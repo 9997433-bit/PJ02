@@ -9,6 +9,7 @@ MagTile Studio 是一款面向消费市场的桌面应用: 用交互式 3D 分�
 - **物理规则校验**: 八条规则两组把关 —— 几何/拓扑 (接地支撑、磁力边吸合、无重叠、重心稳定) + 静力学/工艺 (悬挂承重、悬臂力矩、装配可达、结构冗余, 磁吸边按"铰链"而非刚性节点建模); 不仅校验成品, 还逐步校验教程每个中间状态乃至步骤内逐片放置顺序 (保证不会"搭到一半塌掉"或"照着图纸搭却掉下来"), 详见 `docs/PHYSICS_RULES.md`。
 - **3D 交互教程**: GLFW + OpenGL 4.1 渲染后端 —— 半透明彩色磁力片、成品轮廓虚影、当前步骤高亮描边、轨道相机, 教程 HUD 支持按钮与键盘双通道导航。
 - **渲染层解耦**: 核心逻辑与渲染完全隔离; 无窗口渲染器用于 CLI 与 CI, 窗口后端隐藏在同一 `IRenderer` 接口之后 (详见架构文档)。
+- **本地进度存档**: SQLite 单文件存档 —— 每个模型的教程进度、完成状态、收藏、成就与磁力片库存; 离线优先, 写入语义天然支持未来云同步 (详见 `docs/PROGRESS.md`)。
 
 ## 快速开始
 
@@ -39,6 +40,9 @@ cmake --build build -j
 # 在终端预览分步教程
 ./build/magtile_app tutorial data/models/castle_foundation_01.json
 
+# 查看教程进度存档 (progress show/reset <model_id> 查看/重置单个模型)
+./build/magtile_app progress list
+
 # 运行测试
 ctest --test-dir build --output-on-failure
 
@@ -53,19 +57,20 @@ xvfb-run -a ./build/magtile_app tutorial data/models/castle_foundation_01.json \
 magtile-studio/
 ├── CMakeLists.txt          # 构建入口
 ├── docs/                   # 架构 / 路线图 / 物理规则文档
-├── include/magtile/        # 公共头文件 (core / physics / tutorial / render)
+├── include/magtile/        # 公共头文件 (core / physics / tutorial / render / progress)
 ├── src/
 │   ├── core/               # 磁力片类型、模型数据结构、JSON 读写
 │   ├── physics/            # 几何工具与物理规则校验器
 │   ├── tutorial/           # 分步教程引擎
 │   ├── render/             # 渲染接口、轨道相机、无窗口实现与 GL 后端 (gl/)
+│   ├── progress/           # 本地进度存档 (SQLite)
 │   └── app/                # 应用入口 (CLI + 3D 教程窗口)
 ├── data/
 │   ├── tile_catalog.json   # 9 种标准磁力片的几何与磁力边定义
 │   └── models/             # 模型定义 (含示例: 城堡地基与城墙, 72 片 / 16 步)
 ├── assets/                 # 模型资源与贴图占位目录
 ├── tools/                  # 内容生产脚本 (示例模型生成器)
-└── third_party/            # 第三方库 (nlohmann/json, 单头文件)
+└── third_party/            # 第三方库 (nlohmann/json 单头文件, SQLite3 amalgamation)
 ```
 
 ## 示例模型: 城堡地基与城墙
@@ -80,8 +85,9 @@ magtile-studio/
 | [docs/ROADMAP.md](docs/ROADMAP.md) | 面向 500+ 模型内容库的分阶段商业化路线 |
 | [docs/CONTENT_STRATEGY.md](docs/CONTENT_STRATEGY.md) | 内容策略: 技法分类学、主题矩阵、反批量生成规则、生产管线 |
 | [docs/PHYSICS_RULES.md](docs/PHYSICS_RULES.md) | 物理校验规则的精确定义与判定算法 |
+| [docs/PROGRESS.md](docs/PROGRESS.md) | 进度存档模块: SQLite 结构、C++ API、CLI 命令与测试 |
 | [docs/BUILD_VERIFICATION.md](docs/BUILD_VERIFICATION.md) | 实物搭建验证工作流: 三层验证金字塔、实物测试规程与内容 CI/CD 门禁 |
 
 ## 许可
 
-商业项目, 版权所有。第三方组件: [nlohmann/json](https://github.com/nlohmann/json) (MIT)、[GLFW](https://www.glfw.org/) (zlib/libpng)、[Dear ImGui](https://github.com/ocornut/imgui) (MIT)。
+商业项目, 版权所有。第三方组件: [nlohmann/json](https://github.com/nlohmann/json) (MIT)、[SQLite](https://www.sqlite.org/) (公有领域)、[GLFW](https://www.glfw.org/) (zlib/libpng)、[Dear ImGui](https://github.com/ocornut/imgui) (MIT)。

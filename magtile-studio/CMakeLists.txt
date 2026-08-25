@@ -64,6 +64,7 @@ add_library(magtile_core STATIC
     src/core/json_io.cpp
     src/physics/geometry.cpp
     src/physics/physics_validator.cpp
+    src/progress/progress_store.cpp
     src/tutorial/tutorial_engine.cpp
     src/render/null_renderer.cpp
     src/render/orbit_camera.cpp
@@ -72,7 +73,7 @@ target_include_directories(magtile_core
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/third_party
 )
-target_link_libraries(magtile_core PRIVATE magtile_warnings)
+target_link_libraries(magtile_core PRIVATE magtile_warnings magtile_sqlite3)
 
 # ---- GLFW + OpenGL 4.1 渲染后端 ---------------------------------
 if(MAGTILE_BUILD_GL_RENDERER)
@@ -160,6 +161,19 @@ if(MAGTILE_BUILD_TESTS)
 
     add_test(NAME print_tile_catalog
         COMMAND magtile_app catalog --data-dir ${MAGTILE_DATA_DIR})
+
+    # 进度存档回归测试 (C++): 保存/读取往返、完成/收藏/成就/库存、
+    # 跨连接持久化与重置删除, 详见 tests/test_progress_roundtrip.cpp
+    if(EXISTS ${MAGTILE_TESTS_DIR}/test_progress_roundtrip.cpp)
+        add_executable(magtile_progress_test tests/test_progress_roundtrip.cpp)
+        target_link_libraries(magtile_progress_test PRIVATE magtile_core magtile_warnings)
+        add_test(NAME progress_roundtrip
+            COMMAND magtile_progress_test ${CMAKE_CURRENT_BINARY_DIR}/progress_roundtrip_test.db)
+    endif()
+
+    # 进度存档 CLI 冒烟: 空库 list 必须正常退出 (同时覆盖建库建表路径)
+    add_test(NAME progress_cli_smoke
+        COMMAND magtile_app progress list --db ${CMAKE_CURRENT_BINARY_DIR}/progress_cli_smoke.db)
 
     # 每个模型单独注册 validate / tutorial 用例, 便于精确定位失败模型。
     # CONFIGURE_DEPENDS: 新增模型 JSON 时自动重新 glob, 无需手工改 CMake。

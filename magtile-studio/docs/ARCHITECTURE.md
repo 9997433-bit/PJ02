@@ -7,17 +7,17 @@
 1. **内容即数据**: 形状目录与模型定义全部是 JSON 数据, C++ 代码不硬编码任何具体模型。500+ 模型的内容生产不需要改代码、不需要重新发版。
 2. **质检前置**: 物理校验器是内容管线的强制关卡, 校验失败的模型不允许进入发布包。校验覆盖教程的每一个中间状态, 而不仅是成品。
 3. **渲染可替换**: 核心逻辑 (core / physics / tutorial) 不依赖任何图形库, 渲染后端隐藏在 `IRenderer` 接口之后, 可在不触碰业务代码的情况下替换。
-4. **最小依赖**: 第一阶段唯一的第三方依赖是单头文件的 nlohmann/json (已内置于 `third_party/`), 构建不需要网络。
+4. **最小依赖**: 核心库的第三方依赖只有单头文件的 nlohmann/json 与 SQLite 3 amalgamation (均已内置于 `third_party/`), 构建不需要网络。
 
 ## 2. 模块划分
 
 ```
 ┌─────────────────────────────────────────────┐
 │                 app (CLI / 未来 GUI)          │
-├──────────────┬───────────────┬──────────────┤
-│   tutorial   │    physics    │    render    │
-│  分步教程引擎  │  物理规则校验   │  IRenderer   │
-├──────────────┴───────────────┴──────────────┤
+├──────────┬──────────┬──────────┬────────────┤
+│ tutorial │ physics  │  render  │  progress  │
+│ 分步教程  │ 物理校验  │ IRenderer│  进度存档   │
+├──────────┴──────────┴──────────┴────────────┤
 │                    core                      │
 │   类型 / 数学 / 目录 / 模型数据结构 / JSON IO   │
 └─────────────────────────────────────────────┘
@@ -29,7 +29,8 @@
 | physics | `src/physics` | 世界坐标几何 (`TransformedTile`)、分离轴重叠检测、凸包、`PhysicsValidator` | core |
 | tutorial | `src/tutorial` | `TutorialEngine`: 步骤导航、场景查询、步骤一致性质检 | core |
 | render | `src/render` | `IRenderer` 接口 + `NullRenderer` + `OrbitCamera` (核心库内, 无图形依赖); `src/render/gl/` 为 GLFW + OpenGL 4.1 窗口后端 (独立库 `magtile_render_gl`) | core (GL 后端另依赖 GLFW / ImGui) |
-| app | `src/app` | 应用入口: CLI (`catalog` / `validate` / `tutorial`) 与 3D 教程窗口 (`tutorial --gui`) | 全部 |
+| progress | `src/progress` | `ProgressStore`: 教程进度 / 完成 / 收藏 / 成就 / 磁力片库存的本地 SQLite 存档 (详见 [PROGRESS.md](PROGRESS.md)) | SQLite 3 (仅 .cpp 内) |
+| app | `src/app` | 应用入口: CLI (`catalog` / `validate` / `tutorial` / `progress`) 与 3D 教程窗口 (`tutorial --gui`) | 全部 |
 
 依赖方向严格自上而下, core 不反向依赖任何模块。所有公共头文件位于 `include/magtile/<module>/`, 命名空间与目录一一对应 (`magtile::core` 等)。
 
@@ -145,6 +146,6 @@ CI 中 `ctest` 会对仓库内全部模型执行 `validate`, 物理不合法的�
 
 - **render**: 磁吸点/吸合边可视化、放置动画 (新增片飞入)、拾取 (点击查看磁力片信息)、抗锯齿与阴影质量提升。
 - **app**: 模型库浏览界面 (列表 / 缩略图 / 难度筛选), 教程 UI 品牌化自绘。
-- **core**: 用户进度存档、多语言文案表 (当前中文内嵌于数据)。
+- **core**: 多语言文案表 (当前中文内嵌于数据); 用户进度存档已由 `progress` 模块落地。
 - **physics**: 规则从"基础版"演进 (见 PHYSICS_RULES.md 第 5 节)。
 - **编辑器**: 面向内容团队的可视化模型/教程编辑器, 复用同一核心库。

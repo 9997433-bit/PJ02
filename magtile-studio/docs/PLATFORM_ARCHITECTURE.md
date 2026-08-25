@@ -133,11 +133,11 @@ UI 框架决定的是: 教程 HUD、模型浏览/搜索、进度页、设置、�
 
 ## 5. 数据与同步: 本地优先
 
-### 5.1 本地存储 (MVP 必做)
+### 5.1 本地存储 (MVP 必做) — ✅ 已实现 (`magtile::progress`, 详见 [PROGRESS.md](PROGRESS.md))
 
-- **引擎**: SQLite 3 (公有领域, 全平台一致, 单文件易备份)。桌面/Android 均用同一封装 `magtile::progress` (核心库新模块)。
-- **存放位置**: Windows `%APPDATA%/MagTile/`, macOS `~/Library/Application Support/MagTile/`, Linux `~/.local/share/magtile/`, Android `Context.getFilesDir()`。路径由平台外壳注入, 核心库不猜路径。
-- **核心表**:
+- **引擎**: SQLite 3 (公有领域, 全平台一致, 单文件易备份)。桌面/Android 均用同一封装 `magtile::progress` (核心库模块, amalgamation 内嵌于 `third_party/sqlite3/`, 全平台统一自编译)。
+- **存放位置**: Windows `%APPDATA%/MagTile/`, macOS `~/Library/Application Support/MagTile/`, Linux `~/.local/share/magtile/`, Android `Context.getFilesDir()`。路径由平台外壳注入, 核心库不猜路径 (CLI 即桌面外壳, 已按上表注入默认路径, `--db` 可覆盖)。
+- **核心表** (schema v1 已建; `content_state` 随内容分发功能落地时加入 v2):
 
 ```sql
 -- 每个模型的教程进度
@@ -146,15 +146,20 @@ CREATE TABLE model_progress (
   current_step  INTEGER NOT NULL DEFAULT 0,
   completed_at  INTEGER,            -- unix 时间戳, NULL = 未完成
   play_seconds  INTEGER NOT NULL DEFAULT 0,
+  favorited     INTEGER NOT NULL DEFAULT 0,  -- 0/1 收藏标记
   updated_at    INTEGER NOT NULL    -- 同步冲突判定用
 );
-CREATE TABLE settings (key TEXT PRIMARY KEY, value TEXT);
-CREATE TABLE content_state (        -- 已下载内容包的版本与校验状态 (见 §6)
+CREATE TABLE achievements (         -- 已解锁成就 (未解锁不落库)
+  id TEXT PRIMARY KEY, unlocked_at INTEGER NOT NULL
+);
+CREATE TABLE settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+-- 磁力片库存 JSON 存于 settings 表 key = 'tile_inventory'
+CREATE TABLE content_state (        -- [规划中] 已下载内容包的版本与校验状态 (见 §6)
   pack_id TEXT PRIMARY KEY, version INTEGER, sha256 TEXT, installed_at INTEGER
 );
 ```
 
-- schema 带 `PRAGMA user_version` 做迁移版本号, 迁移脚本随核心库单元测试。
+- schema 带 `PRAGMA user_version` 做迁移版本号 (当前 v1), 迁移路径随核心库回归测试 (`progress_roundtrip`); 版本号高于应用支持范围时拒绝写入, 防止旧应用损坏新存档。
 
 ### 5.2 云同步 (MVP 后, 可选功能)
 

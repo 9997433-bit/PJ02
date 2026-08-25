@@ -10,10 +10,13 @@
 //   magtile_app catalog  [--data-dir DIR]                查看磁力片形状目录
 //   magtile_app validate <model.json> [--data-dir DIR]   物理与教程质检
 //   magtile_app tutorial <model.json> [--gui] [--data-dir DIR]  分步教程
+//   magtile_app progress list|show|reset [...] [--db FILE]      进度存档
 // =============================================================
 
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
+#include <ctime>
 #include <exception>
 #include <filesystem>
 #include <string>
@@ -21,6 +24,7 @@
 
 #include "magtile/core/json_io.hpp"
 #include "magtile/physics/physics_validator.hpp"
+#include "magtile/progress/progress_store.hpp"
 #include "magtile/tutorial/tutorial_engine.hpp"
 
 #if defined(MAGTILE_HAS_GL_RENDERER)
@@ -44,6 +48,9 @@ struct CliArgs {
     int start_step = 1;          ///< 图形模式的起始步骤
     long max_frames = 0;         ///< >0 时渲染指定帧数后自动退出 (冒烟测试)
     std::string screenshot_file; ///< 非空时在最后一帧保存 PPM 截图 (冒烟测试)
+    std::string progress_action; ///< progress 子命令: list / show / reset
+    std::string model_id;        ///< progress show/reset 的目标模型 id
+    fs::path db_file;            ///< 进度存档路径; 为空时用平台默认路径
 };
 
 void printUsage() {
@@ -55,11 +62,17 @@ void printUsage() {
         "  magtile_app validate <model.json> [--data-dir DIR] 校验模型物理规则与教程步骤\n"
         "  magtile_app tutorial <model.json> [--gui] [--data-dir DIR]\n"
         "                       分步教程: 默认在终端预览, --gui 打开 3D 交互窗口\n"
+        "  magtile_app progress list                          查看全部教程进度与成就\n"
+        "  magtile_app progress show  <model_id>              查看单个模型的进度详情\n"
+        "  magtile_app progress reset <model_id>              重置单个模型的进度\n"
         "\n"
         "图形模式选项:\n"
         "  --step N            从第 N 步开始 (默认 1)\n"
         "  --frames N          渲染 N 帧后自动退出 (供 CI 冒烟测试)\n"
-        "  --screenshot FILE   退出前把画面保存为 PPM 图片 (供 CI 冒烟测试)\n");
+        "  --screenshot FILE   退出前把画面保存为 PPM 图片 (供 CI 冒烟测试)\n"
+        "\n"
+        "进度存档选项:\n"
+        "  --db FILE           指定存档数据库文件 (默认平台存档目录, 见 docs/PROGRESS.md)\n");
 }
 
 bool parseArgs(int argc, char** argv, CliArgs& args) {
@@ -83,6 +96,9 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
         } else if (arg == "--screenshot") {
             if (i + 1 >= argc) return false;
             args.screenshot_file = argv[++i];
+        } else if (arg == "--db") {
+            if (i + 1 >= argc) return false;
+            args.db_file = argv[++i];
         } else {
             positional.push_back(arg);
         }
@@ -92,6 +108,17 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
         if (positional.size() != 1) return false;
         args.model_file = positional[0];
         return true;
+    }
+    if (args.command == "progress") {
+        if (positional.empty()) return false;
+        args.progress_action = positional[0];
+        if (args.progress_action == "list") return positional.size() == 1;
+        if (args.progress_action == "show" || args.progress_action == "reset") {
+            if (positional.size() != 2) return false;
+            args.model_id = positional[1];
+            return true;
+        }
+        return false;
     }
     return false;
 }
@@ -175,6 +202,116 @@ int runValidate(const CliArgs& args) {
     std::printf("\n结论: 模型 %s 未通过质检 (%d 个错误, %zu 个警告)\n", model.id.c_str(),
                 failures, report.warningCount());
     return 1;
+}
+
+// ---- 进度存档 (progress list / show / reset) ---------------------
+
+/// 平台默认存档路径 (docs/PLATFORM_ARCHITECTURE.md §5.1)。
+/// 路径由平台外壳注入是核心库的铁律, CLI 即桌面外壳, 在此落实;
+/// 测试与多存档场景用 --db 覆盖。
+fs::path defaultProgressDbPath() {
+#if defined(_WIN32)
+    if (const char* appdata = std::getenv("APPDATA"); appdata != nullptr && *appdata != '\0') {
+        return fs::path(appdata) / "MagTile" / "progress.db";
+    }
+#elif defined(__APPLE__)
+    if (const char* home = std::getenv("HOME"); home != nullptr && *home != '\0') {
+        return fs::path(home) / "Library" / "Application Support" / "MagTile" / "progress.db";
+    }
+#else
+    if (const char* xdg = std::getenv("XDG_DATA_HOME"); xdg != nullptr && *xdg != '\0') {
+        return fs::path(xdg) / "magtile" / "progress.db";
+    }
+    if (const char* home = std::getenv("HOME"); home != nullptr && *home != '\0') {
+        return fs::path(home) / ".local" / "share" / "magtile" / "progress.db";
+    }
+#endif
+    return fs::path("magtile_progress.db");  // 兜底: 当前目录
+}
+
+std::string formatTimestamp(std::int64_t unix_seconds) {
+    if (unix_seconds <= 0) return "-";
+    const std::time_t time = static_cast<std::time_t>(unix_seconds);
+    std::tm tm_buffer{};
+#if defined(_WIN32)
+    localtime_s(&tm_buffer, &time);
+#else
+    localtime_r(&time, &tm_buffer);
+#endif
+    char text[32];
+    std::strftime(text, sizeof(text), "%Y-%m-%d %H:%M", &tm_buffer);
+    return text;
+}
+
+std::string formatPlaySeconds(std::int64_t seconds) {
+    if (seconds < 60) return std::to_string(seconds) + " 秒";
+    if (seconds < 3600) return std::to_string(seconds / 60) + " 分钟";
+    return std::to_string(seconds / 3600) + " 小时 " + std::to_string(seconds % 3600 / 60) + " 分";
+}
+
+void printProgressLine(const progress::Progress& record) {
+    std::printf("  %s %-28s 第 %d 步  累计 %s  最近 %s\n",
+                record.favorited ? "★" : " ", record.model_id.c_str(), record.current_step,
+                formatPlaySeconds(record.play_seconds).c_str(),
+                formatTimestamp(record.updated_at).c_str());
+}
+
+int runProgress(const CliArgs& args) {
+    const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
+    progress::ProgressStore store(db_file);
+
+    if (args.progress_action == "list") {
+        std::printf("进度存档: %s\n\n", db_file.string().c_str());
+
+        const auto in_progress = store.listInProgress();
+        std::printf("进行中 (%zu 个):\n", in_progress.size());
+        if (in_progress.empty()) std::printf("  (暂无)\n");
+        for (const auto& record : in_progress) printProgressLine(record);
+
+        const auto completed = store.listCompleted();
+        std::printf("\n已完成 (%zu 个):\n", completed.size());
+        if (completed.empty()) std::printf("  (暂无)\n");
+        for (const auto& record : completed) {
+            std::printf("  %s %-28s 完成于 %s  累计 %s\n", record.favorited ? "★" : " ",
+                        record.model_id.c_str(), formatTimestamp(record.completed_at).c_str(),
+                        formatPlaySeconds(record.play_seconds).c_str());
+        }
+
+        const auto achievements = store.listAchievements();
+        std::printf("\n已解锁成就 (%zu 个):\n", achievements.size());
+        if (achievements.empty()) std::printf("  (暂无)\n");
+        for (const auto& achievement : achievements) {
+            std::printf("  %-30s 解锁于 %s\n", achievement.id.c_str(),
+                        formatTimestamp(achievement.unlocked_at).c_str());
+        }
+        return 0;
+    }
+
+    if (args.progress_action == "show") {
+        const auto record = store.loadProgress(args.model_id);
+        if (!record.has_value()) {
+            std::printf("模型 %s 暂无进度记录\n", args.model_id.c_str());
+            return 1;
+        }
+        std::printf("模型: %s\n", record->model_id.c_str());
+        if (record->isCompleted()) {
+            std::printf("状态: 已完成 (%s)\n", formatTimestamp(record->completed_at).c_str());
+        } else {
+            std::printf("状态: 进行中, 已完成到第 %d 步\n", record->current_step);
+        }
+        std::printf("收藏: %s\n", record->favorited ? "是" : "否");
+        std::printf("累计游玩: %s\n", formatPlaySeconds(record->play_seconds).c_str());
+        std::printf("最近游玩: %s\n", formatTimestamp(record->updated_at).c_str());
+        return 0;
+    }
+
+    // reset: 幂等操作, 无记录也算成功
+    if (store.resetProgress(args.model_id)) {
+        std::printf("已重置模型 %s 的进度\n", args.model_id.c_str());
+    } else {
+        std::printf("模型 %s 暂无进度记录, 无需重置\n", args.model_id.c_str());
+    }
+    return 0;
 }
 
 #if defined(MAGTILE_HAS_GL_RENDERER)
@@ -329,6 +466,7 @@ int main(int argc, char** argv) {
         if (args.command == "catalog") return runCatalog(args);
         if (args.command == "validate") return runValidate(args);
         if (args.command == "tutorial") return runTutorial(args);
+        if (args.command == "progress") return runProgress(args);
     } catch (const std::exception& e) {
         std::fprintf(stderr, "错误: %s\n", e.what());
         return 1;
