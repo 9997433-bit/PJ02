@@ -22,8 +22,12 @@
 #                            PASS(部分): PlayBillingManager.kt 存在 + gradle
 #                            依赖 billingclient + setSubscriptionActive 写入口
 #                            调用在位 + store_billing_client.cpp 无 Google
-#                            Play 未接入守卫; Windows 商店档未接线单列 SKIP
-#                            (R11W, MSIX 商店档出包前接入)
+#                            Play 未接入守卫; Windows 商店档单列 R11W ——
+#                            WinRT StoreContext 接线证据全在位即 PASS(部分):
+#                            store_billing_client.cpp 无 Windows 未接入守卫 +
+#                            Windows.Services.Store 接入 + 购买流/许可证恢复 +
+#                            setSubscriptionActive 写契约键 + 根 CMake 选项接线
+#                            (MSIX 实包沙盒验收仍属人工项 B3/M1)
 #   R12 [P1] Android 链路资产 android.yml + build.gradle.kts + README 存在
 #   R13 [P0] Android 签名    signingConfigs 接线 + keystore.properties.example
 #                            模板齐备 (真实 keystore 不入库, 生成与商店
@@ -285,9 +289,8 @@ check_billing_test() {
 #      (static_assert 拒绝档), 且文档化了 Kotlin 侧分工。
 # 全部在位 = PASS (部分: 沙盒付费验收仍属人工项 B3)。
 #
-# Windows 商店档 (MAGTILE_BILLING_WINDOWS_STORE) 仍未接线, 由编排处
-# 单列 SKIP (R11W) —— MSIX 商店档出包前接入, .cpp 内保留编译期
-# static_assert 守卫防误开宏, 不再作为本检查的失败口径。
+# Windows 商店档已单列 R11W 独立探测 (check_store_billing_windows,
+# 见下), 不参与本检查口径。
 # =============================================================
 check_store_billing() {
     local src="$ROOT/src/billing/store_billing_client.cpp"
@@ -322,7 +325,69 @@ check_store_billing() {
         failed=1
     fi
     [ "$failed" -eq 0 ] || return 1
-    echo "[断言通过] Google Play 计费已接线 (部分就绪: Windows 商店档见 R11W SKIP; 沙盒付费验收仍属人工项 B3)"
+    echo "[断言通过] Google Play 计费已接线 (部分就绪: Windows 商店档见 R11W; 沙盒付费验收仍属人工项 B3)"
+}
+
+# =============================================================
+# R11W 真实商店计费接入探测 (Windows 商店档, 清单 §2 B2)
+#
+# Windows 侧真实计费在 C++ 跨商店接口缝内落地 (src/billing/
+# store_billing_client.cpp 的 MAGTILE_BILLING_WINDOWS_STORE 宏分支):
+# WinRT StoreContext (Windows.Services.Store, C++/WinRT 投影, 随
+# Windows SDK 附带) 查商品 / RequestPurchaseAsync 收银台购买 /
+# StoreAppLicense.AddOnLicenses 遍历有效订阅恢复 (商店账户即回执),
+# 购买或恢复成功后写 progress/subscription_settings 契约键
+# (setSubscriptionActive, 与 FakeBilling / Google Play 同键)。
+# 宏仅 MSIX 商店包出包配置时开启 (商店上下文只在包身份下可用),
+# 本地开发 / CI 保持 OFF 走 FakeBillingClient。探测五项接线证据:
+#   1. store_billing_client.cpp 无 Windows 未接入守卫 (static_assert 拒绝档);
+#   2. 其内含 winrt/Windows.Services.Store.h (WinRT SDK 接入);
+#   3. RequestPurchaseAsync (购买流) 与 AddOnLicenses (许可证恢复) 在位;
+#   4. setSubscriptionActive 写入口调用在位 (回执 -> 契约键);
+#   5. 根 CMakeLists 有 MAGTILE_BILLING_WINDOWS_STORE 选项 + windowsapp 链接。
+# 全部在位 = PASS (部分: Linux/CI 无法编译 WinRT 分支, 本探测只验
+# 接线证据; MSIX 商店包出包 + Partner Center 商品配置 + 沙盒付费
+# 验收仍属人工项 B3/M1)。
+# =============================================================
+check_store_billing_windows() {
+    local src="$ROOT/src/billing/store_billing_client.cpp"
+    local cmake_root="$ROOT/CMakeLists.txt"
+    local failed=0
+    if [ ! -f "$src" ]; then
+        echo "[断言失败] 缺少 $src (计费适配层未落地)"; return 1
+    fi
+    if grep -q 'static_assert(false, "Windows' "$src"; then
+        echo "[断言失败] store_billing_client.cpp 的 Windows 分支仍是未接入守卫 (static_assert 拒绝档)"
+        failed=1
+    else
+        echo "  就绪: store_billing_client.cpp Windows 分支已移除未接入守卫"
+    fi
+    if grep -q 'winrt/Windows\.Services\.Store\.h' "$src"; then
+        echo "  就绪: WinRT Windows.Services.Store 接入 (StoreContext)"
+    else
+        echo "[断言失败] store_billing_client.cpp 未接 winrt/Windows.Services.Store.h (WinRT SDK)"
+        failed=1
+    fi
+    if grep -q 'RequestPurchaseAsync' "$src" && grep -q 'AddOnLicenses' "$src"; then
+        echo "  就绪: 收银台购买流 (RequestPurchaseAsync) 与许可证恢复 (AddOnLicenses) 在位"
+    else
+        echo "[断言失败] 购买流 / 许可证恢复调用缺失 (RequestPurchaseAsync / AddOnLicenses)"
+        failed=1
+    fi
+    if grep -q 'setSubscriptionActive' "$src"; then
+        echo "  就绪: 购买/恢复回执经 setSubscriptionActive 写契约键 (与 FakeBilling / Google Play 同键)"
+    else
+        echo "[断言失败] store_billing_client.cpp 未调用 setSubscriptionActive —— 回执未接契约键写入口"
+        failed=1
+    fi
+    if grep -q 'MAGTILE_BILLING_WINDOWS_STORE' "$cmake_root" && grep -q 'windowsapp' "$cmake_root"; then
+        echo "  就绪: 构建接线 (根 CMakeLists MAGTILE_BILLING_WINDOWS_STORE 选项 + windowsapp 链接)"
+    else
+        echo "[断言失败] 根 CMakeLists.txt 缺 MAGTILE_BILLING_WINDOWS_STORE 选项或 windowsapp 链接"
+        failed=1
+    fi
+    [ "$failed" -eq 0 ] || return 1
+    echo "[断言通过] Windows 商店计费已接线 (部分就绪: MSIX 商店包出包 + Partner Center 商品配置 + 沙盒付费验收仍属人工项 B3/M1)"
 }
 
 # =============================================================
@@ -417,8 +482,7 @@ else
 fi
 
 run_check R11 P0 "真实商店计费接入 (Google Play 接线)"            check_store_billing
-skip_check R11W P0 "真实商店计费 (Windows 商店档)" \
-    "未接线 —— Windows MSIX 商店档出包前接入 (清单 §2 B2 分平台; 桌面开发档继续 FakeBilling)"
+run_check R11W P0 "真实商店计费接入 (Windows 商店档接线)"          check_store_billing_windows
 run_check R12 P1 "Android 构建链路资产"                           check_android_assets
 run_check R13 P0 "Android release 签名配置"                       check_android_signing
 run_check R14 P0 "商店上架文档守卫 (validate_store_listing)" \

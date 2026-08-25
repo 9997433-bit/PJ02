@@ -327,7 +327,11 @@ PARTIAL, 见第十/十二节); Windows/macOS 实机项见下节。
       全链路 (`--sign-identity` 已预留)。
 - [ ] Linux AppImage (linuxdeploy + Qt 插件), 面向用户分发。
 - [ ] MSIX (Windows 商店) / Mac App Store 渠道评估 (含 LGPL 可替换性
-      法务结论, 见第八节)。
+      法务结论, 见第八节)。商店订阅计费代码侧已就绪 (探测 R11W):
+      MSIX 商店包配置时加 `-DMAGTILE_BILLING_WINDOWS_STORE=ON` 即
+      编入 WinRT StoreContext 接线 (仅包身份下商店上下文可用; 本地
+      开发档保持 OFF 走假计费, 见
+      `include/magtile/billing/store_billing_client.hpp`)。
 - [ ] licenses/ 补 LGPLv3 + GPLv3 许可全文; THIRD_PARTY_NOTICES.md
       注明随包 Qt 精确版本与源码地址。
 - [ ] 应用图标/安装器素材 (与 `scripts/package_windows.md` 第十一节

@@ -28,6 +28,16 @@ option(MAGTILE_BUILD_TESTS "构建并注册 CTest 用例" ON)
 # docs/QT_UI_PLAN.md); 未找到 Qt 时给出带安装指引的明确报错。
 option(MAGTILE_BUILD_QT "构建 Qt 6 + QML 商用桌面界面 (需系统 Qt >= 6.4, 见 docs/QT_UI_PLAN.md)" OFF)
 
+# Windows 商店档订阅计费 (V1 清单 §2 B2; 探测 R11W): 默认关闭 ——
+# WinRT StoreContext 只在 MSIX 商店包身份下可用, 仅商店出包配置时
+# 开启; 本地开发 / CI 保持 OFF 走 FakeBillingClient (零真实扣费)。
+# 开启后 magtile_core 编入真实 Windows.Services.Store 接线
+# (src/billing/store_billing_client.cpp 的宏分支), 并向使用方 (Qt 壳
+# billing_backend) 公开商店档宏; 接线细节见
+# include/magtile/billing/store_billing_client.hpp 文档。
+option(MAGTILE_BILLING_WINDOWS_STORE
+    "Windows 商店订阅计费 (WinRT StoreContext, 仅 MSIX 商店包; 需 MSVC + Windows SDK)" OFF)
+
 # ---- Android 交叉编译 (NDK 工具链文件会定义 ANDROID) -------------
 # 用法见 platforms/android/README.md。手机端不使用桌面 GL 后端
 # (GLFW) 也无法跑 CTest, 强制关闭; 只产出 magtile_core + JNI 共享库。
@@ -92,6 +102,23 @@ target_include_directories(magtile_core
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/third_party
 )
 target_link_libraries(magtile_core PRIVATE magtile_warnings magtile_sqlite3)
+
+# Windows 商店计费接线 (选项说明见文件头部 option 处): 宏走 PUBLIC
+# 传播 —— 链接 magtile_core 的 Qt 壳 (billing_backend.cpp) 据此选
+# StoreBillingClient 而不是 FakeBillingClient。
+if(MAGTILE_BILLING_WINDOWS_STORE)
+    if(NOT WIN32)
+        message(FATAL_ERROR
+            "MAGTILE_BILLING_WINDOWS_STORE 仅支持 Windows (WinRT StoreContext); "
+            "其他平台请保持 OFF (桌面开发档走 FakeBillingClient)")
+    endif()
+    target_compile_definitions(magtile_core PUBLIC
+        MAGTILE_BILLING_WINDOWS_STORE   # 真实商店分支 (store_billing_client.cpp)
+        MAGTILE_BILLING_STORE           # 使用方选 StoreBillingClient (billing_backend.cpp)
+    )
+    # C++/WinRT 投影运行库 (Windows SDK 自带 WindowsApp.lib, 无第三方依赖)
+    target_link_libraries(magtile_core PUBLIC windowsapp)
+endif()
 
 # ---- 无窗口 GL 磁力片场景渲染器 ----------------------------------
 # 只画场景不建窗口 (gl_scene_renderer.cpp + 自研 GL 加载器), 零外部

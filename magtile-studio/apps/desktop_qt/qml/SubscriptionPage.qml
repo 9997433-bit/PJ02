@@ -12,8 +12,10 @@ import MagTile.Studio
 // 付费区走计费适配层 (billing 桥, COMMERCIAL_PLAN §2.2): 三卡档位
 // 与主 CTA / 恢复购买只面向 BillingClient 抽象 —— 桌面开发档为
 // FakeBillingClient (零真实扣费, 开发档另有「模拟已订阅」开关),
-// 商店空实现档 (storeAvailable=false) 自动退回「即将上线」占位;
-// 接真商店 SDK 时本页零改动 (Windows 商店/Google Play 接法见
+// 商店不可用 (storeAvailable=false, 空实现档或商品表没查到) 自动
+// 退回「即将上线」占位; Windows 商店档 (MSIX, WinRT StoreContext)
+// 走同一 billing 桥零结构改动, 仅 CTA 的「开发模拟」标注按
+// simulatedBilling 分流 (接法见
 // include/magtile/billing/store_billing_client.hpp)。
 // 红线 (§11 禁止事项): 无倒计时、无「即将涨价」、无预勾选加购、
 // 不索取任何个人信息; 全页不用红色与紧迫话术; 价格只出现在
@@ -352,8 +354,12 @@ Page {
                     color: ctaButton.pressed ? Theme.primaryPressed : Theme.primary
                 }
                 contentItem: Text {
+                    // 「开发模拟」标注只在假计费档出现 (simulatedBilling);
+                    // 商店档 (Windows 商店 MSIX 等) 是真实扣费, 不得误标
                     text: billing.storeAvailable && page.selectedProductId !== ""
-                          ? "🌱 开通订阅 (开发模拟, 不产生扣费)"
+                          ? (billing.simulatedBilling
+                             ? "🌱 开通订阅 (开发模拟, 不产生扣费)"
+                             : "🌱 开通订阅")
                           : "🌱 订阅即将上线"
                     color: "white"
                     font.pixelSize: Theme.fontButton

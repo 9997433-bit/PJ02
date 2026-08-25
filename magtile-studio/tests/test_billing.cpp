@@ -146,6 +146,10 @@ int main(int argc, char** argv) {
     }
 
     // ---- 5. StoreBillingClient 空实现档 (正式商店骨架, 未接 SDK) --------
+    // Windows 商店档 (MAGTILE_BILLING_WINDOWS_STORE) 编入真实 WinRT
+    // 接线后本节语义不再适用 (MSIX 商店包身份下可真实购买), 故仅宏
+    // 未开启时钉死空实现口径 —— 常规桌面 / CI 构建恒走本分支。
+#if !defined(MAGTILE_BILLING_WINDOWS_STORE)
     {
         billing::StoreBillingClient store_client;
         expect(store_client.queryProducts().empty(), "空实现档商品表为空 (界面退回占位)");
@@ -157,6 +161,7 @@ int main(int argc, char** argv) {
         expect(!billing::isContentUnlocked(/*is_free_model=*/false, store_client),
                "空实现档付费模型保持上锁");
     }
+#endif  // !MAGTILE_BILLING_WINDOWS_STORE
 
     if (g_failures == 0) {
         std::printf("\n计费适配层单元测试全部通过\n");
