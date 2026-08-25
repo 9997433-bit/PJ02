@@ -42,7 +42,8 @@ void OrbitCamera::pan(double dx_pixels, double dy_pixels, int viewport_height) n
 
 void OrbitCamera::zoom(double scroll_steps) noexcept {
     // 每格滚轮缩放 12%, 指数级手感在远近两端都平滑
-    distance_ = std::clamp(distance_ * std::pow(0.88, scroll_steps), kMinDistance, kMaxDistance);
+    distance_ = std::clamp(distance_ * std::pow(kZoomStepFactor, scroll_steps), kMinDistance,
+                           kMaxDistance);
 }
 
 void OrbitCamera::frameBounds(const Vec3& min_corner, const Vec3& max_corner) noexcept {

@@ -6,8 +6,9 @@
 // QQuickFramebufferObject 集成无窗口场景渲染器 GlSceneRenderer
 // (magtile_render_scene, 与 GLFW/ImGui 版共用同一份 3D 绘制实现):
 //   - GUI 线程 (本类): 教程引擎 (上一步/下一步/跳步)、轨道相机
-//     (拖动旋转 / 右键平移 / 滚轮缩放)、进度自动存档 (ProgressStore,
-//     与 CLI/GL 版共用同一 SQLite);
+//     (鼠标: 拖动旋转 / 右键平移 / 滚轮缩放; 触屏: 单指拖动旋转 /
+//     双指捏合缩放 / 双指同向滑动平移, 两套输入并存同口径)、进度
+//     自动存档 (ProgressStore, 与 CLI/GL 版共用同一 SQLite);
 //   - 渲染线程 (FboRenderer): synchronize 拷贝场景快照, render 在
 //     Qt 场景图分配的 FBO 里画 网格 + 已放置片 + 本步新片呼吸高亮
 //     + 未来片 ghost (docs/UI_UX_SPEC.md §6)。
@@ -20,8 +21,8 @@
 //
 // 只读预览模式 (previewMode=true, QT-1 详情页 §5.4): 同一视口的
 // 轻量用法 —— 直接加载模型最终态展示成品全貌, 不显示 ghost/步骤
-// 高亮/呼吸动画, 不开进度存档 (纯看不写); 轨道相机交互 (拖动旋转/
-// 滚轮缩放/右键平移) 与教程模式完全一致。
+// 高亮/呼吸动画, 不开进度存档 (纯看不写); 轨道相机交互 (鼠标 +
+// 触屏手势) 与教程模式完全一致。
 // =============================================================
 
 #include <QElapsedTimer>
@@ -115,6 +116,8 @@ protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void wheelEvent(QWheelEvent* event) override;
+    void touchEvent(QTouchEvent* event) override;
+    void touchUngrabEvent() override;
 
 private:
     friend class TutorialFboRenderer;
@@ -153,6 +156,12 @@ private:
     QString status_text_;
     render::OrbitCamera camera_;
     QPointF last_mouse_pos_;
+
+    // 触屏手势基准 (touchEvent): 手指数变化的那一帧只重定基准不产生
+    // 相机位移, 落下/抬起第二指时画面不跳变
+    int touch_point_count_ = 0;       ///< 上一事件的按住触点数 (0 = 无手势)
+    QPointF last_touch_anchor_;       ///< 单指位置 / 双指中点 (item 像素坐标)
+    double last_touch_spread_ = 0.0;  ///< 双指指距 (像素, 捏合缩放基准)
     QElapsedTimer flush_clock_;  ///< 距上次进度落盘的游玩时长
     int last_saved_step_ = -1;
     bool session_flushed_ = false;

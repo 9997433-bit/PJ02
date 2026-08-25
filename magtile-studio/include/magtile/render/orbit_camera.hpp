@@ -27,6 +27,10 @@ public:
     /// 缩放: steps 为滚轮格数, 正值拉近。距离按指数缩放并夹在合法区间。
     void zoom(double scroll_steps) noexcept;
 
+    /// 每格滚轮的距离缩放系数 (12%/格)。触屏捏合等连续手势可据此把
+    /// 比例变化换算成等效滚轮格数, 与滚轮共用同一缩放口径。
+    static constexpr double kZoomStepFactor = 0.88;
+
     /// 取景: 移动目标点到包围盒中心并调整距离, 使整个模型进入视野。
     void frameBounds(const core::Vec3& min_corner, const core::Vec3& max_corner) noexcept;
 

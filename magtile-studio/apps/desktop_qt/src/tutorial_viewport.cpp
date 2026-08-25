@@ -1,16 +1,20 @@
 #include "tutorial_viewport.hpp"
 
+#include <QLineF>
 #include <QMouseEvent>
 #include <QOpenGLContext>
 #include <QOpenGLFramebufferObject>
 #include <QOpenGLFramebufferObjectFormat>
+#include <QTouchEvent>
 #include <QWheelEvent>
 #include <QtQuick/qquickopenglutils.h>
 #include <algorithm>
+#include <cmath>
 #include <cstdio>
 #include <exception>
 #include <unordered_set>
 #include <utility>
+#include <vector>
 
 #include "magtile/core/json_io.hpp"
 #include "magtile/core/model_definition.hpp"
@@ -23,6 +27,10 @@ namespace {
 
 /// 轨道相机旋转手感 (与 GL 版 kRotateSpeedDegPerPx 一致)。
 constexpr double kRotateSpeedDegPerPx = 0.32;
+
+/// 捏合缩放的最小指距 (px): 双指过近时指距比值噪声过大 (微小抖动
+/// 被放大成猛烈缩放), 低于该值的帧只重定基准不缩放。
+constexpr double kMinPinchSpreadPx = 8.0;
 
 /// GL 入口解析: Qt 场景图上下文 (render 线程调用, 上下文已 current)。
 render::GlSceneRenderer::GlProc resolveGlProc(const char* name) {
@@ -110,6 +118,7 @@ private:
 
 TutorialViewport::TutorialViewport(QQuickItem* parent) : QQuickFramebufferObject(parent) {
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
+    setAcceptTouchEvents(true);  // 触屏手势 (单指旋转/双指捏合缩放/双指平移)
     setMirrorVertically(true);  // GL 原点在左下, Qt 场景图纹理原点在左上
 }
 
@@ -412,6 +421,75 @@ void TutorialViewport::wheelEvent(QWheelEvent* event) {
         update();
     }
     event->accept();
+}
+
+// ---- 触屏手势 (单指旋转 / 双指捏合缩放 / 双指平移) --------------------
+//
+// 与鼠标交互并存: 本视口 setAcceptTouchEvents(true) 后触点在此消费,
+// Qt 不再为这些触点合成鼠标事件 (不会与左键拖动重复驱动相机), 无触屏
+// 设备根本走不到本函数, 桌面三键 + 滚轮操作完全不受影响。手势直接改
+// 相机并请求重绘, 不经任何动画系统 —— 「减少动态效果」开关下照常可用
+// (手势是输入不是装饰动画, UI_UX_SPEC §4.7)。previewMode 详情页预览
+// 复用同一视口, 手势自动同样生效。
+void TutorialViewport::touchEvent(QTouchEvent* event) {
+    if (event->type() == QEvent::TouchCancel) {
+        touch_point_count_ = 0;
+        event->accept();
+        return;
+    }
+
+    // 只统计仍按住的触点 (已抬起的不参与手势); 三指及以上取前两指
+    std::vector<QPointF> active;
+    active.reserve(static_cast<size_t>(event->points().size()));
+    for (const QEventPoint& point : event->points()) {
+        if (point.state() != QEventPoint::Released) active.push_back(point.position());
+    }
+
+    // 手指数变化 (落下/抬起第二指、3 指与 2 指互换) 的当帧只重定基准:
+    // 基准点语义随手指数切换 (单指位置 <-> 双指中点), 跨口径求差会跳变
+    const bool count_stable = static_cast<int>(active.size()) == touch_point_count_;
+
+    if (active.size() == 1) {
+        // 单指拖动 = 轨道旋转 (与鼠标左键拖动同口径同灵敏度)
+        const QPointF pos = active.front();
+        if (count_stable) {
+            const double dx = pos.x() - last_touch_anchor_.x();
+            const double dy = pos.y() - last_touch_anchor_.y();
+            camera_.rotate(-dx * kRotateSpeedDegPerPx, -dy * kRotateSpeedDegPerPx);
+            update();
+        }
+        last_touch_anchor_ = pos;
+    } else if (active.size() >= 2) {
+        const QPointF mid = (active[0] + active[1]) * 0.5;
+        const double spread = QLineF(active[0], active[1]).length();
+        if (count_stable) {
+            // 双指捏合 = 缩放: 指距比经对数换算成等效滚轮格数, 与滚轮
+            // 共用 OrbitCamera::kZoomStepFactor (12%/格) 同一缩放口径;
+            // 净效果是相机距离随指距反比变化 —— 指距张大一倍, 成品
+            // 视觉上恰好放大一倍, 缩放跟手不窜
+            if (spread > kMinPinchSpreadPx && last_touch_spread_ > kMinPinchSpreadPx) {
+                camera_.zoom(std::log(spread / last_touch_spread_) /
+                             std::log(1.0 / render::OrbitCamera::kZoomStepFactor));
+            }
+            // 双指同向滑动 = 平移 (中点位移, 与鼠标右键拖动同口径)
+            camera_.pan(mid.x() - last_touch_anchor_.x(), mid.y() - last_touch_anchor_.y(),
+                        std::max(1, static_cast<int>(height())));
+            update();
+        }
+        last_touch_anchor_ = mid;
+        last_touch_spread_ = spread;
+    }
+    touch_point_count_ = static_cast<int>(active.size());
+
+    // 显式收下事件 (含全部触点): TouchBegin 被接受本视口才能成为触点
+    // 的独占抓取者, 后续 TouchUpdate/TouchEnd 才会继续送达
+    event->accept();
+}
+
+void TutorialViewport::touchUngrabEvent() {
+    // 触点抓取被夺走 (如手势中页面切换): 清基准, 下次触摸重新开始
+    touch_point_count_ = 0;
+    QQuickFramebufferObject::touchUngrabEvent();
 }
 
 }  // namespace magtile::qtui

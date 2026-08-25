@@ -7,7 +7,8 @@ import MagTile.Studio
 // 模型详情页 (UI_UX_SPEC.md §5.4, QT-1): 进教程前的确认页。
 // 大预览位: 3D 可旋转成品预览 (复用 QT-3 TutorialViewport 的只读
 // previewMode —— 最终态全貌, 无 ghost/步骤高亮, 不写进度存档;
-// 拖动旋转 / 滚轮缩放 / 右键平移与教程一致) + 难度/片数/步数 +
+// 鼠标拖动旋转 / 滚轮缩放 / 右键平移与教程一致, 触屏单指旋转 /
+// 双指捏合缩放 / 双指平移同样生效) + 难度/片数/步数 +
 // 所需片型 BOM 清单 (对照家庭库存, 缺片琥珀提示, 不用红色表达
 // "错误") + 收藏 + 「开始搭建」大按钮 (高 64, 占宽 80%)。
 // 数据经 studio.modelDetail / studio.bomForModel 读取;
@@ -153,7 +154,7 @@ Page {
                 Text {
                     id: previewHintLabel
                     anchors.centerIn: parent
-                    text: "🖱 拖动转圈看成品 · 滚轮放大"
+                    text: "🖱 拖动转圈看成品 · 滚轮或双指捏合放大"
                     font.pixelSize: Theme.fontSmall
                     color: Theme.textSecondary
                 }
