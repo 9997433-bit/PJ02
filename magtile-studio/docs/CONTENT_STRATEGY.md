@@ -247,6 +247,9 @@ AI (含程序化生成器) 是加速器, 不是设计师。边界一次说清:
 - **组合配额**: 同一 (主技法, 主题) 组合全库上限 **6 个**, 且这 6 个至少覆盖 3 种不同 `build_paradigm`。
 - **全库占比**: 任一主技法占比 ≤ 12% (520 × 12% ≈ 62 个封顶); 任一范式占比 ≤ 30%。
 - **批次评审**: 内容按批发布, 每批 10 个。批内主技法重复 ≤ 2 次、主题重复 ≤ 3 次; 每批评审时策展人更新"多样性账本" (各技法/主题/范式的消耗进度)。
+- **难度配额 (D3 冻结硬闸门)**: 全库 D3 (熟练档) 已超 520 终态目标而 D1/D5 两端空转 ([reports/CONTENT_GAP_AUDIT.md](reports/CONTENT_GAP_AUDIT.md) §7.3), 批次评审因此含机检项 `tools/check_difficulty_quota.py --batch` —— 冻结生效期间 (D1 < 20 或 D5 < 6) 新增 difficulty=3 模型**直接 FAIL**, 例外须策展人白名单签发 (`--whitelist-file`); 解冻条件为 D1 ≥ 20 且 D5 ≥ 6 同时达标。工具口径与回归测试见 [TESTING.md](TESTING.md) 3.19 节。
+- **series 归类回填 (入库必填)**: 每个模型的 `content_meta.series` (5.1 节 schema 正字段) 必须落盘 —— 矩阵内模型取 13 主题词值 (权威词表 `data/content_series_map.json`), 矩阵外模型写 `series: null` + `matrix_bucket` 聚桶 (待矩阵治理决断后归置, 见缺口审计第 6 节)。全库 250 个已按缺口审计附录 A 底稿回填完毕; 新模型入库时在词表 `models` 节登记归类并跑 `tools/backfill_content_series.py` 落盘, 由 `tools/check_content_series.py --strict` 机检把关 (全量 QA 可选关卡 20, `MAGTILE_SERIES_CHECK=1`, 批次评审/发布打包必开)。
+- **矩阵进度机检化**: 每批发布后 `tools/update_model_catalog.py --matrix-report` 重生成主题 × 难度矩阵进度快照 ([reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md), 对照 2.2 节 520 终态逐格给出 现状/目标, 超编格加粗, 矩阵外按桶单列) —— 多样性账本的矩阵消耗页与选题池的缺口依据由此机检产出, 缺口审计不再全库人工归类。
 - **实物复核率**: D5 与 D4 100%; D3 抽检 30%; D1–D2 抽检 10%。执行规程见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) (敲击/提起/记录模板/元数据落盘); D4+ 待复核清单用 `tools/list_physical_pending.py` 跟踪, 复核通过后在 `content_meta` 写入 `physical_verified` 三字段 (5.1 节)。
 
 ### 4.4 策展人职责 (Curator)
@@ -254,7 +257,7 @@ AI (含程序化生成器) 是加速器, 不是设计师。边界一次说清:
 策展人是多样性的最终责任人, 一票否决权。日常工作:
 
 1. 维护**多样性账本**: 技法 × 主题 × 范式三张消耗表 + 招牌技法陈述索引, 每批发布后更新;
-2. 按矩阵缺口发布选题 (例如"桥梁 D4 还缺 3 个, 且 T04 拱券在该主题未用过");
+2. 按矩阵缺口发布选题 (例如"桥梁 D4 还缺 3 个, 且 T04 拱券在该主题未用过"; 缺口数字以机检快照 [reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md) 为准), 并签发/收回 D3 冻结白名单 (4.3 节难度配额闸门的唯一例外通道);
 3. 执行预审与终审 (第 3.4 节清单);
 4. 监控第 7 节 KPI, 任何指标越线时冻结相关技法/主题的新增排期;
 5. 每 50 个模型做一次"全库回看": 随机抽 20 对相似度最高的模型对, 亲自做剪影测试, 校准自动阈值是否放得太松。

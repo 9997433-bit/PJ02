@@ -35,8 +35,9 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 17 | 教程步进性能基准 | 可选 (`MAGTILE_TUTORIAL_BENCH=1`): 小/中/大代表模型逐步计时 nextStep/goToStep, 每步 ms 与 P95, 超预算退出 1 (见 3.16 节; CTest 关卡已含同口径回归) |
 | 18 | 儿童友好文案守卫 | 用户可见中文文案红线: 恐吓词/催促话术零容忍 (Qt QML / Android strings.xml / Kotlin / 展示层 C++ / 模型步骤文案, [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.3 §4.5) |
 | 19 | L2 抗扰动巡检 | 可选 (`MAGTILE_L2_JITTER=1`): D4+ 模型逐个 `validate --profile strict --jitter 50` (验证金字塔 L2 门禁挂钩; CLI 未实装 `--jitter` 前为占位通过, 见 3.17 节) |
+| 20 | 内容系列归类机检 | 可选 (`MAGTILE_SERIES_CHECK=1`): 每模型 `content_meta.series` (13 主题词值) 或 `matrix_bucket` (矩阵外桶) 恰好其一, 词值受控于 `data/content_series_map.json` (见 3.19 节) |
 
-环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `MAGTILE_TUTORIAL_BENCH=1` 开启可选关卡 17; `MAGTILE_L2_JITTER=1` 开启可选关卡 19; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
+环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `MAGTILE_TUTORIAL_BENCH=1` 开启可选关卡 17; `MAGTILE_L2_JITTER=1` 开启可选关卡 19; `MAGTILE_SERIES_CHECK=1` 开启可选关卡 20; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
 
 CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑绿。
 
@@ -420,6 +421,41 @@ ctest --test-dir build -R "physics_jitter|validate_jitter" --output-on-failure
 ./build/magtile_app validate <model.json> --data-dir data --jitter 200 --profile strict  # 加严: 更多轮数 + 弱磁档
 ```
 
+### 3.19 内容治理机检 (series 归类 / D3 冻结硬闸门 / 矩阵进度)
+
+内容缺口审计 [reports/CONTENT_GAP_AUDIT.md](reports/CONTENT_GAP_AUDIT.md) §7.3 三条机制建议的机检落地; 批次纪律侧的约束见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §4.3。
+
+**series 归类机检 (可选关卡 20)** —— 脚本 `tools/check_content_series.py`。全库 250 个模型的 `content_meta.series` 已按缺口审计附录 A 底稿全量回填 (矩阵内 176 个写 13 主题 slug, 矩阵外 74 个写 `series: null` + `matrix_bucket` 聚桶), 自此归类是**入库必填**: 每个模型必须带 `content_meta.series` (13 策略主题之一, [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2.2) 或 `content_meta.matrix_bucket` (矩阵外桶) **恰好其一**, 词值受控于权威词表 `data/content_series_map.json` (词表语义与维护规则见同目录 `content_series_map.README.md`; slug 一经回填不得改名, 增删词须策展决断)。`--strict` 下任何缺失/非法即退出 1; 常见回填笔误 (字段写反、误用中文主题名) 给定向修复提示。新模型入库时在词表 `models` 节登记归类, 用幂等回填工具 `tools/backfill_content_series.py` 落盘 (只写 `series`/`matrix_bucket` 两键, 其余字段原样保留, 落盘后自检全库覆盖率)。
+
+```bash
+python3 tools/check_content_series.py data/models --strict   # 日常裸跑 (缺失/非法即退出 1)
+MAGTILE_SERIES_CHECK=1 tests/run_full_qa.sh                  # 随全量 QA (可选关卡 20)
+python3 tools/backfill_content_series.py --dry-run           # 词表登记后回填 (先看将发生的改动)
+```
+
+全量 QA 中默认跳过 (归类只在内容批次合入时变化, 日常代码合入不受它约束); **内容批次评审与发布打包置 `MAGTILE_SERIES_CHECK=1` 作硬闸门**。
+
+**D3 冻结硬闸门** —— 脚本 `tools/check_difficulty_quota.py`。全库 D3 (熟练档) 已超 520 终态目标而 D1/D5 两端空转, 审计把"D3 冻结"从纸面建议升级为批次评审机检:
+
+- 默认报告模式: 输出全库 D1–D5 分布与冻结判定 (**D1 < 20 或 D5 < 6 即冻结生效**; 解冻须 D1 ≥ 20 且 D5 ≥ 6 同时达标), 恒退出 0;
+- `--batch <目录或id清单>`: 批次硬闸门, 接受新模型 JSON 目录 (入库前审查) 或每行一个模型 id 的清单文件 (入库后复核) —— 冻结生效期间新增 `difficulty=3` 模型**直接 FAIL (退出码 1)**, 例外须策展人以 `--whitelist-file` 白名单签发 (每行一个 id);
+- `--strict`: 冻结生效时退出 1 (CI 对主库状态的告警闸)。
+
+闸门行为由回归测试 `tests/test_difficulty_quota.py` 锁定 (合成微模型于临时目录, 不进库)。
+
+```bash
+python3 tools/check_difficulty_quota.py                       # 分布报告 + 冻结判定 (恒退出 0)
+python3 tools/check_difficulty_quota.py --batch <目录或id清单> \
+    --whitelist-file <白名单>                                 # 批次评审硬闸门 (白名单可选)
+python3 tests/test_difficulty_quota.py .                      # 闸门自身的回归测试
+```
+
+**矩阵进度快照** —— `tools/update_model_catalog.py` 在重建目录后按 `content_meta.series` × `difficulty` 输出 13 主题 × D1–D5 矩阵进度表 (对照 CONTENT_STRATEGY.md §2.2 的 520 终态目标, 矩阵外模型按 `matrix_bucket` 聚桶单列、不摊薄矩阵内数字), `--matrix-report` 另存 markdown 快照 (缺省落点 [reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md), 超编格加粗) —— 缺口审计由此从人工逐模型归类变成可复跑的常规指标, 后续审计只需复核增量。
+
+```bash
+python3 tools/update_model_catalog.py --matrix-report   # 目录重建 + 矩阵进度快照刷新
+```
+
 ## 4. 持续集成 (CI)
 
 `.github/workflows/qa.yml` 在**每次 push** 时于 Ubuntu runner 上并行跑两个 job, 任一红灯都阻断 PR 合入:
@@ -483,8 +519,8 @@ CI 侧: `.github/workflows/release-gate.yml` 仅 `workflow_dispatch` 手动触�
 
 ## 6. 如何新增一个模型 (必须全绿才能入库)
 
-1. **生成或搭建模型 JSON**: 用编辑器/生成工具产出 `data/models/<model_id>.json`, BOM 等元数据由工具写入 `content_meta` (勿手写);
-2. **对照内容策略自检**: 难度与片数区间匹配 (CONTENT_STRATEGY.md 2.1 节)、≥ 3 种片形、≥ 2 个 Z 层、步骤 1~12 片/步、每步中文说明;
+1. **生成或搭建模型 JSON**: 用编辑器/生成工具产出 `data/models/<model_id>.json`, BOM 等元数据由工具写入 `content_meta` (勿手写); series 归类在 `data/content_series_map.json` 的 `models` 节登记后由 `tools/backfill_content_series.py` 回填 (3.19 节);
+2. **对照内容策略自检**: 难度与片数区间匹配 (CONTENT_STRATEGY.md 2.1 节) 且不触 D3 冻结硬闸门 (冻结生效期间新增 difficulty=3 会被批次评审拒绝, 见 3.19 节与 CONTENT_STRATEGY.md §4.3)、≥ 3 种片形、≥ 2 个 Z 层、步骤 1~12 片/步、每步中文说明;
 3. **重新配置一次 CMake** (`cmake -S . -B build`): `validate_<模型名>` / `tutorial_<模型名>` 用例自动注册 (glob 是 `CONFIGURE_DEPENDS`, 但新文件仍需触发一次配置);
 4. **跑全量 QA**: `tests/run_full_qa.sh`, 新模型必须让全部关卡保持绿灯 —— 物理 R1~R8 (含每个中间步骤)、体量门槛、逻辑质检、教程完整性一个都不能少;
 5. **有 Warning 先处理**: `disconnected_assembly` 等 Warning 须在教程文案中有对应分组说明; R8 结构冗余警告的点位建议按 PHYSICS_RULES.md 加固;
@@ -502,7 +538,8 @@ CI 侧: `.github/workflows/release-gate.yml` 仅 `workflow_dispatch` 手动触�
 5. `step_assembly_gate` 通过 (逐片零差错 P1~P8: id 唯一、每片恰好放置一次、高亮只引用已放置片、无孤儿/幽灵、逐片空间连续, 见 [MODEL_QUALITY.md](MODEL_QUALITY.md));
 6. `library_uniqueness_gate` 通过 (与全库任何模型的结构签名相似度 ≤ 0.85);
 7. `tutorial_integrity` 通过 (步骤恰好覆盖全部磁力片, 教程引擎实跑成功);
-8. 按难度分级完成实物验证要求 (BUILD_VERIFICATION.md 第 2 节; 执行规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md)); D4+ 复核通过后写入 `content_meta.physical_verified` 三字段或旁车验证文件, 否则一直挂在 `tools/list_physical_pending.py` 的待复核清单上。
+8. 按难度分级完成实物验证要求 (BUILD_VERIFICATION.md 第 2 节; 执行规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md)); D4+ 复核通过后写入 `content_meta.physical_verified` 三字段或旁车验证文件, 否则一直挂在 `tools/list_physical_pending.py` 的待复核清单上;
+9. 内容治理机检通过 (3.19 节): `content_meta.series`/`matrix_bucket` 归类已登记词表并回填落盘 (`check_content_series.py --strict` 全绿), 且所在批次通过 D3 冻结硬闸门 (`check_difficulty_quota.py --batch`, 冻结期间 difficulty=3 须策展人白名单豁免)。
 
 ## 8. 核心用户路径 E2E 冒烟 (上架验收)
 
