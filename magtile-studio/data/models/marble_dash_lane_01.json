@@ -1,0 +1,1004 @@
+{
+  "schema_version": 1,
+  "id": "marble_dash_lane_01",
+  "name": "弹珠冲关大道",
+  "name_en": "Marble Dash Lane 01",
+  "description": "滚珠乐园 D3 新作: 与绕塔盘旋的螺旋滚珠塔完全不同的直线玩法 —— 三段 30 度坡道从三层发射塔一路接力放平到地面, 每段坡尾由桥墩-坡道-转接台三件互吸的刚性节点接住, 转接台外缘再加门式立柱; 弹珠零转弯全速冲进清色保龄球道, 撞倒站在拼缝上的两只紫色球瓶, 最后撞响道底的粉色窗格铃靶。摆好球瓶, 从出珠口放珠 —— 一杆全倒!",
+  "difficulty": 3,
+  "total_pieces": 53,
+  "tags": [
+    "滚珠",
+    "轨道",
+    "弹珠",
+    "保龄球",
+    "冲刺"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 38,
+        "equilateral_triangle": 11,
+        "rectangle": 3,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "base_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw0_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw0_n",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw0_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw0_e_0",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw0_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw0_e_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_n",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_e_0",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_e_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw2_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tw2_n",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tw2_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tw2_e_0",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tw2_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tw2_e_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "deck_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "drail_w_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drail_w_1",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drail_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drail_e_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "p1a",
+      "type": "square",
+      "position": [
+        2.732051,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "p1b",
+      "type": "square",
+      "position": [
+        2.732051,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "p1c",
+      "type": "square",
+      "position": [
+        3.732051,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "p1d",
+      "type": "square",
+      "position": [
+        3.732051,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_1",
+      "type": "rectangle",
+      "position": [
+        1.866025,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "plat_1",
+      "type": "square",
+      "position": [
+        3.232051,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail1_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.232051,
+        0.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail1_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.232051,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "p2a",
+      "type": "square",
+      "position": [
+        5.464102,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "p2b",
+      "type": "square",
+      "position": [
+        6.464102,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_2",
+      "type": "rectangle",
+      "position": [
+        4.598076,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "plat_2",
+      "type": "square",
+      "position": [
+        5.964102,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail2_s",
+      "type": "equilateral_triangle",
+      "position": [
+        5.964102,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail2_n",
+      "type": "equilateral_triangle",
+      "position": [
+        5.964102,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ramp_3",
+      "type": "rectangle",
+      "position": [
+        7.330127,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "lane_0",
+      "type": "square",
+      "position": [
+        8.696153,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lane_1",
+      "type": "square",
+      "position": [
+        9.696153,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lane_2",
+      "type": "square",
+      "position": [
+        10.696153,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lane_3",
+      "type": "square",
+      "position": [
+        11.696153,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "guard_s_0",
+      "type": "square",
+      "position": [
+        8.696153,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "guard_n_0",
+      "type": "square",
+      "position": [
+        8.696153,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "guard_s_1",
+      "type": "square",
+      "position": [
+        9.696153,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "guard_n_1",
+      "type": "square",
+      "position": [
+        9.696153,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pin_1",
+      "type": "equilateral_triangle",
+      "position": [
+        10.196153,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "pin_2",
+      "type": "equilateral_triangle",
+      "position": [
+        11.196153,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "bell",
+      "type": "window_square",
+      "position": [
+        12.196153,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺塔基地台并立发射塔第一层: 两片灰色方板打底, 六片蓝色方板沿地台边缘合围。",
+      "tip": "塔基东边要留出一整条直线场地 —— 弹珠将从这里一冲到底。",
+      "tiles_to_add": [
+        "base_0",
+        "base_1",
+        "tw0_s",
+        "tw0_w_0",
+        "tw0_w_1",
+        "tw0_n",
+        "tw0_e_0",
+        "tw0_e_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "发射塔第二层: 六片蓝色方板骑上第一层墙顶, 上下边完整贴合。",
+      "tip": "墙环四角竖边两两互咬, 一层一层像穿糖葫芦一样往上叠。",
+      "tiles_to_add": [
+        "tw1_s",
+        "tw1_w_0",
+        "tw1_w_1",
+        "tw1_n",
+        "tw1_e_0",
+        "tw1_e_1"
+      ],
+      "highlight_tiles": [
+        "tw0_s",
+        "tw0_e_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "发射塔第三层: 六片青色方板封顶层, 塔身升到三层高。",
+      "tip": "塔越高越要轻放 —— 一手扶塔身, 一手放片。",
+      "tiles_to_add": [
+        "tw2_s",
+        "tw2_w_0",
+        "tw2_w_1",
+        "tw2_n",
+        "tw2_e_0",
+        "tw2_e_1"
+      ],
+      "highlight_tiles": [
+        "tw1_s",
+        "tw1_e_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "盖发射台: 两片黄色方板压住第三层墙顶, 四边都要吸在墙顶上。",
+      "tip": "发射台就是赛道起点 —— 弹珠从这里出发一冲到底。",
+      "tiles_to_add": [
+        "deck_0",
+        "deck_1"
+      ],
+      "highlight_tiles": [
+        "tw2_s",
+        "tw2_n"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装台沿挡珠: 五片红色挡珠三角围住台沿, 东缘南半格空着不拦 —— 那是出珠口。",
+      "tip": "出珠口对准正东 —— 从这里望出去就是弹珠的整条冲刺跑道。",
+      "tiles_to_add": [
+        "drail_w_0",
+        "drail_w_1",
+        "drail_s",
+        "drail_n",
+        "drail_e_1"
+      ],
+      "highlight_tiles": [
+        "deck_0",
+        "deck_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "冲刺段一 (整段成组安装): 塔东侧先立双层栈桥墩与双层门式立柱, 橙色坡道顶边整边吸住出珠口沿、坡尾搭上墩顶, 黄色转接台西缘压住墩顶与坡尾、东缘压住立柱顶。",
+      "tip": "桥墩-坡道-转接台三件互吸, 立柱像门框一样顶住台缘 —— 装完轻摇应纹丝不动。",
+      "tiles_to_add": [
+        "p1a",
+        "p1b",
+        "p1c",
+        "p1d",
+        "ramp_1",
+        "plat_1"
+      ],
+      "highlight_tiles": [
+        "deck_0",
+        "tw2_e_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "转接台一装挡珠三角: 南北各一片红三角, 弹珠只能乖乖直行。",
+      "tip": "直线冲刺不拐弯 —— 挡珠三角是跑道两侧的护栏。",
+      "tiles_to_add": [
+        "rail1_s",
+        "rail1_n"
+      ],
+      "highlight_tiles": [
+        "plat_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "冲刺段二: 立单层桥墩与立柱, 第二段坡道从转接台东缘下探, 再铺第二块转接台与两片挡珠三角。",
+      "tip": "海拔又降一层 —— 弹珠每过一段都更快一分。",
+      "tiles_to_add": [
+        "p2a",
+        "p2b",
+        "ramp_2",
+        "plat_2",
+        "rail2_s",
+        "rail2_n"
+      ],
+      "highlight_tiles": [
+        "plat_1",
+        "p1d"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "架冲线坡道: 最后一段橙色坡道从转接台二东缘直落地面, 坡尾自然着地。",
+      "tip": "冲线坡道顶边吸台缘, 坡尾落地不需要任何支撑。",
+      "tiles_to_add": [
+        "ramp_3"
+      ],
+      "highlight_tiles": [
+        "plat_2"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "铺保龄球道: 四片清色方板从坡尾向东一字排开, 西缘与坡尾整边互吸。",
+      "tip": "球道要铺得笔直 —— 弹珠落地后就在这条道上滑行减速。",
+      "tiles_to_add": [
+        "lane_0",
+        "lane_1",
+        "lane_2",
+        "lane_3"
+      ],
+      "highlight_tiles": [
+        "ramp_3"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "装球道护栏: 前两片球道南北各立两片绿色矮墙, 弹珠出不了界。",
+      "tip": "护栏墙脚踩住球道边缘整边吸合 —— 落点附近最容易弹跳出界。",
+      "tiles_to_add": [
+        "guard_s_0",
+        "guard_n_0",
+        "guard_s_1",
+        "guard_n_1"
+      ],
+      "highlight_tiles": [
+        "lane_0",
+        "lane_1"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "摆球瓶与铃靶: 两片紫色球瓶立在球道拼缝上, 道底立粉色窗格铃靶 —— 放珠开冲!",
+      "tip": "球瓶只吸一条缝, 弹珠一撞就倒 —— 全倒再撞响铃靶才算满分!",
+      "tiles_to_add": [
+        "pin_1",
+        "pin_2",
+        "bell"
+      ],
+      "highlight_tiles": [
+        "lane_2",
+        "lane_3"
+      ]
+    }
+  ]
+}
