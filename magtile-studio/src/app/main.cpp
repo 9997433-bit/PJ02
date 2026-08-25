@@ -15,7 +15,7 @@
 //   magtile_app tutorial <model.json> [--gui] [--data-dir DIR]  分步教程
 //   magtile_app progress list|show|reset [...] [--db FILE]      进度存档
 //   magtile_app inventory set|show|match [...] [--db FILE]      磁力片库存
-//   magtile_app settings set-age 4|7|10 | show [--db FILE]      年龄段模式等设置
+//   magtile_app settings set-age|set-tts|show [...] [--db FILE]  年龄段/朗读等设置
 // =============================================================
 
 #include <algorithm>
@@ -36,6 +36,7 @@
 #include "magtile/physics/physics_validator.hpp"
 #include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/progress_store.hpp"
+#include "magtile/progress/ui_settings.hpp"
 #include "magtile/tts/tts_engine.hpp"
 #include "magtile/tutorial/tutorial_engine.hpp"
 
@@ -69,8 +70,8 @@ struct CliArgs {
     std::string model_id;        ///< progress show/reset 的目标模型 id
     std::string inventory_action;  ///< inventory 子命令: set / show / match
     std::vector<std::string> inventory_pairs;  ///< inventory set 的 <形状 数量> 对
-    std::string settings_action;  ///< settings 子命令: set-age / show
-    std::string settings_value;   ///< settings set-age 的年龄参数 (周岁)
+    std::string settings_action;  ///< settings 子命令: set-age / set-tts / show
+    std::string settings_value;   ///< settings set-age 的年龄 (周岁) / set-tts 的 on|off
     std::string profile;          ///< validate 的物理校验档位 (default / strict)
     bool tts = false;            ///< --tts: 教程切步时朗读步骤说明 (系统 TTS)
     std::string open_model;      ///< library --gui: 启动后直接打开的模型 id
@@ -110,11 +111,15 @@ void printUsage() {
         "  magtile_app inventory match [--data-dir DIR]       对照库存列出能搭建的模型\n"
         "  magtile_app settings set-age <周岁>                 设置孩子年龄段模式\n"
         "                       (4~6 启蒙 / 7~9 标准 / 10~12 进阶, 示例: set-age 4)\n"
+        "  magtile_app settings set-tts <on|off>              开关教程步骤朗读\n"
+        "                       (写入与图形版页眉开关 / Qt 版设置页同一\n"
+        "                        \"tts_enabled\" 设置键, 默认开)\n"
         "  magtile_app settings show                          查看当前设置与 TTS 后端\n"
         "\n"
         "教程选项:\n"
         "  --tts               切换步骤时朗读步骤说明 (系统 TTS, 无后端时静音;\n"
-        "                       4-6 岁启蒙模式下模型库教程自动开启)\n"
+        "                       4-6 岁启蒙模式下图形教程自动开启; 均受\n"
+        "                       settings set-tts 朗读总开关约束)\n"
         "\n"
         "图形模式选项:\n"
         "  --step N            (tutorial) 从第 N 步开始 (默认 1)\n"
@@ -213,7 +218,7 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
         if (positional.empty()) return false;
         args.settings_action = positional[0];
         if (args.settings_action == "show") return positional.size() == 1;
-        if (args.settings_action == "set-age") {
+        if (args.settings_action == "set-age" || args.settings_action == "set-tts") {
             if (positional.size() != 2) return false;
             args.settings_value = positional[1];
             return true;
@@ -575,11 +580,11 @@ int runInventory(const CliArgs& args) {
     return 0;
 }
 
-// ---- 设置 (settings set-age / show) --------------------------------
+// ---- 设置 (settings set-age / set-tts / show) -----------------------
 
-/// settings 命令: 年龄段模式切换与设置总览 (UI_UX_SPEC.md §2 / §8)。
-/// 正式产品中年龄段切换位于家长门之后的家长区; CLI 是桌面外壳的
-/// 内容制作与评审入口, 不做门禁。
+/// settings 命令: 年龄段模式与朗读开关切换、设置总览 (UI_UX_SPEC.md
+/// §2 / §4.2 / §8)。正式产品中这些设置位于家长门之后的家长区; CLI
+/// 是桌面外壳的内容制作与评审入口, 不做门禁。
 int runSettings(const CliArgs& args) {
     const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
     progress::ProgressStore store(db_file);
@@ -601,11 +606,32 @@ int runSettings(const CliArgs& args) {
         return 0;
     }
 
-    // show: 设置总览 (年龄段 + TTS 后端探测结果)
+    if (args.settings_action == "set-tts") {
+        // 步骤朗读总开关 (§4.2): 写 "tts_enabled" 键, 与图形版教程
+        // 页眉开关 / Qt 版设置页同一 progress/ui_settings 契约
+        const std::string& value = args.settings_value;
+        if (value == "on" || value == "1") {
+            progress::setTtsEnabled(store, true);
+            std::printf("步骤朗读已开启\n");
+            return 0;
+        }
+        if (value == "off" || value == "0") {
+            progress::setTtsEnabled(store, false);
+            std::printf("步骤朗读已关闭\n");
+            return 0;
+        }
+        std::fprintf(stderr, "错误: \"%s\" 不是合法的朗读开关值 (on / off)。示例: settings set-tts off\n",
+                     value.c_str());
+        return 2;
+    }
+
+    // show: 设置总览 (年龄段 + 朗读开关 + TTS 后端探测结果)
     const auto tts_engine = tts::createSystemTts();
     std::printf("设置 (%s):\n", db_file.string().c_str());
     std::printf("  年龄段模式: %s\n",
                 std::string(core::displayNameZh(progress::getAgeMode(store))).c_str());
+    std::printf("  步骤朗读: %s (4-6 岁启蒙模式教程自动朗读)\n",
+                progress::getTtsEnabled(store) ? "开" : "关");
     std::printf("  TTS 朗读后端: %s%s\n", std::string(tts_engine->name()).c_str(),
                 tts_engine->available() ? "" : " (本机无可用朗读器, 已静音降级)");
     return 0;
@@ -638,14 +664,19 @@ enum class TutorialExit {
 ///
 /// store 非空时把进度写入存档: 每次步骤变化落盘当前步骤与游玩时长
 /// 增量, 走到最后一步即记完成 (并解锁首个模型完成成就)。
-/// tts 非空时进入/切换步骤即朗读步骤说明 (speak 内部先停旧朗读,
-/// 保证无叠音, UI_UX_SPEC.md §4.2); 会话结束停止朗读。
+/// tts 非空时页眉显示朗读开关 (读/写 settings_store 的 "tts_enabled"
+/// 键, 与 Qt 版设置页 / CLI set-tts 同一 progress/ui_settings 契约);
+/// tts_auto_read 为真 (4-6 岁启蒙模式或显式 --tts) 且总开关开时,
+/// 进入/切换步骤自动朗读步骤说明 (speak 内部先停旧朗读, 保证无叠音,
+/// UI_UX_SPEC.md §4.2); 会话结束停止朗读。
 /// frame_index 与调用方共享 --frames 帧预算 (模型库 + 教程连续计数)。
 TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
                                 const core::TileCatalog& catalog,
                                 tutorial::TutorialEngine& engine,
-                                progress::ProgressStore* store, tts::ITtsEngine* tts,
-                                bool from_library, const CliArgs& args, long& frame_index) {
+                                progress::ProgressStore* store,
+                                progress::ProgressStore* settings_store, tts::ITtsEngine* tts,
+                                bool tts_auto_read, bool from_library, const CliArgs& args,
+                                long& frame_index) {
     using Clock = std::chrono::steady_clock;
     Clock::time_point last_flush_time = Clock::now();
     int last_saved_step = engine.currentStepNumber();
@@ -663,11 +694,20 @@ TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
     // 会话开始即建档, 模型库立刻能显示 "进行中"
     flushProgress(last_saved_step);
 
-    // TTS: 朗读当前步骤说明; 会话结束时停止 (离开教程不能还在说话)
+    // 朗读总开关 (§4.2): 会话开始从存档读一次快照, 页眉开关翻转即
+    // 写回同一 "tts_enabled" 键 —— Qt 版设置页 / CLI set-tts 改的
+    // 也是它。无设置存档时按默认开处理 (与 ui_settings 口径一致)。
+    bool tts_enabled =
+        settings_store == nullptr || progress::getTtsEnabled(*settings_store);
+
+    // TTS: 朗读当前步骤说明 (总开关关闭时静默); 会话结束时停止
+    // (离开教程不能还在说话)。朗读文案与 Qt 版一致: 说明 + 技巧提示。
     const auto speakCurrentStep = [&]() {
-        if (tts == nullptr) return;
+        if (tts == nullptr || !tts_enabled) return;
         if (const core::BuildStep* step = engine.currentStep(); step != nullptr) {
-            tts->speak(step->description);
+            std::string text = step->description;
+            if (!step->tip.empty()) text += "。小提示，" + step->tip;
+            tts->speak(text);
         } else {
             tts->stop();  // 第 0 步 (未开始) 无步骤说明
         }
@@ -676,7 +716,7 @@ TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
         if (tts != nullptr) tts->stop();
     };
     int last_spoken_step = engine.currentStepNumber();
-    speakCurrentStep();  // 进入教程即朗读恢复到的步骤
+    if (tts_auto_read) speakCurrentStep();  // 自动朗读: 进教程即朗读恢复到的步骤
 
     while (!renderer.shouldClose()) {
         renderer.pollEvents();
@@ -706,6 +746,9 @@ TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
         hud.tiles_placed = static_cast<int>(placed.size());
         hud.tiles_total = static_cast<int>(engine.model().final_assembly.size());
         hud.show_back_button = from_library;
+        hud.show_tts_toggle = tts != nullptr;
+        hud.tts_enabled = tts_enabled;
+        hud.tts_available = tts != nullptr && tts->available();
         if (const core::BuildStep* step = engine.currentStep(); step != nullptr) {
             hud.description = step->description;
             hud.tip = step->tip;
@@ -729,10 +772,30 @@ TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
             engine.previousStep();
         }
 
-        // 步骤变化 -> 朗读新步骤 (与进度落盘解耦: 无存档的直开教程也要朗读)
+        // 页眉朗读开关: 翻转 + 持久化 "tts_enabled"; 关闭立即停止
+        // 朗读, 打开立即朗读当前步骤 (即时反馈, 也兼作手动点读)
+        if (actions.toggle_tts && tts != nullptr) {
+            tts_enabled = !tts_enabled;
+            if (settings_store != nullptr) {
+                progress::setTtsEnabled(*settings_store, tts_enabled);
+            }
+            if (tts_enabled) {
+                speakCurrentStep();
+            } else {
+                tts->stop();
+            }
+        }
+
+        // 步骤变化 -> 自动朗读新步骤 (与进度落盘解耦: 无存档的直开
+        // 教程也要朗读); 非自动朗读档位切步只停旧朗读 (无叠音, 与
+        // Qt 版一致)
         if (engine.currentStepNumber() != last_spoken_step) {
             last_spoken_step = engine.currentStepNumber();
-            speakCurrentStep();
+            if (tts_auto_read) {
+                speakCurrentStep();
+            } else {
+                stopSpeaking();
+            }
         }
 
         // 步骤变化 -> 进度落盘; 走到最后一步 -> 记完成 + 首次完成成就
@@ -790,17 +853,25 @@ int runTutorialGui(const CliArgs& args) {
     }
     frameModelBounds(*renderer, catalog, engine.model());
 
-    // --tts: 切步朗读步骤说明 (直开教程无存档, 只认显式开关)
-    std::unique_ptr<tts::ITtsEngine> tts_engine;
-    if (args.tts) {
-        tts_engine = tts::createSystemTts();
+    // 朗读接线 (§4.2): 引擎常备 (无后端时静音降级), 教程页眉朗读
+    // 开关读/写进度存档 settings 表的 "tts_enabled" 键 —— 直开教程
+    // 照旧不写任何进度记录, 只经该存档读写朗读/年龄段设置 (与模型
+    // 库 / Qt 版 / CLI 共库)。自动朗读认显式 --tts 或 4-6 岁启蒙
+    // 模式 (与 Qt 版同一口径), 总开关关闭时静默。
+    const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
+    progress::ProgressStore settings_store(db_file);
+    auto tts_engine = tts::createSystemTts();
+    const bool tts_auto_read =
+        args.tts || progress::getAgeMode(settings_store) == core::AgeMode::Age4_6;
+    if (tts_auto_read) {
         std::printf("[tts] 朗读后端: %s%s\n", std::string(tts_engine->name()).c_str(),
                     tts_engine->available() ? "" : " (无可用朗读器, 静音降级)");
     }
 
     long frame_index = 0;
-    runTutorialSession(*renderer, catalog, engine, /*store=*/nullptr, tts_engine.get(),
-                       /*from_library=*/false, args, frame_index);
+    runTutorialSession(*renderer, catalog, engine, /*store=*/nullptr, &settings_store,
+                       tts_engine.get(), tts_auto_read, /*from_library=*/false, args,
+                       frame_index);
     renderer->shutdown();
     return 0;
 }
@@ -820,11 +891,13 @@ int runLibraryGui(const CliArgs& args) {
     // 年龄段模式 (家长在设置中选择, UI_UX_SPEC.md §2):
     //   - 模型库按档位切卡片密度与筛选器收放 (渲染层 submitLibrary):
     //     4-6 超大卡片无筛选 / 7-9 难度+主题 / 10+ 紧凑卡片全量筛选;
-    //   - 4-6 岁启蒙模式教程自动朗读, 其余档位朗读只认显式 --tts。
+    //   - 4-6 岁启蒙模式教程自动朗读, 其余档位自动朗读只认显式
+    //     --tts; 两者都受 "tts_enabled" 朗读总开关约束 (§4.2, 教程
+    //     页眉开关 / Qt 版设置页 / CLI set-tts 读写同一键)。
     const core::AgeMode age_mode = progress::getAgeMode(store);
-    std::unique_ptr<tts::ITtsEngine> tts_engine;
-    if (args.tts || age_mode == core::AgeMode::Age4_6) {
-        tts_engine = tts::createSystemTts();
+    auto tts_engine = tts::createSystemTts();
+    const bool tts_auto_read = args.tts || age_mode == core::AgeMode::Age4_6;
+    if (tts_auto_read) {
         std::printf("[tts] 朗读后端: %s%s\n", std::string(tts_engine->name()).c_str(),
                     tts_engine->available() ? "" : " (无可用朗读器, 静音降级)");
     }
@@ -1004,8 +1077,9 @@ int runLibraryGui(const CliArgs& args) {
                 frameModelBounds(*renderer, catalog, engine.model());
 
                 const TutorialExit exit_reason = runTutorialSession(
-                    *renderer, catalog, engine, &store, tts_engine.get(),
-                    /*from_library=*/true, args, frame_index);
+                    *renderer, catalog, engine, &store, /*settings_store=*/&store,
+                    tts_engine.get(), tts_auto_read, /*from_library=*/true, args,
+                    frame_index);
                 if (exit_reason == TutorialExit::FrameBudget) break;
                 // WindowClosed 由外层循环条件收尾; BackToLibrary 继续渲染库界面
             } catch (const std::exception& e) {
@@ -1237,12 +1311,19 @@ int runTutorial(const CliArgs& args) {
 
     // --tts: 每步推进都朗读说明; speak 内部先停旧朗读 (无叠音),
     // 终端预览逐步瞬时推进, 实际可听到的是最后一步 —— 主要用于
-    // 快速验证后端发声与教程文案的口语化程度
+    // 快速验证后端发声与教程文案的口语化程度。朗读总开关
+    // ("tts_enabled", settings set-tts) 关闭时本次静音, 与图形版 /
+    // Qt 版同一口径。
     std::unique_ptr<tts::ITtsEngine> tts_engine;
     if (args.tts) {
-        tts_engine = tts::createSystemTts();
-        std::printf("[tts] 朗读后端: %s%s\n\n", std::string(tts_engine->name()).c_str(),
-                    tts_engine->available() ? "" : " (无可用朗读器, 静音降级)");
+        const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
+        if (progress::ProgressStore store(db_file); progress::getTtsEnabled(store)) {
+            tts_engine = tts::createSystemTts();
+            std::printf("[tts] 朗读后端: %s%s\n\n", std::string(tts_engine->name()).c_str(),
+                        tts_engine->available() ? "" : " (无可用朗读器, 静音降级)");
+        } else {
+            std::printf("[tts] 朗读总开关已关闭, 本次静音 (settings set-tts on 可开启)\n\n");
+        }
     }
 
     tutorial::TutorialEngine engine(std::move(model));

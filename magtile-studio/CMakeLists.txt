@@ -357,6 +357,15 @@ if(MAGTILE_BUILD_TESTS)
             COMMAND ${MAGTILE_BASH} -c
                 "$<TARGET_FILE:magtile_app> settings set-age 4 --db ${CMAKE_CURRENT_BINARY_DIR}/settings_cli_smoke.db && $<TARGET_FILE:magtile_app> settings show --db ${CMAKE_CURRENT_BINARY_DIR}/settings_cli_smoke.db | grep -q 启蒙模式")
 
+        # 步骤朗读开关 CLI: set-tts on/off/1/0 与 show 对 "tts_enabled"
+        # 键的读写 (默认开 / 跨进程持久化 / 非法值退出码 2 / 终端教程
+        # --tts 遵守总开关), 与图形版页眉开关 / Qt 版设置页同一契约
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_settings_tts_cli.sh)
+            add_test(NAME settings_tts_cli
+                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_settings_tts_cli.sh
+                    $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
+        endif()
+
         # 模型库 GUI 冒烟: 无头渲染模型库界面截图 + --open 深链教程会话
         # 并校验进度存档写入; 无显示环境自动降级为链接检查。
         if(EXISTS ${MAGTILE_TESTS_DIR}/test_library_smoke.sh AND MAGTILE_BUILD_GL_RENDERER)

@@ -31,6 +31,12 @@ struct TutorialHudState {
     int tiles_placed = 0;
     int tiles_total = 0;
     bool show_back_button = false;  ///< 从模型库进入时显示 "返回模型库"
+
+    // ---- 步骤朗读开关 (UI_UX_SPEC.md §4.2, 与 Qt 版共用
+    //      progress/ui_settings 的 "tts_enabled" 设置键) ------------
+    bool show_tts_toggle = false;  ///< 应用层带朗读会话时在页眉显示开关
+    bool tts_enabled = false;      ///< 朗读总开关当前状态 (应用层持久化)
+    bool tts_available = false;    ///< 本机语音引擎可发声; 否则开关旁温和说明
 };
 
 /// 一帧内用户发出的教程导航操作 (键盘与 HUD 按钮来源合并)。
@@ -39,12 +45,14 @@ struct TutorialActions {
     bool previous_step = false;
     bool reset = false;            ///< 回到未开始状态 (第 0 步)
     bool back_to_library = false;  ///< 返回模型库 (仅库内会话有效)
+    bool toggle_tts = false;       ///< 点击页眉朗读开关: 应用层翻转并持久化 tts_enabled
 
     TutorialActions& operator|=(const TutorialActions& o) noexcept {
         next_step = next_step || o.next_step;
         previous_step = previous_step || o.previous_step;
         reset = reset || o.reset;
         back_to_library = back_to_library || o.back_to_library;
+        toggle_tts = toggle_tts || o.toggle_tts;
         return *this;
     }
 };

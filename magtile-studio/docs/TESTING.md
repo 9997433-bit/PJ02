@@ -211,9 +211,9 @@ tests/test_physics_negative.sh build/magtile_app data \
 
 正例夹具按 `CONFIGURE_DEPENDS` 自动注册, 新增只需把 JSON 放进目录后重新配置。**每放宽/收紧一次 PhysicsConfig 预算参数, 都必须同时补一对正/负例夹具钉住新边界** (见 PHYSICS_RULES.md "调参纪律")。
 
-### 3.9 C++ 回归 (`progress_roundtrip` / `progress_cli_smoke` / `parent_gate` / `inventory_cli`)
+### 3.9 C++ 回归 (`progress_roundtrip` / `progress_cli_smoke` / `parent_gate` / `age_tts` / `inventory_cli` / `settings_cli_smoke` / `settings_tts_cli`)
 
-进度存档 (SQLite) 的保存/读取往返、完成/收藏/成就、磁力片库存 (`tile_inventory` 表登记/读取、`canBuild`/`missingPieces` BOM 对照、v1 库存 JSON 迁移)、跨连接持久化与重置删除的 C++ 级回归, 以及空库 CLI 冒烟。`inventory_cli` (`tests/test_inventory_cli.sh`) 覆盖库存 CLI 全流程: set/show/match、非法输入拒绝、匹配边界 (满配库存全库能搭 / 全 0 库存能搭数为 0 且缺片清单按缺片数升序)。`inventory_gui_smoke` (`tests/test_inventory_gui.sh`) 覆盖图形录入与 CLI 共库承诺: 无头渲染库存录入界面截图、只浏览不保存则不落盘、`--smoke-inventory` 自动驾驶经图形路径保存后 CLI `inventory show/match` 从同一 SQLite 读到、未指定片型按 0 落库 (「明确没有」); 无显示环境自动降级为链接检查。`parent_gate` (`tests/test_parent_gate.cpp`) 覆盖家长门模块 (SECURITY_AND_PRIVACY.md §6.2 要求单测的三个域): 乘法题生成域、中文大写数字转换/解析与验证逻辑、3 次答错冷却状态机、15 分钟内存会话有效期 (时间经显式注入, 测试不真实等待)。随代码演进持续追加此类用例 —— 注册进 CTest 即自动纳入全量 QA 关卡 3。
+进度存档 (SQLite) 的保存/读取往返、完成/收藏/成就、磁力片库存 (`tile_inventory` 表登记/读取、`canBuild`/`missingPieces` BOM 对照、v1 库存 JSON 迁移)、跨连接持久化与重置删除的 C++ 级回归, 以及空库 CLI 冒烟。`age_tts` (`tests/test_age_tts.cpp`) 覆盖年龄分层映射、界面设置 (字号三档/减少动效) 与步骤朗读总开关 (`tts_enabled` 键: 默认开/往返/脏值按开兜底/跨连接持久化) 的 SQLite 契约, 以及 TTS 引擎 stub (NullTts 无叠音语义、系统后端探测与静音降级)。`inventory_cli` (`tests/test_inventory_cli.sh`) 覆盖库存 CLI 全流程: set/show/match、非法输入拒绝、匹配边界 (满配库存全库能搭 / 全 0 库存能搭数为 0 且缺片清单按缺片数升序)。`settings_cli_smoke` 覆盖 `settings set-age` 写入与 `show` 回读; `settings_tts_cli` (`tests/test_settings_tts_cli.sh`) 覆盖 `settings set-tts on|off|1|0` 与 `show` 对 `tts_enabled` 键的读写 —— 默认开、跨进程持久化、非法值以退出码 2 拒绝且不改动存档、终端教程 `--tts` 在总开关关闭时静音降级; 该键与图形版教程页眉朗读开关、Qt 版设置页开关是同一 `progress/ui_settings` 持久化契约 (三端任一处改动, 其余两端下次会话生效)。`inventory_gui_smoke` (`tests/test_inventory_gui.sh`) 覆盖图形录入与 CLI 共库承诺: 无头渲染库存录入界面截图、只浏览不保存则不落盘、`--smoke-inventory` 自动驾驶经图形路径保存后 CLI `inventory show/match` 从同一 SQLite 读到、未指定片型按 0 落库 (「明确没有」); 无显示环境自动降级为链接检查。`parent_gate` (`tests/test_parent_gate.cpp`) 覆盖家长门模块 (SECURITY_AND_PRIVACY.md §6.2 要求单测的三个域): 乘法题生成域、中文大写数字转换/解析与验证逻辑、3 次答错冷却状态机、15 分钟内存会话有效期 (时间经显式注入, 测试不真实等待)。随代码演进持续追加此类用例 —— 注册进 CTest 即自动纳入全量 QA 关卡 3。
 
 ### 3.10 GL 渲染冒烟 (`tests/test_gl_smoke.sh`)
 
@@ -232,6 +232,14 @@ xvfb-run -a ./build/magtile_app tutorial data/models/castle_foundation_01.json \
 ```
 
 `--frames N` 渲染 N 帧后自动退出, `--screenshot FILE` 在最后一帧保存画面, 两者专为 CI 冒烟测试设计。
+
+图形教程页眉带步骤朗读开关 (UI_UX_SPEC.md §4.2): 读/写进度存档 `tts_enabled` 设置键 (与 Qt 版设置页 / CLI `settings set-tts` 同一契约), 关闭立即停止朗读, 打开立即朗读当前步骤; 自动朗读 (进入/切换步骤即读) 只在 4-6 岁启蒙模式或显式 `--tts` 下开启, 且同样受总开关约束。手动验证:
+
+```bash
+./build/magtile_app settings set-age 4 --db /tmp/t.db     # 启蒙模式自动朗读
+./build/magtile_app tutorial data/models/castle_foundation_01.json --gui --db /tmp/t.db
+./build/magtile_app settings set-tts off --db /tmp/t.db   # 总开关关闭 -> 全端静音
+```
 
 ### 3.11 逐步装配质检 (`step_assembly_gate`)
 

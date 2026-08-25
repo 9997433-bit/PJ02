@@ -822,6 +822,21 @@ TutorialActions GlRenderer::submitHud(const TutorialHudState& hud) {
             ImGui::SameLine();
         }
         ImGui::Text("%s", hud.model_name.c_str());
+        if (hud.show_tts_toggle) {
+            // 步骤朗读开关 (§4.2): 与 Qt 版设置页共用 "tts_enabled" 键,
+            // 点击由应用层翻转并持久化; 引擎缺失时开关照常可调,
+            // 只温和说明不禁用 (P3 零挫败, 与 Qt 版同一策略)
+            if (ImGui::Button(hud.tts_enabled ? "朗读: 开" : "朗读: 关")) {
+                actions.toggle_tts = true;
+            }
+            ImGui::SameLine();
+            if (hud.tts_available) {
+                ImGui::TextDisabled(hud.tts_enabled ? "切换步骤时朗读说明"
+                                                    : "点击开启步骤朗读");
+            } else {
+                ImGui::TextDisabled("本机暂无语音引擎, 开关照常保存");
+            }
+        }
         ImGui::Separator();
         ImGui::TextDisabled("鼠标左键 旋转 | 右键 平移 | 滚轮 缩放 | R 重置视角");
         ImGui::TextDisabled("方向键 <- -> 切换步骤 | Home 从头开始 | Esc 退出");
