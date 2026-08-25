@@ -43,6 +43,10 @@ add_library(magtile_android SHARED
 # Kotlin 侧以 System.loadLibrary("magtile_core") 加载, 故产物命名为
 # libmagtile_core.so (与桌面静态库 libmagtile_core.a 互不冲突)。
 set_target_properties(magtile_android PROPERTIES OUTPUT_NAME magtile_core)
+# nlohmann/json: listModels() 序列化模型库目录为 JSON 字符串
+target_include_directories(magtile_android
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../third_party
+)
 target_link_libraries(magtile_android
     PRIVATE
         magtile_core

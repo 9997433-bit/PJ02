@@ -1,8 +1,9 @@
 // =============================================================
-// MagTile Studio - Android JNI 包装层 (脚手架)
+// MagTile Studio - Android JNI 包装层
 //
-// 向 Kotlin 侧 (com.magtile.studio.MainActivity) 暴露三个入口:
+// 向 Kotlin 侧 (com.magtile.studio.MainActivity) 暴露四个入口:
 //   loadCatalog(catalogPath)      -> 加载磁力片形状目录, 返回形状数
+//   listModels(dataDir)           -> 模型库目录 (卡片元数据), 返回 JSON 字符串
 //   validateModel(jsonPath)       -> 加载模型并跑完整物理校验, 返回中文摘要
 //   getTutorialStepCount()        -> 最近一次成功加载模型的教程步骤数
 //
@@ -19,6 +20,8 @@
 #include <string>
 #include <utility>
 
+#include <nlohmann/json.hpp>
+
 #if defined(__ANDROID__)
 #include <android/log.h>
 #define MAGTILE_LOGE(...) \
@@ -28,6 +31,7 @@
 #endif
 
 #include "magtile/core/json_io.hpp"
+#include "magtile/core/model_catalog.hpp"
 #include "magtile/core/model_definition.hpp"
 #include "magtile/core/tile_catalog.hpp"
 #include "magtile/physics/physics_validator.hpp"
@@ -81,6 +85,44 @@ JNIEXPORT jint JNICALL Java_com_magtile_studio_MainActivity_loadCatalog(
         MAGTILE_LOGE("loadCatalog 失败: %s", e.what());
         ctx.catalog.reset();
         return -1;
+    }
+}
+
+/// 加载 data 目录下的模型库目录 (model_catalog.json, 缺失时自动扫描
+/// models/*.json), 返回 UTF-8 JSON 字符串供 Kotlin 侧 (org.json) 解析:
+///   成功: {"models":[{"id","name","name_en","description","difficulty",
+///                     "total_pieces","step_count","theme","file"}, ...]}
+///   失败: {"error":"中文错误信息"}
+/// 只含卡片展示元数据, 不加载几何与教程步骤 (模型库秒开);
+/// file 为模型 JSON 绝对路径, 可直接传给 validateModel()。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MainActivity_listModels(
+    JNIEnv* env, jobject /*thiz*/, jstring data_dir) {
+    try {
+        const std::vector<magtile::core::ModelCatalogEntry> entries =
+            magtile::core::loadModelCatalog(toUtf8(env, data_dir));
+
+        nlohmann::json models = nlohmann::json::array();
+        for (const auto& entry : entries) {
+            models.push_back({
+                {"id", entry.id},
+                {"name", entry.name},
+                {"name_en", entry.name_en},
+                {"description", entry.description},
+                {"difficulty", entry.difficulty},
+                {"total_pieces", entry.total_pieces},
+                {"step_count", entry.step_count},
+                {"theme", entry.theme()},
+                {"file", entry.file.string()},
+            });
+        }
+        const nlohmann::json root = {{"models", std::move(models)}};
+        // dump() 输出标准 UTF-8; 目录内容均为基本多文种平面字符,
+        // 与 NewStringUTF 要求的 Modified UTF-8 编码一致。
+        return toJString(env, root.dump());
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("listModels 失败: %s", e.what());
+        const nlohmann::json error = {{"error", std::string("错误: ") + e.what()}};
+        return toJString(env, error.dump());
     }
 }
 
