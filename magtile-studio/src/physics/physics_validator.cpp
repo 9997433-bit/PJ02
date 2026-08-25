@@ -480,12 +480,16 @@ ValidationReport PhysicsValidator::validateAssembly(
                                             config_.knock_safety_factor;
                     if (component_mass > capacity + 1e-9) {
                         std::ostringstream oss;
+                        // 安全系数随档位变化 (default 0.8 / strict 0.7),
+                        // 文案必须跟随实际生效的参数, 不得硬编码。
                         oss << "悬挂链超重: " << component.size() << " 片约 "
                             << formatGrams(component_mass) << "g 全部悬挂在总长 "
                             << formatGrams(hinge_length) << " 的磁力边下方, 超过承重预算 "
                             << formatGrams(capacity) << "g (额定 "
                             << formatGrams(config_.hanging_capacity_per_edge)
-                            << "g/单位边长 x 80% 抗碰撞裕量), 实搭时整串会脱落";
+                            << "g/单位边长 x "
+                            << std::lround(config_.knock_safety_factor * 100.0)
+                            << "% 抗碰撞裕量), 实搭时整串会脱落";
                         report.issues.push_back({IssueSeverity::Error, "hanging_chain_overload",
                                                  withContext(context, oss.str()),
                                                  component_ids});

@@ -20,11 +20,14 @@
 #   11. 物理负例 x N         (不成立的结构必须被拒绝, 错误码必须正确)
 #   12. 物理正例 x N         (预算内的合法结构必须放行)
 #   13. GL 渲染冒烟          (无头渲染 + 截图校验, 无显示环境自动降级)
+#   14. 弱磁严格档全库巡检   (可选: MAGTILE_STRICT_AUDIT=1 时执行,
+#       tools/run_strict_audit.sh —— strict 零警告审计 + 逐步装配质检)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
 # 环境变量:
 #   MAGTILE_CMAKE_ARGS   附加 CMake 配置参数 (如 "-DMAGTILE_BUILD_GL_RENDERER=OFF")
+#   MAGTILE_STRICT_AUDIT=1  启用可选关卡 14 (弱磁严格档全库巡检)
 #   FORCE_COLOR=1        非终端环境 (CI) 强制彩色输出
 #   NO_COLOR=1           禁用彩色输出
 #
@@ -194,6 +197,18 @@ fi
 
 # ---- 12: GL 渲染冒烟 --------------------------------------------
 run_stage "GL 渲染冒烟" bash "$TESTS_DIR/test_gl_smoke.sh" "$BUILD_DIR"
+
+# ---- 13: 弱磁严格档全库巡检 (可选关卡) ---------------------------
+# strict 档零警告审计 + 逐步装配质检; CTest 关卡已覆盖旗舰模型的
+# strict 回归, 这里是全库 131 模型的完整巡检, 默认关闭以控制
+# 流水线时长, 发布前 / 内容批量合入时置 MAGTILE_STRICT_AUDIT=1 开启。
+if [ -n "${MAGTILE_STRICT_AUDIT:-}" ]; then
+    run_stage "弱磁严格档全库巡检 (strict)" \
+        bash "$ROOT/tools/run_strict_audit.sh" "$BUILD_DIR"
+else
+    skip_stage "弱磁严格档全库巡检 (strict)" \
+        "可选关卡, 置 MAGTILE_STRICT_AUDIT=1 开启 (tools/run_strict_audit.sh)"
+fi
 
 # ---- 总结报告 ---------------------------------------------------
 pass_count=0; fail_count=0; skip_count=0

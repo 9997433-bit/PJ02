@@ -306,6 +306,16 @@ if(MAGTILE_BUILD_TESTS)
             endforeach()
         endif()
 
+        # 档位参数文案回归 (2026-08-25 strict 巡检回填): R5 悬挂超重
+        # 文案的安全系数必须跟随实际档位 (default 80% / strict 70%),
+        # 不得硬编码 —— 防止内容作者按错误文案反推预算。
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_strict_profile_message.sh)
+            add_test(NAME strict_profile_message
+                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_strict_profile_message.sh
+                    $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR}
+                    ${MAGTILE_TESTS_DIR}/test_physics_negative/hanging_chain_overload.json)
+        endif()
+
         # 物理正例: 处于承载预算之内的合法结构, validate 必须放行
         # (防止 R5/R6 静力规则矫枉过正, 误杀磁力片的常规玩法)。
         # 执行器额外断言输出包含 "可发布" 结论, 确保走到完整校验流程的成功出口。
