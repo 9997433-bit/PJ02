@@ -40,6 +40,11 @@
 #       tools/run_strict_audit.sh --jitter-only —— D4+ 模型逐个
 #       validate --profile strict --jitter 50, 验证金字塔 L2 层门禁挂钩;
 #       CLI 未实装 --jitter 前为占位通过, 实装后自动实跑, TESTING.md 3.17)
+#   20. 内容系列归类机检        (可选: MAGTILE_SERIES_CHECK=1 时执行,
+#       tools/check_content_series.py --strict —— 每模型须带
+#       content_meta.series (13 主题词值) 或 matrix_bucket (矩阵外桶),
+#       词值对照 data/content_series_map.json 词表, 输出主题 × 难度
+#       矩阵计数; CONTENT_GAP_AUDIT.md §7.3 机检化, 回填底稿见其附录 A)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -49,6 +54,7 @@
 #   MAGTILE_STRICT_AUDIT=1  启用可选关卡 15 (弱磁严格档全库巡检)
 #   MAGTILE_TUTORIAL_BENCH=1  启用可选关卡 17 (教程步进性能基准)
 #   MAGTILE_L2_JITTER=1  启用可选关卡 19 (L2 抗扰动巡检, D4+ jitter)
+#   MAGTILE_SERIES_CHECK=1  启用可选关卡 20 (内容系列归类机检)
 #   FORCE_COLOR=1        非终端环境 (CI) 强制彩色输出
 #   NO_COLOR=1           禁用彩色输出
 #
@@ -302,6 +308,22 @@ if [ -n "${MAGTILE_L2_JITTER:-}" ]; then
 else
     skip_stage "L2 抗扰动巡检 (D4+ jitter)" \
         "可选关卡, 置 MAGTILE_L2_JITTER=1 开启 (tools/run_strict_audit.sh --jitter-only; CLI --jitter 未实装时为占位)"
+fi
+
+# ---- 20: 内容系列归类机检 (可选关卡) ------------------------------
+# CONTENT_GAP_AUDIT.md §7.3 「series 回填 + 矩阵进度机检化」的门禁挂钩:
+# 每个模型必须带 content_meta.series (13 主题词值) 或
+# content_meta.matrix_bucket (矩阵外桶), 词值对照
+# data/content_series_map.json 词表, --strict 使任何缺失/非法即失败。
+# series 回填 (审计附录 A 为底稿) 落库前全库缺失、开启即红, 故默认
+# 跳过; 回填合入后内容批次评审置 MAGTILE_SERIES_CHECK=1 作为硬闸门。
+if [ -n "${MAGTILE_SERIES_CHECK:-}" ]; then
+    run_stage "内容系列归类机检 (series)" \
+        "$PYTHON" "$ROOT/tools/check_content_series.py" "$DATA_DIR/models" \
+        --map "$DATA_DIR/content_series_map.json" --strict
+else
+    skip_stage "内容系列归类机检 (series)" \
+        "可选关卡, 置 MAGTILE_SERIES_CHECK=1 开启 (tools/check_content_series.py --strict)"
 fi
 
 # ---- 总结报告 ---------------------------------------------------
