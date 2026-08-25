@@ -14,10 +14,14 @@ struct TileTypeInfo {
 
 constexpr std::array<TileTypeInfo, kTileTypeCount> kTileTypes{{
     {TileType::Square, "square", "正方形"},
+    {TileType::LargeSquare, "large_square", "大正方形"},
+    {TileType::WindowSquare, "window_square", "窗格方"},
+    {TileType::DoorFrame, "door_frame", "门框方"},
     {TileType::EquilateralTriangle, "equilateral_triangle", "等边三角形"},
     {TileType::RightTriangle, "right_triangle", "直角三角形"},
     {TileType::IsoscelesTriangle, "isosceles_triangle", "等腰三角形"},
     {TileType::Rectangle, "rectangle", "长方形"},
+    {TileType::WheelBase, "wheel_base", "车轮底座"},
     {TileType::Rhombus, "rhombus", "菱形"},
     {TileType::Trapezoid, "trapezoid", "梯形"},
     {TileType::Hexagon, "hexagon", "六边形"},

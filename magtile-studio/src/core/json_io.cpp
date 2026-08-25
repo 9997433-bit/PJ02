@@ -63,6 +63,10 @@ TileCatalog loadTileCatalog(const std::filesystem::path& file) {
         shape.name_zh = entry.at("name_zh").get<std::string>();
         shape.name_en = entry.value("name_en", std::string{});
         shape.description_zh = entry.value("description_zh", std::string{});
+        shape.tier = entry.value("tier", std::string{"core"});
+        shape.hollow = entry.value("hollow", false);
+        shape.variant = entry.value("variant", std::string{});
+        shape.wheeled = entry.value("wheeled", false);
 
         for (const auto& v : entry.at("vertices")) {
             if (!v.is_array() || v.size() != 2) {

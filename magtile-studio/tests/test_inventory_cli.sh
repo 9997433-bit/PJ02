@@ -6,6 +6,7 @@
 #   1. 空库 inventory show: 正常退出并提示尚未登记;
 #   2. 空库 inventory match: 非零退出并提示先登记;
 #   3. inventory set: 登记多种形状并回显清单与合计;
+#      3b. 新核心片型 (大正方形/窗格方/门框方/车轮底座) 的标识被接受;
 #   4. 跨进程持久化: 再次 inventory show 仍能读到;
 #   5. 非法输入: 未知形状 / 非法数量必须非零退出;
 #   6. inventory match: 满配库存下全库模型均能搭,
@@ -60,6 +61,18 @@ else
     printf '%s\n' "$output" >&2
 fi
 
+# ---- 3b. 新核心片型标识被接受 (独立库, 不影响后续合计断言) ----------
+CORE_DB="$WORK_DIR/core.db"
+output="$("$APP" inventory set large_square 4 window_square 6 door_frame 8 wheel_base 10 --db "$CORE_DB" 2>&1)"
+if [[ $? -eq 0 ]] && grep -q "大正方形.*x 4" <<<"$output" && \
+   grep -q "窗格方.*x 6" <<<"$output" && grep -q "门框方.*x 8" <<<"$output" && \
+   grep -q "车轮底座.*x 10" <<<"$output" && grep -q "合计: 28 片" <<<"$output"; then
+    pass "新核心片型 large_square/window_square/door_frame/wheel_base 登记成功 (合计 28 片)"
+else
+    fail "新核心片型标识登记异常"
+    printf '%s\n' "$output" >&2
+fi
+
 # ---- 4. 跨进程持久化 + 覆盖登记 ------------------------------------
 output="$("$APP" inventory set square 30 --db "$DB" 2>&1)"
 show_output="$("$APP" inventory show --db "$DB" 2>&1)"
@@ -91,8 +104,9 @@ fi
 # ---- 6a. match: 满配库存下全库模型均能搭 ----------------------------
 FULL_DB="$WORK_DIR/full.db"
 "$APP" inventory set \
-    square 999 equilateral_triangle 999 right_triangle 999 isosceles_triangle 999 \
-    rectangle 999 rhombus 999 trapezoid 999 hexagon 999 sector 999 \
+    square 999 large_square 999 window_square 999 door_frame 999 \
+    equilateral_triangle 999 right_triangle 999 isosceles_triangle 999 \
+    rectangle 999 wheel_base 999 rhombus 999 trapezoid 999 hexagon 999 sector 999 \
     --db "$FULL_DB" >/dev/null 2>&1
 match_output="$("$APP" inventory match --data-dir "$DATA_DIR" --db "$FULL_DB" 2>&1)"
 match_exit=$?

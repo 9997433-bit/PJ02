@@ -1,10 +1,11 @@
 {
   "schema_version": 1,
-  "comment": "磁力片形状目录。坐标单位: 1.0 = 标准正方形边长 (实物约 70mm)。顶点位于本地 XY 平面, 逆时针排列; 边 i 连接顶点 i 与 i+1, magnet_edges 列出带磁条的边索引。除扇形以原点为圆心角顶点外, 其余形状均以质心为本地原点。",
+  "comment": "磁力片形状目录。坐标单位: 1.0 = 标准正方形边长 (实物约 70mm)。顶点位于本地 XY 平面, 逆时针排列; 边 i 连接顶点 i 与 i+1, magnet_edges 列出带磁条的边索引。除扇形以原点为圆心角顶点外, 其余形状均以质心为本地原点。tier 为套装分层 (core = 核心 9 片型 / extended = 扩展片型, 见 docs/TILE_SET.md); hollow / variant / wheeled 仅为语义标记 (教程文案与 BOM 用), 物理校验一律使用外框多边形。",
   "unit_mm": 70,
   "tiles": [
     {
       "type": "square",
+      "tier": "core",
       "name_zh": "正方形",
       "name_en": "Square",
       "description_zh": "基础方片, 边长 1, 四边带磁条, 是地面与墙体的主力形状。",
@@ -12,7 +13,39 @@
       "magnet_edges": [0, 1, 2, 3]
     },
     {
+      "type": "large_square",
+      "tier": "core",
+      "name_zh": "大正方形",
+      "name_en": "Large Square",
+      "description_zh": "边长 2 的大方片, 四边带磁条; 每边与长方形长边等长 (磁力吸合按整边端点重合判定), 用于大面积地台与墙面, 显著减少片数。",
+      "vertices": [[-1.0, -1.0], [1.0, -1.0], [1.0, 1.0], [-1.0, 1.0]],
+      "magnet_edges": [0, 1, 2, 3]
+    },
+    {
+      "type": "window_square",
+      "tier": "core",
+      "name_zh": "窗格方",
+      "name_en": "Window Square",
+      "description_zh": "外框与正方形完全一致 (边长 1, 四边带磁条), 面内为窗格造型。物理与拼接规则按实心正方形处理, variant 仅供渲染与教程文案区分外观。",
+      "vertices": [[-0.5, -0.5], [0.5, -0.5], [0.5, 0.5], [-0.5, 0.5]],
+      "magnet_edges": [0, 1, 2, 3],
+      "hollow": false,
+      "variant": "window"
+    },
+    {
+      "type": "door_frame",
+      "tier": "core",
+      "name_zh": "门框方",
+      "name_en": "Door Frame",
+      "description_zh": "外框与正方形完全一致 (边长 1, 四边带磁条), 中心镂空作门洞或滚珠出口。hollow 仅为语义标记 (教程/BOM 用): R1~R8 边磁力逻辑与平面重叠检测仍使用外框正方形多边形, 不把镂空内部当作实心遮挡。",
+      "vertices": [[-0.5, -0.5], [0.5, -0.5], [0.5, 0.5], [-0.5, 0.5]],
+      "magnet_edges": [0, 1, 2, 3],
+      "hollow": true,
+      "variant": "door"
+    },
+    {
       "type": "equilateral_triangle",
+      "tier": "core",
       "name_zh": "等边三角形",
       "name_en": "Equilateral Triangle",
       "description_zh": "边长 1 的等边三角形, 三边带磁条, 常用于屋顶、城齿与球面结构。",
@@ -21,6 +54,7 @@
     },
     {
       "type": "right_triangle",
+      "tier": "core",
       "name_zh": "直角三角形",
       "name_en": "Right Triangle",
       "description_zh": "等腰直角三角形, 两直角边长 1, 斜边长 √2, 三边带磁条。",
@@ -29,6 +63,7 @@
     },
     {
       "type": "isosceles_triangle",
+      "tier": "core",
       "name_zh": "等腰三角形",
       "name_en": "Isosceles Triangle",
       "description_zh": "底 1、高 1 的等腰三角形, 三边带磁条, 用于尖塔与装饰。",
@@ -37,6 +72,7 @@
     },
     {
       "type": "rectangle",
+      "tier": "core",
       "name_zh": "长方形",
       "name_en": "Rectangle",
       "description_zh": "2 x 1 长方形, 四边带磁条; 长边与两个正方形拼接等长。",
@@ -44,7 +80,19 @@
       "magnet_edges": [0, 1, 2, 3]
     },
     {
+      "type": "wheel_base",
+      "tier": "core",
+      "name_zh": "车轮底座",
+      "name_en": "Wheel Base",
+      "description_zh": "外框与长方形完全一致 (2 x 1, 即两个小正方形并排), 四边带磁条 (长边长 2, 短边长 1), 顶面/侧面拼接与物理校验一律按长方形外框多边形处理; 底面装有滚动车轮, 作车辆底盘用。wheeled 仅为语义标记 (教程文案与车辆模型用)。",
+      "vertices": [[-1.0, -0.5], [1.0, -0.5], [1.0, 0.5], [-1.0, 0.5]],
+      "magnet_edges": [0, 1, 2, 3],
+      "variant": "wheeled",
+      "wheeled": true
+    },
+    {
       "type": "rhombus",
+      "tier": "extended",
       "name_zh": "菱形",
       "name_en": "Rhombus",
       "description_zh": "边长 1、锐角 60 度的菱形, 四边带磁条, 常用于星形与花瓣图案。",
@@ -53,6 +101,7 @@
     },
     {
       "type": "trapezoid",
+      "tier": "extended",
       "name_zh": "梯形",
       "name_en": "Trapezoid",
       "description_zh": "等腰梯形, 下底 2、上底 1、腰 1 (底角 60 度), 四边带磁条。",
@@ -61,6 +110,7 @@
     },
     {
       "type": "hexagon",
+      "tier": "extended",
       "name_zh": "六边形",
       "name_en": "Hexagon",
       "description_zh": "边长 1 的正六边形, 六边带磁条, 常作塔楼底座与蜂窝结构。",
@@ -69,6 +119,7 @@
     },
     {
       "type": "sector",
+      "tier": "extended",
       "name_zh": "扇形",
       "name_en": "Sector",
       "description_zh": "四分之一圆扇形, 半径 1; 仅两条直边带磁条, 弧边为装饰边 (以圆心角顶点为本地原点, 弧线用 6 段折线近似)。",

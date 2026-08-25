@@ -21,6 +21,12 @@ struct TileShape {
     std::string name_zh;                ///< 中文名, 如 "正方形"
     std::string name_en;                ///< 英文名
     std::string description_zh;         ///< 中文说明
+    std::string tier = "core";          ///< 套装分层: core (核心) / extended (扩展)
+    bool hollow = false;                ///< 中心镂空 (门框方); 仅语义标记 (教程/BOM),
+                                        ///< 物理校验一律使用外框多边形
+    std::string variant;                ///< 外观变体 (如 "window" / "door" / "wheeled"), 空 = 标准实心
+    bool wheeled = false;               ///< 底面带滚动车轮 (车轮底座); 仅语义标记 (教程文案
+                                        ///< 与车辆模型用), 拼接与物理校验按外框多边形处理
     std::vector<Vec2> vertices;         ///< 本地 XY 平面内的顶点 (逆时针, 凸多边形)
     std::vector<int> magnet_edge_indices;  ///< 带磁条的边索引 (边 i 连接顶点 i 与 i+1)
 
