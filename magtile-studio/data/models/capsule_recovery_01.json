@@ -1,0 +1,805 @@
+{
+  "schema_version": 1,
+  "id": "capsule_recovery_01",
+  "name": "返回舱回收站",
+  "name_en": "Capsule Recovery Site 01",
+  "description": "只用核心九片型的任务最后一幕: 与月球着陆器的多舱对接不同, 主角是落地的返回舱与全库第一张平铺伞面 —— 红白棋盘格主伞嵌进草地同层 (既是地面也是图案), 两片灰色伞绳板一路牵到烧灼的着陆点; 返回舱四墙踩落点边线合环, 舷窗朝伞、橙色舱门朝东迎着回收车, 等边四坡防热锥尖 1.71; 蓝色回收车门式底盘驮完整箱环, 驾驶窗正对舱门、红色警灯 2.87 闪烁, 两面信标旗标出场界 —— 欢迎回家, 航天员!",
+  "difficulty": 2,
+  "total_pieces": 42,
+  "tags": [
+    "航天",
+    "返回舱",
+    "降落伞",
+    "回收",
+    "草原"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 17,
+        "rectangle": 13,
+        "equilateral_triangle": 7,
+        "wheel_base": 2,
+        "window_square": 2,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g_s0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_s1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_s2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_s3",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "chute_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "chute_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "chute_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "chute_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "chute_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "chute_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "chute_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "chute_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "chute_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_12",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_13",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_14",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "line_a",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "line_b",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g_23",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_31",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_32",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_33",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "cap_s",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_n",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_w",
+      "type": "window_square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cap_e",
+      "type": "door_frame",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cap_cone_s",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cap_cone_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cap_cone_n",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cap_cone_w",
+      "type": "equilateral_triangle",
+      "position": [
+        5.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wh_s",
+      "type": "wheel_base",
+      "position": [
+        7.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_n",
+      "type": "wheel_base",
+      "position": [
+        7.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tk_deck",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tk_s",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tk_n",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tk_w",
+      "type": "window_square",
+      "position": [
+        6.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tk_e",
+      "type": "square",
+      "position": [
+        8.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tk_top",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tk_lamp",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bcn_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bcn_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南行草坪: 四条绿色长板短边互吸, 草原着陆场开工。",
+      "tip": "返回舱预报落点就在这片草原 —— 回收队凌晨就出发了。",
+      "tiles_to_add": [
+        "g_s0",
+        "g_s1",
+        "g_s2",
+        "g_s3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "平铺主伞伞面: 九片红白棋盘方板嵌进草地, 与草坪同层拼缝互吸。",
+      "tip": "主伞落地后摊成一大朵红白花 —— 直升机在天上一眼就能认出。",
+      "tiles_to_add": [
+        "chute_0_1",
+        "chute_1_1",
+        "chute_2_1",
+        "chute_0_2",
+        "chute_1_2",
+        "chute_2_2",
+        "chute_0_3",
+        "chute_1_3",
+        "chute_2_3"
+      ],
+      "highlight_tiles": [
+        "g_s0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺中带草坪: 方板加长板, 行行与南行对齐。",
+      "tip": "伞面东边留出通道 —— 回收车要从这里开到舱边。",
+      "tiles_to_add": [
+        "g_12",
+        "g_13",
+        "g_14"
+      ],
+      "highlight_tiles": [
+        "chute_2_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺伞绳板与着陆点: 两片灰色伞绳板从伞面一路牵到烧灼的落点。",
+      "tip": "灰色方板就是伞绳与烧痕 —— 防热大底真的会把草烤焦一圈。",
+      "tiles_to_add": [
+        "line_a",
+        "line_b",
+        "pad",
+        "g_23"
+      ],
+      "highlight_tiles": [
+        "chute_2_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "铺北带草坪合拢场地: 着陆场占地 8x4。",
+      "tip": "全场一张拼缝网 —— 返回舱和回收车都要踩它的边线。",
+      "tiles_to_add": [
+        "g_31",
+        "g_32",
+        "g_33"
+      ],
+      "highlight_tiles": [
+        "pad"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立返回舱四墙: 素墙合上朝西舷窗与朝东橙色舱门, 踩住落点边线。",
+      "tip": "四角竖边互咬合环 —— 舱门朝东, 正对回收车开来的方向。",
+      "tiles_to_add": [
+        "cap_s",
+        "cap_n",
+        "cap_w",
+        "cap_e"
+      ],
+      "highlight_tiles": [
+        "pad",
+        "line_b"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "戴防热锥: 橙色等边四坡锥四棱互咬自锁, 尖端 1.71。",
+      "tip": "再入大气层时全靠它顶住上千度烈焰 —— 现在功成身退。",
+      "tiles_to_add": [
+        "cap_cone_s",
+        "cap_cone_e",
+        "cap_cone_n",
+        "cap_cone_w"
+      ],
+      "highlight_tiles": [
+        "cap_s"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "装回收车底盘: 双轮底座吸住草坪长缝, 甲板长边整边压双轮顶。",
+      "tip": "车轮底座长 2, 草坪长板也长 2 —— 门式底盘一格不差。",
+      "tiles_to_add": [
+        "wh_s",
+        "wh_n",
+        "tk_deck"
+      ],
+      "highlight_tiles": [
+        "g_14",
+        "g_23"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "合回收车箱体: 横楣双面 + 驾驶窗 + 尾门 + 舱顶, 红色警灯点亮。",
+      "tip": "驾驶窗朝西正对舱门 —— 医监医生第一个跳下车。",
+      "tiles_to_add": [
+        "tk_s",
+        "tk_n",
+        "tk_w",
+        "tk_e",
+        "tk_top",
+        "tk_lamp"
+      ],
+      "highlight_tiles": [
+        "cap_e"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "插信标旗收尾: 南北场界各一面红旗 —— 欢迎回家, 航天员!",
+      "tip": "旗子底边整边吸场界拼缝 —— 下一位乘客, 也许就是你。",
+      "tiles_to_add": [
+        "bcn_n",
+        "bcn_s"
+      ],
+      "highlight_tiles": [
+        "tk_lamp",
+        "cap_cone_s"
+      ]
+    }
+  ]
+}
