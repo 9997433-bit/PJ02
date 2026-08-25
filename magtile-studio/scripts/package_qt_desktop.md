@@ -297,8 +297,9 @@ ldd build-pack/apps/desktop_qt/magtile_studio_qt | grep -i qt   # 应全为 .so
 CMake 3.28 / NSIS 3.10) 全绿: 三档 TGZ 清单断言、NSIS 脚本生成 +
 makensis 编译 + 快捷方式断言、starter 解包目录一致性、offscreen
 启动、ldd 动态链接核验全部通过; `smoke_qt_macos.sh` 的可移植子集
-(构建→ctest→CPack TGZ→清单断言→offscreen→ldd) 也可在 Linux 上跑,
-macOS 专属环节显式 SKIP (第十二节); Windows/macOS 实机项见下节。
+(构建→ctest→CPack TGZ→清单断言→offscreen→ldd) 已在同一 Ubuntu 环境
+实跑全绿 (4 过 / 0 失败 / 5 项 macOS 专属 SKIP, 退出码 0 标记
+PARTIAL, 见第十/十二节); Windows/macOS 实机项见下节。
 
 ## 十、QT-6 待办清单 (实机阶段)
 
@@ -313,6 +314,14 @@ macOS 专属环节显式 SKIP (第十二节); Windows/macOS 实机项见下节�
       (合成 .app→macdeployqt→ad-hoc 签名→bundle 断言→自足启动→DMG
       挂载断言已自动化, Linux 上仅可移植子集 + SKIP); 再按第十二节
       人工清单在干净机器拖装验收。
+  - [x] Linux 可移植子集实跑全绿 (Ubuntu, Qt 6.4.2 / CMake 3.28):
+        `bash -n` 语法检查 + `--dry-run` 双失败注入自检通过; 实跑
+        构建→ctest 457/457 全过→CPack TGZ→包内清单断言→offscreen
+        启动→ldd 动态链接核验 (11 个 libQt6*.so 全为共享库) ——
+        4 项通过 / 0 失败 / 5 项 macOS 专属环节逐条 SKIP, 退出码 0,
+        按第十二节语义标记 PARTIAL。
+  - [ ] macOS 实机零 SKIP 全绿 + 第十二节人工验收 (待 macOS 构建机;
+        此两段都过本条才算收口)。
 - [ ] macOS 正式路径: MACOSX_BUNDLE 切换 + Info.plist/图标资产进
       构建系统 (替代冒烟脚本的合成 bundle) + Developer ID 签名/公证
       全链路 (`--sign-identity` 已预留)。
