@@ -58,7 +58,11 @@ l2_required (综合结论) = flagged, 或 difficulty 达到 §2 分级表 T4/T5
   - 几何计算 (旋转/世界顶点) 直接 import tools/magtile_gen
     (与 C++ 端 R = Rz*Ry*Rx 完全一致), 容差同 PHYSICS_RULES.md 1.1 节;
   - L1 警告数用 build/magtile_app validate (default 档) 实跑统计,
-    二进制缺失时自动降级: 该分项计 0 并在报告中注明 (不崩溃)。
+    二进制缺失时自动降级: 该分项计 0 并在报告中注明 (不崩溃);
+  - 反向复用: tools/physical_family_pack.py (结构族去重包) 依次探测
+    docs/reports/physical_risk_report.json / PHYSICAL_RISK_REPORT.json
+    (--json 输出存盘即用, 含 flags) 或本模块公共入口 risk_score(model)
+    (纯结构分, L1 警告分项按 0 计), 均缺位才退化其内置启发式。
 
 用法:
     tools/physical_risk_report.py [models_path] [选项]
@@ -515,6 +519,42 @@ def flags_compact(flags):
     return ",".join(L2_CODE_NO[f] for f in flags) if flags else "-"
 
 
+def structural_metrics(model, expansion_types=EXPANSION_TYPES_FALLBACK):
+    """单模型纯结构分项 (不含 L1 实跑与复核状态), analyze 与 risk_score 共用。"""
+    assembly = model.get("final_assembly", [])
+    geos = [TileGeo(t) for t in assembly]
+    conns = magnet_connections(geos)
+    margin_min, margin_at, margin_final = com_margin_over_states(model, geos)
+    odd_pieces = sum(1 for t in assembly if t["type"] in expansion_types)
+    rnd = lambda m: None if m is None else round(m, 4) + 0.0  # noqa: E731  (+0.0 归一化 -0.0)
+    return {
+        "difficulty": int(model.get("difficulty", 0)),
+        "pieces": int(model.get("total_pieces", len(assembly))),
+        "steps": len(model.get("steps", [])),
+        "height": round(max((v[2] for g in geos for v in g.verts), default=0.0), 3),
+        "wall_chain": max_wall_chain(geos, conns),
+        "com_margin": rnd(margin_min),      # 成品与全部中间状态的最小裕量
+        "com_margin_at": margin_at,
+        "com_margin_final": rnd(margin_final),
+        "odd_pieces": odd_pieces,
+        "odd_ratio": round(odd_pieces / len(assembly), 4) if assembly else 0.0,
+        "lowmag_pieces": sum(1 for t in assembly if t["type"] in LOWMAG_TYPES),
+        "lowmag_load_bearing": lowmag_load_bearing(model, geos, conns),
+    }
+
+
+def risk_score(model: dict) -> float:
+    """单模型风险分 (0~100) 公共入口, 供 tools/physical_family_pack.py
+    模块探测复用 (2.1 节探测链第 2 级)。
+
+    只依赖模型 JSON 本身: L1 警告分项需要校验器实跑, 此入口按 0 计;
+    完整口径 (含 L1 警告与 flags) 用 --json 报告存盘为
+    docs/reports/PHYSICAL_RISK_REPORT.json 走探测链第 1 级。
+    """
+    entry = dict(structural_metrics(model), l1_warnings=0)
+    return round(sum(WEIGHTS[k] * v for k, v in sub_risks(entry).items()), 1)
+
+
 # ---- 扫描 ----------------------------------------------------------
 def analyze(paths, data_dir, ver_dir, catalog_path, validator, do_validate):
     names, themes = {}, {}
@@ -542,9 +582,6 @@ def analyze(paths, data_dir, ver_dir, catalog_path, validator, do_validate):
         model = load_json(path)
         model.setdefault("id", path.stem)
         models.append(model)
-        assembly = model.get("final_assembly", [])
-        geos = [TileGeo(t) for t in assembly]
-        conns = magnet_connections(geos)
         cm = model.get("content_meta") or {}
         sidecar = load_sidecar(model, ver_dir)
 
@@ -554,29 +591,15 @@ def analyze(paths, data_dir, ver_dir, catalog_path, validator, do_validate):
                 validator, path, data_dir)
 
         verified, via, warnings = classify(model, ver_dir)
-        margin_min, margin_at, margin_final = com_margin_over_states(model, geos)
-        odd_pieces = sum(1 for t in assembly if t["type"] in expansion_types)
-        rnd = lambda m: None if m is None else round(m, 4) + 0.0  # noqa: E731  (+0.0 归一化 -0.0)
         entry = {
             "model_id": model["id"],
             "name": names.get(model["id"], model.get("name", path.stem)),
             "theme": themes.get(model["id"], "(未登记)"),
-            "difficulty": int(model.get("difficulty", 0)),
-            "pieces": int(model.get("total_pieces", len(assembly))),
-            "steps": len(model.get("steps", [])),
             "free_tier": FREE_TAG in model.get("tags", []),
             "l1_warnings": warn_count,
             "l1_warning_codes": warn_codes,
             "l1_errors": err_count,
-            "height": round(max((v[2] for g in geos for v in g.verts), default=0.0), 3),
-            "wall_chain": max_wall_chain(geos, conns),
-            "com_margin": rnd(margin_min),      # 成品与全部中间状态的最小裕量
-            "com_margin_at": margin_at,
-            "com_margin_final": rnd(margin_final),
-            "odd_pieces": odd_pieces,
-            "odd_ratio": round(odd_pieces / len(assembly), 4) if assembly else 0.0,
-            "lowmag_pieces": sum(1 for t in assembly if t["type"] in LOWMAG_TYPES),
-            "lowmag_load_bearing": lowmag_load_bearing(model, geos, conns),
+            **structural_metrics(model, expansion_types),
             "manual_flag": cm.get("l2_manual_flag") is True
             or "manual_flag" in ((sidecar or {}).get("flags") or []),
             "physical_verified": verified,
