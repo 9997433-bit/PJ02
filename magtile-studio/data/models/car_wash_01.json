@@ -1,0 +1,1083 @@
+{
+  "schema_version": 1,
+  "id": "car_wash_01",
+  "name": "自动洗车馆",
+  "name_en": "Auto Car Wash 01",
+  "description": "只用核心九片型的贯通式洗车隧道: 两端全开、车从楼里穿过去 —— 南北两面 2 层高墙 (二层透明观察窗) 被 8 片屋顶板以砖缝错拼锁成四榀门式刚架, 相邻列接缝错开半跨, 不存在贯通全宽的空中铰链线; 隧道里立刷/吊刷交替: 两对立刷底边整边吸湿地坪拼缝夹住车道, 一对粉色吊刷顶边整边吸屋顶板沿倒挂半空 (单刷 30g 远低于 strict 档 84g 悬挂预算), 正好擦到车顶; 小黄车赶在封顶之前开进刷位 (装配可达的秩序), 车轮紧贴立刷; 屋顶三颗透明泡泡骑板缝, 檐口黄色警示条, 入口红色招牌塔直上 4.0 —— 唰唰唰, 三分钟洗出一辆亮晶晶。",
+  "difficulty": 3,
+  "total_pieces": 58,
+  "tags": [
+    "城市",
+    "交通",
+    "洗车",
+    "街景",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 34,
+        "rectangle": 11,
+        "equilateral_triangle": 6,
+        "window_square": 4,
+        "wheel_base": 2,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "fl_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_2_4",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_3_4",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_4_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_5_4",
+      "type": "square",
+      "position": [
+        5.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "in_2",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "out_2",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "in_3",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "out_3",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "in_4",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "out_4",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ws1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ws1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ws1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ws1_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ws2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ws2_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ws2_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ws2_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wn1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wn1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wn1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wn1_5",
+      "type": "square",
+      "position": [
+        5.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wn2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        5.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wn2_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        5.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wn2_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        5.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wn2_5",
+      "type": "square",
+      "position": [
+        5.5,
+        5.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rf_sq_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rf_re_2",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        4.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rf_re_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rf_sq_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rf_sq_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rf_re_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        4.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rf_re_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rf_sq_5",
+      "type": "square",
+      "position": [
+        5.5,
+        4.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_s3",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "br_n3",
+      "type": "square",
+      "position": [
+        3.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "br_s5",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "br_n5",
+      "type": "square",
+      "position": [
+        5.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "br_h_s",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "br_h_n",
+      "type": "square",
+      "position": [
+        4.0,
+        4.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "car_wh_s",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "car_wh_n",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "car_top",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "car_cab",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        3.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bub_1",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bub_2",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        4.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bub_3",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        4.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "trim_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        5.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "trim_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sign",
+      "type": "isosceles_triangle",
+      "position": [
+        2.0,
+        2.5,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺湿地坪: 12 片青色方板铺满洗车隧道 (x [2,6], y [2,5])。",
+      "tip": "立刷和车轮都要整边吸在这些拼缝上 —— 一格都不能错位。",
+      "tiles_to_add": [
+        "fl_2_2",
+        "fl_2_3",
+        "fl_2_4",
+        "fl_3_2",
+        "fl_3_3",
+        "fl_3_4",
+        "fl_4_2",
+        "fl_4_3",
+        "fl_4_4",
+        "fl_5_2",
+        "fl_5_3",
+        "fl_5_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺入口与出口引道: 东西各 3 片灰色长板, 车道贯通 8 格。",
+      "tip": "西进东出 —— 洗车馆是一条流水线, 不走回头路。",
+      "tiles_to_add": [
+        "in_2",
+        "in_3",
+        "in_4",
+        "out_2",
+        "out_3",
+        "out_4"
+      ],
+      "highlight_tiles": [
+        "fl_2_3",
+        "fl_5_3"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立南墙一层: 4 片蓝墙沿 y=2 排开, 墙脚整边吸地坪南沿。",
+      "tip": "相邻墙片竖边互咬 —— 整面墙比单片墙稳得多。",
+      "tiles_to_add": [
+        "ws1_2",
+        "ws1_3",
+        "ws1_4",
+        "ws1_5"
+      ],
+      "highlight_tiles": [
+        "fl_2_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立北墙一层: 与南墙隔 3 格车道对望。",
+      "tip": "中间留足 3 格宽 —— 车身加两排刷子刚刚好。",
+      "tiles_to_add": [
+        "wn1_2",
+        "wn1_3",
+        "wn1_4",
+        "wn1_5"
+      ],
+      "highlight_tiles": [
+        "fl_2_4"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装两道立刷: 紫色/绿色方片底边整边吸地坪拼缝 (x=3 与 x=5), 竖边与墙棱互咬, 中间让出车道。",
+      "tip": "立刷成对夹住车道 —— 车身两侧一次刷干净。",
+      "tiles_to_add": [
+        "br_s3",
+        "br_n3",
+        "br_s5",
+        "br_n5"
+      ],
+      "highlight_tiles": [
+        "fl_2_2",
+        "fl_4_4"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "小黄车开进刷位: 车轮底座整边吸地坪拼缝, 长板车顶压轮顶, 车头朝出口。",
+      "tip": "车轮正好贴着立刷 —— 记住: 车要赶在封顶之前开进来!",
+      "tiles_to_add": [
+        "car_wh_s",
+        "car_wh_n",
+        "car_top",
+        "car_cab"
+      ],
+      "highlight_tiles": [
+        "br_s3",
+        "br_n3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立南墙二层: 中段两扇透明观察窗, 看得见车在里面洗。",
+      "tip": "窗格方物理上按实心方片拼接 —— 隔窗看泡泡翻滚。",
+      "tiles_to_add": [
+        "ws2_2",
+        "ws2_3",
+        "ws2_4",
+        "ws2_5"
+      ],
+      "highlight_tiles": [
+        "ws1_2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立北墙二层: 双墙同高 z=2, 屋顶一放就平。",
+      "tip": "八片二层墙就位 —— 四榀门式刚架只差屋顶合龙。",
+      "tiles_to_add": [
+        "wn2_2",
+        "wn2_3",
+        "wn2_4",
+        "wn2_5"
+      ],
+      "highlight_tiles": [
+        "wn1_2"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖屋顶 (砖缝错拼): 每列 1 长板 + 1 方板, 相邻列接缝错开半跨。",
+      "tip": "接缝错开就没有贯通全宽的空中铰链 —— 砌砖师傅的老规矩。",
+      "tiles_to_add": [
+        "rf_sq_2",
+        "rf_re_2",
+        "rf_re_3",
+        "rf_sq_3",
+        "rf_sq_4",
+        "rf_re_4",
+        "rf_re_5",
+        "rf_sq_5"
+      ],
+      "highlight_tiles": [
+        "ws2_2",
+        "wn2_5"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "挂吊刷: 两片粉色方片顶边整边吸屋顶板沿, 倒挂在车顶两侧 (x=4)。",
+      "tip": "单刷 30g, 吊边预算 84g —— 挂得稳稳的, 正好擦到车顶。",
+      "tiles_to_add": [
+        "br_h_s",
+        "br_h_n"
+      ],
+      "highlight_tiles": [
+        "rf_sq_4",
+        "rf_sq_3"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "冒泡泡贴警示条: 3 颗透明泡泡骑屋顶板缝, 檐口南北各 1 片黄色警示三角。",
+      "tip": "泡泡重心正压板缝 —— 洗车馆屋顶咕嘟咕嘟冒泡。",
+      "tiles_to_add": [
+        "bub_1",
+        "bub_2",
+        "bub_3",
+        "trim_n",
+        "trim_s"
+      ],
+      "highlight_tiles": [
+        "rf_sq_2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "立招牌塔: 红色等腰高牌骑入口西南角屋顶沿 (顶高 4.0, 全场最高)。",
+      "tip": "大红招牌一立 —— 三分钟洗出一辆亮晶晶!",
+      "tiles_to_add": [
+        "sign"
+      ],
+      "highlight_tiles": [
+        "rf_sq_2"
+      ]
+    }
+  ]
+}
