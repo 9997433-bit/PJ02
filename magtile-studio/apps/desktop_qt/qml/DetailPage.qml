@@ -13,6 +13,9 @@ import MagTile.Studio
 // 数据经 studio.modelDetail / studio.bomForModel 读取;
 // 「开始搭建」走 studio.startBuild -> buildRequested 信号,
 // 路由在 Main.qml。
+// 订阅内容 (非免费层): 元数据/BOM/3D 预览照常可浏览, 「开始搭建」
+// 改为「请家长来解锁」-> openSubscription 信号 -> Main.qml 经家长门
+// 导向订阅页 (§11, COMMERCIAL_PLAN §2.1 只锁内容不锁功能)。
 // =============================================================
 Page {
     id: page
@@ -21,8 +24,15 @@ Page {
     property var detail: ({ found: false })
     property var bom: []
 
+    // 订阅内容 (非免费层): 只锁「开始搭建」入口, 元数据/BOM 照常可看
+    // (COMMERCIAL_PLAN §2.1 只锁内容不锁功能)。isFree 显式为 false 才
+    // 上锁 —— 数据未就绪 (undefined) 时不误锁 (宁可放行)。
+    readonly property bool locked: detail.found === true && detail.isFree === false
+
     signal back()
     signal notify(string message)
+    /// 非免费模型「开始搭建」: Main.qml 路由到家长门后的订阅页 (§11)
+    signal openSubscription()
 
     function refresh() {
         detail = studio.modelDetail(modelId)
@@ -283,21 +293,40 @@ Page {
                         }
                     }
 
-                    // -- 套装分层: 基础套装即可 / 需要扩展片 ----------------
-                    Rectangle {
-                        visible: page.detail.found && page.detail.bomKnown
-                        radius: Theme.radiusButton
-                        height: 36
-                        width: tierLabel.implicitWidth + 2 * Theme.spacing
-                        color: page.detail.core9Only ? Theme.successSoft : Theme.warningSoft
-                        Text {
-                            id: tierLabel
-                            anchors.centerIn: parent
-                            text: page.detail.core9Only ? "🧲 核心 9 片就能搭"
-                                                        : "✨ 会用到扩展片"
-                            font.pixelSize: Theme.fontBody
-                            font.bold: true
-                            color: page.detail.core9Only ? Theme.success : Theme.warning
+                    // -- 套装分层 + 免费层徽章 -----------------------------
+                    RowLayout {
+                        spacing: 8
+                        Rectangle {
+                            visible: page.detail.found && page.detail.bomKnown
+                            radius: Theme.radiusButton
+                            height: 36
+                            width: tierLabel.implicitWidth + 2 * Theme.spacing
+                            color: page.detail.core9Only ? Theme.successSoft : Theme.warningSoft
+                            Text {
+                                id: tierLabel
+                                anchors.centerIn: parent
+                                text: page.detail.core9Only ? "🧲 核心 9 片就能搭"
+                                                            : "✨ 会用到扩展片"
+                                font.pixelSize: Theme.fontBody
+                                font.bold: true
+                                color: page.detail.core9Only ? Theme.success : Theme.warning
+                            }
+                        }
+                        // 订阅解锁徽章 (温和, 主色浅底不用红色)
+                        Rectangle {
+                            visible: page.locked
+                            radius: Theme.radiusButton
+                            height: 36
+                            width: subscriptionTag.implicitWidth + 2 * Theme.spacing
+                            color: Theme.primarySoft
+                            Text {
+                                id: subscriptionTag
+                                anchors.centerIn: parent
+                                text: "🔒 订阅解锁"
+                                font.pixelSize: Theme.fontBody
+                                font.bold: true
+                                color: Theme.primary
+                            }
                         }
                     }
 
@@ -460,20 +489,49 @@ Page {
                         lineHeight: 1.3
                     }
 
+                    // -- 订阅内容温和说明 (§11/§12.2: 无价格无催促, 免费层
+                    //    先说明白; 免费数实时读目录 studio.freeModelCount) --
+                    Rectangle {
+                        visible: page.locked
+                        Layout.fillWidth: true
+                        radius: Theme.radiusCard
+                        implicitHeight: subscriptionBanner.implicitHeight + 2 * Theme.spacing
+                        color: Theme.primarySoft
+                        Text {
+                            id: subscriptionBanner
+                            anchors.fill: parent
+                            anchors.margins: Theme.spacing
+                            text: "🔒 这个模型属于订阅内容: 简介和磁力片清单随时可以看, "
+                                  + "完整的 3D 分步教程订阅后解锁。免费区还有 "
+                                  + studio.freeModelCount
+                                  + " 个模型永久免费, 随时开搭。"
+                            font.pixelSize: Theme.fontBody
+                            color: Theme.textPrimary
+                            wrapMode: Text.WordWrap
+                            lineHeight: 1.4
+                        }
+                    }
+
                     Item { Layout.preferredHeight: Theme.spacing }
                 }
             }
 
-            // -- 主 CTA: 开始/继续搭建 (高 64, 占宽 80%, §5.4) --------------
+            // -- 主 CTA: 开始/继续搭建 (高 64, 占宽 80%, §5.4); 订阅内容
+            //    改为「请家长来解锁」, 经家长门导向订阅页 (§11 订阅只在
+            //    门后; 儿童侧只说"请家长来解锁", 无价格 §12.2) ------------
             BigButton {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.preferredWidth: Math.round(parent.width * 0.8)
-                emoji: page.detail.status === 1 ? "▶" : "🧲"
-                text: page.detail.status === 1
-                      ? "继续搭建 (第 " + page.detail.currentStep + " 步)"
-                      : (page.detail.status === 2 ? "再搭一次" : "开始搭建")
+                emoji: page.locked ? "🔒"
+                                   : (page.detail.status === 1 ? "▶" : "🧲")
+                text: page.locked
+                      ? "请家长来解锁"
+                      : (page.detail.status === 1
+                         ? "继续搭建 (第 " + page.detail.currentStep + " 步)"
+                         : (page.detail.status === 2 ? "再搭一次" : "开始搭建"))
                 accent: Theme.primary
-                onClicked: studio.startBuild(page.modelId)
+                onClicked: page.locked ? page.openSubscription()
+                                       : studio.startBuild(page.modelId)
             }
         }
     }

@@ -25,6 +25,9 @@ data class ModelCard(
     val canBuild: Boolean,
     /** 库存对照 BOM 共缺几片 (未登记 / BOM 未知时为 0)。 */
     val missingTotal: Int,
+    /** 免费层模型 (原生层 core::isFreeTierModel 共享口径: 目录 tags
+     *  含「免费」); 非免费只在详情作温和订阅提示, 浏览不受限。 */
+    val isFree: Boolean,
 ) {
     /** 难度星显示: 实心 = 难度值, 补空心到 5 星, 如 ★★☆☆☆。 */
     val difficultyStars: String
@@ -79,6 +82,8 @@ data class ModelCard(
             core9Only = obj.optBoolean("core9_only", false),
             canBuild = obj.optBoolean("can_build", false),
             missingTotal = obj.optInt("missing_total", 0),
+            // 字段缺失按免费处理 (宁可少提示, 不误锁内容)
+            isFree = obj.optBoolean("free", true),
         )
     }
 }

@@ -4,8 +4,8 @@ import QtQuick.Layouts
 import MagTile.Studio
 
 // =============================================================
-// 模型库 (QT-1): 左侧筛选栏 (难度 / 主题 / 只用核心 9 片 / 我能搭的)
-// + 卡片网格 + 进度徽标。数据来自 studio.libraryFilter
+// 模型库 (QT-1): 左侧筛选栏 (难度 / 免费模型 / 主题 / 只用核心 9 片 /
+// 我能搭的) + 卡片网格 + 进度徽标。数据来自 studio.libraryFilter
 // (LibraryFilterModel 包着 LibraryModel), 筛选规范见 UI_UX_SPEC.md
 // §5.1; 点卡片进模型详情页 (§5.4)。筛选无结果时给「换个条件试试」
 // 空态, 不出现空白页 (§5.2); 开着「我能搭的」时空态改为推荐 3 个
@@ -13,8 +13,8 @@ import MagTile.Studio
 //
 // 年龄分层 (§2, 读 appSettings.ageModeId, 家长区切换即时生效):
 //   4-6 启蒙  无筛选栏, 只留超大主题入口, 每行 2 张超大卡片;
-//   7-9 标准  难度 + 主题两个筛选器, 每行 3~4 张;
-//   10+ 进阶  全量筛选 (难度/主题/核心 9 片/我能搭的), 每行 4~5 张。
+//   7-9 标准  难度 + 免费模型 + 主题三个筛选器, 每行 3~4 张;
+//   10+ 进阶  全量筛选 (难度/免费/主题/核心 9 片/我能搭的), 每行 4~5 张。
 // =============================================================
 Page {
     id: page
@@ -30,7 +30,12 @@ Page {
     // 被收起的筛选维度同步清零: 看不见的筛选绝不能悄悄过滤列表
     // (否则孩子面对被过滤的列表却没有任何入口能解除筛选)
     function collapseHiddenFilters() {
-        if (bandJunior) studio.libraryFilter.difficulty = 0
+        // 免费筛选属内容可及性, 7-9 标准档保留 (侧栏可见即保留),
+        // 4-6 启蒙档随整栏侧栏收起同步清零
+        if (bandJunior) {
+            studio.libraryFilter.difficulty = 0
+            studio.libraryFilter.freeOnly = false
+        }
         if (!bandFull) {
             studio.libraryFilter.core9Only = false
             studio.libraryFilter.buildableOnly = false
@@ -158,6 +163,23 @@ Page {
                                                checked ? 0 : index + 1
                             }
                         }
+                    }
+
+                    // -- 内容 (免费层, COMMERCIAL_PLAN §2.1: 「免费」标签
+                    //    即事实来源; 订阅内容照常可浏览, 只锁教程入口)。
+                    //    内容可及性筛选, 7-9 标准档起就展示 (整栏侧栏
+                    //    在 4-6 启蒙档已收起, 无需单独 visible 门控) ----
+                    Text {
+                        text: "内容"
+                        font.pixelSize: Theme.fontSmall
+                        font.bold: true
+                        color: Theme.textSecondary
+                    }
+                    FilterChip {
+                        Layout.fillWidth: true
+                        text: "🎁 免费模型"
+                        checked: studio.libraryFilter.freeOnly
+                        onClicked: studio.libraryFilter.freeOnly = !checked
                     }
 
                     // -- 磁力片 (仅 10+ 进阶模式的全量筛选可见, §2) -------
@@ -394,13 +416,33 @@ Page {
 
                             Item { Layout.fillHeight: true }
 
-                            // 徽标行: 进度 (✓/▶) + 缺片提示, 图形 + 文字 + 颜色
-                            // 三重编码 (§4.7); 缺片用琥珀 (不用红色表达"错误")
+                            // 徽标行: 订阅解锁 + 进度 (✓/▶) + 缺片提示, 图形 +
+                            // 文字 + 颜色三重编码 (§4.7); 缺片用琥珀, 订阅用
+                            // 主色浅底 (均不用红色表达"错误"/"锁")
                             RowLayout {
                                 Layout.leftMargin: Theme.spacing
                                 Layout.rightMargin: Theme.spacing
                                 Layout.bottomMargin: Theme.spacing
                                 spacing: 8
+
+                                // 订阅解锁角标 (温和): 元数据照常可浏览, 详情页
+                                // 「开始搭建」经家长门引导到订阅页 (§11);
+                                // 4-6 超大卡片同步放大 (与进度徽标同规格)
+                                Rectangle {
+                                    visible: !model.isFree
+                                    radius: Theme.radiusButton
+                                    height: page.bandJunior ? 40 : 32
+                                    width: subscriptionLabel.implicitWidth + 2 * Theme.spacing
+                                    color: Theme.primarySoft
+                                    Text {
+                                        id: subscriptionLabel
+                                        anchors.centerIn: parent
+                                        text: "🔒 订阅解锁"
+                                        font.pixelSize: page.bandJunior ? Theme.fontBody : Theme.fontSmall
+                                        font.bold: true
+                                        color: Theme.primary
+                                    }
+                                }
 
                                 Rectangle {
                                     visible: model.status !== 0

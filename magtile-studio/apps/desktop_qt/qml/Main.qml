@@ -193,6 +193,9 @@ ApplicationWindow {
         DetailPage {
             onBack: stack.pop()
             onNotify: function(message) { window.showToast(message) }
+            // 订阅内容「请家长来解锁」: 与其余订阅入口同一路由 (先过
+            // 家长门, 过门后原位替换为订阅页, §11)
+            onOpenSubscription: window.openSubscriptionZone()
         }
     }
 

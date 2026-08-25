@@ -39,6 +39,7 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const {
         case CanBuildRole: return row.can_build;
         case MissingTotalRole: return row.missing_total;
         case BomKnownRole: return row.bom_known;
+        case FreeRole: return row.is_free;
         default: return {};
     }
 }
@@ -60,6 +61,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const {
         {CanBuildRole, "canBuild"},
         {MissingTotalRole, "missingTotal"},
         {BomKnownRole, "bomKnown"},
+        {FreeRole, "isFree"},
     };
 }
 

@@ -4,10 +4,11 @@
 // MagTile Studio (Qt) - 模型库筛选代理 (QT-1)
 //
 // 包在 LibraryModel 外面的 QSortFilterProxyModel: 难度 / 主题 /
-// 「只用核心 9 片」/「我能搭的」(对照磁力片库存的 canBuild) 四个
-// 筛选维度, 对应 UI_UX_SPEC.md §5.1 侧栏。筛选条件由 QML 侧直接
-// 读写属性; 数据角色 (core9Only / canBuild) 由 StudioBackend 在
-// reload 时算好, 本类只做行过滤, 不碰磁盘。
+// 「免费模型」(免费层标签) /「只用核心 9 片」/「我能搭的」(对照
+// 磁力片库存的 canBuild) 五个筛选维度, 对应 UI_UX_SPEC.md §5.1
+// 侧栏。筛选条件由 QML 侧直接读写属性; 数据角色 (isFree /
+// core9Only / canBuild) 由 StudioBackend 在 reload 时算好, 本类
+// 只做行过滤, 不碰磁盘。
 // =============================================================
 
 #include <QSortFilterProxyModel>
@@ -22,6 +23,8 @@ class LibraryFilterModel final : public QSortFilterProxyModel {
     Q_PROPERTY(int difficulty READ difficulty WRITE setDifficulty NOTIFY filtersChanged)
     /// 主题筛选: 空串 = 全部, 否则精确匹配卡片主题。
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY filtersChanged)
+    /// 「免费模型」: 只看免费层 (目录 tags 含「免费」, COMMERCIAL_PLAN §2.1)。
+    Q_PROPERTY(bool freeOnly READ freeOnly WRITE setFreeOnly NOTIFY filtersChanged)
     /// 只看基础套装 (核心 9 片型) 就能搭的模型。
     Q_PROPERTY(bool core9Only READ core9Only WRITE setCore9Only NOTIFY filtersChanged)
     /// 「我能搭的」: 只看磁力片库存足够的模型 (未登记库存时由界面禁用)。
@@ -40,6 +43,9 @@ public:
     [[nodiscard]] QString theme() const { return theme_; }
     void setTheme(const QString& theme);
 
+    [[nodiscard]] bool freeOnly() const noexcept { return free_only_; }
+    void setFreeOnly(bool on);
+
     [[nodiscard]] bool core9Only() const noexcept { return core9_only_; }
     void setCore9Only(bool on);
 
@@ -47,7 +53,8 @@ public:
     void setBuildableOnly(bool on);
 
     [[nodiscard]] bool hasActiveFilters() const noexcept {
-        return difficulty_ != 0 || !theme_.isEmpty() || core9_only_ || buildable_only_;
+        return difficulty_ != 0 || !theme_.isEmpty() || free_only_ || core9_only_ ||
+               buildable_only_;
     }
 
     [[nodiscard]] int count() const { return rowCount(); }
@@ -73,6 +80,7 @@ protected:
 private:
     int difficulty_ = 0;
     QString theme_;
+    bool free_only_ = false;
     bool core9_only_ = false;
     bool buildable_only_ = false;
 };

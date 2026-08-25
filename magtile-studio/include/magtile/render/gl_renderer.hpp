@@ -67,6 +67,12 @@ struct LibraryCard {
     bool core9_only = false;  ///< BOM 只用核心 9 片型 (基础套装即可搭;
                               ///< false 且 bom_known 时卡片显示 "需要扩展装" 角标)
 
+    // ---- 来自模型库目录 tags (见 core::isFreeTierModel) -----------
+    bool free_tier = true;    ///< 免费层模型 (tags 含「免费」, COMMERCIAL_PLAN §2.1);
+                              ///< false 时卡片显示温和「订阅解锁」角标, 点击由应用层
+                              ///< 弹订阅引导而非进教程 (元数据照常可浏览)。缺省 true:
+                              ///< 无标签数据时不上锁 (宁可放行, 不误锁免费内容)
+
     // ---- 来自进度存档 -------------------------------------------
     bool started = false;    ///< 有进度记录且未完成 (显示 "继续搭建")
     bool completed = false;  ///< 已完成 (显示绿色对勾)
@@ -88,6 +94,14 @@ struct LibraryActions {
 struct InventoryOnboardingActions {
     bool start_entry = false;  ///< 点击 "现在登记": 进入库存录入界面
     bool dismissed = false;    ///< 点击 "稍后再说": 关闭提示 (应用层记入存档, 不再弹出)
+};
+
+/// 订阅引导弹窗 (点击订阅内容模型时出现) 一帧内用户发出的操作。
+struct SubscriptionPromptActions {
+    bool open_parent_area = false;  ///< 点击 "请家长来解锁": 进入家长区 (先过家长门)
+    bool browse_free = false;       ///< 点击 "先看免费模型": 关闭弹窗并开启「免费模型」
+                                    ///< 筛选 (筛选切换由渲染器内部完成)
+    bool dismissed = false;         ///< 点击 "回模型库": 仅关闭弹窗
 };
 
 /// 库存录入界面: 一种片型一行的展示状态 (UI_UX_SPEC.md §10.2)。
@@ -176,6 +190,15 @@ public:
     /// UI_UX_SPEC.md §10.1) 并返回用户操作。带压暗遮罩, 须在
     /// submitLibrary 之后、endFrame 之前调用, 每帧至多一次。
     [[nodiscard]] virtual InventoryOnboardingActions submitInventoryOnboarding() = 0;
+
+    /// 绘制订阅引导弹窗 (点击订阅内容模型时出现): 温和说明免费层
+    /// 永久免费、订阅解锁全库, 无价格/无倒计时/无催促 (UI_UX_SPEC.md
+    /// §11/§12.2, 儿童侧只说 "请家长来解锁") 并返回用户操作。带压暗
+    /// 遮罩, 须在 submitLibrary 之后、endFrame 之前调用, 每帧至多
+    /// 一次, 与 submitInventoryOnboarding 互斥 (同为库上层弹窗)。
+    /// @param model_name 被点击的订阅内容模型中文名。
+    [[nodiscard]] virtual SubscriptionPromptActions submitSubscriptionPrompt(
+        const std::string& model_name) = 0;
 
     /// 绘制磁力片库存录入界面 (全部片型中文名 + 大号 +/- 步进器,
     /// 支持长按连加与直接输入, UI_UX_SPEC.md §10.2) 并返回用户操作。

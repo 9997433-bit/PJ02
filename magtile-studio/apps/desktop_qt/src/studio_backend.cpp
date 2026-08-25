@@ -30,10 +30,6 @@ QString fromUtf8(std::string_view s) {
     return QString::fromUtf8(s.data(), static_cast<int>(s.size()));
 }
 
-/// 免费层标记 (COMMERCIAL_PLAN.md §2.1 免费 30): 与目录登记及
-/// tools/check_core5_usage.py 的 FREE_TAG 同一口径。
-constexpr const char* kFreeTag = "免费";
-
 /// 成就墙徽章档位定义 (QT-4, UI_UX_SPEC.md §4.5: 成就只与搭建行为
 /// 挂钩, 按完成模型数分档)。first_model_completed 与完成链路写入
 /// 存档的成就 id 同名 (completeBuild / 教程视口 / GL 版三处同一
@@ -168,10 +164,11 @@ void StudioBackend::reload() {
         LibraryRow row;
         row.entry = std::move(entry);
         total_pieces_ += row.entry.total_pieces;
-        if (std::find(row.entry.tags.begin(), row.entry.tags.end(), kFreeTag) !=
-            row.entry.tags.end()) {
-            ++free_model_count_;
-        }
+        // 免费层 (COMMERCIAL_PLAN §2.1): 与 CLI / GL 版同一共享判定
+        // core::isFreeTierModel (目录 tags 含「免费」); 非免费模型卡片
+        // 显示「订阅解锁」角标, 详情页「开始搭建」改走家长门后的订阅页
+        row.is_free = core::isFreeTierModel(row.entry);
+        if (row.is_free) ++free_model_count_;
 
         const QString theme = fromUtf8(row.entry.theme());
         if (!themes_.contains(theme)) themes_ << theme;
@@ -300,6 +297,7 @@ QVariantMap StudioBackend::modelDetail(const QString& model_id) const {
     detail.insert(QStringLiteral("status"), row->status);
     detail.insert(QStringLiteral("currentStep"), row->current_step);
     detail.insert(QStringLiteral("favorited"), row->favorited);
+    detail.insert(QStringLiteral("isFree"), row->is_free);
     detail.insert(QStringLiteral("bomKnown"), row->bom_known);
     detail.insert(QStringLiteral("core9Only"), row->core9_only);
     detail.insert(QStringLiteral("canBuild"), row->can_build);
