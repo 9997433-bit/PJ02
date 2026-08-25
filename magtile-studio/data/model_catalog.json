@@ -3,6 +3,24 @@
   "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 与 thumbnail 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。theme 为卡片主题 (由标签推导), thumbnail 由 tools/generate_thumbnails.py 生成。本文件由 tools/update_model_catalog.py 自动生成, 请勿手工编辑。",
   "models": [
     {
+      "id": "robot_arm_01",
+      "file": "models/robot_arm_01.json",
+      "name": "机械臂工位",
+      "name_en": "Robot Arm Workcell 01",
+      "description": "全库第一座工业机器人工位: 蓝色双层闭合环肩座顶起橙色水平大臂, 大臂远端稳稳搭在前臂立柱顶上 (逐片双端受力零悬挑), 腹下倒挂红色三角夹爪 (悬挂 13g 远低于 strict 预算), 正对下方绿色四坡料堆; 柱顶警示灯、紫色斜面控制台与三面黄色安全围栏把工位围出真实的车间秩序 —— 机械臂就位, 开始作业!",
+      "difficulty": 2,
+      "total_pieces": 46,
+      "step_count": 10,
+      "theme": "工程结构",
+      "tags": [
+        "工程",
+        "工业机器人",
+        "机械臂",
+        "职业体验",
+        "入门进阶"
+      ]
+    },
+    {
       "id": "geodesic_dome_01",
       "file": "models/geodesic_dome_01.json",
       "name": "测地穹顶",
@@ -78,6 +96,25 @@
         "高塔"
       ],
       "thumbnail": "thumbnails/giraffe_01.png"
+    },
+    {
+      "id": "ambulance_01",
+      "file": "models/ambulance_01.json",
+      "name": "120 急救车",
+      "name_en": "Ambulance 01",
+      "description": "城市守护者的高箱厢式车: 2 片车轮底座整边吸马路拼缝, 底盘甲板双长边压轮顶锁成门式框架; 甲板上圈层砌法立起两层高的白色方舱 (红色急救条纹绕舱一周), 舱顶长板四边全吸闭合箱形环、红警灯朝前; 驾驶室退低一级直接落地, 透明挡风正对车头, 车顶整条贴住方舱前壁共享受力 —— 高低错落的阶梯剪影就是救护车的标志。车后医院急诊楼门脸: 蓝色急诊门/透明大窗/二层红十字, 透明雨棚平挑 (力矩 15<=20 双片共担), 楼顶红旗高扬; 安全锥围出急救通道, 路灯长明 —— 呜哇呜哇, 请让出生命通道!",
+      "difficulty": 3,
+      "total_pieces": 53,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "职业体验",
+        "救护车",
+        "载具",
+        "车轮底座",
+        "进阶"
+      ]
     },
     {
       "id": "crocodile_01",
@@ -412,23 +449,6 @@
       "thumbnail": "thumbnails/sydney_opera_01.png"
     },
     {
-      "id": "gas_station_01",
-      "file": "models/gas_station_01.json",
-      "name": "加油站",
-      "name_en": "Gas Station",
-      "description": "星光加油站: 东西两榀双层门架托起 4x2 红色大雨棚, 前檐整排透明招牌墙点亮双星徽记; 棚下两台黄色加油机油枪朝天, 东侧便利店借门架一墙两用 (门框方店门 + 窗格方橱窗), 屋顶双旗迎风; 南侧车道上车轮底座敞篷小车正在加油, 西口窗格方价目牌一目了然 —— 加满一箱, 出发!",
-      "difficulty": 3,
-      "total_pieces": 60,
-      "step_count": 16,
-      "theme": "城市生活",
-      "tags": [
-        "城市",
-        "交通",
-        "车辆",
-        "进阶"
-      ]
-    },
-    {
       "id": "roller_coaster_hill_01",
       "file": "models/roller_coaster_hill_01.json",
       "name": "过山车爬升段",
@@ -659,6 +679,23 @@
       "thumbnail": "thumbnails/cable_car_01.png"
     },
     {
+      "id": "gas_station_01",
+      "file": "models/gas_station_01.json",
+      "name": "加油站",
+      "name_en": "Gas Station",
+      "description": "星光加油站: 西/中/东三榀双层门架托起 4x2 红色大雨棚 (每半跨两端受力零悬挑), 前檐整排透明招牌墙点亮双星徽记; 棚下两台黄色加油机油枪朝天, 东侧便利店借门架一墙两用 (门框方店门 + 窗格方橱窗), 屋顶双旗迎风; 南侧车道上车轮底座敞篷小车正在加油, 西口窗格方价目牌一目了然 —— 加满一箱, 出发!",
+      "difficulty": 3,
+      "total_pieces": 64,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "车辆",
+        "进阶"
+      ]
+    },
+    {
       "id": "pyramid_giza_01",
       "file": "models/pyramid_giza_01.json",
       "name": "吉萨金字塔",
@@ -675,6 +712,24 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/pyramid_giza_01.png"
+    },
+    {
+      "id": "farm_barn_01",
+      "file": "models/farm_barn_01.json",
+      "name": "农场谷仓",
+      "name_en": "Farm Barn 01",
+      "description": "田园农场的当家建筑: 4 格长的红色大谷仓用两层长楣圈层叠出高挑仓身, 南面木门 (门框方) 与采光窗 (窗格方) 竖边咬合入墙, 60 度人字大屋面四片坡板脊线互吸、等边山花封脊; 北侧披屋平顶长板双端受力如桥, 把饲料棚与仓身锁成闭环; 草料场上两座等边四坡干草堆自锁成环, 稻草人与橙色栅栏围出牲口栏 —— 丰收季的农场从这里开张。",
+      "difficulty": 3,
+      "total_pieces": 65,
+      "step_count": 17,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "农场",
+        "谷仓",
+        "人字坡",
+        "进阶"
+      ]
     },
     {
       "id": "water_slide_park_01",
@@ -1607,6 +1662,24 @@
       "thumbnail": "thumbnails/ball_run_tower_01.png"
     },
     {
+      "id": "library_building_01",
+      "file": "models/library_building_01.json",
+      "name": "城市图书馆",
+      "name_en": "City Library 01",
+      "description": "全库第一座图书馆: 两层通高阅览大厅整面南向玻璃幕墙, 馆内三列彩色书架先上架后封顶 (R7b 装配顺序教科书案例), 隔着玻璃一目了然; 东端书塔借大厅东墙作西壁, 三层拔起戴四坡橙顶; 门前广场立着巨书亭 —— 讲台墙顶摊开两页 30 度斜板, 像一本永远翻开的书, 顶边互吸坡尾落地三路受力 —— 嘘, 阅览区请保持安静!",
+      "difficulty": 4,
+      "total_pieces": 90,
+      "step_count": 18,
+      "theme": "城市生活",
+      "tags": [
+        "城市生活",
+        "图书馆",
+        "玻璃幕墙",
+        "文化建筑",
+        "进阶"
+      ]
+    },
+    {
       "id": "covered_bridge_01",
       "file": "models/covered_bridge_01.json",
       "name": "风雨廊桥",
@@ -1754,6 +1827,25 @@
         "车轮底座"
       ],
       "thumbnail": "thumbnails/school_bus_01.png"
+    },
+    {
+      "id": "apartment_block_01",
+      "file": "models/apartment_block_01.json",
+      "name": "居民楼",
+      "name_en": "Apartment Block 01",
+      "description": "全库第一组住宅小区: 高低错落的两栋居民楼 —— 西楼三层橙墙、东楼两层黄墙, 逐层箱形围合、上下墙单位边对吸; 层层窗格方住户窗, 一层各嵌一扇门框方单元门; 西楼南立面挑出三方绿色阳台 (单方弯矩 15、双方并挑 30, 均在预算内), 东楼屋顶是种着绿植的露台; 院子里红色滑梯双端受力、绿色四坡小树自锁合拢、黄色路灯守在院口 —— 放学了, 院子里玩一会儿再回家!",
+      "difficulty": 4,
+      "total_pieces": 99,
+      "step_count": 18,
+      "theme": "城市生活",
+      "tags": [
+        "居民楼",
+        "城市",
+        "住宅",
+        "生活场景",
+        "阳台"
+      ],
+      "thumbnail": "thumbnails/apartment_block_01.png"
     },
     {
       "id": "castle_drawbridge_01",
