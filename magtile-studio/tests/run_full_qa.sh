@@ -52,6 +52,10 @@
 #       门禁 --full 即此档; 冻结期间新增 D3 的拦截由批次评审 --batch
 #       闸门负责; 同口径 CTest 关卡 content_series_gate /
 #       difficulty_quota_gate 已随关卡 3 全量回归常开, CONTENT_GAP_AUDIT.md §7.3)
+#   22. 矩阵进度快照刷新       (可选: MAGTILE_MATRIX_REPORT=1 时执行,
+#       tools/update_model_catalog.py --matrix-report —— 重建目录后
+#       顺手刷新 docs/reports/CONTENT_MATRIX_PROGRESS.md 主题 × 难度
+#       矩阵快照; 产物为仓库内文件, 刷新后随内容批一起提交, TESTING.md 3.19)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -64,6 +68,7 @@
 #   MAGTILE_SERIES_CHECK=1  启用可选关卡 20 (内容系列归类机检)
 #   MAGTILE_DIFFICULTY_QUOTA=1  将常开关卡 21 难度配额升级为 strict 守卫档
 #                        (D3 冻结生效即红灯; 默认为报告型不阻断)
+#   MAGTILE_MATRIX_REPORT=1  启用可选关卡 22 (目录重建 + 矩阵进度快照刷新)
 #   FORCE_COLOR=1        非终端环境 (CI) 强制彩色输出
 #   NO_COLOR=1           禁用彩色输出
 #
@@ -352,6 +357,21 @@ if [ -n "${MAGTILE_DIFFICULTY_QUOTA:-}" ]; then
 else
     run_stage "难度配额报告 (D3 冻结状态)" \
         "$PYTHON" "$ROOT/tools/check_difficulty_quota.py" "$DATA_DIR/models"
+fi
+
+# ---- 22: 矩阵进度快照刷新 (可选关卡) ------------------------------
+# CONTENT_GAP_AUDIT.md §7.3 矩阵进度机检产物的 QA 挂钩: 重建目录
+# (data/model_catalog.json) 后顺手刷新 docs/reports/CONTENT_MATRIX_PROGRESS.md
+# 主题 × 难度矩阵快照, 让进度表随模型库同步而不靠人记得重跑。
+# 产物是仓库内文件 (刷新后须随内容批一起提交), 日常 QA 不应改动
+# 工作区, 故默认跳过; 内容批次合入 / 目录重建后置
+# MAGTILE_MATRIX_REPORT=1 开启 (docs/TESTING.md 3.19)。
+if [ -n "${MAGTILE_MATRIX_REPORT:-}" ]; then
+    run_stage "矩阵进度快照刷新 (matrix-report)" \
+        "$PYTHON" "$ROOT/tools/update_model_catalog.py" --matrix-report
+else
+    skip_stage "矩阵进度快照刷新 (matrix-report)" \
+        "可选关卡, 置 MAGTILE_MATRIX_REPORT=1 开启 (tools/update_model_catalog.py --matrix-report)"
 fi
 
 # ---- 总结报告 ---------------------------------------------------

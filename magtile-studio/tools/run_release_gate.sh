@@ -18,7 +18,7 @@
 # 用法:
 #   tools/run_release_gate.sh [build_dir] [选项]
 #     build_dir          构建目录 (默认 build)
-#     --full             发布档: 改为完整跑 21 关全量 QA 并开启
+#     --full             发布档: 改为完整跑 22 关全量 QA 并开启
 #                        发布专项可选关卡 (= MAGTILE_FREE_TIER_CHECK=1
 #                        MAGTILE_STRICT_AUDIT=1 MAGTILE_SERIES_CHECK=1
 #                        MAGTILE_DIFFICULTY_QUOTA=1 tests/run_full_qa.sh
@@ -149,8 +149,8 @@ run_gate() {
 
 TIER_DESC="默认 (三道发布专项)"
 if [ "$FULL" -eq 1 ]; then
-    TIER_DESC="--full (21 关全量 QA + 发布专项)"
-    [ "$L2" -eq 1 ] && TIER_DESC="--full --l2 (21 关全量 QA + 发布专项 + L2 抗扰动档)"
+    TIER_DESC="--full (22 关全量 QA + 发布专项)"
+    [ "$L2" -eq 1 ] && TIER_DESC="--full --l2 (22 关全量 QA + 发布专项 + L2 抗扰动档)"
 fi
 
 if [ "$DRY_RUN" -eq 1 ]; then
