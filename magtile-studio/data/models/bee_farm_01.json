@@ -1,0 +1,897 @@
+{
+  "schema_version": 1,
+  "id": "bee_farm_01",
+  "name": "快乐养蜂场",
+  "name_en": "Bee Farm 01",
+  "description": "只用核心九片型的养蜂场, 结构签名是'一高一矮双蜂箱塔': 蜂箱就是逐层摞起的箱环 —— 女王蜂箱两节箱环整边共线上叠 (真实养蜂人加继箱的方式), 南面一层开门框方巢门、二层嵌窗格方观察窗, 顶上四坡锥顶四棱互吸自锁; 工蜂箱单节箱环 + 锥顶, 一高一矮排出蜂场天际线。花田粉色四坡锥盛开在南侧, 黄色小蜜蜂骑着地缝沿飞行走廊从花丛直飞巢门 —— 嗡嗡嗡, 掀开锥顶就能看蜂群酿蜜!",
+  "difficulty": 2,
+  "total_pieces": 48,
+  "tags": [
+    "田园",
+    "农场",
+    "蜜蜂",
+    "花田",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 28,
+        "equilateral_triangle": 13,
+        "rectangle": 4,
+        "door_frame": 2,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g0_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_e",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_e",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "qa1_s",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "qa1_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "qa1_w",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "qa1_e",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "qa_cap1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "qa2_s",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "qa2_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "qa2_w",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "qa2_e",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "qa_cap2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "qa_roof_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.166667,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "qa_roof_e",
+      "type": "equilateral_triangle",
+      "position": [
+        1.833333,
+        2.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "qa_roof_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.833333,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "qa_roof_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.166667,
+        2.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wb1_s",
+      "type": "door_frame",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wb1_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wb1_w",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wb1_e",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wb_cap",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wb_roof_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wb_roof_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wb_roof_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wb_roof_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flower_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flower_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flower_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flower_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bee",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺花田行: 两片绿茵长板收东西两端, 花田锥脚下用单位方板。",
+      "tip": "清晨的养蜂场从花田开始 —— 蜜蜂的早餐就种在这一行。",
+      "tiles_to_add": [
+        "g0_w",
+        "g0_2",
+        "g0_3",
+        "g0_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺飞行走廊行: 六片单位方板一字排开, 与花田行对缝。",
+      "tip": "这条走廊是蜜蜂的航线 —— 从花田直飞巢门, 一格都不绕。",
+      "tiles_to_add": [
+        "g1_0",
+        "g1_1",
+        "g1_2",
+        "g1_3",
+        "g1_4",
+        "g1_5"
+      ],
+      "highlight_tiles": [
+        "g0_2"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺蜂箱行: 六片单位方板, 两座蜂箱的墙脚全踩在这行拼缝上。",
+      "tip": "蜂箱脚下必须是单位方板 —— 墙底边要和方板边等长吸合。",
+      "tiles_to_add": [
+        "g2_0",
+        "g2_1",
+        "g2_2",
+        "g2_3",
+        "g2_4",
+        "g2_5"
+      ],
+      "highlight_tiles": [
+        "g1_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺北缘行收口: 两片长板 + 两片方板, 草地围合完成。",
+      "tip": "相邻行至少一对等长边互吸 —— 整片草地连成一体。",
+      "tiles_to_add": [
+        "g3_w",
+        "g3_2",
+        "g3_3",
+        "g3_e"
+      ],
+      "highlight_tiles": [
+        "g2_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "砌女王蜂箱第一节: 巢门门框方朝南, 四角竖边互咬成环。",
+      "tip": "巢门是蜂群的大门 —— 门框方外框与正方形一样能整边吸合。",
+      "tiles_to_add": [
+        "qa1_s",
+        "qa1_n",
+        "qa1_w",
+        "qa1_e"
+      ],
+      "highlight_tiles": [
+        "g2_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "盖第一层压顶并摞第二节箱环: 观察窗窗格方朝南, 底边与下节墙顶整边共线吸合。",
+      "tip": "加继箱喽! 真实的养蜂人就是这样一层层往上摞蜂箱的。",
+      "tiles_to_add": [
+        "qa_cap1",
+        "qa2_s",
+        "qa2_n",
+        "qa2_w",
+        "qa2_e"
+      ],
+      "highlight_tiles": [
+        "qa1_s"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "盖第二层压顶并合女王蜂箱锥顶: 四片等边三角四棱互吸自锁。",
+      "tip": "锥顶底边吸'压顶边+墙顶边'两条共线铰链 —— 掀开就能看蜂群。",
+      "tiles_to_add": [
+        "qa_cap2",
+        "qa_roof_s",
+        "qa_roof_e",
+        "qa_roof_n",
+        "qa_roof_w"
+      ],
+      "highlight_tiles": [
+        "qa2_s"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "砌工蜂箱并盖压顶: 单节箱环巢门朝南, 压顶四边吸墙顶。",
+      "tip": "矮的这座住工蜂 —— 一高一矮, 蜂场的天际线就有了节奏。",
+      "tiles_to_add": [
+        "wb1_s",
+        "wb1_n",
+        "wb1_w",
+        "wb1_e",
+        "wb_cap"
+      ],
+      "highlight_tiles": [
+        "g2_4"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "合工蜂箱锥顶: 四片橙色等边三角逐片就位, 斜棱两两互吸。",
+      "tip": "第四片最难放 —— 它要同时吸住两条斜棱, 对准再松手。",
+      "tiles_to_add": [
+        "wb_roof_s",
+        "wb_roof_e",
+        "wb_roof_n",
+        "wb_roof_w"
+      ],
+      "highlight_tiles": [
+        "wb_cap"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "种花田并放小蜜蜂: 粉色四坡锥四棱自锁, 黄色小蜜蜂骑地缝起飞!",
+      "tip": "小蜜蜂正沿着飞行走廊回家 —— 嗡嗡嗡, 今天也是采蜜的好日子!",
+      "tiles_to_add": [
+        "flower_s",
+        "flower_e",
+        "flower_n",
+        "flower_w",
+        "bee"
+      ],
+      "highlight_tiles": [
+        "g0_2"
+      ]
+    }
+  ]
+}
