@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。",
+  "models": [
+    {
+      "id": "castle_foundation_01",
+      "file": "models/castle_foundation_01.json",
+      "name": "城堡地基与城墙",
+      "name_en": "Castle Foundation 01",
+      "description": "经典城堡系列第一课: 从 4x4 地台开始, 逐层搭建双层围墙、四角角楼、角楼尖塔与三角城齿, 学习磁力片建筑最重要的三个技巧 —— 平铺打底、垂直立墙、逐层加高。",
+      "difficulty": 3,
+      "total_pieces": 72,
+      "step_count": 16,
+      "tags": ["城堡", "建筑基础", "进阶"]
+    }
+  ]
+}
