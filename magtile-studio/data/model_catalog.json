@@ -60,6 +60,25 @@
       "thumbnail": "thumbnails/beach_hut_01.png"
     },
     {
+      "id": "tow_truck_01",
+      "file": "models/tow_truck_01.json",
+      "name": "道路救援拖车",
+      "name_en": "Tow Truck 01",
+      "description": "只用核心九片型的平板道路救援拖车, 结构签名是'平板拖床 + 30 度登车坡道 + 待救小车': 驾驶室箱体 (挡风窗格方 + 双侧门框方) 压顶与拖床同在一个平面, 压顶东边与拖床西短边整边互吸; 拖床双长边压住两排车轮底座轮顶锁成门式框架, 车尾 30 度登车坡道顶边整边吸拖床东短边、坡尾自然落地零悬挑; 故障小车停在坡道尽头, 两座橙色安全锥四坡锥与黄色警示牌围出作业区 —— 绞盘一收, 小车就上平板!",
+      "difficulty": 2,
+      "total_pieces": 44,
+      "step_count": 10,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "救援车",
+        "职业体验",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/tow_truck_01.png"
+    },
+    {
       "id": "boxing_ring_01",
       "file": "models/boxing_ring_01.json",
       "name": "拳击台",
@@ -155,6 +174,25 @@
         "离心机"
       ],
       "thumbnail": "thumbnails/astronaut_training_01.png"
+    },
+    {
+      "id": "bee_farm_01",
+      "file": "models/bee_farm_01.json",
+      "name": "快乐养蜂场",
+      "name_en": "Bee Farm 01",
+      "description": "只用核心九片型的养蜂场, 结构签名是'一高一矮双蜂箱塔': 蜂箱就是逐层摞起的箱环 —— 女王蜂箱两节箱环整边共线上叠 (真实养蜂人加继箱的方式), 南面一层开门框方巢门、二层嵌窗格方观察窗, 顶上四坡锥顶四棱互吸自锁; 工蜂箱单节箱环 + 锥顶, 一高一矮排出蜂场天际线。花田粉色四坡锥盛开在南侧, 黄色小蜜蜂骑着地缝沿飞行走廊从花丛直飞巢门 —— 嗡嗡嗡, 掀开锥顶就能看蜂群酿蜜!",
+      "difficulty": 2,
+      "total_pieces": 48,
+      "step_count": 10,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "农场",
+        "蜜蜂",
+        "花田",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/bee_farm_01.png"
     },
     {
       "id": "lifeguard_tower_01",
@@ -915,6 +953,25 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/magic_tree_01.png"
+    },
+    {
+      "id": "aquarium_01",
+      "file": "models/aquarium_01.json",
+      "name": "海底隧道水族馆",
+      "name_en": "Aquarium Tunnel 01",
+      "description": "只用核心九片型的水族馆, 结构签名是'玻璃观景隧道从两座水缸中间穿过': 两座满墙窗格方的玻璃水缸南北对峙 (墙环四角竖边互咬, 缸底蓝色水板), 三片透明隧道顶南北两边分别整边吸住两缸内墙顶 —— 双端受力零悬挑, 游客从西端门框方拱门进馆, 头顶就是水缸的水面; 缸里粉色珊瑚四坡锥静静盛开 (锥尖没进水线), 三条小鱼骑缸沿跃出水面, 东北角蓝色鲸尾直上 3.0 高高扬起 —— 这是散场前最后一场鲸鱼表演!",
+      "difficulty": 3,
+      "total_pieces": 60,
+      "step_count": 13,
+      "theme": "海洋航行",
+      "tags": [
+        "海洋",
+        "水族馆",
+        "观景隧道",
+        "亲子",
+        "挑战"
+      ],
+      "thumbnail": "thumbnails/aquarium_01.png"
     },
     {
       "id": "bullet_train_01",
@@ -2421,6 +2478,25 @@
       "thumbnail": "thumbnails/cactus_desert_01.png"
     },
     {
+      "id": "canal_lock_01",
+      "file": "models/canal_lock_01.json",
+      "name": "运河船闸",
+      "name_en": "Canal Lock 01",
+      "description": "只用核心九片型的运河船闸, 结构签名是'两级水位 + 闸室夹船': 西端高位蓄水池的水面整整比下游高出一层 (z=1 对 z=0), 3x3 高位水面周圈吸墙顶、中心一片靠邻板共面互吸环撑成板; 中段闸室由两道钢闸门 (中嵌观察窗) 与两侧闸墙锁成闭环箱体, 与蓄水池墙环共用上游闸门一道墙; 一艘挂着等腰高桅杆的红色小拖船泊在闸室水底等待放水, 桅尖 3.0 从闸墙顶探出全场制高; 闸控小屋守在东北角, 红绿信号旗分骑两道闸门顶 —— 绿旗一挂, 开闸放行!",
+      "difficulty": 3,
+      "total_pieces": 72,
+      "step_count": 14,
+      "theme": "工程结构",
+      "tags": [
+        "工程",
+        "运河",
+        "船闸",
+        "水利",
+        "挑战"
+      ],
+      "thumbnail": "thumbnails/canal_lock_01.png"
+    },
+    {
       "id": "castle_foundation_01",
       "file": "models/castle_foundation_01.json",
       "name": "城堡地基与城墙",
@@ -2573,6 +2649,25 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/safari_lodge_01.png"
+    },
+    {
+      "id": "snowman_01",
+      "file": "models/snowman_01.json",
+      "name": "冬日雪人广场",
+      "name_en": "Snowman Plaza 01",
+      "description": "只用核心九片型的大雪人, 结构签名是'三比一突变收分': 身子是 3x3 足印的两节空心大墙环 (整边共线上叠, 四角竖边互咬, R8 高层检查靠闭环拓扑天然通过), 身盖 9 宫格周圈吸墙顶、中心一片靠邻板共面互吸环撑成板; 脖子处一步从 3x3 跳到 1x1 —— 雪球头的四片墙全骑在身盖正中那片方板的四条边上, 一片方板独扛一颗头; 头顶红色等腰四坡尖帽四棱自锁、帽尖 4.94 全场制高。窗格方作煤扣与眼睛, 红围巾结骑脖线, 双树枝手臂从身盖沿伸出, 雪地一角还插着一把等腰大扫帚 —— 拍完合影再回屋喝热可可!",
+      "difficulty": 3,
+      "total_pieces": 72,
+      "step_count": 14,
+      "theme": "节日",
+      "tags": [
+        "节日",
+        "冬季",
+        "雪人",
+        "亲子",
+        "挑战"
+      ],
+      "thumbnail": "thumbnails/snowman_01.png"
     },
     {
       "id": "space_elevator_01",
