@@ -1,0 +1,1063 @@
+{
+  "schema_version": 1,
+  "id": "penguin_01",
+  "name": "帝企鹅一家",
+  "name_en": "Emperor Penguin Family 01",
+  "description": "全库第一只直立行走的鸟类: 2x1 箱形身躯用长方形前后壁+方形侧壁圈层直上两层 (透明前壁就是白肚皮), 双肩方板压顶后头颅小箱四边全吸落座 (四重连接无单点失效), 橙色等边扁喙水平收尖; 两片菱形鳍肢 60 度斜撑身侧, 灰色企鹅宝宝戴四棱自锁绒帽; 东侧冰台连 30 度冰滑梯直插水面溅起浪花, 六边形冰山守着西北两沿 —— 排队, 下水!",
+  "difficulty": 3,
+  "total_pieces": 54,
+  "tags": [
+    "动物世界",
+    "企鹅",
+    "极地",
+    "自然",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 33,
+        "equilateral_triangle": 8,
+        "rectangle": 8,
+        "rhombus": 3,
+        "hexagon": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "fl_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fl_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sea_0",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_1",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_2",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pg_s_0",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pg_w_0",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pg_n_0",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pg_e_0",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pg_s_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pg_w_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pg_n_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pg_e_1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sh_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sh_e",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hd_s",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hd_w",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hd_n",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hd_e",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hd_top",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "beak",
+      "type": "equilateral_triangle",
+      "position": [
+        3.288675,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fin_s",
+      "type": "rhombus",
+      "position": [
+        1.25,
+        0.722792,
+        0.33265
+      ],
+      "rotation": [
+        50.194429,
+        0.0,
+        180.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "fin_n",
+      "type": "rhombus",
+      "position": [
+        1.75,
+        2.277208,
+        0.33265
+      ],
+      "rotation": [
+        50.194429,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ck_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ck_w",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ck_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ck_e",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ck_hat_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ck_hat_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ck_hat_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ck_hat_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lg_w",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "lg_e",
+      "type": "square",
+      "position": [
+        5.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "lg_top",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "slide",
+      "type": "rectangle",
+      "position": [
+        5.866025,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "splash",
+      "type": "equilateral_triangle",
+      "position": [
+        6.73205,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "berg_w",
+      "type": "hexagon",
+      "position": [
+        0.5,
+        3.0,
+        0.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "berg_w2",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        2.5,
+        0.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "icicle_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "icicle_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fish",
+      "type": "rhombus",
+      "position": [
+        7.0,
+        1.75,
+        0.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺浮冰南列: [0,5]x[0,1] 铺 5 片透明青色相间方板。",
+      "tip": "浮冰是全家的舞台, 透明片就是新结的亮冰。",
+      "tiles_to_add": [
+        "fl_0_0",
+        "fl_1_0",
+        "fl_2_0",
+        "fl_3_0",
+        "fl_4_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺浮冰中列: 再铺 5 片, 大企鹅将站在这一列上。",
+      "tip": "拼缝对齐, 冰面才平整。",
+      "tiles_to_add": [
+        "fl_0_1",
+        "fl_1_1",
+        "fl_2_1",
+        "fl_3_1",
+        "fl_4_1"
+      ],
+      "highlight_tiles": [
+        "fl_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺浮冰北列: 5 片补齐, 浮冰成型。",
+      "tip": "北沿留给冰山背景 —— 一会儿它们会立起来。",
+      "tiles_to_add": [
+        "fl_0_2",
+        "fl_1_2",
+        "fl_2_2",
+        "fl_3_2",
+        "fl_4_2"
+      ],
+      "highlight_tiles": [
+        "fl_0_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺海水: 浮冰东侧 3 片蓝色长板拼出海面。",
+      "tip": "长板短边吸浮冰边 —— 冰与海从此连成整体。",
+      "tiles_to_add": [
+        "sea_0",
+        "sea_1",
+        "sea_2"
+      ],
+      "highlight_tiles": [
+        "fl_4_0",
+        "fl_4_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "砌身躯第 1 层: 透明前壁 (白肚皮) + 蓝色后壁两片长方形, 加两片方形侧壁, 拐角竖边互吸自锁成环。",
+      "tip": "长边给前后壁、短边给侧壁 —— 圈层砌法的长短分工。",
+      "tiles_to_add": [
+        "pg_s_0",
+        "pg_w_0",
+        "pg_n_0",
+        "pg_e_0"
+      ],
+      "highlight_tiles": [
+        "fl_1_1",
+        "fl_2_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "砌身躯第 2 层: 再叠一环, 上环整边压下环。",
+      "tip": "帝企鹅站起来有一米多高 —— 塔式身躯要对缝直叠。",
+      "tiles_to_add": [
+        "pg_s_1",
+        "pg_w_1",
+        "pg_n_1",
+        "pg_e_1"
+      ],
+      "highlight_tiles": [
+        "pg_s_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "压双肩: 2 片蓝色方板并排盖住身躯顶口。",
+      "tip": "用 2 片方板而不是 1 片长板 —— 头颅的四条底边才有处可吸。",
+      "tiles_to_add": [
+        "sh_w",
+        "sh_e"
+      ],
+      "highlight_tiles": [
+        "pg_w_1",
+        "pg_e_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "落头颅: 东肩上四面立墙围出头颅小箱, 脸颊朝南是透明的。",
+      "tip": "四条底边边边落吸 —— 四重连接, 头颅没有单点失效。",
+      "tiles_to_add": [
+        "hd_s",
+        "hd_w",
+        "hd_n",
+        "hd_e"
+      ],
+      "highlight_tiles": [
+        "sh_e",
+        "sh_w"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "封头顶接扁喙: 头顶方板四边压墙顶, 橙色等边扁喙从东沿水平收尖。",
+      "tip": "扁喙悬挑力矩 5 <= 预算 20 —— 正望着滑梯的方向。",
+      "tiles_to_add": [
+        "hd_top",
+        "beak"
+      ],
+      "highlight_tiles": [
+        "hd_s",
+        "hd_e"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "撑鳍肢: 两片蓝色菱形从冰面斜倚身躯前后两侧, 底边整边吸浮冰边。",
+      "tip": "菱形 60 度的天然斜度就是鳍肢摆动的角度 —— 接地斜撑, 越靠越稳。",
+      "tiles_to_add": [
+        "fin_s",
+        "fin_n"
+      ],
+      "highlight_tiles": [
+        "pg_s_0",
+        "pg_n_0"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "搭企鹅宝宝: 浮冰东北角四面灰色立墙围出毛茸茸的小身子。",
+      "tip": "宝宝紧挨着大企鹅 —— 帝企鹅是全世界最顾家的鸟。",
+      "tiles_to_add": [
+        "ck_s",
+        "ck_w",
+        "ck_n",
+        "ck_e"
+      ],
+      "highlight_tiles": [
+        "fl_4_2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "戴绒帽: 4 片灰色等边三角四棱互吸, 合拢成宝宝的圆锥绒帽。",
+      "tip": "四条斜棱两两精确互吸自锁成环 —— 圆滚滚才可爱。",
+      "tiles_to_add": [
+        "ck_hat_s",
+        "ck_hat_e",
+        "ck_hat_n",
+        "ck_hat_w"
+      ],
+      "highlight_tiles": [
+        "ck_s",
+        "ck_e"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "筑冰台: 浮冰东南角两片青色立墙, 顶上盖一片透明台面。",
+      "tip": "台面两端压双壁 —— 这是跳水队的出发台。",
+      "tiles_to_add": [
+        "lg_w",
+        "lg_e",
+        "lg_top"
+      ],
+      "highlight_tiles": [
+        "fl_4_0",
+        "sea_0"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "架冰滑梯: 30 度滑梯顶边整边吸冰台东沿, 坡尾直插水面, 尾端立起透明浪花。",
+      "tip": "坡尾落在海面上就是接地斜撑 —— 出发!",
+      "tiles_to_add": [
+        "slide",
+        "splash"
+      ],
+      "highlight_tiles": [
+        "lg_top"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "立冰山背景: 浮冰北沿与西沿各竖 1 片透明六边形大冰山。",
+      "tip": "六边形重心正压冰沿铰链, 力臂为零 —— 极地的天际线。",
+      "tiles_to_add": [
+        "berg_w",
+        "berg_w2"
+      ],
+      "highlight_tiles": [
+        "fl_0_2",
+        "fl_4_2"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "点冰凌与小鱼: 北沿与西沿各立 1 片透明冰凌尖, 海面东缘一条青色菱形小鱼跃出水面 —— 帝企鹅一家, 开饭啦!",
+      "tip": "冰凌立在冰沿铰链线上, 小鱼斜身出水 —— 全场收官。",
+      "tiles_to_add": [
+        "icicle_n",
+        "icicle_w",
+        "fish"
+      ],
+      "highlight_tiles": [
+        "berg_w",
+        "sea_1"
+      ]
+    }
+  ]
+}
