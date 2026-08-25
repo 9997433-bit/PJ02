@@ -1,0 +1,1175 @@
+{
+  "schema_version": 1,
+  "id": "mars_habitat_01",
+  "name": "火星互联栖息基地",
+  "name_en": "Mars Habitat 01",
+  "description": "全库第一座多舱互联基地: 五个舱室以中央枢纽为心拼成十字, 枢纽四面全是门框方舱门 (北穹顶居住舱 / 东玻璃温室 / 南气闸 / 西能源舱), 枢纽顶板四边压四门顶把基地锁成一体; 居住舱三面舷窗戴透明四坡穹顶, 温室双透明横楣夹房、先种作物后封玻璃顶, 气闸红外门橙内门双门串联, 能源舱顶骑通讯桅杆 (杆尖 3.0); 舱外双轮巡逻车甲板双端受力、太阳能板墙沿南线展开、四坡岩丘把守东侧 —— 在红色荒原上安下第一个家。",
+  "difficulty": 3,
+  "total_pieces": 64,
+  "tags": [
+    "航天",
+    "火星",
+    "基地",
+    "科学探索",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 23,
+        "rectangle": 19,
+        "equilateral_triangle": 11,
+        "door_frame": 5,
+        "window_square": 3,
+        "wheel_base": 2,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "m0_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m0_b",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "m0_c",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m0_d",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m1_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m1_b",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "m1_c",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m1_d",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m1_e",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "m1_f",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m2_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "m2_b",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "m2_c",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m2_d",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m2_e",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m2_f",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m3_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m3_b",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "m3_c",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m3_d",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m3_e",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m3_f",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "m3_g",
+      "type": "square",
+      "position": [
+        7.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m4_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m4_b",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "m4_c",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "m4_d",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "al_door_s",
+      "type": "door_frame",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "al_w",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "al_e",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "al_door_n",
+      "type": "door_frame",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "al_roof",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hab_door",
+      "type": "door_frame",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gh_door",
+      "type": "door_frame",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pw_door",
+      "type": "door_frame",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hub_roof",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "hab_w",
+      "type": "window_square",
+      "position": [
+        3.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hab_e",
+      "type": "window_square",
+      "position": [
+        4.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hab_n",
+      "type": "window_square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hab_dome_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hab_dome_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.833333,
+        3.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hab_dome_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hab_dome_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.166667,
+        3.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pw_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pw_s",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pw_n",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pw_roof",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pw_mast",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "gh_s",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gh_n",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gh_e",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gh_crop",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        2.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gh_roof",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sol1",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sol2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "beacon",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rov_w1",
+      "type": "wheel_base",
+      "position": [
+        7.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rov_w2",
+      "type": "wheel_base",
+      "position": [
+        7.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rov_deck",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rov_ant",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rock_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        3.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rock_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.833333,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rock_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        3.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rock_w",
+      "type": "equilateral_triangle",
+      "position": [
+        6.166667,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺荒原南缘 (y [0,1]): 4 片长板, 红色火星地表铺起。",
+      "tip": "橙色条带是风化带 —— 基地会建在它们北侧。",
+      "tiles_to_add": [
+        "m0_a",
+        "m0_b",
+        "m0_c",
+        "m0_d"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺基地南排 (y [1,2]): 6 片, 灰色气闸地垫就位。",
+      "tip": "灰色方板是气闸落点, 东端长板是巡逻车车位。",
+      "tiles_to_add": [
+        "m1_a",
+        "m1_b",
+        "m1_c",
+        "m1_d",
+        "m1_e",
+        "m1_f"
+      ],
+      "highlight_tiles": [
+        "m0_b"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺舱室排 (y [2,3]): 6 片, 五色地垫一字排开。",
+      "tip": "黄=能源舱, 青=枢纽, 绿=温室 —— 地垫颜色就是舱位图。",
+      "tiles_to_add": [
+        "m2_a",
+        "m2_b",
+        "m2_c",
+        "m2_d",
+        "m2_e",
+        "m2_f"
+      ],
+      "highlight_tiles": [
+        "m1_c"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺北侧荒原 (y [3,5]): 11 片, 场地合拢。",
+      "tip": "8x5 荒原铺满, 所有舱墙都压在地板拼缝上。",
+      "tiles_to_add": [
+        "m3_a",
+        "m3_b",
+        "m3_c",
+        "m3_d",
+        "m3_e",
+        "m3_f",
+        "m3_g",
+        "m4_a",
+        "m4_b",
+        "m4_c",
+        "m4_d"
+      ],
+      "highlight_tiles": [
+        "m2_c"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立气闸舱: 红色外门朝南, 双侧墙 + 橙色内门 + 顶板。",
+      "tip": "出舱必经之路: 外门-侧墙-内门围成 1x1 过渡舱。",
+      "tiles_to_add": [
+        "al_door_s",
+        "al_w",
+        "al_e",
+        "al_door_n",
+        "al_roof"
+      ],
+      "highlight_tiles": [
+        "m1_c"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "拼中央枢纽: 三樘橙门合围, 顶板四边锁住四门顶。",
+      "tip": "枢纽四面全是门 —— 每樘门都同时属于两个舱室。",
+      "tiles_to_add": [
+        "hab_door",
+        "gh_door",
+        "pw_door",
+        "hub_roof"
+      ],
+      "highlight_tiles": [
+        "al_door_n"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "起穹顶居住舱: 三面舷窗墙 + 4 片透明等边锥穹顶。",
+      "tip": "穹顶四棱两两自锁 —— 躺在舱里就能仰望火星星空。",
+      "tiles_to_add": [
+        "hab_w",
+        "hab_e",
+        "hab_n",
+        "hab_dome_s",
+        "hab_dome_e",
+        "hab_dome_n",
+        "hab_dome_w"
+      ],
+      "highlight_tiles": [
+        "hab_door"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立能源舱: 黄墙三面 + 顶板, 北沿骑起通讯桅杆。",
+      "tip": "桅杆底边同时吸顶板北沿与北墙顶, 杆尖 3.0 全场最高。",
+      "tiles_to_add": [
+        "pw_w",
+        "pw_s",
+        "pw_n",
+        "pw_roof",
+        "pw_mast"
+      ],
+      "highlight_tiles": [
+        "pw_door"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "建玻璃温室: 双透明横楣夹房, 先种作物再封玻璃顶。",
+      "tip": "绿色作物先立在地缝上, 玻璃顶最后合拢 —— 顺序别反。",
+      "tiles_to_add": [
+        "gh_s",
+        "gh_n",
+        "gh_e",
+        "gh_crop",
+        "gh_roof"
+      ],
+      "highlight_tiles": [
+        "gh_door"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "展开太阳能板墙、插信标旗: 基地南线 3 片。",
+      "tip": "两道透明长板墙底边整边吸地板长边 —— 2 对 2 严丝合缝。",
+      "tiles_to_add": [
+        "sol1",
+        "sol2",
+        "beacon"
+      ],
+      "highlight_tiles": [
+        "al_door_s"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "组装巡逻车: 双轮底座 + 蓝色甲板 + 车头天线。",
+      "tip": "甲板两长边分别压双轮顶边 —— 双端受力像一座小桥。",
+      "tiles_to_add": [
+        "rov_w1",
+        "rov_w2",
+        "rov_deck",
+        "rov_ant"
+      ],
+      "highlight_tiles": [
+        "m1_f"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "堆东侧岩丘 —— 火星互联栖息基地落成!",
+      "tip": "四片等边锥两两自锁成岩丘, 给基地挡住东来的沙暴。",
+      "tiles_to_add": [
+        "rock_s",
+        "rock_e",
+        "rock_n",
+        "rock_w"
+      ],
+      "highlight_tiles": [
+        "rov_deck"
+      ]
+    }
+  ]
+}
