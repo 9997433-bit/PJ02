@@ -10,7 +10,10 @@
 //      3 次答错进冷却 (冷却期拒答) / 锁定会话;
 //   4. LibraryFilterModel (QT-1): 「我能搭的」筛选空态推荐
 //      recommendBuildable —— 只挑 canBuild、难度升序 (同难度片数
-//      少者优先)、无视其他筛选条件、上限截断。
+//      少者优先)、无视其他筛选条件、上限截断;
+//   5. TtsBackend (QT-4): 朗读开关默认开 / 跨实例持久化 / 与
+//      ui_settings "tts_enabled" 键的双向契约 (设置页开关同键);
+//      本目标不定义 MAGTILE_QT_TTS, 顺带覆盖无引擎静默降级路径。
 // 用法: magtile_qt_backend_test <临时数据库路径>
 // =============================================================
 
@@ -31,6 +34,7 @@
 #include "magtile/progress/ui_settings.hpp"
 #include "parent_gate_backend.hpp"
 #include "settings_backend.hpp"
+#include "tts_backend.hpp"
 
 namespace {
 
@@ -222,6 +226,36 @@ int main(int argc, char** argv) {
         none_buildable.push_back(makeRow("a", 1, 10, false));
         model.resetRows(std::move(none_buildable));
         expect(filter.recommendBuildable(3).isEmpty(), "没有可搭模型时推荐为空");
+    }
+
+    // ---- 5. TtsBackend: 朗读开关持久化与 ui_settings 契约 (QT-4) -------
+    {
+        magtile::qtui::TtsBackend tts(db_path);
+        expect(tts.enabled(), "朗读开关默认开");
+        // 本测试目标不链 QtTextToSpeech (未定义 MAGTILE_QT_TTS):
+        // available 恒 false, speak/stop 必须静默安全 (P3 零挫败)
+        expect(!tts.available(), "无引擎构建时 available=false (静默降级)");
+        tts.speak(QStringLiteral("把三角片靠在墙边"));
+        tts.stop();
+        expect(!tts.speaking(), "无引擎时 speak/stop 平稳返回");
+        expect(!tts.autoRead(), "无引擎时不自动朗读 (即使启蒙模式)");
+
+        tts.setEnabled(false);
+        expect(!tts.enabled(), "关闭朗读立即生效");
+    }
+    {
+        magtile::qtui::TtsBackend tts(db_path);  // 重开桥: 验证真正落盘
+        expect(!tts.enabled(), "朗读开关跨实例持久化");
+
+        // 与设置页 / GL 版的共键契约: 桥写入的关闭状态能被 ui_settings
+        // 层原样读回, 反向写入同样能被桥读回 (同一个 "tts_enabled" 键)
+        progress::ProgressStore store(db_path);
+        expect(!progress::getTtsEnabled(store), "桥写入能被 ui_settings 层读回");
+        progress::setTtsEnabled(store, true);
+    }
+    {
+        magtile::qtui::TtsBackend tts(db_path);
+        expect(tts.enabled(), "ui_settings 层写入能被桥读回 (反向契约)");
     }
 
     if (g_failures == 0) {

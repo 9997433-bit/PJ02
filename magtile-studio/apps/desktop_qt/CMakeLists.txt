@@ -110,7 +110,8 @@ if(MAGTILE_BUILD_TESTS)
     # 后端桥单元测试 (C++, 无需显示环境): 家长门桥 (过门/答错/冷却/
     # 锁定) 与设置桥 (字号三档/减少动效/年龄段) 的 SQLite 往返, 以及
     # 与 GL 版/CLI 的键名契约互通 (共用同一 SQLite 存档承诺);
-    # 另覆盖模型库筛选代理的「我能搭的」空态推荐 (QT-1)
+    # 另覆盖模型库筛选代理的「我能搭的」空态推荐 (QT-1) 与朗读桥
+    # 开关持久化/无引擎静默降级 (QT-4, 本目标不定义 MAGTILE_QT_TTS)
     if(EXISTS ${CMAKE_SOURCE_DIR}/tests/test_qt_backends.cpp)
         qt_add_executable(magtile_qt_backend_test
             ${CMAKE_SOURCE_DIR}/tests/test_qt_backends.cpp
@@ -118,6 +119,7 @@ if(MAGTILE_BUILD_TESTS)
             src/library_filter_model.cpp
             src/parent_gate_backend.cpp
             src/settings_backend.cpp
+            src/tts_backend.cpp
         )
         target_include_directories(magtile_qt_backend_test PRIVATE src)
         target_link_libraries(magtile_qt_backend_test PRIVATE
