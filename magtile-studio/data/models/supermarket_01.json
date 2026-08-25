@@ -1,0 +1,1272 @@
+{
+  "schema_version": 1,
+  "id": "supermarket_01",
+  "name": "阳光超市",
+  "name_en": "Supermarket 01",
+  "description": "全库第一家大卖场: 5x2 单层大盒子南脸留 2 格负空间大门, 橙色门楣两端竖边传力横跨洞口, 整排透明橱窗晒出货架; 北墙长板横砌与南脸方板错开节奏, 屋顶长板双边压墙顶锁成多环箱体; 门头红黄绿蓝四色招牌重心正压铰链, 两片橙色雨棚平挑护住入口 (单片力矩 15 <= 20 且整边互吸共担); 西侧果蔬摊双墙架长板柜台 (双端受力+山墙顶三路保险) 绿棚迎客, 门口购物车排队、东沿回收栏收边, 楼顶黄旗高扬 —— 开门营业, 今日特价!",
+  "difficulty": 3,
+  "total_pieces": 67,
+  "tags": [
+    "城市",
+    "超市",
+    "商业街",
+    "负空间",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 45,
+        "rectangle": 13,
+        "equilateral_triangle": 5,
+        "window_square": 3,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g3_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_d1",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g0_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_d2",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g0_c",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ww1_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ww1_3",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ew1_2",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ew1_3",
+      "type": "square",
+      "position": [
+        6.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "nw1_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "nw1_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "nw1_c",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fw1_1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fw1_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fw1_5",
+      "type": "window_square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ww2_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ww2_3",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ew2_2",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ew2_3",
+      "type": "square",
+      "position": [
+        6.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "nw2_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "nw2_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "nw2_c",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fw2_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "f_lintel",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fw2_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fw2_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rf_1",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rf_2",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rf_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rf_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rf_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sign_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sign_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sign_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sign_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "cp_w",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cp_e",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flag",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        4.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "st_s",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "st_n",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "st_top",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        3.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "st_awn",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "cart_1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cart_2",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_1",
+      "type": "equilateral_triangle",
+      "position": [
+        7.0,
+        2.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_2",
+      "type": "equilateral_triangle",
+      "position": [
+        7.0,
+        3.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺卖场后排: 7 片灰色方板沿 y=3 排开。",
+      "tip": "卖场的北墙与山墙都会踩在这一排格线上。",
+      "tiles_to_add": [
+        "g3_0",
+        "g3_1",
+        "g3_2",
+        "g3_3",
+        "g3_4",
+        "g3_5",
+        "g3_6"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺卖场前排: 再铺 7 片, 大盒子卖场的地基完成。",
+      "tip": "前排与后排整边互吸 —— 南脸大门就开在这排格线上。",
+      "tiles_to_add": [
+        "g2_0",
+        "g2_1",
+        "g2_2",
+        "g2_3",
+        "g2_4",
+        "g2_5",
+        "g2_6"
+      ],
+      "highlight_tiles": [
+        "g3_0",
+        "g3_6"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺门前步行道: 7 片方板一字排开。",
+      "tip": "步行道留给行人和购物车 —— 车辆止步。",
+      "tiles_to_add": [
+        "g1_0",
+        "g1_1",
+        "g1_2",
+        "g1_3",
+        "g1_4",
+        "g1_5",
+        "g1_6"
+      ],
+      "highlight_tiles": [
+        "g2_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺停车位: 2 片灰色长板车位, 青色方板是分隔线。",
+      "tip": "停车位在最外侧 —— 逛超市先找车位。",
+      "tiles_to_add": [
+        "g0_a",
+        "g0_d1",
+        "g0_b",
+        "g0_d2",
+        "g0_c"
+      ],
+      "highlight_tiles": [
+        "g1_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立一层山墙: 东西两端各 2 片灰色方墙。",
+      "tip": "山墙底边整边吸地坪格线 —— 大盒子从两端立起。",
+      "tiles_to_add": [
+        "ww1_2",
+        "ww1_3",
+        "ew1_2",
+        "ew1_3"
+      ],
+      "highlight_tiles": [
+        "g2_1",
+        "g2_5"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "砌一层北墙: 2 片长板横砌加 1 片方板, 竖边吸进山墙拐角。",
+      "tip": "长板横砌拼缝更少 —— 竖边在拐角与山墙互吸传力。",
+      "tiles_to_add": [
+        "nw1_a",
+        "nw1_b",
+        "nw1_c"
+      ],
+      "highlight_tiles": [
+        "ww1_3",
+        "ew1_3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "装一层橱窗: 大门两侧 3 片透明橱窗落位, 中间留 2 格大门洞。",
+      "tip": "负空间大门 —— 超市的门永远为顾客敞开。",
+      "tiles_to_add": [
+        "fw1_1",
+        "fw1_4",
+        "fw1_5"
+      ],
+      "highlight_tiles": [
+        "ww1_2",
+        "ew1_2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立二层山墙: 沿一层山墙顶再起 4 片。",
+      "tip": "上环整边压下环 —— 圈层砌法越按越紧。",
+      "tiles_to_add": [
+        "ww2_2",
+        "ww2_3",
+        "ew2_2",
+        "ew2_3"
+      ],
+      "highlight_tiles": [
+        "ww1_2",
+        "ew1_2"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "砌二层北墙: 长板整边压一层北墙顶, 拐角竖边互吸。",
+      "tip": "长板压长板, 整条边受力 —— 北墙是卖场的脊梁。",
+      "tiles_to_add": [
+        "nw2_a",
+        "nw2_b",
+        "nw2_c"
+      ],
+      "highlight_tiles": [
+        "nw1_a",
+        "ww2_3"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "装门楣合龙二层: 橙色门楣横跨大门洞, 两端竖边吸邻墙。",
+      "tip": "先装西侧方板, 门楣两端竖边传力 —— 剪断一端力走另一端。",
+      "tiles_to_add": [
+        "fw2_1",
+        "f_lintel",
+        "fw2_4",
+        "fw2_5"
+      ],
+      "highlight_tiles": [
+        "fw1_1",
+        "fw1_4"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "盖屋顶: 5 片长板纵向铺过卖场, 南北两端同时压墙顶。",
+      "tip": "每片双端受力零悬挑 —— 屋顶把墙圈锁成整体箱体。",
+      "tiles_to_add": [
+        "rf_1",
+        "rf_2",
+        "rf_3",
+        "rf_4",
+        "rf_5"
+      ],
+      "highlight_tiles": [
+        "nw2_a",
+        "f_lintel"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "立门头招牌: 红黄绿蓝四色方板沿屋顶南沿一字排开。",
+      "tip": "底边同吸屋顶板边与墙顶双铰链 —— 四色招牌就是超市的脸。",
+      "tiles_to_add": [
+        "sign_1",
+        "sign_2",
+        "sign_3",
+        "sign_4"
+      ],
+      "highlight_tiles": [
+        "rf_1",
+        "rf_4"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "挑入口雨棚并升旗: 2 片橙色方板从门楣顶平挑, 北沿黄旗升起。",
+      "tip": "每片力矩 15 <= 预算 20, 两片再整边互吸共担 —— 风雨不进门。",
+      "tiles_to_add": [
+        "cp_w",
+        "cp_e",
+        "flag"
+      ],
+      "highlight_tiles": [
+        "f_lintel",
+        "sign_2"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "搭果蔬摊: 西侧双墙架起长板柜台, 双端受力零悬挑。",
+      "tip": "柜台东边还整条贴着卖场山墙顶 —— 三路支撑互为保险。",
+      "tiles_to_add": [
+        "st_s",
+        "st_n",
+        "st_top"
+      ],
+      "highlight_tiles": [
+        "ww1_2"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "撑摊位绿棚: 柜台南沿立起绿色三角遮阳棚。",
+      "tip": "新鲜蔬果最怕晒 —— 绿棚底边整边吸柜台沿口。",
+      "tiles_to_add": [
+        "st_awn"
+      ],
+      "highlight_tiles": [
+        "st_top"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "摆购物车与回收栏: 门口两辆购物车排队, 东沿栏杆收边。",
+      "tip": "购物车用完请归位 —— 阳光超市, 开门营业!",
+      "tiles_to_add": [
+        "cart_1",
+        "cart_2",
+        "rail_1",
+        "rail_2"
+      ],
+      "highlight_tiles": [
+        "g1_5",
+        "g2_6"
+      ]
+    }
+  ]
+}
