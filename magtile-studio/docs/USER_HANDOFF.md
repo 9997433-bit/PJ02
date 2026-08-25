@@ -8,11 +8,12 @@
 > [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md), 本单不另立口径,
 > 只做「工程 vs 你」的分工切面。
 >
-> **状态快照**: 2026-08-25 19:30 UTC 文档同步 —— 内容库扩容至
+> **状态快照**: 2026-08-25 19:35 UTC 文档同步 —— 内容库扩容至
 > **234 模型** (`3d24d74` 基线, 内容批 A~E 合计 209→234); L2 风险报告
-> 与结构族包已刷新至 234 基线 (`50a3f4c`), strict 巡检 / 发布门禁 /
-> 全量就绪三报告随并行刷新批复跑。自动探测最近一次 `--quick` 实跑为
-> 17:20 UTC (209 模型时点)。
+> 与结构族包 (`50a3f4c`) 及发布门禁报告 (QA + L2 全绿仅 L3 红) 已刷新
+> 至 234 基线; strict 巡检 (`3767088`, 233 通过 + 1 白名单豁免) 与
+> 全量就绪 (`34aebfd`, 16 PASS / 2 FAIL 仅 R6/R7 / 6 SKIP) 234 基线
+> 复跑已完成、合入在途。
 > 工作区多代理并行推进, 状态以 `tools/check_v1_readiness.sh` 实跑与
 > 清单最新快照为准; 本单引用的 commit 均已推送 origin (并行工作区
 > 偶有变基, 哈希漂移时按提交信息检索)。
@@ -23,8 +24,8 @@
 > 实搭量大幅缩减 (§4.3); **L2 批次 10 槽 + 接力批 4 模型加固均已交付** (§2)。
 
 **快照时自动探测实跑** (`tools/check_v1_readiness.sh --quick`,
-17:20 UTC / 209 模型时点; 扩容至 234 后 R1/R2 口径已按仓库快照核对 ——
-JSON / 目录登记 / 缩略图 234 三方一致, 全量复跑随刷新批):
+17:20 UTC / 209 模型时点; 234 基线**全量档**复跑已完成 `34aebfd`
+合入在途 —— 16 PASS / 2 FAIL 仅 R6/R7 / 6 SKIP, 结论不变):
 
 ```
 合计 24 项: 13 PASS / 2 FAIL / 9 SKIP (其中 P0 失败 2 项)
@@ -48,7 +49,7 @@ M1~M6 六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)�
 | 项 | 状态 | 交付物 | commit / 依据 |
 | --- | --- | --- | --- |
 | C1 模型库体量 | ✅ | **234 个模型 JSON** (探测门槛 200, 处于 200~250 目标区间) | 最近登记批 `3d24d74` (229→234; 内容批 A~E 合计 209→234); R1 实跑 PASS |
-| C2 全库质量门禁 | ✅ | 全库 234 模型 strict 双档零未豁免警告 (并入批全库 QA 36 关卡全绿: test_all_models 234/234 + 唯一性 27261 对 0 警告; 唯一豁免 `suspension_bridge_01` 已文档化) | 并入批 `3d24d74`; 巡检深报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) + 最新全库实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) (`5b915a0`/209 基线, 234 刷新批复跑中); R5 实跑 |
+| C2 全库质量门禁 | ✅ | 全库 234 模型 strict 双档零未豁免警告 (并入批全库 QA 36 关卡全绿: test_all_models 234/234 + 唯一性 27261 对 0 警告; 唯一豁免 `suspension_bridge_01` 已文档化) | 并入批 `3d24d74`; 巡检深报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) (234 复跑合入在途 `3767088`) + 最新全库实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) (**已刷新至 234 基线**); R5 实跑 |
 | C3 目录 + 缩略图 | ✅ | JSON / 目录登记 / 缩略图 234 三方对账一致 | `3d24d74`; R2 实跑 PASS |
 | C4 免费层 30 对齐 | ✅ | 标签 = starter 清单, 全 core-9, 三条断言常绿 | [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md); R3 实跑 PASS |
 | C5 主题/难度终审 | 🔶 | 分布数据可一键输出 (`magtile_app library`), 人工终审留待上架前 | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2 |
