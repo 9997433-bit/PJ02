@@ -49,7 +49,7 @@ MagTile Studio\
 
 | 取值 | 内容 |
 | --- | --- |
-| `full` (默认) | 完整模型库 (当前 209 模型 + 全部缩略图, 约 12 MiB) |
+| `full` (默认) | 完整模型库 (当前 250 模型 + 全部缩略图, 约 14 MiB) |
 | `starter` | 免费层 30 模型 (与模型 `免费` 标签集合一致, 全 core-9; 对齐决议见 `docs/FREE_TIER_MANIFEST.md`), 清单 `platforms/windows/packaging/starter_models.txt` |
 | 清单文件路径 | 自定义子集 (每行一个模型 id, 支持 `#` 注释) |
 
