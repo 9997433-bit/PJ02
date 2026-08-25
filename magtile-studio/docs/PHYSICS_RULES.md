@@ -206,7 +206,7 @@ magtile_app validate <model.json> --jitter [N] [--profile strict]
 
 报告: 汇总为一条 `placement_jitter_failure` Error, 内含失败轮数/总轮数、涉及的底层错误码集合、首个失败样本的完整消息 (自带"最终成品/第 N 步"上下文) 与涉事片 id。执行顺序: 常规 R1~R8 未通过时跳过抖动仿真 (对静态已不成立的模型做抖动没有意义, CLI 打印提示)。
 
-回归载体 (`TESTING.md` 3.18 节): `tests/test_physics_jitter/` 下的"静态全绿但抖动必挂"边缘夹具 (执行器先断言普通 validate 放行、再断言 `--jitter` 以 `placement_jitter_failure` 拒绝, 配同构造加固后的抖动正例防矫枉过正) + 物理正例对照组抖动全绿 + 旗舰模型 `validate_jitter_*` 用例; 负例套件另有 `jitter=<N>` sidecar 通道 (`tests/test_physics_negative/jitter_sensitive`, 见 `TESTING.md` 3.7/3.18 节)。首次全库巡检 (2026-08-25, `--jitter 50`): 209 个模型 208 个全绿, 1 个 (`lego_style_house_01`) 在 7/50 轮出现 `enclosed_placement` —— 第 14 步补片的手部通道对毫米级误差没有裕量, 属于真实的边缘设计发现 (非误报), 待内容侧加固或调整放置顺序后按本节复验。
+回归载体 (`TESTING.md` 3.18 节): `tests/test_physics_jitter/` 下的"静态全绿但抖动必挂"边缘夹具 (执行器先断言普通 validate 放行、再断言 `--jitter` 以 `placement_jitter_failure` 拒绝, 配同构造加固后的抖动正例防矫枉过正) + 物理正例对照组抖动全绿 + 旗舰模型 `validate_jitter_*` 用例; 负例套件另有 `jitter=<N>` sidecar 通道 (`tests/test_physics_negative/jitter_sensitive`, 见 `TESTING.md` 3.7/3.18 节)。首次全库巡检 (2026-08-25, `--jitter 50`): 209 个模型 208 个全绿, 1 个 (`lego_style_house_01`) 在 7/50 轮出现 `enclosed_placement` —— 第 14 步补片的手部通道对毫米级误差没有裕量, 属于真实的边缘设计发现 (非误报), 待内容侧加固或调整放置顺序后按本节复验。strict 档 D4+ 首巡 (`tools/run_strict_audit.sh --jitter-only`, `--profile strict --jitter 50`): 45 个模型 42 个全绿, 3 个在 3~4/50 轮出现 `cantilever_overload` (`ball_run_tower_01` / `marble_run_spiral_01` / `rainforest_canopy_01`, 外挑力矩 35.1~35.3 贴着 strict 预算 35.0 的边) —— 名义几何恰好压线用满弱磁档抗弯预算, 零裕量外挑同样待内容侧加固后复验 (第 5 节宁严勿松: 修模型不放宽预算)。
 
 ## 4. 报告格式
 

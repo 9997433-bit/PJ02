@@ -412,7 +412,7 @@ tools/run_release_gate.sh --full --l2                  # 发布门禁 L2 抗扰�
 | `physics_jitter_positive_*` | `tests/test_physics_positive/` 全部正例的抖动档 | 预算内的合法结构在抖动下也必须全绿, 且输出含 "N/N 轮全部通过" 统计行 (防关卡静默变空) |
 | `validate_jitter_*` | 旗舰模型 (castle_foundation_01 / eiffel_tower_01 / tokyo_tower_01, 与 `validate_strict_*` 同一批清单) | 核心内容对儿童的毫米级放置误差必须有足够裕量 |
 
-夹具按 `CONFIGURE_DEPENDS` 目录 glob 自动注册: 新增抖动负例 = JSON + `.expected` sidecar (声明 `expected_fail_rule` 与 `severity=error`), 新增抖动正例 = 只放 JSON。并行通道: `tests/test_physics_negative/` 的负例执行器支持 sidecar 声明 `jitter=<N>`, 声明后该负例改以 `validate --jitter N` 运行并进入负例注册表 (如 `jitter_sensitive`); 与 3.7 节负例通道的差异在于本节专用执行器额外断言"名义模型普通 validate 放行"这一前提 (锁定 R9 的**增量**检出能力), 负例通道只断言最终拒绝。抖动仿真固定随机种子逐轮可复现; 全库巡检口径 (2026-08-25, `--jitter 50`): 209 模型 208 全绿, 1 个真实边缘设计被抓出 (`lego_style_house_01`, 7/50 轮 `enclosed_placement`), 处置记录见 PHYSICS_RULES.md R9 节。
+夹具按 `CONFIGURE_DEPENDS` 目录 glob 自动注册: 新增抖动负例 = JSON + `.expected` sidecar (声明 `expected_fail_rule` 与 `severity=error`), 新增抖动正例 = 只放 JSON。并行通道: `tests/test_physics_negative/` 的负例执行器支持 sidecar 声明 `jitter=<N>`, 声明后该负例改以 `validate --jitter N` 运行并进入负例注册表 (如 `jitter_sensitive`); 与 3.7 节负例通道的差异在于本节专用执行器额外断言"名义模型普通 validate 放行"这一前提 (锁定 R9 的**增量**检出能力), 负例通道只断言最终拒绝。抖动仿真固定随机种子逐轮可复现; 全库巡检口径 (2026-08-25, `--jitter 50`): 默认档 209 模型 208 全绿, 1 个真实边缘设计被抓出 (`lego_style_house_01`, 7/50 轮 `enclosed_placement`); strict 档 D4+ 巡检 (3.17 节门禁挂钩, 实装后首跑) 45 模型 42 全绿, 3 个零裕量外挑被抓出 (`ball_run_tower_01` / `marble_run_spiral_01` / `rainforest_canopy_01`, 3~4/50 轮 `cantilever_overload` 贴 strict 预算边), 处置记录见 PHYSICS_RULES.md R9 节。
 
 ```bash
 ctest --test-dir build -R "physics_jitter|validate_jitter" --output-on-failure
