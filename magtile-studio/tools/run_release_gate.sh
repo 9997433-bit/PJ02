@@ -18,10 +18,15 @@
 # 用法:
 #   tools/run_release_gate.sh [build_dir] [选项]
 #     build_dir          构建目录 (默认 build)
-#     --full             发布档: 改为完整跑 16 关全量 QA 并开启
-#                        全部可选关卡 (= MAGTILE_FREE_TIER_CHECK=1
+#     --full             发布档: 改为完整跑 19 关全量 QA 并开启
+#                        发布专项可选关卡 (= MAGTILE_FREE_TIER_CHECK=1
 #                        MAGTILE_STRICT_AUDIT=1 tests/run_full_qa.sh),
 #                        CI 手动流水线 release-gate.yml 默认即此档
+#     --l2               (需与 --full 连用) 追加可选 L2 抗扰动档:
+#                        run_strict_audit.sh --jitter-only --jitter require,
+#                        要求 D4+ 模型 validate --profile strict --jitter 50
+#                        实跑全绿; CLI 未实装 --jitter 前该关卡按失败处理
+#                        (L2 档不允许占位判绿, 说明见 docs/TESTING.md 3.17)
 #     --fail-on-pending  L3 待复核清单非空按失败处理 (正式出包终防线)
 #     --report FILE      strict 巡检附带 Markdown 报告 (透传
 #                        run_strict_audit.sh --report; 不支持与 --full 同用)
@@ -35,15 +40,17 @@ set -u
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD_DIR=""
 FULL=0
+L2=0
 FAIL_ON_PENDING=0
 REPORT_FILE=""
 DRY_RUN=0
 
-usage() { sed -n '2,32p' "$0"; }
+usage() { sed -n '2,37p' "$0"; }
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
         --full)            FULL=1; shift ;;
+        --l2)              L2=1; shift ;;
         --fail-on-pending) FAIL_ON_PENDING=1; shift ;;
         --report)
             [ "$#" -ge 2 ] || { echo "错误: --report 需要文件参数" >&2; exit 2; }
@@ -70,6 +77,11 @@ esac
 if [ "$FULL" -eq 1 ] && [ -n "$REPORT_FILE" ]; then
     echo "错误: --report 只在默认档可用 (--full 档 strict 巡检嵌在全量 QA 内," >&2
     echo "      如需报告请单独执行 tools/run_strict_audit.sh --report FILE)" >&2
+    exit 2
+fi
+if [ "$L2" -eq 1 ] && [ "$FULL" -eq 0 ]; then
+    echo "错误: --l2 是 --full 发布档的可选加档, 需与 --full 连用" >&2
+    echo "      (单独跑 L2 抗扰动巡检可用 tools/run_strict_audit.sh --jitter-only --jitter require)" >&2
     exit 2
 fi
 
@@ -130,6 +142,12 @@ run_gate() {
     return "$status"
 }
 
+TIER_DESC="默认 (三道发布专项)"
+if [ "$FULL" -eq 1 ]; then
+    TIER_DESC="--full (19 关全量 QA + 发布专项)"
+    [ "$L2" -eq 1 ] && TIER_DESC="--full --l2 (19 关全量 QA + 发布专项 + L2 抗扰动档)"
+fi
+
 if [ "$DRY_RUN" -eq 1 ]; then
     echo "${BOLD}发布门禁 dry-run (只列关卡, 不执行):${RESET}"
 else
@@ -137,7 +155,7 @@ else
     echo " MagTile Studio 发布门禁 (Release Gate)"
     echo " 项目根: $ROOT"
     echo " 构建目录: $BUILD_DIR"
-    echo " 档位: $([ "$FULL" -eq 1 ] && echo '--full (16 关全量 QA + 发布专项)' || echo '默认 (三道发布专项)')"
+    echo " 档位: $TIER_DESC"
     echo "==============================================================${RESET}"
 fi
 
@@ -155,6 +173,15 @@ if [ "$FULL" -eq 1 ]; then
     run_gate "全量 QA (含免费层对齐 + strict 巡检)" \
         env MAGTILE_FREE_TIER_CHECK=1 MAGTILE_STRICT_AUDIT=1 \
         bash "$ROOT/tests/run_full_qa.sh" "$BUILD_DIR"
+    if [ "$L2" -eq 1 ]; then
+        # 可选 L2 抗扰动档: D4+ 模型 validate --profile strict --jitter 50
+        # 必须实跑全绿 (require 档: CLI 未实装 --jitter 即失败, 占位不判绿;
+        # 挂钩与启用条件见 docs/TESTING.md 3.17)。全量 QA 内的 strict 巡检
+        # (关卡 15) 走 auto 档, 未实装时只占位 —— L2 判绿在此单独加闸。
+        run_gate "L2 抗扰动档 (D4+ jitter 全绿)" \
+            bash "$ROOT/tools/run_strict_audit.sh" "$BUILD_DIR" \
+            --jitter-only --jitter require
+    fi
     if [ "$FAIL_ON_PENDING" -eq 1 ]; then
         # 全量 QA 内的关卡 16 是报告型, 终防线在这里单独加闸
         run_gate "$pending_name" \

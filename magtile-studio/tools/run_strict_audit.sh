@@ -8,24 +8,41 @@
 #      (复用 tools/audit_strict_physics.sh: 零警告政策 + 白名单豁免);
 #   2. 全库逐步装配质检 (tests/test_step_assembly.py: 逐片连通/
 #      引用对账/步骤粒度);
-#   3. (可选) --report FILE 生成 Markdown 巡检报告: 通过/豁免/失败
+#   3. D4+ 抗扰动巡检 (jitter): difficulty >= 4 模型逐个
+#      magtile_app validate --profile strict --jitter 50
+#      (验证金字塔 L2 层蒙特卡洛容差抖动的门禁挂钩, 见
+#      docs/TESTING.md 3.17)。CLI 尚未实装 --jitter (并行 L2 任务落地中):
+#      实装并按惯例登记进 --help 用法文本后, 本阶段自动由占位
+#      切换为实跑;
+#   4. (可选) --report FILE 生成 Markdown 巡检报告: 通过/豁免/失败
 #      计数、按规则 R1~R8 分类的问题统计、D4+ 实物复核清单。
 #
 # 用法:
 #   tools/run_strict_audit.sh [build_dir] [--report FILE]
+#                             [--jitter MODE] [--jitter-only]
 #     build_dir      构建目录 (默认 build)
 #     --report FILE  同时生成 Markdown 报告 (如
 #                    docs/reports/STRICT_AUDIT_$(date +%F).md)
+#     --jitter MODE  阶段 3 模式: auto (默认: CLI 未实装 --jitter 时
+#                    打印占位说明不阻断, 实装后实跑且失败阻断) /
+#                    require (未实装也按失败, 发布门禁 --l2 档专用) /
+#                    off (跳过阶段 3)
+#     --jitter-only  只执行阶段 3 (供 tests/run_full_qa.sh 关卡 19 与
+#                    tools/run_release_gate.sh --l2 复用; 不与 --report 同用)
+# 环境变量:
+#   MAGTILE_JITTER_SAMPLES  --jitter 的扰动采样次数 (默认 50)
 #
 # CI 接入: tests/run_full_qa.sh 的可选关卡 (MAGTILE_STRICT_AUDIT=1
 # 时执行), 也可单独在流水线中调用。
-# 退出码: 0 = 两阶段全部通过; 1 = 任一阶段失败; 2 = 环境不满足
+# 退出码: 0 = 全部阶段通过; 1 = 任一阶段失败; 2 = 环境不满足
 # =============================================================
 set -u
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD_DIR="$ROOT/build"
 REPORT_FILE=""
+JITTER_MODE="auto"
+JITTER_ONLY=0
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
@@ -34,12 +51,33 @@ while [ "$#" -gt 0 ]; do
             REPORT_FILE="$2"; shift 2 ;;
         --report=*)
             REPORT_FILE="${1#--report=}"; shift ;;
+        --jitter)
+            [ "$#" -ge 2 ] || { echo "错误: --jitter 需要模式参数 (auto/require/off)" >&2; exit 2; }
+            JITTER_MODE="$2"; shift 2 ;;
+        --jitter=*)
+            JITTER_MODE="${1#--jitter=}"; shift ;;
+        --jitter-only)
+            JITTER_ONLY=1; shift ;;
         -h|--help)
-            sed -n '2,24p' "$0"; exit 0 ;;
+            sed -n '2,38p' "$0"; exit 0 ;;
         *)
             BUILD_DIR="$1"; shift ;;
     esac
 done
+case "$JITTER_MODE" in
+    auto|require|off) ;;
+    *)
+        echo "错误: --jitter 模式必须是 auto / require / off (收到: $JITTER_MODE)" >&2
+        exit 2 ;;
+esac
+if [ "$JITTER_ONLY" -eq 1 ] && [ -n "$REPORT_FILE" ]; then
+    echo "错误: --jitter-only 不支持与 --report 同用 (报告依赖阶段 1/2 日志)" >&2
+    exit 2
+fi
+if [ "$JITTER_ONLY" -eq 1 ] && [ "$JITTER_MODE" = "off" ]; then
+    echo "错误: --jitter-only 与 --jitter off 互斥 (没有可执行的阶段)" >&2
+    exit 2
+fi
 case "$BUILD_DIR" in
     /*) ;;
     *) BUILD_DIR="$ROOT/$BUILD_DIR" ;;
@@ -70,27 +108,129 @@ fi
 LOG_DIR="$(mktemp -d /tmp/magtile_strict_audit_XXXXXX)"
 AUDIT_LOG="$LOG_DIR/strict_audit.log"
 STEP_LOG="$LOG_DIR/step_assembly.log"
+JITTER_LOG="$LOG_DIR/jitter_audit.log"
+JITTER_SAMPLES="${MAGTILE_JITTER_SAMPLES:-50}"
+JITTER_SUMMARY="未启用"
+
+# ---- 阶段 3: D4+ 抗扰动巡检 (jitter) ------------------------------
+# 验证金字塔 L2 层 (docs/BUILD_VERIFICATION.md 第 1 节, 蒙特卡洛容差
+# 抖动) 的门禁挂钩: difficulty >= 4 模型逐个
+#   validate --profile strict --jitter $JITTER_SAMPLES
+# 挂钩契约: CLI (并行 L2 任务) 实装 --jitter 时必须按现有旗标惯例登记进
+# printUsage 用法文本 (src/app/main.cpp), 本阶段据此探测并自动由占位
+# 切换为实跑; 在此之前 auto 档打印占位说明不阻断, require 档 (发布
+# 门禁 --l2) 按失败处理 —— L2 档不允许占位判绿。启用后先按退出码
+# 判定 (非零即失败); 零警告政策/豁免白名单是否套用 jitter 输出,
+# 待 CLI 落地时按其输出格式对齐 (docs/TESTING.md 3.17)。
+run_jitter_stage() {
+    local label="3/3"
+    [ "$JITTER_ONLY" -eq 1 ] && label="3/3 (单独执行)"
+    echo ""
+    echo ">> 阶段 $label: D4+ 抗扰动巡检 (validate --profile strict --jitter $JITTER_SAMPLES)"
+    if [ "$JITTER_MODE" = "off" ]; then
+        echo "   [跳过] --jitter off: 本次不执行抗扰动巡检"
+        JITTER_SUMMARY="关闭 (--jitter off)"
+        return 0
+    fi
+    if ! "$APP" --help 2>/dev/null | grep -q -- '--jitter'; then
+        if [ "$JITTER_MODE" = "require" ]; then
+            echo "   [失败] magtile_app 尚未实装 validate --jitter (--help 用法文本未登记该旗标)。"
+            echo "          require 档 (发布门禁 --l2) 要求 D4+ jitter 实跑全绿, 占位不判绿;"
+            echo "          CLI (并行 L2 任务) 实装落地后本阶段自动启用, 说明见 docs/TESTING.md 3.17。"
+            JITTER_SUMMARY="未实装 (require 档按失败)"
+            return 1
+        fi
+        echo "   [占位] magtile_app 尚未实装 validate --jitter, 本阶段暂为占位, 不阻断。"
+        echo "          挂钩契约: CLI 实装并把 --jitter 登记进 --help 用法文本后自动启用实跑;"
+        echo "          届时 D4+ 模型逐个 --profile strict --jitter $JITTER_SAMPLES, 退出码非零即失败。"
+        echo "          (占位与启用条件见 docs/TESTING.md 3.17)"
+        JITTER_SUMMARY="占位 (CLI 未实装 --jitter, 不阻断)"
+        return 0
+    fi
+
+    local models total=0 failed=0 model id one_log
+    models="$("$PYTHON" - "$DATA_DIR/models" <<'PYEOF'
+import glob
+import json
+import os
+import sys
+
+for path in sorted(glob.glob(os.path.join(sys.argv[1], "*.json"))):
+    with open(path, encoding="utf-8") as f:
+        model = json.load(f)
+    if model.get("difficulty", 0) >= 4:
+        print(path)
+PYEOF
+)"
+    if [ -z "$models" ]; then
+        echo "   [跳过] $DATA_DIR/models 下没有 difficulty >= 4 的模型"
+        JITTER_SUMMARY="无 D4+ 模型"
+        return 0
+    fi
+    one_log="$LOG_DIR/jitter_model.log"
+    while IFS= read -r model; do
+        [ -n "$model" ] || continue
+        total=$((total + 1))
+        id="$(basename "$model" .json)"
+        if "$APP" validate "$model" --data-dir "$DATA_DIR" \
+                --profile strict --jitter "$JITTER_SAMPLES" >"$one_log" 2>&1; then
+            echo "   [通过] $id"
+        else
+            failed=$((failed + 1))
+            echo "   [失败] $id (validate --jitter 退出码非零)"
+            sed 's/^/          /' "$one_log"
+        fi
+        cat "$one_log" >> "$JITTER_LOG"
+    done <<< "$models"
+    echo "   小计: D4+ 共 $total 个模型, 通过 $((total - failed)), 失败 $failed"
+    if [ "$failed" -gt 0 ]; then
+        JITTER_SUMMARY="未通过 ($failed/$total 个 D4+ 模型失败)"
+        return 1
+    fi
+    JITTER_SUMMARY="全绿 ($total 个 D4+ 模型 x $JITTER_SAMPLES 次采样)"
+    return 0
+}
+
+# ---- --jitter-only: 只跑阶段 3 (run_full_qa 关卡 19 / 发布门禁 --l2) ----
+if [ "$JITTER_ONLY" -eq 1 ]; then
+    run_jitter_stage
+    jitter_status=$?
+    echo ""
+    echo "=============================================================="
+    echo " D4+ 抗扰动巡检结论: $JITTER_SUMMARY"
+    if [ "$jitter_status" -eq 0 ]; then
+        rm -rf "$LOG_DIR"
+        exit 0
+    fi
+    echo " 分项日志: $LOG_DIR"
+    exit 1
+fi
 
 # ---- 1. strict 零警告审计 ----------------------------------------
 echo ""
-echo ">> 阶段 1/2: 全库 validate --profile strict (零警告政策)"
+echo ">> 阶段 1/3: 全库 validate --profile strict (零警告政策)"
 NO_COLOR=1 bash "$ROOT/tools/audit_strict_physics.sh" "$BUILD_DIR" 2>&1 | tee "$AUDIT_LOG"
 audit_status=${PIPESTATUS[0]}
 
 # ---- 2. 逐步装配质检 ---------------------------------------------
 echo ""
-echo ">> 阶段 2/2: 全库逐步装配质检 (test_step_assembly.py)"
+echo ">> 阶段 2/3: 全库逐步装配质检 (test_step_assembly.py)"
 "$PYTHON" "$ROOT/tests/test_step_assembly.py" "$DATA_DIR/models" \
     --catalog "$DATA_DIR/tile_catalog.json" 2>&1 | tee "$STEP_LOG"
 step_status=${PIPESTATUS[0]}
 
-# ---- 3. Markdown 报告 (可选) -------------------------------------
+# ---- 3. D4+ 抗扰动巡检 (jitter, 实现见上方 run_jitter_stage) ------
+run_jitter_stage
+jitter_status=$?
+
+# ---- 4. Markdown 报告 (可选) -------------------------------------
 if [ -n "$REPORT_FILE" ]; then
     echo ""
     echo ">> 生成巡检报告: $REPORT_FILE"
     mkdir -p "$(dirname "$REPORT_FILE")"
     MAGTILE_ROOT="$ROOT" AUDIT_LOG="$AUDIT_LOG" STEP_LOG="$STEP_LOG" \
     AUDIT_STATUS="$audit_status" STEP_STATUS="$step_status" \
+    JITTER_STATUS="$jitter_status" JITTER_SUMMARY="$JITTER_SUMMARY" \
     REPORT_FILE="$REPORT_FILE" "$PYTHON" - <<'PYEOF'
 import datetime
 import glob
@@ -103,6 +243,8 @@ audit_log = open(os.environ["AUDIT_LOG"], encoding="utf-8").read().splitlines()
 step_log = open(os.environ["STEP_LOG"], encoding="utf-8").read().splitlines()
 audit_ok = os.environ["AUDIT_STATUS"] == "0"
 step_ok = os.environ["STEP_STATUS"] == "0"
+jitter_ok = os.environ.get("JITTER_STATUS", "0") == "0"
+jitter_summary = os.environ.get("JITTER_SUMMARY", "未启用")
 
 # ---- 解析 strict 审计日志 (tools/audit_strict_physics.sh 输出) ----
 RULE_OF_CODE = {
@@ -182,7 +324,8 @@ out.append("")
 out.append(f"- 生成时间: {now}")
 out.append("- 生成工具: `tools/run_strict_audit.sh` "
            "(`magtile_app validate --profile strict` 零警告审计 + "
-           "`tests/test_step_assembly.py` 逐步装配质检)")
+           "`tests/test_step_assembly.py` 逐步装配质检 + "
+           "D4+ 抗扰动巡检 jitter 挂钩, 见 `docs/TESTING.md` 3.17)")
 out.append("- 校验档位: `strict_consumer` (悬挂额定 120g/单位边长, "
            "抗碰撞安全系数 0.7 → 有效悬挂预算 84g/边长, 有效抗弯预算 "
            "17.5 g·单位; 参数依据见 `docs/PHYSICS_RULES.md` 1.4 节)")
@@ -199,7 +342,8 @@ out.append(f"| 白名单豁免 (警告经书面论证) | {n_waived} |")
 out.append(f"| 未豁免警告 (拦截) | {n_warned} |")
 out.append(f"| 失败 (Error 级) | {n_failed} |")
 out.append(f"| 逐步装配质检 | {step_pass} 通过 / {step_fail} 失败 |")
-overall = "全绿" if (audit_ok and step_ok) else "未达标"
+out.append(f"| D4+ 抗扰动巡检 (jitter, L2 挂钩) | {jitter_summary} |")
+overall = "全绿" if (audit_ok and step_ok and jitter_ok) else "未达标"
 out.append(f"| 巡检结论 | **{overall}** |")
 out.append("")
 out.append("## 2. 按规则分类 (R1~R8)")
@@ -270,12 +414,14 @@ fi
 # ---- 汇总 --------------------------------------------------------
 echo ""
 echo "=============================================================="
-if [ "$audit_status" -eq 0 ] && [ "$step_status" -eq 0 ]; then
-    echo " strict 巡检结论: 全绿 (strict 零警告审计 + 逐步装配质检均通过)"
+if [ "$audit_status" -eq 0 ] && [ "$step_status" -eq 0 ] && [ "$jitter_status" -eq 0 ]; then
+    echo " strict 巡检结论: 全绿 (strict 零警告审计 + 逐步装配质检均通过;"
+    echo "                  D4+ 抗扰动巡检: $JITTER_SUMMARY)"
     rm -rf "$LOG_DIR"
     exit 0
 fi
 [ "$audit_status" -ne 0 ] && echo " strict 巡检结论: strict 零警告审计未通过 (退出码 $audit_status)"
 [ "$step_status" -ne 0 ] && echo " strict 巡检结论: 逐步装配质检未通过 (退出码 $step_status)"
+[ "$jitter_status" -ne 0 ] && echo " strict 巡检结论: D4+ 抗扰动巡检未通过 ($JITTER_SUMMARY)"
 echo " 分项日志: $LOG_DIR"
 exit 1

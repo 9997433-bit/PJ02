@@ -36,6 +36,10 @@
 #   18. 儿童友好文案守卫       (用户可见中文文案红线: 恐吓词/催促话术,
 #       tools/check_child_friendly_copy.py —— Qt QML / Android strings.xml /
 #       Kotlin / 展示层 C++ / 模型步骤文案, UI_UX_SPEC §4.3 §4.5 P3, 秒级)
+#   19. L2 抗扰动巡检          (可选: MAGTILE_L2_JITTER=1 时执行,
+#       tools/run_strict_audit.sh --jitter-only —— D4+ 模型逐个
+#       validate --profile strict --jitter 50, 验证金字塔 L2 层门禁挂钩;
+#       CLI 未实装 --jitter 前为占位通过, 实装后自动实跑, TESTING.md 3.17)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -44,6 +48,7 @@
 #   MAGTILE_FREE_TIER_CHECK=1  启用可选关卡 10 (免费层清单对齐核验)
 #   MAGTILE_STRICT_AUDIT=1  启用可选关卡 15 (弱磁严格档全库巡检)
 #   MAGTILE_TUTORIAL_BENCH=1  启用可选关卡 17 (教程步进性能基准)
+#   MAGTILE_L2_JITTER=1  启用可选关卡 19 (L2 抗扰动巡检, D4+ jitter)
 #   FORCE_COLOR=1        非终端环境 (CI) 强制彩色输出
 #   NO_COLOR=1           禁用彩色输出
 #
@@ -264,6 +269,22 @@ fi
 # Android strings.xml / Kotlin / 展示层 C++ / 模型步骤与提示文案。
 run_stage "儿童友好文案守卫" \
     "$PYTHON" "$ROOT/tools/check_child_friendly_copy.py"
+
+# ---- 19: L2 抗扰动巡检 (可选关卡, 占位挂钩) -----------------------
+# 验证金字塔 L2 层 (BUILD_VERIFICATION.md 第 1 节蒙特卡洛容差抖动)
+# 的 CI 挂钩: D4+ 模型逐个 validate --profile strict --jitter 50。
+# CLI 尚未实装 --jitter (并行 L2 任务落地中): 实装并登记进 --help 用法文本前,
+# 开启本关卡也只打印占位说明并计通过; 实装后自动切换为实跑, 任一
+# D4+ 模型退出码非零即失败 (占位与启用条件见 docs/TESTING.md 3.17)。
+# 关卡 15 的 strict 巡检已含同一阶段 (auto 档), 本关卡供只想单独
+# 加验 jitter 而不重跑全库 strict 审计的流水线使用。
+if [ -n "${MAGTILE_L2_JITTER:-}" ]; then
+    run_stage "L2 抗扰动巡检 (D4+ jitter)" \
+        bash "$ROOT/tools/run_strict_audit.sh" "$BUILD_DIR" --jitter-only
+else
+    skip_stage "L2 抗扰动巡检 (D4+ jitter)" \
+        "可选关卡, 置 MAGTILE_L2_JITTER=1 开启 (tools/run_strict_audit.sh --jitter-only; CLI --jitter 未实装时为占位)"
+fi
 
 # ---- 总结报告 ---------------------------------------------------
 pass_count=0; fail_count=0; skip_count=0

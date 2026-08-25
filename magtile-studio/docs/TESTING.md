@@ -29,11 +29,13 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 12 | 物理负例回归 | 夹具注册表完整性 (缺夹具即 FAIL) + 每个负例按 sidecar 期望报错/报警 |
 | 13 | 物理正例 × N | 预算内的合法结构必须放行 |
 | 14 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
-| 15 | 弱磁严格档全库巡检 | 可选 (`MAGTILE_STRICT_AUDIT=1`): strict 零警告审计 + 逐步装配质检 |
+| 15 | 弱磁严格档全库巡检 | 可选 (`MAGTILE_STRICT_AUDIT=1`): strict 零警告审计 + 逐步装配质检 + D4+ 抗扰动巡检 (auto 档, 见 3.17 节) |
 | 16 | L3 实物复核缺口报告 | 报告型: 输出 D4+ 未实物复核模型数量, 仅报告不阻断 (见 3.13 节) |
 | 17 | 教程步进性能基准 | 可选 (`MAGTILE_TUTORIAL_BENCH=1`): 小/中/大代表模型逐步计时 nextStep/goToStep, 每步 ms 与 P95, 超预算退出 1 (见 3.16 节; CTest 关卡已含同口径回归) |
+| 18 | 儿童友好文案守卫 | 用户可见中文文案红线: 恐吓词/催促话术零容忍 (Qt QML / Android strings.xml / Kotlin / 展示层 C++ / 模型步骤文案, [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.3 §4.5) |
+| 19 | L2 抗扰动巡检 | 可选 (`MAGTILE_L2_JITTER=1`): D4+ 模型逐个 `validate --profile strict --jitter 50` (验证金字塔 L2 门禁挂钩; CLI 未实装 `--jitter` 前为占位通过, 见 3.17 节) |
 
-环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `MAGTILE_TUTORIAL_BENCH=1` 开启可选关卡 17; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
+环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `MAGTILE_TUTORIAL_BENCH=1` 开启可选关卡 17; `MAGTILE_L2_JITTER=1` 开启可选关卡 19; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
 
 CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑绿。
 
@@ -47,7 +49,7 @@ CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑
                ╱实物╲      L3 实物搭建验证 (人 + 真实磁力片)
               ╱ 验证 ╲        捕捉: 品牌磁力差异、儿童手部抖动、
              ╱────────╲             装配手感、"手伸不进去"的实操死角
-            ╱ 物理仿真 ╲    L2 刚体仿真抽检 (规划中, 被标记模型)
+            ╱ 物理仿真 ╲    L2 刚体仿真抽检 (规划中; 门禁挂钩已就位, 3.17 节)
            ╱   抽检     ╲      捕捉: 微小错位累积坍塌、扰动回稳性
           ╱──────────────╲
          ╱   GL 渲染冒烟   ╲  test_gl_smoke.sh
@@ -367,6 +369,35 @@ python3 tools/bench_tutorial_step.py --budget-ms 50 \
 MAGTILE_TUTORIAL_BENCH=1 tests/run_full_qa.sh                      # 随全量 QA (可选关卡 17)
 ```
 
+### 3.17 L2 抗扰动巡检 (D4+ jitter, 门禁挂钩)
+
+验证金字塔第 2 层 (L2 刚体仿真抽检, [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 第 1 节) 的蒙特卡洛容差抖动进 CI 的门禁挂钩: 对 difficulty ≥ 4 的模型逐个执行
+
+```bash
+magtile_app validate <model.json> --profile strict --jitter 50
+```
+
+`--jitter N` 为扰动采样次数 (门禁默认 50, 环境变量 `MAGTILE_JITTER_SAMPLES` 可覆盖), 任一 D4+ 模型退出码非零即失败, "D4+ jitter 全绿" 才判绿。
+
+**现状: CLI 尚未实装 `--jitter` (并行 L2 任务落地中), 本关卡为占位挂钩。** 挂钩契约: CLI 实装时按现有旗标惯例把 `--jitter` 登记进 `printUsage` 用法文本 (`src/app/main.cpp`); 门禁脚本以 `magtile_app --help` 输出是否含 `--jitter` 探测实装与否, 探测到即**自动由占位切换为实跑**, 无须再改任何门禁脚本。启用初期按退出码判定; 零警告政策与豁免白名单 ([STRICT_PHYSICS_AUDIT.md](STRICT_PHYSICS_AUDIT.md) 的 strict 口径) 是否套用到 jitter 输出, 待 CLI 落地时按其输出格式对齐本节与 `run_jitter_stage`。
+
+三个接入点共用同一实现 (`tools/run_strict_audit.sh` 的阶段 3 `run_jitter_stage`), 差别只在模式:
+
+| 接入点 | 模式 | CLI 未实装时的行为 |
+| --- | --- | --- |
+| `tools/run_strict_audit.sh` 阶段 3/3 (随 run_full_qa 关卡 15 与发布门禁的 strict 巡检一起跑) | auto | 打印占位说明, 不阻断; 实装后实跑, 失败阻断 |
+| `tests/run_full_qa.sh` 可选关卡 19 (`MAGTILE_L2_JITTER=1` 时执行, `--jitter-only`) | auto | 同上 (占位计通过) |
+| `tools/run_release_gate.sh --full --l2` (`--jitter-only --jitter require`) | require | **按失败处理** —— L2 档承诺 "D4+ jitter 全绿", 不允许占位判绿 |
+
+```bash
+tools/run_strict_audit.sh build                        # 阶段 3 随全库 strict 巡检 (auto 档)
+tools/run_strict_audit.sh build --jitter-only          # 只跑 D4+ 抗扰动巡检
+tools/run_strict_audit.sh build --jitter-only --jitter require  # L2 判绿口径 (未实装即红灯)
+tools/run_strict_audit.sh build --jitter off           # 本次跳过阶段 3
+MAGTILE_L2_JITTER=1 tests/run_full_qa.sh               # 随全量 QA (可选关卡 19)
+tools/run_release_gate.sh --full --l2                  # 发布门禁 L2 抗扰动档 (第 5 节)
+```
+
 ## 4. 持续集成 (CI)
 
 `.github/workflows/qa.yml` 在**每次 push** 时于 Ubuntu runner 上并行跑两个 job, 任一红灯都阻断 PR 合入:
@@ -393,8 +424,10 @@ MAGTILE_TUTORIAL_BENCH=1 tests/run_full_qa.sh                      # 随全量 Q
 
 ```bash
 tools/run_release_gate.sh              # 快检档: 三道发布专项 (默认构建目录 build)
-tools/run_release_gate.sh --full       # 发布档: 16 关全量 QA + 发布专项一次跑全
+tools/run_release_gate.sh --full       # 发布档: 19 关全量 QA + 发布专项一次跑全
                                        #   = MAGTILE_FREE_TIER_CHECK=1 MAGTILE_STRICT_AUDIT=1 tests/run_full_qa.sh
+tools/run_release_gate.sh --full --l2  # 发布档 + 可选 L2 抗扰动档: 追加 D4+ jitter 全绿硬闸门
+                                       #   (3.17 节; CLI 未实装 --jitter 前该关卡保持红灯)
 tools/run_release_gate.sh --fail-on-pending   # 终防线: D4+ 实物待复核非空即红灯
 tools/run_release_gate.sh --report docs/reports/STRICT_AUDIT_$(date +%F).md  # 附带 strict 巡检 Markdown 报告
 tools/run_release_gate.sh --dry-run    # 只打印将执行的关卡与命令
@@ -406,7 +439,8 @@ tools/run_release_gate.sh --help       # 完整用法
 | 关卡 | 工具 | 阻断性 | 依据 |
 | --- | --- | --- | --- |
 | 免费层清单对齐核验 | `tools/verify_free_tier.py` (3.14 节) | 阻断 | 免费标签恰 30 + 全 core-9 + 与 starter 打包清单一致, 决议见 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) |
-| 弱磁严格档全库巡检 | `tools/run_strict_audit.sh` | 阻断 | strict 零警告审计 + 逐步装配质检 (缺 `magtile_app` 时自动构建), 政策见 [STRICT_PHYSICS_AUDIT.md](STRICT_PHYSICS_AUDIT.md) |
+| 弱磁严格档全库巡检 | `tools/run_strict_audit.sh` | 阻断 | strict 零警告审计 + 逐步装配质检 + D4+ 抗扰动巡检 auto 档 (缺 `magtile_app` 时自动构建), 政策见 [STRICT_PHYSICS_AUDIT.md](STRICT_PHYSICS_AUDIT.md) 与 3.17 节 |
+| L2 抗扰动档 (可选, 仅 `--full --l2`) | `tools/run_strict_audit.sh --jitter-only --jitter require` (3.17 节) | 阻断 | D4+ 模型 `validate --profile strict --jitter 50` 实跑全绿; CLI 未实装 `--jitter` 前按失败处理 (占位不判绿) |
 | L3 实物复核缺口报告 | `tools/list_physical_pending.py` (3.13 节) | 报告型, 与 run_full_qa.sh 关卡 16 同一口径; `--fail-on-pending` 时升级为硬闸门 | 规程见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) |
 
 退出码与 run_full_qa.sh 同一约定: 0 = 全部阻断关卡通过, 1 = 存在失败关卡, 2 = 环境/参数不满足; 结尾输出 PASS/FAIL 分项摘要, 失败时保留分项日志目录。
@@ -419,6 +453,7 @@ tools/run_release_gate.sh --help       # 完整用法
 | --- | --- | --- |
 | 内容批量合入后 (一次合入多个模型 / 免费层选品变动) | `tools/run_release_gate.sh` | 快检: 日常 CI 跳过的两道专项 + 待复核缺口盘点 |
 | 发布打包前 (Windows / Qt 桌面 / Android 出包) | `tools/run_release_gate.sh --full` | 全量 QA 与发布专项一次跑全, 全绿才进入打包手册流程: [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) / [../scripts/package_windows.md](../scripts/package_windows.md) |
+| L2 抗扰动认证 (jitter CLI 实装后启用) | 上一档追加 `--l2` | D4+ 模型 jitter 实跑全绿 (3.17 节); CLI 实装 `--jitter` 前该档保持红灯, 不允许占位交差 |
 | 正式对外发布 (终防线) | 上一档追加 `--fail-on-pending` | D4+ 模型必须全部完成实物复核 (3.13 节口径) |
 | 上架商用验收 (用户路径) | `tools/run_e2e_smoke.sh --strict` | 核心用户路径 E2E 自动子集 (第 8 节); 人工路径按 [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) 逐条打钩 |
 

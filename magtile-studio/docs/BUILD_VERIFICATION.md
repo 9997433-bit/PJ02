@@ -36,7 +36,7 @@
 
 - **落地形态 (第一期, 已实现)**: 不等完整刚体引擎, 先在校验器内落地**容差抖动蒙特卡洛 (jitter)** —— 对成品及关键中间状态的每片位姿注入 ±1.5mm / ±2° 随机误差, 生成 N=20 个扰动副本 (固定随机种子, CI 可复现), 逐副本重算稳定性判定 (连接拓扑按未扰动模型取定), 通过率 ≥ 90% 才算通过 —— 专门捕捉"微小错位累积坍塌" (失效分类 F08)。触发标记由 `tools/physical_risk_report.py` 自动判定, 执行入口与字段约定见 2.1 节接口约定。
 - **后续增强 (仍为规划)**: 接入刚体物理引擎 (候选: [Jolt Physics](https://github.com/jrouwe/JoltPhysics) 或 [Rapier](https://rapier.rs/)), 磁吸边建模为**可断裂约束** (按品牌标定的最大拉力/力矩), 补齐两段动力学测试: ① **静置沉降** —— 重力下模拟 5 秒, 任何片位移 > 5mm 或约束断裂即失败; ② **扰动脉冲** —— 对最高点施加水平小冲量 (模拟轻碰), 结构须回稳。任务登记: [PHYSICS_VERIFICATION_DEEP_DIVE.md](PHYSICS_VERIFICATION_DEEP_DIVE.md) 第 5 节 P1-3 剩余项。
-- **执行者**: 工程师本地与 CI 均可即刻执行 (工具入库, 门禁挂接见第 6 节), 不再依赖人工排期。
+- **执行者**: 工程师本地与 CI 均可即刻执行 (工具入库, 门禁挂接见第 6 节), 不再依赖人工排期。QA 流水线门禁挂钩三接入点 (统一入口: D4+ 模型 `validate --profile strict --jitter 50`): `tools/run_strict_audit.sh` 阶段 3 / `tests/run_full_qa.sh` 可选关卡 19 / `tools/run_release_gate.sh --full --l2` —— CLI 实装 `--jitter` 前为占位, 实装后自动启用, 挂钩契约与启用条件见 [TESTING.md](TESTING.md) 3.17 节。
 - **成本**: 秒~分钟级/模型。**覆盖**: 被标记的模型 (见第 2 节触发条件, 全部可自动检测)。
 - **定位**: L2 是 L1 的**抽检补强**, 不是替代 —— L1 的规则永远先跑、永远全量; L2 全绿同样不豁免 L3 分级要求 (人手排产用法见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) 0.5 节)。
 
