@@ -41,6 +41,7 @@ struct CliArgs {
     std::string model_file;
     fs::path data_dir = "data";
     bool gui = false;
+    int start_step = 1;          ///< 图形模式的起始步骤
     long max_frames = 0;         ///< >0 时渲染指定帧数后自动退出 (冒烟测试)
     std::string screenshot_file; ///< 非空时在最后一帧保存 PPM 截图 (冒烟测试)
 };
@@ -55,9 +56,10 @@ void printUsage() {
         "  magtile_app tutorial <model.json> [--gui] [--data-dir DIR]\n"
         "                       分步教程: 默认在终端预览, --gui 打开 3D 交互窗口\n"
         "\n"
-        "图形模式测试选项 (供 CI 冒烟测试):\n"
-        "  --frames N          渲染 N 帧后自动退出\n"
-        "  --screenshot FILE   退出前把画面保存为 PPM 图片\n");
+        "图形模式选项:\n"
+        "  --step N            从第 N 步开始 (默认 1)\n"
+        "  --frames N          渲染 N 帧后自动退出 (供 CI 冒烟测试)\n"
+        "  --screenshot FILE   退出前把画面保存为 PPM 图片 (供 CI 冒烟测试)\n");
 }
 
 bool parseArgs(int argc, char** argv, CliArgs& args) {
@@ -72,6 +74,9 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
             args.data_dir = argv[++i];
         } else if (arg == "--gui") {
             args.gui = true;
+        } else if (arg == "--step") {
+            if (i + 1 >= argc) return false;
+            args.start_step = static_cast<int>(std::strtol(argv[++i], nullptr, 10));
         } else if (arg == "--frames") {
             if (i + 1 >= argc) return false;
             args.max_frames = std::strtol(argv[++i], nullptr, 10);
@@ -179,7 +184,8 @@ int runTutorialGui(const CliArgs& args) {
     }
 
     tutorial::TutorialEngine engine(std::move(model));
-    engine.nextStep();  // 打开窗口即进入第 1 步
+    // 打开窗口即进入起始步骤 (缺省第 1 步)
+    if (!engine.goToStep(args.start_step)) engine.nextStep();
 
     auto renderer = render::createOpenGLRenderer();
     if (!renderer->initialize(1440, 900, "MagTile Studio - " + engine.model().name)) {
