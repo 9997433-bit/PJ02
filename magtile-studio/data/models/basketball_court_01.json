@@ -1,0 +1,1020 @@
+{
+  "schema_version": 1,
+  "id": "basketball_court_01",
+  "name": "街头篮球场",
+  "name_en": "Street Basketball Court",
+  "description": "街头篮球半场: 橙色大正方形油漆区领衔 5x4 水泥场地, U 形箱筒篮架塔两层围合、塔口嵌两片窗格方篮板, 红色篮筐平台压顶悬挑; 三面窗格方铁丝网围栏 (南开门框方大门) 与塔身竖边锁扣, 东侧球员长凳悬挑坐板面朝场地, 中场一颗四坡自锁的橙色篮球 —— 嘭、嘭、嘭, 运球声就是街头的心跳。",
+  "difficulty": 3,
+  "total_pieces": 52,
+  "tags": [
+    "运动",
+    "篮球",
+    "街头",
+    "场景"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 25,
+        "window_square": 13,
+        "rectangle": 6,
+        "equilateral_triangle": 4,
+        "isosceles_triangle": 2,
+        "door_frame": 1,
+        "large_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ct_s_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ct_s_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ct_s_e",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "paint",
+      "type": "large_square",
+      "position": [
+        1.0,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ct_m0",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ct_m0_e",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ct_m1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ct_m1_e",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ct_n_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ct_n_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ct_n_e",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw_f0",
+      "type": "square",
+      "position": [
+        -0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_f1",
+      "type": "square",
+      "position": [
+        -0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_s_0",
+      "type": "square",
+      "position": [
+        -0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_n_0",
+      "type": "square",
+      "position": [
+        -0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_w0_0",
+      "type": "square",
+      "position": [
+        -1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_w1_0",
+      "type": "square",
+      "position": [
+        -1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_s_1",
+      "type": "square",
+      "position": [
+        -0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_n_1",
+      "type": "square",
+      "position": [
+        -0.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_w0_1",
+      "type": "square",
+      "position": [
+        -1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_w1_1",
+      "type": "square",
+      "position": [
+        -1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bb_s",
+      "type": "window_square",
+      "position": [
+        0.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bb_n",
+      "type": "window_square",
+      "position": [
+        0.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hoop_s",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hoop_n",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fn_s_0",
+      "type": "window_square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_s_1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_s_2",
+      "type": "window_square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_s_3",
+      "type": "window_square",
+      "position": [
+        4.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_gate",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fn_w_s",
+      "type": "window_square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_w_n",
+      "type": "window_square",
+      "position": [
+        0.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_n_0",
+      "type": "window_square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_n_1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_n_2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_n_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_n_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bn_f_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bn_f_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bn_f_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bn_w_0",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bn_w_1",
+      "type": "square",
+      "position": [
+        6.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bn_w_2",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bn_s_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bn_s_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bn_s_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ball_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ball_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.833333,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ball_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ball_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.166667,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fl_w",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        4.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fl_e",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        4.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺半场南排: 蓝色边线长方形 + 灰色场地长方形 + 蓝色角方板。",
+      "tip": "街头半场从南边线铺起, 长方形长边彼此等长互吸。",
+      "tiles_to_add": [
+        "ct_s_w",
+        "ct_s_m",
+        "ct_s_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺油漆区与中场南带: 橙色大正方形一片顶四片, 南边整边吸边线长方形长边 (2 = 2); 再补中场长方形与方板。",
+      "tip": "大正方形是油漆区 —— 罚球线内的必争之地。",
+      "tiles_to_add": [
+        "paint",
+        "ct_m0",
+        "ct_m0_e"
+      ],
+      "highlight_tiles": [
+        "ct_s_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "合拢场地: 中场北带 + 北边线一排, 半场 5x4 铺完。",
+      "tip": "北边线长方形与大正方形北边等长互吸, 场地连成刚性整板。",
+      "tiles_to_add": [
+        "ct_m1",
+        "ct_m1_e",
+        "ct_n_w",
+        "ct_n_m",
+        "ct_n_e"
+      ],
+      "highlight_tiles": [
+        "paint"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺篮架塔底板: 2 片灰色方板贴在油漆区西侧场外。",
+      "tip": "塔底板中缝互吸, 也是塔身三面墙的地基。",
+      "tiles_to_add": [
+        "tw_f0",
+        "tw_f1"
+      ],
+      "highlight_tiles": [
+        "paint"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立篮架塔一层: 南/北/西三面墙 U 形围合 (东面敞开做通道), 拐角竖边互吸锁定。",
+      "tip": "U 形墙三面锁角, 比两根孤柱结实得多 —— 这是街球篮架的底气。",
+      "tiles_to_add": [
+        "tw_s_0",
+        "tw_n_0",
+        "tw_w0_0",
+        "tw_w1_0"
+      ],
+      "highlight_tiles": [
+        "tw_f0",
+        "tw_f1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "叠篮架塔二层: 再 4 片墙, 底边整边吸一层墙顶边。",
+      "tip": "上下两层墙缝对缝, 拐角继续互吸成环。",
+      "tiles_to_add": [
+        "tw_s_1",
+        "tw_n_1",
+        "tw_w0_1",
+        "tw_w1_1"
+      ],
+      "highlight_tiles": [
+        "tw_s_0",
+        "tw_w0_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "嵌窗格篮板: 2 片透明窗格方立在塔东口, 竖边吸二层墙竖边、两片中缝互吸。",
+      "tip": "窗格就是篮板格纹 —— 打板进筐就靠它。",
+      "tiles_to_add": [
+        "bb_s",
+        "bb_n"
+      ],
+      "highlight_tiles": [
+        "tw_s_1",
+        "tw_n_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "压篮筐平台: 2 片红色方板压住篮板顶边、向场内悬挑。",
+      "tip": "两片平台共线铰链合并受力 (力矩 30 <= 预算 35)。",
+      "tiles_to_add": [
+        "hoop_s",
+        "hoop_n"
+      ],
+      "highlight_tiles": [
+        "bb_s",
+        "bb_n"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立南围栏与大门: 4 片窗格网眼 + 1 扇绿色门框方大门, 底边吸场地南沿。",
+      "tip": "窗格方就是铁丝网 —— 街球场的味道一下就来了。",
+      "tiles_to_add": [
+        "fn_s_0",
+        "fn_s_1",
+        "fn_gate",
+        "fn_s_2",
+        "fn_s_3"
+      ],
+      "highlight_tiles": [
+        "ct_s_w",
+        "ct_s_m"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立西围栏: 2 片窗格方补上西侧两角, 竖边与南围栏、篮架塔锁扣。",
+      "tip": "拐角竖边互吸, 围栏和塔身连成一体。",
+      "tiles_to_add": [
+        "fn_w_s",
+        "fn_w_n"
+      ],
+      "highlight_tiles": [
+        "fn_s_0",
+        "tw_s_0"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "立北围栏: 5 片窗格方一字排开, 三面铁丝网合拢。",
+      "tip": "球飞不出场, 行人也看得见 —— 铁丝网围栏两全其美。",
+      "tiles_to_add": [
+        "fn_n_0",
+        "fn_n_1",
+        "fn_n_2",
+        "fn_n_3",
+        "fn_n_4"
+      ],
+      "highlight_tiles": [
+        "fn_w_n"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "搭球员长凳台: 东侧 3 片台面方板 + 3 片蓝色背墙。",
+      "tip": "背墙底边吸台面板边, 竖边互吸连成整面。",
+      "tiles_to_add": [
+        "bn_f_0",
+        "bn_f_1",
+        "bn_f_2",
+        "bn_w_0",
+        "bn_w_1",
+        "bn_w_2"
+      ],
+      "highlight_tiles": [
+        "ct_s_e"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "压长凳坐板: 3 片坐板压背墙顶边、面朝球场悬挑。",
+      "tip": "一排坐板共线铰链合并受力 (力矩 45 <= 预算 52.5)。",
+      "tiles_to_add": [
+        "bn_s_0",
+        "bn_s_1",
+        "bn_s_2"
+      ],
+      "highlight_tiles": [
+        "bn_w_0",
+        "bn_w_2"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "拼场上篮球: 4 片橙色等边三角四坡互吸自锁, 停在中场格上。",
+      "tip": "四条斜棱两两互吸 —— 篮球在等下一次运球。",
+      "tiles_to_add": [
+        "ball_s",
+        "ball_e",
+        "ball_n",
+        "ball_w"
+      ],
+      "highlight_tiles": [
+        "ct_m0_e"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "升围栏角旗: 2 面红色瘦高角旗立上北围栏顶边 —— 开球!",
+      "tip": "角旗立在围栏顶铰链线上, 重心正压不外倾。",
+      "tiles_to_add": [
+        "fl_w",
+        "fl_e"
+      ],
+      "highlight_tiles": [
+        "fn_n_0",
+        "fn_n_4"
+      ]
+    }
+  ]
+}
