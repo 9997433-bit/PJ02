@@ -1,7 +1,7 @@
 # 实物复核用户指南 (Physical Review User Guide)
 
 - 面向读者: **准备动手实搭的用户 / QA 复核人** —— 不需要读代码, 照本指南把磁力片、时间、打印件准备好, 就能开工。
-- 定位: V1 上架清单 [§8 实物复核 (L2 三层缩减流程)](../V1_LAUNCH_CHECKLIST.md) 两项 P0 缺口 (S1 缩减集实搭 / S2 D4+ 全覆盖清零, 探测 R6 抽样包 0/10、R7 全集 0/46) 是**唯一无法由软件代劳的人手缺口**, 本指南把「需要人做什么」一页说清。判定标准以 [PHYSICAL_REBUILD_CHECKLIST.md](../PHYSICAL_REBUILD_CHECKLIST.md) 规程为准; 桌边逐步记录用 [PHYSICAL_SIGNOFF_WORKSHEET.md](PHYSICAL_SIGNOFF_WORKSHEET.md) 工作单; 模型级签核摘要与落盘操作见 [PHYSICAL_SAMPLE_V1.md](PHYSICAL_SAMPLE_V1.md)。
+- 定位: V1 上架清单 [§8 实物复核 (L2 三层缩减流程)](../V1_LAUNCH_CHECKLIST.md) 两项 P0 缺口 (S1 缩减集实搭 / S2 D4+ 全覆盖清零, 探测 R6 抽样包 0/10、R7 全集 0/46) 是**唯一无法由软件代劳的人手缺口**, 本指南把「需要人做什么」一页说清。判定标准以 [PHYSICAL_REBUILD_CHECKLIST.md](../PHYSICAL_REBUILD_CHECKLIST.md) 规程为准; 桌边逐步记录用 [PHYSICAL_SIGNOFF_WORKSHEET.md](PHYSICAL_SIGNOFF_WORKSHEET.md) 工作单; 模型级签核摘要与落盘操作见 [PHYSICAL_SAMPLE_V1.md](PHYSICAL_SAMPLE_V1.md); 排产优先队列 (CSV / Markdown 单表, 必搭/可缓建标注) 的导出方法见本文 3.1 节, 最新导出件见 [PHYSICAL_REVIEW_QUEUE.md](PHYSICAL_REVIEW_QUEUE.md)。
 - 数据快照: 2026-08-25, 250 模型库基线 (模型库 / 复核状态变化后, 本文第 2、3 节的备料与工时数字以重新生成的工作单为准)。
 
 ## 1. 现状与目标
@@ -9,7 +9,7 @@
 - **现状**: 全库 250 个模型中 D4+ 共 46 个 (45 个 D4 + 1 个 D5), 全部待实物复核。`tools/check_v1_readiness.sh --quick` 退出码 1, 自动侧 P0 FAIL **仅剩** R6 (抽样包缺口 10/10) 与 R7 (全集缺口 46/46) 两项 —— 软件侧已全绿, 上架卡在实搭人手。
 - **目标 (分两步走)**:
   1. **先清抽样包 (S1 首批 / R6)**: 按确定性抽样规则选出的 10 个高风险模型 (1 个 D5 旗舰 + 9 个大体量 D4), 逐个实搭签核, 预算约 **750 分钟 ≈ 12.5 小时** (单人);
-  2. **再清缩减集 (S1/S2 / R7)**: 全集 46 个**不再逐个实搭** —— 按 L2 三层流程只实搭 **risk Top 15 + 结构族代表** (清单以 [PHYSICAL_RISK_REPORT.md](PHYSICAL_RISK_REPORT.md) 与 [PHYSICAL_FAMILY_PACK.md](PHYSICAL_FAMILY_PACK.md) 250 基线实跑输出为准): 族去重后必搭 36 个 (含本抽样包 10 个) 合计约 2570 分钟 ≈ 42.8 小时, 可缓建 10 个约 700 分钟 (省 21%, 须策展签核; 原全集口径 46 个 ≈ 3270 分钟 ≈ 54.5 小时), 未实搭成员由「同族代表实搭通过 + 第二层 jitter 全绿」覆盖 —— 抽样包全绿**不豁免**缩减集清零, 但能先解除最大结构风险并支撑上架风险评估。
+  2. **再清缩减集 (S1/S2 / R7)**: 全集 46 个**不再逐个实搭** —— 按 L2 三层流程只实搭 **risk Top 15 + 结构族代表** (清单以 [PHYSICAL_RISK_REPORT.md](PHYSICAL_RISK_REPORT.md) 与 [PHYSICAL_FAMILY_PACK.md](PHYSICAL_FAMILY_PACK.md) 250 基线实跑输出为准, 合并后的单表排产队列按 3.1 节一键导出): 族去重后必搭 36 个 (含本抽样包 10 个) 合计约 2570 分钟 ≈ 42.8 小时, 可缓建 10 个约 700 分钟 (省 21%, 须策展签核; 原全集口径 46 个 ≈ 3270 分钟 ≈ 54.5 小时), 未实搭成员由「同族代表实搭通过 + 第二层 jitter 全绿」覆盖 —— 抽样包全绿**不豁免**缩减集清零, 但能先解除最大结构风险并支撑上架风险评估。
 - **红线**: 软件 strict 全绿是入库必要条件不是充分条件; **未实际搭过的模型严禁标记通过** —— 伪造复核结论比不复核更危险。
 
 ## 2. 需要准备的磁力片
@@ -45,6 +45,21 @@
 | 大体量 D4 × 9 (每场建议 ≤ 2 个防疲劳) | `stadium_gate_01` / `ferry_terminal_01` / `castle_drawbridge_01` / `treehouse_02` / `elephant_01` / `ball_run_tower_01` / `stonehenge_01` / `subway_station_01` / `tennis_court_01` | 各 70 分钟 |
 
 预算是规程第 2 节的难度预算 (D4: 70 / D5: 120 分钟), **超时本身要记 Warning 反馈步骤拆分**, 所以别赶工。多人分摊时按模型切分即可 (每个模型由一人完整走完全程, 不要中途换手)。缩减集清零 (S2) 抽样包之外的必搭 26 个 D4 每个同样按 70 分钟预算排产 (名单见 [PHYSICAL_FAMILY_PACK.md](PHYSICAL_FAMILY_PACK.md) 代表清单与建议排产顺序)。
+
+### 3.1 排产队列一键导出 (CSV / Markdown)
+
+排产不必人肉对照三份报告 —— `tools/export_physical_review_queue.py` 把「哪些还没搭 (`list_physical_pending`)、谁先验 (`PHYSICAL_RISK_REPORT.json` 风险分)、哪些可缓建 (`physical_family_pack` 结构族)」合并成一张 **D4+ 待复核单表**: 按风险分降序, 每行标注**必搭** (上架抽样包 ∪ 多成员族代表 ∪ 单模型族) 或**可缓建** (同族代表兜底, 须策展签核):
+
+```bash
+python3 tools/export_physical_review_queue.py            # 桌边速览 (文本表)
+python3 tools/export_physical_review_queue.py \
+    --csv docs/reports/PHYSICAL_REVIEW_QUEUE.csv \
+    --markdown docs/reports/PHYSICAL_REVIEW_QUEUE.md     # 导出排产工单 (导出件勿手改)
+```
+
+- **CSV** 给表格软件 / QA 工单系统 (列含 `rank` / `risk_score` / `risk_band` / `l2_flags` / `build_class` / `build_reason` / 兜底代表 / 预算分钟); **Markdown** ([PHYSICAL_REVIEW_QUEUE.md](PHYSICAL_REVIEW_QUEUE.md)) 给评审与打印; 加 `--json` 得机器可读版。
+- 队列**只合并不重算** (单一来源纪律): 待复核判定 / 风险分 / 必搭缓建划分分别与 `tools/list_physical_pending.py` / `tools/physical_risk_report.py` / `tools/physical_family_pack.py` 同源。风险报告快照与当前模型库不一致时工具会逐条告警 —— 先刷新快照 (`python3 tools/physical_risk_report.py --json > docs/reports/PHYSICAL_RISK_REPORT.json`) 再导出。
+- **可缓建 ≠ 免检**: 不豁免 `--fail-on-pending` 的 D4+ 全集清零终防线, 缓建前提 (同族代表实搭 Pass 已落盘) 与纪律见 [PHYSICAL_FAMILY_PACK.md](PHYSICAL_FAMILY_PACK.md) 第 5 节。
 
 ## 4. 如何打印工作单
 
@@ -82,13 +97,16 @@ python3 tools/physical_sample_pack.py --print-checklist docs/reports/PHYSICAL_SI
 }
 ```
 
-2. 验证缺口计数变化并重新生成两份报告 (已复核模型自动折叠为一行):
+2. 验证缺口计数变化并重新生成各报告 (已复核模型自动折叠为一行 / 出队):
 
 ```bash
 python3 tools/list_physical_pending.py data/models            # 该模型转入「已复核」
 python3 tools/physical_sample_pack.py                          # 抽样包缺口 -1
 python3 tools/physical_sample_pack.py --markdown docs/reports/PHYSICAL_SAMPLE_V1.md
 python3 tools/physical_sample_pack.py --print-checklist docs/reports/PHYSICAL_SIGNOFF_WORKSHEET.md
+python3 tools/physical_risk_report.py --json > docs/reports/PHYSICAL_RISK_REPORT.json  # 风险报告快照刷新
+python3 tools/export_physical_review_queue.py --csv docs/reports/PHYSICAL_REVIEW_QUEUE.csv \
+    --markdown docs/reports/PHYSICAL_REVIEW_QUEUE.md           # 排产队列刷新 (该模型出队, 见 3.1 节)
 tools/check_v1_readiness.sh --quick                            # 全部落盘后 R6/R7 转 PASS
 ```
 
