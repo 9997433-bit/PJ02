@@ -156,17 +156,10 @@ b.step(
     tip="运河边的纤道 —— 以前的船就是靠人沿着这条路拉过闸的。",
 )
 b.step(
-    "铺北岸步道: 同样一排, 与南岸隔水相望。",
-    ["bank_n_0", "bank_n_1", "bank_n_2", "bank_n_3",
-     "bank_n_mid", "bank_n_6"],
-    highlight=["bank_s_0"],
-    tip="两岸之间空出来的两格宽, 就是船要走的水道。",
-)
-b.step(
-    "铺下游低位水面: 六片青色水板嵌进两岸之间。",
+    "铺下游低位水面: 六片青色水板贴着南岸北沿铺开。",
     ["water_lo_4_1", "water_lo_4_2", "water_lo_5_1",
      "water_lo_5_2", "water_lo_6_1", "water_lo_6_2"],
-    highlight=["bank_s_4", "bank_n_3"],
+    highlight=["bank_s_4"],
     tip="下游的水位低 —— 记住这个高度, 一会儿和上游比一比。",
 )
 b.step(
@@ -174,6 +167,13 @@ b.step(
     ["chamber_2_1", "chamber_2_2", "chamber_3_1", "chamber_3_2"],
     highlight=["water_lo_4_1"],
     tip="闸室是船的'电梯间': 关上门, 水涨船高。",
+)
+b.step(
+    "铺北岸步道: 贴着水面北沿再铺一排, 与南岸隔水相望。",
+    ["bank_n_0", "bank_n_1", "bank_n_2", "bank_n_3",
+     "bank_n_mid", "bank_n_6"],
+    highlight=["chamber_2_2", "water_lo_4_2"],
+    tip="两岸夹住两格宽的水道 —— 船闸的舞台搭好了。",
 )
 b.step(
     "立闸室南北闸墙: 四片灰墙踩住岸沿拼缝, 墙脚咬牢。",

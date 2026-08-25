@@ -855,23 +855,7 @@
     },
     {
       "step_number": 2,
-      "description": "铺北岸步道: 同样一排, 与南岸隔水相望。",
-      "tip": "两岸之间空出来的两格宽, 就是船要走的水道。",
-      "tiles_to_add": [
-        "bank_n_0",
-        "bank_n_1",
-        "bank_n_2",
-        "bank_n_3",
-        "bank_n_mid",
-        "bank_n_6"
-      ],
-      "highlight_tiles": [
-        "bank_s_0"
-      ]
-    },
-    {
-      "step_number": 3,
-      "description": "铺下游低位水面: 六片青色水板嵌进两岸之间。",
+      "description": "铺下游低位水面: 六片青色水板贴着南岸北沿铺开。",
       "tip": "下游的水位低 —— 记住这个高度, 一会儿和上游比一比。",
       "tiles_to_add": [
         "water_lo_4_1",
@@ -882,12 +866,11 @@
         "water_lo_6_2"
       ],
       "highlight_tiles": [
-        "bank_s_4",
-        "bank_n_3"
+        "bank_s_4"
       ]
     },
     {
-      "step_number": 4,
+      "step_number": 3,
       "description": "铺闸室低位水面: 四片青色水板, 船就停在这一段。",
       "tip": "闸室是船的'电梯间': 关上门, 水涨船高。",
       "tiles_to_add": [
@@ -898,6 +881,23 @@
       ],
       "highlight_tiles": [
         "water_lo_4_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺北岸步道: 贴着水面北沿再铺一排, 与南岸隔水相望。",
+      "tip": "两岸夹住两格宽的水道 —— 船闸的舞台搭好了。",
+      "tiles_to_add": [
+        "bank_n_0",
+        "bank_n_1",
+        "bank_n_2",
+        "bank_n_3",
+        "bank_n_mid",
+        "bank_n_6"
+      ],
+      "highlight_tiles": [
+        "chamber_2_2",
+        "water_lo_4_2"
       ]
     },
     {
