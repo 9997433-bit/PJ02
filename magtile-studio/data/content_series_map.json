@@ -1,41 +1,94 @@
 {
-  "schema_version": 1,
-  "source": "docs/reports/CONTENT_GAP_AUDIT.md 附录 A (2026-08-25, 250 基线) 逐模型归类清单",
-  "notes": [
-    "series: CONTENT_STRATEGY.md 2.2 节 13 排期主题的 snake_case slug; bridge_engineering 为 5.1 节 schema v2 示例既定值, 其余按同一命名风格定名。",
-    "矩阵外 74 个 (附录 A「矩阵外」桶) series=null, 以 matrix_bucket 记录审计第 6 节的子类聚桶 (按目录展示主题聚类), 待矩阵治理决断 (修订矩阵/冻结供给) 后再行归置。",
-    "回填工具: tools/backfill_content_series.py (只写 content_meta.series / matrix_bucket, 不动其他字段)。"
-  ],
-  "series_slugs": {
-    "城堡与要塞": "castle_fortress",
-    "陆地交通": "land_transport",
-    "海空交通": "sea_air_transport",
-    "航天器": "spacecraft",
-    "动物世界": "animal_world",
-    "建筑地标": "landmark_architecture",
-    "桥梁工程": "bridge_engineering",
-    "几何艺术": "geometric_art",
-    "滚珠乐园": "marble_run",
-    "植物花园": "plant_garden",
-    "节日限定": "holiday_seasonal",
-    "实用功能": "practical_utility",
-    "幻想与机械": "fantasy_machinery"
+  "_readme": "MagTile Studio 内容系列权威词表 —— content_meta.series / content_meta.matrix_bucket 的合法取值全集与全库 250 模型归类底稿。语义、维护规则与消费方见同目录 content_series_map.README.md。词表手工维护, models 节由缺口审计附录 A 底稿录入; 禁止工具生成覆盖。",
+  "version": 1,
+  "series": {
+    "castle_fortress": {
+      "display_name_zh": "城堡与要塞",
+      "matrix_bucket": null
+    },
+    "land_transport": {
+      "display_name_zh": "陆地交通",
+      "matrix_bucket": null
+    },
+    "sea_air_transport": {
+      "display_name_zh": "海空交通",
+      "matrix_bucket": null
+    },
+    "spacecraft": {
+      "display_name_zh": "航天器",
+      "matrix_bucket": null
+    },
+    "animal_world": {
+      "display_name_zh": "动物世界",
+      "matrix_bucket": null
+    },
+    "landmark_architecture": {
+      "display_name_zh": "建筑地标",
+      "matrix_bucket": null
+    },
+    "bridge_engineering": {
+      "display_name_zh": "桥梁工程",
+      "matrix_bucket": null
+    },
+    "geometric_art": {
+      "display_name_zh": "几何艺术",
+      "matrix_bucket": null
+    },
+    "marble_run": {
+      "display_name_zh": "滚珠乐园",
+      "matrix_bucket": null
+    },
+    "plant_garden": {
+      "display_name_zh": "植物花园",
+      "matrix_bucket": null
+    },
+    "holiday_seasonal": {
+      "display_name_zh": "节日限定",
+      "matrix_bucket": null
+    },
+    "practical_utility": {
+      "display_name_zh": "实用功能",
+      "matrix_bucket": null
+    },
+    "fantasy_machinery": {
+      "display_name_zh": "幻想与机械",
+      "matrix_bucket": null
+    }
   },
-  "matrix_bucket_slugs": {
-    "城市生活": "city_life",
-    "运动": "sports",
-    "田园": "farm",
-    "工程结构": "engineering_structure",
-    "音乐": "music",
-    "自然世界": "natural_world",
-    "校园": "campus",
-    "游乐园": "amusement_park",
-    "海洋航行": "ocean_sailing",
-    "博物馆": "museum",
-    "极地": "polar",
-    "航天探索": "space_exploration",
-    "夏日乐园": "summer_park",
-    "足球": "soccer"
+  "off_matrix_buckets": {
+    "city_life": {
+      "display_name_zh": "城市生活"
+    },
+    "sports": {
+      "display_name_zh": "运动"
+    },
+    "farm": {
+      "display_name_zh": "田园"
+    },
+    "engineering_misc": {
+      "display_name_zh": "工程结构"
+    },
+    "music": {
+      "display_name_zh": "音乐"
+    },
+    "nature_misc": {
+      "display_name_zh": "自然世界"
+    },
+    "campus": {
+      "display_name_zh": "校园"
+    },
+    "amusement": {
+      "display_name_zh": "游乐园"
+    },
+    "maritime_misc": {
+      "display_name_zh": "海洋航行"
+    },
+    "museum": {
+      "display_name_zh": "博物馆"
+    },
+    "other": {
+      "display_name_zh": "其他"
+    }
   },
   "models": {
     "aircraft_carrier_01": {
@@ -94,7 +147,7 @@
     },
     "beach_hut_01": {
       "series": null,
-      "matrix_bucket": "ocean_sailing"
+      "matrix_bucket": "maritime_misc"
     },
     "bike_rack_park_01": {
       "series": null,
@@ -138,11 +191,11 @@
     },
     "campfire_site_01": {
       "series": null,
-      "matrix_bucket": "natural_world"
+      "matrix_bucket": "nature_misc"
     },
     "canal_lock_01": {
       "series": null,
-      "matrix_bucket": "engineering_structure"
+      "matrix_bucket": "engineering_misc"
     },
     "canoe_01": {
       "series": "sea_air_transport"
@@ -188,7 +241,7 @@
     },
     "circus_tent_01": {
       "series": null,
-      "matrix_bucket": "amusement_park"
+      "matrix_bucket": "amusement"
     },
     "city_bus_stop_01": {
       "series": "land_transport"
@@ -208,7 +261,7 @@
     },
     "conveyor_factory_01": {
       "series": null,
-      "matrix_bucket": "engineering_structure"
+      "matrix_bucket": "engineering_misc"
     },
     "coral_reef_01": {
       "series": "animal_world"
@@ -237,7 +290,7 @@
     },
     "deep_sea_lab_01": {
       "series": null,
-      "matrix_bucket": "ocean_sailing"
+      "matrix_bucket": "maritime_misc"
     },
     "dental_clinic_01": {
       "series": null,
@@ -400,7 +453,7 @@
     },
     "hydro_dam_01": {
       "series": null,
-      "matrix_bucket": "engineering_structure"
+      "matrix_bucket": "engineering_misc"
     },
     "ice_cream_truck_01": {
       "series": "land_transport"
@@ -411,7 +464,7 @@
     },
     "igloo_01": {
       "series": null,
-      "matrix_bucket": "polar"
+      "matrix_bucket": "other"
     },
     "jungle_gym_01": {
       "series": null,
@@ -440,7 +493,7 @@
     },
     "lifeguard_tower_01": {
       "series": null,
-      "matrix_bucket": "ocean_sailing"
+      "matrix_bucket": "maritime_misc"
     },
     "lighthouse_01": {
       "series": "sea_air_transport"
@@ -502,7 +555,7 @@
     },
     "oasis_01": {
       "series": null,
-      "matrix_bucket": "natural_world"
+      "matrix_bucket": "nature_misc"
     },
     "observatory_01": {
       "series": "spacecraft"
@@ -528,7 +581,7 @@
     },
     "particle_accelerator_01": {
       "series": null,
-      "matrix_bucket": "space_exploration"
+      "matrix_bucket": "other"
     },
     "peacock_01": {
       "series": "animal_world"
@@ -659,7 +712,7 @@
     },
     "scaffolding_site_01": {
       "series": null,
-      "matrix_bucket": "engineering_structure"
+      "matrix_bucket": "engineering_misc"
     },
     "school_bus_01": {
       "series": "land_transport"
@@ -696,7 +749,7 @@
     },
     "slide_playground_01": {
       "series": null,
-      "matrix_bucket": "amusement_park"
+      "matrix_bucket": "amusement"
     },
     "snowman_01": {
       "series": "holiday_seasonal"
@@ -706,11 +759,11 @@
     },
     "soccer_goal_01": {
       "series": null,
-      "matrix_bucket": "soccer"
+      "matrix_bucket": "other"
     },
     "solar_farm_01": {
       "series": null,
-      "matrix_bucket": "engineering_structure"
+      "matrix_bucket": "engineering_misc"
     },
     "space_elevator_01": {
       "series": "spacecraft"
@@ -759,7 +812,7 @@
     },
     "swing_set_01": {
       "series": null,
-      "matrix_bucket": "amusement_park"
+      "matrix_bucket": "amusement"
     },
     "sydney_opera_01": {
       "series": "landmark_architecture"
@@ -825,7 +878,7 @@
     },
     "volcano_base_01": {
       "series": null,
-      "matrix_bucket": "natural_world"
+      "matrix_bucket": "nature_misc"
     },
     "warehouse_01": {
       "series": null,
@@ -833,15 +886,15 @@
     },
     "water_slide_park_01": {
       "series": null,
-      "matrix_bucket": "summer_park"
+      "matrix_bucket": "other"
     },
     "water_tower_01": {
       "series": null,
-      "matrix_bucket": "engineering_structure"
+      "matrix_bucket": "engineering_misc"
     },
     "weather_station_01": {
       "series": null,
-      "matrix_bucket": "natural_world"
+      "matrix_bucket": "nature_misc"
     },
     "whale_01": {
       "series": "animal_world"

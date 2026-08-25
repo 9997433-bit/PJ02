@@ -37,8 +37,8 @@ def load_map(root):
         print(f"错误: 找不到映射表 {map_path}", file=sys.stderr)
         return None
     mapping = json.loads(map_path.read_text(encoding="utf-8"))
-    valid_series = set(mapping["series_slugs"].values())
-    valid_buckets = set(mapping["matrix_bucket_slugs"].values())
+    valid_series = set(mapping["series"])
+    valid_buckets = set(mapping["off_matrix_buckets"])
     for mid, entry in mapping["models"].items():
         series = entry.get("series")
         bucket = entry.get("matrix_bucket")
