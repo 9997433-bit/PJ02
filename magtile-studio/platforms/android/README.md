@@ -576,6 +576,10 @@ androidx.test 四件套 + espresso-core (仅 androidTest 变体, 不进
 
 ## 相关文档
 
+- `docs/QA_ANDROID_DEBUG_RELEASE.md` — **QA 单页入口**: Debug vs
+  Release 构建差异 (计费/签名/混淆) 一览表、仪器测试执行、release
+  keystore 最短路径、Play 内部测试轨步骤与常见坑速查, 并把真机
+  勾选表与沙盒验收按档位对号入座。
 - `docs/PLATFORM_ARCHITECTURE.md` — 跨平台技术架构总纲 (共享 C++ 核心 +
   平台外壳、渲染后端矩阵、CI 矩阵); 本目录即其第 8 节规划的
   `platforms/android/` 落地。
