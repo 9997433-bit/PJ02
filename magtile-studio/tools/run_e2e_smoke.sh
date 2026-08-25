@@ -110,7 +110,11 @@ stage_index=0
 run_stage() {
     local name="$1"; shift
     stage_index=$((stage_index + 1))
-    local log="$LOG_DIR/$(printf '%02d' "$stage_index")_${name// /_}.log"
+    # 名称中的空格与斜杠都转下划线: 斜杠会被当成子目录导致 tee 建档
+    # 失败 (如 "E2E-04a/09a/11c/12b"), 分项日志就悄悄丢了
+    local safe_name="${name// /_}"
+    safe_name="${safe_name//\//_}"
+    local log="$LOG_DIR/$(printf '%02d' "$stage_index")_${safe_name}.log"
     echo ""
     echo "${BOLD}${CYAN}==============================================================${RESET}"
     echo "${BOLD}${CYAN} E2E 冒烟 $stage_index: $name${RESET}"
