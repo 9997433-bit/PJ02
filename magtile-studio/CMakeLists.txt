@@ -63,6 +63,7 @@ add_library(magtile_core STATIC
     src/core/tile_catalog.cpp
     src/core/json_io.cpp
     src/core/model_catalog.cpp
+    src/core/parent_gate.cpp
     src/physics/geometry.cpp
     src/physics/physics_validator.cpp
     src/progress/progress_store.cpp
@@ -175,6 +176,15 @@ if(MAGTILE_BUILD_TESTS)
     # 进度存档 CLI 冒烟: 空库 list 必须正常退出 (同时覆盖建库建表路径)
     add_test(NAME progress_cli_smoke
         COMMAND magtile_app progress list --db ${CMAKE_CURRENT_BINARY_DIR}/progress_cli_smoke.db)
+
+    # 家长门单元测试 (C++): 题目生成域、中文大写数字转换/解析、
+    # 验证逻辑、冷却状态机、内存会话有效期 (SECURITY_AND_PRIVACY.md §6.2
+    # 要求家长门组件独立可复用并单元测试)
+    if(EXISTS ${MAGTILE_TESTS_DIR}/test_parent_gate.cpp)
+        add_executable(magtile_parent_gate_test tests/test_parent_gate.cpp)
+        target_link_libraries(magtile_parent_gate_test PRIVATE magtile_core magtile_warnings)
+        add_test(NAME parent_gate COMMAND magtile_parent_gate_test)
+    endif()
 
     # 模型库目录对账: model_catalog.json 卡片元数据 (名称/难度/片数/步数)
     # 必须与模型文件一致, 防止商业版模型库界面展示信息漂移

@@ -70,6 +70,29 @@ struct LibraryCard {
 struct LibraryActions {
     std::string open_model_id;       ///< 点击卡片 / 继续搭建: 打开该模型教程
     std::string toggle_favorite_id;  ///< 点击收藏星标: 切换收藏状态
+    bool open_parent_area = false;   ///< 点击 "家长区" 入口 (须先过家长门)
+};
+
+/// 家长门界面一帧的展示状态 (验证逻辑由应用层 core::ParentGate
+/// 驱动, 渲染层只负责题面展示与中文大写数字软键盘输入)。
+struct ParentGateState {
+    std::string question;        ///< 题面 (中文数字), 如 "叁 × 柒 = ?"
+    int attempts_remaining = 3;  ///< 本轮剩余尝试次数
+    int cooldown_seconds = 0;    ///< >0 = 冷却中, 显示温和的 "休息一下"
+    bool wrong_answer = false;   ///< 上次提交答错 (显示温和提示, 无惩罚文案)
+};
+
+/// 家长门界面一帧内用户发出的操作。
+struct ParentGateActions {
+    bool submitted = false;  ///< 点击 [确认]
+    std::string answer;      ///< submitted 时: 软键盘拼出的中文大写数字答案
+    bool dismissed = false;  ///< 点击 [返回]: 放弃验证回到模型库
+};
+
+/// 家长区 (家长门之后的占位页) 一帧内用户发出的操作。
+struct ParentAreaActions {
+    bool back_to_library = false;  ///< 返回模型库 (家长会话保持有效)
+    bool lock_now = false;         ///< 立即锁定家长区 (结束家长会话)
 };
 
 /// 带窗口与交互能力的渲染后端接口。
@@ -97,6 +120,16 @@ public:
     /// 提交全量卡片即可。须在 beginFrame 与 endFrame 之间调用,
     /// 每帧至多一次, 与 submitHud 互斥 (二者分属不同界面)。
     [[nodiscard]] virtual LibraryActions submitLibrary(const std::vector<LibraryCard>& cards) = 0;
+
+    /// 绘制家长门界面 (算术题 + 中文大写数字软键盘) 并返回用户
+    /// 操作。软键盘输入缓冲由渲染器跨帧保持, 提交/返回时自动清空。
+    /// 须在 beginFrame 与 endFrame 之间调用, 每帧至多一次, 与
+    /// submitHud / submitLibrary 互斥 (分属不同界面)。
+    [[nodiscard]] virtual ParentGateActions submitParentGate(const ParentGateState& state) = 0;
+
+    /// 绘制家长区占位页 (订阅管理 / 设置占位 + 会话剩余时间) 并
+    /// 返回用户操作。调用约定同 submitParentGate。
+    [[nodiscard]] virtual ParentAreaActions submitParentArea(int session_remaining_seconds) = 0;
 
     /// 冒烟测试辅助: 请求在本帧 endFrame 时把画面保存为 PPM (P6)
     /// 图片。写入失败仅输出警告, 不影响渲染循环。

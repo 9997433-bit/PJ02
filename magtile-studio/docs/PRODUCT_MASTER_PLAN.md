@@ -197,7 +197,7 @@ flowchart TB
 
 | 功能 | 说明 | 状态 | 规范出处 |
 |------|------|------|----------|
-| 家长门（算术题/PIN, 会话不落盘） **[M3 门槛]** | 付费/设置/外链/账号/数据操作前置 | `PLANNED` | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §6 |
+| 家长门（算术题/PIN, 会话不落盘） **[M3 门槛]** | 付费/设置/外链/账号/数据操作前置 | `IN_PROGRESS`（算术题门 stub `DONE`: 桌面模型库家长区入口已拦截, 15 分钟内存会话; PIN 待做） | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §6 |
 | 家长中心（订阅/模式/库存/数据面板） **[M3 门槛]** | 门后聚合页 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §9.2 |
 | 隐私政策 + 儿童个人信息保护声明 **[M3 门槛]** | 离线可读, 家长一页纸摘要 | `PLANNED` | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §4 |
 | COPPA + 中国《规定》合规清单落地 **[M3 门槛]** | 专员任命/数据查删/单独同意 | `PLANNED` | 同上 §4 |

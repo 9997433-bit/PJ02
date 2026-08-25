@@ -37,6 +37,7 @@
 #include <unordered_set>
 #include <utility>
 
+#include "magtile/core/parent_gate.hpp"
 #include "magtile/physics/geometry.hpp"
 #include "magtile/render/gl_renderer.hpp"
 #endif
@@ -57,6 +58,7 @@ struct CliArgs {
     std::string progress_action; ///< progress 子命令: list / show / reset
     std::string model_id;        ///< progress show/reset 的目标模型 id
     std::string open_model;      ///< library --gui: 启动后直接打开的模型 id
+    bool open_parent_gate = false;  ///< library --gui: 启动即显示家长门 (评审/冒烟)
     fs::path db_file;            ///< 进度存档路径; 为空时用平台默认路径
 };
 
@@ -79,6 +81,7 @@ void printUsage() {
         "图形模式选项:\n"
         "  --step N            (tutorial) 从第 N 步开始 (默认 1)\n"
         "  --open MODEL_ID     (library) 启动后直接进入指定模型的教程\n"
+        "  --parent-gate       (library) 启动即显示家长门界面 (评审/冒烟测试)\n"
         "  --frames N          渲染 N 帧后自动退出 (供 CI 冒烟测试)\n"
         "  --screenshot FILE   退出前把画面保存为 PPM 图片 (供 CI 冒烟测试)\n"
         "\n"
@@ -110,6 +113,8 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
         } else if (arg == "--open") {
             if (i + 1 >= argc) return false;
             args.open_model = argv[++i];
+        } else if (arg == "--parent-gate") {
+            args.open_parent_gate = true;
         } else if (arg == "--db") {
             if (i + 1 >= argc) return false;
             args.db_file = argv[++i];
@@ -509,6 +514,16 @@ int runLibraryGui(const CliArgs& args) {
     // --open <model_id>: 启动即进入指定模型 (深链 / 冒烟测试)
     std::string pending_open = args.open_model;
 
+    // 家长门: 订阅/设置 (家长区) 前置强制关卡 (UI_UX_SPEC.md §9)。
+    // 会话与冷却只存内存, 重启即失效, 不落盘 "已通过" 标记
+    // (SECURITY_AND_PRIVACY.md §6.2)。
+    enum class LibraryScreen { Cards, ParentGate, ParentArea };
+    // --parent-gate: 启动即显示家长门 (构造时已生成一道新题)
+    LibraryScreen screen =
+        args.open_parent_gate ? LibraryScreen::ParentGate : LibraryScreen::Cards;
+    core::ParentGate parent_gate;
+    bool gate_wrong_answer = false;  // 上次提交答错, 用于门界面温和提示
+
     long frame_index = 0;
     while (!renderer->shouldClose()) {
         // ---- 教程会话: 有待打开的模型则切换到教程界面 -----------------
@@ -551,35 +566,49 @@ int runLibraryGui(const CliArgs& args) {
             continue;
         }
 
-        // ---- 模型库界面帧 --------------------------------------------
+        // ---- 模型库 / 家长门 / 家长区界面帧 -----------------------------
         renderer->pollEvents();
         (void)renderer->consumeActions();  // 库界面不使用教程键盘导航
 
-        std::vector<render::LibraryCard> cards;
-        cards.reserve(entries.size());
-        for (const auto& entry : entries) {
-            render::LibraryCard card;
-            card.model_id = entry.id;
-            card.name = entry.name;
-            card.name_en = entry.name_en;
-            card.description = entry.description;
-            card.difficulty = entry.difficulty;
-            card.total_pieces = entry.total_pieces;
-            card.step_count = entry.step_count;
-            card.theme = entry.theme();
-            card.tags = entry.tags;
-            if (const auto record = store.loadProgress(entry.id); record.has_value()) {
-                card.completed = record->isCompleted();
-                // 收藏也会建档, "进行中" 只认真正搭过的 (步骤 > 0)
-                card.started = !card.completed && record->current_step > 0;
-                card.favorited = record->favorited;
-                card.current_step = record->current_step;
-            }
-            cards.push_back(std::move(card));
-        }
+        render::LibraryActions library_actions;
+        render::ParentGateActions gate_actions;
+        render::ParentAreaActions area_actions;
 
         renderer->beginFrame(render::Camera{});  // 默认视角的空场景网格作背景
-        const render::LibraryActions library_actions = renderer->submitLibrary(cards);
+        if (screen == LibraryScreen::Cards) {
+            std::vector<render::LibraryCard> cards;
+            cards.reserve(entries.size());
+            for (const auto& entry : entries) {
+                render::LibraryCard card;
+                card.model_id = entry.id;
+                card.name = entry.name;
+                card.name_en = entry.name_en;
+                card.description = entry.description;
+                card.difficulty = entry.difficulty;
+                card.total_pieces = entry.total_pieces;
+                card.step_count = entry.step_count;
+                card.theme = entry.theme();
+                card.tags = entry.tags;
+                if (const auto record = store.loadProgress(entry.id); record.has_value()) {
+                    card.completed = record->isCompleted();
+                    // 收藏也会建档, "进行中" 只认真正搭过的 (步骤 > 0)
+                    card.started = !card.completed && record->current_step > 0;
+                    card.favorited = record->favorited;
+                    card.current_step = record->current_step;
+                }
+                cards.push_back(std::move(card));
+            }
+            library_actions = renderer->submitLibrary(cards);
+        } else if (screen == LibraryScreen::ParentGate) {
+            render::ParentGateState gate_state;
+            gate_state.question = parent_gate.question();
+            gate_state.attempts_remaining = parent_gate.attemptsRemaining();
+            gate_state.cooldown_seconds = parent_gate.cooldownRemainingSeconds();
+            gate_state.wrong_answer = gate_wrong_answer;
+            gate_actions = renderer->submitParentGate(gate_state);
+        } else {
+            area_actions = renderer->submitParentArea(parent_gate.sessionRemainingSeconds());
+        }
         const bool last_frame = args.max_frames > 0 && frame_index + 1 >= args.max_frames;
         if (last_frame && !args.screenshot_file.empty()) {
             renderer->requestScreenshot(args.screenshot_file);
@@ -587,11 +616,47 @@ int runLibraryGui(const CliArgs& args) {
         renderer->endFrame();
         ++frame_index;
 
-        if (!library_actions.toggle_favorite_id.empty()) {
-            store.toggleFavorite(library_actions.toggle_favorite_id);
-        }
-        if (!library_actions.open_model_id.empty()) {
-            pending_open = library_actions.open_model_id;
+        // ---- 帧末统一应用界面操作 --------------------------------------
+        if (screen == LibraryScreen::Cards) {
+            if (!library_actions.toggle_favorite_id.empty()) {
+                store.toggleFavorite(library_actions.toggle_favorite_id);
+            }
+            if (!library_actions.open_model_id.empty()) {
+                pending_open = library_actions.open_model_id;
+            }
+            if (library_actions.open_parent_area) {
+                if (parent_gate.sessionActive()) {
+                    screen = LibraryScreen::ParentArea;  // 15 分钟会话内免重复验证
+                } else {
+                    parent_gate.newChallenge();  // 每次进门都是新题, 防背题
+                    gate_wrong_answer = false;
+                    screen = LibraryScreen::ParentGate;
+                }
+            }
+        } else if (screen == LibraryScreen::ParentGate) {
+            if (gate_actions.submitted) {
+                switch (parent_gate.submitAnswer(gate_actions.answer)) {
+                    case core::ParentGateResult::Passed:
+                        gate_wrong_answer = false;
+                        screen = LibraryScreen::ParentArea;
+                        break;
+                    case core::ParentGateResult::WrongAnswer:
+                        gate_wrong_answer = true;
+                        break;
+                    case core::ParentGateResult::CoolingDown:
+                        gate_wrong_answer = false;  // 冷却界面自带温和提示
+                        break;
+                }
+            }
+            if (gate_actions.dismissed) {
+                gate_wrong_answer = false;
+                screen = LibraryScreen::Cards;
+            }
+        } else {
+            if (area_actions.lock_now) parent_gate.endSession();
+            if (area_actions.lock_now || area_actions.back_to_library) {
+                screen = LibraryScreen::Cards;
+            }
         }
         if (last_frame) break;
     }

@@ -8,7 +8,9 @@
 #      DISPLAY), 渲染 5 帧并保存 PPM 截图, 校验格式与内容非纯色;
 #   3. library --gui --open <model>: 深链直接进入教程会话, 渲染数帧
 #      后退出, 校验进度存档中确实建档 (库与教程/进度模块联动);
-#   4. 无显示环境时 2/3 降级为链接检查 (--gui 退出码不为 2)。
+#   4. library --gui --parent-gate: 渲染家长门界面 (算术题 + 中文
+#      大写数字软键盘) 并截图, 校验非纯色 (家长门 UI 冒烟);
+#   5. 无显示环境时 2/3/4 降级为链接检查 (--gui 退出码不为 2)。
 #
 # 用法:
 #   tests/test_library_smoke.sh <magtile_app 路径> <项目根>
@@ -114,6 +116,35 @@ if [[ $? -eq 0 ]] && grep -q "$MODEL_ID" <<<"$show_output"; then
 else
     fail "进度存档中没有 $MODEL_ID 的记录 (库与进度模块联动失败)"
     printf '%s\n' "$show_output" >&2
+fi
+
+# ---- 4. --parent-gate: 家长门界面渲染 + 截图 ------------------------
+GATE_SHOT="$WORK_DIR/parent_gate.ppm"
+echo "[信息] 无头渲染家长门界面 $FRAMES 帧..."
+"${TIMEOUT_CMD[@]}" "${RUNNER[@]}" \
+    "$APP" library --data-dir "$DATA_DIR" --db "$DB" \
+    --gui --parent-gate --frames "$FRAMES" --screenshot "$GATE_SHOT"
+gate_exit=$?
+if [[ "$gate_exit" -eq 0 ]]; then
+    pass "家长门界面渲染 $FRAMES 帧后正常退出"
+else
+    fail "家长门界面渲染退出码 $gate_exit (期望 0)"
+fi
+
+if [[ -s "$GATE_SHOT" ]]; then
+    gate_header="$(head -c 32 "$GATE_SHOT" | head -n 2 | tr '\n' ' ')"
+    if [[ "$gate_header" == P6\ * ]]; then
+        distinct="$(tail -c 262144 "$GATE_SHOT" | od -An -v -tx1 | tr ' ' '\n' | sort -u | grep -c . || true)"
+        if [[ "$distinct" -ge 2 ]]; then
+            pass "家长门截图已生成且非纯色 (采样到 $distinct 种字节值)"
+        else
+            fail "家长门截图疑似纯色/空白 (采样仅 $distinct 种字节值)"
+        fi
+    else
+        fail "家长门截图不是 PPM (P6) 格式: $gate_header"
+    fi
+else
+    fail "未生成家长门截图 $GATE_SHOT"
 fi
 
 echo

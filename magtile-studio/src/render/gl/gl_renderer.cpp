@@ -24,6 +24,7 @@
 #include <functional>
 #include <iterator>
 #include <string>
+#include <string_view>
 #include <utility>
 #include <vector>
 
@@ -319,6 +320,8 @@ public:
     }
     [[nodiscard]] TutorialActions submitHud(const TutorialHudState& hud) override;
     [[nodiscard]] LibraryActions submitLibrary(const std::vector<LibraryCard>& cards) override;
+    [[nodiscard]] ParentGateActions submitParentGate(const ParentGateState& state) override;
+    [[nodiscard]] ParentAreaActions submitParentArea(int session_remaining_seconds) override;
     void requestScreenshot(const std::string& ppm_path) override { screenshot_path_ = ppm_path; }
 
 private:
@@ -357,6 +360,9 @@ private:
     int library_difficulty_filter_ = 0;  ///< 0 = 全部难度, 1~5 = 对应星级
     std::string library_theme_filter_;   ///< 空 = 全部主题
     bool library_favorites_only_ = false;
+
+    // 家长门软键盘的跨帧输入缓冲 (中文大写数字; 提交/返回时清空)
+    std::string parent_gate_input_;
 
     // GL 资源
     GLuint program_ = 0;
@@ -571,9 +577,10 @@ void GlRenderer::setupImGui() {
 
     if (const char* font_path = findCjkFontPath(); font_path != nullptr) {
         // 常用简体字形之外补充模型库界面用到的符号 (星级/角标/箭头)
+        // 与家长门的中文大写数字 (财务体不在常用 2500 字表内)
         ImFontGlyphRangesBuilder ranges_builder;
         ranges_builder.AddRanges(io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
-        ranges_builder.AddText("★☆●○◆▶◀·");
+        ranges_builder.AddText("★☆●○◆▶◀·×零壹贰叁肆伍陆柒捌玖拾");
         glyph_ranges_.clear();
         ranges_builder.BuildRanges(&glyph_ranges_);
         io.Fonts->AddFontFromFileTTF(font_path, 19.0f, nullptr, glyph_ranges_.Data);
@@ -1001,6 +1008,21 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards) 
         if (font_title_ != nullptr) ImGui::PushFont(font_title_);
         ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorInk), "MagTile Studio 模型库");
         if (font_title_ != nullptr) ImGui::PopFont();
+
+        // 家长区入口: 刻意小尺寸 (全应用唯一低于 48dp 的可点元素,
+        // 防儿童误入) + 家长门兜底, 见 UI_UX_SPEC.md §5.3 / §9
+        const float entry_width = 96.0f;
+        ImGui::SameLine(panel_width - 26.0f - entry_width);
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.42f, 0.45f, 0.52f, 0.12f));
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.42f, 0.45f, 0.52f, 1.0f));
+        if (ImGui::Button("家长区##parent_entry", ImVec2(entry_width, 32.0f))) {
+            actions.open_parent_area = true;
+        }
+        ImGui::PopStyleColor(2);
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("订阅与设置 (需要家长完成验证)");
+        }
+
         ImGui::TextDisabled("挑选一个模型, 跟随 3D 分步教程开始搭建 · 共 %d 个模型 · Esc 退出",
                             static_cast<int>(cards.size()));
         ImGui::Spacing();
@@ -1124,6 +1146,201 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards) 
             }
         }
         ImGui::EndChild();
+    }
+    ImGui::End();
+    ImGui::PopStyleVar(2);
+    return actions;
+}
+
+ParentGateActions GlRenderer::submitParentGate(const ParentGateState& state) {
+    ParentGateActions actions;
+    const ImGuiIO& io = ImGui::GetIO();
+
+    ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f),
+                            ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2(480.0f, 0.0f));  // 固定宽, 高度自适应
+    ImGui::SetNextWindowBgAlpha(0.975f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 16.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(30.0f, 26.0f));
+    const ImGuiWindowFlags flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
+                                   ImGuiWindowFlags_NoSavedSettings |
+                                   ImGuiWindowFlags_AlwaysAutoResize;
+    if (ImGui::Begin("##parent_gate", nullptr, flags)) {
+        const float avail = ImGui::GetContentRegionAvail().x;
+        const auto centeredText = [&](const char* text) {
+            ImGui::SetCursorPosX(
+                std::max(0.0f, (ImGui::GetWindowWidth() - ImGui::CalcTextSize(text).x) * 0.5f));
+            ImGui::TextUnformatted(text);
+        };
+
+        if (font_title_ != nullptr) ImGui::PushFont(font_title_);
+        centeredText("请家长来完成");
+        if (font_title_ != nullptr) ImGui::PopFont();
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.48f, 0.51f, 0.58f, 1.0f));
+        centeredText("订阅与设置只对家长开放, 请作答后进入家长区");
+        ImGui::PopStyleColor();
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::Spacing();
+
+        if (state.cooldown_seconds > 0) {
+            // ---- 冷却: 温和的 "休息一下", 无惩罚文案 (P3 零挫败) ------
+            parent_gate_input_.clear();
+            ImGui::Dummy(ImVec2(0.0f, 10.0f));
+            if (font_title_ != nullptr) ImGui::PushFont(font_title_);
+            centeredText("休息一下");
+            if (font_title_ != nullptr) ImGui::PopFont();
+            char cooldown_text[64];
+            std::snprintf(cooldown_text, sizeof(cooldown_text), "%d 秒后可以再试一次",
+                          state.cooldown_seconds);
+            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.48f, 0.51f, 0.58f, 1.0f));
+            centeredText(cooldown_text);
+            ImGui::PopStyleColor();
+            ImGui::Dummy(ImVec2(0.0f, 14.0f));
+            if (ImGui::Button("返回模型库##gate_back", ImVec2(avail, 48.0f))) {
+                actions.dismissed = true;
+            }
+        } else {
+            // ---- 题面 + 中文大写数字软键盘 ----------------------------
+            if (font_title_ != nullptr) ImGui::PushFont(font_title_);
+            centeredText(state.question.c_str());
+            if (font_title_ != nullptr) ImGui::PopFont();
+            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.48f, 0.51f, 0.58f, 1.0f));
+            centeredText("请用中文大写数字作答 (例: 贰拾壹)");
+            ImGui::PopStyleColor();
+            ImGui::Spacing();
+
+            // 答案展示框
+            {
+                ImDrawList* draw_list = ImGui::GetWindowDrawList();
+                const ImVec2 top_left = ImGui::GetCursorScreenPos();
+                const ImVec2 bottom_right{top_left.x + avail, top_left.y + 46.0f};
+                draw_list->AddRectFilled(top_left, bottom_right,
+                                         IM_COL32(237, 239, 245, 255), 10.0f);
+                const bool empty = parent_gate_input_.empty();
+                const char* text = empty ? "点击下方数字键输入" : parent_gate_input_.c_str();
+                const ImVec2 text_size = ImGui::CalcTextSize(text);
+                draw_list->AddText(ImVec2(top_left.x + (avail - text_size.x) * 0.5f,
+                                          top_left.y + (46.0f - text_size.y) * 0.5f),
+                                   empty ? IM_COL32(150, 155, 165, 255) : kColorInk, text);
+                ImGui::Dummy(ImVec2(avail, 46.0f));
+            }
+
+            if (state.wrong_answer) {
+                char retry_text[96];
+                std::snprintf(retry_text, sizeof(retry_text),
+                              "还差一点, 再试一次吧 (还可尝试 %d 次)", state.attempts_remaining);
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.86f, 0.49f, 0.13f, 1.0f));
+                centeredText(retry_text);
+                ImGui::PopStyleColor();
+            }
+            ImGui::Spacing();
+
+            // 软键盘: 家长门不依赖物理键盘/输入法 (平板同款交互)
+            static constexpr const char* kKeypad[4][3] = {
+                {"壹", "贰", "叁"}, {"肆", "伍", "陆"}, {"柒", "捌", "玖"}, {"零", "拾", "退格"}};
+            const float key_spacing = 8.0f;
+            const float key_width = (avail - key_spacing * 2.0f) / 3.0f;
+            for (const auto& row : kKeypad) {
+                for (int col = 0; col < 3; ++col) {
+                    if (col > 0) ImGui::SameLine(0.0f, key_spacing);
+                    const std::string label = std::string(row[col]) + "##gate_key";
+                    if (ImGui::Button(label.c_str(), ImVec2(key_width, 48.0f))) {
+                        if (std::string_view(row[col]) == "退格") {
+                            // 键盘只产生 3 字节 CJK 字符, 退格按整字删除
+                            if (parent_gate_input_.size() >= 3) {
+                                parent_gate_input_.resize(parent_gate_input_.size() - 3);
+                            }
+                        } else if (parent_gate_input_.size() < 4 * 3) {
+                            parent_gate_input_ += row[col];
+                        }
+                    }
+                }
+            }
+
+            ImGui::Spacing();
+            const float button_width = (avail - 10.0f) * 0.5f;
+            ImGui::BeginDisabled(parent_gate_input_.empty());
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.28f, 0.44f, 0.93f, 0.90f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.24f, 0.40f, 0.88f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.20f, 0.35f, 0.80f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+            if (ImGui::Button("确认##gate_submit", ImVec2(button_width, 48.0f))) {
+                actions.submitted = true;
+                actions.answer = parent_gate_input_;
+                parent_gate_input_.clear();
+            }
+            ImGui::PopStyleColor(4);
+            ImGui::EndDisabled();
+            ImGui::SameLine(0.0f, 10.0f);
+            if (ImGui::Button("返回##gate_dismiss", ImVec2(button_width, 48.0f))) {
+                actions.dismissed = true;
+                parent_gate_input_.clear();
+            }
+        }
+    }
+    ImGui::End();
+    ImGui::PopStyleVar(2);
+    return actions;
+}
+
+ParentAreaActions GlRenderer::submitParentArea(int session_remaining_seconds) {
+    ParentAreaActions actions;
+    const ImGuiIO& io = ImGui::GetIO();
+
+    ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f),
+                            ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2(560.0f, 0.0f));
+    ImGui::SetNextWindowBgAlpha(0.975f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 16.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(30.0f, 26.0f));
+    const ImGuiWindowFlags flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
+                                   ImGuiWindowFlags_NoSavedSettings |
+                                   ImGuiWindowFlags_AlwaysAutoResize;
+    if (ImGui::Begin("##parent_area", nullptr, flags)) {
+        const float avail = ImGui::GetContentRegionAvail().x;
+
+        if (font_title_ != nullptr) ImGui::PushFont(font_title_);
+        ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorInk), "家长中心");
+        if (font_title_ != nullptr) ImGui::PopFont();
+        ImGui::TextDisabled("家长会话剩余 %d 分 %02d 秒 · 只保存在内存, 退出应用即失效",
+                            session_remaining_seconds / 60, session_remaining_seconds % 60);
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::Spacing();
+
+        // ---- 占位分区 (M3 商用功能, 见 UI_UX_SPEC.md §9.2 / §11) ------
+        ImGui::TextColored(kAccentVec, "订阅");
+        ImGui::TextDisabled("全库订阅与恢复购买将在正式版开放; 儿童界面不显示任何价格。");
+        ImGui::BeginDisabled();
+        (void)ImGui::Button("订阅管理 (即将上线)##sub_placeholder", ImVec2(avail, 44.0f));
+        ImGui::EndDisabled();
+        ImGui::Spacing();
+
+        ImGui::TextColored(kAccentVec, "设置");
+        ImGui::TextDisabled("年龄段模式 / 音量与朗读 / 磁力片库存管理 / 进度重置。");
+        ImGui::BeginDisabled();
+        (void)ImGui::Button("打开设置 (即将上线)##settings_placeholder", ImVec2(avail, 44.0f));
+        ImGui::EndDisabled();
+        ImGui::Spacing();
+
+        ImGui::TextColored(kAccentVec, "隐私与数据");
+        ImGui::TextDisabled("本应用不采集儿童个人信息; 数据导出与一键清除将在此提供。");
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::Spacing();
+
+        const float button_width = (avail - 10.0f) * 0.5f;
+        if (ImGui::Button("返回模型库##area_back", ImVec2(button_width, 48.0f))) {
+            actions.back_to_library = true;
+        }
+        ImGui::SameLine(0.0f, 10.0f);
+        if (ImGui::Button("锁定家长区##area_lock", ImVec2(button_width, 48.0f))) {
+            actions.lock_now = true;
+        }
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("立即结束家长会话, 再次进入需重新验证");
+        }
     }
     ImGui::End();
     ImGui::PopStyleVar(2);
