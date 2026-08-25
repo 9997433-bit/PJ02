@@ -121,7 +121,7 @@
 
 - 进度库为单文件 SQLite（`progress.db`），schema 版本化（`PRAGMA user_version`），旧应用拒写新版本库，防降级损坏。`DONE`
 - 数据库路径由平台外壳注入应用私有目录（Android `filesDir`、Windows `%APPDATA%`），不落公共存储。`DONE`
-- Android 构建关闭 `allowBackup` 的云备份白名单外泄（backup 规则仅含 progress.db，且 M4 起若含令牌则排除令牌文件）。`PLANNED`
+- Android 构建关闭 `allowBackup` 的云备份白名单外泄（backup 规则仅含 progress.db，且 M4 起若含令牌则排除令牌文件）。`DONE` —— 保留 `allowBackup="true"`（孩子的搭建进度换机不丢），manifest 挂双份白名单规则：API 31+ `dataExtractionRules`（云备份 + 设备迁移两节）与 API 26~30 `fullBackupContent` 均仅 `<include>` `progress.db`（`platforms/android/app/src/main/res/xml/`），解包数据资产与导出 JSON 隐式排除；决策与商店 Data Safety 申报的一致性随签核单 DC7 核验。
 
 ### 5.2 儿童构建零第三方分析 SDK（`POLICY`，验收硬条款）
 

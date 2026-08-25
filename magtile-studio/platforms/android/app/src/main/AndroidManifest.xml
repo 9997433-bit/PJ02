@@ -13,10 +13,17 @@
         android:required="true" />
 
     <!-- MagTileApplication: Release 档启动时经 PlayBillingManager 向
-         Play 账户静默恢复订阅权益 (Debug 档温和短路, QA 走模拟订阅) -->
+         Play 账户静默恢复订阅权益 (Debug 档温和短路, QA 走模拟订阅)。
+         备份口径 (SECURITY_AND_PRIVACY.md §5.1, 签核单 DC7): 保留
+         allowBackup 但白名单只放行 progress.db (孩子的搭建进度换机
+         不丢) —— API 31+ 走 dataExtractionRules (云备份 + 设备迁移),
+         API 26~30 走 fullBackupContent, 两份规则同一白名单; 解包的
+         数据资产与导出 JSON 隐式排除, 不进云备份 -->
     <application
         android:name=".MagTileApplication"
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="false"

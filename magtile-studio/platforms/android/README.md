@@ -102,6 +102,8 @@ platforms/android/
         │   ├── ThumbnailLoader.kt     assets/thumbnails 异步解码 + LruCache
         │   └── DataAssetInstaller.kt  assets/data -> filesDir/data 解包
         └── res/                       布局 / 主题 / 自适应启动图标
+            └── xml/                   备份白名单 (data_extraction_rules +
+                                       backup_rules, 仅含 progress.db, 见第四节)
 ```
 
 ## 一、构建 APK (Gradle, 推荐)
@@ -458,8 +460,19 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
   解码 + `LruCache` (进程内存 1/8 上限), 不占用 `filesDir` 空间;
   asset 缺失时卡片显示占位底色, 并记入负缓存避免滚动时反复尝试 IO。
 - 进度存档 (磁力片库存 / 教程进度 / 收藏) 是运行期数据, 不在 assets
-  范围: `filesDir/progress.db` (SQLite, 随 `allowBackup` 自动备份),
-  schema 与桌面完全一致 (同一份 `progress_store.cpp` 编译进 .so)。
+  范围: `filesDir/progress.db` (SQLite), schema 与桌面完全一致 (同一份
+  `progress_store.cpp` 编译进 .so)。
+- **备份口径** (SECURITY_AND_PRIVACY.md §5.1 / 签核单 DC7): 保留
+  `allowBackup="true"` —— 孩子的搭建进度换机/恢复出厂后不丢; 但
+  manifest 挂**双份白名单规则**把系统备份限制到仅 `progress.db`:
+  API 31+ 走 `android:dataExtractionRules`
+  (`res/xml/data_extraction_rules.xml`, 云备份与设备迁移两节同一
+  白名单), API 26~30 走 `android:fullBackupContent`
+  (`res/xml/backup_rules.xml`); 有 `<include>` 时其余文件隐式排除 ——
+  `filesDir/data` 解包数据资产 (可从 APK 重建, 且约 3.3 MB 白占
+  25 MB 备份配额) 与外部专属目录的导出 JSON (家长显式动作的产物,
+  不该悄悄进云) 都不参与备份。两份规则文件必须保持同一白名单;
+  M4 起若引入令牌/凭证文件, 须在两份规则中核对排除 (§5.1 令牌条款)。
 
 ## 五、CI
 
