@@ -1,0 +1,1269 @@
+{
+  "schema_version": 1,
+  "id": "art_gallery_01",
+  "name": "白盒双光庭美术馆",
+  "name_en": "Art Gallery 01",
+  "description": "全库第一座 L 形平面建筑: 两翼展厅折成 L, 转角凹出前庭广场; 屋面开两个 1x1 负空间光庭, 透明窗格方鼓身四角闭环、等边四坡锥自锁收头, 天光正对馆内展品; 外墙嵌红黄蓝窗格方色块 (蒙德里安式立面), 馆内彩色展墙与三角雕塑先布展后封顶 —— 装配顺序即策展顺序; 门口透明雨棚单边铰链外挑, 前庭立着馆外第一件雕塑。",
+  "difficulty": 3,
+  "total_pieces": 69,
+  "tags": [
+    "博物馆",
+    "艺术",
+    "美术馆",
+    "光庭",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 28,
+        "rectangle": 15,
+        "window_square": 14,
+        "equilateral_triangle": 10,
+        "door_frame": 1,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g0_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_b",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_c",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_d",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_a",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_b",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g1_c",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g1_d",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "g1_e",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_a",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g2_c",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_d",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_e",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_a",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g3_c",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g3_d",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g4_a",
+      "type": "square",
+      "position": [
+        0.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g4_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g4_c",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g4_d",
+      "type": "square",
+      "position": [
+        5.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g5_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g5_b",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g5_c",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wS_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wS_2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "door",
+      "type": "door_frame",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wE_b",
+      "type": "window_square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wA_s1",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wA_s2",
+      "type": "window_square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wA_e1",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wA_e2",
+      "type": "window_square",
+      "position": [
+        5.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wN_1",
+      "type": "square",
+      "position": [
+        1.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wN_2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wN_3",
+      "type": "square",
+      "position": [
+        3.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wN_4",
+      "type": "square",
+      "position": [
+        4.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wW_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wW_2",
+      "type": "window_square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wW_3",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wW_4",
+      "type": "square",
+      "position": [
+        1.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "exhib_r",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "exhib_b",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "statue",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rfB1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rfB2",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rfA1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rfA2",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rfA3",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rfA4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lantB_s",
+      "type": "window_square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lantB_e",
+      "type": "window_square",
+      "position": [
+        2.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lantB_n",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lantB_w",
+      "type": "window_square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lantB_hat_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.166667,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lantB_hat_e",
+      "type": "equilateral_triangle",
+      "position": [
+        1.833333,
+        1.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lantB_hat_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.833333,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lantB_hat_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.166667,
+        1.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lantA_s",
+      "type": "window_square",
+      "position": [
+        3.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lantA_e",
+      "type": "window_square",
+      "position": [
+        4.0,
+        4.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lantA_n",
+      "type": "window_square",
+      "position": [
+        3.5,
+        5.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lantA_w",
+      "type": "window_square",
+      "position": [
+        3.0,
+        4.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lantA_hat_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.166667,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lantA_hat_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.833333,
+        4.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lantA_hat_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.833333,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lantA_hat_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.166667,
+        4.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "canopy",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "plaza_tri",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "plaza_spire",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        2.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南侧地面 (y [0,2]): 9 片, 橙色步道直指入口。",
+      "tip": "青色是展厅地板, 灰色是室外广场 —— 步道尽头就是大门。",
+      "tiles_to_add": [
+        "g0_a",
+        "g0_b",
+        "g0_c",
+        "g0_d",
+        "g1_a",
+        "g1_b",
+        "g1_c",
+        "g1_d",
+        "g1_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺中部地面 (y [2,4]): 9 片, 主翼展厅地板开始出现。",
+      "tip": "美术馆平面是一个 L: 南翼窄、主翼宽, 转角凹出前庭。",
+      "tiles_to_add": [
+        "g2_a",
+        "g2_b",
+        "g2_c",
+        "g2_d",
+        "g2_e",
+        "g3_a",
+        "g3_b",
+        "g3_c",
+        "g3_d"
+      ],
+      "highlight_tiles": [
+        "g1_b"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺北侧地面 (y [4,6]): 7 片, 场地合拢。",
+      "tip": "6x6 场地铺满, 所有墙线都压在地板拼缝上。",
+      "tiles_to_add": [
+        "g4_a",
+        "g4_b",
+        "g4_c",
+        "g4_d",
+        "g5_a",
+        "g5_b",
+        "g5_c"
+      ],
+      "highlight_tiles": [
+        "g3_b"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立南翼墙与入口: 门框方大门朝东, 红蓝色块嵌进立面。",
+      "tip": "彩色窗格方就是蒙德里安式的立面构成 —— 墙即作品。",
+      "tiles_to_add": [
+        "wS_1",
+        "wS_2",
+        "door",
+        "wE_b"
+      ],
+      "highlight_tiles": [
+        "g1_c"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立主翼东南墙: 4 片, 黄色与红色色块继续排布。",
+      "tip": "南翼与主翼的墙在 (3,3) 转角竖边互吸。",
+      "tiles_to_add": [
+        "wA_s1",
+        "wA_s2",
+        "wA_e1",
+        "wA_e2"
+      ],
+      "highlight_tiles": [
+        "wS_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立北墙 (y=5): 4 片, 蓝色色块居中。",
+      "tip": "x [3,4] 这片墙顶稍后要竖叠光庭鼓身 —— 位置别放错。",
+      "tiles_to_add": [
+        "wN_1",
+        "wN_2",
+        "wN_3",
+        "wN_4"
+      ],
+      "highlight_tiles": [
+        "wA_e1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立西墙 (x=1): 4 片, L 形外墙闭合。",
+      "tip": "转角竖边互吸闭环, 轻推整圈墙应一起联动。",
+      "tiles_to_add": [
+        "wW_1",
+        "wW_2",
+        "wW_3",
+        "wW_4"
+      ],
+      "highlight_tiles": [
+        "wN_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "馆内布展: 红蓝展墙立上主翼, 三角雕塑放进南翼光庭正下方。",
+      "tip": "先布展后封顶 —— 装配顺序就是策展顺序 (R7b)。",
+      "tiles_to_add": [
+        "exhib_r",
+        "exhib_b",
+        "statue"
+      ],
+      "highlight_tiles": [
+        "g4_b",
+        "g2_b"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖南翼屋面: 2 片, 留出 1x1 光庭洞口 (x [1,2], y [1,2])。",
+      "tip": "洞口是负空间 —— 天光从这里落到三角雕塑上。",
+      "tiles_to_add": [
+        "rfB1",
+        "rfB2"
+      ],
+      "highlight_tiles": [
+        "wS_1",
+        "wW_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "盖主翼屋面: 4 片, 留出光庭洞口 (x [3,4], y [4,5])。",
+      "tip": "每片屋面同时压墙顶与邻板拼缝, 展墙顶边也被锁进屋面。",
+      "tiles_to_add": [
+        "rfA1",
+        "rfA2",
+        "rfA3",
+        "rfA4"
+      ],
+      "highlight_tiles": [
+        "exhib_r",
+        "exhib_b"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "起南翼光庭: 4 片透明鼓身 + 4 片等边锥自锁收头。",
+      "tip": "南/西两面竖叠外墙顶, 东/北两面吸屋面洞口沿 —— 四角闭环。",
+      "tiles_to_add": [
+        "lantB_s",
+        "lantB_w",
+        "lantB_e",
+        "lantB_n",
+        "lantB_hat_s",
+        "lantB_hat_e",
+        "lantB_hat_n",
+        "lantB_hat_w"
+      ],
+      "highlight_tiles": [
+        "rfB1",
+        "rfB2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "起主翼光庭: 4 片透明鼓身 + 4 片等边锥自锁收头。",
+      "tip": "两个光庭一蓝一黄 —— 从外面看, 屋顶长出两颗水晶。",
+      "tiles_to_add": [
+        "lantA_n",
+        "lantA_e",
+        "lantA_s",
+        "lantA_w",
+        "lantA_hat_s",
+        "lantA_hat_e",
+        "lantA_hat_n",
+        "lantA_hat_w"
+      ],
+      "highlight_tiles": [
+        "rfA2",
+        "rfA4"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "挂入口雨棚、立前庭雕塑 —— 白盒双光庭美术馆开馆!",
+      "tip": "雨棚单边铰链外挑一格, 前庭三角与尖塔是馆外的第一件展品。",
+      "tiles_to_add": [
+        "canopy",
+        "plaza_tri",
+        "plaza_spire"
+      ],
+      "highlight_tiles": [
+        "door"
+      ]
+    }
+  ]
+}
