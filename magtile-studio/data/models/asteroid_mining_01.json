@@ -1,0 +1,1250 @@
+{
+  "schema_version": 1,
+  "id": "asteroid_mining_01",
+  "name": "小行星采矿站",
+  "name_en": "Asteroid Mining Outpost 01",
+  "description": "全库第一座地外采矿站: 紫色小行星岩面上, 龙门钻机门式刚架 (双节立柱托两片桥面, 地-柱-桥-柱-地锁成大环) 正对矿脉开钻 —— 倒垂等腰钻杆底边吸桥面南沿 (受拉悬垂 30g << strict 预算 84g, 力矩 0), 钻尖恰好触地拉压双保险; 储矿仓仓口四坡矿堆冒尖, 青色输送坡道顶铰链+坡尾接地俯冲落地; 黄色居住舱气闸朝钻机、舷窗朝北, 长板舱顶双端如桥; 两座矿锥、月岩与信标旗散布场区 —— 太空淘金开工!",
+  "difficulty": 3,
+  "total_pieces": 67,
+  "tags": [
+    "航天",
+    "小行星",
+    "采矿",
+    "科学探索",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 38,
+        "equilateral_triangle": 18,
+        "rectangle": 8,
+        "door_frame": 1,
+        "isosceles_triangle": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "gd_s_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_s_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_s_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_s_3",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_6_1",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gd_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gd_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_6_2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_6_3",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_n_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_n_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_n_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gd_n_3",
+      "type": "square",
+      "position": [
+        6.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "leg_w0",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_w1",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_e0",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_e1",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "beam_w",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "beam_e",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "drill",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.333333
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rig_flag",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bin_s",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bin_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bin_w",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bin_e",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ore_top_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ore_top_e",
+      "type": "equilateral_triangle",
+      "position": [
+        1.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ore_top_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ore_top_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "belt",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "hab_s",
+      "type": "square",
+      "position": [
+        6.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hab_n",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hab_door",
+      "type": "door_frame",
+      "position": [
+        6.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hab_win",
+      "type": "window_square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hab_e_a",
+      "type": "square",
+      "position": [
+        7.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hab_e_b",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hab_roof",
+      "type": "rectangle",
+      "position": [
+        6.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hab_ant",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pile_a_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_a_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.833333,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_a_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_a_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.166667,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_b_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_b_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.833333,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_b_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_b_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.166667,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rock_a",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rock_b",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        2.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rock_c",
+      "type": "equilateral_triangle",
+      "position": [
+        7.0,
+        3.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bea_pole",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bea_flag",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        4.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺地表南沿: 3 片紫长板 + 1 片方板 (y [0,1])。",
+      "tip": "小行星的岩面从南沿铺起 —— 输送坡道的坡尾落在这排。",
+      "tiles_to_add": [
+        "gd_s_0",
+        "gd_s_1",
+        "gd_s_2",
+        "gd_s_3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺第二行 (y [1,2]): 7 片, 两处橙色矿脉露头。",
+      "tip": "矿脉露头就是开采目标 —— 钻机对着它落位。",
+      "tiles_to_add": [
+        "gd_0_1",
+        "gd_1_1",
+        "gd_2_1",
+        "gd_3_1",
+        "gd_4_1",
+        "gd_5_1",
+        "gd_6_1"
+      ],
+      "highlight_tiles": [
+        "gd_s_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺第三行 (y [2,3]): 7 片, 灰色双格是钻坑。",
+      "tip": "龙门立柱踩这行拼缝, 钻尖直插钻坑沿。",
+      "tiles_to_add": [
+        "gd_0_2",
+        "gd_1_2",
+        "gd_2_2",
+        "gd_3_2",
+        "gd_4_2",
+        "gd_5_2",
+        "gd_6_2"
+      ],
+      "highlight_tiles": [
+        "gd_0_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺第四行 (y [3,4]): 7 片, 东端再露一条矿脉。",
+      "tip": "矿锥一会儿就堆在这行 —— 刚出井的矿石。",
+      "tiles_to_add": [
+        "gd_0_3",
+        "gd_1_3",
+        "gd_2_3",
+        "gd_3_3",
+        "gd_4_3",
+        "gd_5_3",
+        "gd_6_3"
+      ],
+      "highlight_tiles": [
+        "gd_2_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "铺北沿: 3 片长板 + 1 片方板, 地表合拢。",
+      "tip": "七五岩面铺满 —— 采矿站马上开工。",
+      "tiles_to_add": [
+        "gd_n_0",
+        "gd_n_1",
+        "gd_n_2",
+        "gd_n_3"
+      ],
+      "highlight_tiles": [
+        "gd_0_3"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "砌储矿仓: 4 片灰墙围仓, 四角竖边互吸闭环。",
+      "tip": "仓口闭环 —— 矿石就堆进这一格。",
+      "tiles_to_add": [
+        "bin_s",
+        "bin_n",
+        "bin_w",
+        "bin_e"
+      ],
+      "highlight_tiles": [
+        "gd_1_1",
+        "gd_1_2"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "堆仓口矿堆 + 搭输送坡道: 四坡矿堆冒尖, 坡道俯冲落地。",
+      "tip": "坡道顶边吸仓墙顶、坡尾自然落地 —— 越压越稳。",
+      "tiles_to_add": [
+        "ore_top_s",
+        "ore_top_e",
+        "ore_top_n",
+        "ore_top_w",
+        "belt"
+      ],
+      "highlight_tiles": [
+        "bin_s",
+        "bin_e"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立龙门立柱: 东西各两节, 底边整边吸拼缝。",
+      "tip": "两根立柱隔钻坑相望 —— 桥面马上架上去。",
+      "tiles_to_add": [
+        "leg_w0",
+        "leg_e0",
+        "leg_w1",
+        "leg_e1"
+      ],
+      "highlight_tiles": [
+        "gd_3_1",
+        "gd_5_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "架桥面 + 挂钻杆 + 插警示旗: 门式刚架合龙。",
+      "tip": "钻杆底边吸桥面南沿垂直下探, 钻尖恰好触地 —— 拉压双保险。",
+      "tiles_to_add": [
+        "beam_w",
+        "beam_e",
+        "drill",
+        "rig_flag"
+      ],
+      "highlight_tiles": [
+        "leg_w1",
+        "leg_e1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "砌居住舱墙: 气闸门朝钻机, 舷窗朝北, 6 片锁环。",
+      "tip": "宇航员出气闸就是钻位 —— 通勤三步到岗。",
+      "tiles_to_add": [
+        "hab_s",
+        "hab_door",
+        "hab_win",
+        "hab_n",
+        "hab_e_a",
+        "hab_e_b"
+      ],
+      "highlight_tiles": [
+        "gd_6_1",
+        "gd_6_2"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "盖舱顶长板 + 立天线: 短边双端压墙如桥。",
+      "tip": "长板双端受力 —— 天线重心正压舱顶铰链。",
+      "tiles_to_add": [
+        "hab_roof",
+        "hab_ant"
+      ],
+      "highlight_tiles": [
+        "hab_s",
+        "hab_n"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "堆第一座矿锥: 4 片橙色等边四坡, 就在钻位东侧。",
+      "tip": "刚出井的矿石还带着钻头的热气。",
+      "tiles_to_add": [
+        "pile_a_s",
+        "pile_a_e",
+        "pile_a_n",
+        "pile_a_w"
+      ],
+      "highlight_tiles": [
+        "gd_4_2"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "堆第二座矿锥: 储矿仓北侧再来一堆。",
+      "tip": "四条斜棱两两互吸 —— 矿锥自锁成环。",
+      "tiles_to_add": [
+        "pile_b_s",
+        "pile_b_e",
+        "pile_b_n",
+        "pile_b_w"
+      ],
+      "highlight_tiles": [
+        "pile_a_s",
+        "bin_n"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "摆月岩 x3, 立信标旗 —— 太空淘金开工!",
+      "tip": "岩石与旗面重心正压拼缝铰链, 力矩为零。",
+      "tiles_to_add": [
+        "rock_a",
+        "rock_b",
+        "rock_c",
+        "bea_pole",
+        "bea_flag"
+      ],
+      "highlight_tiles": [
+        "gd_0_1",
+        "gd_0_3"
+      ]
+    }
+  ]
+}
