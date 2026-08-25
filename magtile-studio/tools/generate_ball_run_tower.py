@@ -197,16 +197,16 @@ X2 = -SQ3                                 # 西线第一转角台东缘 -1.73205
 wall_ew("tre_w1a", X2, 1, 0, "gray")
 wall_ew("tre_w1b", X2, 1, 1, "gray")
 ramp("ramp_w1", "-x", 0.0, 1, 3.0, "orange")
-flat("cor_w1", X2 - 1, 1, 2.0, "yellow")
-rail_ew("rail_w1_out", X2 - 1, 1, 2.0, "red")
-rail_ns("rail_w1_s", X2 - 1, 1.0, 2.0, "red")     # 南侧挡珠 (逼珠北转)
+flat("cor_w1", X2, 1, 2.0, "yellow")              # 东移一格: 西缘对齐桥墩, 缩短外挑臂
+rail_ew("rail_w1_out", X2, 1, 2.0, "red")
+rail_ns("rail_w1_s", X2, 1.0, 2.0, "red")         # 南侧挡珠 (逼珠北转)
 
 Y3 = 2 + SQ3                              # 西线第二转角台南缘 3.732051
-wall_ns("tre_w2", X2 - 1, Y3, 0, "gray")
-ramp("ramp_w2", "+y", 2.0, X2 - 1, 2.0, "orange")
-flat("cor_w2", X2 - 1, Y3, 1.0, "yellow")
-rail_ew("rail_w2_out", X2 - 1, Y3, 1.0, "red")
-rail_ns("rail_w2_n", X2 - 1, Y3 + 1, 1.0, "red")  # 北侧挡珠 (逼珠东转)
+wall_ns("tre_w2", X2, Y3, 0, "gray")
+ramp("ramp_w2", "+y", 2.0, X2, 2.0, "orange")
+flat("cor_w2", X2, Y3, 1.0, "yellow")
+rail_ew("rail_w2_out", X2, Y3, 1.0, "red")
+rail_ns("rail_w2_n", X2, Y3 + 1, 1.0, "red")  # 北侧挡珠 (逼珠东转)
 
 ramp("ramp_w3", "+x", X2, Y3, 1.0, "orange")      # 冲线坡道, 坡尾停在 x=0
 
