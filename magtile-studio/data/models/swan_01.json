@@ -1,0 +1,707 @@
+{
+  "schema_version": 1,
+  "id": "swan_01",
+  "name": "白天鹅",
+  "name_en": "White Swan 01",
+  "description": "动物世界 D2: 2x2 白身箱浮在蓝绿棋盘 pond 上, S 形颈以逐段退台内收 (T12) 把重心拉回接地凸包; 双翼与尾羽严格左右镜像 (T11), 窗格方黑眼 + 橙喙点睛。与蜂场/海龟滩两个 D2 场景不同 —— 这是第一只 D2 具象动物主角。",
+  "difficulty": 2,
+  "total_pieces": 36,
+  "tags": [
+    "动物世界",
+    "天鹅",
+    "入门",
+    "镜像",
+    "池塘"
+  ],
+  "content_meta": {
+    "series": "animal_world",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 27,
+        "equilateral_triangle": 5,
+        "isosceles_triangle": 2,
+        "right_triangle": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "pond_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pond_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pond_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pond_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pond_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pond_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pond_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pond_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pond_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pond_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pond_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pond_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "body_s0",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_s1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_n0",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_n1",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_e",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_cap_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_cap_e",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "neck_s0",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "neck_s1",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "neck_w",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "neck_m",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "eye",
+      "type": "window_square",
+      "position": [
+        2.5,
+        3.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "head_w",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_e",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_cap",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wing_w",
+      "type": "isosceles_triangle",
+      "position": [
+        1.0,
+        1.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wing_e",
+      "type": "isosceles_triangle",
+      "position": [
+        3.0,
+        2.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tail_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tail_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "neck_br",
+      "type": "right_triangle",
+      "position": [
+        2.0,
+        2.666667,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "beak",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        3.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "lily_a",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "lily_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺池塘第一行: 四片蓝绿相间的方板, 边边互吸。",
+      "tip": "白天鹅住在安静的池塘里 —— 先把水面铺好。",
+      "tiles_to_add": [
+        "pond_0_0",
+        "pond_1_0",
+        "pond_2_0",
+        "pond_3_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺池塘第二、三行: 再来八片, 4x3 水面完成。",
+      "tip": "棋盘格颜色错开铺, 一眼就能看出哪片没对齐。",
+      "tiles_to_add": [
+        "pond_0_1",
+        "pond_1_1",
+        "pond_2_1",
+        "pond_3_1",
+        "pond_0_2",
+        "pond_1_2",
+        "pond_2_2",
+        "pond_3_2"
+      ],
+      "highlight_tiles": [
+        "pond_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "砌身箱: 四片白墙围成 2x2 开口箱, 墙脚整边踩水面拼缝。",
+      "tip": "身箱是天鹅浮在水上的白色身体。",
+      "tiles_to_add": [
+        "body_s0",
+        "body_s1",
+        "body_n0",
+        "body_n1",
+        "body_w",
+        "body_e"
+      ],
+      "highlight_tiles": [
+        "pond_1_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "盖身箱双盖板: 两片白板压墙顶, 背部圆润收口。",
+      "tip": "盖板一压, 身箱变成结实的闭口箱。",
+      "tiles_to_add": [
+        "body_cap_w",
+        "body_cap_e"
+      ],
+      "highlight_tiles": [
+        "body_s0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "起颈南段: 两片墙 + 一片西墙, 在身箱北沿上叠高并向西内收 (T12 退台)。",
+      "tip": "颈开始弯了 —— 每高一层就往里收一点, 重心才不会跑出去。",
+      "tiles_to_add": [
+        "neck_s0",
+        "neck_s1",
+        "neck_w"
+      ],
+      "highlight_tiles": [
+        "body_n0",
+        "body_cap_w"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "续颈北段与头墙: 单片北墙 + 窗格方黑眼, 东西墙合围成 1x1 头箱。",
+      "tip": "黑眼睛是窗格方 —— 从正面看, 白天鹅在看你。",
+      "tiles_to_add": [
+        "neck_m",
+        "eye",
+        "head_w",
+        "head_e"
+      ],
+      "highlight_tiles": [
+        "neck_w"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "盖头盖 + 颈撑 + 橙喙: 顶板、灰色颈斜撑 (先撑后盖)、喙三角 —— 头颈成形。",
+      "tip": "颈斜撑双边吸身盖与颈墙 —— S 形颈把重心拉回身箱上方, 天鹅站得稳。",
+      "tiles_to_add": [
+        "neck_br",
+        "head_cap",
+        "beak"
+      ],
+      "highlight_tiles": [
+        "eye"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "展双翼 (T11 镜像): 先左后右, 两片等腰三角分别贴在西/东身侧。",
+      "tip": "左右对称下料 —— 翅膀要一样高、一样开。",
+      "tiles_to_add": [
+        "wing_w",
+        "wing_e"
+      ],
+      "highlight_tiles": [
+        "body_cap_w"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "装尾羽 (T11 镜像): 两片等边三角骑在身盖北沿, 左右对称。",
+      "tip": "尾羽与双翼呼应 —— 镜像同步, 重心不偏。",
+      "tiles_to_add": [
+        "tail_w",
+        "tail_e"
+      ],
+      "highlight_tiles": [
+        "body_cap_e"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "点缀收尾: 两朵睡莲 —— 白天鹅在 pond 上漂好了!",
+      "tip": "动物世界第一只 D2 具象动物 —— 优雅, 站得稳, 还会看你。",
+      "tiles_to_add": [
+        "lily_a",
+        "lily_b"
+      ],
+      "highlight_tiles": [
+        "pond_0_1"
+      ]
+    }
+  ]
+}
