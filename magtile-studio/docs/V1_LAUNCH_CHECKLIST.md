@@ -35,9 +35,10 @@ tools/check_v1_readiness.sh --strict   # 签核档: E2E 冒烟用 --strict (SKIP
 tools/check_v1_readiness.sh --help     # 完整用法
 ```
 
-退出码: **0** = 无 P0 失败; **1** = 存在 P0 失败 (2026-08-25 `--quick`
-实跑为 1: 自动侧 P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项
-全 PASS); **2** = 环境/参数不满足。
+退出码: **0** = 无 P0 失败; **1** = 存在 P0 失败 (2026-08-25 17:20 UTC
+`--quick` 实跑为 1: 合计 24 项 13 PASS / 2 FAIL / 9 SKIP —— 自动侧
+P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项全 PASS);
+**2** = 环境/参数不满足。
 
 ## 1. 内容 (目标 200~250 模型)
 
@@ -47,9 +48,9 @@ tools/check_v1_readiness.sh --help     # 完整用法
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| C1 | 模型库体量达 200~250 | P0 | Auto (R1) | `data/models/*.json` 计数; [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 产能与主题池 | ✅ 205 个 JSON (R1 实跑 PASS: 门槛 200 已过, 处于 200~250 目标区间) |
+| C1 | 模型库体量达 200~250 | P0 | Auto (R1) | `data/models/*.json` 计数; [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 产能与主题池 | ✅ 209 个 JSON (最近登记批 `856fab0` 205→209; R1 实跑 PASS: 门槛 200 已过, 处于 200~250 目标区间) |
 | C2 | 全库质量门禁全绿 (16 关 QA + strict 零未豁免警告) | P0 | Auto (R5) | `tests/run_full_qa.sh` / `tools/run_strict_audit.sh`; 最近报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) | ✅ 全库 strict 双档零未豁免警告 (唯一豁免 `suspension_bridge_01` 已文档化) |
-| C3 | 模型库目录全量登记 + 缩略图全覆盖 | P0 | Auto (R2) | `tools/update_model_catalog.py` / `tools/generate_thumbnails.py` | ✅ JSON 205 / 目录登记 205 / 缩略图就绪 205 三方对账一致 (R2 实跑 PASS) |
+| C3 | 模型库目录全量登记 + 缩略图全覆盖 | P0 | Auto (R2) | `tools/update_model_catalog.py` / `tools/generate_thumbnails.py` | ✅ JSON 209 / 目录登记 209 / 缩略图就绪 209 三方对账一致 (R2 实跑 PASS) |
 | C4 | 免费层 30 对齐 (标签 = starter 清单, 全 core-9) | P0 | Auto (R3) | `tools/verify_free_tier.py`; 决议 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) | ✅ 三条断言常绿 (随发布门禁复跑) |
 | C5 | 主题覆盖与难度分布终审 (D1~D4 全覆盖, 系列不断档) | P1 | Manual | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2; `magtile_app library` 分布输出 | 🔶 主题池持续补批中, 上架前人工终审一次 |
 
@@ -64,7 +65,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | B2 | 真实商店计费接入 (Windows 商店 / Google Play `StoreBillingClient`) | P0 | Auto (R11 分平台: Google Play 接线 PASS / Windows 档 R11W 接线 PASS) | Android: `platforms/android/app/.../PlayBillingManager.kt` (Play Billing 6.x 购买/恢复/回执确认 + 启动静默恢复 → 既有 `setSubscriptionActive` 契约键, 与 FakeBilling 同键) + 家长门后订阅页 `SubscriptionActivity.kt` (三档档位卡实时取 Play 价格 + 主 CTA + 恢复购买 + 会话守卫, 对齐桌面 Qt SubscriptionPage; 接线与订阅页说明 [../platforms/android/README.md](../platforms/android/README.md) 第三节); Windows: `src/billing/store_billing_client.cpp` 的 `MAGTILE_BILLING_WINDOWS_STORE` 宏分支 (WinRT `StoreContext` 查商品 / `RequestPurchaseAsync` 收银台购买 / `AddOnLicenses` 许可证恢复 + Qt 壳启动静默恢复 → 同一 `setSubscriptionActive` 契约键; 仅 MSIX 商店包配置 `-DMAGTILE_BILLING_WINDOWS_STORE=ON` 编入, 本地开发档保持 FakeBilling) | 🔶 Google Play 与 Windows 商店两侧代码均已接线, R11/R11W 实跑 PASS (Android: Release 走 Play Billing, Debug 保留模拟订阅; Windows: 商店上下文仅 MSIX 包身份可用, 商品表查到才亮价格卡, 否则退回「即将上线」占位; 商品 id 三端统一 `sub_monthly`/`sub_yearly`/`sub_family_yearly`); Qt 订阅页桌面侧 UI 已收口 —— 商店档真实价格卡 (商品表查到才亮价, 「商店可用 <=> 价格卡真有价」口径随 `qt_gui_smoke --smoke-parent-flow` 终态常态断言) + 「恢复购买」按钮 + `simulatedBilling` 分流标注 (CTA 与购买/恢复成功文案只在假计费档标「开发模拟」, 商店档真实扣费不标; 取消/退款指引商店档指向系统商店订阅管理, 商店暂时联系不上给温和「稍后再试」而非「即将上线」, `qt_billing_bridge` 常态断言); Android 订阅页 UI 已落地 (家长门后 SubscriptionActivity: 三档档位卡价格实时读 Play 后台、查询不可用退温和占位绝不显示空价格卡, 主 CTA 接 purchase + 「恢复购买」接 restore, 会话守卫到期自动退场儿童侧零价格 §11; Debug 档「模拟已订阅」QA 开关同页, assembleDebug 绿 + 文案守卫全绿) —— B3 的购买入口依赖已解除; 剩余: MSIX 商店包出包 (§3 侧) + 双商店后台商品配置与沙盒验收 (B3) |
 | B3 | 商店商品配置 + 沙箱付费验收 (真实账号购买 / 恢复 / 退款链路) | P0 | Manual | 商品 id 约定见 `store_billing_client.hpp` 注释; 价格表 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §3.1; Google Play 侧分步验收文档 [PLAY_BILLING_SANDBOX_QA.md](PLAY_BILLING_SANDBOX_QA.md) (内部测试轨 + 许可测试账号 + 购买/恢复/断网宽限期勾选清单; 接线概要 [../platforms/android/README.md](../platforms/android/README.md) 第三节); Windows 商店侧分步验收文档 [WINDOWS_STORE_BILLING_SANDBOX_QA.md](WINDOWS_STORE_BILLING_SANDBOX_QA.md) (Partner Center 附加内容配置 + MSIX 商店包测试安装 + 同构勾选清单; 微软商店无沙盒无时间压缩, 成本控制与上线后回归项口径见文内第四/五节) | ⬜ Google Play 代码侧已就绪 (B2 🔶, 订阅页购买/恢复入口已落地 —— SubscriptionActivity, 前置 P4 已满足) 且分步验收文档已备, 执行仍依赖开发者账号 (L3) 与 Play Console 商品配置; Windows 代码侧已就绪 (B2 🔶) 且分步验收文档已备, 执行依赖 Partner Center 商品配置 (附加内容 id = 三端统一商品 id; 订阅附加内容需微软侧开通账号权限) 与 MSIX 商店包出包 |
 | B4 | 首批 3 个一次性内容包上线 | P1 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §2.3/§8 V1 交付物 | ⬜ 未开始 (订阅先行) |
-| B5 | 儿童侧零价格红线复核 (订阅入口必过家长门, 无倒计时/催购) | P0 | Auto(部分) (R16 文案红线守卫 + E2E 家长门流; 视觉/语气终审仍人工) | `qt_gui_smoke --smoke-parent-flow` 自动; 文案红线 `tools/check_child_friendly_copy.py` 全库扫描 (恐吓词/催促稀缺话术, [UI_UX_SPEC.md](UI_UX_SPEC.md) §11 无倒计时/无「即将涨价」等) | 🔶 家长门流随 E2E 常绿 + 文案红线随 R16 常态守卫, 上架前视觉与语气人工终审 |
+| B5 | 儿童侧零价格红线复核 (订阅入口必过家长门, 无倒计时/催购) | P0 | Auto(部分) (R16 文案红线守卫 + E2E 家长门流; 视觉/语气终审仍人工) | `qt_gui_smoke --smoke-parent-flow` 自动; 文案红线 `tools/check_child_friendly_copy.py` 全库扫描 (恐吓词/催促稀缺话术, [UI_UX_SPEC.md](UI_UX_SPEC.md) §11 无倒计时/无「即将涨价」等) | 🔶 家长门流随 E2E 常绿 + 文案红线随 R16 常态守卫 (2026-08-25 17:20 实跑 PASS: 260 文件 7751 段用户可见中文文案 0 违规), 上架前视觉与语气人工终审 |
 
 ## 3. 桌面 Windows / macOS
 
@@ -166,14 +167,23 @@ tools/check_v1_readiness.sh --help     # 完整用法
 复核人上手指南 (备料/工时/打印/落盘/照片归档):
 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md)。
 
-**载体状态注**: L2 工具链 (jitter / 风险报告 / 结构族 / 失败登记 /
-R17 探测 / 门禁接入) 为 2026-08-25 L2 批次交付物, 满槽并行落地中
-(失败登记账本与校准手册已先行入库 `08d3018`); 本节口径与挂链先行
-登记, 各载体入库与实跑状态以 `tools/check_v1_readiness.sh` 输出为准。
+**载体状态注**: L2 工具链已**全部入库** (2026-08-25 L2 批次 10/10
+交付): jitter CLI `8b424be` / 风险报告 `41bda4c` (公共入口增补
+`6dff7cb`) / 结构族 `b093b6d` (209 模型 → 154 族) / 失败登记
+`08d3018` / R17 探测 `13e6cd9` / 门禁接入 `6acfa54` + `607c0cb` /
+夹具与单测 `262ebc3` (ctest 472/472 绿) / 文档口径 `bca88fd` +
+`df902b9`; 实跑状态以 `tools/check_v1_readiness.sh` 输出为准。
+抖动首巡揪出 **4 个边缘模型** 待内容侧加固 (默认档
+`lego_style_house_01` 7/50 轮 `enclosed_placement`; strict 档
+`ball_run_tower_01` 4/50 / `marble_run_spiral_01` 3/50 /
+`rainforest_canopy_01` 3/50, 均 `cantilever_overload` 贴预算) ——
+真实边缘设计发现非误报, 不放宽预算, 加固进行中 (处置记录
+[PHYSICS_RULES.md](PHYSICS_RULES.md) R9 节), 复验通过前全量档 R17
+对涉事模型如实报 FAIL (P1 不阻断退出码)。
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| S0 | 第二层虚拟物理验证全绿 (D4+ 默认 `--jitter 50` + 风险报告 + 自动标记) | P0 | Auto (R17) | `magtile_app validate --jitter N` (蒙特卡洛 ±1.5mm/±2° 逐步扰动, 失败记 F08 类) + `tools/physical_risk_report.py` + [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件代码化; 门禁接入 `tools/run_strict_audit.sh` / `tools/run_release_gate.sh`; jitter 夹具与 risk report 单测随 ctest; 就绪探测载体 `tools/check_v1_readiness.sh` R17 (P1 报告档): D4+ 确定性抽检 —— D5 全数优先 + 大体量 D4 按总片数降序补足 (默认 10 个, `--jitter-sample` 可调; 与 `physical_sample_pack.py` 同一风险代理口径), 逐个 `validate --jitter 50`; 慢项 `--quick` 记 SKIP 而**全量签核必跑**: 二进制缺失 / `--jitter` 特性不可用 / 抽样为空一律显式 FAIL 不静默跳过; `physical_risk_report.py` 落地后抽样源可切换其高风险 Top 子集 | 🔶 L2 批次并行落地中 (口径与挂链先行登记, 状态以 R17 实跑为准); R17 探测已接入 check_v1_readiness (「跳过即 FAIL」口径经负向自测; `validate --jitter` CLI 落地并重建前, 全量档 R17 如实报 FAIL —— P1 不阻断退出码, 签核留痕) |
+| S0 | 第二层虚拟物理验证全绿 (D4+ 默认 `--jitter 50` + 风险报告 + 自动标记) | P0 | Auto (R17) | `magtile_app validate --jitter N` (蒙特卡洛 ±1.5mm/±2° 逐步扰动, 失败记 F08 类) + `tools/physical_risk_report.py` + [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件代码化; 门禁接入 `tools/run_strict_audit.sh` / `tools/run_release_gate.sh`; jitter 夹具与 risk report 单测随 ctest; 就绪探测载体 `tools/check_v1_readiness.sh` R17 (P1 报告档): D4+ 确定性抽检 —— D5 全数优先 + 大体量 D4 按总片数降序补足 (默认 10 个, `--jitter-sample` 可调; 与 `physical_sample_pack.py` 同一风险代理口径), 逐个 `validate --jitter 50`; 慢项 `--quick` 记 SKIP 而**全量签核必跑**: 二进制缺失 / `--jitter` 特性不可用 / 抽样为空一律显式 FAIL 不静默跳过; `physical_risk_report.py` 落地后抽样源可切换其高风险 Top 子集 | 🔶 工具链全部入库 (jitter CLI `8b424be` / 风险报告 `41bda4c` / 门禁挂钩 `6acfa54`+`607c0cb` / R17 探测 `13e6cd9` / 夹具单测 `262ebc3`), R17 探测已接入 check_v1_readiness (「跳过即 FAIL」口径经负向自测); 剩余缺口 = 抖动首巡揪出的 4 个边缘模型加固复验 (默认档 `lego_style_house_01` + strict 档 `ball_run_tower_01`/`marble_run_spiral_01`/`rainforest_canopy_01`, 见上方载体状态注), 复验全绿前全量档 R17 如实报 FAIL —— P1 不阻断退出码, 签核留痕 |
 | S1 | 缩减人手集实搭签核: **risk Top 15 + 结构族代表** (并集去重, 清单以两份报告实跑输出钉死) | P0 | Auto 报告 (R6 + R17) + Manual 实搭 | `tools/physical_risk_report.py` Top 15 人手建议 + `tools/physical_family_pack.py` 结构族代表; 规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) + 上手指南 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + 工作单 [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md); 原 V1 抽样包 10 个 ([reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md), `tools/physical_sample_pack.py --fail-on-missing-sample`) 预计与 Top 15 高度重合, 作首批排产兼第二层校准数据 | ⬜ 0 已复核 —— 人手范围由报告钉死, **不必 209 全搭** |
 | S2 | D4+ 实物风险全覆盖清零 (缩减集实搭 + 同族代表结论 + 第二层全绿合围) | P0 | Auto 报告 (R7, 覆盖口径随 L2 门禁接入升级) + Manual 实搭 | `tools/list_physical_pending.py --fail-on-pending` + `tools/physical_family_pack.py` 族谱; 落盘口径见 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 5.2 | ⬜ 三层覆盖口径已定 (原「45 个逐个实搭」改为缩减集 + 族代表覆盖); 实搭失败经 `tools/physical_failure_registry.py` 登记整改, 整改后同族复验 |
 | S3 | 免费层 D3 抽检 30% (免费层无 D4+, 实物风险由抽检政策覆盖) | P1 | Manual | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §4.3; [reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md) §2 免费层说明 | 🔶 已有 3 个 D3 实物复核落盘 (`content_meta.physical_verified`, R6 报告一致性核对可见) |
