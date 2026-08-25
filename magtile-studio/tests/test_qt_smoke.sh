@@ -6,8 +6,9 @@
 #   1. 默认启动 (首页): QML 模块任何加载/语法错误都会让进程以
 #      非零退出 (main.cpp 的 objectCreationFailed -> exit(1));
 #   2. --parent-gate 深链: 家长门界面 (QT-2) 可加载;
-#   3. --smoke-parent-flow 自动驾驶: 家长门 -> 提交标准答案过门 ->
-#      家长中心 -> 设置 -> 订阅逐页实例化, 全程无误才返回 0
+#   3. --smoke-parent-flow 自动驾驶: 进度页 -> 成就墙 (QT-4) ->
+#      家长门 -> 提交标准答案过门 -> 家长中心 -> 设置 -> 订阅
+#      逐页实例化, 全程无误才返回 0
 #      (Main.qml 置 smokeParentFlowOk, main.cpp 据此决定退出码);
 #   4. --smoke-complete-model 完成链路 (QT-4): completeBuild 写存档
 #      完成状态 -> buildCompleted -> 完成庆祝页实例化, 随后校验
@@ -37,7 +38,7 @@ echo "[2/4] --parent-gate 深链 (家长门界面) ..."
 "$APP" --data-dir "$ROOT/data" --db "$TMP_DIR/qt_smoke.db" \
     --parent-gate --smoke-quit-ms 1500
 
-echo "[3/4] --smoke-parent-flow 自动驾驶 (门->家长中心->设置->订阅) ..."
+echo "[3/4] --smoke-parent-flow 自动驾驶 (进度页->成就墙->门->家长中心->设置->订阅) ..."
 "$APP" --data-dir "$ROOT/data" --db "$TMP_DIR/qt_smoke.db" \
     --smoke-parent-flow --smoke-quit-ms 3000
 

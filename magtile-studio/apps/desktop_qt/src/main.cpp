@@ -14,7 +14,8 @@
 //   - --smoke-quit-ms: N 毫秒后自动退出 (无头 QML 加载冒烟专用);
 //   - --smoke-open-model: 启动后直接进入该模型的 3D 教程 (QT-3 冒烟);
 //   - --smoke-screenshot: 2.5s 后抓屏保存 PNG 并退出 (配合上一项);
-//   - --smoke-complete-model: 启动后直接完成该模型进庆祝页 (QT-4 冒烟)。
+//   - --smoke-complete-model: 启动后直接完成该模型进庆祝页 (QT-4 冒烟);
+//   - --smoke-open-progress: 启动直开进度页「我的作品」(QT-4 评审/冒烟)。
 //
 // 场景图后端: 3D 教程视口 (QQuickFramebufferObject) 需要 OpenGL,
 // 未显式设置 QSG_RHI_BACKEND 时在此固定为 OpenGL (全平台桌面可用)。
@@ -112,7 +113,8 @@ int main(int argc, char* argv[]) {
         QStringLiteral("N 毫秒后自动退出 (无头 QML 加载冒烟专用)"), QStringLiteral("N"));
     const QCommandLineOption smoke_flow_opt(
         QStringLiteral("smoke-parent-flow"),
-        QStringLiteral("冒烟自动驾驶: 家长门->过门->家长中心->设置->订阅 (配合 --smoke-quit-ms)"));
+        QStringLiteral("冒烟自动驾驶: 进度页->成就墙->家长门->过门->家长中心->设置->订阅 "
+                       "(配合 --smoke-quit-ms)"));
     const QCommandLineOption smoke_model_opt(
         QStringLiteral("smoke-open-model"),
         QStringLiteral("启动后直接进入该模型的 3D 教程 (QT-3 视口冒烟)"), QStringLiteral("ID"));
@@ -122,6 +124,9 @@ int main(int argc, char* argv[]) {
     const QCommandLineOption smoke_complete_opt(
         QStringLiteral("smoke-complete-model"),
         QStringLiteral("启动后直接完成该模型并进入庆祝页 (QT-4 冒烟)"), QStringLiteral("ID"));
+    const QCommandLineOption smoke_progress_opt(
+        QStringLiteral("smoke-open-progress"),
+        QStringLiteral("启动直开进度页「我的作品」(QT-4 评审/冒烟深链)"));
     parser.addOption(data_dir_opt);
     parser.addOption(db_opt);
     parser.addOption(parent_gate_opt);
@@ -130,6 +135,7 @@ int main(int argc, char* argv[]) {
     parser.addOption(smoke_model_opt);
     parser.addOption(smoke_shot_opt);
     parser.addOption(smoke_complete_opt);
+    parser.addOption(smoke_progress_opt);
     parser.process(app);
 
     fs::path data_dir;
@@ -169,6 +175,8 @@ int main(int argc, char* argv[]) {
     engine.rootContext()->setContextProperty(QStringLiteral("tts"), &tts);
     const bool smoke_flow = parser.isSet(smoke_flow_opt);
     engine.rootContext()->setContextProperty(QStringLiteral("smokeParentFlow"), smoke_flow);
+    engine.rootContext()->setContextProperty(QStringLiteral("smokeOpenProgress"),
+                                             parser.isSet(smoke_progress_opt));
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreationFailed, &app,

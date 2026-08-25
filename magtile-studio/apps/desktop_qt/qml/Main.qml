@@ -35,6 +35,10 @@ ApplicationWindow {
             parentGate.openGate()
             stack.push(parentGateComponent)
         }
+        // --smoke-open-progress 深链: 启动直开进度页 (评审 / 冒烟, QT-4)
+        if (smokeOpenProgress) {
+            stack.push(progressComponent)
+        }
     }
 
     /// 温和的占位提示 (P3 零挫败: 只说"即将上线", 永不弹"失败")
@@ -91,9 +95,33 @@ ApplicationWindow {
             onOpenLibrary: stack.push(libraryComponent)
             onOpenModel: function(modelId) { stack.push(detailComponent, { modelId: modelId }) }
             onOpenInventory: stack.push(inventoryComponent)
+            onOpenProgress: stack.push(progressComponent)
             onOpenParentArea: window.openParentZone()
             onOpenSubscription: window.openSubscriptionZone()
             onNotify: function(message) { window.showToast(message) }
+        }
+    }
+
+    // 进度页「我的作品」+ 成就墙 (QT-4, §7): 首页儿童侧直达 (§5.3),
+    // 作品行点击进模型详情 (继续/再搭都走详情页既有大按钮路由)
+    Component {
+        id: progressComponent
+        ProgressPage {
+            onBack: stack.pop()
+            onOpenModel: function(modelId) { stack.push(detailComponent, { modelId: modelId }) }
+            onOpenAchievements: stack.push(achievementsComponent)
+            // 空态「去模型库挑一个」: 落到 首页 -> 模型库 (<= 2 步回首页 §3)
+            onOpenLibrary: {
+                stack.pop(null)
+                stack.push(libraryComponent)
+            }
+        }
+    }
+
+    Component {
+        id: achievementsComponent
+        AchievementsPage {
+            onBack: stack.pop()
         }
     }
 
@@ -238,9 +266,10 @@ ApplicationWindow {
     }
 
     // ---- 冒烟自动驾驶 (--smoke-parent-flow, 无头 CI 专用) -------------
-    // 家长门 -> 提交标准答案过门 -> 家长中心 -> 设置 -> 订阅, 逐页驻留;
-    // 全程无误后置 smokeParentFlowOk, main.cpp 在 --smoke-quit-ms 到点
-    // 时据此决定退出码 —— 保证四个新页面在 CI 里真实实例化过。
+    // 进度页 -> 成就墙 (QT-4) -> 回首页 -> 家长门 -> 提交标准答案过门
+    // -> 家长中心 -> 设置 -> 订阅, 逐页驻留; 全程无误后置
+    // smokeParentFlowOk, main.cpp 在 --smoke-quit-ms 到点时据此决定
+    // 退出码 —— 保证这些页面在 CI 里真实实例化过。
     property bool smokeParentFlowOk: false
     Timer {
         id: smokeFlowTimer
@@ -251,12 +280,17 @@ ApplicationWindow {
         onTriggered: {
             stage += 1
             if (stage === 1) {
-                window.openParentZone()                              // 家长门
+                stack.push(progressComponent)                        // 进度页 (QT-4)
             } else if (stage === 2) {
-                parentGate.submitAnswer(parentGate.expectedAnswer()) // 过门 -> 家长中心
+                stack.push(achievementsComponent)                    // 成就墙 (QT-4)
             } else if (stage === 3) {
-                stack.push(settingsComponent)                        // 设置页
+                stack.pop(null)                                      // 回首页
+                window.openParentZone()                              // 家长门
             } else if (stage === 4) {
+                parentGate.submitAnswer(parentGate.expectedAnswer()) // 过门 -> 家长中心
+            } else if (stage === 5) {
+                stack.push(settingsComponent)                        // 设置页
+            } else if (stage === 6) {
                 stack.pop()
                 stack.push(subscriptionComponent)                    // 订阅占位页
             } else {

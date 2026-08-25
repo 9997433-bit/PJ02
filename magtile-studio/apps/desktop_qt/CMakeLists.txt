@@ -68,6 +68,8 @@ qt_add_qml_module(magtile_studio_qt
         qml/DetailPage.qml
         qml/TutorialPage.qml
         qml/CelebrationPage.qml
+        qml/ProgressPage.qml
+        qml/AchievementsPage.qml
         qml/InventoryPage.qml
         qml/ParentGatePage.qml
         qml/ParentAreaPage.qml

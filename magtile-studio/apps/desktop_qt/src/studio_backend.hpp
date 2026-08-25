@@ -55,6 +55,10 @@ class StudioBackend final : public QObject {
     Q_PROPERTY(int freeModelCount READ freeModelCount NOTIFY catalogChanged)
     /// 全部主题 (按目录出现顺序去重), 主题筛选器数据源。
     Q_PROPERTY(QStringList themes READ themes NOTIFY catalogChanged)
+    /// 收藏的模型数 (QT-4 进度页「我的收藏」与首页温和统计卡片)。
+    Q_PROPERTY(int favoriteCount READ favoriteCount NOTIFY catalogChanged)
+    /// 已点亮的成就徽章数 (QT-4 成就墙, 判定口径同 achievementsList)。
+    Q_PROPERTY(int achievementCount READ achievementCount NOTIFY catalogChanged)
 
 public:
     StudioBackend(std::filesystem::path data_dir, std::filesystem::path db_file,
@@ -76,6 +80,8 @@ public:
     [[nodiscard]] bool inventoryConfigured() const noexcept { return inventory_configured_; }
     [[nodiscard]] int freeModelCount() const noexcept { return free_model_count_; }
     [[nodiscard]] QStringList themes() const { return themes_; }
+    [[nodiscard]] int favoriteCount() const noexcept { return favorite_count_; }
+    [[nodiscard]] int achievementCount() const noexcept { return achievement_count_; }
 
     /// 重新加载模型库目录并合并进度存档 (构造时自动调用一次)。
     Q_INVOKABLE void reload();
@@ -108,6 +114,28 @@ public:
     /// 模型 JSON 文件路径 (QT-3 教程视口按需加载模型本体用);
     /// 未知模型返回空串 (视口温和降级)。
     Q_INVOKABLE QString modelFilePath(const QString& model_id) const;
+
+    // ---- 进度页 / 成就墙数据 (QT-4, UI_UX_SPEC.md §7) -----------------
+
+    /// 成就墙徽章列表: 每项 {achievementId, emoji, name, condition,
+    /// unlocked, unlockedText}。徽章档位只与搭建行为挂钩 (§4.5, 按
+    /// 完成模型数); 未解锁项由界面按灰色剪影 + 一句话达成条件展示
+    /// (不显示进度百分比, §7.1 防焦虑)。存档中额外解锁的成就 id
+    /// (未来新增触发点) 以通用徽章补列在末尾, 永不缺席。
+    Q_INVOKABLE QVariantList achievementsList() const;
+
+    /// 进行中作品列表 (按最近游玩倒序): 每项 {modelId, name,
+    /// currentStep, stepCount, playText}; 只列已真正开动 (step > 0)
+    /// 且仍在库中的模型, 与首页「继续上次」同口径。
+    Q_INVOKABLE QVariantList inProgressList() const;
+
+    /// 已完成作品列表 (按完成时间倒序): 每项 {modelId, name, pieces,
+    /// metaText}; metaText 为 "8月20日 完成 · 用时 23 分钟" 式摘要。
+    Q_INVOKABLE QVariantList completedList() const;
+
+    /// 收藏的模型列表 (按目录顺序): 每项 {modelId, name, status}
+    /// (status 同 LibraryModel::Status)。
+    Q_INVOKABLE QVariantList favoritesList() const;
 
 signals:
     void catalogChanged();
@@ -142,6 +170,8 @@ private:
     int free_model_count_ = 0;
     int in_progress_count_ = 0;
     int completed_count_ = 0;
+    int favorite_count_ = 0;      ///< 收藏的模型数 (reload 统计, 收藏切换时增量维护)
+    int achievement_count_ = 0;   ///< 已点亮徽章数 (判定口径同 achievementsList)
     QString continue_title_;      ///< "继续上次"卡片文案, 如 "彩虹桥 · 第 3/12 步"
     QString continue_model_id_;   ///< "继续上次"对应的模型 id (直达详情/教程)
     QString status_message_;      ///< 页脚状态行 (加载结果或温和的降级提示)

@@ -1,7 +1,11 @@
 #include "studio_backend.hpp"
 
+#include <QDate>
+#include <QDateTime>
 #include <algorithm>
+#include <cstdint>
 #include <exception>
+#include <map>
 #include <optional>
 #include <string>
 #include <unordered_map>
@@ -29,6 +33,44 @@ QString fromUtf8(std::string_view s) {
 /// 免费层标记 (COMMERCIAL_PLAN.md §2.1 免费 30): 与目录登记及
 /// tools/check_core5_usage.py 的 FREE_TAG 同一口径。
 constexpr const char* kFreeTag = "免费";
+
+/// 成就墙徽章档位定义 (QT-4, UI_UX_SPEC.md §4.5: 成就只与搭建行为
+/// 挂钩, 按完成模型数分档)。first_model_completed 与完成链路写入
+/// 存档的成就 id 同名 (completeBuild / 教程视口 / GL 版三处同一
+/// 口径); 其余档位按已完成模型数在展示层判定达成 —— 数据源仍是
+/// 同一份进度存档, 不新增写库触发点 (触发统一收口留待成就系统
+/// 完整落地, 见 QT_UI_PLAN.md QT-4)。
+struct AchievementDef {
+    const char* id;
+    const char* emoji;
+    const char* name;
+    const char* condition;    ///< 一句话达成条件 (未解锁时展示, §7.1)
+    int completed_threshold;  ///< 达成所需的已完成模型数
+};
+constexpr AchievementDef kAchievementDefs[] = {
+    {"first_model_completed", "🏗️", "首搭达成", "完成第 1 个模型", 1},
+    {"three_models_completed", "🏘️", "小小建造家", "完成 3 个模型", 3},
+    {"ten_models_completed", "🏰", "建造能手", "完成 10 个模型", 10},
+    {"thirty_models_completed", "🌟", "磁力片大师", "完成 30 个模型", 30},
+};
+
+/// unix 秒 -> "8月20日" (今年) / "2025年8月20日" (往年); 无记录返回空串。
+QString dayText(std::int64_t unix_seconds) {
+    if (unix_seconds <= 0) return {};
+    const QDateTime t = QDateTime::fromSecsSinceEpoch(unix_seconds);
+    return t.toString(t.date().year() == QDate::currentDate().year()
+                          ? QStringLiteral("M月d日")
+                          : QStringLiteral("yyyy年M月d日"));
+}
+
+/// 累计游玩时长 -> "用时 23 分钟" 式温和摘要; 不足 1 分钟返回空串
+/// (界面直接隐藏, 不显示 "0 分钟" 这类扫兴数字)。
+QString playText(std::int64_t play_seconds) {
+    if (play_seconds < 60) return {};
+    const std::int64_t minutes = play_seconds / 60;
+    if (minutes < 60) return QStringLiteral("用时 %1 分钟").arg(minutes);
+    return QStringLiteral("用时 %1 小时 %2 分").arg(minutes / 60).arg(minutes % 60);
+}
 
 }  // namespace
 
@@ -80,6 +122,7 @@ void StudioBackend::reload() {
     free_model_count_ = 0;
     in_progress_count_ = 0;
     completed_count_ = 0;
+    favorite_count_ = 0;
     continue_title_.clear();
     continue_model_id_.clear();
     themes_.clear();
@@ -174,6 +217,7 @@ void StudioBackend::reload() {
                 // 单条读取失败按未开始处理
             }
         }
+        if (row.favorited) ++favorite_count_;
         row_by_id.emplace(row.entry.id, rows.size());
         rows.push_back(std::move(row));
     }
@@ -197,6 +241,13 @@ void StudioBackend::reload() {
         }
     }
 
+    // 已点亮徽章计数 (首页统计卡片 / 成就墙页脚): 与 achievementsList
+    // 同一判定 (completed_count_ 已定格, 此处直接复用列表结果)
+    achievement_count_ = 0;
+    for (const QVariant& badge : achievementsList()) {
+        if (badge.toMap().value(QStringLiteral("unlocked")).toBool()) ++achievement_count_;
+    }
+
     if (status_message_.isEmpty()) {
         status_message_ = QStringLiteral("模型库已就绪: %1 个模型 · 共 %2 片")
                               .arg(rows.size())
@@ -218,6 +269,11 @@ bool StudioBackend::toggleFavorite(const QString& model_id) {
     try {
         const bool favorited = store_->toggleFavorite(id);
         library_model_.setFavorited(id, favorited);
+        if (row != nullptr && favorited != current) {
+            // 收藏计数增量维护 (favoriteCount 属性): 进度页/首页统计即时刷新
+            favorite_count_ += favorited ? 1 : -1;
+            emit catalogChanged();
+        }
         return favorited;
     } catch (const progress::ProgressError&) {
         return current;
@@ -315,6 +371,117 @@ QString StudioBackend::modelFilePath(const QString& model_id) const {
     const LibraryRow* row = library_model_.findRow(model_id.toStdString());
     if (row == nullptr) return {};
     return QString::fromStdString(row->entry.file.string());
+}
+
+QVariantList StudioBackend::achievementsList() const {
+    // 存档成就快照 (id -> 首次解锁时刻); 存档不可用/读取失败时按
+    // 空处理 (P3 零挫败: 成就墙照常展示, 只是全部未点亮)
+    std::map<std::string, std::int64_t> unlocked;
+    if (store_ != nullptr) {
+        try {
+            for (const progress::Achievement& a : store_->listAchievements()) {
+                unlocked.emplace(a.id, a.unlocked_at);
+            }
+        } catch (const progress::ProgressError&) {
+        }
+    }
+
+    QVariantList list;
+    for (const AchievementDef& def : kAchievementDefs) {
+        const auto it = unlocked.find(def.id);
+        const bool reached = it != unlocked.end() || completed_count_ >= def.completed_threshold;
+        QVariantMap item;
+        item.insert(QStringLiteral("achievementId"), QString::fromUtf8(def.id));
+        item.insert(QStringLiteral("emoji"), QString::fromUtf8(def.emoji));
+        item.insert(QStringLiteral("name"), QString::fromUtf8(def.name));
+        item.insert(QStringLiteral("condition"), QString::fromUtf8(def.condition));
+        item.insert(QStringLiteral("unlocked"), reached);
+        QString when;
+        if (it != unlocked.end() && it->second > 0) {
+            when = QStringLiteral("解锁于 %1").arg(dayText(it->second));
+        } else if (reached) {
+            when = QStringLiteral("已达成");
+        }
+        item.insert(QStringLiteral("unlockedText"), when);
+        list.append(item);
+        if (it != unlocked.end()) unlocked.erase(it);
+    }
+    // 存档中额外解锁的成就 (未来新增触发点): 通用徽章补列, 永不缺席
+    for (const auto& [id, at] : unlocked) {
+        QVariantMap item;
+        item.insert(QStringLiteral("achievementId"), fromUtf8(id));
+        item.insert(QStringLiteral("emoji"), QStringLiteral("🏅"));
+        item.insert(QStringLiteral("name"), fromUtf8(id));
+        item.insert(QStringLiteral("condition"), QString());
+        item.insert(QStringLiteral("unlocked"), true);
+        item.insert(QStringLiteral("unlockedText"),
+                    at > 0 ? QStringLiteral("解锁于 %1").arg(dayText(at))
+                           : QStringLiteral("已达成"));
+        list.append(item);
+    }
+    return list;
+}
+
+QVariantList StudioBackend::inProgressList() const {
+    QVariantList list;
+    if (store_ == nullptr) return list;
+    try {
+        for (const progress::Progress& p : store_->listInProgress()) {
+            const LibraryRow* row = library_model_.findRow(p.model_id);
+            // 与首页「继续上次」同口径: 只列已真正开动且仍在库中的模型
+            if (row == nullptr || p.current_step <= 0 || p.isCompleted()) continue;
+            QVariantMap item;
+            item.insert(QStringLiteral("modelId"), fromUtf8(row->entry.id));
+            item.insert(QStringLiteral("name"), fromUtf8(row->entry.name));
+            item.insert(QStringLiteral("currentStep"), p.current_step);
+            item.insert(QStringLiteral("stepCount"), row->entry.step_count);
+            item.insert(QStringLiteral("playText"), playText(p.play_seconds));
+            list.append(item);
+        }
+    } catch (const progress::ProgressError&) {
+        // 读取失败按空列表处理 (界面显示温和空态)
+    }
+    return list;
+}
+
+QVariantList StudioBackend::completedList() const {
+    QVariantList list;
+    if (store_ == nullptr) return list;
+    try {
+        for (const progress::Progress& p : store_->listCompleted()) {
+            const LibraryRow* row = library_model_.findRow(p.model_id);
+            // 已不在库中的模型不再展示; 完成判定与徽标口径一致 (isCompleted)
+            if (row == nullptr || !p.isCompleted()) continue;
+            QVariantMap item;
+            item.insert(QStringLiteral("modelId"), fromUtf8(row->entry.id));
+            item.insert(QStringLiteral("name"), fromUtf8(row->entry.name));
+            item.insert(QStringLiteral("pieces"), row->entry.total_pieces);
+            QStringList meta;
+            if (const QString day = dayText(p.completed_at); !day.isEmpty()) {
+                meta << QStringLiteral("%1 完成").arg(day);
+            }
+            if (const QString play = playText(p.play_seconds); !play.isEmpty()) {
+                meta << play;
+            }
+            item.insert(QStringLiteral("metaText"), meta.join(QStringLiteral(" · ")));
+            list.append(item);
+        }
+    } catch (const progress::ProgressError&) {
+    }
+    return list;
+}
+
+QVariantList StudioBackend::favoritesList() const {
+    QVariantList list;
+    for (const LibraryRow& row : library_model_.rows()) {
+        if (!row.favorited) continue;
+        QVariantMap item;
+        item.insert(QStringLiteral("modelId"), fromUtf8(row.entry.id));
+        item.insert(QStringLiteral("name"), fromUtf8(row.entry.name));
+        item.insert(QStringLiteral("status"), row.status);
+        list.append(item);
+    }
+    return list;
 }
 
 }  // namespace magtile::qtui

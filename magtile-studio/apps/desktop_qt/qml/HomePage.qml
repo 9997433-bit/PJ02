@@ -13,6 +13,7 @@ Page {
     signal openLibrary()
     signal openModel(string modelId)
     signal openInventory()
+    signal openProgress()
     signal openParentArea()
     signal openSubscription()
     signal notify(string message)
@@ -189,7 +190,41 @@ Page {
                 emoji: "🏅"
                 text: "我的进度"
                 accent: Theme.success
-                onClicked: page.notify("进度与成就页正在搭建中, 马上就好!")
+                onClicked: page.openProgress()
+            }
+        }
+
+        // 「我的进度」温和统计卡片 (QT-4, §5.3/§7): 有作品后儿童侧
+        // 可见, 轻声报喜不催促 (§4.3), 点击与上方按钮同路由进进度页
+        AbstractButton {
+            id: progressStatsCard
+            visible: studio.completedCount > 0 || studio.inProgressCount > 0
+            Layout.alignment: Qt.AlignHCenter
+            Layout.preferredHeight: Theme.touchTarget
+            Layout.preferredWidth: progressStatsText.implicitWidth + 2 * Theme.spacingLarge
+            onClicked: page.openProgress()
+            background: Rectangle {
+                radius: Theme.radiusButton
+                color: progressStatsCard.pressed ? Theme.successSoft : "transparent"
+                border.color: Theme.cardBorder
+                border.width: 1
+            }
+            contentItem: Text {
+                id: progressStatsText
+                text: {
+                    var parts = []
+                    if (studio.completedCount > 0)
+                        parts.push("已完成 " + studio.completedCount + " 个模型")
+                    if (studio.inProgressCount > 0)
+                        parts.push(studio.inProgressCount + " 个进行中")
+                    if (studio.achievementCount > 0)
+                        parts.push("点亮 " + studio.achievementCount + " 枚徽章")
+                    return "🏅 " + parts.join(" · ") + " ▶"
+                }
+                font.pixelSize: Theme.fontBody
+                color: Theme.textSecondary
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
             }
         }
 
