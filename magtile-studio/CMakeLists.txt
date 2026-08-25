@@ -569,4 +569,37 @@ if(MAGTILE_BUILD_TESTS)
             COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_physical_risk_report.py
                 ${CMAKE_CURRENT_SOURCE_DIR})
     endif()
+
+    # 治理守卫: 内容系列归类机检 (Python): 每个模型必须带
+    # content_meta.series (13 主题词值) 或 matrix_bucket (矩阵外桶)
+    # 恰好其一, 词值对照 data/content_series_map.json 权威词表
+    # (CONTENT_GAP_AUDIT.md §7.3 机检化)。series 回填已全库落地
+    # (tools/backfill_content_series.py), 故按 --strict 硬闸门注册:
+    # 新增模型漏归类 / 词值走样即失败 —— 升级路径与 check_core5_usage.py
+    # 在免费 30 定稿后切 strict 一致。QA 流水线关卡 20 为同口径的
+    # 显式巡检 (MAGTILE_SERIES_CHECK=1), 此处随 CTest 全量回归常开。
+    if(Python3_Interpreter_FOUND
+            AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_content_series.py
+            AND EXISTS ${MAGTILE_DATA_DIR}/content_series_map.json)
+        add_test(NAME content_series_gate
+            COMMAND ${Python3_EXECUTABLE}
+                ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_content_series.py
+                ${MAGTILE_DATA_DIR}/models
+                --map ${MAGTILE_DATA_DIR}/content_series_map.json
+                --strict)
+    endif()
+
+    # 治理守卫: 难度配额 (Python): D1–D5 分布报告 + D3 冻结状态判定
+    # (CONTENT_GAP_AUDIT.md §7.3: D1 >= 20 且 D5 >= 6 两项同时达标
+    # 方可解冻)。按报告模式注册 —— 冻结与否只报告不拦截 (存量 181 个
+    # D3 不追责), 但难度值非法 / 模型不可读仍按结构错误硬失败;
+    # 冻结期间对新增 D3 的拦截由批次评审的 --batch 闸门负责,
+    # 不在常规回归重复。
+    if(Python3_Interpreter_FOUND
+            AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_difficulty_quota.py)
+        add_test(NAME difficulty_quota_gate
+            COMMAND ${Python3_EXECUTABLE}
+                ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_difficulty_quota.py
+                ${MAGTILE_DATA_DIR}/models)
+    endif()
 endif()
