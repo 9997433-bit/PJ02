@@ -8,7 +8,7 @@
 > [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md), 本单不另立口径,
 > 只做「工程 vs 你」的分工切面。
 >
-> **状态快照**: 2026-08-25 15:55 UTC。工作区多代理并行推进, 状态以
+> **状态快照**: 2026-08-25 16:05 UTC。工作区多代理并行推进, 状态以
 > `tools/check_v1_readiness.sh` 实跑与清单最新快照为准; 本单引用的
 > commit 均已推送 origin (并行工作区偶有变基, 哈希漂移时按提交信息检索)。
 
@@ -44,7 +44,7 @@ P0 缺口 (见 §4.3); 8 项 SKIP = 快检刻意跳过的 R4/R5 两个长跑项 
 | 项 | 状态 | 交付物 | commit / 依据 |
 | --- | --- | --- | --- |
 | B1 假计费闭环 | ✅ | 计费适配层 + 三档商品 + 购买/恢复 + 统一解锁口径, 41 断言单测 | `f4bb5c7`; R10 PASS |
-| B2 真实商店接线 | 🔶 | **Google Play**: Play Billing 6.x 购买/恢复/回执 + 启动静默恢复 (`a694a17`); **Windows 商店**: WinRT 全链 + MTA 线程模型 (`aa50909`); **Qt 订阅页商店档 UI**: 真实价格卡 + 恢复购买 + `simulatedBilling` 分流 (`aa50909`); Android 订阅页 drawable 已入库 (`9d9ad0a`), Activity 在途 (§2 槽 3) | R11 / R11W 实跑 PASS; 商品 id 三端统一 `sub_monthly`/`sub_yearly`/`sub_family_yearly` |
+| B2 真实商店接线 | 🔶 | **Google Play**: Play Billing 6.x 购买/恢复/回执 + 启动静默恢复 (`a694a17`); **Windows 商店**: WinRT 全链 + MTA 线程模型 (`aa50909`); **Qt 订阅页商店档 UI**: 真实价格卡 + 恢复购买 + `simulatedBilling` 分流 (`aa50909`); **Android 订阅页 UI** (家长门后档位卡 + 恢复购买): `fdc0082` (drawable 先行 `9d9ad0a`) | R11 / R11W 实跑 PASS; 商品 id 三端统一 `sub_monthly`/`sub_yearly`/`sub_family_yearly` |
 | B5 儿童零价格红线 | 🔶 | 家长门流随 E2E 常绿 + R16 文案守卫常态扫描 (260 文件 7714 段, 0 违规); 视觉/语气人工终审留待上架前 | 守卫 `654d775`/`61b514c`, 违规修复 `a128acd`/`5023313` |
 
 ### 1.3 §3 桌面 (D1/D7 ✅, D2/D6 🔶)
@@ -53,7 +53,7 @@ P0 缺口 (见 §4.3); 8 项 SKIP = 快检刻意跳过的 R4/R5 两个长跑项 
 | --- | --- | --- | --- |
 | D1 打包资产 | ✅ | CPack/NSIS/WiX 资产 + 双打包手册 + `windows-release.yml` (已迁仓库根) | `9c92aee`; R9 PASS |
 | D2 Windows CI 出包 | 🔶 | 首跑阻塞项已修 + Linux 可验子集全绿 + **触发/预期产物/排查/签核四件套指南** | `150a948` → [../scripts/package_windows.md](../scripts/package_windows.md) §8; 真实 runner 首跑见 §4.5 |
-| D6 LGPL 合规 | 🔶 | 清单与 `THIRD_PARTY_NOTICES.md` 随包就绪, 出包时逐项打钩 (自动核对工具在途, §2 槽 2) | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §8 |
+| D6 LGPL 合规 | 🔶 | 清单与 `THIRD_PARTY_NOTICES.md` 随包就绪 + 自动核对脚本已入库 (`2605e34`), 出包时逐项打钩 | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §8 |
 | D7 Linux 打包冒烟 | ✅ | 三档 TGZ 清单断言 + NSIS 编译 + offscreen 启动 + ldd 核验, Ubuntu 实跑全绿 | 落档 [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §9 |
 
 ### 1.4 §4 Android (A1/A2 ✅, A3/A6/A7 🔶)
@@ -91,29 +91,29 @@ P0 缺口 (见 §4.3); 8 项 SKIP = 快检刻意跳过的 R4/R5 两个长跑项 
 | [WINDOWS_STORE_BILLING_SANDBOX_QA.md](WINDOWS_STORE_BILLING_SANDBOX_QA.md) 微软商店验收分步 (无沙盒, 真钱口径) | B3 | `721a594` |
 | [reports/MACOS_ACCEPTANCE_CHECKLIST.md](reports/MACOS_ACCEPTANCE_CHECKLIST.md) macOS 36 项可打印验收单 | D4 | `06e5e9f` |
 | [../scripts/package_windows.md](../scripts/package_windows.md) §8 Windows CI 触发与首跑签核指南 | D2 | `150a948` |
-| [ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) 行政办理执行手册 (去哪办/带什么/什么顺序/等多久) | L1~L5 | 在途 (§2 槽 4, 清单 §9 已挂链) |
+| [ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) 行政办理执行手册 (去哪办/带什么/什么顺序/等多久) | L1~L5 | `be708d3` |
 | [reports/PRIVACY_SECURITY_SIGNOFF.md](reports/PRIVACY_SECURITY_SIGNOFF.md) 三平台隐私安全签核单 | V4 | `2750313` |
 | 清单状态列对齐实跑快照 | 全局 | `e5be8d7` |
 
 ---
 
-## 2. 工程侧仍在跑 (10 槽状态, 2026-08-25 15:55 UTC 时点)
+## 2. 工程侧仍在跑 (10 槽状态, 2026-08-25 16:05 UTC 时点)
 
 | 槽 | 任务 | 清单项 | 截至快照的落地状态 |
 | --- | --- | --- | --- |
 | 1 | 审计工程 vs 用户分工 | 本单 | **运行中** —— 本文件即其产物 (初版 `4f1dc10` + 顶部挂链 `91f7671`, 本次扩写) |
-| 2 | D6 LGPL 自动核对 | D6 | **运行中**, 暂未见提交 |
-| 3 | Android 订阅页 UI | B2 | **运行中** —— drawable 已入库 (`9d9ad0a`), `SubscriptionActivity.kt` + 两布局在工作区待提交 |
-| 4 | 软著/备案办理清单 | §9 L1~L5 | **收尾中** —— `ADMIN_LAUNCH_CHECKLIST.md` 已成文, 提交在途 |
-| 5 | Android 真机 QA 仪器测试 | A4 前置 | 骨架已入库 (`9d9ad0a`); 真机验收单 `QA_ANDROID_DEVICE_CHECKLIST.md` 在途 |
+| 2 | D6 LGPL 自动核对 | D6 | **已交付** `2605e34` (合规自动核对脚本) |
+| 3 | Android 订阅页 UI | B2 | **已交付** `fdc0082` (家长门后档位卡 + 恢复购买; drawable 先行 `9d9ad0a`) |
+| 4 | 软著/备案办理清单 | §9 L1~L5 | **已交付** `be708d3` ([ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md)) |
+| 5 | Android 真机 QA 仪器测试 | A4 前置 | 骨架 `9d9ad0a` + 真机验收单 [reports/QA_ANDROID_DEVICE_CHECKLIST.md](reports/QA_ANDROID_DEVICE_CHECKLIST.md) `f60e31e` 已交付 |
 | 6 | Windows 商店沙盒验收文档 | B3 | **已交付** `721a594` |
 | 7 | Qt 订阅页商店档收口 | B2 | **已交付** (随 `aa50909` 入库) |
 | 8 | macOS 实机验收模板 | D4 | **已交付** `06e5e9f` |
 | 9 | 隐私安全可执行自查单 | V4 | **已交付** `2750313` |
 | 10 | 生成器文案措辞同步 | B5/R16 | **已交付** `5023313` |
 
-排队中 (槽满未启动, 释放后补位): 商店素材规格单、Qt/Android 订阅页收尾
-提交、文档批次提交、Android Debug/Release 双档文档。
+排队中 (槽满未启动, 释放后补位): 商店素材规格单、Android Debug/Release
+双档文档 (Qt/Android 订阅页与文档批次的收尾提交请求已由上表交付覆盖)。
 
 **工程收口标准**: `check_v1_readiness.sh --quick` 只剩 R6/R7 FAIL;
 B2 双端订阅页 UI 全部入库; 清单工程侧行无 ⬜。
@@ -122,8 +122,8 @@ B2 双端订阅页 UI 全部入库; 清单工程侧行无 ⬜。
 
 ## 3. 工程侧下一波可继续做 (不依赖你的资源)
 
-1. **B2 收尾**: Android 订阅页 `SubscriptionActivity` 合入 + 双端订阅页回归 (§2 槽 3 在途);
-2. **D6**: LGPL 逐项核对自动化工具 (§2 槽 2 在途);
+1. **B2 收尾**: 双端订阅页回归复跑 + 清单 B2 状态收敛 (Android 订阅页 UI 已入库 `fdc0082`);
+2. **D6 收尾**: 把 LGPL 自动核对脚本 (`2605e34`) 纳入出包流程与手册勾选项;
 3. **内容 209 → 250**: 继续按主题池补批; 并输出主题/难度分布报表, 给 C5 人工终审当底稿;
 4. **D8 自动更新决策文档**: COMMERCIAL_PLAN §8 列为 V1 交付物但未实现 —— 工程可先出「实现 vs 降级 V1.1」决策文档与最小方案, 决策本身留你签字;
 5. **B4 首批一次性内容包**: 内容与打包侧可先做 (P1, 商店后台配置属你);
