@@ -1,0 +1,1097 @@
+{
+  "schema_version": 1,
+  "id": "ferris_wheel_frame_01",
+  "name": "游乐园摩天轮",
+  "name_en": "Ferris Wheel Frame 01",
+  "description": "游乐园主题: 六边形轮毂、5 片等边三角轮辐与 4 片菱形辐间板在竖直平面内拼成一面六角星大轮, 由 3 根双层立墙塔架三点托举 (轮毂吸中柱, 两片下轮辐吸侧柱), 剪断任一条铰链线星轮都不塌; 场边配登轮台与下客坡道、锥顶售票亭和挂着门旗的入园拱门 —— 全库第一个把菱形用作结构件的模型。",
+  "difficulty": 3,
+  "total_pieces": 56,
+  "tags": [
+    "游乐园",
+    "摩天轮",
+    "星形",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 33,
+        "equilateral_triangle": 12,
+        "isosceles_triangle": 4,
+        "rhombus": 4,
+        "rectangle": 2,
+        "hexagon": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "base_0_0",
+      "type": "square",
+      "position": [
+        0.0,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "base_0_1",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_0_2",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "base_1_0",
+      "type": "square",
+      "position": [
+        1.0,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_1_1",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "base_1_2",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_2_0",
+      "type": "square",
+      "position": [
+        2.0,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "base_2_1",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_2_2",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "base_3_0",
+      "type": "square",
+      "position": [
+        3.0,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_3_1",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "base_3_2",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_4_0",
+      "type": "square",
+      "position": [
+        4.0,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "base_4_1",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_4_2",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "col_0_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "col_0_2",
+      "type": "square",
+      "position": [
+        1.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "col_1_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "col_1_2",
+      "type": "square",
+      "position": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "col_2_1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "col_2_2",
+      "type": "square",
+      "position": [
+        3.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hub",
+      "type": "hexagon",
+      "position": [
+        2.0,
+        1.0,
+        2.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "spoke_0",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.0,
+        3.443375
+      ],
+      "rotation": [
+        90.0,
+        -60.000017,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "spoke_1",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.0,
+        4.020726
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "spoke_2",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.0,
+        3.443376
+      ],
+      "rotation": [
+        90.0,
+        60.000017,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "spoke_3",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        -90.0,
+        59.999988,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "spoke_5",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        -90.0,
+        -59.999988,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rhomb_0",
+      "type": "rhombus",
+      "position": [
+        3.25,
+        1.0,
+        4.165064
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "rhomb_1",
+      "type": "rhombus",
+      "position": [
+        1.499999,
+        1.0,
+        4.598077
+      ],
+      "rotation": [
+        90.0,
+        -60.000017,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "rhomb_2",
+      "type": "rhombus",
+      "position": [
+        0.25,
+        1.0,
+        3.299038
+      ],
+      "rotation": [
+        -90.0,
+        -60.000017,
+        180.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "rhomb_5",
+      "type": "rhombus",
+      "position": [
+        3.75,
+        1.0,
+        2.433013
+      ],
+      "rotation": [
+        90.0,
+        59.999988,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "pf_s",
+      "type": "square",
+      "position": [
+        3.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pf_w",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pf_e",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pf_deck",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pf_ramp",
+      "type": "rectangle",
+      "position": [
+        4.366025,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pf_rail",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bt_s",
+      "type": "square",
+      "position": [
+        0.0,
+        -1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bt_e",
+      "type": "square",
+      "position": [
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bt_n",
+      "type": "square",
+      "position": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bt_w",
+      "type": "square",
+      "position": [
+        -0.5,
+        -0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bt_roof_s",
+      "type": "isosceles_triangle",
+      "position": [
+        0.0,
+        -0.833333,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bt_roof_e",
+      "type": "isosceles_triangle",
+      "position": [
+        0.333333,
+        -0.5,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bt_roof_n",
+      "type": "isosceles_triangle",
+      "position": [
+        0.0,
+        -0.166667,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        180.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bt_roof_w",
+      "type": "isosceles_triangle",
+      "position": [
+        -0.333333,
+        -0.5,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        -90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gate_w1",
+      "type": "square",
+      "position": [
+        1.0,
+        -1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gate_w2",
+      "type": "square",
+      "position": [
+        1.0,
+        -1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gate_e1",
+      "type": "square",
+      "position": [
+        4.0,
+        -1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gate_e2",
+      "type": "square",
+      "position": [
+        4.0,
+        -1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gate_top",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        -1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "gate_fl_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        -1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "gate_fl_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        -1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "fence_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fence_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "fence_2",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fence_3",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺设游乐场南排: 5 片正方形 (绿灰相间) 沿直线平放吸合。",
+      "tip": "注意场地网格从 -0.5 起 —— 摆放时以第一片为基准即可, 后续全部对齐它。",
+      "tiles_to_add": [
+        "base_0_0",
+        "base_1_0",
+        "base_2_0",
+        "base_3_0",
+        "base_4_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺设中排 5 片。",
+      "tip": "中排与北排的接缝线就是摩天轮星轮所在的竖直平面。",
+      "tiles_to_add": [
+        "base_0_1",
+        "base_1_1",
+        "base_2_1",
+        "base_3_1",
+        "base_4_1"
+      ],
+      "highlight_tiles": [
+        "base_0_0",
+        "base_4_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺设北排 5 片, 5x3 游乐场完工。",
+      "tip": "从上往下看是整齐的 5x3 棋盘格。",
+      "tiles_to_add": [
+        "base_0_2",
+        "base_1_2",
+        "base_2_2",
+        "base_3_2",
+        "base_4_2"
+      ],
+      "highlight_tiles": [
+        "base_0_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "竖立塔架下层: 3 片灰色立墙并排立在中排与北排的接缝上, 相邻竖边互吸。",
+      "tip": "三片连成一面 3 格宽的桁架墙 —— 摩天轮的全部重量都压在它上面。",
+      "tiles_to_add": [
+        "col_0_1",
+        "col_1_1",
+        "col_2_1"
+      ],
+      "highlight_tiles": [
+        "base_1_1",
+        "base_2_1",
+        "base_3_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "叠塔架上层: 再叠 3 片, 上下完整贴合、左右竖边互吸。",
+      "tip": "塔架顶边 (高度 2) 将同时托住轮毂和两片下轮辐 —— 三点托举。",
+      "tiles_to_add": [
+        "col_0_2",
+        "col_1_2",
+        "col_2_2"
+      ],
+      "highlight_tiles": [
+        "col_0_1",
+        "col_2_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "安装六边形轮毂: 竖立在中柱顶边正上方, 底边整边吸合。",
+      "tip": "轮毂是整面星轮的心脏; 放稳后轻碰不应晃动。",
+      "tiles_to_add": [
+        "hub"
+      ],
+      "highlight_tiles": [
+        "col_1_2"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "安装 2 片下轮辐: 红色等边三角形贴着轮毂左下、右下两条边, 水平底边分别吸在左右侧柱的顶边上。",
+      "tip": "每片下轮辐同时吸住轮毂斜边和侧柱顶边 —— 星轮从此三点着力。",
+      "tiles_to_add": [
+        "spoke_3",
+        "spoke_5"
+      ],
+      "highlight_tiles": [
+        "hub",
+        "col_0_2",
+        "col_2_2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "安装 3 片上轮辐: 贴着轮毂左上、正上、右上三条边向外辐射。",
+      "tip": "先左上、再正上、最后右上, 每片底边与轮毂边完全贴合。",
+      "tiles_to_add": [
+        "spoke_2",
+        "spoke_1",
+        "spoke_0"
+      ],
+      "highlight_tiles": [
+        "hub"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "嵌入 4 片紫色菱形辐间板: 填进相邻轮辐之间的豁口, 两条边分别与两侧轮辐的侧边互吸 —— 星轮锁成一个整环。",
+      "tip": "菱形的锐角朝轮心、钝角朝外; 装完后星轮任何一片都有两条以上支撑路径。",
+      "tiles_to_add": [
+        "rhomb_5",
+        "rhomb_0",
+        "rhomb_1",
+        "rhomb_2"
+      ],
+      "highlight_tiles": [
+        "spoke_0",
+        "spoke_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "搭登轮台三面矮墙: 右侧柱前方围出 1x1 站台 (北面由塔架侧柱兼任)。",
+      "tip": "三片矮墙与塔架侧柱围成口字形 —— 乘客从这里登上摩天轮。",
+      "tiles_to_add": [
+        "pf_s",
+        "pf_w",
+        "pf_e"
+      ],
+      "highlight_tiles": [
+        "col_2_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "盖登轮台台面, 接下客坡道, 装护栏: 台面四边压住矮墙与侧柱, 坡道顶边吸台面东沿、坡尾自然落地, 护栏立在台面南沿。",
+      "tip": "台面要同时压住三面矮墙和塔架侧柱的下层顶边, 四边受力才稳。",
+      "tiles_to_add": [
+        "pf_deck",
+        "pf_ramp",
+        "pf_rail"
+      ],
+      "highlight_tiles": [
+        "pf_s",
+        "pf_e"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "搭售票亭亭身: 场地西南角立 1x1 四面青色墙。",
+      "tip": "四片按 南-东-北-西 合围, 转角竖边互吸。",
+      "tiles_to_add": [
+        "bt_s",
+        "bt_e",
+        "bt_n",
+        "bt_w"
+      ],
+      "highlight_tiles": [
+        "base_0_0"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "合拢售票亭锥顶: 4 片蓝色等腰三角形斜棱两两互吸。",
+      "tip": "最后一片要同时吸住底边和两条斜棱, 轻压到位。",
+      "tiles_to_add": [
+        "bt_roof_s",
+        "bt_roof_e",
+        "bt_roof_n",
+        "bt_roof_w"
+      ],
+      "highlight_tiles": [
+        "bt_s",
+        "bt_n"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "竖立入园拱门双柱: 南沿两端各叠 2 片蓝色门柱。",
+      "tip": "两柱间空出 2 格宽门洞 —— 下一步的长方形门楣正好跨过它。",
+      "tiles_to_add": [
+        "gate_w1",
+        "gate_w2",
+        "gate_e1",
+        "gate_e2"
+      ],
+      "highlight_tiles": [
+        "base_1_0",
+        "base_4_0"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "架门楣、挂门旗: 黄色长方形横跨门洞, 两条短边吸住左右门柱上层竖边; 柱顶各立 1 片粉色门旗。",
+      "tip": "门楣要水平: 先吸一侧短边, 再轻压另一侧到位。",
+      "tiles_to_add": [
+        "gate_top",
+        "gate_fl_w",
+        "gate_fl_e"
+      ],
+      "highlight_tiles": [
+        "gate_w2",
+        "gate_e2"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "插北沿围栏旗 4 片, 游乐园开园 —— 摩天轮转起来!",
+      "tip": "全部完成后从侧面看: 六角星轮悬在塔架正上方, 轮缘离地正好一格。",
+      "tiles_to_add": [
+        "fence_0",
+        "fence_1",
+        "fence_2",
+        "fence_3"
+      ],
+      "highlight_tiles": [
+        "base_0_2",
+        "base_4_2"
+      ]
+    }
+  ]
+}
