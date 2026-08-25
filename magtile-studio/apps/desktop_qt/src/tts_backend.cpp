@@ -4,6 +4,7 @@
 
 #include "magtile/core/age_mode.hpp"
 #include "magtile/progress/age_settings.hpp"
+#include "magtile/progress/ui_settings.hpp"
 
 #if defined(MAGTILE_QT_TTS)
 #include <QTextToSpeech>
@@ -14,9 +15,7 @@ namespace magtile::qtui {
 TtsBackend::TtsBackend(std::filesystem::path db_file, QObject* parent) : QObject(parent) {
     try {
         store_ = std::make_unique<progress::ProgressStore>(db_file);
-        if (const auto stored = store_->getSetting(kTtsEnabledSettingKey)) {
-            enabled_ = (*stored != "0");
-        }
+        enabled_ = progress::getTtsEnabled(*store_);
     } catch (const progress::ProgressError&) {
         // 存档打不开只影响开关持久化, 朗读本身照常可用 (P3 零挫败)
         store_.reset();
@@ -53,7 +52,7 @@ void TtsBackend::setEnabled(bool enabled) {
     if (!enabled) stop();
     if (store_ != nullptr) {
         try {
-            store_->setSetting(kTtsEnabledSettingKey, enabled ? "1" : "0");
+            progress::setTtsEnabled(*store_, enabled);
         } catch (const progress::ProgressError&) {
             // 落盘失败不打断: 开关仍在本次运行内生效
         }

@@ -6,6 +6,8 @@
 //      未设置与脏值的默认档兜底;
 //   2b. 界面设置 (§4.7/§8 字号三档 + 减少动效): 往返、非法档位
 //      忽略、脏值兜底、跨连接持久化;
+//   2c. 步骤朗读总开关 (§4.2 "tts_enabled", Qt 版设置页/TtsBackend
+//      共用契约): 默认开、往返、脏值按开兜底、跨连接持久化;
 //   3. NullTts: speak 替换旧朗读 (无叠音语义)、stop 幂等、
 //      空文本等价于 stop;
 //   4. 系统 TTS 探测: createSystemTts 永不返回空指针, 无后端时
@@ -116,6 +118,25 @@ int main(int argc, char** argv) {
     {
         progress::ProgressStore store(db_path);  // 重开连接: 验证真正落盘
         expect(progress::getReduceMotion(store), "减少动效跨连接持久化");
+    }
+
+    // ---- 2c. 步骤朗读总开关 (§4.2 tts_enabled) 的 SQLite 往返 ----------
+    {
+        progress::ProgressStore store(db_path);
+        expect(progress::getTtsEnabled(store), "从未设置时朗读默认开");
+        progress::setTtsEnabled(store, false);
+        expect(!progress::getTtsEnabled(store), "关闭朗读后立即可读");
+        progress::setTtsEnabled(store, true);
+        expect(progress::getTtsEnabled(store), "重新开启朗读");
+
+        // 脏值兜底: 非 "0" 一律按开处理 (不毒化朗读功能)
+        store.setSetting(progress::kTtsEnabledSettingKey, "banana");
+        expect(progress::getTtsEnabled(store), "脏值按默认开兜底");
+        progress::setTtsEnabled(store, false);
+    }
+    {
+        progress::ProgressStore store(db_path);  // 重开连接: 验证真正落盘
+        expect(!progress::getTtsEnabled(store), "朗读开关跨连接持久化");
     }
 
     // ---- 3. NullTts: 无叠音语义 ---------------------------------------

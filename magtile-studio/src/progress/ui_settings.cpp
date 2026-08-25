@@ -37,4 +37,14 @@ bool getReduceMotion(const ProgressStore& store) {
     return stored.has_value() && *stored == "1";
 }
 
+void setTtsEnabled(ProgressStore& store, bool enabled) {
+    store.setSetting(kTtsEnabledSettingKey, enabled ? "1" : "0");
+}
+
+bool getTtsEnabled(const ProgressStore& store) {
+    // 默认开 (§4.2): 只有显式写 "0" 才算关, 脏值不毒化朗读功能
+    const auto stored = store.getSetting(kTtsEnabledSettingKey);
+    return !stored.has_value() || *stored != "0";
+}
+
 }  // namespace magtile::progress

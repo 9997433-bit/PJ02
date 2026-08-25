@@ -12,12 +12,12 @@
 // 朗读语义与 GL 版 tts::ITtsEngine 一致: speak 先停旧朗读,
 // 切步/退出即打断, 保证无叠音 (§4.2)。
 //
-// 开关与 QT-2 设置页并行的挂钩约定: 总开关持久化在 ProgressStore
-// settings 表键 kTtsEnabledSettingKey ("tts_enabled"), 设置页
-// (SettingsPage / SettingsBackend) 落地后读写同一个键即可接管,
-// 本类无需改动。自动朗读 (autoRead) 只在 4-6 岁启蒙模式下开启
-// (读 age_mode 键, 与 GL 版/CLI 同一口径), 其余年龄段由步骤面板
-// 🔊 按钮手动触发。
+// 开关持久化契约: 总开关经 progress/ui_settings 的
+// kTtsEnabledSettingKey ("tts_enabled") 落 ProgressStore settings
+// 表 —— 设置页开关直接绑本类 enabled 属性 (enabledChanged 全应用
+// 即时生效), 与 GL 版 / CLI 共用同一键名。自动朗读 (autoRead) 只在
+// 4-6 岁启蒙模式下开启 (读 age_mode 键, 与 GL 版/CLI 同一口径),
+// 其余年龄段由教程页眉 🔊 按钮手动触发。
 // =============================================================
 
 #include <QObject>
@@ -32,9 +32,6 @@ class QTextToSpeech;
 #endif
 
 namespace magtile::qtui {
-
-/// TTS 总开关在 settings 表中的键名 (持久化契约, 设置页挂钩同此键)。
-inline constexpr const char* kTtsEnabledSettingKey = "tts_enabled";
 
 class TtsBackend final : public QObject {
     Q_OBJECT

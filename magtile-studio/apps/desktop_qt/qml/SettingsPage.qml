@@ -5,10 +5,12 @@ import MagTile.Studio
 
 // =============================================================
 // 设置页 (UI_UX_SPEC.md §8, 家长门后完整设置): 字号三档缩放
-// (§4.7 阅读友好 100/125/150%) / 减少动效开关 / 年龄段模式三档
-// (§2)。经 appSettings 后端桥写入 ProgressStore settings 表 ——
-// 与 GL 版 / CLI (`settings set-age`) 共用同一 SQLite 存档,
-// 全部设置立即生效 (字号与动效经 Theme 单例全应用即时应用)。
+// (§4.7 阅读友好 100/125/150%) / 减少动效开关 / 步骤朗读开关
+// (§4.2, QT-4) / 年龄段模式三档 (§2)。字号/动效/年龄段经
+// appSettings 后端桥、朗读开关经 tts 桥写入 ProgressStore
+// settings 表 —— 与 GL 版 / CLI (`settings set-age`) 共用同一
+// SQLite 存档, 全部设置立即生效 (字号与动效经 Theme 单例、朗读
+// 经 tts.enabledChanged 全应用即时应用)。
 // =============================================================
 Page {
     id: page
@@ -208,6 +210,92 @@ Page {
                                 radius: height / 2
                                 y: 4
                                 x: appSettings.reduceMotion ? parent.width - width - 4 : 4
+                                color: "white"
+                                border.color: Theme.cardBorder
+                                border.width: 1
+                                Behavior on x { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+                            }
+                        }
+                        contentItem: Item {}
+                    }
+                }
+            }
+
+            // ---- 步骤朗读 (§4.2, QT-4): 开关直绑 tts 桥, 持久化
+            // ui_settings "tts_enabled" 键, 教程页 🔊 与自动朗读即时生效 ----
+            Rectangle {
+                Layout.fillWidth: true
+                implicitHeight: ttsRow.implicitHeight + 2 * Theme.spacing
+                radius: Theme.radiusCard
+                color: Theme.surface
+                border.color: Theme.cardBorder
+                border.width: 1
+
+                RowLayout {
+                    id: ttsRow
+                    anchors.centerIn: parent
+                    width: parent.width - 2 * Theme.spacing
+                    spacing: Theme.spacing
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 4
+                        Text {
+                            text: "步骤朗读"
+                            font.pixelSize: Theme.fontButton
+                            font.bold: true
+                            color: Theme.primary
+                        }
+                        Text {
+                            Layout.fillWidth: true
+                            // 引擎缺失时温和说明 (P3 零挫败): 开关照常可调,
+                            // 装好语音引擎后无需再进设置
+                            text: tts.available
+                                  ? "教程里用 🔊 听步骤说明; 4-6 岁启蒙模式会自动朗读"
+                                  : "这台设备暂时没有语音引擎, 装好后按这里的开关生效"
+                            font.pixelSize: Theme.fontSmall
+                            color: Theme.textSecondary
+                            wrapMode: Text.WordWrap
+                        }
+                    }
+
+                    // 大号自绘开关 (与「减少动效」同款: 位置 + 颜色 + 文字三重编码)
+                    AbstractButton {
+                        id: ttsSwitch
+                        Layout.preferredWidth: 96
+                        Layout.preferredHeight: Theme.touchTarget
+                        onClicked: tts.enabled = !tts.enabled
+                        background: Rectangle {
+                            radius: height / 2
+                            color: tts.enabled ? Theme.success : Theme.cardBorder
+                            Behavior on color { ColorAnimation { duration: Theme.animMs } }
+
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 14
+                                visible: tts.enabled
+                                text: "开"
+                                font.pixelSize: Theme.fontSmall
+                                font.bold: true
+                                color: "white"
+                            }
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.right: parent.right
+                                anchors.rightMargin: 14
+                                visible: !tts.enabled
+                                text: "关"
+                                font.pixelSize: Theme.fontSmall
+                                font.bold: true
+                                color: Theme.textSecondary
+                            }
+                            Rectangle {
+                                width: parent.height - 8
+                                height: parent.height - 8
+                                radius: height / 2
+                                y: 4
+                                x: tts.enabled ? parent.width - width - 4 : 4
                                 color: "white"
                                 border.color: Theme.cardBorder
                                 border.width: 1
