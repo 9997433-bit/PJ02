@@ -354,6 +354,24 @@
       "thumbnail": "thumbnails/mars_rover_01.png"
     },
     {
+      "id": "monorail_01",
+      "file": "models/monorail_01.json",
+      "name": "单轨列车段",
+      "name_en": "Monorail Segment 01",
+      "description": "全库第一段跨座式单轨: 三座直角三角斜撑加固的高架墩柱托起 10 格青色轨道梁, 红色单轨列车跨坐梁上 —— 两侧整排透明观景车窗 (窗格方首次上列车), 南墙嵌橙色乘客门, 车顶受电弓与前后信号鳍立在沿口, 轨道尽头一片红色缓冲挡板。车厢墙踩梁沿、车顶双边压墙顶锁成箱形闭环 —— 叮! 下一站, 科技馆。",
+      "difficulty": 3,
+      "total_pieces": 56,
+      "step_count": 12,
+      "theme": "城市生活",
+      "tags": [
+        "交通",
+        "单轨",
+        "列车",
+        "城市",
+        "进阶"
+      ]
+    },
+    {
       "id": "roller_coaster_loop_01",
       "file": "models/roller_coaster_loop_01.json",
       "name": "过山车大环圈",
@@ -392,6 +410,23 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/sydney_opera_01.png"
+    },
+    {
+      "id": "gas_station_01",
+      "file": "models/gas_station_01.json",
+      "name": "加油站",
+      "name_en": "Gas Station",
+      "description": "星光加油站: 东西两榀双层门架托起 4x2 红色大雨棚, 前檐整排透明招牌墙点亮双星徽记; 棚下两台黄色加油机油枪朝天, 东侧便利店借门架一墙两用 (门框方店门 + 窗格方橱窗), 屋顶双旗迎风; 南侧车道上车轮底座敞篷小车正在加油, 西口窗格方价目牌一目了然 —— 加满一箱, 出发!",
+      "difficulty": 3,
+      "total_pieces": 60,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "车辆",
+        "进阶"
+      ]
     },
     {
       "id": "roller_coaster_hill_01",
@@ -752,6 +787,25 @@
       "thumbnail": "thumbnails/crane_tower_01.png"
     },
     {
+      "id": "museum_01",
+      "file": "models/museum_01.json",
+      "name": "艺术博物馆",
+      "name_en": "Art Museum 01",
+      "description": "全库第一座博物馆: 前庭正中透明玻璃金字塔 (梯形四坡+方板压顶自锁, 卢浮宫式样), 身后古典三段式主馆 —— 两翼展廊戴栏板与翼端旗, 中央大厅由上下两环长方形横楣箱形叠合、顶戴梯形四坡金顶; 玻璃门厅整面通透, 门前双柱门廊托檐饰三角, 步道两侧立馆藏雕塑 —— 今天常设展免费开放!",
+      "difficulty": 3,
+      "total_pieces": 68,
+      "step_count": 16,
+      "theme": "建筑地标",
+      "tags": [
+        "建筑地标",
+        "博物馆",
+        "玻璃金字塔",
+        "古典建筑",
+        "进阶",
+        "需要扩展装"
+      ]
+    },
+    {
       "id": "planetarium_01",
       "file": "models/planetarium_01.json",
       "name": "城市天文馆",
@@ -808,6 +862,25 @@
         "接地斜撑"
       ],
       "thumbnail": "thumbnails/dinosaur_stego_01.png"
+    },
+    {
+      "id": "fire_truck_01",
+      "file": "models/fire_truck_01.json",
+      "name": "消防车",
+      "name_en": "Fire Truck 01",
+      "description": "全库第一辆带升降云梯的救援车: 平头消防车两对车轮底座托起 4x2 底盘, 器材舱首尾方墙与舱顶纵向长板锁成箱形环, 南北四扇窗格方器材柜卷帘; 黄色云梯长板绕舱顶整条长边铰链升起 60 度 (弯矩 30 < 35, 实打实的极限仰角), 直指东侧起火小屋 —— 屋面拼缝上三簇橙红火苗窜动, 门框方房门待救, 街角消防栓待命。呜哇呜哇, 让一让!",
+      "difficulty": 3,
+      "total_pieces": 69,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "消防车",
+        "城市",
+        "载具",
+        "救援",
+        "车轮底座"
+      ],
+      "thumbnail": "thumbnails/fire_truck_01.png"
     },
     {
       "id": "space_station_01",
@@ -1285,6 +1358,25 @@
       "thumbnail": "thumbnails/fire_station_01.png"
     },
     {
+      "id": "parking_garage_01",
+      "file": "models/parking_garage_01.json",
+      "name": "立体停车场",
+      "name_en": "Parking Garage 01",
+      "description": "全库第一座敞开式立体车库: 没有一面完整外墙, 两层车板 (各 6 片长板纵铺) 全部架在南北交错的黄色立柱上 —— 板端整边压柱顶、邻板长边互吸, 柱-板-柱锁成多环框架, 柱脚四角直角三角斜撑锁地; 入口匝道从前街 30 度爬上一层, 出口匝道俯冲后院, 顶层青色护栏围边、下行坡道经中继桥墩两段接力降回地面 (坡道链每段两端受力零悬臂); 西侧红色电梯塔三层圈层自锁, 透明观景层戴等腰四坡尖顶, 4.94 格高俯瞰全场 —— 车位已满, 请上二层!",
+      "difficulty": 4,
+      "total_pieces": 82,
+      "step_count": 18,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "停车场",
+        "框架结构",
+        "坡道链",
+        "挑战"
+      ]
+    },
+    {
       "id": "race_track_01",
       "file": "models/race_track_01.json",
       "name": "环形赛道",
@@ -1604,6 +1696,24 @@
         "城市",
         "职业体验",
         "建筑",
+        "进阶"
+      ]
+    },
+    {
+      "id": "post_office_01",
+      "file": "models/post_office_01.json",
+      "name": "邮局",
+      "name_en": "Post Office",
+      "description": "中央邮局: 两层营业大厅开双门框方大门、二层嵌四扇窗格方高窗, 四柱门廊托横楣、门廊平顶与主楼平顶同层合缝成大环, 前檐一排黄色等边齿饰; 东侧装卸月台借主楼东墙受力, 30 度手推车坡道直落场地; 西侧车轮底座邮车 (长方形厢壁 + 门框方后门 + 透明挡风) 整装待发, 路口绿色邮筒嵌窗格方投信口 —— 叮, 寄往全世界。",
+      "difficulty": 4,
+      "total_pieces": 97,
+      "step_count": 19,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "职业体验",
+        "建筑",
+        "车辆",
         "进阶"
       ]
     },
