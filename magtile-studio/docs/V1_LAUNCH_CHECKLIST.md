@@ -92,7 +92,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | A2 | JNI 符号与 NDK 交叉编译本地断言 | P0 | Auto (R4 内 E2E-14a) | `tools/run_e2e_smoke.sh` (符号清单解析自 `android.yml`, 口径自动同步) | ✅ 随 E2E 冒烟 |
 | A3 | release 签名配置 (signingConfig + 密钥管理; 商店档产物) | P0 | Auto (R13: signingConfigs 块 + `keystore.properties.example` 齐备) | `platforms/android/app/build.gradle.kts` signingConfigs (从不入库的 `keystore.properties` 读取) + [../platforms/android/SIGNING.md](../platforms/android/SIGNING.md) (生成/出包/CI 口径) | 🔶 签名接线与模板/手册已落地 (缺配置时 release 报错指引, debug 不受影响); 真实 keystore 生成与商店档出包属人工 (随 A4/A5) |
 | A4 | 真机验收 (arm64 API 26+; E2E-03/14/15 + 触屏手势 + 首启解包) | P0 | Manual | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) §1/§3; [../platforms/android/README.md](../platforms/android/README.md) 第一节走查 | ⬜ 无真机验收记录 |
-| A5 | 商店上架资料 (图标/截图/儿童类目分级问卷; Google Play 亲子政策 / 国内商店资质) | P0 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.2 (优先华为/应用宝) + §6.3 | ⬜ 未开始 (国内商店依赖 L1/L2) |
+| A5 | 商店上架资料 (图标/截图/儿童类目分级问卷; Google Play 亲子政策 / 国内商店资质) | P0 | Auto(部分) (R14/R15 守卫文案与资质清单文档结构; 素材制作与后台填报仍人工) | 文案字段 [STORE_LISTING.md](STORE_LISTING.md) + 资质办理 [CHINA_STORE_COMPLIANCE.md](CHINA_STORE_COMPLIANCE.md); [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.2 (优先华为/应用宝) + §6.3 | ⬜ 素材/资质未开始 (国内商店依赖 L1/L2); 两份清单文档已入库, 结构由 R14/R15 常态守卫 |
 | A6 | starter 子集包验证 (`-PmagtileAssets=starter` 恰 30 模型) | P1 | Manual | [../platforms/android/README.md](../platforms/android/README.md) 第四节; [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) §1 | 🔶 构建选项已落地, 出包前抽验一次 |
 | A7 | Android 已知体验缺口盘点留痕 (视口 MSAA / 按需渲染节电 / 家长中心完整功能等) | P1 | Manual | [../platforms/android/README.md](../platforms/android/README.md) 第六节「后续计划」 | 🔶 缺口已文档化, P1 允许带已记录问题上架 |
 
@@ -146,8 +146,12 @@ tools/check_v1_readiness.sh --help     # 完整用法
 ## 9. 软著 / 备案 / 商店资质
 
 国内商店上架前置项见 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.2 与
-§6.3 末条; 全部为线下法务/行政流程, 无自动化载体, 建议**最早启动**
-(周期不受工程进度控制)。
+§6.3 末条; 逐项**办理动作**、负责方与串行关键路径见
+[CHINA_STORE_COMPLIANCE.md](CHINA_STORE_COMPLIANCE.md) (本节是其
+状态快照, 两处互为回链)。办理本身为线下法务/行政流程无自动化载体,
+建议**最早启动** (周期不受工程进度控制); 该办理清单的章节/条目/
+交叉引用完整性由 `tools/check_china_compliance_docs.py` 守卫
+(探测 R15, 已接入 `tools/check_v1_readiness.sh`)。
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |

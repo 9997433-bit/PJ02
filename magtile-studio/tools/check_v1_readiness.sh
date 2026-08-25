@@ -24,6 +24,10 @@
 #   R13 [P0] Android 签名    signingConfigs 接线 + keystore.properties.example
 #                            模板齐备 (真实 keystore 不入库, 生成与商店
 #                            出包属人工项 M2; 流程 platforms/android/SIGNING.md)
+#   R14 [P0] 商店上架文档守卫 tools/validate_store_listing.py
+#                            (STORE_LISTING + store_assets 必填章节与内链)
+#   R15 [P0] 国内合规清单守卫 tools/check_china_compliance_docs.py
+#                            (CHINA_STORE_COMPLIANCE 章节/条目格式/交叉引用)
 #
 # 用法:
 #   tools/check_v1_readiness.sh [选项]
@@ -47,7 +51,8 @@ QUICK=0
 STRICT=0
 MODEL_TARGET=200
 
-usage() { sed -n '2,41p' "$0"; }
+# 帮助 = 文件头注释块 (行 2 起至第一条闭合分隔线, 随头注增删自适应)
+usage() { sed -n '2,/^# =\{20,\}$/p' "$0"; }
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
@@ -370,6 +375,10 @@ fi
 run_check R11 P0 "真实商店计费接入 (StoreBillingClient)"          check_store_billing
 run_check R12 P1 "Android 构建链路资产"                           check_android_assets
 run_check R13 P0 "Android release 签名配置"                       check_android_signing
+run_check R14 P0 "商店上架文档守卫 (validate_store_listing)" \
+    "$PYTHON" "$ROOT/tools/validate_store_listing.py"
+run_check R15 P0 "国内合规清单守卫 (check_china_compliance_docs)" \
+    "$PYTHON" "$ROOT/tools/check_china_compliance_docs.py"
 
 # ---- 纯人工项提醒 (不参与判定, 对应清单各节 Manual 行) -----------
 skip_check M1 P0 "Windows/macOS 实机打包验收 + 代码签名/公证" "Manual, 见清单 §3 D2~D6"
@@ -377,7 +386,7 @@ skip_check M2 P0 "Android 真机验收 + 商店上架资料"            "Manual,
 skip_check M3 P0 "隐私政策法务定稿 + 合规自查单"              "Manual, 见清单 §5 V2/V4"
 skip_check M4 P0 "E2E 矩阵 P0 人工要点打钩与签核记录"         "Manual, 见 E2E_TEST_MATRIX.md §3"
 skip_check M5 P0 "实物抽样实搭签核 (R6/R7 只报告缺口)"        "Manual, 见清单 §8 与 PHYSICAL_REBUILD_CHECKLIST.md"
-skip_check M6 P0 "软著 / ICP 备案 / 开发者账号 / 运营主体"    "Manual, 见清单 §9"
+skip_check M6 P0 "软著 / ICP 备案 / 开发者账号 / 运营主体"    "Manual, 见清单 §9 与 CHINA_STORE_COMPLIANCE.md (文档完整性已由 R15 守卫)"
 
 # ---- 总结报告 ----------------------------------------------------
 pass_count=0; fail_count=0; skip_count=0; p0_fail=0

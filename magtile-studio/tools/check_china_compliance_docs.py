@@ -13,9 +13,9 @@
      「- [ ] **P0|P1 · 负责方** — 描述」格式, 缺级别或缺负责方即失败;
   3. 覆盖: 每个必备章节 (含商店小节) 至少含 1 条合格 checkbox;
   4. 交叉引用: 文档正文链接 PRIVACY_POLICY_DRAFT / STORE_LISTING /
-     COMMERCIAL_PLAN / SECURITY_AND_PRIVACY 且这四份文档实际存在;
-     另须提及 V1_LAUNCH_CHECKLIST (该文档暂未创建, 按 STORE_LISTING
-     §1 同一口径以「暂未创建」标注; 若日后创建, 本断言自动满足)。
+     COMMERCIAL_PLAN / SECURITY_AND_PRIVACY / V1_LAUNCH_CHECKLIST
+     且这五份文档实际存在 (V1_LAUNCH_CHECKLIST §9 与本文档互为
+     状态快照/办理动作的对账双方, 断链即口径失联)。
 
 退出码:
   0  全部断言通过;
@@ -58,8 +58,7 @@ REQUIRED_XREFS: list[tuple[str, str, bool]] = [
     ("商店上架素材清单", "STORE_LISTING.md", True),
     ("商业化总纲", "COMMERCIAL_PLAN.md", True),
     ("安全与隐私规范", "SECURITY_AND_PRIVACY.md", True),
-    # V1_LAUNCH_CHECKLIST 暂未创建 (STORE_LISTING §1 口径), 只要求提及
-    ("V1 上架总清单 (提及即可)", "V1_LAUNCH_CHECKLIST", False),
+    ("V1 上架总清单", "V1_LAUNCH_CHECKLIST.md", True),
 ]
 
 # 合格条目: - [ ] **P0 · 负责方** — 描述  (允许已勾选 [x])

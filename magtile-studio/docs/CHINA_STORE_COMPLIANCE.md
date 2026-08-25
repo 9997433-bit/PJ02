@@ -24,9 +24,10 @@
   商标注册与 IP 规避 (见 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §6.1,
   商标属公司资产建设, 非单次上架阻塞项), Google Play 国际版 (见
   [STORE_LISTING.md](STORE_LISTING.md) §3)。
-- **V1 上架总清单**: docs/V1_LAUNCH_CHECKLIST.md 暂未创建 (同
-  [STORE_LISTING.md](STORE_LISTING.md) §1 口径); 创建后应收录本文
-  第 9 节「总控清单」并回链本文, 届时本节此条替换为正式链接。
+- **V1 上架总清单**: [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md)
+  —— 其 §9「软著 / 备案 / 商店资质」(L1~L5) 是本文事项的**状态快照**
+  并回链本文; 分工: 该清单管全局就绪状态与放行规则, 本文管逐项
+  **办理动作** (本文第 9 节「总控清单」即其 L1~L4 的展开)。
 
 ### 1.2 阻塞级别定义
 
@@ -367,7 +368,9 @@
   (驳回原因 / 申诉口径 / 结果), 不散落在个人聊天记录里。
 - 提交前最后一步: 跑 [STORE_LISTING.md](STORE_LISTING.md) §11 提交前
   核对清单 + `python3 tools/check_china_compliance_docs.py` (本文
-  章节与条目完整性守卫)。
+  章节与条目完整性守卫, 已作为 **R15** 接入
+  `tools/check_v1_readiness.sh` 一键就绪探测, 见
+  [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §0)。
 
 ---
 
@@ -382,4 +385,4 @@
 | 儿童侧零价格 UI 规范 | [UI_UX_SPEC.md](UI_UX_SPEC.md) §11 |
 | Android 工程与签名 | [../platforms/android/README.md](../platforms/android/README.md) |
 | 本文完整性守卫 | `tools/check_china_compliance_docs.py` |
-| V1 上架逐项总清单 | docs/V1_LAUNCH_CHECKLIST.md (暂未创建, 见 §1.1) |
+| V1 上架逐项总清单 | [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §9 (分工与回链关系见 §1.1) |
