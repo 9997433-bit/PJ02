@@ -869,6 +869,25 @@
       "thumbnail": "thumbnails/lunar_lander_01.png"
     },
     {
+      "id": "moon_lander_01",
+      "file": "models/moon_lander_01.json",
+      "name": "月宫着陆舱",
+      "name_en": "Moon Lander 01",
+      "description": "十字五舱月面着陆器 (结构逻辑不同于月面着陆器的方箱对接): 中央核心舱四面各接一间翼舱, 12 片金色舱墙沿十字周界 8 凸角 4 凹角全部竖边互吸闭环; 核心顶板无墙可踩, 四边全骑翼舱顶板拼缝多路受力; 其上再起透明舷窗上升舱, 戴等边四坡穹顶 (2.71); 四个舱尖各配一对直角三角八字抱脚 —— 竖直角边吸墙竖棱、水平直角边吸月面拼缝, 一脚三吸零悬挑; 天线塔尖 3.0 直指地球, 灼痕环形山月岩红旗铺满着陆场 —— 广寒宫到了。",
+      "difficulty": 3,
+      "total_pieces": 63,
+      "step_count": 15,
+      "theme": "航天探索",
+      "tags": [
+        "航天",
+        "着陆器",
+        "月球",
+        "航天器",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/moon_lander_01.png"
+    },
+    {
       "id": "sandbox_park_01",
       "file": "models/sandbox_park_01.json",
       "name": "沙坑公园",
@@ -1101,6 +1120,25 @@
       "thumbnail": "thumbnails/igloo_01.png"
     },
     {
+      "id": "asteroid_mining_01",
+      "file": "models/asteroid_mining_01.json",
+      "name": "小行星采矿站",
+      "name_en": "Asteroid Mining Outpost 01",
+      "description": "全库第一座地外采矿站: 紫色小行星岩面上, 龙门钻机门式刚架 (双节立柱托两片桥面, 地-柱-桥-柱-地锁成大环) 正对矿脉开钻 —— 倒垂等腰钻杆底边吸桥面南沿 (受拉悬垂 30g << strict 预算 84g, 力矩 0), 钻尖恰好触地拉压双保险; 储矿仓仓口四坡矿堆冒尖, 青色输送坡道顶铰链+坡尾接地俯冲落地; 黄色居住舱气闸朝钻机、舷窗朝北, 长板舱顶双端如桥; 两座矿锥、月岩与信标旗散布场区 —— 太空淘金开工!",
+      "difficulty": 3,
+      "total_pieces": 67,
+      "step_count": 14,
+      "theme": "航天探索",
+      "tags": [
+        "航天",
+        "小行星",
+        "采矿",
+        "科学探索",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/asteroid_mining_01.png"
+    },
+    {
       "id": "clock_tower_01",
       "file": "models/clock_tower_01.json",
       "name": "中央大钟楼",
@@ -1118,6 +1156,25 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/clock_tower_01.png"
+    },
+    {
+      "id": "satellite_dish_01",
+      "file": "models/satellite_dish_01.json",
+      "name": "卫星地面站",
+      "name_en": "Satellite Ground Station 01",
+      "description": "全库第一口朝天锅: 1x1 两层蓝色基座塔顶, 四片透明方板花瓣绕墙顶铰链向外翻开 30 度, 与馈源盖板围成仰望深空的碗 (碗沿 2.87, 单片悬挑力矩 7.5 << strict 预算 17.5); 西北角青色等边花瓣小碟追低轨卫星, 黄色测控楼门框方大门朝碟、双窗格方窗朝南, 屋脊天线骑缝双连接, 信标旗与仪器箱点景 —— 深空的问候, 落进碗里。",
+      "difficulty": 3,
+      "total_pieces": 67,
+      "step_count": 14,
+      "theme": "航天探索",
+      "tags": [
+        "航天",
+        "卫星",
+        "天线",
+        "地面站",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/satellite_dish_01.png"
     },
     {
       "id": "slide_playground_01",
@@ -1273,6 +1330,25 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/sailboat_01.png"
+    },
+    {
+      "id": "space_shuttle_01",
+      "file": "models/space_shuttle_01.json",
+      "name": "航天飞机",
+      "name_en": "Space Shuttle 01",
+      "description": "全库第一架航天飞机, 刚着陆停在跑道正中: 白色机腹长条用独木舟嵌地技法嵌进道面同层, 侧墙从拼缝立起锁成细长箱体; 招牌是四扇货舱门绕墙顶铰链向外翻开 30 度 (单扇力矩 7.5 <= strict 预算 17.5, 相邻门竖边互吸), 舱内躺着待部署的青色卫星; 三角翼嵌进跑道平面、斜边与道面直角三角整边互吸拼出后掠角; 双垂尾等腰塔尖 3.0 骑墙顶纵向立起, 窗格方风挡 + 直角三角鼻锥骨架收出机头, 尾喷焰、地勤拖车与红绿跑道边灯列队 —— 欢迎回家!",
+      "difficulty": 3,
+      "total_pieces": 68,
+      "step_count": 15,
+      "theme": "航天探索",
+      "tags": [
+        "航天",
+        "航天器",
+        "航天飞机",
+        "跑道",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/space_shuttle_01.png"
     },
     {
       "id": "dinosaur_stego_01",
