@@ -109,7 +109,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | V1 | 隐私政策草稿入库并随应用可查阅 | P0 | Auto (R8 存在性) | [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) | 🔶 草稿已起草 (家长一页纸 + 正文十节) |
 | V2 | 隐私政策法务定稿 (运营主体全称 / 注册地址 / 备案号 / 生效日期) | P0 | Manual | [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) 头部「状态: 草稿」标注; 依赖 L5 | ⬜ 未定稿 |
 | V3 | 应用内数据管理入口 (家长中心查阅 / 导出 / 删除) | P0 | Auto(部分) | 数据隐私后端 `progress/data_privacy` (三端同一导出契约) + Qt `privacy_backend` (家长中心「隐私与数据」区) + Android JNI `progressStoreAvailable`/`exportLocalDataJson`/`clearLocalData` (家长门后隐私面板, 与 Qt 同口径: 温和禁用 / 防覆盖原子导出 / 清除后锁家长会话) | 🔶 Qt + Android 双端在位 (同一核心实现同一导出格式); 真机走查随 V4 自查单 |
-| V4 | 上架前跑一遍安全与隐私自查单 (三平台逐项) | P0 | Manual | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) 合规检查清单 | ⬜ 待出包前执行并归档 |
+| V4 | 上架前跑一遍安全与隐私自查单 (三平台逐项) | P0 | Manual | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) 合规检查清单 (§3/§4/§5.2/§6/§8/§11) 的可执行签核载体: [reports/PRIVACY_SECURITY_SIGNOFF.md](reports/PRIVACY_SECURITY_SIGNOFF.md) (数据收集 / 家长门 / 导出删除 / 离线 / 第三方 SDK / 计费回执 六组 × Windows/macOS/Android 逐项勾选 + 平台签核栏与总放行判定, 逐组与 [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) 对外承诺互证; Android 计费组复用 [PLAY_BILLING_SANDBOX_QA.md](PLAY_BILLING_SANDBOX_QA.md) 勾选清单只记结论) | 🔶 三平台逐项签核单已入库 (空白模板, 含 allowBackup 备份规则等已知缺口预登记); 实际执行须对候选出包产物进行 (随 D2/D4/A4 出包与真机验收、V5 断网复核同批), 归档签核后转 ✅ |
 | V5 | 离线承诺断网复核 (断网走安装启动与教程主链路) | P1 | Manual | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) E2E-20 | ⬜ 随真机验收一并做 |
 
 ## 6. E2E 验收

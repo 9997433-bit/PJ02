@@ -2,6 +2,8 @@
 
 > **状态：草稿（DRAFT）。** 本文由产品团队按 [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) 的数据清单与合规检查清单起草，**商店上架前须经法务复核定稿**（补充运营主体全称、注册地址、备案信息与正式生效日期）。定稿前本文随应用离线分发，供家长在家长中心 /设置页查阅同一口径的摘要。
 >
+> **上架前核对载体**：本政策各节承诺与出包产物实际行为的逐项一致性，由 [reports/PRIVACY_SECURITY_SIGNOFF.md](reports/PRIVACY_SECURITY_SIGNOFF.md)（三平台安全与隐私签核单，V1 清单 V4 项）在每次商店提审前逐平台勾选签核——该表每组核对项均标注本文对应章节，任一不符即为上架阻断。
+>
 > 适用产品：MagTile Studio（磁力片工坊）桌面版（Windows / macOS / Linux）与 Android 版。
 > 适用用户：4–12 岁儿童及其监护人（下称「家长」）。
 
