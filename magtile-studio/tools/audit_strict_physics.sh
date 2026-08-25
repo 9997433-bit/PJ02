@@ -65,8 +65,13 @@ fi
 # "东西两岸对称推进、主跨正中合龙" (真实悬索桥的施工顺序), 第 7~11 步
 # 东岸子结构独立接地属预期分组; 校验器对该警告的建议是"在教程中明确
 # 分组说明", 该模型第 7 步教程文案已显式说明分组 —— 判定为设计使然。
+#
+# marble_relay_city_01 / disconnected_assembly: 四塔接力滚珠城按 T16 分体
+# 对接叙事逐塔预制 (A→B→C→D), 第 3~21 步各塔模块与换轨栈桥暂时独立接地
+# 属预期分组; 十字连廊与换轨坡道在末步对接成环, 教程 tip 已逐组说明。
 WAIVERS=(
     "suspension_bridge_01:disconnected_assembly"
+    "marble_relay_city_01:disconnected_assembly"
 )
 
 is_waived() {

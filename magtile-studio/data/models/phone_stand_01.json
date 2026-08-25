@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "id": "phone_stand_01",
+  "name": "双档手机支架",
+  "name_en": "Dual-Slot Phone Stand 01",
+  "description": "实用功能 D1: 3x2 盒式地台上 U 形背靠分出左右两槽, 各配 30 度坡道 + 直角斜撑 (T14 双边吸合); 左槽陡坡竖放、右槽缓坡横放,换槽即换档位。与相框画架 (主角是框与画面) 剪影和功能均不同 —— 这是策略点名的真·手机架。",
+  "difficulty": 1,
+  "total_pieces": 22,
+  "tags": [
+    "实用功能",
+    "手机架",
+    "桌面",
+    "入门",
+    "斜撑"
+  ],
+  "content_meta": {
+    "series": "practical_utility",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 18,
+        "rectangle": 2,
+        "right_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "base_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "base_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "base_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "base_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "base_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "base_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "slot_w0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "slot_w1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "slot_div",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "slot_e0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "slot_e1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "slot_back",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "ramp_v",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        0.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ramp_h",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        0.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "brace_l",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        2.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "brace_r",
+      "type": "right_triangle",
+      "position": [
+        3.0,
+        2.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lip_l",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lip_r",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "foot_l",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "foot_r",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_l",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "back_r",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺底板: 六片黄橙相间的方板拼成 3x2, 相邻边整边互吸。",
+      "tip": "底板是整个支架的地基 —— 拼缝对齐了, 背靠和坡道才有得吸。",
+      "tiles_to_add": [
+        "base_0_0",
+        "base_1_0",
+        "base_2_0",
+        "base_0_1",
+        "base_1_1",
+        "base_2_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立 U 形侧墙: 四片侧墙 + 一片中隔围出左右两个手机槽。",
+      "tip": "中隔把底板分成两槽 —— 一槽竖放、一槽横放。",
+      "tiles_to_add": [
+        "slot_w0",
+        "slot_w1",
+        "slot_div",
+        "slot_e0",
+        "slot_e1"
+      ],
+      "highlight_tiles": [
+        "base_0_0",
+        "base_2_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "封槽北墙: 紫色方板挡住槽口北缘, U 形背靠成型 (T01)。",
+      "tip": "北墙把 U 形锁成盒式框架 —— 坡道等会儿吸在这道沿上。",
+      "tiles_to_add": [
+        "slot_back"
+      ],
+      "highlight_tiles": [
+        "slot_w0",
+        "slot_e0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺后脚: 两片方板沿底板北缘延伸, 给支架更大的后脚。",
+      "tip": "后脚越宽, 支架越不容易向后翻。",
+      "tiles_to_add": [
+        "foot_l",
+        "foot_r"
+      ],
+      "highlight_tiles": [
+        "base_0_1",
+        "base_2_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立后墙: 两片紫色方板沿后脚北沿竖起, 为斜撑准备竖向吸附面。",
+      "tip": "后墙与侧墙同高 —— 斜撑等会儿要吸住它们。",
+      "tiles_to_add": [
+        "back_l",
+        "back_r"
+      ],
+      "highlight_tiles": [
+        "foot_l",
+        "foot_r"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "装双斜撑: 两片灰色直角三角, 竖边吸后墙、横边吸后脚拼缝 (T14)。",
+      "tip": "斜撑双边吸合 —— 背靠从此推不倒。",
+      "tiles_to_add": [
+        "brace_l",
+        "brace_r"
+      ],
+      "highlight_tiles": [
+        "back_l",
+        "back_r"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "搭双档坡道: 青色坡道顶边吸左槽靠背上沿, 粉色坡道吸右槽 —— 陡坡竖放、缓坡横放。",
+      "tip": "30 度坡道顶边整边吸背靠, 坡尾落桌板 —— 手机躺上去试试!",
+      "tiles_to_add": [
+        "ramp_v",
+        "ramp_h"
+      ],
+      "highlight_tiles": [
+        "slot_back",
+        "slot_div"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "装前挡收尾: 两片前唇骑槽口沿 —— 双档手机支架完工!",
+      "tip": "左槽竖放刷视频, 右槽横放看地图 —— 换槽就是换档位!",
+      "tiles_to_add": [
+        "lip_l",
+        "lip_r"
+      ],
+      "highlight_tiles": [
+        "ramp_v",
+        "ramp_h"
+      ]
+    }
+  ]
+}

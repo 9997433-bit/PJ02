@@ -1,0 +1,667 @@
+{
+  "schema_version": 1,
+  "id": "sunflower_pot_01",
+  "name": "向日葵盆栽",
+  "name_en": "Sunflower Pot 01",
+  "description": "植物花园 D2 盆栽原型: 陶土 2x2 闭环盆身托住 S 形等腰茎干, 顶上一朵 2x2 灰色花盘心; 八片花瓣按放射展开图平铺后向心翻折立起; 四片叶子沿接水盘南沿下垂, 窗格南北墙点缀盆身。",
+  "difficulty": 2,
+  "total_pieces": 34,
+  "tags": [
+    "植物花园",
+    "向日葵",
+    "盆栽",
+    "翻折",
+    "镜像"
+  ],
+  "content_meta": {
+    "series": "plant_garden",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 17,
+        "equilateral_triangle": 13,
+        "isosceles_triangle": 2,
+        "window_square": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "pad_w",
+      "type": "square",
+      "position": [
+        -0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_nw",
+      "type": "square",
+      "position": [
+        -0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "saucer_w",
+      "type": "square",
+      "position": [
+        0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "saucer_c",
+      "type": "square",
+      "position": [
+        1.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "saucer_e",
+      "type": "square",
+      "position": [
+        2.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_e",
+      "type": "square",
+      "position": [
+        3.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_ne",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pot_00",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pot_01",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pot_10",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pot_11",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pot_s",
+      "type": "window_square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pot_n",
+      "type": "window_square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pot_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pot_e",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hub_00",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hub_01",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hub_10",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hub_11",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "stem_lo",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        1.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "stem_hi",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        1.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pet_s0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        -0.288675,
+        1.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pet_s1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        -0.288675,
+        1.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pet_w0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pet_w1",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pet_e0",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pet_e1",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pet_n0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pet_n1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "leaf_w",
+      "type": "equilateral_triangle",
+      "position": [
+        -1.0,
+        -0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "leaf_cw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        -1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "leaf_ce",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        -1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "leaf_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        -0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bug",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        -1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺接水盘: 七片灰色方板拼成工字形台沿, 两侧外扩托住整盆。",
+      "tip": "盆栽的第一件事 —— 接水盘接住浇多的水。",
+      "tiles_to_add": [
+        "pad_w",
+        "pad_nw",
+        "saucer_w",
+        "saucer_c",
+        "saucer_e",
+        "pad_e",
+        "pad_ne"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "拼盆底: 四片陶土方板 2x2 整边互吸, 落在接水盘中央。",
+      "tip": "盆底与接水盘沿整边互吸 —— 盆就不会滑。",
+      "tiles_to_add": [
+        "pot_00",
+        "pot_01",
+        "pot_10",
+        "pot_11"
+      ],
+      "highlight_tiles": [
+        "saucer_c"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "围盆身: 两片窗格南北墙与两片陶土东西墙踩住盆底, 四角竖边互咬成环。",
+      "tip": "闭环盆身 —— 接下来封住墙顶做花盘。",
+      "tiles_to_add": [
+        "pot_s",
+        "pot_n",
+        "pot_w",
+        "pot_e"
+      ],
+      "highlight_tiles": [
+        "pot_00",
+        "pot_11"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "拼花盘心: 四片灰色方板 2x2 整边互吸 —— 先铺三片再封口。",
+      "tip": "花盘心骑墙顶 —— 这是向日葵的脸。",
+      "tiles_to_add": [
+        "hub_00",
+        "hub_01",
+        "hub_10",
+        "hub_11"
+      ],
+      "highlight_tiles": [
+        "pot_s"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立茎干: 两段绿色瘦高尖接成 S 形茎, 底边整边吸花盘。",
+      "tip": "S 形茎把重心拉回盆心 —— 接下来铺花瓣。",
+      "tiles_to_add": [
+        "stem_lo",
+        "stem_hi"
+      ],
+      "highlight_tiles": [
+        "hub_01"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "平铺南半圈花瓣: 四片黄色三角在花心南侧平铺开 (放射展开图)。",
+      "tip": "T05 平面翻折 —— 先在桌面平铺, 看清放射展开图。",
+      "tiles_to_add": [
+        "pet_s0",
+        "pet_s1",
+        "pet_w0",
+        "pet_w1"
+      ],
+      "highlight_tiles": [
+        "hub_00",
+        "hub_10"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "平铺北半圈花瓣: 四片橙色三角在北侧, 与南侧镜像成对。",
+      "tip": "T11 镜像 —— 南黄北橙, 八瓣一次向心翻折就立起来!",
+      "tiles_to_add": [
+        "pet_e0",
+        "pet_e1",
+        "pet_n0",
+        "pet_n1"
+      ],
+      "highlight_tiles": [
+        "pet_s0",
+        "hub_11"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "装四片叶子: 等边三角沿接水盘南沿下垂, 左右镜像成对。",
+      "tip": "叶子整边吸接水盘 —— 把重心拉回盆心下方。",
+      "tiles_to_add": [
+        "leaf_w",
+        "leaf_cw",
+        "leaf_ce",
+        "leaf_e"
+      ],
+      "highlight_tiles": [
+        "saucer_w",
+        "saucer_e"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "点睛: 接水盘中央趴一只瓢虫 —— 向日葵盆栽落成!",
+      "tip": "瓢虫趴在接水盘中央 —— 全库第一盆站得住的向日葵!",
+      "tiles_to_add": [
+        "bug"
+      ],
+      "highlight_tiles": [
+        "saucer_c"
+      ]
+    }
+  ]
+}

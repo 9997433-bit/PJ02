@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "id": "birthday_cake_01",
+  "name": "三层生日蛋糕",
+  "name_en": "Birthday Cake 01",
+  "description": "节日限定 D1: 3x3 粉白密铺底层 (T18) 上逐层收分 2x2 / 1x1 墙环与盖板 (T12), 顶层黄色瘦高蜡烛 + 底层东沿生日火花。蛋糕本体就是主角, 与派对场景模型完全不同。吹蜡烛前先许愿!",
+  "difficulty": 1,
+  "total_pieces": 24,
+  "tags": [
+    "节日",
+    "生日",
+    "蛋糕",
+    "入门",
+    "密铺"
+  ],
+  "content_meta": {
+    "series": "holiday_seasonal",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 22,
+        "equilateral_triangle": 1,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "t1_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "t1_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t1_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "t1_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t1_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "t1_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t1_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "t1_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t1_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "t2_s0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "t2_s1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "t2_n0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "t2_n1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "t2_cap_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "t2_cap_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "t2_cap_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "t2_cap_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "t3_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "t3_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "t3_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "t3_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "t3_cap",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "candle",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        0.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "spark",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺底层圆台: 九片粉白相间的方板拼成 3x3, 行行整边互吸 —— 这是最大的一层蛋糕。",
+      "tip": "粉白交替就是 T18 密铺 —— 像奶油裱花一样有节奏。",
+      "tiles_to_add": [
+        "t1_0_0",
+        "t1_1_0",
+        "t1_2_0",
+        "t1_0_1",
+        "t1_1_1",
+        "t1_2_1",
+        "t1_0_2",
+        "t1_1_2",
+        "t1_2_2"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "砌中层墙环: 四片黄橙墙围成 2x2, 墙脚整边踩底层拼缝 (T12 收分)。",
+      "tip": "第二层比第一层小一圈 —— 墙环立在底层上, 不是悬空叠板。",
+      "tiles_to_add": [
+        "t2_s0",
+        "t2_s1",
+        "t2_n0",
+        "t2_n1"
+      ],
+      "highlight_tiles": [
+        "t1_0_0",
+        "t1_1_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "盖中层奶油: 四片黄橙盖板压墙顶, 中层圆台完成。",
+      "tip": "盖板四边吸墙顶 —— 中层蛋糕面平整了。",
+      "tiles_to_add": [
+        "t2_cap_0_0",
+        "t2_cap_1_0",
+        "t2_cap_0_1",
+        "t2_cap_1_1"
+      ],
+      "highlight_tiles": [
+        "t2_s0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "砌顶层墙环: 四片粉墙围成 1x1, 墙脚吸中层盖板拼缝。",
+      "tip": "最小的一圈 —— 第三层圆台只剩正中一格。",
+      "tiles_to_add": [
+        "t3_s",
+        "t3_n",
+        "t3_w",
+        "t3_e"
+      ],
+      "highlight_tiles": [
+        "t2_cap_0_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖顶层 + 插蜡烛: 粉色顶板, 黄色瘦高蜡烛从正中向上立起。",
+      "tip": "蜡烛要插正 —— 顶层第三层圆台完成。",
+      "tiles_to_add": [
+        "t3_cap",
+        "candle"
+      ],
+      "highlight_tiles": [
+        "t3_s"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "点火花收尾: 橙色三角骑在底层东沿 —— 三层生日蛋糕完工, 生日快乐!",
+      "tip": "吹蜡烛前先许愿 —— 节日限定第一座 D1 蛋糕!",
+      "tiles_to_add": [
+        "spark"
+      ],
+      "highlight_tiles": [
+        "candle",
+        "t1_2_0"
+      ]
+    }
+  ]
+}

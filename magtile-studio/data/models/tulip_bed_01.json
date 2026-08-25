@@ -1,0 +1,504 @@
+{
+  "schema_version": 1,
+  "id": "tulip_bed_01",
+  "name": "郁金香花坛",
+  "name_en": "Tulip Flower Bed 01",
+  "description": "植物花园 D1: 四色周期围栏 (T18 密铺色带) 围合 2x2 泥土花床, 框内立着红/黄/紫三支等腰郁金香立柱; 对角绿色角柱锁住围栏沿口。与玫瑰长廊的门式花架不同, 这次主角就是花本身 —— 孩子能独立完成的第一个花坛作品。",
+  "difficulty": 1,
+  "total_pieces": 26,
+  "tags": [
+    "植物花园",
+    "郁金香",
+    "花坛",
+    "入门",
+    "密铺"
+  ],
+  "content_meta": {
+    "series": "plant_garden",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 21,
+        "isosceles_triangle": 3,
+        "equilateral_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "path_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "soil_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "soil_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "soil_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "soil_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fence_s0_0",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fence_n0_0",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_s1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fence_n1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_s0_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fence_n0_1",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fence_s1_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fence_n1_1",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fence_w0",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fence_w1",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fence_e0",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_e1",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tulip_s",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        1.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tulip_n",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        2.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tulip_w",
+      "type": "isosceles_triangle",
+      "position": [
+        1.0,
+        2.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "post_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "post_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺园路: 五片灰色方板围出框外走道, 中间留 2x2 给花床。",
+      "tip": "园路是围栏的脚位 —— 拼缝对齐, 墙才站得稳。",
+      "tiles_to_add": [
+        "path_0_0",
+        "path_1_0",
+        "path_2_0",
+        "path_0_1",
+        "path_0_2"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺花坛底: 四片橙色泥土方板填满框内, 行行整边互吸。",
+      "tip": "泥土区就是郁金香的家。",
+      "tiles_to_add": [
+        "soil_1_1",
+        "soil_1_2",
+        "soil_2_1",
+        "soil_2_2"
+      ],
+      "highlight_tiles": [
+        "path_1_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "砌围栏第一层: 红/白/绿/黄四色周期交替, 八片立墙踩住花床拼缝。",
+      "tip": "色带按固定节奏走 —— 红/清/绿/黄四色密铺。",
+      "tiles_to_add": [
+        "fence_s0_0",
+        "fence_s0_1",
+        "fence_n0_0",
+        "fence_n0_1",
+        "fence_w0",
+        "fence_w1",
+        "fence_e0",
+        "fence_e1"
+      ],
+      "highlight_tiles": [
+        "soil_1_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "围栏加高第二层: 四片续接色带, 与下层竖边整边互吸。",
+      "tip": "两层围栏才够高 —— 郁金香要从框里探出头来。",
+      "tiles_to_add": [
+        "fence_s1_0",
+        "fence_s1_1",
+        "fence_n1_0",
+        "fence_n1_1"
+      ],
+      "highlight_tiles": [
+        "fence_s0_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "种郁金香: 三支等腰三角立在围栏顶沿, 底边吸墙顶。",
+      "tip": "红/黄/紫三色 —— 三支立柱就是这座花坛的主角。",
+      "tiles_to_add": [
+        "tulip_s",
+        "tulip_n",
+        "tulip_w"
+      ],
+      "highlight_tiles": [
+        "fence_s1_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "装围栏角柱收尾: 西南与东北角各立一片绿色等边三角 —— 郁金香花坛落成!",
+      "tip": "色带、立柱、角柱齐了 —— 植物花园第一座 D1 花作品。",
+      "tiles_to_add": [
+        "post_sw",
+        "post_ne"
+      ],
+      "highlight_tiles": [
+        "tulip_s"
+      ]
+    }
+  ]
+}

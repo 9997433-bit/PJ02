@@ -3,6 +3,234 @@
   "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 与 thumbnail 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。theme 为卡片主题 (由标签推导), thumbnail 由 tools/generate_thumbnails.py 生成。本文件由 tools/update_model_catalog.py 自动生成, 请勿手工编辑。",
   "models": [
     {
+      "id": "phone_stand_01",
+      "file": "models/phone_stand_01.json",
+      "name": "双档手机支架",
+      "name_en": "Dual-Slot Phone Stand 01",
+      "description": "实用功能 D1: 3x2 盒式地台上 U 形背靠分出左右两槽, 各配 30 度坡道 + 直角斜撑 (T14 双边吸合); 左槽陡坡竖放、右槽缓坡横放,换槽即换档位。与相框画架 (主角是框与画面) 剪影和功能均不同 —— 这是策略点名的真·手机架。",
+      "difficulty": 1,
+      "total_pieces": 22,
+      "step_count": 8,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "手机架",
+        "桌面",
+        "入门",
+        "斜撑"
+      ],
+      "thumbnail": "thumbnails/phone_stand_01.png"
+    },
+    {
+      "id": "photo_frame_01",
+      "file": "models/photo_frame_01.json",
+      "name": "自立相框画架",
+      "name_en": "Photo Frame Easel 01",
+      "description": "实用功能 D1 引流作: 3x2 黄橙双层地台留出一道竖缝即插纸槽,粉色窗格框立在台前, 灰色直角三角从框背斜撑到地台后缘,照片从槽顶一插就展示, 相框自己站住。",
+      "difficulty": 1,
+      "total_pieces": 22,
+      "step_count": 8,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "相框",
+        "画架",
+        "照片",
+        "桌面"
+      ],
+      "thumbnail": "thumbnails/photo_frame_01.png"
+    },
+    {
+      "id": "birthday_cake_01",
+      "file": "models/birthday_cake_01.json",
+      "name": "三层生日蛋糕",
+      "name_en": "Birthday Cake 01",
+      "description": "节日限定 D1: 3x3 粉白密铺底层 (T18) 上逐层收分 2x2 / 1x1 墙环与盖板 (T12), 顶层黄色瘦高蜡烛 + 底层东沿生日火花。蛋糕本体就是主角, 与派对场景模型完全不同。吹蜡烛前先许愿!",
+      "difficulty": 1,
+      "total_pieces": 24,
+      "step_count": 6,
+      "theme": "节日",
+      "tags": [
+        "节日",
+        "生日",
+        "蛋糕",
+        "入门",
+        "密铺"
+      ],
+      "thumbnail": "thumbnails/birthday_cake_01.png"
+    },
+    {
+      "id": "storage_chest_01",
+      "file": "models/storage_chest_01.json",
+      "name": "翻盖百宝盒",
+      "name_en": "Storage Chest 01",
+      "description": "实用功能首个 D1: 结构签名是'翻盖百宝盒' —— 2x2 胡桃木闭环箱框内藏着三枚金币与一把钥匙; 盖板先在展示垫上平拼成 2x2 金色整板, 后沿长板与后墙顶共线互吸形成铰链, 再沿磁吸边整体翻折扣合 (T05 平面翻折, 磁吸边即铰链); 正面金扣三角同时吸前墙顶与盖板前沿, 角钉收边, 顶把手一提就开 —— 与敞口格架收纳站的开合方式完全不同!",
+      "difficulty": 1,
+      "total_pieces": 24,
+      "step_count": 8,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "收纳",
+        "翻盖",
+        "百宝盒",
+        "入门"
+      ],
+      "thumbnail": "thumbnails/storage_chest_01.png"
+    },
+    {
+      "id": "tessellation_lantern_01",
+      "file": "models/tessellation_lantern_01.json",
+      "name": "密铺柱面灯笼",
+      "name_en": "Tessellation Lantern 01",
+      "description": "几何艺术 D1: 2x2 盒式框架四面墙环, 每面墙顶立两片正三角形成密铺带 (T18), 内顶方板收边成腔。",
+      "difficulty": 1,
+      "total_pieces": 24,
+      "step_count": 4,
+      "theme": "几何艺术",
+      "tags": [
+        "几何艺术",
+        "密铺",
+        "灯笼",
+        "柱面",
+        "光影"
+      ],
+      "thumbnail": "thumbnails/tessellation_lantern_01.png"
+    },
+    {
+      "id": "watchtower_01",
+      "file": "models/watchtower_01.json",
+      "name": "城墙转角哨塔",
+      "name_en": "Corner Watchtower 01",
+      "description": "城堡与要塞 D1 入门: 单座两层哨塔嵌在 L 形转角城墙短段上 —— 盒式墙环合围, 南门洞与北箭窗用门框方/窗格方做负空间造型; 黄色城齿与红色瞭望尖让体量虽小却有要塞味道。与 75 片的土丘主塔刻意拉开, 这是孩子能独立完成的第一个城堡作品。",
+      "difficulty": 1,
+      "total_pieces": 24,
+      "step_count": 6,
+      "theme": "城堡王国",
+      "tags": [
+        "城堡",
+        "哨塔",
+        "城墙",
+        "入门",
+        "要塞"
+      ],
+      "thumbnail": "thumbnails/watchtower_01.png"
+    },
+    {
+      "id": "mini_bus_01",
+      "file": "models/mini_bus_01.json",
+      "name": "迷你小巴",
+      "name_en": "Mini Bus 01",
+      "description": "陆地交通首个 D1 载具: 四片 wheel_base 前后双轴立在车道拼缝上,两片黄色底盘长板长边压轮顶锁成门式框架; 2x1 蓝色箱体围合,前后三角灯与绿色线路牌点睛 —— 不附街景, 只搭车就能开!",
+      "difficulty": 1,
+      "total_pieces": 26,
+      "step_count": 7,
+      "theme": "陆地交通",
+      "tags": [
+        "陆地交通",
+        "巴士",
+        "载具",
+        "wheel_base",
+        "入门"
+      ],
+      "thumbnail": "thumbnails/mini_bus_01.png"
+    },
+    {
+      "id": "tulip_bed_01",
+      "file": "models/tulip_bed_01.json",
+      "name": "郁金香花坛",
+      "name_en": "Tulip Flower Bed 01",
+      "description": "植物花园 D1: 四色周期围栏 (T18 密铺色带) 围合 2x2 泥土花床, 框内立着红/黄/紫三支等腰郁金香立柱; 对角绿色角柱锁住围栏沿口。与玫瑰长廊的门式花架不同, 这次主角就是花本身 —— 孩子能独立完成的第一个花坛作品。",
+      "difficulty": 1,
+      "total_pieces": 26,
+      "step_count": 6,
+      "theme": "植物花园",
+      "tags": [
+        "植物花园",
+        "郁金香",
+        "花坛",
+        "入门",
+        "密铺"
+      ],
+      "thumbnail": "thumbnails/tulip_bed_01.png"
+    },
+    {
+      "id": "star_octahedron_01",
+      "file": "models/star_octahedron_01.json",
+      "name": "星形八面体摆件",
+      "name_en": "Star Octahedron Display 01",
+      "description": "几何艺术 D2: 2x2 底座对角直角三角互锁, 上下两组等边三角互穿成星芒, 顶上一枚等边四坡锥合拢上四面体 —— T05 翻折 + T11 镜像的入库示范。与密铺屏风/测地穹顶完全不同, 这是全库第一座星形多面体摆件。",
+      "difficulty": 2,
+      "total_pieces": 30,
+      "step_count": 4,
+      "theme": "几何艺术",
+      "tags": [
+        "几何艺术",
+        "多面体",
+        "星形",
+        "摆件",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/star_octahedron_01.png"
+    },
+    {
+      "id": "marble_cascade_01",
+      "file": "models/marble_cascade_01.json",
+      "name": "阶梯瀑布滚珠台",
+      "name_en": "Marble Cascade 01",
+      "description": "滚珠乐园首个 D2: 与绕塔双轨/单塔螺旋完全不同的三级退台瀑布 —— 两层发射台向正东甩出三段 30 度坡道, 每级平台东沿是坡道顶铰链、桥墩接住坡尾, 弹珠连跳三次落进南端接珠池; 轨道严格服从台阶几何 (T12 层叠退台 + T08 滚珠轨道), 全部 CORE-9, 实物跑珠即可验证。",
+      "difficulty": 2,
+      "total_pieces": 34,
+      "step_count": 10,
+      "theme": "滚珠乐园",
+      "tags": [
+        "滚珠",
+        "轨道",
+        "瀑布",
+        "滚珠乐园",
+        "退台"
+      ],
+      "thumbnail": "thumbnails/marble_cascade_01.png"
+    },
+    {
+      "id": "sunflower_pot_01",
+      "file": "models/sunflower_pot_01.json",
+      "name": "向日葵盆栽",
+      "name_en": "Sunflower Pot 01",
+      "description": "植物花园 D2 盆栽原型: 陶土 2x2 闭环盆身托住 S 形等腰茎干, 顶上一朵 2x2 灰色花盘心; 八片花瓣按放射展开图平铺后向心翻折立起; 四片叶子沿接水盘南沿下垂, 窗格南北墙点缀盆身。",
+      "difficulty": 2,
+      "total_pieces": 34,
+      "step_count": 9,
+      "theme": "植物花园",
+      "tags": [
+        "植物花园",
+        "向日葵",
+        "盆栽",
+        "翻折",
+        "镜像"
+      ],
+      "thumbnail": "thumbnails/sunflower_pot_01.png"
+    },
+    {
+      "id": "swan_01",
+      "file": "models/swan_01.json",
+      "name": "白天鹅",
+      "name_en": "White Swan 01",
+      "description": "动物世界 D2: 2x2 白身箱浮在蓝绿棋盘 pond 上, S 形颈以逐段退台内收 (T12) 把重心拉回接地凸包; 双翼与尾羽严格左右镜像 (T11), 窗格方黑眼 + 橙喙点睛。与蜂场/海龟滩两个 D2 场景不同 —— 这是第一只 D2 具象动物主角。",
+      "difficulty": 2,
+      "total_pieces": 36,
+      "step_count": 10,
+      "theme": "自然世界",
+      "tags": [
+        "动物世界",
+        "天鹅",
+        "入门",
+        "镜像",
+        "池塘"
+      ],
+      "thumbnail": "thumbnails/swan_01.png"
+    },
+    {
       "id": "rehab_park_01",
       "file": "models/rehab_park_01.json",
       "name": "康复操场",
@@ -2670,25 +2898,6 @@
       "thumbnail": "thumbnails/space_shuttle_01.png"
     },
     {
-      "id": "art_gallery_01",
-      "file": "models/art_gallery_01.json",
-      "name": "白盒双光庭美术馆",
-      "name_en": "Art Gallery 01",
-      "description": "全库第一座 L 形平面建筑: 两翼展厅折成 L, 转角凹出前庭广场; 屋面开两个 1x1 负空间光庭, 透明窗格方鼓身四角闭环、等边四坡锥自锁收头, 天光正对馆内展品; 外墙嵌红黄蓝窗格方色块 (蒙德里安式立面), 馆内彩色展墙与三角雕塑先布展后封顶 —— 装配顺序即策展顺序; 门口透明雨棚单边铰链外挑, 前庭立着馆外第一件雕塑。",
-      "difficulty": 3,
-      "total_pieces": 69,
-      "step_count": 13,
-      "theme": "博物馆",
-      "tags": [
-        "博物馆",
-        "艺术",
-        "美术馆",
-        "光庭",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/art_gallery_01.png"
-    },
-    {
       "id": "birthday_party_01",
       "file": "models/birthday_party_01.json",
       "name": "生日派对",
@@ -2764,25 +2973,6 @@
         "免费"
       ],
       "thumbnail": "thumbnails/dinosaur_stego_01.png"
-    },
-    {
-      "id": "farm_silo_01",
-      "file": "models/farm_silo_01.json",
-      "name": "农场筒仓",
-      "name_en": "Farm Silo 01",
-      "description": "农场的粮食摩天楼: 两座 1x1 方形圈层粮塔并肩叠起三层, 蓝色压顶封口, 红色等腰四坡锥顶自锁冲天 (锥尖 4.94 格全场最高); 塔间天桥方板双端搭墙顶如桥, 把双塔锁成一个大环, 桥沿等边护栏守住高空通道; 塔脚橙色溜槽斜贴塔壁, 晒谷场上粮堆四坡自锁, 栅栏围场 —— 圈层塔身、双端天桥、四坡锥顶三大技法一次学会。",
-      "difficulty": 3,
-      "total_pieces": 69,
-      "step_count": 16,
-      "theme": "田园",
-      "tags": [
-        "田园",
-        "农场",
-        "筒仓",
-        "双塔",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/farm_silo_01.png"
     },
     {
       "id": "fire_truck_01",
@@ -2903,25 +3093,6 @@
       "thumbnail": "thumbnails/amphitheater_01.png"
     },
     {
-      "id": "drive_in_cinema_01",
-      "file": "models/drive_in_cinema_01.json",
-      "name": "露天汽车影院",
-      "name_en": "Drive-in Cinema 01",
-      "description": "只用核心九片型的夜场影院: 主角是 4 格宽 2 层高的巨型银幕箱塔 —— 清色银幕面朝观众, 红色幕布收在两端, 层层箱形闭环站得笔直; 幕前两辆小车头朝银幕停进车位, 双轮立上车位长板的两条长边, 车顶板压双轮顶锁成滚动门式框架, 清色挡风玻璃骑车顶北沿; 车旁青色喇叭桩插在地缝上, 西南角放映亭二层窗格方放映窗正对银幕、紫色放映机骑顶, 入场口双柱托横板挂红旗 —— 关掉车灯, 今晚放的是什么片?",
-      "difficulty": 3,
-      "total_pieces": 70,
-      "step_count": 14,
-      "theme": "城市生活",
-      "tags": [
-        "城市",
-        "电影",
-        "职业体验",
-        "汽车",
-        "夜晚"
-      ],
-      "thumbnail": "thumbnails/drive_in_cinema_01.png"
-    },
-    {
       "id": "kangaroo_01",
       "file": "models/kangaroo_01.json",
       "name": "袋鼠妈妈",
@@ -2940,44 +3111,6 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/kangaroo_01.png"
-    },
-    {
-      "id": "conveyor_factory_01",
-      "file": "models/conveyor_factory_01.json",
-      "name": "传送带车间",
-      "name_en": "Conveyor Factory 01",
-      "description": "全库第一条工厂流水线: 蓝色厂房两面锯齿天窗墙之间, 四座托架墙把绿色带面逐段顶到 1 格高 (每段双端受力零悬挑), 西端 30 度上料坡道顶铰链接地起跑, 带面上两枚三角包裹行进、带尾四坡礼盒封箱, 东端落进与托架合围的红色卸料仓; 控制室警示灯与 3 格高烟囱塔尖收束全景 —— 开机, 整条流水线跑起来!",
-      "difficulty": 3,
-      "total_pieces": 71,
-      "step_count": 15,
-      "theme": "工程结构",
-      "tags": [
-        "工程",
-        "工厂",
-        "流水线",
-        "传送带",
-        "职业体验"
-      ],
-      "thumbnail": "thumbnails/conveyor_factory_01.png"
-    },
-    {
-      "id": "eye_clinic_01",
-      "file": "models/eye_clinic_01.json",
-      "name": "眼科诊所",
-      "name_en": "Eye Clinic 01",
-      "description": "全库第一座'把视力表搭成楼'的模型: 3x1 底 3 层高的双面视力表箱塔, 南北两面各用 8 片蓝方板拼出巨型 E 字 (留白格分居中层两侧 —— 南 E 开口朝东、北 E 开口朝西, 正是视力表上会转方向的 E), E 字本身就是承重墙, 塔高 3.0 靠层层箱形闭环通过高层检查; 塔前测距道透明格黄格相间笔直铺向南, 尽头红色站位格, 两侧橙色候诊长凳; 西侧 2x2 验光室平顶骑缝立一副巨型眼镜 —— 两扇青色窗格方镜片肩并肩竖边互吸, 镜框正对测距道; 塔顶红色检查灯压檐, 东北角院旗高扬 —— 站上红格伸手指方向, 眼睛越练越亮!",
-      "difficulty": 3,
-      "total_pieces": 71,
-      "step_count": 13,
-      "theme": "城市生活",
-      "tags": [
-        "医院",
-        "城市",
-        "职业体验",
-        "视力表",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/eye_clinic_01.png"
     },
     {
       "id": "helicopter_pad_01",
@@ -3174,25 +3307,6 @@
       "thumbnail": "thumbnails/oasis_01.png"
     },
     {
-      "id": "particle_accelerator_01",
-      "file": "models/particle_accelerator_01.json",
-      "name": "环形粒子加速器",
-      "name_en": "Particle Accelerator 01",
-      "description": "全库第一座环形封闭隧道建筑: 外墙环 12 片与对撞厅内墙环 4 片双圈合围出 '回' 字形束流隧道, 8 片紫色屏蔽顶板跨在双圈墙顶上双端受力; 外墙嵌红蓝窗格方偏转磁铁, 束流从东侧门框方注入口经直线注入器隧道冲进环里; 环心对撞厅四面蓝色观察窗, 厅顶黄色等边四坡探测器穹顶自锁收头; 西南角控制室贴建在外墙环上, 屋顶西沿骑红色雷达 —— 一圈墙就是一台科学装置。",
-      "difficulty": 3,
-      "total_pieces": 72,
-      "step_count": 14,
-      "theme": "航天探索",
-      "tags": [
-        "科学探索",
-        "粒子加速器",
-        "实验室",
-        "环形隧道",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/particle_accelerator_01.png"
-    },
-    {
       "id": "road_construction_01",
       "file": "models/road_construction_01.json",
       "name": "道路施工段",
@@ -3288,25 +3402,6 @@
       "thumbnail": "thumbnails/butterfly_garden_01.png"
     },
     {
-      "id": "circus_tent_01",
-      "file": "models/circus_tent_01.json",
-      "name": "马戏团大帐篷",
-      "name_en": "Circus Big Top 01",
-      "description": "只用核心九片型的马戏团首秀: 游乐园主题里第一座'演出建筑', 与旋转木马的圈层转台和摩天轮的桁架都不同 —— 结构签名是'条纹大顶再起一节': 4x3 红白条纹墙环托起十二片满铺大顶 (周圈直压墙顶, 中央两片四邻共面环撑), 大顶正中再起一节 2x1 天窗箱环, 黄色团旗瘦高尖从二段顶心拼缝直上全场制高; 南面两扇黄色门框方并排成双开检票大门, 门顶四面彩旗骑满大顶南沿, 红毯从广场一直铺进场心沙圈; 场外紫色售票亭戴四坡锥顶, 售票窗正对红毯, 小丑骑缝翻跟头, 粉气球升空 —— 女士们先生们, 马戏团开演啦!",
-      "difficulty": 3,
-      "total_pieces": 73,
-      "step_count": 13,
-      "theme": "游乐园",
-      "tags": [
-        "游乐园",
-        "马戏团",
-        "大帐篷",
-        "演出",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/circus_tent_01.png"
-    },
-    {
       "id": "fireworks_show_01",
       "file": "models/fireworks_show_01.json",
       "name": "烟花表演",
@@ -3324,26 +3419,6 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/fireworks_show_01.png"
-    },
-    {
-      "id": "fountain_plaza_01",
-      "file": "models/fountain_plaza_01.json",
-      "name": "音乐喷泉广场",
-      "name_en": "Musical Fountain Plaza 01",
-      "description": "全库第一座水景广场: 7x7 石板广场中央, 12 片青色池壁四角竖边互吸围成闭合水池, 池心两节透明水柱顶端绽开水花, 四条透明 30 度水舌从池壁顶沿口向四方划出抛物线落回广场 (顶铰链 + 接地斜撑); 南池沿竖起六边形音乐水幕屏, 对角两只直角三角音响, 四角路灯挑亮暖黄灯冠, 两畦粉色花丘四坡自锁 —— 音乐响起, 水随声舞!",
-      "difficulty": 3,
-      "total_pieces": 73,
-      "step_count": 17,
-      "theme": "城市生活",
-      "tags": [
-        "城市生活",
-        "喷泉",
-        "广场",
-        "水景",
-        "进阶",
-        "需要扩展装"
-      ],
-      "thumbnail": "thumbnails/fountain_plaza_01.png"
     },
     {
       "id": "ice_cream_truck_01",
@@ -3383,25 +3458,6 @@
         "挑檐"
       ],
       "thumbnail": "thumbnails/pagoda_01.png"
-    },
-    {
-      "id": "scaffolding_site_01",
-      "file": "models/scaffolding_site_01.json",
-      "name": "脚手架翻新工地",
-      "name_en": "Scaffolding Site 01",
-      "description": "建筑/工地主题: 楼与架层层互锁的翻新现场 —— 2x2 双层小楼 (门框方大门 + 四扇窗格方窗洞 + 两层满铺楼板), 屋顶东北格起等腰四坡楼梯间塔 (塔尖 3.94), 南沿西沿立女儿墙护齿; 南立面外贴双层脚手架: 立杆墙 + 端墙 + 双方板作业台, 台板北沿整边吸楼体墙顶, 每层都与小楼锁成刚性环, 二层立杆换窗格方格构面; 顶台南沿护栏齿把守, 东端 30 度爬梯一线双吸直下地坪预留空位。场边沙堆四坡自锁 —— 一处会讲安全课的翻新工地。",
-      "difficulty": 3,
-      "total_pieces": 73,
-      "step_count": 14,
-      "theme": "工程结构",
-      "tags": [
-        "工程",
-        "脚手架",
-        "翻新",
-        "在建小楼",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/scaffolding_site_01.png"
     },
     {
       "id": "trex_skeleton_01",
@@ -3500,44 +3556,6 @@
       "thumbnail": "thumbnails/hangar_01.png"
     },
     {
-      "id": "marching_band_01",
-      "file": "models/marching_band_01.json",
-      "name": "军乐队巡游",
-      "name_en": "Marching Band 01",
-      "description": "全库第一支军乐队: 彩旗拱门顶排三片方片竖边互吸连排跨街 (中片悬在洞口上方, 重力平行竖直铰链轴力矩为零, 柱-顶排-柱-地面闭合成门式大环); 大鼓花车以两片车轮底座作侧板、双长板甲板 2=2 整边压顶, 120g 大方片鼓面骑甲板中缝立起、四只直角三角斜撑前后对撑; 六名乐手三排两列双层墙身肩并肩竖边互吸成网格, 前中排戴等边号帽、后排扛等腰大旗 (旗尖 4.0 全场最高); 东端检阅台墙环平台上乐队指挥执等腰指挥杖。门式拱、轮基花车、网格方阵 —— 一场巡游三种结构队形。",
-      "difficulty": 3,
-      "total_pieces": 74,
-      "step_count": 14,
-      "theme": "音乐",
-      "tags": [
-        "音乐",
-        "乐队",
-        "巡游",
-        "花车",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/marching_band_01.png"
-    },
-    {
-      "id": "pipe_organ_01",
-      "file": "models/pipe_organ_01.json",
-      "name": "音乐厅管风琴",
-      "name_en": "Pipe Organ 01",
-      "description": "只用核心九片型的音乐厅一景, 全库第一台管风琴, 给音乐主题补上一件'往天上长'的乐器: 结构签名是'共墙音管楼按 1-2-3-2-1 阶梯升高' —— 五座 1x1 音管楼在一条直线上并肩而立, 相邻楼共用一面隔墙 (五座楼其实手拉手连成一体), 楼高从两端向中央1-2-3-2-1 递增, 每座楼顶盖板后沿立一支金色瘦高管口, 五支管口连成阶梯天际线; 演奏台紧贴中央音管楼 (北墙共用), 30 度透明键盘斜板顶边整边吸台口、坡尾稳稳压在红毯上, 橙色琴凳四角互咬, 演奏家落座, 两位听众沿红毯入场 —— 嘟~ 第一首曲子开演!",
-      "difficulty": 3,
-      "total_pieces": 74,
-      "step_count": 13,
-      "theme": "音乐",
-      "tags": [
-        "音乐",
-        "管风琴",
-        "音乐厅",
-        "演出",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/pipe_organ_01.png"
-    },
-    {
       "id": "pirate_ship_01",
       "file": "models/pirate_ship_01.json",
       "name": "海盗船与藏宝码头",
@@ -3575,25 +3593,6 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/planetarium_02.png"
-    },
-    {
-      "id": "rice_terrace_01",
-      "file": "models/rice_terrace_01.json",
-      "name": "梯田稻香",
-      "name_en": "Rice Terrace 01",
-      "description": "只用核心九片型的梯田景观: 整个模型就是一面被田坎雕出来的山坡 —— 三级水田沿山坡逐级抬升, 每一级都是'土坎墙四面合环 + 田面压顶'的箱形梯级, 上一级的田面就是下一级的屋顶, 上下两圈坎在山背面叠成 2 格高的整面崖; 30 度田埂坡道顶边吸坎顶、坡尾落地生根 (顶铰链 + 接地斜撑), 登田石阶盒与三级田坎共墙成环, 阶顶两边双吸; 青色水面上三排绿秧苗骑缝而立 (一缝双吸零力矩), 田头红墙黄顶农舍守着全场最高点 (顶尖 3.71) —— 春耕水满, 山坡一层层绿上去。",
-      "difficulty": 3,
-      "total_pieces": 74,
-      "step_count": 15,
-      "theme": "田园",
-      "tags": [
-        "田园",
-        "农场",
-        "农业",
-        "梯田",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/rice_terrace_01.png"
     },
     {
       "id": "robot_01",
@@ -3673,25 +3672,6 @@
       "thumbnail": "thumbnails/traffic_light_junction_01.png"
     },
     {
-      "id": "water_tower_01",
-      "file": "models/water_tower_01.json",
-      "name": "市政水塔",
-      "name_en": "Water Tower 01",
-      "description": "全库第一座市政水塔与最高纯受压结构: 2x2 闭合环塔身两层叠起, 塔脚四片橙色直角斜撑风车形外展 (竖边吸塔角竖棱、各占一个墙面平面), 塔顶平台托起青色储水箱环, 箱盖四沿山墙饰环立, 中央透明避雷尖直上 5 格 —— 逐层闭环 + 四角斜撑, R8 高层检查零警告; 塔下老井静照塔影 —— 水压来自高度, 高度来自秩序!",
-      "difficulty": 3,
-      "total_pieces": 74,
-      "step_count": 12,
-      "theme": "工程结构",
-      "tags": [
-        "工程",
-        "水塔",
-        "市政",
-        "供水",
-        "高塔"
-      ],
-      "thumbnail": "thumbnails/water_tower_01.png"
-    },
-    {
       "id": "castle_tower_01",
       "file": "models/castle_tower_01.json",
       "name": "土丘要塞主塔",
@@ -3709,25 +3689,6 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/castle_tower_01.png"
-    },
-    {
-      "id": "corn_maze_01",
-      "file": "models/corn_maze_01.json",
-      "name": "玉米迷宫",
-      "name_en": "Corn Maze 01",
-      "description": "只用核心九片型的负空间迷宫: 主角不是墙围出的房间, 而是墙留出的路 —— 6x5 玉米田上 21 片绿色玉米墙骑田垄拼缝立成迷宫阵 (一缝双吸重心正压铰链零力矩, 拐角丁字竖边互咬), 橙色土路蜿蜒出唯一通路, 三条死胡同两处玉米荡守株待兔; 南门楼双柱托楣纯剪互锁, 迷宫中心 1x1 两层瞭望塔一层门框方开向终点、二层四面窗格方 360 度找路, 塔旗一线双吸; 四株等腰玉米高杆骑墙顶直上 3.0 —— 走错了别急, 上塔看一眼再来!",
-      "difficulty": 3,
-      "total_pieces": 75,
-      "step_count": 13,
-      "theme": "田园",
-      "tags": [
-        "田园",
-        "农场",
-        "农业",
-        "迷宫",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/corn_maze_01.png"
     },
     {
       "id": "crane_tower_02",
@@ -3841,45 +3802,6 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/merry_go_round_01.png"
-    },
-    {
-      "id": "police_station_01",
-      "file": "models/police_station_01.json",
-      "name": "社区派出所",
-      "name_en": "Police Station 01",
-      "description": "城市守护者系列的政务小楼: 7x4 警务大院里, 4x2 两层派出所圈层砌法起楼 —— 一层户籍窗口与蓝色值班大门, 二层整排透明办案窗, 屋顶长板南北双边压墙顶锁成多环箱体; 门头两片发光窗格招牌顶着红蓝警灯 (重心正压铰链零力矩), 北沿通讯天线直指 4 格高; 大院南门双柱横楣岗门 (两端竖边传力) 也戴红蓝门灯, 东侧治安岗亭四墙自锁加等边四坡尖顶, 西侧绿篱收边 —— 有事找警察, 24 小时不打烊。",
-      "difficulty": 3,
-      "total_pieces": 75,
-      "step_count": 17,
-      "theme": "城市生活",
-      "tags": [
-        "城市",
-        "职业体验",
-        "派出所",
-        "建筑",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/police_station_01.png"
-    },
-    {
-      "id": "schoolyard_stand_01",
-      "file": "models/schoolyard_stand_01.json",
-      "name": "操场看台",
-      "name_en": "Schoolyard Grandstand 01",
-      "description": "只用核心九片型的校园运动会看台: 与放射环带的圆形剧场和门楼式体育场大门都不同, 这是'直线两级退台'的校园看台 —— 前后两级墙环合环 + 座板压顶的闭环箱体背靠背, 后排二层墙环整边骑上一层墙顶, 两片红色直角三角斜撑竖边吸二层墙棱、横边吸前排座板沿 (双边受力零悬挑), 红黄彩旗骑顶沿力矩为零; 台前红色跑道冲向白色终点线, 1-2-3 三连领奖台四道隔墙共墙成环, 金色冠军台二层墙环再压金色台面全场最高 —— 三、二、一, 冲线!",
-      "difficulty": 3,
-      "total_pieces": 75,
-      "step_count": 15,
-      "theme": "校园",
-      "tags": [
-        "校园",
-        "操场",
-        "看台",
-        "运动会",
-        "领奖台",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/schoolyard_stand_01.png"
     },
     {
       "id": "submarine_01",
@@ -4474,6 +4396,26 @@
       "thumbnail": "thumbnails/stonehenge_01.png"
     },
     {
+      "id": "stone_arch_bridge_01",
+      "file": "models/stone_arch_bridge_01.json",
+      "name": "三孔石拱桥",
+      "name_en": "Stone Arch Bridge 01",
+      "description": "桥梁工程 D4 拱桥原型: 结构签名是'三孔石拱桥' —— 四座共享桥墩撑起三孔拱洞负空间 (T17), 下层六片梯形拱肩 (T04) 逐拱合龙, 上层矮墩与跨洞横楣层叠退台 (T12), 行车道压顶锁拱;四条 30 度引桥坡尾落岸, 游鸭从拱洞穿过 —— 与罗马水道桥 (主角是渠) 和桁架红桥 (桁架墙抗剪) 功能叙事与传力逻辑均不同, 补全桥梁四原型最后缺失的'拱桥'!",
+      "difficulty": 4,
+      "total_pieces": 92,
+      "step_count": 16,
+      "theme": "工程结构",
+      "tags": [
+        "桥梁",
+        "拱桥",
+        "工程",
+        "石拱",
+        "挑战",
+        "需要扩展装"
+      ],
+      "thumbnail": "thumbnails/stone_arch_bridge_01.png"
+    },
+    {
       "id": "ball_run_tower_01",
       "file": "models/ball_run_tower_01.json",
       "name": "螺旋滚珠塔",
@@ -4817,6 +4759,65 @@
         "大师"
       ],
       "thumbnail": "thumbnails/skyscraper_01.png"
+    },
+    {
+      "id": "marble_relay_city_01",
+      "file": "models/marble_relay_city_01.json",
+      "name": "四塔接力滚珠城",
+      "name_en": "Marble Relay City 01",
+      "description": "滚珠乐园 D5 灯塔: 四座 2x2 发球塔在 6x6 紧凑方阵分体预制 (T16), 十字地面连廊贯通全场, 四条短换轨顺时针接力 (T08), 四象限镜像 (T11) —— 弹珠跨塔换轨跑完全程。与单塔双轨/螺旋动线拓扑不同。",
+      "difficulty": 5,
+      "total_pieces": 128,
+      "step_count": 22,
+      "theme": "滚珠乐园",
+      "tags": [
+        "滚珠",
+        "轨道",
+        "接力",
+        "滚珠乐园",
+        "旗舰",
+        "分体对接"
+      ],
+      "thumbnail": "thumbnails/marble_relay_city_01.png"
+    },
+    {
+      "id": "temple_of_heaven_01",
+      "file": "models/temple_of_heaven_01.json",
+      "name": "祈年殿",
+      "name_en": "Temple of Heaven 01",
+      "description": "建筑地标 D5 灯塔: 双重蓝色圆檐意象 + 三层汉白玉台基逐环收分, 八面红柱围成圆形廊柱意象, 四扇形拱券点缀台基, 金顶双坡自锁.",
+      "difficulty": 5,
+      "total_pieces": 132,
+      "step_count": 23,
+      "theme": "建筑地标",
+      "tags": [
+        "建筑地标",
+        "祈年殿",
+        "天坛",
+        "圆檐",
+        "攒尖"
+      ],
+      "thumbnail": "thumbnails/temple_of_heaven_01.png"
+    },
+    {
+      "id": "guardian_dragon_01",
+      "file": "models/guardian_dragon_01.json",
+      "name": "盘城巨龙",
+      "name_en": "Guardian Coiling Dragon 01",
+      "description": "幻想与机械 D5 灯塔: 1x1 小城塔为轴, 绿色箱形梁龙身 (T10) 分尾/四圈螺旋/颈/头四个模块预制对接 (T16), 逐层绕塔盘旋上升 (T06); 头朝东北、尾朝南互为配重, 肋爪斜撑加固。与霸王龙骨架 (博物馆立姿) 和火龙洞窟 (D3 配景) 主题/体态/范式全异 —— 龙是主角, 需逐一实物复核。",
+      "difficulty": 5,
+      "total_pieces": 140,
+      "step_count": 21,
+      "theme": "幻想",
+      "tags": [
+        "幻想",
+        "巨龙",
+        "螺旋",
+        "旗舰",
+        "大师",
+        "分体对接"
+      ],
+      "thumbnail": "thumbnails/guardian_dragon_01.png"
     }
   ]
 }
