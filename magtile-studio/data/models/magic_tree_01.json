@@ -1,0 +1,1080 @@
+{
+  "schema_version": 1,
+  "id": "magic_tree_01",
+  "name": "魔法垂枝树",
+  "name_en": "Magic Weeping Tree 01",
+  "description": "全库第一棵垂枝大树: 1x1 空心树干三层拔起 (门框方树洞 + 窗格方精灵窗), 两圈各 4 片绿色方形垂枝从墙层水平缝向外下垂 30 度 —— 每片底边一线双吸 (下层墙顶 + 上层墙底/盖板沿), 像蓑衣一样披在树干上; 树顶等腰四坡粉色花冠四棱自锁 (树尖 4.94); 树下红黄蘑菇圈四棱自锁, 小径两侧萤光花开。披挂式树冠、缝上铰链、层层成环 —— 一棵树读懂悬挑与自锁。",
+  "difficulty": 3,
+  "total_pieces": 58,
+  "tags": [
+    "童话",
+    "奇幻",
+    "魔法树",
+    "森林",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 36,
+        "equilateral_triangle": 12,
+        "isosceles_triangle": 4,
+        "rectangle": 4,
+        "door_frame": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "mg0_a",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg0_b",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg0_c",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mg0_d",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg1_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg1_b",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mg1_c",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg1_d",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg2_a",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg2_b",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg2_c",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mg2_d",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg2_e",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg3_a",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg3_b",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg3_c",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg3_d",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg4_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg4_b",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg4_c",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mg4_d",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk1_s",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk1_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk1_e",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk1_n",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk2_s",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk2_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk2_e",
+      "type": "window_square",
+      "position": [
+        3.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tk2_n",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk3_s",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk3_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk3_e",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tk3_n",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fr1_s",
+      "type": "square",
+      "position": [
+        2.5,
+        1.566987,
+        1.75
+      ],
+      "rotation": [
+        -149.999988,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fr1_n",
+      "type": "square",
+      "position": [
+        2.5,
+        3.433013,
+        1.75
+      ],
+      "rotation": [
+        -30.000012,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fr1_w",
+      "type": "square",
+      "position": [
+        1.566987,
+        2.5,
+        1.75
+      ],
+      "rotation": [
+        -30.000012,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fr1_e",
+      "type": "square",
+      "position": [
+        3.433013,
+        2.5,
+        1.75
+      ],
+      "rotation": [
+        -149.999988,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fr2_s",
+      "type": "square",
+      "position": [
+        2.5,
+        1.566987,
+        2.75
+      ],
+      "rotation": [
+        -149.999988,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fr2_n",
+      "type": "square",
+      "position": [
+        2.5,
+        3.433013,
+        2.75
+      ],
+      "rotation": [
+        -30.000012,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fr2_w",
+      "type": "square",
+      "position": [
+        1.566987,
+        2.5,
+        2.75
+      ],
+      "rotation": [
+        -30.000012,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fr2_e",
+      "type": "square",
+      "position": [
+        3.433013,
+        2.5,
+        2.75
+      ],
+      "rotation": [
+        -149.999988,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "crown_cap",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "crown_s",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        2.166667,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "crown_e",
+      "type": "isosceles_triangle",
+      "position": [
+        2.833333,
+        2.5,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "crown_n",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        2.833333,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "crown_w",
+      "type": "isosceles_triangle",
+      "position": [
+        2.166667,
+        2.5,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "mush_r_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mush_r_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.833333,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mush_r_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mush_r_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.166667,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mush_y_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mush_y_e",
+      "type": "equilateral_triangle",
+      "position": [
+        0.833333,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mush_y_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mush_y_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.166667,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "glow_a",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "glow_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "glow_c",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "glow_d",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺林间空地南段两行 (y [0,2]): 8 片, 石板小径通向树心。",
+      "tip": "小径 (x [2,3]) 的尽头就是树洞门。",
+      "tiles_to_add": [
+        "mg0_a",
+        "mg0_b",
+        "mg0_c",
+        "mg0_d",
+        "mg1_a",
+        "mg1_b",
+        "mg1_c",
+        "mg1_d"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺树根一行 (y [2,3]): 5 片, 树干踩这一行的格线。",
+      "tip": "x=2 与 x=3 的拼缝是树干的四条根线。",
+      "tiles_to_add": [
+        "mg2_a",
+        "mg2_b",
+        "mg2_c",
+        "mg2_d",
+        "mg2_e"
+      ],
+      "highlight_tiles": [
+        "mg1_b"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺空地北段两行 (y [3,5]): 8 片, 草地合拢。",
+      "tip": "5x5 空地铺满 —— 魔法树独占林间一方天地。",
+      "tiles_to_add": [
+        "mg3_a",
+        "mg3_b",
+        "mg3_c",
+        "mg3_d",
+        "mg4_a",
+        "mg4_b",
+        "mg4_c",
+        "mg4_d"
+      ],
+      "highlight_tiles": [
+        "mg2_c"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立树干第 1 层: 4 片墙环, 南面是橙色门框方树洞。",
+      "tip": "树洞门正对小径 —— 每片底边吸缝、转角竖边互咬。",
+      "tiles_to_add": [
+        "tk1_s",
+        "tk1_w",
+        "tk1_e",
+        "tk1_n"
+      ],
+      "highlight_tiles": [
+        "mg1_b",
+        "mg2_c"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "叠树干第 2 层: 东面嵌窗格方精灵窗。",
+      "tip": "精灵住在树干里, 窗户朝着日出的方向。",
+      "tiles_to_add": [
+        "tk2_s",
+        "tk2_w",
+        "tk2_e",
+        "tk2_n"
+      ],
+      "highlight_tiles": [
+        "tk1_s"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "叠树干第 3 层: 4 片墙环, 树干升到 3 格高。",
+      "tip": "第 3 层墙顶是上圈垂枝与花冠的铰链线。",
+      "tiles_to_add": [
+        "tk3_s",
+        "tk3_w",
+        "tk3_e",
+        "tk3_n"
+      ],
+      "highlight_tiles": [
+        "tk2_e"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "披下圈垂枝: 4 片绿色方板从 z=2 水平缝向外下垂 30 度。",
+      "tip": "每片底边同时吸下层墙顶与上层墙底 —— 铰链预算翻倍。",
+      "tiles_to_add": [
+        "fr1_s",
+        "fr1_n",
+        "fr1_w",
+        "fr1_e"
+      ],
+      "highlight_tiles": [
+        "tk3_s"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖树顶盖板、披上圈垂枝: 盖板压墙顶, 4 片垂枝再披一圈。",
+      "tip": "上圈垂枝同时吸墙顶与盖板沿 —— 像蓑衣一样层层披挂。",
+      "tiles_to_add": [
+        "crown_cap",
+        "fr2_s",
+        "fr2_n",
+        "fr2_w",
+        "fr2_e"
+      ],
+      "highlight_tiles": [
+        "fr1_s"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "戴粉色花冠: 4 片等腰三角斜棱两两互吸自锁 (树尖 4.94)。",
+      "tip": "花冠、盖板、墙顶、垂枝共用四条铰链线 —— 越吸越紧。",
+      "tiles_to_add": [
+        "crown_s",
+        "crown_e",
+        "crown_n",
+        "crown_w"
+      ],
+      "highlight_tiles": [
+        "crown_cap"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "种红蘑菇: 4 片等边三角四棱自锁, 踩满一格地砖的四条边。",
+      "tip": "蘑菇圈是精灵的板凳 —— 四条基线全在整边上。",
+      "tiles_to_add": [
+        "mush_r_s",
+        "mush_r_e",
+        "mush_r_n",
+        "mush_r_w"
+      ],
+      "highlight_tiles": [
+        "mg1_d"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "种黄蘑菇: 树的另一侧再来一朵。",
+      "tip": "一红一黄, 分立树干两角 —— 布局讲究平衡。",
+      "tiles_to_add": [
+        "mush_y_s",
+        "mush_y_e",
+        "mush_y_n",
+        "mush_y_w"
+      ],
+      "highlight_tiles": [
+        "mush_r_s"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "开萤光花 —— 魔法垂枝树落成!",
+      "tip": "花与地砖共面, 重心正压整边 —— 夜里它们会发光哦!",
+      "tiles_to_add": [
+        "glow_a",
+        "glow_b",
+        "glow_c",
+        "glow_d"
+      ],
+      "highlight_tiles": [
+        "mg0_c",
+        "mg4_c"
+      ]
+    }
+  ]
+}
