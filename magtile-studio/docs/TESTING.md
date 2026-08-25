@@ -337,17 +337,18 @@ MAGTILE_FREE_TIER_CHECK=1 tests/run_full_qa.sh   # 随全量 QA (可选关卡 10
 
 全量 QA 中默认跳过 (免费层清单只在选品换血时变化, 日常内容合入不受它约束), **发布打包前必须开启** (一键入口: `tools/run_release_gate.sh`, 见第 5 节); 片型红线本身另有常开关卡 9 兜底 (`check_core5_usage.py --strict`)。换血流程见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2.5.1。
 
-### 3.15 Qt 界面测试 (`qt_backend_bridges` / `qt_gui_smoke`)
+### 3.15 Qt 界面测试 (`qt_backend_bridges` / `qt_gui_smoke` / `qt_ui_paths_smoke`)
 
-仅在 `-DMAGTILE_BUILD_QT=ON` 时注册 (默认 OFF 的构建完全不受影响), 两者都**无需显示环境**:
+仅在 `-DMAGTILE_BUILD_QT=ON` 时注册 (默认 OFF 的构建完全不受影响), 三者都**无需显示环境**:
 
 - `qt_backend_bridges` (`tests/test_qt_backends.cpp`): QT-2 两座后端桥的 C++ 单测。`SettingsBackend` 的字号三档 / 减少动效 / 年龄段 SQLite 往返、跨实例持久化、非法值忽略, 以及**与 GL 版/CLI 的共库契约** (Qt 桥写入的键 progress 层原样读回, 反向亦然); `ParentGateBackend` 的出题 / 答对开会话 / 答错温和提示 / 3 次答错进冷却 (冷却期拒答) / 锁定会话。
 - `qt_gui_smoke` (`tests/test_qt_smoke.sh`): offscreen 平台无头加载 QML 多路径连跑 (完整路径清单以脚本自身为准) —— 默认启动 (首页)、`--parent-gate` 深链 (家长门界面)、`--smoke-parent-flow` 自动驾驶 (家长门 → 提交标准答案过门 → 家长中心 → 设置 → 订阅逐页实例化, 全程无误 `Main.qml` 才置 `smokeParentFlowOk`, 否则进程非零退出)、`--smoke-complete-model` 完成链路 (庆祝页 + 存档 `completed_at` 断言) 等; 全程输出扫描 QML 运行时错误 (ReferenceError/TypeError) 一票否决。`--smoke-open-progress` 进度页深链由 `tools/run_e2e_smoke.sh` 的 E2E-12a 项覆盖 (见第 8 节)。
+- `qt_ui_paths_smoke` (`tests/test_qt_ui_paths_smoke.sh`): 在加载冒烟之上把四条此前只能人工点按的**按钮级用户路径**收进无头自动驾驶 (E2E 矩阵 E2E-04a / 09a / 11c / 12b) —— `--smoke-library-filters` 模型库筛选切换对账 (免费筛选数量 = `freeModelCount`、主题筛选真在过滤、难度 1~5 分片求和 = 全库、清除复位, 与 FilterChip 同一条属性写路径); `--smoke-open-inventory` 库存页深链 (步进器 +3 → 「保存库存」落盘 → SQLite 直读全片型入表且总数对账); `--smoke-locked-model` 非免费锁 (详情页 locked 上锁 → 「请家长来解锁」落家长门不开教程 → SQLite 直读断言零进度写档); `--smoke-complete-model` + `--smoke-progress-data` 进度页有数据断言 (已完成列表与统计对账 + 成就列表非空 + 至少一枚徽章点亮 + 成就墙全览复核)。抽样模型派生自 starter 打包清单 (免费层事实来源), 片型总数派生自 `data/tile_catalog.json`, 不硬编码; QML 运行时错误同口径一票否决。
 
 ```bash
 cmake -S . -B build-qt -DMAGTILE_BUILD_QT=ON
 cmake --build build-qt -j
-ctest --test-dir build-qt -R "qt_backend_bridges|qt_gui_smoke" --output-on-failure
+ctest --test-dir build-qt -R "qt_backend_bridges|qt_gui_smoke|qt_ui_paths_smoke" --output-on-failure
 ```
 
 ### 3.16 教程步进性能基准 (`bench_tutorial_step`)

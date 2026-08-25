@@ -179,6 +179,16 @@ if(MAGTILE_BUILD_TESTS)
                 $<TARGET_FILE:magtile_studio_qt> ${CMAKE_SOURCE_DIR})
         set_tests_properties(qt_gui_smoke PROPERTIES TIMEOUT 120)
     endif()
+
+    # 按钮级 UI 路径冒烟 (offscreen, 同样无需显示环境): 筛选切换对账 /
+    # 库存页深链保存落盘 / 非免费锁走家长门 / 进度页有数据时成就非空
+    # (E2E-04a / 09a / 11c / 12b, 自动驾驶断言 + SQLite 落盘直读)
+    if(MAGTILE_QT_BASH AND EXISTS ${CMAKE_SOURCE_DIR}/tests/test_qt_ui_paths_smoke.sh)
+        add_test(NAME qt_ui_paths_smoke
+            COMMAND ${MAGTILE_QT_BASH} ${CMAKE_SOURCE_DIR}/tests/test_qt_ui_paths_smoke.sh
+                $<TARGET_FILE:magtile_studio_qt> ${CMAKE_SOURCE_DIR})
+        set_tests_properties(qt_ui_paths_smoke PROPERTIES TIMEOUT 120)
+    endif()
 endif()
 
 # ---- 打包安装规则 (QT-6; 操作手册 scripts/package_qt_desktop.md) --

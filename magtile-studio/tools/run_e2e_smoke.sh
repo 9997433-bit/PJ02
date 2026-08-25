@@ -22,6 +22,10 @@
 #   E2E-12a  Qt 进度页深链       --smoke-complete-model 造非空存档后
 #            --smoke-open-progress 实例化进度页/成就墙, QML 运行时
 #            错误一票否决
+#   E2E-04a/09a/11c/12b  Qt 按钮级路径冒烟
+#            tests/test_qt_ui_paths_smoke.sh: 模型库筛选切换对账 /
+#            库存页深链保存落盘 / 非免费锁走家长门 (不开教程) /
+#            进度页有数据时成就列表非空 (自动驾驶断言 + SQLite 直读)
 #   E2E-14a  Android JNI 符号    NDK 交叉编译 libmagtile_core.so +
 #            JNI 符号断言 (符号清单运行时解析自 CI android.yml,
 #            与流水线口径自动同步); 无 NDK 环境自动 SKIP
@@ -55,7 +59,7 @@ SKIP_QT=0
 SKIP_ANDROID=0
 STRICT=0
 
-usage() { sed -n '2,42p' "$0"; }
+usage() { sed -n '2,46p' "$0"; }
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
@@ -399,6 +403,7 @@ QT_APP="$QT_BUILD_DIR/apps/desktop_qt/magtile_studio_qt"
 if [ "$SKIP_QT" -eq 1 ]; then
     skip_stage "E2E-QT Qt 无头冒烟 (test_qt_smoke.sh)" "--skip-qt"
     skip_stage "E2E-12a Qt 进度页深链 (--smoke-open-progress)" "--skip-qt"
+    skip_stage "E2E-04a/09a/11c/12b Qt 按钮级路径冒烟" "--skip-qt"
 else
     if [ ! -x "$QT_APP" ]; then
         echo ""
@@ -418,10 +423,13 @@ else
             bash "$ROOT/tests/test_qt_smoke.sh" "$QT_APP" "$ROOT"
         run_stage "E2E-12a Qt 进度页深链 (--smoke-open-progress)" \
             e2e_qt_progress_deeplink "$QT_APP"
+        run_stage "E2E-04a/09a/11c/12b Qt 按钮级路径冒烟" \
+            bash "$ROOT/tests/test_qt_ui_paths_smoke.sh" "$QT_APP" "$ROOT"
     else
         skip_stage "E2E-QT Qt 无头冒烟 (test_qt_smoke.sh)" \
             "magtile_studio_qt 不可用且自动构建失败 (需要 Qt6, 构建方法见 docs/TESTING.md §3.15)"
         skip_stage "E2E-12a Qt 进度页深链 (--smoke-open-progress)" "同上"
+        skip_stage "E2E-04a/09a/11c/12b Qt 按钮级路径冒烟" "同上"
     fi
 fi
 

@@ -354,6 +354,173 @@ ApplicationWindow {
         }
     }
 
+    // ---- 库存页深链冒烟 (--smoke-open-inventory, 无头 CI 专用) --------
+    // E2E-09a: 直开库存录入页 -> 断言片型行全量加载 -> 与 + 按钮同一条
+    // updateCount 路径给第一种片型 +3 -> 与「保存库存」按钮同一条
+    // saveAll 路径落盘 (保存后自动返回) -> 断言库存已登记且总数一致。
+    // 全程无误后置 smokeInventoryOk, main.cpp 在 --smoke-quit-ms 到点时
+    // 据此决定退出码; 存档侧行数/总数由 tests/test_qt_ui_paths_smoke.sh
+    // 直读 SQLite 补齐断言。
+    property bool smokeInventoryOk: false
+    Timer {
+        id: smokeInventoryTimer
+        property int stage: 0
+        property int expectedTotal: 0
+        interval: 300
+        repeat: true
+        running: smokeOpenInventory
+        onTriggered: {
+            stage += 1
+            if (stage === 1) {
+                stack.push(inventoryComponent)                       // 库存页深链
+            } else if (stage === 2) {
+                var page = stack.currentItem
+                if (!page || page.rowsData === undefined
+                        || page.rowsData.length === 0) { stop(); return }
+                var shapeId = page.rowsData[0].shapeId
+                page.updateCount(shapeId, page.counts[shapeId] + 3)  // 与 + 按钮同一条路径
+                expectedTotal = page.totalCount
+                page.saveAll(false)                                  // 与「保存库存」同一条路径
+            } else {
+                window.smokeInventoryOk = expectedTotal > 0
+                    && inventory.configured
+                    && inventory.totalCount === expectedTotal
+                    && studio.inventoryConfigured
+                stop()
+            }
+        }
+    }
+
+    // ---- 模型库筛选切换冒烟 (--smoke-library-filters, 无头 CI 专用) ---
+    // E2E-04a: 打开模型库后走 FilterChip 同一条属性写路径逐项切换并
+    // 对账: 基线全量 -> 「🎁 免费模型」数量 = freeModelCount -> 「↺ 看
+    // 全部模型」复位 -> 主题筛选真在过滤 -> 难度 1~5 分片求和 = 全库
+    // (互斥且完备) -> 最终复位。全程无误后置 smokeLibraryFiltersOk。
+    property bool smokeLibraryFiltersOk: false
+    Timer {
+        id: smokeFiltersTimer
+        property int stage: 0
+        interval: 300
+        repeat: true
+        running: smokeLibraryFilters
+        onTriggered: {
+            stage += 1
+            var filter = studio.libraryFilter
+            if (stage === 1) {
+                stack.push(libraryComponent)
+            } else if (stage === 2) {
+                if (studio.modelCount === 0 || filter.count !== studio.modelCount
+                        || filter.hasActiveFilters) { stop(); return }
+                filter.freeOnly = true                                // 「🎁 免费模型」筛选片
+            } else if (stage === 3) {
+                if (!filter.hasActiveFilters
+                        || filter.count !== studio.freeModelCount
+                        || filter.count >= studio.modelCount) { stop(); return }
+                filter.clearFilters()                                 // 「↺ 看全部模型」
+            } else if (stage === 4) {
+                if (filter.hasActiveFilters || filter.freeOnly
+                        || filter.count !== studio.modelCount
+                        || studio.themes.length === 0) { stop(); return }
+                filter.theme = studio.themes[0]                       // 主题筛选片
+            } else if (stage === 5) {
+                if (filter.count === 0 || filter.count >= studio.modelCount) { stop(); return }
+                filter.theme = ""
+                // 难度分片互斥且完备: 1~5 星逐档筛选求和应恰为全库
+                var sum = 0
+                for (var d = 1; d <= 5; ++d) {
+                    filter.difficulty = d                             // 难度星级筛选片
+                    sum += filter.count
+                }
+                filter.difficulty = 0
+                if (sum !== studio.modelCount) { stop(); return }
+                filter.clearFilters()
+            } else {
+                window.smokeLibraryFiltersOk = !filter.hasActiveFilters
+                    && filter.count === studio.modelCount
+                stop()
+            }
+        }
+    }
+
+    // ---- 非免费锁冒烟 (--smoke-locked-model <ID>, 无头 CI 专用) -------
+    // E2E-11c 订阅内容付费边界 (§11): 直开该模型详情页, 断言 locked
+    // 上锁 (isFree 显式 false 且未订阅), 再走「请家长来解锁」大按钮
+    // 同一条 openSubscription 路由 —— 必须落在家长门 (不开教程、订阅页
+    // 不得先于过门出现)。全程无误后置 smokeLockedModelOk; 教程未被
+    // 误开 (无进度写档) 由 tests/test_qt_ui_paths_smoke.sh 直读 SQLite
+    // 补齐断言。
+    property bool smokeLockedModelOk: false
+    Timer {
+        id: smokeLockedTimer
+        property int stage: 0
+        interval: 300
+        repeat: true
+        running: smokeLockedModelId !== ""
+        onTriggered: {
+            stage += 1
+            if (stage === 1) {
+                var d = studio.modelDetail(smokeLockedModelId)
+                if (d.found !== true || d.isFree !== false
+                        || billing.subscriptionActive) { stop(); return }
+                stack.push(detailComponent, { modelId: smokeLockedModelId })
+            } else if (stage === 2) {
+                var page = stack.currentItem
+                if (!page || page.locked !== true) { stop(); return }
+                page.openSubscription()          // 与「请家长来解锁」大按钮同一条路由
+            } else {
+                var current = stack.currentItem
+                window.smokeLockedModelOk = current !== null
+                    && current.answerInput !== undefined      // 家长门 (软键盘输入缓冲)
+                    && current.isTutorialPage !== true        // 教程没被误开
+                    && current.requiresParentSession !== true // 订阅页不得先于过门出现
+                    && window.parentZoneTarget === "subscription"
+                    && !parentGate.sessionActive
+                stop()
+            }
+        }
+    }
+
+    // ---- 进度页有数据冒烟 (--smoke-progress-data, 无头 CI 专用) -------
+    // E2E-12b: 存档已有完成记录时 (先以 --smoke-complete-model 造档)
+    // 直开进度页, 断言已完成列表与统计对账、成就列表非空且至少一枚
+    // 徽章点亮 (完成即解锁首搭成就), 再走「看看全部徽章 ▶」同一路由进
+    // 成就墙全览复核同一数据源。全程无误后置 smokeProgressDataOk。
+    property bool smokeProgressDataOk: false
+    Timer {
+        id: smokeProgressDataTimer
+        property int stage: 0
+        property bool progressPageOk: false
+        interval: 300
+        repeat: true
+        running: smokeProgressData
+        onTriggered: {
+            stage += 1
+            if (stage === 1) {
+                stack.push(progressComponent)
+            } else if (stage === 2) {
+                var page = stack.currentItem
+                if (!page || page.badges === undefined) { stop(); return }
+                var unlocked = 0
+                for (var i = 0; i < page.badges.length; ++i) {
+                    if (page.badges[i].unlocked) ++unlocked
+                }
+                progressPageOk = studio.completedCount > 0
+                    && page.completedRows.length === studio.completedCount
+                    && page.badges.length > 0
+                    && unlocked >= 1
+                if (!progressPageOk) { stop(); return }
+                stack.push(achievementsComponent)    // 「看看全部徽章 ▶」同一路由
+            } else {
+                var wall = stack.currentItem
+                window.smokeProgressDataOk = progressPageOk
+                    && wall !== null && wall.badges !== undefined
+                    && wall.badges.length > 0
+                    && studio.achievementCount >= 1
+                stop()
+            }
+        }
+    }
+
     // ---- 底部浮出提示 (琥珀软底, 2.5s 自动消失) ----------------------
     Popup {
         id: toast

@@ -18,6 +18,18 @@
 //   - --smoke-open-progress: 启动直开进度页「我的作品」(QT-4 评审/冒烟);
 //   - --smoke-age-onboarding: 首启年龄段引导自动驾驶 (QT-5 冒烟):
 //     首启选档落盘 / 二次启动引导不再出现, 退出码由断言决定;
+//   - --smoke-open-inventory: 库存页深链自动驾驶 (E2E-09a): 直开
+//     库存录入页 -> 与 + 按钮同一条 updateCount 路径步进 -> 与
+//     「保存库存」按钮同一条 saveAll 路径落盘, 退出码由断言决定;
+//   - --smoke-library-filters: 模型库筛选切换自动驾驶 (E2E-04a):
+//     免费筛选数量对账 / 主题筛选 / 难度分片求和 = 全库 / 清除
+//     筛选复位, 全部走 FilterChip 同一条属性写路径;
+//   - --smoke-locked-model: 非免费锁自动驾驶 (E2E-11c): 直开该
+//     模型详情页, 断言 locked 上锁且「请家长来解锁」走家长门
+//     (不开教程); 传入模型必须非免费层;
+//   - --smoke-progress-data: 进度页有数据断言 (E2E-12b): 存档已有
+//     完成记录时直开进度页, 断言已完成列表与成就列表非空且至少
+//     一枚徽章点亮 (配合 --smoke-complete-model 先造存档);
 //   - --dev-billing: 订阅页显示「模拟已订阅」开发开关 (假计费适配层,
 //     零真实扣费; Debug 构建默认开, 商店档编译期恒关)。
 //
@@ -137,6 +149,23 @@ int main(int argc, char* argv[]) {
         QStringLiteral("smoke-age-onboarding"),
         QStringLiteral("冒烟自动驾驶: 首启年龄段引导选档落盘 / 二次启动不再出现 "
                        "(QT-5, 配合 --smoke-quit-ms)"));
+    const QCommandLineOption smoke_inventory_opt(
+        QStringLiteral("smoke-open-inventory"),
+        QStringLiteral("冒烟自动驾驶: 库存页深链 -> 步进器 +3 -> 保存落盘 "
+                       "(E2E-09a, 配合 --smoke-quit-ms)"));
+    const QCommandLineOption smoke_filters_opt(
+        QStringLiteral("smoke-library-filters"),
+        QStringLiteral("冒烟自动驾驶: 模型库筛选切换对账 (免费/主题/难度/清除, "
+                       "E2E-04a, 配合 --smoke-quit-ms)"));
+    const QCommandLineOption smoke_locked_opt(
+        QStringLiteral("smoke-locked-model"),
+        QStringLiteral("冒烟自动驾驶: 非免费模型详情上锁 + 「请家长来解锁」走家长门 "
+                       "(E2E-11c, 配合 --smoke-quit-ms)"),
+        QStringLiteral("ID"));
+    const QCommandLineOption smoke_progress_data_opt(
+        QStringLiteral("smoke-progress-data"),
+        QStringLiteral("冒烟自动驾驶: 进度页有数据断言 (已完成列表 + 成就列表非空, "
+                       "E2E-12b, 配合 --smoke-quit-ms)"));
     const QCommandLineOption dev_billing_opt(
         QStringLiteral("dev-billing"),
         QStringLiteral("订阅页显示「模拟已订阅」开发开关 (假计费, 零真实扣费; "
@@ -151,6 +180,10 @@ int main(int argc, char* argv[]) {
     parser.addOption(smoke_complete_opt);
     parser.addOption(smoke_progress_opt);
     parser.addOption(smoke_age_opt);
+    parser.addOption(smoke_inventory_opt);
+    parser.addOption(smoke_filters_opt);
+    parser.addOption(smoke_locked_opt);
+    parser.addOption(smoke_progress_data_opt);
     parser.addOption(dev_billing_opt);
     parser.process(app);
 
@@ -216,6 +249,18 @@ int main(int argc, char* argv[]) {
                                              parser.isSet(smoke_progress_opt));
     const bool smoke_age = parser.isSet(smoke_age_opt);
     engine.rootContext()->setContextProperty(QStringLiteral("smokeAgeOnboarding"), smoke_age);
+    const bool smoke_inventory = parser.isSet(smoke_inventory_opt);
+    engine.rootContext()->setContextProperty(QStringLiteral("smokeOpenInventory"),
+                                             smoke_inventory);
+    const bool smoke_filters = parser.isSet(smoke_filters_opt);
+    engine.rootContext()->setContextProperty(QStringLiteral("smokeLibraryFilters"),
+                                             smoke_filters);
+    const QString smoke_locked_id = parser.value(smoke_locked_opt);  // 未设置时为空串 = 关闭
+    engine.rootContext()->setContextProperty(QStringLiteral("smokeLockedModelId"),
+                                             smoke_locked_id);
+    const bool smoke_progress_data = parser.isSet(smoke_progress_data_opt);
+    engine.rootContext()->setContextProperty(QStringLiteral("smokeProgressData"),
+                                             smoke_progress_data);
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
@@ -258,16 +303,30 @@ int main(int argc, char* argv[]) {
         bool ok = false;
         const int quit_ms = parser.value(smoke_quit_opt).toInt(&ok);
         if (ok && quit_ms > 0) {
-            QTimer::singleShot(quit_ms, &app, [&engine, smoke_flow, smoke_age]() {
-                int exit_code = 0;
-                const auto roots = engine.rootObjects();
-                const auto root_flag = [&roots](const char* name) {
-                    return !roots.isEmpty() && roots.constFirst()->property(name).toBool();
-                };
-                if (smoke_flow && !root_flag("smokeParentFlowOk")) exit_code = 1;
-                if (smoke_age && !root_flag("smokeAgeOnboardingOk")) exit_code = 1;
-                QCoreApplication::exit(exit_code);
-            });
+            QTimer::singleShot(quit_ms, &app,
+                               [&engine, smoke_flow, smoke_age, smoke_inventory, smoke_filters,
+                                smoke_locked_id, smoke_progress_data]() {
+                                   int exit_code = 0;
+                                   const auto roots = engine.rootObjects();
+                                   const auto root_flag = [&roots](const char* name) {
+                                       return !roots.isEmpty() &&
+                                              roots.constFirst()->property(name).toBool();
+                                   };
+                                   if (smoke_flow && !root_flag("smokeParentFlowOk"))
+                                       exit_code = 1;
+                                   if (smoke_age && !root_flag("smokeAgeOnboardingOk"))
+                                       exit_code = 1;
+                                   if (smoke_inventory && !root_flag("smokeInventoryOk"))
+                                       exit_code = 1;
+                                   if (smoke_filters && !root_flag("smokeLibraryFiltersOk"))
+                                       exit_code = 1;
+                                   if (!smoke_locked_id.isEmpty() &&
+                                       !root_flag("smokeLockedModelOk"))
+                                       exit_code = 1;
+                                   if (smoke_progress_data && !root_flag("smokeProgressDataOk"))
+                                       exit_code = 1;
+                                   QCoreApplication::exit(exit_code);
+                               });
         }
     }
 
