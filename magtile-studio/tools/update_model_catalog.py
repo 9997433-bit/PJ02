@@ -14,8 +14,9 @@ theme 字段时直接采用; 否则按 TAG_TO_THEME 关键词表从标签推导,
 (相对 data 目录), 由 tools/generate_thumbnails.py 生成。
 
 矩阵进度 (CONTENT_GAP_AUDIT §7.3 的机检化落地): 目录重建后, 若模型
-带 content_meta.series (schema v2 的策略主题正字段, 13 主题词表见
-MATRIX_THEMES), 追加输出 主题 × 难度 (D1–D5) 矩阵进度表, 对照
+带 content_meta.series (schema v2 的策略主题正字段, 词值见
+data/content_series_map.json; 矩阵外模型 series=null 按 matrix_bucket
+聚桶), 追加输出 主题 × 难度 (D1–D5) 矩阵进度表, 对照
 docs/CONTENT_STRATEGY.md §2.2 的 520 终态目标; series 尚未回填时
 仅提示一句, 不影响目录重建。--matrix-report 可另存 markdown 快照
 (默认落点 docs/reports/CONTENT_MATRIX_PROGRESS.md)。
@@ -97,32 +98,32 @@ SERIES_MAP = ROOT / "data" / "content_series_map.json"
 
 # CONTENT_STRATEGY.md §2.2 主题 × 难度分布矩阵 (终态目标 520 个)。
 # 每项: (series 词值, 中文主题名, (D1, D2, D3, D4, D5) 目标)。
-# series 词值与 data/content_series_map.json 权威词表逐条一致 (该文件
-# 是 content_meta.series 合法取值的唯一来源, 本表只补充 §2.2 的难度
-# 目标); 词表文件在场时以其为准 (build_series_index), 兼收中文主题名。
+# series 词值与 data/content_series_map.json (回填映射表, series 词值的
+# 权威来源) 的 series_slugs 逐条一致, 本表只补充 §2.2 的难度目标;
+# 词表文件在场时以其为准 (build_series_index), 兼收中文主题名。
 MATRIX_THEMES = [
     ("castle_fortress", "城堡与要塞", (6, 10, 14, 8, 4)),
     ("land_transport", "陆地交通", (8, 12, 12, 8, 2)),
     ("sea_air_transport", "海空交通", (4, 8, 10, 8, 2)),
     ("spacecraft", "航天器", (4, 8, 10, 8, 4)),
     ("animal_world", "动物世界", (10, 14, 14, 8, 2)),
-    ("architecture_landmark", "建筑地标", (4, 10, 14, 12, 10)),
+    ("landmark_architecture", "建筑地标", (4, 10, 14, 12, 10)),
     ("bridge_engineering", "桥梁工程", (2, 8, 12, 10, 8)),
     ("geometric_art", "几何艺术", (8, 12, 12, 8, 4)),
     ("marble_run", "滚珠乐园", (2, 8, 12, 10, 6)),
     ("plant_garden", "植物花园", (8, 10, 10, 4, 0)),
-    ("festival_seasonal", "节日限定", (8, 10, 10, 6, 2)),
-    ("utility_items", "实用功能", (10, 12, 10, 4, 0)),
+    ("holiday_seasonal", "节日限定", (8, 10, 10, 6, 2)),
+    ("practical_utility", "实用功能", (10, 12, 10, 4, 0)),
     ("fantasy_machinery", "幻想与机械", (4, 8, 16, 10, 8)),
 ]
 
 
 def build_series_index():
-    """series 词值 -> 矩阵行下标, 及矩阵外合法桶的显示名。
+    """series 词值 -> 矩阵行下标, 及矩阵外聚桶词值 -> 中文显示名。
 
-    以 data/content_series_map.json 权威词表为准: matrix_bucket 为 null
-    的条目按中文名对齐 §2.2 矩阵行, 非 null 的登记为矩阵外合法桶;
-    词表缺失时退回 MATRIX_THEMES 内置词值。中文主题名恒可识别。
+    以 data/content_series_map.json 为准: series_slugs (中文主题名 ->
+    词值) 按中文名对齐 §2.2 矩阵行, matrix_bucket_slugs 登记为矩阵外
+    聚桶; 词表缺失时退回 MATRIX_THEMES 内置词值。中文主题名恒可识别。
     """
     index = {}
     for i, (slug, cn, _targets) in enumerate(MATRIX_THEMES):
@@ -131,15 +132,13 @@ def build_series_index():
     bucket_names = {}
     if SERIES_MAP.is_file():
         name_to_row = {cn: i for i, (_s, cn, _t) in enumerate(MATRIX_THEMES)}
-        series = json.loads(SERIES_MAP.read_text(encoding="utf-8"))["series"]
-        for slug, info in series.items():
-            name = info.get("display_name_zh", slug)
-            if info.get("matrix_bucket") is None:
-                row = name_to_row.get(name)
-                if row is not None:
-                    index[slug] = row
-            else:
-                bucket_names[slug] = name
+        data = json.loads(SERIES_MAP.read_text(encoding="utf-8"))
+        for cn, slug in data.get("series_slugs", {}).items():
+            row = name_to_row.get(cn)
+            if row is not None:
+                index[slug] = row
+        for cn, slug in data.get("matrix_bucket_slugs", {}).items():
+            bucket_names[slug] = cn
     return index, bucket_names
 
 
@@ -157,29 +156,37 @@ def derive_theme(model):
 
 
 def collect_matrix(series_records):
-    """(series, difficulty) 序列 -> 矩阵统计。
+    """(series, matrix_bucket, difficulty) 序列 -> 矩阵统计。
 
-    返回 (counts, extra, missing): counts 为 13 主题 × D1–D5 计数,
-    extra 为矩阵外 series 值计数 (词表登记的桶带中文显示名, 含难度
-    越界的异常记录), missing 为未标注 series 的模型数。
+    返回 (counts, extra, missing): counts 为 13 主题 × D1–D5 计数;
+    extra 为矩阵外计数 —— series=null 按 matrix_bucket 聚桶 (带中文
+    显示名), 另含词表外 series 与难度越界的异常记录; missing 为
+    series 与 matrix_bucket 均未标注的模型数。
     """
     index, bucket_names = build_series_index()
     counts = [[0] * 5 for _ in MATRIX_THEMES]
     extra = Counter()
     missing = 0
-    for series, difficulty in series_records:
-        if not series:
-            missing += 1
-            continue
-        row = index.get(series)
-        if row is None:
-            name = bucket_names.get(series)
-            extra[f"{name} ({series})" if name else series] += 1
-        elif 1 <= difficulty <= 5:
-            counts[row][difficulty - 1] += 1
+    for series, bucket, difficulty in series_records:
+        if series:
+            row = index.get(series)
+            if row is None:
+                extra[f"{series} (词表外 series)"] += 1
+            elif 1 <= difficulty <= 5:
+                counts[row][difficulty - 1] += 1
+            else:
+                extra[f"{series} (难度越界 D{difficulty})"] += 1
+        elif bucket:
+            name = bucket_names.get(bucket)
+            extra[f"{name} ({bucket})" if name else bucket] += 1
         else:
-            extra[f"{series} (难度越界 D{difficulty})"] += 1
+            missing += 1
     return counts, extra, missing
+
+
+def _pct(cur, target):
+    """完成度百分比, 四舍五入 (half-up, 与缺口审计报告口径一致)。"""
+    return f"{int(cur / target * 100 + 0.5)}%"
 
 
 def matrix_rows(counts, markdown=False):
@@ -198,13 +205,13 @@ def matrix_rows(counts, markdown=False):
             col_target[d] += targets[d]
         row_cur, row_target = sum(cur), sum(targets)
         rows.append([name] + cells + [f"{row_cur}/{row_target}",
-                                      f"{round(row_cur / row_target * 100)}%"])
+                                      _pct(row_cur, row_target)])
     total_cur, total_target = sum(col_cur), sum(col_target)
     total_name = "**合计**" if markdown else "合计"
     rows.append([total_name]
                 + [f"{col_cur[d]}/{col_target[d]}" for d in range(5)]
                 + [f"{total_cur}/{total_target}",
-                   f"{round(total_cur / total_target * 100)}%"])
+                   _pct(total_cur, total_target)])
     return rows
 
 
@@ -236,9 +243,10 @@ def matrix_note_lines(total, extra, missing):
         listed = ", ".join(f"{value} x {count}"
                            for value, count in sorted(extra.items(),
                                                       key=lambda kv: (-kv[1], kv[0])))
-        lines.append(f"矩阵外 series (不计入 13 主题矩阵): {listed}")
+        lines.append(f"矩阵外 {sum(extra.values())} 个 (series=null 按 "
+                     f"matrix_bucket 聚桶, 不计入 13 主题矩阵): {listed}")
     if missing:
-        lines.append(f"未标注 content_meta.series: {missing}/{total} 个 "
+        lines.append(f"未标注 content_meta.series/matrix_bucket: {missing}/{total} 个 "
                      f"(回填底稿见 docs/reports/CONTENT_GAP_AUDIT.md 附录 A)")
     return lines
 
@@ -253,10 +261,12 @@ def write_matrix_report(path, series_records, counts, extra, missing):
         "",
         f"- 生成时间: {today}",
         f"- 数据源: `data/models/` 全库 {total} 个模型的 "
-        "`content_meta.series` × `difficulty`",
+        "`content_meta.series`/`matrix_bucket` × `difficulty` "
+        "(词表: `data/content_series_map.json`)",
         "- 对照标尺: [CONTENT_STRATEGY.md](../CONTENT_STRATEGY.md) §2.2 "
         "主题 × 难度分布矩阵 (13 主题 × D1–D5, 终态目标 520)",
-        f"- series 覆盖: {tagged}/{total} 个模型已标注 `content_meta.series`",
+        f"- series 覆盖: {tagged}/{total} 个模型已标注 "
+        "(矩阵内 series 或矩阵外 matrix_bucket)",
         "- 本文件由 `tools/update_model_catalog.py --matrix-report` 自动生成, "
         "请勿手工编辑",
         "",
@@ -302,7 +312,9 @@ def main():
     for path in sorted(MODELS_DIR.glob("*.json")):
         model = json.loads(path.read_text(encoding="utf-8"))
         content_meta = model.get("content_meta") or {}
-        series_records.append((content_meta.get("series"), model["difficulty"]))
+        series_records.append((content_meta.get("series"),
+                               content_meta.get("matrix_bucket"),
+                               model["difficulty"]))
         entry = {
             "id": model["id"],
             "file": f"models/{path.name}",
@@ -344,7 +356,7 @@ def main():
     tagged = len(series_records) - missing
     if tagged == 0:
         print(f"矩阵进度: 全库 {len(series_records)} 个模型均未标注 "
-              "content_meta.series, 跳过主题 × 难度矩阵 "
+              "content_meta.series/matrix_bucket, 跳过主题 × 难度矩阵 "
               "(回填后自动输出; 底稿见 docs/reports/CONTENT_GAP_AUDIT.md 附录 A)")
     else:
         print(f"主题 × 难度矩阵进度 (现状/目标, 对照 CONTENT_STRATEGY §2.2 "
