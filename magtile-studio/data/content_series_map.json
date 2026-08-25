@@ -1,0 +1,866 @@
+{
+  "schema_version": 1,
+  "source": "docs/reports/CONTENT_GAP_AUDIT.md 附录 A (2026-08-25, 250 基线) 逐模型归类清单",
+  "notes": [
+    "series: CONTENT_STRATEGY.md 2.2 节 13 排期主题的 snake_case slug; bridge_engineering 为 5.1 节 schema v2 示例既定值, 其余按同一命名风格定名。",
+    "矩阵外 74 个 (附录 A「矩阵外」桶) series=null, 以 matrix_bucket 记录审计第 6 节的子类聚桶 (按目录展示主题聚类), 待矩阵治理决断 (修订矩阵/冻结供给) 后再行归置。",
+    "回填工具: tools/backfill_content_series.py (只写 content_meta.series / matrix_bucket, 不动其他字段)。"
+  ],
+  "series_slugs": {
+    "城堡与要塞": "castle_fortress",
+    "陆地交通": "land_transport",
+    "海空交通": "sea_air_transport",
+    "航天器": "spacecraft",
+    "动物世界": "animal_world",
+    "建筑地标": "landmark_architecture",
+    "桥梁工程": "bridge_engineering",
+    "几何艺术": "geometric_art",
+    "滚珠乐园": "marble_run",
+    "植物花园": "plant_garden",
+    "节日限定": "holiday_seasonal",
+    "实用功能": "practical_utility",
+    "幻想与机械": "fantasy_machinery"
+  },
+  "matrix_bucket_slugs": {
+    "城市生活": "city_life",
+    "运动": "sports",
+    "田园": "farm",
+    "工程结构": "engineering_structure",
+    "音乐": "music",
+    "自然世界": "natural_world",
+    "校园": "campus",
+    "游乐园": "amusement_park",
+    "海洋航行": "ocean_sailing",
+    "博物馆": "museum",
+    "极地": "polar",
+    "航天探索": "space_exploration",
+    "夏日乐园": "summer_park",
+    "足球": "soccer"
+  },
+  "models": {
+    "aircraft_carrier_01": {
+      "series": "sea_air_transport"
+    },
+    "airport_terminal_01": {
+      "series": "sea_air_transport"
+    },
+    "airport_terminal_02": {
+      "series": "sea_air_transport"
+    },
+    "ambulance_01": {
+      "series": "land_transport"
+    },
+    "amphitheater_01": {
+      "series": "landmark_architecture"
+    },
+    "apartment_block_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "apiary_01": {
+      "series": "animal_world"
+    },
+    "aquarium_tunnel_01": {
+      "series": "animal_world"
+    },
+    "art_gallery_01": {
+      "series": null,
+      "matrix_bucket": "museum"
+    },
+    "asteroid_mining_01": {
+      "series": "spacecraft"
+    },
+    "astronaut_training_01": {
+      "series": "spacecraft"
+    },
+    "bakery_shop_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "ball_run_tower_01": {
+      "series": "marble_run"
+    },
+    "bamboo_house_01": {
+      "series": null,
+      "matrix_bucket": "farm"
+    },
+    "basketball_arena_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "basketball_court_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "beach_hut_01": {
+      "series": null,
+      "matrix_bucket": "ocean_sailing"
+    },
+    "bike_rack_park_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "birthday_party_01": {
+      "series": "holiday_seasonal"
+    },
+    "bowling_alley_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "boxing_ring_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "bridge_wood_01": {
+      "series": "bridge_engineering"
+    },
+    "bulldozer_01": {
+      "series": "land_transport"
+    },
+    "bullet_train_01": {
+      "series": "land_transport"
+    },
+    "butterfly_01": {
+      "series": "animal_world"
+    },
+    "butterfly_garden_01": {
+      "series": "animal_world"
+    },
+    "cabin_lake_01": {
+      "series": null,
+      "matrix_bucket": "farm"
+    },
+    "cable_car_01": {
+      "series": "land_transport"
+    },
+    "cactus_desert_01": {
+      "series": "plant_garden"
+    },
+    "campfire_site_01": {
+      "series": null,
+      "matrix_bucket": "natural_world"
+    },
+    "canal_lock_01": {
+      "series": null,
+      "matrix_bucket": "engineering_structure"
+    },
+    "canoe_01": {
+      "series": "sea_air_transport"
+    },
+    "capsule_recovery_01": {
+      "series": "spacecraft"
+    },
+    "car_repair_shop_01": {
+      "series": "land_transport"
+    },
+    "car_wash_01": {
+      "series": "land_transport"
+    },
+    "cargo_plane_01": {
+      "series": "sea_air_transport"
+    },
+    "cargo_ship_01": {
+      "series": "sea_air_transport"
+    },
+    "carousel_01": {
+      "series": "fantasy_machinery"
+    },
+    "castle_drawbridge_01": {
+      "series": "castle_fortress"
+    },
+    "castle_foundation_01": {
+      "series": "castle_fortress"
+    },
+    "castle_tower_01": {
+      "series": "castle_fortress"
+    },
+    "cement_mixer_01": {
+      "series": "land_transport"
+    },
+    "chicken_coop_01": {
+      "series": "animal_world"
+    },
+    "chinese_garden_01": {
+      "series": "landmark_architecture"
+    },
+    "christmas_market_01": {
+      "series": "holiday_seasonal"
+    },
+    "circus_tent_01": {
+      "series": null,
+      "matrix_bucket": "amusement_park"
+    },
+    "city_bus_stop_01": {
+      "series": "land_transport"
+    },
+    "climbing_wall_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "clock_tower_01": {
+      "series": "landmark_architecture"
+    },
+    "combine_harvester_01": {
+      "series": "land_transport"
+    },
+    "control_tower_01": {
+      "series": "sea_air_transport"
+    },
+    "conveyor_factory_01": {
+      "series": null,
+      "matrix_bucket": "engineering_structure"
+    },
+    "coral_reef_01": {
+      "series": "animal_world"
+    },
+    "coral_reef_02": {
+      "series": "animal_world"
+    },
+    "corn_maze_01": {
+      "series": null,
+      "matrix_bucket": "farm"
+    },
+    "covered_bridge_01": {
+      "series": "bridge_engineering"
+    },
+    "crane_tower_01": {
+      "series": "land_transport"
+    },
+    "crane_tower_02": {
+      "series": "land_transport"
+    },
+    "crocodile_01": {
+      "series": "animal_world"
+    },
+    "cruise_ship_01": {
+      "series": "sea_air_transport"
+    },
+    "deep_sea_lab_01": {
+      "series": null,
+      "matrix_bucket": "ocean_sailing"
+    },
+    "dental_clinic_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "desk_organizer_01": {
+      "series": "practical_utility"
+    },
+    "dinosaur_hall_01": {
+      "series": "animal_world"
+    },
+    "dinosaur_stego_01": {
+      "series": "animal_world"
+    },
+    "diving_tower_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "dragon_boat_01": {
+      "series": "holiday_seasonal"
+    },
+    "dragon_cave_01": {
+      "series": "fantasy_machinery"
+    },
+    "drawbridge_01": {
+      "series": "castle_fortress"
+    },
+    "drive_in_cinema_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "drone_pad_01": {
+      "series": "sea_air_transport"
+    },
+    "drum_set_01": {
+      "series": null,
+      "matrix_bucket": "music"
+    },
+    "dump_truck_01": {
+      "series": "land_transport"
+    },
+    "eiffel_tower_01": {
+      "series": "landmark_architecture"
+    },
+    "elephant_01": {
+      "series": "animal_world"
+    },
+    "elephant_pavilion_01": {
+      "series": "animal_world"
+    },
+    "er_entrance_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "excavator_01": {
+      "series": "land_transport"
+    },
+    "eye_clinic_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "fairy_castle_01": {
+      "series": "fantasy_machinery"
+    },
+    "farm_barn_01": {
+      "series": null,
+      "matrix_bucket": "farm"
+    },
+    "farm_silo_01": {
+      "series": null,
+      "matrix_bucket": "farm"
+    },
+    "ferris_wheel_frame_01": {
+      "series": "fantasy_machinery"
+    },
+    "ferry_terminal_01": {
+      "series": "sea_air_transport"
+    },
+    "fire_station_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "fire_truck_01": {
+      "series": "land_transport"
+    },
+    "fireboat_01": {
+      "series": "sea_air_transport"
+    },
+    "fireworks_show_01": {
+      "series": "holiday_seasonal"
+    },
+    "fishing_boat_01": {
+      "series": "sea_air_transport"
+    },
+    "flag_plaza_01": {
+      "series": null,
+      "matrix_bucket": "campus"
+    },
+    "food_truck_01": {
+      "series": "land_transport"
+    },
+    "forklift_01": {
+      "series": "land_transport"
+    },
+    "fountain_plaza_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "freight_yard_01": {
+      "series": "land_transport"
+    },
+    "gas_station_01": {
+      "series": "land_transport"
+    },
+    "geodesic_dome_01": {
+      "series": "geometric_art"
+    },
+    "gingerbread_house_01": {
+      "series": "fantasy_machinery"
+    },
+    "giraffe_01": {
+      "series": "animal_world"
+    },
+    "great_wall_01": {
+      "series": "landmark_architecture"
+    },
+    "greenhouse_01": {
+      "series": "plant_garden"
+    },
+    "greenhouse_dome_01": {
+      "series": "plant_garden"
+    },
+    "hangar_01": {
+      "series": "sea_air_transport"
+    },
+    "hanging_garden_01": {
+      "series": "landmark_architecture"
+    },
+    "harbor_crane_01": {
+      "series": "sea_air_transport"
+    },
+    "hedgehog_01": {
+      "series": "animal_world"
+    },
+    "helicopter_01": {
+      "series": "sea_air_transport"
+    },
+    "helicopter_pad_01": {
+      "series": "sea_air_transport"
+    },
+    "horse_stable_01": {
+      "series": "animal_world"
+    },
+    "hospital_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "hot_air_balloon_01": {
+      "series": "sea_air_transport"
+    },
+    "hydro_dam_01": {
+      "series": null,
+      "matrix_bucket": "engineering_structure"
+    },
+    "ice_cream_truck_01": {
+      "series": "land_transport"
+    },
+    "ice_rink_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "igloo_01": {
+      "series": null,
+      "matrix_bucket": "polar"
+    },
+    "jungle_gym_01": {
+      "series": null,
+      "matrix_bucket": "campus"
+    },
+    "kangaroo_01": {
+      "series": "animal_world"
+    },
+    "kindergarten_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "knight_armor_01": {
+      "series": "castle_fortress"
+    },
+    "lantern_festival_01": {
+      "series": "holiday_seasonal"
+    },
+    "lego_style_house_01": {
+      "series": null,
+      "matrix_bucket": "farm"
+    },
+    "library_building_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "lifeguard_tower_01": {
+      "series": null,
+      "matrix_bucket": "ocean_sailing"
+    },
+    "lighthouse_01": {
+      "series": "sea_air_transport"
+    },
+    "lighthouse_pier_01": {
+      "series": "sea_air_transport"
+    },
+    "lion_dance_01": {
+      "series": "holiday_seasonal"
+    },
+    "lunar_lander_01": {
+      "series": "spacecraft"
+    },
+    "magic_tree_01": {
+      "series": "fantasy_machinery"
+    },
+    "marble_dash_lane_01": {
+      "series": "marble_run"
+    },
+    "marble_run_spiral_01": {
+      "series": "marble_run"
+    },
+    "marching_band_01": {
+      "series": null,
+      "matrix_bucket": "music"
+    },
+    "mars_habitat_01": {
+      "series": "spacecraft"
+    },
+    "mars_rover_01": {
+      "series": "spacecraft"
+    },
+    "medieval_gate_01": {
+      "series": "castle_fortress"
+    },
+    "merry_go_round_01": {
+      "series": "fantasy_machinery"
+    },
+    "mission_control_01": {
+      "series": "spacecraft"
+    },
+    "monorail_01": {
+      "series": "land_transport"
+    },
+    "moon_festival_altar_01": {
+      "series": "holiday_seasonal"
+    },
+    "moon_lander_01": {
+      "series": "spacecraft"
+    },
+    "mountain_rail_01": {
+      "series": "land_transport"
+    },
+    "museum_01": {
+      "series": "landmark_architecture"
+    },
+    "mushroom_grove_01": {
+      "series": "plant_garden"
+    },
+    "oasis_01": {
+      "series": null,
+      "matrix_bucket": "natural_world"
+    },
+    "observatory_01": {
+      "series": "spacecraft"
+    },
+    "octopus_01": {
+      "series": "animal_world"
+    },
+    "open_air_cinema_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "owl_01": {
+      "series": "animal_world"
+    },
+    "pagoda_01": {
+      "series": "landmark_architecture"
+    },
+    "panda_bamboo_01": {
+      "series": "animal_world"
+    },
+    "parking_garage_01": {
+      "series": "land_transport"
+    },
+    "particle_accelerator_01": {
+      "series": null,
+      "matrix_bucket": "space_exploration"
+    },
+    "peacock_01": {
+      "series": "animal_world"
+    },
+    "pedestrian_overpass_01": {
+      "series": "bridge_engineering"
+    },
+    "penguin_01": {
+      "series": "animal_world"
+    },
+    "penguin_pool_01": {
+      "series": "animal_world"
+    },
+    "pet_clinic_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "piano_stage_01": {
+      "series": null,
+      "matrix_bucket": "music"
+    },
+    "pipe_organ_01": {
+      "series": null,
+      "matrix_bucket": "music"
+    },
+    "pirate_ship_01": {
+      "series": "sea_air_transport"
+    },
+    "planetarium_01": {
+      "series": "spacecraft"
+    },
+    "planetarium_02": {
+      "series": "spacecraft"
+    },
+    "police_car_01": {
+      "series": "land_transport"
+    },
+    "police_station_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "post_office_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "pumpkin_lantern_01": {
+      "series": "holiday_seasonal"
+    },
+    "puppet_theater_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "pyramid_giza_01": {
+      "series": "landmark_architecture"
+    },
+    "race_track_01": {
+      "series": "land_transport"
+    },
+    "radio_telescope_01": {
+      "series": "spacecraft"
+    },
+    "railway_crossing_01": {
+      "series": "land_transport"
+    },
+    "rainforest_canopy_01": {
+      "series": "plant_garden"
+    },
+    "recycling_center_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "rehab_park_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "rescue_hq_01": {
+      "series": "landmark_architecture"
+    },
+    "rice_terrace_01": {
+      "series": null,
+      "matrix_bucket": "farm"
+    },
+    "road_construction_01": {
+      "series": "land_transport"
+    },
+    "robot_01": {
+      "series": "fantasy_machinery"
+    },
+    "robot_arm_01": {
+      "series": "fantasy_machinery"
+    },
+    "robot_lab_01": {
+      "series": "fantasy_machinery"
+    },
+    "rocket_crawler_01": {
+      "series": "spacecraft"
+    },
+    "rocket_launchpad_01": {
+      "series": "spacecraft"
+    },
+    "roller_coaster_hill_01": {
+      "series": "fantasy_machinery"
+    },
+    "roller_coaster_loop_01": {
+      "series": "fantasy_machinery"
+    },
+    "roman_aqueduct_01": {
+      "series": "landmark_architecture"
+    },
+    "rose_pergola_01": {
+      "series": "plant_garden"
+    },
+    "safari_lodge_01": {
+      "series": "animal_world"
+    },
+    "sailboat_01": {
+      "series": "sea_air_transport"
+    },
+    "sandbox_park_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "santa_sleigh_01": {
+      "series": "holiday_seasonal"
+    },
+    "satellite_dish_01": {
+      "series": "spacecraft"
+    },
+    "scaffolding_site_01": {
+      "series": null,
+      "matrix_bucket": "engineering_structure"
+    },
+    "school_bus_01": {
+      "series": "land_transport"
+    },
+    "schoolyard_stand_01": {
+      "series": null,
+      "matrix_bucket": "campus"
+    },
+    "science_lab_01": {
+      "series": null,
+      "matrix_bucket": "campus"
+    },
+    "sculpture_plaza_01": {
+      "series": null,
+      "matrix_bucket": "museum"
+    },
+    "sheep_farm_01": {
+      "series": "animal_world"
+    },
+    "skate_park_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "ski_jump_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "ski_lodge_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "skyscraper_01": {
+      "series": "landmark_architecture"
+    },
+    "slide_playground_01": {
+      "series": null,
+      "matrix_bucket": "amusement_park"
+    },
+    "snowman_01": {
+      "series": "holiday_seasonal"
+    },
+    "snowplow_01": {
+      "series": "land_transport"
+    },
+    "soccer_goal_01": {
+      "series": null,
+      "matrix_bucket": "soccer"
+    },
+    "solar_farm_01": {
+      "series": null,
+      "matrix_bucket": "engineering_structure"
+    },
+    "space_elevator_01": {
+      "series": "spacecraft"
+    },
+    "space_shuttle_01": {
+      "series": "spacecraft"
+    },
+    "space_station_01": {
+      "series": "spacecraft"
+    },
+    "spider_bot_01": {
+      "series": "fantasy_machinery"
+    },
+    "stadium_gate_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "steam_locomotive_01": {
+      "series": "land_transport"
+    },
+    "stonehenge_01": {
+      "series": "landmark_architecture"
+    },
+    "submarine_01": {
+      "series": "sea_air_transport"
+    },
+    "submarine_dock_01": {
+      "series": "sea_air_transport"
+    },
+    "subway_station_01": {
+      "series": "land_transport"
+    },
+    "supermarket_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "suspension_bridge_01": {
+      "series": "bridge_engineering"
+    },
+    "suspension_rail_01": {
+      "series": "land_transport"
+    },
+    "swimming_pool_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "swing_set_01": {
+      "series": null,
+      "matrix_bucket": "amusement_park"
+    },
+    "sydney_opera_01": {
+      "series": "landmark_architecture"
+    },
+    "taxi_01": {
+      "series": "land_transport"
+    },
+    "temple_greek_01": {
+      "series": "landmark_architecture"
+    },
+    "tennis_court_01": {
+      "series": null,
+      "matrix_bucket": "sports"
+    },
+    "tessellation_screen_01": {
+      "series": "geometric_art"
+    },
+    "tokyo_tower_01": {
+      "series": "landmark_architecture"
+    },
+    "toll_station_01": {
+      "series": "land_transport"
+    },
+    "tow_truck_01": {
+      "series": "land_transport"
+    },
+    "tractor_01": {
+      "series": "land_transport"
+    },
+    "traffic_light_junction_01": {
+      "series": "land_transport"
+    },
+    "trailer_home_01": {
+      "series": "land_transport"
+    },
+    "train_station_01": {
+      "series": "land_transport"
+    },
+    "trebuchet_01": {
+      "series": "castle_fortress"
+    },
+    "treehouse_01": {
+      "series": "plant_garden"
+    },
+    "treehouse_02": {
+      "series": "plant_garden"
+    },
+    "trex_skeleton_01": {
+      "series": "animal_world"
+    },
+    "triumphal_arch_01": {
+      "series": "landmark_architecture"
+    },
+    "truss_bridge_01": {
+      "series": "bridge_engineering"
+    },
+    "turtle_beach_01": {
+      "series": "animal_world"
+    },
+    "violin_shop_01": {
+      "series": null,
+      "matrix_bucket": "music"
+    },
+    "volcano_base_01": {
+      "series": null,
+      "matrix_bucket": "natural_world"
+    },
+    "warehouse_01": {
+      "series": null,
+      "matrix_bucket": "city_life"
+    },
+    "water_slide_park_01": {
+      "series": null,
+      "matrix_bucket": "summer_park"
+    },
+    "water_tower_01": {
+      "series": null,
+      "matrix_bucket": "engineering_structure"
+    },
+    "weather_station_01": {
+      "series": null,
+      "matrix_bucket": "natural_world"
+    },
+    "whale_01": {
+      "series": "animal_world"
+    },
+    "whale_watching_01": {
+      "series": "animal_world"
+    },
+    "wind_turbine_01": {
+      "series": "fantasy_machinery"
+    },
+    "windmill_01": {
+      "series": "fantasy_machinery"
+    },
+    "wizard_tower_01": {
+      "series": "fantasy_machinery"
+    },
+    "yurt_01": {
+      "series": null,
+      "matrix_bucket": "farm"
+    }
+  }
+}
