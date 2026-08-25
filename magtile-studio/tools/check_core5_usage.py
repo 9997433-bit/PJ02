@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-"""核心五片型 (core-5) 覆盖率检查 —— 片型分层质检工具。
+"""核心九片型 (core-9) 覆盖率检查 —— 片型分层质检工具。
 
-产品默认基础套装只含核心五片型 (docs/TILE_CATALOG.md):
-正方形 / 等边三角形 / 直角三角形 / 等腰三角形 / 长方形。
-本工具扫描模型库, 输出片型分层报告并核对内容策略 2.5 节的规则
-(docs/CONTENT_STRATEGY.md):
+产品默认基础套装含 9 种核心片型 (docs/TILE_CATALOG.md, 依据实物确认):
+正方形 / 等边三角形 / 直角三角形 / 等腰三角形 / 长方形 /
+大正方形 / 窗格方 / 门框方 / 车轮底座。
+本工具扫描模型库, 输出片型分层报告并
+核对内容策略 2.5 节的规则 (docs/CONTENT_STRATEGY.md):
 
-  1. 全库 core-5 覆盖率: 只用核心五片型的模型占比 (主库以 core-5 为默认);
+  1. 全库 core-9 覆盖率: 只用核心九片型的模型占比 (主库以 core-9 为默认);
   2. 扩展片型清单: 每个用到扩展片型的模型, 列出具体片型;
   3. 标签一致性: 用了扩展片型的模型必须带 "需要扩展装" 标签,
      没用的不得带 (双向核对, 违反输出 WARN);
-  4. 免费层红线: 带 "免费" 标签的模型中 >=80% 必须只用核心五片型,
+  4. 免费层红线: 带 "免费" 标签的模型中 >=80% 必须只用核心九片型,
      免费层用扩展片型的模型逐个输出 WARN。
 
 目录一致性双重校验: data/tile_catalog.json 中 tier=core 的片型集合
-必须与本工具内置的核心五片型白名单完全一致, 不一致按结构错误退出 —— 
+必须与本工具内置的核心九片型白名单完全一致, 不一致按结构错误退出 —— 
 tier 的事实来源是目录文件, 白名单只用来兜住目录被误改的情况。
 
 退出码:
@@ -24,6 +25,10 @@ tier 的事实来源是目录文件, 白名单只用来兜住目录被误改的�
 
 用法:
   python3 tools/check_core5_usage.py [模型目录] [--catalog 目录文件] [--strict]
+
+(工具文件名保留 check_core5_usage.py 以兼容既有流程; "core-5" 是
+历史名 —— 经实物确认核心层实为 9 种 (core-9): 早期 5 种基础片 +
+大正方形 / 窗格方 / 门框方 / 车轮底座。)
 """
 
 import argparse
@@ -33,15 +38,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# 核心五片型白名单 (与 data/tile_catalog.json 的 tier=core 双重校验)
-CORE5 = frozenset({
+# 核心九片型白名单 (与 data/tile_catalog.json 的 tier=core 双重校验)
+CORE9 = frozenset({
     "square", "equilateral_triangle", "right_triangle",
     "isosceles_triangle", "rectangle",
+    "large_square", "window_square", "door_frame", "wheel_base",
 })
 
 EXPANSION_TAG = "需要扩展装"   # 内容策略 2.5 节: 用扩展片型必打标
 FREE_TAG = "免费"              # 免费层标记 (COMMERCIAL_PLAN.md 免费 30)
-FREE_CORE5_MIN_RATIO = 0.80    # 免费层 core-5 占比红线
+FREE_CORE9_MIN_RATIO = 0.80    # 免费层 core-9 占比红线
 
 
 def load_tiers(catalog_path):
@@ -50,10 +56,10 @@ def load_tiers(catalog_path):
     tiers = {t["type"]: t.get("tier") for t in catalog["tiles"]}
 
     catalog_core = {t for t, tier in tiers.items() if tier == "core"}
-    if catalog_core != CORE5:
-        print("[错误] 目录 tier=core 集合与核心五片型白名单不一致:", file=sys.stderr)
+    if catalog_core != CORE9:
+        print("[错误] 目录 tier=core 集合与核心九片型白名单不一致:", file=sys.stderr)
         print(f"  目录 core:  {sorted(catalog_core)}", file=sys.stderr)
-        print(f"  白名单:     {sorted(CORE5)}", file=sys.stderr)
+        print(f"  白名单:     {sorted(CORE9)}", file=sys.stderr)
         print("  请核对 data/tile_catalog.json 的 tier 字段或本工具白名单。",
               file=sys.stderr)
         sys.exit(2)
@@ -66,7 +72,7 @@ def load_tiers(catalog_path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="核心五片型 (core-5) 覆盖率检查")
+    parser = argparse.ArgumentParser(description="核心九片型 (core-9) 覆盖率检查")
     parser.add_argument("models_dir", nargs="?", default=str(ROOT / "data" / "models"),
                         help="模型目录 (默认 data/models)")
     parser.add_argument("--catalog", default=str(ROOT / "data" / "tile_catalog.json"),
@@ -84,7 +90,7 @@ def main():
         sys.exit(2)
 
     warnings = []
-    core5_only = []          # [(id, difficulty)]
+    core9_only = []          # [(id, difficulty)]
     expansion_using = []     # [(id, difficulty, sorted(exp_types), tagged)]
     expansion_freq = {}      # 扩展片型 -> 使用它的模型数
     free_models = []         # [(id, uses_expansion)]
@@ -116,27 +122,27 @@ def main():
                 warnings.append(
                     f"{mid} 使用了扩展片型 {','.join(exp_types)} 但缺少 \"{EXPANSION_TAG}\" 标签")
         else:
-            core5_only.append((mid, model.get("difficulty")))
+            core9_only.append((mid, model.get("difficulty")))
             if tagged:
                 warnings.append(
-                    f"{mid} 只用核心五片型却带着 \"{EXPANSION_TAG}\" 标签 (应移除)")
+                    f"{mid} 只用核心九片型却带着 \"{EXPANSION_TAG}\" 标签 (应移除)")
 
         if FREE_TAG in tags:
             free_models.append((mid, bool(exp_types)))
             if exp_types:
                 warnings.append(
                     f"免费层模型 {mid} 使用了扩展片型 {','.join(exp_types)} "
-                    f"(免费层应以 core-5 为主, 橱窗模型须控制在 20% 以内)")
+                    f"(免费层应以 core-9 为主, 橱窗模型须控制在 20% 以内)")
 
     total = len(model_files)
-    n_core = len(core5_only)
+    n_core = len(core9_only)
     ratio = n_core / total
 
     print("=" * 62)
-    print(" 核心五片型 (core-5) 覆盖率报告")
+    print(" 核心九片型 (core-9) 覆盖率报告")
     print("=" * 62)
     print(f"模型总数:          {total}")
-    print(f"只用核心五片型:    {n_core}  ({ratio:.1%})")
+    print(f"只用核心九片型:    {n_core}  ({ratio:.1%})")
     print(f"用到扩展片型:      {len(expansion_using)}  ({1 - ratio:.1%})")
 
     if expansion_freq:
@@ -150,16 +156,16 @@ def main():
             mark = "" if tagged else "   <-- 缺标签"
             print(f"  D{diff}  {mid:<28} {','.join(exp_types)}{mark}")
 
-    print("\n免费层检查 (标签 \"免费\", 红线: core-5 占比 >= 80%):")
+    print("\n免费层检查 (标签 \"免费\", 红线: core-9 占比 >= 80%):")
     if free_models:
         free_core = sum(1 for _, uses_exp in free_models if not uses_exp)
         free_ratio = free_core / len(free_models)
-        print(f"  免费层模型 {len(free_models)} 个, 其中只用 core-5 的 {free_core} 个"
+        print(f"  免费层模型 {len(free_models)} 个, 其中只用 core-9 的 {free_core} 个"
               f" ({free_ratio:.1%})")
-        if free_ratio < FREE_CORE5_MIN_RATIO:
+        if free_ratio < FREE_CORE9_MIN_RATIO:
             warnings.append(
-                f"免费层 core-5 占比 {free_ratio:.1%} 低于红线 "
-                f"{FREE_CORE5_MIN_RATIO:.0%} (CONTENT_STRATEGY.md 2.5 节)")
+                f"免费层 core-9 占比 {free_ratio:.1%} 低于红线 "
+                f"{FREE_CORE9_MIN_RATIO:.0%} (CONTENT_STRATEGY.md 2.5 节)")
     else:
         print("  尚无模型带 \"免费\" 标签 —— 免费 30 选品定稿后本节自动生效")
 

@@ -7,7 +7,7 @@
 **交付物**
 
 - C++20 / CMake 跨平台工程骨架, 模块化架构 (core / physics / tutorial / render / app)。
-- 13 种标准磁力片形状目录 (数据驱动, `data/tile_catalog.json`; 核心 5 + 扩展 8 分层见 `docs/TILE_CATALOG.md`)。
+- 13 种标准磁力片形状目录 (数据驱动, `data/tile_catalog.json`; 核心 9 [6 基础 + 3 变体] + 扩展 4 分层见 `docs/TILE_CATALOG.md`)。
 - 完整核心数据模型: `TileType`、`TileInstance`、`BuildStep`、`ModelDefinition`。
 - 物理校验器基础版: 接地支撑 / 磁力吸合 / 无重叠 / 重心稳定, 覆盖教程全部中间步骤。
 - 分步教程引擎 (导航、场景查询、一致性质检) 与渲染接口 (`IRenderer` + NullRenderer)。

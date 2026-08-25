@@ -87,7 +87,7 @@ ctest --test-dir build --output-on-failure
 
 ### 3.1 目录冒烟 (`print_tile_catalog`)
 
-打印磁力片形状目录, 确认 `data/tile_catalog.json` 可以正常加载、13 种形状定义完整 (核心 5 + 扩展 8, 见 `docs/TILE_CATALOG.md`)。
+打印磁力片形状目录, 确认 `data/tile_catalog.json` 可以正常加载、13 种形状定义完整 (核心 9 [6 基础 + 3 变体] + 扩展 4, 见 `docs/TILE_CATALOG.md`)。
 
 ### 3.2 单模型质检 (`validate_<模型名>` / `tutorial_<模型名>`)
 

@@ -15,7 +15,7 @@
 #    6. 模型逻辑质检         (步骤粒度/中文说明/对账/难度区间/BOM)
 #    7. 逐步装配质检         (逐片零差错 P1~P8, 见 docs/MODEL_QUALITY.md)
 #    8. 模型库唯一性         (结构签名两两比对, 拒绝换皮克隆)
-#    9. 片型分层检查         (core-5 覆盖率 + 需要扩展装标签, WARN 不拦截)
+#    9. 片型分层检查         (core-9 覆盖率 + 需要扩展装标签, WARN 不拦截)
 #   10. 教程完整性           (静态走查 + 教程引擎实跑)
 #   11. 物理负例 x N         (不成立的结构必须被拒绝, 错误码必须正确)
 #   12. 物理正例 x N         (预算内的合法结构必须放行)
@@ -146,9 +146,9 @@ run_stage "模型库唯一性 (克隆检测)" \
     "$PYTHON" "$TESTS_DIR/test_library_uniqueness.py" "$DATA_DIR/models" \
     --catalog "$DATA_DIR/tile_catalog.json"
 
-# 片型分层 (core-5 覆盖率 + 需要扩展装标签 + 免费层红线): 现阶段
+# 片型分层 (core-9 覆盖率 + 需要扩展装标签 + 免费层红线): 现阶段
 # WARN 不计失败 (工具默认退出码 0), 免费 30 选品定稿后加 --strict
-run_stage "片型分层检查 (core-5)" \
+run_stage "片型分层检查 (core-9)" \
     "$PYTHON" "$ROOT/tools/check_core5_usage.py" "$DATA_DIR/models" \
     --catalog "$DATA_DIR/tile_catalog.json"
 
