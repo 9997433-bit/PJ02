@@ -57,10 +57,22 @@ import java.util.concurrent.Executors
  * 儿童可达无门 (§5.3)。
  *
  * 点击卡片弹出详情: 简介 + 套装说明 + 库存对照 (够搭 / 还差几片,
- * 「缺什么片?」按需展开清单) + 免费模型「开始搭建」直达
- * TutorialActivity 分步教程 (非免费为温和订阅提示); 「物理校验」
- * 按钮按需加载模型并跑完整 R1~R8 校验, 展示中文摘要与教程步骤数。
+ * 「缺什么片?」按需展开清单) + 「开始搭建」直达 TutorialActivity
+ * 分步教程; 「物理校验」按钮按需加载模型并跑完整 R1~R8 校验,
+ * 展示中文摘要与教程步骤数。
  * 渲染循环 (GLSurfaceView / Vulkan) 与 3D 教程视口后续在此接入。
+ *
+ * 订阅与免费层锁 (COMMERCIAL_PLAN §2.1/§2.2, 与桌面 Qt DetailPage
+ * 完全同口径): 解锁 = 模型属免费层 (is_free) 或 订阅有效
+ * (billing::isContentUnlocked 单一判定); 未订阅的非免费模型只锁
+ * 「开始搭建」入口 —— 简介/物理校验/浏览照常, 详情弹窗给温和的
+ * 「订阅解锁」提示 (无价格无催促, 儿童侧零价格信息 §12.2); 订阅
+ * 生效后全库直达教程。订阅状态经 MagTileNative.subscriptionActive()
+ * 读进度存档 settings 表 (progress/subscription_settings 契约键,
+ * 与桌面 BillingBackend 同键, 缺键/脏值按未订阅兜底宁可锁)。
+ * Debug 构建另有「模拟已订阅」QA 开关 (家长门后的年龄段对话框内,
+ * BuildConfig.DEBUG 恒 false 的 Release 档不可见), 与桌面订阅页
+ * devControlsEnabled 开发开关同角色; 不接任何真实商店 SDK。
  */
 class MainActivity : Activity() {
 
@@ -96,6 +108,11 @@ class MainActivity : Activity() {
     /** 磁力片库存是否已登记 (含 0 数量的 "明确没有"; 未登记时
      *  「我能搭的」筛选禁用并引导录入)。 */
     private var inventoryConfigured = false
+
+    /** 订阅是否有效 (免费层锁口径, 与桌面 DetailPage 锁同源: 启动时
+     *  经 JNI 读 progress/subscription_settings 契约键; 缺键/脏值/
+     *  存档不可用一律 false —— 未订阅兜底, 宁可锁)。 */
+    private var subscriptionActive = false
 
     /** 进度页收藏行带回的待弹详情模型 id (列表加载完成后补弹)。 */
     private var pendingDetailModelId: String? = null
@@ -184,6 +201,9 @@ class MainActivity : Activity() {
                 // 年龄段 (settings 表 age_mode 键, 与桌面同键):
                 // 存档打开失败 / 从未设置时原生层兜底返回默认档 7-9
                 val storedAgeMode = MagTileNative.ageModeId()
+                // 订阅状态 (settings 表 subscription_active 键, 与桌面
+                // BillingBackend 同键): 缺键/脏值/存档不可用按未订阅兜底
+                val storedSubscription = MagTileNative.subscriptionActive()
                 val library = ModelCard.libraryFromJson(
                     listModels(dataDir.absolutePath))
 
@@ -191,6 +211,7 @@ class MainActivity : Activity() {
                     shapeCount = loadedShapes
                     allCards = library.cards
                     inventoryConfigured = library.inventoryConfigured
+                    subscriptionActive = storedSubscription
                     populateThemeSpinner(library.cards)
                     updateInventoryUi()
                     ageModeId = storedAgeMode
@@ -362,14 +383,15 @@ class MainActivity : Activity() {
 
     /** 三档单选对话框 (展示名对齐 core::displayNameZh); 家长门通过
      *  后由标题栏入口调起 (ParentGateDialog.requireParent)。中性键
-     *  「隐私与数据」进隐私面板 (同在家长门后, 与桌面家长中心一致)。 */
+     *  「隐私与数据」进隐私面板 (同在家长门后, 与桌面家长中心一致);
+     *  Debug 构建的正键为「模拟已订阅」QA 开关 (见 toggleDevBilling)。 */
     private fun showAgeModeDialog() {
         val ids = listOf(AGE_4_6, AGE_7_9, AGE_10_12)
         val labels = arrayOf(
             getString(R.string.age_mode_4_6),
             getString(R.string.age_mode_7_9),
             getString(R.string.age_mode_10_12))
-        AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this)
             .setTitle(R.string.age_mode_dialog_title)
             .setSingleChoiceItems(labels, ids.indexOf(ageModeId)) { dialog, which ->
                 dialog.dismiss()
@@ -377,7 +399,53 @@ class MainActivity : Activity() {
             }
             .setNeutralButton(R.string.privacy_entry) { _, _ -> showPrivacyDialog() }
             .setNegativeButton(R.string.dialog_close, null)
-            .show()
+        if (BuildConfig.DEBUG) {
+            // 「模拟已订阅」QA 开关 (仅 Debug 构建; BuildConfig.DEBUG 为
+            // 编译期常量, Release 档此分支不可达 —— 与桌面订阅页
+            // devControlsEnabled 开发开关同角色同位置策略: 家长门后)。
+            // 按钮标签描述将要执行的动作 (当前未订阅 -> 「开」)。
+            builder.setPositiveButton(
+                getString(if (subscriptionActive) R.string.dev_billing_turn_off
+                          else R.string.dev_billing_turn_on)) { _, _ ->
+                toggleDevBilling()
+            }
+        }
+        builder.show()
+    }
+
+    /**
+     * Debug 档「模拟已订阅」切换 (QA 用, 与桌面 FakeBillingClient::
+     * devSetSubscribed 同口径): 打开时以年度主推档 sub_yearly 为模拟
+     * 档位, 经 JNI 写 progress/subscription_settings 契约键落盘 ——
+     * 与桌面同键, 存档跨端互认; 落盘失败不翻转界面解锁状态 (订阅
+     * 权益以落盘为准), 只温和提示。不产生任何真实扣费。
+     */
+    private fun toggleDevBilling() {
+        if (!BuildConfig.DEBUG) return  // Release 档误接线也改不了订阅状态
+        val target = !subscriptionActive
+        backgroundExecutor.execute {
+            val persisted = try {
+                MagTileNative.setSubscriptionActive(
+                    target, if (target) DEV_BILLING_PRODUCT_ID else "")
+            } catch (t: Throwable) {
+                Log.e(TAG, "模拟订阅切换失败", t)
+                false
+            }
+            runOnUiThread {
+                if (isFinishing || isDestroyed) return@runOnUiThread
+                if (persisted) {
+                    subscriptionActive = target
+                }
+                android.widget.Toast.makeText(
+                    this,
+                    getString(when {
+                        !persisted -> R.string.dev_billing_soft_fail
+                        target -> R.string.dev_billing_on_toast
+                        else -> R.string.dev_billing_off_toast
+                    }),
+                    android.widget.Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     // ---- 隐私与数据 (SECURITY_AND_PRIVACY.md §3/§4 C4/Z8, 家长门后;
@@ -450,8 +518,10 @@ class MainActivity : Activity() {
             runOnUiThread {
                 if (isFinishing || isDestroyed) return@runOnUiThread
                 if (cleared) {
-                    // 温和回到首次状态: settings 已清空, 界面同步回默认档
+                    // 温和回到首次状态: settings 已清空, 界面同步回默认档;
+                    // 订阅状态同键被清 -> 回未订阅 (免费层锁恢复, 宁可锁)
                     ageModeId = AGE_7_9
+                    subscriptionActive = false
                     applyAgeMode()
                     refreshLibraryAsync(enableBuildable = false)
                 }
@@ -537,17 +607,32 @@ class MainActivity : Activity() {
 
     // ---- 卡片详情与物理校验 -------------------------------------------
 
-    /** 卡片详情: 简介 + 套装说明 + 库存对照 + 「开始搭建」直达分步
-     *  教程 (免费模型; 非免费为温和订阅提示) + 按需物理校验入口。 */
+    /** 卡片详情: 简介 + 预计用时 (§5.4, 步数未知隐藏) + 套装说明 +
+     *  库存对照 + 「开始搭建」直达分步教程 (免费或订阅生效; 未订阅
+     *  的非免费为温和订阅解锁提示) + 按需物理校验入口。 */
     private fun showModelDialog(card: ModelCard) {
-        // 免费且有步骤数据 -> 「开始搭建」大按钮直达 TutorialActivity
-        // (占位文案退场); 非免费保持温和订阅提示 (教程随订阅上线,
-        // 浏览/校验不受限); 免费但无步骤 (数据缺失) 退回教程占位。
-        val startable = card.isFree && card.stepCount > 0
+        // 解锁口径与桌面 billing::isContentUnlocked / DetailPage 锁
+        // 完全一致: 免费层 或 订阅有效 即解锁。已解锁且有步骤数据 ->
+        // 「开始搭建」大按钮直达 TutorialActivity; 未订阅的非免费只锁
+        // 这个入口 (浏览/校验不受限), 给温和的「订阅解锁」提示 (无
+        // 价格无催促 §12.2); 已解锁但无步骤 (数据缺失) 退回教程占位。
+        val unlocked = card.isFree || subscriptionActive
+        val startable = unlocked && card.stepCount > 0
+        // 预计用时 (UI_UX_SPEC §5.4, 与桌面 Qt DetailPage 同口径):
+        // 原生层 core::estimateBuildMinutes 档位估算随 listModels 下发
+        // (每步 1.5 分钟 + 每片 0.1 分钟归整到 5/10/15/20/30/45 分钟
+        // 六档), 只说「大约 N 分钟」不假精确; 0 = 步数未知时整行隐藏;
+        // 用时是信息不是门槛 —— 与缺片/订阅锁无关照常显示
+        val estimateLine = if (card.estimatedMinutes > 0) {
+            getString(R.string.dialog_estimated_minutes, card.estimatedMinutes)
+        } else {
+            ""
+        }
         val message = buildString {
             append(card.difficultyStars)
             append("  ")
             append(getString(R.string.card_pieces_steps, card.totalPieces, card.stepCount))
+            if (estimateLine.isNotEmpty()) append("\n").append(estimateLine)
             if (card.theme.isNotBlank()) append("\n主题: ").append(card.theme)
             // 套装说明 (BOM 未知时不显示, 与卡片角标同一口径)
             if (card.bomKnown) {
@@ -566,13 +651,27 @@ class MainActivity : Activity() {
             if (card.description.isNotBlank()) append("\n\n").append(card.description)
             if (!startable) {
                 append("\n\n").append(getString(
-                    if (card.isFree) R.string.dialog_tutorial_coming
+                    if (unlocked) R.string.dialog_tutorial_coming
                     else R.string.dialog_subscription_note))
+            }
+        }
+        // 预计用时行加粗 (与桌面 Qt font.bold 一致); 4-6 岁启蒙模式
+        // 更大字 (分龄可读 §2, 对齐 Qt bandJunior 换 fontButton 大字号)
+        val styledMessage: CharSequence = if (estimateLine.isEmpty()) message else {
+            android.text.SpannableString(message).apply {
+                val start = message.indexOf(estimateLine)
+                val end = start + estimateLine.length
+                setSpan(android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
+                        start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                if (bandJunior) {
+                    setSpan(android.text.style.RelativeSizeSpan(1.4f),
+                            start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
             }
         }
         val builder = AlertDialog.Builder(this)
             .setTitle(card.name)
-            .setMessage(message)
+            .setMessage(styledMessage)
             .setPositiveButton(R.string.dialog_validate) { _, _ -> runValidation(card) }
             .setNegativeButton(R.string.dialog_close, null)
         if (inventoryConfigured && card.bomKnown && !card.canBuild) {
@@ -669,6 +768,10 @@ class MainActivity : Activity() {
         private const val AGE_4_6 = "age_4_6"
         private const val AGE_7_9 = "age_7_9"
         private const val AGE_10_12 = "age_10_12"
+
+        /** Debug 档「模拟已订阅」写档的模拟档位: 年度主推 (与桌面
+         *  FakeBillingClient::devSetSubscribed 同一档位约定)。 */
+        private const val DEV_BILLING_PRODUCT_ID = "sub_yearly"
 
         init {
             // 对应 platforms/android/CMakeLists.txt 产出的 libmagtile_core.so

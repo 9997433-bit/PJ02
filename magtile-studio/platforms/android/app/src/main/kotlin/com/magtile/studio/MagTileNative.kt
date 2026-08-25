@@ -152,6 +152,36 @@ object MagTileNative {
      */
     external fun clearLocalData(): Boolean
 
+    // ---- 订阅状态 (COMMERCIAL_PLAN §2.2: 复用 progress/
+    //      subscription_settings 契约键, 与桌面 Qt BillingBackend /
+    //      FakeBillingClient 同键 subscription_active /
+    //      subscription_product_id 同口径, 存档跨端互认; 不接任何
+    //      真实商店 SDK —— 后续 Google Play Billing 经
+    //      StoreBillingClient 落地, 见 platforms/android/README.md) ----
+
+    /**
+     * 订阅当前是否有效 (免费层锁的读取口径, 与桌面 DetailPage 锁 /
+     * billing::isContentUnlocked 同一判定源): 存档未打开 / 缺键 /
+     * 脏值一律返回 false (未订阅兜底, 宁可锁不放行 —— 与免费层
+     * is_free 缺数据宁可放行的方向相反, 守的是付费权益)。
+     */
+    external fun subscriptionActive(): Boolean
+
+    /**
+     * 生效中的订阅商品档位 id (如 "sub_yearly", 三端统一档位约定);
+     * 未订阅 / 从未写入 / 存档不可用返回空串。
+     */
+    external fun subscriptionProductId(): String
+
+    /**
+     * 写订阅状态 (立即落盘, progress::setSubscriptionActive 同一
+     * 实现: active=false 时清空档位记录)。当前唯一调用方是 Debug 档
+     * 「模拟已订阅」QA 开关; 后续 StoreBillingClient 购买/恢复回执
+     * 走同一写入口。成功 true; 存档未打开 / 落盘失败 false ——
+     * 调用方不得在 false 时翻转界面解锁状态 (订阅权益以落盘为准)。
+     */
+    external fun setSubscriptionActive(active: Boolean, productId: String): Boolean
+
     init {
         // 与 MainActivity 共用同一 libmagtile_core.so (loadLibrary 幂等)
         System.loadLibrary("magtile_core")

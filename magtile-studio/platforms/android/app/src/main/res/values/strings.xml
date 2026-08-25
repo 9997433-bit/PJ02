@@ -34,8 +34,19 @@
     <string name="dialog_tutorial_coming">分步教程即将上线, 敬请期待!</string>
     <!-- 免费模型详情弹窗的搭建入口 (进 TutorialActivity 分步浏览) -->
     <string name="dialog_start_build">🧲 开始搭建</string>
-    <!-- 非免费模型详情的温和订阅提示 (不锁浏览/不用催促话术) -->
-    <string name="dialog_subscription_note">本模型属于订阅内容: 简介和物理校验随时可用, 完整分步教程将随订阅上线; 免费区的模型永久免费, 用「只看免费」就能找到它们。</string>
+    <!-- 未订阅时非免费模型详情的温和「订阅解锁」提示 (只锁「开始
+         搭建」入口, 不锁浏览/校验; 无价格无催促 §12.2, 措辞对齐
+         桌面 Qt DetailPage 订阅横幅; 订阅生效后本提示退场, 直达教程) -->
+    <string name="dialog_subscription_note">🔒 这个模型属于订阅内容: 简介和物理校验随时可以看, 完整分步教程订阅后解锁; 免费区的模型永久免费, 用「只看免费」随时开搭。</string>
+    <!-- Debug 构建的「模拟已订阅」QA 开关 (家长门后的年龄段对话框
+         正键; Release 档 BuildConfig.DEBUG 恒 false 不可见。写
+         progress/subscription_settings 契约键, 与桌面订阅页
+         devControlsEnabled 开发开关同角色, 零真实扣费) -->
+    <string name="dev_billing_turn_on">🧪 模拟订阅: 开</string>
+    <string name="dev_billing_turn_off">🧪 模拟订阅: 关</string>
+    <string name="dev_billing_on_toast">模拟订阅已开启 (仅测试构建, 未产生任何扣费) —— 全库已解锁</string>
+    <string name="dev_billing_off_toast">模拟订阅已关闭 —— 回到免费层</string>
+    <string name="dev_billing_soft_fail">这次没切换成功, 稍后再试一次就好</string>
     <string name="dialog_validate">物理校验</string>
     <string name="dialog_close">关闭</string>
     <string name="dialog_validating">正在执行物理校验 (R1~R8)…</string>

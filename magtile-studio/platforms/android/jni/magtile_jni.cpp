@@ -49,6 +49,18 @@
 //   clearLocalData()              -> 单事务原子清空四张表 (二次确认在
 //                                    Kotlin 侧; 清完回到首次启动状态)
 //
+// 订阅状态链路 (绑定 com.magtile.studio.MagTileNative, 直接复用
+// progress/subscription_settings 契约键 —— 与桌面 Qt BillingBackend /
+// FakeBillingClient 同键 (subscription_active / subscription_product_id)
+// 同口径 (缺键/脏值一律按未订阅兜底, 宁可锁), COMMERCIAL_PLAN §2.2;
+// 不接任何真实商店 SDK, 写入口供 Debug 档「模拟已订阅」QA 开关与
+// 后续 StoreBillingClient 购买/恢复回执落地使用):
+//   subscriptionActive()          -> 订阅当前是否有效 (免费层锁读取口径)
+//   subscriptionProductId()       -> 生效中的订阅档位 id (未订阅空串)
+//   setSubscriptionActive(active, productId)
+//                                 -> 写订阅状态 (立即落盘; active=false
+//                                    时清空档位记录, 与桌面同一实现)
+//
 // 说明: 3D 教程视口链路 (场景加载 / 设步 / 相机手势 / GLES3 渲染循环,
 // 绑定 com.magtile.studio.TutorialSceneNative) 在 magtile_scene_jni.cpp。
 // =============================================================
@@ -89,6 +101,7 @@
 #include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/data_privacy.hpp"
 #include "magtile/progress/progress_store.hpp"
+#include "magtile/progress/subscription_settings.hpp"
 #include "magtile/tutorial/tutorial_engine.hpp"
 
 namespace {
@@ -1005,6 +1018,75 @@ JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_clearLocalData(
         return JNI_TRUE;
     } catch (const std::exception& e) {
         MAGTILE_LOGE("clearLocalData 失败: %s", e.what());
+        return JNI_FALSE;
+    }
+}
+
+// =============================================================
+// 订阅状态 (COMMERCIAL_PLAN §2.2, 绑定 com.magtile.studio.MagTileNative)
+// 直接复用 progress/subscription_settings 契约键 —— 与桌面 Qt
+// BillingBackend / FakeBillingClient 同键 (subscription_active /
+// subscription_product_id) 同一份 settings 表语义, 存档文件跨端互认。
+// 安全口径与桌面一致: 缺键 / 脏值 / 存档不可用一律按「未订阅」兜底
+// (宁可锁, 不放行 —— 守的是付费权益, 与免费层 is_free 缺数据宁可
+// 放行的方向相反)。本层不接任何真实商店 SDK; 写入口当前只服务
+// Debug 档「模拟已订阅」QA 开关, 后续 Google Play Billing 经
+// StoreBillingClient 落地时购买/恢复回执走同一写入口。
+// =============================================================
+
+/// 订阅当前是否有效 (免费层锁的读取口径, 与桌面 DetailPage 锁 /
+/// billing::isContentUnlocked 同一判定源): 存档未打开 / 缺键 /
+/// 脏值一律返回 false (未订阅兜底, 宁可锁)。
+JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_subscriptionActive(
+    JNIEnv* /*env*/, jobject /*thiz*/) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    if (!ctx.store.has_value()) {
+        return JNI_FALSE;
+    }
+    try {
+        return magtile::progress::getSubscriptionActive(*ctx.store) ? JNI_TRUE : JNI_FALSE;
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("subscriptionActive 读取失败: %s", e.what());
+        return JNI_FALSE;  // 读取失败按未订阅兜底 (宁可锁)
+    }
+}
+
+/// 生效中的订阅商品档位 id (如 "sub_yearly", 三端统一档位约定);
+/// 未订阅 / 从未写入 / 存档不可用返回空串。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_subscriptionProductId(
+    JNIEnv* env, jobject /*thiz*/) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    if (!ctx.store.has_value()) {
+        return toJString(env, "");
+    }
+    try {
+        return toJString(env, magtile::progress::getSubscriptionProductId(*ctx.store));
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("subscriptionProductId 读取失败: %s", e.what());
+        return toJString(env, "");
+    }
+}
+
+/// 写订阅状态 (立即落盘, progress::setSubscriptionActive 同一实现:
+/// active=false 时清空档位记录)。成功返回 true; 存档未打开 / 落盘
+/// 失败返回 false —— 调用方不得在 false 时翻转界面解锁状态 (订阅
+/// 权益以落盘为准, 与年龄段"内存态即真相"的温和降级刻意不同)。
+JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_setSubscriptionActive(
+    JNIEnv* env, jobject /*thiz*/, jboolean active, jstring product_id) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    if (!ctx.store.has_value()) {
+        MAGTILE_LOGE("setSubscriptionActive 失败: 进度存档未打开");
+        return JNI_FALSE;
+    }
+    try {
+        magtile::progress::setSubscriptionActive(
+            *ctx.store, active == JNI_TRUE, toUtf8(env, product_id));
+        return JNI_TRUE;
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("setSubscriptionActive 落盘失败: %s", e.what());
         return JNI_FALSE;
     }
 }

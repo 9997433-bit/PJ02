@@ -58,6 +58,12 @@ android {
         }
     }
 
+    buildFeatures {
+        // BuildConfig.DEBUG 门控「模拟已订阅」QA 开关 (MainActivity.
+        // toggleDevBilling, 仅 Debug 档可见; AGP 8 起默认不生成需显式开)
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

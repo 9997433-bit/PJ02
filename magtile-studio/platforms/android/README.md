@@ -16,7 +16,11 @@
 > RecyclerView 模型卡片列表 (缩略图 / 中文名 / 主题 / 难度星 /
 > 片数·步数 / 「需要扩展装」角标)、筛选栏 (难度星级 / 主题 /
 > 「只看免费」 / 「只用核心 9 片」 / 「我能搭的」, 口径与桌面
-> GL/Qt 一致)、分龄 UI 三档 (4-6 超大卡片只留主题筛选 / 7-9
+> GL/Qt 一致)、订阅状态与免费层锁 (解锁 = 免费层或订阅有效,
+> 与桌面 `billing::isContentUnlocked` / DetailPage 锁同口径; 订阅
+> 状态经 `progress/subscription_settings` 契约键与桌面同键落
+> settings 表, Debug 档带「模拟已订阅」QA 开关, 不接真实商店
+> SDK)、分龄 UI 三档 (4-6 超大卡片只留主题筛选 / 7-9
 > 难度+主题+免费 / 10+ 全量筛选, 与桌面 Qt LibraryPage 同一口径,
 > 年龄段与桌面 settings 同键)、磁力片库存录入屏 (片型 +
 > 数量步进器, 对齐桌面 InventoryPage)、进度页「我的作品」与成就墙
@@ -42,7 +46,7 @@ platforms/android/
 ├── README.md                 本文档
 ├── CMakeLists.txt            JNI 共享库构建脚本 (双入口: 仓库根 / Gradle)
 ├── jni/
-│   ├── magtile_jni.cpp       JNI 包装层 (模型库/存档/教程/家长门/隐私 20 个入口, 见下表)
+│   ├── magtile_jni.cpp       JNI 包装层 (模型库/存档/教程/家长门/隐私/订阅 23 个入口, 见下表)
 │   └── magtile_scene_jni.cpp 3D 教程视口 JNI 桥 (场景/相机/渲染循环 8 个入口, 见下表)
 ├── settings.gradle.kts       Gradle 工程入口 (工程根 = 本目录)
 ├── build.gradle.kts          插件版本 (AGP 8.7.3 / Kotlin 2.0.21)
@@ -102,10 +106,24 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 只看家里磁力片库存足够搭建的模型 —— 未登记库存时该开关禁用, 由
 「去登记 ▶」引导进库存录入屏 (片型 + 数量步进器, 长按连加, 支持
 直接输入; 「保存, 看看我能搭什么 ▶」保存后直接勾上筛选), 已登记后
-入口变为「改库存」。点击卡片弹出简介 + 套装说明 + 库存对照 (够搭 /
-还差几片, 「缺什么片?」展开清单), 免费模型带「🧲 开始搭建」大按钮
-直达分步教程页 (非免费为温和订阅提示), 「物理校验」按钮按需加载
-模型并展示 R1~R8 中文校验摘要与教程步骤数。
+入口变为「改库存」。点击卡片弹出简介 + 预计用时「🕒 大约 N 分钟」
+(原生层 `core::estimateBuildMinutes` 与桌面 Qt 详情页同一纯函数档位
+估算, 步数未知时隐藏, 4-6 岁更大字, 与缺片/订阅状态无关照常显示)
++ 套装说明 + 库存对照 (够搭 /
+还差几片, 「缺什么片?」展开清单), 已解锁模型 (免费层或订阅生效,
+`billing::isContentUnlocked` 与桌面同口径) 带「🧲 开始搭建」大按钮
+直达分步教程页; 未订阅的非免费模型只锁这个入口 —— 浏览/校验照常,
+以温和的「🔒 订阅解锁」提示替代 (无价格无催促, 措辞对齐桌面 Qt
+DetailPage 订阅横幅), 订阅生效后提示退场全库直达教程; 「物理校验」
+按钮按需加载模型并展示 R1~R8 中文校验摘要与教程步骤数。
+
+订阅状态持久化与桌面完全同键同口径 (`progress/subscription_settings`
+契约键 `subscription_active` / `subscription_product_id`, 落同一份
+SQLite settings 表, 缺键/脏值一律按未订阅兜底宁可锁); **Debug 构建**
+在家长门后的年龄段对话框带「🧪 模拟订阅: 开/关」QA 开关 (与桌面
+订阅页 `devControlsEnabled` 开发开关同角色, 模拟档位同为年度主推
+`sub_yearly`, 零真实扣费), `BuildConfig.DEBUG` 为编译期常量,
+Release 档不可见亦不可达。当前不接任何真实商店 SDK。
 
 分步教程页 (3D 教程视口 + 文字分步, 措辞对齐桌面 GL/Qt 教程 HUD):
 进度头「第 x/y 步 · 已放 n/m 片」+ 进度条, 页顶为**可交互 3D 教程
@@ -214,7 +232,7 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 | Kotlin 声明 | 说明 |
 | --- | --- |
 | `loadCatalog(catalogPath: String): Int` | 加载 `tile_catalog.json`, 返回形状数量, 失败 -1 |
-| `listModels(dataDir: String): String` | 模型库目录 JSON: `{"inventory_configured":bool,"models":[{id/name/name_en/description/difficulty/total_pieces/step_count/theme/file/bom_known/core9_only/can_build/missing_total/free},...]}`, 失败 `{"error":"..."}`; 卡片元数据外逐模型加载 BOM 判定「只用核心 9 片」(`core::isCoreTile` 共享口径, 目录 tier 优先) 与库存已登记时的「我能搭的」(`can_build` / 共缺几片 `missing_total`); `free` = 免费层判定 (`core::isFreeTierModel`, 目录 tags 含「免费」, 与桌面 CLI/GL/Qt 同口径); 模型文件有问题按 `bom_known=false` 降级, 139 模型后台线程百毫秒完成 |
+| `listModels(dataDir: String): String` | 模型库目录 JSON: `{"inventory_configured":bool,"models":[{id/name/name_en/description/difficulty/total_pieces/step_count/theme/file/bom_known/core9_only/can_build/missing_total/free/estimated_minutes},...]}`, 失败 `{"error":"..."}`; 卡片元数据外逐模型加载 BOM 判定「只用核心 9 片」(`core::isCoreTile` 共享口径, 目录 tier 优先) 与库存已登记时的「我能搭的」(`can_build` / 共缺几片 `missing_total`); `free` = 免费层判定 (`core::isFreeTierModel`, 目录 tags 含「免费」, 与桌面 CLI/GL/Qt 同口径); `estimated_minutes` = 预计用时档位 (§5.4, `core::estimateBuildMinutes` 与桌面 Qt 详情页同一纯函数, 5/10/15/20/30/45 分钟六档, 0 = 步数未知时界面隐藏); 模型文件有问题按 `bom_known=false` 降级, 139 模型后台线程百毫秒完成 |
 | `validateModel(jsonPath: String): String` | 加载模型并跑完整物理校验 (R1~R8), 返回中文摘要 |
 | `getTutorialStepCount(): Int` | 最近一次成功加载模型的教程步骤数, 未加载 -1 |
 
@@ -270,7 +288,32 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 文案口径与桌面 Qt 家长中心一致; 「导出进度 (JSON)」直接导出,
 「清除本地数据」再过一道二次确认 (说清删什么 + 不可恢复 + 引导
 先导出, 「先不清除」为安全默认), 清除成功后年龄段回默认档、
-模型库重拉 (库存回未登记引导态) —— 温和回到首次启动状态。
+订阅状态回未订阅、模型库重拉 (库存回未登记引导态) —— 温和回到
+首次启动状态。
+
+订阅状态链路同样绑定 `com.magtile.studio.MagTileNative`
+(COMMERCIAL_PLAN §2.2: 直接复用 `progress/subscription_settings`
+契约键 —— 与桌面 Qt BillingBackend / FakeBillingClient **同键**
+(`subscription_active` / `subscription_product_id`) **同口径**
+(缺键/脏值/存档不可用一律按未订阅兜底, 宁可锁不放行), 落同一份
+SQLite settings 表, 存档文件跨端互认; 不接任何真实商店 SDK):
+
+| Kotlin 声明 | 说明 |
+| --- | --- |
+| `subscriptionActive(): Boolean` | 订阅当前是否有效 (免费层锁的读取口径, 与桌面 DetailPage 锁 / `billing::isContentUnlocked` 同一判定源): 存档未打开 / 缺键 / 脏值一律 false (未订阅兜底宁可锁 —— 与免费层 `is_free` 缺数据宁可放行的方向相反, 守的是付费权益) |
+| `subscriptionProductId(): String` | 生效中的订阅商品档位 id (如 `sub_yearly`, 三端统一档位约定); 未订阅 / 从未写入 / 存档不可用返回空串 |
+| `setSubscriptionActive(active: Boolean, productId: String): Boolean` | 写订阅状态 (立即落盘, `progress::setSubscriptionActive` 同一实现: `active=false` 时清空档位记录); 成功 true, 存档未打开 / 落盘失败 false —— 调用方不得在 false 时翻转界面解锁状态 (订阅权益以落盘为准, 与年龄段"内存态即真相"的温和降级刻意不同)。当前唯一调用方是 Debug 档「模拟已订阅」QA 开关 |
+
+**后续接真实商店 (Google Play Billing) 的路径**: 界面与免费层锁
+只面向订阅状态读取口径, 不感知商店 SDK —— 接入时在 Kotlin 侧引入
+Play Billing Library (购买流 / 恢复购买 / 回执校验), 购买或恢复
+成功后经 `setSubscriptionActive` 写同一契约键即可, 免费层锁零改动;
+商品 id 沿用三端统一约定 (`sub_monthly` / `sub_yearly` /
+`sub_family_yearly`, `COMMERCIAL_PLAN.md` §3.1), 原生侧对应
+`billing::StoreBillingClient` 骨架 (各商店接法与回执口径文档见
+`include/magtile/billing/store_billing_client.hpp`; 空实现档全部
+Unavailable 绝不误报已订阅)。届时 Debug 档「模拟已订阅」QA 开关
+保持仅 Debug 可见, 与真实购买链路互不干扰。
 
 3D 教程视口链路绑定 `com.magtile.studio.TutorialSceneNative`
 (实现在 `jni/magtile_scene_jni.cpp`; 场景绘制复用
@@ -340,10 +383,10 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 
 `.github/workflows/android.yml` (仓库根) 包含两个任务:
 
-- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 28 个 JNI
+- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 31 个 JNI
   符号齐全 (模型库 4 个 + 进度存档/库存/年龄段/进度页 8 个 +
-  分步教程 3 个 + 家长门 3 个 + 隐私与数据 2 个 + 3D 教程视口
-  8 个) —— 持续保证 `magtile_core` 无平台依赖。
+  分步教程 3 个 + 家长门 3 个 + 隐私与数据 2 个 + 订阅状态 3 个 +
+  3D 教程视口 8 个) —— 持续保证 `magtile_core` 无平台依赖。
 - `assemble-debug`: Gradle 全量打包 debug APK, 校验 APK 内容
   (原生库 / 数据资产 / 缩略图已打包; 缩略图数量落后于模型数量时
   只告警 —— 内容制作期新模型缩略图可能滞后生成, 缺图卡片显示占位)
@@ -373,6 +416,14 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 - 家长门: 年龄段切换与库存录入入口已上锁 (对齐 UI_UX_SPEC.md §9,
   复用 `core::ParentGate` 共享状态机, 15 分钟会话守卫); 后续随
   桌面 M3 推进可选 4 位 PIN 与家长中心完整功能 (订阅/数据管理)。
+- 订阅与计费: 订阅状态读写与免费层锁已对齐桌面 (`progress/
+  subscription_settings` 同键同口径, Debug 档「模拟已订阅」QA
+  开关); 尚未接真实 Google Play Billing SDK —— 接入路径见第三节
+  「后续接真实商店」(Kotlin 侧 Play Billing Library 购买/恢复成功
+  后经 `setSubscriptionActive` 写同一契约键, 免费层锁零改动, 原生
+  侧对应 `billing::StoreBillingClient` 骨架); 家长门后的订阅页
+  (三档档位卡 + 恢复购买, 对齐桌面 Qt SubscriptionPage) 待家长
+  中心落地时一并接入。
 
 ## 相关文档
 
