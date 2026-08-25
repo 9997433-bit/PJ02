@@ -49,7 +49,7 @@ Page {
 
     // ---- 页眉: 大返回键 (>= 48) + 标题 + 统计徽标 ---------------------
     header: Item {
-        height: 72
+        height: Theme.headerHeight
 
         AbstractButton {
             id: backButton
@@ -139,7 +139,10 @@ Page {
                     }
 
                     // -- 难度 --------------------------------------------
+                    // 分组标题统一加组间留白 (Layout.topMargin), 筛选栏
+                    // 不再一整列贴死 —— 分组呼吸感, 儿童一眼找到分区
                     Text {
+                        Layout.topMargin: Theme.spacingSmall
                         text: "难度"
                         font.pixelSize: Theme.fontSmall
                         font.bold: true
@@ -147,7 +150,7 @@ Page {
                     }
                     Flow {
                         Layout.fillWidth: true
-                        spacing: 8
+                        spacing: Theme.spacingSmall
                         FilterChip {
                             text: "全部"
                             checked: studio.libraryFilter.difficulty === 0
@@ -170,6 +173,7 @@ Page {
                     //    内容可及性筛选, 7-9 标准档起就展示 (整栏侧栏
                     //    在 4-6 启蒙档已收起, 无需单独 visible 门控) ----
                     Text {
+                        Layout.topMargin: Theme.spacingSmall
                         text: "内容"
                         font.pixelSize: Theme.fontSmall
                         font.bold: true
@@ -185,6 +189,7 @@ Page {
                     // -- 磁力片 (仅 10+ 进阶模式的全量筛选可见, §2) -------
                     Text {
                         visible: page.bandFull
+                        Layout.topMargin: Theme.spacingSmall
                         text: "磁力片"
                         font.pixelSize: Theme.fontSmall
                         font.bold: true
@@ -233,6 +238,7 @@ Page {
 
                     // -- 主题 --------------------------------------------
                     Text {
+                        Layout.topMargin: Theme.spacingSmall
                         text: "主题"
                         font.pixelSize: Theme.fontSmall
                         font.bold: true
@@ -240,7 +246,7 @@ Page {
                     }
                     Flow {
                         Layout.fillWidth: true
-                        spacing: 8
+                        spacing: Theme.spacingSmall
                         FilterChip {
                             text: "全部"
                             checked: studio.libraryFilter.theme === ""
@@ -262,6 +268,7 @@ Page {
                     // -- 清除筛选 ----------------------------------------
                     FilterChip {
                         Layout.fillWidth: true
+                        Layout.topMargin: Theme.spacingSmall
                         visible: studio.libraryFilter.hasActiveFilters
                         text: "↺ 看全部模型"
                         onClicked: studio.libraryFilter.clearFilters()
@@ -594,10 +601,14 @@ Page {
         }
     }
 
-    // ---- 目录空态 (§5.2: 不出现空白页) ---------------------------------
+    // ---- 目录空态 / 加载失败态 (§5.2: 不出现空白页, 不说 "失败") --------
+    // 目录读取是同步的: modelCount === 0 即 "没读到" (加载中或出错都
+    // 归到这里)。给温和文案 + 重试大按钮 (studio.reload 幂等可重入),
+    // 技术细节 (statusMessage) 以小字给家长看, 儿童侧只见引导不见报错。
     ColumnLayout {
         visible: studio.modelCount === 0
         anchors.centerIn: parent
+        width: Math.min(parent.width - 2 * Theme.spacingLarge, 520)
         spacing: Theme.spacing
         Text {
             Layout.alignment: Qt.AlignHCenter
@@ -613,9 +624,37 @@ Page {
         }
         Text {
             Layout.alignment: Qt.AlignHCenter
-            text: "用 --data-dir 指向仓库的 data 目录就能看到全部模型"
+            Layout.fillWidth: true
+            text: "这次没有找到模型, 别着急 —— 点下面的按钮再叫它们一次"
             font.pixelSize: Theme.fontBody
             color: Theme.textSecondary
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
+            lineHeight: 1.4
+        }
+        BigButton {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: Theme.spacingSmall
+            emoji: "🔄"
+            text: "再试一次"
+            accent: Theme.primary
+            onClicked: {
+                studio.reload()
+                if (studio.modelCount > 0)
+                    page.notify("模型们到齐啦, 开搭吧!")
+            }
+        }
+        // 家长可读的小字诊断 (statusMessage 带具体原因, 儿童侧不放大)
+        Text {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.fillWidth: true
+            Layout.topMargin: Theme.spacingSmall
+            text: studio.statusMessage
+            font.pixelSize: Theme.fontSmall
+            color: Theme.textSecondary
+            opacity: 0.8
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
         }
     }
 }

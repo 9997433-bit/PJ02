@@ -24,7 +24,7 @@ Page {
 
     // ---- 页眉: 大返回键 + 标题 ---------------------------------------
     header: Item {
-        height: 72
+        height: Theme.headerHeight
 
         AbstractButton {
             id: backButton
@@ -222,6 +222,16 @@ Page {
                         font.pixelSize: Theme.fontSmall
                         color: Theme.textSecondary
                         wrapMode: Text.WordWrap
+                    }
+                    // 诊断信息 (成人信息密度): 原首页页脚的数据目录移到
+                    // 这里 —— 儿童界面不露工程路径, 家长排查时仍找得到
+                    Text {
+                        Layout.fillWidth: true
+                        text: "模型库目录: " + studio.dataDirText
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                        opacity: 0.8
+                        elide: Text.ElideMiddle
                     }
                 }
             }

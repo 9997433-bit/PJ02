@@ -50,7 +50,7 @@ Page {
 
     // ---- 页眉: 返回 + 标题 + 收藏 (均 >= 48 触控目标) -------------------
     header: Item {
-        height: 72
+        height: Theme.headerHeight
 
         AbstractButton {
             id: backButton
@@ -127,7 +127,7 @@ Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
             radius: Theme.radiusCard
-            color: "#E6ECF2"   // 与场景清屏色同族, 圆角边不突兀
+            color: Theme.viewportBg   // 与场景清屏色同族, 圆角边不突兀
             border.color: Theme.cardBorder
             border.width: 1
 
@@ -147,7 +147,7 @@ Page {
                 anchors.bottom: parent.bottom
                 anchors.margins: Theme.spacing
                 radius: Theme.radiusButton
-                color: "#CCFFFFFF"
+                color: Theme.overlayLight
                 width: previewHintLabel.implicitWidth + 2 * Theme.spacing
                 height: 40
                 visible: previewViewport.sessionReady

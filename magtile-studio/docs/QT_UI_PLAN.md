@@ -169,6 +169,8 @@ cmake --build build-qt --target magtile_studio_qt -j
 | Onboarding / 库存录入 §10 | 库存录入首启弹窗 + 图形录入 | 库存图形录入 `DONE`；年龄段前置流程 `DONE`（首启温和全屏引导：三档大卡片选完落盘只出现一次, 家长可在设置改档；GL 版年龄段前置 `PLANNED`）；快捷套装预填 `PLANNED` | QT-5 |
 | 订阅页 §11 | 无 | 脚手架 `DONE`（家长门后；免费 30 vs 全库对比实时读目录；温和文案 + 承诺清单；「即将上线」CTA + mailto 占位；首页/家长中心/设置页三入口）；正式订阅页（三卡定价/透明条款/恢复购买/IAP）`PLANNED` | QT-5 |
 
+**商用视觉抛光（2026-08）**：Theme 新增 `headerHeight/spacingSmall/viewportBg/overlayLight/textDim` 令牌收口全部页面的页眉高/视口底色/浮层底/未点亮星色（QML 侧硬编码色值清零，只剩 Theme 单例）；模型库目录空态改温和文案 +「再试一次」重试大按钮（`studio.reload` 幂等，statusMessage 小字给家长看诊断，0 模型不再自称"已就绪"）；筛选栏分组加组间留白；首页页脚不再露数据目录工程路径（诊断移入家长中心「隐私与数据」卡）；减少动效补齐两处降级：教程视口呼吸高亮定格最亮描边且不自驱重绘（`TutorialViewport.reduceMotion`），庆祝页彩带在减少动效下不实例化（此前仅隐藏、28 条动画仍在后台跑）。
+
 ## 6. 风险与对策
 
 | 风险 | 对策 |
