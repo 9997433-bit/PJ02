@@ -49,7 +49,7 @@ MagTile Studio\
 | 取值 | 内容 |
 | --- | --- |
 | `full` (默认) | 完整模型库 (当前 131 模型 + 全部缩略图, 约 7 MiB) |
-| `starter` | 免费层精选 30 模型 (含旗舰球道 `ball_run_tower_01`), 清单 `platforms/windows/packaging/starter_models.txt`, 约 1.4 MiB |
+| `starter` | 免费层 30 模型 (与模型 `免费` 标签集合一致, 全 core-9; 对齐决议见 `docs/FREE_TIER_MANIFEST.md`), 清单 `platforms/windows/packaging/starter_models.txt` |
 | 清单文件路径 | 自定义子集 (每行一个模型 id, 支持 `#` 注释) |
 
 子集模式在安装/打包阶段自动调用 `tools/make_data_subset.py`:
@@ -275,4 +275,6 @@ XML 良构检查。本仓库当前状态即按此流程冒烟通过 (结果登�
       (完整验收项见 `platforms/windows/README.md`)。
 - [ ] 实测 MSI 原地升级 (低版本 → 高版本) 与静默安装 `msiexec /qn`。
 - [ ] 确认发布档位 (full / starter) 与商业策略一致
-      (免费层定义见 `docs/PRODUCT_MASTER_PLAN.md`)。
+      (免费层定义见 `docs/COMMERCIAL_PLAN.md` §2.1, 三端清单对齐
+      见 `docs/FREE_TIER_MANIFEST.md`), 并跑
+      `python3 tools/verify_free_tier.py` 确认 starter 清单未漂移。

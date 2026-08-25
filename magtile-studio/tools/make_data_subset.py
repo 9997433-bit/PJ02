@@ -4,7 +4,8 @@
 用途
 ----
 Windows 安装包 (scripts/package_windows.md) 支持只随包分发模型库的一个
-子集 (如免费层 30 精选模型, 见 docs/PRODUCT_MASTER_PLAN.md)。本脚本把
+子集 (如免费层 30 模型, 见 docs/COMMERCIAL_PLAN.md §2.1 与
+docs/FREE_TIER_MANIFEST.md)。本脚本把
 完整 data/ 目录裁剪成一个自洽的安装布局:
 
     <out-dir>/

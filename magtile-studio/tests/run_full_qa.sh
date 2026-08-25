@@ -15,14 +15,17 @@
 #    6. 模型逻辑质检         (步骤粒度/中文说明/对账/难度区间/BOM)
 #    7. 逐步装配质检         (逐片零差错 P1~P8, 见 docs/MODEL_QUALITY.md)
 #    8. 模型库唯一性         (结构签名两两比对, 拒绝换皮克隆)
-#    9. 片型分层检查         (core-9 覆盖率 + 需要扩展装标签, WARN 不拦截)
-#   10. 教程完整性           (静态走查 + 教程引擎实跑)
-#   11. 物理负例 x N         (不成立的结构必须被拒绝, 错误码必须正确)
-#   12. 物理正例 x N         (预算内的合法结构必须放行)
-#   13. GL 渲染冒烟          (无头渲染 + 截图校验, 无显示环境自动降级)
-#   14. 弱磁严格档全库巡检   (可选: MAGTILE_STRICT_AUDIT=1 时执行,
+#    9. 片型分层检查         (core-9 覆盖率 + 需要扩展装标签, --strict 硬闸门)
+#   10. 免费层清单对齐       (可选: MAGTILE_FREE_TIER_CHECK=1 时执行,
+#       tools/verify_free_tier.py —— 免费标签数=30 + 全 core-9 +
+#       与 starter 打包清单一致, 决议见 docs/FREE_TIER_MANIFEST.md)
+#   11. 教程完整性           (静态走查 + 教程引擎实跑)
+#   12. 物理负例 x N         (不成立的结构必须被拒绝, 错误码必须正确)
+#   13. 物理正例 x N         (预算内的合法结构必须放行)
+#   14. GL 渲染冒烟          (无头渲染 + 截图校验, 无显示环境自动降级)
+#   15. 弱磁严格档全库巡检   (可选: MAGTILE_STRICT_AUDIT=1 时执行,
 #       tools/run_strict_audit.sh —— strict 零警告审计 + 逐步装配质检)
-#   15. L3 实物复核缺口报告   (报告型: 输出 D4+ 未实物复核模型数量,
+#   16. L3 实物复核缺口报告   (报告型: 输出 D4+ 未实物复核模型数量,
 #       tools/list_physical_pending.py —— 仅报告不阻断, 实物复核是
 #       线下人工流程, 规程见 docs/PHYSICAL_REBUILD_CHECKLIST.md)
 #
@@ -30,7 +33,8 @@
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
 # 环境变量:
 #   MAGTILE_CMAKE_ARGS   附加 CMake 配置参数 (如 "-DMAGTILE_BUILD_GL_RENDERER=OFF")
-#   MAGTILE_STRICT_AUDIT=1  启用可选关卡 14 (弱磁严格档全库巡检)
+#   MAGTILE_FREE_TIER_CHECK=1  启用可选关卡 10 (免费层清单对齐核验)
+#   MAGTILE_STRICT_AUDIT=1  启用可选关卡 15 (弱磁严格档全库巡检)
 #   FORCE_COLOR=1        非终端环境 (CI) 强制彩色输出
 #   NO_COLOR=1           禁用彩色输出
 #
@@ -134,7 +138,7 @@ fi
 # ---- 3: CTest 全量回归 ------------------------------------------
 run_stage "CTest 全量回归" ctest --test-dir "$BUILD_DIR" --output-on-failure
 
-# ---- 4~9: 内容质量关卡 (脚本直跑, 与 CTest 注册互为冗余防线) -----
+# ---- 4~11: 内容质量关卡 (脚本直跑, 与 CTest 注册互为冗余防线) ----
 run_stage "模型库全量质检 (>=40 片)" \
     bash "$TESTS_DIR/test_all_models.sh" "$APP" "$ROOT" 40
 
@@ -159,10 +163,24 @@ run_stage "片型分层检查 (core-9, strict)" \
     "$PYTHON" "$ROOT/tools/check_core5_usage.py" "$DATA_DIR/models" \
     --catalog "$DATA_DIR/tile_catalog.json" --strict
 
+# 免费层三端清单对齐 (可选): 免费标签数=30 + 全 core-9 + 与 Windows
+# starter 打包清单集合相等 (对齐决议见 docs/FREE_TIER_MANIFEST.md)。
+# 免费层清单只在选品换血时变化, 日常合入不受它约束, 故默认跳过;
+# 发布打包前置 MAGTILE_FREE_TIER_CHECK=1 作为终防线。
+if [ -n "${MAGTILE_FREE_TIER_CHECK:-}" ]; then
+    run_stage "免费层清单对齐核验" \
+        "$PYTHON" "$ROOT/tools/verify_free_tier.py" \
+        --models-dir "$DATA_DIR/models" \
+        --catalog "$DATA_DIR/tile_catalog.json"
+else
+    skip_stage "免费层清单对齐核验" \
+        "可选关卡, 置 MAGTILE_FREE_TIER_CHECK=1 开启 (tools/verify_free_tier.py)"
+fi
+
 run_stage "教程完整性" \
     bash "$TESTS_DIR/test_tutorial_integrity.sh" "$APP" "$ROOT"
 
-# ---- 10: 物理负例 (每个夹具一个关卡) -----------------------------
+# ---- 12: 物理负例 (每个夹具一个关卡) -----------------------------
 # 期望错误码默认与夹具文件名一致, 少数历史夹具通过下表映射
 # (与 CMakeLists.txt 中的注册列表保持一致)。
 expected_code_for() {
@@ -186,7 +204,7 @@ if [ "$negative_found" -eq 0 ]; then
     skip_stage "物理负例" "tests/test_physics_negative/ 下没有夹具 (可用 tools/generate_test_models.py 生成)"
 fi
 
-# ---- 11: 物理正例 (每个夹具一个关卡) -----------------------------
+# ---- 13: 物理正例 (每个夹具一个关卡) -----------------------------
 positive_found=0
 for fixture in "$TESTS_DIR"/test_physics_positive/*.json; do
     [ -e "$fixture" ] || continue
@@ -199,10 +217,10 @@ if [ "$positive_found" -eq 0 ]; then
     skip_stage "物理正例" "tests/test_physics_positive/ 下没有夹具 (可用 tools/generate_test_models.py 生成)"
 fi
 
-# ---- 12: GL 渲染冒烟 --------------------------------------------
+# ---- 14: GL 渲染冒烟 --------------------------------------------
 run_stage "GL 渲染冒烟" bash "$TESTS_DIR/test_gl_smoke.sh" "$BUILD_DIR"
 
-# ---- 13: 弱磁严格档全库巡检 (可选关卡) ---------------------------
+# ---- 15: 弱磁严格档全库巡检 (可选关卡) ---------------------------
 # strict 档零警告审计 + 逐步装配质检; CTest 关卡已覆盖旗舰模型的
 # strict 回归, 这里是全库 131 模型的完整巡检, 默认关闭以控制
 # 流水线时长, 发布前 / 内容批量合入时置 MAGTILE_STRICT_AUDIT=1 开启。
@@ -214,7 +232,7 @@ else
         "可选关卡, 置 MAGTILE_STRICT_AUDIT=1 开启 (tools/run_strict_audit.sh)"
 fi
 
-# ---- 14: L3 实物复核缺口报告 (报告型, 不阻断) ---------------------
+# ---- 16: L3 实物复核缺口报告 (报告型, 不阻断) ---------------------
 # 软件全绿不替代实物复核: D4+ 模型须按 docs/PHYSICAL_REBUILD_CHECKLIST.md
 # 实搭复核后落盘 content_meta.physical_verified 或旁车验证文件。
 # 本关卡只报告未复核数量供 QA 排产, 默认永不失败 (线下人工进度不卡 CI);

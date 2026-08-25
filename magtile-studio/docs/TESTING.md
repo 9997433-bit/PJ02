@@ -21,15 +21,16 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 6 | 模型逻辑质检 | 步骤粒度 / 中文说明 / 对账 / 难度区间 / BOM |
 | 7 | 逐步装配质检 | 逐片零差错 P1~P8 (见 [MODEL_QUALITY.md](MODEL_QUALITY.md)) |
 | 8 | 模型库唯一性 | 结构签名两两比对, 拒绝换皮克隆 |
-| 9 | 片型分层检查 | core-9 覆盖率 + 需要扩展装标签 (现阶段 WARN 不拦截) |
-| 10 | 教程完整性 | 静态走查 + 教程引擎实跑 |
-| 11 | 物理负例 × N | 不成立的结构必须被拒绝, 且错误码正确 |
-| 12 | 物理正例 × N | 预算内的合法结构必须放行 |
-| 13 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
-| 14 | 弱磁严格档全库巡检 | 可选 (`MAGTILE_STRICT_AUDIT=1`): strict 零警告审计 + 逐步装配质检 |
-| 15 | L3 实物复核缺口报告 | 报告型: 输出 D4+ 未实物复核模型数量, 仅报告不阻断 (见 3.13 节) |
+| 9 | 片型分层检查 | core-9 覆盖率 + 需要扩展装标签 + 免费层 ≥80% 红线 (`--strict` 硬闸门) |
+| 10 | 免费层清单对齐核验 | 可选 (`MAGTILE_FREE_TIER_CHECK=1`): 免费标签数=30 + 全 core-9 + 与 starter 打包清单一致 (见 3.14 节) |
+| 11 | 教程完整性 | 静态走查 + 教程引擎实跑 |
+| 12 | 物理负例 × N | 不成立的结构必须被拒绝, 且错误码正确 |
+| 13 | 物理正例 × N | 预算内的合法结构必须放行 |
+| 14 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
+| 15 | 弱磁严格档全库巡检 | 可选 (`MAGTILE_STRICT_AUDIT=1`): strict 零警告审计 + 逐步装配质检 |
+| 16 | L3 实物复核缺口报告 | 报告型: 输出 D4+ 未实物复核模型数量, 仅报告不阻断 (见 3.13 节) |
 
-环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 14; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
+环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
 
 CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑绿。
 
@@ -284,7 +285,18 @@ python3 tools/list_physical_pending.py data/models --fail-on-pending  # 发布�
 
 全量 QA 中该关卡**只报告未复核数量, 不阻断 CI** (实物复核是线下人工流程, 进度不应卡住代码/内容合入); 发布打包前可用 `--fail-on-pending` 作为终防线。
 
-### 3.14 Qt 界面测试 (`qt_backend_bridges` / `qt_gui_smoke`)
+### 3.14 免费层清单对齐核验 (`tools/verify_free_tier.py`)
+
+免费层在三条分发链路上各有一份"清单": 模型 `tags` 的 `免费` 标签 (运行时事实来源)、Windows starter 打包清单 `platforms/windows/packaging/starter_models.txt` (打包投影)、Android APK (全量打包, 靠标签生效)。本工具固化 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) 的对齐决议: **免费标签数恰好 30 + 免费层全部只用核心 9 片型 + starter 清单与标签集合相等**, 任一失败退出码 1, 不一致时逐条列出两侧差异。
+
+```bash
+python3 tools/verify_free_tier.py                # 仓库默认路径, 日常裸跑
+MAGTILE_FREE_TIER_CHECK=1 tests/run_full_qa.sh   # 随全量 QA (可选关卡 10)
+```
+
+全量 QA 中默认跳过 (免费层清单只在选品换血时变化, 日常内容合入不受它约束), **发布打包前必须开启**; 片型红线本身另有常开关卡 9 兜底 (`check_core5_usage.py --strict`)。换血流程见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2.5.1。
+
+### 3.15 Qt 界面测试 (`qt_backend_bridges` / `qt_gui_smoke`)
 
 仅在 `-DMAGTILE_BUILD_QT=ON` 时注册 (默认 OFF 的构建完全不受影响), 两者都**无需显示环境**:
 
