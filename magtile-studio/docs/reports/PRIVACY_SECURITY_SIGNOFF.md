@@ -61,7 +61,7 @@
 | DC4 | 「年龄段模式」仅本地 UI 开关 (P0) | 切换年龄段后直读 `progress.db` settings: 仅本地键值, 无标识符关联; 断网状态切换无任何网络请求 (§3 说明块) | ☐ | ☐ | ☐ | |
 | DC5 | 卸载后无残留 (P1) | 卸载 → 检查应用私有目录与注册表/偏好域: 平台允许范围内无残留 (政策 §6「卸载同样删除」承诺; §11.2 本地数据检查) | ☐ | ☐ | ☐ | |
 | DC6 | 商店表单三方一致 (P0) | 商店「数据安全」/隐私申报 ↔ PRIVACY_POLICY_DRAFT §2 数据表 ↔ 实测行为逐字段核对 (§12 审核一致性): Play Data Safety / Microsoft Store 隐私声明; macOS 直销档无商店表单, 核对官网隐私页 | ☐ | ☐ | ☐ | |
-| DC7 | Android 备份口径已决策 (P0, 仅 And) | §5.1 缺口: 当前 manifest `allowBackup="true"` 且无备份规则白名单 —— 出包前须落决策 (关闭云备份或补 `dataExtractionRules` 仅含 `progress.db`) 并与商店申报一致; 见 §8 缺口预登记 | n-a | n-a | ☐ | |
+| DC7 | Android 备份白名单仅 `progress.db` (P0, 仅 And) | 决策已落地 (§5.1 `DONE`): 保留 `allowBackup="true"` + 双份白名单规则 (API 31+ `dataExtractionRules` 云备份/设备迁移两节、API 26~30 `fullBackupContent`, 均仅含 `progress.db`, 见 `platforms/android/res/xml/`)。执行人核验: ① 候选产物合并后 manifest 两属性在位 (`aapt2 dump xmltree --file AndroidManifest.xml`); ② 真机 `adb shell bmgr backupnow` + 恢复/换机迁移实测仅还原 `progress.db` (解包数据资产与导出 JSON 不在备份内); ③ Play Data Safety 申报与「仅本地进度数据参与系统备份」口径一致 | n-a | n-a | ☐ | |
 
 ## 3. PG 家长门
 
@@ -144,7 +144,7 @@ A/B/C, 本表只记结论。macOS V1 无商店计费, 除 BL6 外记 n-a。
 
 | 缺口 | 影响行 | 跟踪处 / 处理指引 |
 | --- | --- | --- |
-| Android `allowBackup="true"` 无备份规则白名单 (SECURITY_AND_PRIVACY §5.1 `PLANNED`) | DC7 | 出包前决策关闭或补 `dataExtractionRules`; 决策结果同步商店 Data Safety 申报 |
+| ~~Android `allowBackup="true"` 无备份规则白名单~~ **已解决** (SECURITY_AND_PRIVACY §5.1 `DONE`): manifest 已挂 `dataExtractionRules` + `fullBackupContent` 双白名单, 仅含 `progress.db` | DC7 | 缺口关闭, DC7 改为对产物核验白名单生效 + Data Safety 申报一致; 无需再做决策 |
 | 家长门 PIN 哈希未落地 (§5.3/§6.2 `PLANNED`) | PG 组 | V1 按算术题门口径验收; PIN 上线后本表 PG 组补验一次 |
 | 隐私政策法务定稿未完成 (清单 V2, 依赖 L4 运营主体) | DC6 | 商店表单一致性核对以**定稿文本**为准; 草稿阶段先按现文本预核 |
 | Android 订阅页 UI (档位卡 + 恢复购买按钮) 随家长中心落地 (清单 B2 剩余缺口) | BL 组 And 列 | UI 在位前 BL1~BL5 的 Android 列无法执行, 记阻塞不记通过 |

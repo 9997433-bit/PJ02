@@ -5,8 +5,9 @@ package com.magtile.studio
  *
  * 直接复用核心库 progress::ProgressStore —— 与桌面 CLI `inventory set`
  * / GL / Qt 录入界面同一份 SQLite schema (tile_inventory 表), 存档文件
- * 互相兼容。数据库放在 filesDir/progress.db (应用私有目录, 随
- * allowBackup 自动备份)。
+ * 互相兼容。数据库放在 filesDir/progress.db (应用私有目录, 是备份
+ * 白名单唯一放行的文件 —— res/xml/data_extraction_rules.xml 与
+ * backup_rules.xml 仅含 progress.db, SECURITY_AND_PRIVACY.md §5.1)。
  *
  * 放在独立 object 上 (而非 MainActivity): MainActivity /
  * InventoryActivity / ProgressActivity / TutorialActivity 都要调用,

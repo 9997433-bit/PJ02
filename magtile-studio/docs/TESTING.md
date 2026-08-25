@@ -37,8 +37,9 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 19 | L2 抗扰动巡检 | 可选 (`MAGTILE_L2_JITTER=1`): D4+ 模型逐个 `validate --profile strict --jitter 50` (验证金字塔 L2 门禁挂钩; CLI 未实装 `--jitter` 前为占位通过, 见 3.17 节) |
 | 20 | 内容系列归类机检 | 可选 (`MAGTILE_SERIES_CHECK=1`): 每模型 `content_meta.series` (13 主题词值) 或 `matrix_bucket` (矩阵外桶) 恰好其一, 词值受控于 `data/content_series_map.json` (见 3.19 节) |
 | 21 | 难度配额 (报告/守卫) | 常开报告型: D1~D5 分布 + D3 冻结判定, 冻结只报告不阻断; `MAGTILE_DIFFICULTY_QUOTA=1` 升级 strict 守卫档, 冻结生效 (D1 < 20 或 D5 < 6) 即红 (见 3.19 节; D1/D5 补齐前 strict 档即红灯, 属预期告警) |
+| 22 | 矩阵进度快照刷新 | 可选 (`MAGTILE_MATRIX_REPORT=1`): `tools/update_model_catalog.py --matrix-report` 重建目录后刷新 [reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md) 快照, 刷新产物随内容批一起提交 (见 3.19 节) |
 
-环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `MAGTILE_TUTORIAL_BENCH=1` 开启可选关卡 17; `MAGTILE_L2_JITTER=1` 开启可选关卡 19; `MAGTILE_SERIES_CHECK=1` 开启可选关卡 20; `MAGTILE_DIFFICULTY_QUOTA=1` 将常开关卡 21 升级为 strict 守卫档; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
+环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `MAGTILE_TUTORIAL_BENCH=1` 开启可选关卡 17; `MAGTILE_L2_JITTER=1` 开启可选关卡 19; `MAGTILE_SERIES_CHECK=1` 开启可选关卡 20; `MAGTILE_DIFFICULTY_QUOTA=1` 将常开关卡 21 升级为 strict 守卫档; `MAGTILE_MATRIX_REPORT=1` 开启可选关卡 22; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
 
 CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑绿。
 
@@ -453,10 +454,11 @@ python3 tools/check_difficulty_quota.py --batch <目录或id清单> \
 python3 tests/test_difficulty_quota.py .                      # 闸门自身的回归测试
 ```
 
-**矩阵进度快照** —— `tools/update_model_catalog.py` 在重建目录后按 `content_meta.series` × `difficulty` 输出 13 主题 × D1–D5 矩阵进度表 (对照 CONTENT_STRATEGY.md §2.2 的 520 终态目标, 矩阵外模型按 `matrix_bucket` 聚桶单列、不摊薄矩阵内数字), `--matrix-report` 另存 markdown 快照 (缺省落点 [reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md), 超编格加粗) —— 缺口审计由此从人工逐模型归类变成可复跑的常规指标, 后续审计只需复核增量。
+**矩阵进度快照** —— `tools/update_model_catalog.py` 在重建目录后按 `content_meta.series` × `difficulty` 输出 13 主题 × D1–D5 矩阵进度表 (对照 CONTENT_STRATEGY.md §2.2 的 520 终态目标, 矩阵外模型按 `matrix_bucket` 聚桶单列、不摊薄矩阵内数字), `--matrix-report` 另存 markdown 快照 (缺省落点 [reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md), 超编格加粗) —— 缺口审计由此从人工逐模型归类变成可复跑的常规指标, 后续审计只需复核增量。QA 可选关卡 22 (`MAGTILE_MATRIX_REPORT=1`) 把这一步挂进流水线: 目录重建后自动刷新快照, 进度表随模型库同步而不靠人记得重跑; 产物是仓库内文件, 刷新后随内容批一起提交 (日常 QA 不应改动工作区, 故默认跳过)。
 
 ```bash
 python3 tools/update_model_catalog.py --matrix-report   # 目录重建 + 矩阵进度快照刷新
+MAGTILE_MATRIX_REPORT=1 tests/run_full_qa.sh            # 随全量 QA (可选关卡 22)
 ```
 
 **技法标注守卫脚手架** —— 脚本 `tools/check_technique_tags.py`。报告缺失 `content_meta.technique_tags.primary` 的模型 (主技法, [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §1.2 每模型恰好 1 个; 缺标注的模型不参与唯一性检查的主题/技法拥挤度统计)。默认 **warn-only** 恒退出 0 (当前全库 250 个均未标注, 回填另行推进 —— 本工具只查不填), `--strict` 有缺失即退出 1; 与 series 归类机检同一"先回填后 strict 闸门"次序, 回填落地前不接入 QA/发布门禁, T01–T18 词值受控机检届时一并挂闸。
@@ -492,7 +494,7 @@ python3 tools/check_technique_tags.py --strict       # 回填完成后的硬闸�
 
 ```bash
 tools/run_release_gate.sh              # 快检档: 三道发布专项 (默认构建目录 build)
-tools/run_release_gate.sh --full       # 发布档: 21 关全量 QA + 发布专项一次跑全
+tools/run_release_gate.sh --full       # 发布档: 22 关全量 QA + 发布专项一次跑全
                                        #   = MAGTILE_FREE_TIER_CHECK=1 MAGTILE_STRICT_AUDIT=1
                                        #     MAGTILE_SERIES_CHECK=1 MAGTILE_DIFFICULTY_QUOTA=1 tests/run_full_qa.sh
                                        #   (难度配额 strict 档在 D3 冻结生效期间保持红灯, 见 3.19 节)
