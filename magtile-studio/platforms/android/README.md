@@ -110,6 +110,9 @@ android {
 
 ## 相关文档
 
-仓库暂无 `docs/PLATFORM_ARCHITECTURE.md`, 平台拆分约定先记录于各平台
-README (本文档与 `platforms/windows/README.md`); 总体架构与分层原则见
-`docs/ARCHITECTURE.md`, 物理规则见 `docs/PHYSICS_RULES.md`。
+- `docs/PLATFORM_ARCHITECTURE.md` — 跨平台技术架构总纲 (共享 C++ 核心 +
+  平台外壳、渲染后端矩阵、CI 矩阵); 本目录即其第 8 节规划的
+  `platforms/android/` 落地脚手架。
+- `docs/ARCHITECTURE.md` — 核心分层与模块职责。
+- `docs/PHYSICS_RULES.md` — validateModel 执行的 R1~R8 物理规则。
+- `platforms/windows/README.md` — Windows 端构建与安装包规划。

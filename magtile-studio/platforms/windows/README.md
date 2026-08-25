@@ -65,6 +65,9 @@ platforms/windows/
 
 ## 相关文档
 
-仓库暂无 `docs/PLATFORM_ARCHITECTURE.md`, 平台拆分约定先记录于各平台
-README (本文档与 `platforms/android/README.md`); 总体架构见
-`docs/ARCHITECTURE.md`, 发布节奏见 `docs/ROADMAP.md`。
+- `docs/PLATFORM_ARCHITECTURE.md` — 跨平台技术架构总纲 (含发布流水线
+  与各平台打包策略); 本目录即其第 8 节规划的 `platforms/windows/`
+  落地脚手架。
+- `docs/ARCHITECTURE.md` — 核心分层与模块职责。
+- `docs/ROADMAP.md` — 发布节奏。
+- `platforms/android/README.md` — Android 端 NDK 构建与 JNI 接入。
