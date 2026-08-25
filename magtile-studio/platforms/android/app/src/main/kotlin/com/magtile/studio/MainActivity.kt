@@ -46,7 +46,7 @@ import java.util.concurrent.Executors
  * 与桌面 GL/Qt/CLI 同键):
  *   4-6 启蒙  超大卡片 (大缩略图竖排 + 少文字), 只留主题筛选;
  *   7-9 标准  标准卡片, 难度 + 主题 + 只看免费 (库存录入入口保留);
- *   10+ 进阶  全量筛选 (难度/主题/免费/核心 9 片/我能搭的)。
+ *   10+ 进阶  紧凑卡片 + 全量筛选 (难度/主题/免费/核心 9 片/我能搭的)。
  * 被收起的筛选维度同步清零 (applyAgeMode) —— 看不见的筛选绝不能
  * 悄悄过滤列表 (与 Qt collapseHiddenFilters 同一策略)。标题栏入口
  * 可切换档位, 立即生效并经 setAgeModeId 落盘。
@@ -92,6 +92,7 @@ class MainActivity : Activity() {
     private val backgroundExecutor = Executors.newSingleThreadExecutor()
     private lateinit var statusView: TextView
     private lateinit var emptyHint: TextView
+    private lateinit var libraryEmptyCard: View
     private lateinit var filterBar: View
     private lateinit var difficultySpinner: Spinner
     private lateinit var themeSpinner: Spinner
@@ -117,6 +118,10 @@ class MainActivity : Activity() {
     /** 进度页收藏行带回的待弹详情模型 id (列表加载完成后补弹)。 */
     private var pendingDetailModelId: String? = null
 
+    /** 减少动效 (§4.7, 系统动画设置联动): 列表点按反馈退为静态
+     *  按压色、列表切换不做条目动画 (见 MotionPrefs)。 */
+    private var reduceMotion = false
+
     // ---- 年龄段模式 (UI_UX_SPEC.md §2, 与桌面 settings 同键) ----------
     /** 当前年龄段模式标识 (启动时经 JNI 从进度存档读取, 默认 7-9 标准档)。 */
     private var ageModeId = AGE_7_9
@@ -141,8 +146,11 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        reduceMotion = MotionPrefs.reduceMotion(this)
+
         statusView = findViewById(R.id.status)
         emptyHint = findViewById(R.id.empty_hint)
+        libraryEmptyCard = findViewById(R.id.library_empty_card)
         filterBar = findViewById(R.id.filter_bar)
         difficultySpinner = findViewById(R.id.filter_difficulty)
         themeSpinner = findViewById(R.id.filter_theme)
@@ -169,9 +177,18 @@ class MainActivity : Activity() {
         }
 
         adapter = ModelCardAdapter(::showModelDialog)
+        adapter.reduceMotion = reduceMotion
         findViewById<RecyclerView>(R.id.model_list).apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = this@MainActivity.adapter
+            // 减少动效: 列表全量替换/切档时不做条目淡入淡出 (§4.7)
+            if (reduceMotion) itemAnimator = null
+        }
+
+        // 加载失败 / 空目录的温和空态「再试一次」(与桌面 Qt
+        // studio.reload 同角色, 幂等可反复点)
+        findViewById<View>(R.id.library_retry).setOnClickListener {
+            retryLoadLibrary()
         }
 
         setUpFilterBar()
@@ -212,6 +229,15 @@ class MainActivity : Activity() {
                     allCards = library.cards
                     inventoryConfigured = library.inventoryConfigured
                     subscriptionActive = storedSubscription
+                    // 目录打开但一个模型都没有 (数据资产异常): 0 个模型
+                    // 不自称"已就绪", 走同一张温和空态卡 + 「再试一次」
+                    // (与桌面 Qt 模型库空态同口径)
+                    if (allCards.isEmpty()) {
+                        statusView.text = getString(R.string.library_empty_catalog)
+                        libraryEmptyCard.visibility = View.VISIBLE
+                        return@runOnUiThread
+                    }
+                    libraryEmptyCard.visibility = View.GONE
                     populateThemeSpinner(library.cards)
                     updateInventoryUi()
                     ageModeId = storedAgeMode
@@ -225,13 +251,24 @@ class MainActivity : Activity() {
                     }
                 }
             } catch (t: Throwable) {
+                // 技术细节 (路径/异常) 只进 logcat 给家长/开发者;
+                // 儿童侧是温和文案 + 「再试一次」大按钮 (§4.3 零挫败)
                 Log.e(TAG, "模型库加载失败", t)
                 runOnUiThread {
-                    statusView.text =
-                        getString(R.string.library_load_failed, t.message ?: t.toString())
+                    statusView.text = getString(R.string.library_soft_fail_status)
+                    libraryEmptyCard.visibility = View.VISIBLE
                 }
             }
         }
+    }
+
+    /** 空态「再试一次」: 收起空态卡回到加载中, 重跑整条启动链路
+     *  (解包/开档/建目录均幂等, 反复点无副作用 —— 与桌面 Qt
+     *  studio.reload 同角色)。 */
+    private fun retryLoadLibrary() {
+        libraryEmptyCard.visibility = View.GONE
+        statusView.text = getString(R.string.library_loading)
+        loadLibraryAsync()
     }
 
     /**
@@ -378,7 +415,13 @@ class MainActivity : Activity() {
             buildableFilter = false
             buildableCheckBox.isChecked = false
         }
-        adapter.junior = bandJunior
+        // 分龄卡片密度三档 (与 Qt LibraryPage 2 列超大 / 3~4 列标准 /
+        // 4~5 列紧凑同一密度梯度): 4-6 超大 / 7-9 标准 / 10+ 紧凑
+        adapter.density = when {
+            bandJunior -> ModelCardAdapter.DENSITY_JUNIOR
+            bandFull -> ModelCardAdapter.DENSITY_COMPACT
+            else -> ModelCardAdapter.DENSITY_STANDARD
+        }
     }
 
     /** 三档单选对话框 (展示名对齐 core::displayNameZh); 家长门通过

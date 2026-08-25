@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 列表行按压前景 (减动效档, §4.7): 替换 selectableItemBackground
+     水波纹, 按下时静态主色蒙层, 抬手即消 (不扩散不闪动) -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/magtile_press_overlay" />
+            <corners android:radius="@dimen/radius_card" />
+        </shape>
+    </item>
+    <item android:drawable="@android:color/transparent" />
+</selector>

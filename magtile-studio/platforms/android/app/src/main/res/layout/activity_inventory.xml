@@ -21,13 +21,13 @@
         <TextView
             android:id="@+id/inventory_back"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/touch_target"
             android:gravity="center"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:text="@string/inventory_back"
-            android:textColor="#FFFFFFFF"
-            android:textSize="16sp"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="@dimen/text_section"
             android:textStyle="bold" />
 
         <TextView
@@ -35,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/inventory_title"
-            android:textColor="#FFFFFFFF"
-            android:textSize="19sp"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="@dimen/text_title"
             android:textStyle="bold" />
 
         <!-- 合计角标 (随录入实时刷新) -->
@@ -44,8 +44,8 @@
             android:id="@+id/inventory_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFFFF"
-            android:textSize="13sp"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="@dimen/text_secondary"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -58,7 +58,7 @@
         android:paddingBottom="4dp"
         android:text="@string/inventory_hint"
         android:textColor="@color/magtile_text_secondary"
-        android:textSize="13sp" />
+        android:textSize="@dimen/text_secondary" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/inventory_group_core"
                 android:textColor="@color/magtile_text_primary"
-                android:textSize="15sp"
+                android:textSize="@dimen/text_section"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -97,7 +97,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/inventory_group_expansion"
                 android:textColor="@color/magtile_text_primary"
-                android:textSize="15sp"
+                android:textSize="@dimen/text_section"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:text="@string/inventory_zero_note"
             android:textColor="@color/magtile_text_secondary"
-            android:textSize="11sp" />
+            android:textSize="@dimen/text_caption" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -136,21 +136,21 @@
             <Button
                 android:id="@+id/inventory_save"
                 android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="@dimen/spacing_small"
                 android:layout_weight="1"
                 android:text="@string/inventory_save"
-                android:textSize="15sp" />
+                android:textSize="@dimen/text_body" />
 
             <Button
                 android:id="@+id/inventory_save_match"
                 android:layout_width="0dp"
-                android:layout_height="52dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_weight="1.4"
                 android:backgroundTint="@color/magtile_primary"
                 android:text="@string/inventory_save_match"
-                android:textColor="#FFFFFFFF"
-                android:textSize="15sp" />
+                android:textColor="@color/magtile_on_primary"
+                android:textSize="@dimen/text_body" />
         </LinearLayout>
     </LinearLayout>
 

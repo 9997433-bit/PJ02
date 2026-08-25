@@ -39,7 +39,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/magtile_text_primary"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_body"
             android:textStyle="bold" />
 
         <!-- 进度条: 进行中行显示 (max = 总步数, progress = 当前步) -->
@@ -61,7 +61,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/magtile_text_secondary"
-            android:textSize="13sp"
+            android:textSize="@dimen/text_secondary"
             android:visibility="gone" />
     </LinearLayout>
 
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:textSize="14sp"
+        android:textSize="@dimen/text_body"
         android:textStyle="bold"
         android:visibility="gone" />
 

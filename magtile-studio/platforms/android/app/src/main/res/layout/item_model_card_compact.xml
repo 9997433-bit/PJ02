@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 模型卡片: 缩略图 + 中文名 + 英文名/主题 + 扩展装角标 + 难度星 + 片数·步数 -->
+<!-- 10+ 进阶模式紧凑卡片 (UI_UX_SPEC.md §2, 口径与桌面 Qt LibraryPage
+     bandFull 更高列密度一致): 缩略图/内边距/行距收紧, 一屏可见更多
+     模型 (信息项与标准卡片完全相同, 只降密度不减内容)。
+     视图 id 与标准卡片 item_model_card 一一对应, 共用同一个 ViewHolder。 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="6dp"
     android:background="@drawable/bg_model_card"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:padding="@dimen/spacing_small">
 
-    <!-- 320x240 缩略图 (4:3), assets 流式加载; 无缩略图时显示占位底色 -->
+    <!-- 320x240 缩略图 (4:3) 紧凑尺寸; 无缩略图时显示占位底色 -->
     <ImageView
         android:id="@+id/model_thumbnail"
-        android:layout_width="96dp"
-        android:layout_height="72dp"
+        android:layout_width="76dp"
+        android:layout_height="57dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginEnd="14dp"
+        android:layout_marginEnd="12dp"
         android:background="@drawable/bg_thumbnail_placeholder"
         android:contentDescription="@string/thumbnail_description"
         android:scaleType="centerCrop" />
@@ -31,28 +34,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/magtile_text_primary"
-            android:textSize="@dimen/text_section"
+            android:textSize="@dimen/text_body"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/model_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:textColor="@color/magtile_text_secondary"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_caption" />
 
         <!-- 「需要扩展装」琥珀角标: 只在 BOM 已知且用到扩展片型时显示 -->
         <TextView
             android:id="@+id/model_expansion_badge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="3dp"
             android:background="@drawable/bg_badge_expansion"
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             android:text="@string/card_needs_expansion"
             android:textColor="@color/magtile_badge_expansion_text"
             android:textSize="@dimen/text_caption"
@@ -71,15 +74,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/magtile_star"
-            android:textSize="14sp" />
+            android:textSize="@dimen/text_secondary" />
 
         <TextView
             android:id="@+id/model_pieces"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             android:textColor="@color/magtile_text_secondary"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_caption" />
     </LinearLayout>
 
 </LinearLayout>

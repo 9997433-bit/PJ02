@@ -26,13 +26,13 @@
         <TextView
             android:id="@+id/tutorial_back"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/touch_target"
             android:gravity="center"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:text="@string/back_button"
-            android:textColor="#FFFFFFFF"
-            android:textSize="16sp"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="@dimen/text_section"
             android:textStyle="bold" />
 
         <!-- 模型中文名 (Intent 附带, 数据加载前即可显示) -->
@@ -44,8 +44,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/tutorial_title_fallback"
-            android:textColor="#FFFFFFFF"
-            android:textSize="19sp"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="@dimen/text_title"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -60,7 +60,7 @@
         android:paddingBottom="4dp"
         android:text="@string/tutorial_loading"
         android:textColor="@color/magtile_text_secondary"
-        android:textSize="13sp" />
+        android:textSize="@dimen/text_secondary" />
 
     <!-- 主体列 (数据加载完成前隐藏, 避免空壳闪烁) -->
     <LinearLayout
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/magtile_text_primary"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_section"
                 android:textStyle="bold" />
 
             <ProgressBar
@@ -109,7 +109,7 @@
                 android:paddingBottom="10dp"
                 android:text="@string/tutorial_finished_banner"
                 android:textColor="@color/magtile_success"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_body"
                 android:textStyle="bold"
                 android:visibility="gone" />
         </LinearLayout>
@@ -135,7 +135,7 @@
             android:paddingBottom="2dp"
             android:text="@string/tutorial_scene_hint"
             android:textColor="@color/magtile_text_secondary"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_secondary" />
 
         <!-- 步骤列表 (当前步高亮 + smoothScroll 定位) -->
         <androidx.recyclerview.widget.RecyclerView
@@ -162,21 +162,21 @@
             <Button
                 android:id="@+id/tutorial_prev_button"
                 android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="@dimen/spacing_small"
                 android:layout_weight="1"
                 android:text="@string/tutorial_prev"
-                android:textSize="15sp" />
+                android:textSize="@dimen/text_body" />
 
             <Button
                 android:id="@+id/tutorial_next_button"
                 android:layout_width="0dp"
-                android:layout_height="52dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_weight="1.4"
                 android:backgroundTint="@color/magtile_primary"
                 android:text="@string/tutorial_next"
-                android:textColor="#FFFFFFFF"
-                android:textSize="15sp" />
+                android:textColor="@color/magtile_on_primary"
+                android:textSize="@dimen/text_body" />
         </LinearLayout>
     </LinearLayout>
 

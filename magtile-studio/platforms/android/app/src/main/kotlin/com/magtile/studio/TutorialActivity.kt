@@ -62,9 +62,15 @@ class TutorialActivity : Activity() {
     /** 上次落盘后的计时起点 (elapsedRealtime 毫秒), 时长按增量累计。 */
     private var playClockStartMs = 0L
 
+    /** 减少动效 (§4.7, 系统动画设置联动): 步骤列表定位改瞬时、
+     *  3D 视口呼吸描边定格最亮帧 (见 MotionPrefs / TutorialSceneView)。 */
+    private var reduceMotion = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
+
+        reduceMotion = MotionPrefs.reduceMotion(this)
 
         modelId = intent.getStringExtra(EXTRA_MODEL_ID).orEmpty()
         intent.getStringExtra(EXTRA_MODEL_NAME)?.takeIf { it.isNotBlank() }?.let {
@@ -85,8 +91,11 @@ class TutorialActivity : Activity() {
         stepList = findViewById<RecyclerView>(R.id.tutorial_steps).apply {
             layoutManager = LinearLayoutManager(this@TutorialActivity)
             adapter = this@TutorialActivity.adapter
+            // 减少动效: 步骤三态切换不做条目动画 (§4.7)
+            if (reduceMotion) itemAnimator = null
         }
         sceneView = findViewById(R.id.tutorial_scene)
+        sceneView.reduceMotion = reduceMotion
 
         loadStepsAsync()
     }
@@ -147,13 +156,14 @@ class TutorialActivity : Activity() {
                 runOnUiThread {
                     if (isFinishing || isDestroyed) return@runOnUiThread
                     // 模型已下架 (不在模型库目录中, 如进度页存档里的旧作品):
-                    // 温和提示先去挑别的, 不出现「失败」字样 (P3 零挫败;
-                    // 标记文本与 magtile_jni.cpp getTutorialSteps 报错一致)
+                    // 温和提示先去挑别的; 其余异常同样只给温和文案 ——
+                    // 不出现「失败」字样、不给儿童看技术路径 (P3 零挫败,
+                    // 诊断细节只在上面的 logcat; 标记文本与
+                    // magtile_jni.cpp getTutorialSteps 报错一致)
                     findViewById<TextView>(R.id.tutorial_status).text =
                         if (t.message?.contains("不在模型库目录中") == true)
                             getString(R.string.tutorial_model_unavailable)
-                        else getString(
-                            R.string.tutorial_load_failed, t.message ?: t.toString())
+                        else getString(R.string.tutorial_load_failed)
                 }
             }
         }
@@ -174,6 +184,7 @@ class TutorialActivity : Activity() {
 
         findViewById<TextView>(R.id.tutorial_status).visibility = View.GONE
         findViewById<View>(R.id.tutorial_body).visibility = View.VISIBLE
+        sceneView.notifySceneChanged()  // 减动效的脏帧模式下补首帧
         updateStepUi()
         // 会话开始即建档 (与桌面 TutorialViewport 同策略): 模型库 /
         // 进度页立刻显示 "进行中" (current_step=0 的新档不进进行中列表)
@@ -192,6 +203,7 @@ class TutorialActivity : Activity() {
         // 3D 场景同步到当前展示步 (完成态停在末步全貌; 原生锁内
         // 重建片快照, 亚毫秒级, 可在主线程直接调)
         TutorialSceneNative.setStep((doneCount + 1).coerceAtMost(steps.size))
+        sceneView.notifySceneChanged()  // 减动效的脏帧模式下补一帧
         updateStepUi()
         saveProgressAsync()
     }
@@ -221,8 +233,11 @@ class TutorialActivity : Activity() {
             else R.string.tutorial_next)
 
         if (stepCount > 0) {
-            // 当前步行定位 (完成态停在末步行, 供「上一步」回看)
-            stepList.smoothScrollToPosition(doneCount.coerceAtMost(stepCount - 1))
+            // 当前步行定位 (完成态停在末步行, 供「上一步」回看);
+            // 减少动效时瞬时定位, 不做滚动动画 (§4.7)
+            val target = doneCount.coerceAtMost(stepCount - 1)
+            if (reduceMotion) stepList.scrollToPosition(target)
+            else stepList.smoothScrollToPosition(target)
         }
     }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 模型卡片背景 (减动效档, §4.7): 与 bg_model_card 同一张白底圆角卡,
+     点按反馈由水波纹降级为静态的主色浅底按压态 (不扩散不闪动,
+     反馈信息不减 —— 与桌面 Qt 减少动效口径一致) -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/magtile_primary_soft" />
+            <corners android:radius="@dimen/radius_card" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/magtile_card" />
+            <corners android:radius="@dimen/radius_card" />
+        </shape>
+    </item>
+</selector>

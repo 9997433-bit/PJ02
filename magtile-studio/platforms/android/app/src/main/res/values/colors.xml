@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 颜色令牌: 与桌面 Qt Theme.qml (docs/UI_UX_SPEC.md §1.2 的唯一
+     QML 落点) 逐项对齐 —— 蓝/琥珀/绿色盲安全组合 (§4.7), 状态从不
+     单靠颜色表达; Android 侧只在此文件定值, 布局/代码一律引用。 -->
 <resources>
-    <!-- 品牌色: 与桌面 Qt 界面的磁力片青蓝主色保持一致的暖青系 -->
-    <color name="magtile_primary">#FF2E86AB</color>
-    <color name="magtile_primary_dark">#FF1B5E7F</color>
-    <color name="magtile_background">#FFF4F7F9</color>
+    <!-- 磁力蓝主色 (= Qt Theme.primary) 与按下加深态 (= primaryPressed) -->
+    <color name="magtile_primary">#FF2E7DD1</color>
+    <color name="magtile_primary_dark">#FF1F5FA8</color>
+    <!-- 主色底上的文字 (页眉/主按钮), 替代散落的硬编码白 -->
+    <color name="magtile_on_primary">#FFFFFFFF</color>
+    <!-- 页面底色 (= Qt surfaceAlt 低饱和蓝灰) 与卡片面 (= surface) -->
+    <color name="magtile_background">#FFF2F6FB</color>
     <color name="magtile_card">#FFFFFFFF</color>
-    <color name="magtile_text_primary">#FF1F2A33</color>
-    <color name="magtile_text_secondary">#FF6B7B87</color>
-    <color name="magtile_star">#FFF2A93B</color>
-    <color name="magtile_icon_bg">#FF2E86AB</color>
-    <!-- 缩略图占位底色 (未生成/解码中) -->
-    <color name="magtile_thumb_placeholder">#FFE3EAEF</color>
-    <!-- 「需要扩展装」琥珀角标 (对齐桌面 GL 模型库角标色系) -->
+    <color name="magtile_text_primary">#FF243244</color>
+    <color name="magtile_text_secondary">#FF5B6B7F</color>
+    <!-- 未点亮元素 (= Qt textDim; 成就墙灰色剪影等) -->
+    <color name="magtile_text_dim">#FFB9C6D6</color>
+    <!-- 难度星: 与桌面模型库星色同为提示琥珀 (= Qt warning) -->
+    <color name="magtile_star">#FFE8A13C</color>
+    <color name="magtile_icon_bg">#FF2E7DD1</color>
+    <!-- 缩略图占位底色 (未生成/解码中; = Qt viewportBg 同族) -->
+    <color name="magtile_thumb_placeholder">#FFE6ECF2</color>
+    <!-- 「需要扩展装」琥珀角标 (对齐桌面 GL/Qt 模型库角标色系) -->
     <color name="magtile_badge_expansion_text">#FFB86A00</color>
-    <color name="magtile_badge_expansion_bg">#33F2A93B</color>
+    <color name="magtile_badge_expansion_bg">#33E8A13C</color>
     <!-- 进度页/成就墙状态色 (对齐桌面 Qt Theme.qml: 完成绿 / 提示琥珀 /
          主色浅底; 色盲安全组合, 状态从不单靠颜色表达 §4.7) -->
     <color name="magtile_success">#FF2C9F6B</color>
@@ -22,4 +31,7 @@
     <color name="magtile_warning_soft">#FFFBF0DC</color>
     <color name="magtile_primary_soft">#FFE3EEFA</color>
     <color name="magtile_card_border">#FFE1E8F2</color>
+    <!-- 点按反馈: 水波纹色 / 减动效下的平面按压蒙层 (主色低透明度) -->
+    <color name="magtile_ripple">#332E7DD1</color>
+    <color name="magtile_press_overlay">#1F2E7DD1</color>
 </resources>

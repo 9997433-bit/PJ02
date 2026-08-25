@@ -24,12 +24,18 @@ import kotlin.math.hypot
  * 渲染模式为连续重绘: 本步新增片的呼吸描边动画由帧时间驱动 (与
  * 桌面同一实现); 视口离屏时由宿主 Activity 转发 onPause 停帧,
  * 不在后台空转。场景很小 (数百片薄板), 单帧 GPU 开销可忽略。
+ *
+ * 减少动效 ([reduceMotion], §4.7, 与桌面 Qt TutorialViewport 同口径):
+ * 呼吸相位定格在峰值 (kFrozenPulseSeconds 同款常量) —— 本步新片以
+ * 最亮描边恒定标示, 不闪不动但指示信息一点不少; 同时切脏帧模式
+ * 不自驱重绘 (顺带省电), 手势/设步仍正常触发重绘。
  */
 class TutorialSceneView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : GLSurfaceView(context, attrs) {
 
     private val density = resources.displayMetrics.density
+    private val sceneRenderer = SceneRenderer()
 
     // 手势基准: 单指 = 触点位置, 双指 = 两指中点 + 指距
     private var touchPointCount = 0
@@ -39,8 +45,25 @@ class TutorialSceneView @JvmOverloads constructor(
 
     init {
         setEGLContextClientVersion(3)
-        setRenderer(SceneRenderer())
+        setRenderer(sceneRenderer)
         renderMode = RENDERMODE_CONTINUOUSLY
+    }
+
+    /** 减少动效: 呼吸描边定格最亮帧 + 脏帧模式按需重绘 (宿主
+     *  Activity 在 onCreate 时机赋值一次)。 */
+    var reduceMotion: Boolean = false
+        set(value) {
+            if (field == value) return
+            field = value
+            sceneRenderer.frozenTimeSeconds = if (value) FROZEN_PULSE_SECONDS else -1.0
+            renderMode = if (value) RENDERMODE_WHEN_DIRTY else RENDERMODE_CONTINUOUSLY
+            if (value) requestRender()
+        }
+
+    /** 场景内容变化 (加载完成 / 步骤切换) 后由宿主调用: 脏帧模式下
+     *  补一帧; 连续重绘模式下一帧本来就会来, 空操作。 */
+    fun notifySceneChanged() {
+        if (reduceMotion) requestRender()
     }
 
     /**
@@ -102,6 +125,8 @@ class TutorialSceneView @JvmOverloads constructor(
             lastSpread = spread
         }
         touchPointCount = xs.size
+        // 减少动效的脏帧模式下, 相机操作逐事件触发重绘 (跟手不掉帧)
+        if (reduceMotion) requestRender()
         return true
     }
 
@@ -110,6 +135,11 @@ class TutorialSceneView @JvmOverloads constructor(
         private var width = 0
         private var height = 0
         private val clockStartMs = SystemClock.uptimeMillis()
+
+        /** >= 0 时以该定格时刻代替帧时间 (减少动效: 呼吸相位停在
+         *  峰值); 主线程写 / GL 线程读, volatile 保证可见。 */
+        @Volatile
+        var frozenTimeSeconds: Double = -1.0
 
         override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
             // 表面创建 / Home 后返回的上下文重建: 原生侧重建 GL 资源
@@ -122,13 +152,21 @@ class TutorialSceneView @JvmOverloads constructor(
         }
 
         override fun onDrawFrame(gl: GL10?) {
+            val frozen = frozenTimeSeconds
             TutorialSceneNative.drawFrame(
-                width, height, (SystemClock.uptimeMillis() - clockStartMs) / 1000.0)
+                width, height,
+                if (frozen >= 0) frozen
+                else (SystemClock.uptimeMillis() - clockStartMs) / 1000.0)
         }
     }
 
     companion object {
         /** 捏合最小指距 (dp): 与 Qt kMinPinchSpreadPx (逻辑像素) 同值。 */
         private const val MIN_PINCH_SPREAD_DP = 8f
+
+        /** 减少动效下呼吸高亮的定格时刻 (与桌面 Qt tutorial_viewport
+         *  kFrozenPulseSeconds 同款): 1.2Hz 正弦在该时刻取峰值
+         *  (sin(2π·1.2·t) = 1), 本步新片以最亮描边恒定标示。 */
+        private const val FROZEN_PULSE_SECONDS = 1.0 / (4.0 * 1.2)
     }
 }

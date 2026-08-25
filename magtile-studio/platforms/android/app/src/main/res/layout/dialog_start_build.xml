@@ -13,10 +13,10 @@
     <Button
         android:id="@+id/dialog_start_build"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="@dimen/button_height"
         android:backgroundTint="@color/magtile_primary"
         android:text="@string/dialog_start_build"
-        android:textColor="#FFFFFFFF"
-        android:textSize="16sp" />
+        android:textColor="@color/magtile_on_primary"
+        android:textSize="@dimen/text_section" />
 
 </LinearLayout>

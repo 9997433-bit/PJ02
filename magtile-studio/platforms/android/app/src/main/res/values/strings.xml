@@ -5,7 +5,16 @@
     <string name="library_loading">正在解包数据资产…</string>
     <!-- %1$d = 筛选后模型数, %2$d = 模型总数, %3$d = 磁力片形状数 -->
     <string name="library_summary">%1$d / %2$d 个模型 · %3$d 种磁力片形状</string>
-    <string name="library_load_failed">模型库加载失败:\n%1$s</string>
+    <!-- 加载失败的温和文案 (§4.3 / P3 零挫败, 对齐桌面 Qt 模型库空态
+         口径): 不出现「失败」字样, 不给儿童看技术路径 —— 诊断细节
+         只写 logcat 给家长/开发者 -->
+    <string name="library_soft_fail_status">模型库这次没打开, 点下面的按钮再试一次就好</string>
+    <string name="library_soft_fail_title">模型库休息了一小会儿</string>
+    <string name="library_soft_fail_hint">别着急, 点一下按钮把模型们叫回来</string>
+    <string name="library_retry">🧲 再试一次</string>
+    <!-- 目录成功打开但一个模型都没有 (数据资产异常): 0 个模型不自称
+         「已就绪」(与桌面 Qt 空态同口径), 同样给温和重试 -->
+    <string name="library_empty_catalog">模型们还在路上</string>
     <string name="library_filter_empty">没有符合当前筛选条件的模型</string>
     <!-- 筛选栏 (口径与桌面 GL/Qt 模型库一致) -->
     <string name="filter_all_difficulties">全部难度</string>
@@ -88,7 +97,8 @@
     <string name="main_progress_entry">🏆 我的进度</string>
     <string name="progress_title">🏆 我的作品</string>
     <string name="progress_loading">正在翻看进度存档…</string>
-    <string name="progress_load_failed">进度看板加载失败:\n%1$s</string>
+    <!-- 温和降级 (不出现「失败」字样, 技术细节只写 logcat) -->
+    <string name="progress_load_failed">进度看板这次没打开, 退出再进来看看就好</string>
     <string name="progress_store_unavailable">进度存档暂不可用, 作品清单先歇一会儿</string>
     <!-- 三格温和统计 (%1$d = 数量; 图形+数字+文字三重编码 §4.7) -->
     <string name="progress_stat_completed">✓ %1$d\n已完成</string>
@@ -122,7 +132,8 @@
          措辞对齐桌面 GL/Qt 教程 HUD 的 "第 x/y 步 · 已放 n/m 片") -->
     <string name="tutorial_title_fallback">分步搭建</string>
     <string name="tutorial_loading">正在准备分步教程…</string>
-    <string name="tutorial_load_failed">分步教程加载失败:\n%1$s</string>
+    <!-- 温和降级 (不出现「失败」字样, 技术细节只写 logcat) -->
+    <string name="tutorial_load_failed">教程这次没打开, 回上一页再进来一次就好</string>
     <!-- 模型已下架 (不在模型库目录中) 的温和降级, 不出现「失败」字样 -->
     <string name="tutorial_model_unavailable">这个模型暂时不在模型库里, 先去挑别的试试吧</string>
     <!-- 3D 视口手势提示 (单指旋转 / 双指捏合缩放, 与桌面 Qt 同口径) -->

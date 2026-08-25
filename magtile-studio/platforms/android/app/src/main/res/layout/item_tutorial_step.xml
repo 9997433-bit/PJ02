@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/magtile_text_primary"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_body" />
 
         <!-- 可选小提示 ("💡 …"; 无提示的步骤整行隐藏) -->
         <TextView
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textColor="@color/magtile_text_secondary"
-            android:textSize="13sp"
+            android:textSize="@dimen/text_secondary"
             android:visibility="gone" />
     </LinearLayout>
 
@@ -57,6 +57,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textColor="@color/magtile_text_secondary"
-        android:textSize="13sp" />
+        android:textSize="@dimen/text_secondary" />
 
 </LinearLayout>

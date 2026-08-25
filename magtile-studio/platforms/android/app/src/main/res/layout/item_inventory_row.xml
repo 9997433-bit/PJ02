@@ -19,14 +19,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@color/magtile_text_primary"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_section"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/count_minus"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:minWidth="48dp"
+        android:layout_width="@dimen/touch_target"
+        android:layout_height="@dimen/touch_target"
+        android:minWidth="@dimen/touch_target"
         android:text="@string/inventory_minus"
         android:textSize="20sp" />
 
@@ -34,21 +34,21 @@
     <EditText
         android:id="@+id/count_input"
         android:layout_width="64dp"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/touch_target"
         android:gravity="center"
         android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="3"
         android:selectAllOnFocus="true"
         android:textColor="@color/magtile_text_primary"
-        android:textSize="17sp"
+        android:textSize="@dimen/text_section"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/count_plus"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:minWidth="48dp"
+        android:layout_width="@dimen/touch_target"
+        android:layout_height="@dimen/touch_target"
+        android:minWidth="@dimen/touch_target"
         android:text="@string/inventory_plus"
         android:textSize="20sp" />
 

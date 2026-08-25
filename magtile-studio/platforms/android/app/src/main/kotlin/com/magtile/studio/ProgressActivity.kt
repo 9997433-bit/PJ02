@@ -46,9 +46,15 @@ class ProgressActivity : Activity() {
     /** 首次 onResume 跳过重拉 (onCreate 已加载)。 */
     private var firstResume = true
 
+    /** 减少动效 (§4.7, 系统动画设置联动): 作品行点按反馈由水波纹
+     *  退为静态按压色 (见 MotionPrefs)。 */
+    private var reduceMotion = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_progress)
+
+        reduceMotion = MotionPrefs.reduceMotion(this)
 
         findViewById<TextView>(R.id.progress_back).setOnClickListener { finish() }
         findViewById<View>(R.id.badge_strip).setOnClickListener {
@@ -93,11 +99,13 @@ class ProgressActivity : Activity() {
                     render(root)
                 }
             } catch (t: Throwable) {
+                // 技术细节只进 logcat; 儿童侧是温和文案 (不出现「失败」
+                // 字样、不显示技术路径, P3 零挫败)
                 Log.e(TAG, "进度看板加载失败", t)
                 runOnUiThread {
                     if (isFinishing || isDestroyed) return@runOnUiThread
                     findViewById<TextView>(R.id.progress_status).text =
-                        getString(R.string.progress_load_failed, t.message ?: t.toString())
+                        getString(R.string.progress_load_failed)
                 }
             }
         }
@@ -224,6 +232,10 @@ class ProgressActivity : Activity() {
         for (index in 0 until items.length()) {
             val item = items.getJSONObject(index)
             val row = inflater.inflate(R.layout.item_progress_row, container, false)
+            // 减少动效: 行点按反馈由水波纹退为静态按压色 (§4.7)
+            if (reduceMotion) {
+                row.foreground = getDrawable(R.drawable.bg_row_pressed_flat)
+            }
             row.findViewById<TextView>(R.id.row_name).text = item.getString("name")
             bind(item, row)
             container.addView(row)
