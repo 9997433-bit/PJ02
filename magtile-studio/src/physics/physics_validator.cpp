@@ -122,6 +122,19 @@ bool isEnclosed(const Vec3& origin, const std::vector<TransformedTile>& placed) 
 
 }  // namespace
 
+PhysicsConfig PhysicsConfig::strictConsumer() {
+    PhysicsConfig config;
+    config.hanging_capacity_per_edge = 120.0;
+    config.knock_safety_factor = 0.7;
+    return config;
+}
+
+std::optional<PhysicsConfig> configForProfile(std::string_view name) {
+    if (name.empty() || name == "default" || name == "standard") return PhysicsConfig{};
+    if (name == "strict" || name == "strict_consumer") return PhysicsConfig::strictConsumer();
+    return std::nullopt;
+}
+
 std::size_t ValidationReport::errorCount() const noexcept {
     return static_cast<std::size_t>(std::count_if(
         issues.begin(), issues.end(),
@@ -517,19 +530,33 @@ ValidationReport PhysicsValidator::validateAssembly(
         }
 
         // 2. 无环拓扑: 环路数 = E - (V - 连通分量数); 为零说明没有任何
-        //    三角桁架 / 闭合环, 高层结构强烈建议至少一处环状加固
+        //    三角桁架 / 闭合环, 高层结构强烈建议至少一处环状加固。
+        //    超过 unbraced_wall_max_height 的无环高墙升级为 Error:
+        //    真实磁力片的高墙没有任何桁架时轻碰即整面倒塌, 不允许发布。
         const std::size_t cycles =
             connections.size() + num_components >= tiles.size()
                 ? connections.size() + num_components - tiles.size()
                 : 0;
         if (cycles == 0) {
-            std::ostringstream oss;
-            oss << "高层结构无环加固: 最高点 " << max_z
-                << " 个单位, 但磁力连接图是纯树状 (没有任何三角桁架或闭合环), "
-                   "每个连接都是自由铰链, 整体抗晃动能力差, 建议增加三角形或环状加固";
-            report.issues.push_back({IssueSeverity::Warning, "no_structural_redundancy",
-                                     withContext(context, oss.str()),
-                                     {}});
+            if (max_z >= config_.unbraced_wall_max_height) {
+                std::ostringstream oss;
+                oss << "无桁架高墙超限: 最高点 " << max_z << " 个单位已超过无加固结构上限 "
+                    << config_.unbraced_wall_max_height
+                    << ", 且磁力连接图是纯树状 (没有任何三角桁架或闭合环), "
+                       "每个连接都是自由铰链, 实搭时轻碰即整面倒塌; "
+                       "请增加三角斜撑、垂直翼墙或环状圈层加固";
+                report.issues.push_back({IssueSeverity::Error, "unbraced_wall_too_tall",
+                                         withContext(context, oss.str()),
+                                         {}});
+            } else {
+                std::ostringstream oss;
+                oss << "高层结构无环加固: 最高点 " << max_z
+                    << " 个单位, 但磁力连接图是纯树状 (没有任何三角桁架或闭合环), "
+                       "每个连接都是自由铰链, 整体抗晃动能力差, 建议增加三角形或环状加固";
+                report.issues.push_back({IssueSeverity::Warning, "no_structural_redundancy",
+                                         withContext(context, oss.str()),
+                                         {}});
+            }
         }
     }
 

@@ -67,6 +67,7 @@ struct CliArgs {
     std::vector<std::string> inventory_pairs;  ///< inventory set 的 <形状 数量> 对
     std::string settings_action;  ///< settings 子命令: set-age / show
     std::string settings_value;   ///< settings set-age 的年龄参数 (周岁)
+    std::string profile;          ///< validate 的物理校验档位 (default / strict)
     bool tts = false;            ///< --tts: 教程切步时朗读步骤说明 (系统 TTS)
     std::string open_model;      ///< library --gui: 启动后直接打开的模型 id
     bool open_parent_gate = false;  ///< library --gui: 启动即显示家长门 (评审/冒烟)
@@ -82,7 +83,10 @@ void printUsage() {
         "                       模型库 (商业版主入口): --gui 打开图形界面, 浏览/搜索/\n"
         "                       筛选模型卡片并进入教程; 默认在终端列出模型与进度\n"
         "  magtile_app catalog  [--data-dir DIR]              查看磁力片形状目录\n"
-        "  magtile_app validate <model.json> [--data-dir DIR] 校验模型物理规则与教程步骤\n"
+        "  magtile_app validate <model.json> [--data-dir DIR] [--profile default|strict]\n"
+        "                       校验模型物理规则与教程步骤; --profile strict 使用弱磁\n"
+        "                       严格档 (悬挂额定 120g/边长, 安全系数 0.7, 面向磁力较弱\n"
+        "                       的品牌与旧片, 详见 docs/PHYSICS_RULES.md)\n"
         "  magtile_app tutorial <model.json> [--gui] [--data-dir DIR]\n"
         "                       分步教程: 默认在终端预览, --gui 打开 3D 交互窗口\n"
         "  magtile_app progress list                          查看全部教程进度与成就\n"
@@ -140,6 +144,9 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
             args.open_parent_gate = true;
         } else if (arg == "--tts") {
             args.tts = true;
+        } else if (arg == "--profile") {
+            if (i + 1 >= argc) return false;
+            args.profile = argv[++i];
         } else if (arg == "--db") {
             if (i + 1 >= argc) return false;
             args.db_file = argv[++i];
@@ -218,9 +225,27 @@ void printModelHeader(const core::ModelDefinition& model) {
 }
 
 int runValidate(const CliArgs& args) {
+    // --profile: 物理校验参数档位。默认档按官方基准品牌实测标定;
+    // strict (strict_consumer) 弱磁严格档按弱磁品牌/旧片标定, 供
+    // "换个牌子的磁力片也搭得起来" 的余量校验 (docs/PHYSICS_RULES.md §5)。
+    const auto profile_config = physics::configForProfile(args.profile);
+    if (!profile_config.has_value()) {
+        std::fprintf(stderr, "错误: 未知校验档位 \"%s\" (可用: default, strict)\n",
+                     args.profile.c_str());
+        return 2;
+    }
+
     const auto catalog = core::loadTileCatalog(args.data_dir / "tile_catalog.json");
     const auto model = core::loadModelDefinition(args.model_file);
     printModelHeader(model);
+
+    if (!args.profile.empty() && args.profile != "default" && args.profile != "standard") {
+        std::printf(
+            "校验档位: strict_consumer (弱磁严格档: 悬挂额定 %.0fg/单位边长, "
+            "抗碰撞安全系数 %.0f%%)\n\n",
+            profile_config->hanging_capacity_per_edge,
+            profile_config->knock_safety_factor * 100.0);
+    }
 
     int failures = 0;
 
@@ -236,7 +261,7 @@ int runValidate(const CliArgs& args) {
     }
 
     // 物理规则 (最终成品 + 每一步中间状态)
-    const physics::PhysicsValidator validator(catalog);
+    const physics::PhysicsValidator validator(catalog, *profile_config);
     const auto report = validator.validateModel(model);
     for (const auto& issue : report.issues) {
         const char* tag = issue.severity == physics::IssueSeverity::Error ? "错误" : "警告";

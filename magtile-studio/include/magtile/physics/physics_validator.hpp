@@ -21,7 +21,8 @@
 //   R7 装配可达: 按教程顺序逐片放置时, 每片在放下的那一刻必须有依托
 //               (接地或吸附), 且不能被已完成结构完全包围 (手要伸得进去)
 //   R8 结构冗余: 高层结构中警告单点失效连接与纯树状 (无环) 拓扑,
-//               鼓励三角桁架 (Warning 级, 不阻断发布)
+//               鼓励三角桁架 (Warning 级); 无环高墙超过
+//               unbraced_wall_max_height 升级为 Error (阻断发布)
 //
 // R5/R6/R8 的静力学模型: 把每一组共线磁力边视为一条 "铰链线",
 // 假想剪断这条铰链后与地面失去联系的子结构, 其全部重量 (R5) 与
@@ -29,7 +30,9 @@
 // 乘以抗碰撞安全系数 (默认 0.8, 即保留 20% 抗震/碰撞裕量)。
 // =============================================================
 
+#include <optional>
 #include <string>
+#include <string_view>
 #include <vector>
 
 #include "magtile/core/model_definition.hpp"
@@ -51,7 +54,8 @@ enum class IssueSeverity {
 ///   hanging_chain_overload / hanging_chain_long            (R5)
 ///   cantilever_overload                                    (R6)
 ///   unplaceable_tile / enclosed_placement                  (R7)
-///   single_point_of_failure / no_structural_redundancy     (R8)
+///   single_point_of_failure / no_structural_redundancy
+///   unbraced_wall_too_tall                                 (R8)
 struct ValidationIssue {
     IssueSeverity severity = IssueSeverity::Error;
     std::string code;                    ///< 如 "floating_tile"、"cantilever_overload"
@@ -95,7 +99,25 @@ struct PhysicsConfig {
     // ---- 结构冗余参数 (R8) ---------------------------------------
     double tall_structure_height = 2.5;    ///< 最高点达到此高度即视为高层结构, 启用 R8
     int spof_min_component_tiles = 3;      ///< 单点失效警告阈值: 单条连接独自支撑的最少片数
+    /// 无桁架结构 (连接图纯树状, 零环路) 允许的最大高度。超过即 Error
+    /// `unbraced_wall_too_tall`: 高墙没有任何三角桁架/闭合环加固时,
+    /// 每个连接都是自由铰链, 实搭中轻碰即整面倒塌 —— 不再只是 Warning。
+    double unbraced_wall_max_height = 4.0;
+
+    // ---- 预设档位 -------------------------------------------------
+    /// 弱磁严格档 (strict_consumer): 面向消费者手中磁力较弱的品牌 /
+    /// 使用多年磁力衰减的旧片。悬挂额定承重从 150g 降到 120g/单位边长
+    /// (实测弱磁品牌标准边约 4 片正方形即脱落), 抗碰撞安全系数从 0.8
+    /// 收紧到 0.7 (儿童实际使用中的碰撞远多于成人测试)。
+    /// 旗舰模型必须在本档位下依然全绿 (CMake 注册 validate_strict_* 用例)。
+    [[nodiscard]] static PhysicsConfig strictConsumer();
 };
+
+/// 按档位名称查找预设校验参数:
+///   "" / "default" / "standard"    -> 默认档 (官方基准品牌实测标定);
+///   "strict" / "strict_consumer"   -> 弱磁严格档 (见 strictConsumer());
+/// 未知名称返回 std::nullopt, 由调用方 (CLI) 报错。
+[[nodiscard]] std::optional<PhysicsConfig> configForProfile(std::string_view name);
 
 /// 已识别的一条磁力连接 (a、b 为 final_assembly 下标)。
 struct MagnetConnection {

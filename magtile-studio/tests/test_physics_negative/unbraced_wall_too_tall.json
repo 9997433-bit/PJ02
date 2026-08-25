@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "id": "fixture_unbraced_wall_too_tall",
+  "name": "负例夹具: 无桁架高墙超限",
+  "name_en": "fixture_unbraced_wall_too_tall",
+  "description": "反面教材: 5 片正方形逐层立墙叠到 5 个单位高, 磁力连接图是纯树状 (没有任何三角桁架、垂直翼墙或闭合环)。静力预算逐条铰链都合格 (纯压), 但真实磁力片的无加固高墙每个连接都是自由铰链, 轻碰即整面倒塌。校验器必须报 unbraced_wall_too_tall 错误并拒绝该模型 (无环结构高度上限 4.0)。",
+  "difficulty": 2,
+  "total_pieces": 5,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "w1",
+      "type": "square",
+      "position": [0.0, 0.0, 0.5],
+      "rotation": [90, 0, 90],
+      "color": "blue"
+    },
+    {
+      "id": "w2",
+      "type": "square",
+      "position": [0.0, 0.0, 1.5],
+      "rotation": [90, 0, 90],
+      "color": "blue"
+    },
+    {
+      "id": "w3",
+      "type": "square",
+      "position": [0.0, 0.0, 2.5],
+      "rotation": [90, 0, 90],
+      "color": "cyan"
+    },
+    {
+      "id": "w4",
+      "type": "square",
+      "position": [0.0, 0.0, 3.5],
+      "rotation": [90, 0, 90],
+      "color": "cyan"
+    },
+    {
+      "id": "w5",
+      "type": "square",
+      "position": [0.0, 0.0, 4.5],
+      "rotation": [90, 0, 90],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "自下而上立起 3 片方片, 形成 3 个单位高的单片墙。",
+      "tip": "每叠一片都要上下边完全贴合。",
+      "tiles_to_add": ["w1", "w2", "w3"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "错误示范: 继续往上叠到 5 个单位高, 全程没有加任何三角斜撑或翼墙。",
+      "tip": "无桁架的高墙每个连接都是自由铰链, 轻碰即整面倒塌 —— 校验器必须拒绝。",
+      "tiles_to_add": ["w4", "w5"],
+      "highlight_tiles": []
+    }
+  ]
+}
