@@ -169,7 +169,8 @@ flowchart TB
 |------|------|
 | [ARCHITECTURE.md](ARCHITECTURE.md) | 模块架构 |
 | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) | 500+ 模型多样性 |
-| [PHYSICS_RULES.md](PHYSICS_RULES.md) | 物理规则 |
+| [PHYSICS_RULES.md](PHYSICS_RULES.md) | 物理规则 R1–R8 |
+| [COMPETITOR_ANALYSIS.md](COMPETITOR_ANALYSIS.md) | 竞品深度分析与市场空白 |
 | [ROADMAP.md](ROADMAP.md) | 内容阶段路线 |
 | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) | 商业策略（子代理生成中） |
 | [UI_UX_SPEC.md](UI_UX_SPEC.md) | 界面规范（子代理生成中） |
