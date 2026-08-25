@@ -45,6 +45,11 @@
 #       content_meta.series (13 主题词值) 或 matrix_bucket (矩阵外桶),
 #       词值对照 data/content_series_map.json 词表, 输出主题 × 难度
 #       矩阵计数; CONTENT_GAP_AUDIT.md §7.3 机检化, 回填底稿见其附录 A)
+#   21. 难度配额报告            (报告型: D1–D5 分布与 D3 冻结状态,
+#       tools/check_difficulty_quota.py —— 冻结与否只报告不阻断,
+#       冻结期间新增 D3 的拦截由批次评审 --batch 闸门负责; 同口径
+#       CTest 关卡 content_series_gate / difficulty_quota_gate 已随
+#       关卡 3 全量回归常开, CONTENT_GAP_AUDIT.md §7.3)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -326,6 +331,14 @@ else
     skip_stage "内容系列归类机检 (series)" \
         "可选关卡, 置 MAGTILE_SERIES_CHECK=1 开启 (tools/check_content_series.py --strict)"
 fi
+
+# ---- 21: 难度配额报告 (报告型, 不阻断) ----------------------------
+# CONTENT_GAP_AUDIT.md §7.3 难度配额治理: D1–D5 分布与 D3 冻结状态
+# (D1 >= 20 且 D5 >= 6 方可解冻) 每次 QA 都报告供排产参考; 冻结与否
+# 不阻断 (存量 181 个 D3 不追责), 难度值非法仍按结构错误失败。冻结
+# 期间对新增 D3 的拦截由批次评审的 --batch 闸门负责, 不在此重复。
+run_stage "难度配额报告 (D3 冻结状态)" \
+    "$PYTHON" "$ROOT/tools/check_difficulty_quota.py" "$DATA_DIR/models"
 
 # ---- 总结报告 ---------------------------------------------------
 pass_count=0; fail_count=0; skip_count=0
