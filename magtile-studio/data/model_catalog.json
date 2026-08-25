@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。本文件由 tools/update_model_catalog.py 自动生成, 请勿手工编辑。",
+  "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 与 thumbnail 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。theme 为卡片主题 (由标签推导), thumbnail 由 tools/generate_thumbnails.py 生成。本文件由 tools/update_model_catalog.py 自动生成, 请勿手工编辑。",
   "models": [
     {
       "id": "geodesic_dome_01",
@@ -11,12 +11,14 @@
       "difficulty": 3,
       "total_pieces": 49,
       "step_count": 15,
+      "theme": "建筑地标",
       "tags": [
         "未来建筑",
         "穹顶",
         "测地网格",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/geodesic_dome_01.png"
     },
     {
       "id": "butterfly_01",
@@ -27,12 +29,14 @@
       "difficulty": 3,
       "total_pieces": 55,
       "step_count": 16,
+      "theme": "自然世界",
       "tags": [
         "自然",
         "昆虫",
         "对称拼花",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/butterfly_01.png"
     },
     {
       "id": "ferris_wheel_frame_01",
@@ -43,12 +47,32 @@
       "difficulty": 3,
       "total_pieces": 56,
       "step_count": 16,
+      "theme": "游乐园",
       "tags": [
         "游乐园",
         "摩天轮",
         "星形",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/ferris_wheel_frame_01.png"
+    },
+    {
+      "id": "windmill_01",
+      "file": "models/windmill_01.json",
+      "name": "风车磨坊",
+      "name_en": "Windmill 01",
+      "description": "田园风车磨坊: 2x2 塔身留 2 格宽负空间大门, 门楣横跨传力; 塔顶梯形裙檐收分出 1x1 洞口再戴等腰锥帽; 南面沿口立起两格高毂柱, 4 片透明菱形叶片吸在毂柱上下两段的左右竖边上, 借菱形 60 度天然斜置拼出正在旋转的 X 形风车 —— 全库第一次把菱形当叶片用。场边配石板路、栅栏、锥顶水井与花丛。",
+      "difficulty": 3,
+      "total_pieces": 57,
+      "step_count": 16,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "风车",
+        "菱形叶片",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/windmill_01.png"
     },
     {
       "id": "lunar_lander_01",
@@ -59,13 +83,15 @@
       "difficulty": 3,
       "total_pieces": 63,
       "step_count": 16,
+      "theme": "航天探索",
       "tags": [
         "航天",
         "着陆器",
         "分体对接",
         "航天器",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/lunar_lander_01.png"
     },
     {
       "id": "pyramid_giza_01",
@@ -76,12 +102,14 @@
       "difficulty": 3,
       "total_pieces": 64,
       "step_count": 17,
+      "theme": "建筑地标",
       "tags": [
         "金字塔",
         "建筑地标",
         "层叠退台",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/pyramid_giza_01.png"
     },
     {
       "id": "sailboat_01",
@@ -92,12 +120,14 @@
       "difficulty": 3,
       "total_pieces": 68,
       "step_count": 15,
+      "theme": "海洋航行",
       "tags": [
         "帆船",
         "海洋",
         "交通工具",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/sailboat_01.png"
     },
     {
       "id": "castle_foundation_01",
@@ -108,11 +138,13 @@
       "difficulty": 3,
       "total_pieces": 72,
       "step_count": 16,
+      "theme": "城堡王国",
       "tags": [
         "城堡",
         "建筑基础",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/castle_foundation_01.png"
     },
     {
       "id": "pagoda_01",
@@ -123,13 +155,15 @@
       "difficulty": 3,
       "total_pieces": 73,
       "step_count": 16,
+      "theme": "建筑地标",
       "tags": [
         "五重塔",
         "建筑地标",
         "宝塔",
         "旋位",
         "挑檐"
-      ]
+      ],
+      "thumbnail": "thumbnails/pagoda_01.png"
     },
     {
       "id": "trex_skeleton_01",
@@ -140,13 +174,15 @@
       "difficulty": 3,
       "total_pieces": 73,
       "step_count": 16,
+      "theme": "自然世界",
       "tags": [
         "恐龙",
         "骨架",
         "动物世界",
         "博物馆",
         "悬挑"
-      ]
+      ],
+      "thumbnail": "thumbnails/trex_skeleton_01.png"
     },
     {
       "id": "suspension_bridge_01",
@@ -157,13 +193,15 @@
       "difficulty": 3,
       "total_pieces": 74,
       "step_count": 16,
+      "theme": "工程结构",
       "tags": [
         "桥梁",
         "悬索桥",
         "对称",
         "工程",
         "合龙"
-      ]
+      ],
+      "thumbnail": "thumbnails/suspension_bridge_01.png"
     },
     {
       "id": "train_station_01",
@@ -174,12 +212,14 @@
       "difficulty": 4,
       "total_pieces": 75,
       "step_count": 18,
+      "theme": "城市生活",
       "tags": [
         "交通",
         "火车",
         "建筑",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/train_station_01.png"
     },
     {
       "id": "marble_run_spiral_01",
@@ -190,13 +230,15 @@
       "difficulty": 4,
       "total_pieces": 77,
       "step_count": 18,
+      "theme": "滚珠乐园",
       "tags": [
         "滚珠",
         "轨道",
         "螺旋",
         "滚珠乐园",
         "挑战"
-      ]
+      ],
+      "thumbnail": "thumbnails/marble_run_spiral_01.png"
     },
     {
       "id": "roman_aqueduct_01",
@@ -207,12 +249,14 @@
       "difficulty": 4,
       "total_pieces": 79,
       "step_count": 18,
+      "theme": "工程结构",
       "tags": [
         "古代工程",
         "桥梁",
         "双层结构",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/roman_aqueduct_01.png"
     },
     {
       "id": "fire_station_01",
@@ -223,12 +267,14 @@
       "difficulty": 4,
       "total_pieces": 81,
       "step_count": 19,
+      "theme": "城市生活",
       "tags": [
         "城市",
         "职业体验",
         "建筑",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/fire_station_01.png"
     },
     {
       "id": "rocket_launchpad_01",
@@ -239,13 +285,15 @@
       "difficulty": 4,
       "total_pieces": 82,
       "step_count": 18,
+      "theme": "航天探索",
       "tags": [
         "火箭",
         "航天",
         "发射台",
         "模块对接",
         "盒式框架"
-      ]
+      ],
+      "thumbnail": "thumbnails/rocket_launchpad_01.png"
     },
     {
       "id": "ball_run_tower_01",
@@ -256,13 +304,15 @@
       "difficulty": 4,
       "total_pieces": 90,
       "step_count": 19,
+      "theme": "滚珠乐园",
       "tags": [
         "滚珠",
         "轨道",
         "竞速",
         "滚珠乐园",
         "旗舰"
-      ]
+      ],
+      "thumbnail": "thumbnails/ball_run_tower_01.png"
     },
     {
       "id": "eiffel_tower_01",
@@ -273,12 +323,14 @@
       "difficulty": 4,
       "total_pieces": 95,
       "step_count": 21,
+      "theme": "建筑地标",
       "tags": [
         "世界地标",
         "高塔",
         "工程",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/eiffel_tower_01.png"
     },
     {
       "id": "castle_drawbridge_01",
@@ -289,13 +341,15 @@
       "difficulty": 4,
       "total_pieces": 99,
       "step_count": 21,
+      "theme": "城堡王国",
       "tags": [
         "城堡",
         "吊桥",
         "门楼",
         "负空间",
         "挑战"
-      ]
+      ],
+      "thumbnail": "thumbnails/castle_drawbridge_01.png"
     },
     {
       "id": "rescue_hq_01",
@@ -306,13 +360,15 @@
       "difficulty": 4,
       "total_pieces": 101,
       "step_count": 18,
+      "theme": "城市生活",
       "tags": [
         "救援",
         "总部",
         "建筑地标",
         "旗舰",
         "挑战"
-      ]
+      ],
+      "thumbnail": "thumbnails/rescue_hq_01.png"
     },
     {
       "id": "skyscraper_01",
@@ -323,13 +379,15 @@
       "difficulty": 5,
       "total_pieces": 122,
       "step_count": 26,
+      "theme": "建筑地标",
       "tags": [
         "摩天大楼",
         "建筑地标",
         "退台",
         "旗舰",
         "大师"
-      ]
+      ],
+      "thumbnail": "thumbnails/skyscraper_01.png"
     }
   ]
 }
