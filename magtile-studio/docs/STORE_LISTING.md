@@ -19,7 +19,9 @@
   应用宝 / OPPO / vivo), 与 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.1~5.2
   的移动端全量节奏对齐。iOS App Store、Steam、Windows 商店 (MSIX) 不在本文
   范围, 各自渠道启动时另立文档 (桌面渠道打包与 LGPL 合规见
-  [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md))。
+  [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md));
+  其中 Microsoft Store 的**素材规格**已先行立档于
+  [STORE_ASSETS_SPEC.md](STORE_ASSETS_SPEC.md) (与 Google Play 逐渠道细目同文)。
 - **工程前置** (提交前必须满足, 详见
   [../platforms/android/README.md](../platforms/android/README.md)):
   targetSdk 35 / arm64-v8a 已就位; Google Play 需改出 **AAB** (App Bundle) +
@@ -154,8 +156,10 @@
 ## 5. 截图与图形素材规格
 
 素材尺寸总表、命名约定、目录结构、产出与占位规则统一维护在
-[../store_assets/README.md](../store_assets/README.md), 本文不重复数字,
-只定口径:
+[../store_assets/README.md](../store_assets/README.md); Google Play 与
+Microsoft Store 的逐渠道规格细目 (截图/大图/图标/视频尺寸数量、字段
+字符限制、分级申报矩阵) 见 [STORE_ASSETS_SPEC.md](STORE_ASSETS_SPEC.md)。
+本文不重复数字, 只定口径:
 
 - **数量下限**: 手机截图每语言 ≥4 张; Play 另加 7 寸/10 寸平板各 ≥2 张。
 - **内容顺序**: 前 4 张固定为 ① 3D 教程视口 (核心卖点) ② 模型库网格
@@ -323,6 +327,7 @@
 | Android 工程与打包 | [../platforms/android/README.md](../platforms/android/README.md) |
 | 桌面渠道打包 (Steam/Win 前置) | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) |
 | 素材尺寸与命名 | [../store_assets/README.md](../store_assets/README.md) |
+| Play / Microsoft Store 素材规格细目 | [STORE_ASSETS_SPEC.md](STORE_ASSETS_SPEC.md) |
 | 国内上架法务/行政办理清单 (软著/ICP/分级等) | [CHINA_STORE_COMPLIANCE.md](CHINA_STORE_COMPLIANCE.md) |
 | 章节完整性守卫 | `tools/validate_store_listing.py` |
 | V1 上架就绪对账单 | [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) |
