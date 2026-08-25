@@ -27,4 +27,4 @@
 | 幻想与机械 | 0/4 | 2/8 | 14/16 | 0/10 | 0/8 | 16/46 | 35% |
 | **合计** | 0/78 | 15/130 | 128/156 | 32/104 | 1/52 | 176/520 | 34% |
 
-- 矩阵外 74 个 (series=null 按 matrix_bucket 聚桶, 不计入 13 主题矩阵): 城市生活 (city_life) x 24, 运动 (sports) x 11, 田园 (farm) x 8, 工程结构 (engineering_structure) x 6, 音乐 (music) x 5, 校园 (campus) x 4, 自然世界 (natural_world) x 4, 海洋航行 (ocean_sailing) x 3, 游乐园 (amusement_park) x 3, 博物馆 (museum) x 2, 夏日乐园 (summer_park) x 1, 极地 (polar) x 1, 航天探索 (space_exploration) x 1, 足球 (soccer) x 1
+- 矩阵外 74 个 (series=null 按 matrix_bucket 聚桶, 不计入 13 主题矩阵): 城市生活 (city_life) x 24, 运动 (sports) x 11, 田园 (farm) x 8, 工程结构 (engineering_misc) x 6, 音乐 (music) x 5, 其他 (other) x 4, 校园 (campus) x 4, 自然世界 (nature_misc) x 4, 海洋航行 (maritime_misc) x 3, 游乐园 (amusement) x 3, 博物馆 (museum) x 2
