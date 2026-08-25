@@ -3,9 +3,9 @@
   "id": "elephant_01",
   "name": "大象",
   "name_en": "Elephant 01",
-  "description": "野生动物主题: 全库第一只长鼻动物 —— 四腿方柱踩草原垫, 3x3 箱式身躯双层围墙; 头颅是抬高一层的 2x3 方箱, 头盘双端受力如桥: 东沿骑身躯前墙顶 (与背板西沿 T 形双吸), 西沿中央落在直通地面的象鼻柱顶 —— 头颅前伸却零悬挑; 两片粉色大耳从头环底边垂挂, 顶边共面+垂直双吸、侧竖边再吸前胸墙, 一片耳朵三向受力; 一对透明象牙沿 30 度翘出, 尾巴在背板东沿翘起 —— 长鼻着地, 稳如泰山。",
+  "description": "野生动物主题: 全库第一只长鼻动物 —— 四腿方柱踩草原垫, 3x3 箱式身躯双层围墙; 头颅是抬高一层的 2x3 方箱, 头盘双端受力如桥: 东沿骑身躯前墙顶 (与背板西沿 T 形双吸), 西沿中央落在直通地面的象鼻柱顶 —— 头颅前伸却零悬挑; 两片粉色大耳从头环底边垂挂, 顶边共面+垂直双吸、侧竖边再吸前胸墙, 一片耳朵三向受力; 一对透明象牙贴着象鼻两侧垂挂 (零重力力矩), 尾巴在背板东沿翘起 —— 长鼻着地, 稳如泰山。",
   "difficulty": 4,
-  "total_pieces": 96,
+  "total_pieces": 95,
   "tags": [
     "动物",
     "大象",
@@ -15,9 +15,9 @@
   "content_meta": {
     "structural_signature": {
       "tile_histogram": {
-        "square": 93,
-        "rectangle": 2,
-        "equilateral_triangle": 1
+        "square": 89,
+        "equilateral_triangle": 3,
+        "rectangle": 3
       }
     }
   },
@@ -1268,55 +1268,10 @@
       "color": "gray"
     },
     {
-      "id": "ht_0_0",
-      "type": "square",
+      "id": "ht_0",
+      "type": "rectangle",
       "position": [
-        0.5,
-        0.5,
-        4.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "ht_0_1",
-      "type": "square",
-      "position": [
-        0.5,
-        1.5,
-        4.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "ht_0_2",
-      "type": "square",
-      "position": [
-        0.5,
-        2.5,
-        4.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "ht_1_0",
-      "type": "square",
-      "position": [
-        1.5,
+        1.0,
         0.5,
         4.0
       ],
@@ -1328,10 +1283,10 @@
       "color": "gray"
     },
     {
-      "id": "ht_1_1",
-      "type": "square",
+      "id": "ht_1",
+      "type": "rectangle",
       "position": [
-        1.5,
+        1.0,
         1.5,
         4.0
       ],
@@ -1343,10 +1298,10 @@
       "color": "gray"
     },
     {
-      "id": "ht_1_2",
-      "type": "square",
+      "id": "ht_2",
+      "type": "rectangle",
       "position": [
-        1.5,
+        1.0,
         2.5,
         4.0
       ],
@@ -1419,31 +1374,31 @@
     },
     {
       "id": "tusk_s",
-      "type": "rectangle",
+      "type": "square",
       "position": [
-        -0.866025,
+        0.0,
         0.5,
         2.5
       ],
       "rotation": [
+        90.0,
         0.0,
-        -30.0,
-        0.0
+        90.0
       ],
       "color": "clear"
     },
     {
       "id": "tusk_n",
-      "type": "rectangle",
+      "type": "square",
       "position": [
-        -0.866025,
+        0.0,
         2.5,
         2.5
       ],
       "rotation": [
+        90.0,
         0.0,
-        -30.0,
-        0.0
+        90.0
       ],
       "color": "clear"
     },
@@ -1461,6 +1416,36 @@
         90.0
       ],
       "color": "gray"
+    },
+    {
+      "id": "tuft_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tuft_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
     }
   ],
   "steps": [
@@ -1705,18 +1690,16 @@
     },
     {
       "step_number": 16,
-      "description": "盖头顶: 6 片正方形封住头环。",
-      "tip": "头顶合拢 —— 大象抬起了方方的大脑袋。",
+      "description": "盖头顶: 3 条灰色长方形横盖头环, 短边搭在东西墙顶。",
+      "tip": "长板两端短边各吸一面墙顶 —— 头顶也是双端受力。",
       "tiles_to_add": [
-        "ht_0_0",
-        "ht_0_1",
-        "ht_0_2",
-        "ht_1_0",
-        "ht_1_1",
-        "ht_1_2"
+        "ht_0",
+        "ht_1",
+        "ht_2"
       ],
       "highlight_tiles": [
-        "hr_w_1"
+        "hr_w_1",
+        "hr_e_1"
       ]
     },
     {
@@ -1736,14 +1719,17 @@
     },
     {
       "step_number": 18,
-      "description": "翘象牙与尾巴: 2 条透明象牙沿 30 度翘出, 尾巴在背板东沿翘起 —— 大象登场!",
-      "tip": "象牙质心水平距只有 0.87, 翘板力矩远低预算 —— 长鼻着地, 稳如泰山。",
+      "description": "挂象牙翘尾巴: 2 片透明象牙贴着象鼻两侧垂挂, 尾巴在背板东沿翘起, 两丛草点缀脚边 —— 大象登场!",
+      "tip": "象牙垂直下挂零力矩, 顶边双吸+侧边吸鼻柱 —— 长鼻着地, 稳如泰山。",
       "tiles_to_add": [
         "tusk_s",
         "tusk_n",
-        "tail"
+        "tail",
+        "tuft_w",
+        "tuft_e"
       ],
       "highlight_tiles": [
+        "trunk_2",
         "hd_0_0",
         "back_4_1"
       ]
