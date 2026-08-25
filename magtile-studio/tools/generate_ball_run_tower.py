@@ -386,7 +386,7 @@ model = {
     ),
     "difficulty": 4,
     "total_pieces": len(tiles),
-    "tags": ["滚珠", "轨道", "竞速", "滚珠乐园", "旗舰"],
+    "tags": ["滚珠", "轨道", "竞速", "滚珠乐园", "旗舰", "需要扩展装"],
     "content_meta": {
         "structural_signature": {
             "tile_histogram": bom,

@@ -64,6 +64,13 @@ SHAPES = {
     "sector": [(0.0, 0.0), (1.0, 0.0), (0.965926, 0.258819), (0.866025, 0.5),
                (0.707107, 0.707107), (0.5, 0.866025), (0.258819, 0.965926), (0.0, 1.0)],
 }
+# 核心五片型 (tier=core, 实物基础套装, docs/TILE_CATALOG.md);
+# finalize() 据此自动为用到扩展片型的模型追加 "需要扩展装" 标签
+CORE5 = frozenset({
+    "square", "equilateral_triangle", "right_triangle",
+    "isosceles_triangle", "rectangle",
+})
+
 MAGNET_EDGES = {
     "square": (0, 1, 2, 3),
     "large_square": (0, 1, 2, 3),
@@ -416,6 +423,12 @@ class ModelBuilder:
         for t in self.tiles:
             bom[t["type"]] = bom.get(t["type"], 0) + 1
         bom = dict(sorted(bom.items(), key=lambda kv: (-kv[1], kv[0])))
+
+        # 片型分层 (CONTENT_STRATEGY.md 2.5 节): 用到扩展片型的模型
+        # 自动打 "需要扩展装" 标, 产品端据此展示角标与购前提示
+        tags = list(tags)
+        if any(t not in CORE5 for t in bom) and "需要扩展装" not in tags:
+            tags.append("需要扩展装")
 
         model = {
             "schema_version": 1,
