@@ -145,4 +145,22 @@
     <string name="gate_submit">确认</string>
     <string name="gate_cancel">返回</string>
     <string name="gate_key_backspace">退格</string>
+    <!-- 隐私与数据 (SECURITY_AND_PRIVACY.md §3/§4 C4/Z8, 家长门后;
+         文案口径与桌面 Qt 家长中心「隐私与数据」区一致: 我们收集什么 /
+         数据存在哪 / 导出 JSON / 清除带二次确认) -->
+    <string name="privacy_entry">隐私与数据</string>
+    <string name="privacy_dialog_title">隐私与数据</string>
+    <!-- %1$s = 本机存档文件完整路径 -->
+    <string name="privacy_summary">我们收集什么: 只在这台设备上记录搭建进度与成就、收藏、磁力片库存和设置 (年龄段等)。默认无账号、无广告、无第三方分析, 不联网, 也不采集孩子的姓名、照片、位置等任何个人信息。\n\n数据存在哪: 本机存档文件\n%1$s\n\n完整隐私政策草稿随应用文档提供: docs/PRIVACY_POLICY_DRAFT.md (离线可读, 上架前经法务定稿)。</string>
+    <string name="privacy_export">导出进度 (JSON)</string>
+    <!-- %1$s = 导出文件完整路径 -->
+    <string name="privacy_export_done">进度已导出: %1$s</string>
+    <string name="privacy_export_soft_fail">这次没导出成功, 稍后再试一次就好</string>
+    <string name="privacy_clear">清除本地数据…</string>
+    <string name="privacy_clear_confirm_title">确定要清除本机数据吗?</string>
+    <string name="privacy_clear_confirm_text">将删除这台设备上的全部搭建进度、成就、收藏、磁力片库存和设置, 删除后无法恢复。需要留档的话, 可以先用「导出进度」保存一份 JSON。</string>
+    <string name="privacy_clear_confirm_yes">确认清除</string>
+    <string name="privacy_clear_confirm_no">先不清除</string>
+    <string name="privacy_clear_done">本机数据已清除, 一切回到最初的样子</string>
+    <string name="privacy_clear_soft_fail">这次没清除成功, 稍后再试一次就好</string>
 </resources>

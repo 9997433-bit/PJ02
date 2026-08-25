@@ -403,6 +403,48 @@ Page {
                 }
             }
 
+            // ---- 隐私与数据摘要 (SECURITY_AND_PRIVACY.md §3; 内嵌
+            // 一页纸口径, 导出/清除的操作入口在家长中心同名区) ------------
+            Rectangle {
+                Layout.fillWidth: true
+                implicitHeight: privacySummaryColumn.implicitHeight + 2 * Theme.spacing
+                radius: Theme.radiusCard
+                color: Theme.surface
+                border.color: Theme.cardBorder
+                border.width: 1
+
+                ColumnLayout {
+                    id: privacySummaryColumn
+                    anchors.centerIn: parent
+                    width: parent.width - 2 * Theme.spacing
+                    spacing: 8
+
+                    Text {
+                        text: "隐私与数据"
+                        font.pixelSize: Theme.fontButton
+                        font.bold: true
+                        color: Theme.primary
+                    }
+                    Text {
+                        Layout.fillWidth: true
+                        text: "全部数据只保存在这台设备上: 搭建进度与成就、收藏、"
+                              + "磁力片库存和这里的设置。默认无账号、无广告、无第三方"
+                              + "分析, 不采集孩子的任何个人信息。"
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                        wrapMode: Text.WordWrap
+                    }
+                    Text {
+                        Layout.fillWidth: true
+                        text: "导出进度与清除本地数据在家长中心「隐私与数据」区;"
+                              + " 完整隐私政策草稿见随应用文档 docs/PRIVACY_POLICY_DRAFT.md。"
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                        wrapMode: Text.WordWrap
+                    }
+                }
+            }
+
             Text {
                 Layout.fillWidth: true
                 text: "设置立即生效并保存在本机存档里, 不上传任何数据"

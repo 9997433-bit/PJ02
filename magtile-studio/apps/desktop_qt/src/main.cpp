@@ -41,6 +41,7 @@
 #include "billing_backend.hpp"
 #include "inventory_backend.hpp"
 #include "parent_gate_backend.hpp"
+#include "privacy_backend.hpp"
 #include "settings_backend.hpp"
 #include "studio_backend.hpp"
 #include "tts_backend.hpp"
@@ -179,6 +180,9 @@ int main(int argc, char* argv[]) {
     magtile::qtui::SettingsBackend settings(db_file);
     // 步骤朗读后端桥 (§4.2, QT-4): 系统 TTS 封装, 开关与年龄段共库
     magtile::qtui::TtsBackend tts(db_file);
+    // 隐私与数据后端桥 (SECURITY_AND_PRIVACY.md §4 C4/Z8): 家长中心
+    // 「隐私与数据」区的导出 (JSON) 与一键清除, 与其余桥共库
+    magtile::qtui::PrivacyBackend privacy(db_file);
     // 计费后端桥 (COMMERCIAL_PLAN §2.2): 订阅/IAP 适配层, 桌面开发档走
     // 假计费 (零真实扣费); 「模拟已订阅」开发开关 Debug 构建默认开,
     // Release 可经 --dev-billing 打开 (商店档编译期恒关)
@@ -204,6 +208,7 @@ int main(int argc, char* argv[]) {
     engine.rootContext()->setContextProperty(QStringLiteral("parentGate"), &parent_gate);
     engine.rootContext()->setContextProperty(QStringLiteral("appSettings"), &settings);
     engine.rootContext()->setContextProperty(QStringLiteral("tts"), &tts);
+    engine.rootContext()->setContextProperty(QStringLiteral("privacy"), &privacy);
     engine.rootContext()->setContextProperty(QStringLiteral("billing"), &billing);
     const bool smoke_flow = parser.isSet(smoke_flow_opt);
     engine.rootContext()->setContextProperty(QStringLiteral("smokeParentFlow"), smoke_flow);

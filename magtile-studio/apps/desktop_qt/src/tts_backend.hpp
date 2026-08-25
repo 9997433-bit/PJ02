@@ -61,6 +61,11 @@ public:
     /// 立即停止朗读 (切步 / 退出教程页时调用, 幂等)。
     Q_INVOKABLE void stop();
 
+    /// 「清除本地数据」后的内存复位 (SECURITY_AND_PRIVACY.md §4 C4/Z8):
+    /// settings 表已被清空, 把朗读开关的内存快照拉回默认开 (§4.2)
+    /// 并停掉当前朗读 —— 不写存档, 默认值以「键不存在」表达。
+    Q_INVOKABLE void resetToDefaults();
+
 signals:
     void enabledChanged();
     void stateChanged();

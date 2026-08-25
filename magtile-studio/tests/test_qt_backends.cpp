@@ -19,11 +19,19 @@
 //      本目标不定义 MAGTILE_QT_TTS, 顺带覆盖无引擎静默降级路径;
 //   6. 首启年龄段引导判定 (QT-5, §10.1): 全新存档待引导 / 选档落盘
 //      (age_mode + onboarding_age_done) 且只出现一次 / 选默认 7-9 档
-//      同样落盘 / CLI/GL 已设年龄段或只有完成标记都不再弹 (双保险)。
+//      同样落盘 / CLI/GL 已设年龄段或只有完成标记都不再弹 (双保险);
+//   7. PrivacyBackend (SECURITY_AND_PRIVACY.md §4 C4/Z8): 全量导出
+//      JSON 文件 (格式标识/进度/成就/库存/设置齐全, 两次导出互不
+//      覆盖) / 一键清除四张表 / 清除后各桥回默认 (等价首次启动) /
+//      resetToDefaults 当场复位 (QML onDataCleared 同一条路径)。
 // 用法: magtile_qt_backend_test <临时数据库路径>
 // =============================================================
 
 #include <QCoreApplication>
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QString>
 #include <QVariantList>
 #include <QVariantMap>
@@ -39,6 +47,7 @@
 #include "magtile/progress/progress_store.hpp"
 #include "magtile/progress/ui_settings.hpp"
 #include "parent_gate_backend.hpp"
+#include "privacy_backend.hpp"
 #include "settings_backend.hpp"
 #include "tts_backend.hpp"
 
@@ -411,6 +420,106 @@ int main(int argc, char** argv) {
             expect(!settings.ageOnboardingPending(),
                    "只有完成标记也不再弹引导 (双保险任一即生效)");
         }
+    }
+
+    // ---- 7. PrivacyBackend: 全量导出 / 一键清除 / 回首启状态 -----------
+    // (SECURITY_AND_PRIVACY.md §4 C4/Z8: 家长可查看/导出/删除全部数据)
+    {
+        using magtile::qtui::PrivacyBackend;
+        PrivacyBackend privacy(db_path);
+        expect(privacy.storeAvailable(), "隐私桥存档可用");
+        expect(!privacy.dbFileText().isEmpty(), "「数据存在哪」存档路径非空");
+
+        // 前置数据: 进度 / 成就 / 库存各放一条, 导出应全部带上
+        {
+            progress::ProgressStore store(db_path);
+            store.saveProgress("privacy_probe_01", 2, 30);
+            store.unlockAchievement("privacy_probe_badge");
+            store.setInventory("square", 9);
+        }
+
+        const QString export_dir = QString::fromStdString(
+            (db_path.parent_path() / "privacy_export_test").string());
+        const QString exported = privacy.exportData(export_dir);
+        expect(!exported.isEmpty(), "导出返回文件完整路径");
+        QFile file(exported);
+        expect(file.exists() && file.open(QIODevice::ReadOnly), "导出文件已写盘可读");
+        const QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+        file.close();
+        expect(doc.isObject(), "导出内容是合法 JSON");
+        const QJsonObject root = doc.object();
+        expect(root.value(QStringLiteral("format")).toString() ==
+                       QStringLiteral("magtile_local_data_export") &&
+                   root.value(QStringLiteral("format_version")).toInt() == 1,
+               "导出格式标识与版本正确 (三端导出契约)");
+        expect(root.value(QStringLiteral("exported_at")).toDouble() > 0, "导出带导出时刻");
+        bool progress_in_export = false;
+        const QJsonArray progress_rows =
+            root.value(QStringLiteral("model_progress")).toArray();
+        for (const QJsonValue& row : progress_rows) {
+            if (row.toObject().value(QStringLiteral("model_id")).toString() ==
+                QStringLiteral("privacy_probe_01")) {
+                progress_in_export =
+                    row.toObject().value(QStringLiteral("current_step")).toInt() == 2;
+            }
+        }
+        expect(progress_in_export, "导出含进度记录 (model_id + 当前步)");
+        expect(root.value(QStringLiteral("tile_inventory"))
+                       .toObject()
+                       .value(QStringLiteral("square"))
+                       .toInt() == 9,
+               "导出含磁力片库存");
+        expect(!root.value(QStringLiteral("settings")).toObject().isEmpty(),
+               "导出含设置键值");
+        bool badge_in_export = false;
+        const QJsonArray achievement_rows =
+            root.value(QStringLiteral("achievements")).toArray();
+        for (const QJsonValue& row : achievement_rows) {
+            badge_in_export = badge_in_export ||
+                              row.toObject().value(QStringLiteral("id")).toString() ==
+                                  QStringLiteral("privacy_probe_badge");
+        }
+        expect(badge_in_export, "导出含成就");
+
+        // 时间戳文件名: 两次导出互不覆盖, 家长可留多份存档
+        const QString exported_again = privacy.exportData(export_dir);
+        expect(!exported_again.isEmpty() && exported_again != exported,
+               "再次导出生成新文件不覆盖旧档");
+
+        // 一键清除: 四张表单事务原子清空, 同库其他连接立即可见
+        expect(privacy.clearAllData(), "clearAllData 返回 true");
+        {
+            progress::ProgressStore store(db_path);
+            expect(!store.loadProgress("privacy_probe_01").has_value(), "清除后进度消失");
+            expect(store.listAchievements().empty(), "清除后成就清空");
+            expect(!store.hasInventory(), "清除后库存回未登记引导态");
+            expect(store.listSettings().empty(), "清除后 settings 表为空");
+        }
+    }
+    {
+        // 清除后重开各桥 = 首次启动: 设置/朗读回默认, 首启引导重新待命
+        SettingsBackend settings(db_path);
+        expect(settings.fontScalePercent() == 100 && !settings.reduceMotion() &&
+                   settings.ageModeId() == QStringLiteral("age_7_9"),
+               "清除后重开设置桥回默认 (等价首启)");
+        expect(settings.ageOnboardingPending(),
+               "清除后首启年龄段引导重新待完成 (温和回到首次状态)");
+        magtile::qtui::TtsBackend tts(db_path);
+        expect(tts.enabled(), "清除后重开朗读桥回默认开");
+
+        // 清除流程的当场复位 (Main.qml onDataCleared 同一条调用路径)
+        settings.setFontScalePercent(150);
+        settings.setReduceMotion(true);
+        settings.setAgeModeId(QStringLiteral("age_4_6"));
+        tts.setEnabled(false);
+        magtile::qtui::PrivacyBackend privacy(db_path);
+        expect(privacy.clearAllData(), "再次清除返回 true");
+        settings.resetToDefaults();
+        tts.resetToDefaults();
+        expect(settings.fontScalePercent() == 100 && !settings.reduceMotion() &&
+                   settings.ageModeId() == QStringLiteral("age_7_9"),
+               "resetToDefaults 把设置内存快照拉回默认");
+        expect(tts.enabled(), "resetToDefaults 把朗读开关拉回默认开");
     }
 
     if (g_failures == 0) {

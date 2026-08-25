@@ -130,6 +130,28 @@ object MagTileNative {
      */
     external fun parentGateSessionActive(): Boolean
 
+    // ---- 隐私与数据 (SECURITY_AND_PRIVACY.md §3/§4 C4/Z8: 家长可
+    //      查看/导出/删除全部本地数据; 复用核心库
+    //      progress::exportLocalDataJson / ProgressStore::clearAllData,
+    //      与桌面 Qt 家长中心「隐私与数据」区同一实现与导出格式) ------
+
+    /**
+     * 导出全部本地数据 (进度/成就/磁力片库存/设置 —— 应用在本机的
+     * 全部用户数据) 为家长可读的 JSON 文本 (缩进 2 空格, 顶层含
+     * format/format_version/exported_at, 与桌面导出同格式)。
+     * 写文件由调用方完成; 存档未打开/读库失败返回 {"error":"..."}
+     * (界面温和提示, 不弹「失败」)。
+     */
+    external fun exportLocalDataJson(): String
+
+    /**
+     * 清除全部本地数据: 进度/成就/库存/设置四张表单事务原子清空
+     * (要么全清要么不动), 清完等价首次启动的空档状态。入口须在
+     * 家长门后且调用前须经界面二次确认。成功返回 true; 存档未打开
+     * 或清除失败返回 false (界面温和提示)。
+     */
+    external fun clearLocalData(): Boolean
+
     init {
         // 与 MainActivity 共用同一 libmagtile_core.so (loadLibrary 幂等)
         System.loadLibrary("magtile_core")

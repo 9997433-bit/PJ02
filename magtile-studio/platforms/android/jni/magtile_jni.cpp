@@ -40,6 +40,15 @@
 //   parentGateSubmitJson(answer)  -> 提交答案, 返回结果 + 剩余次数/冷却
 //   parentGateSessionActive()     -> 家长会话是否仍有效 (免重复验证)
 //
+// 隐私与数据链路 (绑定 com.magtile.studio.MagTileNative, 直接复用
+// progress::exportLocalDataJson / ProgressStore::clearAllData ——
+// 与桌面 Qt 家长中心「隐私与数据」区同一核心实现与导出格式,
+// SECURITY_AND_PRIVACY.md §4 C4/Z8; 入口在家长门后):
+//   exportLocalDataJson()         -> 全部本地数据 JSON (进度/成就/库存/
+//                                    设置), 写文件由 Kotlin 侧完成
+//   clearLocalData()              -> 单事务原子清空四张表 (二次确认在
+//                                    Kotlin 侧; 清完回到首次启动状态)
+//
 // 说明: 3D 教程视口链路 (场景加载 / 设步 / 相机手势 / GLES3 渲染循环,
 // 绑定 com.magtile.studio.TutorialSceneNative) 在 magtile_scene_jni.cpp。
 // =============================================================
@@ -78,6 +87,7 @@
 #include "magtile/core/age_mode.hpp"
 #include "magtile/physics/physics_validator.hpp"
 #include "magtile/progress/age_settings.hpp"
+#include "magtile/progress/data_privacy.hpp"
 #include "magtile/progress/progress_store.hpp"
 #include "magtile/tutorial/tutorial_engine.hpp"
 
@@ -949,6 +959,54 @@ JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_parentGateSessi
     auto& ctx = gateContext();
     std::lock_guard<std::mutex> lock(ctx.mutex);
     return ctx.gate.sessionActive() ? JNI_TRUE : JNI_FALSE;
+}
+
+// =============================================================
+// 隐私与数据 (SECURITY_AND_PRIVACY.md §3 / §4 C4/Z8, 绑定
+// com.magtile.studio.MagTileNative): 家长可查看、导出、删除全部
+// 本地数据。直接复用核心库 progress::exportLocalDataJson /
+// ProgressStore::clearAllData —— 与桌面 Qt 家长中心「隐私与数据」
+// 区同一实现与导出格式; Kotlin 侧入口在家长门后, 清除另有二次确认。
+// =============================================================
+
+/// 导出全部本地数据 (进度/成就/磁力片库存/设置, 即 §3.1 数据清单的
+/// 本地全集) 为家长可读的 JSON 文本 (缩进 2 空格, 与桌面同格式);
+/// 写文件由 Kotlin 侧完成 (应用专属外部目录, 家长可用文件管理器取走)。
+/// 存档未打开 / 读库失败返回 {"error":"..."} (界面温和提示)。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_exportLocalDataJson(
+    JNIEnv* env, jobject /*thiz*/) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    if (!ctx.store.has_value()) {
+        return toJString(env, nlohmann::json({{"error", "进度存档未打开"}}).dump());
+    }
+    try {
+        return toJString(env, magtile::progress::exportLocalDataJson(*ctx.store));
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("exportLocalDataJson 失败: %s", e.what());
+        return toJString(env, nlohmann::json({{"error", e.what()}}).dump());
+    }
+}
+
+/// 清除全部本地数据: 进度/成就/库存/设置四张表单事务原子清空 (要么
+/// 全清要么不动), 表结构与 schema 版本保留, 清完等价首次启动的空档。
+/// 二次确认在 Kotlin 侧 (入口本身已在家长门后)。成功返回 true;
+/// 存档未打开 / 清除失败返回 false (界面温和提示, 不弹「失败」)。
+JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_clearLocalData(
+    JNIEnv* /*env*/, jobject /*thiz*/) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    if (!ctx.store.has_value()) {
+        MAGTILE_LOGE("clearLocalData 失败: 进度存档未打开");
+        return JNI_FALSE;
+    }
+    try {
+        ctx.store->clearAllData();
+        return JNI_TRUE;
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("clearLocalData 失败: %s", e.what());
+        return JNI_FALSE;
+    }
 }
 
 }  // extern "C"

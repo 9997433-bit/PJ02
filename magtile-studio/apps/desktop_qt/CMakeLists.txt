@@ -43,6 +43,7 @@ qt_add_executable(magtile_studio_qt
     src/studio_backend.cpp
     src/inventory_backend.cpp
     src/parent_gate_backend.cpp
+    src/privacy_backend.cpp
     src/settings_backend.cpp
     src/tts_backend.cpp
     src/billing_backend.cpp
@@ -120,6 +121,7 @@ if(MAGTILE_BUILD_TESTS)
             src/library_model.cpp
             src/library_filter_model.cpp
             src/parent_gate_backend.cpp
+            src/privacy_backend.cpp
             src/settings_backend.cpp
             src/tts_backend.cpp
         )

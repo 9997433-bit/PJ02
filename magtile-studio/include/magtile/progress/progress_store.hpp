@@ -112,6 +112,16 @@ public:
     /// 通用键值设置 (settings 表), 供音量 / 语言等杂项复用。
     void setSetting(const std::string& key, const std::string& value);
     [[nodiscard]] std::optional<std::string> getSetting(const std::string& key) const;
+    /// settings 表全量快照 (键 -> 值): 家长数据导出用
+    /// (SECURITY_AND_PRIVACY.md §4 C4/Z8, 配合 data_privacy.hpp)。
+    [[nodiscard]] std::map<std::string, std::string> listSettings() const;
+
+    // ---- 家长数据控制: 一键清除 (SECURITY_AND_PRIVACY.md §4 C4/Z8) ---
+    /// 清除全部本地数据: 进度 / 成就 / 磁力片库存 / 设置四张表在
+    /// 单个事务里原子清空 (要么全清要么不动, 不留半清状态)。表结构
+    /// 与 schema 版本保留, 清完即等价首次启动的空档 —— hasInventory
+    /// 回到未登记引导态, 各设置读取回默认值。失败抛 ProgressError。
+    void clearAllData();
 
 private:
     void initializeSchema();

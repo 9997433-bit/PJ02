@@ -361,7 +361,8 @@ class MainActivity : Activity() {
     }
 
     /** 三档单选对话框 (展示名对齐 core::displayNameZh); 家长门通过
-     *  后由标题栏入口调起 (ParentGateDialog.requireParent)。 */
+     *  后由标题栏入口调起 (ParentGateDialog.requireParent)。中性键
+     *  「隐私与数据」进隐私面板 (同在家长门后, 与桌面家长中心一致)。 */
     private fun showAgeModeDialog() {
         val ids = listOf(AGE_4_6, AGE_7_9, AGE_10_12)
         val labels = arrayOf(
@@ -374,8 +375,93 @@ class MainActivity : Activity() {
                 dialog.dismiss()
                 switchAgeMode(ids[which])
             }
+            .setNeutralButton(R.string.privacy_entry) { _, _ -> showPrivacyDialog() }
             .setNegativeButton(R.string.dialog_close, null)
             .show()
+    }
+
+    // ---- 隐私与数据 (SECURITY_AND_PRIVACY.md §3/§4 C4/Z8, 家长门后;
+    //      文案口径与桌面 Qt 家长中心「隐私与数据」区一致) ---------------
+
+    /** 隐私面板: 我们收集什么 / 数据存在哪 (存档路径) / 隐私政策文档
+     *  路径 + 「导出进度 (JSON)」与「清除本地数据」(带二次确认)。 */
+    private fun showPrivacyDialog() {
+        val dbPath = File(filesDir, PROGRESS_DB_NAME).absolutePath
+        AlertDialog.Builder(this)
+            .setTitle(R.string.privacy_dialog_title)
+            .setMessage(getString(R.string.privacy_summary, dbPath))
+            .setPositiveButton(R.string.privacy_export) { _, _ -> exportLocalData() }
+            .setNeutralButton(R.string.privacy_clear) { _, _ -> confirmClearLocalData() }
+            .setNegativeButton(R.string.dialog_close, null)
+            .show()
+    }
+
+    /** 导出全部本地数据为 JSON 文件 (复用核心库导出, 与桌面同格式):
+     *  写入应用专属外部目录 (无需任何权限, 家长可用文件管理器取走;
+     *  外部存储不可用时退回 filesDir), 文件名带时间戳互不覆盖。 */
+    private fun exportLocalData() {
+        backgroundExecutor.execute {
+            val result = try {
+                val payload = MagTileNative.exportLocalDataJson()
+                if (payload.startsWith("{\"error\"")) {
+                    null
+                } else {
+                    val stamp = java.text.SimpleDateFormat(
+                        "yyyyMMdd_HHmmss", java.util.Locale.US).format(java.util.Date())
+                    val dir = getExternalFilesDir(null) ?: filesDir
+                    File(dir, "magtile_export_$stamp.json").apply { writeText(payload) }
+                }
+            } catch (t: Throwable) {
+                Log.e(TAG, "本地数据导出失败", t)
+                null
+            }
+            runOnUiThread {
+                if (isFinishing || isDestroyed) return@runOnUiThread
+                android.widget.Toast.makeText(
+                    this,
+                    if (result != null) getString(R.string.privacy_export_done, result.absolutePath)
+                    else getString(R.string.privacy_export_soft_fail),
+                    android.widget.Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    /** 清除本地数据的二次确认 (入口已在家长门后, §6.1 数据操作):
+     *  说清删什么 + 不可恢复 + 引导先导出; 「先不清除」为安全默认。 */
+    private fun confirmClearLocalData() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.privacy_clear_confirm_title)
+            .setMessage(R.string.privacy_clear_confirm_text)
+            .setPositiveButton(R.string.privacy_clear_confirm_no, null)
+            .setNegativeButton(R.string.privacy_clear_confirm_yes) { _, _ -> clearLocalData() }
+            .show()
+    }
+
+    /** 执行清除 (单事务原子清空) 并温和回到首次状态: 年龄段回默认档、
+     *  重拉模型库 (库存回未登记引导态), 只报结果不弹「失败」。 */
+    private fun clearLocalData() {
+        backgroundExecutor.execute {
+            val cleared = try {
+                MagTileNative.clearLocalData()
+            } catch (t: Throwable) {
+                Log.e(TAG, "本地数据清除失败", t)
+                false
+            }
+            runOnUiThread {
+                if (isFinishing || isDestroyed) return@runOnUiThread
+                if (cleared) {
+                    // 温和回到首次状态: settings 已清空, 界面同步回默认档
+                    ageModeId = AGE_7_9
+                    applyAgeMode()
+                    refreshLibraryAsync(enableBuildable = false)
+                }
+                android.widget.Toast.makeText(
+                    this,
+                    getString(if (cleared) R.string.privacy_clear_done
+                              else R.string.privacy_clear_soft_fail),
+                    android.widget.Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     /** 切换年龄段: 立即生效 (收放筛选 + 换卡片密度), 工作线程落盘。 */

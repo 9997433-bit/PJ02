@@ -150,6 +150,18 @@ ApplicationWindow {
             onBack: stack.pop()
             onOpenSettings: stack.push(settingsComponent)
             onOpenSubscription: stack.push(subscriptionComponent)
+            onNotify: function(message) { window.showToast(message) }
+            // 清除本地数据后 (SECURITY_AND_PRIVACY.md §4 C4/Z8): 设置与
+            // 朗读内存复位、模型库重读空存档, 温和回到首次启动状态;
+            // 先退回首页再锁家长会话 (顺序保证守卫不重复弹提示)
+            onDataCleared: {
+                appSettings.resetToDefaults()
+                tts.resetToDefaults()
+                studio.reload()
+                stack.pop(null)
+                parentGate.lockSession()
+                window.showToast("本机数据已清除, 一切都回到了最初的样子")
+            }
             // 「锁定家长区」只结束会话, 退回首页由下方会话守卫统一处理
         }
     }

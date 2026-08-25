@@ -87,4 +87,12 @@ void TtsBackend::stop() {
 #endif
 }
 
+void TtsBackend::resetToDefaults() {
+    stop();
+    if (!enabled_) {
+        enabled_ = true;  // §4.2 默认开; 存档已清空, 无需再写
+        emit enabledChanged();
+    }
+}
+
 }  // namespace magtile::qtui

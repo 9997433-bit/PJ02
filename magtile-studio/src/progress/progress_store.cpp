@@ -409,4 +409,34 @@ std::optional<std::string> ProgressStore::getSetting(const std::string& key) con
     return stmt.columnText(0);
 }
 
+std::map<std::string, std::string> ProgressStore::listSettings() const {
+    Statement stmt(db_, "SELECT key, value FROM settings ORDER BY key;");
+    std::map<std::string, std::string> settings;
+    while (stmt.step()) {
+        settings[stmt.columnText(0)] = stmt.columnText(1);
+    }
+    return settings;
+}
+
+void ProgressStore::clearAllData() {
+    // 家长「清除本地数据」(SECURITY_AND_PRIVACY.md §4 C4/Z8): 四张表
+    // 在单个事务里原子清空; sqlite3_exec 中途失败会自动回滚未提交
+    // 事务, 这里再显式 ROLLBACK 兜底 (忽略其结果), 保证连接不滞留在
+    // 事务中。表结构与 PRAGMA user_version 保留 —— 清完即空档首启态。
+    try {
+        exec(db_,
+             "BEGIN IMMEDIATE;"
+             "DELETE FROM model_progress;"
+             "DELETE FROM achievements;"
+             "DELETE FROM tile_inventory;"
+             "DELETE FROM settings;"
+             "COMMIT;");
+    } catch (...) {
+        char* ignored = nullptr;
+        sqlite3_exec(db_, "ROLLBACK;", nullptr, nullptr, &ignored);
+        sqlite3_free(ignored);
+        throw;
+    }
+}
+
 }  // namespace magtile::progress

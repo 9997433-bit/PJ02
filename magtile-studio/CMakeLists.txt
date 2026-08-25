@@ -75,6 +75,7 @@ add_library(magtile_core STATIC
     src/physics/geometry.cpp
     src/physics/physics_validator.cpp
     src/progress/progress_store.cpp
+    src/progress/data_privacy.cpp
     src/progress/age_settings.cpp
     src/progress/ui_settings.cpp
     src/progress/subscription_settings.cpp

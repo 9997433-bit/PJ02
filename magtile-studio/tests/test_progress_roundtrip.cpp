@@ -3,7 +3,9 @@
 // 覆盖: 保存/读取往返、时长累加、完成标记、收藏切换、列表查询、
 // 成就解锁、磁力片库存 (tile_inventory 表) 登记/读取/BOM 对照
 // (canBuild / missingPieces)、v1 库存 JSON 迁移、跨连接持久化
-// 与重置删除。
+// 与重置删除、隐私与数据控制 (SECURITY_AND_PRIVACY.md §4 C4/Z8:
+// listSettings 全量快照 / exportLocalDataJson 全量导出 /
+// clearAllData 单事务清空并回到首启空档 + 清除落盘持久化)。
 // 用法: magtile_progress_test <临时数据库文件>
 // =============================================================
 
@@ -15,6 +17,7 @@
 #include "magtile/core/model_definition.hpp"
 #include "magtile/core/tile_instance.hpp"
 #include "magtile/core/types.hpp"
+#include "magtile/progress/data_privacy.hpp"
 #include "magtile/progress/progress_store.hpp"
 
 namespace {
@@ -197,6 +200,54 @@ int main(int argc, char** argv) {
         expect(inventory.count("bogus_shape") == 0 && inventory.count("trapezoid") == 0,
                "未知形状与负数数量的遗留条目被丢弃");
         expect(!store.getSetting("tile_inventory").has_value(), "迁移后遗留 JSON 键已删除");
+    }
+
+    // ---- 隐私与数据控制: 全量导出 (JSON) 与一键清除 (C4/Z8) ----
+    {
+        using magtile::progress::exportLocalDataJson;
+        constexpr auto npos = std::string::npos;
+        ProgressStore store(db_file);
+
+        // listSettings: settings 表全量快照 (导出数据源)
+        store.setSetting("age_mode", "age_4_6");
+        const auto settings = store.listSettings();
+        expect(settings.count("age_mode") == 1 && settings.at("age_mode") == "age_4_6",
+               "listSettings 返回 settings 表全量快照");
+
+        // 导出: 进度 / 成就 / 库存 / 设置齐全, 顶层带格式标识
+        const std::string exported = exportLocalDataJson(store);
+        expect(exported.find("\"format\": \"magtile_local_data_export\"") != npos &&
+                   exported.find("\"format_version\": 1") != npos,
+               "导出 JSON 带格式标识与版本 (三端导出契约)");
+        expect(exported.find("rainbow_bridge_01") != npos, "导出含进度记录");
+        expect(exported.find("first_model_done") != npos, "导出含成就");
+        expect(exported.find("\"square\": 30") != npos, "导出含磁力片库存");
+        expect(exported.find("\"age_mode\": \"age_4_6\"") != npos, "导出含设置键值");
+
+        // 一键清除: 四张表单事务原子清空, 回到首次启动的空档状态
+        store.clearAllData();
+        expect(store.listInProgress().empty() && store.listCompleted().empty(),
+               "清除后无任何进度记录");
+        expect(store.listAchievements().empty(), "清除后成就清空");
+        expect(!store.hasInventory() && store.getInventory().empty(),
+               "清除后库存回到未登记引导态");
+        expect(store.listSettings().empty(), "清除后设置表为空 (各设置回默认)");
+
+        // schema 保留: 清除后可立即重新写入 (无需重建库)
+        store.saveProgress("castle_foundation_01", 1, 10);
+        expect(store.loadProgress("castle_foundation_01").has_value(),
+               "清除后可立即重新写入 (表结构保留)");
+    }
+
+    // ---- 重开数据库: 清除与清除后的新写入都真正落盘 ----
+    {
+        ProgressStore store(db_file);
+        expect(store.listSettings().empty() && !store.hasInventory() &&
+                   store.listAchievements().empty(),
+               "重开后仍是清除后状态 (清除持久化)");
+        const auto record = store.loadProgress("castle_foundation_01");
+        expect(record.has_value() && record->current_step == 1,
+               "清除后的新写入跨连接持久化");
     }
 
     if (g_failures == 0) {
