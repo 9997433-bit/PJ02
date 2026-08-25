@@ -1,0 +1,997 @@
+{
+  "schema_version": 1,
+  "id": "hedgehog_01",
+  "name": "森林小刺猬",
+  "name_en": "Forest Hedgehog 01",
+  "description": "只用核心九片型的刺猬首秀: 与坐姿大熊猫的头部墙环和猫头鹰的图腾柱都不同, 小刺猬是'满背芒刺骑满每一条拼缝' —— 3x2 伏卧墙环上六片背甲盖板拼出五条拼缝与东侧沿口, 每一段都骑一片灰色等边三角背刺, 九根芒刺根根双边受力, 拼缝本身成了造型主角; 清色脸颊朝西, 双耳骑背甲西沿, 小灰鼻蹲在脸前地缝上; 身旁一只四棱自锁的红苹果, 东北角冒出两朵小蘑菇 —— 秋天的傍晚, 小刺猬正忙着把过冬的粮食运回落叶窝呢!",
+  "difficulty": 3,
+  "total_pieces": 53,
+  "tags": [
+    "自然",
+    "动物世界",
+    "刺猬",
+    "森林",
+    "秋天",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 28,
+        "equilateral_triangle": 19,
+        "rectangle": 6
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ground_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_1_0",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_4_0",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "nest_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nest_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nest_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ground_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "nest_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nest_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nest_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ground_4_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_0_3",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_2_3",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_4_3",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "body_s_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_s_m",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_s_e",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_n_m",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_n_e",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "face_s",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "face_n",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_e_s",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_e_n",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_w_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_m_s",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_e_s",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_w_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_m_n",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_e_n",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "spike_mid_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_mid_m",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_mid_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_w_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_w_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_e_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_e_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_tail_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_tail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ear_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ear_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nose",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "apple_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "apple_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "apple_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "apple_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shroom_a",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shroom_b",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "leaf_pile",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺林地南行: 苔藓长板与落叶方板互吸, 东边留出苹果的底格。",
+      "tip": "秋天的森林里沙沙作响 —— 是谁在落叶堆里忙着运粮?",
+      "tiles_to_add": [
+        "ground_0_0",
+        "ground_1_0",
+        "ground_3_0",
+        "ground_4_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺中段两行: 橙色的是刺猬的落叶窝, 墙脚要踩住这些拼缝。",
+      "tip": "行行等边互吸 —— 窝底铺的全是单位方板。",
+      "tiles_to_add": [
+        "ground_0_1",
+        "nest_1_1",
+        "nest_2_1",
+        "nest_3_1",
+        "ground_4_1",
+        "ground_5_1",
+        "ground_0_2",
+        "nest_1_2",
+        "nest_2_2",
+        "nest_3_2",
+        "ground_4_2"
+      ],
+      "highlight_tiles": [
+        "ground_1_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺林地北行: 三条长板收口, 林间空地铺满。",
+      "tip": "东北角的苔藓地上, 待会儿要冒出小蘑菇。",
+      "tiles_to_add": [
+        "ground_0_3",
+        "ground_2_3",
+        "ground_4_3"
+      ],
+      "highlight_tiles": [
+        "nest_1_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立身体南墙与脸颊: 清色的两片是刺猬的白脸颊, 朝西。",
+      "tip": "刺猬伏卧的身体是 3x2 的墙环 —— 墙脚踩住拼缝才稳。",
+      "tiles_to_add": [
+        "body_s_w",
+        "body_s_m",
+        "body_s_e",
+        "face_s",
+        "face_n"
+      ],
+      "highlight_tiles": [
+        "nest_1_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "合身体北墙与尾墙: 十片墙环四角竖边互咬闭环。",
+      "tip": "墙环合拢 —— 圆滚滚的小身子有了。",
+      "tiles_to_add": [
+        "body_n_w",
+        "body_n_m",
+        "body_n_e",
+        "body_e_s",
+        "body_e_n"
+      ],
+      "highlight_tiles": [
+        "body_s_w"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "盖背甲: 六片橙色盖板边边入扣墙顶, 板板互吸。",
+      "tip": "盖板拼出的每一条缝都记好位置 —— 那是背刺的家。",
+      "tiles_to_add": [
+        "back_w_s",
+        "back_m_s",
+        "back_e_s",
+        "back_w_n",
+        "back_m_n",
+        "back_e_n"
+      ],
+      "highlight_tiles": [
+        "body_s_m"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立中线刺: 三根灰刺骑住背甲正中的拼缝, 一根挨一根。",
+      "tip": "每根刺的底边同时咬住两侧盖板 —— 双路受力才结实。",
+      "tiles_to_add": [
+        "spike_mid_w",
+        "spike_mid_m",
+        "spike_mid_e"
+      ],
+      "highlight_tiles": [
+        "back_w_s"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立双缝刺: 四根灰刺骑住南北向的两条拼缝。",
+      "tip": "拼缝本身就是造型主角 —— 背上的刺越来越密了。",
+      "tiles_to_add": [
+        "spike_w_s",
+        "spike_w_n",
+        "spike_e_s",
+        "spike_e_n"
+      ],
+      "highlight_tiles": [
+        "spike_mid_m"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立尾刺: 两根灰刺骑住东沿口, 同时咬住盖板沿边和墙顶边。",
+      "tip": "沿口的刺也有两条受力路 —— 小刺猬从头武装到尾。",
+      "tiles_to_add": [
+        "spike_tail_s",
+        "spike_tail_n"
+      ],
+      "highlight_tiles": [
+        "body_e_s"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "竖耳朵, 放鼻头: 双耳骑背甲西沿, 小鼻头蹲在脸前的地缝上。",
+      "tip": "清色脸颊配小灰鼻 —— 嗅嗅, 苹果在哪儿?",
+      "tiles_to_add": [
+        "ear_s",
+        "ear_n",
+        "nose"
+      ],
+      "highlight_tiles": [
+        "face_s"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "结红苹果: 四片红色等边三角斜棱互吸, 自锁成锥。",
+      "tip": "四条底边都要整边吸住脚下的方板 —— 今晚的粮食找到了!",
+      "tiles_to_add": [
+        "apple_s",
+        "apple_e",
+        "apple_n",
+        "apple_w"
+      ],
+      "highlight_tiles": [
+        "ground_3_0"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "冒蘑菇丛, 堆落叶: 森林小刺猬完工!",
+      "tip": "传说刺猬会用背刺扎起苹果搬回家 —— 你信不信?",
+      "tiles_to_add": [
+        "shroom_a",
+        "shroom_b",
+        "leaf_pile"
+      ],
+      "highlight_tiles": [
+        "nose",
+        "apple_s"
+      ]
+    }
+  ]
+}
