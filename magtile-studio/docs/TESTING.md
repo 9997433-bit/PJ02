@@ -424,7 +424,7 @@ ctest --test-dir build -R "physics_jitter|validate_jitter" --output-on-failure
 
 ### 3.19 内容治理机检 (series 归类 / D3 冻结硬闸门 / 矩阵进度)
 
-内容缺口审计 [reports/CONTENT_GAP_AUDIT.md](reports/CONTENT_GAP_AUDIT.md) §7.3 三条机制建议的机检落地; 批次纪律侧的约束见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §4.3。
+内容缺口审计 [reports/CONTENT_GAP_AUDIT.md](reports/CONTENT_GAP_AUDIT.md) §7.3 三条机制建议的机检落地; 批次纪律侧的约束见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §4.3。内容批 PR 评审时, series 归类与 D3 冻结两道闸由一键机检脚本 `tools/review_content_batch.sh` 与 strict 校验/片型分层/唯一性抽查串成一条命令执行 (五道关卡全部阻断, 用法见 CONTENT_STRATEGY.md §4.3「批次评审一键机检」)。
 
 **series 归类机检 (可选关卡 20)** —— 脚本 `tools/check_content_series.py`。全库 250 个模型的 `content_meta.series` 已按缺口审计附录 A 底稿全量回填 (矩阵内 176 个写 13 主题 slug, 矩阵外 74 个写 `series: null` + `matrix_bucket` 聚桶), 自此归类是**入库必填**: 每个模型必须带 `content_meta.series` (13 策略主题之一, [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2.2) 或 `content_meta.matrix_bucket` (矩阵外桶) **恰好其一**, 词值受控于权威词表 `data/content_series_map.json` (词表语义与维护规则见同目录 `content_series_map.README.md`; slug 一经回填不得改名, 增删词须策展决断)。`--strict` 下任何缺失/非法即退出 1; 常见回填笔误 (字段写反、误用中文主题名) 给定向修复提示。新模型入库时在词表 `models` 节登记归类, 用幂等回填工具 `tools/backfill_content_series.py` 落盘 (只写 `series`/`matrix_bucket` 两键, 其余字段原样保留, 落盘后自检全库覆盖率)。
 
@@ -434,7 +434,7 @@ MAGTILE_SERIES_CHECK=1 tests/run_full_qa.sh                  # 随全量 QA (可
 python3 tools/backfill_content_series.py --dry-run           # 词表登记后回填 (先看将发生的改动)
 ```
 
-全量 QA 中默认跳过 (归类只在内容批次合入时变化, 日常代码合入不受它约束); **内容批次评审与发布打包置 `MAGTILE_SERIES_CHECK=1` 作硬闸门**。
+同口径 CTest 关卡 `content_series_gate` (同样 `--strict`) 已随全量回归 (关卡 3) 常开 —— 漏归类/词值走样在每次 push 即被拦截; QA 可选关卡 20 是同一检查的独立分项入口, 默认跳过, **内容批次评审与发布打包 (`--full` 档) 置 `MAGTILE_SERIES_CHECK=1` 开启**。
 
 **D3 冻结硬闸门 (关卡 21, 难度配额报告/守卫)** —— 脚本 `tools/check_difficulty_quota.py`。全库 D3 (熟练档) 已超 520 终态目标而 D1/D5 两端空转, 审计把"D3 冻结"从纸面建议升级为批次评审机检。QA 关卡 21 常开报告档 (冻结只报告不阻断), `MAGTILE_DIFFICULTY_QUOTA=1` 升级为 strict 守卫档; 同口径 CTest 关卡 `difficulty_quota_gate` (报告档) 随全量回归常跑:
 
