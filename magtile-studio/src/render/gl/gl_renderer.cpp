@@ -1,17 +1,10 @@
 // =============================================================
 // MagTile Studio - GLFW + OpenGL 4.1 Core 渲染后端实现
 //
-// 渲染管线概览 (每帧):
-//   1. submitTile 阶段: 磁力片经 physics::transformTile 展开为世界
-//      坐标几何并缓存;
-//   2. endFrame 阶段: 按视线方向由远及近排序 (画家算法), 把每片
-//      挤出成带厚度的薄板 (真实磁力片约 5mm 厚), 填充半透明彩色;
-//   3. 高亮描边以不透明色带 (面内边框) 绘制, 避开 Core Profile
-//      下 glLineWidth > 1 的兼容性限制;
-//   4. Dear ImGui 绘制教程 HUD (步骤说明 / 进度 / 导航按钮)。
-//
-// 半透明策略: 磁力片整体按质心深度排序后关闭深度写入绘制, 对本
-// 应用的规模 (数百片凸多边形) 视觉效果稳定且实现简单。
+// 3D 场景 (地面网格 / 半透明磁力片 / 高亮描边) 由无窗口的
+// GlSceneRenderer 绘制 (gl_scene_renderer.cpp, 与 Qt 教程视口
+// 共用同一实现); 本文件负责 GLFW 窗口 / 输入 / 轨道相机交互与
+// Dear ImGui 界面 (教程 HUD / 模型库 / 家长门 / 库存录入)。
 // =============================================================
 
 #include "magtile/render/gl_renderer.hpp"
@@ -42,155 +35,15 @@
 #include <stb/stb_image.h>
 
 #include "gl_api.hpp"
-#include "magtile/physics/geometry.hpp"
+#include "magtile/render/gl_scene_renderer.hpp"
 
 namespace magtile::render {
 namespace {
 
 using namespace glapi;
-using core::Vec3;
 
-// ---- 渲染参数 ----------------------------------------------------
-constexpr float kTileThickness = 0.06f;   ///< 磁力片厚度 (世界单位, ≈4mm 实物)
-constexpr float kOutlineWidth = 0.07f;    ///< 高亮描边色带宽度
-constexpr int kGridHalfExtent = 12;       ///< 地面网格半径 (格)
+// ---- 交互参数 ----------------------------------------------------
 constexpr double kRotateSpeedDegPerPx = 0.32;
-constexpr float kClearColor[3] = {0.90f, 0.925f, 0.95f};
-
-// ---- 小型 4x4 矩阵 (列主序, 可直接传 glUniformMatrix4fv) -----------
-struct Mat4 {
-    std::array<float, 16> m{};
-
-    static Mat4 perspective(double fov_deg, double aspect, double z_near, double z_far) {
-        const double f = 1.0 / std::tan(fov_deg * 0.5 * core::kDegToRad);
-        Mat4 r;
-        r.m[0] = static_cast<float>(f / aspect);
-        r.m[5] = static_cast<float>(f);
-        r.m[10] = static_cast<float>((z_far + z_near) / (z_near - z_far));
-        r.m[11] = -1.0f;
-        r.m[14] = static_cast<float>(2.0 * z_far * z_near / (z_near - z_far));
-        return r;
-    }
-
-    static Mat4 lookAt(const Vec3& eye, const Vec3& target, const Vec3& up) {
-        const Vec3 f = (target - eye).normalized();
-        const Vec3 s = f.cross(up).normalized();
-        const Vec3 u = s.cross(f);
-        Mat4 r;
-        r.m = {static_cast<float>(s.x),  static_cast<float>(u.x),  static_cast<float>(-f.x), 0.0f,
-               static_cast<float>(s.y),  static_cast<float>(u.y),  static_cast<float>(-f.y), 0.0f,
-               static_cast<float>(s.z),  static_cast<float>(u.z),  static_cast<float>(-f.z), 0.0f,
-               static_cast<float>(-s.dot(eye)), static_cast<float>(-u.dot(eye)),
-               static_cast<float>(f.dot(eye)), 1.0f};
-        return r;
-    }
-
-    Mat4 operator*(const Mat4& o) const {
-        Mat4 r;
-        for (int col = 0; col < 4; ++col) {
-            for (int row = 0; row < 4; ++row) {
-                float sum = 0.0f;
-                for (int k = 0; k < 4; ++k) sum += m[k * 4 + row] * o.m[col * 4 + k];
-                r.m[col * 4 + row] = sum;
-            }
-        }
-        return r;
-    }
-};
-
-// ---- 颜色 --------------------------------------------------------
-struct Rgba {
-    float r = 1.0f, g = 1.0f, b = 1.0f, a = 1.0f;
-};
-
-/// 磁力片半透明彩色 ABS 的基准色。
-Rgba tileBaseColor(core::TileColor color) {
-    switch (color) {
-        case core::TileColor::Red: return {0.91f, 0.22f, 0.25f, 1.0f};
-        case core::TileColor::Orange: return {0.98f, 0.55f, 0.15f, 1.0f};
-        case core::TileColor::Yellow: return {0.99f, 0.83f, 0.18f, 1.0f};
-        case core::TileColor::Green: return {0.28f, 0.75f, 0.36f, 1.0f};
-        case core::TileColor::Cyan: return {0.20f, 0.74f, 0.82f, 1.0f};
-        case core::TileColor::Blue: return {0.23f, 0.46f, 0.90f, 1.0f};
-        case core::TileColor::Purple: return {0.58f, 0.36f, 0.86f, 1.0f};
-        case core::TileColor::Pink: return {0.95f, 0.48f, 0.70f, 1.0f};
-        case core::TileColor::Clear: return {0.85f, 0.90f, 0.94f, 1.0f};
-        case core::TileColor::Gray: return {0.55f, 0.58f, 0.62f, 1.0f};
-    }
-    return {0.7f, 0.7f, 0.7f, 1.0f};
-}
-
-Rgba mix(const Rgba& a, const Rgba& b, float t) {
-    return {a.r + (b.r - a.r) * t, a.g + (b.g - a.g) * t, a.b + (b.b - a.b) * t,
-            a.a + (b.a - a.a) * t};
-}
-
-// ---- 着色器 ------------------------------------------------------
-// 顶点已在 CPU 侧变换到世界坐标, 只需一个视图投影矩阵。
-const char* const kVertexShaderSrc = R"GLSL(#version 410 core
-layout(location = 0) in vec3 a_position;
-layout(location = 1) in vec3 a_normal;
-layout(location = 2) in vec4 a_color;
-uniform mat4 u_view_proj;
-out vec3 v_normal;
-out vec3 v_world_pos;
-out vec4 v_color;
-void main() {
-    v_normal = a_normal;
-    v_world_pos = a_position;
-    v_color = a_color;
-    gl_Position = u_view_proj * vec4(a_position, 1.0);
-}
-)GLSL";
-
-// 双面受光 + 边缘增亮, 模拟半透明彩色塑料的通透感。
-const char* const kFragmentShaderSrc = R"GLSL(#version 410 core
-in vec3 v_normal;
-in vec3 v_world_pos;
-in vec4 v_color;
-uniform vec3 u_camera_pos;
-uniform int u_unlit;
-out vec4 frag_color;
-void main() {
-    if (u_unlit == 1) {
-        frag_color = v_color;
-        return;
-    }
-    vec3 n = normalize(v_normal);
-    vec3 light_dir = normalize(vec3(0.35, 0.25, 0.9));
-    float diffuse = abs(dot(n, light_dir));
-    vec3 view_dir = normalize(u_camera_pos - v_world_pos);
-    float rim = pow(1.0 - abs(dot(n, view_dir)), 2.0);
-    vec3 color = v_color.rgb * (0.5 + 0.5 * diffuse) + vec3(0.22) * rim;
-    float alpha = clamp(v_color.a + 0.18 * rim * v_color.a, 0.0, 1.0);
-    frag_color = vec4(color, alpha);
-}
-)GLSL";
-
-/// 顶点布局: 位置 3f + 法向 3f + 颜色 4f。
-constexpr int kFloatsPerVertex = 10;
-
-void appendVertex(std::vector<float>& out, const Vec3& p, const Vec3& n, const Rgba& c) {
-    out.insert(out.end(), {static_cast<float>(p.x), static_cast<float>(p.y),
-                           static_cast<float>(p.z), static_cast<float>(n.x),
-                           static_cast<float>(n.y), static_cast<float>(n.z), c.r, c.g, c.b, c.a});
-}
-
-GLuint compileShader(GLenum type, const char* source) {
-    const GLuint shader = glCreateShader(type);
-    glShaderSource(shader, 1, &source, nullptr);
-    glCompileShader(shader);
-    GLint ok = 0;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &ok);
-    if (ok == 0) {
-        std::array<GLchar, 1024> log{};
-        glGetShaderInfoLog(shader, static_cast<GLsizei>(log.size()), nullptr, log.data());
-        std::fprintf(stderr, "[render] 着色器编译失败:\n%s\n", log.data());
-        glDeleteShader(shader);
-        return 0;
-    }
-    return shader;
-}
 
 /// 查找系统中可用的中文字体 (HUD 步骤文案为中文)。
 const char* findCjkFontPath() {
@@ -227,6 +80,7 @@ void glfwErrorCallback(int error, const char* description) {
 constexpr ImU32 kColorGreen = IM_COL32(43, 158, 78, 255);      ///< 已完成
 constexpr ImU32 kColorGold = IM_COL32(240, 173, 30, 255);      ///< 星级 / 收藏
 constexpr ImU32 kColorInk = IM_COL32(38, 43, 54, 255);         ///< 主文字
+constexpr ImU32 kColorExpansion = IM_COL32(217, 119, 6, 255);  ///< "需要扩展装" 角标 (琥珀)
 const ImVec4 kAccentVec{0.28f, 0.44f, 0.93f, 1.0f};            ///< 品牌蓝
 
 /// 主题标签 -> 卡片主题色: 规范主题 (tools/update_model_catalog.py
@@ -346,16 +200,6 @@ public:
     void requestScreenshot(const std::string& ppm_path) override { screenshot_path_ = ppm_path; }
 
 private:
-    struct PendingTile {
-        physics::TransformedTile geometry;
-        RenderTile state;
-        Rgba base_color;
-        double depth = 0.0;  ///< 沿视线方向的距离, 用于画家算法排序
-    };
-
-    bool createShaderProgram();
-    void createBuffers();
-    void buildGridGeometry();
     void setupImGui();
     /// 模型卡片: 大卡 (网格) 与小卡 (继续搭建区), 点击写入 actions。
     void drawLibraryCard(const LibraryCard& card, const ImVec2& size, bool compact,
@@ -365,10 +209,6 @@ private:
                            InventoryEditorActions& actions);
     /// 缩略图纹理: 首次使用时从 PNG 加载并缓存, 失败缓存 0 (不重试)。
     [[nodiscard]] GLuint thumbnailTexture(const std::string& png_path);
-    void drawVertexBuffer(GLuint vao, GLuint vbo, const std::vector<float>& data, GLenum mode,
-                          bool unlit);
-    void appendTileGeometry(const PendingTile& tile);
-    void appendOutlineBand(const physics::TransformedTile& geom, const Rgba& color);
     [[nodiscard]] bool keyPressed(int key);
     void writeScreenshot();
 
@@ -386,6 +226,7 @@ private:
     int library_difficulty_filter_ = 0;  ///< 0 = 全部难度, 1~5 = 对应星级
     std::string library_theme_filter_;   ///< 空 = 全部主题
     bool library_favorites_only_ = false;
+    bool library_core9_only_ = false;      ///< "只用核心 9 片": 只看基础套装能搭的模型
     bool library_buildable_only_ = false;  ///< "我能搭的": 只看库存足够的模型
 
     // 家长门软键盘的跨帧输入缓冲 (中文大写数字; 提交/返回时清空)
@@ -394,15 +235,8 @@ private:
     // 模型卡片缩略图纹理缓存 (路径 -> GL 纹理; 0 = 加载失败不再重试)
     std::unordered_map<std::string, GLuint> thumbnail_textures_;
 
-    // GL 资源
-    GLuint program_ = 0;
-    GLint u_view_proj_ = -1;
-    GLint u_camera_pos_ = -1;
-    GLint u_unlit_ = -1;
-    GLuint tile_vao_ = 0, tile_vbo_ = 0;
-    GLuint outline_vao_ = 0, outline_vbo_ = 0;
-    GLuint grid_vao_ = 0, grid_vbo_ = 0;
-    GLsizei grid_vertex_count_ = 0;
+    // 3D 场景渲染器 (着色器 / 顶点缓冲 / 网格, 与 Qt 教程视口共用实现)
+    GlSceneRenderer scene_;
 
     // 相机与交互
     OrbitCamera camera_;
@@ -412,11 +246,6 @@ private:
     std::array<bool, GLFW_KEY_LAST + 1> key_was_down_{};
 
     // 帧状态
-    Camera frame_camera_{};
-    Vec3 view_forward_{0.0, 1.0, 0.0};
-    std::vector<PendingTile> pending_tiles_;
-    std::vector<float> tile_vertices_;
-    std::vector<float> outline_vertices_;
     int fb_width_ = 0, fb_height_ = 0;
     std::string screenshot_path_;
 
@@ -455,18 +284,11 @@ bool GlRenderer::initialize(int width, int height, const std::string& window_tit
     glfwMakeContextCurrent(window_);
     glfwSwapInterval(1);  // 垂直同步
 
-    if (!glapi::loadFunctions(glfwGetProcAddress)) {
+    if (!scene_.initialize(glfwGetProcAddress)) {
         shutdown();
         return false;
     }
     std::printf("[render] OpenGL %s @ %s\n", glGetString(GL_VERSION), glGetString(GL_RENDERER));
-
-    if (!createShaderProgram()) {
-        shutdown();
-        return false;
-    }
-    createBuffers();
-    buildGridGeometry();
 
     // 输入回调需在 ImGui 之前安装, ImGui 的 GLFW 后端会链式转发
     glfwSetWindowUserPointer(window_, this);
@@ -486,18 +308,11 @@ void GlRenderer::shutdown() {
     }
     if (window_ != nullptr) {
         // GL 资源随上下文销毁, 仍显式删除以便调试工具追踪
-        if (program_ != 0) glDeleteProgram(program_);
-        const GLuint vaos[] = {tile_vao_, outline_vao_, grid_vao_};
-        const GLuint vbos[] = {tile_vbo_, outline_vbo_, grid_vbo_};
-        glDeleteVertexArrays(3, vaos);
-        glDeleteBuffers(3, vbos);
+        scene_.shutdown();
         for (const auto& cached : thumbnail_textures_) {
             if (cached.second != 0) glDeleteTextures(1, &cached.second);
         }
         thumbnail_textures_.clear();
-        program_ = 0;
-        tile_vao_ = outline_vao_ = grid_vao_ = 0;
-        tile_vbo_ = outline_vbo_ = grid_vbo_ = 0;
 
         glfwDestroyWindow(window_);
         window_ = nullptr;
@@ -506,80 +321,6 @@ void GlRenderer::shutdown() {
         glfwTerminate();
         glfw_initialized_ = false;
     }
-}
-
-bool GlRenderer::createShaderProgram() {
-    const GLuint vs = compileShader(GL_VERTEX_SHADER, kVertexShaderSrc);
-    const GLuint fs = compileShader(GL_FRAGMENT_SHADER, kFragmentShaderSrc);
-    if (vs == 0 || fs == 0) return false;
-
-    program_ = glCreateProgram();
-    glAttachShader(program_, vs);
-    glAttachShader(program_, fs);
-    glLinkProgram(program_);
-    glDeleteShader(vs);
-    glDeleteShader(fs);
-
-    GLint ok = 0;
-    glGetProgramiv(program_, GL_LINK_STATUS, &ok);
-    if (ok == 0) {
-        std::array<GLchar, 1024> log{};
-        glGetProgramInfoLog(program_, static_cast<GLsizei>(log.size()), nullptr, log.data());
-        std::fprintf(stderr, "[render] 着色器链接失败:\n%s\n", log.data());
-        return false;
-    }
-    u_view_proj_ = glGetUniformLocation(program_, "u_view_proj");
-    u_camera_pos_ = glGetUniformLocation(program_, "u_camera_pos");
-    u_unlit_ = glGetUniformLocation(program_, "u_unlit");
-    return true;
-}
-
-void GlRenderer::createBuffers() {
-    const auto makeVertexArray = [](GLuint& vao, GLuint& vbo) {
-        glGenVertexArrays(1, &vao);
-        glGenBuffers(1, &vbo);
-        glBindVertexArray(vao);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        const GLsizei stride = kFloatsPerVertex * static_cast<GLsizei>(sizeof(float));
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, nullptr);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride,
-                              reinterpret_cast<const void*>(3 * sizeof(float)));
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, stride,
-                              reinterpret_cast<const void*>(6 * sizeof(float)));
-    };
-    makeVertexArray(tile_vao_, tile_vbo_);
-    makeVertexArray(outline_vao_, outline_vbo_);
-    makeVertexArray(grid_vao_, grid_vbo_);
-    glBindVertexArray(0);
-}
-
-void GlRenderer::buildGridGeometry() {
-    const Rgba minor{0.72f, 0.76f, 0.80f, 0.55f};
-    const Rgba major{0.58f, 0.63f, 0.69f, 0.75f};
-    const Rgba axis_x{0.85f, 0.38f, 0.38f, 0.9f};
-    const Rgba axis_y{0.35f, 0.72f, 0.42f, 0.9f};
-    const Vec3 up{0.0, 0.0, 1.0};
-    const double ext = kGridHalfExtent;
-
-    std::vector<float> lines;
-    for (int i = -kGridHalfExtent; i <= kGridHalfExtent; ++i) {
-        const Rgba color = (i % 4 == 0) ? major : minor;
-        // 平行于 X 轴的线 (i == 0 即 X 轴本身)
-        const Rgba cx = (i == 0) ? axis_x : color;
-        appendVertex(lines, {-ext, static_cast<double>(i), 0.0}, up, cx);
-        appendVertex(lines, {ext, static_cast<double>(i), 0.0}, up, cx);
-        // 平行于 Y 轴的线
-        const Rgba cy = (i == 0) ? axis_y : color;
-        appendVertex(lines, {static_cast<double>(i), -ext, 0.0}, up, cy);
-        appendVertex(lines, {static_cast<double>(i), ext, 0.0}, up, cy);
-    }
-    grid_vertex_count_ = static_cast<GLsizei>(lines.size() / kFloatsPerVertex);
-    glBindBuffer(GL_ARRAY_BUFFER, grid_vbo_);
-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(lines.size() * sizeof(float)),
-                 lines.data(), GL_STATIC_DRAW);
 }
 
 void GlRenderer::setupImGui() {
@@ -684,16 +425,8 @@ bool GlRenderer::keyPressed(int key) {
 }
 
 void GlRenderer::beginFrame(const Camera& camera) {
-    frame_camera_ = camera;
-    view_forward_ = (camera.target - camera.eye).normalized();
-    pending_tiles_.clear();
-    tile_vertices_.clear();
-    outline_vertices_.clear();
-
     glfwGetFramebufferSize(window_, &fb_width_, &fb_height_);
-    glViewport(0, 0, fb_width_, fb_height_);
-    glClearColor(kClearColor[0], kClearColor[1], kClearColor[2], 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    scene_.begin(camera, fb_width_, fb_height_);
 
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -701,98 +434,7 @@ void GlRenderer::beginFrame(const Camera& camera) {
 }
 
 void GlRenderer::submitTile(const RenderTile& tile, const core::TileShape& shape) {
-    if (tile.instance == nullptr) return;
-
-    PendingTile pending;
-    pending.geometry = physics::transformTile(*tile.instance, shape);
-    pending.state = tile;
-    pending.base_color = tileBaseColor(tile.instance->color);
-    pending.depth = (pending.geometry.centroid - frame_camera_.eye).dot(view_forward_);
-    pending_tiles_.push_back(std::move(pending));
-}
-
-/// 把一片磁力片挤出成带厚度的薄板并写入三角形缓冲。
-void GlRenderer::appendTileGeometry(const PendingTile& tile) {
-    const auto& geom = tile.geometry;
-    const std::size_t n = geom.vertices.size();
-    if (n < 3) return;
-
-    // ---- 根据教程状态决定填充颜色 ----------------------------------
-    Rgba fill = tile.base_color;
-    if (tile.state.ghost) {
-        // 未放置: 褪色 + 高度透明, 只提示最终轮廓
-        fill = mix(fill, {0.62f, 0.65f, 0.70f, 1.0f}, 0.55f);
-        fill.a = 0.10f;
-    } else {
-        fill.a = 0.55f;
-        if (tile.state.just_placed) {
-            // 本步新增: 呼吸动画引导视线
-            const auto pulse =
-                static_cast<float>(0.5 + 0.5 * std::sin(glfwGetTime() * 2.0 * 3.14159265 * 1.2));
-            fill = mix(fill, {1.0f, 1.0f, 1.0f, fill.a}, 0.12f);
-            fill.a = 0.50f + 0.28f * pulse;
-        } else if (tile.state.highlighted) {
-            fill = mix(fill, {1.0f, 1.0f, 1.0f, fill.a}, 0.10f);
-        }
-    }
-
-    const Vec3 offset = geom.normal * (kTileThickness * 0.5);
-    // 顶面 (法向 normal), 扇形三角化 (形状均为凸多边形)
-    for (std::size_t i = 1; i + 1 < n; ++i) {
-        appendVertex(tile_vertices_, geom.vertices[0] + offset, geom.normal, fill);
-        appendVertex(tile_vertices_, geom.vertices[i] + offset, geom.normal, fill);
-        appendVertex(tile_vertices_, geom.vertices[i + 1] + offset, geom.normal, fill);
-    }
-    // 底面 (法向 -normal), 顶点逆序保持一致的绕向约定
-    const Vec3 neg_normal = geom.normal * -1.0;
-    for (std::size_t i = 1; i + 1 < n; ++i) {
-        appendVertex(tile_vertices_, geom.vertices[0] - offset, neg_normal, fill);
-        appendVertex(tile_vertices_, geom.vertices[i + 1] - offset, neg_normal, fill);
-        appendVertex(tile_vertices_, geom.vertices[i] - offset, neg_normal, fill);
-    }
-    // 侧面
-    for (std::size_t i = 0; i < n; ++i) {
-        const Vec3& a = geom.vertices[i];
-        const Vec3& b = geom.vertices[(i + 1) % n];
-        const Vec3 side_normal = (b - a).cross(geom.normal).normalized();
-        const Vec3 a_top = a + offset, a_bot = a - offset;
-        const Vec3 b_top = b + offset, b_bot = b - offset;
-        appendVertex(tile_vertices_, a_bot, side_normal, fill);
-        appendVertex(tile_vertices_, b_bot, side_normal, fill);
-        appendVertex(tile_vertices_, b_top, side_normal, fill);
-        appendVertex(tile_vertices_, a_bot, side_normal, fill);
-        appendVertex(tile_vertices_, b_top, side_normal, fill);
-        appendVertex(tile_vertices_, a_top, side_normal, fill);
-    }
-}
-
-/// 在顶面与底面沿边缘绘制不透明色带作为高亮描边。
-/// (Core Profile 前向兼容上下文中 glLineWidth > 1 不可用, 色带方案
-/// 三平台一致且宽度可控。)
-void GlRenderer::appendOutlineBand(const physics::TransformedTile& geom, const Rgba& color) {
-    const std::size_t n = geom.vertices.size();
-    if (n < 3) return;
-
-    // 色带略微悬浮于表面, 保证绘制在填充之上
-    const double lift = kTileThickness * 0.5 + 0.004;
-    for (int side = 0; side < 2; ++side) {
-        const Vec3 face_normal = (side == 0) ? geom.normal : geom.normal * -1.0;
-        const Vec3 offset = face_normal * lift;
-        for (std::size_t i = 0; i < n; ++i) {
-            const Vec3& a = geom.vertices[i];
-            const Vec3& b = geom.vertices[(i + 1) % n];
-            // 指向多边形内部的单位向量 (顶点逆时针绕 normal 排列)
-            const Vec3 inward = geom.normal.cross(b - a).normalized();
-            const Vec3 a_in = a + inward * kOutlineWidth;
-            const Vec3 b_in = b + inward * kOutlineWidth;
-            appendVertex(outline_vertices_, a + offset, face_normal, color);
-            appendVertex(outline_vertices_, b + offset, face_normal, color);
-            appendVertex(outline_vertices_, b_in + offset, face_normal, color);
-            appendVertex(outline_vertices_, a + offset, face_normal, color);
-            appendVertex(outline_vertices_, b_in + offset, face_normal, color);
-            appendVertex(outline_vertices_, a_in + offset, face_normal, color);
-        }
-    }
+    scene_.submitTile(tile, shape);
 }
 
 TutorialActions GlRenderer::submitHud(const TutorialHudState& hud) {
@@ -1037,9 +679,17 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
             ImGui::SameLine(0.0f, 12.0f);
             ImGui::TextDisabled("%d 片 · %d 步", card.total_pieces, card.step_count);
 
-            // 主题徽章
+            // 主题徽章; 用到扩展片型的模型追加 "需要扩展装" 角标
+            // (CONTENT_STRATEGY.md §2.5: 产品端据 BOM 分层展示购前提示)
             ImGui::SetCursorPos(ImVec2(pad, 92.0f + thumb_height));
             drawThemeBadge(card.theme, theme_color);
+            if (card.bom_known && !card.core9_only) {
+                ImGui::SameLine(0.0f, 8.0f);
+                drawThemeBadge("需要扩展装", kColorExpansion);
+                if (ImGui::IsItemHovered()) {
+                    ImGui::SetTooltip("本模型用到基础套装之外的扩展片型");
+                }
+            }
 
             // 简介 (两行内, 超长截断)
             if (!card.description.empty()) {
@@ -1176,6 +826,14 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
             ImGui::SameLine();
             ImGui::Checkbox("只看收藏", &library_favorites_only_);
             ImGui::SameLine();
+            // "只用核心 9 片": 只看基础套装 (核心 9 片型) 就能搭的模型
+            // (与 Qt 版同一共享判定口径, 见 core::isCoreTile / TILE_CATALOG.md)
+            ImGui::Checkbox("只用核心 9 片", &library_core9_only_);
+            if (ImGui::IsItemHovered()) {
+                ImGui::SetTooltip("只显示基础套装 (核心 9 片型) 就能搭的模型, "
+                                  "不需要任何扩展装");
+            }
+            ImGui::SameLine();
             // "我能搭的": 依据磁力片库存过滤 BOM 满足的模型 (§5.2);
             // 未登记库存时禁用并引导先去登记, 不显示全空列表
             if (inventory_configured) {
@@ -1260,6 +918,8 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
                     continue;
                 }
                 if (library_favorites_only_ && !card.favorited) continue;
+                // "只用核心 9 片": BOM 未知 (模型文件有问题) 的模型不进核心筛选
+                if (library_core9_only_ && !(card.bom_known && card.core9_only)) continue;
                 if (inventory_configured && library_buildable_only_ && !card.buildable) {
                     continue;
                 }
@@ -1732,17 +1392,6 @@ ParentAreaActions GlRenderer::submitParentArea(int session_remaining_seconds) {
     return actions;
 }
 
-void GlRenderer::drawVertexBuffer(GLuint vao, GLuint vbo, const std::vector<float>& data,
-                                  GLenum mode, bool unlit) {
-    if (data.empty()) return;
-    glBindVertexArray(vao);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(data.size() * sizeof(float)),
-                 data.data(), GL_DYNAMIC_DRAW);
-    glUniform1i(u_unlit_, unlit ? 1 : 0);
-    glDrawArrays(mode, 0, static_cast<GLsizei>(data.size() / kFloatsPerVertex));
-}
-
 void GlRenderer::endFrame() {
     if (window_ == nullptr) return;
     if (fb_width_ <= 0 || fb_height_ <= 0) {  // 窗口最小化
@@ -1751,52 +1400,8 @@ void GlRenderer::endFrame() {
         return;
     }
 
-    // ---- 由远及近排序 (画家算法) ------------------------------------
-    std::sort(pending_tiles_.begin(), pending_tiles_.end(),
-              [](const PendingTile& a, const PendingTile& b) { return a.depth > b.depth; });
-    for (const PendingTile& tile : pending_tiles_) {
-        appendTileGeometry(tile);
-        if (tile.state.just_placed) {
-            const auto pulse =
-                static_cast<float>(0.5 + 0.5 * std::sin(glfwGetTime() * 2.0 * 3.14159265 * 1.2));
-            appendOutlineBand(tile.geometry, {1.0f, 0.52f, 0.08f, 0.75f + 0.25f * pulse});
-        } else if (tile.state.highlighted && !tile.state.ghost) {
-            appendOutlineBand(tile.geometry, {1.0f, 0.80f, 0.18f, 0.95f});
-        }
-    }
-
-    // ---- 场景绘制 ---------------------------------------------------
-    const double aspect = static_cast<double>(fb_width_) / fb_height_;
-    const Mat4 view = Mat4::lookAt(frame_camera_.eye, frame_camera_.target, frame_camera_.up);
-    const Mat4 proj = Mat4::perspective(frame_camera_.fov_deg, aspect, 0.05, 300.0);
-    const Mat4 view_proj = proj * view;
-    const float camera_pos[3] = {static_cast<float>(frame_camera_.eye.x),
-                                 static_cast<float>(frame_camera_.eye.y),
-                                 static_cast<float>(frame_camera_.eye.z)};
-
-    glUseProgram(program_);
-    glUniformMatrix4fv(u_view_proj_, 1, GL_FALSE, view_proj.m.data());
-    glUniform3fv(u_camera_pos_, 1, camera_pos);
-
-    glEnable(GL_MULTISAMPLE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-    glDisable(GL_CULL_FACE);  // 半透明薄板双面可见
-
-    // 地面网格 (静态缓冲) 写入深度, 从下方观察时可正确遮挡
-    glDepthMask(GL_TRUE);
-    glBindVertexArray(grid_vao_);
-    glUniform1i(u_unlit_, 1);
-    glDrawArrays(GL_LINES, 0, grid_vertex_count_);
-
-    // 半透明磁力片: 已排序, 关闭深度写入
-    glDepthMask(GL_FALSE);
-    drawVertexBuffer(tile_vao_, tile_vbo_, tile_vertices_, GL_TRIANGLES, false);
-    // 高亮描边色带最后绘制, 始终可见
-    drawVertexBuffer(outline_vao_, outline_vbo_, outline_vertices_, GL_TRIANGLES, true);
-    glDepthMask(GL_TRUE);
+    // ---- 3D 场景 (排序 / 挤出 / 绘制由 GlSceneRenderer 完成) ----------
+    scene_.end(glfwGetTime());
 
     // ---- HUD ---------------------------------------------------------
     ImGui::Render();
