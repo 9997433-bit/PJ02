@@ -5,9 +5,9 @@
   - 4x4 正方形地台 (z = 0 平面)                          16 片
   - 四面城墙第 1 层 (z 0~1) + 第 2 层 (z 1~2)             32 片
   - 四角角楼第 3 层 (z 2~3, 每角 2 片成 L 形)              8 片
-  - 角楼顶城齿 (等边三角形, 底边 z = 3)                    8 片
+  - 角楼顶尖塔 (等腰三角形, 底边 z = 3, 塔尖更高更醒目)     8 片
   - 城墙中段城齿 (等边三角形, 底边 z = 2)                  8 片
-  合计 72 片, 16 个教程步骤。
+  合计 72 片, 16 个教程步骤, 使用 3 种磁力片形状。
 
 坐标约定与 C++ 端一致 (include/magtile/core/tile_instance.hpp):
   旋转为欧拉角 (度), 施加顺序 R = Rz * Ry * Rx。
@@ -20,8 +20,9 @@ import json
 import math
 from pathlib import Path
 
-# 等边三角形质心到底边的距离 (与 data/tile_catalog.json 中的顶点一致)
-TRI_CENTROID = round(math.sqrt(3) / 6, 6)  # 0.288675
+# 质心到底边的距离 (与 data/tile_catalog.json 中的顶点一致)
+TRI_CENTROID = round(math.sqrt(3) / 6, 6)  # 等边三角形: 0.288675
+ISO_CENTROID = round(1.0 / 3.0, 6)         # 等腰三角形 (底 1 高 1): 0.333333
 
 SIZE = 4  # 地台为 SIZE x SIZE 个正方形
 
@@ -71,11 +72,13 @@ for side, k in CORNER_SEGMENTS:
     center, rot = WALL_SIDES[side]
     add(f"w3_{side}_{k}", "square", center(k, 2.5), rot, "purple")
 
-# ---- 4. 角楼顶城齿: 等边三角形, 底边落在 z=3 --------------------
+# ---- 4. 角楼顶尖塔: 等腰三角形 (底 1 高 1), 底边落在 z=3 --------
+# 用比城齿更高的等腰三角形收顶, 让四座角楼在轮廓上明显高于城墙,
+# 同时引入第 3 种磁力片形状 (正方形 / 等边三角形 / 等腰三角形)。
 for side, k in CORNER_SEGMENTS:
     center, rot = WALL_SIDES[side]
     x, y, _ = center(k, 0)
-    add(f"bt_{side}_{k}", "equilateral_triangle", (x, y, 3.0 + TRI_CENTROID), rot, "yellow")
+    add(f"bt_{side}_{k}", "isosceles_triangle", (x, y, 3.0 + ISO_CENTROID), rot, "yellow")
 
 # ---- 5. 城墙中段城齿: 等边三角形, 底边落在 z=2 ------------------
 MID_SEGMENTS = [(side, k) for side in ("s", "n", "w", "e") for k in (1, 2)]
@@ -150,12 +153,12 @@ step(
     tip="完成后从上往下看, 四角应形成四个对称的直角。",
 )
 
-# 步骤 15: 角楼顶城齿
+# 步骤 15: 角楼顶尖塔
 step(
-    "为四座角楼装上黄色三角城齿: 8 片等边三角形底边分别吸在角楼顶边上, 尖角朝天。",
+    "为四座角楼装上黄色尖塔: 8 片等腰三角形底边分别吸在角楼顶边上, 高高的塔尖朝天。",
     [f"bt_{side}_{k}" for side, k in CORNER_SEGMENTS],
     highlight=[f"w3_{side}_{k}" for side, k in CORNER_SEGMENTS],
-    tip="三角形只需底边吸合即可站稳, 摆放时捏住尖角轻轻放下。",
+    tip="等腰三角形比等边三角形更高更醒目, 只需底边吸合即可站稳, 摆放时捏住尖角轻轻放下。",
 )
 
 # 步骤 16: 城墙中段城齿
@@ -176,7 +179,7 @@ model = {
     "name": "城堡地基与城墙",
     "name_en": "Castle Foundation 01",
     "description": (
-        "经典城堡系列第一课: 从 4x4 地台开始, 逐层搭建双层围墙、四角角楼与三角城齿, "
+        "经典城堡系列第一课: 从 4x4 地台开始, 逐层搭建双层围墙、四角角楼、角楼尖塔与三角城齿, "
         "学习磁力片建筑最重要的三个技巧 —— 平铺打底、垂直立墙、逐层加高。"
     ),
     "difficulty": 3,
