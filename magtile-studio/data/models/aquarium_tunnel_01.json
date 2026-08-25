@@ -1,0 +1,980 @@
+{
+  "schema_version": 1,
+  "id": "aquarium_tunnel_01",
+  "name": "海底隧道水族馆",
+  "name_en": "Aquarium Tunnel 01",
+  "description": "只用核心九片型的海底隧道: 大水箱正中留出一条 2 格宽的贯通隧道, 黄色步道南进北出, 头顶就是水箱底 —— 隧道顶板两短边压双排玻璃墙顶, 双端受力如桥; 顶板之上第二层玻璃观景环整圈闭合, 三条小鱼骑在水底拼缝上, 隔着玻璃从四面都看得见; 红色馆旗骑东壁顶直上 4.0, 馆前粉绿珊瑚分立两侧 —— 从鱼肚子底下穿过去是什么感觉?",
+  "difficulty": 3,
+  "total_pieces": 52,
+  "tags": [
+    "海洋",
+    "水族馆",
+    "隧道",
+    "探险",
+    "小鱼"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 44,
+        "equilateral_triangle": 5,
+        "rectangle": 2,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "plz_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "plz_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "plz_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "plz_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "plz_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plz_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "t0_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_w_2",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_e_1",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_e_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tn_w_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tn_w_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tn_e_1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tn_e_2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "dk_w_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "dk_w_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "dk_e_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "dk_e_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "dk_t_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "dk_t_2",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "fish_a",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fish_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fish_c",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "g_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_w_2",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_e_1",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g_e_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "coral_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "coral_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "flag",
+      "type": "isosceles_triangle",
+      "position": [
+        4.0,
+        1.5,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺广场南行: 四片方板一字排开, 这是水族馆的门脸。",
+      "tip": "中间两列待会是隧道步道, 黄色的路一直通到馆里。",
+      "tiles_to_add": [
+        "plz_0_0",
+        "plz_1_0",
+        "plz_2_0",
+        "plz_3_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺第二行: 黄色步道格居中, 灰色广场格在两边。",
+      "tip": "行行等边互吸, 步道从这里钻进水箱底下。",
+      "tiles_to_add": [
+        "plz_0_1",
+        "plz_1_1",
+        "plz_2_1",
+        "plz_3_1"
+      ],
+      "highlight_tiles": [
+        "plz_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺第三行: 步道继续向北。",
+      "tip": "这两行黄格就是隧道的地面 —— 头顶马上就要有鱼了。",
+      "tiles_to_add": [
+        "plz_0_2",
+        "plz_1_2",
+        "plz_2_2",
+        "plz_3_2"
+      ],
+      "highlight_tiles": [
+        "plz_1_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺第四行: 广场铺满, 北出口亮相。",
+      "tip": "隧道南进北出, 两头都不封 —— 这是一条走得通的路。",
+      "tiles_to_add": [
+        "plz_0_3",
+        "plz_1_3",
+        "plz_2_3",
+        "plz_3_3"
+      ],
+      "highlight_tiles": [
+        "plz_1_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立水箱外壁: 蓝色墙踩住广场拼缝, 南北面各留 2 格隧道口。",
+      "tip": "四角竖边互咬; 正中空出来的洞口就是隧道大门。",
+      "tiles_to_add": [
+        "t0_s_0",
+        "t0_s_3",
+        "t0_n_0",
+        "t0_n_3",
+        "t0_w_1",
+        "t0_w_2",
+        "t0_e_1",
+        "t0_e_2"
+      ],
+      "highlight_tiles": [
+        "plz_0_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立隧道玻璃墙: 两排清色墙夹住黄色步道。",
+      "tip": "玻璃墙与外壁围成左右两个闭环箱体 —— 那是鱼住的地方。",
+      "tiles_to_add": [
+        "tn_w_1",
+        "tn_w_2",
+        "tn_e_1",
+        "tn_e_2"
+      ],
+      "highlight_tiles": [
+        "t0_s_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "铺水箱底两侧: 四片蓝色方板压上外壁与隧道墙顶。",
+      "tip": "每片底板两条外边压墙顶, 箱体就此封成整环。",
+      "tiles_to_add": [
+        "dk_w_1",
+        "dk_w_2",
+        "dk_e_1",
+        "dk_e_2"
+      ],
+      "highlight_tiles": [
+        "tn_w_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖隧道顶: 两块蓝色长板短边各压一排玻璃墙顶。",
+      "tip": "双端受力零悬挑, 像桥一样跨过隧道 —— 桥上就是水底。",
+      "tiles_to_add": [
+        "dk_t_1",
+        "dk_t_2"
+      ],
+      "highlight_tiles": [
+        "dk_w_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "放小鱼: 三条小鱼骑上水底拼缝, 趁玻璃环没合拢先入住。",
+      "tip": "底边整边吸住拼缝; 橙色小丑鱼最喜欢待在隧道顶上。",
+      "tiles_to_add": [
+        "fish_a",
+        "fish_b",
+        "fish_c"
+      ],
+      "highlight_tiles": [
+        "dk_t_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "起玻璃观景环南面与西面: 清色墙踩住水底沿口。",
+      "tip": "隧道口上方的玻璃墙踩在长板顶沿上, 竖边再与邻片互咬。",
+      "tiles_to_add": [
+        "g_s_0",
+        "g_s_1",
+        "g_s_2",
+        "g_s_3",
+        "g_w_1",
+        "g_w_2"
+      ],
+      "highlight_tiles": [
+        "fish_a"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "补北面与东面, 玻璃环整圈闭合。",
+      "tip": "十二片玻璃合成一圈, 从哪个方向都能看到鱼游过头顶。",
+      "tiles_to_add": [
+        "g_n_0",
+        "g_n_1",
+        "g_n_2",
+        "g_n_3",
+        "g_e_1",
+        "g_e_2"
+      ],
+      "highlight_tiles": [
+        "g_s_0"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "馆前珊瑚与馆旗收尾: 红旗骑东壁顶直上 4.0。",
+      "tip": "粉珊瑚绿珊瑚分立大门两侧 —— 走, 从鱼肚子底下穿过去!",
+      "tiles_to_add": [
+        "coral_w",
+        "coral_e",
+        "flag"
+      ],
+      "highlight_tiles": [
+        "g_e_1"
+      ]
+    }
+  ]
+}
