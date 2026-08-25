@@ -1,0 +1,1222 @@
+{
+  "schema_version": 1,
+  "id": "bridge_wood_01",
+  "name": "乡间木桥",
+  "name_en": "Country Wood Bridge 01",
+  "description": "多跨连续木桥的入门教科书: 四片桥墩顺水流立在河床格缝上, 五片橙色桥板首尾整边互吸、接缝正压墩顶, 两端 30 度引桥顶边吸桥板端边、坡尾落岸 —— 双端受力, 剪断任何一条铰链桥面仍有支撑路径; 十片等边护栏重心正压铰链零力矩; 蓝色小河穿谷而过, 两岸绿树灌木、河里青鱼绿头鸭 —— 过河不湿鞋, 全靠这座桥。",
+  "difficulty": 3,
+  "total_pieces": 64,
+  "tags": [
+    "田园",
+    "桥梁",
+    "木桥",
+    "河流",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 26,
+        "equilateral_triangle": 20,
+        "rectangle": 16,
+        "isosceles_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "wb_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wb_r_0",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wb_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wb_r_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wb_r_2",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wb_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wb_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wb_r_3",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wb_0_4",
+      "type": "square",
+      "position": [
+        0.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wb_r_4",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rv_s_0",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_5_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_s_1",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_n_3",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_n_4",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rv_5_4",
+      "type": "square",
+      "position": [
+        5.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "eb_r_0",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eb_8_0",
+      "type": "square",
+      "position": [
+        8.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eb_r_1",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eb_8_1",
+      "type": "square",
+      "position": [
+        8.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eb_6_2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eb_r_2",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eb_r_3",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eb_8_3",
+      "type": "square",
+      "position": [
+        8.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eb_r_4",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eb_8_4",
+      "type": "square",
+      "position": [
+        8.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pier_3",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_4",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_5",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_6",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dk_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ap_w",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ap_e",
+      "type": "rectangle",
+      "position": [
+        7.866025,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_s_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_n_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_s_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_n_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_s_4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_n_4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_s_5",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_n_5",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_s_6",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rl_n_6",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tree_w",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        5.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tree_e",
+      "type": "isosceles_triangle",
+      "position": [
+        8.5,
+        5.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_w_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_w_e",
+      "type": "equilateral_triangle",
+      "position": [
+        0.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_w_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_w_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_e_s",
+      "type": "equilateral_triangle",
+      "position": [
+        8.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_e_e",
+      "type": "equilateral_triangle",
+      "position": [
+        8.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_e_n",
+      "type": "equilateral_triangle",
+      "position": [
+        8.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_e_w",
+      "type": "equilateral_triangle",
+      "position": [
+        8.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fish",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "duck",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺西岸: 10 片绿色地坪铺出西岸草地, 桥头留在正中一行。",
+      "tip": "河谷从西岸铺起 —— 正中一行就是过河的路线。",
+      "tiles_to_add": [
+        "wb_0_0",
+        "wb_r_0",
+        "wb_0_1",
+        "wb_r_1",
+        "wb_r_2",
+        "wb_2_2",
+        "wb_0_3",
+        "wb_r_3",
+        "wb_0_4",
+        "wb_r_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺河面南半: 4 片蓝色河水接上西岸。",
+      "tip": "河水由南向北流 —— 蓝色长板是平静的深水区。",
+      "tiles_to_add": [
+        "rv_s_0",
+        "rv_5_0",
+        "rv_s_1",
+        "rv_5_1"
+      ],
+      "highlight_tiles": [
+        "wb_r_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺桥下河床: 3 片蓝色方板一字排开, 格缝就是桥墩的立足线。",
+      "tip": "这一行必须用方板 —— x=3/4/5/6 四条格缝马上要立桥墩。",
+      "tiles_to_add": [
+        "rv_3_2",
+        "rv_4_2",
+        "rv_5_2"
+      ],
+      "highlight_tiles": [
+        "wb_2_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺河面北半: 4 片河水合拢, 小河贯通南北。",
+      "tip": "哗啦啦 —— 河水到位, 就差一座桥了。",
+      "tiles_to_add": [
+        "rv_n_3",
+        "rv_5_3",
+        "rv_n_4",
+        "rv_5_4"
+      ],
+      "highlight_tiles": [
+        "rv_3_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "铺东岸: 10 片绿色地坪, 9x5 河谷两岸合拢。",
+      "tip": "两岸就位 —— 各回各家前, 先把桥修好。",
+      "tiles_to_add": [
+        "eb_r_0",
+        "eb_8_0",
+        "eb_r_1",
+        "eb_8_1",
+        "eb_6_2",
+        "eb_r_2",
+        "eb_r_3",
+        "eb_8_3",
+        "eb_r_4",
+        "eb_8_4"
+      ],
+      "highlight_tiles": [
+        "rv_5_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立西侧桥墩: 2 片灰色方板立在 x=3 与 x=4 格缝上, 底边整边吸河床格边。",
+      "tip": "桥墩顺着水流方向立 —— 挡水面最小, 冲不倒。",
+      "tiles_to_add": [
+        "pier_3",
+        "pier_4"
+      ],
+      "highlight_tiles": [
+        "rv_3_2",
+        "rv_4_2"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立东侧桥墩: x=5 与 x=6 格缝再立 2 片, 四墩一线。",
+      "tip": "四墩等距, 桥板的每条接缝都有墩顶托着。",
+      "tiles_to_add": [
+        "pier_5",
+        "pier_6"
+      ],
+      "highlight_tiles": [
+        "pier_3",
+        "pier_4"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "铺桥面西段: 2 片橙色桥板, 侧边整边压墩顶、首尾互吸。",
+      "tip": "桥板接缝正落在墩顶 —— 多跨连续桥的标准做法。",
+      "tiles_to_add": [
+        "dk_2",
+        "dk_3"
+      ],
+      "highlight_tiles": [
+        "pier_3",
+        "pier_4"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "铺桥面东段: 再铺 3 片, 桥面贯通两岸。",
+      "tip": "五板连吸, 走上去咚咚响 —— 这就是木桥的声音。",
+      "tiles_to_add": [
+        "dk_4",
+        "dk_5",
+        "dk_6"
+      ],
+      "highlight_tiles": [
+        "dk_3",
+        "pier_5"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "架西引桥: 30 度桥板顶端短边整边吸桥板端边, 坡尾落在西岸。",
+      "tip": "双端受力 —— 上桥的坡道要缓, 推车也能过。",
+      "tiles_to_add": [
+        "ap_w"
+      ],
+      "highlight_tiles": [
+        "dk_2",
+        "wb_2_2"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "架东引桥: 东端同法斜下, 过河通道全线贯通。",
+      "tip": "两端引桥一对称, 木桥的弧线就完整了。",
+      "tiles_to_add": [
+        "ap_e"
+      ],
+      "highlight_tiles": [
+        "dk_6",
+        "eb_6_2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "立南侧护栏: 5 片等边三角沿南桥沿一字排开。",
+      "tip": "护栏底边整边吸桥板边沿, 重心正压铰链 —— 靠着也不倒。",
+      "tiles_to_add": [
+        "rl_s_2",
+        "rl_s_3",
+        "rl_s_4",
+        "rl_s_5",
+        "rl_s_6"
+      ],
+      "highlight_tiles": [
+        "dk_2",
+        "dk_6"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "立北侧护栏: 北沿再立 5 片, 桥面两侧都有了扶手。",
+      "tip": "过桥不扶栏, 掉进河里别怪桥。",
+      "tiles_to_add": [
+        "rl_n_2",
+        "rl_n_3",
+        "rl_n_4",
+        "rl_n_5",
+        "rl_n_6"
+      ],
+      "highlight_tiles": [
+        "rl_s_2"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "种岸树: 两岸北头各立 1 棵等腰绿树。",
+      "tip": "树梢 2 格高, 是河谷的制高点 —— 夏天桥头好乘凉。",
+      "tiles_to_add": [
+        "tree_w",
+        "tree_e"
+      ],
+      "highlight_tiles": [
+        "wb_0_4",
+        "eb_8_4"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "栽灌木: 两岸南头各 4 片等边三角合拢成四坡灌木球。",
+      "tip": "四片斜棱互吸自锁 —— 灌木球滚不走。",
+      "tiles_to_add": [
+        "bush_w_s",
+        "bush_w_e",
+        "bush_w_n",
+        "bush_w_w",
+        "bush_e_s",
+        "bush_e_e",
+        "bush_e_n",
+        "bush_e_w"
+      ],
+      "highlight_tiles": [
+        "wb_0_0",
+        "eb_8_0"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "放河中生灵: 青鱼在南河跃波, 绿头鸭在北河浮水 —— 木桥通行!",
+      "tip": "从桥心往下望: 鱼游鸭浮, 流水从四个桥墩间穿过。",
+      "tiles_to_add": [
+        "fish",
+        "duck"
+      ],
+      "highlight_tiles": [
+        "rv_5_1",
+        "rv_5_4"
+      ]
+    }
+  ]
+}
