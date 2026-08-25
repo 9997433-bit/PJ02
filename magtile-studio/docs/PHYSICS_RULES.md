@@ -208,6 +208,17 @@ magtile_app validate <model.json> --jitter [N] [--profile strict]
 
 回归载体 (`TESTING.md` 3.18 节): `tests/test_physics_jitter/` 下的"静态全绿但抖动必挂"边缘夹具 (执行器先断言普通 validate 放行、再断言 `--jitter` 以 `placement_jitter_failure` 拒绝, 配同构造加固后的抖动正例防矫枉过正) + 物理正例对照组抖动全绿 + 旗舰模型 `validate_jitter_*` 用例; 负例套件另有 `jitter=<N>` sidecar 通道 (`tests/test_physics_negative/jitter_sensitive`, 见 `TESTING.md` 3.7/3.18 节)。首次全库巡检 (2026-08-25, `--jitter 50`): 209 个模型 208 个全绿, 1 个 (`lego_style_house_01`) 在 7/50 轮出现 `enclosed_placement` —— 第 14 步补片的手部通道对毫米级误差没有裕量, 属于真实的边缘设计发现 (非误报), 待内容侧加固或调整放置顺序后按本节复验。strict 档 D4+ 首巡 (`tools/run_strict_audit.sh --jitter-only`, `--profile strict --jitter 50`): 45 个模型 42 个全绿, 3 个在 3~4/50 轮出现 `cantilever_overload` (`ball_run_tower_01` / `marble_run_spiral_01` / `rainforest_canopy_01`, 外挑力矩 35.1~35.3 贴着 strict 预算 35.0 的边) —— 名义几何恰好压线用满弱磁档抗弯预算, 零裕量外挑同样待内容侧加固后复验 (第 5 节宁严勿松: 修模型不放宽预算)。
 
+**待复验清单处置状态 (2026-08-25 快照)**: 两轮首巡共抓出 4 个待加固模型, 内容侧加固已全部立项并派发至并行工程槽, 截至本快照均为**加固进行中, 尚无一个完成复验入库**, 挂账如下:
+
+| 模型 | 难度 | 被抓档位与轮数 | 底层错误码 | 待办与复验口径 |
+| --- | --- | --- | --- | --- |
+| `lego_style_house_01` | D3 | 默认档 7/50 | `enclosed_placement` | 第 14 步补片的手部通道加裕量或调整放置顺序; 复验 `validate --jitter 50` 默认档全绿 |
+| `ball_run_tower_01` | D4 | strict 档 4/50 | `cantilever_overload` | 外挑加斜撑/远端支撑或缩短悬挑; 复验默认档 + `--profile strict --jitter 50` 双档全绿 |
+| `marble_run_spiral_01` | D4 | strict 档 3/50 | `cantilever_overload` | 同上 |
+| `rainforest_canopy_01` | D4 | strict 档 3/50 | `cantilever_overload` | 同上 |
+
+三个 D4 模型属 `run_strict_audit.sh --jitter-only` 巡检集, 加固入库前该 D4+ 抗扰动巡检保持 42/45 的红灯结论, `run_release_gate.sh --full --l2` 的 L2 硬闸门不判绿; `lego_style_house_01` (D3) 不在 D4+ 门禁集内, 但全库 `--jitter 50` 巡检口径同样以其复验通过为收口条件。加固提交必须随附上述口径的复验实跑证据并更新本节登记; 处置纪律不变 —— 修模型, 不放宽预算 (第 5 节)。
+
 ## 4. 报告格式
 
 每条问题包含: 严重级别 (Error / Warning)、稳定的机器可读 `code`、中文 `message` (含上下文前缀, 如"第 5 步完成后")、涉及的磁力片 `id` 列表。code 全集:

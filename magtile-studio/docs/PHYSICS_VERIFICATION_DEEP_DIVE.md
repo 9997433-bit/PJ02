@@ -172,6 +172,11 @@ L2 的三段测试按"先能落地、后动力学增强"分两期:
 
 定位: L2 是 L1 的**抽检补强**, 不是替代 —— L1 永远先跑、永远全量。触发条件 (L1 有 Warning; 结构高 > 6 单位或连续 ≥ 3 片垂直墙链; 重心距接地凸包边界 < `stability_margin` 的 50%; 弱磁形状承重; 设计师手动标记) 已全部落实为 `tools/physical_risk_report.py` 的可检测项 (检测编码表: BUILD_VERIFICATION.md 第 2 节), 被标记模型经内容门禁强制走 jitter (BUILD_VERIFICATION.md 第 6 节); L3 人手排产先看 L2 结果 (PHYSICAL_REBUILD_CHECKLIST.md 0.5 节)。
 
+围绕 L2/L3 衔接的配套工具链已同批入库, 排产 (L2 → L3) 与校准回灌 (L3 → L1/L2) 两个方向都不再靠口头纪律:
+
+- **结构族去重 `tools/physical_family_pack.py`**: 按片型直方图 + 主题标签 + 难度做确定性聚类 (完全连接凝聚, 可复现), 每族恰选一个代表实搭, 同族其余由"代表实搭通过 + L2 全绿"覆盖 —— 实测全库 209 模型聚 154 族, D4+ 人手实搭量可削减约 24%; 人手清单取风险报告 Top 建议与结构族代表的并集;
+- **实物失效登记账本 `tools/physical_failure_registry.py`** (账本 `data/physical_failures.json`): L3 失败 `add` 登记 (F01~F12 编码校验 + 照片归档约定核对) → 负例夹具下沉后 `mark-sunk` 关账 (强制校验夹具真实存在、带 `.expected` sidecar、已进必备清单) → `check` 盘点待下沉欠账 (`--fail-on-pending-sink` 可升级硬门禁), 配套四步校准闭环手册 [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md) (抽样实搭 → 失败登记 → 生成负例夹具 → CI 回归)。
+
 ### L3 实物搭建验证 (D4+ 强制, 最终裁判)
 
 完整规程见 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 第 3 节, 核心项:
@@ -181,7 +186,7 @@ L2 的三段测试按"先能落地、后动力学增强"分两期:
 - **提起测试 (Lift)**: 双手托底座提起 5cm 悬停 10 秒; 任何片脱落 = Fail;
 - **拆解重搭**: 逆序拆解 + 立即二次搭建; 第二次仍在同一步出问题 = 步骤设计缺陷实锤;
 - **品牌兼容**: 主流品牌各搭一次 + 最弱混搭组合复测敲击/提起 (T5 全测);
-- **儿童测试**: T4/T5 必做, 目标年龄段 ≥ 2 名儿童, 结论取较差者; **结构自身坍塌 0 次容忍**, 出现即 Fail 且必须回答"L1/L2 为什么没拦住"并回填负例夹具。
+- **儿童测试**: T4/T5 必做, 目标年龄段 ≥ 2 名儿童, 结论取较差者; **结构自身坍塌 0 次容忍**, 出现即 Fail 且必须回答"L1/L2 为什么没拦住"并回填负例夹具 (失效经 `tools/physical_failure_registry.py` 登记入账, 回填闭环规程见 [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md))。
 
 分级要求 (与模型 `difficulty` 一一对应): T1/T2 抽检, **T3 起每模型必做成人实测, T4/T5 (即 D4+) 每模型必做全套 + 儿童测试**, T5 加两名测试员独立各搭一次。`magtile_app validate` 对 difficulty ≥ 4 的模型在通过结论前会打印实物复核提示, 从工具层面防止"忘了这一步"。
 
@@ -202,9 +207,9 @@ L2 的三段测试按"先能落地、后动力学增强"分两期:
 
 ### P0-2 负例夹具强制增长机制
 
-- **现状**: 已有 9 个负例夹具 (R1~R8 全覆盖) + 正例夹具防矫枉过正; 文档纪律要求"实搭失败先回填夹具再修规则" (PHYSICS_RULES.md 第 5 节)。
-- **缺口**: 纪律靠自觉, 没有流程闸门强制执行。
-- **工程内容**: 在验证旁车文件 schema 中加入 `regression_fixture` 字段 —— L3 记录任何 Fail 时该字段必填 (指向新增的负例夹具文件), CI 门禁脚本校验"有失效记录必有对应夹具", 否则拒绝合并验证记录。
+- **现状**: 负例夹具已增长到 17 个 (R1~R9 全覆盖, 含 R9 抖动通道 `jitter_sensitive`) + 正例夹具防矫枉过正, 套件完整性由 `physics_fixture_registry` 关卡把守 (必备清单缺任何一个夹具或 sidecar 即红); "实搭失败先回填夹具再修规则"的纪律 (PHYSICS_RULES.md 第 5 节) 已由 `tools/physical_failure_registry.py` 固化为机器可查账本: 每次 L3 失效 `add` 登记, `mark-sunk` 关账前强制校验夹具真实存在、带 `.expected` sidecar 且已进必备清单, `check` 盘点待下沉欠账 (`--fail-on-pending-sink` 可升级硬门禁); 执行规程见 [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md)。
+- **缺口**: 账本 `check` 门禁尚未接入内容仓库合并流水线; 验证旁车文件 schema 也还没有 `regression_fixture` 字段 —— 旁车 Fail 记录与账本条目之间缺结构性互锁。
+- **工程内容**: ① 在验证旁车文件 schema 中加入 `regression_fixture` 字段 —— L3 记录任何 Fail 时该字段必填 (指向新增的负例夹具文件), CI 门禁脚本校验"有失效记录必有对应夹具"并与账本条目对账, 否则拒绝合并验证记录; ② 内容门禁挂入 `physical_failure_registry.py check --fail-on-pending-sink`, 让"必下沉未下沉"的欠账直接挡合并。
 - **验收标准**: 一次演练: 提交带 Fail 而无夹具的验证记录, CI 必须红。
 
 ### P1-1 R6 多铰链连锁剥离 (multi-hinge peel)
@@ -252,9 +257,9 @@ L2 的三段测试按"先能落地、后动力学增强"分两期:
 
 - **每个模型两个用例**: `validate_<模型名>` (物理 + 教程一致性, 零 Error 才通过) 与 `tutorial_<模型名>` (教程引擎实跑)。模型 JSON 通过 `CONFIGURE_DEPENDS` 自动 glob —— **新增模型自动进入门禁, 不存在"忘了注册"**;
 - **旗舰严格档回归**: `validate_strict_castle_foundation_01` / `validate_strict_eiffel_tower_01` / `validate_strict_tokyo_tower_01` 在弱磁档下必须全绿;
-- **负例套件** (9 个): 物理上不成立的结构必须被**以正确的错误码**拒绝 —— `test_physics_negative.sh` 同时断言非零退出码和输出中的期望错误码, 防止"因 JSON 解析失败等无关原因碰巧返回非零"的假阴性;
+- **负例套件** (17 个, R1~R9 全覆盖): 物理上不成立的结构必须被**以正确的错误码**拒绝 —— `test_physics_negative.sh` 同时断言非零退出码和输出中的期望错误码, 防止"因 JSON 解析失败等无关原因碰巧返回非零"的假阴性; sidecar 声明 `jitter=<N>` 的负例 (如 `jitter_sensitive`) 改以 `validate --jitter N` 运行 (R9 通道); 套件完整性由 `physics_fixture_registry` 必备清单关卡把守, 夹具被误删或除名即红;
 - **正例套件**: 预算之内的合法结构必须放行且输出"可发布"结论, 防止规则矫枉过正 —— 负例/正例是锁死校验器行为的双向防线, **任何参数/规则改动都必须同时通过两侧**;
-- 此外还有逐步装配质检、反平凡检查、模型逻辑质检、库唯一性、目录对账、教程完整性、进度存档、家长门等全套用例, 合计 150+ 注册用例。
+- 此外还有 R9 抖动回归 (`physics_jitter_*` / `physics_jitter_positive_*` / `validate_jitter_*`)、风险报告契约回归 (`physical_risk_report_gate`)、逐步装配质检、反平凡检查、模型逻辑质检、库唯一性、目录对账、教程完整性、进度存档、家长门等全套用例, 合计 470+ 注册用例。
 
 ### 6.2 一键全量 QA (`tests/run_full_qa.sh`)
 
@@ -300,6 +305,8 @@ tests/run_full_qa.sh                                                            
 
 - 规则精确定义与调参纪律: [PHYSICS_RULES.md](PHYSICS_RULES.md)
 - 实物验证规程、失效分类学 F01~F12、L2 工具接口约定 (2.1 节)、验证状态机与 CI 门禁脚本: [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md)
+- 实物失效登记账本 (`tools/physical_failure_registry.py`) 与"实搭失败 → 登记 → 负例夹具 → CI 回归"四步校准闭环: [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md)
+- L3 人手排产 (先跑 L2 再定范围): [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) 0.5 节; 结构族去重代表清单 (`tools/physical_family_pack.py` 生成): [reports/PHYSICAL_FAMILY_PACK.md](reports/PHYSICAL_FAMILY_PACK.md)
 - 测试体系总览: [TESTING.md](TESTING.md)
 - 模型质量承诺 (逐片零差错 P1~P8): [MODEL_QUALITY.md](MODEL_QUALITY.md)
 
