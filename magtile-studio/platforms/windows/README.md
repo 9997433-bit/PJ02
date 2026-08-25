@@ -7,7 +7,7 @@ Windows 不需要独立的构建入口 —— 本目录只承载 **打包/安装
 > 状态: **脚手架**。MSVC 构建路径当前即可用 (仓库根 CMakeLists.txt
 > 已内置 `/W4 /utf-8` 等 MSVC 配置); 打包配置 (CPack/NSIS + WiX stub)
 > 已入库但尚未实机出包, 完整操作手册见 `scripts/package_windows.md`,
-> CI 流水线草案见 `.github/workflows/windows-release.yml`。
+> CI 流水线草案见仓库根 `.github/workflows/windows-release.yml`。
 
 ## 一、MSVC 构建
 
@@ -76,8 +76,8 @@ platforms/windows/
 
 - `scripts/package_windows.md` — Windows 构建/打包完整操作手册
   (前置条件、CPack/NSIS、WiX/MSI、版本号管理、发布前清单)。
-- `.github/workflows/windows-release.yml` — Windows 发布流水线草案
-  (标签触发, 构建 + 测试 + 打包 + Release 草稿)。
+- 仓库根 `.github/workflows/windows-release.yml` — Windows 发布
+  流水线草案 (标签触发, 构建 + 测试 + 打包 + Release 草稿)。
 - `docs/PLATFORM_ARCHITECTURE.md` — 跨平台技术架构总纲 (含发布流水线
   与各平台打包策略); 本目录即其第 8 节规划的 `platforms/windows/`
   落地脚手架。

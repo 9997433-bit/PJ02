@@ -2,7 +2,8 @@
 
 本文是 MagTile Studio Windows 端从源码到安装包的完整操作手册。
 打包资产位于 `platforms/windows/packaging/`, 自动化流水线草案位于
-`.github/workflows/windows-release.yml`。
+仓库根 `.github/workflows/windows-release.yml` (workflow 必须放在
+仓库根才会被 GitHub 识别, 本工程位于仓库的 `magtile-studio/` 子目录)。
 
 > 状态: **脚手架**。CPack/NSIS 与 WiX 配置已就位但尚未在真实
 > Windows 机器上出过包; 首次实机打包时请按第七节清单逐项核对。
@@ -107,7 +108,7 @@ UpgradeCode (`6FE5F9D7-79A7-4829-B13A-8C3B1517CA61`), 因此互相可
 
 ## 六、CI 流水线 (草案)
 
-`.github/workflows/windows-release.yml`:
+仓库根 `.github/workflows/windows-release.yml`:
 
 - 触发: 推送 `v*` 标签 (正式发布) 或手动 `workflow_dispatch` (试跑)。
 - 步骤: MSVC 配置构建 → 从 CMakeCache 提取版本号并校验标签 →

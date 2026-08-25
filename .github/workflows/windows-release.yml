@@ -5,15 +5,19 @@
 #   - 推送 v* 标签 (如 v0.1.0): 构建 + 打包 + 创建 GitHub Release 草稿
 #   - workflow_dispatch: 手动试跑, 只产出构建产物, 不建 Release
 #
-# 版本号唯一来源是根 CMakeLists.txt 的 project(MagTileStudio VERSION),
-# 本流水线在配置后从 CMakeCache 提取版本号, 并校验与标签一致。
+# 工程位于仓库的 magtile-studio/ 子目录 (workflow 必须放在仓库根
+# .github/workflows/ 才会被 GitHub 识别, 与 qa.yml 同理)。
+#
+# 版本号唯一来源是 magtile-studio/CMakeLists.txt 的
+# project(MagTileStudio VERSION), 本流水线在配置后从 CMakeCache
+# 提取版本号, 并校验与标签一致。
 #
 # 依赖说明:
 #   - NSIS: windows-latest 镜像预装 makensis, 无需额外安装。
 #   - GLFW / Dear ImGui: 配置阶段经 FetchContent 联网拉取。
 #   - library_gui_smoke 测试需要可建 OpenGL 窗口的显示环境, CI 上跳过。
 #
-# 详细打包手册: scripts/package_windows.md
+# 详细打包手册: magtile-studio/scripts/package_windows.md
 # =====================================================================
 name: windows-release
 
@@ -28,12 +32,22 @@ permissions:
 jobs:
   package:
     runs-on: windows-latest
+    timeout-minutes: 60
     defaults:
       run:
         shell: pwsh
+        working-directory: magtile-studio
+
     steps:
       - name: 检出源码
         uses: actions/checkout@v4
+
+      # GLFW / ImGui 经 FetchContent 拉取, 按 CMakeLists 哈希缓存源码
+      - name: 缓存 FetchContent 依赖
+        uses: actions/cache@v4
+        with:
+          path: magtile-studio/build/_deps
+          key: fetchcontent-${{ runner.os }}-${{ hashFiles('magtile-studio/CMakeLists.txt') }}
 
       - name: CMake 配置 (MSVC x64)
         run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
@@ -53,7 +67,7 @@ jobs:
           $tag = '${{ github.ref_name }}'
           $expected = 'v${{ steps.version.outputs.version }}'
           if ($tag -ne $expected) {
-            throw "标签 $tag 与 CMake project VERSION 不一致 (应为 $expected); 请先在根 CMakeLists.txt 升版"
+            throw "标签 $tag 与 CMake project VERSION 不一致 (应为 $expected); 请先在 magtile-studio/CMakeLists.txt 升版"
           }
 
       - name: 构建 (Release)
@@ -63,16 +77,17 @@ jobs:
         run: ctest --test-dir build -C Release --output-on-failure -E library_gui_smoke
 
       - name: CPack 打包 (NSIS 安装器 + 便携 ZIP)
-        working-directory: build
+        working-directory: magtile-studio/build
         run: cpack -G "NSIS;ZIP" -C Release
 
+      # upload/release 的 path 相对仓库根 (actions 不受 run 工作目录影响)
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
         with:
           name: MagTileStudio-${{ steps.version.outputs.version }}-win64
           path: |
-            build/MagTileStudio-*-win64.exe
-            build/MagTileStudio-*-win64.zip
+            magtile-studio/build/MagTileStudio-*-win64.exe
+            magtile-studio/build/MagTileStudio-*-win64.zip
           if-no-files-found: error
 
       # 只建"草稿": 按 scripts/package_windows.md 第七节清单
@@ -84,6 +99,6 @@ jobs:
           draft: true
           name: MagTile Studio ${{ github.ref_name }} (Windows)
           files: |
-            build/MagTileStudio-*-win64.exe
-            build/MagTileStudio-*-win64.zip
+            magtile-studio/build/MagTileStudio-*-win64.exe
+            magtile-studio/build/MagTileStudio-*-win64.zip
           fail_on_unmatched_files: true

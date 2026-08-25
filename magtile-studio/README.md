@@ -107,7 +107,9 @@ cd build-win && cpack -G "NSIS;ZIP" -C Release
 - 打包资产 (CPack 配置、WiX v4 stub、许可文本):
   [platforms/windows/packaging/](platforms/windows/packaging/)
 - CI 发布流水线草案 (推送 `v*` 标签触发, 构建 + 测试 + 打包 +
-  Release 草稿): [.github/workflows/windows-release.yml](.github/workflows/windows-release.yml)
+  Release 草稿): [仓库根 .github/workflows/windows-release.yml](../.github/workflows/windows-release.yml)
+  (workflow 必须放在仓库根才会被 GitHub 识别, 本工程位于仓库的
+  `magtile-studio/` 子目录)
 
 ## 文档
 
