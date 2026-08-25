@@ -4,7 +4,7 @@
 #
 # docs/V1_LAUNCH_CHECKLIST.md 的自动侧执行器: 把清单中所有能自动
 # 探测的项串成一条命令跑一遍, 输出 PASS/FAIL/SKIP 摘要。每个检查
-# 号 (R1..R16) 与清单「探测」列一一对应; 纯人工项 (实机验收 /
+# 号 (R1..R17) 与清单「探测」列一一对应; 纯人工项 (实机验收 /
 # 法务定稿 / 软著备案等) 以 SKIP[Manual] 列出提醒, 不参与判定。
 #
 # 检查项 (P0 = 上架阻断, 任一 FAIL 退出码非零; P1 = 报告不阻断):
@@ -40,14 +40,25 @@
 #                            (Qt QML / Android strings.xml / Kotlin / 展示层
 #                            C++ / 模型文案 全库秒级扫描: 无恐吓词与催促
 #                            话术, UI_UX_SPEC P3/§4.3/§4.5/§11/§14 红线)
+#   R17 [P1] 扰动仿真抽检   D4+ 高风险抽样跑 magtile_app validate
+#                            --jitter 50 (装配坐标注入随机抖动后复跑物理
+#                            校验, 实物复核的软件侧前哨; 清单 §8 S4)。
+#                            抽样确定性可复现: D5 全数优先 + 大体量 D4
+#                            按总片数降序补足 (与 physical_sample_pack
+#                            同一风险代理口径), 默认 10 个可调。慢项:
+#                            --quick 跳过 (记 SKIP), 全量签核必跑 ——
+#                            二进制缺失 / --jitter 特性不可用 / 抽样为空
+#                            一律按 FAIL 报告, 不允许静默跳过。
 #
 # 用法:
 #   tools/check_v1_readiness.sh [选项]
-#     --build-dir DIR      CLI 构建目录 (默认 build; 透传给 R5/R10)
+#     --build-dir DIR      CLI 构建目录 (默认 build; 透传给 R5/R10/R17)
 #     --qt-build-dir DIR   Qt 构建目录 (默认 build-qt; 透传给 R4)
-#     --quick              跳过两个长跑项 R4/R5 (记 SKIP; 日常快检用)
+#     --quick              跳过三个长跑项 R4/R5/R17 (记 SKIP; 日常快检用)
 #     --strict             签核档: R4 的 E2E 冒烟加 --strict (SKIP 也算失败)
 #     --model-target N     R1 内容体量门槛 (默认 200)
+#     --jitter-sample N    R17 扰动抽检的抽样规模 (默认 10; D5 全数优先,
+#                          大体量 D4 补足; 加大可换覆盖率, 线性变慢)
 #     -h | --help          打印本说明
 #
 # 退出码: 0 = 无 P0 失败 (P1 失败与 SKIP 不阻断);
@@ -62,6 +73,10 @@ QT_BUILD_DIR="$ROOT/build-qt"
 QUICK=0
 STRICT=0
 MODEL_TARGET=200
+# R17 扰动仿真口径: 每模型 50 次扰动迭代为签核档固定口径 (慢而稳);
+# 抽样规模可经 --jitter-sample 调整 (默认 10, D5 全数 + 大体量 D4 补足)
+JITTER_ITERATIONS=50
+JITTER_SAMPLE=10
 
 # 帮助 = 文件头注释块 (行 2 起至第一条闭合分隔线, 随头注增删自适应)
 usage() { sed -n '2,/^# =\{20,\}$/p' "$0"; }
@@ -79,6 +94,9 @@ while [ "$#" -gt 0 ]; do
         --model-target)
             [ "$#" -ge 2 ] || { echo "错误: --model-target 需要数字参数" >&2; exit 2; }
             MODEL_TARGET="$2"; shift 2 ;;
+        --jitter-sample)
+            [ "$#" -ge 2 ] || { echo "错误: --jitter-sample 需要数字参数" >&2; exit 2; }
+            JITTER_SAMPLE="$2"; shift 2 ;;
         -h|--help) usage; exit 0 ;;
         *) echo "错误: 未知参数 $1 (用法见 --help)" >&2; exit 2 ;;
     esac
@@ -87,6 +105,9 @@ case "$BUILD_DIR"    in /*) ;; *) BUILD_DIR="$ROOT/$BUILD_DIR" ;; esac
 case "$QT_BUILD_DIR" in /*) ;; *) QT_BUILD_DIR="$ROOT/$QT_BUILD_DIR" ;; esac
 case "$MODEL_TARGET" in ''|*[!0-9]*)
     echo "错误: --model-target 必须是正整数 (收到: $MODEL_TARGET)" >&2; exit 2 ;;
+esac
+case "$JITTER_SAMPLE" in ''|0|*[!0-9]*)
+    echo "错误: --jitter-sample 必须是正整数 (收到: $JITTER_SAMPLE)" >&2; exit 2 ;;
 esac
 
 PYTHON="$(command -v python3 || command -v python)"
@@ -152,7 +173,7 @@ echo "${BOLD}=============================================================="
 echo " MagTile Studio V1 上架就绪自动探测"
 echo " 对账清单: docs/V1_LAUNCH_CHECKLIST.md"
 echo " 项目根: $ROOT"
-echo " 档位: $([ "$QUICK" -eq 1 ] && echo '--quick (跳过 E2E 冒烟 / 发布门禁)' || echo '全量')$([ "$STRICT" -eq 1 ] && echo ' + --strict (E2E 签核档)')"
+echo " 档位: $([ "$QUICK" -eq 1 ] && echo '--quick (跳过 E2E 冒烟 / 发布门禁 / 扰动抽检)' || echo '全量')$([ "$STRICT" -eq 1 ] && echo ' + --strict (E2E 签核档)')"
 echo " 内容体量门槛: $MODEL_TARGET (上架目标区间 200~250)"
 echo "==============================================================${RESET}"
 
@@ -446,6 +467,92 @@ check_android_signing() {
     echo "[断言通过] release 签名已接线 (真实 keystore 生成与商店出包仍属人工项 M2, 见 SIGNING.md)"
 }
 
+# =============================================================
+# R17 D4+ 扰动仿真抽检 (清单 §8 S4)
+#
+# 实物复核的软件侧前哨: 对结构风险最高的 D4+ 模型抽样跑
+# magtile_app validate --jitter N (装配坐标注入随机抖动后复跑
+# 物理校验, 检验模型对真实搭建误差的稳健性)。抽样确定性可复现,
+# 与 physical_sample_pack.py 同一风险代理口径: D5 全数优先,
+# 名额未满时 D4 按总片数降序 (id 升序决胜) 补足至 $JITTER_SAMPLE。
+#
+# 失败口径 (全量签核必跑, 不允许静默跳过 —— 负向自测: 下列任一
+# "跳过途径" 都必须显式 FAIL 而非 SKIP/PASS):
+#   - 二进制缺失 (构建目录无 magtile_app);
+#   - 二进制不支持 validate --jitter (特性未落地或二进制过旧);
+#   - 抽样清单为空 / 实际执行 0 个模型;
+#   - 任一模型扰动校验非零退出。
+# 软件侧全绿不豁免 S1/S2 实搭 (§8 口径)。--quick 档记 SKIP,
+# 与 R4/R5 同约定 (签核前必须全量跑)。
+# =============================================================
+check_jitter_sampling() {
+    local app="$BUILD_DIR/magtile_app"
+    if [ ! -x "$app" ]; then
+        echo "[断言失败] 缺少可执行文件 $app —— R17 全量档必跑, 不得静默跳过;"
+        echo "  先构建: cmake -S \"$ROOT\" -B \"$BUILD_DIR\" && cmake --build \"$BUILD_DIR\" --target magtile_app"
+        return 1
+    fi
+    # 特性探测: 用法文本含 --jitter 才认为扰动仿真已落地。老二进制会把
+    # --jitter 当未知参数拒绝 (退出码 2 + 用法), 这里提前给出明确失败。
+    if ! "$app" --help 2>/dev/null | grep -q -- '--jitter'; then
+        echo "[断言失败] $app 不支持 validate --jitter —— 扰动仿真特性未落地或二进制过旧;"
+        echo "  R17 全量档必跑, 不得静默跳过: 更新代码并重建后重跑"
+        echo "  (自查: \"$app\" --help 应列出 --jitter 选项)"
+        return 1
+    fi
+    local sample
+    sample="$("$PYTHON" - "$ROOT/data/models" "$JITTER_SAMPLE" <<'PYEOF'
+import json, sys
+from pathlib import Path
+
+models_dir, target = Path(sys.argv[1]), int(sys.argv[2])
+d5, d4 = [], []
+for path in sorted(models_dir.glob("*.json")):
+    model = json.loads(path.read_text(encoding="utf-8"))
+    diff = int(model.get("difficulty", 0))
+    if diff < 4:
+        continue
+    pieces = int(model.get("total_pieces", len(model.get("final_assembly", []))))
+    entry = (-pieces, model.get("id", path.stem), path.name, diff, pieces)
+    (d5 if diff >= 5 else d4).append(entry)
+d5.sort()
+d4.sort()
+picked = d5 + d4[:max(0, target - len(d5))]
+for _, _, name, diff, pieces in picked:
+    print(f"{name}\tD{diff}\t{pieces}")
+PYEOF
+)" || { echo "[断言失败] D4+ 抽样清单生成失败 (模型 JSON 无法解析?)"; return 1; }
+    if [ -z "$sample" ]; then
+        echo "[断言失败] D4+ 抽样为空 (模型库无 difficulty >= 4 模型?) —— R17 一个没跑等同失败"
+        return 1
+    fi
+    echo "抽样规则: D5 全数优先 + 大体量 D4 补足, 目标 $JITTER_SAMPLE 个; 每模型 --jitter $JITTER_ITERATIONS"
+    local total=0 failed=0 name diff pieces out
+    while IFS=$'\t' read -r name diff pieces; do
+        [ -n "$name" ] || continue
+        total=$((total + 1))
+        printf '  [%2d] %-28s %s %4s 片  ' "$total" "$name" "$diff" "$pieces"
+        if out="$("$app" validate "$ROOT/data/models/$name" \
+                 --data-dir "$ROOT/data" --jitter "$JITTER_ITERATIONS" 2>&1)"; then
+            echo "通过"
+        else
+            echo "失败"
+            printf '%s\n' "$out" | tail -n 12 | sed 's/^/       | /'
+            echo "       复现: $app validate $ROOT/data/models/$name --data-dir $ROOT/data --jitter $JITTER_ITERATIONS"
+            failed=$((failed + 1))
+        fi
+    done <<< "$sample"
+    if [ "$total" -eq 0 ]; then
+        echo "[断言失败] 实际执行 0 个模型 —— R17 不允许静默跳过"
+        return 1
+    fi
+    if [ "$failed" -gt 0 ]; then
+        echo "[断言失败] $failed/$total 个模型扰动校验未通过 (搭建误差稳健性缺口, 逐个排查上方日志)"
+        return 1
+    fi
+    echo "[断言通过] D4+ 扰动仿真抽检全绿 ($total/$total, 每个 $JITTER_ITERATIONS 次扰动; 不豁免 S1/S2 实搭)"
+}
+
 # ---- 检查编排 ----------------------------------------------------
 run_check R1 P0 "内容体量 (模型 JSON >= $MODEL_TARGET)"           check_model_count
 run_check R2 P1 "目录登记 / 缩略图对账"                            check_catalog_sync
@@ -492,6 +599,14 @@ run_check R15 P0 "国内合规清单守卫 (check_china_compliance_docs)" \
     "$PYTHON" "$ROOT/tools/check_china_compliance_docs.py"
 run_check R16 P0 "儿童友好文案守卫 (check_child_friendly_copy)" \
     "$PYTHON" "$ROOT/tools/check_child_friendly_copy.py"
+
+if [ "$QUICK" -eq 1 ]; then
+    skip_check R17 P1 "D4+ 扰动仿真抽检 (validate --jitter $JITTER_ITERATIONS)" \
+        "--quick (慢项; 签核前必须全量跑, 全量档不允许静默跳过)"
+else
+    run_check R17 P1 "D4+ 扰动仿真抽检 (validate --jitter $JITTER_ITERATIONS)" \
+        check_jitter_sampling
+fi
 
 # ---- 纯人工项提醒 (不参与判定, 对应清单各节 Manual 行) -----------
 skip_check M1 P0 "Windows/macOS 实机打包验收 + 代码签名/公证" "Manual, 见清单 §3 D2~D6"
