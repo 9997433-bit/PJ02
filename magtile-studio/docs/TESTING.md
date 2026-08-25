@@ -2,6 +2,8 @@
 
 MagTile Studio 的测试目标只有一个: **保证每一个入库模型都是用户可以真实搭出来的、有搭建价值的教程内容**。因此这里的"测试"远不止软件单元测试 —— 模型的物理合理性 (搭得起来)、教程逻辑 (讲得通)、内容体量与多样性 (值得搭) 全部是自动化质量关卡的对象。
 
+上架前的**用户路径验收**另见 [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) (V1 必测路径矩阵 + 自动子集一键跑 `tools/run_e2e_smoke.sh`, 见第 8 节)。
+
 ## 0. 一键全量 QA
 
 ```bash
@@ -309,7 +311,7 @@ MAGTILE_FREE_TIER_CHECK=1 tests/run_full_qa.sh   # 随全量 QA (可选关卡 10
 仅在 `-DMAGTILE_BUILD_QT=ON` 时注册 (默认 OFF 的构建完全不受影响), 两者都**无需显示环境**:
 
 - `qt_backend_bridges` (`tests/test_qt_backends.cpp`): QT-2 两座后端桥的 C++ 单测。`SettingsBackend` 的字号三档 / 减少动效 / 年龄段 SQLite 往返、跨实例持久化、非法值忽略, 以及**与 GL 版/CLI 的共库契约** (Qt 桥写入的键 progress 层原样读回, 反向亦然); `ParentGateBackend` 的出题 / 答对开会话 / 答错温和提示 / 3 次答错进冷却 (冷却期拒答) / 锁定会话。
-- `qt_gui_smoke` (`tests/test_qt_smoke.sh`): offscreen 平台无头加载 QML 三连跑 —— 默认启动 (首页)、`--parent-gate` 深链 (家长门界面)、`--smoke-parent-flow` 自动驾驶 (家长门 → 提交标准答案过门 → 家长中心 → 设置 → 订阅逐页实例化, 全程无误 `Main.qml` 才置 `smokeParentFlowOk`, 否则进程非零退出)。
+- `qt_gui_smoke` (`tests/test_qt_smoke.sh`): offscreen 平台无头加载 QML 多路径连跑 (完整路径清单以脚本自身为准) —— 默认启动 (首页)、`--parent-gate` 深链 (家长门界面)、`--smoke-parent-flow` 自动驾驶 (家长门 → 提交标准答案过门 → 家长中心 → 设置 → 订阅逐页实例化, 全程无误 `Main.qml` 才置 `smokeParentFlowOk`, 否则进程非零退出)、`--smoke-complete-model` 完成链路 (庆祝页 + 存档 `completed_at` 断言) 等; 全程输出扫描 QML 运行时错误 (ReferenceError/TypeError) 一票否决。`--smoke-open-progress` 进度页深链由 `tools/run_e2e_smoke.sh` 的 E2E-12a 项覆盖 (见第 8 节)。
 
 ```bash
 cmake -S . -B build-qt -DMAGTILE_BUILD_QT=ON
@@ -359,6 +361,7 @@ tools/run_release_gate.sh --help       # 完整用法
 | 内容批量合入后 (一次合入多个模型 / 免费层选品变动) | `tools/run_release_gate.sh` | 快检: 日常 CI 跳过的两道专项 + 待复核缺口盘点 |
 | 发布打包前 (Windows / Qt 桌面 / Android 出包) | `tools/run_release_gate.sh --full` | 全量 QA 与发布专项一次跑全, 全绿才进入打包手册流程: [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) / [../scripts/package_windows.md](../scripts/package_windows.md) |
 | 正式对外发布 (终防线) | 上一档追加 `--fail-on-pending` | D4+ 模型必须全部完成实物复核 (3.13 节口径) |
+| 上架商用验收 (用户路径) | `tools/run_e2e_smoke.sh --strict` | 核心用户路径 E2E 自动子集 (第 8 节); 人工路径按 [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) 逐条打钩 |
 
 CI 侧: `.github/workflows/release-gate.yml` 仅 `workflow_dispatch` 手动触发 (发布门禁不拖慢日常 PR —— push/PR 仍只跑 qa.yml), Actions 页可选 `mode` (full / gate-only) 与 `fail_on_pending`, 跑的与本地是同一个脚本。
 
@@ -384,3 +387,41 @@ CI 侧: `.github/workflows/release-gate.yml` 仅 `workflow_dispatch` 手动触�
 6. `library_uniqueness_gate` 通过 (与全库任何模型的结构签名相似度 ≤ 0.85);
 7. `tutorial_integrity` 通过 (步骤恰好覆盖全部磁力片, 教程引擎实跑成功);
 8. 按难度分级完成实物验证要求 (BUILD_VERIFICATION.md 第 2 节; 执行规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md)); D4+ 复核通过后写入 `content_meta.physical_verified` 三字段或旁车验证文件, 否则一直挂在 `tools/list_physical_pending.py` 的待复核清单上。
+
+## 8. 核心用户路径 E2E 冒烟 (上架验收)
+
+前面各节保证"代码不退化、内容搭得起来"; 上架前还要以**用户视角**把
+完整路径 (安装 → 浏览 → 搭建 → 庆祝 → 付费边界) 走一遍。路径清单、
+平台与优先级 (P0/P1)、Auto/Manual 标注统一维护在
+[E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md); 其中已自动化的子集一键跑:
+
+```bash
+tools/run_e2e_smoke.sh                 # 默认: SKIP 不阻断 (日常回归)
+tools/run_e2e_smoke.sh --strict        # 验收档: 任何 SKIP 也按失败处理 (上架签核)
+tools/run_e2e_smoke.sh --skip-android  # 无 NDK 环境跳过 Android 项
+tools/run_e2e_smoke.sh --help          # 完整用法
+```
+
+自动子集当前覆盖 (矩阵编号见 E2E_TEST_MATRIX.md 第 1 节):
+
+- **E2E-01a** CLI 启动冒烟: `magtile_app catalog` 目录加载, 13 种片型齐全;
+- **E2E-11a** 免费层清单对齐: `tools/verify_free_tier.py` (3.14 节同一工具);
+- **E2E-11b** CLI 免费筛选对账: `library --free-only` 数量与 starter 打包
+  清单一致 + 抽样免费模型在列 + 目录元数据对账通过;
+- **E2E-06a** CLI 免费模型教程步进: 教程引擎全程步进, 放置片数与
+  `total_pieces` 对账 (免费用户"打开就能搭完"的最短闭环);
+- **E2E-QT** Qt 无头冒烟: `tests/test_qt_smoke.sh` 全部路径 (3.15 节);
+- **E2E-12a** Qt 进度页深链: `--smoke-complete-model` 造非空存档后
+  `--smoke-open-progress` 实例化进度页/成就墙数据源, QML 运行时错误
+  一票否决;
+- **E2E-14a** Android JNI 符号断言: NDK 交叉编译 `libmagtile_core.so` 并
+  断言 JNI 符号齐全 —— 符号清单**运行时解析自 CI `android.yml`**, 与
+  流水线口径自动同步; 无 NDK 环境自动 SKIP (CI 由 `android.yml` 兜底)。
+
+退出码: 0 = 全部执行项通过 (默认档 SKIP 不算失败, `--strict` 下算);
+1 = 存在失败项; 2 = 环境/参数不满足。缺 `magtile_app` 时自动构建;
+缺 `magtile_studio_qt` 时尝试自动构建, 环境无 Qt6 则记 SKIP。
+
+与发布门禁的关系: `run_release_gate.sh` 管**软件/内容/实物**三层质量,
+`run_e2e_smoke.sh` 管**用户路径**健康度, 上架签核两者都要全绿, 人工侧
+再按 E2E_TEST_MATRIX.md 第 3 节的签核规则补齐 Manual 项。
