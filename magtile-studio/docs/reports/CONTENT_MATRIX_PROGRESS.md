@@ -8,4 +8,4 @@
 
 ## 矩阵进度暂不可用
 
-全库 250 个模型的 `content_meta.series` 均未回填, 无法机检主题 × 难度矩阵进度。回填 (底稿见 [CONTENT_GAP_AUDIT.md](CONTENT_GAP_AUDIT.md) 附录 A, 词表见 `tools/update_model_catalog.py` 的 `MATRIX_THEMES`) 后重跑 `python3 tools/update_model_catalog.py --matrix-report` 即自动输出进度表。
+全库 250 个模型的 `content_meta.series` 均未回填, 无法机检主题 × 难度矩阵进度。回填 (底稿见 [CONTENT_GAP_AUDIT.md](CONTENT_GAP_AUDIT.md) 附录 A, 权威词表见 `data/content_series_map.json`) 后重跑 `python3 tools/update_model_catalog.py --matrix-report` 即自动输出进度表。

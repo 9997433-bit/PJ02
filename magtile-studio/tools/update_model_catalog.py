@@ -93,12 +93,13 @@ TAG_TO_THEME = {
 
 
 MATRIX_REPORT_DEFAULT = "docs/reports/CONTENT_MATRIX_PROGRESS.md"
+SERIES_MAP = ROOT / "data" / "content_series_map.json"
 
 # CONTENT_STRATEGY.md §2.2 主题 × 难度分布矩阵 (终态目标 520 个)。
 # 每项: (series 词值, 中文主题名, (D1, D2, D3, D4, D5) 目标)。
-# series 词值遵循 §5.1 schema 示例的英文下划线风格 (bridge_engineering
-# 为文档钦定, 其余 12 个由本表定义为规范词表); 模型回填时写英文词值或
-# 中文主题名均可识别 (CONTENT_GAP_AUDIT §7.3 的回填底稿用中文主题名)。
+# series 词值与 data/content_series_map.json 权威词表逐条一致 (该文件
+# 是 content_meta.series 合法取值的唯一来源, 本表只补充 §2.2 的难度
+# 目标); 词表文件在场时以其为准 (build_series_index), 兼收中文主题名。
 MATRIX_THEMES = [
     ("castle_fortress", "城堡与要塞", (6, 10, 14, 8, 4)),
     ("land_transport", "陆地交通", (8, 12, 12, 8, 2)),
@@ -108,18 +109,38 @@ MATRIX_THEMES = [
     ("architecture_landmark", "建筑地标", (4, 10, 14, 12, 10)),
     ("bridge_engineering", "桥梁工程", (2, 8, 12, 10, 8)),
     ("geometric_art", "几何艺术", (8, 12, 12, 8, 4)),
-    ("ball_run_park", "滚珠乐园", (2, 8, 12, 10, 6)),
+    ("marble_run", "滚珠乐园", (2, 8, 12, 10, 6)),
     ("plant_garden", "植物花园", (8, 10, 10, 4, 0)),
     ("festival_seasonal", "节日限定", (8, 10, 10, 6, 2)),
-    ("utility_functional", "实用功能", (10, 12, 10, 4, 0)),
-    ("fantasy_mechanical", "幻想与机械", (4, 8, 16, 10, 8)),
+    ("utility_items", "实用功能", (10, 12, 10, 4, 0)),
+    ("fantasy_machinery", "幻想与机械", (4, 8, 16, 10, 8)),
 ]
 
-# series 值 (英文词值或中文主题名) -> 矩阵行下标
-SERIES_TO_ROW = {}
-for _i, (_slug, _cn, _targets) in enumerate(MATRIX_THEMES):
-    SERIES_TO_ROW[_slug] = _i
-    SERIES_TO_ROW[_cn] = _i
+
+def build_series_index():
+    """series 词值 -> 矩阵行下标, 及矩阵外合法桶的显示名。
+
+    以 data/content_series_map.json 权威词表为准: matrix_bucket 为 null
+    的条目按中文名对齐 §2.2 矩阵行, 非 null 的登记为矩阵外合法桶;
+    词表缺失时退回 MATRIX_THEMES 内置词值。中文主题名恒可识别。
+    """
+    index = {}
+    for i, (slug, cn, _targets) in enumerate(MATRIX_THEMES):
+        index[slug] = i
+        index[cn] = i
+    bucket_names = {}
+    if SERIES_MAP.is_file():
+        name_to_row = {cn: i for i, (_s, cn, _t) in enumerate(MATRIX_THEMES)}
+        series = json.loads(SERIES_MAP.read_text(encoding="utf-8"))["series"]
+        for slug, info in series.items():
+            name = info.get("display_name_zh", slug)
+            if info.get("matrix_bucket") is None:
+                row = name_to_row.get(name)
+                if row is not None:
+                    index[slug] = row
+            else:
+                bucket_names[slug] = name
+    return index, bucket_names
 
 
 def derive_theme(model):
@@ -139,9 +160,10 @@ def collect_matrix(series_records):
     """(series, difficulty) 序列 -> 矩阵统计。
 
     返回 (counts, extra, missing): counts 为 13 主题 × D1–D5 计数,
-    extra 为矩阵外 series 值计数 (含难度越界的异常记录), missing 为
-    未标注 series 的模型数。
+    extra 为矩阵外 series 值计数 (词表登记的桶带中文显示名, 含难度
+    越界的异常记录), missing 为未标注 series 的模型数。
     """
+    index, bucket_names = build_series_index()
     counts = [[0] * 5 for _ in MATRIX_THEMES]
     extra = Counter()
     missing = 0
@@ -149,9 +171,10 @@ def collect_matrix(series_records):
         if not series:
             missing += 1
             continue
-        row = SERIES_TO_ROW.get(series)
+        row = index.get(series)
         if row is None:
-            extra[series] += 1
+            name = bucket_names.get(series)
+            extra[f"{name} ({series})" if name else series] += 1
         elif 1 <= difficulty <= 5:
             counts[row][difficulty - 1] += 1
         else:
@@ -244,8 +267,8 @@ def write_matrix_report(path, series_records, counts, extra, missing):
             "",
             f"全库 {total} 个模型的 `content_meta.series` 均未回填, 无法机检"
             "主题 × 难度矩阵进度。回填 (底稿见 "
-            "[CONTENT_GAP_AUDIT.md](CONTENT_GAP_AUDIT.md) 附录 A, 词表见 "
-            "`tools/update_model_catalog.py` 的 `MATRIX_THEMES`) 后重跑 "
+            "[CONTENT_GAP_AUDIT.md](CONTENT_GAP_AUDIT.md) 附录 A, 权威词表见 "
+            "`data/content_series_map.json`) 后重跑 "
             "`python3 tools/update_model_catalog.py --matrix-report` 即自动"
             "输出进度表。",
         ]
