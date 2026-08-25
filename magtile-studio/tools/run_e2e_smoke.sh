@@ -272,7 +272,7 @@ jni_symbol_list() {
     local wf
     if wf="$(android_workflow_file)"; then
         echo "  (符号清单解析自 $wf)" >&2
-        grep -oE '(MainActivity|MagTileNative)_[A-Za-z]+' "$wf" | sort -u
+        grep -oE '(MainActivity|MagTileNative|TutorialSceneNative)_[A-Za-z]+' "$wf" | sort -u
     else
         echo "  (未找到 android.yml, 使用内置基线清单)" >&2
         printf '%s\n' \
@@ -286,7 +286,12 @@ jni_symbol_list() {
             MagTileNative_getTutorialSteps MagTileNative_savedTutorialStep \
             MagTileNative_saveTutorialStep \
             MagTileNative_parentGateOpenJson MagTileNative_parentGateSubmitJson \
-            MagTileNative_parentGateSessionActive
+            MagTileNative_parentGateSessionActive \
+            TutorialSceneNative_loadScene TutorialSceneNative_setStep \
+            TutorialSceneNative_releaseScene \
+            TutorialSceneNative_dragRotate TutorialSceneNative_pinchZoom \
+            TutorialSceneNative_pan \
+            TutorialSceneNative_surfaceCreated TutorialSceneNative_drawFrame
     fi
 }
 
