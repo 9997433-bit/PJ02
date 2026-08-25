@@ -1,0 +1,951 @@
+{
+  "schema_version": 1,
+  "id": "halloween_pumpkin_house_01",
+  "name": "万圣节南瓜女巫屋",
+  "name_en": "Halloween Pumpkin House 01",
+  "description": "只用核心九片型的节日限定新档期 —— 全库第一个万圣节模型, 也是全库第一个非正交墙环: 八片方墙竖边以 135 度钝角逐对互咬, 闭环自锁成南瓜灯鼓鼓的圆筒肚皮, 只有正南的门框方大嘴踩着青石门阶拼缝, 其余七片墙脚潇洒落地; 筒顶八片紫色瘦高等腰沿八条斜棱互吸收拢成八棱女巫帽尖, 两扇黄窗格方斜嵌在东南西南棱面上, 就是南瓜灯的发光眼睛; 田里两颗四棱自锁小南瓜, 篱笆边小黑猫守着门阶, 小幽灵飘过南瓜田 —— 不给糖就捣蛋!",
+  "difficulty": 3,
+  "total_pieces": 50,
+  "tags": [
+    "节日",
+    "万圣节",
+    "南瓜灯",
+    "女巫屋",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 23,
+        "equilateral_triangle": 12,
+        "isosceles_triangle": 10,
+        "rectangle": 2,
+        "window_square": 2,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g1_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_e",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "w1_0",
+      "type": "door_frame",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "w1_1",
+      "type": "square",
+      "position": [
+        4.353553,
+        2.353553,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        45.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w1_2",
+      "type": "square",
+      "position": [
+        4.707107,
+        3.207107,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w1_3",
+      "type": "square",
+      "position": [
+        4.353553,
+        4.06066,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        135.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w1_4",
+      "type": "square",
+      "position": [
+        3.5,
+        4.414214,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w1_5",
+      "type": "square",
+      "position": [
+        2.646447,
+        4.06066,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -135.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w1_6",
+      "type": "square",
+      "position": [
+        2.292893,
+        3.207107,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w1_7",
+      "type": "square",
+      "position": [
+        2.646447,
+        2.353553,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -45.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w2_0",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w2_1",
+      "type": "window_square",
+      "position": [
+        4.353553,
+        2.353553,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        45.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "w2_2",
+      "type": "square",
+      "position": [
+        4.707107,
+        3.207107,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w2_3",
+      "type": "square",
+      "position": [
+        4.353553,
+        4.06066,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        135.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w2_4",
+      "type": "square",
+      "position": [
+        3.5,
+        4.414214,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w2_5",
+      "type": "square",
+      "position": [
+        2.646447,
+        4.06066,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -135.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w2_6",
+      "type": "square",
+      "position": [
+        2.292893,
+        3.207107,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "w2_7",
+      "type": "window_square",
+      "position": [
+        2.646447,
+        2.353553,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -45.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hat_0",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        2.402369,
+        2.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hat_1",
+      "type": "isosceles_triangle",
+      "position": [
+        4.069035,
+        2.638071,
+        2.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        45.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hat_2",
+      "type": "isosceles_triangle",
+      "position": [
+        4.304738,
+        3.207107,
+        2.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hat_3",
+      "type": "isosceles_triangle",
+      "position": [
+        4.069035,
+        3.776142,
+        2.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        135.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hat_4",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        4.011844,
+        2.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        180.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hat_5",
+      "type": "isosceles_triangle",
+      "position": [
+        2.930965,
+        3.776142,
+        2.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        -135.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hat_6",
+      "type": "isosceles_triangle",
+      "position": [
+        2.695262,
+        3.207107,
+        2.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        -90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hat_7",
+      "type": "isosceles_triangle",
+      "position": [
+        2.930965,
+        2.638071,
+        2.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        -45.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "pk_w_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pk_w_e",
+      "type": "equilateral_triangle",
+      "position": [
+        1.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pk_w_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pk_w_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pk_e_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pk_e_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pk_e_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pk_e_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fence_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fence_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fence_5",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fence_6",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cat",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        1.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ghost",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        1.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺门前行: 两条草地长板夹三片方板, 中间灰色的是青石门阶。",
+      "tip": "万圣节的傍晚到啦! 门阶北沿待会儿要咬住南瓜屋的大门墙脚。",
+      "tiles_to_add": [
+        "g1_w",
+        "g1_2",
+        "g1_3",
+        "g1_4",
+        "g1_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺南瓜田行: 七片方板等边互吸, 灰色方板续上青石小路。",
+      "tip": "小南瓜要种在单位方板上 —— 四条底边都得有整边可吸。",
+      "tiles_to_add": [
+        "g0_0",
+        "g0_1",
+        "g0_2",
+        "g0_3",
+        "g0_4",
+        "g0_5",
+        "g0_6"
+      ],
+      "highlight_tiles": [
+        "g1_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "起一层墙环南半: 门框方大嘴踩上门阶北沿, 左右各接一片橙墙。",
+      "tip": "相邻墙片的竖边以 135 度互咬 —— 南瓜的圆肚皮就是这么鼓起来的。",
+      "tiles_to_add": [
+        "w1_0",
+        "w1_1",
+        "w1_7"
+      ],
+      "highlight_tiles": [
+        "g1_3"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "合一层墙环北半: 余下五片橙墙逐片咬进环里, 首尾合拢。",
+      "tip": "八片墙合成闭环就自己站稳了 —— 除了大门, 其他墙脚直接踩地。",
+      "tiles_to_add": [
+        "w1_2",
+        "w1_3",
+        "w1_4",
+        "w1_5",
+        "w1_6"
+      ],
+      "highlight_tiles": [
+        "w1_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "摞二层墙环南半: 两扇黄窗格方斜嵌在东南和西南棱面上。",
+      "tip": "底边与一层墙顶整边共线吸合 —— 这两扇斜窗就是南瓜灯的眼睛!",
+      "tiles_to_add": [
+        "w2_0",
+        "w2_1",
+        "w2_7"
+      ],
+      "highlight_tiles": [
+        "w1_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "合二层墙环北半: 五片橙墙上环, 南瓜灯的脑袋鼓圆了。",
+      "tip": "每片墙都要同时咬住脚下墙顶和旁边的邻墙。",
+      "tiles_to_add": [
+        "w2_2",
+        "w2_3",
+        "w2_4",
+        "w2_5",
+        "w2_6"
+      ],
+      "highlight_tiles": [
+        "w2_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "戴女巫帽南半: 四片紫色瘦高等腰底边吸住二层墙顶, 斜棱互吸。",
+      "tip": "帽片一片挨一片, 斜棱两两咬住 —— 帽尖会在正中央碰头。",
+      "tiles_to_add": [
+        "hat_0",
+        "hat_1",
+        "hat_7",
+        "hat_6"
+      ],
+      "highlight_tiles": [
+        "w2_0"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "合女巫帽北半: 余下四片收拢, 八条棱在帽尖自锁成环。",
+      "tip": "最后一片同时咬住两条斜棱 —— 八棱帽尖一锁, 风都吹不歪。",
+      "tiles_to_add": [
+        "hat_2",
+        "hat_3",
+        "hat_4",
+        "hat_5"
+      ],
+      "highlight_tiles": [
+        "hat_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "种西边的小南瓜: 四片橙色等边斜棱互吸自锁成锥。",
+      "tip": "小南瓜的四条底边都要整边吸住脚下的草地方板。",
+      "tiles_to_add": [
+        "pk_w_s",
+        "pk_w_e",
+        "pk_w_n",
+        "pk_w_w"
+      ],
+      "highlight_tiles": [
+        "g0_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "种东边的小南瓜: 南瓜田凑成一对。",
+      "tip": "两颗小南瓜一西一东, 等着被做成明年的南瓜灯。",
+      "tiles_to_add": [
+        "pk_e_s",
+        "pk_e_e",
+        "pk_e_n",
+        "pk_e_w"
+      ],
+      "highlight_tiles": [
+        "g0_4"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "插尖桩篱笆: 四片灰色等边骑住庭院南沿, 中间留出小路豁口。",
+      "tip": "篱笆一片骑一沿 —— 讨糖的小客人从青石小路进来。",
+      "tiles_to_add": [
+        "fence_0",
+        "fence_1",
+        "fence_5",
+        "fence_6"
+      ],
+      "highlight_tiles": [
+        "g0_0"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "请出小黑猫和小幽灵: 一只守门阶, 一只飘在南瓜田上。",
+      "tip": "不给糖就捣蛋! 南瓜灯的眼睛亮起来, 万圣节晚会开场啦。",
+      "tiles_to_add": [
+        "cat",
+        "ghost"
+      ],
+      "highlight_tiles": [
+        "g1_4",
+        "g0_1"
+      ]
+    }
+  ]
+}
