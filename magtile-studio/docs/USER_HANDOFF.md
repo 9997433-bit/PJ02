@@ -42,7 +42,7 @@ M1~M6 六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)�
 | 项 | 状态 | 交付物 | commit / 依据 |
 | --- | --- | --- | --- |
 | C1 模型库体量 | ✅ | **209 个模型 JSON** (探测门槛 200, 处于 200~250 目标区间) | 最近登记批 `856fab0` (205→209); R1 实跑 PASS |
-| C2 全库质量门禁 | ✅ | strict 双档零未豁免警告 (唯一豁免 `suspension_bridge_01` 已文档化) | 报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md); R5 实跑 |
+| C2 全库质量门禁 | ✅ | 全库 209 模型 strict 双档零未豁免警告 (唯一豁免 `suspension_bridge_01` 已文档化) | 巡检深报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) + 最新全库实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) (`5b915a0` 基线); R5 实跑 |
 | C3 目录 + 缩略图 | ✅ | JSON / 目录登记 / 缩略图 209 三方对账一致 | `856fab0`; R2 实跑 PASS |
 | C4 免费层 30 对齐 | ✅ | 标签 = starter 清单, 全 core-9, 三条断言常绿 | [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md); R3 实跑 PASS |
 | C5 主题/难度终审 | 🔶 | 分布数据可一键输出 (`magtile_app library`), 人工终审留待上架前 | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2 |
@@ -86,7 +86,7 @@ M1~M6 六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)�
 | 项 | 状态 | 交付物 | commit / 依据 |
 | --- | --- | --- | --- |
 | E1 自动子集 strict 全绿 | ✅ | `run_e2e_smoke.sh --strict` 9 项 0 SKIP + **每次 push CI 常态复跑** (`qa.yml` e2e-strict job) | CI 固化 `15f4e03`; 按钮级路径冒烟 `26032b0` |
-| G1 门禁快检常绿 | ✅ | `run_release_gate.sh` 快检档 PASS (G2 被实物复核卡住, 见 §4.3) | R5 实跑 |
+| G1 门禁快检常绿 | ✅ | `run_release_gate.sh` 快检档 PASS + 全量档 QA+L2 全绿 (仅 L3 实物硬闸门红 —— G2 被实物复核卡住, 见 §4.3) | R5 实跑; 留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) |
 | 整机 QA 报告 | ✅ | Qt 桌面儿童视角全路径实玩 (`86e0b5f`, P1-1 已修 `b16e85e`) + Android 全量静态审查 (`b3c1685`) | [reports/QA_QT_CHILD_PLAYTHROUGH.md](reports/QA_QT_CHILD_PLAYTHROUGH.md) / [reports/QA_ANDROID_CHILD_PLAYTHROUGH.md](reports/QA_ANDROID_CHILD_PLAYTHROUGH.md) |
 
 ### 1.7 §8/§9 给你铺路的执行文档 (全部新增)
