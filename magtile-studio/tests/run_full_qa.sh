@@ -22,6 +22,9 @@
 #   13. GL 渲染冒烟          (无头渲染 + 截图校验, 无显示环境自动降级)
 #   14. 弱磁严格档全库巡检   (可选: MAGTILE_STRICT_AUDIT=1 时执行,
 #       tools/run_strict_audit.sh —— strict 零警告审计 + 逐步装配质检)
+#   15. L3 实物复核缺口报告   (报告型: 输出 D4+ 未实物复核模型数量,
+#       tools/list_physical_pending.py —— 仅报告不阻断, 实物复核是
+#       线下人工流程, 规程见 docs/PHYSICAL_REBUILD_CHECKLIST.md)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -210,6 +213,14 @@ else
     skip_stage "弱磁严格档全库巡检 (strict)" \
         "可选关卡, 置 MAGTILE_STRICT_AUDIT=1 开启 (tools/run_strict_audit.sh)"
 fi
+
+# ---- 14: L3 实物复核缺口报告 (报告型, 不阻断) ---------------------
+# 软件全绿不替代实物复核: D4+ 模型须按 docs/PHYSICAL_REBUILD_CHECKLIST.md
+# 实搭复核后落盘 content_meta.physical_verified 或旁车验证文件。
+# 本关卡只报告未复核数量供 QA 排产, 默认永不失败 (线下人工进度不卡 CI);
+# 发布打包前可单独执行 --fail-on-pending 作为终防线。
+run_stage "L3 实物复核缺口报告" \
+    "$PYTHON" "$ROOT/tools/list_physical_pending.py" "$DATA_DIR/models"
 
 # ---- 总结报告 ---------------------------------------------------
 pass_count=0; fail_count=0; skip_count=0

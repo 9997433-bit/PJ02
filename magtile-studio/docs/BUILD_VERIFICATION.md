@@ -341,6 +341,7 @@ jobs:
 
 ## 7. 与其他文档的关系
 
+- 作者级逐步实搭执行清单 (敲击/提起/记录模板/`content_meta.physical_verified` 轻量落盘): [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md), D4+ 待复核清单由 `tools/list_physical_pending.py` 跟踪 (本文档 5.2 节旁车文件与轻量字段两种凭据都认, 旁车带内容哈希绑定为权威);
 - 软件规则 (L1) 的精确定义与演进路线: [PHYSICS_RULES.md](PHYSICS_RULES.md);
 - 编辑器与内容量产管线的阶段规划: [ROADMAP.md](ROADMAP.md) 阶段 2 与阶段 4;
 - 本文档新增的规划项 (L2 仿真管线、验证旁车文件、门禁脚本、编辑器复核面板) 随阶段 2 编辑器一并落地, 在此之前 L3 流程即刻以人工表单执行 —— **实物验证从今天起就是 T3+ 模型入库的硬性要求, 不等工具**。

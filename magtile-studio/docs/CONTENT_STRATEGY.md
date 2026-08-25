@@ -246,7 +246,7 @@ AI (含程序化生成器) 是加速器, 不是设计师。边界一次说清:
 - **组合配额**: 同一 (主技法, 主题) 组合全库上限 **6 个**, 且这 6 个至少覆盖 3 种不同 `build_paradigm`。
 - **全库占比**: 任一主技法占比 ≤ 12% (520 × 12% ≈ 62 个封顶); 任一范式占比 ≤ 30%。
 - **批次评审**: 内容按批发布, 每批 10 个。批内主技法重复 ≤ 2 次、主题重复 ≤ 3 次; 每批评审时策展人更新"多样性账本" (各技法/主题/范式的消耗进度)。
-- **实物复核率**: D5 与 D4 100%; D3 抽检 30%; D1–D2 抽检 10%。
+- **实物复核率**: D5 与 D4 100%; D3 抽检 30%; D1–D2 抽检 10%。执行规程见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) (敲击/提起/记录模板/元数据落盘); D4+ 待复核清单用 `tools/list_physical_pending.py` 跟踪, 复核通过后在 `content_meta` 写入 `physical_verified` 三字段 (5.1 节)。
 
 ### 4.4 策展人职责 (Curator)
 
@@ -314,10 +314,20 @@ AI (含程序化生成器) 是加速器, 不是设计师。边界一次说清:
       "date": "2026-08-25",
       "checklist_passed": true,              // 第 3.4 节 10 项全过
       "boundary_case_note": null             // 相似度 0.70–0.85 时的人工比对说明
-    }
+    },
+
+    // ---- 实物搭建复核摘要 (三个可选字段, 全部缺省 = 未复核) ----
+    // 规程与填写纪律见 PHYSICAL_REBUILD_CHECKLIST.md; 权威完整记录仍是
+    // BUILD_VERIFICATION.md 5.2 节的旁车文件, 这里只是供清单工具与产品端
+    // 快速判读的轻量摘要。模型内容变更 (final_assembly/steps) 时必须清除。
+    "physical_verified": true,               // 实物复核通过 (敲击/提起等全部适用项 Pass)
+    "physical_verified_at": "2026-08-25",    // 复核日期 (ISO 8601), verified=true 时必填
+    "physical_notes": "基准品牌新片实搭 38 分钟; 敲击/提起/拆解重搭全 Pass"
   }
 }
 ```
+
+已示例标注的模型: `castle_foundation_01`、`tokyo_tower_01` (strict 回归旗舰)、`great_wall_01`。D4+ 待复核清单由 `tools/list_physical_pending.py` 跟踪 (`content_meta.physical_verified` 与旁车文件两种凭据都认)。
 
 ### 5.2 uniqueness_hash 与相似度算法
 

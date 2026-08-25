@@ -21,12 +21,15 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 6 | 模型逻辑质检 | 步骤粒度 / 中文说明 / 对账 / 难度区间 / BOM |
 | 7 | 逐步装配质检 | 逐片零差错 P1~P8 (见 [MODEL_QUALITY.md](MODEL_QUALITY.md)) |
 | 8 | 模型库唯一性 | 结构签名两两比对, 拒绝换皮克隆 |
-| 9 | 教程完整性 | 静态走查 + 教程引擎实跑 |
-| 10 | 物理负例 × N | 不成立的结构必须被拒绝, 且错误码正确 |
-| 11 | 物理正例 × N | 预算内的合法结构必须放行 |
-| 12 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
+| 9 | 片型分层检查 | core-9 覆盖率 + 需要扩展装标签 (现阶段 WARN 不拦截) |
+| 10 | 教程完整性 | 静态走查 + 教程引擎实跑 |
+| 11 | 物理负例 × N | 不成立的结构必须被拒绝, 且错误码正确 |
+| 12 | 物理正例 × N | 预算内的合法结构必须放行 |
+| 13 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
+| 14 | 弱磁严格档全库巡检 | 可选 (`MAGTILE_STRICT_AUDIT=1`): strict 零警告审计 + 逐步装配质检 |
+| 15 | L3 实物复核缺口报告 | 报告型: 输出 D4+ 未实物复核模型数量, 仅报告不阻断 (见 3.13 节) |
 
-环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
+环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 14; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
 
 CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑绿。
 
@@ -269,6 +272,31 @@ python3 tests/test_step_assembly.py data/models
 python3 tests/test_library_uniqueness.py data/models
 ```
 
+### 3.13 L3 实物复核缺口报告 (`tools/list_physical_pending.py`)
+
+软件全绿不替代实物复核: difficulty ≥ 4 的模型必须按 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) 完成实物搭建复核 (敲击/提起/记录模板), 通过后在模型 `content_meta` 写入 `physical_verified` / `physical_verified_at` / `physical_notes` 三个可选字段 (schema 见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 5.1 节), 或落盘 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 5.2 节的旁车验证文件 (内容哈希绑定, 模型改动自动作废)。
+
+```bash
+python3 tools/list_physical_pending.py data/models                    # 人类可读清单
+python3 tools/list_physical_pending.py data/models --json             # 机器可读
+python3 tools/list_physical_pending.py data/models --fail-on-pending  # 发布门禁模式
+```
+
+全量 QA 中该关卡**只报告未复核数量, 不阻断 CI** (实物复核是线下人工流程, 进度不应卡住代码/内容合入); 发布打包前可用 `--fail-on-pending` 作为终防线。
+
+### 3.14 Qt 界面测试 (`qt_backend_bridges` / `qt_gui_smoke`)
+
+仅在 `-DMAGTILE_BUILD_QT=ON` 时注册 (默认 OFF 的构建完全不受影响), 两者都**无需显示环境**:
+
+- `qt_backend_bridges` (`tests/test_qt_backends.cpp`): QT-2 两座后端桥的 C++ 单测。`SettingsBackend` 的字号三档 / 减少动效 / 年龄段 SQLite 往返、跨实例持久化、非法值忽略, 以及**与 GL 版/CLI 的共库契约** (Qt 桥写入的键 progress 层原样读回, 反向亦然); `ParentGateBackend` 的出题 / 答对开会话 / 答错温和提示 / 3 次答错进冷却 (冷却期拒答) / 锁定会话。
+- `qt_gui_smoke` (`tests/test_qt_smoke.sh`): offscreen 平台无头加载 QML 三连跑 —— 默认启动 (首页)、`--parent-gate` 深链 (家长门界面)、`--smoke-parent-flow` 自动驾驶 (家长门 → 提交标准答案过门 → 家长中心 → 设置 → 订阅逐页实例化, 全程无误 `Main.qml` 才置 `smokeParentFlowOk`, 否则进程非零退出)。
+
+```bash
+cmake -S . -B build-qt -DMAGTILE_BUILD_QT=ON
+cmake --build build-qt -j
+ctest --test-dir build-qt -R "qt_backend_bridges|qt_gui_smoke" --output-on-failure
+```
+
 ## 4. 持续集成 (CI)
 
 `.github/workflows/qa.yml` 在**每次 push** 时于 Ubuntu runner 上执行 `tests/run_full_qa.sh` 全流程:
@@ -285,7 +313,7 @@ python3 tests/test_library_uniqueness.py data/models
 3. **重新配置一次 CMake** (`cmake -S . -B build`): `validate_<模型名>` / `tutorial_<模型名>` 用例自动注册 (glob 是 `CONFIGURE_DEPENDS`, 但新文件仍需触发一次配置);
 4. **跑全量 QA**: `tests/run_full_qa.sh`, 新模型必须让全部关卡保持绿灯 —— 物理 R1~R8 (含每个中间步骤)、体量门槛、逻辑质检、教程完整性一个都不能少;
 5. **有 Warning 先处理**: `disconnected_assembly` 等 Warning 须在教程文案中有对应分组说明; R8 结构冗余警告的点位建议按 PHYSICS_RULES.md 加固;
-6. **高难模型走实物层**: difficulty ≥ 3 按 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 完成实物验证 (T3+ 硬性要求), difficulty ≥ 4 另需目标年龄段儿童测试;
+6. **高难模型走实物层**: difficulty ≥ 3 按 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 完成实物验证 (T3+ 硬性要求), difficulty ≥ 4 另需目标年龄段儿童测试; 作者级逐步实搭规程与结论落盘方式见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md), 待复核清单由 `tools/list_physical_pending.py` 跟踪;
 7. **提交**: CI 会在 push 时把第 4 步整套重跑一遍, 红灯不允许合入。
 
 ## 6. 内容入库标准 (Definition of Done)
@@ -299,4 +327,4 @@ python3 tests/test_library_uniqueness.py data/models
 5. `step_assembly_gate` 通过 (逐片零差错 P1~P8: id 唯一、每片恰好放置一次、高亮只引用已放置片、无孤儿/幽灵、逐片空间连续, 见 [MODEL_QUALITY.md](MODEL_QUALITY.md));
 6. `library_uniqueness_gate` 通过 (与全库任何模型的结构签名相似度 ≤ 0.85);
 7. `tutorial_integrity` 通过 (步骤恰好覆盖全部磁力片, 教程引擎实跑成功);
-8. 按难度分级完成实物验证要求 (BUILD_VERIFICATION.md 第 2 节)。
+8. 按难度分级完成实物验证要求 (BUILD_VERIFICATION.md 第 2 节; 执行规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md)); D4+ 复核通过后写入 `content_meta.physical_verified` 三字段或旁车验证文件, 否则一直挂在 `tools/list_physical_pending.py` 的待复核清单上。
