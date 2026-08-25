@@ -301,32 +301,32 @@ if(MAGTILE_BUILD_TESTS)
                     $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
         endif()
 
-        # 物理负例: 这些夹具物理上不成立, validate 必须以非零退出码拒绝,
-        # 且必须报出对应的错误码 (由 test_physics_negative.sh 断言)。
-        # 覆盖几何规则 R1~R4 (悬空/错位半搭/倾覆/穿插)、静力与工艺规则
-        # R5~R7 (悬挂超重/悬臂超限/封闭腔/顺序不可放) 及 R8 错误级
-        # (无桁架高墙超限), 对应真实搭建中 "照着图纸搭却掉下来" 的失败
-        # 模式 (部分由 tools/generate_test_models.py 生成, 详见其 docstring)。
-        # 注意: 引号内的 \; 不会被 CMake 拆分为列表, 这里用 | 作分隔符。
+        # 物理负例: 这些夹具物理上不成立 (或数据非法), validate 必须
+        # 按各夹具旁 .expected sidecar 声明的级别报告 —— error 级以
+        # 非零退出码拒绝, warning 级零退出但必须输出 [警告] 行 (断言
+        # 由 test_physics_negative.sh 执行)。覆盖几何规则 R1~R4 (穿地/
+        # 悬空/错位半搭/断开装配/倾覆/穿插)、静力与工艺规则 R5~R7
+        # (悬挂超重/悬挂链过长/悬臂超限/封闭腔/顺序不可放)、R8 结构
+        # 冗余 (单点失效/无环拓扑/无桁架高墙超限)、数据层 (非法片型)
+        # 与教程中间态 (成品合法但半成品倾倒), 对应真实搭建中 "照着
+        # 图纸搭却掉下来" 的失败模式 (部分由 tools/generate_test_models.py
+        # 生成, 详见其 docstring)。夹具按目录 glob 自动注册, 新增负例
+        # 只需放入 JSON + sidecar 后重新配置; 套件完整性 (必备清单/
+        # sidecar 对应/正例非空) 由 physics_fixture_registry 关卡把守,
+        # 误删夹具会让该关卡变红而不是让用例静默消失。
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_physics_fixture_registry.sh)
+            add_test(NAME physics_fixture_registry
+                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_fixture_registry.sh
+                    ${MAGTILE_TESTS_DIR})
+        endif()
         if(EXISTS ${MAGTILE_TESTS_DIR}/test_physics_negative.sh)
-            foreach(pair IN ITEMS
-                    "floating_tile|floating_tile"
-                    "isolated_tile|isolated_tile"
-                    "unstable_cantilever|unstable_center_of_mass"
-                    "overlapping_tiles|tile_overlap"
-                    "hanging_chain_overload|hanging_chain_overload"
-                    "cantilever_overload|cantilever_overload"
-                    "enclosed_placement|enclosed_placement"
-                    "unplaceable_order|unplaceable_tile"
-                    "unbraced_wall_too_tall|unbraced_wall_too_tall")
-                string(REPLACE "|" ";" pair "${pair}")
-                list(GET pair 0 fixture_name)
-                list(GET pair 1 expected_code)
+            file(GLOB MAGTILE_NEGATIVE_FIXTURES CONFIGURE_DEPENDS
+                ${MAGTILE_TESTS_DIR}/test_physics_negative/*.json)
+            foreach(fixture_file IN LISTS MAGTILE_NEGATIVE_FIXTURES)
+                get_filename_component(fixture_name ${fixture_file} NAME_WE)
                 add_test(NAME physics_negative_${fixture_name}
                     COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_negative.sh
-                        $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR}
-                        ${MAGTILE_TESTS_DIR}/test_physics_negative/${fixture_name}.json
-                        ${expected_code})
+                        $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR} ${fixture_file})
             endforeach()
         endif()
 

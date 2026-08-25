@@ -89,6 +89,8 @@ magtile_app validate <model.json> --profile strict
 
 这是"禁止悬空"的图论化表述: 允许力沿磁吸边传递 (立墙上再立墙、墙顶挂城齿都合法), 但空中孤片、只靠"视觉贴近"而没有磁力边贴合的片都会被判悬空。
 
+**R1 前置: 禁止穿入地面 (below_ground_tile)**。桌面是刚体, 任何顶点低于地面 (`z < -ground_tolerance`) 的磁力片实物上根本摆不出来, 报 Error `below_ground_tile`。2026-08 负例回归加强时发现历史版本的漏洞: 接地判定把 `z ≤ ground_tolerance` 的顶点一律视为接触地面, 穿地片反而被当作稳定接地片放行 —— 已按第 5/6 节的回填闭环修复, 负例夹具 `tests/test_physics_negative/below_ground_tile.json` 锁定该回归。
+
 ### R2 磁力连接 (isolated_tile / disconnected_assembly)
 
 > 相邻磁力片必须通过磁力边**完整贴合**吸附: 等长整边贴合, 或较短磁力边**完整**落在较长磁力边上。
@@ -190,6 +192,7 @@ R8 警告的点位是实物验证 (`BUILD_VERIFICATION.md` 3.6.4) 中"误碰即�
 
 | code | 级别 | 规则 |
 | --- | --- | --- |
+| `below_ground_tile` | Error | R1 前置 (穿入地面) |
 | `floating_tile` | Error | R1 |
 | `isolated_tile` | Error | R2 |
 | `disconnected_assembly` | Warning | R2 |
@@ -219,7 +222,7 @@ CLI 示例:
 两种错误的代价完全不对称, 冲突时永远选择前者: 通过修改模型 (加固) 而不是放宽参数来解决误杀。具体纪律:
 
 1. R5/R6 的预算参数来自实物测量 (见 1.2 节表格中的取值依据), 并统一乘 `knock_safety_factor` 保留抗碰撞裕量; 面向弱磁品牌与旧片另设 `strict` 档 (见 1.4 节), 旗舰模型必须双档全绿;
-2. 任何参数改动后, `tests/test_physics_negative/` 负例套件必须仍然全部被拒绝, `tests/test_physics_positive/` 正例夹具与全库模型必须仍然通过 (`tests/test_all_models.sh`);
+2. 任何参数改动后, `tests/test_physics_negative/` 负例套件必须仍然按各夹具 `.expected` sidecar 声明的期望报错/报警 (error 级拒绝、warning 级报告, 见 `TESTING.md` 3.7 节), `tests/test_physics_positive/` 正例夹具与全库模型必须仍然通过 (`tests/test_all_models.sh`); 负例套件本身的完整性由 `physics_fixture_registry` 关卡把守, 缺夹具即 FAIL;
 3. 实物验证 (见 `BUILD_VERIFICATION.md`) 中"软件放行但实搭失败"的案例, 一律**先回填为负例夹具**再修规则/收紧参数——用回归用例锁住每一次教训, 同类问题永不复发;
 4. **放宽任何参数必须有实测证据** (`BUILD_VERIFICATION.md` 3.6.4: 校验器拒绝但目标年龄段儿童反复轻松搭成), 且放宽后全部负例夹具仍被拒绝; 没有实测证据的"看起来应该没问题"不构成放宽理由。
 

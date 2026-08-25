@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "id": "fixture_midstep_collapse",
+  "name": "负例夹具: 步骤中间态塌陷",
+  "name_en": "fixture_midstep_collapse",
+  "description": "反面教材 (中间态回归): 最终成品是一个两端落地的口字形拱架, R1~R8 全绿; 但教程顺序写错了 —— 远端挂墙 (第 6 步) 先于远端支撑柱 (第 7 步) 放置。第 6 步完成后整体重心的水平投影超出接地区域 0.25 单位 (> 0.15 裕量), 悬出侧的铰链力矩也同时超预算, 半成品会当场向前倾倒。校验器必须对『第 6 步完成后』的中间状态报 unstable_center_of_mass 错误并拒绝 —— 成品合法不等于每一步都搭得住。",
+  "difficulty": 1,
+  "total_pieces": 7,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "g0",
+      "type": "square",
+      "position": [0.5, -0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "w1",
+      "type": "square",
+      "position": [0.5, 0.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    },
+    {
+      "id": "w2",
+      "type": "square",
+      "position": [0.5, 0.0, 1.5],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    },
+    {
+      "id": "d1",
+      "type": "square",
+      "position": [0.5, 0.5, 1.0],
+      "rotation": [0, 0, 0],
+      "color": "yellow"
+    },
+    {
+      "id": "d2",
+      "type": "square",
+      "position": [0.5, 0.5, 2.0],
+      "rotation": [0, 0, 0],
+      "color": "yellow"
+    },
+    {
+      "id": "t1",
+      "type": "square",
+      "position": [0.5, 1.0, 1.5],
+      "rotation": [90, 0, 0],
+      "color": "purple"
+    },
+    {
+      "id": "w3",
+      "type": "square",
+      "position": [0.5, 1.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平放 1 片蓝色方片作后侧地台。",
+      "tip": "",
+      "tiles_to_add": ["g0"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "沿地台前缘立起第一层红色墙片。",
+      "tip": "",
+      "tiles_to_add": ["w1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "在墙顶叠加第二层红色墙片。",
+      "tip": "",
+      "tiles_to_add": ["w2"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 4,
+      "description": "从两层墙的接缝处向前平搭第一层黄色台面。",
+      "tip": "",
+      "tiles_to_add": ["d1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 5,
+      "description": "从墙顶向前平搭第二层黄色台面。",
+      "tip": "",
+      "tiles_to_add": ["d2"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 6,
+      "description": "错误示范: 先在两层台面的前缘之间竖插紫色端墙, 合拢成口字。",
+      "tip": "远端支撑柱还没立, 重心水平投影已超出接地区域 0.25 单位 —— 半成品会向前倾倒, 校验器必须报『第 6 步完成后』unstable_center_of_mass。",
+      "tiles_to_add": ["t1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 7,
+      "description": "在端墙正下方立起绿色支撑柱落地, 结构恢复稳定 (成品合法, 错在顺序)。",
+      "tip": "",
+      "tiles_to_add": ["w3"],
+      "highlight_tiles": []
+    }
+  ]
+}

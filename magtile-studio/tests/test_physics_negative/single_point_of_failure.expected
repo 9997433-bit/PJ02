@@ -1,0 +1,6 @@
+# single_point_of_failure.expected — 物理负例期望声明 (sidecar, 由 test_physics_negative.sh 读取)
+# expected_fail_rule: validate 输出必须匹配的错误/警告码 (grep 正则)
+# severity: error = 必须以非零退出码拒绝; warning = 必须零退出且输出 [警告] 行
+# R8: 高层结构单点失效 —— 一条连接独自支撑 3 片天线杆 (Warning)
+expected_fail_rule=single_point_of_failure
+severity=warning

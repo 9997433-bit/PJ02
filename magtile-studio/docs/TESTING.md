@@ -26,7 +26,7 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 9 | 片型分层检查 | core-9 覆盖率 + 需要扩展装标签 + 免费层 ≥80% 红线 (`--strict` 硬闸门) |
 | 10 | 免费层清单对齐核验 | 可选 (`MAGTILE_FREE_TIER_CHECK=1`): 免费标签数=30 + 全 core-9 + 与 starter 打包清单一致 (见 3.14 节) |
 | 11 | 教程完整性 | 静态走查 + 教程引擎实跑 |
-| 12 | 物理负例 × N | 不成立的结构必须被拒绝, 且错误码正确 |
+| 12 | 物理负例回归 | 夹具注册表完整性 (缺夹具即 FAIL) + 每个负例按 sidecar 期望报错/报警 |
 | 13 | 物理正例 × N | 预算内的合法结构必须放行 |
 | 14 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
 | 15 | 弱磁严格档全库巡检 | 可选 (`MAGTILE_STRICT_AUDIT=1`): strict 零警告审计 + 逐步装配质检 |
@@ -176,30 +176,53 @@ python3 tests/test_model_logic.py data/models
 tests/test_tutorial_integrity.sh build/magtile_app .
 ```
 
-### 3.7 物理负例 (`physics_negative_*`)
+### 3.7 物理负例回归 (`physics_fixture_registry` / `physics_negative_*`)
 
-目录: `tests/test_physics_negative/`, 执行器: `tests/test_physics_negative.sh`
+目录: `tests/test_physics_negative/`, 执行器: `tests/test_physics_negative.sh`, 注册表关卡: `tests/test_physics_fixture_registry.sh`
 
-这些夹具是**物理上不成立的反面教材**, `magtile_app validate` 必须以非零退出码拒绝, 并且输出必须包含期望的错误码 (防止因 JSON 解析失败等无关原因"碰巧"非零):
+这些夹具是**物理上不成立 (或数据非法) 的反面教材**, 是防止校验器"该拒未拒"回归的核心防线。每个夹具 JSON 旁必须放一个同名 `.expected` sidecar 声明期望:
 
-| 夹具 | 物理缺陷 | 期望错误码 | 规则 |
-| --- | --- | --- | --- |
-| `floating_tile.json` | 一片磁力片悬空, 无磁力连接也无支撑路径 | `floating_tile` | R1 |
-| `unstable_cantilever.json` | 连接合法但重心水平投影远超接地区域, 必然倾倒 | `unstable_center_of_mass` | R4 |
-| `overlapping_tiles.json` | 两片在同一平面上完全重合 | `tile_overlap` | R3 |
-| `hanging_chain_overload.json` | 5 片竖链 (~150g) 全部吊在一条磁力边下, 超出 120g 悬挂预算 | `hanging_chain_overload` | R5 |
-| `cantilever_overload.json` | 墙顶外挑 2 片, 力矩 60 g·单位 远超 20 g·单位 铰链预算 (**旧版 R1~R4 全绿**, 是"校验通过但实搭掉落"的典型标本) | `cantilever_overload` | R6 |
-| `enclosed_placement.json` | 全封闭盒子完成后才放内部隔断, 手伸不进去 (成品本身合法, 错在顺序) | `enclosed_placement` | R7b |
-| `unplaceable_order.json` | 步骤内 tiles_to_add 顺序写反, 上层片放下瞬间无处吸附 | `unplaceable_tile` | R7a |
+```
+expected_fail_rule=<grep 正则>   # validate 输出必须匹配的错误/警告码
+severity=error|warning           # 期望级别
+```
 
-R5~R7 的 4 个夹具由 `tools/generate_test_models.py` 生成 (含每个夹具对应的实物失效对照说明), R1~R4 的 3 个为手工维护。
+执行器按 severity 双向断言:
+
+- `severity=error`: `magtile_app validate` 必须以**非零退出码拒绝**, 且输出匹配 `expected_fail_rule` (防止因 JSON 解析失败等无关原因"碰巧"非零);
+- `severity=warning`: validate 必须以**零退出码放行** (Warning 不阻断发布, 见 PHYSICS_RULES.md 第 6 节的人工评审分工), 且输出必须包含匹配的 `[警告]` 行 —— 同时锁住"必须报告"与"不得擅自升级为错误"两个方向的回归。
+
+夹具按目录 glob 自动注册进 CTest (`CONFIGURE_DEPENDS`)。**负例套件不允许悄悄缩水**: `physics_fixture_registry` 关卡断言必备负例清单齐全、每个夹具与 sidecar 一一对应 (双向查孤儿)、正例目录非空 —— 误删夹具或漏写 sidecar 会让该关卡 FAIL, 而不是让对应用例静默消失。
+
+| 夹具 | 缺陷 | 期望 (expected_fail_rule) | 级别 | 规则 |
+| --- | --- | --- | --- | --- |
+| `below_ground_tile.json` | 立墙底边穿入桌面 (最低顶点 z = -0.2), 实物摆不出来; **修复前的校验器把它当接地片放行** (2026-08 回填) | `below_ground_tile` | Error | R1 前置 |
+| `floating_tile.json` | 一片磁力片悬空, 无磁力连接也无支撑路径 | `floating_tile` | Error | R1 |
+| `isolated_tile.json` | 错位半搭孤立片, 磁条对不齐吸不住 | `isolated_tile` | Error | R2 |
+| `disconnected_assembly.json` | 断开装配: 两座各自接地的孤岛, 教程未分组说明 | `disconnected_assembly` | Warning | R2 |
+| `overlapping_tiles.json` | 两片在同一平面上完全重合 | `tile_overlap` | Error | R3 |
+| `unstable_cantilever.json` | 连接合法但重心水平投影远超接地区域, 必然倾倒 | `unstable_center_of_mass` | Error | R4 |
+| `hanging_chain_overload.json` | 单铰过重: 5 片竖链 (~150g) 全部吊在一条磁力边下, 超出 120g 悬挂预算 | `hanging_chain_overload` | Error | R5 |
+| `hanging_chain_long.json` | 5 片 90g 吊挂链未超承重预算, 但超过单边 4 片建议上限 (轻碰整串脱落) | `hanging_chain_long` | Warning | R5 |
+| `cantilever_overload.json` | 悬挑超预算: 墙顶外挑 2 片, 力矩 60 g·单位 远超 20 g·单位 铰链预算 (**旧版 R1~R4 全绿**, 是"校验通过但实搭掉落"的典型标本) | `cantilever_overload` | Error | R6 |
+| `enclosed_placement.json` | 全封闭盒子完成后才放内部隔断, 手伸不进去 (成品本身合法, 错在顺序) | `enclosed_placement` | Error | R7b |
+| `unplaceable_order.json` | 步骤内 tiles_to_add 顺序写反, 上层片放下瞬间无处吸附 | `unplaceable_tile` | Error | R7a |
+| `single_point_of_failure.json` | 环形底座上 3 片天线杆全部悬在一条磁力连接上, 撞一下整段脱落 | `single_point_of_failure` | Warning | R8 |
+| `no_structural_redundancy.json` | 3.0 单位高的纯树状塔, 没有任何三角桁架/闭合环 | `no_structural_redundancy` | Warning | R8 |
+| `unbraced_wall_too_tall.json` | 无桁架纯树状高墙超过 4.0 上限, 错误级一票否决 | `unbraced_wall_too_tall` | Error | R8 |
+| `unknown_tile_type.json` | 非法片型: type 为形状目录中不存在的形状, 必须在 JSON 加载层拒绝, 不允许静默降级 | `未知的磁力片形状` | Error | 数据层 |
+| `midstep_collapse.json` | 步骤中间态塌陷: 最终成品是 R1~R8 全绿的口字拱架, 但教程先挂远端墙后立支撑柱, 第 6 步完成后的半成品重心失稳会当场倾倒 | `第 6 步完成后.*unstable_center_of_mass` | Error | 中间态 (R4) |
+
+R5~R7 的 4 个历史夹具由 `tools/generate_test_models.py` 生成 (含每个夹具对应的实物失效对照说明), 其余为手工维护。手动执行单个负例 (期望从 sidecar 读取):
 
 ```bash
 tests/test_physics_negative.sh build/magtile_app data \
-    tests/test_physics_negative/floating_tile.json floating_tile
+    tests/test_physics_negative/floating_tile.json
 ```
 
-新增负例的方法: 在 `tests/test_physics_negative/` 放入夹具 JSON (须能通过 JSON 加载, 只在物理层失败), 然后在顶层 `CMakeLists.txt` 的负例列表中追加 `"文件名|期望错误码"` 一行; 若错误码与文件名不同, 同时在 `tests/run_full_qa.sh` 的 `expected_code_for` 映射中登记。
+新增负例的方法: 在 `tests/test_physics_negative/` 放入夹具 JSON 与同名 `.expected` sidecar, 并在 `tests/test_physics_fixture_registry.sh` 的必备清单 (`REQUIRED_NEGATIVE`) 中登记, 然后重新配置一次 CMake (`cmake -S . -B build`) 即自动注册; `run_full_qa.sh` 为运行时扫描, 无需额外改动。
+
+回填闭环 (PHYSICS_RULES.md 第 5/6 节): 实物验证或巡检发现"软件放行但实搭失败"的, 一律**先回填负例夹具锁住教训, 再修规则/参数** —— 2026-08 的负例回归加强即按此流程发现并修复了穿地片漏洞 (`below_ground_tile`: 历史版本把 z ≤ 0.02 的顶点一律当作接地, 穿入桌面的片反而被判为稳定接地片放行)。
 
 ### 3.8 物理正例 (`physics_positive_*`)
 

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "fixture_no_structural_redundancy",
+  "name": "负例夹具: 高层结构无环加固",
+  "name_en": "fixture_no_structural_redundancy",
+  "description": "反面教材 (R8 Warning 级): 一片地台上竖直叠 3 层墙片, 最高点 3.0 单位 (超过 2.5 的高层结构阈值, 未到 4.0 的无桁架高墙错误线)。磁力连接图是纯树状 —— 没有任何三角桁架或闭合环, 每条水平缝都是自由铰链, 整体像风铃一样晃。校验器必须报 no_structural_redundancy 警告 (Warning 不阻断发布, 建议加三角/环状加固), 退出码保持 0。",
+  "difficulty": 1,
+  "total_pieces": 4,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "g1",
+      "type": "square",
+      "position": [0.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "green"
+    },
+    {
+      "id": "w1",
+      "type": "square",
+      "position": [0.5, 0.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    },
+    {
+      "id": "w2",
+      "type": "square",
+      "position": [0.5, 0.0, 1.5],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    },
+    {
+      "id": "w3",
+      "type": "square",
+      "position": [0.5, 0.0, 2.5],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平放 1 片绿色方片作地台。",
+      "tip": "",
+      "tiles_to_add": ["g1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "沿地台前缘立起第一层红色墙片。",
+      "tip": "",
+      "tiles_to_add": ["w1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "叠加第二层墙片。",
+      "tip": "",
+      "tiles_to_add": ["w2"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 4,
+      "description": "错误示范: 继续叠到第三层, 全塔没有任何三角桁架或闭合环。",
+      "tip": "3.0 单位高的纯树状结构每条水平缝都是自由铰链 —— 校验器必须报 no_structural_redundancy 警告。",
+      "tiles_to_add": ["w3"],
+      "highlight_tiles": []
+    }
+  ]
+}

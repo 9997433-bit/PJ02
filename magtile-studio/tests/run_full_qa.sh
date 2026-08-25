@@ -180,16 +180,13 @@ fi
 run_stage "教程完整性" \
     bash "$TESTS_DIR/test_tutorial_integrity.sh" "$APP" "$ROOT"
 
-# ---- 12: 物理负例 (每个夹具一个关卡) -----------------------------
-# 期望错误码默认与夹具文件名一致, 少数历史夹具通过下表映射
-# (与 CMakeLists.txt 中的注册列表保持一致)。
-expected_code_for() {
-    case "$1" in
-        unstable_cantilever) echo "unstable_center_of_mass" ;;
-        unplaceable_order)   echo "unplaceable_tile" ;;
-        *)                   echo "$1" ;;
-    esac
-}
+# ---- 12: 物理负例 (注册表完整性 + 每个夹具一个关卡) ---------------
+# 每个夹具的期望 (错误/警告码 + 级别) 由同名 .expected sidecar 声明,
+# 执行器 test_physics_negative.sh 读取并断言; 注册表关卡保证必备负例
+# 清单齐全、夹具与 sidecar 一一对应、正例目录非空 —— 缺夹具即 FAIL,
+# 负例套件不允许悄悄缩水。
+run_stage "物理负例夹具注册表" \
+    bash "$TESTS_DIR/test_physics_fixture_registry.sh" "$TESTS_DIR"
 
 negative_found=0
 for fixture in "$TESTS_DIR"/test_physics_negative/*.json; do
@@ -197,8 +194,7 @@ for fixture in "$TESTS_DIR"/test_physics_negative/*.json; do
     negative_found=$((negative_found + 1))
     fixture_name="$(basename "$fixture" .json)"
     run_stage "物理负例: $fixture_name" \
-        bash "$TESTS_DIR/test_physics_negative.sh" "$APP" "$DATA_DIR" \
-        "$fixture" "$(expected_code_for "$fixture_name")"
+        bash "$TESTS_DIR/test_physics_negative.sh" "$APP" "$DATA_DIR" "$fixture"
 done
 if [ "$negative_found" -eq 0 ]; then
     skip_stage "物理负例" "tests/test_physics_negative/ 下没有夹具 (可用 tools/generate_test_models.py 生成)"

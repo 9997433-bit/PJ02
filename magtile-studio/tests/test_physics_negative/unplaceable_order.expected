@@ -1,0 +1,6 @@
+# unplaceable_order.expected — 物理负例期望声明 (sidecar, 由 test_physics_negative.sh 读取)
+# expected_fail_rule: validate 输出必须匹配的错误/警告码 (grep 正则)
+# severity: error = 必须以非零退出码拒绝; warning = 必须零退出且输出 [警告] 行
+# R7a: 步骤内顺序写反, 上层片放下瞬间无依托
+expected_fail_rule=unplaceable_tile
+severity=error

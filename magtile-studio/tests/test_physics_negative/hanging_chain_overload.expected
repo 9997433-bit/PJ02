@@ -1,0 +1,6 @@
+# hanging_chain_overload.expected — 物理负例期望声明 (sidecar, 由 test_physics_negative.sh 读取)
+# expected_fail_rule: validate 输出必须匹配的错误/警告码 (grep 正则)
+# severity: error = 必须以非零退出码拒绝; warning = 必须零退出且输出 [警告] 行
+# R5: 单铰过重 —— 5 片 150g 竖链吊在一条磁力边下, 超出 120g 悬挂预算
+expected_fail_rule=hanging_chain_overload
+severity=error

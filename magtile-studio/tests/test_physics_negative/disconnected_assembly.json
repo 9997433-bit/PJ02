@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "fixture_disconnected_assembly",
+  "name": "负例夹具: 断开装配孤岛",
+  "name_en": "fixture_disconnected_assembly",
+  "description": "反面教材 (R2 Warning 级): 模型由两座互不相连的接地孤岛组成 (中间空 3 个单位), 每座孤岛内部连接正常。物理上两座孤岛都成立, 但教程若不明确分组说明, 用户会以为两部分应该拼在一起。校验器必须报 disconnected_assembly 警告 (Warning 不阻断发布, 由内容评审逐条处理), 退出码保持 0。",
+  "difficulty": 1,
+  "total_pieces": 4,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "a1",
+      "type": "square",
+      "position": [0.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "green"
+    },
+    {
+      "id": "a2",
+      "type": "square",
+      "position": [1.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "green"
+    },
+    {
+      "id": "b1",
+      "type": "square",
+      "position": [4.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "orange"
+    },
+    {
+      "id": "b2",
+      "type": "square",
+      "position": [5.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平铺 2 片绿色方片, 整边吸合成第一座地台。",
+      "tip": "",
+      "tiles_to_add": ["a1", "a2"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "错误示范: 在 3 个单位之外另起一座橙色地台, 与第一座完全不相连。",
+      "tip": "两座孤岛物理上都成立, 但教程没有分组说明 —— 校验器必须报 disconnected_assembly 警告。",
+      "tiles_to_add": ["b1", "b2"],
+      "highlight_tiles": []
+    }
+  ]
+}

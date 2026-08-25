@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "id": "fixture_single_point_of_failure",
+  "name": "负例夹具: 高塔单点失效",
+  "name_en": "fixture_single_point_of_failure",
+  "description": "反面教材 (R8 Warning 级): 四面围合的环形底座 (有闭合环, 拓扑本身合格) 上, 从一条底座顶边竖直叠出 3 片高的天线杆。剪断底座与天线杆之间那条唯一的磁力连接, 3 片天线全部失联 —— 高层结构被小朋友撞一下时会整段脱落。校验器必须报 single_point_of_failure 警告 (Warning 不阻断发布, 须书面确认风险或加固), 退出码保持 0。",
+  "difficulty": 1,
+  "total_pieces": 7,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "b1",
+      "type": "square",
+      "position": [0.5, 0.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "b2",
+      "type": "square",
+      "position": [1.0, 0.5, 0.5],
+      "rotation": [90, 0, 90],
+      "color": "blue"
+    },
+    {
+      "id": "b3",
+      "type": "square",
+      "position": [0.5, 1.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "b4",
+      "type": "square",
+      "position": [0.0, 0.5, 0.5],
+      "rotation": [90, 0, 90],
+      "color": "blue"
+    },
+    {
+      "id": "m1",
+      "type": "square",
+      "position": [0.5, 0.0, 1.5],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    },
+    {
+      "id": "m2",
+      "type": "square",
+      "position": [0.5, 0.0, 2.5],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    },
+    {
+      "id": "m3",
+      "type": "square",
+      "position": [0.5, 0.0, 3.5],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "四片蓝色方片竖立围合成环形底座, 相邻竖边两两吸合。",
+      "tip": "",
+      "tiles_to_add": ["b1", "b2", "b3", "b4"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "在前侧底座片的顶边上竖直叠加第一节天线杆。",
+      "tip": "",
+      "tiles_to_add": ["m1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "叠加第二节天线杆。",
+      "tip": "",
+      "tiles_to_add": ["m2"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 4,
+      "description": "错误示范: 继续叠加第三节天线杆, 3 片天线全部悬在一条磁力连接上。",
+      "tip": "剪断底座与天线杆之间唯一的连接, 3 片整段脱落 —— 校验器必须报 single_point_of_failure 警告。",
+      "tiles_to_add": ["m3"],
+      "highlight_tiles": []
+    }
+  ]
+}

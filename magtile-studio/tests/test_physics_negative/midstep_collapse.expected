@@ -1,0 +1,6 @@
+# midstep_collapse.expected — 物理负例期望声明 (sidecar, 由 test_physics_negative.sh 读取)
+# expected_fail_rule: validate 输出必须匹配的错误/警告码 (grep 正则)
+# severity: error = 必须以非零退出码拒绝; warning = 必须零退出且输出 [警告] 行
+# 中间态回归: 最终成品全绿, 但第 6 步完成后的半成品重心失稳会当场倾倒
+expected_fail_rule=第 6 步完成后.*unstable_center_of_mass
+severity=error

@@ -1,0 +1,6 @@
+# cantilever_overload.expected — 物理负例期望声明 (sidecar, 由 test_physics_negative.sh 读取)
+# expected_fail_rule: validate 输出必须匹配的错误/警告码 (grep 正则)
+# severity: error = 必须以非零退出码拒绝; warning = 必须零退出且输出 [警告] 行
+# R6: 悬挑超预算 —— 墙顶外挑 2 片力矩 60g·单位, 远超 20g·单位 抗弯预算
+expected_fail_rule=cantilever_overload
+severity=error
