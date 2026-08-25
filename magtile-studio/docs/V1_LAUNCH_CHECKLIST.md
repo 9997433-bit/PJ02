@@ -7,6 +7,7 @@
 
 | 问题 | 文档 |
 | --- | --- |
+| **工程已完成什么、你还需做什么** | **[USER_HANDOFF.md](USER_HANDOFF.md)** |
 | 卖给谁、怎么收费、里程碑定义 | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) |
 | 用户路径逐条走通 (上架必测) | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) |
 | 代码与内容质量关卡 (按提交跑) | [TESTING.md](TESTING.md) |
