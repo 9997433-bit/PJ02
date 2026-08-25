@@ -85,7 +85,8 @@ else()
 
     # 配置期快速校验: 清单里的模型必须真实存在, 拼写错误当场失败,
     # 不要拖到打包阶段才炸。完整校验 (含目录登记一致性) 由脚本负责。
-    file(STRINGS "${_magtile_model_manifest}" _magtile_manifest_lines)
+    # ENCODING UTF-8 必须显式给出: 缺省行为把中文注释当二进制拆碎。
+    file(STRINGS "${_magtile_model_manifest}" _magtile_manifest_lines ENCODING UTF-8)
     set(_magtile_manifest_missing "")
     set(_magtile_subset_count 0)
     foreach(_magtile_line IN LISTS _magtile_manifest_lines)
