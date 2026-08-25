@@ -175,12 +175,19 @@ if(MAGTILE_BUILD_TESTS)
 
         # 物理负例: 这些夹具物理上不成立, validate 必须以非零退出码拒绝,
         # 且必须报出对应的错误码 (由 test_physics_negative.sh 断言)。
+        # 前 3 个覆盖几何规则 R1~R4; 后 4 个覆盖静力/工艺规则 R5~R7,
+        # 对应真实搭建中 "照着图纸搭却掉下来" 的失败模式
+        # (由 tools/generate_test_models.py 生成, 详见其 docstring)。
         # 注意: 引号内的 \; 不会被 CMake 拆分为列表, 这里用 | 作分隔符。
         if(EXISTS ${MAGTILE_TESTS_DIR}/test_physics_negative.sh)
             foreach(pair IN ITEMS
                     "floating_tile|floating_tile"
                     "unstable_cantilever|unstable_center_of_mass"
-                    "overlapping_tiles|tile_overlap")
+                    "overlapping_tiles|tile_overlap"
+                    "hanging_chain_overload|hanging_chain_overload"
+                    "cantilever_overload|cantilever_overload"
+                    "enclosed_placement|enclosed_placement"
+                    "unplaceable_order|unplaceable_tile")
                 string(REPLACE "|" ";" pair "${pair}")
                 list(GET pair 0 fixture_name)
                 list(GET pair 1 expected_code)
@@ -191,6 +198,16 @@ if(MAGTILE_BUILD_TESTS)
                         ${expected_code})
             endforeach()
         endif()
+
+        # 物理正例: 处于承载预算之内的合法结构, validate 必须放行
+        # (防止 R5/R6 静力规则矫枉过正, 误杀磁力片的常规玩法)。
+        file(GLOB MAGTILE_POSITIVE_FIXTURES CONFIGURE_DEPENDS
+            ${MAGTILE_TESTS_DIR}/test_physics_positive/*.json)
+        foreach(fixture_file IN LISTS MAGTILE_POSITIVE_FIXTURES)
+            get_filename_component(fixture_name ${fixture_file} NAME_WE)
+            add_test(NAME physics_positive_${fixture_name}
+                COMMAND magtile_app validate ${fixture_file} --data-dir ${MAGTILE_DATA_DIR})
+        endforeach()
     else()
         message(WARNING "MagTile: 未找到 bash, 跳过脚本类测试注册")
     endif()

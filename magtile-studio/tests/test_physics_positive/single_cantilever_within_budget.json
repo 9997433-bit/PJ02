@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "id": "fixture_single_cantilever_within_budget",
+  "name": "正例夹具: 单片外挑",
+  "name_en": "fixture_single_cantilever_within_budget",
+  "description": "正面对照组: 墙顶外挑单片, 力矩在铰链抗弯预算之内, 且墙底铰链跨两条磁力边。全部物理规则必须通过, 防止 R5/R6 静力规则矫枉过正误杀磁力片的常规玩法。",
+  "difficulty": 1,
+  "total_pieces": 4,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "g0",
+      "type": "square",
+      "position": [
+        0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "g1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "w1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "c1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平放两片地板, 前后并排吸合。",
+      "tip": "",
+      "tiles_to_add": [
+        "g0",
+        "g1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "在两片地板的公共边上立起一片墙。",
+      "tip": "",
+      "tiles_to_add": [
+        "w1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "从墙顶水平外挑 1 片平板 (在承载预算之内)。",
+      "tip": "单片外挑力矩 15g·单位 < 预算 20g·单位, 实物立得住, 校验应当放行。",
+      "tiles_to_add": [
+        "c1"
+      ],
+      "highlight_tiles": []
+    }
+  ]
+}

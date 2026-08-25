@@ -149,7 +149,9 @@ int runValidate(const CliArgs& args) {
     failures += static_cast<int>(report.errorCount());
 
     if (report.ok() && step_problems.empty()) {
-        std::printf("[通过] 物理规则检查: 接地支撑 / 磁力连接 / 无重叠 / 重心稳定\n");
+        std::printf(
+            "[通过] 物理规则检查: 接地支撑 / 磁力连接 / 无重叠 / 重心稳定 / "
+            "悬挂承重 / 悬臂力矩 / 装配可达 / 结构冗余\n");
 
         // 补充统计信息, 方便内容制作人员核对
         std::vector<const core::TileInstance*> tiles;
@@ -157,6 +159,15 @@ int runValidate(const CliArgs& args) {
         const auto connections = validator.findConnections(tiles);
         std::printf("\n统计: 磁力连接 %zu 处, 校验含最终成品与 %zu 个中间步骤\n",
                     connections.size(), model.steps.size());
+
+        // 高难模型: 自动校验之外强烈建议实物复核 (人手感知的失效模式
+        // 无法完全仿真, 见 docs/PHYSICS_RULES.md "人工复核工作流")
+        if (model.difficulty >= 4) {
+            std::printf(
+                "\n[提示] 本模型难度 %d/5: 自动校验通过不等于实搭万无一失, "
+                "发布前请按 docs/PHYSICS_RULES.md 的\"人工复核工作流\"完成实物复核\n",
+                model.difficulty);
+        }
         std::printf("\n结论: 模型 %s 可发布\n", model.id.c_str());
         return 0;
     }

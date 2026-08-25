@@ -1,7 +1,10 @@
 #include "magtile/physics/physics_validator.hpp"
 
 #include <algorithm>
+#include <cmath>
+#include <iomanip>
 #include <queue>
+#include <set>
 #include <sstream>
 
 #include "magtile/physics/geometry.hpp"
@@ -23,6 +26,98 @@ bool edgesSnap(const std::pair<Vec3, Vec3>& ea, const std::pair<Vec3, Vec3>& eb,
     const bool reverse = core::distance(ea.first, eb.second) <= tolerance &&
                          core::distance(ea.second, eb.first) <= tolerance;
     return forward || reverse;
+}
+
+/// 两片磁力片之间是否存在任意一对贴合的磁力边。
+bool tilesSnap(const TransformedTile& a, const TransformedTile& b, double tolerance) {
+    for (std::size_t ei = 0; ei < a.edgeCount(); ++ei) {
+        if (!a.isMagnetEdge(ei)) continue;
+        for (std::size_t ej = 0; ej < b.edgeCount(); ++ej) {
+            if (!b.isMagnetEdge(ej)) continue;
+            if (edgesSnap(a.edge(ei), b.edge(ej), tolerance)) return true;
+        }
+    }
+    return false;
+}
+
+// ------------------------------------------------------------------
+// R5/R6 静力学分析工具: 铰链线 (共线磁力边组)
+//
+// 磁力片的边连接是 "铰链" 而非刚性节点: 磁条只提供有限的拉脱力与
+// 抗弯矩。位于同一条空间直线上的若干磁力连接共同构成一条铰链线,
+// 假想剪断它后失去接地路径的子结构, 其重量与力矩全部压在这条线上。
+// ------------------------------------------------------------------
+
+/// 一条铰链线: 直线上一点 + 单位方向。
+struct HingeLine {
+    Vec3 point;
+    Vec3 dir;
+};
+
+HingeLine makeHingeLine(const std::pair<Vec3, Vec3>& edge) {
+    return {edge.first, (edge.second - edge.first).normalized()};
+}
+
+/// 两条铰链线是否共线 (方向平行且点在同一条直线上)。
+bool sameLine(const HingeLine& a, const HingeLine& b, double tolerance) {
+    if (std::abs(a.dir.dot(b.dir)) < 1.0 - 1e-6) return false;  // 方向不平行
+    const Vec3 offset = b.point - a.point;
+    const Vec3 perpendicular = offset - a.dir * offset.dot(a.dir);
+    return perpendicular.length() <= tolerance;
+}
+
+/// 格式化克数 (保留 1 位小数)。
+std::string formatGrams(double grams) {
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(1) << grams;
+    return oss.str();
+}
+
+// ------------------------------------------------------------------
+// R7 装配可达性工具: 射线检测
+// ------------------------------------------------------------------
+
+/// 射线 (origin + t * dir) 是否命中磁力片所在的凸多边形。
+/// 用于判断新片放置点是否被已完成结构包围。
+bool rayHitsTile(const Vec3& origin, const Vec3& dir, const TransformedTile& tile) {
+    const double denom = dir.dot(tile.normal);
+    if (std::abs(denom) < 1e-9) return false;  // 射线与片平面平行
+    const double t = (tile.vertices[0] - origin).dot(tile.normal) / denom;
+    if (t < 0.05) return false;  // 忽略贴脸命中 (放置点附近的相邻片不算遮挡)
+    const Vec3 hit = origin + dir * t;
+
+    // 命中点是否在凸多边形内 (顶点绕法向逆时针; 容差取负让边界命中也算遮挡)
+    const std::size_t n = tile.vertices.size();
+    for (std::size_t i = 0; i < n; ++i) {
+        const Vec3& a = tile.vertices[i];
+        const Vec3& b = tile.vertices[(i + 1) % n];
+        if ((b - a).cross(hit - a).dot(tile.normal) < -0.02) return false;
+    }
+    return true;
+}
+
+/// 新片是否被已放置结构完全包围 (从任何外部方向都伸不进手)。
+/// 从放置点 (质心) 向上、四周与斜上共 13 个方向发射射线, 全部被
+/// 已放置磁力片挡住即判定为封闭腔体内部; 不检测正下方 (桌面本来就挡)。
+bool isEnclosed(const Vec3& origin, const std::vector<TransformedTile>& placed) {
+    static const Vec3 kDirections[] = {
+        {0, 0, 1},                                            // 正上
+        {1, 0, 0},   {-1, 0, 0},  {0, 1, 0},   {0, -1, 0},    // 水平四向
+        {1, 1, 0},   {1, -1, 0},  {-1, 1, 0},  {-1, -1, 0},   // 水平对角
+        {1, 0, 1},   {-1, 0, 1},  {0, 1, 1},   {0, -1, 1},    // 斜上四向
+    };
+    for (const Vec3& raw : kDirections) {
+        const Vec3 dir = raw.normalized();
+        bool blocked = false;
+        for (const TransformedTile& tile : placed) {
+            if (rayHitsTile(origin, dir, tile)) {
+                blocked = true;
+                break;
+            }
+        }
+        if (!blocked) return false;  // 存在一个可以伸手进入的方向
+    }
+    return true;
 }
 
 }  // namespace
@@ -78,8 +173,12 @@ ValidationReport PhysicsValidator::validateAssembly(
     // ---- 预计算世界坐标几何 ---------------------------------------
     std::vector<TransformedTile> transformed;
     transformed.reserve(tiles.size());
+    double max_z = 0.0;
     for (const TileInstance* tile : tiles) {
         transformed.push_back(transformTile(*tile, catalog_->get(tile->type)));
+        for (const Vec3& v : transformed.back().vertices) {
+            max_z = std::max(max_z, v.z);
+        }
     }
 
     // ---- R3 无重叠: 共面片做分离轴检测 ----------------------------
@@ -99,12 +198,13 @@ ValidationReport PhysicsValidator::validateAssembly(
         }
     }
 
-    // ---- R2 磁力连接图 --------------------------------------------
+    // ---- R2 磁力连接图 (带连接索引, 供 R5/R6/R8 的切割分析复用) ----
     const std::vector<MagnetConnection> connections = findConnections(tiles);
-    std::vector<std::vector<std::size_t>> adjacency(tiles.size());
-    for (const MagnetConnection& c : connections) {
-        adjacency[c.tile_a].push_back(c.tile_b);
-        adjacency[c.tile_b].push_back(c.tile_a);
+    // adjacency[i] = { (相邻片下标, 连接下标), ... }
+    std::vector<std::vector<std::pair<std::size_t, std::size_t>>> adjacency(tiles.size());
+    for (std::size_t c = 0; c < connections.size(); ++c) {
+        adjacency[connections[c].tile_a].push_back({connections[c].tile_b, c});
+        adjacency[connections[c].tile_b].push_back({connections[c].tile_a, c});
     }
 
     if (tiles.size() > 1) {
@@ -119,27 +219,38 @@ ValidationReport PhysicsValidator::validateAssembly(
         }
     }
 
-    // ---- R1 接地支撑: 从接地片沿磁力连接做 BFS --------------------
-    std::vector<bool> supported(tiles.size(), false);
-    std::queue<std::size_t> frontier;
-    for (std::size_t i = 0; i < transformed.size(); ++i) {
-        if (transformed[i].min_z <= config_.ground_tolerance) {
-            supported[i] = true;
-            frontier.push(i);
-        }
-    }
-    while (!frontier.empty()) {
-        const std::size_t current = frontier.front();
-        frontier.pop();
-        for (const std::size_t next : adjacency[current]) {
-            if (!supported[next]) {
-                supported[next] = true;
-                frontier.push(next);
+    // 从接地片沿磁力连接做 BFS, 可跳过指定的被 "剪断" 连接集合;
+    // R1 直接使用, R5/R6/R8 用它做假想切割分析。
+    const auto reachableFromGround =
+        [&](const std::vector<char>& removed_connections) -> std::vector<char> {
+        std::vector<char> reachable(tiles.size(), 0);
+        std::queue<std::size_t> frontier;
+        for (std::size_t i = 0; i < transformed.size(); ++i) {
+            if (transformed[i].min_z <= config_.ground_tolerance) {
+                reachable[i] = 1;
+                frontier.push(i);
             }
         }
-    }
+        while (!frontier.empty()) {
+            const std::size_t current = frontier.front();
+            frontier.pop();
+            for (const auto& [next, conn] : adjacency[current]) {
+                if (!removed_connections.empty() && removed_connections[conn]) continue;
+                if (!reachable[next]) {
+                    reachable[next] = 1;
+                    frontier.push(next);
+                }
+            }
+        }
+        return reachable;
+    };
+
+    // ---- R1 接地支撑 ----------------------------------------------
+    const std::vector<char> supported = reachableFromGround({});
+    bool has_floating = false;
     for (std::size_t i = 0; i < tiles.size(); ++i) {
         if (!supported[i]) {
+            has_floating = true;
             report.issues.push_back(
                 {IssueSeverity::Error, "floating_tile",
                  withContext(context, "磁力片 " + tiles[i]->id +
@@ -148,25 +259,29 @@ ValidationReport PhysicsValidator::validateAssembly(
         }
     }
 
-    // ---- 连通性: 多个各自接地的孤岛不算错误, 但提示内容制作者 ------
-    if (!tiles.empty()) {
-        std::vector<bool> visited(tiles.size(), false);
-        std::queue<std::size_t> bfs;
-        bfs.push(0);
-        visited[0] = true;
-        std::size_t reached = 1;
-        while (!bfs.empty()) {
-            const std::size_t current = bfs.front();
-            bfs.pop();
-            for (const std::size_t next : adjacency[current]) {
-                if (!visited[next]) {
-                    visited[next] = true;
-                    ++reached;
-                    bfs.push(next);
+    // ---- 连通性: 统计连通分量 (多个各自接地的孤岛提示内容制作者) ----
+    std::size_t num_components = 0;
+    {
+        std::vector<char> visited(tiles.size(), 0);
+        for (std::size_t start = 0; start < tiles.size(); ++start) {
+            if (visited[start]) continue;
+            ++num_components;
+            std::queue<std::size_t> bfs;
+            bfs.push(start);
+            visited[start] = 1;
+            while (!bfs.empty()) {
+                const std::size_t current = bfs.front();
+                bfs.pop();
+                for (const auto& [next, conn] : adjacency[current]) {
+                    (void)conn;
+                    if (!visited[next]) {
+                        visited[next] = 1;
+                        bfs.push(next);
+                    }
                 }
             }
         }
-        if (reached != tiles.size()) {
+        if (num_components > 1) {
             report.issues.push_back({IssueSeverity::Warning, "disconnected_assembly",
                                      withContext(context,
                                                  "模型由多个互不相连的部分组成, "
@@ -188,8 +303,9 @@ ValidationReport PhysicsValidator::validateAssembly(
             }
         }
     }
+    const bool has_ground_contact = !ground_contacts.empty();
 
-    if (ground_contacts.empty()) {
+    if (!has_ground_contact) {
         report.issues.push_back({IssueSeverity::Error, "no_ground_contact",
                                  withContext(context, "模型没有任何接触地面的磁力片"),
                                  {}});
@@ -207,6 +323,278 @@ ValidationReport PhysicsValidator::validateAssembly(
         }
     }
 
+    // ================================================================
+    // R5/R6 铰链切割静力分析
+    //
+    // 磁吸边连接在实物上是 "铰链": 抗压强 (下方有支撑时稳), 抗拉与
+    // 抗弯都很弱。R1~R4 只回答 "结构是否连通且不倾倒", 却把每条磁
+    // 力连接当成无限强 —— 这正是 "校验通过但实搭时掉下来" 的根源。
+    //
+    // 分析方法: 把所有共线的磁力连接归并为一条 "铰链线", 逐条假想
+    // 剪断; 剪断后与地面失联的子结构, 其全部重量必须经由这条铰链
+    // 传递:
+    //   - 子结构重心低于铰链线 => 悬挂 (磁条受拉), 校验 R5 承重预算;
+    //   - 重力绕铰链轴产生的力矩 => 悬臂 (磁条受弯), 校验 R6 力矩预算。
+    // 被三角斜撑 / 环状结构加固的部分剪断单条铰链后仍有其他支撑路
+    // 径, 自然不会进入分析 —— 桁架的加固效果由图论连通性隐式表达。
+    //
+    // 前置条件: R1 通过且存在接地片 (悬空结构做静力分析没有意义)。
+    // ================================================================
+    if (!has_floating && has_ground_contact && !connections.empty()) {
+        // 每条连接的铰链线与磁力边长度 (取 A 侧边, B 侧在容差内与其重合)
+        std::vector<HingeLine> lines;
+        std::vector<double> edge_lengths;
+        lines.reserve(connections.size());
+        edge_lengths.reserve(connections.size());
+        for (const MagnetConnection& c : connections) {
+            const auto edge = transformed[c.tile_a].edge(c.edge_a);
+            lines.push_back(makeHingeLine(edge));
+            edge_lengths.push_back((edge.second - edge.first).length());
+        }
+
+        std::set<std::vector<std::size_t>> analyzed_cuts;  // 共线组去重
+        for (std::size_t seed = 0; seed < connections.size(); ++seed) {
+            // 与 seed 共线的全部连接构成一条铰链线 (一次性剪断)
+            std::vector<std::size_t> cut;
+            for (std::size_t j = 0; j < connections.size(); ++j) {
+                if (sameLine(lines[seed], lines[j], config_.collinear_tolerance)) {
+                    cut.push_back(j);
+                }
+            }
+            if (!analyzed_cuts.insert(cut).second) continue;
+
+            std::vector<char> removed(connections.size(), 0);
+            for (const std::size_t j : cut) removed[j] = 1;
+            const std::vector<char> still_grounded = reachableFromGround(removed);
+
+            // 剪断后失联的磁力片, 按剩余连接划分为独立的悬挂/悬臂子结构
+            std::vector<char> assigned(tiles.size(), 0);
+            for (std::size_t i = 0; i < tiles.size(); ++i) {
+                assigned[i] = still_grounded[i];
+            }
+            for (std::size_t start = 0; start < tiles.size(); ++start) {
+                if (assigned[start]) continue;
+
+                // 收集子结构 K
+                std::vector<std::size_t> component;
+                std::vector<char> in_component(tiles.size(), 0);
+                std::queue<std::size_t> bfs;
+                bfs.push(start);
+                assigned[start] = 1;
+                in_component[start] = 1;
+                while (!bfs.empty()) {
+                    const std::size_t current = bfs.front();
+                    bfs.pop();
+                    component.push_back(current);
+                    for (const auto& [next, conn] : adjacency[current]) {
+                        if (removed[conn] || assigned[next]) continue;
+                        assigned[next] = 1;
+                        in_component[next] = 1;
+                        bfs.push(next);
+                    }
+                }
+
+                // 跨越铰链线的连接 (子结构真正挂在哪些磁力边上)
+                double hinge_length = 0.0;
+                double hinge_z_sum = 0.0;
+                int crossing_count = 0;
+                for (const std::size_t j : cut) {
+                    const MagnetConnection& c = connections[j];
+                    if (in_component[c.tile_a] == in_component[c.tile_b]) continue;
+                    ++crossing_count;
+                    hinge_length += edge_lengths[j];
+                    const auto edge = transformed[c.tile_a].edge(c.edge_a);
+                    hinge_z_sum += (edge.first.z + edge.second.z) * 0.5;
+                }
+                if (crossing_count == 0) continue;  // 与本铰链线无直接联系
+                const double hinge_z = hinge_z_sum / crossing_count;
+
+                // 子结构质量与重心 (质量 = 面积 x 面密度)
+                double component_mass = 0.0;
+                Vec3 component_weighted{};
+                for (const std::size_t idx : component) {
+                    const double mass = transformed[idx].area * config_.tile_mass_per_area;
+                    component_mass += mass;
+                    component_weighted += transformed[idx].centroid * mass;
+                }
+                const Vec3 component_com = component_weighted * (1.0 / component_mass);
+
+                std::vector<std::string> component_ids;
+                component_ids.reserve(component.size());
+                for (const std::size_t idx : component) {
+                    component_ids.push_back(tiles[idx]->id);
+                }
+
+                // ---- R5 悬挂承重: 重心低于铰链线 => 磁条受拉 ------
+                if (component_com.z < hinge_z - config_.hanging_z_tolerance) {
+                    const double capacity = config_.hanging_capacity_per_edge * hinge_length *
+                                            config_.knock_safety_factor;
+                    if (component_mass > capacity + 1e-9) {
+                        std::ostringstream oss;
+                        oss << "悬挂链超重: " << component.size() << " 片约 "
+                            << formatGrams(component_mass) << "g 全部悬挂在总长 "
+                            << formatGrams(hinge_length) << " 的磁力边下方, 超过承重预算 "
+                            << formatGrams(capacity) << "g (额定 "
+                            << formatGrams(config_.hanging_capacity_per_edge)
+                            << "g/单位边长 x 80% 抗碰撞裕量), 实搭时整串会脱落";
+                        report.issues.push_back({IssueSeverity::Error, "hanging_chain_overload",
+                                                 withContext(context, oss.str()),
+                                                 component_ids});
+                    } else if (static_cast<int>(component.size()) >
+                               config_.max_hanging_tiles_per_edge * crossing_count) {
+                        std::ostringstream oss;
+                        oss << "悬挂链过长: " << component.size()
+                            << " 片挂在 " << crossing_count
+                            << " 条磁力边下方 (建议单边不超过 "
+                            << config_.max_hanging_tiles_per_edge
+                            << " 片), 铰链节点逐级累积晃动, 轻碰易整串脱落";
+                        report.issues.push_back({IssueSeverity::Warning, "hanging_chain_long",
+                                                 withContext(context, oss.str()),
+                                                 component_ids});
+                    }
+                }
+
+                // ---- R6 悬臂力矩: 重力绕铰链轴的力矩 => 磁条受弯 --
+                // 力矩 = Σ mᵢ x ((质心ᵢ - 铰链点) x 重力方向) 在铰链轴上的分量。
+                // 正上/正下方的子结构力矩为零 (纯压/纯拉), 水平外挑越远力矩越大。
+                double torque = 0.0;
+                for (const std::size_t idx : component) {
+                    const double mass = transformed[idx].area * config_.tile_mass_per_area;
+                    const Vec3 r = transformed[idx].centroid - lines[seed].point;
+                    // r x g, g = (0,0,-1) => (-r.y, r.x, 0)
+                    torque += mass * Vec3{-r.y, r.x, 0.0}.dot(lines[seed].dir);
+                }
+                torque = std::abs(torque);
+                const double moment_capacity = config_.hinge_moment_capacity_per_edge *
+                                               hinge_length * config_.knock_safety_factor;
+                if (torque > moment_capacity + 1e-9) {
+                    std::ostringstream oss;
+                    oss << "悬臂力矩超限: " << component.size() << " 片外挑结构绕铰链线产生 "
+                        << formatGrams(torque) << "g·单位 的重力力矩, 超过总长 "
+                        << formatGrams(hinge_length) << " 磁力边的抗弯预算 "
+                        << formatGrams(moment_capacity)
+                        << "g·单位; 单边磁吸是铰链而非刚性节点, 请添加三角斜撑或在外挑远端增加支撑";
+                    report.issues.push_back({IssueSeverity::Error, "cantilever_overload",
+                                             withContext(context, oss.str()),
+                                             component_ids});
+                }
+            }
+        }
+    }
+
+    // ================================================================
+    // R8 结构冗余 (高层结构, Warning 级)
+    //
+    // 结构越高, 碰撞与桌面震动的放大效应越强。仿真无法精确复现
+    // "被小朋友撞一下", 因此只做拓扑级提示:
+    //   1. 单点失效: 一条磁力连接独自撑起一大段结构 —— 掉一处塌一片;
+    //   2. 无环拓扑: 连接图是纯树状 (没有任何环路/三角桁架), 每个
+    //      节点都是自由铰链, 整体会像风铃一样晃。
+    // ================================================================
+    if (!has_floating && has_ground_contact && max_z >= config_.tall_structure_height &&
+        tiles.size() > 1) {
+        // 1. 单点失效: 逐条剪断单条连接, 统计失联片数
+        for (std::size_t c = 0; c < connections.size(); ++c) {
+            std::vector<char> removed(connections.size(), 0);
+            removed[c] = 1;
+            const std::vector<char> still_grounded = reachableFromGround(removed);
+            std::size_t lost = 0;
+            for (std::size_t i = 0; i < tiles.size(); ++i) {
+                if (!still_grounded[i]) ++lost;
+            }
+            if (lost >= static_cast<std::size_t>(config_.spof_min_component_tiles)) {
+                const std::string id_a = tiles[connections[c].tile_a]->id;
+                const std::string id_b = tiles[connections[c].tile_b]->id;
+                std::ostringstream oss;
+                oss << "高层结构单点失效: " << id_a << " 与 " << id_b
+                    << " 之间的单条磁力连接是 " << lost
+                    << " 片子结构的唯一支撑路径, 碰撞时会整段脱落, "
+                       "建议增加三角桁架或第二条连接路径";
+                report.issues.push_back({IssueSeverity::Warning, "single_point_of_failure",
+                                         withContext(context, oss.str()),
+                                         {id_a, id_b}});
+            }
+        }
+
+        // 2. 无环拓扑: 环路数 = E - (V - 连通分量数); 为零说明没有任何
+        //    三角桁架 / 闭合环, 高层结构强烈建议至少一处环状加固
+        const std::size_t cycles =
+            connections.size() + num_components >= tiles.size()
+                ? connections.size() + num_components - tiles.size()
+                : 0;
+        if (cycles == 0) {
+            std::ostringstream oss;
+            oss << "高层结构无环加固: 最高点 " << max_z
+                << " 个单位, 但磁力连接图是纯树状 (没有任何三角桁架或闭合环), "
+                   "每个连接都是自由铰链, 整体抗晃动能力差, 建议增加三角形或环状加固";
+            report.issues.push_back({IssueSeverity::Warning, "no_structural_redundancy",
+                                     withContext(context, oss.str()),
+                                     {}});
+        }
+    }
+
+    return report;
+}
+
+ValidationReport PhysicsValidator::validatePlacements(const core::ModelDefinition& model) const {
+    ValidationReport report;
+
+    // ================================================================
+    // R7 装配可达性
+    //
+    // 静态规则 (R1~R6) 保证每个中间状态 "放好之后是稳的", 但没有回答
+    // "这一片当时放得进去吗":
+    //   a) 放下的那一刻必须有依托 —— 既不接地又吸不到任何已放置的片,
+    //      松手即掉 (常见于步骤内 tiles_to_add 顺序写反);
+    //   b) 放置点必须从外部可达 —— 已完成结构形成封闭腔体后, 手和
+    //      磁力片都伸不进去 (常见于 "先封顶再补内部隔断" 的教程)。
+    // 按教程步骤与步骤内列表顺序逐片模拟, 与真人搭建顺序完全一致。
+    // ================================================================
+    std::vector<TransformedTile> placed;
+    placed.reserve(model.final_assembly.size());
+
+    for (const core::BuildStep& step : model.steps) {
+        std::ostringstream context;
+        context << "第 " << step.step_number << " 步";
+
+        for (const std::string& tile_id : step.tiles_to_add) {
+            const TileInstance* tile = model.findTile(tile_id);
+            if (tile == nullptr) continue;  // 引用错误由教程一致性检查负责报告
+
+            TransformedTile geometry = transformTile(*tile, catalog_->get(tile->type));
+
+            // ---- R7a 放置瞬间必须有依托 (接地或吸附) ---------------
+            const bool grounded = geometry.min_z <= config_.ground_tolerance;
+            bool attached = false;
+            for (const TransformedTile& other : placed) {
+                if (tilesSnap(geometry, other, config_.connect_tolerance)) {
+                    attached = true;
+                    break;
+                }
+            }
+            if (!grounded && !attached) {
+                report.issues.push_back(
+                    {IssueSeverity::Error, "unplaceable_tile",
+                     withContext(context.str(),
+                                 "磁力片 " + tile->id +
+                                     " 按教程顺序放下的那一刻既不接地、也吸不到任何已放置"
+                                     "磁力片, 松手即掉; 请调整本步内 tiles_to_add 的先后"
+                                     "顺序或拆分步骤"),
+                     {tile->id}});
+            } else if (!placed.empty() && isEnclosed(geometry.centroid, placed)) {
+                // ---- R7b 放置点必须从外部伸手可达 ------------------
+                report.issues.push_back(
+                    {IssueSeverity::Error, "enclosed_placement",
+                     withContext(context.str(),
+                                 "磁力片 " + tile->id +
+                                     " 的放置位置已被完成结构完全包围, 实搭时手无法从"
+                                     "外部放入; 请把这一片移到封闭结构合拢之前放置"),
+                     {tile->id}});
+            }
+
+            placed.push_back(std::move(geometry));
+        }
+    }
     return report;
 }
 
@@ -221,13 +609,18 @@ ValidationReport PhysicsValidator::validateModel(const core::ModelDefinition& mo
     }
     report.merge(validateAssembly(all_tiles, "最终成品"));
 
-    // 每个步骤完成后的中间状态: 保证教程任意时刻都物理成立
+    // 每个步骤完成后的中间状态: 保证教程任意时刻都物理成立。
+    // 用户搭到第 s 步就是一个真实存在过的实物结构, 它必须独立满足
+    // 全部静态规则 —— 即使最终成品稳定, 中间状态失稳一样会塌。
     for (std::size_t s = 1; s <= model.steps.size(); ++s) {
         const auto partial = model.tilesUpToStep(static_cast<int>(s));
         std::ostringstream context;
         context << "第 " << model.steps[s - 1].step_number << " 步完成后";
         report.merge(validateAssembly(partial, context.str()));
     }
+
+    // R7: 全程逐片放置可行性 (需要精确到步骤内的先后顺序)
+    report.merge(validatePlacements(model));
     return report;
 }
 

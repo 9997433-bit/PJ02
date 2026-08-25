@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "id": "fixture_hanging_chain_overload",
+  "name": "负例夹具: 悬挂链超重",
+  "name_en": "fixture_hanging_chain_overload",
+  "description": "反面教材: 5 片正方形竖链 (约 150g) 悬挂在单条磁力边下方, 超过 120g 悬挂预算 (额定 150g/单位边长 x 80% 抗碰撞裕量)。现实中最上面那条磁力边会被整串拉脱。校验器必须报 hanging_chain_overload 错误并拒绝该模型。",
+  "difficulty": 1,
+  "total_pieces": 20,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "ta1",
+      "type": "square",
+      "position": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ta2",
+      "type": "square",
+      "position": [
+        0.0,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ta3",
+      "type": "square",
+      "position": [
+        0.0,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ta4",
+      "type": "square",
+      "position": [
+        0.0,
+        0.0,
+        3.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ta5",
+      "type": "square",
+      "position": [
+        0.0,
+        0.0,
+        4.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ta6",
+      "type": "square",
+      "position": [
+        0.0,
+        0.0,
+        5.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tb1",
+      "type": "square",
+      "position": [
+        3.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tb2",
+      "type": "square",
+      "position": [
+        3.0,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tb3",
+      "type": "square",
+      "position": [
+        3.0,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tb4",
+      "type": "square",
+      "position": [
+        3.0,
+        0.0,
+        3.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tb5",
+      "type": "square",
+      "position": [
+        3.0,
+        0.0,
+        4.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tb6",
+      "type": "square",
+      "position": [
+        3.0,
+        0.0,
+        5.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "d1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        6.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "d2",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        6.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "d3",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        6.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "h1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        5.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "h2",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        4.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "h3",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        3.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "h4",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "h5",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "自下而上叠 6 片方片, 立起西侧塔柱 (平面 x=0)。",
+      "tip": "每叠一片都要上下边完全贴合。",
+      "tiles_to_add": [
+        "ta1",
+        "ta2",
+        "ta3",
+        "ta4",
+        "ta5",
+        "ta6"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "同样方法立起东侧塔柱 (平面 x=3)。",
+      "tip": "",
+      "tiles_to_add": [
+        "tb1",
+        "tb2",
+        "tb3",
+        "tb4",
+        "tb5",
+        "tb6"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "在塔顶架设 3 片橙色桥面板, 两端分别吸在双塔顶边。",
+      "tip": "",
+      "tiles_to_add": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 4,
+      "description": "错误示范: 从中间桥面板边缘向下挂 5 片红色方片吊链。",
+      "tip": "整串约 150g 全部吊在一条磁力边上, 实物必掉 —— 校验器必须拒绝。",
+      "tiles_to_add": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5"
+      ],
+      "highlight_tiles": []
+    }
+  ]
+}
