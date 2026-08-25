@@ -33,6 +33,9 @@
 #       nextStep/goToStep + 渲染层每步查询, 输出每步 ms 与 P95,
 #       超预算退出 1; CTest 关卡已含 bench_tutorial_step 同口径回归,
 #       此处为输出完整耗时表的显式巡检, 见 docs/TESTING.md 3.16 节)
+#   18. 儿童友好文案守卫       (用户可见中文文案红线: 恐吓词/催促话术,
+#       tools/check_child_friendly_copy.py —— Qt QML / Android strings.xml /
+#       Kotlin / 展示层 C++ / 模型步骤文案, UI_UX_SPEC §4.3 §4.5 P3, 秒级)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -254,6 +257,13 @@ else
     skip_stage "教程步进性能基准" \
         "可选关卡, 置 MAGTILE_TUTORIAL_BENCH=1 开启 (tools/bench_tutorial_step.py)"
 fi
+
+# ---- 18: 儿童友好文案守卫 (UI_UX_SPEC §4.3/§4.5/P3 红线) ----------
+# 用户可见中文文案不得出现「失败/错误/崩溃/网络异常」等恐吓词与
+# 倒计时/限时/稀缺催促话术, 技术诊断只进日志; 覆盖 Qt QML /
+# Android strings.xml / Kotlin / 展示层 C++ / 模型步骤与提示文案。
+run_stage "儿童友好文案守卫" \
+    "$PYTHON" "$ROOT/tools/check_child_friendly_copy.py"
 
 # ---- 总结报告 ---------------------------------------------------
 pass_count=0; fail_count=0; skip_count=0

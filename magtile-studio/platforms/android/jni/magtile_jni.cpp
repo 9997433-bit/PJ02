@@ -394,7 +394,10 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MainActivity_validateModel(
     std::lock_guard<std::mutex> lock(ctx.mutex);
     try {
         if (!ctx.catalog.has_value()) {
-            return toJString(env, "错误: 请先调用 loadCatalog() 加载磁力片形状目录");
+            // 正常启动流程不会走到这里 (loadCatalog 在首屏就绪前调用);
+            // 万一走到, 技术细节只进 logcat, 弹窗给温和文案 (P3 零挫败)
+            MAGTILE_LOGE("validateModel: 形状目录尚未加载 (需先调用 loadCatalog)");
+            return toJString(env, "磁力片形状目录还在准备中, 稍后再试一次就好");
         }
         magtile::core::ModelDefinition model =
             magtile::core::loadModelDefinition(toUtf8(env, json_path));
@@ -402,15 +405,23 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MainActivity_validateModel(
         magtile::physics::PhysicsValidator validator(*ctx.catalog);
         const magtile::physics::ValidationReport report = validator.validateModel(model);
 
+        // 本摘要在详情弹窗对全部用户 (含儿童) 可见: 信息照常给全,
+        // 但不用「失败/错误/警告」恐吓词 (UI_UX_SPEC §4.3 / P3 零挫败)
         std::ostringstream out;
-        out << "模型 " << model.id << " (" << model.name << "): "
-            << (report.ok() ? "校验通过" : "校验未通过")
-            << " [" << report.errorCount() << " 错误 / "
-            << report.warningCount() << " 警告]";
+        out << "模型 " << model.id << " (" << model.name << "): ";
+        if (report.ok()) {
+            out << "✓ 校验通过";
+            if (report.warningCount() > 0) {
+                out << " (" << report.warningCount() << " 个小提醒)";
+            }
+        } else {
+            out << "有 " << report.errorCount() << " 处需要调整"
+                << " · " << report.warningCount() << " 个小提醒";
+        }
         for (const auto& issue : report.issues) {
             const bool is_error =
                 issue.severity == magtile::physics::IssueSeverity::Error;
-            out << '\n' << (is_error ? "[错误] " : "[警告] ")
+            out << '\n' << (is_error ? "[需调整] " : "[小提醒] ")
                 << issue.code << ": " << issue.message;
         }
 
@@ -418,7 +429,7 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MainActivity_validateModel(
         return toJString(env, out.str());
     } catch (const std::exception& e) {
         MAGTILE_LOGE("validateModel 失败: %s", e.what());
-        return toJString(env, std::string("错误: ") + e.what());
+        return toJString(env, "校验这次没跑完, 稍后再试一次就好");
     }
 }
 
