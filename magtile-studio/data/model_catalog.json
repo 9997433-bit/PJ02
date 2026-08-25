@@ -715,6 +715,24 @@
       ]
     },
     {
+      "id": "supermarket_01",
+      "file": "models/supermarket_01.json",
+      "name": "阳光超市",
+      "name_en": "Supermarket 01",
+      "description": "全库第一家大卖场: 5x2 单层大盒子南脸留 2 格负空间大门, 橙色门楣两端竖边传力横跨洞口, 整排透明橱窗晒出货架; 北墙长板横砌与南脸方板错开节奏, 屋顶长板双边压墙顶锁成多环箱体; 门头红黄绿蓝四色招牌重心正压铰链, 两片橙色雨棚平挑护住入口 (单片力矩 15 <= 20 且整边互吸共担); 西侧果蔬摊双墙架长板柜台 (双端受力+山墙顶三路保险) 绿棚迎客, 门口购物车排队、东沿回收栏收边, 楼顶黄旗高扬 —— 开门营业, 今日特价!",
+      "difficulty": 3,
+      "total_pieces": 67,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "超市",
+        "商业街",
+        "负空间",
+        "进阶"
+      ]
+    },
+    {
       "id": "crane_tower_01",
       "file": "models/crane_tower_01.json",
       "name": "工地塔式起重机",
@@ -850,6 +868,42 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/amphitheater_01.png"
+    },
+    {
+      "id": "helicopter_pad_01",
+      "file": "models/helicopter_pad_01.json",
+      "name": "楼顶停机坪",
+      "name_en": "Rooftop Helipad 01",
+      "description": "全库第一座楼顶停机坪: 三层玻璃门厅办公楼层层箱形互锁, 楼顶向东西两翼挑出停机坪甲板 (成对共铰力矩 30 <= 严格档 35, 四片直角三角膝撑再锁成刚性节点); 坪心停着小型直升机 —— 尾梁双端受力搭在尾撑柱顶, 六边形旋翼盘立在舱顶铰链正上; 透明安全网、风向袋与四坡通信设备房点齐高空作业细节 —— 塔台呼叫, 可以降落!",
+      "difficulty": 3,
+      "total_pieces": 71,
+      "step_count": 17,
+      "theme": "城市生活",
+      "tags": [
+        "城市生活",
+        "建筑",
+        "直升机",
+        "停机坪",
+        "进阶",
+        "需要扩展装"
+      ]
+    },
+    {
+      "id": "bakery_shop_01",
+      "file": "models/bakery_shop_01.json",
+      "name": "面包店",
+      "name_en": "Bakery Shop",
+      "description": "街角面包店: 门框方大门与两扇透明窗格方橱窗组成敞亮店面, 女儿墙竖边挂出 5 片红白相间的直角三角遮阳篷肋 (竖直铰链重力矩为零), 双等腰招牌塔尖直插天际; 屋顶紫色烟囱吐着橙色烟火, 后院砖炉房借店堂北墙一墙两用, 门前人行道两张悬挑小圆桌 —— 出炉铃一响, 香气飘满整条街。",
+      "difficulty": 3,
+      "total_pieces": 72,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "商店",
+        "职业体验",
+        "进阶"
+      ]
     },
     {
       "id": "castle_foundation_01",
@@ -1055,8 +1109,7 @@
         "职业体验",
         "派出所",
         "建筑",
-        "进阶",
-        "需要扩展装"
+        "进阶"
       ]
     },
     {
@@ -1536,6 +1589,42 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/temple_greek_01.png"
+    },
+    {
+      "id": "pet_clinic_01",
+      "file": "models/pet_clinic_01.json",
+      "name": "宠物医院",
+      "name_en": "Pet Clinic",
+      "description": "爱心宠物医院: 两层候诊主楼一层开蓝色门框方大门、二层嵌三扇窗格方观察窗, 平顶前檐立红十字徽记 (等腰塔尖 + 双等边); 东翼诊疗室借主楼山墙一墙两用, 顶戴橙色等腰尖顶; 北院住院部两座门框方门洞的犬舍戴等边锥顶排排坐 —— 汪汪喵喵, 挂号看诊。",
+      "difficulty": 4,
+      "total_pieces": 96,
+      "step_count": 18,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "职业体验",
+        "建筑",
+        "进阶"
+      ]
+    },
+    {
+      "id": "school_bus_01",
+      "file": "models/school_bus_01.json",
+      "name": "校车",
+      "name_en": "School Bus 01",
+      "description": "全库最长的公路车辆: 三轴六轮大鼻子校车 —— 前轴一对、后双轴四只车轮底座托起 8 格长的橙色底盘 (长边整边压轮顶, 六轮断一仍稳), 一层黄色车身嵌门框方乘客门, 二层 16 扇窗格方车窗整圈一字排开, 车头透明挡风、车尾两扇后窗, 16 片方板大平顶与两侧窗墙锁成连续箱形环; 人行道红顶站牌立在格边上 —— 叮叮, 校车进站, 请排队上车!",
+      "difficulty": 4,
+      "total_pieces": 98,
+      "step_count": 18,
+      "theme": "城市生活",
+      "tags": [
+        "校车",
+        "城市",
+        "载具",
+        "交通",
+        "车轮底座"
+      ],
+      "thumbnail": "thumbnails/school_bus_01.png"
     },
     {
       "id": "castle_drawbridge_01",
