@@ -121,9 +121,9 @@ MATRIX_THEMES = [
 def build_series_index():
     """series 词值 -> 矩阵行下标, 及矩阵外聚桶词值 -> 中文显示名。
 
-    以 data/content_series_map.json 为准: series_slugs (中文主题名 ->
-    词值) 按中文名对齐 §2.2 矩阵行, matrix_bucket_slugs 登记为矩阵外
-    聚桶; 词表缺失时退回 MATRIX_THEMES 内置词值。中文主题名恒可识别。
+    以 data/content_series_map.json 权威词表为准: series 节 (13 主题词值)
+    按 display_name_zh 对齐 §2.2 矩阵行, off_matrix_buckets 节登记为
+    矩阵外聚桶; 词表缺失时退回 MATRIX_THEMES 内置词值。中文主题名恒可识别。
     """
     index = {}
     for i, (slug, cn, _targets) in enumerate(MATRIX_THEMES):
@@ -133,12 +133,12 @@ def build_series_index():
     if SERIES_MAP.is_file():
         name_to_row = {cn: i for i, (_s, cn, _t) in enumerate(MATRIX_THEMES)}
         data = json.loads(SERIES_MAP.read_text(encoding="utf-8"))
-        for cn, slug in data.get("series_slugs", {}).items():
-            row = name_to_row.get(cn)
+        for slug, info in data.get("series", {}).items():
+            row = name_to_row.get(info.get("display_name_zh"))
             if row is not None:
                 index[slug] = row
-        for cn, slug in data.get("matrix_bucket_slugs", {}).items():
-            bucket_names[slug] = cn
+        for slug, info in data.get("off_matrix_buckets", {}).items():
+            bucket_names[slug] = info.get("display_name_zh", slug)
     return index, bucket_names
 
 
