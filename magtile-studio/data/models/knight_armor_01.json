@@ -1,0 +1,1054 @@
+{
+  "schema_version": 1,
+  "id": "knight_armor_01",
+  "name": "军械库骑士铠甲",
+  "name_en": "Knight Armor 01",
+  "description": "全库第一套陈列铠甲: 拱式腿甲 (基座-左腿-髋甲-右腿闭合成环, 髋甲双端搭腿顶不是悬挑) + 直角三角铁靴一前一后错步 (造型即斜撑); 两片臂甲自肩甲两侧竖边外垂 30 度 (受拉悬挂 30g / 力矩 7.5 双双远低于预算); 胸口与面罩两扇窗格方, 盔顶等腰四坡红缨冲天 (5.94 全馆最高); 身旁 120g 大方片巨盾后仰 65 度倚地 (力矩 50.7 < 一线双吸预算 70), 兵器架双柱各挑一柄等腰长剑, 双壁炬照亮红毯。拱环传力、垂挂臂甲、斜倚巨盾 —— 三个静力学新姿势一课学会。",
+  "difficulty": 3,
+  "total_pieces": 56,
+  "tags": [
+    "中世纪",
+    "骑士",
+    "铠甲",
+    "军械库",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 26,
+        "equilateral_triangle": 11,
+        "rectangle": 8,
+        "isosceles_triangle": 6,
+        "right_triangle": 2,
+        "window_square": 2,
+        "large_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "fl0_a",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl0_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fl0_c",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl1_a",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl1_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl1_c",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl2_a",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl2_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl2_c",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl3_a",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl3_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl3_c",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pl_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pl_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pl_w_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pl_e_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pl_w_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pl_e_2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pt_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pt_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rib_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rib_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pn_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_e",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sab_w",
+      "type": "right_triangle",
+      "position": [
+        1.333333,
+        1.0,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sab_e",
+      "type": "right_triangle",
+      "position": [
+        1.666667,
+        2.0,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hip",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "chest",
+      "type": "window_square",
+      "position": [
+        1.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "back",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "te",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "shoulder",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_w",
+      "type": "square",
+      "position": [
+        0.75,
+        1.5,
+        2.566987
+      ],
+      "rotation": [
+        -59.999988,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_e",
+      "type": "square",
+      "position": [
+        2.25,
+        1.5,
+        2.566987
+      ],
+      "rotation": [
+        -120.000012,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hm_visor",
+      "type": "window_square",
+      "position": [
+        1.5,
+        1.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hm_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hm_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hm_e",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plume_s",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        1.166667,
+        4.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "plume_e",
+      "type": "isosceles_triangle",
+      "position": [
+        1.833333,
+        1.5,
+        4.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "plume_n",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        1.833333,
+        4.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "plume_w",
+      "type": "isosceles_triangle",
+      "position": [
+        1.166667,
+        1.5,
+        4.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shield",
+      "type": "large_square",
+      "position": [
+        4.0,
+        0.577382,
+        0.906308
+      ],
+      "rotation": [
+        114.999981,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rk_p1",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk_p2",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sword_w",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        4.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sword_e",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        4.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "torch_a_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "torch_a_e",
+      "type": "equilateral_triangle",
+      "position": [
+        0.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "torch_a_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "torch_a_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "torch_b_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "torch_b_e",
+      "type": "equilateral_triangle",
+      "position": [
+        0.833333,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "torch_b_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "torch_b_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.166667,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺军械库地面南半 (y [0,2]): 6 片, 红毯迎门。",
+      "tip": "x=1 与 x=3 的拼缝是基座墙脚 —— 展品位置从地面定下。",
+      "tiles_to_add": [
+        "fl0_a",
+        "fl0_b",
+        "fl0_c",
+        "fl1_a",
+        "fl1_b",
+        "fl1_c"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺地面北半 (y [2,4]): 6 片, 军械库合拢。",
+      "tip": "北墙边留给兵器架 —— 剑与甲隔馆相望。",
+      "tiles_to_add": [
+        "fl2_a",
+        "fl2_b",
+        "fl2_c",
+        "fl3_a",
+        "fl3_b",
+        "fl3_c"
+      ],
+      "highlight_tiles": [
+        "fl1_b"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "砌陈列基座墙环: 6 片蓝墙踩拼缝, 四角竖边互吸。",
+      "tip": "基座 1x2 进深 —— 铠甲站前半, 后半留展台余地。",
+      "tiles_to_add": [
+        "pl_s",
+        "pl_w_1",
+        "pl_w_2",
+        "pl_n",
+        "pl_e_2",
+        "pl_e_1"
+      ],
+      "highlight_tiles": [
+        "fl1_b",
+        "fl2_b"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺基座台面并挂绶带旗: 2 片台面 + 两侧绶带 + 北沿锦旗。",
+      "tip": "台面每片同时压三段墙顶; 旗与绶带重心正压铰链。",
+      "tiles_to_add": [
+        "pt_1",
+        "pt_2",
+        "rib_w",
+        "rib_e",
+        "pn_n"
+      ],
+      "highlight_tiles": [
+        "pl_s",
+        "pl_n"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立腿甲与错步铁靴: 两片胫甲踩台缝, 直角三角铁靴一前一后。",
+      "tip": "铁靴两条直角边分别吸台缝与腿身竖边 —— 造型即斜撑。",
+      "tiles_to_add": [
+        "leg_w",
+        "leg_e",
+        "sab_w",
+        "sab_e"
+      ],
+      "highlight_tiles": [
+        "pt_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "架髋甲 + 合胸甲: 髋甲方板双端搭腿顶如拱桥, 再围 1x1 胸环。",
+      "tip": "基座-左腿-髋-右腿锁成拱环; 胸口窗格方是透气的胸甲。",
+      "tiles_to_add": [
+        "hip",
+        "tw",
+        "te",
+        "chest",
+        "back"
+      ],
+      "highlight_tiles": [
+        "leg_w",
+        "leg_e"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "压肩甲、垂臂甲: 肩甲方板压胸甲顶, 两片臂甲外垂 30 度。",
+      "tip": "臂甲顶边一线双吸 (肩甲侧边 + 胸甲墙顶), 悬重仅 30g。",
+      "tiles_to_add": [
+        "shoulder",
+        "arm_w",
+        "arm_e"
+      ],
+      "highlight_tiles": [
+        "chest",
+        "te"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "扣头盔: 4 片墙环踩肩甲, 南面窗格方面罩。",
+      "tip": "面罩后面空无一人 —— 这就是陈列铠甲的神秘。",
+      "tiles_to_add": [
+        "hm_visor",
+        "hm_n",
+        "hm_w",
+        "hm_e"
+      ],
+      "highlight_tiles": [
+        "shoulder"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "插盔缨: 4 片等腰四坡红缨冲天, 缨尖 5.94 全馆最高。",
+      "tip": "四条斜棱两两互吸自锁 —— 红缨一立, 威风凛凛。",
+      "tiles_to_add": [
+        "plume_s",
+        "plume_e",
+        "plume_n",
+        "plume_w"
+      ],
+      "highlight_tiles": [
+        "hm_visor",
+        "hm_n"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立兵器架: 双柱贴北墙, 两柄等腰长剑整边骑上柱顶。",
+      "tip": "剑刃重心正压柱顶铰链线, 力矩为零 —— 稳稳当当。",
+      "tiles_to_add": [
+        "rk_p1",
+        "rk_p2",
+        "sword_w",
+        "sword_e"
+      ],
+      "highlight_tiles": [
+        "fl3_c"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "倚巨盾: 大方片后仰 65 度靠在红毯东侧, 底边骑地面拼缝。",
+      "tip": "底边一线双吸 (接触总长 4), 后仰力矩 50.7 < 预算 70。",
+      "tiles_to_add": [
+        "shield"
+      ],
+      "highlight_tiles": [
+        "fl0_c",
+        "fl1_c"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "点壁炬 x2 —— 军械库骑士铠甲布展完成!",
+      "tip": "壁炬四棱自锁; 火光里, 铠甲的影子投在红毯上。",
+      "tiles_to_add": [
+        "torch_a_s",
+        "torch_a_e",
+        "torch_a_n",
+        "torch_a_w",
+        "torch_b_s",
+        "torch_b_e",
+        "torch_b_n",
+        "torch_b_w"
+      ],
+      "highlight_tiles": [
+        "fl0_a",
+        "fl3_a"
+      ]
+    }
+  ]
+}
