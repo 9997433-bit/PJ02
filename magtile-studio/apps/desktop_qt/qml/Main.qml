@@ -45,6 +45,7 @@ ApplicationWindow {
         HomePage {
             onOpenLibrary: stack.push(libraryComponent)
             onOpenModel: function(modelId) { stack.push(detailComponent, { modelId: modelId }) }
+            onOpenInventory: stack.push(inventoryComponent)
             onNotify: function(message) { window.showToast(message) }
         }
     }
@@ -54,7 +55,23 @@ ApplicationWindow {
         LibraryPage {
             onBack: stack.pop()
             onOpenDetail: function(modelId) { stack.push(detailComponent, { modelId: modelId }) }
+            onOpenInventory: stack.push(inventoryComponent)
             onNotify: function(message) { window.showToast(message) }
+        }
+    }
+
+    Component {
+        id: inventoryComponent
+        InventoryPage {
+            onBack: stack.pop()
+            onNotify: function(message) { window.showToast(message) }
+            // 「保存, 看看我能搭什么」: 开启筛选后落到模型库
+            // (导航深度保持 首页 -> 模型库, 任意界面 <= 2 步回首页)
+            onLookWhatICanBuild: {
+                studio.libraryFilter.buildableOnly = true
+                stack.pop(null)
+                stack.push(libraryComponent)
+            }
         }
     }
 

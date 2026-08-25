@@ -21,6 +21,7 @@
 #include <cstdlib>
 #include <filesystem>
 
+#include "inventory_backend.hpp"
 #include "studio_backend.hpp"
 
 namespace fs = std::filesystem;
@@ -104,11 +105,15 @@ int main(int argc, char* argv[]) {
                                  : defaultProgressDbPath();
 
     magtile::qtui::StudioBackend backend(data_dir, db_file);
+    // 库存录入后端桥: 与 studio 共用同一 SQLite 存档 (多连接安全),
+    // InventoryPage 保存后由 QML 调 studio.reload() 刷新「我能搭的」
+    magtile::qtui::InventoryBackend inventory(data_dir, db_file);
 
     QQmlApplicationEngine engine;
     // Qt 6.4 的默认引擎导入路径不含 /qt/qml (6.5+ 才内置), 显式补上
     engine.addImportPath(QStringLiteral("qrc:/qt/qml"));
     engine.rootContext()->setContextProperty(QStringLiteral("studio"), &backend);
+    engine.rootContext()->setContextProperty(QStringLiteral("inventory"), &inventory);
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreationFailed, &app,

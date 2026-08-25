@@ -29,6 +29,7 @@ qt_add_executable(magtile_studio_qt
     src/library_model.cpp
     src/library_filter_model.cpp
     src/studio_backend.cpp
+    src/inventory_backend.cpp
 )
 
 # Theme.qml 是设计令牌单例 (pragma Singleton), 需在 qmldir 中登记为 singleton
@@ -46,6 +47,7 @@ qt_add_qml_module(magtile_studio_qt
         qml/LibraryPage.qml
         qml/DetailPage.qml
         qml/TutorialPage.qml
+        qml/InventoryPage.qml
         qml/BigButton.qml
         qml/FilterChip.qml
         qml/Theme.qml

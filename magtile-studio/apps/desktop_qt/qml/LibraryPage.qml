@@ -15,6 +15,7 @@ Page {
 
     signal back()
     signal openDetail(string modelId)
+    signal openInventory()
     signal notify(string message)
 
     background: Rectangle { color: Theme.surfaceAlt }
@@ -164,11 +165,20 @@ Page {
                     Text {
                         visible: !studio.inventoryConfigured
                         Layout.fillWidth: true
-                        text: "请爸爸妈妈先登记家里的磁力片, 就能只看现在搭得成的模型啦"
+                        text: "先登记家里的磁力片, 就能只看现在搭得成的模型啦"
                         font.pixelSize: Theme.fontSmall
                         color: Theme.textSecondary
                         wrapMode: Text.WordWrap
                         lineHeight: 1.3
+                    }
+                    // 库存录入入口 (UI_UX_SPEC.md §10): 未登记时是
+                    // onboarding 引导, 已登记时用于随时修改
+                    FilterChip {
+                        Layout.fillWidth: true
+                        text: studio.inventoryConfigured ? "✏️ 修改磁力片库存"
+                                                         : "🧲 去登记磁力片 ▶"
+                        accent: Theme.warning
+                        onClicked: page.openInventory()
                     }
 
                     // -- 主题 --------------------------------------------

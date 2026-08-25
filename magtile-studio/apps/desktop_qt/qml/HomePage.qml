@@ -12,6 +12,7 @@ Page {
 
     signal openLibrary()
     signal openModel(string modelId)
+    signal openInventory()
     signal notify(string message)
 
     background: Rectangle { color: Theme.surfaceAlt }
@@ -117,6 +118,56 @@ Page {
                     }
                 }
                 Item { Layout.fillWidth: true }
+            }
+        }
+
+        // 首启 onboarding 入口 (UI_UX_SPEC.md §10.1: 引导而非报错,
+        // 跳过永远可见 —— 不登记也能正常开搭): 未登记库存时给清晰的
+        // 图形录入入口, 登记后此卡自动消失 (录入入口常驻模型库筛选栏)
+        AbstractButton {
+            id: inventoryOnboardingCard
+            visible: !studio.inventoryConfigured
+            Layout.fillWidth: true
+            Layout.preferredHeight: 88
+            onClicked: page.openInventory()
+            scale: pressed ? 0.98 : 1.0
+            Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+
+            background: Rectangle {
+                radius: Theme.radiusCard
+                color: Theme.warningSoft
+                border.color: Theme.warning
+                border.width: 2
+            }
+            contentItem: RowLayout {
+                spacing: Theme.spacing
+                Text {
+                    Layout.leftMargin: Theme.spacingLarge
+                    text: "🧲"
+                    font.pixelSize: 30
+                }
+                ColumnLayout {
+                    spacing: 4
+                    Text {
+                        text: "先登记家里的磁力片 (2 分钟)"
+                        font.pixelSize: Theme.fontButton
+                        font.bold: true
+                        color: Theme.textPrimary
+                    }
+                    Text {
+                        text: "登记后模型库能筛出「我能搭的」, 开搭前不会再因缺片而中断"
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                    }
+                }
+                Item { Layout.fillWidth: true }
+                Text {
+                    Layout.rightMargin: Theme.spacingLarge
+                    text: "去登记 ▶"
+                    font.pixelSize: Theme.fontBody
+                    font.bold: true
+                    color: Theme.primary
+                }
             }
         }
 
