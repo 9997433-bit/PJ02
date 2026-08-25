@@ -23,6 +23,14 @@ endif()
 option(MAGTILE_BUILD_GL_RENDERER "构建 GLFW + OpenGL 渲染后端 (GLFW/ImGui 经 FetchContent 获取)" ON)
 option(MAGTILE_BUILD_TESTS "构建并注册 CTest 用例" ON)
 
+# ---- Android 交叉编译 (NDK 工具链文件会定义 ANDROID) -------------
+# 用法见 platforms/android/README.md。手机端不使用桌面 GL 后端
+# (GLFW) 也无法跑 CTest, 强制关闭; 只产出 magtile_core + JNI 共享库。
+if(ANDROID)
+    set(MAGTILE_BUILD_GL_RENDERER OFF CACHE BOOL "" FORCE)
+    set(MAGTILE_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+endif()
+
 # ---- 编译警告 --------------------------------------------------
 add_library(magtile_warnings INTERFACE)
 if(MSVC)
@@ -111,12 +119,17 @@ if(MAGTILE_BUILD_GL_RENDERER)
     target_compile_definitions(magtile_render_gl PUBLIC MAGTILE_HAS_GL_RENDERER=1)
 endif()
 
-# ---- 命令行应用 -------------------------------------------------
-add_executable(magtile_app src/app/main.cpp)
-target_link_libraries(magtile_app PRIVATE magtile_core magtile_warnings)
-if(MAGTILE_BUILD_GL_RENDERER)
-    target_link_libraries(magtile_app PRIVATE magtile_render_gl)
+# ---- 命令行应用 (桌面; Android 由 platforms/android 提供 JNI 外壳) ----
+if(NOT ANDROID)
+    add_executable(magtile_app src/app/main.cpp)
+    target_link_libraries(magtile_app PRIVATE magtile_core magtile_warnings)
+    if(MAGTILE_BUILD_GL_RENDERER)
+        target_link_libraries(magtile_app PRIVATE magtile_render_gl)
+    endif()
 endif()
+
+# ---- 平台外壳 (Android JNI 共享库 / Windows 打包资产) -------------
+add_subdirectory(platforms)
 
 # ---- 测试 (详见 docs/TESTING.md) --------------------------------
 if(MAGTILE_BUILD_TESTS)
@@ -140,43 +153,50 @@ if(MAGTILE_BUILD_TESTS)
     endforeach()
 
     # 脚本类测试 (bash): 模型库全量质检 / 教程完整性 / 物理负例
+    # 各脚本按存在性注册, 便于测试资产分批合入时仓库始终可配置。
     find_program(MAGTILE_BASH bash)
     if(MAGTILE_BASH)
         # 全量质检: 逐一 validate + 报告片数步数 + 拒绝 < 40 片的小模型
-        add_test(NAME all_models_quality_gate
-            COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_all_models.sh
-                $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR} 40)
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_all_models.sh)
+            add_test(NAME all_models_quality_gate
+                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_all_models.sh
+                    $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR} 40)
+        endif()
 
         # 教程完整性: 静态逐步累加走查 + CLI 教程引擎实际跑一遍
-        add_test(NAME tutorial_integrity
-            COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_tutorial_integrity.sh
-                $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_tutorial_integrity.sh)
+            add_test(NAME tutorial_integrity
+                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_tutorial_integrity.sh
+                    $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
+        endif()
 
         # 物理负例: 这些夹具物理上不成立, validate 必须以非零退出码拒绝,
         # 且必须报出对应的错误码 (由 test_physics_negative.sh 断言)。
-        foreach(pair IN ITEMS
-                "floating_tile\;floating_tile"
-                "unstable_cantilever\;unstable_center_of_mass"
-                "overlapping_tiles\;tile_overlap")
-            list(GET pair 0 fixture_name)
-            list(GET pair 1 expected_code)
-            add_test(NAME physics_negative_${fixture_name}
-                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_negative.sh
-                    $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR}
-                    ${MAGTILE_TESTS_DIR}/test_physics_negative/${fixture_name}.json
-                    ${expected_code})
-        endforeach()
+        # 注意: 引号内的 \; 不会被 CMake 拆分为列表, 这里用 | 作分隔符。
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_physics_negative.sh)
+            foreach(pair IN ITEMS
+                    "floating_tile|floating_tile"
+                    "unstable_cantilever|unstable_center_of_mass"
+                    "overlapping_tiles|tile_overlap")
+                string(REPLACE "|" ";" pair "${pair}")
+                list(GET pair 0 fixture_name)
+                list(GET pair 1 expected_code)
+                add_test(NAME physics_negative_${fixture_name}
+                    COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_negative.sh
+                        $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR}
+                        ${MAGTILE_TESTS_DIR}/test_physics_negative/${fixture_name}.json
+                        ${expected_code})
+            endforeach()
+        endif()
     else()
         message(WARNING "MagTile: 未找到 bash, 跳过脚本类测试注册")
     endif()
 
     # 反平凡检查 (Python): 拒绝片数过少 / 形状单一 / 纯平面的敷衍模型
     find_package(Python3 COMPONENTS Interpreter QUIET)
-    if(Python3_Interpreter_FOUND)
+    if(Python3_Interpreter_FOUND AND EXISTS ${MAGTILE_TESTS_DIR}/test_anti_trivial.py)
         add_test(NAME anti_trivial_models
             COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_anti_trivial.py
                 ${MAGTILE_DATA_DIR}/models)
-    else()
-        message(WARNING "MagTile: 未找到 Python3, 跳过反平凡模型检查注册")
     endif()
 endif()
