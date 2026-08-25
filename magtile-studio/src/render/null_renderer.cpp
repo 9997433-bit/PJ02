@@ -27,9 +27,9 @@ public:
     void submitTile(const RenderTile& tile, const core::TileShape& shape) override {
         ++frame_tile_count_;
         if (verbose_ && tile.instance != nullptr) {
-            std::printf("[render]   %s (%s)%s%s\n", tile.instance->id.c_str(),
+            std::printf("[render]   %s (%s)%s%s%s\n", tile.instance->id.c_str(),
                         shape.name_zh.c_str(), tile.highlighted ? " [高亮]" : "",
-                        tile.ghost ? " [虚影]" : "");
+                        tile.ghost ? " [虚影]" : "", tile.just_placed ? " [新增]" : "");
         }
     }
 

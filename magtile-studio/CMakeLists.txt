@@ -18,8 +18,9 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
-# 渲染后端开关: 第一阶段默认关闭, 落地 GLFW + OpenGL 后开启
-option(MAGTILE_BUILD_GL_RENDERER "构建 GLFW + OpenGL 渲染后端 (需要 GLFW)" OFF)
+# 渲染后端开关: 默认开启; 无显示环境的纯 CI 可用 -DMAGTILE_BUILD_GL_RENDERER=OFF
+# 关闭后不需要网络与 X11/Wayland 开发库, CLI 功能完全不受影响。
+option(MAGTILE_BUILD_GL_RENDERER "构建 GLFW + OpenGL 渲染后端 (GLFW/ImGui 经 FetchContent 获取)" ON)
 option(MAGTILE_BUILD_TESTS "构建并注册 CTest 用例" ON)
 
 # ---- 编译警告 --------------------------------------------------
@@ -40,6 +41,7 @@ add_library(magtile_core STATIC
     src/physics/physics_validator.cpp
     src/tutorial/tutorial_engine.cpp
     src/render/null_renderer.cpp
+    src/render/orbit_camera.cpp
 )
 target_include_directories(magtile_core
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -47,9 +49,64 @@ target_include_directories(magtile_core
 )
 target_link_libraries(magtile_core PRIVATE magtile_warnings)
 
+# ---- GLFW + OpenGL 4.1 渲染后端 ---------------------------------
+if(MAGTILE_BUILD_GL_RENDERER)
+    include(FetchContent)
+
+    # GLFW: 优先使用系统安装 (发行版打包 / brew / vcpkg), 否则联网获取
+    find_package(glfw3 3.3 QUIET)
+    if(NOT glfw3_FOUND)
+        message(STATUS "MagTile: 未找到系统 GLFW, 通过 FetchContent 获取 3.4")
+        set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+        set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+        set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+        set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
+        FetchContent_Declare(glfw
+            GIT_REPOSITORY https://github.com/glfw/glfw.git
+            GIT_TAG 3.4
+            GIT_SHALLOW TRUE)
+        FetchContent_MakeAvailable(glfw)
+    endif()
+
+    # Dear ImGui: 教程 HUD (无自带构建脚本, 直接编译其源码)
+    FetchContent_Declare(imgui
+        GIT_REPOSITORY https://github.com/ocornut/imgui.git
+        GIT_TAG v1.91.9b
+        GIT_SHALLOW TRUE)
+    FetchContent_MakeAvailable(imgui)
+
+    add_library(magtile_imgui STATIC
+        ${imgui_SOURCE_DIR}/imgui.cpp
+        ${imgui_SOURCE_DIR}/imgui_draw.cpp
+        ${imgui_SOURCE_DIR}/imgui_tables.cpp
+        ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+        ${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp
+        ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
+    )
+    target_include_directories(magtile_imgui PUBLIC
+        ${imgui_SOURCE_DIR}
+        ${imgui_SOURCE_DIR}/backends
+    )
+    target_link_libraries(magtile_imgui PUBLIC glfw)
+
+    add_library(magtile_render_gl STATIC
+        src/render/gl/gl_api.cpp
+        src/render/gl/gl_renderer.cpp
+    )
+    target_link_libraries(magtile_render_gl
+        PUBLIC magtile_core
+        PRIVATE magtile_imgui glfw magtile_warnings
+    )
+    # 链接方可据此宏启用 --gui 代码路径
+    target_compile_definitions(magtile_render_gl PUBLIC MAGTILE_HAS_GL_RENDERER=1)
+endif()
+
 # ---- 命令行应用 -------------------------------------------------
 add_executable(magtile_app src/app/main.cpp)
 target_link_libraries(magtile_app PRIVATE magtile_core magtile_warnings)
+if(MAGTILE_BUILD_GL_RENDERER)
+    target_link_libraries(magtile_app PRIVATE magtile_render_gl)
+endif()
 
 # ---- 测试: 用示例模型跑完整质检流程 -----------------------------
 if(MAGTILE_BUILD_TESTS)

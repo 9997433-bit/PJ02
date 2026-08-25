@@ -4,10 +4,10 @@
 // MagTile Studio - 渲染层抽象接口
 //
 // 技术选型 (详见 docs/ARCHITECTURE.md):
-// 正式渲染后端计划采用 GLFW + OpenGL 4.1 Core (三平台均原生支持,
+// 正式渲染后端采用 GLFW + OpenGL 4.1 Core (三平台均原生支持,
 // macOS 最高支持到 4.1), 通过本接口隔离, 后续可平滑替换为
 // Vulkan / Metal 后端而不影响核心与教程模块。
-// 当前阶段仅提供 NullRenderer (无窗口), 用于 CLI 校验与 CI。
+// NullRenderer (无窗口) 用于 CLI 校验与 CI; 窗口后端见 gl_renderer.hpp。
 // =============================================================
 
 #include <memory>
@@ -30,7 +30,8 @@ struct Camera {
 struct RenderTile {
     const core::TileInstance* instance = nullptr;
     bool highlighted = false;  ///< 教程参照高亮 (描边)
-    bool ghost = false;        ///< 半透明幽灵片 (提示即将放置的位置)
+    bool ghost = false;        ///< 尚未放置的淡化预览片 (提示最终轮廓)
+    bool just_placed = false;  ///< 本步骤新增 (描边 + 呼吸动画引导放置)
 };
 
 /// 渲染后端接口。实现必须无状态泄漏地支持多次 initialize/shutdown。
