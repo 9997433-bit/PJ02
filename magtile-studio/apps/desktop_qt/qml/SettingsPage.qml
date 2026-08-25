@@ -14,6 +14,7 @@ Page {
     id: page
 
     signal back()
+    signal openSubscription()
 
     /// Main.qml 会话守卫: 会话失效时该页自动退回首页
     readonly property bool requiresParentSession: true
@@ -258,6 +259,57 @@ Page {
                                 checked: appSettings.ageModeId === modelData.id
                                 onClicked: appSettings.ageModeId = modelData.id
                             }
+                        }
+                    }
+                }
+            }
+
+            // ---- 订阅入口 (QT-5, §11: 本页已在家长门后, 可直达订阅页) ----
+            Rectangle {
+                Layout.fillWidth: true
+                implicitHeight: subscriptionColumn.implicitHeight + 2 * Theme.spacing
+                radius: Theme.radiusCard
+                color: Theme.surface
+                border.color: Theme.cardBorder
+                border.width: 1
+
+                ColumnLayout {
+                    id: subscriptionColumn
+                    anchors.centerIn: parent
+                    width: parent.width - 2 * Theme.spacing
+                    spacing: 8
+
+                    Text {
+                        text: "订阅"
+                        font.pixelSize: Theme.fontButton
+                        font.bold: true
+                        color: Theme.primary
+                    }
+                    Text {
+                        Layout.fillWidth: true
+                        text: "免费精选模型永久免费; 订阅解锁全库与每周上新 (即将上线)。"
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                        wrapMode: Text.WordWrap
+                    }
+                    AbstractButton {
+                        id: subscriptionButton
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: Theme.touchTarget
+                        onClicked: page.openSubscription()
+                        background: Rectangle {
+                            radius: Theme.radiusButton
+                            color: subscriptionButton.pressed ? Theme.primarySoft : Theme.surface
+                            border.color: Theme.primary
+                            border.width: 1
+                        }
+                        contentItem: Text {
+                            text: "查看订阅说明 ▶"
+                            font.pixelSize: Theme.fontBody
+                            font.bold: true
+                            color: Theme.primary
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
                         }
                     }
                 }

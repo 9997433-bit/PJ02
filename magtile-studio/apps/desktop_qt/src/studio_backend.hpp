@@ -48,6 +48,9 @@ class StudioBackend final : public QObject {
     Q_PROPERTY(QString dataDirText READ dataDirText NOTIFY catalogChanged)
     /// 家庭磁力片库存是否已登记 (未登记时「我能搭的」筛选由界面禁用并引导)。
     Q_PROPERTY(bool inventoryConfigured READ inventoryConfigured NOTIFY catalogChanged)
+    /// 免费层模型数 (目录 tags 含「免费」, COMMERCIAL_PLAN.md §2.1 免费 30):
+    /// 订阅页 (QT-5) 的「免费 vs 全库」对比数据源, 与 QA 红线工具同一口径。
+    Q_PROPERTY(int freeModelCount READ freeModelCount NOTIFY catalogChanged)
     /// 全部主题 (按目录出现顺序去重), 主题筛选器数据源。
     Q_PROPERTY(QStringList themes READ themes NOTIFY catalogChanged)
 
@@ -68,6 +71,7 @@ public:
     [[nodiscard]] QString statusMessage() const { return status_message_; }
     [[nodiscard]] QString dataDirText() const { return QString::fromStdString(data_dir_.string()); }
     [[nodiscard]] bool inventoryConfigured() const noexcept { return inventory_configured_; }
+    [[nodiscard]] int freeModelCount() const noexcept { return free_model_count_; }
     [[nodiscard]] QStringList themes() const { return themes_; }
 
     /// 重新加载模型库目录并合并进度存档 (构造时自动调用一次)。
@@ -118,6 +122,7 @@ private:
     bool inventory_configured_ = false;
     QStringList themes_;
     int total_pieces_ = 0;
+    int free_model_count_ = 0;
     int in_progress_count_ = 0;
     int completed_count_ = 0;
     QString continue_title_;      ///< "继续上次"卡片文案, 如 "彩虹桥 · 第 3/12 步"

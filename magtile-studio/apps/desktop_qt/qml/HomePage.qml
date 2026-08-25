@@ -14,6 +14,7 @@ Page {
     signal openModel(string modelId)
     signal openInventory()
     signal openParentArea()
+    signal openSubscription()
     signal notify(string message)
 
     background: Rectangle { color: Theme.surfaceAlt }
@@ -189,6 +190,30 @@ Page {
                 text: "我的进度"
                 accent: Theme.success
                 onClicked: page.notify("进度与成就页正在搭建中, 马上就好!")
+            }
+        }
+
+        // 订阅入口 (QT-5, §12.2): 儿童侧只说"请家长解锁", 无价格无催促;
+        // 点击经 Main.qml 统一路由 —— 先过家长门, 订阅页只在门后可见 (§11)
+        AbstractButton {
+            id: subscriptionEntry
+            Layout.alignment: Qt.AlignHCenter
+            Layout.preferredHeight: Theme.touchTarget
+            Layout.preferredWidth: subscriptionEntryText.implicitWidth + 2 * Theme.spacingLarge
+            onClicked: page.openSubscription()
+            background: Rectangle {
+                radius: Theme.radiusButton
+                color: subscriptionEntry.pressed ? Theme.primarySoft : "transparent"
+                border.color: Theme.cardBorder
+                border.width: 1
+            }
+            contentItem: Text {
+                id: subscriptionEntryText
+                text: "🔓 想搭更多模型? 请家长来解锁"
+                font.pixelSize: Theme.fontBody
+                color: Theme.textSecondary
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
             }
         }
     }

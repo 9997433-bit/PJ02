@@ -41,6 +41,7 @@ apps/desktop_qt/
 │   │                       #   + --parent-gate 深链 / --smoke-quit-ms + --smoke-parent-flow 无头冒烟
 │   ├── studio_backend.*    # QML 后端桥: 模型库目录 + 进度存档 + BOM/库存对照 (canBuild/缺片/core-9)
 │   │                       #   + modelDetail/bomForModel/toggleFavorite + startBuild -> buildRequested 信号
+│   │                       #   + freeModelCount (QT-5: 目录「免费」标签计数, 订阅页对比数据源)
 │   ├── library_model.*     # QAbstractListModel: 模型卡片 (名称/难度/片数/步数/主题/进度徽标/收藏
 │   │                       #   /core9Only/canBuild/missingTotal)
 │   ├── library_filter_model.*  # QSortFilterProxyModel: 难度/主题/只用核心9片/我能搭的 四维筛选
@@ -56,7 +57,9 @@ apps/desktop_qt/
     ├── FilterChip.qml      # 筛选胶囊 (高度 48, 选中实心主色, 状态由外部绑定驱动)
     ├── Main.qml            # 主窗口 + StackView 导航 (首页->库->详情->教程 / 首页->家长门|家长中心->设置|订阅)
     │                       #   + buildRequested 统一路由 + 家长会话守卫 (到期/锁定自动退回首页) + 底部温和提示
+    │                       #   + openSubscriptionZone 订阅统一路由 (QT-5: 任意入口先过家长门, 深度保持 1)
     ├── HomePage.qml        # 首页: 超大主按钮 + "继续上次"卡片 (直达断点模型详情) + 32px 家长区入口 (§5.3)
+    │                       #   + 儿童侧订阅温和入口 (QT-5, §12.2: 只说"请家长来解锁", 无价格无催促)
     ├── LibraryPage.qml     # 模型库: 筛选侧栏 (难度/主题/只用核心9片/我能搭的) + 卡片网格
     │                       #   + ✓/▶ 进度徽标 + "还缺 N 片"琥珀徽标 + 筛选空态 ("换个条件试试")
     ├── DetailPage.qml      # 模型详情 (§5.4): 预览占位 + 难度/片数/步数 + BOM 对照库存缺片提示
@@ -66,7 +69,9 @@ apps/desktop_qt/
     │                       #   + 3 次错 60 秒冷却 "休息一下" (复刻 GL 版交互, 无任何价格信息)
     ├── ParentAreaPage.qml  # 家长中心 (§9.2, QT-2): 会话剩余倒计时 + 订阅/设置入口 + 隐私说明 + 锁定家长区
     ├── SettingsPage.qml    # 设置 (§8, QT-2): 字号三档 (100/125/150%, 即时生效) + 减少动效 + 年龄段三档
-    ├── SubscriptionPage.qml # 订阅占位 (§11): 家长门后温和 "即将上线", 无倒计时无催促不索取信息
+    │                       #   + 订阅入口 (QT-5, 本页已在门后, 原位替换进订阅页)
+    ├── SubscriptionPage.qml # 订阅页脚手架 (§11, QT-5): 家长门后温和说明订阅解锁全库 + 「免费 vs 全库」
+    │                       #   对比实时读目录 + 「即将上线」占位 CTA + mailto; 无 IAP/倒计时/催促/索取信息
     └── TutorialPage.qml    # 教程占位页: QT-3 视口就绪前温和提示, 路由契约与真教程一致
 ```
 
@@ -74,7 +79,9 @@ apps/desktop_qt/
 
 QT-1 补充说明：BOM 与库存对照在 `StudioBackend::reload` 一次性算好（与 GL 版同策略，模型 JSON 仅启动/重载时加载），核心 9 片分层以 `data/tile_catalog.json` 的 `tier` 标注为单一数据源（目录不可用时退回代码内同口径白名单）；「我能搭的」在未登记库存时禁用并温和引导（不显示全空列表）。「开始搭建」统一走 `startBuild -> buildRequested` 信号，Main.qml 据此路由到占位 TutorialPage —— QT-3 视口就绪后只需替换教程页内容，详情页与路由契约不变。
 
-QT-2 补充说明：家长门/冷却/会话逻辑**零重复实现**——Qt 版与 GL 版链接同一个 `core::ParentGate`（纯逻辑层，单测 `parent_gate` 不变），`ParentGateBackend` 只做属性包装与秒级倒计时通知；会话与冷却只存内存、永不落盘（SECURITY_AND_PRIVACY.md §6.2）。路由为 首页 32px 入口 → 无会话先进家长门（过门后**原位替换**为家长中心，导航深度保持 1）→ 设置/订阅在门后第 2 层；Main.qml 有统一的会话守卫，会话到期或点「锁定家长区」时自动退回首页并温和提示。设置三项（字号三档/减少动效/年龄段）经 `SettingsBackend` 写 `ProgressStore` settings 表：年龄段沿用 `age_settings` 键（CLI `settings set-age` / GL 版启蒙布局读同一键），字号与减少动效的键名契约新增在核心层 `progress/ui_settings`（GL/移动端外壳可直接复用，核心库依旧零 Qt 依赖）；字号与动效经 Theme 单例绑定即时全应用生效。订阅页当前为家长门后的温和「即将上线」占位（无倒计时/无催促/不索取信息），正式订阅页在 QT-5。测试：后端桥单测 `qt_backend_bridges`（含与 GL/CLI 的共库契约双向验证）+ 无头 QML 冒烟 `qt_gui_smoke`（offscreen 三连跑：首页 / `--parent-gate` 深链 / `--smoke-parent-flow` 自动驾驶走完 门→家长中心→设置→订阅）。
+QT-2 补充说明：家长门/冷却/会话逻辑**零重复实现**——Qt 版与 GL 版链接同一个 `core::ParentGate`（纯逻辑层，单测 `parent_gate` 不变），`ParentGateBackend` 只做属性包装与秒级倒计时通知；会话与冷却只存内存、永不落盘（SECURITY_AND_PRIVACY.md §6.2）。路由为 首页 32px 入口 → 无会话先进家长门（过门后**原位替换**为家长中心，导航深度保持 1）→ 设置/订阅在门后第 2 层；Main.qml 有统一的会话守卫，会话到期或点「锁定家长区」时自动退回首页并温和提示。设置三项（字号三档/减少动效/年龄段）经 `SettingsBackend` 写 `ProgressStore` settings 表：年龄段沿用 `age_settings` 键（CLI `settings set-age` / GL 版启蒙布局读同一键），字号与减少动效的键名契约新增在核心层 `progress/ui_settings`（GL/移动端外壳可直接复用，核心库依旧零 Qt 依赖）；字号与动效经 Theme 单例绑定即时全应用生效。订阅页已由 QT-5 升级为脚手架（见下方 QT-5 补充说明）。测试：后端桥单测 `qt_backend_bridges`（含与 GL/CLI 的共库契约双向验证）+ 无头 QML 冒烟 `qt_gui_smoke`（offscreen 三连跑：首页 / `--parent-gate` 深链 / `--smoke-parent-flow` 自动驾驶走完 门→家长中心→设置→订阅）。
+
+QT-5 补充说明（订阅页脚手架，家长门后）：文案按 UI_UX_SPEC §11 与 COMMERCIAL_PLAN 口径 —— 页首明示免费额度（反套路即信任），温和说明「订阅解锁全库 + 每周上新；免费层永久免费、只锁内容不锁功能」，全页无倒计时/无催促/无羞辱话术/不索取信息、不用红色。「免费 30 vs 全库」对比数字**实时读模型目录**：`StudioBackend::reload` 统计 tags 含「免费」的条目（与 `tools/check_core5_usage.py` 的 `FREE_TAG` 同一口径）暴露为 `freeModelCount`，全库数即既有 `modelCount` —— 选品或库容变化零代码同步。主 CTA 为「订阅即将上线」占位（点按只弹温和 toast），次级 CTA 为 mailto 联系通道（占位邮箱 `hello@magtile.example`，RFC 2606 保留域，上线前替换）；**不接任何 IAP/支付 SDK**，正式三卡定价（月/年/家庭年）、透明条款与「恢复购买」随 V1 付费闭环替换占位区。入口共三处且全部过同一道门：首页儿童侧温和入口（只说「请家长来解锁」，无价格，§12.2）、家长中心「订阅管理」、设置页「查看订阅说明」—— 统一走 Main.qml `openSubscriptionZone`（无会话先进家长门，过门后原位替换为订阅页；设置页进入用 `stack.replace`），订阅页导航深度恒为 1~2，满足「≤ 2 步回首页」与「订阅页只在家长门后可见」两条铁律；会话到期由既有守卫统一退回首页。
 
 Qt 版与 GL 版**共用同一份进度存档**（默认平台路径与 `magtile_app` 一致，见 docs/PROGRESS.md），家庭用户在两个外壳间切换进度不丢。
 
@@ -108,7 +115,7 @@ cmake --build build-qt --target magtile_studio_qt -j
 | **QT-2 家长门与设置** | `core::ParentGate` 接 QML（算术题 + 中文大写软键盘复刻 GL 版）、家长中心、设置页（字号三档/减少动效/主题） | QT-0 | `IN_PROGRESS`（家长门 QML + 家长中心 + 设置页字号三档/减少动效/年龄段 + 订阅温和占位页（门后）+ 会话守卫 + 后端桥单测/QML 冒烟 DONE；主题亮暗切换、PIN、家长中心完整功能 PLANNED） |
 | **QT-3 3D 教程播放器** | `QQuickFramebufferObject` 集成 `magtile_render_gl`：步骤导航/高亮/ghost/轨道相机上屏；退出自动存档 | QT-1 | `PLANNED`（核心屏 ★，工作量最大） |
 | **QT-4 反馈与庆祝** | 每步星星反馈、完成庆祝页、成就墙 GUI、QtTextToSpeech 朗读（§4.2/4.3） | QT-3 | `PLANNED` |
-| **QT-5 Onboarding 与订阅** | 年龄段选择、库存录入（大号 −/+ 步进器）、订阅页（家长门后, §11） | QT-2 | `PLANNED` |
+| **QT-5 Onboarding 与订阅** | 年龄段选择、库存录入（大号 −/+ 步进器）、订阅页（家长门后, §11） | QT-2 | `IN_PROGRESS`（订阅页脚手架 DONE：温和文案 + 免费 30 vs 全库对比读目录 + 「即将上线」CTA/mailto 占位 + 首页儿童侧/家长中心/设置页三入口全过家长门，无 IAP；库存录入已随 QT-1 落地；年龄段前置流程、正式三卡定价/恢复购买 PLANNED——后者依赖 V1 付费闭环） |
 | **QT-6 打包发布** | windeployqt/MSIX、macdeployqt/DMG 公证、Linux AppImage；ImGui 版退役为内部工具 | QT-1~5 | `PLANNED` |
 
 **退役条件**：QT-3 完成且教程播放器通过 UI_UX_SPEC §14 验收清单后，`library --gui` 从用户文档移除、降级为 `--dev-gui`（保留冒烟测试）；QT-6 完成后商店渠道只发 Qt 版。
@@ -125,7 +132,7 @@ cmake --build build-qt --target magtile_studio_qt -j
 | 设置 §8 | 无 | 字号三档/减少动效/年龄段 `DONE`（家长门后设置页, 即时生效并落 SQLite）；主题/语言/库存复入口 `PLANNED` | QT-2 |
 | 家长门 §9 | 算术题门 + 中文大写软键盘 已可用 | 32px 入口 + 门界面（软键盘/冷却）+ 家长中心 + 会话守卫 `DONE`；PIN / 手写键盘 `PLANNED` | QT-2 |
 | Onboarding / 库存录入 §10 | 无 | 库存图形录入 `DONE`；年龄段前置流程 `PLANNED` | QT-5 |
-| 订阅页 §11 | 无 | 家长门后温和占位（即将上线）`DONE`；正式订阅页（三卡/透明条款/恢复购买）`PLANNED` | QT-5 |
+| 订阅页 §11 | 无 | 脚手架 `DONE`（家长门后；免费 30 vs 全库对比实时读目录；温和文案 + 承诺清单；「即将上线」CTA + mailto 占位；首页/家长中心/设置页三入口）；正式订阅页（三卡定价/透明条款/恢复购买/IAP）`PLANNED` | QT-5 |
 
 ## 6. 风险与对策
 

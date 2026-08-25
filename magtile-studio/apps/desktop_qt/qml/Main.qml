@@ -10,6 +10,8 @@ import MagTile.Studio
 // parentGate (家长门, §9) / appSettings (设置, §8)。
 // 家长区路由: 无有效会话先进家长门 (过门后原位替换为家长中心),
 // 15 分钟会话内免重复验证; 会话到期或锁定由下方守卫统一退回首页。
+// 订阅入口 (首页儿童侧温和入口 / 家长中心 / 设置页) 统一经
+// openSubscriptionZone 过同一道家长门 —— 订阅页只在门后可见 (§11)。
 // 「开始搭建」统一走 studio.buildRequested 信号路由 —— QT-3 教程
 // 视口就绪后只换 TutorialPage 内容, 路由不变。
 // =============================================================
@@ -42,12 +44,30 @@ ApplicationWindow {
         toastTimer.restart()
     }
 
+    /// 家长门通过后落地的页面: "area" = 家长中心 (默认), "subscription"
+    /// = 订阅页 (QT-5 入口直达, 依旧在门后, §11)
+    property string parentZoneTarget: "area"
+
     /// 家长区入口 (§9): 15 分钟会话内直达家长中心, 否则先过家长门
     function openParentZone() {
+        parentZoneTarget = "area"
         if (parentGate.sessionActive) {
             stack.push(parentAreaComponent)
         } else {
             parentGate.openGate()   // 每次进门都是新题, 防背题
+            stack.push(parentGateComponent)
+        }
+    }
+
+    /// 订阅入口统一路由 (QT-5): 会话有效直达订阅页, 否则先过家长门
+    /// (过门后原位替换为订阅页) —— 订阅页只可能出现在家长门之后 (§11),
+    /// 且导航深度保持 1, 任意入口进来都 <= 2 步回首页 (§3)
+    function openSubscriptionZone() {
+        parentZoneTarget = "subscription"
+        if (parentGate.sessionActive) {
+            stack.push(subscriptionComponent)
+        } else {
+            parentGate.openGate()
             stack.push(parentGateComponent)
         }
     }
@@ -72,6 +92,7 @@ ApplicationWindow {
             onOpenModel: function(modelId) { stack.push(detailComponent, { modelId: modelId }) }
             onOpenInventory: stack.push(inventoryComponent)
             onOpenParentArea: window.openParentZone()
+            onOpenSubscription: window.openSubscriptionZone()
             onNotify: function(message) { window.showToast(message) }
         }
     }
@@ -79,8 +100,10 @@ ApplicationWindow {
     Component {
         id: parentGateComponent
         ParentGatePage {
-            // 过门后原位替换为家长中心 (导航深度保持 1, <= 2 步回首页)
-            onPassed: stack.replace(parentAreaComponent)
+            // 过门后原位替换为目标页 (家长中心或订阅页, 导航深度保持 1,
+            // <= 2 步回首页); 目标由 openParentZone/openSubscriptionZone 设定
+            onPassed: stack.replace(window.parentZoneTarget === "subscription"
+                                    ? subscriptionComponent : parentAreaComponent)
             onDismissed: stack.pop()
         }
     }
@@ -99,6 +122,8 @@ ApplicationWindow {
         id: settingsComponent
         SettingsPage {
             onBack: stack.pop()
+            // 设置页 -> 订阅: 原位替换 (不叠加深度, 保证订阅页也 <= 2 步回首页)
+            onOpenSubscription: stack.replace(subscriptionComponent)
         }
     }
 
@@ -106,6 +131,7 @@ ApplicationWindow {
         id: subscriptionComponent
         SubscriptionPage {
             onBack: stack.pop()
+            onNotify: function(message) { window.showToast(message) }
         }
     }
 

@@ -26,6 +26,10 @@ QString fromUtf8(std::string_view s) {
     return QString::fromUtf8(s.data(), static_cast<int>(s.size()));
 }
 
+/// 免费层标记 (COMMERCIAL_PLAN.md §2.1 免费 30): 与目录登记及
+/// tools/check_core5_usage.py 的 FREE_TAG 同一口径。
+constexpr const char* kFreeTag = "免费";
+
 }  // namespace
 
 StudioBackend::StudioBackend(std::filesystem::path data_dir, std::filesystem::path db_file,
@@ -73,6 +77,7 @@ QString StudioBackend::missingText(const LibraryRow& row) const {
 void StudioBackend::reload() {
     std::vector<LibraryRow> rows;
     total_pieces_ = 0;
+    free_model_count_ = 0;
     in_progress_count_ = 0;
     completed_count_ = 0;
     continue_title_.clear();
@@ -120,6 +125,10 @@ void StudioBackend::reload() {
         LibraryRow row;
         row.entry = std::move(entry);
         total_pieces_ += row.entry.total_pieces;
+        if (std::find(row.entry.tags.begin(), row.entry.tags.end(), kFreeTag) !=
+            row.entry.tags.end()) {
+            ++free_model_count_;
+        }
 
         const QString theme = fromUtf8(row.entry.theme());
         if (!themes_.contains(theme)) themes_ << theme;
