@@ -1,0 +1,1056 @@
+{
+  "schema_version": 1,
+  "id": "monorail_01",
+  "name": "单轨列车段",
+  "name_en": "Monorail Segment 01",
+  "description": "全库第一段跨座式单轨: 三座直角三角斜撑加固的高架墩柱托起 10 格青色轨道梁, 红色单轨列车跨坐梁上 —— 两侧整排透明观景车窗 (窗格方首次上列车), 南墙嵌橙色乘客门, 车顶受电弓与前后信号鳍立在沿口, 轨道尽头一片红色缓冲挡板。车厢墙踩梁沿、车顶双边压墙顶锁成箱形闭环 —— 叮! 下一站, 科技馆。",
+  "difficulty": 3,
+  "total_pieces": 56,
+  "tags": [
+    "交通",
+    "单轨",
+    "列车",
+    "城市",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 34,
+        "window_square": 7,
+        "right_triangle": 6,
+        "rectangle": 5,
+        "equilateral_triangle": 3,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "lawn_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_3",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_4",
+      "type": "rectangle",
+      "position": [
+        9.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "base_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_7",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_8",
+      "type": "square",
+      "position": [
+        8.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_9",
+      "type": "square",
+      "position": [
+        9.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_10",
+      "type": "square",
+      "position": [
+        10.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "py_1_0",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "py_1_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_1_e",
+      "type": "right_triangle",
+      "position": [
+        1.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_1_w",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "py_5_0",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "py_5_1",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_5_e",
+      "type": "right_triangle",
+      "position": [
+        5.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_5_w",
+      "type": "right_triangle",
+      "position": [
+        4.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "py_10_0",
+      "type": "square",
+      "position": [
+        10.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "py_10_1",
+      "type": "square",
+      "position": [
+        10.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_10_e",
+      "type": "right_triangle",
+      "position": [
+        10.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_10_w",
+      "type": "right_triangle",
+      "position": [
+        9.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "beam_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beam_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beam_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beam_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beam_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beam_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beam_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beam_7",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beam_8",
+      "type": "square",
+      "position": [
+        8.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beam_9",
+      "type": "square",
+      "position": [
+        9.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bumper",
+      "type": "square",
+      "position": [
+        10.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "car_s_3",
+      "type": "door_frame",
+      "position": [
+        3.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "car_s_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "car_s_5",
+      "type": "window_square",
+      "position": [
+        5.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "car_s_6",
+      "type": "window_square",
+      "position": [
+        6.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "car_n_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "car_n_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "car_n_5",
+      "type": "window_square",
+      "position": [
+        5.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "car_n_6",
+      "type": "window_square",
+      "position": [
+        6.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "car_w",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "car_e",
+      "type": "square",
+      "position": [
+        7.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "roof_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "roof_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "roof_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "roof_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fin_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fin_e",
+      "type": "equilateral_triangle",
+      "position": [
+        7.0,
+        1.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "panto",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        1.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺街景绿化带: 5 片绿色长板沿线排开 (y [0,1])。",
+      "tip": "绿化带的北沿拼缝, 就是墩柱斜撑的落脚线。",
+      "tiles_to_add": [
+        "lawn_0",
+        "lawn_1",
+        "lawn_2",
+        "lawn_3",
+        "lawn_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺轨道基带西半段: 5 片灰色方板 (x 0~5)。",
+      "tip": "方板之间的拼缝要对齐网格线 —— 墩柱就踩在拼缝上。",
+      "tiles_to_add": [
+        "base_0",
+        "base_1",
+        "base_2",
+        "base_3",
+        "base_4"
+      ],
+      "highlight_tiles": [
+        "lawn_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺轨道基带东半段: 再铺 6 片, 基带贯通 11 格。",
+      "tip": "基带铺直了, 高架才立得正。",
+      "tiles_to_add": [
+        "base_5",
+        "base_6",
+        "base_7",
+        "base_8",
+        "base_9",
+        "base_10"
+      ],
+      "highlight_tiles": [
+        "base_4"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立三座高架墩柱: 每座两节立墙叠高, 墙脚整边吸基带拼缝。",
+      "tip": "上节墙底边整边吸下节墙顶边 —— 磁条对磁条, 一条不落。",
+      "tiles_to_add": [
+        "py_1_0",
+        "py_1_1",
+        "py_5_0",
+        "py_5_1",
+        "py_10_0",
+        "py_10_1"
+      ],
+      "highlight_tiles": [
+        "base_1",
+        "base_5",
+        "base_9"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "加墩柱斜撑: 每座前后各一片直角三角形, 竖边吸墙、底边吸板。",
+      "tip": "三角形是最稳的形状 —— 列车驶过, 墩柱纹丝不动。",
+      "tiles_to_add": [
+        "br_1_e",
+        "br_1_w",
+        "br_5_e",
+        "br_5_w",
+        "br_10_e",
+        "br_10_w"
+      ],
+      "highlight_tiles": [
+        "py_1_0",
+        "py_5_0",
+        "py_10_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "架轨道梁西半段: 5 片青色方板从西端铺到中央墩柱。",
+      "tip": "先放 x=0 这片: 它的东边正好吸住西墩柱顶。",
+      "tiles_to_add": [
+        "beam_0",
+        "beam_1",
+        "beam_2",
+        "beam_3",
+        "beam_4"
+      ],
+      "highlight_tiles": [
+        "py_1_1",
+        "py_5_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "架轨道梁东半段 + 缓冲挡板: 梁铺满 10 格, 尽头立起红色挡板。",
+      "tip": "挡板正压端墩柱顶 —— 列车永远不会冲出轨道。",
+      "tiles_to_add": [
+        "beam_5",
+        "beam_6",
+        "beam_7",
+        "beam_8",
+        "beam_9",
+        "bumper"
+      ],
+      "highlight_tiles": [
+        "beam_4",
+        "py_10_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立列车南墙: 橙色乘客门在前, 3 扇透明观景窗随后。",
+      "tip": "墙脚踩轨道梁的南沿 —— 单轨列车是跨坐在梁上的。",
+      "tiles_to_add": [
+        "car_s_3",
+        "car_s_4",
+        "car_s_5",
+        "car_s_6"
+      ],
+      "highlight_tiles": [
+        "beam_3",
+        "beam_6"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立列车北墙: 4 扇透明观景窗一字排开。",
+      "tip": "两侧墙隔梁相望, 车顶一盖就是牢固的箱形结构。",
+      "tiles_to_add": [
+        "car_n_3",
+        "car_n_4",
+        "car_n_5",
+        "car_n_6"
+      ],
+      "highlight_tiles": [
+        "car_s_3"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "封前后端墙: 车头车尾各一片红色方板, 竖边与侧墙互吸。",
+      "tip": "端墙底边吸梁缝、两条竖边吸侧墙 —— 三边受力。",
+      "tiles_to_add": [
+        "car_w",
+        "car_e"
+      ],
+      "highlight_tiles": [
+        "car_s_3",
+        "car_n_6"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "盖车顶: 4 片红色方板双边压住南北墙顶。",
+      "tip": "车顶把整节车厢锁成闭环 —— 这就是结构冗余。",
+      "tiles_to_add": [
+        "roof_3",
+        "roof_4",
+        "roof_5",
+        "roof_6"
+      ],
+      "highlight_tiles": [
+        "car_w",
+        "car_e"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "装车顶装备: 前后黄色信号鳍 + 中央受电弓 —— 发车!",
+      "tip": "三片三角重心都正压车顶铰链, 力臂为零, 稳如泰山。",
+      "tiles_to_add": [
+        "fin_w",
+        "fin_e",
+        "panto"
+      ],
+      "highlight_tiles": [
+        "roof_3",
+        "roof_5"
+      ]
+    }
+  ]
+}
