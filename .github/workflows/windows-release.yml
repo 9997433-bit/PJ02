@@ -3,7 +3,9 @@
 #
 # 触发:
 #   - 推送 v* 标签 (如 v0.1.0): 构建 + 打包 + 创建 GitHub Release 草稿
-#   - workflow_dispatch: 手动试跑, 只产出构建产物, 不建 Release
+#     (数据集固定为 full 完整模型库)
+#   - workflow_dispatch: 手动试跑, 只产出构建产物, 不建 Release;
+#     可选 model_set 输入 (full/starter) 试打模型子集包
 #
 # 工程位于仓库的 magtile-studio/ 子目录 (workflow 必须放在仓库根
 # .github/workflows/ 才会被 GitHub 识别, 与 qa.yml 同理)。
@@ -15,7 +17,8 @@
 # 依赖说明:
 #   - NSIS: windows-latest 镜像预装 makensis, 无需额外安装。
 #   - GLFW / Dear ImGui: 配置阶段经 FetchContent 联网拉取。
-#   - library_gui_smoke 测试需要可建 OpenGL 窗口的显示环境, CI 上跳过。
+#   - library_gui_smoke / inventory_gui_smoke 测试需要可建 OpenGL 窗口
+#     的显示环境, CI 上统一跳过。
 #
 # 详细打包手册: magtile-studio/scripts/package_windows.md
 # =====================================================================
@@ -25,6 +28,12 @@ on:
   push:
     tags: ['v*']
   workflow_dispatch:
+    inputs:
+      model_set:
+        description: 打包数据集 (full=完整模型库 / starter=精选 30 模型子集)
+        type: choice
+        options: [full, starter]
+        default: full
 
 permissions:
   contents: write # 标签触发时创建 Release 草稿需要
@@ -49,8 +58,9 @@ jobs:
           path: magtile-studio/build/_deps
           key: fetchcontent-${{ runner.os }}-${{ hashFiles('magtile-studio/CMakeLists.txt') }}
 
+      # 标签发布固定打完整模型库; 手动试跑可经 model_set 输入切子集
       - name: CMake 配置 (MSVC x64)
-        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DMAGTILE_PACKAGE_MODEL_SET=${{ inputs.model_set || 'full' }}
 
       - name: 提取 CMake 工程版本号
         id: version
@@ -74,7 +84,7 @@ jobs:
         run: cmake --build build --config Release --parallel
 
       - name: 测试 (跳过需显示环境的 GUI 冒烟)
-        run: ctest --test-dir build -C Release --output-on-failure -E library_gui_smoke
+        run: ctest --test-dir build -C Release --output-on-failure -E "(library|inventory)_gui_smoke"
 
       - name: CPack 打包 (NSIS 安装器 + 便携 ZIP)
         working-directory: magtile-studio/build

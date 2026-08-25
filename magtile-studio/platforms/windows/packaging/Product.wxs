@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   =============================================================
-  MagTile Studio - WiX Toolset v4 MSI 描述文件 (stub, 未经实机验证)
+  MagTile Studio - WiX Toolset v4 MSI 描述文件 (待实机验证)
 
   这是独立于 CPack 的 MSI 打包路径, 面向企业分发 / 组策略 / 静默
   安装 (msiexec /qn) 场景。版本号不在此硬编码, 由命令行注入, 且
   必须与根 CMakeLists.txt 的 project(VERSION) 一致。先按
-  scripts/package_windows.md 第二节完成 MSVC Release 构建, 然后:
+  scripts/package_windows.md 第三节完成 MSVC Release 构建, 然后
+  (在仓库 magtile-studio/ 目录下):
 
     wix build platforms\windows\packaging\Product.wxs ^
         -d Version=0.1.0 ^
         -d BuildDir=build-win\Release ^
         -d DataDir=data ^
+        -d LicensesDir=platforms\windows\packaging ^
         -o build-win\MagTileStudio-0.1.0-win64.msi
 
-  (完整命令与版本号提取方式见 scripts/package_windows.md 第四节。
+  只随包分发模型子集时, 先运行 tools/make_data_subset.py 把 data/
+  按清单装配到 build-win\package_data (脚本参数见其文件头 docstring),
+  再改传 -d DataDir=build-win\package_data, 收割逻辑不变。
+
+  (完整命令与版本号提取方式见 scripts/package_windows.md 第六节。
   注: XML 注释内不允许出现连续两个连字符, 涉及命令行长选项的写法
   一律参见上述手册。)
 
@@ -28,7 +34,8 @@
 -->
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
 
-  <!-- 命令行未注入时的兜底值, 便于本地快速试构建 -->
+  <!-- 命令行未注入时的兜底值 (相对路径按"在本目录内运行 wix build"
+       解析), 便于本地快速试构建 -->
   <?ifndef Version ?>
     <?define Version = "0.1.0" ?>
   <?endif?>
@@ -37,6 +44,9 @@
   <?endif?>
   <?ifndef DataDir ?>
     <?define DataDir = "..\..\..\data" ?>
+  <?endif?>
+  <?ifndef LicensesDir ?>
+    <?define LicensesDir = "." ?>
   <?endif?>
 
   <Package Name="MagTile Studio"
@@ -51,10 +61,12 @@
     <MajorUpgrade DowngradeErrorMessage="已安装更高版本的 MagTile Studio, 请先卸载后再安装本版本。" />
     <MediaTemplate EmbedCab="yes" />
 
-    <!-- 安装布局: %ProgramFiles%\MagTile Studio\{magtile_app.exe, data\} -->
+    <!-- 安装布局: %ProgramFiles%\MagTile Studio\
+           {magtile_app.exe, data\, licenses\}  (与 CPack/NSIS 路径一致) -->
     <StandardDirectory Id="ProgramFiles64Folder">
       <Directory Id="INSTALLFOLDER" Name="MagTile Studio">
         <Directory Id="DATAFOLDER" Name="data" />
+        <Directory Id="LICENSESFOLDER" Name="licenses" />
       </Directory>
     </StandardDirectory>
     <StandardDirectory Id="ProgramMenuFolder">
@@ -69,9 +81,25 @@
       </Component>
     </ComponentGroup>
 
-    <!-- data/ 整目录收割 (形状目录 + 模型库, 运行必需) -->
+    <!-- data/ 整目录收割 (形状目录 + 模型库, 运行必需)。
+         模型子集分发: DataDir 指向 make_data_subset.py 的输出目录
+         (见文件头注释), 收割逻辑不变。 -->
     <ComponentGroup Id="DataComponents" Directory="DATAFOLDER">
       <Files Include="$(var.DataDir)\**" />
+    </ComponentGroup>
+
+    <!-- 许可文件: EULA + 第三方组件许可声明 (与 NSIS/ZIP 布局一致) -->
+    <ComponentGroup Id="LicenseComponents" Directory="LICENSESFOLDER">
+      <Component Id="EulaRtf">
+        <File Id="LicenseRtfFile"
+              Source="$(var.LicensesDir)\License.rtf"
+              KeyPath="yes" />
+      </Component>
+      <Component Id="ThirdPartyNotices">
+        <File Id="ThirdPartyNoticesFile"
+              Source="$(var.LicensesDir)\THIRD_PARTY_NOTICES.md"
+              KeyPath="yes" />
+      </Component>
     </ComponentGroup>
 
     <!-- 开始菜单快捷方式直达模型库主界面 (library 子命令的 GUI 模式);
@@ -97,8 +125,14 @@
     <Feature Id="Main" Title="MagTile Studio" Level="1">
       <ComponentGroupRef Id="AppComponents" />
       <ComponentGroupRef Id="DataComponents" />
+      <ComponentGroupRef Id="LicenseComponents" />
       <ComponentGroupRef Id="ShortcutComponents" />
     </Feature>
+
+    <!-- TODO(发布前): Qt 界面 (magtile_studio_qt.exe + windeployqt 产出的
+         Qt 运行库) 暂不进 MSI —— Qt 版分发走 CPack/NSIS+ZIP 路径
+         (见 scripts/package_windows.md 第五节); 若企业分发也要 Qt 版,
+         需在此补 QtAppComponents 组件组收割 windeployqt 输出目录。 -->
 
     <!-- TODO(发布前): 安装向导 UI 与素材, 需要 UI 扩展:
            wix extension add WixToolset.UI.wixext

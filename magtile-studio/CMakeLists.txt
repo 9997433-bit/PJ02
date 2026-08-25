@@ -173,11 +173,12 @@ if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/platforms/CMakeLists.txt)
     add_subdirectory(platforms)
 endif()
 
-# ---- 安装与打包 (CPack; Windows 安装器脚手架) ---------------------
+# ---- 安装与打包 (CPack; Windows 安装器) ---------------------------
 # 版本号唯一来源是顶部 project(VERSION x.y.z), 打包配置一律引用
 # PROJECT_VERSION。Windows 产出 NSIS 安装器 + 便携 ZIP (WiX/MSI 见
 # platforms/windows/packaging/Product.wxs); 其它桌面平台产出 TGZ
-# 仅作安装规则冒烟。用法详见 scripts/package_windows.md。
+# 仅作安装规则冒烟。随包模型库范围由 -DMAGTILE_PACKAGE_MODEL_SET
+# 控制 (full / starter / 自定义清单)。用法详见 scripts/package_windows.md。
 if(NOT ANDROID)
     include(platforms/windows/packaging/CPackWindows.cmake)
 endif()

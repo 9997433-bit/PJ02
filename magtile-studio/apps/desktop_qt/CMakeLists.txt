@@ -69,3 +69,57 @@ set_target_properties(magtile_studio_qt PROPERTIES
     WIN32_EXECUTABLE TRUE
     MACOSX_BUNDLE FALSE
 )
+
+# ---- Qt 侧测试 (仅 MAGTILE_BUILD_QT=ON 时注册, 详见 docs/TESTING.md) ----
+if(MAGTILE_BUILD_TESTS)
+    # 后端桥单元测试 (C++, 无需显示环境): 家长门桥 (过门/答错/冷却/
+    # 锁定) 与设置桥 (字号三档/减少动效/年龄段) 的 SQLite 往返, 以及
+    # 与 GL 版/CLI 的键名契约互通 (共用同一 SQLite 存档承诺)
+    if(EXISTS ${CMAKE_SOURCE_DIR}/tests/test_qt_backends.cpp)
+        qt_add_executable(magtile_qt_backend_test
+            ${CMAKE_SOURCE_DIR}/tests/test_qt_backends.cpp
+            src/parent_gate_backend.cpp
+            src/settings_backend.cpp
+        )
+        target_include_directories(magtile_qt_backend_test PRIVATE src)
+        target_link_libraries(magtile_qt_backend_test PRIVATE
+            magtile_core
+            magtile_warnings
+            Qt6::Core
+        )
+        add_test(NAME qt_backend_bridges
+            COMMAND magtile_qt_backend_test ${CMAKE_BINARY_DIR}/qt_backend_test.db)
+    endif()
+
+    # QML 加载冒烟 (offscreen 平台, 与显示环境无关): 默认启动 + 家长门
+    # 深链各跑一次, QML 有任何加载错误进程即非零退出
+    find_program(MAGTILE_QT_BASH bash)
+    if(MAGTILE_QT_BASH AND EXISTS ${CMAKE_SOURCE_DIR}/tests/test_qt_smoke.sh)
+        add_test(NAME qt_gui_smoke
+            COMMAND ${MAGTILE_QT_BASH} ${CMAKE_SOURCE_DIR}/tests/test_qt_smoke.sh
+                $<TARGET_FILE:magtile_studio_qt> ${CMAKE_SOURCE_DIR})
+        set_tests_properties(qt_gui_smoke PROPERTIES TIMEOUT 120)
+    endif()
+endif()
+
+# ---- 打包安装规则 (安装布局见 platforms/windows/packaging) --------
+# 安装到安装根, 与 magtile_app 并列。Qt 运行库 (DLL + QML 模块) 部署:
+#   - Qt >= 6.5: 官方部署 API 在 install/cpack 阶段自动收集
+#     (Windows/macOS 支持; 其余平台经 NO_UNSUPPORTED_PLATFORM_ERROR
+#     静默跳过, Linux TGZ 冒烟不受影响);
+#   - Qt 6.4: 部署 API 尚为技术预览, 不启用 —— 打包后手动对安装目录
+#     运行 windeployqt (命令见 scripts/package_windows.md 第五节)。
+install(TARGETS magtile_studio_qt RUNTIME DESTINATION .)
+if(Qt6_VERSION VERSION_GREATER_EQUAL 6.5)
+    qt_generate_deploy_qml_app_script(
+        TARGET magtile_studio_qt
+        OUTPUT_SCRIPT magtile_qt_deploy_script
+        NO_UNSUPPORTED_PLATFORM_ERROR
+        NO_TRANSLATIONS
+    )
+    install(SCRIPT ${magtile_qt_deploy_script})
+else()
+    message(STATUS
+        "MagTile: Qt ${Qt6_VERSION} < 6.5 无稳定部署 API, 打包后请手动运行 "
+        "windeployqt (见 scripts/package_windows.md 第五节)")
+endif()
