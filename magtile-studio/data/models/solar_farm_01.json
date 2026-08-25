@@ -1,0 +1,1015 @@
+{
+  "schema_version": 1,
+  "id": "solar_farm_01",
+  "name": "光伏阵列",
+  "name_en": "Solar Farm 01",
+  "description": "全库第一座太阳能电站: 两排共 6 片蓝色光伏板以 30 度仰角朝南列阵, 每片顶边与支架墙顶等长整边贴合、坡尾贴地生根 (顶铰链 + 接地斜撑, 6 片独立受力), 排距 2 格互不遮挡; 逆变器房与储能电池柜共用隔墙两环相扣, 红色告警灯与 3 格高监测塔尖点睛, 黄色围栏封场 —— 并网发电, 绿电入城!",
+  "difficulty": 3,
+  "total_pieces": 53,
+  "tags": [
+    "工程",
+    "光伏",
+    "太阳能",
+    "新能源",
+    "电站"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 33,
+        "rectangle": 15,
+        "equilateral_triangle": 4,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "fd_a_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fd_b_0",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fd_c_0",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fd_d_0",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fd_a_1",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_b_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_c_1",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_d_1",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_6_2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_6_3",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_a_4",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_b_4",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_c_4",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fd_d_4",
+      "type": "square",
+      "position": [
+        6.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rk_a_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk_a_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk_a_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pv_a_1",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pv_a_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pv_a_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rk_b_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk_b_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk_b_5",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pv_b_1",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        3.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pv_b_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        3.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pv_b_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        3.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "iv_s",
+      "type": "square",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "iv_n",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "iv_w",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "iv_e",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "iv_top",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "iv_lamp",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bt_n",
+      "type": "square",
+      "position": [
+        6.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bt_w",
+      "type": "square",
+      "position": [
+        6.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bt_e",
+      "type": "square",
+      "position": [
+        7.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bt_top",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ms_pole",
+      "type": "square",
+      "position": [
+        6.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ms_tip",
+      "type": "isosceles_triangle",
+      "position": [
+        6.5,
+        5.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fc_w2",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        2.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fc_w3",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        3.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fc_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南半地坪: 灰色检修道一行 + 绿色田野一行, 共 8 片。",
+      "tip": "检修道正对板面 —— 光伏板的坡尾会落到这附近。",
+      "tiles_to_add": [
+        "fd_a_0",
+        "fd_b_0",
+        "fd_c_0",
+        "fd_d_0",
+        "fd_a_1",
+        "fd_b_1",
+        "fd_c_1",
+        "fd_d_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺前排咬缝行: 7 片方板逐格铺满。",
+      "tip": "方板格边 y=2 就是前排支架墙的落脚线。",
+      "tiles_to_add": [
+        "fd_0_2",
+        "fd_1_2",
+        "fd_2_2",
+        "fd_3_2",
+        "fd_4_2",
+        "fd_5_2",
+        "fd_6_2"
+      ],
+      "highlight_tiles": [
+        "fd_a_1",
+        "fd_c_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺后排咬缝行: 再铺 7 片方板。",
+      "tip": "格边 y=4 留给后排 —— 排距 2 格, 冬至日也不遮挡。",
+      "tiles_to_add": [
+        "fd_0_3",
+        "fd_1_3",
+        "fd_2_3",
+        "fd_3_3",
+        "fd_4_3",
+        "fd_5_3",
+        "fd_6_3"
+      ],
+      "highlight_tiles": [
+        "fd_1_2",
+        "fd_5_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺北沿收边: 4 片, 田野合拢成 7x5。",
+      "tip": "东北角方板是监测杆的地基。",
+      "tiles_to_add": [
+        "fd_a_4",
+        "fd_b_4",
+        "fd_c_4",
+        "fd_d_4"
+      ],
+      "highlight_tiles": [
+        "fd_1_3",
+        "fd_5_3"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立前排支架: y=2 线上 3 片灰墙, 底边整边吸方板格边。",
+      "tip": "支架墙间隔而立 —— 每片光伏板一个支点。",
+      "tiles_to_add": [
+        "rk_a_1",
+        "rk_a_3",
+        "rk_a_5"
+      ],
+      "highlight_tiles": [
+        "fd_1_2",
+        "fd_5_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "挂前排光伏板: 3 片蓝色长板 30 度朝南, 顶边整边吸支架顶。",
+      "tip": "顶铰链 + 接地斜撑 —— 板面迎着正午的太阳。",
+      "tiles_to_add": [
+        "pv_a_1",
+        "pv_a_3",
+        "pv_a_5"
+      ],
+      "highlight_tiles": [
+        "rk_a_1",
+        "rk_a_5"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立后排支架: y=4 线上再立 3 片灰墙。",
+      "tip": "与前排严格同列 —— 阵列的秩序感来自对齐。",
+      "tiles_to_add": [
+        "rk_b_1",
+        "rk_b_3",
+        "rk_b_5"
+      ],
+      "highlight_tiles": [
+        "fd_1_3",
+        "fd_5_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "挂后排光伏板: 再挂 3 片, 坡尾落在 y=2.27, 不碰前排。",
+      "tip": "6 片板独立受力 —— 一片检修拆下, 其余照常发电。",
+      "tiles_to_add": [
+        "pv_b_1",
+        "pv_b_3",
+        "pv_b_5"
+      ],
+      "highlight_tiles": [
+        "rk_b_1",
+        "pv_a_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "砌逆变器房: 东侧 4 片橙色立墙四角竖边互吸闭环。",
+      "tip": "直流从这里变交流 —— 电站的心脏。",
+      "tiles_to_add": [
+        "iv_s",
+        "iv_n",
+        "iv_w",
+        "iv_e"
+      ],
+      "highlight_tiles": [
+        "fd_6_2"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "封顶点灯: 方板压顶, 西沿立红色告警灯。",
+      "tip": "告警灯重心正压铰链 —— 红灯不亮, 万事正常。",
+      "tiles_to_add": [
+        "iv_top",
+        "iv_lamp"
+      ],
+      "highlight_tiles": [
+        "iv_s",
+        "iv_w"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "装储能电池柜: 3 片黄墙与逆变器房共用隔墙, 方板压顶。",
+      "tip": "隔墙一片顶两用 —— 白天存电, 夜里放电。",
+      "tiles_to_add": [
+        "bt_n",
+        "bt_w",
+        "bt_e",
+        "bt_top"
+      ],
+      "highlight_tiles": [
+        "iv_n"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "竖监测杆: 东北角方墙上立透明等腰塔尖, 直指 3 格高空。",
+      "tip": "辐照、风速、温度 —— 全站数据从杆顶发回。",
+      "tiles_to_add": [
+        "ms_pole",
+        "ms_tip"
+      ],
+      "highlight_tiles": [
+        "fd_d_4"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "围栏收尾: 西面 2 片、南面 1 片黄色三角 —— 并网发电!",
+      "tip": "围栏立好, 电站封场 —— 绿电正在入城。",
+      "tiles_to_add": [
+        "fc_w2",
+        "fc_w3",
+        "fc_s"
+      ],
+      "highlight_tiles": [
+        "fd_0_2",
+        "fd_d_0"
+      ]
+    }
+  ]
+}
