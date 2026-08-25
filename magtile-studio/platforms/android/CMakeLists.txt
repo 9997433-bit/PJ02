@@ -27,6 +27,13 @@ if(NOT TARGET magtile_core)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../.. magtile_root)
 endif()
 
+# 独立入口时, 上面的 add_subdirectory 会经根目录的
+# add_subdirectory(platforms) 重入本文件并完成 JNI 目标定义,
+# 此处直接结束, 避免重复定义 magtile_android。
+if(TARGET magtile_android)
+    return()
+endif()
+
 # NDK 默认已开启 -fPIC, 这里显式声明以防宿主侧配置覆盖。
 set_target_properties(magtile_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
