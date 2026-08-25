@@ -228,6 +228,8 @@ constexpr ImU32 kColorGreen = IM_COL32(43, 158, 78, 255);      ///< 已完成
 constexpr ImU32 kColorGold = IM_COL32(240, 173, 30, 255);      ///< 星级 / 收藏
 constexpr ImU32 kColorInk = IM_COL32(38, 43, 54, 255);         ///< 主文字
 constexpr ImU32 kColorExpansion = IM_COL32(217, 119, 6, 255);  ///< "需要扩展装" 角标 (琥珀)
+constexpr ImU32 kColorSubscription = IM_COL32(122, 94, 216, 255);  ///< "订阅解锁" 角标 (温和紫,
+                                                                   ///< 刻意不用红色表达 "锁")
 const ImVec4 kAccentVec{0.28f, 0.44f, 0.93f, 1.0f};            ///< 品牌蓝
 
 /// 主题标签 -> 卡片主题色: 规范主题 (tools/update_model_catalog.py
@@ -340,6 +342,8 @@ public:
                                                core::AgeMode age_mode, bool inventory_configured,
                                                bool activate_buildable_filter) override;
     [[nodiscard]] InventoryOnboardingActions submitInventoryOnboarding() override;
+    [[nodiscard]] SubscriptionPromptActions submitSubscriptionPrompt(
+        const std::string& model_name) override;
     [[nodiscard]] InventoryEditorActions submitInventoryEditor(
         const std::vector<InventoryEditorRow>& rows) override;
     [[nodiscard]] ParentGateActions submitParentGate(const ParentGateState& state) override;
@@ -389,6 +393,7 @@ private:
     bool library_favorites_only_ = false;
     bool library_core9_only_ = false;      ///< "只用核心 9 片": 只看基础套装能搭的模型
     bool library_buildable_only_ = false;  ///< "我能搭的": 只看库存足够的模型
+    bool library_free_only_ = false;       ///< "免费模型": 只看免费层 (tags 含「免费」)
 
     // 家长门软键盘的跨帧输入缓冲 (中文大写数字; 提交/返回时清空)
     std::string parent_gate_input_;
@@ -1050,6 +1055,16 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
                     ImGui::SetTooltip("本模型用到基础套装之外的扩展片型");
                 }
             }
+            // 订阅内容: 温和的 "订阅解锁" 角标 (元数据照常可浏览,
+            // 点击进入订阅引导而非教程, COMMERCIAL_PLAN §2.1)
+            if (!card.free_tier) {
+                ImGui::SameLine(0.0f, 8.0f);
+                drawThemeBadge("订阅解锁", kColorSubscription);
+                if (ImGui::IsItemHovered()) {
+                    ImGui::SetTooltip("订阅内容: 简介和清单随时可以看, "
+                                      "完整教程订阅后解锁");
+                }
+            }
 
             // 简介 (两行内, 超长截断)
             if (!card.description.empty()) {
@@ -1073,6 +1088,9 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
                 ImGui::SameLine();
                 ImGui::TextColored(kAccentVec, "第 %d / %d 步", card.current_step,
                                    card.step_count);
+            } else if (!card.free_tier) {
+                ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorSubscription),
+                                   "订阅内容 · 点击了解怎么解锁");
             } else {
                 ImGui::TextDisabled("未开始 · 点击开始搭建");
             }
@@ -1105,6 +1123,13 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
         library_favorites_only_ = false;
         library_core9_only_ = false;
         library_buildable_only_ = false;
+    }
+    // "免费模型" 筛选属于内容可及性, 标准档 (7-9) 起就展示; 4-6 启蒙档
+    // 整行筛选隐藏, 同步清零 (同上防看不见的筛选), 订阅引导弹窗的
+    // 「先看免费模型」按钮也随之隐藏 (见 submitSubscriptionPrompt)
+    library_filter_row_visible_ = !simple_layout;
+    if (simple_layout) {
+        library_free_only_ = false;
     }
 
     // 主题筛选候选: 全部卡片标签去重, 保持出现顺序
@@ -1196,8 +1221,19 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
                 }
                 ImGui::EndCombo();
             }
+            ImGui::SameLine();
+            // "免费模型": 只看免费层 (目录 tags 含「免费」, 三端与
+            // starter 打包同一口径, 见 docs/FREE_TIER_MANIFEST.md)。
+            // 内容可及性筛选, 标准档 (7-9) 起就展示 —— 不同于收藏/
+            // 核心 9 片等进阶专属维度, 订阅引导「先看免费模型」要在
+            // 有筛选行的档位都能落地
+            ImGui::Checkbox("免费模型", &library_free_only_);
+            if (ImGui::IsItemHovered()) {
+                ImGui::SetTooltip("只显示免费层的模型 (随时可搭); "
+                                  "其余模型订阅后解锁教程, 依旧可以浏览");
+            }
             // 收藏/核心 9 片/我能搭的 只在 10+ 进阶模式展示 (§2:
-            // 7-9 标准模式只留 难度 + 主题 两个筛选器)
+            // 7-9 标准模式筛选行保持精简)
             if (full_filters) {
                 ImGui::SameLine();
                 ImGui::Checkbox("只看收藏", &library_favorites_only_);
@@ -1295,6 +1331,8 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
                     continue;
                 }
                 if (library_favorites_only_ && !card.favorited) continue;
+                // "免费模型": 只留免费层 (订阅内容照常出现在全量列表)
+                if (library_free_only_ && !card.free_tier) continue;
                 // "只用核心 9 片": BOM 未知 (模型文件有问题) 的模型不进核心筛选
                 if (library_core9_only_ && !(card.bom_known && card.core9_only)) continue;
                 if (inventory_configured && library_buildable_only_ && !card.buildable) {
@@ -1430,6 +1468,76 @@ InventoryOnboardingActions GlRenderer::submitInventoryOnboarding() {
         }
         ImGui::PopStyleColor(4);
         if (ImGui::Button("稍后再说##onboarding_dismiss", ImVec2(avail, 48.0f))) {
+            actions.dismissed = true;
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::EndPopup();
+    }
+    ImGui::PopStyleColor();
+    ImGui::PopStyleVar(2);
+    return actions;
+}
+
+SubscriptionPromptActions GlRenderer::submitSubscriptionPrompt(const std::string& model_name) {
+    SubscriptionPromptActions actions;
+    const ImGuiIO& io = ImGui::GetIO();
+
+    // 与库存 onboarding 同一套模态弹窗骨架 (压暗遮罩 + 阻断库界面输入)。
+    // 文案铁律 (UI_UX_SPEC.md §11/§12.2): 儿童侧只说 "请家长来解锁",
+    // 无价格/无倒计时/无催促/不用红色; 免费层永久免费先说明白。
+    if (!ImGui::IsPopupOpen("##subscription_prompt")) {
+        ImGui::OpenPopup("##subscription_prompt");
+    }
+    ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f),
+                            ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2(560.0f, 0.0f));  // 固定宽, 高度自适应
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 16.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(30.0f, 26.0f));
+    ImGui::PushStyleColor(ImGuiCol_ModalWindowDimBg, ImVec4(0.10f, 0.12f, 0.16f, 0.45f));
+    const ImGuiWindowFlags flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
+                                   ImGuiWindowFlags_NoSavedSettings |
+                                   ImGuiWindowFlags_AlwaysAutoResize;
+    if (ImGui::BeginPopupModal("##subscription_prompt", nullptr, flags)) {
+        const float avail = ImGui::GetContentRegionAvail().x;
+
+        if (font_title_ != nullptr) ImGui::PushFont(font_title_);
+        ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorInk), "这个模型在订阅内容里");
+        if (font_title_ != nullptr) ImGui::PopFont();
+        ImGui::Spacing();
+
+        ImGui::PushTextWrapPos(avail);
+        ImGui::TextUnformatted(("「" + model_name +
+                                "」属于订阅内容: 简介和磁力片清单随时可以看, "
+                                "完整的 3D 分步教程订阅后解锁。")
+                                   .c_str());
+        ImGui::Spacing();
+        ImGui::TextUnformatted(
+            "免费区的模型永久免费、随时可搭; 订阅会解锁全部模型, 还有每周上新。"
+            "想解锁的话, 请家长到家长区看看订阅说明吧。");
+        ImGui::PopTextWrapPos();
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::Spacing();
+
+        // 主操作: 进家长区 (先过家长门, 订阅说明在门后 —— §11 铁律);
+        // 次操作: 一键切到「免费模型」筛选, 孩子不需要家长也有得搭
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.48f, 0.37f, 0.85f, 0.90f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.44f, 0.33f, 0.80f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.38f, 0.28f, 0.72f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+        if (ImGui::Button("请家长来解锁 ▶##subscription_parent", ImVec2(avail, 52.0f))) {
+            actions.open_parent_area = true;
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::PopStyleColor(4);
+        // 4-6 启蒙档筛选行整行隐藏, 一键切筛选无处落地 -> 不出此按钮
+        if (library_filter_row_visible_ &&
+            ImGui::Button("先看免费模型##subscription_browse_free", ImVec2(avail, 48.0f))) {
+            actions.browse_free = true;
+            library_free_only_ = true;  // 筛选状态归渲染器, 就地切换
+            ImGui::CloseCurrentPopup();
+        }
+        if (ImGui::Button("回模型库##subscription_dismiss", ImVec2(avail, 44.0f))) {
             actions.dismissed = true;
             ImGui::CloseCurrentPopup();
         }

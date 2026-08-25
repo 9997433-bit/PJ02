@@ -61,6 +61,7 @@ struct CliArgs {
     fs::path data_dir = "data";
     bool gui = false;
     bool core_only = false;      ///< --core-only: 只列核心 9 片型 / 只用核心片的模型
+    bool free_only = false;      ///< --free-only: 只列免费层 (带「免费」标签) 的模型
     int start_step = 1;          ///< 图形模式的起始步骤
     long max_frames = 0;         ///< >0 时渲染指定帧数后自动退出 (冒烟测试)
     std::string screenshot_file; ///< 非空时在最后一帧保存 PPM 图片 (冒烟测试)
@@ -85,10 +86,12 @@ void printUsage() {
         "MagTile Studio - 磁力片搭建教程\n"
         "\n"
         "用法:\n"
-        "  magtile_app library  [--gui] [--core-only] [--data-dir DIR] [--db FILE]\n"
+        "  magtile_app library  [--gui] [--core-only] [--free-only] [--data-dir DIR] [--db FILE]\n"
         "                       模型库 (商业版主入口): --gui 打开图形界面, 浏览/搜索/\n"
         "                       筛选模型卡片并进入教程; 默认在终端列出模型与进度;\n"
-        "                       --core-only 只列基础套装 (核心 9 片型) 就能搭的模型\n"
+        "                       --core-only 只列基础套装 (核心 9 片型) 就能搭的模型;\n"
+        "                       --free-only 只列免费层模型 (带「免费」标签, 与\n"
+        "                       starter 安装包同一清单口径, 可与 --core-only 叠加)\n"
         "  magtile_app catalog  [--core-only] [--data-dir DIR]  查看磁力片形状目录\n"
         "                       (--core-only 只列核心 9 片型)\n"
         "  magtile_app validate <model.json> [--data-dir DIR] [--profile default|strict]\n"
@@ -142,6 +145,8 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
             args.gui = true;
         } else if (arg == "--core-only") {
             args.core_only = true;
+        } else if (arg == "--free-only") {
+            args.free_only = true;
         } else if (arg == "--step") {
             if (i + 1 >= argc) return false;
             args.start_step = static_cast<int>(std::strtol(argv[++i], nullptr, 10));
@@ -824,6 +829,15 @@ int runLibraryGui(const CliArgs& args) {
                     tts_engine->available() ? "" : " (无可用朗读器, 静音降级)");
     }
 
+    // ---- 免费层 (COMMERCIAL_PLAN §2.1 "免费 30"): 目录 tags 含「免费」
+    // 的模型随时可搭; 其余属订阅内容 —— 只锁教程入口不锁浏览, 卡片
+    // 显示温和「订阅解锁」角标, 点击进入订阅引导弹窗 (与 Qt 版
+    // 同一共享判定 core::isFreeTierModel, docs/FREE_TIER_MANIFEST.md)。
+    std::unordered_set<std::string> free_tier_ids;
+    for (const auto& entry : entries) {
+        if (core::isFreeTierModel(entry)) free_tier_ids.insert(entry.id);
+    }
+
     // ---- 片型分层: "只用核心 9 片" 筛选与 "需要扩展装" 角标 -------------
     // 启动时逐模型加载 BOM, 对照片型目录 tier 判定是否只用核心 9 片型
     // (与 Qt 版同一共享判定 core::isCoreTile); 模型文件有问题的按
@@ -934,8 +948,13 @@ int runLibraryGui(const CliArgs& args) {
         return 1;
     }
 
-    // --open <model_id>: 启动即进入指定模型 (深链 / 冒烟测试)
+    // --open <model_id>: 启动即进入指定模型 (深链 / 冒烟测试; 内容
+    // 制作与 CI 入口, 刻意不过订阅引导 —— 用户路径的引导在卡片点击处)
     std::string pending_open = args.open_model;
+
+    // 订阅引导弹窗 (UI_UX_SPEC.md §12.2 风格: 温和, 无价格无催促):
+    // 非空 = 弹窗显示中, 内容为被点击的订阅内容模型名。
+    std::string subscription_prompt_model;
 
     // 家长门: 订阅/设置 (家长区) 前置强制关卡 (UI_UX_SPEC.md §9)。
     // 会话与冷却只存内存, 重启即失效, 不落盘 "已通过" 标记
@@ -1001,6 +1020,7 @@ int runLibraryGui(const CliArgs& args) {
 
         render::LibraryActions library_actions;
         render::InventoryOnboardingActions onboarding_actions;
+        render::SubscriptionPromptActions subscription_actions;
         render::InventoryEditorActions inventory_actions;
         render::ParentGateActions gate_actions;
         render::ParentAreaActions area_actions;
@@ -1020,6 +1040,7 @@ int runLibraryGui(const CliArgs& args) {
                 card.step_count = entry.step_count;
                 card.theme = entry.theme();
                 card.tags = entry.tags;
+                card.free_tier = free_tier_ids.count(entry.id) > 0;
                 if (!entry.thumbnail.empty()) card.thumbnail_path = entry.thumbnail.string();
                 if (const auto it = core9_by_id.find(entry.id); it != core9_by_id.end()) {
                     card.bom_known = true;
@@ -1042,6 +1063,11 @@ int runLibraryGui(const CliArgs& args) {
             if (show_inventory_onboarding) {
                 // onboarding 弹窗盖在模型库之上; 弹窗期间吞掉库界面操作
                 onboarding_actions = renderer->submitInventoryOnboarding();
+                library_actions = {};
+            } else if (!subscription_prompt_model.empty()) {
+                // 订阅引导弹窗 (点击订阅内容模型时出现); 同样吞掉库操作
+                subscription_actions =
+                    renderer->submitSubscriptionPrompt(subscription_prompt_model);
                 library_actions = {};
             }
         } else if (screen == LibraryScreen::Inventory) {
@@ -1090,7 +1116,37 @@ int runLibraryGui(const CliArgs& args) {
                 store.toggleFavorite(library_actions.toggle_favorite_id);
             }
             if (!library_actions.open_model_id.empty()) {
-                pending_open = library_actions.open_model_id;
+                if (free_tier_ids.count(library_actions.open_model_id) > 0) {
+                    pending_open = library_actions.open_model_id;
+                } else {
+                    // 订阅内容: 不进教程, 弹温和的订阅引导 (元数据照常
+                    // 可浏览, "只锁内容不锁功能" COMMERCIAL_PLAN §2.1)
+                    const auto entry_it = std::find_if(
+                        entries.begin(), entries.end(),
+                        [&](const core::ModelCatalogEntry& e) {
+                            return e.id == library_actions.open_model_id;
+                        });
+                    subscription_prompt_model = entry_it != entries.end()
+                                                    ? entry_it->name
+                                                    : library_actions.open_model_id;
+                }
+            }
+            if (subscription_actions.open_parent_area) {
+                // "请家长来解锁": 与页眉家长区入口同一路由 (先过家长门,
+                // 家长区内有订阅说明占位, UI_UX_SPEC.md §9/§11)
+                subscription_prompt_model.clear();
+                if (parent_gate.sessionActive()) {
+                    screen = LibraryScreen::ParentArea;
+                } else {
+                    parent_gate.newChallenge();
+                    gate_wrong_answer = false;
+                    screen = LibraryScreen::ParentGate;
+                }
+            }
+            if (subscription_actions.browse_free || subscription_actions.dismissed) {
+                // "先看免费模型" 的筛选切换由渲染器内部完成 (筛选状态
+                // 归渲染器跨帧保持), 应用层只需关闭弹窗
+                subscription_prompt_model.clear();
             }
             if (library_actions.open_inventory) {
                 openInventoryEditor();
@@ -1223,10 +1279,18 @@ int runLibrary(const CliArgs& args) {
 
     // --core-only: 只列基础套装 (核心 9 片型) 就能搭的模型 —— 判定
     // 口径与图形版筛选一致 (core::isCoreTile, 目录 tier 优先)。
+    // --free-only: 只列免费层模型 (目录 tags 含「免费」, 与图形版
+    // 「免费模型」筛选及 starter 打包清单同一口径, 见
+    // docs/FREE_TIER_MANIFEST.md); 两个开关可叠加。
     // 目录/模型对账照常覆盖全库, 过滤只影响列表输出。
     const auto catalog = core::loadTileCatalog(args.data_dir / "tile_catalog.json");
 
-    if (args.core_only) {
+    if (args.core_only && args.free_only) {
+        std::printf("MagTile Studio 模型库 (免费层中只用核心 9 片型的模型, 全库 %zu 个):\n\n",
+                    entries.size());
+    } else if (args.free_only) {
+        std::printf("MagTile Studio 模型库 (免费层模型, 全库 %zu 个):\n\n", entries.size());
+    } else if (args.core_only) {
         std::printf("MagTile Studio 模型库 (只用核心 9 片型的模型, 全库 %zu 个):\n\n",
                     entries.size());
     } else {
@@ -1264,6 +1328,7 @@ int runLibrary(const CliArgs& args) {
             continue;
         }
         if (args.core_only && !core9_only) continue;
+        if (args.free_only && !core::isFreeTierModel(entry)) continue;
         ++listed;
 
         std::string stars;
@@ -1288,9 +1353,13 @@ int runLibrary(const CliArgs& args) {
         std::printf("\n结论: 模型库目录有 %d 个条目未通过对账\n", failures);
         return 1;
     }
-    if (args.core_only) {
-        std::printf("\n结论: 全库 %zu 个模型中 %zu 个只用核心 9 片型 (目录对账通过)\n",
-                    entries.size(), listed);
+    if (args.core_only || args.free_only) {
+        const char* scope = args.core_only && args.free_only
+                                ? "属于免费层且只用核心 9 片型"
+                                : (args.free_only ? "属于免费层 (带「免费」标签)"
+                                                  : "只用核心 9 片型");
+        std::printf("\n结论: 全库 %zu 个模型中 %zu 个%s (目录对账通过)\n", entries.size(),
+                    listed, scope);
     } else {
         std::printf("\n结论: 模型库目录与模型文件一致 (%zu 个模型)\n", entries.size());
     }

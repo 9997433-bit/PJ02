@@ -14,6 +14,7 @@
 
 #include <filesystem>
 #include <string>
+#include <string_view>
 #include <vector>
 
 #include "magtile/core/model_definition.hpp"
@@ -43,6 +44,20 @@ struct ModelCatalogEntry {
         return tags.empty() ? kUncategorized : tags.front();
     }
 };
+
+/// 免费层标记 (COMMERCIAL_PLAN.md §2.1 "免费 30"): 模型 tags 是免费层
+/// 的事实来源 (docs/FREE_TIER_MANIFEST.md §1), CLI / GL / Qt 三端与
+/// 打包守卫 (tools/verify_free_tier.py) 均以本标签为同一口径。
+inline constexpr std::string_view kFreeTierTag = "免费";
+
+/// 条目是否属于免费层 (tags 含「免费」)。非免费模型在产品端只锁
+/// 教程入口不锁浏览 ("只锁内容不锁功能", COMMERCIAL_PLAN §2.1)。
+[[nodiscard]] inline bool isFreeTierModel(const ModelCatalogEntry& entry) noexcept {
+    for (const std::string& tag : entry.tags) {
+        if (tag == kFreeTierTag) return true;
+    }
+    return false;
+}
 
 /// 加载 data_dir/model_catalog.json 并返回全部条目 (保持文件内顺序,
 /// 未登记的模型文件按文件名排序补录到末尾)。目录文件不存在时扫描
