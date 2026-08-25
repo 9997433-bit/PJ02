@@ -203,8 +203,9 @@ int runCatalog(const CliArgs& args) {
     const auto catalog = core::loadTileCatalog(args.data_dir / "tile_catalog.json");
     std::printf("磁力片形状目录 (共 %zu 种):\n\n", catalog.size());
     for (const auto& [type, shape] : catalog.shapes()) {
-        std::printf("  %-22s %s  顶点 %zu 个, 磁力边 %zu 条, 面积 %.3f\n",
+        std::printf("  %-22s %s [%s]%s  顶点 %zu 个, 磁力边 %zu 条, 面积 %.3f\n",
                     std::string(core::toString(type)).c_str(), shape.name_zh.c_str(),
+                    shape.tier.c_str(), shape.hollow ? " (镂空)" : "",
                     shape.vertices.size(), shape.magnet_edge_indices.size(), shape.area());
         if (!shape.description_zh.empty()) {
             std::printf("      %s\n", shape.description_zh.c_str());

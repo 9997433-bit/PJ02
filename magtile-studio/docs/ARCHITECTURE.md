@@ -98,9 +98,13 @@ BuildStep    = { step_number, description(中文), tip, tiles_to_add[], highligh
   "tiles": [
     {
       "type": "square",            // 与 TileType 的稳定标识一致
+      "tier": "core",              // 套装分层: core / extended (docs/TILE_SET.md)
       "name_zh": "正方形",
       "vertices": [[-0.5,-0.5], [0.5,-0.5], [0.5,0.5], [-0.5,0.5]],
       "magnet_edges": [0, 1, 2, 3] // 带磁条的边索引
+      // 可选语义标记 (docs/TILE_SET.md 第 4 节): "hollow": true (门框方镂空) /
+      // "variant": "window" (窗格方) / "wheeled": true (车轮底座),
+      // 仅供教程文案/BOM/渲染, 物理校验一律使用外框多边形
     }
   ]
 }
