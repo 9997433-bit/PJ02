@@ -1064,29 +1064,29 @@
   "steps": [
     {
       "step_number": 1,
-      "description": "塔基环道: 4 片灰色长方形围出 [2,4]x[2,4] 底口 —— 长边留给裙座梯形的下底。",
-      "tip": "底口正中空着 —— 东京塔的裙座直接跨在环道上。",
+      "description": "塔基环道南沿: 灰色长方形横放, 两端各吸 1 片灰色角板 —— 环道从南沿起步。",
+      "tip": "角板整边吸长方形的短边, 底口留给裙座。",
       "tiles_to_add": [
         "rg_s",
-        "rg_e",
-        "rg_n",
-        "rg_w"
+        "rg_sw",
+        "rg_se"
       ],
       "highlight_tiles": []
     },
     {
       "step_number": 2,
-      "description": "环道角板: 4 片方板补齐四角, 环道成回字。",
-      "tip": "",
+      "description": "环道合拢: 沿西-北-东逆时针补 3 片长方形与 2 片角板, 围出 [2,4]x[2,4] 底口, 环道成回字。",
+      "tip": "底口正中空着 —— 东京塔的裙座直接跨在环道上。",
       "tiles_to_add": [
-        "rg_sw",
-        "rg_se",
+        "rg_w",
         "rg_nw",
-        "rg_ne"
+        "rg_n",
+        "rg_ne",
+        "rg_e"
       ],
       "highlight_tiles": [
-        "rg_s",
-        "rg_w"
+        "rg_sw",
+        "rg_se"
       ]
     },
     {
