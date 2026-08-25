@@ -3,9 +3,9 @@
   "id": "marble_run_spiral_01",
   "name": "弹珠螺旋滑道",
   "name_en": "Marble Spiral Slide 01",
-  "description": "单珠盘旋弹珠机: 一条连续轨道绕四层高塔顺时针盘旋 3/4 圈, 每段 30 度坡道顶边整边吸平台沿口、坡尾由阶梯桥墩接住, 弹珠从 z=4 的发球台出发, 转过三个直角弯后沿冲线坡道射进接珠池撞响六边形靶标。塔基四角的直角三角斜撑双边吸合, 让全库最高的发球塔抗得住反复开赛的碰撞。",
+  "description": "单珠盘旋弹珠机: 一条连续轨道绕四层高塔顺时针盘旋 3/4 圈, 每段 30 度坡道顶边整边吸平台沿口、坡尾由阶梯桥墩接住, 弹珠从 z=4 的发球台出发, 转过三个直角弯后沿冲线坡道射进接珠池撞响六边形靶标。每块转角台下的直角三角斜撑把台面与桥墩锁成门式框架, 塔基四角的直角三角斜撑双边吸合, 让全库最高的发球塔抗得住反复开赛的碰撞。",
   "difficulty": 4,
-  "total_pieces": 77,
+  "total_pieces": 80,
   "tags": [
     "滚珠",
     "轨道",
@@ -19,8 +19,8 @@
       "tile_histogram": {
         "square": 55,
         "equilateral_triangle": 11,
+        "right_triangle": 7,
         "rectangle": 4,
-        "right_triangle": 4,
         "isosceles_triangle": 2,
         "hexagon": 1
       }
@@ -868,6 +868,21 @@
       "color": "yellow"
     },
     {
+      "id": "braceA",
+      "type": "right_triangle",
+      "position": [
+        4.065384,
+        0.0,
+        2.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
       "id": "railA_out",
       "type": "equilateral_triangle",
       "position": [
@@ -958,6 +973,21 @@
       "color": "yellow"
     },
     {
+      "id": "braceB",
+      "type": "right_triangle",
+      "position": [
+        3.732051,
+        -2.065384,
+        1.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "purple"
+    },
+    {
       "id": "railB_out",
       "type": "equilateral_triangle",
       "position": [
@@ -1031,6 +1061,21 @@
         0.0
       ],
       "color": "yellow"
+    },
+    {
+      "id": "braceC",
+      "type": "right_triangle",
+      "position": [
+        1.666667,
+        -1.732051,
+        0.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "purple"
     },
     {
       "id": "railC_out",
@@ -1328,14 +1373,15 @@
     },
     {
       "step_number": 9,
-      "description": "轨道第 1 段 (整段成组安装): 塔东侧立三层灰色阶梯桥墩, 橙色坡道顶边整边吸在发球台东缘出珠口, 坡尾搭上墩顶, 最后铺黄色转角台 A 压住墩顶与坡尾。",
-      "tip": "坡道-桥墩-转角台三件互相吸住才算装好: 这是一个三角刚性节点。",
+      "description": "轨道第 1 段 (整段成组安装): 塔东侧立三层灰色阶梯桥墩, 橙色坡道顶边整边吸在发球台东缘出珠口, 坡尾搭上墩顶, 铺黄色转角台 A 压住墩顶与坡尾, 再在台底南缘挂 1 片紫色直角三角斜撑: 水平直角边吸台底边, 竖直直角边吸墩身侧边。",
+      "tip": "坡道-桥墩-转角台三件互相吸住才算装好; 台下斜撑给转角台加上第二条支撑路径, 弹珠反复冲撞也不松。",
       "tiles_to_add": [
         "pierA_0",
         "pierA_1",
         "pierA_2",
         "ramp_1",
-        "corner_a"
+        "corner_a",
+        "braceA"
       ],
       "highlight_tiles": [
         "plat_1_0",
@@ -1356,13 +1402,14 @@
     },
     {
       "step_number": 11,
-      "description": "轨道第 2 段: 塔东南立双层桥墩, 南向坡道从转角台 A 南缘下探, 再铺转角台 B 压住墩顶与坡尾。",
-      "tip": "仍是桥墩-坡道-转角台三件互吸; 螺旋每转过四分之一圈就下降一层。",
+      "description": "轨道第 2 段: 塔东南立双层桥墩, 南向坡道从转角台 A 南缘下探, 铺转角台 B 压住墩顶与坡尾, 台底西缘再挂 1 片紫色直角三角斜撑吸牢墩身侧边。",
+      "tip": "仍是桥墩-坡道-转角台三件互吸加台下斜撑; 螺旋每转过四分之一圈就下降一层。",
       "tiles_to_add": [
         "pierB_0",
         "pierB_1",
         "ramp_2",
-        "corner_b"
+        "corner_b",
+        "braceB"
       ],
       "highlight_tiles": [
         "corner_a",
@@ -1383,12 +1430,13 @@
     },
     {
       "step_number": 13,
-      "description": "轨道第 3 段: 塔正南立单层桥墩, 西向坡道从转角台 B 西缘下探, 铺转角台 C。",
+      "description": "轨道第 3 段: 塔正南立单层桥墩, 西向坡道从转角台 B 西缘下探, 铺转角台 C, 台底北缘挂上最后 1 片紫色直角三角斜撑, 竖直角边一直吸到落地桥墩的侧边。",
       "tip": "轨道已绕塔盘旋了半圈多; 转角台 C 离地只剩一层高。",
       "tiles_to_add": [
         "pierC_0",
         "ramp_3",
-        "corner_c"
+        "corner_c",
+        "braceC"
       ],
       "highlight_tiles": [
         "corner_b",
