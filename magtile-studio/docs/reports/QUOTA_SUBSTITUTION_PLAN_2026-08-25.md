@@ -57,7 +57,8 @@
 ## 3. 执行纪律 (置换模式)
 
 1. 用户书面批准路径 B1 后启动;
-2. 每批: 先退役候选序顶部 N 个 D3 (删 JSON + 目录 + 缩略图), 再入库新批;
+2. 每批: `tools/retire_models.sh --dry-run <id>...` 预览 → `--execute` 退役
+   (或 `--from-plan N` 取本报告候选序前 N 个), 再入库新批;
 3. 入库前跑 `tools/review_content_batch.sh` 五关机检;
 4. 全库保持 250 模型; `check_difficulty_quota.py --strict` 达标后 G2 红灯②自动转绿。
 
