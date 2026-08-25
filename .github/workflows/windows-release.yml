@@ -73,11 +73,17 @@ jobs:
           Write-Host "project VERSION = $version"
           "version=$version" >> $env:GITHUB_OUTPUT
 
+      # ref_name 经 env 间接注入而非 ${{ }} 内插进脚本体: git 标签名
+      # 允许含单引号等字符, 直接内插可被构造成 pwsh 脚本注入
+      # (GitHub 安全加固指南推荐做法; 版本号输出同样走 env 以保持一致)
       - name: 校验标签与工程版本号一致
         if: startsWith(github.ref, 'refs/tags/')
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+          PROJECT_VERSION: ${{ steps.version.outputs.version }}
         run: |
-          $tag = '${{ github.ref_name }}'
-          $expected = 'v${{ steps.version.outputs.version }}'
+          $tag = $env:TAG_NAME
+          $expected = "v$($env:PROJECT_VERSION)"
           if ($tag -ne $expected) {
             throw "标签 $tag 与 CMake project VERSION 不一致 (应为 $expected); 请先在 magtile-studio/CMakeLists.txt 升版"
           }
