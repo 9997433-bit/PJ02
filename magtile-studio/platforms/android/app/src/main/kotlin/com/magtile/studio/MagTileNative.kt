@@ -155,9 +155,9 @@ object MagTileNative {
     // ---- 订阅状态 (COMMERCIAL_PLAN §2.2: 复用 progress/
     //      subscription_settings 契约键, 与桌面 Qt BillingBackend /
     //      FakeBillingClient 同键 subscription_active /
-    //      subscription_product_id 同口径, 存档跨端互认; 不接任何
-    //      真实商店 SDK —— 后续 Google Play Billing 经
-    //      StoreBillingClient 落地, 见 platforms/android/README.md) ----
+    //      subscription_product_id 同口径, 存档跨端互认; 真实商店
+    //      SDK 由 Kotlin 层 PlayBillingManager 持有 —— 购买/恢复
+    //      回执经下方写入口落盘, 见 platforms/android/README.md 第三节) ----
 
     /**
      * 订阅当前是否有效 (免费层锁的读取口径, 与桌面 DetailPage 锁 /
@@ -175,10 +175,11 @@ object MagTileNative {
 
     /**
      * 写订阅状态 (立即落盘, progress::setSubscriptionActive 同一
-     * 实现: active=false 时清空档位记录)。当前唯一调用方是 Debug 档
-     * 「模拟已订阅」QA 开关; 后续 StoreBillingClient 购买/恢复回执
-     * 走同一写入口。成功 true; 存档未打开 / 落盘失败 false ——
-     * 调用方不得在 false 时翻转界面解锁状态 (订阅权益以落盘为准)。
+     * 实现: active=false 时清空档位记录)。调用方: Debug 档
+     * 「模拟已订阅」QA 开关 与 Release 档 PlayBillingManager
+     * (Play Billing 购买/恢复回执 + 启动静默恢复, 同一写入口)。
+     * 成功 true; 存档未打开 / 落盘失败 false —— 调用方不得在
+     * false 时翻转界面解锁状态 (订阅权益以落盘为准)。
      */
     external fun setSubscriptionActive(active: Boolean, productId: String): Boolean
 

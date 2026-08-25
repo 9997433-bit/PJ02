@@ -238,6 +238,14 @@ dependencies {
     // 模型卡片列表; 刻意不引 appcompat/material, 保持依赖面最小
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
+    // Google Play Billing (订阅计费, V1 清单 §2 B2 / 探测 R11):
+    // PlayBillingManager 是唯一消费方 —— 购买/恢复/回执确认后经既有
+    // JNI setSubscriptionActive 写 progress/subscription_settings
+    // 契约键 (与桌面 FakeBilling 同键)。刻意用纯 Java 工件 (非 -ktx),
+    // 不引 kotlinx-coroutines, 依赖面保持最小; Debug 档运行期温和
+    // 短路 (QA 走「模拟已订阅」开关), Release 走真实 Play Billing
+    implementation("com.android.billingclient:billing:6.2.1")
+
     // 仪器测试 (仅 androidTest 变体, 不进产品 APK; 依赖面同样保持最小:
     // 不引 espresso-contrib —— RecyclerView 条目点击用原生 ViewHolder)
     androidTestImplementation("junit:junit:4.13.2")

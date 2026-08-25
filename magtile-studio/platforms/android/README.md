@@ -19,8 +19,10 @@
 > GL/Qt 一致)、订阅状态与免费层锁 (解锁 = 免费层或订阅有效,
 > 与桌面 `billing::isContentUnlocked` / DetailPage 锁同口径; 订阅
 > 状态经 `progress/subscription_settings` 契约键与桌面同键落
-> settings 表, Debug 档带「模拟已订阅」QA 开关, 不接真实商店
-> SDK)、分龄 UI 三档 (4-6 超大卡片只留主题筛选 / 7-9
+> settings 表, Debug 档带「模拟已订阅」QA 开关; **Release 档接
+> Google Play Billing** —— PlayBillingManager 购买/恢复/回执确认 +
+> 启动静默恢复, 成功后写同一契约键, 见第三节)、分龄 UI 三档
+> (4-6 超大卡片只留主题筛选 / 7-9
 > 难度+主题+免费 / 10+ 全量筛选, 与桌面 Qt LibraryPage 同一口径,
 > 年龄段与桌面 settings 同键)、磁力片库存录入屏 (片型 +
 > 数量步进器, 对齐桌面 InventoryPage)、进度页「我的作品」与成就墙
@@ -81,6 +83,8 @@ platforms/android/
         │   ├── TutorialSceneNative.kt 3D 视口 JNI 桥 (场景加载/设步/手势/渲染循环)
         │   ├── TutorialStepAdapter.kt 教程步骤行适配器 (已完成/当前/待搭三态)
         │   ├── MagTileNative.kt       进度存档/库存/年龄段/进度页/教程 JNI 桥 (进程级单例)
+        │   ├── MagTileApplication.kt  进程级入口 (Release 档调起 Play Billing 启动静默恢复)
+        │   ├── PlayBillingManager.kt  Google Play Billing 接线 (购买/恢复/回执确认 → 订阅契约键, 见第三节)
         │   ├── ModelCard.kt           卡片元数据 (listModels JSON 解析)
         │   ├── ModelCardAdapter.kt    RecyclerView 适配器 (标准/启蒙双卡片布局)
         │   ├── ThumbnailLoader.kt     assets/thumbnails 异步解码 + LruCache
@@ -141,7 +145,10 @@ SQLite settings 表, 缺键/脏值一律按未订阅兜底宁可锁); **Debug �
 在家长门后的年龄段对话框带「🧪 模拟订阅: 开/关」QA 开关 (与桌面
 订阅页 `devControlsEnabled` 开发开关同角色, 模拟档位同为年度主推
 `sub_yearly`, 零真实扣费), `BuildConfig.DEBUG` 为编译期常量,
-Release 档不可见亦不可达。当前不接任何真实商店 SDK。
+Release 档不可见亦不可达。**Release 构建走真实 Google Play Billing**
+(`PlayBillingManager`, Debug 档温和短路互不干扰): 启动时向 Play
+账户静默恢复订阅权益, 购买/恢复成功后写同一契约键 —— 免费层锁
+零改动, 详见第三节「订阅与计费: Google Play Billing 接线」。
 
 分步教程页 (3D 教程视口 + 文字分步, 措辞对齐桌面 GL/Qt 教程 HUD):
 进度头「第 x/y 步 · 已放 n/m 片」+ 进度条, 页顶为**可交互 3D 教程
@@ -320,18 +327,43 @@ SQLite settings 表, 存档文件跨端互认; 不接任何真实商店 SDK):
 | --- | --- |
 | `subscriptionActive(): Boolean` | 订阅当前是否有效 (免费层锁的读取口径, 与桌面 DetailPage 锁 / `billing::isContentUnlocked` 同一判定源): 存档未打开 / 缺键 / 脏值一律 false (未订阅兜底宁可锁 —— 与免费层 `is_free` 缺数据宁可放行的方向相反, 守的是付费权益) |
 | `subscriptionProductId(): String` | 生效中的订阅商品档位 id (如 `sub_yearly`, 三端统一档位约定); 未订阅 / 从未写入 / 存档不可用返回空串 |
-| `setSubscriptionActive(active: Boolean, productId: String): Boolean` | 写订阅状态 (立即落盘, `progress::setSubscriptionActive` 同一实现: `active=false` 时清空档位记录); 成功 true, 存档未打开 / 落盘失败 false —— 调用方不得在 false 时翻转界面解锁状态 (订阅权益以落盘为准, 与年龄段"内存态即真相"的温和降级刻意不同)。当前唯一调用方是 Debug 档「模拟已订阅」QA 开关 |
+| `setSubscriptionActive(active: Boolean, productId: String): Boolean` | 写订阅状态 (立即落盘, `progress::setSubscriptionActive` 同一实现: `active=false` 时清空档位记录); 成功 true, 存档未打开 / 落盘失败 false —— 调用方不得在 false 时翻转界面解锁状态 (订阅权益以落盘为准, 与年龄段"内存态即真相"的温和降级刻意不同)。调用方: Debug 档「模拟已订阅」QA 开关 与 Release 档 `PlayBillingManager` (Play Billing 购买/恢复回执) |
 
-**后续接真实商店 (Google Play Billing) 的路径**: 界面与免费层锁
-只面向订阅状态读取口径, 不感知商店 SDK —— 接入时在 Kotlin 侧引入
-Play Billing Library (购买流 / 恢复购买 / 回执校验), 购买或恢复
-成功后经 `setSubscriptionActive` 写同一契约键即可, 免费层锁零改动;
-商品 id 沿用三端统一约定 (`sub_monthly` / `sub_yearly` /
-`sub_family_yearly`, `COMMERCIAL_PLAN.md` §3.1), 原生侧对应
-`billing::StoreBillingClient` 骨架 (各商店接法与回执口径文档见
-`include/magtile/billing/store_billing_client.hpp`; 空实现档全部
-Unavailable 绝不误报已订阅)。届时 Debug 档「模拟已订阅」QA 开关
-保持仅 Debug 可见, 与真实购买链路互不干扰。
+**订阅与计费: Google Play Billing 接线** (V1 清单 §2 B2 🔶, 探测
+R11): 界面与免费层锁只面向订阅状态读取口径, 不感知商店 SDK ——
+`PlayBillingManager.kt` 是 Android 端唯一接触 Play Billing Library
+(`com.android.billingclient:billing` 6.x, 纯 Java 工件不引协程)
+的地方:
+
+- **启动静默恢复**: `MagTileApplication.onCreate` 调起
+  `syncOnAppStart` —— 向 Play 账户查询有效订阅
+  (`queryPurchasesAsync(SUBS)`, 商店回执是权威来源): 有则补确认
+  回执 (acknowledge) 并经 `setSubscriptionActive` 写契约键 (换机 /
+  重装 / 他端购买自动生效); 查询成功且明确没有则清掉本地过期凭证
+  (宁可锁); **查询失败 (无网/商店不可用) 不动本地凭证** —— 契约键
+  即离线宽限期本地凭证 (`COMMERCIAL_PLAN.md` §4.4)。进度存档由
+  MainActivity 异步打开, 落盘时序差由退避重试吸收;
+- **购买 / 恢复入口** (`purchase` / `restore` / `queryProducts`):
+  `queryProductDetailsAsync` 取 Play 后台本地化价格 →
+  `launchBillingFlow` 收银台 → `PurchasesUpdatedListener` 回执确认
+  后写契约键; 已接线待消费 —— 家长门后的订阅页 (三档档位卡 +
+  恢复购买, 对齐桌面 Qt SubscriptionPage) 落地时直接调用, 价格
+  文案只出现在门后 (儿童侧零价格红线 §11);
+- **Debug / Release 分流**: Debug 档全部入口温和短路 (QA 走上文
+  「模拟已订阅」开关, 零真实扣费, 两条链路互不干扰), Release 档
+  走真实 Play Billing;
+- **沙盒验收要点** (清单 §2 B3, 人工): 商品 id 三端统一
+  (`sub_monthly` / `sub_yearly` / `sub_family_yearly`,
+  `COMMERCIAL_PLAN.md` §3.1), 须在 Play Console 后台配置同名订阅
+  商品; 验收走内部测试轨 (Internal testing) + 许可测试账号
+  (License testing, 沙盒扣费即时退款), 上传 release 签名包后在
+  真机走「购买 → 详情弹窗解锁 → 清数据重装 → 启动静默恢复」
+  闭环;
+- 原生侧 `billing::StoreBillingClient` 保留为跨商店接口缝, 在
+  Android **不参与购买链路** (契约键读写已由 JNI + Kotlin 收口;
+  各商店档现状与接法文档见
+  `include/magtile/billing/store_billing_client.hpp`, 桌面开发档
+  继续 FakeBillingClient 绝不误报已订阅)。
 
 3D 教程视口链路绑定 `com.magtile.studio.TutorialSceneNative`
 (实现在 `jni/magtile_scene_jni.cpp`; 场景绘制复用
@@ -471,12 +503,13 @@ espresso-core (仅 androidTest 变体, 不进产品 APK)。
   桌面 M3 推进可选 4 位 PIN 与家长中心完整功能 (订阅/数据管理)。
 - 订阅与计费: 订阅状态读写与免费层锁已对齐桌面 (`progress/
   subscription_settings` 同键同口径, Debug 档「模拟已订阅」QA
-  开关); 尚未接真实 Google Play Billing SDK —— 接入路径见第三节
-  「后续接真实商店」(Kotlin 侧 Play Billing Library 购买/恢复成功
-  后经 `setSubscriptionActive` 写同一契约键, 免费层锁零改动, 原生
-  侧对应 `billing::StoreBillingClient` 骨架); 家长门后的订阅页
-  (三档档位卡 + 恢复购买, 对齐桌面 Qt SubscriptionPage) 待家长
-  中心落地时一并接入。
+  开关); **Google Play Billing 已接线** (第三节: Release 档
+  `PlayBillingManager` 购买/恢复/回执确认 + 启动静默恢复, 成功后
+  经 `setSubscriptionActive` 写同一契约键, 免费层锁零改动)。
+  剩余缺口: 家长门后的订阅页 UI (三档档位卡 + 恢复购买按钮,
+  对齐桌面 Qt SubscriptionPage —— 数据源 `queryProducts` /
+  `purchase` / `restore` 已就绪) 待家长中心落地时一并接入;
+  Play Console 商品配置与沙盒付费验收属人工项 (清单 §2 B3)。
 
 ## 相关文档
 

@@ -18,8 +18,12 @@
 #   R8  [P0] 隐私合规文档    SECURITY_AND_PRIVACY.md + PRIVACY_POLICY_DRAFT.md 存在
 #   R9  [P0] 桌面打包资产    打包手册 / CPack / WiX / starter 清单 / 第三方声明 / CI
 #   R10 [P1] 计费适配层单测  build 内 magtile_billing_test 存在即实跑, 否则 SKIP
-#   R11 [P0] 真实商店计费    store_billing_client.cpp 不再是空实现档
-#                            (探测口径: 文件内含 static_assert(false 即视为未接入)
+#   R11 [P0] 真实商店计费    分平台口径 —— Google Play (Android) 接线在位即
+#                            PASS(部分): PlayBillingManager.kt 存在 + gradle
+#                            依赖 billingclient + setSubscriptionActive 写入口
+#                            调用在位 + store_billing_client.cpp 无 Google
+#                            Play 未接入守卫; Windows 商店档未接线单列 SKIP
+#                            (R11W, MSIX 商店档出包前接入)
 #   R12 [P1] Android 链路资产 android.yml + build.gradle.kts + README 存在
 #   R13 [P0] Android 签名    signingConfigs 接线 + keystore.properties.example
 #                            模板齐备 (真实 keystore 不入库, 生成与商店
@@ -263,22 +267,58 @@ check_billing_test() {
 }
 
 # =============================================================
-# R11 真实商店计费接入探测 (清单 §2 B2)
-# 口径: src/billing/store_billing_client.cpp 内仍有
-# static_assert(false 守卫 = 空实现档未接入任何真实 SDK。
+# R11 真实商店计费接入探测 (清单 §2 B2, 分平台口径)
+#
+# Google Play (Android, 本检查): 真实计费在 Kotlin 壳层 ——
+# PlayBillingManager.kt 持有 Play Billing Library (购买流 / 恢复 /
+# 回执确认 / 启动静默恢复), 购买或恢复成功后经既有 JNI
+# setSubscriptionActive 写 progress/subscription_settings 契约键
+# (与 FakeBilling 同键, 免费层锁零改动)。探测四项接线证据:
+#   1. PlayBillingManager.kt 存在;
+#   2. 其内含 setSubscriptionActive 写入口调用 (回执 -> 契约键);
+#   3. app/build.gradle.kts 引入 com.android.billingclient;
+#   4. store_billing_client.cpp 无 Google Play 未接入守卫
+#      (static_assert 拒绝档), 且文档化了 Kotlin 侧分工。
+# 全部在位 = PASS (部分: 沙盒付费验收仍属人工项 B3)。
+#
+# Windows 商店档 (MAGTILE_BILLING_WINDOWS_STORE) 仍未接线, 由编排处
+# 单列 SKIP (R11W) —— MSIX 商店档出包前接入, .cpp 内保留编译期
+# static_assert 守卫防误开宏, 不再作为本检查的失败口径。
 # =============================================================
 check_store_billing() {
     local src="$ROOT/src/billing/store_billing_client.cpp"
+    local mgr="$ROOT/platforms/android/app/src/main/kotlin/com/magtile/studio/PlayBillingManager.kt"
+    local gradle="$ROOT/platforms/android/app/build.gradle.kts"
+    local failed=0
     if [ ! -f "$src" ]; then
         echo "[断言失败] 缺少 $src (计费适配层未落地)"; return 1
     fi
-    if grep -q "static_assert(false" "$src"; then
-        echo "[断言失败] StoreBillingClient 仍为空实现档 (源内含未接入守卫):"
-        grep -n "static_assert(false" "$src" | sed 's/^/    /'
-        echo "  接入口径见 include/magtile/billing/store_billing_client.hpp 注释与清单 §2 B2/B3"
-        return 1
+    if grep -q 'static_assert(false, "Google Play' "$src"; then
+        echo "[断言失败] store_billing_client.cpp 的 Google Play 分支仍是未接入守卫 (static_assert 拒绝档)"
+        failed=1
+    else
+        echo "  就绪: store_billing_client.cpp Google Play 分支已移除未接入守卫"
     fi
-    echo "[断言通过] StoreBillingClient 已移除未接入守卫 (沙箱付费验收仍属人工项 B3)"
+    if [ -f "$mgr" ]; then
+        echo "  就绪: PlayBillingManager.kt (Kotlin 壳层 Play Billing 接线)"
+        if grep -q "setSubscriptionActive" "$mgr"; then
+            echo "  就绪: 购买/恢复回执经 setSubscriptionActive 写契约键 (与 FakeBilling 同键)"
+        else
+            echo "[断言失败] PlayBillingManager.kt 未调用 setSubscriptionActive —— 回执未接契约键写入口"
+            failed=1
+        fi
+    else
+        echo "[断言失败] 缺少 $mgr (Android Play Billing 未接线)"
+        failed=1
+    fi
+    if [ -f "$gradle" ] && grep -q "com.android.billingclient" "$gradle"; then
+        echo "  就绪: Play Billing Library 依赖已登记 (app/build.gradle.kts)"
+    else
+        echo "[断言失败] app/build.gradle.kts 未引入 com.android.billingclient:billing"
+        failed=1
+    fi
+    [ "$failed" -eq 0 ] || return 1
+    echo "[断言通过] Google Play 计费已接线 (部分就绪: Windows 商店档见 R11W SKIP; 沙盒付费验收仍属人工项 B3)"
 }
 
 # =============================================================
@@ -372,7 +412,9 @@ else
         "构建目录无该测试 (cmake --build \"$BUILD_DIR\" --target magtile_billing_test 后重试)"
 fi
 
-run_check R11 P0 "真实商店计费接入 (StoreBillingClient)"          check_store_billing
+run_check R11 P0 "真实商店计费接入 (Google Play 接线)"            check_store_billing
+skip_check R11W P0 "真实商店计费 (Windows 商店档)" \
+    "未接线 —— Windows MSIX 商店档出包前接入 (清单 §2 B2 分平台; 桌面开发档继续 FakeBilling)"
 run_check R12 P1 "Android 构建链路资产"                           check_android_assets
 run_check R13 P0 "Android release 签名配置"                       check_android_signing
 run_check R14 P0 "商店上架文档守卫 (validate_store_listing)" \
