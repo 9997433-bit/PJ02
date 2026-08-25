@@ -32,7 +32,7 @@ b = ModelBuilder()
 
 PATH = "gray"
 SOIL = "orange"
-PATTERN = ["red", "white", "green", "yellow"]
+PATTERN = ["red", "clear", "green", "yellow"]
 TULIP = ["red", "yellow", "purple"]
 POST = "green"
 
@@ -72,9 +72,9 @@ b.wall_ew("fence_e1", 3.0, 2, 0, fence_color(11))
 # =================================================================
 # 4. 郁金香 + 角柱
 # =================================================================
-b.crest_ns("tulip_w", 1, 1.0, 2.0, TULIP[0])
-b.crest_ns("tulip_m", 2, 1.0, 2.0, TULIP[1])
-b.crest_ns("tulip_e", 2, 2.0, 2.0, TULIP[2])
+b.spire_ns("tulip_s", 2, 1.0, 2.0, TULIP[0])
+b.spire_ns("tulip_n", 1, 2.0, 2.0, TULIP[1])
+b.spire_ew("tulip_w", 1.0, 2, 1.0, TULIP[2])
 b.crest_ns("post_sw", 1, 1.0, 2.0, POST)
 b.crest_ns("post_ne", 2, 2.0, 2.0, POST)
 
@@ -98,7 +98,7 @@ b.step(
     + [f"fence_n0_{i}" for i in (0, 1)]
     + ["fence_w0", "fence_w1", "fence_e0", "fence_e1"],
     highlight=["soil_1_1"],
-    tip="色带按固定节奏走 —— 这就是 T18 密铺变奏。",
+    tip="色带按固定节奏走 —— 红/清/绿/黄四色密铺。",
 )
 b.step(
     "围栏加高第二层: 四片续接色带, 与下层竖边整边互吸。",
@@ -107,15 +107,15 @@ b.step(
     tip="两层围栏才够高 —— 郁金香要从框里探出头来。",
 )
 b.step(
-    "种郁金香: 三支等边三角立在围栏顶沿, 底边吸墙顶。",
-    ["tulip_w", "tulip_m", "tulip_e"],
-    highlight=["fence_s1_0"],
+    "种郁金香: 三支等腰三角立在围栏顶沿, 底边吸墙顶。",
+    ["tulip_s", "tulip_n", "tulip_w"],
+    highlight=["fence_s1_1"],
     tip="红/黄/紫三色 —— 三支立柱就是这座花坛的主角。",
 )
 b.step(
     "装围栏角柱收尾: 西南与东北角各立一片绿色等边三角 —— 郁金香花坛落成!",
     ["post_sw", "post_ne"],
-    highlight=["tulip_m"],
+    highlight=["tulip_s"],
     tip="色带、立柱、角柱齐了 —— 植物花园第一座 D1 花作品。",
 )
 
@@ -133,4 +133,5 @@ b.finalize(
     tags=["植物花园", "郁金香", "花坛", "入门", "密铺"],
     min_pieces=26,
     min_steps=6,
+    series="plant_garden",
 )

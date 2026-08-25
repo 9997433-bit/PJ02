@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "id": "watchtower_01",
+  "name": "城墙转角哨塔",
+  "name_en": "Corner Watchtower 01",
+  "description": "城堡与要塞 D1 入门: 单座两层哨塔嵌在 L 形转角城墙短段上 —— 盒式墙环合围, 南门洞与北箭窗用门框方/窗格方做负空间造型; 黄色城齿与红色瞭望尖让体量虽小却有要塞味道。与 75 片的土丘主塔刻意拉开, 这是孩子能独立完成的第一个城堡作品。",
+  "difficulty": 1,
+  "total_pieces": 24,
+  "tags": [
+    "城堡",
+    "哨塔",
+    "城墙",
+    "入门",
+    "要塞"
+  ],
+  "content_meta": {
+    "series": "castle_fortress",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 18,
+        "equilateral_triangle": 3,
+        "door_frame": 1,
+        "isosceles_triangle": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ground_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ground_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ground_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ground_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ground_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wall_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wall_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wall_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wall_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "crenel_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "crenel_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "t1_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t1_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t1_gate",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "t1_e",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t2_slit",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t2_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t2_e",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t2_roof",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lookout",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        1.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tower_crenel",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺草甸地台: 八片灰绿相间的方板拼成 4x2 平台, 这是转角城墙的地基。",
+      "tip": "拼缝对齐了, 上面的城墙和哨塔才有整边可吸。",
+      "tiles_to_add": [
+        "ground_0_0",
+        "ground_1_0",
+        "ground_2_0",
+        "ground_3_0",
+        "ground_0_1",
+        "ground_1_1",
+        "ground_2_1",
+        "ground_3_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立 L 形城墙: 西墙两片、南墙两片合围转角, 墙脚整边踩地台拼缝。",
+      "tip": "L 形短段就是城墙转角 —— 敌人从这边来, 先看见的就是这截墙。",
+      "tiles_to_add": [
+        "wall_w_0",
+        "wall_w_1",
+        "wall_s_1",
+        "wall_s_2"
+      ],
+      "highlight_tiles": [
+        "ground_0_0",
+        "ground_1_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "装城墙城齿: 西墙与南墙顶沿各立一片黄色等边三角垛口。",
+      "tip": "城齿与墙共面, 重心正压墙顶 —— 力矩为零。",
+      "tiles_to_add": [
+        "crenel_w",
+        "crenel_s"
+      ],
+      "highlight_tiles": [
+        "wall_w_1",
+        "wall_s_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "起哨塔一层: 三片蓝墙合围, 南面嵌一片橙色门框方门洞。",
+      "tip": "门洞朝南 —— 哨兵进出塔内, 敌人从墙外看不见里面。",
+      "tiles_to_add": [
+        "t1_n",
+        "t1_w",
+        "t1_gate",
+        "t1_e"
+      ],
+      "highlight_tiles": [
+        "ground_1_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "加哨塔二层: 北墙换清色窗格方箭窗, 东西墙续高, 平顶封住塔顶。",
+      "tip": "箭窗就是 T17 负空间 —— 少一片墙, 瞭望孔却更有城堡味道。",
+      "tiles_to_add": [
+        "t2_slit",
+        "t2_w",
+        "t2_e",
+        "t2_roof"
+      ],
+      "highlight_tiles": [
+        "t1_n",
+        "t1_gate"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立瞭望尖与塔顶城齿: 红色瞭望尖 + 黄色垛口 —— 转角哨塔落成!",
+      "tip": "单塔加短墙, 体量不大却站得住 —— 城堡主题第一座 D1 入门作品。",
+      "tiles_to_add": [
+        "lookout",
+        "tower_crenel"
+      ],
+      "highlight_tiles": [
+        "t2_roof"
+      ]
+    }
+  ]
+}

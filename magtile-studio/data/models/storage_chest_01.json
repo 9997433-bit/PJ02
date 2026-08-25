@@ -1,0 +1,496 @@
+{
+  "schema_version": 1,
+  "id": "storage_chest_01",
+  "name": "翻盖百宝盒",
+  "name_en": "Storage Chest 01",
+  "description": "实用功能首个 D1: 结构签名是'翻盖百宝盒' —— 2x2 胡桃木闭环箱框内藏着三枚金币与一把钥匙; 盖板先在展示垫上平拼成 2x2 金色整板, 后沿长板与后墙顶共线互吸形成铰链, 再沿磁吸边整体翻折扣合 (T05 平面翻折, 磁吸边即铰链); 正面金扣三角同时吸前墙顶与盖板前沿, 角钉收边, 顶把手一提就开 —— 与敞口格架收纳站的开合方式完全不同!",
+  "difficulty": 1,
+  "total_pieces": 24,
+  "tags": [
+    "实用功能",
+    "收纳",
+    "翻盖",
+    "百宝盒",
+    "入门"
+  ],
+  "content_meta": {
+    "series": "practical_utility",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 17,
+        "equilateral_triangle": 6,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "link_20",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_00",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "base_01",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "base_10",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "base_11",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wall_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wall_n",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wall_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wall_e",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "coin_a",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "coin_b",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "coin_c",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "key",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        2.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lid_00",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lid_01",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lid_10",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lid_11",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hinge",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "clasp",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rivet_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "handle",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺展示垫: 连桥方板把百宝盒与右侧工作台接成一体。",
+      "tip": "实用功能 D1 开工! 展示垫就是盖板平拼的工作台。",
+      "tiles_to_add": [
+        "link_20",
+        "pad_3_0",
+        "pad_4_0",
+        "pad_4_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "拼盒底: 四片胡桃木方板 2x2 整边互吸, 角对角对齐。",
+      "tip": "盒底拼缝对齐, 墙脚才有整边可吸。",
+      "tiles_to_add": [
+        "base_00",
+        "base_01",
+        "base_10",
+        "base_11"
+      ],
+      "highlight_tiles": [
+        "link_20"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "围盒身: 四片方墙踩住盒底四沿, 四角竖边互咬成环。",
+      "tip": "闭环箱框 —— 荷载沿墙面直下, 百宝才装得稳。",
+      "tiles_to_add": [
+        "wall_s",
+        "wall_n",
+        "wall_w",
+        "wall_e"
+      ],
+      "highlight_tiles": [
+        "base_00",
+        "base_11"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "装入金币: 三枚金色三角放进盒内中央。",
+      "tip": "金币底边吸盒底拼缝 —— 关盖前先收好宝贝!",
+      "tiles_to_add": [
+        "coin_a",
+        "coin_b",
+        "coin_c"
+      ],
+      "highlight_tiles": [
+        "wall_s"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "放入钥匙: 一把金色瘦高尖靠在盒内北半。",
+      "tip": "钥匙也是百宝 —— 开盒靠它!",
+      "tiles_to_add": [
+        "key"
+      ],
+      "highlight_tiles": [
+        "coin_a"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "平拼翻盖并扣合: 四片金色方板 2x2 整边互吸, 沿后沿铰链翻折; 可先于垫板上平拼再整体搬回 —— 磁吸边即铰链。",
+      "tip": "T05 平面翻折 —— 先在桌面平拼, 再沿后沿磁吸边整体翻折扣合。",
+      "tiles_to_add": [
+        "lid_00",
+        "lid_01",
+        "lid_10",
+        "lid_11",
+        "hinge"
+      ],
+      "highlight_tiles": [
+        "pad_4_0",
+        "wall_w"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "扣上前锁: 前扣三角整边吸前墙顶与盖板前沿。",
+      "tip": "前扣一片锁三件 —— 盖板被锁死了。",
+      "tiles_to_add": [
+        "clasp"
+      ],
+      "highlight_tiles": [
+        "lid_00",
+        "wall_s"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "收角钉与顶把手: 角钉锁住盖板东沿, 金色把手一提就开 —— 百宝盒封箱!",
+      "tip": "翻盖百宝盒完工, 钥匙还在里面呢!",
+      "tiles_to_add": [
+        "rivet_e",
+        "handle"
+      ],
+      "highlight_tiles": [
+        "clasp",
+        "lid_11"
+      ]
+    }
+  ]
+}

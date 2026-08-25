@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "id": "photo_frame_01",
+  "name": "自立相框画架",
+  "name_en": "Photo Frame Easel 01",
+  "description": "实用功能 D1 引流作: 3x2 黄橙双层地台留出一道竖缝即插纸槽,粉色窗格框立在台前, 灰色直角三角从框背斜撑到地台后缘,照片从槽顶一插就展示, 相框自己站住。",
+  "difficulty": 1,
+  "total_pieces": 21,
+  "tags": [
+    "实用功能",
+    "相框",
+    "画架",
+    "照片",
+    "桌面"
+  ],
+  "content_meta": {
+    "series": "practical_utility",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 16,
+        "equilateral_triangle": 3,
+        "right_triangle": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "base_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "base_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "base_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "base_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "base_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "base_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "slot_w0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "slot_w1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "slot_e0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "slot_e1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "slot_back",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "frame",
+      "type": "window_square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "frame_top",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "frame_flower",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "foot_l",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "foot_r",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_l",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_r",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "easel",
+      "type": "right_triangle",
+      "position": [
+        1.666667,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "crown_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺底层地台: 六片黄橙相间的方板拼成 3x2 底板, 相邻边整边互吸。",
+      "tip": "",
+      "tiles_to_add": [
+        "base_0_0",
+        "base_1_0",
+        "base_2_0",
+        "base_0_1",
+        "base_1_1",
+        "base_2_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立槽侧墙: 四片方板沿左右两列踩住底板拼缝, 围出中间插纸缝。",
+      "tip": "",
+      "tiles_to_add": [
+        "slot_w0",
+        "slot_w1",
+        "slot_e0",
+        "slot_e1"
+      ],
+      "highlight_tiles": [
+        "base_0_0",
+        "base_2_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "封槽北沿: 中间一片侧墙挡住槽口北缘, 插缝仍从上方进入。",
+      "tip": "",
+      "tiles_to_add": [
+        "slot_back"
+      ],
+      "highlight_tiles": [
+        "slot_w0",
+        "slot_e0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立相框: 粉色窗格框踩在底板上, 顶板骑在框顶, 红花冠点在顶沿。",
+      "tip": "",
+      "tiles_to_add": [
+        "frame",
+        "frame_top",
+        "frame_flower"
+      ],
+      "highlight_tiles": [
+        "base_1_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "铺后脚: 两片方板沿底板北缘向东延伸, 给画架一个更大的后脚。",
+      "tip": "",
+      "tiles_to_add": [
+        "foot_l",
+        "foot_r"
+      ],
+      "highlight_tiles": [
+        "base_0_1",
+        "base_2_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立后墙: 两片方板沿后脚北沿竖起, 为斜撑准备竖向吸附面。",
+      "tip": "",
+      "tiles_to_add": [
+        "back_l",
+        "back_r"
+      ],
+      "highlight_tiles": [
+        "foot_l",
+        "foot_r"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "装后撑三角: 灰色直角三角竖边吸后墙、横边吸后脚拼缝, 锁成三角框。",
+      "tip": "",
+      "tiles_to_add": [
+        "easel"
+      ],
+      "highlight_tiles": [
+        "back_r",
+        "foot_r"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "侧冠收尾: 两片红色三角骑在槽侧墙顶沿 —— 自立相框画架完工!",
+      "tip": "",
+      "tiles_to_add": [
+        "crown_w",
+        "crown_e"
+      ],
+      "highlight_tiles": [
+        "slot_w1",
+        "slot_e1"
+      ]
+    }
+  ]
+}
