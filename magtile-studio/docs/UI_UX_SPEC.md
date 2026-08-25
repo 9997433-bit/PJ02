@@ -464,3 +464,38 @@ sequenceDiagram
 | 无障碍/分龄 | 字号三档缩放 + 减少动效（Qt 版设置页即时生效，`progress/ui_settings` 存储） | 年龄分层框架（AgeMode 三档 + 启蒙模式布局 + Qt 版家长区年龄段切换 + TTS 自动朗读，单元测试 `age_tts`） | 其余分龄细则、色盲安全、跟随系统 |
 
 > 状态变更须同步更新本表与 [PRODUCT_MASTER_PLAN.md](PRODUCT_MASTER_PLAN.md)「商用功能清单」。
+
+---
+
+## 16. 外部 skills 对照表
+
+> 把两份社区高星 GitHub agent skills 的检查点映射到本规范条目, 作为 UI 评审时的外部基准: **carmahhawwari/ui-design-brain**(通用 UI 设计要点)与 **klovaaxel/web-a11y-agent-skills**(无障碍要点)。本规范仍是唯一事实来源, 两边冲突时以本文为准(例: 触控目标外部基准 44px, 本规范儿童产品收紧为 48dp)。评审顺序: 先 §14 验收清单逐条打钩, 再用本表对照外部基准补盲。
+
+| 外部检查点 | 来源 | 本规范落点 | Qt 桌面现状 | Android 现状 |
+|---|---|---|---|---|
+| 触控目标 ≥ 44px | ui-design-brain | §4.1 收紧为 48dp, 主按钮 ≥ 64dp | `Theme.touchTarget=48` / `bigButtonHeight=64`; 唯一例外 32dp 家长区入口 (§5.3 有意为之) | `touch_target=48dp` 全布局令牌化; 主按钮 `button_height=52dp` 为手机屏折算档, 低于桌面 64 (见下方 P1) |
+| 空态三件套 (图形 + 说明 + CTA) | ui-design-brain | §5.2 筛选/目录空态、§7.1 进度空态 | 模型库筛选空态 (推荐 3 可搭 + 看全部模型)、目录空态 (再试一次)、进度空态 (去模型库挑一个) 均三件齐全 | 目录空态「再试一次」、进度空态「去模型库挑一个」齐全; 筛选空态原只有一行灰字, 本次审计补齐 🔍 + 温和说明 + 「看全部模型」 |
+| 按钮层级 (主/次分明, 主 CTA 唯一) | ui-design-brain | §1.2 胶囊主按钮、§5.4 主 CTA 占宽 80% | BigButton 实心主色 = 主操作; 白底描边 = 次操作 (上一步/从头再来/复位视角), 每屏主 CTA 唯一 | 主按钮 `backgroundTint` 主色 + 白字, 次按钮默认灰;「下一步」权重 1.4 更宽 |
+| 减少动效 (respect reduced motion) | ui-design-brain + a11y | §4.7 全部动效尊重「减少动态效果」 | 设置页开关 → `Theme.animMs=0`; 庆祝彩带不实例化、呼吸高亮定格最亮帧、星星反馈降级静态 | `MotionPrefs` 联动系统动画缩放: 水波纹退静态按压、滚动瞬时、呼吸描边定格; 应用内共享 `reduce_motion` 键 JNI 链路待接 (P1) |
+| 儿童友好文案 (不吓人、零术语、无惩罚) | ui-design-brain | P1「铁律」P3 零挫败、§4.2 文案规范、§4.3 | 界面无「失败/错误/红叉」; 技术细节只进 stderr 与家长区诊断小字 | 同口径 (soft_fail 系列文案); 本次修复两处直出: 物理校验异常原文、缺片清单原生 error → 温和文案, 细节只进 logcat |
+| 状态不单靠颜色 | web-a11y-agent-skills | §4.7 三重编码 (图形+文字+颜色) | ✓/▶/🔒/★ 图形 + 文字徽标; 难度星靠图形计数; 开关带「开/关」字 | colors.xml 与 Theme.qml 逐项对齐, 同一套图形编码 |
+| 文字可缩放不破版 | web-a11y-agent-skills | §4.7 字号三档 100/125/150% | 全部字号经 `Theme.fontScale`; 本次修复订阅页主推徽标硬编码 12px | 全 sp 单位随系统字号缩放; 应用内三档覆盖 PLANNED |
+| 对比度 AA (正文 ≥ 4.5:1) | web-a11y-agent-skills | §4.7 | `textPrimary #243244` 于白底 ≈ 12:1, `textSecondary #5B6B7F` ≈ 5.4:1, 均达标 | 同一色板; 色盲模拟器逐屏走查 PLANNED |
+| 键盘/焦点可达 | web-a11y-agent-skills | §13 键盘步进 | 教程页 ←/→ 切步 DONE; 全界面 Tab 焦点遍历 PLANNED | 触屏为主; TalkBack 走查 PLANNED |
+
+### 16.1 本次审计已修 (P0, 最小 diff)
+
+- Android 物理校验异常直出「校验失败: <异常原文>」→ 温和文案 `dialog_validate_soft_fail`, 细节只进 logcat(`MainActivity.kt` / `strings.xml`)。
+- Android 缺片清单弹窗直出原生层 error 原文 → 同上温和降级(`MainActivity.kt`)。
+- Android 筛选空态缺 CTA → 补空态三件套:🔍 + 温和说明 + 「↺ 看全部模型」一键清筛选(`activity_main.xml` / `MainActivity.kt`,与 Qt `clearFilters` 同角色)。
+- Android 令牌漂移收口(零视觉变化):家长门弹窗与成就墙散落的 13/15/16/20sp 与 48/52dp 硬编码改令牌引用(`dialog_parent_gate.xml` / `activity_achievements.xml`);库存页补页面底色令牌(`activity_inventory.xml` 原先无底色)。
+- Qt 订阅页「多数家庭的选择」徽标硬编码 12px 不随字号三档缩放 → `Theme.fontSmall` 且徽标高度随文字自适应(`SubscriptionPage.qml`)。
+
+### 16.2 遗留缺口 (P1, 已定位到文件)
+
+- Android 主按钮 `button_height=52dp` 低于 §4.1「主操作按钮 ≥ 64dp」:手机屏刻意折算档, 平板布局落地时应升回 64dp(`platforms/android/.../values/dimens.xml`)。
+- Android 仍有无令牌对应的中间字号(14sp/12sp/18sp/26sp:`activity_main.xml` 筛选行、`item_model_card*.xml`、`item_tutorial_step.xml`、`dialog_parent_gate.xml` 题面/答案框):需补字号令牌或归一到现有五级, 属批量视觉调整不在本次最小修复内。
+- Qt QML 约 20 处主色底上的 `color: "white"` 未令牌化:建议 `Theme.qml` 增 `onPrimary` 令牌后批量替换(对应 Android 已有 `magtile_on_primary`)。
+- Android 4–6 启蒙档主题筛选仍是 48dp Spinner 下拉, 未达 §2「超大主题入口」形态(`MainActivity.applyAgeMode`)。
+- Android 应用内 `reduce_motion` 共享设置键 JNI 链路待接(`MotionPrefs.kt`, 平台 README 已登记), 目前仅联动系统动画设置。
+- 双端 §6.2 旋转提示 👋、Qt 🔊 波形动画、Android TTS 原生后端:维持既有 PLANNED 条目, 不重复登记。

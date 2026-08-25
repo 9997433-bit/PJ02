@@ -91,7 +91,7 @@ class MainActivity : Activity() {
 
     private val backgroundExecutor = Executors.newSingleThreadExecutor()
     private lateinit var statusView: TextView
-    private lateinit var emptyHint: TextView
+    private lateinit var filterEmptyGroup: View
     private lateinit var libraryEmptyCard: View
     private lateinit var filterBar: View
     private lateinit var difficultySpinner: Spinner
@@ -149,8 +149,13 @@ class MainActivity : Activity() {
         reduceMotion = MotionPrefs.reduceMotion(this)
 
         statusView = findViewById(R.id.status)
-        emptyHint = findViewById(R.id.empty_hint)
+        filterEmptyGroup = findViewById(R.id.filter_empty_group)
         libraryEmptyCard = findViewById(R.id.library_empty_card)
+        // 筛选空态 CTA (空态三件套的行动按钮, 对齐桌面 Qt「看全部模型」):
+        // 一键清掉全部筛选, 孩子不用逐个找回被勾掉的条件
+        findViewById<View>(R.id.filter_clear_button).setOnClickListener {
+            clearFilters()
+        }
         filterBar = findViewById(R.id.filter_bar)
         difficultySpinner = findViewById(R.id.filter_difficulty)
         themeSpinner = findViewById(R.id.filter_theme)
@@ -631,7 +636,24 @@ class MainActivity : Activity() {
         adapter.submit(filtered)
         statusView.text = getString(
             R.string.library_summary, filtered.size, allCards.size, shapeCount)
-        emptyHint.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
+        filterEmptyGroup.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
+    }
+
+    /** 筛选空态 CTA「看全部模型」: 一键复位全部筛选维度 (控件与状态
+     *  同步复位, 监听器触发的 applyFilters 幂等; 与桌面 Qt
+     *  LibraryFilterModel::clearFilters 同角色)。 */
+    private fun clearFilters() {
+        difficultyFilter = 0
+        themeFilter = ""
+        freeFilter = false
+        core9Filter = false
+        buildableFilter = false
+        difficultySpinner.setSelection(0)
+        themeSpinner.setSelection(0)
+        freeCheckBox.isChecked = false
+        core9CheckBox.isChecked = false
+        buildableCheckBox.isChecked = false
+        applyFilters()
     }
 
     private fun spinnerAdapter(items: List<String>) =
@@ -745,7 +767,12 @@ class MainActivity : Activity() {
             val text = try {
                 val root = JSONObject(MagTileNative.missingPiecesJson(card.filePath))
                 when {
-                    root.has("error") -> root.getString("error")
+                    // 原生层报错原文只进 logcat, 弹窗给温和文案
+                    // (P3 零挫败, 不给儿童看技术细节)
+                    root.has("error") -> {
+                        Log.e(TAG, "缺片清单原生层报错: ${root.getString("error")}")
+                        getString(R.string.dialog_missing_failed)
+                    }
                     root.optBoolean("can_build") ->
                         getString(R.string.dialog_can_build)
                     // 与桌面 Qt missingText 同一措辞: "缺 2 片正方形、1 片菱形"
@@ -784,8 +811,9 @@ class MainActivity : Activity() {
                     report
                 }
             } catch (t: Throwable) {
+                // 异常细节只进 logcat; 弹窗对儿童可见, 给温和文案 (P3)
                 Log.e(TAG, "物理校验失败: ${card.id}", t)
-                "校验失败: ${t.message}"
+                getString(R.string.dialog_validate_soft_fail)
             }
             runOnUiThread {
                 if (isFinishing || isDestroyed) return@runOnUiThread

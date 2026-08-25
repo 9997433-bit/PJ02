@@ -2,7 +2,9 @@
 <resources>
     <string name="app_name">MagTile Studio</string>
     <string name="library_title">模型库</string>
-    <string name="library_loading">正在解包数据资产…</string>
+    <!-- 首启解包数据资产期间的状态文案: 儿童可见, 不用「解包/资产」
+         类术语 (§4.2 零术语), 与桌面 Qt「模型库正在准备中」同口径 -->
+    <string name="library_loading">正在准备模型库…</string>
     <!-- %1$d = 筛选后模型数, %2$d = 模型总数, %3$d = 磁力片形状数 -->
     <string name="library_summary">%1$d / %2$d 个模型 · %3$d 种磁力片形状</string>
     <!-- 加载失败的温和文案 (§4.3 / P3 零挫败, 对齐桌面 Qt 模型库空态
@@ -15,7 +17,11 @@
     <!-- 目录成功打开但一个模型都没有 (数据资产异常): 0 个模型不自称
          「已就绪」(与桌面 Qt 空态同口径), 同样给温和重试 -->
     <string name="library_empty_catalog">模型们还在路上</string>
-    <string name="library_filter_empty">没有符合当前筛选条件的模型</string>
+    <!-- 筛选空态三件套 (图形 + 温和说明 + 一键 CTA, 对齐桌面 Qt
+         模型库「换个条件试试 + 看全部模型」空态口径): 不出现空白页,
+         孩子一键就能回到全部模型 -->
+    <string name="library_filter_empty">这个组合暂时没有模型, 换个条件试试</string>
+    <string name="filter_clear_all">↺ 看全部模型</string>
     <!-- 筛选栏 (口径与桌面 GL/Qt 模型库一致) -->
     <string name="filter_all_difficulties">全部难度</string>
     <string name="filter_all_themes">全部主题</string>
@@ -63,6 +69,9 @@
     <string name="dialog_validate">物理校验</string>
     <string name="dialog_close">关闭</string>
     <string name="dialog_validating">正在执行物理校验 (R1~R8)…</string>
+    <!-- 校验没跑完的温和兜底 (P3 零挫败: 弹窗不出现「失败」字样,
+         异常细节只写 logcat 给家长/开发者) -->
+    <string name="dialog_validate_soft_fail">校验这次没跑完, 稍后再试一次就好</string>
     <!-- %1$s = 模型中文名 -->
     <string name="dialog_validate_title">物理校验 — %1$s</string>
     <!-- %1$d = 教程步骤数 -->

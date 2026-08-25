@@ -293,18 +293,19 @@ Page {
                                     font.bold: true
                                     color: Theme.textPrimary
                                 }
-                                // 主推徽标 (中性推荐, 非稀缺/催促话术)
+                                // 主推徽标 (中性推荐, 非稀缺/催促话术);
+                                // 字号走 Theme 令牌, 徽标随字号三档缩放不裁字 (§4.7)
                                 Rectangle {
                                     visible: productCard.modelData.recommended
                                     radius: Theme.radiusButton
-                                    height: 24
+                                    height: recommendTag.implicitHeight + 8
                                     width: recommendTag.implicitWidth + 16
                                     color: Theme.primary
                                     Text {
                                         id: recommendTag
                                         anchors.centerIn: parent
                                         text: "多数家庭的选择"
-                                        font.pixelSize: 12
+                                        font.pixelSize: Theme.fontSmall
                                         font.bold: true
                                         color: "white"
                                     }

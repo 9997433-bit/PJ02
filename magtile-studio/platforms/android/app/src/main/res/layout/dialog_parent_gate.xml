@@ -21,7 +21,7 @@
         android:gravity="center"
         android:text="@string/gate_title"
         android:textColor="@color/magtile_text_primary"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_title"
         android:textStyle="bold" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:gravity="center"
         android:text="@string/gate_subtitle"
         android:textColor="@color/magtile_text_secondary"
-        android:textSize="13sp" />
+        android:textSize="@dimen/text_secondary" />
 
     <!-- ================= 答题态 ================= -->
     <LinearLayout
@@ -58,13 +58,13 @@
             android:gravity="center"
             android:text="@string/gate_answer_format_hint"
             android:textColor="@color/magtile_text_secondary"
-            android:textSize="13sp" />
+            android:textSize="@dimen/text_secondary" />
 
         <!-- 答案展示框 (软键盘输入, 不弹系统输入法) -->
         <TextView
             android:id="@+id/gate_answer"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_gate_answer"
             android:gravity="center"
@@ -80,7 +80,7 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:textColor="@color/magtile_badge_expansion_text"
-            android:textSize="13sp"
+            android:textSize="@dimen/text_secondary"
             android:visibility="gone" />
 
         <!-- 中文大写数字软键盘 (4 行 x 3 列, 键帽由 ParentGateDialog
@@ -101,7 +101,7 @@
             <TextView
                 android:id="@+id/gate_submit"
                 android:layout_width="0dp"
-                android:layout_height="52dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:background="@drawable/bg_gate_submit"
                 android:gravity="center"
@@ -113,14 +113,14 @@
             <TextView
                 android:id="@+id/gate_cancel"
                 android:layout_width="0dp"
-                android:layout_height="52dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_gate_key"
                 android:gravity="center"
                 android:text="@string/gate_cancel"
                 android:textColor="@color/magtile_text_primary"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_section"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
@@ -140,7 +140,7 @@
             android:gravity="center"
             android:text="@string/gate_cooldown_title"
             android:textColor="@color/magtile_text_primary"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_title"
             android:textStyle="bold" />
 
         <TextView
@@ -150,18 +150,18 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:textColor="@color/magtile_text_secondary"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_body" />
 
         <TextView
             android:id="@+id/gate_cooldown_back"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="18dp"
             android:background="@drawable/bg_gate_key"
             android:gravity="center"
             android:text="@string/gate_cancel"
             android:textColor="@color/magtile_text_primary"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_section"
             android:textStyle="bold" />
     </LinearLayout>
 
