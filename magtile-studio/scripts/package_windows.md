@@ -8,7 +8,8 @@
 > 状态: **IN_PROGRESS**。CPack/NSIS + WiX 配置、模型子集打包与许可
 > 文件安装均已就位; 安装规则与文件清单已在 Linux CI 环境冒烟通过
 > (TGZ 全量/子集两档, 见第九节), 但**尚未在真实 Windows 机器出过
-> exe/msi**。首次实机打包按第十节 checklist 逐项核对,
+> exe/msi**。CI 流水线首跑的触发/预期产物/排查/签核见第八节;
+> 首次实机打包按第十节排查表逐项核对,
 > 验收项见 `platforms/windows/README.md`。
 
 ## 一、前置条件
@@ -209,21 +210,144 @@ UpgradeCode (`6FE5F9D7-79A7-4829-B13A-8C3B1517CA61`), 因此互相可
    一致, 不一致直接失败, 防止"标签说 0.2.0 包里是 0.1.0"。
 4. WiX 方式 B 的 `-d Version=` 为显式传参, 见第六节。
 
-## 八、CI 流水线
+## 八、CI 流水线: 触发、预期产物与首跑签核
 
 仓库根 `.github/workflows/windows-release.yml`:
 
-- 触发: 推送 `v*` 标签 (正式发布, 数据集固定 full) 或手动
-  `workflow_dispatch` (试跑, 可选 `model_set=starter` 试打子集包)。
 - 步骤: MSVC 配置构建 → 从 CMakeCache 提取版本号并校验标签 →
   `ctest` (跳过需显示环境的两个 GUI 冒烟) → 安装 NSIS
   (`windows-latest` 的 Windows Server 2025 镜像已移除预装, 经
   Chocolatey 自装) → `cpack -G "NSIS;ZIP"` → 上传构建产物;
   标签触发时另建 GitHub Release **草稿** (人工核对后再发布)。
-- 该工作流尚未在真实 runner 上跑通过; 已做静态与替身验证
-  (actionlint 零告警 + pwsh 步骤逻辑核验 + Linux 侧
-  `smoke_qt_linux_pack.sh` 打包链路全绿), 首跑失败优先排查
-  FetchContent 网络 (见第十节)。
+- 验证状态: 首跑阻断项 (镜像移除预装 NSIS) 已修; 静态与替身验证
+  全绿 (actionlint 零告警 + pwsh 版本提取步对真实 CMakeCache 实测 +
+  Linux 侧 `smoke_qt_linux_pack.sh` 打包链路全绿), 但**尚未在真实
+  runner 上出过包** —— 按 §8.1 触发、§8.2 核对产物、§8.3 排查失败、
+  §8.4 登记签核, 两场试跑全绿后按 §8.5 一次性翻状态。
+
+### 8.1 如何触发
+
+**路径 A — `workflow_dispatch` 手动试跑 (首跑用这条, 可反复触发)**
+
+不建 Release、不需要打标签, 只产出构建产物, 失败无副作用:
+
+- 网页: 仓库 → Actions → `windows-release` → `Run workflow` →
+  选分支与 `model_set` (full / starter) → 运行。
+- 命令行 (gh CLI):
+
+  ```bash
+  gh workflow run windows-release --ref <分支> -f model_set=full
+  gh run list --workflow=windows-release --limit 3   # 找到刚起的 run
+  gh run watch <run-id> --exit-status                # 跟进度, 失败退非零
+  ```
+
+- 前提: `workflow_dispatch` 入口只有在该 workflow 文件**已存在于
+  仓库默认分支**时才可见/可用 (GitHub 平台限制, 网页与 gh CLI 同
+  受限; `--ref` 可指到含该文件的其它分支, 但列表登记以默认分支
+  为准)。workflow 未合入默认分支前无法 dispatch, 替代法是走
+  路径 B 对本分支提交打 `v<版本>` 标签触发 (标签事件按标签指向
+  提交上的 workflow 文件执行, 不受默认分支限制), 试跑完删除
+  Release 草稿与远端标签即可, 版本号不被烧掉。
+- 首跑建议顺序: `model_set=full` 一场 → `model_set=starter` 一场
+  (`platforms/windows/README.md` 验收清单要求含 starter 档试跑),
+  逐场按 §8.4 登记。
+
+**路径 B — 推送 `v*` 标签 (正式发布)**
+
+1. 确认 `magtile-studio/CMakeLists.txt` 的
+   `project(MagTileStudio VERSION x.y.z)` 就是要发布的版本号。
+2. 打标签并推送 (标签必须与 project VERSION 逐字符一致,
+   `v` 前缀 + 三段号; 不一致时流水线在"校验标签"步直接失败,
+   防呆见第七节):
+
+   ```bash
+   git tag v0.1.0          # 缺省打在当前 HEAD; 也可显式指定提交
+   git push origin v0.1.0
+   ```
+
+3. 数据集固定 full (标签发布不吃 `model_set` 输入); 成功后自动
+   创建 GitHub Release **草稿** —— 草稿不对外可见, 按第十一节
+   待办清单人工核对 (License 替换/签名/实机冒烟) 后再 Publish。
+4. 撤回/重来: 网页删除 Release 草稿 +
+   `git push origin :refs/tags/v0.1.0` 删远端标签; 修复后重打
+   同名标签即可 (标签删除后版本号可复用)。
+
+### 8.2 预期产物
+
+- run 时长: 首跑无 FetchContent 缓存 + MSVC 全量构建, 预计
+  15~40 分钟, 上限 `timeout-minutes: 60`; 缓存 (`build/_deps`)
+  命中后的后续 run 明显缩短。
+- 两种触发都产出 Actions 构建产物: run 页面 Artifacts 区一个
+  `MagTileStudio-<版本>-win64` (GitHub 下载时外面统一再套一层
+  zip), 内含:
+
+| 文件 | 内容 |
+| --- | --- |
+| `MagTileStudio-<版本>-win64.exe` | NSIS 安装器 (布局见第二节) |
+| `MagTileStudio-<版本>-win64.zip` | 便携版, 解压即用 |
+
+- **starter 档产物文件名与 full 档相同** (CPack 包名不带档位
+  后缀, 仅 Qt-only 形态加 `-qt`), 两场试跑的下载物勿混放一个
+  目录; 甄别看包内 `data/models/` 条数 (starter 恰 30)。
+- CI 配置未开 `-DMAGTILE_BUILD_QT`, 产物为 CLI/GL 档包, **不含**
+  `magtile_studio_qt.exe` (Qt 商用界面打包目前走实机路径,
+  见第五节与 `scripts/package_qt_desktop.md`)。
+- 标签触发额外产出: GitHub Release **草稿**一份
+  (名 `MagTile Studio v<版本> (Windows)`), 附上述两文件;
+  `fail_on_unmatched_files: true` 保证缺文件时步骤失败,
+  不会发出空草稿。
+
+产物下载解包后快速核验 (Linux/macOS; Windows 用
+`tar -tf` + `certutil -hashfile <文件> SHA256` 同效):
+
+```bash
+unzip -l MagTileStudio-<版本>-win64.zip        # 清单: exe + data/ + licenses/ + README
+unzip -l MagTileStudio-<版本>-win64.zip | grep -c 'data/models/.*\.json'
+    # full = 与 data/model_catalog.json 登记条数一致; starter = 30
+sha256sum MagTileStudio-<版本>-win64.exe MagTileStudio-<版本>-win64.zip
+    # 登记进 §8.4 签核表
+```
+
+安装/卸载/快捷方式/中文显示等深度验收属 Windows 实机验收
+(V1 清单 D3), 按 `platforms/windows/README.md` 验收清单执行,
+不阻塞本节流水线转正。
+
+### 8.3 首跑失败排查 (CI 专属; 通用打包故障见第十节)
+
+| 症状 | 原因 | 处置 |
+| --- | --- | --- |
+| 配置步 FetchContent 拉取失败/超时 | runner 出网抖动 | Re-run failed jobs; `actions/cache` 命中 `build/_deps` 后不再拉网 |
+| 「安装 NSIS」步 choco 失败 | Chocolatey 社区源抖动/限流 | 重跑该 job; 持续失败可临时钉版本 (`choco install nsis --version=<版本> -y`) 或改 `winget install NSIS.NSIS` |
+| cpack 报 `Cannot initialize generator NSIS` (NSIS 步已绿) | makensis 不在 PATH 且注册表未写 | 回看「安装 NSIS」步日志确认真装成; CPack 另经注册表 `HKLM\SOFTWARE\NSIS` 定位, choco 安装会写注册表, 正常两条路径都命中 |
+| 「校验标签与工程版本号一致」步失败 | 标签与 project VERSION 不一致 | 先升 `CMakeLists.txt` 版本号, 再重打对应 `v<版本>` 标签 (第七节) |
+| ctest 步失败 | MSVC 平台差异首次暴露 (此前测试仅在 Linux 常跑) | 摘 ctest 日志在本地 VS2022 复现 (第三节), 修复合入后重触发 |
+| 「上传构建产物」步报 no files found | cpack 实际没出包 (上一步失败被吞) 或产物名不符 `MagTileStudio-*-win64.*` | 回看 cpack 步日志; 版本号异常时核对 project VERSION |
+| 「创建 GitHub Release 草稿」步 403 | 仓库/组织把 workflow 默认权限收成只读且不允许声明提权 | workflow 已声明 `permissions: contents: write`; 仍 403 时在仓库 Settings → Actions → General 放开 workflow 写权限 |
+| job 60 分钟超时被杀 | 首跑全量构建 + 无缓存 | 直接重跑 (缓存已落, 二跑显著缩短); 反复超时再考虑升 `timeout-minutes` |
+
+### 8.4 首跑签核登记表
+
+D2 (流水线转正) 的验收口径: 第 1、2 两场全绿且产物核验通过。
+第 3 场属正式发布动作, 不阻塞 D2, 首个 `v*` 标签发布时补登。
+
+| # | 场次 | 触发方式 | run 链接 | 提交 / 标签 | 产物核验要点 (§8.2 命令) | SHA256 (exe / zip) | 结果 | 签核人 / 日期 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | full 档试跑 | `workflow_dispatch` `model_set=full` | ⬜ | | exe + zip 齐; 文件名版本号 = project VERSION; 模型条数与 `model_catalog.json` 一致 | | ⬜ | |
+| 2 | starter 档试跑 | `workflow_dispatch` `model_set=starter` | ⬜ | | 模型 json 恰 30 + 缩略图恰 30 + `model_catalog.json` 同步过滤 | | ⬜ | |
+| 3 | 首个正式标签 | push `v<版本>` | ⬜ | | "校验标签"步绿; Release 草稿两产物齐 | | ⬜ | |
+
+### 8.5 两场试跑全绿后翻状态 (一次性收尾)
+
+- [ ] `docs/V1_LAUNCH_CHECKLIST.md` D2 行 🔶→✅ (状态列登记
+      run 链接或 §8.4 表位置)。
+- [ ] `platforms/windows/README.md` 验收清单末项
+      "`windows-release.yml` 在 `workflow_dispatch` 下于真实
+      runner 跑通 (含 starter 档试跑)" 打 `[x]`。
+- [ ] 去除三处"尚未在真实 runner 验证"注记: 本手册头部状态块与
+      本节验证状态行、`windows-release.yml` 头注"草案"字样、
+      `platforms/windows/README.md` 状态块。
+- [ ] 注意 D2 转正 ≠ D3: Windows 实机安装验收 (装/卸/GUI 中文
+      无乱码) 仍按 `platforms/windows/README.md` 待办段独立推进。
 
 ## 九、Linux/macOS 冒烟验证 (无 Windows 机器时)
 
