@@ -20,7 +20,8 @@ LGPL 合规清单。通用打包基座 (NSIS/ZIP/WiX、版本号管理、CI 流�
 > Linux 实跑子集 + --dry-run 双失败注入自检已全绿)。
 > **windeployqt / macdeployqt 尚未在 Windows / macOS 实机跑过**:
 > Windows 构建机上跑第五节脚本 + 第十一节验收清单, macOS 构建机上跑
-> `smoke_qt_macos.sh` + 第十二节验收清单, 结果回填第十节。
+> `smoke_qt_macos.sh` + 第十二节验收清单 (人工段已展开为可打印勾选表
+> `docs/reports/MACOS_ACCEPTANCE_CHECKLIST.md`), 结果回填第十节。
 
 ## 一、包形态总览
 
@@ -321,7 +322,9 @@ PARTIAL, 见第十/十二节); Windows/macOS 实机项见下节。
         4 项通过 / 0 失败 / 5 项 macOS 专属环节逐条 SKIP, 退出码 0,
         按第十二节语义标记 PARTIAL。
   - [ ] macOS 实机零 SKIP 全绿 + 第十二节人工验收 (待 macOS 构建机;
-        此两段都过本条才算收口)。
+        此两段都过本条才算收口)。人工段用可打印验收单
+        `docs/reports/MACOS_ACCEPTANCE_CHECKLIST.md` 逐项签核
+        (含签名公证项, 同为 V1 清单 D4 的验收载体)。
 - [ ] macOS 正式路径: MACOSX_BUNDLE 切换 + Info.plist/图标资产进
       构建系统 (替代冒烟脚本的合成 bundle) + Developer ID 签名/公证
       全链路 (`--sign-identity` 已预留)。
@@ -469,6 +472,12 @@ MagTileStudio-<版本>-macos[-qt].dmg   (UDZO 压缩映像)
   docs/PROGRESS.md), 重装/升级不丢档。
 
 ### 12.3 人工验收 (干净 macOS 12+, 未装 Qt/Xcode 的物理机或虚拟机)
+
+> 本节为速览版; 实机验收请打印逐项展开的
+> [`docs/reports/MACOS_ACCEPTANCE_CHECKLIST.md`](../docs/reports/MACOS_ACCEPTANCE_CHECKLIST.md)
+> 填写签核 (环境登记 + 安装/启动/教程/家长门/订阅/签名公证/卸载
+> 36 项勾选表 + 失败登记与签核栏), 结论按其 §9 回填第十节与
+> V1 清单 D4。
 
 - [ ] **挂载**: 双击 DMG → Finder 出现 `magtile_studio_qt.app` +
       `Applications` 软链, 无"映像损坏"报错。
