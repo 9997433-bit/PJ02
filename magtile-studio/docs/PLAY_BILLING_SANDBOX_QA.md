@@ -33,7 +33,7 @@
 | P1 | Google Play 开发者账号可用, 应用已创建 (包名 `com.magtile.studio`) | 清单 §9 L3 (法务与账号) |
 | P2 | release 签名链路就绪 (`keystore.properties` + `bundleRelease` 出签名 AAB) | [`../platforms/android/SIGNING.md`](../platforms/android/SIGNING.md); 建议接受 Play App Signing (Google 托管分发签名) |
 | P3 | 测试机 = arm64-v8a 真机, 装有 Play 商店且登录测试账号; **App 必须经 Play 内部测试轨安装, 不可侧载** (侧载包与 Play 分发签名/许可校验不匹配, 商品查询与收银台会拒绝) | 首发 ABI 只出 arm64 (README 第一节) |
-| P4 | 家长门后的订阅页 UI (三档档位卡 + 恢复购买按钮) 已落地 —— 这是唯一的购买/恢复触发入口 (`PlayBillingManager.queryProducts` / `purchase` / `restore` 数据源已就绪, B2 剩余缺口) | README 第三节; 订阅是应用内商品, 无入口则购买链路无法发起, B3 无法闭环 |
+| P4 | ✅ 已满足 —— 家长门后的订阅页 UI 已落地 (`SubscriptionActivity`: 三档档位卡 + 主 CTA + 恢复购买按钮, 接 `PlayBillingManager.queryProducts` / `purchase` / `restore`), 这是唯一的购买/恢复触发入口; 入口路径: 标题栏年龄段入口 → 家长门 → 年龄段对话框「订阅」键 | README 第三节; 订阅是应用内商品, 无入口则购买链路无法发起 —— 本前置已随 B2 订阅页收口满足 |
 | P5 | 只验 **Release 构建**: Debug 档 Play Billing 全部入口温和短路, 「模拟已订阅」QA 开关是 Debug 专属链路, 与沙盒验收互不相干 | `PlayBillingManager.enabled = !BuildConfig.DEBUG` |
 
 ## 二、Play Console 商品配置 (一次性)

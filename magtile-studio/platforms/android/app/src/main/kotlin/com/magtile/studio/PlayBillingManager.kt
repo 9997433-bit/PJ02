@@ -58,9 +58,10 @@ import java.util.concurrent.TimeUnit
  * (幂等写, 见 [persistEntitlement]); 重试耗尽只记 logcat, 下次启动
  * 静默恢复兜底 (温和降级, 不弹「失败」)。
  *
- * 已接线待消费: [queryProducts] / [purchase] 供家长门后的订阅页
- * (三档档位卡 + 恢复购买, 对齐桌面 Qt SubscriptionPage) 落地时调用;
- * 当前 Release 链路先由启动静默恢复保证已购用户权益不丢。
+ * 消费方: 家长门后的订阅页 SubscriptionActivity (三档档位卡经
+ * [queryProducts] 取价 / 主 CTA 经 [purchase] 调起收银台 / 恢复
+ * 购买按钮经 [restore], 对齐桌面 Qt SubscriptionPage); 启动静默
+ * 恢复继续兜底保证已购用户权益不丢 (换机 / 重装 / 他端购买)。
  */
 object PlayBillingManager : PurchasesUpdatedListener {
 

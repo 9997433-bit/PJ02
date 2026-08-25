@@ -21,7 +21,11 @@
 > 状态经 `progress/subscription_settings` 契约键与桌面同键落
 > settings 表, Debug 档带「模拟已订阅」QA 开关; **Release 档接
 > Google Play Billing** —— PlayBillingManager 购买/恢复/回执确认 +
-> 启动静默恢复, 成功后写同一契约键, 见第三节)、分龄 UI 三档
+> 启动静默恢复, 成功后写同一契约键, 见第三节)、**家长门后订阅页**
+> (SubscriptionActivity: 三档档位卡 + 主 CTA + 恢复购买, 价格实时
+> 读 Play 后台、查询不可用退温和占位, 结构对齐桌面 Qt
+> SubscriptionPage; 会话守卫到期自动退场, 儿童侧零价格 §11,
+> 见第三节)、分龄 UI 三档
 > (4-6 超大卡片只留主题筛选 / 7-9
 > 难度+主题+免费 / 10+ 全量筛选, 与桌面 Qt LibraryPage 同一口径,
 > 年龄段与桌面 settings 同键)、磁力片库存录入屏 (片型 +
@@ -82,6 +86,7 @@ platforms/android/
         ├── kotlin/com/magtile/studio/
         │   ├── MainActivity.kt        模型库列表 + 分龄筛选栏 + 详情弹窗 + 按需校验
         │   ├── ParentGateDialog.kt    家长门对话框 (算术题 + 中文大写数字软键盘)
+        │   ├── SubscriptionActivity.kt 订阅页 (家长门后: 三档档位卡 + 恢复购买 + 会话守卫, 见第三节)
         │   ├── InventoryActivity.kt   磁力片库存录入屏 (片型 + 数量步进器)
         │   ├── ProgressActivity.kt    进度页「我的作品」(统计 + 作品列表)
         │   ├── AchievementsActivity.kt 成就墙全览 (徽章两列网格)
@@ -148,14 +153,23 @@ DetailPage 订阅横幅), 订阅生效后提示退场全库直达教程; 「物�
 
 订阅状态持久化与桌面完全同键同口径 (`progress/subscription_settings`
 契约键 `subscription_active` / `subscription_product_id`, 落同一份
-SQLite settings 表, 缺键/脏值一律按未订阅兜底宁可锁); **Debug 构建**
-在家长门后的年龄段对话框带「🧪 模拟订阅: 开/关」QA 开关 (与桌面
-订阅页 `devControlsEnabled` 开发开关同角色, 模拟档位同为年度主推
-`sub_yearly`, 零真实扣费), `BuildConfig.DEBUG` 为编译期常量,
-Release 档不可见亦不可达。**Release 构建走真实 Google Play Billing**
-(`PlayBillingManager`, Debug 档温和短路互不干扰): 启动时向 Play
-账户静默恢复订阅权益, 购买/恢复成功后写同一契约键 —— 免费层锁
-零改动, 详见第三节「订阅与计费: Google Play Billing 接线」。
+SQLite settings 表, 缺键/脏值一律按未订阅兜底宁可锁)。**订阅页**
+(SubscriptionActivity, UI_UX_SPEC §11) 入口在家长门后的年龄段
+对话框正键「订阅」(与「隐私与数据」入口同位): 页首免费额度明示 +
+三档档位卡 (月度/年度主推/家庭年度, 价格实时经
+`PlayBillingManager.queryProducts` 读 Play 后台本地化价格, 查询
+不可用退回「订阅功能正在准备中」温和占位卡, 绝不显示空价格卡) +
+「🌱 开通订阅」主 CTA (64dp) + 「↺ 恢复购买」+ 透明条款承诺,
+结构与措辞对齐桌面 Qt SubscriptionPage; 页内会话守卫心跳查
+`core::ParentGate` 会话, 15 分钟到期自动退场 —— 价格只出现在门后,
+儿童侧界面零价格信息。**Debug 构建**在订阅页内带「模拟已订阅」
+QA 开关行 (与桌面订阅页 `devControlsEnabled` 开发开关同角色同
+位置, 模拟档位同为年度主推 `sub_yearly`, 零真实扣费),
+`BuildConfig.DEBUG` 为编译期常量, Release 档不可见亦不可达。
+**Release 构建走真实 Google Play Billing** (`PlayBillingManager`,
+Debug 档温和短路互不干扰): 启动时向 Play 账户静默恢复订阅权益,
+订阅页购买/恢复成功后写同一契约键 —— 免费层锁零改动, 详见
+第三节「订阅与计费: Google Play Billing 接线」。
 
 分步教程页 (3D 教程视口 + 文字分步, 措辞对齐桌面 GL/Qt 教程 HUD):
 进度头「第 x/y 步 · 已放 n/m 片」+ 进度条, 页顶为**可交互 3D 教程
@@ -360,9 +374,11 @@ R11): 界面与免费层锁只面向订阅状态读取口径, 不感知商店 SD
 - **购买 / 恢复入口** (`purchase` / `restore` / `queryProducts`):
   `queryProductDetailsAsync` 取 Play 后台本地化价格 →
   `launchBillingFlow` 收银台 → `PurchasesUpdatedListener` 回执确认
-  后写契约键; 已接线待消费 —— 家长门后的订阅页 (三档档位卡 +
-  恢复购买, 对齐桌面 Qt SubscriptionPage) 落地时直接调用, 价格
-  文案只出现在门后 (儿童侧零价格红线 §11);
+  后写契约键; **消费方已落地** —— 家长门后的订阅页
+  SubscriptionActivity (三档档位卡 + 主 CTA + 恢复购买, 对齐桌面
+  Qt SubscriptionPage; 结果文案与桌面 BillingBackend 同措辞, 永不
+  弹「失败」), 价格文案只出现在门后 (儿童侧零价格红线 §11, 页内
+  会话守卫到期自动退场);
 - **Debug / Release 分流**: Debug 档全部入口温和短路 (QA 走上文
   「模拟已订阅」开关, 零真实扣费, 两条链路互不干扰), Release 档
   走真实 Play Billing;
@@ -548,13 +564,13 @@ androidx.test 四件套 + espresso-core (仅 androidTest 变体, 不进
   家长中心「隐私与数据」区同口径, 清单 §5 V3); 后续随桌面 M3
   推进可选 4 位 PIN 与家长中心订阅页。
 - 订阅与计费: 订阅状态读写与免费层锁已对齐桌面 (`progress/
-  subscription_settings` 同键同口径, Debug 档「模拟已订阅」QA
-  开关); **Google Play Billing 已接线** (第三节: Release 档
-  `PlayBillingManager` 购买/恢复/回执确认 + 启动静默恢复, 成功后
-  经 `setSubscriptionActive` 写同一契约键, 免费层锁零改动)。
-  剩余缺口: 家长门后的订阅页 UI (三档档位卡 + 恢复购买按钮,
-  对齐桌面 Qt SubscriptionPage —— 数据源 `queryProducts` /
-  `purchase` / `restore` 已就绪) 待家长中心落地时一并接入;
+  subscription_settings` 同键同口径); **Google Play Billing 已
+  接线** (第三节: Release 档 `PlayBillingManager` 购买/恢复/回执
+  确认 + 启动静默恢复, 成功后经 `setSubscriptionActive` 写同一
+  契约键, 免费层锁零改动); **家长门后订阅页 UI 已落地**
+  (SubscriptionActivity: 三档档位卡 + 主 CTA + 恢复购买 + 会话
+  守卫, 对齐桌面 Qt SubscriptionPage; Debug 档「模拟已订阅」QA
+  开关同页, 清单 §2 B2 Android 侧代码缺口收口)。剩余:
   Play Console 商品配置与沙盒付费验收属人工项 (清单 §2 B3,
   分步验收文档已备: `docs/PLAY_BILLING_SANDBOX_QA.md`)。
 
