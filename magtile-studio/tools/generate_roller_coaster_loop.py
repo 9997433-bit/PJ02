@@ -210,7 +210,7 @@ b.step(
 b.step(
     "拼第一节车厢: 挡风尖 + 两侧板 + 尾板, 红色涂装停在环圈东侧。",
     ["car1_nose", "car1_s", "car1_n", "car1_tail"],
-    highlight=["track_c0"],
+    highlight=["track_c1"],
     tip="挡风尖立在停靠区前缝上, 侧板夹住轨道带。",
 )
 b.step(
@@ -226,10 +226,10 @@ b.step(
     tip="旗子底边吸在旗杆顶边上, 迎风招展。",
 )
 b.step(
-    "装缓冲挡与起点闸门: 轨道尽头立缓冲挡, 起点立闸门 —— "
+    "装起点闸门与终点冲线旗: 起点立闸门, 停靠区旁插冲线旗 —— "
     "过山车环圈段正式营业!",
-    ["buffer", "start_gate"],
-    highlight=["track_end", "track_w"],
+    ["start_gate", "finish_flag"],
+    highlight=["track_w", "apron_s5"],
     tip="从侧面看: 站台-小丘-大环圈-列车连成一条完整赛道。",
 )
 

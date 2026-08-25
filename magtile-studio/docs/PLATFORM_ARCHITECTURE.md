@@ -153,7 +153,9 @@ CREATE TABLE achievements (         -- 已解锁成就 (未解锁不落库)
   id TEXT PRIMARY KEY, unlocked_at INTEGER NOT NULL
 );
 CREATE TABLE settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
--- 磁力片库存 JSON 存于 settings 表 key = 'tile_inventory'
+CREATE TABLE tile_inventory (               -- 磁力片库存: 片型 -> 数量 ("我能搭的" 数据源)
+  shape_id TEXT PRIMARY KEY, count INTEGER NOT NULL CHECK(count >= 0)
+);
 CREATE TABLE content_state (        -- [规划中] 已下载内容包的版本与校验状态 (见 §6)
   pack_id TEXT PRIMARY KEY, version INTEGER, sha256 TEXT, installed_at INTEGER
 );

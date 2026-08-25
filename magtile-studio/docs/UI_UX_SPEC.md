@@ -55,7 +55,7 @@ Onboarding 时由**家长**选择孩子年龄段（可随时在家长区修改�
 | 庆祝反馈 | 每一步都有星星粒子 + 音效 | 每步轻反馈，整段完成大庆祝 | 完成庆祝 + 用时/成就统计卡 |
 | 字号基准 | 22sp 起 | 18sp 起 | 16sp 起 |
 
-**实现状态**：年龄分层框架 `PLANNED`；教程引擎的步骤查询接口（`visibleTiles`/`tilesAddedThisStep`）已支持任意粒度展示 `DONE`；「每步 ≤ 3 片」自动细分 `PLANNED`。
+**实现状态**：年龄分层框架 `IN_PROGRESS`（`core::AgeMode` 三档枚举 + SQLite 设置持久化（`progress::setAgeMode`/`getAgeMode`，未设置默认 7–9 标准模式）+ CLI 切换 `settings set-age 4|7|10` 已有，含单元测试 `age_tts`；4–6 岁模型库超大卡片简化布局已接入 GL 版（§5.2）；步骤粒度/相机/庆祝等其余分层细则 PLANNED）；教程引擎的步骤查询接口（`visibleTiles`/`tilesAddedThisStep`）已支持任意粒度展示 `DONE`；「每步 ≤ 3 片」自动细分 `PLANNED`。
 
 ---
 
@@ -83,13 +83,13 @@ flowchart TD
 
 | 界面 | 章节 | 实现状态 |
 |------|------|----------|
-| 首页 / 模型库 | §5 | `IN_PROGRESS`（GL 版模型库窗口已可运行：`magtile_app library --gui`，卡片网格/进度徽标已有；儿童分龄布局与筛选器 PLANNED） |
+| 首页 / 模型库 | §5 | `IN_PROGRESS`（GL 版模型库窗口已可运行：`magtile_app library --gui`，卡片网格/进度徽标已有；4–6 岁启蒙模式超大卡片简化布局已接入（读 SQLite 年龄段设置自动切换）；7–9 / 10–12 筛选器分层 PLANNED） |
 | 模型详情 | §5.4 | `PLANNED`（当前从库直接进教程） |
-| 教程播放器 | §6 | `IN_PROGRESS`（GL 教程窗口已可运行：步骤导航/高亮/ghost/进度条/HUD 已有；TTS、动画手势提示、庆祝动画 PLANNED） |
+| 教程播放器 | §6 | `IN_PROGRESS`（GL 教程窗口已可运行：步骤导航/高亮/ghost/进度条/HUD 已有；TTS 切步朗读已接入（`ITtsEngine` stub，§4.2）；动画手势提示、庆祝动画 PLANNED） |
 | 进度与成就 | §7 | `IN_PROGRESS`（SQLite 存档 + CLI 查询 DONE；图形界面 PLANNED） |
 | 设置 | §8 | `IN_PROGRESS`（键值存储 DONE；设置界面 PLANNED） |
 | 家长门 | §9 | `IN_PROGRESS`（算术题门 stub `DONE`：中文数字乘法题 + 中文大写数字软键盘 + 冷却 + 15 分钟内存会话 + 门后家长区占位页；PIN / 手写键盘 / 家长中心完整功能 PLANNED） |
-| Onboarding（库存录入） | §10 | `IN_PROGRESS`（库存 JSON 存取 API DONE；录入界面 PLANNED） |
+| Onboarding（库存录入） | §10 | `IN_PROGRESS`（结构化库存存取 API + CLI 录入 `inventory set` DONE；首启空库存提示弹窗 stub DONE；按片型计数的图形录入界面 PLANNED） |
 | 订阅页 | §11 | `PLANNED` |
 
 ---
@@ -105,7 +105,9 @@ flowchart TD
 - **禁止**任何「小×关闭角标」类微型按钮；关闭/返回一律用左上角大号返回键或底部大按钮。
 - 长按、双击、多指手势**不得**作为功能的唯一入口（4–6 岁不会用），只能作为快捷方式。
 
-### 4.2 TTS 语音朗读 — PLANNED
+### 4.2 TTS 语音朗读 — IN_PROGRESS
+
+> 已落地 stub：抽象接口 `tts::ITtsEngine`（`include/magtile/tts/tts_engine.hpp`，speak 内部先停旧朗读保证无叠音）+ 静音降级 `NullTts` + Linux 命令行朗读器后端（探测 espeak-ng / espeak / spd-say，子进程朗读、切步即打断）；教程切步朗读已接入 GL 教程会话与 CLI（`--tts` 显式开启；4–6 岁启蒙模式下模型库教程自动开启）；单元测试 `age_tts` 覆盖无叠音语义与探测降级。🔊 按钮 UI 与 Windows SAPI / Android / AVSpeech 原生后端 PLANNED。
 
 - 每条步骤说明配 🔊 朗读按钮（48dp）；4–6 岁模式**进入步骤自动朗读**。
 - 使用系统 TTS（Windows SAPI / Android TextToSpeech / AVSpeech），**不引入第三方语音 SDK**（隐私要求，见 SECURITY_AND_PRIVACY.md §5）。
@@ -174,8 +176,8 @@ flowchart TD
 |------|------|------|
 | 继续上次 | 首页最顶部大卡片，一键回到断点步骤 | `IN_PROGRESS`（进度数据 DONE，GUI 大卡片 PLANNED；GL 库窗口已显示进行中徽标） |
 | 模型卡片 | 预览渲染图 + 名称 + 难度星 + 片数 + 状态徽标（✓完成 / ▶进行中 / 🔒订阅） | `IN_PROGRESS`（GL 版卡片网格已有；预览图管线 PLANNED） |
-| 「我能搭」筛选 | 依据库存（§10）过滤片数与片型 BOM 满足的模型 | `PLANNED`（库存数据 API DONE） |
-| 筛选器分龄 | 4–6 无筛选 / 7–9 两项 / 10–12 全量（§2） | `PLANNED` |
+| 「我能搭」筛选 | 依据库存（§10）过滤片数与片型 BOM 满足的模型 | `IN_PROGRESS`（GL 模型库「我能搭的」勾选框 DONE：依 `canBuild` BOM 对照过滤，未登记库存时禁用并引导登记；步骤级缺片提示 PLANNED） |
+| 筛选器分龄 | 4–6 无筛选 / 7–9 两项 / 10–12 全量（§2） | `IN_PROGRESS`（4–6 启蒙模式已落地：隐藏搜索/筛选行 + 超大卡片（约每行 2 张）+ 加大间距，按 SQLite 年龄段设置自动切换；7–9 / 10–12 差异化筛选 PLANNED） |
 | 空态 | 筛选无结果时给「换个条件试试」+ 推荐 3 个可搭模型，不出现空白页 | `PLANNED` |
 | 加载性能 | 首页冷启动 → 可交互 ≤ 2s（中端平板）；卡片图懒加载 | `PLANNED` |
 
@@ -220,7 +222,7 @@ flowchart TD
 | **Ghost 预览** | 后续未放置片以 15% 透明度 ghost 显示，可在面板开关；4–6 岁默认只 ghost 下一步，防视觉过载 | `IN_PROGRESS`（引擎可枚举未来片 DONE；GL ghost 渲染已有；分龄开关 PLANNED） |
 | **旋转提示** | 首次进入播放器：半透明👋手势动画（触屏：单指划弧；桌面：鼠标图标+拖动轨迹），3s 后淡出，完成一次旋转即永久消失（记入 settings） | `PLANNED` |
 | 轨道相机 | 拖动旋转 / 滚轮·双指缩放 / 平移，带阻尼 | `DONE`（orbit_camera + GL 窗口交互） |
-| TTS 朗读 | §4.2；朗读时🔊按钮变波形动画 | `PLANNED` |
+| TTS 朗读 | §4.2；朗读时🔊按钮变波形动画 | `IN_PROGRESS`（`ITtsEngine` + Linux espeak/spd-say 后端 + 切步自动朗读/自动打断已有，`--tts` 或 4–6 岁模式开启；🔊 按钮与波形动画 PLANNED） |
 | 步骤庆祝 | §4.3 分层反馈；进度条每 10% 点亮一颗小星 | `PLANNED` |
 | 完成庆祝页 | 全屏彩带 + 徽章 + 成就卡 + 「再搭一个」推荐 2 个相近难度模型 | `PLANNED`（完成写库 DONE） |
 | 断点续搭 | 退出自动存档；重进恢复步骤与相机 | `IN_PROGRESS`（步骤存档 DONE；相机姿态恢复 PLANNED） |
@@ -269,7 +271,7 @@ flowchart TD
 | 设置项 | 位置 | 状态 |
 |--------|------|------|
 | 音效/音乐音量、TTS 开关 | 儿童侧（播放器内浮层） | `PLANNED`（键值存储 DONE） |
-| 年龄段模式切换 | 家长区 | `PLANNED` |
+| 年龄段模式切换 | 家长区 | `IN_PROGRESS`（`AgeMode` 存储 + CLI `settings set-age`/`show` DONE；家长区图形界面入口 PLANNED） |
 | 字号缩放三档、减少动效 | 家长区（跟随系统 + 手动覆盖） | `PLANNED` |
 | 主题（亮/暗/跟随系统） | 家长区 | `PLANNED` |
 | 语言（简中首发；繁中/英文 M4+） | 家长区 | `PLANNED` |
@@ -326,7 +328,9 @@ flowchart TD
 
 **目标**：首启 ≤ 90 秒完成「家长设年龄 → 录库存 → 孩子开搭」。库存录入是「我能搭」筛选与 BOM 缺片提示的数据源。
 
-### 10.1 流程 — PLANNED（库存存取 API DONE）
+### 10.1 流程 — IN_PROGRESS（库存存取 API + CLI 录入 + 首启提示弹窗 stub DONE；图形化流程 PLANNED）
+
+现阶段的首启行为：模型库 GUI 启动时若从未登记库存（`hasInventory()` 为假）且未看过提示，弹出「先登记家里的磁力片」占位弹窗（压暗遮罩 + 价值说明 + CLI 录入指引）；「稍后再说」落盘 `inventory_onboarding_done` 标记后不再打扰——跳过永远可见，录库存不是付费墙。
 
 ```mermaid
 flowchart LR
@@ -356,7 +360,7 @@ flowchart LR
 - 计数用 **大号 − / + 步进器**（各 48dp），支持长按连加；不用键盘输入（家长孩子可协作完成）。
 - 提供常见套装一键预填；「跳过」永远可见——录库存不是付费墙。
 - 片型图例与 3D 渲染同源建模，认得出实物。
-- 库存整体以 JSON 存入本地 settings（`saveTileInventory` `DONE`）；结构由 UI 层约定并做 schema 校验（安全文档 §7）。
+- 库存按片型存入本地 SQLite `tile_inventory` 表（`setInventory`/`getInventory` `DONE`）；片型标识与数量在存储层强校验（安全文档 §7），v1 时代的库存 JSON 打开存档时自动迁移。
 
 ---
 
@@ -447,12 +451,12 @@ sequenceDiagram
 
 | 领域 | DONE | IN_PROGRESS | PLANNED |
 |------|------|-------------|---------|
-| 核心引擎 | 教程步进/高亮/ghost 数据、物理校验、进度与成就存储、库存存取、轨道相机 | — | 每步≤3片自动细分 |
-| 教程播放器 | GL 窗口步骤导航、高亮/ghost 渲染、退出存档 | 呼吸动画、相机姿态恢复、收藏按钮 | TTS、手势提示、庆祝动画、完成页 |
-| 模型库 | — | GL 卡片网格 + 进度徽标 | 分龄布局、筛选器、详情页、「我能搭」 |
+| 核心引擎 | 教程步进/高亮/ghost 数据、物理校验、进度与成就存储、库存存取、轨道相机、`AgeMode` 枚举 + 年龄段设置存取 | — | 每步≤3片自动细分 |
+| 教程播放器 | GL 窗口步骤导航、高亮/ghost 渲染、退出存档 | 呼吸动画、相机姿态恢复、收藏按钮、TTS 切步朗读（`ITtsEngine` stub + Linux espeak/spd-say 后端 + `--tts`/启蒙模式自动开启；🔊 按钮与原生后端待做） | 手势提示、庆祝动画、完成页 |
+| 模型库 | — | GL 卡片网格 + 进度徽标、4–6 岁启蒙模式超大卡片简化布局（读年龄段设置自动切换）、「我能搭的」库存筛选 | 7–9/10–12 筛选器分层、详情页、步骤级缺片提示 |
 | 进度成就 | 数据层 + CLI | 成就定义与触发 | 成就墙 GUI |
 | 家长门/订阅 | 算术题门 stub（`core::ParentGate` + 软键盘门界面 + 15 分钟内存会话 + 家长区占位页 + 单元/冒烟测试） | 家长区入口已接入模型库 | PIN、手写键盘、家长中心完整功能、订阅页（M3 商用前置） |
-| Onboarding | 库存 JSON API | — | 录入界面、年龄段选择 |
-| 无障碍/分龄 | — | — | 全部 |
+| Onboarding | 结构化库存 API + CLI 录入（`inventory set/show/match`）、首启空库存提示弹窗 stub | 年龄段选择（存储 + CLI `settings set-age` 已有，GUI 待做） | 按片型计数的图形录入界面 |
+| 无障碍/分龄 | — | 年龄分层框架（AgeMode 三档 + 启蒙模式布局 + TTS 自动朗读，单元测试 `age_tts`） | 其余分龄细则、色盲安全、阅读友好 |
 
 > 状态变更须同步更新本表与 [PRODUCT_MASTER_PLAN.md](PRODUCT_MASTER_PLAN.md)「商用功能清单」。

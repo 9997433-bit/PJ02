@@ -1282,31 +1282,20 @@ InventoryOnboardingActions GlRenderer::submitInventoryOnboarding() {
     InventoryOnboardingActions actions;
     const ImGuiIO& io = ImGui::GetIO();
 
-    // 压暗遮罩: 全屏半透明窗口盖在模型库之上, 同时挡住其下的点击
-    // (窗口按提交顺序绘制, 本函数约定在 submitLibrary 之后调用)
-    ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-    ImGui::SetNextWindowSize(io.DisplaySize);
-    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.10f, 0.12f, 0.16f, 0.45f));
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-    ImGui::Begin("##onboarding_dim", nullptr,
-                 ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
-                     ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoNav |
-                     ImGuiWindowFlags_NoBringToFrontOnFocus);
-    ImGui::End();
-    ImGui::PopStyleVar();
-    ImGui::PopStyleColor();
-
+    // ImGui 原生模态弹窗: 自带压暗遮罩并阻断其下窗口 (模型库) 的输入
+    if (!ImGui::IsPopupOpen("##inventory_onboarding")) {
+        ImGui::OpenPopup("##inventory_onboarding");
+    }
     ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f),
                             ImGuiCond_Always, ImVec2(0.5f, 0.5f));
     ImGui::SetNextWindowSize(ImVec2(560.0f, 0.0f));  // 固定宽, 高度自适应
-    ImGui::SetNextWindowBgAlpha(0.985f);
-    ImGui::SetNextWindowFocus();  // 始终盖在遮罩与模型库之上
     ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 16.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(30.0f, 26.0f));
+    ImGui::PushStyleColor(ImGuiCol_ModalWindowDimBg, ImVec4(0.10f, 0.12f, 0.16f, 0.45f));
     const ImGuiWindowFlags flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
                                    ImGuiWindowFlags_NoSavedSettings |
                                    ImGuiWindowFlags_AlwaysAutoResize;
-    if (ImGui::Begin("##inventory_onboarding", nullptr, flags)) {
+    if (ImGui::BeginPopupModal("##inventory_onboarding", nullptr, flags)) {
         const float avail = ImGui::GetContentRegionAvail().x;
 
         if (font_title_ != nullptr) ImGui::PushFont(font_title_);
@@ -1317,7 +1306,7 @@ InventoryOnboardingActions GlRenderer::submitInventoryOnboarding() {
         ImGui::PushTextWrapPos(avail);
         ImGui::TextUnformatted(
             "告诉我们家里有哪些磁力片, 模型库就能用「我能搭的」筛选出"
-            "库存足够的模型, 开搭前也不会再遇到缺片的尴尬。");
+            "库存足够的模型, 开搭前也不会再因为缺片而中断。");
         ImGui::PopTextWrapPos();
         ImGui::Spacing();
         ImGui::Separator();
@@ -1339,11 +1328,13 @@ InventoryOnboardingActions GlRenderer::submitInventoryOnboarding() {
         ImGui::PopStyleColor();
         ImGui::Spacing();
 
-        if (ImGui::Button("稍后再说, 先逛逛模型库##onboarding_dismiss", ImVec2(avail, 48.0f))) {
+        if (ImGui::Button("稍后再说##onboarding_dismiss", ImVec2(avail, 48.0f))) {
             actions.dismissed = true;
+            ImGui::CloseCurrentPopup();
         }
+        ImGui::EndPopup();
     }
-    ImGui::End();
+    ImGui::PopStyleColor();
     ImGui::PopStyleVar(2);
     return actions;
 }

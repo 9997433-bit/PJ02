@@ -29,8 +29,8 @@
 | physics | `src/physics` | 世界坐标几何 (`TransformedTile`)、分离轴重叠检测、凸包、`PhysicsValidator` | core |
 | tutorial | `src/tutorial` | `TutorialEngine`: 步骤导航、场景查询、步骤一致性质检 | core |
 | render | `src/render` | `IRenderer` 接口 + `NullRenderer` + `OrbitCamera` (核心库内, 无图形依赖); `src/render/gl/` 为 GLFW + OpenGL 4.1 窗口后端 (独立库 `magtile_render_gl`) | core (GL 后端另依赖 GLFW / ImGui) |
-| progress | `src/progress` | `ProgressStore`: 教程进度 / 完成 / 收藏 / 成就 / 磁力片库存的本地 SQLite 存档 (详见 [PROGRESS.md](PROGRESS.md)) | SQLite 3 (仅 .cpp 内) |
-| app | `src/app` | 应用入口: CLI (`catalog` / `validate` / `tutorial` / `progress`) 与 3D 教程窗口 (`tutorial --gui`) | 全部 |
+| progress | `src/progress` | `ProgressStore`: 教程进度 / 完成 / 收藏 / 成就 / 磁力片库存 (`tile_inventory` 表 + `canBuild` BOM 对照) 的本地 SQLite 存档 (详见 [PROGRESS.md](PROGRESS.md)) | core; SQLite 3 + nlohmann/json (仅 .cpp 内) |
+| app | `src/app` | 应用入口: CLI (`catalog` / `validate` / `tutorial` / `progress` / `inventory`) 与 3D 教程窗口 (`tutorial --gui`) | 全部 |
 
 依赖方向严格自上而下, core 不反向依赖任何模块。所有公共头文件位于 `include/magtile/<module>/`, 命名空间与目录一一对应 (`magtile::core` 等)。
 

@@ -51,6 +51,10 @@ cmake --build build -j
 # 查看教程进度存档 (progress show/reset <model_id> 查看/重置单个模型)
 ./build/magtile_app progress list
 
+# 登记家里的磁力片库存并列出能搭建的模型 (inventory show 查看库存)
+./build/magtile_app inventory set square 40 equilateral_triangle 24
+./build/magtile_app inventory match
+
 # 运行测试
 ctest --test-dir build --output-on-failure
 

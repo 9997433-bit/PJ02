@@ -207,9 +207,9 @@ tests/test_physics_negative.sh build/magtile_app data \
 
 正例夹具按 `CONFIGURE_DEPENDS` 自动注册, 新增只需把 JSON 放进目录后重新配置。**每放宽/收紧一次 PhysicsConfig 预算参数, 都必须同时补一对正/负例夹具钉住新边界** (见 PHYSICS_RULES.md "调参纪律")。
 
-### 3.9 C++ 回归 (`progress_roundtrip` / `progress_cli_smoke` / `parent_gate`)
+### 3.9 C++ 回归 (`progress_roundtrip` / `progress_cli_smoke` / `parent_gate` / `inventory_cli`)
 
-进度存档 (SQLite) 的保存/读取往返、完成/收藏/成就/库存、跨连接持久化与重置删除的 C++ 级回归, 以及空库 CLI 冒烟。`parent_gate` (`tests/test_parent_gate.cpp`) 覆盖家长门模块 (SECURITY_AND_PRIVACY.md §6.2 要求单测的三个域): 乘法题生成域、中文大写数字转换/解析与验证逻辑、3 次答错冷却状态机、15 分钟内存会话有效期 (时间经显式注入, 测试不真实等待)。随代码演进持续追加此类用例 —— 注册进 CTest 即自动纳入全量 QA 关卡 3。
+进度存档 (SQLite) 的保存/读取往返、完成/收藏/成就、磁力片库存 (`tile_inventory` 表登记/读取、`canBuild`/`missingPieces` BOM 对照、v1 库存 JSON 迁移)、跨连接持久化与重置删除的 C++ 级回归, 以及空库 CLI 冒烟。`inventory_cli` (`tests/test_inventory_cli.sh`) 覆盖库存 CLI 全流程: set/show/match、非法输入拒绝、匹配边界 (满配库存全库能搭 / 全 0 库存能搭数为 0 且缺片清单按缺片数升序)。`parent_gate` (`tests/test_parent_gate.cpp`) 覆盖家长门模块 (SECURITY_AND_PRIVACY.md §6.2 要求单测的三个域): 乘法题生成域、中文大写数字转换/解析与验证逻辑、3 次答错冷却状态机、15 分钟内存会话有效期 (时间经显式注入, 测试不真实等待)。随代码演进持续追加此类用例 —— 注册进 CTest 即自动纳入全量 QA 关卡 3。
 
 ### 3.10 GL 渲染冒烟 (`tests/test_gl_smoke.sh`)
 

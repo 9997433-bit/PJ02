@@ -167,9 +167,9 @@ flowchart TB
 | 模型详情页（BOM 对照库存/缺片提示） | 开搭前确认页 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §5.4 |
 | 年龄分层三模式（4–6/7–9/10–12） **[M3 门槛]** | 布局/文字量/相机/反馈分龄 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §2 |
 | 触控目标 ≥48dp / 无微型按钮 **[M3 门槛]** | 儿童侧验收红线 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.1 |
-| 「我能搭」筛选 + 难度/主题/片数筛选 | 依库存过滤 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §5.2 |
+| 「我能搭」筛选 + 难度/主题/片数筛选 | 依库存过滤 | `IN_PROGRESS`（GL 库「我能搭的」勾选框 + `inventory match` CLI 已依 BOM 对照过滤；步骤级缺片提示待做） | [UI_UX_SPEC.md](UI_UX_SPEC.md) §5.2 |
 | 进度与成就 GUI（成就墙/作品列表） | 数据层已 DONE, 界面待做 | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §7 |
-| Onboarding（年龄段 + 库存录入 ≤90s） **[M3 门槛]** | 库存 API 已 DONE, 界面待做 | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §10 |
+| Onboarding（年龄段 + 库存录入 ≤90s） **[M3 门槛]** | 结构化库存 API + CLI 录入 + 首启提示弹窗 stub 已 DONE, 图形录入界面待做 | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §10 |
 | 色盲安全 + 阅读友好（字号三档/AA 对比度） **[M3 门槛]** | 无障碍验收 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.7 |
 | 无暗黑模式（无广告/无倒计时/儿童侧无价格） **[M3 门槛]** | 设计红线, 持续生效 | `PLANNED`（验收流程） | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.5 |
 
