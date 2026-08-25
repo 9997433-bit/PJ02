@@ -1,5 +1,9 @@
 #include "library_filter_model.hpp"
 
+#include <QVariantMap>
+#include <algorithm>
+#include <vector>
+
 #include "library_model.hpp"
 
 namespace magtile::qtui {
@@ -48,6 +52,43 @@ void LibraryFilterModel::clearFilters() {
     buildable_only_ = false;
     invalidateRowsFilter();
     emit filtersChanged();
+}
+
+QVariantList LibraryFilterModel::recommendBuildable(int max_count) const {
+    QVariantList recommendations;
+    const QAbstractItemModel* src = sourceModel();
+    if (src == nullptr || max_count <= 0) return recommendations;
+
+    // canBuild 在未登记库存时恒为 false (StudioBackend::reload 口径),
+    // 所以未登记库存时这里自然返回空列表
+    std::vector<QModelIndex> buildable;
+    for (int row = 0; row < src->rowCount(); ++row) {
+        const QModelIndex idx = src->index(row, 0);
+        if (src->data(idx, LibraryModel::CanBuildRole).toBool()) {
+            buildable.push_back(idx);
+        }
+    }
+    std::stable_sort(buildable.begin(), buildable.end(),
+                     [src](const QModelIndex& a, const QModelIndex& b) {
+                         const int diff_a = src->data(a, LibraryModel::DifficultyRole).toInt();
+                         const int diff_b = src->data(b, LibraryModel::DifficultyRole).toInt();
+                         if (diff_a != diff_b) return diff_a < diff_b;
+                         return src->data(a, LibraryModel::PiecesRole).toInt() <
+                                src->data(b, LibraryModel::PiecesRole).toInt();
+                     });
+
+    const int count = std::min(max_count, static_cast<int>(buildable.size()));
+    for (int i = 0; i < count; ++i) {
+        const QModelIndex& idx = buildable[static_cast<std::size_t>(i)];
+        QVariantMap item;
+        item.insert(QStringLiteral("modelId"), src->data(idx, LibraryModel::ModelIdRole));
+        item.insert(QStringLiteral("name"), src->data(idx, LibraryModel::NameRole));
+        item.insert(QStringLiteral("difficulty"), src->data(idx, LibraryModel::DifficultyRole));
+        item.insert(QStringLiteral("pieces"), src->data(idx, LibraryModel::PiecesRole));
+        item.insert(QStringLiteral("theme"), src->data(idx, LibraryModel::ThemeRole));
+        recommendations.push_back(item);
+    }
+    return recommendations;
 }
 
 bool LibraryFilterModel::filterAcceptsRow(int source_row,

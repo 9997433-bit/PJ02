@@ -12,6 +12,8 @@ AbstractButton {
     id: control
 
     property color accent: Theme.primary
+    // 字号可放大 (4-6 岁启蒙模式的超大主题入口用, UI_UX_SPEC.md §2)
+    property int fontSize: Theme.fontBody
 
     implicitHeight: Theme.touchTarget
     implicitWidth: chipLabel.implicitWidth + 2 * Theme.spacing
@@ -33,7 +35,7 @@ AbstractButton {
         id: chipLabel
         text: control.text
         color: control.checked ? "white" : Theme.textPrimary
-        font.pixelSize: Theme.fontBody
+        font.pixelSize: control.fontSize
         font.bold: control.checked
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter

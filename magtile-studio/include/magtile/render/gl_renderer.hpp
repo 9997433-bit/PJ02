@@ -14,6 +14,7 @@
 #include <utility>
 #include <vector>
 
+#include "magtile/core/age_mode.hpp"
 #include "magtile/render/orbit_camera.hpp"
 #include "magtile/render/renderer.hpp"
 
@@ -155,15 +156,19 @@ public:
     /// 用户操作。搜索与筛选状态由渲染器内部跨帧保持, 应用层每帧
     /// 提交全量卡片即可。须在 beginFrame 与 endFrame 之间调用,
     /// 每帧至多一次, 与 submitHud 互斥 (二者分属不同界面)。
-    /// @param simple_layout 4-6 岁启蒙模式简化布局 (UI_UX_SPEC.md §2):
-    ///        超大卡片 + 隐藏搜索/筛选行, 由应用层按年龄段设置传入。
+    /// @param age_mode 年龄段模式, 决定卡片密度与筛选器收放
+    ///        (UI_UX_SPEC.md §2, 由应用层按年龄段设置传入):
+    ///        4-6 启蒙 = 超大卡片约每行 2 张 + 隐藏搜索/筛选行;
+    ///        7-9 标准 = 每行 3~4 张 + 只留难度/主题筛选;
+    ///        10+ 进阶 = 紧凑卡片每行 4~5 张 + 全量筛选。
     /// @param inventory_configured 是否已登记磁力片库存: 未登记时
     ///        "我能搭的" 筛选禁用并显示 "去登记" 引导 (UI_UX_SPEC.md §5.2)。
     /// @param activate_buildable_filter 本帧强制开启 "我能搭的" 筛选
     ///        (一次性触发, 供库存录入界面 "保存, 看看我能搭什么" 跳转用;
-    ///        筛选状态照常由渲染器跨帧保持, 用户可随时取消勾选)。
+    ///        筛选状态照常由渲染器跨帧保持, 用户可随时取消勾选;
+    ///        仅 10+ 进阶模式可见该筛选, 其余档位忽略)。
     [[nodiscard]] virtual LibraryActions submitLibrary(const std::vector<LibraryCard>& cards,
-                                                       bool simple_layout,
+                                                       core::AgeMode age_mode,
                                                        bool inventory_configured,
                                                        bool activate_buildable_filter) = 0;
 

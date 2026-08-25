@@ -337,7 +337,7 @@ public:
     }
     [[nodiscard]] TutorialActions submitHud(const TutorialHudState& hud) override;
     [[nodiscard]] LibraryActions submitLibrary(const std::vector<LibraryCard>& cards,
-                                               bool simple_layout, bool inventory_configured,
+                                               core::AgeMode age_mode, bool inventory_configured,
                                                bool activate_buildable_filter) override;
     [[nodiscard]] InventoryOnboardingActions submitInventoryOnboarding() override;
     [[nodiscard]] InventoryEditorActions submitInventoryEditor(
@@ -1084,14 +1084,27 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
 }
 
 LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
-                                         bool simple_layout, bool inventory_configured,
+                                         core::AgeMode age_mode, bool inventory_configured,
                                          bool activate_buildable_filter) {
     LibraryActions actions;
     const ImGuiIO& io = ImGui::GetIO();
 
+    // 年龄分层 (UI_UX_SPEC.md §2): 启蒙 = 超大卡片无筛选;
+    // 标准 = 难度/主题两个筛选器; 进阶 = 全量筛选 + 紧凑卡片
+    const bool simple_layout = age_mode == core::AgeMode::Age4_6;
+    const bool full_filters = age_mode == core::AgeMode::Age10_12;
+
     // 库存录入界面 "保存, 看看我能搭什么" 的一次性跳转: 强制开启筛选
-    if (activate_buildable_filter && inventory_configured) {
+    // (仅 10+ 进阶模式可见该筛选, 其余档位忽略)
+    if (activate_buildable_filter && inventory_configured && full_filters) {
         library_buildable_only_ = true;
+    }
+    // 非进阶档位收起 收藏/核心 9 片/我能搭的 三个筛选: 状态同步清零,
+    // 防止跨帧/跨档位残留的看不见的筛选悄悄过滤列表
+    if (!full_filters) {
+        library_favorites_only_ = false;
+        library_core9_only_ = false;
+        library_buildable_only_ = false;
     }
 
     // 主题筛选候选: 全部卡片标签去重, 保持出现顺序
@@ -1183,41 +1196,45 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
                 }
                 ImGui::EndCombo();
             }
-            ImGui::SameLine();
-            ImGui::Checkbox("只看收藏", &library_favorites_only_);
-            ImGui::SameLine();
-            // "只用核心 9 片": 只看基础套装 (核心 9 片型) 就能搭的模型
-            // (与 Qt 版同一共享判定口径, 见 core::isCoreTile / TILE_CATALOG.md)
-            ImGui::Checkbox("只用核心 9 片", &library_core9_only_);
-            if (ImGui::IsItemHovered()) {
-                ImGui::SetTooltip("只显示基础套装 (核心 9 片型) 就能搭的模型, "
-                                  "不需要任何扩展装");
-            }
-            ImGui::SameLine();
-            // "我能搭的": 依据磁力片库存过滤 BOM 满足的模型 (§5.2);
-            // 未登记库存时禁用并引导先去登记, 不显示全空列表
-            if (inventory_configured) {
-                ImGui::Checkbox("我能搭的", &library_buildable_only_);
+            // 收藏/核心 9 片/我能搭的 只在 10+ 进阶模式展示 (§2:
+            // 7-9 标准模式只留 难度 + 主题 两个筛选器)
+            if (full_filters) {
+                ImGui::SameLine();
+                ImGui::Checkbox("只看收藏", &library_favorites_only_);
+                ImGui::SameLine();
+                // "只用核心 9 片": 只看基础套装 (核心 9 片型) 就能搭的模型
+                // (与 Qt 版同一共享判定口径, 见 core::isCoreTile / TILE_CATALOG.md)
+                ImGui::Checkbox("只用核心 9 片", &library_core9_only_);
                 if (ImGui::IsItemHovered()) {
-                    ImGui::SetTooltip("只显示现有磁力片库存足够搭建的模型");
+                    ImGui::SetTooltip("只显示基础套装 (核心 9 片型) 就能搭的模型, "
+                                      "不需要任何扩展装");
                 }
-            } else {
-                // 未登记库存: 筛选不可用, 就地给出图形录入入口 (§10 跳过
-                // 永远可见, 引导而非报错)
-                library_buildable_only_ = false;
-                ImGui::BeginDisabled();
-                bool unavailable = false;
-                ImGui::Checkbox("我能搭的", &unavailable);
-                ImGui::EndDisabled();
-                if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
-                    ImGui::SetTooltip("先登记家里的磁力片, 就能只看库存足够搭的模型");
+                ImGui::SameLine();
+                // "我能搭的": 依据磁力片库存过滤 BOM 满足的模型 (§5.2);
+                // 未登记库存时禁用并引导先去登记, 不显示全空列表
+                if (inventory_configured) {
+                    ImGui::Checkbox("我能搭的", &library_buildable_only_);
+                    if (ImGui::IsItemHovered()) {
+                        ImGui::SetTooltip("只显示现有磁力片库存足够搭建的模型");
+                    }
+                } else {
+                    // 未登记库存: 筛选不可用, 就地给出图形录入入口 (§10 跳过
+                    // 永远可见, 引导而非报错)
+                    library_buildable_only_ = false;
+                    ImGui::BeginDisabled();
+                    bool unavailable = false;
+                    ImGui::Checkbox("我能搭的", &unavailable);
+                    ImGui::EndDisabled();
+                    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+                        ImGui::SetTooltip("先登记家里的磁力片, 就能只看库存足够搭的模型");
+                    }
+                    ImGui::SameLine(0.0f, 4.0f);
+                    ImGui::PushStyleColor(ImGuiCol_Text, kAccentVec);
+                    if (ImGui::SmallButton("去登记 ▶##filter_go_inventory")) {
+                        actions.open_inventory = true;
+                    }
+                    ImGui::PopStyleColor();
                 }
-                ImGui::SameLine(0.0f, 4.0f);
-                ImGui::PushStyleColor(ImGuiCol_Text, kAccentVec);
-                if (ImGui::SmallButton("去登记 ▶##filter_go_inventory")) {
-                    actions.open_inventory = true;
-                }
-                ImGui::PopStyleColor();
             }
         }
 
@@ -1297,18 +1314,56 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
                             static_cast<int>(cards.size()));
         ImGui::Spacing();
 
+        // 分龄卡片密度 (UI_UX_SPEC.md §2, 1240px 面板宽口径):
+        //   4-6 启蒙 560px 超大卡片约每行 2 张 (图文放大便于辨认点按,
+        //        卡片上部约 36% 为缩略图区, drawLibraryCard thumb_height);
+        //   7-9 标准 300px 每行 3~4 张;
+        //   10+ 进阶 252px 紧凑卡片每行 4~5 张。
+        const ImVec2 card_size = simple_layout ? ImVec2{560.0f, 420.0f}
+                                : full_filters ? ImVec2{252.0f, 330.0f}
+                                               : ImVec2{300.0f, 340.0f};
         if (filtered.empty()) {
             ImGui::Dummy(ImVec2(0.0f, 36.0f));
             const char* empty_text = "没有找到匹配的模型, 试试清空搜索或放宽筛选条件";
             const float text_width = ImGui::CalcTextSize(empty_text).x;
             ImGui::SetCursorPosX(std::max(0.0f, (avail_width - text_width) * 0.5f));
             ImGui::TextDisabled("%s", empty_text);
+
+            // 「我能搭的」空态推荐 (§5.2): 无视其他筛选, 从库存足够
+            // 搭建的模型里按难度升序 (同难度片数少者优先) 推荐 3 个,
+            // 不让孩子面对一句"没有结果"就停下
+            if (library_buildable_only_ && inventory_configured) {
+                std::vector<const LibraryCard*> recommended;
+                for (const auto& card : cards) {
+                    if (card.buildable) recommended.push_back(&card);
+                }
+                std::stable_sort(recommended.begin(), recommended.end(),
+                                 [](const LibraryCard* a, const LibraryCard* b) {
+                                     if (a->difficulty != b->difficulty) {
+                                         return a->difficulty < b->difficulty;
+                                     }
+                                     return a->total_pieces < b->total_pieces;
+                                 });
+                if (recommended.size() > 3) recommended.resize(3);
+                if (!recommended.empty()) {
+                    ImGui::Spacing();
+                    ImGui::Spacing();
+                    ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorGreen),
+                                       "✓ 不过这几个现在就能搭:");
+                    ImGui::Spacing();
+                    const int rec_columns = columnsFor(card_size.x);
+                    int rec_index = 0;
+                    for (const LibraryCard* card : recommended) {
+                        drawLibraryCard(*card, card_size, /*compact=*/false, actions);
+                        ++rec_index;
+                        if (rec_index % rec_columns != 0 &&
+                            rec_index < static_cast<int>(recommended.size())) {
+                            ImGui::SameLine(0.0f, spacing);
+                        }
+                    }
+                }
+            }
         } else {
-            // 启蒙模式超大卡片: 约每行 2 张 (1240px 面板宽), 图文放大
-            // 便于 4-6 岁儿童辨认与点按 (UI_UX_SPEC.md §2 卡片密度);
-            // 卡片上部约 36% 为缩略图区 (drawLibraryCard thumb_height)
-            const ImVec2 card_size = simple_layout ? ImVec2{560.0f, 420.0f}
-                                                   : ImVec2{300.0f, 340.0f};
             const int columns = columnsFor(card_size.x);
             int index = 0;
             for (const LibraryCard* card : filtered) {

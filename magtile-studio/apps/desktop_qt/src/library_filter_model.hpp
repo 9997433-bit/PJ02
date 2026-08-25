@@ -12,6 +12,7 @@
 
 #include <QSortFilterProxyModel>
 #include <QString>
+#include <QVariantList>
 
 namespace magtile::qtui {
 
@@ -53,6 +54,13 @@ public:
 
     /// 一键回到「全部」(空态页「换个条件试试」按钮)。
     Q_INVOKABLE void clearFilters();
+
+    /// 「我能搭的」筛选空态推荐 (UI_UX_SPEC.md §5.2): 无视其他筛选
+    /// 条件, 从全部卡片中挑库存足够搭建 (canBuild) 的模型, 按难度
+    /// 升序 (同难度片数少者优先) 取前 max_count 个。每项含
+    /// {modelId, name, difficulty, pieces, theme}; 未登记库存或
+    /// 没有可搭模型时返回空列表 (界面退回普通空态文案)。
+    Q_INVOKABLE QVariantList recommendBuildable(int max_count) const;
 
 signals:
     void filtersChanged();

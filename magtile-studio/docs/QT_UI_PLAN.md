@@ -45,6 +45,7 @@ apps/desktop_qt/
 │   ├── library_model.*     # QAbstractListModel: 模型卡片 (名称/难度/片数/步数/主题/进度徽标/收藏
 │   │                       #   /core9Only/canBuild/missingTotal)
 │   ├── library_filter_model.*  # QSortFilterProxyModel: 难度/主题/只用核心9片/我能搭的 四维筛选
+│   │                           #   + recommendBuildable 空态推荐 (canBuild 难度升序挑 3 个)
 │   ├── inventory_backend.*     # 库存录入桥: tile_inventory 表读写 (与 CLI / GL 版共库)
 │   ├── parent_gate_backend.*   # 家长门桥 (QT-2): core::ParentGate 包装 (题目/验证/3 次错冷却/15 分钟
 │   │                           #   内存会话, 与 GL 版同一状态机) + 秒级倒计时通知, 不接触存档
@@ -65,6 +66,8 @@ apps/desktop_qt/
     ├── HomePage.qml        # 首页: 超大主按钮 + "继续上次"卡片 (直达断点模型详情) + 32px 家长区入口 (§5.3)
     │                       #   + 儿童侧订阅温和入口 (QT-5, §12.2: 只说"请家长来解锁", 无价格无催促)
     ├── LibraryPage.qml     # 模型库: 筛选侧栏 (难度/主题/只用核心9片/我能搭的) + 卡片网格
+    │                       #   + 分龄三档 (4-6 超大卡无筛选/7-9 难度+主题/10+ 全量+紧凑)
+    │                       #   + 我能搭的空态推荐 3 个可搭模型 (难度升序, 点击直达详情)
     │                       #   + ✓/▶ 进度徽标 + "还缺 N 片"琥珀徽标 + 筛选空态 ("换个条件试试")
     ├── DetailPage.qml      # 模型详情 (§5.4): 预览占位 + 难度/片数/步数 + BOM 对照库存缺片提示
     │                       #   + 套装分层标签 + 收藏 + "开始搭建"大按钮 (高 64, 占宽 80%)
@@ -85,7 +88,7 @@ apps/desktop_qt/
 
 已兑现的规范点：主色板与圆角令牌、可点元素 ≥ 48（家长区入口 32px 为规范内唯一例外）、主按钮 ≥ 64 高、状态三重编码（图形+文字+颜色, §4.7 色盲安全）、任意界面 ≤ 2 步回首页、无失败文案（占位功能一律"即将上线"温和提示，缺片用琥珀提示 + 替代建议，不用红色表达"错误"）。
 
-QT-1 补充说明：BOM 与库存对照在 `StudioBackend::reload` 一次性算好（与 GL 版同策略，模型 JSON 仅启动/重载时加载），核心 9 片分层以 `data/tile_catalog.json` 的 `tier` 标注为单一数据源（目录不可用时退回代码内同口径白名单）；「我能搭的」在未登记库存时禁用并温和引导（不显示全空列表）。「开始搭建」统一走 `startBuild -> buildRequested` 信号，Main.qml 据此路由到占位 TutorialPage —— QT-3 视口就绪后只需替换教程页内容，详情页与路由契约不变。
+QT-1 补充说明：BOM 与库存对照在 `StudioBackend::reload` 一次性算好（与 GL 版同策略，模型 JSON 仅启动/重载时加载），核心 9 片分层以 `data/tile_catalog.json` 的 `tier` 标注为单一数据源（目录不可用时退回代码内同口径白名单）；「我能搭的」在未登记库存时禁用并温和引导（不显示全空列表）。「开始搭建」统一走 `startBuild -> buildRequested` 信号，Main.qml 据此路由到占位 TutorialPage —— QT-3 视口就绪后只需替换教程页内容，详情页与路由契约不变。分龄三档（§2）读 `appSettings.ageModeId`（家长区改档即时生效）：4–6 收起整个筛选栏只留超大主题入口胶囊（高 64/大字号）+ 每行 2 张超大卡片；7–9 只留难度/主题；10+ 全量筛选 + 每行 4–5 张紧凑卡片；被收起的筛选维度在 `collapseHiddenFilters` 里同步清零（防"看不见的筛选"）。「我能搭的」空态由 `LibraryFilterModel::recommendBuildable` 无视其他筛选按难度升序（同难度片数少者优先）推荐 3 个可搭模型（`qt_backend_bridges` 有单测），GL 版 `submitLibrary` 改收 `core::AgeMode` 同口径收放（含空态推荐），两端读同一年龄段设置键。
 
 QT-2 补充说明：家长门/冷却/会话逻辑**零重复实现**——Qt 版与 GL 版链接同一个 `core::ParentGate`（纯逻辑层，单测 `parent_gate` 不变），`ParentGateBackend` 只做属性包装与秒级倒计时通知；会话与冷却只存内存、永不落盘（SECURITY_AND_PRIVACY.md §6.2）。路由为 首页 32px 入口 → 无会话先进家长门（过门后**原位替换**为家长中心，导航深度保持 1）→ 设置/订阅在门后第 2 层；Main.qml 有统一的会话守卫，会话到期或点「锁定家长区」时自动退回首页并温和提示。设置三项（字号三档/减少动效/年龄段）经 `SettingsBackend` 写 `ProgressStore` settings 表：年龄段沿用 `age_settings` 键（CLI `settings set-age` / GL 版启蒙布局读同一键），字号与减少动效的键名契约新增在核心层 `progress/ui_settings`（GL/移动端外壳可直接复用，核心库依旧零 Qt 依赖）；字号与动效经 Theme 单例绑定即时全应用生效。订阅页已由 QT-5 升级为脚手架（见下方 QT-5 补充说明）。测试：后端桥单测 `qt_backend_bridges`（含与 GL/CLI 的共库契约双向验证）+ 无头 QML 冒烟 `qt_gui_smoke`（offscreen 三连跑：首页 / `--parent-gate` 深链 / `--smoke-parent-flow` 自动驾驶走完 门→家长中心→设置→订阅）。
 
@@ -126,7 +129,7 @@ cmake --build build-qt --target magtile_studio_qt -j
 | 阶段 | 内容 | 依赖 | 状态 |
 |------|------|------|------|
 | **QT-0 外壳落地** | CMake 可选子项目、Theme 令牌、Home + Library 占位、链接 magtile_core、进度徽标 | — | `DONE` |
-| **QT-1 模型库完整** | 筛选器（难度/主题/只用核心 9 片/我能搭）、分龄卡片密度（§2）、"继续上次"直达教程、模型详情页（BOM 缺片提示, §5.4） | QT-0 | `IN_PROGRESS`（筛选器 + 筛选空态 + 详情页 + 收藏 + "继续上次"直达详情 DONE；分龄卡片密度、筛选无结果时推荐 3 个可搭模型、详情页 3D 预览与预计用时 PLANNED） |
+| **QT-1 模型库完整** | 筛选器（难度/主题/只用核心 9 片/我能搭）、分龄卡片密度（§2）、"继续上次"直达教程、模型详情页（BOM 缺片提示, §5.4） | QT-0 | `IN_PROGRESS`（筛选器 + 筛选空态 + 详情页 + 收藏 + "继续上次"直达详情 + 分龄卡片密度与筛选器收放（§2 三档）+「我能搭的」空态推荐 3 个可搭模型 DONE；详情页 3D 预览与预计用时 PLANNED） |
 | **QT-2 家长门与设置** | `core::ParentGate` 接 QML（算术题 + 中文大写软键盘复刻 GL 版）、家长中心、设置页（字号三档/减少动效/主题） | QT-0 | `IN_PROGRESS`（家长门 QML + 家长中心 + 设置页字号三档/减少动效/年龄段 + 订阅温和占位页（门后）+ 会话守卫 + 后端桥单测/QML 冒烟 DONE；主题亮暗切换、PIN、家长中心完整功能 PLANNED） |
 | **QT-3 3D 教程播放器** | `QQuickFramebufferObject` 集成 `magtile_render_gl`：步骤导航/高亮/ghost/轨道相机上屏；退出自动存档 | QT-1 | `DONE`（核心屏 ★：场景绘制抽成 GL/Qt 共用的 `GlSceneRenderer`，视口/导航/高亮/ghost/轨道相机/自动存档 + `--smoke-open-model` 无头冒烟已落地；触屏手势与详情页 3D 预览 PLANNED） |
 | **QT-4 反馈与庆祝** | 每步星星反馈、完成庆祝页、成就墙 GUI、QtTextToSpeech 朗读（§4.2/4.3） | QT-3 | `IN_PROGRESS`（完成庆祝页（彩带/星星/成就卡/再搭一次/回模型库, 减少动效降级）+ 完成链路 `completeBuild -> buildCompleted`（写存档完成 + 首次完成成就, 与 GL 版同口径）+ QtTextToSpeech 步骤朗读骨架（🔊 按钮 + 4-6 岁自动朗读 + `tts_enabled` 开关挂钩, 可选依赖静默降级）+ `--smoke-complete-model` 冒烟 DONE；每步星星反馈动画、进度条 10% 小星、成就墙 GUI、「再搭一个」推荐、🔊 波形动画 PLANNED） |
@@ -139,7 +142,7 @@ cmake --build build-qt --target magtile_studio_qt -j
 
 | 屏幕（UI_UX_SPEC 章节） | GL/ImGui 版 | Qt 版 | 迁移阶段 |
 |------------------------|-------------|-------|----------|
-| 首页 / 模型库 §5 | 卡片网格 + 进度徽标 | 网格/徽标/继续上次卡片 `DONE`；筛选器（难度/主题/只用核心 9 片/我能搭的）+ 筛选空态 + 缺片徽标 `DONE`；分龄布局 `PLANNED` | QT-0 / QT-1 |
+| 首页 / 模型库 §5 | 卡片网格 + 进度徽标 + 分龄三档密度/筛选收放 | 网格/徽标/继续上次卡片 `DONE`；筛选器（难度/主题/只用核心 9 片/我能搭的）+ 筛选空态 + 缺片徽标 `DONE`；分龄布局（4–6 超大卡/7–9 标准/10+ 紧凑 + 筛选器收放）+「我能搭的」空态推荐 `DONE` | QT-0 / QT-1 |
 | 模型详情 §5.4 | 无 | `DONE`（BOM 对照库存缺片琥珀提示/套装分层标签/收藏/开始搭建大按钮）；3D 可旋转预览与预计用时 `PLANNED`（QT-3 后接入） | QT-1 |
 | 教程播放器 §6 ★ | 步骤导航/高亮/ghost/相机 已可用 | `DONE`（3D 视口 + 步骤导航/高亮/ghost/轨道相机/退出自动存档, 与 GL 版共用场景渲染层与存档；🔊 步骤朗读 + 4-6 岁自动朗读已接 QT-4 骨架；触屏双指手势、🔊 波形动画 `PLANNED`） | QT-3 |
 | 完成庆祝页 §6.2 | 无 | `DONE`（彩带 + 星星弹跳 + 温和文案 + 成就卡（片数/步数）+「再搭一次/回模型库」大按钮；教程完成原位替换进入, 减少动效时静态降级）；「再搭一个」推荐相近难度模型 `PLANNED` | QT-4 |

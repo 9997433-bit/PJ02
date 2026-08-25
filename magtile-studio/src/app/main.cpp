@@ -813,10 +813,10 @@ int runLibraryGui(const CliArgs& args) {
     progress::ProgressStore store(db_file);
 
     // 年龄段模式 (家长在设置中选择, UI_UX_SPEC.md §2):
-    //   - 4-6 岁启蒙模式: 模型库切超大卡片简化布局 + 教程自动朗读;
-    //   - 其余档位: 标准布局, 朗读只认显式 --tts。
+    //   - 模型库按档位切卡片密度与筛选器收放 (渲染层 submitLibrary):
+    //     4-6 超大卡片无筛选 / 7-9 难度+主题 / 10+ 紧凑卡片全量筛选;
+    //   - 4-6 岁启蒙模式教程自动朗读, 其余档位朗读只认显式 --tts。
     const core::AgeMode age_mode = progress::getAgeMode(store);
-    const bool simple_layout = age_mode == core::AgeMode::Age4_6;
     std::unique_ptr<tts::ITtsEngine> tts_engine;
     if (args.tts || age_mode == core::AgeMode::Age4_6) {
         tts_engine = tts::createSystemTts();
@@ -1035,7 +1035,7 @@ int runLibraryGui(const CliArgs& args) {
                 }
                 cards.push_back(std::move(card));
             }
-            library_actions = renderer->submitLibrary(cards, simple_layout,
+            library_actions = renderer->submitLibrary(cards, age_mode,
                                                       inventory_configured,
                                                       activate_buildable_filter);
             activate_buildable_filter = false;  // 一次性触发, 用过即清

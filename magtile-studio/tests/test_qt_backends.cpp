@@ -7,7 +7,10 @@
 //   2. 与 GL 版 / CLI 的共库契约: 桥写入的键能被 progress 层
 //      (age_settings / ui_settings) 原样读回, 反向亦然;
 //   3. ParentGateBackend: 出题 / 答对开会话 / 答错温和提示 /
-//      3 次答错进冷却 (冷却期拒答) / 锁定会话。
+//      3 次答错进冷却 (冷却期拒答) / 锁定会话;
+//   4. LibraryFilterModel (QT-1): 「我能搭的」筛选空态推荐
+//      recommendBuildable —— 只挑 canBuild、难度升序 (同难度片数
+//      少者优先)、无视其他筛选条件、上限截断。
 // 用法: magtile_qt_backend_test <临时数据库路径>
 // =============================================================
 
@@ -17,7 +20,11 @@
 #include <QVariantMap>
 #include <cstdio>
 #include <filesystem>
+#include <utility>
+#include <vector>
 
+#include "library_filter_model.hpp"
+#include "library_model.hpp"
 #include "magtile/core/age_mode.hpp"
 #include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/progress_store.hpp"
@@ -155,6 +162,66 @@ int main(int argc, char** argv) {
         gate.openGate();
         expect(!gate.wrongAnswer(), "openGate 复位答错提示");
         expect(gate.cooldownSeconds() > 0, "openGate 不绕过冷却");
+    }
+
+    // ---- 4. LibraryFilterModel: 「我能搭的」空态推荐 (QT-1, §5.2) ------
+    {
+        using magtile::qtui::LibraryFilterModel;
+        using magtile::qtui::LibraryModel;
+        using magtile::qtui::LibraryRow;
+
+        const auto makeRow = [](const char* id, int difficulty, int pieces, bool can_build) {
+            LibraryRow row;
+            row.entry.id = id;
+            row.entry.name = id;
+            row.entry.difficulty = difficulty;
+            row.entry.total_pieces = pieces;
+            row.bom_known = true;
+            row.can_build = can_build;
+            return row;
+        };
+
+        LibraryModel model;
+        std::vector<LibraryRow> rows;
+        rows.push_back(makeRow("hard_ok", 3, 50, true));
+        rows.push_back(makeRow("easy_big", 1, 80, true));
+        rows.push_back(makeRow("easy_small", 1, 40, true));
+        rows.push_back(makeRow("missing_tiles", 2, 60, false));
+        rows.push_back(makeRow("expert_ok", 5, 200, true));
+        model.resetRows(std::move(rows));
+
+        LibraryFilterModel filter;
+        filter.setSourceModel(&model);
+
+        // 模拟空态: 难度 4 + 我能搭的 -> 没有任何匹配
+        filter.setDifficulty(4);
+        filter.setBuildableOnly(true);
+        expect(filter.count() == 0, "难度 4 + 我能搭的 组合为空态");
+
+        // 推荐无视其他筛选: canBuild 里按 难度升序 -> 片数升序 挑 3 个
+        const QVariantList recs = filter.recommendBuildable(3);
+        expect(recs.size() == 3, "空态推荐恰好 3 个可搭模型");
+        expect(recs.value(0).toMap().value(QStringLiteral("modelId")).toString() ==
+                   QStringLiteral("easy_small"),
+               "第 1 个推荐是难度最低且片数最少的模型");
+        expect(recs.value(1).toMap().value(QStringLiteral("modelId")).toString() ==
+                   QStringLiteral("easy_big"),
+               "同难度按片数升序排列");
+        expect(recs.value(2).toMap().value(QStringLiteral("modelId")).toString() ==
+                   QStringLiteral("hard_ok"),
+               "第 3 个推荐是下一档难度的可搭模型");
+        for (const QVariant& rec : recs) {
+            expect(rec.toMap().value(QStringLiteral("modelId")).toString() !=
+                       QStringLiteral("missing_tiles"),
+                   "缺片模型不进推荐");
+        }
+        expect(filter.recommendBuildable(10).size() == 4, "上限大于可搭数时全量返回");
+
+        // 全部缺片时返回空列表 (界面退回普通空态文案)
+        std::vector<LibraryRow> none_buildable;
+        none_buildable.push_back(makeRow("a", 1, 10, false));
+        model.resetRows(std::move(none_buildable));
+        expect(filter.recommendBuildable(3).isEmpty(), "没有可搭模型时推荐为空");
     }
 
     if (g_failures == 0) {
