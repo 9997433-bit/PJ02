@@ -129,7 +129,10 @@ if(NOT ANDROID)
 endif()
 
 # ---- 平台外壳 (Android JNI 共享库 / Windows 打包资产) -------------
-add_subdirectory(platforms)
+# 按存在性引入, 平台外壳资产分批合入期间仓库始终可配置。
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/platforms/CMakeLists.txt)
+    add_subdirectory(platforms)
+endif()
 
 # ---- 测试 (详见 docs/TESTING.md) --------------------------------
 if(MAGTILE_BUILD_TESTS)
