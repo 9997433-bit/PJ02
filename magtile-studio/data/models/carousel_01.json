@@ -1,0 +1,1075 @@
+{
+  "schema_version": 1,
+  "id": "carousel_01",
+  "name": "旋转木马",
+  "name_en": "Carousel 01",
+  "description": "全库第一座环抱式转台游乐设施: 8 片长方形与方形拼成回字大转台 (长边给鼓身、短边给角台的长短分工), 环抱 2x2 圈层鼓身与梯形四坡大帐篷; 转台角台与拼缝上交替立起 8 只彩色三角木马, 重心全部正压沿口铰链; 南侧紫色双柱拱门横楣合龙, 东端售票亭戴四棱自锁尖顶, 菱形彩旗斜插门旁 —— 音乐响起, 糖果色的转台开动了。",
+  "difficulty": 3,
+  "total_pieces": 54,
+  "tags": [
+    "游乐园",
+    "旋转木马",
+    "转台",
+    "圈层砌法",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "rectangle": 16,
+        "square": 16,
+        "equilateral_triangle": 8,
+        "isosceles_triangle": 8,
+        "trapezoid": 4,
+        "rhombus": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "dk_s",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "dk_n",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "dk_w",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "dk_e",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "ck_sw",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ck_se",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ck_nw",
+      "type": "square",
+      "position": [
+        1.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ck_ne",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pv_w",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pv_e",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "kg",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bed_w",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_e",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hg_ws",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hg_wn",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hg_es",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hg_en",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dr_s_0",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "dr_e_0",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "dr_n_0",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "dr_w_0",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "dr_s_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "dr_e_1",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "dr_n_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "dr_w_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tent_s",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        2.222222,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tent_e",
+      "type": "trapezoid",
+      "position": [
+        3.777778,
+        3.0,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tent_n",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        3.777778,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tent_w",
+      "type": "trapezoid",
+      "position": [
+        2.222222,
+        3.0,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tent_cap",
+      "type": "square",
+      "position": [
+        3.0,
+        3.0,
+        2.707107
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hs_sw",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hs_se",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hs_nw",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        5.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hs_ne",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        5.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hm_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hm_se",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hm_nw",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        4.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hm_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        4.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gt_w_0",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gt_e_0",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gt_w_1",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gt_e_1",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gt_top",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ks_s",
+      "type": "square",
+      "position": [
+        5.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ks_n",
+      "type": "square",
+      "position": [
+        5.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ks_w",
+      "type": "square",
+      "position": [
+        5.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ks_e",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ks_rf_s",
+      "type": "isosceles_triangle",
+      "position": [
+        5.5,
+        0.166667,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ks_rf_e",
+      "type": "isosceles_triangle",
+      "position": [
+        5.833333,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ks_rf_n",
+      "type": "isosceles_triangle",
+      "position": [
+        5.5,
+        0.833333,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ks_rf_w",
+      "type": "isosceles_triangle",
+      "position": [
+        5.166667,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fg_w",
+      "type": "rhombus",
+      "position": [
+        1.25,
+        0.0,
+        0.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fg_e",
+      "type": "rhombus",
+      "position": [
+        4.25,
+        0.0,
+        0.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺转台南列: 1 片粉色长方形边台居中, 左右各锁 1 片青色角台。",
+      "tip": "长方形的短边正好交给 1x1 角台 —— 回字环的长短分工。",
+      "tiles_to_add": [
+        "dk_s",
+        "ck_sw",
+        "ck_se"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺转台东西边台: 2 片长方形竖着放, 长边对内、短边咬住角台。",
+      "tip": "内侧长边留给中央鼓身 —— 那是一条 2 格长的整边铰链。",
+      "tiles_to_add": [
+        "dk_w",
+        "dk_e"
+      ],
+      "highlight_tiles": [
+        "ck_sw",
+        "ck_se"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺转台北列合环: 北边台与两只角台落位, 回字大转台闭环。",
+      "tip": "转台是一整圈: 剪断任何一条拼缝, 环上还有第二条路。",
+      "tiles_to_add": [
+        "dk_n",
+        "ck_nw",
+        "ck_ne"
+      ],
+      "highlight_tiles": [
+        "dk_w",
+        "dk_e"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺入园动线: 透明走道长板接转台南沿, 两侧路板与售票亭地台顺次相吸。",
+      "tip": "走道长边整边吸转台南边台 —— 入口动线与转台焊成整体。",
+      "tiles_to_add": [
+        "walk",
+        "pv_w",
+        "pv_e",
+        "kg"
+      ],
+      "highlight_tiles": [
+        "dk_s"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "铺花圃: 东西两条绿色长方形花圃, 长边整边吸转台外沿。",
+      "tip": "花圃也用长边贴长边 —— 一格短边可吸不住 2 格长边。",
+      "tiles_to_add": [
+        "bed_w",
+        "bed_e"
+      ],
+      "highlight_tiles": [
+        "dk_w",
+        "dk_e"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立绿篱: 花圃南北短边各立 1 片绿色三角, 共 4 片。",
+      "tip": "三角绿篱立在花圃短边上, 底边整边吸合。",
+      "tiles_to_add": [
+        "hg_ws",
+        "hg_wn",
+        "hg_es",
+        "hg_en"
+      ],
+      "highlight_tiles": [
+        "bed_w",
+        "bed_e"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "砌鼓身第 1 层: 4 片红色长方形绕 2x2 环抱区立起, 拐角竖边互吸自锁成环, 底边与转台内长边整边贴合。",
+      "tip": "按 南-东-北-西 逆时针放, 每片放下即咬住转台与上一片。",
+      "tiles_to_add": [
+        "dr_s_0",
+        "dr_e_0",
+        "dr_n_0",
+        "dr_w_0"
+      ],
+      "highlight_tiles": [
+        "dk_s",
+        "dk_n"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "砌鼓身第 2 层: 黄色圈层再叠一环, 上环整边压下环。",
+      "tip": "红黄相间就是旋转木马的糖果色号。",
+      "tiles_to_add": [
+        "dr_s_1",
+        "dr_e_1",
+        "dr_n_1",
+        "dr_w_1"
+      ],
+      "highlight_tiles": [
+        "dr_s_0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "撑大帐篷: 4 片红色梯形下底吸鼓身墙顶整边, 腰腰互吸合拢。",
+      "tip": "梯形下底长 2 恰与墙顶等长 —— 一圈装完越按越紧。",
+      "tiles_to_add": [
+        "tent_s",
+        "tent_e",
+        "tent_n",
+        "tent_w"
+      ],
+      "highlight_tiles": [
+        "dr_s_1",
+        "dr_n_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "封帐篷压顶: 黄色压顶方片盖住帐篷 1x1 天窗。",
+      "tip": "压顶四边同时吸四片梯形上底, 帐篷从此一体。",
+      "tiles_to_add": [
+        "tent_cap"
+      ],
+      "highlight_tiles": [
+        "tent_s"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "立角台木马: 4 只等腰三角木马立上四只角台的外沿口。",
+      "tip": "木马底边整边吸角台沿口, 重心正压铰链、力臂为零。",
+      "tiles_to_add": [
+        "hs_sw",
+        "hs_se",
+        "hs_nw",
+        "hs_ne"
+      ],
+      "highlight_tiles": [
+        "ck_sw",
+        "ck_ne"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "立拼缝木马: 4 只等边三角木马立上转台拼缝线, 与角台木马交替起舞。",
+      "tip": "拼缝线是角台与边台的共用铰链 —— 一条铰链三重吸合。",
+      "tiles_to_add": [
+        "hm_sw",
+        "hm_se",
+        "hm_nw",
+        "hm_ne"
+      ],
+      "highlight_tiles": [
+        "hs_sw",
+        "hs_ne"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "立拱门双柱下层: 走道两端各立 1 片紫色柱墙, 底边吸走道短边。",
+      "tip": "双柱夹出 2 格宽的入园门洞 —— 负空间就是大门。",
+      "tiles_to_add": [
+        "gt_w_0",
+        "gt_e_0"
+      ],
+      "highlight_tiles": [
+        "walk"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "拱门加高并合龙: 双柱上层就位, 黄色横楣两端竖边同时吸住双柱 —— 拱门合龙。",
+      "tip": "横楣跨过门洞, 两端竖边传力 —— 门洞全程贯通。",
+      "tiles_to_add": [
+        "gt_w_1",
+        "gt_e_1",
+        "gt_top"
+      ],
+      "highlight_tiles": [
+        "gt_w_0",
+        "gt_e_0"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "立售票亭: 亭地台四边立墙, 西面透明片就是售票窗。",
+      "tip": "四面墙拐角竖边互吸, 1x1 方筒一次成型。",
+      "tiles_to_add": [
+        "ks_s",
+        "ks_n",
+        "ks_w",
+        "ks_e"
+      ],
+      "highlight_tiles": [
+        "kg"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "戴售票亭尖顶: 4 片红色等腰三角四棱互吸, 合拢成尖顶。",
+      "tip": "四条斜棱两两精确互吸自锁成环 —— 越按越紧。",
+      "tiles_to_add": [
+        "ks_rf_s",
+        "ks_rf_e",
+        "ks_rf_n",
+        "ks_rf_w"
+      ],
+      "highlight_tiles": [
+        "ks_s",
+        "ks_e"
+      ]
+    },
+    {
+      "step_number": 17,
+      "description": "斜插彩旗: 门旁两面红色菱形彩旗, 向两侧倒插在路板沿口 —— 音乐响起, 转台开动!",
+      "tip": "菱形 60 度的天然斜度让旗面像正被欢呼声掀起。",
+      "tiles_to_add": [
+        "fg_w",
+        "fg_e"
+      ],
+      "highlight_tiles": [
+        "pv_w",
+        "pv_e"
+      ]
+    }
+  ]
+}
