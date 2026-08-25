@@ -35,8 +35,10 @@ STEP_RECOMMENDED_MAX = 12   # 推荐单步上限, 超出即 WARN
 STEP_HARD_MAX = 15          # 硬性单步上限, 超出即 FAIL
 
 # ---- 难度 <-> 片数区间 (CONTENT_STRATEGY.md 2.1 节, 边界值归属两侧均可) ----
+# D1 下限 20 片: 反幼稚规则 (CONTENT_STRATEGY.md 2.4 节), 入门档降低的是
+# 操作难度, 不是作品的成品感。
 DIFFICULTY_PIECE_BANDS = {
-    1: (12, 28),
+    1: (20, 28),
     2: (28, 48),
     3: (48, 75),
     4: (75, 110),

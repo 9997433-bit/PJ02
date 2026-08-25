@@ -145,7 +145,7 @@ python3 tests/test_anti_trivial.py data/models
 | 步骤粒度 | 某步骤放 13~15 片 (超出推荐的 1~12 片/步) | WARN |
 | 步骤说明 | description 为空或不含中文 | FAIL |
 | 教程对账 | 各步骤 `tiles_to_add` 之和 ≠ `final_assembly` 片数, 或存在重复/幽灵/漏放 id | FAIL |
-| 难度定级 | `difficulty` 与片数区间不匹配 (D1: 12–28 / D2: 28–48 / D3: 48–75 / D4: 75–110 / D5: 110–180, 见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 2.1 节) | FAIL |
+| 难度定级 | `difficulty` 与片数区间不匹配 (D1: 20–28 / D2: 28–48 / D3: 48–75 / D4: 75–110 / D5: 110–180, 见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 2.1 与 2.4 节) | FAIL |
 | 步骤节奏 | 步骤数超出该难度参考区间 | WARN |
 | BOM 备料清单 | `content_meta.structural_signature.tile_histogram` 缺失, 或与 `final_assembly` 实际片形用量不一致 | FAIL |
 
