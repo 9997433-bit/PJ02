@@ -61,6 +61,14 @@ if(MAGTILE_BUILD_GL_RENDERER)
         set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
         set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
         set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
+        # Linux: 缺少 Wayland 开发工具时退回仅 X11, 避免构建硬失败
+        if(UNIX AND NOT APPLE)
+            find_program(MAGTILE_WAYLAND_SCANNER wayland-scanner)
+            if(NOT MAGTILE_WAYLAND_SCANNER)
+                set(GLFW_BUILD_WAYLAND OFF CACHE BOOL "" FORCE)
+                message(STATUS "MagTile: 未找到 wayland-scanner, GLFW 仅启用 X11 后端")
+            endif()
+        endif()
         FetchContent_Declare(glfw
             GIT_REPOSITORY https://github.com/glfw/glfw.git
             GIT_TAG 3.4
@@ -87,6 +95,8 @@ if(MAGTILE_BUILD_GL_RENDERER)
         ${imgui_SOURCE_DIR}
         ${imgui_SOURCE_DIR}/backends
     )
+    # 不引入系统 GL 头: ImGui 的 GL3 后端自带加载器, 本项目用自研加载器
+    target_compile_definitions(magtile_imgui PUBLIC GLFW_INCLUDE_NONE)
     target_link_libraries(magtile_imgui PUBLIC glfw)
 
     add_library(magtile_render_gl STATIC
