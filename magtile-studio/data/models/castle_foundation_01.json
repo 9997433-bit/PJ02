@@ -3,7 +3,7 @@
   "id": "castle_foundation_01",
   "name": "城堡地基与城墙",
   "name_en": "Castle Foundation 01",
-  "description": "经典城堡系列第一课: 从 4x4 地台开始, 逐层搭建双层围墙、四角角楼与三角城齿, 学习磁力片建筑最重要的三个技巧 —— 平铺打底、垂直立墙、逐层加高。",
+  "description": "经典城堡系列第一课: 从 4x4 地台开始, 逐层搭建双层围墙、四角角楼、角楼尖塔与三角城齿, 学习磁力片建筑最重要的三个技巧 —— 平铺打底、垂直立墙、逐层加高。",
   "difficulty": 3,
   "total_pieces": 72,
   "tags": [
@@ -11,6 +11,15 @@
     "建筑基础",
     "进阶"
   ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 56,
+        "equilateral_triangle": 8,
+        "isosceles_triangle": 8
+      }
+    }
+  },
   "final_assembly": [
     {
       "id": "g_0_0",

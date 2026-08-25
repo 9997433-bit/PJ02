@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.20)
 project(MagTileStudio
     VERSION 0.1.0
     DESCRIPTION "MagTile Studio - Magnetic tile building tutorial application"
-    LANGUAGES CXX)
+    LANGUAGES C CXX)  # C 仅用于编译 third_party/sqlite3 amalgamation
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -39,7 +39,24 @@ else()
     target_compile_options(magtile_warnings INTERFACE -Wall -Wextra -Wpedantic)
 endif()
 
-# ---- 核心库: core + physics + tutorial + render 接口 -----------
+# ---- SQLite3 (third_party 内嵌 amalgamation, 进度存档用) ---------
+# 全平台 (含 Android NDK) 统一自编译, 不依赖系统安装的 sqlite 开发包。
+add_library(magtile_sqlite3 STATIC third_party/sqlite3/sqlite3.c)
+target_include_directories(magtile_sqlite3 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/third_party/sqlite3)
+target_compile_definitions(magtile_sqlite3 PRIVATE
+    SQLITE_THREADSAFE=1            # 未来 GUI + 同步线程并发访问
+    SQLITE_OMIT_LOAD_EXTENSION=1   # 不用扩展加载, 同时免去 -ldl 依赖
+    SQLITE_OMIT_DEPRECATED=1
+    SQLITE_DQS=0                   # 禁止双引号字符串 (SQL 书写错误尽早暴露)
+    SQLITE_DEFAULT_MEMSTATUS=0
+)
+find_package(Threads REQUIRED)
+target_link_libraries(magtile_sqlite3 PUBLIC Threads::Threads)
+if(UNIX)
+    target_link_libraries(magtile_sqlite3 PUBLIC m)
+endif()
+
+# ---- 核心库: core + physics + tutorial + render 接口 + progress --
 add_library(magtile_core STATIC
     src/core/types.cpp
     src/core/model_definition.cpp

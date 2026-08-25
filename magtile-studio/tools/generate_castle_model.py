@@ -173,6 +173,15 @@ step(
 placed = [t for s in steps for t in s["tiles_to_add"]]
 assert len(placed) == len(tiles) == len(set(placed)), "步骤必须恰好覆盖全部磁力片"
 
+# BOM (备料清单): 按片形统计用量, 写入 content_meta.structural_signature
+# (schema v2 扩展字段, 见 docs/CONTENT_STRATEGY.md 5.1 节; v1 加载器自动忽略)。
+# tests/test_model_logic.py 会核对该清单与 final_assembly 实际用量完全一致,
+# 保证产品端"所需磁力片清单"永远不会误导用户备料。
+bom: dict[str, int] = {}
+for t in tiles:
+    bom[t["type"]] = bom.get(t["type"], 0) + 1
+bom = dict(sorted(bom.items(), key=lambda kv: (-kv[1], kv[0])))
+
 model = {
     "schema_version": 1,
     "id": "castle_foundation_01",
@@ -185,6 +194,11 @@ model = {
     "difficulty": 3,
     "total_pieces": len(tiles),
     "tags": ["城堡", "建筑基础", "进阶"],
+    "content_meta": {
+        "structural_signature": {
+            "tile_histogram": bom,
+        },
+    },
     "final_assembly": tiles,
     "steps": steps,
 }
