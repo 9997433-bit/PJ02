@@ -27,8 +27,10 @@ Page {
 
     // 订阅内容 (非免费层): 只锁「开始搭建」入口, 元数据/BOM 照常可看
     // (COMMERCIAL_PLAN §2.1 只锁内容不锁功能)。isFree 显式为 false 才
-    // 上锁 —— 数据未就绪 (undefined) 时不误锁 (宁可放行)。
+    // 上锁 —— 数据未就绪 (undefined) 时不误锁 (宁可放行)。订阅生效
+    // (billing.subscriptionActive, 计费适配层) 时解锁全库。
     readonly property bool locked: detail.found === true && detail.isFree === false
+                                   && !billing.subscriptionActive
 
     signal back()
     signal notify(string message)

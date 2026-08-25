@@ -77,6 +77,9 @@ add_library(magtile_core STATIC
     src/progress/progress_store.cpp
     src/progress/age_settings.cpp
     src/progress/ui_settings.cpp
+    src/progress/subscription_settings.cpp
+    src/billing/fake_billing_client.cpp
+    src/billing/store_billing_client.cpp
     src/tts/tts_engine.cpp
     src/tutorial/tutorial_engine.cpp
     src/render/null_renderer.cpp
@@ -236,6 +239,17 @@ if(MAGTILE_BUILD_TESTS)
         add_executable(magtile_parent_gate_test tests/test_parent_gate.cpp)
         target_link_libraries(magtile_parent_gate_test PRIVATE magtile_core magtile_warnings)
         add_test(NAME parent_gate COMMAND magtile_parent_gate_test)
+    endif()
+
+    # 计费适配层单元测试 (C++): BillingClient 抽象 + FakeBillingClient
+    # 付费闭环 (未订阅锁付费模型 / 假购买解锁 / 恢复购买 / 订阅状态
+    # settings 表持久化契约) 与 StoreBillingClient 空实现档语义
+    # (COMMERCIAL_PLAN §2.2; 不接任何真实商店 SDK / 密钥)
+    if(EXISTS ${MAGTILE_TESTS_DIR}/test_billing.cpp)
+        add_executable(magtile_billing_test tests/test_billing.cpp)
+        target_link_libraries(magtile_billing_test PRIVATE magtile_core magtile_warnings)
+        add_test(NAME billing
+            COMMAND magtile_billing_test ${CMAKE_CURRENT_BINARY_DIR}/billing_test.db)
     endif()
 
     # 年龄分层与 TTS 单元测试 (C++): AgeMode 字符串/周岁映射、

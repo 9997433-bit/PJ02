@@ -434,9 +434,10 @@ Page {
 
                                 // 订阅解锁角标 (温和): 元数据照常可浏览, 详情页
                                 // 「开始搭建」经家长门引导到订阅页 (§11);
+                                // 订阅生效后角标整体消失 (全库已解锁);
                                 // 4-6 超大卡片同步放大 (与进度徽标同规格)
                                 Rectangle {
-                                    visible: !model.isFree
+                                    visible: !model.isFree && !billing.subscriptionActive
                                     radius: Theme.radiusButton
                                     height: page.bandJunior ? 40 : 32
                                     width: subscriptionLabel.implicitWidth + 2 * Theme.spacing

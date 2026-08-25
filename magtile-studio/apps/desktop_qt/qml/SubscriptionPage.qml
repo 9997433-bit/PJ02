@@ -4,16 +4,20 @@ import QtQuick.Layouts
 import MagTile.Studio
 
 // =============================================================
-// 订阅页脚手架 (QT-5, UI_UX_SPEC.md §11): 必须在家长门之后才可见
+// 订阅页 (QT-5, UI_UX_SPEC.md §11): 必须在家长门之后才可见
 // (由 Main.qml 路由与会话守卫保证)。给家长看的页面 = 信息完整、
 // 无套路: 页首明示免费额度 (反套路即信任), 温和说明订阅解锁全库,
 // 「免费 vs 全库」对比数字实时读模型目录 (studio.freeModelCount /
 // studio.modelCount, 与 QA 红线工具同一「免费」标签口径)。
-// 主 CTA 为「即将上线」占位 + mailto 联系通道 —— 不接任何 IAP /
-// 支付 SDK; 正式三卡定价 (月/年/家庭年) 与恢复购买在付费闭环
-// (COMMERCIAL_PLAN.md V1) 时替换本页占位区。
+// 付费区走计费适配层 (billing 桥, COMMERCIAL_PLAN §2.2): 三卡档位
+// 与主 CTA / 恢复购买只面向 BillingClient 抽象 —— 桌面开发档为
+// FakeBillingClient (零真实扣费, 开发档另有「模拟已订阅」开关),
+// 商店空实现档 (storeAvailable=false) 自动退回「即将上线」占位;
+// 接真商店 SDK 时本页零改动 (Windows 商店/Google Play 接法见
+// include/magtile/billing/store_billing_client.hpp)。
 // 红线 (§11 禁止事项): 无倒计时、无「即将涨价」、无预勾选加购、
-// 不索取任何个人信息; 全页不用红色与紧迫话术。
+// 不索取任何个人信息; 全页不用红色与紧迫话术; 价格只出现在
+// 本页 (家长门后), 儿童侧界面零价格信息。
 // =============================================================
 Page {
     id: page
@@ -26,6 +30,18 @@ Page {
 
     /// 上线前替换为正式支持邮箱 (RFC 2606 保留域, 占位期不可达)
     readonly property string contactMail: "hello@magtile.example"
+
+    /// 可购档位快照 (计费适配层, 档位表静态, 加载一次即可)
+    readonly property var productList: billing.products()
+
+    /// 选中的档位 id; 默认落在主推档 (年度, COMMERCIAL_PLAN §3.2) ——
+    /// 是"默认高亮"不是"预勾选加购" (§11): 不选也不买, 无任何默认扣费
+    property string selectedProductId: {
+        for (var i = 0; i < productList.length; ++i) {
+            if (productList[i].recommended) return productList[i].productId
+        }
+        return productList.length > 0 ? productList[0].productId : ""
+    }
 
     background: Rectangle { color: Theme.surfaceAlt }
 
@@ -210,12 +226,124 @@ Page {
                 }
             }
 
-            // ---- 主 CTA: 「即将上线」占位 (不接 IAP / 支付 SDK) ----------
+            // ---- 订阅生效状态卡 (完成绿: 已拥有) ------------------------
+            Rectangle {
+                visible: billing.subscriptionActive
+                Layout.fillWidth: true
+                implicitHeight: activeColumn.implicitHeight + 2 * Theme.spacing
+                radius: Theme.radiusCard
+                color: Theme.successSoft
+
+                ColumnLayout {
+                    id: activeColumn
+                    anchors.centerIn: parent
+                    width: parent.width - 2 * Theme.spacing
+                    spacing: 8
+
+                    Text {
+                        text: billing.activePlanName !== ""
+                              ? "✓ 订阅生效中 · " + billing.activePlanName
+                              : "✓ 订阅生效中"
+                        font.pixelSize: Theme.fontButton
+                        font.bold: true
+                        color: Theme.success
+                    }
+                    Text {
+                        Layout.fillWidth: true
+                        text: "全库 " + studio.modelCount + " 个模型已解锁, 每周上新自动包含。"
+                              + "取消与退款入口将随正式商店版提供 (一步取消, 不设挽留关卡)。"
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                        wrapMode: Text.WordWrap
+                    }
+                }
+            }
+
+            // ---- 三卡档位 (计费适配层, 家长门后才可能看到价格) -----------
+            // 点卡只是选择, 购买必须再按下方大按钮 (无预勾选加购语义)
+            Repeater {
+                model: billing.subscriptionActive ? [] : page.productList
+                delegate: AbstractButton {
+                    id: productCard
+                    required property var modelData
+                    readonly property bool selected: page.selectedProductId === modelData.productId
+                    Layout.fillWidth: true
+                    implicitHeight: productRow.implicitHeight + 2 * Theme.spacing
+                    onClicked: page.selectedProductId = modelData.productId
+
+                    background: Rectangle {
+                        radius: Theme.radiusCard
+                        color: productCard.selected ? Theme.primarySoft : Theme.surface
+                        border.color: productCard.selected ? Theme.primary : Theme.cardBorder
+                        border.width: productCard.selected ? 2 : 1
+                    }
+                    contentItem: RowLayout {
+                        id: productRow
+                        spacing: Theme.spacing
+
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            Layout.margins: Theme.spacing
+                            spacing: 4
+                            RowLayout {
+                                spacing: 8
+                                Text {
+                                    text: productCard.modelData.name
+                                    font.pixelSize: Theme.fontBody
+                                    font.bold: true
+                                    color: Theme.textPrimary
+                                }
+                                // 主推徽标 (中性推荐, 非稀缺/催促话术)
+                                Rectangle {
+                                    visible: productCard.modelData.recommended
+                                    radius: Theme.radiusButton
+                                    height: 24
+                                    width: recommendTag.implicitWidth + 16
+                                    color: Theme.primary
+                                    Text {
+                                        id: recommendTag
+                                        anchors.centerIn: parent
+                                        text: "多数家庭的选择"
+                                        font.pixelSize: 12
+                                        font.bold: true
+                                        color: "white"
+                                    }
+                                }
+                            }
+                            Text {
+                                Layout.fillWidth: true
+                                text: productCard.modelData.blurb
+                                font.pixelSize: Theme.fontSmall
+                                color: Theme.textSecondary
+                                wrapMode: Text.WordWrap
+                            }
+                        }
+                        Text {
+                            Layout.rightMargin: Theme.spacing
+                            text: productCard.modelData.priceText
+                            font.pixelSize: Theme.fontButton
+                            font.bold: true
+                            color: productCard.selected ? Theme.primary : Theme.textPrimary
+                        }
+                    }
+                }
+            }
+
+            // ---- 主 CTA: 经计费适配层发起购买 ---------------------------
+            // 商店可用 (桌面开发档 = 假计费) 时购买选中档位; 空实现档
+            // (storeAvailable=false) 保持「即将上线」温和占位
             AbstractButton {
                 id: ctaButton
+                visible: !billing.subscriptionActive
                 Layout.fillWidth: true
                 Layout.preferredHeight: Theme.bigButtonHeight
-                onClicked: page.notify("订阅功能正在准备中, 上线后会在这里开放 —— 免费模型现在就能玩")
+                onClicked: {
+                    if (billing.storeAvailable && page.selectedProductId !== "") {
+                        page.notify(billing.purchase(page.selectedProductId))
+                    } else {
+                        page.notify("订阅功能正在准备中, 上线后会在这里开放 —— 免费模型现在就能玩")
+                    }
+                }
                 scale: pressed ? 0.97 : 1.0
                 Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
                 background: Rectangle {
@@ -223,12 +351,78 @@ Page {
                     color: ctaButton.pressed ? Theme.primaryPressed : Theme.primary
                 }
                 contentItem: Text {
-                    text: "🌱 订阅即将上线"
+                    text: billing.storeAvailable && page.selectedProductId !== ""
+                          ? "🌱 开通订阅 (开发模拟, 不产生扣费)"
+                          : "🌱 订阅即将上线"
                     color: "white"
                     font.pixelSize: Theme.fontButton
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            // 恢复购买 (换机/重装场景; 空实现档给"随正式版开放"温和提示)
+            AbstractButton {
+                id: restoreButton
+                visible: !billing.subscriptionActive
+                Layout.fillWidth: true
+                Layout.preferredHeight: Theme.touchTarget
+                onClicked: page.notify(billing.restore())
+                background: Rectangle {
+                    radius: Theme.radiusButton
+                    color: restoreButton.pressed ? Theme.primarySoft : Theme.surface
+                    border.color: Theme.primary
+                    border.width: 1
+                }
+                contentItem: Text {
+                    text: "↺ 恢复购买"
+                    font.pixelSize: Theme.fontBody
+                    font.bold: true
+                    color: Theme.primary
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            // ---- 开发档控件: 「模拟已订阅」开关 (Debug / --dev-billing) --
+            // 正式商店档编译期恒不可见 (billing.devControlsEnabled 恒 false)
+            Rectangle {
+                visible: billing.devControlsEnabled
+                Layout.fillWidth: true
+                implicitHeight: devRow.implicitHeight + 2 * Theme.spacing
+                radius: Theme.radiusCard
+                color: Theme.surface
+                border.color: Theme.cardBorder
+                border.width: 1
+
+                RowLayout {
+                    id: devRow
+                    anchors.centerIn: parent
+                    width: parent.width - 2 * Theme.spacing
+                    spacing: Theme.spacing
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 4
+                        Text {
+                            text: "开发档: 模拟已订阅"
+                            font.pixelSize: Theme.fontBody
+                            font.bold: true
+                            color: Theme.textPrimary
+                        }
+                        Text {
+                            Layout.fillWidth: true
+                            text: "假计费适配层, 不接商店不扣费; 关掉后可用「恢复购买」演练恢复流程。"
+                            font.pixelSize: Theme.fontSmall
+                            color: Theme.textSecondary
+                            wrapMode: Text.WordWrap
+                        }
+                    }
+                    Switch {
+                        checked: billing.subscriptionActive
+                        onToggled: billing.devSetSubscribed(checked)
+                    }
                 }
             }
 
