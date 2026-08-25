@@ -41,13 +41,22 @@ inline constexpr GLenum GL_ONE_MINUS_SRC_ALPHA = 0x0303;
 inline constexpr GLenum GL_CULL_FACE = 0x0B44;
 inline constexpr GLenum GL_DEPTH_TEST = 0x0B71;
 inline constexpr GLenum GL_BLEND = 0x0BE2;
+inline constexpr GLenum GL_UNPACK_ALIGNMENT = 0x0CF5;
 inline constexpr GLenum GL_PACK_ALIGNMENT = 0x0D05;
+inline constexpr GLenum GL_TEXTURE_2D = 0x0DE1;
 inline constexpr GLenum GL_UNSIGNED_BYTE = 0x1401;
 inline constexpr GLenum GL_FLOAT = 0x1406;
 inline constexpr GLenum GL_RGB = 0x1907;
 inline constexpr GLenum GL_RGBA = 0x1908;
 inline constexpr GLenum GL_VERSION = 0x1F02;
 inline constexpr GLenum GL_RENDERER = 0x1F01;
+inline constexpr GLenum GL_LINEAR = 0x2601;
+inline constexpr GLenum GL_TEXTURE_MAG_FILTER = 0x2800;
+inline constexpr GLenum GL_TEXTURE_MIN_FILTER = 0x2801;
+inline constexpr GLenum GL_TEXTURE_WRAP_S = 0x2802;
+inline constexpr GLenum GL_TEXTURE_WRAP_T = 0x2803;
+inline constexpr GLenum GL_RGBA8 = 0x8058;
+inline constexpr GLenum GL_CLAMP_TO_EDGE = 0x812F;
 inline constexpr GLenum GL_MULTISAMPLE = 0x809D;
 inline constexpr GLenum GL_ARRAY_BUFFER = 0x8892;
 inline constexpr GLenum GL_DYNAMIC_DRAW = 0x88E8;
@@ -108,7 +117,14 @@ inline constexpr GLenum GL_INFO_LOG_LENGTH = 0x8B84;
     X(void, glVertexAttribPointer,                                                           \
       (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride,          \
        const void* pointer))                                                                 \
-    X(void, glDrawArrays, (GLenum mode, GLint first, GLsizei count))
+    X(void, glDrawArrays, (GLenum mode, GLint first, GLsizei count))                         \
+    X(void, glGenTextures, (GLsizei n, GLuint * textures))                                   \
+    X(void, glBindTexture, (GLenum target, GLuint texture))                                  \
+    X(void, glTexParameteri, (GLenum target, GLenum pname, GLint param))                     \
+    X(void, glTexImage2D,                                                                    \
+      (GLenum target, GLint level, GLint internal_format, GLsizei width, GLsizei height,     \
+       GLint border, GLenum format, GLenum type, const void* pixels))                        \
+    X(void, glDeleteTextures, (GLsizei n, const GLuint* textures))
 
 #define MAGTILE_GL_DECLARE(ret, name, params) extern ret(*name) params;
 MAGTILE_GL_FUNCTION_LIST(MAGTILE_GL_DECLARE)

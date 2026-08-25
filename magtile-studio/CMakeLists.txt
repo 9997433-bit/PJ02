@@ -66,6 +66,7 @@ endif()
 # ---- 核心库: core + physics + tutorial + render 接口 + progress --
 add_library(magtile_core STATIC
     src/core/types.cpp
+    src/core/age_mode.cpp
     src/core/model_definition.cpp
     src/core/tile_catalog.cpp
     src/core/json_io.cpp
@@ -74,6 +75,8 @@ add_library(magtile_core STATIC
     src/physics/geometry.cpp
     src/physics/physics_validator.cpp
     src/progress/progress_store.cpp
+    src/progress/age_settings.cpp
+    src/tts/tts_engine.cpp
     src/tutorial/tutorial_engine.cpp
     src/render/null_renderer.cpp
     src/render/orbit_camera.cpp
@@ -211,6 +214,16 @@ if(MAGTILE_BUILD_TESTS)
         add_test(NAME parent_gate COMMAND magtile_parent_gate_test)
     endif()
 
+    # 年龄分层与 TTS 单元测试 (C++): AgeMode 字符串/周岁映射、
+    # 年龄段设置的 SQLite 持久化 (含脏值兜底)、NullTts 无叠音语义、
+    # 系统 TTS 探测与静音降级 (UI_UX_SPEC.md §2 / §4.2 儿童 UX stub)
+    if(EXISTS ${MAGTILE_TESTS_DIR}/test_age_tts.cpp)
+        add_executable(magtile_age_tts_test tests/test_age_tts.cpp)
+        target_link_libraries(magtile_age_tts_test PRIVATE magtile_core magtile_warnings)
+        add_test(NAME age_tts
+            COMMAND magtile_age_tts_test ${CMAKE_CURRENT_BINARY_DIR}/age_tts_test.db)
+    endif()
+
     # 模型库目录对账: model_catalog.json 卡片元数据 (名称/难度/片数/步数)
     # 必须与模型文件一致, 防止商业版模型库界面展示信息漂移
     add_test(NAME library_catalog_check
@@ -243,6 +256,14 @@ if(MAGTILE_BUILD_TESTS)
         if(EXISTS ${MAGTILE_TESTS_DIR}/test_tutorial_integrity.sh)
             add_test(NAME tutorial_integrity
                 COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_tutorial_integrity.sh
+                    $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
+        endif()
+
+        # 磁力片库存 CLI: set/show/match 全流程 + 非法输入拒绝 +
+        # BOM 匹配边界 (满配全库能搭 / 全 0 库存能搭数为 0)
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_inventory_cli.sh)
+            add_test(NAME inventory_cli
+                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_inventory_cli.sh
                     $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
         endif()
 
@@ -285,6 +306,12 @@ if(MAGTILE_BUILD_TESTS)
                         $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR} ${fixture_file})
             endforeach()
         endif()
+
+        # 设置 CLI 冒烟: set-age 写入 -> show 从同一数据库回读出启蒙模式
+        # (覆盖 settings 命令解析、年龄映射与 SQLite 往返)
+        add_test(NAME settings_cli_smoke
+            COMMAND ${MAGTILE_BASH} -c
+                "$<TARGET_FILE:magtile_app> settings set-age 4 --db ${CMAKE_CURRENT_BINARY_DIR}/settings_cli_smoke.db && $<TARGET_FILE:magtile_app> settings show --db ${CMAKE_CURRENT_BINARY_DIR}/settings_cli_smoke.db | grep -q 启蒙模式")
 
         # 模型库 GUI 冒烟: 无头渲染模型库界面截图 + --open 深链教程会话
         # 并校验进度存档写入; 无显示环境自动降级为链接检查。

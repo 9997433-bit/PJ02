@@ -13,6 +13,16 @@ namespace {
 
 using nlohmann::json;
 
+/// 按约定定位模型缩略图: <data 目录>/thumbnails/<id>.png, 不存在时
+/// 返回空路径 (卡片显示主题色占位)。
+std::filesystem::path findThumbnail(const std::filesystem::path& data_dir,
+                                    const std::string& model_id) {
+    std::error_code ec;
+    const std::filesystem::path candidate = data_dir / "thumbnails" / (model_id + ".png");
+    return std::filesystem::is_regular_file(candidate, ec) ? candidate
+                                                           : std::filesystem::path{};
+}
+
 /// 用模型 JSON 的完整定义生成 (或补全) 目录条目。
 ModelCatalogEntry entryFromModelFile(const std::filesystem::path& model_file) {
     const ModelDefinition model = loadModelDefinition(model_file);
@@ -26,6 +36,8 @@ ModelCatalogEntry entryFromModelFile(const std::filesystem::path& model_file) {
     entry.total_pieces = model.total_pieces;
     entry.step_count = static_cast<int>(model.steps.size());
     entry.tags = model.tags;
+    // 未登记条目按目录约定补全缩略图 (models/ 的父目录即 data 目录)
+    entry.thumbnail = findThumbnail(model_file.parent_path().parent_path(), entry.id);
     return entry;
 }
 
@@ -135,6 +147,18 @@ std::vector<ModelCatalogEntry> loadModelCatalog(const std::filesystem::path& dat
                                   ") 不一致");
             }
         }
+        entry.theme_name = item.value("theme", std::string{});
+
+        // 缩略图: 目录登记路径优先 (相对 data 目录解析), 未登记或文件
+        // 缺失时退回 thumbnails/<id>.png 约定; 都没有则留空 (占位显示)
+        entry.thumbnail.clear();
+        if (const auto relative_thumb = item.value("thumbnail", std::string{});
+            !relative_thumb.empty()) {
+            std::error_code ec;
+            const std::filesystem::path thumb_file = data_dir / relative_thumb;
+            if (std::filesystem::is_regular_file(thumb_file, ec)) entry.thumbnail = thumb_file;
+        }
+        if (entry.thumbnail.empty()) entry.thumbnail = findThumbnail(data_dir, id);
 
         if (entry.difficulty < ModelDefinition::kMinDifficulty ||
             entry.difficulty > ModelDefinition::kMaxDifficulty) {

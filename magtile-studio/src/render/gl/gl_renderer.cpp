@@ -19,12 +19,14 @@
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <cstdint>
 #include <cstdio>
 #include <filesystem>
 #include <functional>
 #include <iterator>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -36,6 +38,8 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+
+#include <stb/stb_image.h>
 
 #include "gl_api.hpp"
 #include "magtile/physics/geometry.hpp"
@@ -225,10 +229,22 @@ constexpr ImU32 kColorGold = IM_COL32(240, 173, 30, 255);      ///< 星级 / 收
 constexpr ImU32 kColorInk = IM_COL32(38, 43, 54, 255);         ///< 主文字
 const ImVec4 kAccentVec{0.28f, 0.44f, 0.93f, 1.0f};            ///< 品牌蓝
 
-/// 主题标签 -> 卡片主题色: 常见主题固定配色, 其余从调色板哈希取色,
-/// 同一主题在任何一次运行中颜色稳定。
+/// 主题标签 -> 卡片主题色: 规范主题 (tools/update_model_catalog.py
+/// 推导, 与 tools/generate_thumbnails.py 占位图配色一致) 固定配色,
+/// 其余从调色板哈希取色, 同一主题在任何一次运行中颜色稳定。
 ImU32 themeColor32(const std::string& theme) {
     static const std::pair<const char*, ImU32> kKnown[] = {
+        {"城堡王国", IM_COL32(103, 111, 219, 255)},
+        {"建筑地标", IM_COL32(66, 133, 244, 255)},
+        {"工程结构", IM_COL32(230, 124, 55, 255)},
+        {"自然世界", IM_COL32(52, 168, 111, 255)},
+        {"航天探索", IM_COL32(126, 87, 194, 255)},
+        {"城市生活", IM_COL32(220, 88, 70, 255)},
+        {"游乐园", IM_COL32(236, 64, 122, 255)},
+        {"滚珠乐园", IM_COL32(0, 172, 193, 255)},
+        {"海洋航行", IM_COL32(2, 136, 209, 255)},
+        {"田园", IM_COL32(124, 179, 66, 255)},
+        // 兼容旧目录/临时标签的固定配色
         {"城堡", IM_COL32(103, 111, 219, 255)},
         {"建筑基础", IM_COL32(66, 133, 244, 255)},
         {"进阶", IM_COL32(230, 124, 55, 255)},
@@ -320,7 +336,9 @@ public:
     }
     [[nodiscard]] TutorialActions submitHud(const TutorialHudState& hud) override;
     [[nodiscard]] LibraryActions submitLibrary(const std::vector<LibraryCard>& cards,
-                                               bool simple_layout) override;
+                                               bool simple_layout,
+                                               bool inventory_configured) override;
+    [[nodiscard]] InventoryOnboardingActions submitInventoryOnboarding() override;
     [[nodiscard]] ParentGateActions submitParentGate(const ParentGateState& state) override;
     [[nodiscard]] ParentAreaActions submitParentArea(int session_remaining_seconds) override;
     void requestScreenshot(const std::string& ppm_path) override { screenshot_path_ = ppm_path; }
@@ -340,6 +358,8 @@ private:
     /// 模型卡片: 大卡 (网格) 与小卡 (继续搭建区), 点击写入 actions。
     void drawLibraryCard(const LibraryCard& card, const ImVec2& size, bool compact,
                          LibraryActions& actions);
+    /// 缩略图纹理: 首次使用时从 PNG 加载并缓存, 失败缓存 0 (不重试)。
+    [[nodiscard]] GLuint thumbnailTexture(const std::string& png_path);
     void drawVertexBuffer(GLuint vao, GLuint vbo, const std::vector<float>& data, GLenum mode,
                           bool unlit);
     void appendTileGeometry(const PendingTile& tile);
@@ -361,9 +381,13 @@ private:
     int library_difficulty_filter_ = 0;  ///< 0 = 全部难度, 1~5 = 对应星级
     std::string library_theme_filter_;   ///< 空 = 全部主题
     bool library_favorites_only_ = false;
+    bool library_buildable_only_ = false;  ///< "我能搭的": 只看库存足够的模型
 
     // 家长门软键盘的跨帧输入缓冲 (中文大写数字; 提交/返回时清空)
     std::string parent_gate_input_;
+
+    // 模型卡片缩略图纹理缓存 (路径 -> GL 纹理; 0 = 加载失败不再重试)
+    std::unordered_map<std::string, GLuint> thumbnail_textures_;
 
     // GL 资源
     GLuint program_ = 0;
@@ -462,6 +486,10 @@ void GlRenderer::shutdown() {
         const GLuint vbos[] = {tile_vbo_, outline_vbo_, grid_vbo_};
         glDeleteVertexArrays(3, vaos);
         glDeleteBuffers(3, vbos);
+        for (const auto& cached : thumbnail_textures_) {
+            if (cached.second != 0) glDeleteTextures(1, &cached.second);
+        }
+        thumbnail_textures_.clear();
         program_ = 0;
         tile_vao_ = outline_vao_ = grid_vao_ = 0;
         tile_vbo_ = outline_vbo_ = grid_vbo_ = 0;
@@ -837,11 +865,40 @@ static std::string truncateUtf8(const std::string& text, std::size_t max_bytes) 
     return text.substr(0, cut) + "…";
 }
 
+GLuint GlRenderer::thumbnailTexture(const std::string& png_path) {
+    if (const auto it = thumbnail_textures_.find(png_path); it != thumbnail_textures_.end()) {
+        return it->second;
+    }
+    GLuint texture = 0;
+    int width = 0, height = 0, channels = 0;
+    if (stbi_uc* pixels = stbi_load(png_path.c_str(), &width, &height, &channels, 4);
+        pixels != nullptr) {
+        glGenTextures(1, &texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 4);  // RGBA 行天然 4 字节对齐
+        glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA8), width, height, 0, GL_RGBA,
+                     GL_UNSIGNED_BYTE, pixels);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        stbi_image_free(pixels);
+    } else {
+        std::fprintf(stderr, "[render] 警告: 缩略图加载失败 (%s): %s\n",
+                     stbi_failure_reason(), png_path.c_str());
+    }
+    thumbnail_textures_.emplace(png_path, texture);  // 失败也缓存 0, 避免每帧重试
+    return texture;
+}
+
 void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bool compact,
                                  LibraryActions& actions) {
     const ImU32 theme_color = themeColor32(card.theme);
     const ImVec4 ink = ImGui::ColorConvertU32ToFloat4(kColorInk);
     const float pad = 16.0f;
+    // 大卡顶部为缩略图区 (缺图时显示主题色占位), 文字区整体下移
+    const float thumb_height = compact ? 0.0f : std::floor(size.y * 0.365f);
 
     ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.85f, 0.87f, 0.91f, 1.0f));
@@ -864,13 +921,45 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
         // 顶部主题色条 + 悬停时主题色描边
         draw_list->AddRectFilled(origin, ImVec2(origin.x + size.x, origin.y + 5.0f), theme_color,
                                  12.0f, ImDrawFlags_RoundCornersTop);
+
+        // ---- 缩略图区 (仅大卡): 主题色淡底 + 等比放置 PNG 缩略图 -------
+        if (thumb_height > 0.0f) {
+            const ImVec2 strip_min{origin.x + 1.0f, origin.y + 5.0f};
+            const ImVec2 strip_max{origin.x + size.x - 1.0f, origin.y + 5.0f + thumb_height};
+            draw_list->AddRectFilled(strip_min, strip_max,
+                                     (theme_color & 0x00FFFFFF) | 0x16000000);
+            const GLuint texture =
+                card.thumbnail_path.empty() ? 0 : thumbnailTexture(card.thumbnail_path);
+            if (texture != 0) {
+                // 4:3 缩略图等比 contain, 两侧留主题色淡底不裁剪画面
+                const float image_h = thumb_height - 8.0f;
+                const float image_w =
+                    std::min(image_h * (4.0f / 3.0f), strip_max.x - strip_min.x - 8.0f);
+                const ImVec2 center{(strip_min.x + strip_max.x) * 0.5f,
+                                    (strip_min.y + strip_max.y) * 0.5f};
+                const ImVec2 image_min{center.x - image_w * 0.5f, center.y - image_h * 0.5f};
+                const ImVec2 image_max{center.x + image_w * 0.5f, center.y + image_h * 0.5f};
+                draw_list->AddImageRounded(
+                    static_cast<ImTextureID>(static_cast<std::intptr_t>(texture)), image_min,
+                    image_max, ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f),
+                    IM_COL32(255, 255, 255, 255), 6.0f);
+            } else {
+                // 无缩略图: 居中主题名作占位 (与主题徽章同色系)
+                const ImVec2 text_size = ImGui::CalcTextSize(card.theme.c_str());
+                draw_list->AddText(
+                    ImVec2((strip_min.x + strip_max.x - text_size.x) * 0.5f,
+                           (strip_min.y + strip_max.y - text_size.y) * 0.5f),
+                    (theme_color & 0x00FFFFFF) | 0x66000000, card.theme.c_str());
+            }
+        }
+
         if (hovered) {
             draw_list->AddRect(origin, ImVec2(origin.x + size.x, origin.y + size.y), theme_color,
                                12.0f, 0, 2.0f);
         }
 
         // ---- 标题行 -------------------------------------------------
-        ImGui::SetCursorPos(ImVec2(pad, 14.0f));
+        ImGui::SetCursorPos(ImVec2(pad, 14.0f + thumb_height));
         ImGui::TextColored(ink, "%s", card.name.c_str());
         if (card.completed) {
             ImGui::SameLine();
@@ -911,8 +1000,8 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
             ImGui::PopStyleColor(4);
         } else {
             // ---- 大卡 (模型网格) ------------------------------------
-            // 收藏星标 (右上角)
-            ImGui::SetCursorPos(ImVec2(size.x - 44.0f, 9.0f));
+            // 收藏星标 (标题行右侧, 缩略图之下)
+            ImGui::SetCursorPos(ImVec2(size.x - 44.0f, 9.0f + thumb_height));
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.94f, 0.68f, 0.12f, 0.18f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.94f, 0.68f, 0.12f, 0.35f));
@@ -926,12 +1015,12 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
             ImGui::PopStyleColor(4);
 
             if (!card.name_en.empty()) {
-                ImGui::SetCursorPos(ImVec2(pad, 41.0f));
+                ImGui::SetCursorPos(ImVec2(pad, 41.0f + thumb_height));
                 ImGui::TextDisabled("%s", card.name_en.c_str());
             }
 
             // 星级难度 + 片数/步数
-            ImGui::SetCursorPos(ImVec2(pad, 66.0f));
+            ImGui::SetCursorPos(ImVec2(pad, 66.0f + thumb_height));
             std::string filled, hollow;
             for (int i = 1; i <= 5; ++i) ((i <= card.difficulty) ? filled : hollow) += "★";
             ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorGold), "%s", filled.c_str());
@@ -943,12 +1032,12 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
             ImGui::TextDisabled("%d 片 · %d 步", card.total_pieces, card.step_count);
 
             // 主题徽章
-            ImGui::SetCursorPos(ImVec2(pad, 92.0f));
+            ImGui::SetCursorPos(ImVec2(pad, 92.0f + thumb_height));
             drawThemeBadge(card.theme, theme_color);
 
             // 简介 (两行内, 超长截断)
             if (!card.description.empty()) {
-                ImGui::SetCursorPos(ImVec2(pad, 124.0f));
+                ImGui::SetCursorPos(ImVec2(pad, 124.0f + thumb_height));
                 ImGui::PushTextWrapPos(size.x - pad);
                 ImGui::TextDisabled("%s", truncateUtf8(card.description, 78).c_str());
                 ImGui::PopTextWrapPos();
@@ -979,7 +1068,7 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
 }
 
 LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
-                                         bool simple_layout) {
+                                         bool simple_layout, bool inventory_configured) {
     LibraryActions actions;
     const ImGuiIO& io = ImGui::GetIO();
 
@@ -1065,6 +1154,25 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
             }
             ImGui::SameLine();
             ImGui::Checkbox("只看收藏", &library_favorites_only_);
+            ImGui::SameLine();
+            // "我能搭的": 依据磁力片库存过滤 BOM 满足的模型 (§5.2);
+            // 未登记库存时禁用并引导先去登记, 不显示全空列表
+            if (inventory_configured) {
+                ImGui::Checkbox("我能搭的", &library_buildable_only_);
+                if (ImGui::IsItemHovered()) {
+                    ImGui::SetTooltip("只显示现有磁力片库存足够搭建的模型");
+                }
+            } else {
+                library_buildable_only_ = false;
+                ImGui::BeginDisabled();
+                bool unavailable = false;
+                ImGui::Checkbox("我能搭的", &unavailable);
+                ImGui::EndDisabled();
+                if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+                    ImGui::SetTooltip(
+                        "先登记家里的磁力片库存:\nmagtile_app inventory set square 40 ...");
+                }
+            }
         }
 
         ImGui::Spacing();
@@ -1124,6 +1232,9 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
                     continue;
                 }
                 if (library_favorites_only_ && !card.favorited) continue;
+                if (inventory_configured && library_buildable_only_ && !card.buildable) {
+                    continue;
+                }
                 if (!matchesSearch(card.name, search) && !matchesSearch(card.name_en, search) &&
                     !matchesSearch(card.model_id, search)) {
                     continue;
@@ -1146,9 +1257,10 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
             ImGui::TextDisabled("%s", empty_text);
         } else {
             // 启蒙模式超大卡片: 约每行 2 张 (1240px 面板宽), 图文放大
-            // 便于 4-6 岁儿童辨认与点按 (UI_UX_SPEC.md §2 卡片密度)
-            const ImVec2 card_size = simple_layout ? ImVec2{560.0f, 280.0f}
-                                                   : ImVec2{300.0f, 202.0f};
+            // 便于 4-6 岁儿童辨认与点按 (UI_UX_SPEC.md §2 卡片密度);
+            // 卡片上部约 36% 为缩略图区 (drawLibraryCard thumb_height)
+            const ImVec2 card_size = simple_layout ? ImVec2{560.0f, 420.0f}
+                                                   : ImVec2{300.0f, 340.0f};
             const int columns = columnsFor(card_size.x);
             int index = 0;
             for (const LibraryCard* card : filtered) {
@@ -1160,6 +1272,76 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
             }
         }
         ImGui::EndChild();
+    }
+    ImGui::End();
+    ImGui::PopStyleVar(2);
+    return actions;
+}
+
+InventoryOnboardingActions GlRenderer::submitInventoryOnboarding() {
+    InventoryOnboardingActions actions;
+    const ImGuiIO& io = ImGui::GetIO();
+
+    // 压暗遮罩: 全屏半透明窗口盖在模型库之上, 同时挡住其下的点击
+    // (窗口按提交顺序绘制, 本函数约定在 submitLibrary 之后调用)
+    ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
+    ImGui::SetNextWindowSize(io.DisplaySize);
+    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.10f, 0.12f, 0.16f, 0.45f));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+    ImGui::Begin("##onboarding_dim", nullptr,
+                 ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
+                     ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoNav |
+                     ImGuiWindowFlags_NoBringToFrontOnFocus);
+    ImGui::End();
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor();
+
+    ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f),
+                            ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2(560.0f, 0.0f));  // 固定宽, 高度自适应
+    ImGui::SetNextWindowBgAlpha(0.985f);
+    ImGui::SetNextWindowFocus();  // 始终盖在遮罩与模型库之上
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 16.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(30.0f, 26.0f));
+    const ImGuiWindowFlags flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
+                                   ImGuiWindowFlags_NoSavedSettings |
+                                   ImGuiWindowFlags_AlwaysAutoResize;
+    if (ImGui::Begin("##inventory_onboarding", nullptr, flags)) {
+        const float avail = ImGui::GetContentRegionAvail().x;
+
+        if (font_title_ != nullptr) ImGui::PushFont(font_title_);
+        ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorInk), "先登记家里的磁力片");
+        if (font_title_ != nullptr) ImGui::PopFont();
+        ImGui::Spacing();
+
+        ImGui::PushTextWrapPos(avail);
+        ImGui::TextUnformatted(
+            "告诉我们家里有哪些磁力片, 模型库就能用「我能搭的」筛选出"
+            "库存足够的模型, 开搭前也不会再遇到缺片的尴尬。");
+        ImGui::PopTextWrapPos();
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::Spacing();
+
+        // 占位说明: 按片型计数的图形录入界面 (UI_UX_SPEC.md §10.2) 待做,
+        // 现阶段引导家长使用命令行登记
+        ImGui::TextColored(kAccentVec, "图形录入界面即将上线");
+        ImGui::PushTextWrapPos(avail);
+        ImGui::TextDisabled("现在可以请家长在终端登记 (形状标识见 magtile_app catalog):");
+        ImGui::PopTextWrapPos();
+        ImGui::Spacing();
+        ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.93f, 0.94f, 0.96f, 1.0f));
+        ImGui::BeginChild("##onboarding_cmd", ImVec2(avail, 40.0f), ImGuiChildFlags_None,
+                          ImGuiWindowFlags_NoScrollbar);
+        ImGui::SetCursorPos(ImVec2(12.0f, 10.0f));
+        ImGui::TextUnformatted("magtile_app inventory set square 40 equilateral_triangle 24");
+        ImGui::EndChild();
+        ImGui::PopStyleColor();
+        ImGui::Spacing();
+
+        if (ImGui::Button("稍后再说, 先逛逛模型库##onboarding_dismiss", ImVec2(avail, 48.0f))) {
+            actions.dismissed = true;
+        }
     }
     ImGui::End();
     ImGui::PopStyleVar(2);

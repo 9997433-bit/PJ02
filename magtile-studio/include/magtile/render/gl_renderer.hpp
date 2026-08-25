@@ -58,6 +58,7 @@ struct LibraryCard {
     int step_count = 0;
     std::string theme;    ///< 主题标签 (决定卡片主题色与角标)
     std::vector<std::string> tags;
+    std::string thumbnail_path;  ///< 缩略图 PNG 路径 (空 = 无, 显示主题色占位)
 
     // ---- 来自进度存档 -------------------------------------------
     bool started = false;    ///< 有进度记录且未完成 (显示 "继续搭建")
@@ -128,8 +129,16 @@ public:
     /// 每帧至多一次, 与 submitHud 互斥 (二者分属不同界面)。
     /// @param simple_layout 4-6 岁启蒙模式简化布局 (UI_UX_SPEC.md §2):
     ///        超大卡片 + 隐藏搜索/筛选行, 由应用层按年龄段设置传入。
+    /// @param inventory_configured 是否已登记磁力片库存: 未登记时
+    ///        "我能搭的" 筛选禁用并提示先去登记 (UI_UX_SPEC.md §5.2)。
     [[nodiscard]] virtual LibraryActions submitLibrary(const std::vector<LibraryCard>& cards,
-                                                       bool simple_layout) = 0;
+                                                       bool simple_layout,
+                                                       bool inventory_configured) = 0;
+
+    /// 绘制首启库存 onboarding 提示弹窗 (占位: 完整的按片型计数录入
+    /// 界面见 UI_UX_SPEC.md §10, 待做) 并返回用户操作。带压暗遮罩,
+    /// 须在 submitLibrary 之后、endFrame 之前调用, 每帧至多一次。
+    [[nodiscard]] virtual InventoryOnboardingActions submitInventoryOnboarding() = 0;
 
     /// 绘制家长门界面 (算术题 + 中文大写数字软键盘) 并返回用户
     /// 操作。软键盘输入缓冲由渲染器跨帧保持, 提交/返回时自动清空。

@@ -30,11 +30,16 @@ struct ModelCatalogEntry {
     int difficulty = ModelDefinition::kMinDifficulty;  ///< 难度 1~5
     int total_pieces = 0;         ///< 磁力片总数
     int step_count = 0;           ///< 教程步骤数
-    std::vector<std::string> tags;  ///< 分类标签, 第一个为主题
+    std::string theme_name;      ///< 目录登记的规范主题 (可为空, 见 theme())
+    std::vector<std::string> tags;  ///< 分类标签
+    std::filesystem::path thumbnail;  ///< 缩略图 PNG (已相对 data 目录解析;
+                                      ///< 空 = 未生成, 由 tools/generate_thumbnails.py 产出)
 
-    /// 主题标签 (决定卡片主题色), 无标签时归入 "未分类"。
+    /// 主题 (决定卡片主题色与角标): 目录登记的 theme 优先, 缺省退回
+    /// 第一个标签, 无标签时归入 "未分类"。
     [[nodiscard]] const std::string& theme() const noexcept {
         static const std::string kUncategorized = "未分类";
+        if (!theme_name.empty()) return theme_name;
         return tags.empty() ? kUncategorized : tags.front();
     }
 };

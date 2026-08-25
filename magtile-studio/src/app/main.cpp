@@ -138,6 +138,8 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
             args.open_model = argv[++i];
         } else if (arg == "--parent-gate") {
             args.open_parent_gate = true;
+        } else if (arg == "--tts") {
+            args.tts = true;
         } else if (arg == "--db") {
             if (i + 1 >= argc) return false;
             args.db_file = argv[++i];
@@ -172,6 +174,17 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
             // set 之后是 <形状 数量> 对: 至少一对且必须成对出现
             if (positional.size() < 3 || (positional.size() - 1) % 2 != 0) return false;
             args.inventory_pairs.assign(positional.begin() + 1, positional.end());
+            return true;
+        }
+        return false;
+    }
+    if (args.command == "settings") {
+        if (positional.empty()) return false;
+        args.settings_action = positional[0];
+        if (args.settings_action == "show") return positional.size() == 1;
+        if (args.settings_action == "set-age") {
+            if (positional.size() != 2) return false;
+            args.settings_value = positional[1];
             return true;
         }
         return false;
@@ -498,6 +511,42 @@ int runInventory(const CliArgs& args) {
     return 0;
 }
 
+// ---- 设置 (settings set-age / show) --------------------------------
+
+/// settings 命令: 年龄段模式切换与设置总览 (UI_UX_SPEC.md §2 / §8)。
+/// 正式产品中年龄段切换位于家长门之后的家长区; CLI 是桌面外壳的
+/// 内容制作与评审入口, 不做门禁。
+int runSettings(const CliArgs& args) {
+    const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
+    progress::ProgressStore store(db_file);
+
+    if (args.settings_action == "set-age") {
+        char* end = nullptr;
+        const long age_years = std::strtol(args.settings_value.c_str(), &end, 10);
+        const auto mode = (end != args.settings_value.c_str() && *end == '\0')
+                              ? core::ageModeFromAgeYears(static_cast<int>(age_years))
+                              : std::nullopt;
+        if (!mode.has_value()) {
+            std::fprintf(stderr,
+                         "错误: \"%s\" 不在适龄范围 (4~12 周岁)。示例: settings set-age 4\n",
+                         args.settings_value.c_str());
+            return 2;
+        }
+        progress::setAgeMode(store, *mode);
+        std::printf("年龄段模式已切换: %s\n", std::string(core::displayNameZh(*mode)).c_str());
+        return 0;
+    }
+
+    // show: 设置总览 (年龄段 + TTS 后端探测结果)
+    const auto tts_engine = tts::createSystemTts();
+    std::printf("设置 (%s):\n", db_file.string().c_str());
+    std::printf("  年龄段模式: %s\n",
+                std::string(core::displayNameZh(progress::getAgeMode(store))).c_str());
+    std::printf("  TTS 朗读后端: %s%s\n", std::string(tts_engine->name()).c_str(),
+                tts_engine->available() ? "" : " (本机无可用朗读器, 已静音降级)");
+    return 0;
+}
+
 #if defined(MAGTILE_HAS_GL_RENDERER)
 
 /// 初始取景: 最终成品的包围盒。
@@ -525,12 +574,14 @@ enum class TutorialExit {
 ///
 /// store 非空时把进度写入存档: 每次步骤变化落盘当前步骤与游玩时长
 /// 增量, 走到最后一步即记完成 (并解锁首个模型完成成就)。
+/// tts 非空时进入/切换步骤即朗读步骤说明 (speak 内部先停旧朗读,
+/// 保证无叠音, UI_UX_SPEC.md §4.2); 会话结束停止朗读。
 /// frame_index 与调用方共享 --frames 帧预算 (模型库 + 教程连续计数)。
 TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
                                 const core::TileCatalog& catalog,
                                 tutorial::TutorialEngine& engine,
-                                progress::ProgressStore* store, bool from_library,
-                                const CliArgs& args, long& frame_index) {
+                                progress::ProgressStore* store, tts::ITtsEngine* tts,
+                                bool from_library, const CliArgs& args, long& frame_index) {
     using Clock = std::chrono::steady_clock;
     Clock::time_point last_flush_time = Clock::now();
     int last_saved_step = engine.currentStepNumber();
@@ -547,6 +598,21 @@ TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
     };
     // 会话开始即建档, 模型库立刻能显示 "进行中"
     flushProgress(last_saved_step);
+
+    // TTS: 朗读当前步骤说明; 会话结束时停止 (离开教程不能还在说话)
+    const auto speakCurrentStep = [&]() {
+        if (tts == nullptr) return;
+        if (const core::BuildStep* step = engine.currentStep(); step != nullptr) {
+            tts->speak(step->description);
+        } else {
+            tts->stop();  // 第 0 步 (未开始) 无步骤说明
+        }
+    };
+    const auto stopSpeaking = [&]() {
+        if (tts != nullptr) tts->stop();
+    };
+    int last_spoken_step = engine.currentStepNumber();
+    speakCurrentStep();  // 进入教程即朗读恢复到的步骤
 
     while (!renderer.shouldClose()) {
         renderer.pollEvents();
@@ -599,6 +665,12 @@ TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
             engine.previousStep();
         }
 
+        // 步骤变化 -> 朗读新步骤 (与进度落盘解耦: 无存档的直开教程也要朗读)
+        if (engine.currentStepNumber() != last_spoken_step) {
+            last_spoken_step = engine.currentStepNumber();
+            speakCurrentStep();
+        }
+
         // 步骤变化 -> 进度落盘; 走到最后一步 -> 记完成 + 首次完成成就
         if (store != nullptr && engine.currentStepNumber() != last_saved_step) {
             flushProgress(engine.currentStepNumber());
@@ -613,15 +685,18 @@ TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
         ++frame_index;
         if (actions.back_to_library && from_library) {
             flushProgress(engine.currentStepNumber());
+            stopSpeaking();
             return TutorialExit::BackToLibrary;
         }
         if (last_frame) {
             flushProgress(engine.currentStepNumber());
+            stopSpeaking();
             return TutorialExit::FrameBudget;
         }
     }
 
     flushProgress(engine.currentStepNumber());
+    stopSpeaking();
     return TutorialExit::WindowClosed;
 }
 
@@ -651,9 +726,17 @@ int runTutorialGui(const CliArgs& args) {
     }
     frameModelBounds(*renderer, catalog, engine.model());
 
+    // --tts: 切步朗读步骤说明 (直开教程无存档, 只认显式开关)
+    std::unique_ptr<tts::ITtsEngine> tts_engine;
+    if (args.tts) {
+        tts_engine = tts::createSystemTts();
+        std::printf("[tts] 朗读后端: %s%s\n", std::string(tts_engine->name()).c_str(),
+                    tts_engine->available() ? "" : " (无可用朗读器, 静音降级)");
+    }
+
     long frame_index = 0;
-    runTutorialSession(*renderer, catalog, engine, /*store=*/nullptr, /*from_library=*/false,
-                       args, frame_index);
+    runTutorialSession(*renderer, catalog, engine, /*store=*/nullptr, tts_engine.get(),
+                       /*from_library=*/false, args, frame_index);
     renderer->shutdown();
     return 0;
 }
@@ -669,6 +752,39 @@ int runLibraryGui(const CliArgs& args) {
     }
     const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
     progress::ProgressStore store(db_file);
+
+    // 年龄段模式 (家长在设置中选择, UI_UX_SPEC.md §2):
+    //   - 4-6 岁启蒙模式: 模型库切超大卡片简化布局 + 教程自动朗读;
+    //   - 其余档位: 标准布局, 朗读只认显式 --tts。
+    const core::AgeMode age_mode = progress::getAgeMode(store);
+    const bool simple_layout = age_mode == core::AgeMode::Age4_6;
+    std::unique_ptr<tts::ITtsEngine> tts_engine;
+    if (args.tts || age_mode == core::AgeMode::Age4_6) {
+        tts_engine = tts::createSystemTts();
+        std::printf("[tts] 朗读后端: %s%s\n", std::string(tts_engine->name()).c_str(),
+                    tts_engine->available() ? "" : " (无可用朗读器, 静音降级)");
+    }
+
+    // ---- 磁力片库存: "我能搭的" 筛选 + 首启 onboarding -----------------
+    // 已登记库存时对照每个模型的 BOM 预判 "能不能搭" (模型 JSON 只在
+    // 启动时加载一次; 库存目前只能经 CLI / 家长区修改, 会话内不变)。
+    const bool inventory_configured = store.hasInventory();
+    std::unordered_set<std::string> buildable_ids;
+    if (inventory_configured) {
+        for (const auto& entry : entries) {
+            try {
+                if (store.canBuild(core::loadModelDefinition(entry.file))) {
+                    buildable_ids.insert(entry.id);
+                }
+            } catch (const std::exception&) {
+                // 模型文件有问题由目录对账用例负责报告, 这里按不可搭处理
+            }
+        }
+    }
+    // 首启 onboarding (占位弹窗): 从未登记库存且没看过提示时弹出;
+    // "稍后再说" 记入存档, 之后不再打扰 (UI_UX_SPEC.md §10 跳过永远可见)
+    bool show_inventory_onboarding =
+        !inventory_configured && !store.getSetting("inventory_onboarding_done").has_value();
 
     auto renderer = render::createOpenGLRenderer();
     if (!renderer->initialize(1440, 900, "MagTile Studio - 模型库")) {
@@ -721,8 +837,8 @@ int runLibraryGui(const CliArgs& args) {
                 frameModelBounds(*renderer, catalog, engine.model());
 
                 const TutorialExit exit_reason = runTutorialSession(
-                    *renderer, catalog, engine, &store, /*from_library=*/true, args,
-                    frame_index);
+                    *renderer, catalog, engine, &store, tts_engine.get(),
+                    /*from_library=*/true, args, frame_index);
                 if (exit_reason == TutorialExit::FrameBudget) break;
                 // WindowClosed 由外层循环条件收尾; BackToLibrary 继续渲染库界面
             } catch (const std::exception& e) {
@@ -736,6 +852,7 @@ int runLibraryGui(const CliArgs& args) {
         (void)renderer->consumeActions();  // 库界面不使用教程键盘导航
 
         render::LibraryActions library_actions;
+        render::InventoryOnboardingActions onboarding_actions;
         render::ParentGateActions gate_actions;
         render::ParentAreaActions area_actions;
 
@@ -754,6 +871,8 @@ int runLibraryGui(const CliArgs& args) {
                 card.step_count = entry.step_count;
                 card.theme = entry.theme();
                 card.tags = entry.tags;
+                if (!entry.thumbnail.empty()) card.thumbnail_path = entry.thumbnail.string();
+                card.buildable = buildable_ids.count(entry.id) > 0;
                 if (const auto record = store.loadProgress(entry.id); record.has_value()) {
                     card.completed = record->isCompleted();
                     // 收藏也会建档, "进行中" 只认真正搭过的 (步骤 > 0)
@@ -763,7 +882,13 @@ int runLibraryGui(const CliArgs& args) {
                 }
                 cards.push_back(std::move(card));
             }
-            library_actions = renderer->submitLibrary(cards);
+            library_actions = renderer->submitLibrary(cards, simple_layout,
+                                                      inventory_configured);
+            if (show_inventory_onboarding) {
+                // onboarding 弹窗盖在模型库之上; 弹窗期间吞掉库界面操作
+                onboarding_actions = renderer->submitInventoryOnboarding();
+                library_actions = {};
+            }
         } else if (screen == LibraryScreen::ParentGate) {
             render::ParentGateState gate_state;
             gate_state.question = parent_gate.question();
@@ -783,6 +908,11 @@ int runLibraryGui(const CliArgs& args) {
 
         // ---- 帧末统一应用界面操作 --------------------------------------
         if (screen == LibraryScreen::Cards) {
+            if (onboarding_actions.dismissed) {
+                // 记入存档: 之后启动不再弹出 (库存录入入口保留在家长区)
+                store.setSetting("inventory_onboarding_done", "1");
+                show_inventory_onboarding = false;
+            }
             if (!library_actions.toggle_favorite_id.empty()) {
                 store.toggleFavorite(library_actions.toggle_favorite_id);
             }
@@ -855,9 +985,20 @@ int runTutorial(const CliArgs& args) {
     auto model = core::loadModelDefinition(args.model_file);
     printModelHeader(model);
 
+    // --tts: 每步推进都朗读说明; speak 内部先停旧朗读 (无叠音),
+    // 终端预览逐步瞬时推进, 实际可听到的是最后一步 —— 主要用于
+    // 快速验证后端发声与教程文案的口语化程度
+    std::unique_ptr<tts::ITtsEngine> tts_engine;
+    if (args.tts) {
+        tts_engine = tts::createSystemTts();
+        std::printf("[tts] 朗读后端: %s%s\n\n", std::string(tts_engine->name()).c_str(),
+                    tts_engine->available() ? "" : " (无可用朗读器, 静音降级)");
+    }
+
     tutorial::TutorialEngine engine(std::move(model));
     while (engine.nextStep()) {
         const core::BuildStep* step = engine.currentStep();
+        if (tts_engine != nullptr) tts_engine->speak(step->description);
         std::printf("第 %d/%d 步  [进度 %3.0f%%]\n", engine.currentStepNumber(),
                     engine.stepCount(), engine.progress() * 100.0);
         std::printf("  %s\n", step->description.c_str());
@@ -952,6 +1093,7 @@ int main(int argc, char** argv) {
         if (args.command == "tutorial") return runTutorial(args);
         if (args.command == "progress") return runProgress(args);
         if (args.command == "inventory") return runInventory(args);
+        if (args.command == "settings") return runSettings(args);
         if (args.command == "library") return runLibrary(args);
     } catch (const std::exception& e) {
         std::fprintf(stderr, "错误: %s\n", e.what());
