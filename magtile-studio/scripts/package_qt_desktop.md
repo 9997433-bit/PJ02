@@ -10,8 +10,9 @@ LGPL 合规清单。通用打包基座 (NSIS/ZIP/WiX、版本号管理、CI 流�
 > 状态: **IN_PROGRESS (脚手架 + 冒烟脚本)**。安装规则、并存/Qt-only
 > 两种包形态、starter 子集与许可文件均已就位; Linux 侧验证已脚本化
 > 为一键 `scripts/smoke_qt_linux_pack.sh` 并全绿 (三档 TGZ 清单断言 +
-> **NSIS 安装器脚本生成/makensis 编译冒烟** + 解包实测 + 动态链接
-> 核验, 见第九节); Windows 实机冒烟已脚本化为
+> **NSIS 安装器脚本生成/makensis 编译冒烟** + 解包实测 + LGPL 合规
+> 自动核对 `scripts/check_lgpl_compliance.sh`, 见第八/九节);
+> Windows 实机冒烟已脚本化为
 > `scripts/smoke_qt_windows.ps1` (构建→测试→CPack→windeployqt→清单
 > 断言→无头启动一条龙, 含 -DryRun 自检, 已在 pwsh 下自检通过);
 > macOS 实机冒烟已脚本化为 `scripts/smoke_qt_macos.sh` (构建→测试→
@@ -218,32 +219,54 @@ Qt 以 **LGPLv3 动态链接** 使用 (`docs/QT_UI_PLAN.md` §2 既定决策)。
 每次分发含 Qt 运行库的包前逐项核对; 任何一项做不到, 停发并走法务
 评估 (LGPL 例外条款或 Qt 商业许可, 预算见 `docs/COMMERCIAL_PLAN.md`)。
 
-- [ ] **仅动态链接**: Qt 库全部为共享库 (`.dll`/`.dylib`/`.so`),
+> **可自动化项已脚本化** (V1 清单 D6):
+> `bash scripts/check_lgpl_compliance.sh <包.tar.gz|解包目录>` 对出包
+> 产物自动断言下表标 **[自动]** 的项 —— 动态链接非静态链 (DT_NEEDED/
+> ldd 全共享库 + 动态符号表零 Qt 定义符号的静态吸入检测)、仅 LGPL
+> 模块白名单 (直接链接 ⊆ 本节第二项 7 模块, 传递闭包 ⊆ Essentials
+> 白名单, 白名单外任何 Qt 库当场失败)、必备文件清单
+> (THIRD_PARTY_NOTICES.md 含 Qt+LGPL 条目 / License.rtf / README.md)。
+> 标 **[自动·发布档]** 的"正式发布前追加"项 (LGPLv3+GPLv3 全文、精确
+> 版本+源码地址) 缺省报 WARN 不阻塞冒烟 (缺口在第十节待办), 出正式包
+> 前必跑 `--release` 档提升为硬性失败。Linux 冒烟已挂接常跑
+> (第九节 `smoke_qt_linux_pack.sh` 第 6 步)。其余标 **[人工]** 的项
+> 仍按下表出包时逐项打钩。
+
+- [ ] **仅动态链接** [自动]: Qt 库全部为共享库 (`.dll`/`.dylib`/`.so`),
       不静态链接 Qt。Linux/macOS 核验: `ldd` (或 `otool -L`)
-      `magtile_studio_qt` 中 Qt 全部指向共享库 (第九节已在 Linux
-      冒烟此项); Windows 核验包内存在 `Qt6*.dll` 而非被吸进 exe。
-- [ ] **仅 LGPL 模块**: 当前链接 Core/Gui/Qml/Quick/QuickControls2/
-      OpenGL (+ 可选 TextToSpeech), 全部 Essentials/LGPLv3。新增
-      Qt 模块前先核对许可 —— 部分 Add-on (Charts、Data Visualization
-      等) 是 GPL-only, 引入即传染整包。
-- [ ] **未修改 Qt 源码**: 使用官方二进制发行。若将来自编译打补丁,
-      必须随包公开对应源码修改 (LGPLv3 §4)。
-- [ ] **随包许可声明**: `licenses/THIRD_PARTY_NOTICES.md` 含 Qt 条目
-      (已就位); 正式发布前追加 **LGPLv3 与 GPLv3 许可全文副本**
-      (LGPLv3 是 GPLv3 的补充条款, 两份都要带)。
-- [ ] **可替换性 (LGPLv3 §4(d))**: 用户可用自己编译的兼容 Qt 替换
-      随包 Qt 库 —— 动态链接布局即满足 (库文件在安装目录可见可换);
+      `magtile_studio_qt` 中 Qt 全部指向共享库 (Linux 侧
+      `check_lgpl_compliance.sh` 已断言, 另加 DT_NEEDED 与静态吸入
+      符号检测, 随第九节冒烟常跑); Windows 核验包内存在 `Qt6*.dll`
+      而非被吸进 exe。
+- [ ] **仅 LGPL 模块** [自动]: 当前链接 Core/Gui/Qml/Quick/
+      QuickControls2/OpenGL (+ 可选 TextToSpeech), 全部
+      Essentials/LGPLv3 (`check_lgpl_compliance.sh` 白名单断言:
+      直接链接限上述 7 模块, 传递闭包另放行 QuickTemplates2/
+      QmlModels/QmlWorkerScript/QmlMeta/Network/DBus)。新增
+      Qt 模块前先核对许可再扩脚本白名单 —— 部分 Add-on (Charts、
+      Data Visualization 等) 是 GPL-only, 引入即传染整包, 白名单外
+      模块脚本当场失败。
+- [ ] **未修改 Qt 源码** [人工]: 使用官方二进制发行。若将来自编译
+      打补丁, 必须随包公开对应源码修改 (LGPLv3 §4)。
+- [ ] **随包许可声明** [自动; 追加项为自动·发布档]:
+      `licenses/THIRD_PARTY_NOTICES.md` 含 Qt 条目 (已就位, 脚本断言
+      在包内且含 Qt+LGPL 条目; License.rtf/README.md 同批断言);
+      正式发布前追加 **LGPLv3 与 GPLv3 许可全文副本** (LGPLv3 是
+      GPLv3 的补充条款, 两份都要带; 脚本缺省 WARN, `--release` 失败)。
+- [ ] **可替换性 (LGPLv3 §4(d))** [人工]: 用户可用自己编译的兼容 Qt
+      替换随包 Qt 库 —— 动态链接布局即满足 (库文件在安装目录可见可换);
       安装器/应用不得做"校验 Qt 库指纹、被替换即拒启动"之类的技术
       阻碍。商店渠道 (MSIX / Mac App Store) 的沙箱与签名机制对
       可替换性的影响存在争议, 上架前必须法务评估。
-- [ ] **源码获取途径 (LGPLv3 §4(e))**: 为随包 Qt 版本提供完整对应
-      源码的获取方式 —— 在 THIRD_PARTY_NOTICES.md 注明所用 Qt 精确
-      版本号与官方源码地址 (download.qt.io), 自留一份源码副本以防
-      上游撤档 (发布归档时一并落实)。
-- [ ] **界面署名**: 关于页/文档注明 "基于 Qt (qt.io), LGPLv3" ——
-      非硬性条款但为社区惯例, 家长中心「关于」页落地时带上。
-- [ ] **法务终审**: 商用闭源正式发布前, 由法务确认走 LGPL 合规
-      或改购 Qt 商业许可 (`scripts/package_windows.md` 第十一节
+- [ ] **源码获取途径 (LGPLv3 §4(e))** [自动·发布档]: 为随包 Qt 版本
+      提供完整对应源码的获取方式 —— 在 THIRD_PARTY_NOTICES.md 注明
+      所用 Qt 精确版本号与官方源码地址 (download.qt.io), 自留一份
+      源码副本以防上游撤档 (发布归档时一并落实; 脚本核验版本号与
+      地址两要素, 缺省 WARN, `--release` 失败)。
+- [ ] **界面署名** [人工]: 关于页/文档注明 "基于 Qt (qt.io), LGPLv3"
+      —— 非硬性条款但为社区惯例, 家长中心「关于」页落地时带上。
+- [ ] **法务终审** [人工]: 商用闭源正式发布前, 由法务确认走 LGPL
+      合规或改购 Qt 商业许可 (`scripts/package_windows.md` 第十一节
       发布前清单同款条目)。
 
 ## 九、Linux 冒烟验证 (无 Windows/macOS 机器时)
@@ -263,7 +286,9 @@ bash scripts/smoke_qt_linux_pack.sh          # 构建目录默认 build-pack
 `apt install nsis`, 未装时该档跳过; 3) Qt-only 包 (无 magtile_app,
 -qt 后缀); 4) starter 子集 (模型恰 30 个 + 目录同步过滤 + 解包后
 目录登记一致性复核); 5) offscreen 启动实测吃包内 data/;
-6) ldd 动态链接核验 (第八节第一项)。任一断言失败退出码非零。
+6) LGPL 合规自动核对 (委托 `scripts/check_lgpl_compliance.sh` 对
+解包产物断言 动态链接非静态链 + 模块白名单 + 必备文件清单, 第八节
+可自动化项; "发布前追加"项 WARN 不阻塞冒烟)。任一断言失败退出码非零。
 
 等价手动步骤 (脚本内部即此流程):
 
@@ -290,14 +315,19 @@ QT_QPA_PLATFORM=offscreen /tmp/MagTileStudio-*-qt/magtile_studio_qt \
     --data-dir /tmp/MagTileStudio-*-qt/data --db /tmp/qt_pack_smoke.db \
     --smoke-quit-ms 1500
 
-# 5) LGPL 动态链接核验 (第八节第一项)
-ldd build-pack/apps/desktop_qt/magtile_studio_qt | grep -i qt   # 应全为 .so
+# 5) LGPL 合规自动核对 (第八节可自动化项; 也可单独对任一产物跑)
+bash scripts/check_lgpl_compliance.sh \
+    build-pack/MagTileStudio-*-Linux.tar.gz          # 冒烟档 (WARN 不失败)
+# 出正式包前: 追加 --release, "发布前追加"项 (LGPLv3/GPLv3 全文、
+# 精确版本+源码地址) 提升为硬性失败
 ```
 
 本仓库当前状态已按 `smoke_qt_linux_pack.sh` 在 Ubuntu (Qt 6.4.2 /
 CMake 3.28 / NSIS 3.10) 全绿: 三档 TGZ 清单断言、NSIS 脚本生成 +
 makensis 编译 + 快捷方式断言、starter 解包目录一致性、offscreen
-启动、ldd 动态链接核验全部通过; `smoke_qt_macos.sh` 的可移植子集
+启动、LGPL 合规自动核对 (`check_lgpl_compliance.sh`: 动态链接非
+静态链/模块白名单/必备文件清单 9 项 OK + 发布前追加项 3 WARN 属
+预期缺口, 第十节待办) 全部通过; `smoke_qt_macos.sh` 的可移植子集
 (构建→ctest→CPack TGZ→清单断言→offscreen→ldd) 已在同一 Ubuntu 环境
 实跑全绿 (4 过 / 0 失败 / 5 项 macOS 专属 SKIP, 退出码 0 标记
 PARTIAL, 见第十/十二节); Windows/macOS 实机项见下节。
@@ -338,7 +368,9 @@ PARTIAL, 见第十/十二节); Windows/macOS 实机项见下节。
       Center 商品配置与沙盒验收步骤见
       [`../docs/WINDOWS_STORE_BILLING_SANDBOX_QA.md`](../docs/WINDOWS_STORE_BILLING_SANDBOX_QA.md)。
 - [ ] licenses/ 补 LGPLv3 + GPLv3 许可全文; THIRD_PARTY_NOTICES.md
-      注明随包 Qt 精确版本与源码地址。
+      注明随包 Qt 精确版本与源码地址。缺口已由
+      `scripts/check_lgpl_compliance.sh` 把关: 冒烟档 WARN 提示,
+      出正式包 `--release` 档缺则硬性失败 (第八节)。
 - [ ] 应用图标/安装器素材 (与 `scripts/package_windows.md` 第十一节
       共用)。
 - [ ] 达成 `docs/QT_UI_PLAN.md` §4 退役条件后, 商店渠道只发 Qt 版

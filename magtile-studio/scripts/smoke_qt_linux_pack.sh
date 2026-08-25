@@ -11,7 +11,10 @@
 #   3) Qt-only 包 TGZ: 无 magtile_app, 包名 -qt 后缀
 #   4) starter 子集 TGZ: data/models 恰 30 个 + model_catalog 同步过滤
 #   5) 解包实测: offscreen 启动吃包内 data/ (系统 Qt 运行)
-#   6) LGPL 动态链接核验: ldd 中 Qt 全部为共享库 (手册第八节第一项)
+#   6) LGPL 合规自动核对: 委托 scripts/check_lgpl_compliance.sh 对
+#      解包产物断言 动态链接非静态链 + 仅 LGPL 模块白名单 +
+#      THIRD_PARTY_NOTICES/EULA 必备文件清单 (手册第八节可自动化项;
+#      "发布前追加"项报 WARN 不阻塞冒烟, 出正式包用 --release 档)
 #
 # 用法 (仓库根目录):  bash scripts/smoke_qt_linux_pack.sh [构建目录]
 #   构建目录默认 build-pack; 脚本会反复重配置该目录的打包开关,
@@ -166,12 +169,13 @@ else
     bad "offscreen 启动冒烟失败"
 fi
 
-step "6) LGPL 动态链接核验 (手册第八节第一项)"
-QT_LINKS="$(ldd "$BUILD_DIR/apps/desktop_qt/magtile_studio_qt" | grep -iE 'libqt' || true)"
-if [[ -n "$QT_LINKS" ]] && ! grep -vqE '\.so' <<<"$QT_LINKS"; then
-    ok "Qt 全部为动态链接共享库 ($(wc -l <<<"$QT_LINKS") 个 libQt6*.so)"
+step "6) LGPL 合规自动核对 (手册第八节; scripts/check_lgpl_compliance.sh)"
+# 对解包后的真实出包产物核对 (非构建树二进制): 动态链接非静态链 +
+# 模块白名单 + 必备文件清单; 子脚本逐项打印 [OK]/[!!], 此处只记总评
+if bash scripts/check_lgpl_compliance.sh "$PKG_ROOT"; then
+    ok "LGPL 合规自动核对通过 (动态链接/模块白名单/必备文件清单)"
 else
-    bad "Qt 链接形态异常 (应全为 .so 共享库)"
+    bad "LGPL 合规自动核对失败 (见上方 [!!] 行; 手册第八节)"
 fi
 
 step "恢复构建目录为默认档 (并存 + full)"

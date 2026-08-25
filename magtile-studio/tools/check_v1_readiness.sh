@@ -238,6 +238,7 @@ check_packaging_assets() {
         scripts/package_qt_desktop.md
         scripts/package_windows.md
         scripts/smoke_qt_linux_pack.sh
+        scripts/check_lgpl_compliance.sh
         platforms/windows/packaging/starter_models.txt
         platforms/windows/packaging/THIRD_PARTY_NOTICES.md
         platforms/windows/packaging/CPackWindows.cmake
