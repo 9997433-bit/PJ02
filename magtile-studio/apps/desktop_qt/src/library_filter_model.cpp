@@ -2,11 +2,26 @@
 
 #include <QVariantMap>
 #include <algorithm>
+#include <cstdlib>
 #include <vector>
 
 #include "library_model.hpp"
 
 namespace magtile::qtui {
+namespace {
+
+/// 推荐卡片数据快照 (recommendBuildable / recommendSimilar 共用键)。
+QVariantMap recommendationItem(const QAbstractItemModel* src, const QModelIndex& idx) {
+    QVariantMap item;
+    item.insert(QStringLiteral("modelId"), src->data(idx, LibraryModel::ModelIdRole));
+    item.insert(QStringLiteral("name"), src->data(idx, LibraryModel::NameRole));
+    item.insert(QStringLiteral("difficulty"), src->data(idx, LibraryModel::DifficultyRole));
+    item.insert(QStringLiteral("pieces"), src->data(idx, LibraryModel::PiecesRole));
+    item.insert(QStringLiteral("theme"), src->data(idx, LibraryModel::ThemeRole));
+    return item;
+}
+
+}  // namespace
 
 LibraryFilterModel::LibraryFilterModel(QObject* parent) : QSortFilterProxyModel(parent) {
     // 筛选结果行数变化的全部途径都汇到 countChanged, 供 QML 空态判定
@@ -87,14 +102,57 @@ QVariantList LibraryFilterModel::recommendBuildable(int max_count) const {
 
     const int count = std::min(max_count, static_cast<int>(buildable.size()));
     for (int i = 0; i < count; ++i) {
-        const QModelIndex& idx = buildable[static_cast<std::size_t>(i)];
-        QVariantMap item;
-        item.insert(QStringLiteral("modelId"), src->data(idx, LibraryModel::ModelIdRole));
-        item.insert(QStringLiteral("name"), src->data(idx, LibraryModel::NameRole));
-        item.insert(QStringLiteral("difficulty"), src->data(idx, LibraryModel::DifficultyRole));
-        item.insert(QStringLiteral("pieces"), src->data(idx, LibraryModel::PiecesRole));
-        item.insert(QStringLiteral("theme"), src->data(idx, LibraryModel::ThemeRole));
-        recommendations.push_back(item);
+        recommendations.push_back(
+            recommendationItem(src, buildable[static_cast<std::size_t>(i)]));
+    }
+    return recommendations;
+}
+
+QVariantList LibraryFilterModel::recommendSimilar(const QString& model_id,
+                                                  int max_count) const {
+    QVariantList recommendations;
+    const QAbstractItemModel* src = sourceModel();
+    if (src == nullptr || max_count <= 0) return recommendations;
+
+    // 刚完成模型的难度作为「相近」基准; 目录中找不到 (极端: 目录热更
+    // 后被下架) 时 has_base=false, 排序退回难度升序口径
+    int base_difficulty = 0;
+    bool has_base = false;
+    std::vector<QModelIndex> candidates;
+    for (int row = 0; row < src->rowCount(); ++row) {
+        const QModelIndex idx = src->index(row, 0);
+        if (src->data(idx, LibraryModel::ModelIdRole).toString() == model_id) {
+            base_difficulty = src->data(idx, LibraryModel::DifficultyRole).toInt();
+            has_base = true;
+            continue;  // 刚完成的模型自身不进推荐
+        }
+        if (!src->data(idx, LibraryModel::CanBuildRole).toBool()) continue;
+        // 庆祝页点卡直接开搭 (startBuild 无订阅拦截), 订阅内容在此拦下 (§11)
+        if (!src->data(idx, LibraryModel::FreeRole).toBool()) continue;
+        candidates.push_back(idx);
+    }
+
+    std::stable_sort(
+        candidates.begin(), candidates.end(),
+        [src, base_difficulty, has_base](const QModelIndex& a, const QModelIndex& b) {
+            const int diff_a = src->data(a, LibraryModel::DifficultyRole).toInt();
+            const int diff_b = src->data(b, LibraryModel::DifficultyRole).toInt();
+            if (has_base) {
+                // 同难度最先、±1 次之, 候选不足时距离更远的自然垫后 (放宽难度)
+                const int dist_a = std::abs(diff_a - base_difficulty);
+                const int dist_b = std::abs(diff_b - base_difficulty);
+                if (dist_a != dist_b) return dist_a < dist_b;
+            }
+            // 同距离取更轻松的一档 (P3 零挫败), 同难度片数少者优先
+            if (diff_a != diff_b) return diff_a < diff_b;
+            return src->data(a, LibraryModel::PiecesRole).toInt() <
+                   src->data(b, LibraryModel::PiecesRole).toInt();
+        });
+
+    const int count = std::min(max_count, static_cast<int>(candidates.size()));
+    for (int i = 0; i < count; ++i) {
+        recommendations.push_back(
+            recommendationItem(src, candidates[static_cast<std::size_t>(i)]));
     }
     return recommendations;
 }

@@ -69,6 +69,17 @@ public:
     /// 没有可搭模型时返回空列表 (界面退回普通空态文案)。
     Q_INVOKABLE QVariantList recommendBuildable(int max_count) const;
 
+    /// 庆祝页「再搭一个」推荐 (UI_UX_SPEC.md §6.2, QT-4): 排除刚完成
+    /// 的 model_id 本身, 从目录中挑库存足够 (canBuild) 且属免费层的
+    /// 模型 —— 庆祝页点卡直接走 startBuild 开搭, 订阅内容进推荐会
+    /// 绕过「订阅教程只在解锁后可开」(§11), 故在此拦下。排序: 与刚
+    /// 完成模型的难度差升序 (同难度最先、±1 次之、不足时放宽),
+    /// 同距离难度低者优先、再按片数少者优先, 取前 max_count 个。
+    /// model_id 不在目录中 (极端: 目录热更后被下架) 时退回
+    /// recommendBuildable 的难度升序口径。每项键同 recommendBuildable;
+    /// 无可推荐时返回空列表 (界面整块隐藏, 不显示空态文案)。
+    Q_INVOKABLE QVariantList recommendSimilar(const QString& model_id, int max_count) const;
+
 signals:
     void filtersChanged();
     void countChanged();

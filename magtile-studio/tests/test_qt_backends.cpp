@@ -11,6 +11,9 @@
 //   4. LibraryFilterModel (QT-1): 「我能搭的」筛选空态推荐
 //      recommendBuildable —— 只挑 canBuild、难度升序 (同难度片数
 //      少者优先)、无视其他筛选条件、上限截断;
+//   4b. LibraryFilterModel (QT-4, §6.2): 庆祝页「再搭一个」推荐
+//      recommendSimilar —— 同难度优先、±1 次之、不足时放宽难度,
+//      排除刚完成的自身、订阅内容与缺片模型, 无库存时为空;
 //   5. TtsBackend (QT-4): 朗读开关默认开 / 跨实例持久化 / 与
 //      ui_settings "tts_enabled" 键的双向契约 (设置页开关同键);
 //      本目标不定义 MAGTILE_QT_TTS, 顺带覆盖无引擎静默降级路径。
@@ -226,6 +229,78 @@ int main(int argc, char** argv) {
         none_buildable.push_back(makeRow("a", 1, 10, false));
         model.resetRows(std::move(none_buildable));
         expect(filter.recommendBuildable(3).isEmpty(), "没有可搭模型时推荐为空");
+    }
+
+    // ---- 4b. LibraryFilterModel: 庆祝页「再搭一个」推荐 (QT-4, §6.2) ---
+    {
+        using magtile::qtui::LibraryFilterModel;
+        using magtile::qtui::LibraryModel;
+        using magtile::qtui::LibraryRow;
+
+        const auto makeRow = [](const char* id, int difficulty, int pieces, bool can_build,
+                                bool is_free = true) {
+            LibraryRow row;
+            row.entry.id = id;
+            row.entry.name = id;
+            row.entry.difficulty = difficulty;
+            row.entry.total_pieces = pieces;
+            row.bom_known = true;
+            row.can_build = can_build;
+            row.is_free = is_free;
+            return row;
+        };
+        const auto recId = [](const QVariantList& recs, int i) {
+            return recs.value(i).toMap().value(QStringLiteral("modelId")).toString();
+        };
+
+        // 刚完成 just_done (难度 3); 候选覆盖 同难度/±1/更远/缺片/订阅
+        LibraryModel model;
+        std::vector<LibraryRow> rows;
+        rows.push_back(makeRow("just_done", 3, 50, true));
+        rows.push_back(makeRow("far_easy", 1, 10, true));
+        rows.push_back(makeRow("one_down", 2, 40, true));
+        rows.push_back(makeRow("one_up", 4, 20, true));
+        rows.push_back(makeRow("same_diff_big", 3, 60, true));
+        rows.push_back(makeRow("same_diff_small", 3, 30, true));
+        rows.push_back(makeRow("same_missing", 3, 20, false));
+        rows.push_back(makeRow("same_locked", 3, 15, true, /*is_free=*/false));
+        model.resetRows(std::move(rows));
+
+        LibraryFilterModel filter;
+        filter.setSourceModel(&model);
+
+        const QVariantList top2 = filter.recommendSimilar(QStringLiteral("just_done"), 2);
+        expect(top2.size() == 2, "庆祝页推荐最多 2 张");
+        expect(recId(top2, 0) == QStringLiteral("same_diff_small"),
+               "同难度优先, 片数少者排第 1");
+        expect(recId(top2, 1) == QStringLiteral("same_diff_big"), "同难度片数多者排第 2");
+
+        const QVariantList all = filter.recommendSimilar(QStringLiteral("just_done"), 10);
+        expect(all.size() == 5, "同难度不足时放宽到 ±1 再到更远难度");
+        expect(recId(all, 2) == QStringLiteral("one_down") &&
+                   recId(all, 3) == QStringLiteral("one_up"),
+               "±1 难度垫后, 同距离取更轻松的一档");
+        expect(recId(all, 4) == QStringLiteral("far_easy"), "候选不足时放宽难度兜底");
+        for (const QVariant& rec : all) {
+            const QString id = rec.toMap().value(QStringLiteral("modelId")).toString();
+            expect(id != QStringLiteral("just_done"), "刚完成的模型自身不进推荐");
+            expect(id != QStringLiteral("same_missing"), "缺片模型不进庆祝页推荐");
+            expect(id != QStringLiteral("same_locked"),
+                   "订阅内容不进庆祝页推荐 (点卡直接开搭, 不绕过订阅门)");
+        }
+
+        // 刚完成的模型不在目录 (极端: 目录热更后被下架): 退回难度升序口径
+        const QVariantList fallback = filter.recommendSimilar(QStringLiteral("ghost"), 2);
+        expect(fallback.size() == 2 && recId(fallback, 0) == QStringLiteral("far_easy"),
+               "基准模型不在目录时退回难度升序推荐");
+
+        // 无库存 (canBuild 恒 false) 时返回空列表 (界面整块隐藏)
+        std::vector<LibraryRow> none_buildable;
+        none_buildable.push_back(makeRow("just_done", 3, 50, false));
+        none_buildable.push_back(makeRow("neighbor", 3, 30, false));
+        model.resetRows(std::move(none_buildable));
+        expect(filter.recommendSimilar(QStringLiteral("just_done"), 2).isEmpty(),
+               "无库存可搭时推荐为空 (庆祝页推荐区整块隐藏)");
     }
 
     // ---- 5. TtsBackend: 朗读开关持久化与 ui_settings 契约 (QT-4) -------
