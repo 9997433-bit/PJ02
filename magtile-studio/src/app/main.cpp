@@ -71,6 +71,9 @@ struct CliArgs {
     bool tts = false;            ///< --tts: 教程切步时朗读步骤说明 (系统 TTS)
     std::string open_model;      ///< library --gui: 启动后直接打开的模型 id
     bool open_parent_gate = false;  ///< library --gui: 启动即显示家长门 (评审/冒烟)
+    bool open_inventory = false;    ///< library --gui: 启动即打开库存录入界面
+    std::string smoke_inventory;    ///< 冒烟自动驾驶: "square=40,rectangle=8" 经图形
+                                    ///< 录入路径写入并保存 (供 CI 验证图形写库存)
     fs::path db_file;            ///< 进度存档路径; 为空时用平台默认路径
 };
 
@@ -109,6 +112,10 @@ void printUsage() {
         "  --step N            (tutorial) 从第 N 步开始 (默认 1)\n"
         "  --open MODEL_ID     (library) 启动后直接进入指定模型的教程\n"
         "  --parent-gate       (library) 启动即显示家长门界面 (评审/冒烟测试)\n"
+        "  --inventory         (library) 启动即打开磁力片库存录入界面\n"
+        "  --smoke-inventory SPEC\n"
+        "                      (library) 冒烟自动驾驶: 经图形录入路径把 SPEC\n"
+        "                      (如 square=40,rectangle=8) 写入并保存 (供 CI 测试)\n"
         "  --frames N          渲染 N 帧后自动退出 (供 CI 冒烟测试)\n"
         "  --screenshot FILE   退出前把画面保存为 PPM 图片 (供 CI 冒烟测试)\n"
         "\n"
@@ -142,6 +149,11 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
             args.open_model = argv[++i];
         } else if (arg == "--parent-gate") {
             args.open_parent_gate = true;
+        } else if (arg == "--inventory") {
+            args.open_inventory = true;
+        } else if (arg == "--smoke-inventory") {
+            if (i + 1 >= argc) return false;
+            args.smoke_inventory = argv[++i];
         } else if (arg == "--tts") {
             args.tts = true;
         } else if (arg == "--profile") {
@@ -792,11 +804,13 @@ int runLibraryGui(const CliArgs& args) {
     }
 
     // ---- 磁力片库存: "我能搭的" 筛选 + 首启 onboarding -----------------
-    // 已登记库存时对照每个模型的 BOM 预判 "能不能搭" (模型 JSON 只在
-    // 启动时加载一次; 库存目前只能经 CLI / 家长区修改, 会话内不变)。
-    const bool inventory_configured = store.hasInventory();
+    // 已登记库存时对照每个模型的 BOM 预判 "能不能搭"; 库存经图形录入
+    // 界面保存后就地重算 (模型 JSON 重新加载, 数百个模型量级毫秒完成)。
+    bool inventory_configured = store.hasInventory();
     std::unordered_set<std::string> buildable_ids;
-    if (inventory_configured) {
+    const auto recomputeBuildable = [&]() {
+        buildable_ids.clear();
+        if (!inventory_configured) return;
         for (const auto& entry : entries) {
             try {
                 if (store.canBuild(core::loadModelDefinition(entry.file))) {
@@ -806,11 +820,70 @@ int runLibraryGui(const CliArgs& args) {
                 // 模型文件有问题由目录对账用例负责报告, 这里按不可搭处理
             }
         }
-    }
-    // 首启 onboarding (占位弹窗): 从未登记库存且没看过提示时弹出;
-    // "稍后再说" 记入存档, 之后不再打扰 (UI_UX_SPEC.md §10 跳过永远可见)
+    };
+    recomputeBuildable();
+    // 首启 onboarding: 从未登记库存且没看过提示时弹出, 主按钮直达图形
+    // 录入界面; "稍后再说" 记入存档后不再打扰 (UI_UX_SPEC.md §10
+    // 跳过永远可见, 录库存不是付费墙)。
     bool show_inventory_onboarding =
         !inventory_configured && !store.getSetting("inventory_onboarding_done").has_value();
+
+    // ---- 库存录入界面 (UI_UX_SPEC.md §10.2) 的编辑状态 ------------------
+    // rows 是编辑中的临时副本 (进入界面时从存档快照), 保存才落盘;
+    // "返回" 直接丢弃, 与存档零交互。
+    std::vector<render::InventoryEditorRow> inventory_rows;
+    const auto openInventoryEditor = [&]() {
+        inventory_rows.clear();
+        const auto saved = store.getInventory();
+        for (const auto& [type, shape] : catalog.shapes()) {
+            render::InventoryEditorRow row;
+            row.shape_id = std::string(core::toString(type));
+            row.name_zh = shape.name_zh;
+            row.expansion = shape.tier != "core";
+            if (const auto it = saved.find(row.shape_id); it != saved.end()) {
+                row.count = it->second;
+            }
+            inventory_rows.push_back(std::move(row));
+        }
+    };
+    const auto saveInventoryRows = [&]() {
+        for (const auto& row : inventory_rows) {
+            store.setInventory(row.shape_id, row.count);
+        }
+        // 保存即完成 onboarding (含 count 全 0 的 "明确没有")
+        store.setSetting("inventory_onboarding_done", "1");
+        show_inventory_onboarding = false;
+        inventory_configured = store.hasInventory();
+        recomputeBuildable();
+    };
+
+    // --smoke-inventory "square=40,rectangle=8": CI 冒烟自动驾驶,
+    // 模拟用户在图形录入界面修改数量并点击 "保存, 看看我能搭什么"
+    // (走与真实点击完全相同的 action -> 保存 -> 重算筛选管线)。
+    std::vector<std::pair<std::string, int>> smoke_inventory_pairs;
+    if (!args.smoke_inventory.empty()) {
+        const std::string& spec = args.smoke_inventory;
+        std::size_t pos = 0;
+        while (pos < spec.size()) {
+            const std::size_t comma = spec.find(',', pos);
+            const std::string token =
+                spec.substr(pos, comma == std::string::npos ? std::string::npos : comma - pos);
+            pos = comma == std::string::npos ? spec.size() : comma + 1;
+            const std::size_t eq = token.find('=');
+            char* end = nullptr;
+            const long count =
+                eq == std::string::npos ? -1 : std::strtol(token.c_str() + eq + 1, &end, 10);
+            if (eq == 0 || eq == std::string::npos || end == token.c_str() + eq + 1 ||
+                *end != '\0' || count < 0) {
+                std::fprintf(stderr,
+                             "错误: --smoke-inventory 片段 \"%s\" 不是 形状=数量 格式\n",
+                             token.c_str());
+                return 2;
+            }
+            smoke_inventory_pairs.emplace_back(token.substr(0, eq), static_cast<int>(count));
+        }
+    }
+    int smoke_inventory_stage = 0;  // 0 = 注入修改, 1 = 注入保存, >=2 = 完成
 
     auto renderer = render::createOpenGLRenderer();
     if (!renderer->initialize(1440, 900, "MagTile Studio - 模型库")) {
@@ -824,12 +897,18 @@ int runLibraryGui(const CliArgs& args) {
     // 家长门: 订阅/设置 (家长区) 前置强制关卡 (UI_UX_SPEC.md §9)。
     // 会话与冷却只存内存, 重启即失效, 不落盘 "已通过" 标记
     // (SECURITY_AND_PRIVACY.md §6.2)。
-    enum class LibraryScreen { Cards, ParentGate, ParentArea };
-    // --parent-gate: 启动即显示家长门 (构造时已生成一道新题)
+    enum class LibraryScreen { Cards, ParentGate, ParentArea, Inventory };
+    // --parent-gate: 启动即显示家长门 (构造时已生成一道新题);
+    // --inventory / --smoke-inventory: 启动即打开库存录入界面
     LibraryScreen screen =
         args.open_parent_gate ? LibraryScreen::ParentGate : LibraryScreen::Cards;
+    if (args.open_inventory || !smoke_inventory_pairs.empty()) {
+        openInventoryEditor();
+        screen = LibraryScreen::Inventory;
+    }
     core::ParentGate parent_gate;
     bool gate_wrong_answer = false;  // 上次提交答错, 用于门界面温和提示
+    bool activate_buildable_filter = false;  // 一次性: "保存并匹配" 跳转帧开启筛选
 
     long frame_index = 0;
     while (!renderer->shouldClose()) {
@@ -879,6 +958,7 @@ int runLibraryGui(const CliArgs& args) {
 
         render::LibraryActions library_actions;
         render::InventoryOnboardingActions onboarding_actions;
+        render::InventoryEditorActions inventory_actions;
         render::ParentGateActions gate_actions;
         render::ParentAreaActions area_actions;
 
@@ -909,11 +989,24 @@ int runLibraryGui(const CliArgs& args) {
                 cards.push_back(std::move(card));
             }
             library_actions = renderer->submitLibrary(cards, simple_layout,
-                                                      inventory_configured);
+                                                      inventory_configured,
+                                                      activate_buildable_filter);
+            activate_buildable_filter = false;  // 一次性触发, 用过即清
             if (show_inventory_onboarding) {
                 // onboarding 弹窗盖在模型库之上; 弹窗期间吞掉库界面操作
                 onboarding_actions = renderer->submitInventoryOnboarding();
                 library_actions = {};
+            }
+        } else if (screen == LibraryScreen::Inventory) {
+            inventory_actions = renderer->submitInventoryEditor(inventory_rows);
+            // 冒烟自动驾驶: 第 1 帧注入数量修改, 第 2 帧注入保存并匹配
+            if (!smoke_inventory_pairs.empty() && smoke_inventory_stage <= 1) {
+                if (smoke_inventory_stage == 0) {
+                    inventory_actions.count_changes = smoke_inventory_pairs;
+                } else {
+                    inventory_actions.save_and_match = true;
+                }
+                ++smoke_inventory_stage;
             }
         } else if (screen == LibraryScreen::ParentGate) {
             render::ParentGateState gate_state;
@@ -934,8 +1027,15 @@ int runLibraryGui(const CliArgs& args) {
 
         // ---- 帧末统一应用界面操作 --------------------------------------
         if (screen == LibraryScreen::Cards) {
+            if (onboarding_actions.start_entry) {
+                // 进入图形录入界面; 是否落盘 "已看过" 由保存动作决定
+                // (中途返回的话下次启动还会温和提醒一次)
+                show_inventory_onboarding = false;
+                openInventoryEditor();
+                screen = LibraryScreen::Inventory;
+            }
             if (onboarding_actions.dismissed) {
-                // 记入存档: 之后启动不再弹出 (库存录入入口保留在家长区)
+                // 记入存档: 之后启动不再弹出 (录入入口常驻模型库页眉)
                 store.setSetting("inventory_onboarding_done", "1");
                 show_inventory_onboarding = false;
             }
@@ -945,6 +1045,10 @@ int runLibraryGui(const CliArgs& args) {
             if (!library_actions.open_model_id.empty()) {
                 pending_open = library_actions.open_model_id;
             }
+            if (library_actions.open_inventory) {
+                openInventoryEditor();
+                screen = LibraryScreen::Inventory;
+            }
             if (library_actions.open_parent_area) {
                 if (parent_gate.sessionActive()) {
                     screen = LibraryScreen::ParentArea;  // 15 分钟会话内免重复验证
@@ -953,6 +1057,23 @@ int runLibraryGui(const CliArgs& args) {
                     gate_wrong_answer = false;
                     screen = LibraryScreen::ParentGate;
                 }
+            }
+        } else if (screen == LibraryScreen::Inventory) {
+            // 数量修改先落到编辑副本 (步进器与直接输入同一路径)
+            for (const auto& [shape_id, count] : inventory_actions.count_changes) {
+                for (auto& row : inventory_rows) {
+                    if (row.shape_id == shape_id) {
+                        row.count = count;
+                        break;
+                    }
+                }
+            }
+            if (inventory_actions.save || inventory_actions.save_and_match) {
+                saveInventoryRows();
+                if (inventory_actions.save_and_match) activate_buildable_filter = true;
+                screen = LibraryScreen::Cards;
+            } else if (inventory_actions.back) {
+                screen = LibraryScreen::Cards;  // 放弃编辑副本
             }
         } else if (screen == LibraryScreen::ParentGate) {
             if (gate_actions.submitted) {

@@ -336,9 +336,11 @@ public:
     }
     [[nodiscard]] TutorialActions submitHud(const TutorialHudState& hud) override;
     [[nodiscard]] LibraryActions submitLibrary(const std::vector<LibraryCard>& cards,
-                                               bool simple_layout,
-                                               bool inventory_configured) override;
+                                               bool simple_layout, bool inventory_configured,
+                                               bool activate_buildable_filter) override;
     [[nodiscard]] InventoryOnboardingActions submitInventoryOnboarding() override;
+    [[nodiscard]] InventoryEditorActions submitInventoryEditor(
+        const std::vector<InventoryEditorRow>& rows) override;
     [[nodiscard]] ParentGateActions submitParentGate(const ParentGateState& state) override;
     [[nodiscard]] ParentAreaActions submitParentArea(int session_remaining_seconds) override;
     void requestScreenshot(const std::string& ppm_path) override { screenshot_path_ = ppm_path; }
@@ -358,6 +360,9 @@ private:
     /// 模型卡片: 大卡 (网格) 与小卡 (继续搭建区), 点击写入 actions。
     void drawLibraryCard(const LibraryCard& card, const ImVec2& size, bool compact,
                          LibraryActions& actions);
+    /// 库存录入: 一种片型一张卡 (中文名 + 大步进器 + 直接输入)。
+    void drawInventoryCard(const InventoryEditorRow& row, const ImVec2& size,
+                           InventoryEditorActions& actions);
     /// 缩略图纹理: 首次使用时从 PNG 加载并缓存, 失败缓存 0 (不重试)。
     [[nodiscard]] GLuint thumbnailTexture(const std::string& png_path);
     void drawVertexBuffer(GLuint vao, GLuint vbo, const std::vector<float>& data, GLenum mode,
@@ -605,11 +610,12 @@ void GlRenderer::setupImGui() {
     colors[ImGuiCol_CheckMark] = ImVec4(0.28f, 0.44f, 0.93f, 1.0f);
 
     if (const char* font_path = findCjkFontPath(); font_path != nullptr) {
-        // 常用简体字形之外补充模型库界面用到的符号 (星级/角标/箭头)
-        // 与家长门的中文大写数字 (财务体不在常用 2500 字表内)
+        // 常用简体字形之外补充模型库界面用到的符号 (星级/角标/箭头)、
+        // 家长门的中文大写数字 (财务体不在常用 2500 字表内) 与库存录入
+        // 界面的片型用字 (菱形的 "菱" 同样不在常用表内)
         ImFontGlyphRangesBuilder ranges_builder;
         ranges_builder.AddRanges(io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
-        ranges_builder.AddText("★☆●○◆▶◀·×零壹贰叁肆伍陆柒捌玖拾");
+        ranges_builder.AddText("★☆●○◆▶◀·×零壹贰叁肆伍陆柒捌玖拾菱");
         glyph_ranges_.clear();
         ranges_builder.BuildRanges(&glyph_ranges_);
         io.Fonts->AddFontFromFileTTF(font_path, 19.0f, nullptr, glyph_ranges_.Data);
@@ -1068,9 +1074,15 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
 }
 
 LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
-                                         bool simple_layout, bool inventory_configured) {
+                                         bool simple_layout, bool inventory_configured,
+                                         bool activate_buildable_filter) {
     LibraryActions actions;
     const ImGuiIO& io = ImGui::GetIO();
+
+    // 库存录入界面 "保存, 看看我能搭什么" 的一次性跳转: 强制开启筛选
+    if (activate_buildable_filter && inventory_configured) {
+        library_buildable_only_ = true;
+    }
 
     // 主题筛选候选: 全部卡片标签去重, 保持出现顺序
     std::vector<std::string> all_tags;
@@ -1103,6 +1115,15 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
         // 家长区入口: 刻意小尺寸 (全应用唯一低于 48dp 的可点元素,
         // 防儿童误入) + 家长门兜底, 见 UI_UX_SPEC.md §5.3 / §9
         const float entry_width = 96.0f;
+        // 库存入口: 常驻页眉, 家长孩子都可用 (录库存不是家长区专属)
+        const float inventory_entry_width = 128.0f;
+        ImGui::SameLine(panel_width - 26.0f - entry_width - 10.0f - inventory_entry_width);
+        if (ImGui::Button("我的磁力片##inventory_entry", ImVec2(inventory_entry_width, 32.0f))) {
+            actions.open_inventory = true;
+        }
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("登记家里有哪些磁力片, 模型库就能筛出 \"我能搭的\"");
+        }
         ImGui::SameLine(panel_width - 26.0f - entry_width);
         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.42f, 0.45f, 0.52f, 0.12f));
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.42f, 0.45f, 0.52f, 1.0f));
@@ -1163,15 +1184,22 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
                     ImGui::SetTooltip("只显示现有磁力片库存足够搭建的模型");
                 }
             } else {
+                // 未登记库存: 筛选不可用, 就地给出图形录入入口 (§10 跳过
+                // 永远可见, 引导而非报错)
                 library_buildable_only_ = false;
                 ImGui::BeginDisabled();
                 bool unavailable = false;
                 ImGui::Checkbox("我能搭的", &unavailable);
                 ImGui::EndDisabled();
                 if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
-                    ImGui::SetTooltip(
-                        "先登记家里的磁力片库存:\nmagtile_app inventory set square 40 ...");
+                    ImGui::SetTooltip("先登记家里的磁力片, 就能只看库存足够搭的模型");
                 }
+                ImGui::SameLine(0.0f, 4.0f);
+                ImGui::PushStyleColor(ImGuiCol_Text, kAccentVec);
+                if (ImGui::SmallButton("去登记 ▶##filter_go_inventory")) {
+                    actions.open_inventory = true;
+                }
+                ImGui::PopStyleColor();
             }
         }
 
@@ -1312,22 +1340,20 @@ InventoryOnboardingActions GlRenderer::submitInventoryOnboarding() {
         ImGui::Separator();
         ImGui::Spacing();
 
-        // 占位说明: 按片型计数的图形录入界面 (UI_UX_SPEC.md §10.2) 待做,
-        // 现阶段引导家长使用命令行登记
-        ImGui::TextColored(kAccentVec, "图形录入界面即将上线");
-        ImGui::PushTextWrapPos(avail);
-        ImGui::TextDisabled("现在可以请家长在终端登记 (形状标识见 magtile_app catalog):");
-        ImGui::PopTextWrapPos();
-        ImGui::Spacing();
-        ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.93f, 0.94f, 0.96f, 1.0f));
-        ImGui::BeginChild("##onboarding_cmd", ImVec2(avail, 40.0f), ImGuiChildFlags_None,
-                          ImGuiWindowFlags_NoScrollbar);
-        ImGui::SetCursorPos(ImVec2(12.0f, 10.0f));
-        ImGui::TextUnformatted("magtile_app inventory set square 40 equilateral_triangle 24");
-        ImGui::EndChild();
-        ImGui::PopStyleColor();
+        ImGui::TextDisabled("照着盒子数一数就行, 大约 2 分钟; 之后随时可在 \"我的磁力片\" 修改。");
         ImGui::Spacing();
 
+        // 主操作: 进入按片型计数的图形录入界面 (UI_UX_SPEC.md §10.2);
+        // "稍后再说" 永远可见 —— 录库存不是付费墙 (§10 跳过永远可见)
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.28f, 0.44f, 0.93f, 0.90f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.24f, 0.40f, 0.88f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.20f, 0.35f, 0.80f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+        if (ImGui::Button("现在登记 ▶##onboarding_start", ImVec2(avail, 52.0f))) {
+            actions.start_entry = true;
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::PopStyleColor(4);
         if (ImGui::Button("稍后再说##onboarding_dismiss", ImVec2(avail, 48.0f))) {
             actions.dismissed = true;
             ImGui::CloseCurrentPopup();
@@ -1335,6 +1361,178 @@ InventoryOnboardingActions GlRenderer::submitInventoryOnboarding() {
         ImGui::EndPopup();
     }
     ImGui::PopStyleColor();
+    ImGui::PopStyleVar(2);
+    return actions;
+}
+
+// ---- 库存录入界面 (UI_UX_SPEC.md §10.2) ------------------------------
+
+/// 库存数量的界面上限: 防误触键盘/长按连加输出离谱数字
+/// (存储层只校验 >= 0, 上限是纯 UI 约束)。
+constexpr int kInventoryCountMax = 999;
+
+void GlRenderer::drawInventoryCard(const InventoryEditorRow& row, const ImVec2& size,
+                                   InventoryEditorActions& actions) {
+    const float pad = 14.0f;
+    ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+    ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.85f, 0.87f, 0.91f, 1.0f));
+    ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 12.0f);
+    const std::string child_id = "inv_" + row.shape_id;
+    if (ImGui::BeginChild(child_id.c_str(), size, ImGuiChildFlags_Borders,
+                          ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
+        // 标题行: 中文名 (拥有数量 > 0 时正色, 否则弱化)
+        ImGui::SetCursorPos(ImVec2(pad, 12.0f));
+        if (row.count > 0) {
+            ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorInk), "%s",
+                               row.name_zh.c_str());
+        } else {
+            ImGui::TextDisabled("%s", row.name_zh.c_str());
+        }
+        ImGui::SameLine();
+        ImGui::TextDisabled("(%s)", row.shape_id.c_str());
+
+        // 步进行: [-] [数量可直接输入] [+], 按钮 48dp 且支持长按连加
+        // (UI_UX_SPEC.md §4.1 触控目标 / §10.2 步进器规范)
+        const float button_side = 48.0f;
+        const float input_width = size.x - pad * 2.0f - button_side * 2.0f - 16.0f;
+        ImGui::SetCursorPos(ImVec2(pad, size.y - button_side - 12.0f));
+
+        int new_count = row.count;
+        ImGui::PushItemFlag(ImGuiItemFlags_ButtonRepeat, true);  // 长按连加/连减
+        ImGui::BeginDisabled(row.count <= 0);
+        if (ImGui::Button(("-##dec_" + row.shape_id).c_str(),
+                          ImVec2(button_side, button_side))) {
+            new_count = row.count - 1;
+        }
+        ImGui::EndDisabled();
+        ImGui::SameLine(0.0f, 8.0f);
+        ImGui::SetNextItemWidth(input_width);
+        // 直接输入: InputInt 无内置 +/- (step=0), 数字键盘直接改数量
+        int typed = row.count;
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,
+                            ImVec2(10.0f, (button_side - ImGui::GetTextLineHeight()) * 0.5f));
+        if (ImGui::InputInt(("##count_" + row.shape_id).c_str(), &typed, 0, 0)) {
+            new_count = typed;
+        }
+        ImGui::PopStyleVar();
+        ImGui::SameLine(0.0f, 8.0f);
+        ImGui::BeginDisabled(row.count >= kInventoryCountMax);
+        if (ImGui::Button(("+##inc_" + row.shape_id).c_str(),
+                          ImVec2(button_side, button_side))) {
+            new_count = row.count + 1;
+        }
+        ImGui::EndDisabled();
+        ImGui::PopItemFlag();
+
+        new_count = std::clamp(new_count, 0, kInventoryCountMax);
+        if (new_count != row.count) {
+            actions.count_changes.emplace_back(row.shape_id, new_count);
+        }
+    }
+    ImGui::EndChild();
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor(2);
+}
+
+InventoryEditorActions GlRenderer::submitInventoryEditor(
+    const std::vector<InventoryEditorRow>& rows) {
+    InventoryEditorActions actions;
+    const ImGuiIO& io = ImGui::GetIO();
+
+    const float margin = 26.0f;
+    const float panel_width = std::min(io.DisplaySize.x - margin * 2.0f, 1240.0f);
+    const float panel_height = io.DisplaySize.y - margin * 2.0f;
+    ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, margin), ImGuiCond_Always,
+                            ImVec2(0.5f, 0.0f));
+    ImGui::SetNextWindowSize(ImVec2(panel_width, panel_height));
+    ImGui::SetNextWindowBgAlpha(0.965f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 16.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(26.0f, 22.0f));
+    const ImGuiWindowFlags panel_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
+                                         ImGuiWindowFlags_NoSavedSettings |
+                                         ImGuiWindowFlags_NoFocusOnAppearing;
+    if (ImGui::Begin("##inventory_editor", nullptr, panel_flags)) {
+        // ---- 页眉 ----------------------------------------------------
+        if (font_title_ != nullptr) ImGui::PushFont(font_title_);
+        ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorInk), "家里有哪些磁力片?");
+        if (font_title_ != nullptr) ImGui::PopFont();
+        ImGui::TextDisabled(
+            "照着盒子数一数, 用 + / - 或直接输入数量; 保存后模型库就能筛出 \"我能搭的\"");
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::Spacing();
+
+        // ---- 片型卡片网格 (核心套装在前, 扩展包分组在后) ----------------
+        // 底部固定操作条预留高度
+        const float footer_height = 78.0f;
+        ImGui::BeginChild("##inventory_scroll", ImVec2(0.0f, -footer_height),
+                          ImGuiChildFlags_None, ImGuiWindowFlags_NoBackground);
+        const float spacing = 16.0f;
+        const float avail_width = ImGui::GetContentRegionAvail().x;
+        const ImVec2 card_size{272.0f, 108.0f};
+        const int columns = std::max(
+            1, static_cast<int>((avail_width + spacing) / (card_size.x + spacing)));
+
+        const auto drawGroup = [&](const char* title, const char* subtitle, bool expansion) {
+            std::vector<const InventoryEditorRow*> group;
+            for (const auto& row : rows) {
+                if (row.expansion == expansion) group.push_back(&row);
+            }
+            if (group.empty()) return;
+            ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorInk), "%s", title);
+            ImGui::SameLine();
+            ImGui::TextDisabled("%s", subtitle);
+            ImGui::Spacing();
+            int index = 0;
+            for (const InventoryEditorRow* row : group) {
+                drawInventoryCard(*row, card_size, actions);
+                ++index;
+                if (index % columns != 0 && index < static_cast<int>(group.size())) {
+                    ImGui::SameLine(0.0f, spacing);
+                }
+            }
+            ImGui::Spacing();
+            ImGui::Spacing();
+        };
+        drawGroup("基础套装", "最常见的 9 种片型", /*expansion=*/false);
+        drawGroup("扩展包", "没有就保持 0, 不影响基础模型", /*expansion=*/true);
+        ImGui::EndChild();
+
+        // ---- 底部操作条: 合计 + 返回 / 保存 / 保存并匹配 -----------------
+        ImGui::Separator();
+        int total = 0;
+        for (const auto& row : rows) total += row.count;
+        ImGui::Text("合计 %d 片", total);
+        ImGui::SameLine();
+        ImGui::TextDisabled("数量为 0 的片型也会记住 \"明确没有\"");
+
+        const float action_width = 236.0f;
+        const float back_width = 128.0f;
+        ImGui::SameLine(std::max(
+            0.0f, ImGui::GetContentRegionAvail().x + ImGui::GetCursorPosX() -
+                      (back_width + action_width * 2.0f + 20.0f)));
+        if (ImGui::Button("返回模型库##inventory_back", ImVec2(back_width, 48.0f))) {
+            actions.back = true;
+        }
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("不保存本次修改");
+        }
+        ImGui::SameLine(0.0f, 10.0f);
+        if (ImGui::Button("保存库存##inventory_save", ImVec2(action_width, 48.0f))) {
+            actions.save = true;
+        }
+        ImGui::SameLine(0.0f, 10.0f);
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.28f, 0.44f, 0.93f, 0.90f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.24f, 0.40f, 0.88f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.20f, 0.35f, 0.80f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+        if (ImGui::Button("保存, 看看我能搭什么 ▶##inventory_save_match",
+                          ImVec2(action_width, 48.0f))) {
+            actions.save_and_match = true;
+        }
+        ImGui::PopStyleColor(4);
+    }
+    ImGui::End();
     ImGui::PopStyleVar(2);
     return actions;
 }

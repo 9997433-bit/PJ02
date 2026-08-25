@@ -11,6 +11,7 @@
 
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "magtile/render/orbit_camera.hpp"
@@ -74,11 +75,33 @@ struct LibraryActions {
     std::string open_model_id;       ///< 点击卡片 / 继续搭建: 打开该模型教程
     std::string toggle_favorite_id;  ///< 点击收藏星标: 切换收藏状态
     bool open_parent_area = false;   ///< 点击 "家长区" 入口 (须先过家长门)
+    bool open_inventory = false;     ///< 点击 "我的磁力片" / "去登记": 打开库存录入界面
 };
 
-/// 首启库存 onboarding 提示 (占位弹窗) 一帧内用户发出的操作。
+/// 首启库存 onboarding 提示弹窗一帧内用户发出的操作。
 struct InventoryOnboardingActions {
-    bool dismissed = false;  ///< 点击 "稍后再说": 关闭提示 (应用层记入存档, 不再弹出)
+    bool start_entry = false;  ///< 点击 "现在登记": 进入库存录入界面
+    bool dismissed = false;    ///< 点击 "稍后再说": 关闭提示 (应用层记入存档, 不再弹出)
+};
+
+/// 库存录入界面: 一种片型一行的展示状态 (UI_UX_SPEC.md §10.2)。
+/// 计数由应用层持有 (编辑中的临时副本), 渲染层每帧全量接收并把
+/// 修改经 InventoryEditorActions::count_changes 交回, 保存与否由
+/// 应用层决定 —— 与模型库界面同样的 "状态下行 / 操作上行" 约定。
+struct InventoryEditorRow {
+    std::string shape_id;   ///< 稳定片型标识 (core::toString, 如 "square")
+    std::string name_zh;    ///< 中文名, 如 "正方形"
+    bool expansion = false; ///< 扩展包片型 (界面按 核心套装 / 扩展包 分组)
+    int count = 0;          ///< 当前编辑中的数量
+};
+
+/// 库存录入界面一帧内用户发出的操作。
+struct InventoryEditorActions {
+    /// 步进器 (+/-) 或直接输入产生的数量修改: <片型标识, 新数量>。
+    std::vector<std::pair<std::string, int>> count_changes;
+    bool save = false;            ///< 点击 "保存库存": 写入存档并返回模型库
+    bool save_and_match = false;  ///< 点击 "保存, 看看我能搭什么": 保存并开启 "我能搭的" 筛选
+    bool back = false;            ///< 点击 "返回": 放弃本次修改回到模型库
 };
 
 /// 家长门界面一帧的展示状态 (验证逻辑由应用层 core::ParentGate
@@ -130,15 +153,26 @@ public:
     /// @param simple_layout 4-6 岁启蒙模式简化布局 (UI_UX_SPEC.md §2):
     ///        超大卡片 + 隐藏搜索/筛选行, 由应用层按年龄段设置传入。
     /// @param inventory_configured 是否已登记磁力片库存: 未登记时
-    ///        "我能搭的" 筛选禁用并提示先去登记 (UI_UX_SPEC.md §5.2)。
+    ///        "我能搭的" 筛选禁用并显示 "去登记" 引导 (UI_UX_SPEC.md §5.2)。
+    /// @param activate_buildable_filter 本帧强制开启 "我能搭的" 筛选
+    ///        (一次性触发, 供库存录入界面 "保存, 看看我能搭什么" 跳转用;
+    ///        筛选状态照常由渲染器跨帧保持, 用户可随时取消勾选)。
     [[nodiscard]] virtual LibraryActions submitLibrary(const std::vector<LibraryCard>& cards,
                                                        bool simple_layout,
-                                                       bool inventory_configured) = 0;
+                                                       bool inventory_configured,
+                                                       bool activate_buildable_filter) = 0;
 
-    /// 绘制首启库存 onboarding 提示弹窗 (占位: 完整的按片型计数录入
-    /// 界面见 UI_UX_SPEC.md §10, 待做) 并返回用户操作。带压暗遮罩,
-    /// 须在 submitLibrary 之后、endFrame 之前调用, 每帧至多一次。
+    /// 绘制首启库存 onboarding 提示弹窗 (价值说明 + "现在登记" 入口,
+    /// UI_UX_SPEC.md §10.1) 并返回用户操作。带压暗遮罩, 须在
+    /// submitLibrary 之后、endFrame 之前调用, 每帧至多一次。
     [[nodiscard]] virtual InventoryOnboardingActions submitInventoryOnboarding() = 0;
+
+    /// 绘制磁力片库存录入界面 (全部片型中文名 + 大号 +/- 步进器,
+    /// 支持长按连加与直接输入, UI_UX_SPEC.md §10.2) 并返回用户操作。
+    /// 须在 beginFrame 与 endFrame 之间调用, 每帧至多一次, 与
+    /// submitHud / submitLibrary / submitParentGate 互斥 (分属不同界面)。
+    [[nodiscard]] virtual InventoryEditorActions submitInventoryEditor(
+        const std::vector<InventoryEditorRow>& rows) = 0;
 
     /// 绘制家长门界面 (算术题 + 中文大写数字软键盘) 并返回用户
     /// 操作。软键盘输入缓冲由渲染器跨帧保持, 提交/返回时自动清空。

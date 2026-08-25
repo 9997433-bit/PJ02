@@ -334,6 +334,16 @@ if(MAGTILE_BUILD_TESTS)
                     $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
             set_tests_properties(library_gui_smoke PROPERTIES TIMEOUT 300)
         endif()
+
+        # 库存图形录入冒烟: 无头渲染录入界面截图 + --smoke-inventory
+        # 自动驾驶经图形路径保存库存, 校验 CLI inventory show/match 从
+        # 同一 SQLite 读到 (图形与 CLI 共库承诺); 无显示环境自动降级。
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_inventory_gui.sh AND MAGTILE_BUILD_GL_RENDERER)
+            add_test(NAME inventory_gui_smoke
+                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_inventory_gui.sh
+                    $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
+            set_tests_properties(inventory_gui_smoke PROPERTIES TIMEOUT 300)
+        endif()
     else()
         message(WARNING "MagTile: 未找到 bash, 跳过脚本类测试注册")
     endif()
