@@ -1,0 +1,1018 @@
+{
+  "schema_version": 1,
+  "id": "food_truck_01",
+  "name": "街角美食餐车",
+  "name_en": "Food Truck 01",
+  "description": "把餐车从配角提拔成主角: 3 格长的厨房餐车侧开一格宽出餐窗口 (负空间窗楣砌法), 窗下一条橙色吧台同时吸住吧台墙顶与车身窗台底、把车和广场焊成整体; 车顶向街面平挑三片红黄条纹遮阳篷 (力矩 45 <= 铰链预算 60), 人行道上梧桐成荫、菱形开业彩旗斜插 —— 出餐窗口一开, 整条街都香了。",
+  "difficulty": 3,
+  "total_pieces": 51,
+  "tags": [
+    "城市",
+    "美食",
+    "餐车",
+    "职业体验",
+    "负空间"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 43,
+        "equilateral_triangle": 3,
+        "isosceles_triangle": 3,
+        "rhombus": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "rd_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wk_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_0",
+      "type": "square",
+      "position": [
+        0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rd_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wk_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_1",
+      "type": "square",
+      "position": [
+        1.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rd_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wk_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_2",
+      "type": "square",
+      "position": [
+        2.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rd_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wk_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_3",
+      "type": "square",
+      "position": [
+        3.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rd_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wk_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_4",
+      "type": "square",
+      "position": [
+        4.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bk0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bk1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bk0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bk1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bk0_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bk1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "ft0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "ft0_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "ft1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "ft1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "ft1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "cab0",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "cab1",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tail0",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "tail1",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "rf_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rf_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rf_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "awn_1",
+      "type": "square",
+      "position": [
+        1.5,
+        -0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "awn_2",
+      "type": "square",
+      "position": [
+        2.5,
+        -0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "awn_3",
+      "type": "square",
+      "position": [
+        3.5,
+        -0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bar_w_1",
+      "type": "square",
+      "position": [
+        1.5,
+        -1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bar_w_2",
+      "type": "square",
+      "position": [
+        2.5,
+        -1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bar_w_3",
+      "type": "square",
+      "position": [
+        3.5,
+        -1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bar_t_1",
+      "type": "square",
+      "position": [
+        1.5,
+        -0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bar_t_2",
+      "type": "square",
+      "position": [
+        2.5,
+        -0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bar_t_3",
+      "type": "square",
+      "position": [
+        3.5,
+        -0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "menu",
+      "type": "square",
+      "position": [
+        0.5,
+        -1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "menu_top",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        -1.0,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "flag_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tree_1",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tree_3",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "banner_w",
+      "type": "rhombus",
+      "position": [
+        0.25,
+        2.0,
+        0.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "banner_e",
+      "type": "rhombus",
+      "position": [
+        4.75,
+        2.0,
+        0.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺车道: 5 片蓝色方板一字排开 ([0,5]x[0,1]), 相邻边互吸。",
+      "tip": "餐车马上要停在这条车道上 —— 地面缝缝吸牢。",
+      "tiles_to_add": [
+        "rd_0",
+        "rd_1",
+        "rd_2",
+        "rd_3",
+        "rd_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺人行道: 车道北侧再铺 5 片灰色方板。",
+      "tip": "人行道贴着车道北沿, 一会儿梧桐树就种在这里。",
+      "tiles_to_add": [
+        "wk_0",
+        "wk_1",
+        "wk_2",
+        "wk_3",
+        "wk_4"
+      ],
+      "highlight_tiles": [
+        "rd_0",
+        "rd_4"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺餐位广场: 车道南侧铺 5 片绿色方板, 三条街面完工。",
+      "tip": "广场是食客排队的地方, 也是吧台的地基。",
+      "tiles_to_add": [
+        "pz_0",
+        "pz_1",
+        "pz_2",
+        "pz_3",
+        "pz_4"
+      ],
+      "highlight_tiles": [
+        "rd_0",
+        "rd_4"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "竖餐车后壁下层: 3 片粉色正方形沿车道北线立起。",
+      "tip": "后壁底边同时吸住车道边与人行道边, 一举两得。",
+      "tiles_to_add": [
+        "bk0_1",
+        "bk0_2",
+        "bk0_3"
+      ],
+      "highlight_tiles": [
+        "rd_1",
+        "rd_3"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "竖前脸下层两端: 前脸只立东西两端各 1 片, 中间留出一格宽的出餐窗口。",
+      "tip": "这个负空间就是餐车的灵魂 —— 出餐窗口。",
+      "tiles_to_add": [
+        "ft0_1",
+        "ft0_3"
+      ],
+      "highlight_tiles": [
+        "rd_1",
+        "rd_3"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "封车头车尾下层: 车头车尾各立 1 片, 竖边与前后壁拐角互吸。",
+      "tip": "车头朝西 —— 下一步就给它装挡风玻璃。",
+      "tiles_to_add": [
+        "cab0",
+        "tail0"
+      ],
+      "highlight_tiles": [
+        "ft0_1",
+        "bk0_3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "叠上层车身: 后壁 3 片、车尾 1 片、车头换透明挡风玻璃。",
+      "tip": "透明片就是驾驶室的挡风玻璃, 别装反位置。",
+      "tiles_to_add": [
+        "bk1_1",
+        "bk1_2",
+        "bk1_3",
+        "tail1",
+        "cab1"
+      ],
+      "highlight_tiles": [
+        "bk0_1",
+        "cab0"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "装窗楣合前脸上层: 两端 2 片先叠上, 中间窗楣片靠两侧竖边互吸悬跨窗口。",
+      "tip": "窗楣两条竖边同时吸住左右邻片 —— 一格宽窗洞的标准砌法。",
+      "tiles_to_add": [
+        "ft1_1",
+        "ft1_3",
+        "ft1_2"
+      ],
+      "highlight_tiles": [
+        "ft0_1",
+        "ft0_3"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖车顶: 3 片灰色方板压住四面墙顶, 餐车封顶。",
+      "tip": "从出餐窗口望进去, 厨房宽敞明亮。",
+      "tiles_to_add": [
+        "rf_1",
+        "rf_2",
+        "rf_3"
+      ],
+      "highlight_tiles": [
+        "ft1_2",
+        "bk1_2"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "挑遮阳篷: 车顶前沿向南平挑 3 片红黄条纹方板, 篷片之间也要互吸。",
+      "tip": "每片篷力矩 15, 三片共用一条铰链线 (预算 60) —— 刚刚好, 篷上别再放东西。",
+      "tiles_to_add": [
+        "awn_1",
+        "awn_2",
+        "awn_3"
+      ],
+      "highlight_tiles": [
+        "rf_1",
+        "rf_3"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "砌吧台墙: 广场北沿立 3 片橙色矮墙, 正对出餐窗口。",
+      "tip": "吧台墙底边吸广场北沿, 就立在餐车正前方。",
+      "tiles_to_add": [
+        "bar_w_1",
+        "bar_w_2",
+        "bar_w_3"
+      ],
+      "highlight_tiles": [
+        "pz_1",
+        "pz_3"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "铺吧台台面: 3 片橙色方板同时吸住吧台墙顶边与车身窗台底边。",
+      "tip": "一条吧台把餐车和广场焊成整体 —— 出餐、用餐一条线。",
+      "tiles_to_add": [
+        "bar_t_1",
+        "bar_t_2",
+        "bar_t_3"
+      ],
+      "highlight_tiles": [
+        "bar_w_2",
+        "ft1_2"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "立菜单招牌: 广场西端立 1 片紫色立牌, 牌顶戴黄色尖顶。",
+      "tip": "招牌立在排队动线的入口, 老远就能看见。",
+      "tiles_to_add": [
+        "menu",
+        "menu_top"
+      ],
+      "highlight_tiles": [
+        "pz_0"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "插车顶彩旗: 车顶后沿立 3 片青黄相间的三角彩旗。",
+      "tip": "彩旗立在车顶后沿正上方, 力臂为零纯压不弯。",
+      "tiles_to_add": [
+        "flag_1",
+        "flag_2",
+        "flag_3"
+      ],
+      "highlight_tiles": [
+        "rf_1",
+        "rf_3"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "种梧桐树: 人行道北沿立 2 棵绿色等腰三角梧桐。",
+      "tip": "树影正好落在餐车上 —— 夏天排队也不晒。",
+      "tiles_to_add": [
+        "tree_1",
+        "tree_3"
+      ],
+      "highlight_tiles": [
+        "wk_1",
+        "wk_3"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "斜插开业彩旗: 2 面红色菱形旗沿人行道北沿向外斜插, 街角美食餐车开业!",
+      "tip": "菱形旗底边整边吸人行道边, 倾斜方向朝外避开梧桐树。",
+      "tiles_to_add": [
+        "banner_w",
+        "banner_e"
+      ],
+      "highlight_tiles": [
+        "wk_0",
+        "wk_4"
+      ]
+    }
+  ]
+}

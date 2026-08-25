@@ -21,6 +21,25 @@
       "thumbnail": "thumbnails/geodesic_dome_01.png"
     },
     {
+      "id": "food_truck_01",
+      "file": "models/food_truck_01.json",
+      "name": "街角美食餐车",
+      "name_en": "Food Truck 01",
+      "description": "把餐车从配角提拔成主角: 3 格长的厨房餐车侧开一格宽出餐窗口 (负空间窗楣砌法), 窗下一条橙色吧台同时吸住吧台墙顶与车身窗台底、把车和广场焊成整体; 车顶向街面平挑三片红黄条纹遮阳篷 (力矩 45 <= 铰链预算 60), 人行道上梧桐成荫、菱形开业彩旗斜插 —— 出餐窗口一开, 整条街都香了。",
+      "difficulty": 3,
+      "total_pieces": 51,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "美食",
+        "餐车",
+        "职业体验",
+        "负空间"
+      ],
+      "thumbnail": "thumbnails/food_truck_01.png"
+    },
+    {
       "id": "giraffe_01",
       "file": "models/giraffe_01.json",
       "name": "长颈鹿",
@@ -39,6 +58,25 @@
       "thumbnail": "thumbnails/giraffe_01.png"
     },
     {
+      "id": "crocodile_01",
+      "file": "models/crocodile_01.json",
+      "name": "大嘴鳄鱼",
+      "name_en": "Crocodile 01",
+      "description": "贴地爬行的低姿猛兽: 箱形躯干直接坐在河滩上, 血盆大口由两片 30 度坡道当上颚斜挑张开 (坡尾落地 = 接地斜撑, 零悬臂), 吻端立着透明獠牙; 尾巴用 长方形-梯形-三角 三段逐级收窄, 背脊一排橙色背棘, 四肢带爪向两侧撑开 —— 与腿柱式恐龙完全不同的动物搭法。",
+      "difficulty": 3,
+      "total_pieces": 53,
+      "step_count": 16,
+      "theme": "自然世界",
+      "tags": [
+        "动物世界",
+        "鳄鱼",
+        "自然",
+        "河滩",
+        "接地斜撑"
+      ],
+      "thumbnail": "thumbnails/crocodile_01.png"
+    },
+    {
       "id": "observatory_01",
       "file": "models/observatory_01.json",
       "name": "山顶天文台",
@@ -55,6 +93,25 @@
         "穹顶"
       ],
       "thumbnail": "thumbnails/observatory_01.png"
+    },
+    {
+      "id": "wind_turbine_01",
+      "file": "models/wind_turbine_01.json",
+      "name": "风力发电机",
+      "name_en": "Wind Turbine 01",
+      "description": "现代三叶风机: 三层白色方塔直上, 塔根四片直角护撑与机坪锁成三角闭环; 机舱骑在塔顶平台上, 一整片六边形轮毂竖立在迎风墙顶线 (重心正压铰链、力臂为零), 3 片菱形叶片各吸轮毂一条边, 借菱形 60 度天然斜度甩出 120 度旋位的后掠叶尖 —— 与传统风车磨坊的方毂四叶完全不同的转子拓扑。场景配变压小屋、测风塔与围栏, 新能源田园一景。",
+      "difficulty": 3,
+      "total_pieces": 53,
+      "step_count": 16,
+      "theme": "风力发电",
+      "tags": [
+        "风力发电",
+        "新能源",
+        "转子",
+        "六边形轮毂",
+        "工业"
+      ],
+      "thumbnail": "thumbnails/wind_turbine_01.png"
     },
     {
       "id": "windmill_01",
@@ -76,6 +133,25 @@
       "thumbnail": "thumbnails/windmill_01.png"
     },
     {
+      "id": "ski_jump_01",
+      "file": "models/ski_jump_01.json",
+      "name": "跳台滑雪场",
+      "name_en": "Ski Jump 01",
+      "description": "全库第一条直线下山的雪道动线: 三层出发塔甩出 助滑坡-中继台-加速坡-起跳台 三段 30 度雪道, 每段坡道顶边吸台沿、坡尾由栈桥墩接住 (三角刚性节点); 着陆坡直落雪面滑进减速区, 撞上橙色终点挡墙; 南侧紫色裁判塔戴四坡尖顶, 透明观察窗正对着陆点 —— 3, 2, 1, 出发!",
+      "difficulty": 3,
+      "total_pieces": 54,
+      "step_count": 16,
+      "theme": "运动",
+      "tags": [
+        "运动",
+        "滑雪",
+        "跳台",
+        "坡道",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/ski_jump_01.png"
+    },
+    {
       "id": "butterfly_01",
       "file": "models/butterfly_01.json",
       "name": "花园大蝴蝶",
@@ -94,6 +170,25 @@
       "thumbnail": "thumbnails/butterfly_01.png"
     },
     {
+      "id": "coral_reef_01",
+      "file": "models/coral_reef_01.json",
+      "name": "珊瑚礁场景",
+      "name_en": "Coral Reef 01",
+      "description": "全库第一个海底造景, 也是扇形磁力片的首秀: 6x4 海床上, 双层礁岩塔顶着鹿角珊瑚, 紫色珊瑚拱门横跨中央、楣顶竖起梯形珊瑚冠; 两柄海扇在北缘对称展开, 东缘与礁间再各立一柄; 四株菱形海葵借 60 度天然斜置像正随水流摆动, 等边三角四坡合拢成脑珊瑚, 三丛海带竖立其间 —— 7 种磁力片形状同场, 为全库之最。",
+      "difficulty": 3,
+      "total_pieces": 55,
+      "step_count": 16,
+      "theme": "海洋航行",
+      "tags": [
+        "海洋",
+        "珊瑚礁",
+        "造景",
+        "扇形首秀",
+        "自然"
+      ],
+      "thumbnail": "thumbnails/coral_reef_01.png"
+    },
+    {
       "id": "ferris_wheel_frame_01",
       "file": "models/ferris_wheel_frame_01.json",
       "name": "游乐园摩天轮",
@@ -110,6 +205,25 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/ferris_wheel_frame_01.png"
+    },
+    {
+      "id": "greenhouse_01",
+      "file": "models/greenhouse_01.json",
+      "name": "温室花房",
+      "name_en": "Greenhouse 01",
+      "description": "田园主题: 全库第一座'屋顶即墙'的建筑 —— 没有一面竖直的墙, 8 片透明长方形短边落地、斜起 60 度在 1.73 格高处对脊合掌, 组成四榀连跨的 A 字帐篷玻璃房; 北山墙是 4 片小等边拼成的边长 2 大三角 (倒三角锁芯), 南山墙省去锁芯留出菱形负空间大门。苗床上番茄与幼苗必须先种后盖顶 —— 一堂装配顺序课。屋外配冷床箱、雨水桶、围栏与花丛。",
+      "difficulty": 3,
+      "total_pieces": 56,
+      "step_count": 16,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "温室",
+        "A字帐篷",
+        "三角力",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/greenhouse_01.png"
     },
     {
       "id": "roller_coaster_loop_01",
@@ -187,6 +301,25 @@
       "thumbnail": "thumbnails/whale_01.png"
     },
     {
+      "id": "lego_style_house_01",
+      "file": "models/lego_style_house_01.json",
+      "name": "别墅小屋",
+      "name_en": "Villa Cottage 01",
+      "description": "经典盒式建筑教科书: 6x5 草坪上, 2x2 主楼用长方形圈层砌法叠起两层, 梯形四坡屋顶下底恰与墙顶整边等长贴合, 压顶上再立烟囱; 东侧 1 格进深的门厅侧翼以檐口横楣跨过大门成楣 (两端竖边传力), 顶上 60 度人字坡屋面脊线互吸、等边山花严丝合缝; 院里狗窝自锁成环, 绿篱、小树、花丛围出温馨小院 —— 盒式搭建三大技法, 一栋别墅全学会。",
+      "difficulty": 3,
+      "total_pieces": 61,
+      "step_count": 17,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "别墅",
+        "盒式建筑",
+        "人字坡",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/lego_style_house_01.png"
+    },
+    {
       "id": "bamboo_house_01",
       "file": "models/bamboo_house_01.json",
       "name": "竹楼民居",
@@ -203,6 +336,25 @@
         "田园"
       ],
       "thumbnail": "thumbnails/bamboo_house_01.png"
+    },
+    {
+      "id": "radio_telescope_01",
+      "file": "models/radio_telescope_01.json",
+      "name": "射电望远镜",
+      "name_en": "Radio Telescope 01",
+      "description": "科学观测主题: 5x5 观测场中央立起 1x1 两层馈源塔 (四角风车状直角三角斜撑双边吸合), 塔顶盖板北沿升起竖直大天线盘 —— 透明六边形反射面沿 5 条自由边展开等腰三角接收瓣, 五瓣星芒最高点 5.3 格; 西南角 2x2 控制楼开东门戴通讯天线, 东沿两块 30 度太阳能板迎着日出, 四面警戒旗围场 —— 保持静默, 开始巡天。",
+      "difficulty": 3,
+      "total_pieces": 62,
+      "step_count": 16,
+      "theme": "航天探索",
+      "tags": [
+        "科学",
+        "天文",
+        "望远镜",
+        "星芒",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/radio_telescope_01.png"
     },
     {
       "id": "spider_bot_01",
@@ -280,6 +432,43 @@
       "thumbnail": "thumbnails/pyramid_giza_01.png"
     },
     {
+      "id": "water_slide_park_01",
+      "file": "models/water_slide_park_01.json",
+      "name": "水上滑梯乐园",
+      "name_en": "Water Slide Park 01",
+      "description": "全库第一座入水滑道乐园: 两层跳台上一条 30 度大滑梯经中继桥墩接力俯冲, 穿过泳池西侧留口直插池心水面; 4x3 大泳池四面围墙、券门双柱合龙、北岸儿童缓滑道、东岸救生员高椅 —— 跳台、泳池、儿童区与入口全部由地面板链连成一个连通整体。",
+      "difficulty": 3,
+      "total_pieces": 65,
+      "step_count": 16,
+      "theme": "夏日乐园",
+      "tags": [
+        "夏日乐园",
+        "滑梯",
+        "泳池",
+        "游乐场"
+      ],
+      "thumbnail": "thumbnails/water_slide_park_01.png"
+    },
+    {
+      "id": "greenhouse_dome_01",
+      "file": "models/greenhouse_dome_01.json",
+      "name": "穹顶温室",
+      "name_en": "Dome Greenhouse 01",
+      "description": "田园农业主题: 6x6 花园地块 (草甸、花圃与入口步道) 中央立起 3x3 玻璃温室 —— 透明墙板配绿色骨架转角, 南面留 1 格负空间门洞; 屋面用 8 片透明方板围出 1x1 天窗, 门洞上方的屋面片两侧整边吸角片自然成楣, 天窗上再冠以 4 片等腰三角合拢的采光穹顶; 园区四角花篱、东侧红黄郁金香、西侧六边形雨水罐 —— 阳光洒满苗床, 开园!",
+      "difficulty": 3,
+      "total_pieces": 66,
+      "step_count": 16,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "温室",
+        "穹顶",
+        "负空间",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/greenhouse_dome_01.png"
+    },
+    {
       "id": "clock_tower_01",
       "file": "models/clock_tower_01.json",
       "name": "中央大钟楼",
@@ -296,6 +485,44 @@
         "扇形首秀"
       ],
       "thumbnail": "thumbnails/clock_tower_01.png"
+    },
+    {
+      "id": "crane_tower_01",
+      "file": "models/crane_tower_01.json",
+      "name": "工地塔式起重机",
+      "name_en": "Tower Crane 01",
+      "description": "工程主题: 与港口门吊 (四腿门架) 完全不同的独柱塔吊 —— 1x1 方管塔身直上 4 格, 根部直角护撑风车形锁地; 塔顶回转台上起塔尖小楼, 大臂向东两格、平衡臂向西一格, 每条臂根都由一对直角三角拉杆与塔尖锁成三角环, 剪断任何一条铰链线力都能绕行; 平衡臂尾双层配重正压铰链零力矩, 大臂中缝下倒挂等腰吊钩纯受拉。场边钢梁堆正等着起吊, 在建小楼刚砌半层。",
+      "difficulty": 3,
+      "total_pieces": 68,
+      "step_count": 16,
+      "theme": "工程结构",
+      "tags": [
+        "工程",
+        "塔吊",
+        "拉杆三角",
+        "平衡悬臂",
+        "挑战"
+      ],
+      "thumbnail": "thumbnails/crane_tower_01.png"
+    },
+    {
+      "id": "planetarium_01",
+      "file": "models/planetarium_01.json",
+      "name": "城市天文馆",
+      "name_en": "Planetarium 01",
+      "description": "全库第一座六棱柱星空厅: 六边形地板的六条边上各立方墙、竖边在 120 度拐角两两互吸成环, 两层筒身顶上盖六边形天花, 6 片等腰三角收成锥尖仅高 0.5 的浅锥星空穹 (斜棱 1.118 精确自锁, 南片透明是投影窗); 售票大厅经甬道相连, 屋面立 3 片扇形月相拱, 馆前行星步道菱形轨道旗斜插 —— 白天看月相, 晚上看星河。",
+      "difficulty": 3,
+      "total_pieces": 68,
+      "step_count": 17,
+      "theme": "航天探索",
+      "tags": [
+        "天文",
+        "科学探索",
+        "穹顶",
+        "六棱鼓身",
+        "城市"
+      ],
+      "thumbnail": "thumbnails/planetarium_01.png"
     },
     {
       "id": "sailboat_01",
@@ -354,6 +581,25 @@
       "thumbnail": "thumbnails/space_station_01.png"
     },
     {
+      "id": "tokyo_tower_01",
+      "file": "models/tokyo_tower_01.json",
+      "name": "东京塔",
+      "name_en": "Tokyo Tower 01",
+      "description": "红白涂装的电波塔: 与四柱直腿的铁塔不同, 东京塔的裙座是 4 片梯形从 2x2 底口对倾收分到 1x1 再以压顶板封口 —— 塔身荷载经四条斜面分散到环道; 红白两级塔身直上, 主展望台四面各外挑一片观景板 (上级塔墙压住板内边, 双路径传力), 特别展望台再收一级, 等腰四坡塔尖自锁收顶。塔前红色牌楼门、纪念品商店、绿篱园灯围成塔下公园。",
+      "difficulty": 3,
+      "total_pieces": 69,
+      "step_count": 17,
+      "theme": "建筑地标",
+      "tags": [
+        "东京塔",
+        "世界地标",
+        "电波塔",
+        "梯形收分",
+        "红白涂装"
+      ],
+      "thumbnail": "thumbnails/tokyo_tower_01.png"
+    },
+    {
       "id": "castle_foundation_01",
       "file": "models/castle_foundation_01.json",
       "name": "城堡地基与城墙",
@@ -369,6 +615,44 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/castle_foundation_01.png"
+    },
+    {
+      "id": "dragon_boat_01",
+      "file": "models/dragon_boat_01.json",
+      "name": "龙舟",
+      "name_en": "Dragon Boat 01",
+      "description": "民俗节庆主题: 8x5 江面上一条 6 格长的箱形龙舟破浪而行 —— 两舷 + 艏艉端板 + 通长甲板锁成箱形梁; 船艏六边形大龙头昂起 1.7 格高, 头顶黄色龙角直指 3.6 格, 船艉紫色龙尾高翘, 船腰鼓亭助威; 两舷各 3 支菱形船桨以 45 度外倾齐齐入水, 底边同时吸住江面与船舷 —— 咚咚鼓声里, 这是全库第一条节庆之船。",
+      "difficulty": 3,
+      "total_pieces": 72,
+      "step_count": 17,
+      "theme": "民俗",
+      "tags": [
+        "民俗",
+        "龙舟",
+        "船",
+        "端午",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/dragon_boat_01.png"
+    },
+    {
+      "id": "ice_cream_truck_01",
+      "file": "models/ice_cream_truck_01.json",
+      "name": "冰淇淋车",
+      "name_en": "Ice Cream Truck 01",
+      "description": "街边营业的架空餐车: 四片方轮托起 4x2 底盘, 后厢两层与单层驾驶舱错高; 面向人行道的后厢上半整个留作售卖窗 (负空间), 窗顶红色遮阳篷长边整边外挑、窗下再挑一片售卖吧台; 车头两片透明挡风玻璃 45 度斜披, 车顶一对扇形圆弧招牌像两球刚挖好的冰淇淋。人行道上菜单牌、街灯与排队柱一应俱全 —— 叮铃铃, 开张了。",
+      "difficulty": 3,
+      "total_pieces": 73,
+      "step_count": 16,
+      "theme": "餐车",
+      "tags": [
+        "餐车",
+        "街景",
+        "载具",
+        "负空间",
+        "扇形招牌"
+      ],
+      "thumbnail": "thumbnails/ice_cream_truck_01.png"
     },
     {
       "id": "pagoda_01",
@@ -558,6 +842,43 @@
       "thumbnail": "thumbnails/basketball_arena_01.png"
     },
     {
+      "id": "volcano_base_01",
+      "file": "models/volcano_base_01.json",
+      "name": "火山科考站",
+      "name_en": "Volcano Research Base 01",
+      "description": "自然奇观主题: 6x6 熔岩台地北侧隆起两级火山锥 —— 3x3 一级火山体顶着 8 片环形火山口平台 (先四角后四边锁死), 中央 1x1 二级火山口顶口敞开, 口沿窜出共面火舌、挂下 45 度熔岩瀑, 两条 30 度熔岩流一路淌到台地熔岩纹上; 东南角 2x2 科考站戴平屋顶、透明雷达罩与通讯天线隔着安全距离观测, 四角警戒旗围场 —— 逐级收分 + 负空间火山口 + 三种熔岩挂件, 一座会冒火的山。",
+      "difficulty": 4,
+      "total_pieces": 83,
+      "step_count": 18,
+      "theme": "自然世界",
+      "tags": [
+        "自然",
+        "火山",
+        "科考",
+        "熔岩",
+        "挑战"
+      ],
+      "thumbnail": "thumbnails/volcano_base_01.png"
+    },
+    {
+      "id": "aircraft_carrier_01",
+      "file": "models/aircraft_carrier_01.json",
+      "name": "航母甲板段",
+      "name_en": "Aircraft Carrier Deck 01",
+      "description": "全库第一艘箱形船体: 8 格长机库箱体舰尾开敞、全通飞行甲板同时压住双舷墙与舰艏封板 (三路支撑互为冗余), 舰艏双车道 30 度滑跃坡道直探水线; 右舷两层舰岛带透明舰桥、四坡雷达罩与信号桅, 甲板上双机梯队整装待发 —— 从舰尾望进机库, 8 格纵深一览无余。",
+      "difficulty": 4,
+      "total_pieces": 84,
+      "step_count": 18,
+      "theme": "军港巡礼",
+      "tags": [
+        "军港巡礼",
+        "舰船",
+        "载具",
+        "机库"
+      ],
+      "thumbnail": "thumbnails/aircraft_carrier_01.png"
+    },
+    {
       "id": "harbor_crane_01",
       "file": "models/harbor_crane_01.json",
       "name": "港口门吊",
@@ -575,6 +896,24 @@
         "跨线"
       ],
       "thumbnail": "thumbnails/harbor_crane_01.png"
+    },
+    {
+      "id": "subway_station_01",
+      "file": "models/subway_station_01.json",
+      "name": "地铁一号线车站",
+      "name_en": "Subway Station Line 1",
+      "description": "剖面式地铁车站: 轨道层上一列透明大窗的蓝色列车正靠站, 车顶与悬挑站台板整边相吸; 站台板前排先悬挑后互锁, 背后三层海报墙与三根柱廊分挑单坡雨棚; 站台上灯箱、进站闸机一应俱全, 雨棚前沿两片菱形站名灯箱斜身发光, 东端 30 度出站扶梯直下街面。",
+      "difficulty": 4,
+      "total_pieces": 87,
+      "step_count": 18,
+      "theme": "城市交通",
+      "tags": [
+        "城市交通",
+        "地铁",
+        "剖面",
+        "建筑"
+      ],
+      "thumbnail": "thumbnails/subway_station_01.png"
     },
     {
       "id": "ball_run_tower_01",

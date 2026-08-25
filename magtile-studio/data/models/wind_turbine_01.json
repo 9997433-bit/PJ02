@@ -1,0 +1,1043 @@
+{
+  "schema_version": 1,
+  "id": "wind_turbine_01",
+  "name": "风力发电机",
+  "name_en": "Wind Turbine 01",
+  "description": "现代三叶风机: 三层白色方塔直上, 塔根四片直角护撑与机坪锁成三角闭环; 机舱骑在塔顶平台上, 一整片六边形轮毂竖立在迎风墙顶线 (重心正压铰链、力臂为零), 3 片菱形叶片各吸轮毂一条边, 借菱形 60 度天然斜度甩出 120 度旋位的后掠叶尖 —— 与传统风车磨坊的方毂四叶完全不同的转子拓扑。场景配变压小屋、测风塔与围栏, 新能源田园一景。",
+  "difficulty": 3,
+  "total_pieces": 53,
+  "tags": [
+    "风力发电",
+    "新能源",
+    "转子",
+    "六边形轮毂",
+    "工业"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 36,
+        "isosceles_triangle": 5,
+        "equilateral_triangle": 4,
+        "right_triangle": 4,
+        "rhombus": 3,
+        "hexagon": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ap_sw",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ap_s",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ap_se",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ap_w",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ap_e",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ap_nw",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ap_n",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ap_ne",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "path0",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path1",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hp_bridge",
+      "type": "square",
+      "position": [
+        1.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hp_base",
+      "type": "square",
+      "position": [
+        0.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw0_s",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw0_n",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw0_w",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw0_e",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw1_s",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw1_n",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw1_w",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw1_e",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw2_s",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw2_n",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw2_w",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw2_e",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tb_sw",
+      "type": "right_triangle",
+      "position": [
+        2.666667,
+        3.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tb_se",
+      "type": "right_triangle",
+      "position": [
+        4.333333,
+        3.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tb_nw",
+      "type": "right_triangle",
+      "position": [
+        2.666667,
+        4.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tb_ne",
+      "type": "right_triangle",
+      "position": [
+        4.333333,
+        4.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "t_deck",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "nc_s",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "nc_n",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "nc_w",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "nc_e",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "nc_roof",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hub",
+      "type": "hexagon",
+      "position": [
+        3.5,
+        3.0,
+        4.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "blade_top",
+      "type": "rhombus",
+      "position": [
+        3.25,
+        3.0,
+        6.165064
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "blade_ll",
+      "type": "rhombus",
+      "position": [
+        2.5,
+        3.0,
+        3.999999
+      ],
+      "rotation": [
+        -90.0,
+        59.999988,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "blade_lr",
+      "type": "rhombus",
+      "position": [
+        4.75,
+        3.0,
+        4.433012
+      ],
+      "rotation": [
+        -90.0,
+        -59.999988,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mast0",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mast1",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mast_tip",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        2.0,
+        2.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hut_s",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hut_n",
+      "type": "square",
+      "position": [
+        0.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hut_w",
+      "type": "square",
+      "position": [
+        0.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hut_e",
+      "type": "square",
+      "position": [
+        1.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hut_roof_s",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        4.166667,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hut_roof_e",
+      "type": "isosceles_triangle",
+      "position": [
+        0.833333,
+        4.5,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hut_roof_n",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        4.833333,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hut_roof_w",
+      "type": "isosceles_triangle",
+      "position": [
+        0.166667,
+        4.5,
+        1.288675
+      ],
+      "rotation": [
+        59.999988,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fn_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "fn_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        3.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "fn_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        5.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "fn_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        3.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "机坪南半: 塔基南、西两侧铺 4 片草坪机坪。",
+      "tip": "塔基 [3,4]x[3,4] 空在中央 —— 塔身直接落地。",
+      "tiles_to_add": [
+        "ap_sw",
+        "ap_s",
+        "ap_se",
+        "ap_w"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "机坪北半: 补齐北、东两侧 4 片, 环形机坪合围。",
+      "tip": "",
+      "tiles_to_add": [
+        "ap_e",
+        "ap_nw",
+        "ap_n",
+        "ap_ne"
+      ],
+      "highlight_tiles": [
+        "ap_sw",
+        "ap_se"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "检修道: 机坪南沿向外接 2 片灰色道板。",
+      "tip": "",
+      "tiles_to_add": [
+        "path0",
+        "path1"
+      ],
+      "highlight_tiles": [
+        "ap_s"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "小屋地坪: 机坪西北角向外接 2 片灰色地坪 —— 变压小屋的地基。",
+      "tip": "",
+      "tiles_to_add": [
+        "hp_bridge",
+        "hp_base"
+      ],
+      "highlight_tiles": [
+        "ap_nw"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "塔身第一层: 4 面白色方墙围合, 墙底整边吸机坪内沿。",
+      "tip": "",
+      "tiles_to_add": [
+        "tw0_s",
+        "tw0_n",
+        "tw0_w",
+        "tw0_e"
+      ],
+      "highlight_tiles": [
+        "ap_s",
+        "ap_n"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "塔根护撑: 四角各加 1 片灰色直角三角 —— 竖边吸塔身竖边, 横边吸机坪板边, 塔、撑、坪锁成三角闭环。",
+      "tip": "",
+      "tiles_to_add": [
+        "tb_sw",
+        "tb_se",
+        "tb_nw",
+        "tb_ne"
+      ],
+      "highlight_tiles": [
+        "tw0_w",
+        "tw0_e"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "塔身第二层: 4 面方墙压顶续高。",
+      "tip": "",
+      "tiles_to_add": [
+        "tw1_s",
+        "tw1_n",
+        "tw1_w",
+        "tw1_e"
+      ],
+      "highlight_tiles": [
+        "tw0_s"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "塔身第三层与塔顶平台: 再起一层, 顶上盖灰色平台板 (z=3)。",
+      "tip": "",
+      "tiles_to_add": [
+        "tw2_s",
+        "tw2_n",
+        "tw2_w",
+        "tw2_e",
+        "t_deck"
+      ],
+      "highlight_tiles": [
+        "tw1_s"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "机舱墙身: 平台上围 4 面蓝色机舱墙, 南面是迎风墙。",
+      "tip": "",
+      "tiles_to_add": [
+        "nc_s",
+        "nc_n",
+        "nc_w",
+        "nc_e"
+      ],
+      "highlight_tiles": [
+        "t_deck"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "机舱顶与轮毂: 盖机舱顶板; 一整片灰色六边形轮毂竖立在迎风墙顶线上 —— 重心正压铰链, 力臂为零。",
+      "tip": "轮毂底边与机舱顶板南缘、迎风墙顶三线合一, 一条铰链三重吸合。",
+      "tiles_to_add": [
+        "nc_roof",
+        "hub"
+      ],
+      "highlight_tiles": [
+        "nc_s",
+        "nc_n"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "三片叶片: 菱形叶片依次吸上轮毂顶边与两条下斜边, 呈 120 度风车旋位 —— 每片重心都落在自家铰链的正上/正下方。",
+      "tip": "菱形 60 度的天然斜度让叶尖自带后掠角, 像正在旋转。",
+      "tiles_to_add": [
+        "blade_top",
+        "blade_ll",
+        "blade_lr"
+      ],
+      "highlight_tiles": [
+        "hub"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "测风塔: 机坪东南角叠 2 方 1 尖的黄色测风塔。",
+      "tip": "",
+      "tiles_to_add": [
+        "mast0",
+        "mast1",
+        "mast_tip"
+      ],
+      "highlight_tiles": [
+        "ap_se"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "变压小屋墙身: 西北地坪上围 4 面橙色小屋墙。",
+      "tip": "",
+      "tiles_to_add": [
+        "hut_s",
+        "hut_n",
+        "hut_w",
+        "hut_e"
+      ],
+      "highlight_tiles": [
+        "hp_base"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "小屋四坡顶: 4 片红色等腰三角对锥合拢, 斜棱互吸自锁。",
+      "tip": "",
+      "tiles_to_add": [
+        "hut_roof_s",
+        "hut_roof_e",
+        "hut_roof_n",
+        "hut_roof_w"
+      ],
+      "highlight_tiles": [
+        "hut_s",
+        "hut_n"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "围栏 (南/西): 机坪外沿立 2 片紫色围栏脊板。",
+      "tip": "",
+      "tiles_to_add": [
+        "fn_s",
+        "fn_w"
+      ],
+      "highlight_tiles": [
+        "ap_sw"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "围栏 (北/东): 再立 2 片, 风机并网发电。",
+      "tip": "",
+      "tiles_to_add": [
+        "fn_n",
+        "fn_e"
+      ],
+      "highlight_tiles": [
+        "ap_ne"
+      ]
+    }
+  ]
+}
