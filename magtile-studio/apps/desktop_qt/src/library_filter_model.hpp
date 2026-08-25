@@ -33,6 +33,11 @@ class LibraryFilterModel final : public QSortFilterProxyModel {
     Q_PROPERTY(bool hasActiveFilters READ hasActiveFilters NOTIFY filtersChanged)
     /// 筛选后的卡片数 (QML 空态判定用)。
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    /// 订阅是否有效 (main.cpp 接线 BillingBackend, 计费适配层): 生效时
+    /// 庆祝页推荐不再排除订阅内容 —— 解锁后与免费层同权可直接开搭。
+    /// 「免费模型」筛选不受影响 (那是内容标签, 不是锁状态)。
+    Q_PROPERTY(bool subscriptionActive READ subscriptionActive WRITE setSubscriptionActive
+                   NOTIFY subscriptionActiveChanged)
 
 public:
     explicit LibraryFilterModel(QObject* parent = nullptr);
@@ -59,6 +64,9 @@ public:
 
     [[nodiscard]] int count() const { return rowCount(); }
 
+    [[nodiscard]] bool subscriptionActive() const noexcept { return subscription_active_; }
+    void setSubscriptionActive(bool active);
+
     /// 一键回到「全部」(空态页「换个条件试试」按钮)。
     Q_INVOKABLE void clearFilters();
 
@@ -83,6 +91,7 @@ public:
 signals:
     void filtersChanged();
     void countChanged();
+    void subscriptionActiveChanged();
 
 protected:
     [[nodiscard]] bool filterAcceptsRow(int source_row,
@@ -94,6 +103,7 @@ private:
     bool free_only_ = false;
     bool core9_only_ = false;
     bool buildable_only_ = false;
+    bool subscription_active_ = false;  ///< 缺接线时按未订阅兜底 (宁可锁)
 };
 
 }  // namespace magtile::qtui

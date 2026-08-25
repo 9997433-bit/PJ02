@@ -133,6 +133,27 @@ if(MAGTILE_BUILD_TESTS)
             COMMAND magtile_qt_backend_test ${CMAKE_BINARY_DIR}/qt_backend_test.db)
     endif()
 
+    # 计费桥单元测试 (C++, 无需显示环境): BillingBackend + 假计费适配层
+    # 走通付费闭环 —— 未订阅锁付费模型 / 假购买解锁 (跨实例持久化,
+    # settings 契约键双向) / 恢复购买 / 开发开关门控 / 庆祝页推荐
+    # 订阅感知 (COMMERCIAL_PLAN §2.2, 不接任何真实商店 SDK)
+    if(EXISTS ${CMAKE_SOURCE_DIR}/tests/test_qt_billing.cpp)
+        qt_add_executable(magtile_qt_billing_test
+            ${CMAKE_SOURCE_DIR}/tests/test_qt_billing.cpp
+            src/library_model.cpp
+            src/library_filter_model.cpp
+            src/billing_backend.cpp
+        )
+        target_include_directories(magtile_qt_billing_test PRIVATE src)
+        target_link_libraries(magtile_qt_billing_test PRIVATE
+            magtile_core
+            magtile_warnings
+            Qt6::Core
+        )
+        add_test(NAME qt_billing_bridge
+            COMMAND magtile_qt_billing_test ${CMAKE_BINARY_DIR}/qt_billing_test.db)
+    endif()
+
     # QML 加载冒烟 (offscreen 平台, 与显示环境无关): 默认启动 + 家长门
     # 深链各跑一次, QML 有任何加载错误进程即非零退出
     find_program(MAGTILE_QT_BASH bash)

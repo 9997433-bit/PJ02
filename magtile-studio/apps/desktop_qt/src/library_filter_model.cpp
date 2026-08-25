@@ -66,6 +66,13 @@ void LibraryFilterModel::setBuildableOnly(bool on) {
     emit filtersChanged();
 }
 
+void LibraryFilterModel::setSubscriptionActive(bool active) {
+    if (subscription_active_ == active) return;
+    subscription_active_ = active;
+    // 只影响 recommendSimilar 的排除口径, 行过滤不依赖订阅状态
+    emit subscriptionActiveChanged();
+}
+
 void LibraryFilterModel::clearFilters() {
     if (!hasActiveFilters()) return;
     difficulty_ = 0;
@@ -127,8 +134,9 @@ QVariantList LibraryFilterModel::recommendSimilar(const QString& model_id,
             continue;  // 刚完成的模型自身不进推荐
         }
         if (!src->data(idx, LibraryModel::CanBuildRole).toBool()) continue;
-        // 庆祝页点卡直接开搭 (startBuild 无订阅拦截), 订阅内容在此拦下 (§11)
-        if (!src->data(idx, LibraryModel::FreeRole).toBool()) continue;
+        // 庆祝页点卡直接开搭 (startBuild 无订阅拦截), 未解锁的订阅内容
+        // 在此拦下 (§11); 订阅生效后与免费层同权进推荐 (计费适配层口径)
+        if (!subscription_active_ && !src->data(idx, LibraryModel::FreeRole).toBool()) continue;
         candidates.push_back(idx);
     }
 
