@@ -4,7 +4,7 @@
 #
 # docs/V1_LAUNCH_CHECKLIST.md 的自动侧执行器: 把清单中所有能自动
 # 探测的项串成一条命令跑一遍, 输出 PASS/FAIL/SKIP 摘要。每个检查
-# 号 (R1..R17) 与清单「探测」列一一对应; 纯人工项 (实机验收 /
+# 号 (R1..R18) 与清单「探测」列一一对应; 纯人工项 (实机验收 /
 # 法务定稿 / 软著备案等) 以 SKIP[Manual] 列出提醒, 不参与判定。
 #
 # 检查项 (P0 = 上架阻断, 任一 FAIL 退出码非零; P1 = 报告不阻断):
@@ -49,6 +49,14 @@
 #                            --quick 跳过 (记 SKIP), 全量签核必跑 ——
 #                            二进制缺失 / --jitter 特性不可用 / 抽样为空
 #                            一律按 FAIL 报告, 不允许静默跳过。
+#   R18 [P1] 内容系列归类机检 tools/check_content_series.py --strict
+#                            (清单 §1 C5: 每模型 content_meta.series
+#                            13 主题词值 或 matrix_bucket 矩阵外桶恰好
+#                            其一, 词值对照 data/content_series_map.json;
+#                            主题 × 难度矩阵进度快照
+#                            docs/reports/CONTENT_MATRIX_PROGRESS.md 由
+#                            update_model_catalog.py --matrix-report
+#                            另行生成, 终审判读仍人工)
 #
 # 用法:
 #   tools/check_v1_readiness.sh [选项]
@@ -607,6 +615,10 @@ else
     run_check R17 P1 "D4+ 扰动仿真抽检 (validate --jitter $JITTER_ITERATIONS)" \
         check_jitter_sampling
 fi
+
+run_check R18 P1 "内容系列归类机检 (check_content_series --strict)" \
+    "$PYTHON" "$ROOT/tools/check_content_series.py" "$ROOT/data/models" \
+    --strict
 
 # ---- 纯人工项提醒 (不参与判定, 对应清单各节 Manual 行) -----------
 skip_check M1 P0 "Windows/macOS 实机打包验收 + 代码签名/公证" "Manual, 见清单 §3 D2~D6"
