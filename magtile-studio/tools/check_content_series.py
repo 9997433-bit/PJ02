@@ -8,19 +8,21 @@ CONTENT_GAP_AUDIT.md §7.3 「series 回填 + 矩阵进度机检化」的机检�
   1. 归类齐全: 每个模型必须带 content_meta.series (13 策略主题之一,
      CONTENT_STRATEGY.md §2.2) 或 content_meta.matrix_bucket (矩阵外桶,
      审计第 6 节的治理口径), 二者恰好其一 —— 同时缺失或同时携带都算
-     归类问题;
+     归类问题 (显式写 null 视同缺席, 回填工具对矩阵外模型即写
+     series=null + matrix_bucket);
   2. 词值受控: series / matrix_bucket 取值必须落在
-     data/content_series_map.json 词表内 (series 取 matrix_bucket 为
-     null 的 13 个主题词值, matrix_bucket 取矩阵外条目的桶词值);
+     data/content_series_map.json 词表内 (series 取 series_slugs 的
+     13 个主题词值, matrix_bucket 取 matrix_bucket_slugs 的桶词值);
      中文主题名 / 词值写错字段等常见回填笔误会给出定向修复提示;
   3. 矩阵计数: 输出 13 主题 × D1–D5 现状计数与矩阵外桶计数, 供对照
      CONTENT_GAP_AUDIT.md 第 3 节复核 (520 目标对照表由
      tools/update_model_catalog.py --matrix-report 负责, 不在此重复)。
 
-series 回填 (底稿见 CONTENT_GAP_AUDIT.md 附录 A) 落库前, 全库归类
-字段缺失属预期现状 —— 非 strict 模式只报告不阻断; 回填合入后本工具
-以 --strict 作为硬闸门 (tests/run_full_qa.sh 可选关卡,
-MAGTILE_SERIES_CHECK=1 开启)。
+series 回填 (tools/backfill_content_series.py, 底稿见
+CONTENT_GAP_AUDIT.md 附录 A) 已全库落地 —— 本工具以 --strict 作为
+后续内容批次的硬闸门 (tests/run_full_qa.sh 可选关卡,
+MAGTILE_SERIES_CHECK=1 开启), 新增模型漏归类 / 词值走样即失败;
+非 strict 模式只报告不阻断。
 
 退出码:
   0  检查完成 (可能有 WARN —— 非 strict 模式下缺失/非法不作为硬失败);
@@ -56,10 +58,10 @@ def _pad(text, width):
 def load_allowlists(map_path):
     """读取词表, 返回 (series 词值表, 矩阵外桶词值表, 修复提示索引)。
 
-    词表条目 matrix_bucket 为 null 的是 13 策略主题 (content_meta.series
-    的合法取值); matrix_bucket 非 null 的是矩阵外条目, 其 matrix_bucket
-    词值是 content_meta.matrix_bucket 的合法取值。修复提示索引把中文
-    主题名映射到应写的字段与词值, 用于定位常见回填笔误。
+    词表的 series_slugs (中文主题名 -> 词值) 定义 content_meta.series
+    的 13 个合法取值, matrix_bucket_slugs 定义 content_meta.matrix_bucket
+    的合法桶词值 (词表 schema 见 data/content_series_map.json 头部说明)。
+    修复提示索引把中文名映射到应写的字段与词值, 用于定位常见回填笔误。
     """
     try:
         data = json.loads(map_path.read_text(encoding="utf-8"))
@@ -67,33 +69,39 @@ def load_allowlists(map_path):
         print(f"[错误] 读取词表 {map_path} 失败: {exc}", file=sys.stderr)
         sys.exit(2)
 
-    entries = data.get("series")
-    if not isinstance(entries, dict) or not entries:
-        print(f"[错误] 词表 {map_path} 缺少非空的 series 对象", file=sys.stderr)
+    series_slugs = data.get("series_slugs")
+    bucket_slugs = data.get("matrix_bucket_slugs")
+    if not isinstance(series_slugs, dict) or not series_slugs:
+        print(f"[错误] 词表 {map_path} 缺少非空的 series_slugs 对象",
+              file=sys.stderr)
+        sys.exit(2)
+    if not isinstance(bucket_slugs, dict) or not bucket_slugs:
+        print(f"[错误] 词表 {map_path} 缺少非空的 matrix_bucket_slugs 对象",
+              file=sys.stderr)
         sys.exit(2)
 
-    series_allow = {}    # 主题词值 -> 中文主题名
-    bucket_allow = {}    # 矩阵外桶词值 -> 中文名
-    zh_hint = {}         # 中文名 -> (字段, 词值)
-    for slug, meta in entries.items():
-        if not isinstance(meta, dict):
-            print(f"[错误] 词表条目 {slug} 不是对象", file=sys.stderr)
-            sys.exit(2)
-        name = meta.get("display_name_zh", slug)
-        bucket = meta.get("matrix_bucket")
-        if bucket is None:
-            series_allow[slug] = name
-            zh_hint[name] = ("series", slug)
-        else:
-            bucket_allow[bucket] = name
-            zh_hint[name] = ("matrix_bucket", bucket)
-
+    series_allow = {slug: name for name, slug in series_slugs.items()}
+    bucket_allow = {slug: name for name, slug in bucket_slugs.items()}
+    if len(series_allow) != len(series_slugs) \
+            or len(bucket_allow) != len(bucket_slugs):
+        print("[错误] 词表存在重复词值 (series_slugs / matrix_bucket_slugs "
+              "的词值必须各自唯一)", file=sys.stderr)
+        sys.exit(2)
+    overlap = set(series_allow) & set(bucket_allow)
+    if overlap:
+        print(f"[错误] 词值同时出现在 series_slugs 与 matrix_bucket_slugs: "
+              f"{sorted(overlap)}", file=sys.stderr)
+        sys.exit(2)
     if len(series_allow) != MATRIX_THEME_COUNT:
         print(f"[错误] 词表矩阵主题数 {len(series_allow)} != "
-              f"{MATRIX_THEME_COUNT} (matrix_bucket 为 null 的条目应恰好覆盖"
+              f"{MATRIX_THEME_COUNT} (series_slugs 应恰好覆盖"
               f" CONTENT_STRATEGY.md §2.2 的 13 主题): "
               f"{sorted(series_allow)}", file=sys.stderr)
         sys.exit(2)
+
+    zh_hint = {name: ("series", slug) for name, slug in series_slugs.items()}
+    zh_hint.update((name, ("matrix_bucket", slug))
+                   for name, slug in bucket_slugs.items())
     return series_allow, bucket_allow, zh_hint
 
 

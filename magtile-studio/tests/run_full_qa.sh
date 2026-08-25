@@ -315,8 +315,9 @@ fi
 # 每个模型必须带 content_meta.series (13 主题词值) 或
 # content_meta.matrix_bucket (矩阵外桶), 词值对照
 # data/content_series_map.json 词表, --strict 使任何缺失/非法即失败。
-# series 回填 (审计附录 A 为底稿) 落库前全库缺失、开启即红, 故默认
-# 跳过; 回填合入后内容批次评审置 MAGTILE_SERIES_CHECK=1 作为硬闸门。
+# 全库回填已落地 (tools/backfill_content_series.py, 审计附录 A 底稿),
+# 归类只在内容批次合入时变化, 日常合入不受它约束, 故默认跳过;
+# 内容批次评审 / 发布打包置 MAGTILE_SERIES_CHECK=1 作为硬闸门。
 if [ -n "${MAGTILE_SERIES_CHECK:-}" ]; then
     run_stage "内容系列归类机检 (series)" \
         "$PYTHON" "$ROOT/tools/check_content_series.py" "$DATA_DIR/models" \
