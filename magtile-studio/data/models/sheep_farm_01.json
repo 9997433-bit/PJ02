@@ -1,0 +1,1368 @@
+{
+  "schema_version": 1,
+  "id": "sheep_farm_01",
+  "name": "剪毛牧场",
+  "name_en": "Sheep Farm 01",
+  "description": "只用核心九片型的畜牧牧场, 讲完'剪羊毛'一整个流程: 石砌羊圈里一只没剪的大绵羊蓬松雪白 (透明片=羊毛, 身躯处处成环), 方头不借脖子直接骑羊背东沿 ('背板短边+体墙顶边'一线双吸), 双耳从头顶拼缝向两侧 45 度张开 (单耳力矩 2.7 远小于预算); 剪毛台上一只剪完的羊通体粉红 —— 四面体墙每片'台顶沿+台墙顶'一线双吸, 动物第一次摞上家具, 头顶 2.87 全场最高; 台边两座剪下的羊毛四坡自锁堆成小山, 栏外小羊羔 1x1 迷你体环排队等着轮到自己 —— 今年的毛真厚!",
+  "difficulty": 3,
+  "total_pieces": 74,
+  "tags": [
+    "田园",
+    "农场",
+    "农业",
+    "牧场",
+    "动物世界",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 48,
+        "equilateral_triangle": 13,
+        "rectangle": 12,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "g_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_56_0",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_gate_in",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "g_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "g_bed_s",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_bed_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_bed_n",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_e_in",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_01_4",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_2_4",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_3_4",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_45_4",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_6_4",
+      "type": "square",
+      "position": [
+        6.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_56_3",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g_6_1",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "g_6_2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_gate",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pen_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_w_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_e_1",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_w_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_e_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_w_3",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_e_3",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "shA_s",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shA_n",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shA_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shA_e",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shA_back",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shA_head",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "shA_ear_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.204124,
+        2.5,
+        2.204124
+      ],
+      "rotation": [
+        135.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "shA_ear_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.795876,
+        2.5,
+        2.204124
+      ],
+      "rotation": [
+        135.0,
+        0.0,
+        -90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "shA_tail",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamb_s",
+      "type": "square",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamb_n",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamb_w",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamb_e",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamb_back",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamb_face",
+      "type": "equilateral_triangle",
+      "position": [
+        7.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dk_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_top",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "shB_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "shB_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "shB_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "shB_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "shB_back",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "shB_face",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "wool_a_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wool_a_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wool_a_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wool_a_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wool_b_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wool_b_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wool_b_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wool_b_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "clear"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南场院: 剪毛台位、门前土路与羊毛堆场一字排开。",
+      "tip": "牧场的一天从南场院开始 —— 台位和堆场都在这条线上。",
+      "tiles_to_add": [
+        "g_0_0",
+        "g_1_0",
+        "g_2_0",
+        "g_3_0",
+        "g_4_0",
+        "g_56_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺圈西草地与圈内地坪: 橙色是圈门进来的土路, 绿色是羊床。",
+      "tip": "羊床三片长板咬缝 —— 大绵羊的四只脚全踩在这些缝上。",
+      "tiles_to_add": [
+        "g_0_1",
+        "g_0_2",
+        "g_0_3",
+        "g_gate_in",
+        "g_1_3",
+        "g_bed_s",
+        "g_bed_m",
+        "g_bed_n",
+        "g_e_in",
+        "g_4_3"
+      ],
+      "highlight_tiles": [
+        "g_1_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺北草场与东草场: 小羊羔的排队小路在东边。",
+      "tip": "7x5 草场合拢 —— 每条拼缝都是圈墙与羊脚的地基。",
+      "tiles_to_add": [
+        "g_01_4",
+        "g_2_4",
+        "g_3_4",
+        "g_45_4",
+        "g_6_4",
+        "g_5_1",
+        "g_5_2",
+        "g_56_3",
+        "g_6_1",
+        "g_6_2"
+      ],
+      "highlight_tiles": [
+        "g_e_in"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "砌羊圈南墙 + 装木门: 3 片石墙加 1 扇门框方, 门正对土路。",
+      "tip": "门框方物理上按实心方片拼接 —— 剪完毛从这扇门出去。",
+      "tiles_to_add": [
+        "pen_s_1",
+        "pen_gate",
+        "pen_s_3",
+        "pen_s_4"
+      ],
+      "highlight_tiles": [
+        "g_1_0",
+        "g_gate_in"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "砌羊圈西东墙: 各 3 片, 与南墙四角竖边互咬。",
+      "tip": "拐角一咬, 石墙就从'一排片'变成了'一圈栏'。",
+      "tiles_to_add": [
+        "pen_w_1",
+        "pen_w_2",
+        "pen_w_3",
+        "pen_e_1",
+        "pen_e_2",
+        "pen_e_3"
+      ],
+      "highlight_tiles": [
+        "pen_s_1",
+        "pen_s_4"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "砌羊圈北墙: 4 片合环, 石羊圈关得上门了。",
+      "tip": "四面合环处处成圈 —— 顽皮的羊也拱不开。",
+      "tiles_to_add": [
+        "pen_n_1",
+        "pen_n_2",
+        "pen_n_3",
+        "pen_n_4"
+      ],
+      "highlight_tiles": [
+        "pen_w_3",
+        "pen_e_3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "拼大绵羊身躯: 透明羊毛片前后长楣 + 左右方墙合环 (透明 = 蓬松雪白的毛)。",
+      "tip": "羊脚踩着羊床拼缝, 四角竖边互吸 —— 身躯处处成环。",
+      "tiles_to_add": [
+        "shA_s",
+        "shA_n",
+        "shA_w",
+        "shA_e"
+      ],
+      "highlight_tiles": [
+        "g_bed_m"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖羊背 + 装方头: 背板压顶, 方头骑上羊背东沿 —— 绵羊没有脖子, 头直接从毛里探出来。",
+      "tip": "头的底边'背板短边+体墙顶边'一线双吸 —— 两条保险。",
+      "tiles_to_add": [
+        "shA_back",
+        "shA_head"
+      ],
+      "highlight_tiles": [
+        "shA_e"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "竖双耳 + 安尾巴: 两片粉色等边从头顶拼缝向两侧 45 度张开, 小尾巴骑羊背西沿。",
+      "tip": "双耳底边共吸一条线、彼此再互吸 —— 单耳力矩只有 2.7。",
+      "tiles_to_add": [
+        "shA_ear_e",
+        "shA_ear_w",
+        "shA_tail"
+      ],
+      "highlight_tiles": [
+        "shA_head"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "拼小羊羔身躯: 栏外 1x1 迷你体环, 排在小路尽头。",
+      "tip": "小羊羔个头只有妈妈一半 —— 但结构一样处处成环。",
+      "tiles_to_add": [
+        "lamb_s",
+        "lamb_n",
+        "lamb_w",
+        "lamb_e"
+      ],
+      "highlight_tiles": [
+        "g_6_2",
+        "g_6_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "盖羔背 + 装脸蛋: 背板压顶, 灰色小脸骑东沿望着圈门。",
+      "tip": "别急, 排队 —— 下一个就轮到你。",
+      "tiles_to_add": [
+        "lamb_back",
+        "lamb_face"
+      ],
+      "highlight_tiles": [
+        "lamb_e"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "搭剪毛台: 1x1 木箱环 + 台顶压顶, 剪毛师傅的工作台。",
+      "tip": "台顶四边全吸墙顶 —— 抬羊上台也纹丝不动。",
+      "tiles_to_add": [
+        "dk_s",
+        "dk_n",
+        "dk_w",
+        "dk_e",
+        "dk_top"
+      ],
+      "highlight_tiles": [
+        "g_0_0"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "粉羊上台: 四面粉色体墙骑上台顶四沿, 台上合环。",
+      "tip": "每片墙'台顶沿+台墙顶'一线双吸 —— 动物第一次摞上家具。",
+      "tiles_to_add": [
+        "shB_s",
+        "shB_n",
+        "shB_w",
+        "shB_e"
+      ],
+      "highlight_tiles": [
+        "dk_top"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "盖粉羊背 + 装脸蛋: 剪完毛通体粉红, 脸蛋骑北沿望着羊圈。",
+      "tip": "少了一身毛小了一圈, 站上台反而最高 (头顶 2.87)。",
+      "tiles_to_add": [
+        "shB_back",
+        "shB_face"
+      ],
+      "highlight_tiles": [
+        "shB_n"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "堆羊毛山: 剪下的羊毛堆成两座四坡小锥 —— 收工!",
+      "tip": "四条斜棱两两互吸自锁成环 —— 今年的毛真厚, 装车喽!",
+      "tiles_to_add": [
+        "wool_a_s",
+        "wool_a_e",
+        "wool_a_n",
+        "wool_a_w",
+        "wool_b_s",
+        "wool_b_e",
+        "wool_b_n",
+        "wool_b_w"
+      ],
+      "highlight_tiles": [
+        "shB_back",
+        "g_2_0"
+      ]
+    }
+  ]
+}
