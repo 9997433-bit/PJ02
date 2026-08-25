@@ -137,6 +137,8 @@
       (口径见 [CHINA_STORE_COMPLIANCE.md](CHINA_STORE_COMPLIANCE.md) §2),
       **不含 `third_party/` 任何第三方库代码**, 代码内出现的版权注释
       须与申请人一致;
+      工程侧一键生成: `python3 tools/export_copyright_source_pages.py`
+      → `docs/exports/copyright/source_pages_submission.html` (浏览器打印为 PDF 上传);
 - [ ] **文档鉴别材料**: 操作手册 / 用户手册任选其一, 前 30 页 +
       后 30 页 (不足 60 页全交), 每页 ≥30 行, 页眉同上; 含主界面
       截图与功能说明, 截图必须为真实界面

@@ -1,0 +1,3199 @@
+# 软著源程序鉴别材料 (前 30 页 + 后 30 页)
+# 软件名称: MagTile Studio 磁力片工坊软件 V1.0
+# 生成时间: 2026-08-25 23:16 UTC
+# 全库总页数: 552 (每页 50 行)
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 1 页 / 共 552 页
+========================================================================
+// ===== file: apps/desktop_qt/qml/AchievementsPage.qml =====
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import MagTile.Studio
+
+// =============================================================
+// 成就墙全览 (UI_UX_SPEC.md §7.1, QT-4): 徽章卡片网格。
+// 已点亮 = 完成绿卡 + ✓ + 解锁日期; 未点亮 = 灰色剪影 + 一句话
+// 达成条件 (§7.1: 不显示进度百分比, 防焦虑)。成就只与搭建行为
+// 挂钩 (§4.5), 数据经 studio.achievementsList() 读进度存档 ——
+// 与 CLI `progress list` 的成就口径同一份 SQLite。
+// 页脚只报喜不催促: "已点亮 N 枚徽章" (§4.3 正向与中性反馈)。
+// =============================================================
+Page {
+    id: page
+
+    signal back()
+
+    property var badges: []
+
+    function refresh() { badges = studio.achievementsList() }
+
+    Component.onCompleted: refresh()
+    Connections {
+        target: studio
+        function onCatalogChanged() { page.refresh() }
+    }
+
+    background: Rectangle { color: Theme.surfaceAlt }
+
+    // ---- 页眉: 大返回键 + 标题 ---------------------------------------
+    header: Item {
+        height: Theme.headerHeight
+
+        AbstractButton {
+            id: backButton
+            width: 140
+            height: Theme.touchTarget
+            anchors.left: parent.left
+            anchors.leftMargin: Theme.spacingLarge
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: page.back()
+            scale: pressed ? 0.97 : 1.0
+            Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+            background: Rectangle {
+                radius: Theme.radiusButton
+                color: backButton.pressed ? Theme.primaryPressed : Theme.primary
+            }
+            contentItem: Text {
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 2 页 / 共 552 页
+========================================================================
+                text: "← 返回"
+                color: "white"
+                font.pixelSize: Theme.fontBody
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+        }
+
+        Text {
+            anchors.centerIn: parent
+            text: "🏅 成就墙"
+            font.pixelSize: Theme.fontTitle
+            font.bold: true
+            color: Theme.textPrimary
+        }
+    }
+
+    // ---- 主体: 徽章卡片网格 -------------------------------------------
+    Flickable {
+        anchors.fill: parent
+        contentHeight: bodyColumn.implicitHeight + 2 * Theme.spacingLarge
+        clip: true
+        boundsBehavior: Flickable.StopAtBounds
+
+        ColumnLayout {
+            id: bodyColumn
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: Theme.spacingLarge
+            width: Math.min(page.width - 2 * Theme.spacingLarge, 760)
+            spacing: Theme.spacing
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "每完成一个新模型, 就会点亮新的徽章"
+                font.pixelSize: Theme.fontBody
+                color: Theme.textSecondary
+            }
+
+            Flow {
+                Layout.fillWidth: true
+                Layout.topMargin: Theme.spacing
+                spacing: Theme.spacing
+
+                Repeater {
+                    model: page.badges
+                    delegate: Rectangle {
+                        id: badgeCard
+                        required property var modelData
+                        width: 238
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 3 页 / 共 552 页
+========================================================================
+                        height: 180
+                        radius: Theme.radiusCard
+                        color: modelData.unlocked ? Theme.successSoft : Theme.surface
+                        border.color: modelData.unlocked ? Theme.success : Theme.cardBorder
+                        border.width: modelData.unlocked ? 2 : 1
+
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            width: parent.width - 2 * Theme.spacing
+                            spacing: 6
+
+                            // 徽章图形: 未点亮时灰色剪影 (低透明度, §7.1)
+                            Text {
+                                Layout.alignment: Qt.AlignHCenter
+                                text: badgeCard.modelData.emoji
+                                font.pixelSize: 44
+                                opacity: badgeCard.modelData.unlocked ? 1.0 : 0.3
+                            }
+                            Text {
+                                Layout.alignment: Qt.AlignHCenter
+                                Layout.fillWidth: true
+                                text: badgeCard.modelData.name
+                                      + (badgeCard.modelData.unlocked ? " ✓" : "")
+                                font.pixelSize: Theme.fontBody
+                                font.bold: true
+                                color: badgeCard.modelData.unlocked
+                                       ? Theme.textPrimary : Theme.textSecondary
+                                horizontalAlignment: Text.AlignHCenter
+                                elide: Text.ElideRight
+                            }
+                            // 已点亮: 解锁日期; 未点亮: 一句话达成条件
+                            Text {
+                                Layout.alignment: Qt.AlignHCenter
+                                Layout.fillWidth: true
+                                text: badgeCard.modelData.unlocked
+                                      ? badgeCard.modelData.unlockedText
+                                      : badgeCard.modelData.condition
+                                font.pixelSize: Theme.fontSmall
+                                color: badgeCard.modelData.unlocked
+                                       ? Theme.success : Theme.textSecondary
+                                horizontalAlignment: Text.AlignHCenter
+                                wrapMode: Text.WordWrap
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 4 页 / 共 552 页
+========================================================================
+    // ---- 页脚: 只报喜不催促 (§4.3) ------------------------------------
+    footer: Item {
+        height: 48
+        Text {
+            anchors.centerIn: parent
+            text: studio.achievementCount > 0
+                  ? "🏅 已点亮 " + studio.achievementCount + " 枚徽章, 继续加油!"
+                  : "完成第一个模型, 就能点亮第一枚徽章"
+            font.pixelSize: Theme.fontSmall
+            color: Theme.textSecondary
+        }
+    }
+}
+
+// ===== file: apps/desktop_qt/qml/AgeOnboardingPage.qml =====
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import MagTile.Studio
+
+// =============================================================
+// 首次启动年龄段引导 (QT-5, UI_UX_SPEC.md §10.1 / §2): 盖在首页
+// 之上的温和全屏引导。存档从未写过 age_mode 键且无
+// onboarding_age_done 完成标记时出现一次 (appSettings.
+// ageOnboardingPending); 三档大卡片 (4-6 / 7-9 / 10+) 的档位标识
+// 与 LibraryPage 分龄口径完全同源 (同一组 age_mode 值, 家长之后
+// 随时可在 ⚙ 设置 里改档)。选完经 appSettings.completeAgeOnboarding
+// 落盘 (age_mode + 完成标记) 并淡出露出首页 —— 选档就是全部,
+// 无跳过按钮也无催促 (选任何一档都对, 默认档也在三张卡里)。
+// 「减少动态效果」开启时 Theme.animMs 归零, 入场/退场降级为静态
+// 直出直收 (§4.7)。
+// =============================================================
+Rectangle {
+    id: overlay
+
+    visible: false
+    opacity: 0
+    color: Theme.surfaceAlt
+
+    // 引导期间拦下全部指针事件: 下层首页在选完档位前不可点
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+    }
+
+    Component.onCompleted: {
+        if (appSettings.ageOnboardingPending) {
+            visible = true
+            enterAnim.start()   // 减少动效时时长为 0: 静态直出 (§4.7)
+        }
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 5 页 / 共 552 页
+========================================================================
+    }
+
+    /// 选定档位 (卡片点击与冒烟自动驾驶同走这一条路径): 落盘
+    /// age_mode + onboarding_age_done 后温和淡出, 露出首页
+    function choose(ageModeId) {
+        if (!visible) return
+        appSettings.completeAgeOnboarding(ageModeId)
+        if (!appSettings.ageOnboardingPending) {
+            enterAnim.stop()
+            leaveAnim.start()
+        }
+    }
+
+    // 三档大卡片数据: modeId 与 LibraryPage/SettingsPage 读写的
+    // age_mode 完全同一组标识; 文案儿童友好, 只描述体验不提对错
+    readonly property var ageCards: [
+        {
+            modeId: "age_4_6",
+            emoji: "🐣",
+            ageText: "4-6 岁",
+            modeName: "启蒙模式",
+            hint: "超大卡片和自动朗读, 一步一步慢慢搭"
+        },
+        {
+            modeId: "age_7_9",
+            emoji: "🦖",
+            ageText: "7-9 岁",
+            modeName: "标准模式",
+            hint: "自己挑喜欢的模型, 跟着 3D 教程搭"
+        },
+        {
+            modeId: "age_10_12",
+            emoji: "🚀",
+            ageText: "10 岁以上",
+            modeName: "进阶模式",
+            hint: "全部筛选工具和更有挑战的大模型"
+        }
+    ]
+
+    // 入场: 整页淡入 + 内容轻微上浮 (温和不惊扰); 减少动效时静态直出
+    ParallelAnimation {
+        id: enterAnim
+        NumberAnimation {
+            target: overlay; property: "opacity"
+            from: 0; to: 1
+            duration: 2 * Theme.animMs; easing.type: Easing.OutQuad
+        }
+        NumberAnimation {
+            target: contentColumn; property: "anchors.verticalCenterOffset"
+            from: 24; to: 0
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 6 页 / 共 552 页
+========================================================================
+            duration: 2 * Theme.animMs; easing.type: Easing.OutQuad
+        }
+    }
+
+    // 退场: 淡出后彻底隐藏 (选完即进入首页)
+    SequentialAnimation {
+        id: leaveAnim
+        NumberAnimation {
+            target: overlay; property: "opacity"
+            from: 1; to: 0
+            duration: Theme.animMs; easing.type: Easing.OutQuad
+        }
+        ScriptAction { script: overlay.visible = false }
+    }
+
+    ColumnLayout {
+        id: contentColumn
+        anchors.centerIn: parent
+        width: Math.min(parent.width - 2 * Theme.spacingLarge, 960)
+        spacing: Theme.spacing
+
+        Text {
+            Layout.alignment: Qt.AlignHCenter
+            text: "🧲"
+            font.pixelSize: 56
+        }
+
+        Text {
+            Layout.alignment: Qt.AlignHCenter
+            text: "你好呀, 欢迎来到磁力片工坊!"
+            font.pixelSize: Theme.fontTitle
+            font.bold: true
+            color: Theme.textPrimary
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        Text {
+            Layout.fillWidth: true
+            text: "搭磁力片的小朋友今年几岁啦? 点一张卡片, 界面会变成最合适的样子"
+            font.pixelSize: Theme.fontBody
+            color: Theme.textSecondary
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        Item { Layout.preferredHeight: Theme.spacing }
+
+        // 三档大卡片 (§4.1: 远超 48 触控目标; 状态 图形+文字 双编码)
+        RowLayout {
+            Layout.fillWidth: true
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 7 页 / 共 552 页
+========================================================================
+            spacing: Theme.spacingLarge
+
+            Repeater {
+                model: overlay.ageCards
+                delegate: AbstractButton {
+                    id: ageCard
+                    required property var modelData
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 248
+                    onClicked: overlay.choose(modelData.modeId)
+                    scale: pressed ? 0.97 : 1.0
+                    Behavior on scale {
+                        NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad }
+                    }
+
+                    background: Rectangle {
+                        radius: Theme.radiusCard
+                        color: ageCard.pressed ? Theme.primarySoft : Theme.surface
+                        border.color: ageCard.hovered ? Theme.primary : Theme.cardBorder
+                        border.width: 2
+                    }
+                    contentItem: ColumnLayout {
+                        spacing: 6
+
+                        Item { Layout.fillHeight: true }
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: ageCard.modelData.emoji
+                            font.pixelSize: 44
+                        }
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: ageCard.modelData.ageText
+                            font.pixelSize: Theme.fontTitle
+                            font.bold: true
+                            color: Theme.primary
+                        }
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: ageCard.modelData.modeName
+                            font.pixelSize: Theme.fontButton
+                            color: Theme.textPrimary
+                        }
+                        Text {
+                            Layout.fillWidth: true
+                            Layout.leftMargin: Theme.spacing
+                            Layout.rightMargin: Theme.spacing
+                            text: ageCard.modelData.hint
+                            font.pixelSize: Theme.fontSmall
+                            color: Theme.textSecondary
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 8 页 / 共 552 页
+========================================================================
+                            wrapMode: Text.WordWrap
+                            horizontalAlignment: Text.AlignHCenter
+                        }
+                        Item { Layout.fillHeight: true }
+                    }
+                }
+            }
+        }
+
+        Item { Layout.preferredHeight: Theme.spacing }
+
+        Text {
+            Layout.fillWidth: true
+            text: "选好就开始搭啦! 之后家长随时可以在 ⚙ 设置 里修改"
+            font.pixelSize: Theme.fontSmall
+            color: Theme.textSecondary
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
+        }
+    }
+}
+
+// ===== file: apps/desktop_qt/qml/BigButton.qml =====
+import QtQuick
+import QtQuick.Controls
+import MagTile.Studio
+
+// =============================================================
+// 儿童友好大按钮: 胶囊造型 (圆角 24)、高度 >= 64、字号 22、
+// 按下轻微缩放 + 200ms ease-out (UI_UX_SPEC.md §1.2 / §4.1)。
+// =============================================================
+Button {
+    id: control
+
+    property color accent: Theme.primary
+    property color accentPressed: Qt.darker(accent, 1.25)
+    property string emoji: ""
+
+    implicitHeight: Theme.bigButtonHeight
+    implicitWidth: Math.max(220, row.implicitWidth + 64)
+
+    scale: pressed ? 0.97 : 1.0
+    Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+
+    background: Rectangle {
+        radius: Theme.radiusButton
+        color: control.pressed ? control.accentPressed : control.accent
+        Behavior on color { ColorAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+    }
+
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 9 页 / 共 552 页
+========================================================================
+    contentItem: Item {
+        implicitWidth: row.implicitWidth
+        implicitHeight: row.implicitHeight
+        Row {
+            id: row
+            spacing: 12
+            anchors.centerIn: parent
+            Text {
+                visible: control.emoji.length > 0
+                text: control.emoji
+                font.pixelSize: Theme.fontButton + 4
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            Text {
+                text: control.text
+                color: "white"
+                font.pixelSize: Theme.fontButton
+                font.bold: true
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+    }
+}
+
+// ===== file: apps/desktop_qt/qml/CelebrationPage.qml =====
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import MagTile.Studio
+
+// =============================================================
+// 完成庆祝页 (QT-4, UI_UX_SPEC.md §6.2 / §4.3): 教程完成时由
+// Main.qml 经 studio.buildCompleted 信号路由 (replace 教程页,
+// 返回不会退回已完成的教程)。彩带 + 大星星 + 温和文案 + 成就卡
+// (片数/步数) + 「再搭一次」「回模型库」两个大按钮 + 「再搭一个?」
+// 温和推荐 (最多 2 张相近难度、现在就能搭的免费模型卡片, 经
+// studio.libraryFilter.recommendSimilar 排除刚完成的模型; 点卡走
+// 既有 startBuild -> buildRequested 路由原位替换本页, 导航深度不
+// 增长; 无推荐时整块隐藏)。4-6 岁启蒙模式推荐卡更大、每行 1 张。
+// 反馈只有正向与中性 (§4.3): 页面上没有分数、没有评价、没有催促。
+// 「减少动态效果」开启时彩带与弹跳全部降级为静态淡入 (§4.7)。
+// =============================================================
+Page {
+    id: page
+
+    property string modelId: ""
+    property string modelName: ""
+    property int pieces: 0
+    property int steps: 0
+
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 10 页 / 共 552 页
+========================================================================
+    /// Main.qml 路由判定用 (再搭一次时 replace 本页, 导航深度不增长)
+    readonly property bool isCelebrationPage: true
+
+    /// 4-6 岁启蒙模式 (§2): 推荐卡更大、每行 1 张、字号加大
+    readonly property bool bandJunior: appSettings.ageModeId === "age_4_6"
+
+    /// 「再搭一个」推荐 (§6.2): 同难度 ±1 优先、canBuild 且免费层,
+    /// 排除刚完成的模型; 业务逻辑全在 C++ 桥 (recommendSimilar),
+    /// completeBuild 已先 reload 再进本页, 数据定格一次即可
+    readonly property var recommendations: studio.libraryFilter.recommendSimilar(page.modelId, 2)
+
+    signal buildAgain()
+    signal backToLibrary()
+
+    background: Rectangle {
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: Theme.primarySoft }
+            GradientStop { position: 1.0; color: Theme.surfaceAlt }
+        }
+    }
+
+    Component.onCompleted: {
+        // 4-6 岁启蒙模式自动朗读一句温和的祝贺 (§4.2 / §4.3)
+        if (tts.autoRead)
+            tts.speak("搭好啦！你把" + page.modelName + "搭出来啦，真棒！")
+    }
+    Component.onDestruction: tts.stop()
+
+    // ---- 彩带 (轻量粒子: 一次性飘落; 减少动效时不实例化 —— 不止
+    //      隐藏, 28 条彩带的位移/旋转/淡出动画根本不创建, §4.7) --------
+    Item {
+        anchors.fill: parent
+        Repeater {
+            model: Theme.reduceMotion ? 0 : 28
+            delegate: Rectangle {
+                // 每条彩带的随机参数在创建时定格 (位置/颜色/节奏各不相同)
+                property real rx: Math.random()
+                property real rd: Math.random()
+                width: 10 + Math.round(rd * 8)
+                height: 18 + Math.round(rx * 10)
+                radius: 4
+                color: Theme.tileColors[index % Theme.tileColors.length]
+                x: rx * page.width
+                y: -40
+                rotation: rd * 360
+                NumberAnimation on y {
+                    from: -40
+                    to: page.height + 40
+                    duration: 1800 + rd * 900   // 全程 <= 2.5s 内落定 (§4.3)
+                    easing.type: Easing.InQuad
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 11 页 / 共 552 页
+========================================================================
+                }
+                NumberAnimation on rotation {
+                    from: rd * 360
+                    to: rd * 360 + (rx > 0.5 ? 540 : -540)
+                    duration: 2400
+                }
+                // 飘落尾声淡出, 不留残影
+                SequentialAnimation on opacity {
+                    PauseAnimation { duration: 1600 + rd * 700 }
+                    NumberAnimation { from: 1.0; to: 0.0; duration: 500 }
+                }
+            }
+        }
+    }
+
+    // ---- 主内容 (加推荐区后最小窗高 640 可能放不下, 包一层可滚动;
+    //      内容放得下时照旧垂直居中且不可拖动, 观感不变) -----------------
+    Flickable {
+        id: scroller
+        anchors.fill: parent
+        contentWidth: width
+        contentHeight: content.y + content.height + Theme.spacingLarge
+        interactive: contentHeight > height
+        clip: true
+
+        ColumnLayout {
+            id: content
+            width: Math.min(scroller.width - 2 * Theme.spacingLarge, 680)
+            x: Math.round((scroller.width - width) / 2)
+            y: Math.max(Theme.spacingLarge, Math.round((scroller.height - height) / 2))
+            spacing: Theme.spacing
+
+            // 三颗大星星: 依次弹跳登场 (减少动效时静态淡入 §4.7)
+            Row {
+                Layout.alignment: Qt.AlignHCenter
+                spacing: Theme.spacing
+                Repeater {
+                    model: 3
+                    delegate: Text {
+                        id: star
+                        text: "⭐"
+                        font.pixelSize: index === 1 ? 96 : 72
+                        // 减少动效时静态直接显示 (§4.7), 否则依次弹跳登场
+                        scale: Theme.reduceMotion ? 1.0 : 0.0
+                        SequentialAnimation {
+                            running: !Theme.reduceMotion
+                            PauseAnimation { duration: 150 + index * 200 }
+                            NumberAnimation {
+                                target: star; property: "scale"
+                                from: 0.0; to: 1.15; duration: 250
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 12 页 / 共 552 页
+========================================================================
+                                easing.type: Easing.OutBack
+                            }
+                            NumberAnimation {
+                                target: star; property: "scale"
+                                from: 1.15; to: 1.0; duration: 120
+                                easing.type: Easing.OutQuad
+                            }
+                        }
+                    }
+                }
+            }
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "搭好啦！"
+                font.pixelSize: Theme.fontHero
+                font.bold: true
+                color: Theme.textPrimary
+            }
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                Layout.fillWidth: true
+                text: "你把『" + page.modelName + "』搭出来啦，真棒！"
+                font.pixelSize: Theme.fontTitle
+                color: Theme.textPrimary
+                wrapMode: Text.WordWrap
+                horizontalAlignment: Text.AlignHCenter
+                lineHeight: 1.4
+            }
+
+            // 成就卡: 完成绿徽章 + 片数/步数 (图形+文字+颜色三重编码 §4.7)
+            Rectangle {
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: Theme.spacing
+                implicitWidth: badgeRow.implicitWidth + 2 * Theme.spacingLarge
+                implicitHeight: badgeRow.implicitHeight + 2 * Theme.spacing
+                radius: Theme.radiusCard
+                color: Theme.successSoft
+                border.color: Theme.success
+                border.width: 1
+                Row {
+                    id: badgeRow
+                    anchors.centerIn: parent
+                    spacing: Theme.spacingLarge
+                    Text {
+                        text: "✓ 完成"
+                        font.pixelSize: Theme.fontBody
+                        font.bold: true
+                        color: Theme.success
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 13 页 / 共 552 页
+========================================================================
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    Text {
+                        text: "🧲 " + page.pieces + " 片磁力片"
+                        font.pixelSize: Theme.fontBody
+                        color: Theme.textPrimary
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: page.pieces > 0
+                    }
+                    Text {
+                        text: "🪜 一共 " + page.steps + " 步"
+                        font.pixelSize: Theme.fontBody
+                        color: Theme.textPrimary
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: page.steps > 0
+                    }
+                }
+            }
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: Theme.spacing
+                text: "想再来一次，还是去挑个新模型？"
+                font.pixelSize: Theme.fontBody
+                color: Theme.textSecondary
+            }
+
+            // 两个大按钮 (>= 64 高 §4.1): 再搭一次 / 回模型库
+            RowLayout {
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: Theme.spacing
+                spacing: Theme.spacingLarge
+
+                BigButton {
+                    emoji: "🔁"
+                    text: "再搭一次"
+                    accent: Theme.primary
+                    onClicked: page.buildAgain()
+                }
+                BigButton {
+                    emoji: "📚"
+                    text: "回模型库"
+                    accent: Theme.success
+                    onClicked: page.backToLibrary()
+                }
+            }
+
+            // ---- 「再搭一个?」温和推荐 (§6.2): 最多 2 张相近难度、
+            //      现在就能搭的模型卡; 点卡直接开搭 (startBuild ->
+            //      buildRequested, Main.qml 原位替换本页, 深度不增长);
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 14 页 / 共 552 页
+========================================================================
+            //      没有可推荐时整块隐藏, 不显示空态文案 --------------------
+            Text {
+                visible: page.recommendations.length > 0
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: Theme.spacingLarge
+                text: "再搭一个？这些你现在就能搭:"
+                font.pixelSize: page.bandJunior ? Theme.fontTitle : Theme.fontButton
+                font.bold: true
+                color: Theme.textPrimary
+            }
+
+            // 4-6 岁启蒙模式每行 1 张更大的卡 (§2), 其余年龄段一行 2 张
+            GridLayout {
+                visible: page.recommendations.length > 0
+                Layout.alignment: Qt.AlignHCenter
+                columns: page.bandJunior ? 1 : 2
+                columnSpacing: Theme.spacing
+                rowSpacing: Theme.spacing
+
+                Repeater {
+                    model: page.recommendations
+
+                    AbstractButton {
+                        id: recCard
+                        required property var modelData
+                        Layout.preferredWidth: page.bandJunior ? 440 : 300
+                        Layout.preferredHeight: page.bandJunior ? 212 : 158
+                        onClicked: studio.startBuild(modelData.modelId)
+                        scale: pressed ? 0.97 : 1.0
+                        Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+
+                        background: Rectangle {
+                            radius: Theme.radiusCard
+                            color: Theme.surface
+                            border.color: recCard.pressed ? Theme.primary : Theme.cardBorder
+                            border.width: recCard.pressed ? 2 : 1
+                        }
+
+                        contentItem: ColumnLayout {
+                            spacing: 4
+
+                            // 主题条带缩略位 (与模型库卡片同语言: 颜色 +
+                            // 文字双编码, 色盲安全 §4.7)
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: page.bandJunior ? 64 : 36
+                                radius: Theme.radiusCard
+                                color: Theme.themeColor(recCard.modelData.theme)
+                                // 底边补一块直角矩形, 让条带只有上角是圆角
+                                Rectangle {
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 15 页 / 共 552 页
+========================================================================
+                                    anchors.bottom: parent.bottom
+                                    anchors.left: parent.left
+                                    anchors.right: parent.right
+                                    height: parent.radius
+                                    color: parent.color
+                                }
+                                Text {
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: Theme.spacing
+                                    text: recCard.modelData.theme
+                                    color: "white"
+                                    font.pixelSize: page.bandJunior ? Theme.fontButton : Theme.fontSmall
+                                    font.bold: true
+                                }
+                            }
+
+                            Text {
+                                Layout.fillWidth: true
+                                Layout.leftMargin: Theme.spacing
+                                Layout.rightMargin: Theme.spacing
+                                text: recCard.modelData.name
+                                font.pixelSize: page.bandJunior ? Theme.fontTitle : Theme.fontButton
+                                font.bold: true
+                                color: Theme.textPrimary
+                                elide: Text.ElideRight
+                            }
+
+                            Text {
+                                Layout.leftMargin: Theme.spacing
+                                text: Theme.difficultyStars(recCard.modelData.difficulty)
+                                      + "  ·  🧲 " + recCard.modelData.pieces + " 片"
+                                font.pixelSize: page.bandJunior ? Theme.fontButton : Theme.fontBody
+                                color: Theme.textSecondary
+                            }
+
+                            Item { Layout.fillHeight: true }
+
+                            // 正向徽标 (§4.3): 只报喜, 不催促
+                            Rectangle {
+                                Layout.leftMargin: Theme.spacing
+                                Layout.bottomMargin: Theme.spacing / 2
+                                radius: Theme.radiusButton
+                                height: page.bandJunior ? 36 : 28
+                                width: recTag.implicitWidth + 2 * Theme.spacing
+                                color: Theme.successSoft
+                                Text {
+                                    id: recTag
+                                    anchors.centerIn: parent
+                                    text: "✓ 现在就能搭"
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 16 页 / 共 552 页
+========================================================================
+                                    font.pixelSize: page.bandJunior ? Theme.fontBody : Theme.fontSmall
+                                    font.bold: true
+                                    color: Theme.success
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ===== file: apps/desktop_qt/qml/DetailPage.qml =====
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import MagTile.Studio
+
+// =============================================================
+// 模型详情页 (UI_UX_SPEC.md §5.4, QT-1): 进教程前的确认页。
+// 大预览位: 3D 可旋转成品预览 (复用 QT-3 TutorialViewport 的只读
+// previewMode —— 最终态全貌, 无 ghost/步骤高亮, 不写进度存档;
+// 鼠标拖动旋转 / 滚轮缩放 / 右键平移与教程一致, 触屏单指旋转 /
+// 双指捏合缩放 / 双指平移同样生效) + 难度/片数/步数 +
+// 所需片型 BOM 清单 (对照家庭库存, 缺片琥珀提示, 不用红色表达
+// "错误") + 收藏 + 「开始搭建」大按钮 (高 64, 占宽 80%)。
+// 数据经 studio.modelDetail / studio.bomForModel 读取;
+// 「开始搭建」走 studio.startBuild -> buildRequested 信号,
+// 路由在 Main.qml。
+// 预计用时 (§5.4): 温和档位估算「🕒 大约 15 分钟」(纯函数
+// build_time_estimate.hpp, 5/10/15/20/30/45 分钟档, 不假精确);
+// 4-6 岁启蒙模式用更大字号; 与库存/缺片状态无关照常显示
+// (用时是信息不是门槛, 缺片提示另有温和横幅)。
+// 订阅内容 (非免费层): 元数据/BOM/3D 预览照常可浏览, 「开始搭建」
+// 改为「请家长来解锁」-> openSubscription 信号 -> Main.qml 经家长门
+// 导向订阅页 (§11, COMMERCIAL_PLAN §2.1 只锁内容不锁功能)。
+// =============================================================
+Page {
+    id: page
+
+    property string modelId: ""
+    property var detail: ({ found: false })
+    property var bom: []
+
+    // 订阅内容 (非免费层): 只锁「开始搭建」入口, 元数据/BOM 照常可看
+    // (COMMERCIAL_PLAN §2.1 只锁内容不锁功能)。isFree 显式为 false 才
+    // 上锁 —— 数据未就绪 (undefined) 时不误锁 (宁可放行)。订阅生效
+    // (billing.subscriptionActive, 计费适配层) 时解锁全库。
+    readonly property bool locked: detail.found === true && detail.isFree === false
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 17 页 / 共 552 页
+========================================================================
+                                   && !billing.subscriptionActive
+
+    // 分龄可读 (§2): 4-6 岁启蒙模式预计用时用更大字号
+    readonly property bool bandJunior: appSettings.ageModeId === "age_4_6"
+
+    signal back()
+    signal notify(string message)
+    /// 非免费模型「开始搭建」: Main.qml 路由到家长门后的订阅页 (§11)
+    signal openSubscription()
+
+    function refresh() {
+        detail = studio.modelDetail(modelId)
+        bom = studio.bomForModel(modelId)
+    }
+
+    Component.onCompleted: refresh()
+    Connections {
+        target: studio
+        function onCatalogChanged() { page.refresh() }
+    }
+
+    background: Rectangle { color: Theme.surfaceAlt }
+
+    // ---- 页眉: 返回 + 标题 + 收藏 (均 >= 48 触控目标) -------------------
+    header: Item {
+        height: Theme.headerHeight
+
+        AbstractButton {
+            id: backButton
+            width: 140
+            height: Theme.touchTarget
+            anchors.left: parent.left
+            anchors.leftMargin: Theme.spacingLarge
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: page.back()
+            scale: pressed ? 0.97 : 1.0
+            Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+            background: Rectangle {
+                radius: Theme.radiusButton
+                color: backButton.pressed ? Theme.primaryPressed : Theme.primary
+            }
+            contentItem: Text {
+                text: "← 返回"
+                color: "white"
+                font.pixelSize: Theme.fontBody
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+        }
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 18 页 / 共 552 页
+========================================================================
+
+        Text {
+            anchors.centerIn: parent
+            text: page.detail.found ? page.detail.name : "模型详情"
+            font.pixelSize: Theme.fontTitle
+            font.bold: true
+            color: Theme.textPrimary
+        }
+
+        // 收藏切换: 选中 = 实心星 + 琥珀底 (图形 + 文字 + 颜色三重编码 §4.7)
+        AbstractButton {
+            id: favoriteButton
+            width: favoriteLabel.implicitWidth + 2 * Theme.spacing
+            height: Theme.touchTarget
+            anchors.right: parent.right
+            anchors.rightMargin: Theme.spacingLarge
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: {
+                var favorited = studio.toggleFavorite(page.modelId)
+                page.refresh()
+                page.notify(favorited ? "⭐ 已加入收藏" : "已从收藏移出")
+            }
+            scale: pressed ? 0.96 : 1.0
+            Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+            background: Rectangle {
+                radius: Theme.radiusButton
+                color: page.detail.favorited ? Theme.warningSoft : Theme.surface
+                border.color: page.detail.favorited ? Theme.warning : Theme.cardBorder
+                border.width: 1
+            }
+            contentItem: Text {
+                id: favoriteLabel
+                text: page.detail.favorited ? "⭐ 已收藏" : "☆ 收藏"
+                color: page.detail.favorited ? Theme.warning : Theme.textPrimary
+                font.pixelSize: Theme.fontBody
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+        }
+    }
+
+    RowLayout {
+        anchors.fill: parent
+        anchors.margins: Theme.spacingLarge
+        spacing: Theme.spacingLarge
+
+        // ---- 3D 可旋转成品预览 (只读 previewMode, 复用 QT-3 视口) --------
+        Rectangle {
+            Layout.fillWidth: true
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 19 页 / 共 552 页
+========================================================================
+            Layout.fillHeight: true
+            radius: Theme.radiusCard
+            color: Theme.viewportBg   // 与场景清屏色同族, 圆角边不突兀
+            border.color: Theme.cardBorder
+            border.width: 1
+
+            TutorialViewport {
+                id: previewViewport
+                anchors.fill: parent
+                anchors.margins: 2
+                previewMode: true
+                modelFile: studio.modelFilePath(page.modelId)
+                dataDir: studio.dataDirText
+                // 只读预览不设 dbFile: 纯看不写, 不建进度存档
+            }
+
+            // 操作提示 (左下角浮层, 常驻但视觉很轻, 与教程页同款)
+            Rectangle {
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                anchors.margins: Theme.spacing
+                radius: Theme.radiusButton
+                color: Theme.overlayLight
+                width: previewHintLabel.implicitWidth + 2 * Theme.spacing
+                height: 40
+                visible: previewViewport.sessionReady
+                Text {
+                    id: previewHintLabel
+                    anchors.centerIn: parent
+                    text: "🖱 拖动转圈看成品 · 滚轮或双指捏合放大"
+                    font.pixelSize: Theme.fontSmall
+                    color: Theme.textSecondary
+                }
+            }
+
+            // 复位视角 (右下角, >= 48 触控目标)
+            AbstractButton {
+                id: previewResetButton
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.margins: Theme.spacing
+                width: previewResetLabel.implicitWidth + 2 * Theme.spacing
+                height: Theme.touchTarget
+                visible: previewViewport.sessionReady
+                onClicked: previewViewport.resetView()
+                scale: pressed ? 0.96 : 1.0
+                Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+                background: Rectangle {
+                    radius: Theme.radiusButton
+                    color: previewResetButton.pressed ? Theme.primarySoft : Theme.surface
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 20 页 / 共 552 页
+========================================================================
+                    border.color: Theme.cardBorder
+                    border.width: 1
+                }
+                contentItem: Text {
+                    id: previewResetLabel
+                    text: "🔄 回到最佳视角"
+                    color: Theme.textPrimary
+                    font.pixelSize: Theme.fontSmall
+                    font.bold: true
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            // 预览未就绪的温和降级 (P3 零挫败: 名称卡片占位, 不说 "失败")
+            Rectangle {
+                anchors.fill: parent
+                anchors.margins: 2
+                radius: Theme.radiusCard
+                visible: !previewViewport.sessionReady
+                color: page.detail.found ? Qt.lighter(Theme.themeColor(page.detail.theme), 1.75)
+                                         : Theme.surfaceAlt
+
+                ColumnLayout {
+                    anchors.centerIn: parent
+                    width: parent.width - 2 * Theme.spacingLarge
+                    spacing: Theme.spacing
+                    Text {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: "🧲"
+                        font.pixelSize: 96
+                    }
+                    Text {
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.maximumWidth: parent.width
+                        text: page.detail.found ? page.detail.name : ""
+                        font.pixelSize: Theme.fontHero
+                        font.bold: true
+                        color: Theme.textPrimary
+                        horizontalAlignment: Text.AlignHCenter
+                        wrapMode: Text.WordWrap
+                    }
+                    Text {
+                        visible: page.detail.found && page.detail.nameEn !== ""
+                        Layout.alignment: Qt.AlignHCenter
+                        text: page.detail.found ? page.detail.nameEn : ""
+                        font.pixelSize: Theme.fontBody
+                        color: Theme.textSecondary
+                    }
+                    Text {
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 21 页 / 共 552 页
+========================================================================
+                        Layout.alignment: Qt.AlignHCenter
+                        text: previewViewport.statusText !== ""
+                              ? previewViewport.statusText : "3D 预览正在准备中"
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                    }
+                }
+            }
+        }
+
+        // ---- 信息面板: 元数据 + BOM + 缺片提示 + 开始搭建 -----------------
+        ColumnLayout {
+            // 嵌套布局在 RowLayout 里默认 fillWidth=true, 必须显式关掉,
+            // 否则会与预览区争宽把预览挤没
+            Layout.fillWidth: false
+            Layout.preferredWidth: 440
+            Layout.fillHeight: true
+            spacing: Theme.spacing
+
+            Flickable {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                contentHeight: infoColumn.implicitHeight
+                clip: true
+                boundsBehavior: Flickable.StopAtBounds
+
+                ColumnLayout {
+                    id: infoColumn
+                    width: parent.width
+                    spacing: Theme.spacing
+
+                    // -- 难度 / 片数 / 步数 -------------------------------
+                    RowLayout {
+                        spacing: Theme.spacing
+                        Text {
+                            text: page.detail.found ? Theme.difficultyStars(page.detail.difficulty) : ""
+                            font.pixelSize: Theme.fontButton
+                            color: Theme.warning
+                        }
+                        Rectangle {
+                            radius: Theme.radiusButton
+                            height: 36
+                            width: piecesLabel.implicitWidth + 2 * Theme.spacing
+                            color: Theme.primarySoft
+                            Text {
+                                id: piecesLabel
+                                anchors.centerIn: parent
+                                text: page.detail.found ? page.detail.pieces + " 片" : ""
+                                font.pixelSize: Theme.fontBody
+                                font.bold: true
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 22 页 / 共 552 页
+========================================================================
+                                color: Theme.primary
+                            }
+                        }
+                        Rectangle {
+                            radius: Theme.radiusButton
+                            height: 36
+                            width: stepsLabel.implicitWidth + 2 * Theme.spacing
+                            color: Theme.primarySoft
+                            Text {
+                                id: stepsLabel
+                                anchors.centerIn: parent
+                                text: page.detail.found ? page.detail.steps + " 步" : ""
+                                font.pixelSize: Theme.fontBody
+                                font.bold: true
+                                color: Theme.primary
+                            }
+                        }
+                    }
+
+                    // -- 预计用时 (§5.4): 温和档位估算, 只说「大约」; 与库存
+                    //    缺片状态无关照常显示; 4-6 岁更大字 (分龄可读 §2) ----
+                    Rectangle {
+                        visible: page.detail.found && page.detail.estimatedMinutes > 0
+                        radius: Theme.radiusButton
+                        height: page.bandJunior ? Theme.touchTarget : 36
+                        width: estimateLabel.implicitWidth + 2 * Theme.spacing
+                        color: Theme.primarySoft
+                        Text {
+                            id: estimateLabel
+                            anchors.centerIn: parent
+                            text: "🕒 大约 " + page.detail.estimatedMinutes + " 分钟"
+                            font.pixelSize: page.bandJunior ? Theme.fontButton : Theme.fontBody
+                            font.bold: true
+                            color: Theme.primary
+                        }
+                    }
+
+                    // -- 套装分层 + 免费层徽章 -----------------------------
+                    RowLayout {
+                        spacing: 8
+                        Rectangle {
+                            visible: page.detail.found && page.detail.bomKnown
+                            radius: Theme.radiusButton
+                            height: 36
+                            width: tierLabel.implicitWidth + 2 * Theme.spacing
+                            color: page.detail.core9Only ? Theme.successSoft : Theme.warningSoft
+                            Text {
+                                id: tierLabel
+                                anchors.centerIn: parent
+                                text: page.detail.core9Only ? "🧲 核心 9 片就能搭"
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 23 页 / 共 552 页
+========================================================================
+                                                            : "✨ 会用到扩展片"
+                                font.pixelSize: Theme.fontBody
+                                font.bold: true
+                                color: page.detail.core9Only ? Theme.success : Theme.warning
+                            }
+                        }
+                        // 订阅解锁徽章 (温和, 主色浅底不用红色)
+                        Rectangle {
+                            visible: page.locked
+                            radius: Theme.radiusButton
+                            height: 36
+                            width: subscriptionTag.implicitWidth + 2 * Theme.spacing
+                            color: Theme.primarySoft
+                            Text {
+                                id: subscriptionTag
+                                anchors.centerIn: parent
+                                text: "🔒 订阅解锁"
+                                font.pixelSize: Theme.fontBody
+                                font.bold: true
+                                color: Theme.primary
+                            }
+                        }
+                    }
+
+                    Text {
+                        visible: page.detail.found && page.detail.description !== ""
+                        Layout.fillWidth: true
+                        text: page.detail.found ? page.detail.description : ""
+                        font.pixelSize: Theme.fontBody
+                        color: Theme.textSecondary
+                        wrapMode: Text.WordWrap
+                        lineHeight: 1.4
+                    }
+
+                    // -- 进度回显 (进行中 / 已完成) ------------------------
+                    Rectangle {
+                        visible: page.detail.found && page.detail.status !== 0
+                        Layout.fillWidth: true
+                        radius: Theme.radiusCard
+                        implicitHeight: progressLabel.implicitHeight + 2 * Theme.spacing
+                        color: page.detail.status === 2 ? Theme.successSoft : Theme.primarySoft
+                        Text {
+                            id: progressLabel
+                            anchors.fill: parent
+                            anchors.margins: Theme.spacing
+                            text: page.detail.status === 2
+                                  ? "✓ 已经搭好过一次啦, 随时可以再搭"
+                                  : "▶ 上次搭到第 " + page.detail.currentStep + "/"
+                                    + page.detail.steps + " 步, 可以接着搭"
+                            font.pixelSize: Theme.fontBody
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 24 页 / 共 552 页
+========================================================================
+                            font.bold: true
+                            color: page.detail.status === 2 ? Theme.success : Theme.primary
+                            wrapMode: Text.WordWrap
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                    }
+
+                    // -- BOM 清单 (§5.4: 对照库存, 缺片琥珀提示) ------------
+                    Text {
+                        text: "需要的磁力片"
+                        font.pixelSize: Theme.fontButton
+                        font.bold: true
+                        color: Theme.textPrimary
+                    }
+
+                    Text {
+                        visible: page.detail.found && !page.detail.bomKnown
+                        Layout.fillWidth: true
+                        text: "清单正在准备中"
+                        font.pixelSize: Theme.fontBody
+                        color: Theme.textSecondary
+                    }
+
+                    Repeater {
+                        model: page.bom
+                        Rectangle {
+                            required property var modelData
+                            Layout.fillWidth: true
+                            radius: Theme.radiusCard
+                            implicitHeight: 52
+                            color: Theme.surface
+                            border.color: modelData.missing > 0 ? Theme.warning : Theme.cardBorder
+                            border.width: 1
+
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: Theme.spacing
+                                anchors.rightMargin: Theme.spacing
+                                spacing: 8
+
+                                Text {
+                                    text: modelData.shapeName
+                                    font.pixelSize: Theme.fontBody
+                                    font.bold: true
+                                    color: Theme.textPrimary
+                                }
+                                Rectangle {
+                                    visible: !modelData.isCore
+                                    radius: Theme.radiusButton
+                                    height: 26
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 25 页 / 共 552 页
+========================================================================
+                                    width: expansionTag.implicitWidth + Theme.spacing
+                                    color: Theme.warningSoft
+                                    Text {
+                                        id: expansionTag
+                                        anchors.centerIn: parent
+                                        text: "扩展片"
+                                        font.pixelSize: Theme.fontSmall
+                                        color: Theme.warning
+                                    }
+                                }
+                                Item { Layout.fillWidth: true }
+                                Text {
+                                    text: "× " + modelData.needed
+                                    font.pixelSize: Theme.fontBody
+                                    font.bold: true
+                                    color: Theme.textPrimary
+                                }
+                                Text {
+                                    visible: studio.inventoryConfigured
+                                    text: modelData.missing > 0
+                                          ? "缺 " + modelData.missing + " 片"
+                                          : "✓ 够用"
+                                    font.pixelSize: Theme.fontSmall
+                                    font.bold: true
+                                    color: modelData.missing > 0 ? Theme.warning : Theme.success
+                                }
+                            }
+                        }
+                    }
+
+                    // -- 库存对照结论 (温和, 无失败羞辱 §P3) ----------------
+                    Rectangle {
+                        visible: page.detail.found && page.detail.bomKnown
+                                 && studio.inventoryConfigured && !page.detail.canBuild
+                        Layout.fillWidth: true
+                        radius: Theme.radiusCard
+                        implicitHeight: missingBanner.implicitHeight + 2 * Theme.spacing
+                        color: Theme.warningSoft
+                        border.color: Theme.warning
+                        border.width: 1
+                        Text {
+                            id: missingBanner
+                            anchors.fill: parent
+                            anchors.margins: Theme.spacing
+                            text: "🧩 " + page.detail.missingText
+                                  + "。可以先用颜色不同的同款片代替, 或先挑一个「我能搭的」模型"
+                            font.pixelSize: Theme.fontBody
+                            color: Theme.textPrimary
+                            wrapMode: Text.WordWrap
+                            lineHeight: 1.4
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 26 页 / 共 552 页
+========================================================================
+                        }
+                    }
+
+                    Rectangle {
+                        visible: page.detail.found && page.detail.bomKnown
+                                 && studio.inventoryConfigured && page.detail.canBuild
+                        Layout.fillWidth: true
+                        radius: Theme.radiusCard
+                        implicitHeight: enoughBanner.implicitHeight + 2 * Theme.spacing
+                        color: Theme.successSoft
+                        Text {
+                            id: enoughBanner
+                            anchors.fill: parent
+                            anchors.margins: Theme.spacing
+                            text: "✓ 家里的磁力片够用, 开搭吧!"
+                            font.pixelSize: Theme.fontBody
+                            font.bold: true
+                            color: Theme.success
+                            wrapMode: Text.WordWrap
+                        }
+                    }
+
+                    Text {
+                        visible: page.detail.found && page.detail.bomKnown
+                                 && !studio.inventoryConfigured
+                        Layout.fillWidth: true
+                        text: "请爸爸妈妈登记家里的磁力片后, 这里会帮你对照缺不缺片"
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                        wrapMode: Text.WordWrap
+                        lineHeight: 1.3
+                    }
+
+                    // -- 订阅内容温和说明 (§11/§12.2: 无价格无催促, 免费层
+                    //    先说明白; 免费数实时读目录 studio.freeModelCount) --
+                    Rectangle {
+                        visible: page.locked
+                        Layout.fillWidth: true
+                        radius: Theme.radiusCard
+                        implicitHeight: subscriptionBanner.implicitHeight + 2 * Theme.spacing
+                        color: Theme.primarySoft
+                        Text {
+                            id: subscriptionBanner
+                            anchors.fill: parent
+                            anchors.margins: Theme.spacing
+                            text: "🔒 这个模型属于订阅内容: 简介和磁力片清单随时可以看, "
+                                  + "完整的 3D 分步教程订阅后解锁。免费区还有 "
+                                  + studio.freeModelCount
+                                  + " 个模型永久免费, 随时开搭。"
+                            font.pixelSize: Theme.fontBody
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 27 页 / 共 552 页
+========================================================================
+                            color: Theme.textPrimary
+                            wrapMode: Text.WordWrap
+                            lineHeight: 1.4
+                        }
+                    }
+
+                    Item { Layout.preferredHeight: Theme.spacing }
+                }
+            }
+
+            // -- 主 CTA: 开始/继续搭建 (高 64, 占宽 80%, §5.4); 订阅内容
+            //    改为「请家长来解锁」, 经家长门导向订阅页 (§11 订阅只在
+            //    门后; 儿童侧只说"请家长来解锁", 无价格 §12.2) ------------
+            BigButton {
+                Layout.alignment: Qt.AlignHCenter
+                Layout.preferredWidth: Math.round(parent.width * 0.8)
+                emoji: page.locked ? "🔒"
+                                   : (page.detail.status === 1 ? "▶" : "🧲")
+                text: page.locked
+                      ? "请家长来解锁"
+                      : (page.detail.status === 1
+                         ? "继续搭建 (第 " + page.detail.currentStep + " 步)"
+                         : (page.detail.status === 2 ? "再搭一次" : "开始搭建"))
+                accent: Theme.primary
+                onClicked: page.locked ? page.openSubscription()
+                                       : studio.startBuild(page.modelId)
+            }
+        }
+    }
+}
+
+// ===== file: apps/desktop_qt/qml/FilterChip.qml =====
+import QtQuick
+import QtQuick.Controls
+import MagTile.Studio
+
+// =============================================================
+// 筛选胶囊: 选中态实心主色 + 白字, 未选中白底描边; 高度 48
+// (儿童触控目标下限, UI_UX_SPEC.md §4.1)。选中状态完全由外部
+// 绑定驱动 (checkable 关闭), 点击行为由使用方的 onClicked 决定,
+// 避免内部切换与属性绑定互相打架。
+// =============================================================
+AbstractButton {
+    id: control
+
+    property color accent: Theme.primary
+    // 字号可放大 (4-6 岁启蒙模式的超大主题入口用, UI_UX_SPEC.md §2)
+    property int fontSize: Theme.fontBody
+
+    implicitHeight: Theme.touchTarget
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 28 页 / 共 552 页
+========================================================================
+    implicitWidth: chipLabel.implicitWidth + 2 * Theme.spacing
+
+    opacity: enabled ? 1.0 : 0.45
+    scale: pressed ? 0.96 : 1.0
+    Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+
+    background: Rectangle {
+        radius: Theme.radiusButton
+        color: control.checked ? control.accent
+             : (control.pressed ? Theme.primarySoft : Theme.surface)
+        border.color: control.checked ? control.accent : Theme.cardBorder
+        border.width: 1
+        Behavior on color { ColorAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+    }
+
+    contentItem: Text {
+        id: chipLabel
+        text: control.text
+        color: control.checked ? "white" : Theme.textPrimary
+        font.pixelSize: control.fontSize
+        font.bold: control.checked
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+    }
+}
+
+// ===== file: apps/desktop_qt/qml/HomePage.qml =====
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import MagTile.Studio
+
+// =============================================================
+// 首页: 超大主操作按钮 + "继续上次"大卡片 + 右上角刻意做小的
+// 家长区入口 (32px, UI_UX_SPEC.md §5.3 全应用唯一 < 48 的可点元素)。
+// =============================================================
+Page {
+    id: page
+
+    signal openLibrary()
+    signal openModel(string modelId)
+    signal openInventory()
+    signal openProgress()
+    signal openParentArea()
+    signal openSubscription()
+    signal notify(string message)
+
+    background: Rectangle { color: Theme.surfaceAlt }
+
+    // ---- 页眉 ------------------------------------------------------
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 29 页 / 共 552 页
+========================================================================
+    header: Item {
+        height: Theme.headerHeight
+
+        Text {
+            anchors.left: parent.left
+            anchors.leftMargin: Theme.spacingLarge
+            anchors.verticalCenter: parent.verticalCenter
+            text: "🧲 MagTile 磁力片工坊"
+            font.pixelSize: Theme.fontTitle
+            font.bold: true
+            color: Theme.textPrimary
+        }
+
+        // 家长区入口: 唯一允许 32px 的小按钮 (防儿童误入 + 家长门兜底,
+        // 无有效会话时 Main.qml 先路由进家长门, §5.3 / §9)
+        AbstractButton {
+            id: parentGateButton
+            width: Theme.parentGateSize
+            height: Theme.parentGateSize
+            anchors.right: parent.right
+            anchors.rightMargin: Theme.spacingLarge
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: page.openParentArea()
+            background: Rectangle {
+                radius: width / 2
+                color: parentGateButton.pressed ? Theme.primarySoft : "transparent"
+                border.color: Theme.cardBorder
+                border.width: 1
+            }
+            contentItem: Text {
+                text: "🔒"
+                font.pixelSize: 16
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+        }
+    }
+
+    // ---- 主体 ------------------------------------------------------
+    ColumnLayout {
+        anchors.centerIn: parent
+        width: Math.min(parent.width - 2 * Theme.spacingLarge, 720)
+        spacing: Theme.spacingLarge
+
+        Text {
+            Layout.alignment: Qt.AlignHCenter
+            text: "搭一个自己的世界"
+            font.pixelSize: Theme.fontHero
+            font.bold: true
+            color: Theme.textPrimary
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 30 页 / 共 552 页
+========================================================================
+        }
+
+        Text {
+            Layout.alignment: Qt.AlignHCenter
+            text: "跟着一步一步的 3D 教程, 用家里的磁力片搭出城堡、火箭和大恐龙"
+            font.pixelSize: Theme.fontBody
+            color: Theme.textSecondary
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
+            Layout.fillWidth: true
+        }
+
+        // "继续上次"大卡片 (§5.2: 首页最顶部, 一键回到断点的模型详情)
+        AbstractButton {
+            id: continueCard
+            visible: studio.hasContinue
+            Layout.fillWidth: true
+            Layout.preferredHeight: 88
+            onClicked: page.openModel(studio.continueModelId)
+            scale: pressed ? 0.98 : 1.0
+            Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+
+            background: Rectangle {
+                radius: Theme.radiusCard
+                color: Theme.surface
+                border.color: Theme.primary
+                border.width: 2
+            }
+            contentItem: RowLayout {
+                spacing: Theme.spacing
+                Text {
+                    Layout.leftMargin: Theme.spacingLarge
+                    text: "▶"
+                    font.pixelSize: 30
+                    color: Theme.primary
+                }
+                ColumnLayout {
+                    spacing: 4
+                    Text {
+                        text: "继续上次"
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                    }
+                    Text {
+                        text: studio.continueTitle
+                        font.pixelSize: Theme.fontButton
+                        font.bold: true
+                        color: Theme.textPrimary
+                    }
+                }
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 523 页 / 共 552 页
+========================================================================
+//   3. 读取端 (模拟 Qt 外壳启动): 以第二条连接重开同一存档文件,
+//      经与 Qt SettingsBackend / StudioBackend 完全相同的类型化
+//      读取口径 (getAgeMode / getSubscriptionActive / ...) 断言
+//      读到写入端的全部状态;
+//   4. 脏值兜底: 未来版本新增的未知设置键不得毒化既有读取口径。
+//
+// CLI 真实二进制读取同一存档的断言由 CMake 注册的
+// cross_platform_progress_cli 用例执行 (progress list / settings
+// show 输出对账), 见顶层 CMakeLists.txt。
+// 用法: magtile_cross_platform_test <临时数据库文件>
+// =============================================================
+
+#include <cstdio>
+#include <filesystem>
+#include <string>
+#include <string_view>
+#include <system_error>
+
+#include "magtile/core/age_mode.hpp"
+#include "magtile/progress/achievements.hpp"
+#include "magtile/progress/age_settings.hpp"
+#include "magtile/progress/progress_store.hpp"
+#include "magtile/progress/subscription_settings.hpp"
+#include "magtile/progress/ui_settings.hpp"
+
+namespace {
+
+int g_failures = 0;
+
+void expect(bool condition, const char* message) {
+    if (condition) {
+        std::printf("[通过] %s\n", message);
+    } else {
+        std::printf("[失败] %s\n", message);
+        ++g_failures;
+    }
+}
+
+// ---- schema 键契约: 编译期锁死 (改契约键名 = 编译失败) ------------
+// 这些字符串是四端共用的 SQLite settings 表键名 (各模块头文件注明
+// "持久化契约, 禁止改名"); 任何一端换键名都会破坏跨端互通, 在此
+// 用 static_assert 把口径钉死在编译期。
+using std::string_view;
+static_assert(string_view(magtile::progress::kAgeModeSettingKey) == "age_mode",
+              "age_mode 契约键名不得漂移 (age_settings.hpp)");
+static_assert(string_view(magtile::progress::kAgeOnboardingDoneSettingKey) ==
+                  "onboarding_age_done",
+              "onboarding_age_done 契约键名不得漂移 (ui_settings.hpp)");
+static_assert(string_view(magtile::progress::kSubscriptionActiveSettingKey) ==
+                  "subscription_active",
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 524 页 / 共 552 页
+========================================================================
+              "subscription_active 契约键名不得漂移 (subscription_settings.hpp)");
+static_assert(string_view(magtile::progress::kSubscriptionProductSettingKey) ==
+                  "subscription_product_id",
+              "subscription_product_id 契约键名不得漂移 (subscription_settings.hpp)");
+
+// 样例存档使用的模型 id (存档层不校验模型文件存在, 用真实库内 id
+// 以贴近实际; CLI 用例按同一组 id 对账, 改动需两处同步)
+constexpr const char* kCompletedModels[] = {
+    "castle_foundation_01", "rainbow_bridge_01", "dental_clinic_01"};
+constexpr const char* kInProgressModel = "eye_clinic_01";
+
+}  // namespace
+
+int main(int argc, char** argv) {
+    if (argc != 2) {
+        std::fprintf(stderr, "用法: %s <临时数据库文件>\n", argv[0]);
+        return 2;
+    }
+    const std::filesystem::path db_file = argv[1];
+    std::error_code ec;
+    std::filesystem::remove(db_file, ec);  // 清除上次运行残留, 保证测试可重复
+
+    namespace progress = magtile::progress;
+    using magtile::core::AgeMode;
+
+    // =============================================================
+    // 1. 写入端: 构造样例存档 (模拟 Android/GL 完成链路的写入口径)
+    // =============================================================
+    {
+        progress::ProgressStore store(db_file);
+
+        // 首启引导 + 年龄段 (Qt AgeOnboardingPage / Android 同一落盘对)
+        progress::setAgeMode(store, AgeMode::Age4_6);
+        progress::setAgeOnboardingDone(store);
+
+        // 订阅状态 (计费适配层购买成功后的写入口径)
+        progress::setSubscriptionActive(store, true, "sub_yearly");
+
+        // 完成记录 + 成就统一收口 (markCompleted 之后调用, 与
+        // GL main.cpp / Qt completeBuild / Android JNI 同一口径)
+        for (const char* model_id : kCompletedModels) {
+            store.saveProgress(model_id, 8, 300);
+            store.markCompleted(model_id);
+            progress::unlockAchievementsOnComplete(store);
+        }
+        // 进行中记录 (断点续搭)
+        store.saveProgress(kInProgressModel, 4, 120);
+
+        expect(store.listCompleted().size() == 3, "写入端: 3 个完成记录落盘");
+        expect(store.isAchievementUnlocked("first_model_completed") &&
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 525 页 / 共 552 页
+========================================================================
+                   store.isAchievementUnlocked("three_models_completed"),
+               "写入端: 成就统一收口解锁 1/3 两档");
+        expect(!store.isAchievementUnlocked("ten_models_completed"),
+               "写入端: 未达档成就不提前解锁");
+    }
+
+    // =============================================================
+    // 2. schema 键契约: settings 表落盘键名与值编码逐一对账
+    // =============================================================
+    {
+        progress::ProgressStore store(db_file);
+        const auto settings = store.listSettings();  // settings 表全量快照
+
+        // 年龄段稳定持久化标识 (core/age_mode.cpp toString) 同为跨端契约
+        expect(magtile::core::toString(AgeMode::Age4_6) == "age_4_6",
+               "schema: age_4_6 持久化标识不漂移 (core/age_mode)");
+        expect(settings.count(progress::kAgeModeSettingKey) == 1 &&
+                   settings.at(progress::kAgeModeSettingKey) == "age_4_6",
+               "schema: age_mode 键按稳定标识编码落盘");
+        expect(settings.count(progress::kAgeOnboardingDoneSettingKey) == 1 &&
+                   settings.at(progress::kAgeOnboardingDoneSettingKey) == "1",
+               "schema: onboarding_age_done 键以 \"1\" 落盘");
+        expect(settings.count(progress::kSubscriptionActiveSettingKey) == 1 &&
+                   settings.at(progress::kSubscriptionActiveSettingKey) == "1",
+               "schema: subscription_active 键以 \"1\" 落盘");
+        expect(settings.count(progress::kSubscriptionProductSettingKey) == 1 &&
+                   settings.at(progress::kSubscriptionProductSettingKey) == "sub_yearly",
+               "schema: subscription_product_id 键记录生效档位");
+        expect(settings.size() == 4,
+               "schema: 样例存档 settings 表恰好 4 个契约键 (无隐藏键漂移)");
+    }
+
+    // =============================================================
+    // 3. 读取端: 第二条连接重开, 走 Qt/CLI 同一套类型化读取口径
+    // =============================================================
+    {
+        progress::ProgressStore store(db_file);
+
+        // Qt SettingsBackend / CLI settings show 的读取口径
+        expect(progress::getAgeMode(store) == AgeMode::Age4_6,
+               "读取端: getAgeMode 读到写入端的启蒙模式");
+        expect(progress::getAgeOnboardingDone(store),
+               "读取端: 引导完成标记可读 (Qt 首启不再弹引导)");
+        expect(progress::getSubscriptionActive(store),
+               "读取端: 订阅状态可读 (免费层锁放行口径)");
+        expect(progress::getSubscriptionProductId(store) == "sub_yearly",
+               "读取端: 订阅档位 id 一致");
+
+        // Qt StudioBackend 进度页 / CLI progress list 的读取口径
+        const auto completed = store.listCompleted();
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 526 页 / 共 552 页
+========================================================================
+        expect(completed.size() == 3, "读取端: 完成列表 3 个模型");
+        bool all_found = true;
+        for (const char* model_id : kCompletedModels) {
+            const auto record = store.loadProgress(model_id);
+            if (!record.has_value() || !record->isCompleted()) all_found = false;
+        }
+        expect(all_found, "读取端: 每个完成记录均带完成时刻");
+        const auto in_progress = store.listInProgress();
+        expect(in_progress.size() == 1 && in_progress[0].model_id == kInProgressModel &&
+                   in_progress[0].current_step == 4,
+               "读取端: 进行中记录保留断点步骤");
+
+        // 成就墙读取口径 (Qt achievementsList / Android progressOverviewJson)
+        expect(store.listAchievements().size() == 2,
+               "读取端: 成就墙恰好 2 枚 (1/3 两档, 无重复)");
+
+        // 档位表契约: 写入端解锁的 id 必须出自共享档位表
+        bool ids_in_tiers = true;
+        for (const auto& achievement : store.listAchievements()) {
+            bool found = false;
+            for (const auto& tier : progress::kAchievementTiers) {
+                if (achievement.id == tier.id) found = true;
+            }
+            if (!found) ids_in_tiers = false;
+        }
+        expect(ids_in_tiers, "读取端: 成就 id 全部出自 kAchievementTiers 档位表");
+    }
+
+    // =============================================================
+    // 4. 前向兼容: 未来版本新增未知键不毒化既有读取口径
+    // =============================================================
+    {
+        progress::ProgressStore store(db_file);
+        store.setSetting("future_feature_flag", "42");  // 模拟新版本客户端写入
+        expect(progress::getAgeMode(store) == AgeMode::Age4_6 &&
+                   progress::getSubscriptionActive(store) &&
+                   progress::getAgeOnboardingDone(store),
+               "前向兼容: 未知设置键不影响契约键读取");
+    }
+
+    if (g_failures == 0) {
+        std::printf("\n跨端进度存档互通测试全部通过\n");
+        return 0;
+    }
+    std::printf("\n跨端进度存档互通测试失败 %d 项\n", g_failures);
+    return 1;
+}
+
+// ===== file: tests/test_parent_gate.cpp =====
+// =============================================================
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 527 页 / 共 552 页
+========================================================================
+// MagTile Studio - 家长门单元测试 (ctest: parent_gate)
+// 覆盖 SECURITY_AND_PRIVACY.md §6.2 要求单测的三个域:
+//   1. 题目生成域: 乘法题操作数范围、题面格式、随机化;
+//   2. 验证逻辑: 中文大写数字转换/解析 (含 "壹拾" / "拾" 变体)、
+//      正确/错误答案、非法输入;
+//   3. 冷却状态机与内存会话: 3 次答错 -> 60s 冷却、冷却期拒答、
+//      期满重置; 会话 15 分钟有效、到期/手动结束失效。
+// 时间全部通过显式 time_point 注入, 测试不真实等待。
+// =============================================================
+
+#include <chrono>
+#include <cstdio>
+#include <set>
+#include <string>
+
+#include "magtile/core/parent_gate.hpp"
+
+namespace {
+
+int g_failures = 0;
+
+void expect(bool condition, const char* message) {
+    if (condition) {
+        std::printf("[通过] %s\n", message);
+    } else {
+        std::printf("[失败] %s\n", message);
+        ++g_failures;
+    }
+}
+
+}  // namespace
+
+int main() {
+    using magtile::core::ParentGate;
+    using magtile::core::ParentGateResult;
+    using namespace std::chrono_literals;
+
+    const ParentGate::Clock::time_point t0 = ParentGate::Clock::now();
+
+    // ---- 1. 中文大写数字转换 ----------------------------------------
+    expect(ParentGate::toChineseUppercase(0) == "零", "0 -> 零");
+    expect(ParentGate::toChineseUppercase(7) == "柒", "7 -> 柒");
+    expect(ParentGate::toChineseUppercase(10) == "壹拾", "10 -> 壹拾");
+    expect(ParentGate::toChineseUppercase(21) == "贰拾壹", "21 -> 贰拾壹");
+    expect(ParentGate::toChineseUppercase(81) == "捌拾壹", "81 -> 捌拾壹");
+    bool threw = false;
+    try {
+        (void)ParentGate::toChineseUppercase(100);
+    } catch (const std::out_of_range&) {
+        threw = true;
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 528 页 / 共 552 页
+========================================================================
+    }
+    expect(threw, "超出 0~99 抛 out_of_range");
+
+    // ---- 2. 中文大写数字解析 (含口语变体与非法输入) --------------------
+    expect(ParentGate::parseChineseUppercase("贰拾壹") == 21, "解析 贰拾壹 -> 21");
+    expect(ParentGate::parseChineseUppercase("壹拾贰") == 12, "解析 壹拾贰 -> 12");
+    expect(ParentGate::parseChineseUppercase("拾贰") == 12, "口语变体 拾贰 -> 12");
+    expect(ParentGate::parseChineseUppercase("拾") == 10, "口语变体 拾 -> 10");
+    expect(ParentGate::parseChineseUppercase("肆拾") == 40, "解析 肆拾 -> 40");
+    expect(ParentGate::parseChineseUppercase(" 玖 ") == 9, "忽略前后空白");
+    expect(!ParentGate::parseChineseUppercase("").has_value(), "空串不可解析");
+    expect(!ParentGate::parseChineseUppercase("21").has_value(), "阿拉伯数字不接受");
+    expect(!ParentGate::parseChineseUppercase("二十一").has_value(), "小写中文数字不接受");
+    expect(!ParentGate::parseChineseUppercase("拾拾").has_value(), "拾拾 非法");
+    expect(!ParentGate::parseChineseUppercase("零拾").has_value(), "零拾 非法");
+    expect(!ParentGate::parseChineseUppercase("壹贰叁肆").has_value(), "超长输入非法");
+
+    // ---- 3. 题目生成域 ------------------------------------------------
+    {
+        ParentGate gate(ParentGate::kDefaultSessionDuration, /*seed=*/12345u);
+        std::set<std::string> questions;
+        for (int i = 0; i < 50; ++i) {
+            gate.newChallenge();
+            const std::string& question = gate.question();
+            expect(!question.empty() && question.find("×") != std::string::npos &&
+                       question.find('?') != std::string::npos,
+                   "题面含 × 与 ? (乘法题)");
+            const auto product = ParentGate::parseChineseUppercase(gate.expectedAnswer());
+            expect(product.has_value() && *product >= 4 && *product <= 81,
+                   "标准答案可解析且积在 [4, 81] (操作数 贰~玖)");
+            questions.insert(question);
+            if (g_failures > 0) break;  // 避免刷屏
+        }
+        expect(questions.size() >= 5, "50 道题至少 5 种不同题面 (随机化)");
+    }
+
+    // ---- 4. 验证逻辑 + 内存会话 ----------------------------------------
+    {
+        ParentGate gate(15min, /*seed=*/7u);
+        expect(!gate.sessionActive(t0), "初始无家长会话");
+        expect(gate.submitAnswer("零", t0) == ParentGateResult::WrongAnswer,
+               "错误答案返回 WrongAnswer");
+        expect(!gate.sessionActive(t0), "答错不开启会话");
+        expect(gate.submitAnswer(gate.expectedAnswer(), t0) == ParentGateResult::Passed,
+               "正确答案 (中文大写) 返回 Passed");
+        expect(gate.sessionActive(t0), "答对后会话立即有效");
+        expect(gate.sessionActive(t0 + 14min), "第 14 分钟会话仍有效");
+        expect(gate.sessionRemainingSeconds(t0 + 14min) <= 60 + 1 &&
+                   gate.sessionRemainingSeconds(t0 + 14min) > 0,
+               "第 14 分钟剩余约 1 分钟");
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 529 页 / 共 552 页
+========================================================================
+        expect(!gate.sessionActive(t0 + 15min), "第 15 分钟整会话到期");
+        expect(!gate.sessionActive(t0 + 16min), "到期后不再有效 (重启/过期不保留)");
+
+        // 手动结束 (家长区 "锁定" / 离开家长区)
+        expect(gate.submitAnswer(gate.expectedAnswer(), t0) == ParentGateResult::Passed,
+               "可再次过门");
+        gate.endSession();
+        expect(!gate.sessionActive(t0), "endSession 立即失效");
+    }
+
+    // ---- 5. 冷却状态机 -------------------------------------------------
+    {
+        ParentGate gate(15min, /*seed=*/99u);
+        expect(gate.attemptsRemaining() == 3, "初始 3 次尝试机会");
+        expect(gate.submitAnswer("零", t0) == ParentGateResult::WrongAnswer, "第 1 次答错");
+        expect(gate.attemptsRemaining() == 2, "剩 2 次");
+        expect(gate.submitAnswer("零", t0 + 1s) == ParentGateResult::WrongAnswer, "第 2 次答错");
+        expect(gate.submitAnswer("零", t0 + 2s) == ParentGateResult::CoolingDown,
+               "第 3 次答错触发冷却");
+        expect(gate.coolingDown(t0 + 3s), "冷却期内 coolingDown 为真");
+        expect(gate.cooldownRemainingSeconds(t0 + 2s) >= 59, "冷却剩余约 60 秒");
+        expect(gate.submitAnswer(gate.expectedAnswer(), t0 + 30s) ==
+                   ParentGateResult::CoolingDown,
+               "冷却期内即使答对也拒绝");
+        expect(!gate.sessionActive(t0 + 30s), "冷却期提交不开启会话");
+        expect(!gate.coolingDown(t0 + 63s), "60 秒后冷却结束");
+        expect(gate.submitAnswer(gate.expectedAnswer(), t0 + 63s) == ParentGateResult::Passed,
+               "冷却结束后答对通过");
+        expect(gate.attemptsRemaining() == 3, "通过后尝试次数重置");
+    }
+
+    // ---- 6. 答对重置连续错误计数 ---------------------------------------
+    {
+        ParentGate gate(15min, /*seed=*/5u);
+        (void)gate.submitAnswer("零", t0);
+        (void)gate.submitAnswer("零", t0);
+        expect(gate.submitAnswer(gate.expectedAnswer(), t0) == ParentGateResult::Passed,
+               "两错一对仍可通过");
+        gate.endSession();
+        gate.newChallenge();
+        expect(gate.attemptsRemaining() == 3, "答对后连续错误计数清零");
+    }
+
+    if (g_failures == 0) {
+        std::printf("\n家长门单元测试全部通过\n");
+        return 0;
+    }
+    std::printf("\n家长门单元测试失败: %d 项\n", g_failures);
+    return 1;
+}
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 530 页 / 共 552 页
+========================================================================
+
+// ===== file: tests/test_progress_roundtrip.cpp =====
+// =============================================================
+// MagTile Studio - 进度存档回归测试 (ctest: progress_roundtrip)
+// 覆盖: 保存/读取往返、时长累加、完成标记、收藏切换、列表查询、
+// 成就解锁、磁力片库存 (tile_inventory 表) 登记/读取/BOM 对照
+// (canBuild / missingPieces)、v1 库存 JSON 迁移、跨连接持久化
+// 与重置删除、隐私与数据控制 (SECURITY_AND_PRIVACY.md §4 C4/Z8:
+// listSettings 全量快照 / exportLocalDataJson 全量导出 /
+// clearAllData 单事务清空并回到首启空档 + 清除落盘持久化)。
+// 用法: magtile_progress_test <临时数据库文件>
+// =============================================================
+
+#include <cstdio>
+#include <filesystem>
+#include <string>
+#include <system_error>
+
+#include "magtile/core/model_definition.hpp"
+#include "magtile/core/tile_instance.hpp"
+#include "magtile/core/types.hpp"
+#include "magtile/progress/data_privacy.hpp"
+#include "magtile/progress/progress_store.hpp"
+
+namespace {
+
+int g_failures = 0;
+
+void expect(bool condition, const char* message) {
+    if (condition) {
+        std::printf("[通过] %s\n", message);
+    } else {
+        std::printf("[失败] %s\n", message);
+        ++g_failures;
+    }
+}
+
+/// 构造只填 final_assembly 片型统计的合成模型 (BOM 对照用)。
+magtile::core::ModelDefinition makeModel(int squares, int triangles, int sectors) {
+    magtile::core::ModelDefinition model;
+    model.id = "bom_test_model";
+    const auto append = [&](magtile::core::TileType type, int count, const char* prefix) {
+        for (int i = 0; i < count; ++i) {
+            magtile::core::TileInstance tile;
+            tile.id = std::string(prefix) + std::to_string(i);
+            tile.type = type;
+            model.final_assembly.push_back(tile);
+        }
+    };
+    append(magtile::core::TileType::Square, squares, "s");
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 531 页 / 共 552 页
+========================================================================
+    append(magtile::core::TileType::EquilateralTriangle, triangles, "t");
+    append(magtile::core::TileType::Sector, sectors, "c");
+    return model;
+}
+
+}  // namespace
+
+int main(int argc, char** argv) {
+    if (argc != 2) {
+        std::fprintf(stderr, "用法: %s <临时数据库文件>\n", argv[0]);
+        return 2;
+    }
+    const std::filesystem::path db_file = argv[1];
+    std::error_code ec;
+    std::filesystem::remove(db_file, ec);  // 清除上次运行残留, 保证测试可重复
+
+    using magtile::progress::ProgressError;
+    using magtile::progress::ProgressStore;
+
+    {
+        ProgressStore store(db_file);
+
+        // ---- 空库行为 ----
+        expect(!store.loadProgress("castle_foundation_01").has_value(), "空库无进度记录");
+        expect(store.listInProgress().empty() && store.listCompleted().empty(), "空库列表为空");
+        expect(!store.hasInventory() && store.getInventory().empty(), "空库无库存记录");
+
+        // ---- 保存 / 读取往返 ----
+        store.saveProgress("castle_foundation_01", 3, 120);
+        auto record = store.loadProgress("castle_foundation_01");
+        expect(record.has_value(), "保存后可读取");
+        expect(record->current_step == 3, "读取步骤与保存一致");
+        expect(record->play_seconds == 120, "读取时长与保存一致");
+        expect(!record->isCompleted() && !record->favorited, "新记录未完成且未收藏");
+        expect(record->updated_at > 0, "记录了更新时间戳");
+
+        // 再次保存: 步骤覆盖, 时长累加 (play_seconds 语义为本次新增)
+        store.saveProgress("castle_foundation_01", 5, 60);
+        record = store.loadProgress("castle_foundation_01");
+        expect(record->current_step == 5 && record->play_seconds == 180, "步骤覆盖且时长累加");
+
+        // ---- 完成标记 ----
+        store.saveProgress("rainbow_bridge_01", 8, 300);
+        store.markCompleted("rainbow_bridge_01");
+        record = store.loadProgress("rainbow_bridge_01");
+        expect(record->isCompleted(), "完成标记生效");
+        const auto first_completed_at = record->completed_at;
+        store.markCompleted("rainbow_bridge_01");
+        record = store.loadProgress("rainbow_bridge_01");
+        expect(record->completed_at == first_completed_at, "重复完成不覆盖首次完成时刻");
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 532 页 / 共 552 页
+========================================================================
+
+        // ---- 收藏切换 ----
+        expect(store.toggleFavorite("castle_foundation_01"), "首次切换为已收藏");
+        expect(!store.toggleFavorite("castle_foundation_01"), "再次切换取消收藏");
+        expect(store.toggleFavorite("castle_foundation_01"), "第三次切换恢复收藏");
+
+        // ---- 列表查询 ----
+        const auto in_progress = store.listInProgress();
+        const auto completed = store.listCompleted();
+        expect(in_progress.size() == 1 && in_progress[0].model_id == "castle_foundation_01",
+               "进行中列表只含未完成模型");
+        expect(completed.size() == 1 && completed[0].model_id == "rainbow_bridge_01",
+               "已完成列表只含完成模型");
+
+        // ---- 成就 ----
+        expect(!store.isAchievementUnlocked("first_model_done"), "未解锁的成就查询为否");
+        store.unlockAchievement("first_model_done");
+        store.unlockAchievement("first_model_done");  // 重复解锁应幂等
+        expect(store.isAchievementUnlocked("first_model_done"), "成就解锁生效");
+        expect(store.listAchievements().size() == 1, "重复解锁不产生重复记录");
+
+        // ---- 磁力片库存 (tile_inventory 表) ----
+        store.setInventory("square", 24);
+        store.setInventory("equilateral_triangle", 16);
+        auto inventory = store.getInventory();
+        expect(inventory.size() == 2 && inventory["square"] == 24 &&
+                   inventory["equilateral_triangle"] == 16,
+               "库存登记与读取往返一致");
+        store.setInventory("square", 30);
+        expect(store.getInventory()["square"] == 30, "库存覆盖登记生效");
+        store.setInventory("hexagon", 0);
+        inventory = store.getInventory();
+        expect(inventory.count("hexagon") == 1 && inventory.at("hexagon") == 0,
+               "数量为 0 的登记保留记录 (明确没有 != 从未登记)");
+        expect(store.hasInventory(), "登记后 hasInventory 为真");
+
+        bool threw_shape = false;
+        try {
+            store.setInventory("not_a_shape", 3);
+        } catch (const ProgressError&) {
+            threw_shape = true;
+        }
+        expect(threw_shape, "未知形状标识被拒绝");
+        bool threw_count = false;
+        try {
+            store.setInventory("square", -1);
+        } catch (const ProgressError&) {
+            threw_count = true;
+        }
+        expect(threw_count, "负数库存数量被拒绝");
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 533 页 / 共 552 页
+========================================================================
+
+        // ---- canBuild / missingPieces: 模型 BOM 对照 ----
+        // 当前库存: square 30, equilateral_triangle 16, hexagon 0
+        expect(store.canBuild(makeModel(20, 10, 0)), "库存足够时 canBuild 为真");
+        expect(store.missingPieces(makeModel(20, 10, 0)).empty(), "库存足够时无缺片");
+
+        const auto missing = store.missingPieces(makeModel(20, 20, 4));
+        expect(!store.canBuild(makeModel(20, 20, 4)), "缺片时 canBuild 为假");
+        expect(missing.size() == 2 &&
+                   missing.at(magtile::core::TileType::EquilateralTriangle) == 4 &&
+                   missing.at(magtile::core::TileType::Sector) == 4,
+               "缺片清单按片型给出缺口数量 (含未登记片型)");
+    }
+
+    // ---- 重新打开数据库: 验证跨连接持久化 ----
+    {
+        ProgressStore store(db_file);
+        const auto record = store.loadProgress("castle_foundation_01");
+        expect(record.has_value() && record->current_step == 5 && record->play_seconds == 180 &&
+                   record->favorited,
+               "重开数据库后进度仍在");
+        expect(store.isAchievementUnlocked("first_model_done"), "重开数据库后成就仍在");
+        expect(store.getInventory()["square"] == 30, "重开数据库后库存仍在");
+
+        // ---- v1 库存 JSON 迁移: settings 表遗留键在下次打开时迁入
+        // tile_inventory 表 (已有记录优先, 非法条目丢弃, 键删除) ----
+        store.setSetting("tile_inventory",
+                         R"({"square":7,"rhombus":3,"bogus_shape":5,"trapezoid":-2})");
+
+        // ---- 重置删除 ----
+        expect(store.resetProgress("castle_foundation_01"), "重置已有记录返回 true");
+        expect(!store.loadProgress("castle_foundation_01").has_value(), "重置后记录消失");
+        expect(!store.resetProgress("castle_foundation_01"), "重置不存在的记录返回 false");
+
+        // ---- 非法输入拒绝 ----
+        bool threw = false;
+        try {
+            store.saveProgress("castle_foundation_01", -1, 0);
+        } catch (const ProgressError&) {
+            threw = true;
+        }
+        expect(threw, "负数步骤序号被拒绝");
+    }
+
+    // ---- 第三次打开: 验证 v1 库存 JSON 迁移 ----
+    {
+        ProgressStore store(db_file);
+        const auto inventory = store.getInventory();
+        expect(inventory.at("square") == 30, "迁移不覆盖已有的结构化库存记录");
+        expect(inventory.count("rhombus") == 1 && inventory.at("rhombus") == 3,
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 534 页 / 共 552 页
+========================================================================
+               "遗留 JSON 中的合法条目已迁入 tile_inventory 表");
+        expect(inventory.count("bogus_shape") == 0 && inventory.count("trapezoid") == 0,
+               "未知形状与负数数量的遗留条目被丢弃");
+        expect(!store.getSetting("tile_inventory").has_value(), "迁移后遗留 JSON 键已删除");
+    }
+
+    // ---- 隐私与数据控制: 全量导出 (JSON) 与一键清除 (C4/Z8) ----
+    {
+        using magtile::progress::exportLocalDataJson;
+        constexpr auto npos = std::string::npos;
+        ProgressStore store(db_file);
+
+        // listSettings: settings 表全量快照 (导出数据源)
+        store.setSetting("age_mode", "age_4_6");
+        const auto settings = store.listSettings();
+        expect(settings.count("age_mode") == 1 && settings.at("age_mode") == "age_4_6",
+               "listSettings 返回 settings 表全量快照");
+
+        // 导出: 进度 / 成就 / 库存 / 设置齐全, 顶层带格式标识
+        const std::string exported = exportLocalDataJson(store);
+        expect(exported.find("\"format\": \"magtile_local_data_export\"") != npos &&
+                   exported.find("\"format_version\": 1") != npos,
+               "导出 JSON 带格式标识与版本 (三端导出契约)");
+        expect(exported.find("rainbow_bridge_01") != npos, "导出含进度记录");
+        expect(exported.find("first_model_done") != npos, "导出含成就");
+        expect(exported.find("\"square\": 30") != npos, "导出含磁力片库存");
+        expect(exported.find("\"age_mode\": \"age_4_6\"") != npos, "导出含设置键值");
+
+        // 一键清除: 四张表单事务原子清空, 回到首次启动的空档状态
+        store.clearAllData();
+        expect(store.listInProgress().empty() && store.listCompleted().empty(),
+               "清除后无任何进度记录");
+        expect(store.listAchievements().empty(), "清除后成就清空");
+        expect(!store.hasInventory() && store.getInventory().empty(),
+               "清除后库存回到未登记引导态");
+        expect(store.listSettings().empty(), "清除后设置表为空 (各设置回默认)");
+
+        // schema 保留: 清除后可立即重新写入 (无需重建库)
+        store.saveProgress("castle_foundation_01", 1, 10);
+        expect(store.loadProgress("castle_foundation_01").has_value(),
+               "清除后可立即重新写入 (表结构保留)");
+    }
+
+    // ---- 重开数据库: 清除与清除后的新写入都真正落盘 ----
+    {
+        ProgressStore store(db_file);
+        expect(store.listSettings().empty() && !store.hasInventory() &&
+                   store.listAchievements().empty(),
+               "重开后仍是清除后状态 (清除持久化)");
+        const auto record = store.loadProgress("castle_foundation_01");
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 535 页 / 共 552 页
+========================================================================
+        expect(record.has_value() && record->current_step == 1,
+               "清除后的新写入跨连接持久化");
+    }
+
+    if (g_failures == 0) {
+        std::printf("\n进度存档回归测试全部通过\n");
+        return 0;
+    }
+    std::printf("\n进度存档回归测试失败 %d 项\n", g_failures);
+    return 1;
+}
+
+// ===== file: tests/test_qt_backends.cpp =====
+// =============================================================
+// MagTile Studio - Qt 后端桥单元测试 (ctest: qt_backend_bridges)
+// 仅在 MAGTILE_BUILD_QT=ON 时构建注册, 无需显示环境 (纯 QObject)。
+// 覆盖 QT-2 的两座桥 (docs/QT_UI_PLAN.md):
+//   1. SettingsBackend: 默认值 / 字号三档与减少动效与年龄段的
+//      SQLite 往返 / 跨实例持久化 / 非法值忽略;
+//   2. 与 GL 版 / CLI 的共库契约: 桥写入的键能被 progress 层
+//      (age_settings / ui_settings) 原样读回, 反向亦然;
+//   3. ParentGateBackend: 出题 / 答对开会话 / 答错温和提示 /
+//      3 次答错进冷却 (冷却期拒答) / 锁定会话;
+//   4. LibraryFilterModel (QT-1): 「我能搭的」筛选空态推荐
+//      recommendBuildable —— 只挑 canBuild、难度升序 (同难度片数
+//      少者优先)、无视其他筛选条件、上限截断;
+//   4b. LibraryFilterModel (QT-4, §6.2): 庆祝页「再搭一个」推荐
+//      recommendSimilar —— 同难度优先、±1 次之、不足时放宽难度,
+//      排除刚完成的自身、订阅内容与缺片模型, 无库存时为空;
+//   5. TtsBackend (QT-4): 朗读开关默认开 / 跨实例持久化 / 与
+//      ui_settings "tts_enabled" 键的双向契约 (设置页开关同键);
+//      本目标不定义 MAGTILE_QT_TTS, 顺带覆盖无引擎静默降级路径;
+//   6. 首启年龄段引导判定 (QT-5, §10.1): 全新存档待引导 / 选档落盘
+//      (age_mode + onboarding_age_done) 且只出现一次 / 选默认 7-9 档
+//      同样落盘 / CLI/GL 已设年龄段或只有完成标记都不再弹 (双保险);
+//   7. PrivacyBackend (SECURITY_AND_PRIVACY.md §4 C4/Z8): 全量导出
+//      JSON 文件 (格式标识/进度/成就/库存/设置齐全, 两次导出互不
+//      覆盖) / 一键清除四张表 / 清除后各桥回默认 (等价首次启动) /
+//      resetToDefaults 当场复位 (QML onDataCleared 同一条路径)。
+// 用法: magtile_qt_backend_test <临时数据库路径>
+// =============================================================
+
+#include <QCoreApplication>
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QString>
+#include <QVariantList>
+#include <QVariantMap>
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 536 页 / 共 552 页
+========================================================================
+#include <cstdio>
+#include <filesystem>
+#include <utility>
+#include <vector>
+
+#include "library_filter_model.hpp"
+#include "library_model.hpp"
+#include "magtile/core/age_mode.hpp"
+#include "magtile/progress/age_settings.hpp"
+#include "magtile/progress/progress_store.hpp"
+#include "magtile/progress/ui_settings.hpp"
+#include "parent_gate_backend.hpp"
+#include "privacy_backend.hpp"
+#include "settings_backend.hpp"
+#include "tts_backend.hpp"
+
+namespace {
+
+int g_failures = 0;
+
+void expect(bool condition, const char* message) {
+    if (condition) {
+        std::printf("[通过] %s\n", message);
+    } else {
+        std::printf("[失败] %s\n", message);
+        ++g_failures;
+    }
+}
+
+}  // namespace
+
+int main(int argc, char** argv) {
+    QCoreApplication app(argc, argv);
+
+    if (argc < 2) {
+        std::fprintf(stderr, "用法: %s <临时数据库路径>\n", argv[0]);
+        return 2;
+    }
+    const std::filesystem::path db_path = argv[1];
+    std::filesystem::remove(db_path);  // 每次全新建库, 测试可重复执行
+
+    using magtile::core::AgeMode;
+    namespace core = magtile::core;
+    namespace progress = magtile::progress;
+    using magtile::qtui::ParentGateBackend;
+    using magtile::qtui::SettingsBackend;
+
+    // ---- 1. SettingsBackend: 默认值与选项数据源 ------------------------
+    {
+        SettingsBackend settings(db_path);
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 537 页 / 共 552 页
+========================================================================
+        expect(settings.storeAvailable(), "存档可用");
+        expect(settings.ageOnboardingPending(), "全新存档首启年龄段引导待完成 (QT-5)");
+        expect(settings.fontScalePercent() == 100, "默认字号 100%");
+        expect(!settings.reduceMotion(), "默认动效开启");
+        expect(settings.ageModeId() == QStringLiteral("age_7_9"), "默认年龄段 7-9 标准模式");
+        expect(!settings.ageModeLabel().isEmpty(), "年龄段中文展示名非空");
+        expect(settings.fontScaleOptions().size() == 3, "字号选项恰好三档");
+        expect(settings.ageModeOptions().size() == 3, "年龄段选项恰好三档");
+        const QVariantMap first_age = settings.ageModeOptions().first().toMap();
+        expect(first_age.value(QStringLiteral("id")).toString() == QStringLiteral("age_4_6"),
+               "年龄段选项按启蒙/标准/进阶排序");
+
+        // 写入三项设置
+        settings.setFontScalePercent(125);
+        settings.setReduceMotion(true);
+        settings.setAgeModeId(QStringLiteral("age_4_6"));
+        expect(settings.fontScalePercent() == 125, "字号 125% 立即生效");
+        expect(settings.reduceMotion(), "减少动效立即生效");
+        expect(settings.ageModeId() == QStringLiteral("age_4_6"), "年龄段启蒙模式立即生效");
+
+        // 非法值忽略 (不改内存值也不落盘)
+        settings.setFontScalePercent(137);
+        settings.setAgeModeId(QStringLiteral("age_99"));
+        expect(settings.fontScalePercent() == 125, "非法字号档位被忽略");
+        expect(settings.ageModeId() == QStringLiteral("age_4_6"), "非法年龄段标识被忽略");
+    }
+
+    // ---- 2. 跨实例持久化 + 与 GL 版/CLI 的共库契约 ---------------------
+    {
+        SettingsBackend settings(db_path);  // 重开桥: 验证真正落盘
+        expect(settings.fontScalePercent() == 125, "字号跨实例持久化");
+        expect(settings.reduceMotion(), "减少动效跨实例持久化");
+        expect(settings.ageModeId() == QStringLiteral("age_4_6"), "年龄段跨实例持久化");
+    }
+    {
+        // progress 层直读: Qt 桥写入的就是 GL 版/CLI 读的那几个键
+        progress::ProgressStore store(db_path);
+        expect(progress::getAgeMode(store) == AgeMode::Age4_6,
+               "CLI/GL 层读到 Qt 桥写入的年龄段 (共用 age_mode 键)");
+        expect(progress::getFontScalePercent(store) == 125,
+               "progress 层读到 Qt 桥写入的字号档位");
+        expect(progress::getReduceMotion(store), "progress 层读到 Qt 桥写入的减少动效");
+
+        // 反向: CLI/GL 侧改设置, Qt 桥重开后看得到
+        progress::setAgeMode(store, AgeMode::Age10_12);
+    }
+    {
+        SettingsBackend settings(db_path);
+        expect(settings.ageModeId() == QStringLiteral("age_10_12"),
+               "Qt 桥读到 CLI/GL 层写入的年龄段 (双向共库)");
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 538 页 / 共 552 页
+========================================================================
+    }
+
+    // ---- 3. ParentGateBackend: 过门 / 答错 / 冷却 / 锁定 ---------------
+    {
+        ParentGateBackend gate;
+        expect(!gate.sessionActive(), "初始无家长会话");
+        expect(!gate.deepLinkRequested(), "默认无深链请求");
+
+        gate.openGate();
+        expect(gate.question().contains(QStringLiteral("×")) &&
+                   gate.question().contains(QStringLiteral("?")),
+               "题面含 × 与 ? (乘法题)");
+        expect(gate.attemptsRemaining() == 3, "初始 3 次尝试机会");
+        expect(!gate.expectedAnswer().isEmpty(), "标准答案非空 (冒烟钩子)");
+
+        // 答错: 温和提示 + 次数递减 ("零" 永远不是积, 积在 [4,81])
+        expect(!gate.submitAnswer(QStringLiteral("零")), "答错返回 false");
+        expect(gate.wrongAnswer(), "答错后 wrongAnswer 置位");
+        expect(gate.attemptsRemaining() == 2, "答错后剩 2 次");
+        expect(!gate.sessionActive(), "答错不开会话");
+
+        // 答对: 开启会话 (约 15 分钟)
+        expect(gate.submitAnswer(gate.expectedAnswer()), "答对返回 true");
+        expect(!gate.wrongAnswer(), "答对后 wrongAnswer 复位");
+        expect(gate.sessionActive(), "答对后会话立即有效");
+        expect(gate.sessionRemainingSeconds() > 14 * 60, "会话剩余约 15 分钟");
+
+        // 锁定: 立即结束会话
+        gate.lockSession();
+        expect(!gate.sessionActive(), "锁定后会话立即失效");
+        expect(gate.sessionRemainingSeconds() == 0, "锁定后剩余 0 秒");
+
+        // 冷却: 连续 3 次答错 -> 60 秒冷却, 冷却期内即使答对也拒绝
+        gate.openGate();
+        (void)gate.submitAnswer(QStringLiteral("零"));
+        (void)gate.submitAnswer(QStringLiteral("零"));
+        expect(!gate.submitAnswer(QStringLiteral("零")), "第 3 次答错被拒");
+        expect(gate.cooldownSeconds() > 0 && gate.cooldownSeconds() <= 60,
+               "触发约 60 秒冷却");
+        expect(!gate.wrongAnswer(), "冷却态不再叠加答错提示 (界面自带温和文案)");
+        expect(!gate.submitAnswer(gate.expectedAnswer()), "冷却期内答对也拒绝");
+        expect(!gate.sessionActive(), "冷却期提交不开会话");
+
+        // 重新进门出新题: 冷却仍在 (状态机为准), 答错提示已复位
+        gate.openGate();
+        expect(!gate.wrongAnswer(), "openGate 复位答错提示");
+        expect(gate.cooldownSeconds() > 0, "openGate 不绕过冷却");
+    }
+
+    // ---- 4. LibraryFilterModel: 「我能搭的」空态推荐 (QT-1, §5.2) ------
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 539 页 / 共 552 页
+========================================================================
+    {
+        using magtile::qtui::LibraryFilterModel;
+        using magtile::qtui::LibraryModel;
+        using magtile::qtui::LibraryRow;
+
+        const auto makeRow = [](const char* id, int difficulty, int pieces, bool can_build) {
+            LibraryRow row;
+            row.entry.id = id;
+            row.entry.name = id;
+            row.entry.difficulty = difficulty;
+            row.entry.total_pieces = pieces;
+            row.bom_known = true;
+            row.can_build = can_build;
+            return row;
+        };
+
+        LibraryModel model;
+        std::vector<LibraryRow> rows;
+        rows.push_back(makeRow("hard_ok", 3, 50, true));
+        rows.push_back(makeRow("easy_big", 1, 80, true));
+        rows.push_back(makeRow("easy_small", 1, 40, true));
+        rows.push_back(makeRow("missing_tiles", 2, 60, false));
+        rows.push_back(makeRow("expert_ok", 5, 200, true));
+        model.resetRows(std::move(rows));
+
+        LibraryFilterModel filter;
+        filter.setSourceModel(&model);
+
+        // 模拟空态: 难度 4 + 我能搭的 -> 没有任何匹配
+        filter.setDifficulty(4);
+        filter.setBuildableOnly(true);
+        expect(filter.count() == 0, "难度 4 + 我能搭的 组合为空态");
+
+        // 推荐无视其他筛选: canBuild 里按 难度升序 -> 片数升序 挑 3 个
+        const QVariantList recs = filter.recommendBuildable(3);
+        expect(recs.size() == 3, "空态推荐恰好 3 个可搭模型");
+        expect(recs.value(0).toMap().value(QStringLiteral("modelId")).toString() ==
+                   QStringLiteral("easy_small"),
+               "第 1 个推荐是难度最低且片数最少的模型");
+        expect(recs.value(1).toMap().value(QStringLiteral("modelId")).toString() ==
+                   QStringLiteral("easy_big"),
+               "同难度按片数升序排列");
+        expect(recs.value(2).toMap().value(QStringLiteral("modelId")).toString() ==
+                   QStringLiteral("hard_ok"),
+               "第 3 个推荐是下一档难度的可搭模型");
+        for (const QVariant& rec : recs) {
+            expect(rec.toMap().value(QStringLiteral("modelId")).toString() !=
+                       QStringLiteral("missing_tiles"),
+                   "缺片模型不进推荐");
+        }
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 540 页 / 共 552 页
+========================================================================
+        expect(filter.recommendBuildable(10).size() == 4, "上限大于可搭数时全量返回");
+
+        // 全部缺片时返回空列表 (界面退回普通空态文案)
+        std::vector<LibraryRow> none_buildable;
+        none_buildable.push_back(makeRow("a", 1, 10, false));
+        model.resetRows(std::move(none_buildable));
+        expect(filter.recommendBuildable(3).isEmpty(), "没有可搭模型时推荐为空");
+    }
+
+    // ---- 4b. LibraryFilterModel: 庆祝页「再搭一个」推荐 (QT-4, §6.2) ---
+    {
+        using magtile::qtui::LibraryFilterModel;
+        using magtile::qtui::LibraryModel;
+        using magtile::qtui::LibraryRow;
+
+        const auto makeRow = [](const char* id, int difficulty, int pieces, bool can_build,
+                                bool is_free = true) {
+            LibraryRow row;
+            row.entry.id = id;
+            row.entry.name = id;
+            row.entry.difficulty = difficulty;
+            row.entry.total_pieces = pieces;
+            row.bom_known = true;
+            row.can_build = can_build;
+            row.is_free = is_free;
+            return row;
+        };
+        const auto recId = [](const QVariantList& recs, int i) {
+            return recs.value(i).toMap().value(QStringLiteral("modelId")).toString();
+        };
+
+        // 刚完成 just_done (难度 3); 候选覆盖 同难度/±1/更远/缺片/订阅
+        LibraryModel model;
+        std::vector<LibraryRow> rows;
+        rows.push_back(makeRow("just_done", 3, 50, true));
+        rows.push_back(makeRow("far_easy", 1, 10, true));
+        rows.push_back(makeRow("one_down", 2, 40, true));
+        rows.push_back(makeRow("one_up", 4, 20, true));
+        rows.push_back(makeRow("same_diff_big", 3, 60, true));
+        rows.push_back(makeRow("same_diff_small", 3, 30, true));
+        rows.push_back(makeRow("same_missing", 3, 20, false));
+        rows.push_back(makeRow("same_locked", 3, 15, true, /*is_free=*/false));
+        model.resetRows(std::move(rows));
+
+        LibraryFilterModel filter;
+        filter.setSourceModel(&model);
+
+        const QVariantList top2 = filter.recommendSimilar(QStringLiteral("just_done"), 2);
+        expect(top2.size() == 2, "庆祝页推荐最多 2 张");
+        expect(recId(top2, 0) == QStringLiteral("same_diff_small"),
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 541 页 / 共 552 页
+========================================================================
+               "同难度优先, 片数少者排第 1");
+        expect(recId(top2, 1) == QStringLiteral("same_diff_big"), "同难度片数多者排第 2");
+
+        const QVariantList all = filter.recommendSimilar(QStringLiteral("just_done"), 10);
+        expect(all.size() == 5, "同难度不足时放宽到 ±1 再到更远难度");
+        expect(recId(all, 2) == QStringLiteral("one_down") &&
+                   recId(all, 3) == QStringLiteral("one_up"),
+               "±1 难度垫后, 同距离取更轻松的一档");
+        expect(recId(all, 4) == QStringLiteral("far_easy"), "候选不足时放宽难度兜底");
+        for (const QVariant& rec : all) {
+            const QString id = rec.toMap().value(QStringLiteral("modelId")).toString();
+            expect(id != QStringLiteral("just_done"), "刚完成的模型自身不进推荐");
+            expect(id != QStringLiteral("same_missing"), "缺片模型不进庆祝页推荐");
+            expect(id != QStringLiteral("same_locked"),
+                   "订阅内容不进庆祝页推荐 (点卡直接开搭, 不绕过订阅门)");
+        }
+
+        // 刚完成的模型不在目录 (极端: 目录热更后被下架): 退回难度升序口径
+        const QVariantList fallback = filter.recommendSimilar(QStringLiteral("ghost"), 2);
+        expect(fallback.size() == 2 && recId(fallback, 0) == QStringLiteral("far_easy"),
+               "基准模型不在目录时退回难度升序推荐");
+
+        // 无库存 (canBuild 恒 false) 时返回空列表 (界面整块隐藏)
+        std::vector<LibraryRow> none_buildable;
+        none_buildable.push_back(makeRow("just_done", 3, 50, false));
+        none_buildable.push_back(makeRow("neighbor", 3, 30, false));
+        model.resetRows(std::move(none_buildable));
+        expect(filter.recommendSimilar(QStringLiteral("just_done"), 2).isEmpty(),
+               "无库存可搭时推荐为空 (庆祝页推荐区整块隐藏)");
+    }
+
+    // ---- 5. TtsBackend: 朗读开关持久化与 ui_settings 契约 (QT-4) -------
+    {
+        magtile::qtui::TtsBackend tts(db_path);
+        expect(tts.enabled(), "朗读开关默认开");
+        // 本测试目标不链 QtTextToSpeech (未定义 MAGTILE_QT_TTS):
+        // available 恒 false, speak/stop 必须静默安全 (P3 零挫败)
+        expect(!tts.available(), "无引擎构建时 available=false (静默降级)");
+        tts.speak(QStringLiteral("把三角片靠在墙边"));
+        tts.stop();
+        expect(!tts.speaking(), "无引擎时 speak/stop 平稳返回");
+        expect(!tts.autoRead(), "无引擎时不自动朗读 (即使启蒙模式)");
+
+        tts.setEnabled(false);
+        expect(!tts.enabled(), "关闭朗读立即生效");
+    }
+    {
+        magtile::qtui::TtsBackend tts(db_path);  // 重开桥: 验证真正落盘
+        expect(!tts.enabled(), "朗读开关跨实例持久化");
+
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 542 页 / 共 552 页
+========================================================================
+        // 与设置页 / GL 版的共键契约: 桥写入的关闭状态能被 ui_settings
+        // 层原样读回, 反向写入同样能被桥读回 (同一个 "tts_enabled" 键)
+        progress::ProgressStore store(db_path);
+        expect(!progress::getTtsEnabled(store), "桥写入能被 ui_settings 层读回");
+        progress::setTtsEnabled(store, true);
+    }
+    {
+        magtile::qtui::TtsBackend tts(db_path);
+        expect(tts.enabled(), "ui_settings 层写入能被桥读回 (反向契约)");
+    }
+
+    // ---- 6. 首启年龄段引导判定 (QT-5, §10.1) ---------------------------
+    {
+        // 主库此刻已写过 age_mode (前面几节写入): 引导不待完成
+        SettingsBackend settings(db_path);
+        expect(!settings.ageOnboardingPending(), "已有 age_mode 的存档不再弹首启引导");
+    }
+    {
+        // 全新存档: 引导待完成 -> 选档落盘 -> 只出现一次
+        const std::filesystem::path onboarding_db(db_path.string() + ".onboarding");
+        std::filesystem::remove(onboarding_db);
+        {
+            SettingsBackend settings(onboarding_db);
+            expect(settings.ageOnboardingPending(), "全新存档引导待完成");
+            settings.completeAgeOnboarding(QStringLiteral("age_99"));
+            expect(settings.ageOnboardingPending(), "未知档位标识不结束引导");
+            settings.completeAgeOnboarding(QStringLiteral("age_4_6"));
+            expect(!settings.ageOnboardingPending(), "选定档位后引导立即结束");
+            expect(settings.ageModeId() == QStringLiteral("age_4_6"), "引导选档即落年龄段");
+        }
+        {
+            SettingsBackend settings(onboarding_db);  // 重开桥: 引导只出现一次
+            expect(!settings.ageOnboardingPending(), "引导完成跨实例持久化 (只出现一次)");
+            expect(settings.ageModeId() == QStringLiteral("age_4_6"),
+                   "引导落盘的年龄段跨实例可读");
+        }
+        {
+            // 共库契约: 引导写的就是 CLI/GL 读的 age_mode 键 + 完成标记
+            progress::ProgressStore store(onboarding_db);
+            expect(progress::getAgeMode(store) == AgeMode::Age4_6,
+                   "CLI/GL 层读到引导写入的年龄段 (共用 age_mode 键)");
+            expect(progress::getAgeOnboardingDone(store),
+                   "ui_settings 层读到引导完成标记 (onboarding_age_done 契约)");
+        }
+    }
+    {
+        // 选的正是默认 7-9 档也要显式落盘 (引导只看 "选没选", 不看 "改没改")
+        const std::filesystem::path default_db(db_path.string() + ".onboarding_default");
+        std::filesystem::remove(default_db);
+        {
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 543 页 / 共 552 页
+========================================================================
+            SettingsBackend settings(default_db);
+            expect(settings.ageOnboardingPending(), "全新存档 (将选默认档) 引导待完成");
+            settings.completeAgeOnboarding(QStringLiteral("age_7_9"));
+            expect(!settings.ageOnboardingPending(), "选默认 7-9 档同样结束引导");
+        }
+        {
+            SettingsBackend settings(default_db);
+            expect(!settings.ageOnboardingPending(),
+                   "默认档选择跨实例持久化 (age_mode 已非空)");
+        }
+    }
+    {
+        // 存量存档双保险: CLI/GL 先设过年龄段, 或只有完成标记, 都不再弹
+        const std::filesystem::path legacy_db(db_path.string() + ".onboarding_legacy");
+        std::filesystem::remove(legacy_db);
+        {
+            progress::ProgressStore store(legacy_db);
+            progress::setAgeMode(store, AgeMode::Age10_12);
+        }
+        {
+            SettingsBackend settings(legacy_db);
+            expect(!settings.ageOnboardingPending(),
+                   "CLI/GL 已设年龄段的存量存档不弹引导 (age_mode 非空判定)");
+        }
+        const std::filesystem::path marker_db(db_path.string() + ".onboarding_marker");
+        std::filesystem::remove(marker_db);
+        {
+            progress::ProgressStore store(marker_db);
+            progress::setAgeOnboardingDone(store);
+        }
+        {
+            SettingsBackend settings(marker_db);
+            expect(!settings.ageOnboardingPending(),
+                   "只有完成标记也不再弹引导 (双保险任一即生效)");
+        }
+    }
+
+    // ---- 7. PrivacyBackend: 全量导出 / 一键清除 / 回首启状态 -----------
+    // (SECURITY_AND_PRIVACY.md §4 C4/Z8: 家长可查看/导出/删除全部数据)
+    {
+        using magtile::qtui::PrivacyBackend;
+        PrivacyBackend privacy(db_path);
+        expect(privacy.storeAvailable(), "隐私桥存档可用");
+        expect(!privacy.dbFileText().isEmpty(), "「数据存在哪」存档路径非空");
+
+        // 前置数据: 进度 / 成就 / 库存各放一条, 导出应全部带上
+        {
+            progress::ProgressStore store(db_path);
+            store.saveProgress("privacy_probe_01", 2, 30);
+            store.unlockAchievement("privacy_probe_badge");
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 544 页 / 共 552 页
+========================================================================
+            store.setInventory("square", 9);
+        }
+
+        const QString export_dir = QString::fromStdString(
+            (db_path.parent_path() / "privacy_export_test").string());
+        const QString exported = privacy.exportData(export_dir);
+        expect(!exported.isEmpty(), "导出返回文件完整路径");
+        QFile file(exported);
+        expect(file.exists() && file.open(QIODevice::ReadOnly), "导出文件已写盘可读");
+        const QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+        file.close();
+        expect(doc.isObject(), "导出内容是合法 JSON");
+        const QJsonObject root = doc.object();
+        expect(root.value(QStringLiteral("format")).toString() ==
+                       QStringLiteral("magtile_local_data_export") &&
+                   root.value(QStringLiteral("format_version")).toInt() == 1,
+               "导出格式标识与版本正确 (三端导出契约)");
+        expect(root.value(QStringLiteral("exported_at")).toDouble() > 0, "导出带导出时刻");
+        bool progress_in_export = false;
+        const QJsonArray progress_rows =
+            root.value(QStringLiteral("model_progress")).toArray();
+        for (const QJsonValue& row : progress_rows) {
+            if (row.toObject().value(QStringLiteral("model_id")).toString() ==
+                QStringLiteral("privacy_probe_01")) {
+                progress_in_export =
+                    row.toObject().value(QStringLiteral("current_step")).toInt() == 2;
+            }
+        }
+        expect(progress_in_export, "导出含进度记录 (model_id + 当前步)");
+        expect(root.value(QStringLiteral("tile_inventory"))
+                       .toObject()
+                       .value(QStringLiteral("square"))
+                       .toInt() == 9,
+               "导出含磁力片库存");
+        expect(!root.value(QStringLiteral("settings")).toObject().isEmpty(),
+               "导出含设置键值");
+        bool badge_in_export = false;
+        const QJsonArray achievement_rows =
+            root.value(QStringLiteral("achievements")).toArray();
+        for (const QJsonValue& row : achievement_rows) {
+            badge_in_export = badge_in_export ||
+                              row.toObject().value(QStringLiteral("id")).toString() ==
+                                  QStringLiteral("privacy_probe_badge");
+        }
+        expect(badge_in_export, "导出含成就");
+
+        // 时间戳文件名: 两次导出互不覆盖, 家长可留多份存档
+        const QString exported_again = privacy.exportData(export_dir);
+        expect(!exported_again.isEmpty() && exported_again != exported,
+               "再次导出生成新文件不覆盖旧档");
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 545 页 / 共 552 页
+========================================================================
+
+        // 一键清除: 四张表单事务原子清空, 同库其他连接立即可见
+        expect(privacy.clearAllData(), "clearAllData 返回 true");
+        {
+            progress::ProgressStore store(db_path);
+            expect(!store.loadProgress("privacy_probe_01").has_value(), "清除后进度消失");
+            expect(store.listAchievements().empty(), "清除后成就清空");
+            expect(!store.hasInventory(), "清除后库存回未登记引导态");
+            expect(store.listSettings().empty(), "清除后 settings 表为空");
+        }
+    }
+    {
+        // 清除后重开各桥 = 首次启动: 设置/朗读回默认, 首启引导重新待命
+        SettingsBackend settings(db_path);
+        expect(settings.fontScalePercent() == 100 && !settings.reduceMotion() &&
+                   settings.ageModeId() == QStringLiteral("age_7_9"),
+               "清除后重开设置桥回默认 (等价首启)");
+        expect(settings.ageOnboardingPending(),
+               "清除后首启年龄段引导重新待完成 (温和回到首次状态)");
+        magtile::qtui::TtsBackend tts(db_path);
+        expect(tts.enabled(), "清除后重开朗读桥回默认开");
+
+        // 清除流程的当场复位 (Main.qml onDataCleared 同一条调用路径)
+        settings.setFontScalePercent(150);
+        settings.setReduceMotion(true);
+        settings.setAgeModeId(QStringLiteral("age_4_6"));
+        tts.setEnabled(false);
+        magtile::qtui::PrivacyBackend privacy(db_path);
+        expect(privacy.clearAllData(), "再次清除返回 true");
+        settings.resetToDefaults();
+        tts.resetToDefaults();
+        expect(settings.fontScalePercent() == 100 && !settings.reduceMotion() &&
+                   settings.ageModeId() == QStringLiteral("age_7_9"),
+               "resetToDefaults 把设置内存快照拉回默认");
+        expect(tts.enabled(), "resetToDefaults 把朗读开关拉回默认开");
+    }
+
+    if (g_failures == 0) {
+        std::printf("\nQt 后端桥单元测试全部通过\n");
+        return 0;
+    }
+    std::printf("\nQt 后端桥单元测试失败: %d 项\n", g_failures);
+    return 1;
+}
+
+// ===== file: tests/test_qt_billing.cpp =====
+// =============================================================
+// MagTile Studio - Qt 计费桥单元测试 (ctest: qt_billing_bridge)
+// 仅在 MAGTILE_BUILD_QT=ON 时构建注册, 无需显示环境 (纯 QObject)。
+// 覆盖订阅/IAP 适配层的 Qt 侧 (COMMERCIAL_PLAN §2.2, 无真实 SDK):
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 546 页 / 共 552 页
+========================================================================
+//   1. BillingBackend 默认态: 未订阅、商店可用 (桌面开发档 =
+//      FakeBillingClient)、simulatedBilling=true (「开发模拟」标注
+//      只出现在假计费档, 商店档真实扣费不标)、三卡商品数据源齐全;
+//   2. 订阅页主 CTA 契约: purchase 未知商品退「即将上线」占位
+//      文案且不改状态; 购买合法档位后 subscriptionActive 生效且
+//      成功文案带「开发模拟」标注 (免费层锁 DetailPage/LibraryPage
+//      读同一属性);
+//   3. 跨实例持久化: 重开桥仍是已订阅 (settings 契约键), progress
+//      层直读同键 (与 core 层 / GL 版 / CLI 共库承诺);
+//   4. 开发开关门控: devControlsEnabled=false 时 devSetSubscribed
+//      被忽略; =true 时可关闭本地订阅再经 restore 恢复;
+//   5. LibraryFilterModel 订阅感知: 未订阅时庆祝页推荐排除订阅
+//      内容, 订阅生效后同权进推荐 (解锁即可直接开搭)。
+// 用法: magtile_qt_billing_test <临时数据库路径>
+// =============================================================
+
+#include <QCoreApplication>
+#include <QString>
+#include <QVariantList>
+#include <QVariantMap>
+#include <cstdio>
+#include <filesystem>
+#include <utility>
+#include <vector>
+
+#include "billing_backend.hpp"
+#include "library_filter_model.hpp"
+#include "library_model.hpp"
+#include "magtile/progress/progress_store.hpp"
+#include "magtile/progress/subscription_settings.hpp"
+
+namespace {
+
+int g_failures = 0;
+
+void expect(bool condition, const char* message) {
+    if (condition) {
+        std::printf("[通过] %s\n", message);
+    } else {
+        std::printf("[失败] %s\n", message);
+        ++g_failures;
+    }
+}
+
+}  // namespace
+
+int main(int argc, char** argv) {
+    QCoreApplication app(argc, argv);
+
+    if (argc < 2) {
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 547 页 / 共 552 页
+========================================================================
+        std::fprintf(stderr, "用法: %s <临时数据库路径>\n", argv[0]);
+        return 2;
+    }
+    const std::filesystem::path db_path = argv[1];
+    std::filesystem::remove(db_path);  // 每次全新建库, 测试可重复执行
+
+    namespace progress = magtile::progress;
+    using magtile::qtui::BillingBackend;
+
+    // ---- 1+2. 默认态 -> 主 CTA 假购买解锁 ------------------------------
+    {
+        BillingBackend billing(db_path, /*dev_controls=*/false);
+        expect(!billing.subscriptionActive(), "初始未订阅 (付费模型上锁口径)");
+        expect(billing.storeAvailable(), "桌面开发档商店可用 (FakeBillingClient)");
+        expect(billing.simulatedBilling(), "桌面开发档为假计费 (simulatedBilling 分流标注口径)");
+        expect(!billing.devControlsEnabled(), "未开开发档时无模拟开关");
+        expect(billing.activePlanName().isEmpty(), "未订阅时无生效档位名");
+
+        const QVariantList products = billing.products();
+        expect(products.size() == 3, "订阅页三卡数据源 (月/年/家庭年)");
+        for (const QVariant& entry : products) {
+            const QVariantMap product = entry.toMap();
+            expect(!product.value(QStringLiteral("productId")).toString().isEmpty() &&
+                       !product.value(QStringLiteral("name")).toString().isEmpty() &&
+                       !product.value(QStringLiteral("priceText")).toString().isEmpty(),
+                   "三卡商品字段齐全 (id/名称/价格文本)");
+        }
+
+        const QString rejected = billing.purchase(QStringLiteral("sub_nonsense"));
+        expect(rejected.contains(QStringLiteral("准备中")), "未知商品退温和占位文案");
+        expect(!billing.subscriptionActive(), "被拒购买不改订阅状态");
+
+        const QString purchased = billing.purchase(QStringLiteral("sub_yearly"));
+        expect(purchased.contains(QStringLiteral("已开通")), "假购买返回开通文案");
+        expect(purchased.contains(QStringLiteral("开发模拟")),
+               "假计费档购买成功文案标「开发模拟」(商店档真实扣费不标)");
+        expect(billing.subscriptionActive(), "假购买后订阅生效 (付费模型解锁口径)");
+        expect(billing.activePlanName() == QStringLiteral("年度订阅"), "生效档位中文名正确");
+
+        // 开发开关未启用: devSetSubscribed 被忽略 (误接线也改不了状态)
+        billing.devSetSubscribed(false);
+        expect(billing.subscriptionActive(), "非开发档 devSetSubscribed 被忽略");
+    }
+
+    // ---- 3. 跨实例持久化 + settings 契约键直读 --------------------------
+    {
+        BillingBackend billing(db_path, /*dev_controls=*/true);
+        expect(billing.subscriptionActive(), "订阅状态跨实例持久化 (重启后仍解锁)");
+        expect(billing.devControlsEnabled(), "开发档开关可用");
+    }
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 548 页 / 共 552 页
+========================================================================
+    {
+        progress::ProgressStore store(db_path);
+        expect(progress::getSubscriptionActive(store),
+               "progress 层直读到桥写入的订阅状态 (共用 settings 契约键)");
+        expect(progress::getSubscriptionProductId(store) == "sub_yearly",
+               "progress 层直读到生效档位");
+    }
+
+    // ---- 4. 开发开关关闭本地订阅 -> restore 恢复 ------------------------
+    {
+        BillingBackend billing(db_path, /*dev_controls=*/true);
+        billing.devSetSubscribed(false);
+        expect(!billing.subscriptionActive(), "开发开关关闭后未订阅 (付费模型重新上锁)");
+
+        const QString restored = billing.restore();
+        expect(restored.contains(QStringLiteral("已恢复")), "restore 返回恢复文案");
+        expect(restored.contains(QStringLiteral("开发模拟")),
+               "假计费档恢复成功文案标「开发模拟」(与购买成功同口径)");
+        expect(billing.subscriptionActive(), "恢复购买后订阅重新生效");
+    }
+    {
+        // 全新存档 (无假商店回执): restore 无可恢复且不误开订阅
+        const std::filesystem::path fresh_db = db_path.string() + ".fresh";
+        std::filesystem::remove(fresh_db);
+        BillingBackend billing(fresh_db, /*dev_controls=*/false);
+        const QString nothing = billing.restore();
+        expect(nothing.contains(QStringLiteral("没有可恢复")), "无回执时返回中性文案");
+        expect(!billing.subscriptionActive(), "无可恢复时保持未订阅");
+    }
+
+    // ---- 5. LibraryFilterModel 订阅感知 (庆祝页推荐口径) ----------------
+    {
+        using magtile::qtui::LibraryFilterModel;
+        using magtile::qtui::LibraryModel;
+        using magtile::qtui::LibraryRow;
+
+        const auto makeRow = [](const char* id, int difficulty, int pieces, bool is_free) {
+            LibraryRow row;
+            row.entry.id = id;
+            row.entry.name = id;
+            row.entry.difficulty = difficulty;
+            row.entry.total_pieces = pieces;
+            row.bom_known = true;
+            row.can_build = true;
+            row.is_free = is_free;
+            return row;
+        };
+
+        LibraryModel model;
+        std::vector<LibraryRow> rows;
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 549 页 / 共 552 页
+========================================================================
+        rows.push_back(makeRow("just_done", 3, 50, true));
+        rows.push_back(makeRow("free_neighbor", 3, 30, true));
+        rows.push_back(makeRow("locked_neighbor", 3, 20, /*is_free=*/false));
+        model.resetRows(std::move(rows));
+
+        LibraryFilterModel filter;
+        filter.setSourceModel(&model);
+        const auto recIds = [&filter](int max_count) {
+            QStringList ids;
+            const QVariantList recs =
+                filter.recommendSimilar(QStringLiteral("just_done"), max_count);
+            for (const QVariant& rec : recs) {
+                ids << rec.toMap().value(QStringLiteral("modelId")).toString();
+            }
+            return ids;
+        };
+
+        expect(!filter.subscriptionActive(), "筛选代理默认按未订阅兜底 (宁可锁)");
+        expect(!recIds(5).contains(QStringLiteral("locked_neighbor")),
+               "未订阅时订阅内容不进庆祝页推荐");
+
+        filter.setSubscriptionActive(true);
+        expect(recIds(5).contains(QStringLiteral("locked_neighbor")),
+               "订阅生效后订阅内容同权进推荐 (解锁即可直接开搭)");
+
+        filter.setSubscriptionActive(false);
+        expect(!recIds(5).contains(QStringLiteral("locked_neighbor")),
+               "订阅关闭后推荐口径立即回到上锁");
+    }
+
+    if (g_failures == 0) {
+        std::printf("\nQt 计费桥单元测试全部通过\n");
+        return 0;
+    }
+    std::printf("\nQt 计费桥单元测试失败: %d 项\n", g_failures);
+    return 1;
+}
+
+// ===== file: tests/test_qt_estimate.cpp =====
+// =============================================================
+// MagTile Studio - 详情页「预计用时」纯函数单测
+// (ctest: qt_build_time_estimate, 仅 MAGTILE_BUILD_QT=ON 时注册)
+//
+// 覆盖 build_time_estimate.hpp (QT-1, UI_UX_SPEC §5.4):
+//   1. 返回值必落在 5/10/15/20/30/45 分钟档位 (不假精确到 1 分钟);
+//   2. 档位归整: 取最近档, 平票取小档 (温和, 宁可少说不吓人);
+//   3. 上限封顶 45 分钟 / 极小模型落 5 分钟档;
+//   4. 步数未知 (<= 0) 返回 0 (界面隐藏, 不显示错误), 负片数按 0;
+//   5. 全库代表值回归 (中位 16 步 69 片 -> 30 分钟等);
+//   6. 单调性: 步数/片数增加, 估算档位不下降。
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 550 页 / 共 552 页
+========================================================================
+// 纯函数无 Qt 依赖, 关键值另以 static_assert 编译期锁定。
+// =============================================================
+
+#include <cstdio>
+
+#include "build_time_estimate.hpp"
+
+namespace {
+
+int g_failures = 0;
+
+void expect(bool condition, const char* message) {
+    if (condition) {
+        std::printf("[通过] %s\n", message);
+    } else {
+        std::printf("[失败] %s\n", message);
+        ++g_failures;
+    }
+}
+
+}  // namespace
+
+using magtile::qtui::estimateBuildMinutes;
+using magtile::qtui::kBuildTimeBucketCount;
+using magtile::qtui::kBuildTimeBuckets;
+
+// ---- 编译期锁定关键值 (constexpr 纯函数) -------------------------------
+static_assert(estimateBuildMinutes(0, 50) == 0, "步数未知返回 0");
+static_assert(estimateBuildMinutes(16, 69) == 30, "全库中位模型落 30 分钟档");
+static_assert(estimateBuildMinutes(26, 122) == 45, "最大模型封顶 45 分钟档");
+
+int main() {
+    // ---- 1. 返回值必落在档位表内 (扫全输入面) --------------------------
+    {
+        bool all_in_buckets = true;
+        for (int steps = 1; steps <= 40 && all_in_buckets; ++steps) {
+            for (int pieces = 0; pieces <= 200; ++pieces) {
+                const int minutes = estimateBuildMinutes(steps, pieces);
+                bool in_bucket = false;
+                for (int i = 0; i < kBuildTimeBucketCount; ++i) {
+                    if (minutes == kBuildTimeBuckets[i]) in_bucket = true;
+                }
+                if (!in_bucket) {
+                    std::printf("[失败] 越档: %d 步 %d 片 -> %d 分钟\n", steps, pieces,
+                                minutes);
+                    all_in_buckets = false;
+                    break;
+                }
+            }
+        }
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 551 页 / 共 552 页
+========================================================================
+        expect(all_in_buckets, "任意输入估算必落 5/10/15/20/30/45 分钟档 (不假精确)");
+    }
+
+    // ---- 2. 档位归整: 最近档, 平票取小档 -------------------------------
+    // 2 步 8 片 = 3.8 分钟 -> 最近 5 分钟档
+    expect(estimateBuildMinutes(2, 8) == 5, "极小模型落最小 5 分钟档");
+    // 5 步 20 片 = 9.5 分钟 -> 最近 10 分钟档
+    expect(estimateBuildMinutes(5, 20) == 10, "9.5 分钟归整到 10 分钟档");
+    // 3 步 30 片 = 7.5 分钟, 距 5 与 10 等距 -> 取小档 5 (温和不吓人)
+    expect(estimateBuildMinutes(3, 30) == 5, "档位平票取小档 (7.5 -> 5)");
+    // 10 步 100 片 = 25.0 分钟, 距 20 与 30 等距 -> 取小档 20
+    expect(estimateBuildMinutes(10, 100) == 20, "档位平票取小档 (25.0 -> 20)");
+
+    // ---- 3. 上限封顶: 再大的模型也只说 45 分钟 -------------------------
+    expect(estimateBuildMinutes(40, 200) == 45, "超大模型封顶 45 分钟档");
+    expect(estimateBuildMinutes(100, 500) == 45, "极端输入同样封顶 45 分钟档");
+
+    // ---- 4. 数据异常时温和降级 (0 = 界面隐藏, 不报错) ------------------
+    expect(estimateBuildMinutes(0, 60) == 0, "步数 0 (未知) 返回 0 供界面隐藏");
+    expect(estimateBuildMinutes(-1, 60) == 0, "负步数返回 0 供界面隐藏");
+    expect(estimateBuildMinutes(12, -5) == estimateBuildMinutes(12, 0),
+           "负片数按 0 处理 (不影响估算)");
+
+    // ---- 5. 全库代表值回归 (docs 口径: 每步 1.5 分钟 + 每片 0.1 分钟) --
+    expect(estimateBuildMinutes(10, 46) == 20, "最小在库模型 (10 步 46 片) -> 20 分钟");
+    expect(estimateBuildMinutes(12, 69) == 20, "收费站 (12 步 69 片) -> 20 分钟");
+    expect(estimateBuildMinutes(16, 69) == 30, "中位模型 (16 步 69 片) -> 30 分钟");
+    expect(estimateBuildMinutes(26, 122) == 45, "摩天楼 (26 步 122 片) -> 45 分钟");
+
+    // ---- 6. 单调性: 工作量增加, 档位不下降 -----------------------------
+    {
+        bool monotonic = true;
+        for (int steps = 1; steps <= 40 && monotonic; ++steps) {
+            for (int pieces = 0; pieces <= 200; ++pieces) {
+                if (estimateBuildMinutes(steps + 1, pieces) <
+                        estimateBuildMinutes(steps, pieces) ||
+                    estimateBuildMinutes(steps, pieces + 1) <
+                        estimateBuildMinutes(steps, pieces)) {
+                    std::printf("[失败] 单调性破坏于 %d 步 %d 片\n", steps, pieces);
+                    monotonic = false;
+                    break;
+                }
+            }
+        }
+        expect(monotonic, "步数/片数增加时估算档位不下降");
+    }
+
+    if (g_failures == 0) {
+        std::printf("预计用时纯函数单测全部通过\n");
+        return 0;
+
+========================================================================
+MagTile Studio 磁力片工坊软件 V1.0    第 552 页 / 共 552 页
+========================================================================
+    }
+    std::printf("共 %d 项失败\n", g_failures);
+    return 1;
+}
+

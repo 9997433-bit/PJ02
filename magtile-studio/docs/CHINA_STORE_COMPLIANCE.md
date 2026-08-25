@@ -71,9 +71,11 @@
       原因之一; 若商店字段用短名「磁力片工坊」, 登记名称须包含该短名。
 - [ ] **P0 · 工程** — 准备源程序材料: 连续源代码前 30 页 + 后 30 页
       (每页 ≥50 行, 末页为程序结尾), 页眉标注软件名称与版本号;
-      从 `core/` 等自研目录截取, **不含第三方库代码** (nlohmann/json、
-      GLFW 等第三方组件不属登记范围, 许可清单见
-      [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §6.2)。
+      从 `include/` / `src/` / `apps/` / `platforms/` 等自研目录截取,
+      **不含第三方库代码** (nlohmann/json、GLFW 等第三方组件不属登记范围,
+      许可清单见 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §6.2);
+      生成命令: `python3 tools/export_copyright_source_pages.py`
+      (产物 `docs/exports/copyright/source_pages_submission.html`).
 - [ ] **P0 · 产品/运营 + 工程** — 准备文档材料: 操作手册/用户手册
       前 30 页 + 后 30 页 (不足 60 页全交), 含界面截图与功能说明;
       截图口径与 [STORE_LISTING.md](STORE_LISTING.md) §5 真实界面红线
