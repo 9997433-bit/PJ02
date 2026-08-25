@@ -8,26 +8,28 @@
 > [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md), 本单不另立口径,
 > 只做「工程 vs 你」的分工切面。
 >
-> **状态快照**: 2026-08-25 16:20 UTC (`--quick` 实跑场次为 16:05,
-> 其后无自动侧载体变动)。工作区多代理并行推进, 状态以
-> `tools/check_v1_readiness.sh` 实跑与清单最新快照为准; 本单引用的
-> commit 均已推送 origin (并行工作区偶有变基, 哈希漂移时按提交信息检索)。
+> **状态快照**: 2026-08-25 17:20 UTC (`--quick` 实跑同时点)。
+> 工作区多代理并行推进, 状态以 `tools/check_v1_readiness.sh` 实跑与
+> 清单最新快照为准; 本单引用的 commit 均已推送 origin (并行工作区
+> 偶有变基, 哈希漂移时按提交信息检索)。
 >
 > **L2 决议 (2026-08-25 16:03 用户指令)**: 实物验证工程 (L2) 全套
 > 必做 —— 风险报告 + 蒙特卡洛抖动 + 结构族去重 + 文档/CI 接入,
 > 效率可慢、质量优先。实物复核随之升级为**三层流程**, 你的人手
-> 实搭量大幅缩减 (§4.3); 当前 10 个工程槽已满槽派给 L2 批次 (§2)。
+> 实搭量大幅缩减 (§4.3); **L2 批次 10 槽已全部交付** (§2), 接力批
+> 正在做抖动首巡揪出的 4 个边缘模型内容侧加固。
 
 **快照时自动探测实跑** (`tools/check_v1_readiness.sh --quick`):
 
 ```
-合计 23 项: 13 PASS / 2 FAIL / 8 SKIP (其中 P0 失败 2 项)
+合计 24 项: 13 PASS / 2 FAIL / 9 SKIP (其中 P0 失败 2 项)
 ```
 
 仅有的 2 项 FAIL 是 **R6/R7 实物复核** —— 唯一无法**完全**由软件代劳
 的自动侧 P0 缺口, 但 L2 三层流程已把其中的人手量大幅缩减 (见 §4.3);
-8 项 SKIP = 快检刻意跳过的 R4/R5 两个长跑项 (全量档会实跑) + M1~M6
-六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)。
+9 项 SKIP = 快检刻意跳过的 R4/R5/R17 三个长跑项 (全量档会实跑) +
+M1~M6 六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)。合计项
+23 → 24 系 L2 批次新增 R17 扰动仿真抽检探测所致。
 
 ---
 
@@ -52,7 +54,7 @@
 | --- | --- | --- | --- |
 | B1 假计费闭环 | ✅ | 计费适配层 + 三档商品 + 购买/恢复 + 统一解锁口径, 41 断言单测 | `f4bb5c7`; R10 PASS |
 | B2 真实商店接线 | 🔶 | **Google Play**: Play Billing 6.x 购买/恢复/回执 + 启动静默恢复 (`a694a17`); **Windows 商店**: WinRT 全链 + MTA 线程模型 (`aa50909`); **Qt 订阅页商店档 UI**: 真实价格卡 + 恢复购买 + `simulatedBilling` 分流 (`aa50909`); **Android 订阅页 UI** (家长门后档位卡 + 恢复购买): `1333f8e` (drawable 先行 `9d9ad0a`) | R11 / R11W 实跑 PASS; 商品 id 三端统一 `sub_monthly`/`sub_yearly`/`sub_family_yearly` |
-| B5 儿童零价格红线 | 🔶 | 家长门流随 E2E 常绿 + R16 文案守卫常态扫描 (260 文件 7714 段, 0 违规); 视觉/语气人工终审留待上架前 | 守卫 `654d775`/`61b514c`, 违规修复 `a128acd`/`5023313` |
+| B5 儿童零价格红线 | 🔶 | 家长门流随 E2E 常绿 + R16 文案守卫常态扫描 (快照时实跑: 260 文件 7751 段, 0 违规); 视觉/语气人工终审留待上架前 | 守卫 `654d775`/`61b514c`, 违规修复 `a128acd`/`5023313` |
 
 ### 1.3 §3 桌面 (D1/D7 ✅, D2/D6 🔶)
 
@@ -104,31 +106,42 @@
 
 ---
 
-## 2. 工程侧仍在跑 (10 槽状态, 2026-08-25 16:20 UTC 时点: L2 批次满槽)
+## 2. 工程侧仍在跑 (2026-08-25 17:20 UTC 时点: L2 批次 10/10 交付, 接力批加固 4 个抖动边缘模型)
 
-上一批 10 槽产物已**全部入库**并登记于 §1 (本交接单即原槽 1 产物)。
-16:03 用户决议后, 10 槽整体切换为 **L2 实物验证工程批次** (三层流程
-定义见 §4.3 与 [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §8):
+16:03 用户决议派发的 **L2 实物验证工程批次已 10/10 全部入库** (三层
+流程定义见 §4.3 与 [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §8):
 
-| 槽 | 任务 (L2 批次) | 服务清单项 | 截至快照的落地状态 |
+| 槽 | 任务 (L2 批次) | 服务清单项 | 落地状态 |
 | --- | --- | --- | --- |
-| 1 | `tools/physical_risk_report.py` 全库风险评分 + 「建议人手验 Top 15」(JSON/Markdown 报告) | §8 S0/S1 | 运行中 |
-| 2 | `magtile_app validate --jitter N` 蒙特卡洛容差抖动 (C++, ±1.5mm/±2° 逐步扰动, 失败记 F08 类) | §8 S0 | 运行中 |
-| 3 | `tools/physical_family_pack.py` 结构族聚类 (每族一个代表实搭, 削减重复) | §8 S1/S2 | 运行中 |
-| 4 | [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件自动标记代码化 (L1 Warning / 高墙链 / 临界重心 / 弱磁承重) | §8 S0 | 运行中 |
-| 5 | `run_strict_audit.sh` / `run_release_gate.sh` 门禁接入 | §7 G1/G2 | 运行中 |
-| 6 | jitter 测试夹具 + risk report 单测 (ctest 注册) | §8 S0 | 运行中 |
+| 1 | `tools/physical_risk_report.py` 全库风险评分 + 「建议人手验 Top 15」(JSON/Markdown 报告) | §8 S0/S1 | **已交付** `41bda4c` (209 模型 3.6s 全扫; 公共入口 `risk_score()` 增补 `6dff7cb`) |
+| 2 | `magtile_app validate --jitter N` 蒙特卡洛容差抖动 (C++, ±1.5mm/±2° 逐步扰动, 失败记 F08 类) | §8 S0 | **已交付** `8b424be` (规则号 R9, issue code `placement_jitter_failure`; 全库首巡 208/209 全绿) |
+| 3 | `tools/physical_family_pack.py` 结构族聚类 (每族一个代表实搭, 削减重复) | §8 S1/S2 | **已交付** `b093b6d` (209 模型 → 154 结构族; 与风险分探测链会师 `6dff7cb`) |
+| 4 | [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件自动标记代码化 (L1 Warning / 高墙链 / 临界重心 / 弱磁承重) | §8 S0 | **已交付** —— 五条触发条件代码化随槽 1 落地 (`41bda4c`), 验证文档 L2 层「规划 → 已实现」口径收口 `bca88fd` |
+| 5 | `run_strict_audit.sh` / `run_release_gate.sh` 门禁接入 | §7 G1/G2 | **已交付** `6acfa54` (挂钩) + `607c0cb` (strict 档 D4+ 首巡结果登记) |
+| 6 | jitter 测试夹具 + risk report 单测 (ctest 注册) | §8 S0 | **已交付** `262ebc3` (全量 ctest 472/472 绿, R9 夹具进注册表必备清单) |
 | 7 | `tools/physical_failure_registry.py` 实物失败登记与校准工作流 | §8 S4 | **已交付** `08d3018` (失效账本工具 + 四步闭环手册 [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md)) |
-| 8 | `check_v1_readiness.sh` 新增 R17 L2 探测 | §0 | 运行中 |
-| 9 | V1 清单 §8 + 本交接单 L2 流程更新 | 本单 | 运行中 (本次编辑即其产物) |
-| 10 | Android B2 订阅页提交收口 | B2 | 收尾 (代码 `1333f8e` 与文档 `5eb27a9` 已入库) |
+| 8 | `check_v1_readiness.sh` 新增 R17 L2 探测 | §0 | **已交付** `13e6cd9` (探测合计项 23 → 24; `--quick` 记 SKIP, 全量签核必跑) |
+| 9 | V1 清单 §8 + 本交接单 L2 流程更新 | 本单 | **已交付** `df902b9` (本次快照刷新即其收尾编辑) |
+| 10 | Android B2 订阅页提交收口 | B2 | **已交付** (代码 `1333f8e` + 文档 `5eb27a9`) |
 
-**L2 完成定义**: D4+ 模型默认跑 `--jitter 50` 全绿; risk report 可
-输出「建议人手验 Top 15」; 结构族报告可削减 30%+ 重复实搭。
+**L2 完成定义达成情况**: risk report 可输出「建议人手验 Top 15」✅;
+结构族报告 209 → 154 族, 可削减 30%+ 重复实搭 ✅; D4+ 默认
+`--jitter 50` 全绿 —— **差 4 个模型** (见下), 加固复验后即达成。
 
-**工程收口标准**: `check_v1_readiness.sh --quick` 只剩 R6/R7 FAIL
-(R17 及其余自动项全绿); L2 工具链全部入库且门禁接入; 清单工程侧行
-无 ⬜。
+**接力批 (进行中): 抖动首巡揪出的 4 个边缘模型内容侧加固** ——
+默认档全库首巡 209 个中 208 全绿, 1 个被抓 (`lego_style_house_01`,
+7/50 轮 `enclosed_placement`); strict 档 D4+ 首巡 45 个中 42 全绿,
+3 个零裕量外挑被抓 (`ball_run_tower_01` 4/50 轮 /
+`marble_run_spiral_01` 3/50 轮 / `rainforest_canopy_01` 3/50 轮,
+均为 `cantilever_overload` 贴 strict 预算的边)。四个均为真实边缘
+设计发现 (非误报), 按宁严勿松纪律**不放宽预算**, 内容侧逐模型
+加固后复验 (处置记录 [PHYSICS_RULES.md](PHYSICS_RULES.md) R9 节);
+加固复验通过前, 全量档 R17 对涉事模型如实报 FAIL (P1 不阻断退出码)。
+
+**工程收口标准**: `check_v1_readiness.sh --quick` 只剩 R6/R7 FAIL ——
+**当前已达成** (24 项: 13 PASS / 2 FAIL / 9 SKIP); L2 工具链全部入库
+且门禁接入 ✅; 剩余: 全量档 R17 全绿 (待上述 4 模型加固) + 清单工程
+侧行无 ⬜。
 
 ---
 
@@ -188,8 +201,8 @@ python3 tools/physical_risk_report.py    # 全库风险评分排序 + 「建议�
 python3 tools/physical_family_pack.py    # 结构族聚类: 每族一个代表, 同族其余由代表结论覆盖
 ```
 
-(两工具与 `--jitter` 均为 L2 批次交付物, 落地进度见 §2; 具体旗标以
-各自 `--help` 为准。)
+(两工具与 `--jitter` 均为 L2 批次交付物, **已全部入库** —— 逐槽
+哈希见 §2; 具体旗标以各自 `--help` 为准。)
 
 | # | 做什么 | 准备什么 | 文档 | 预估工时 |
 | --- | --- | --- | --- | --- |
