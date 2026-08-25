@@ -164,7 +164,8 @@ JNIEXPORT jint JNICALL Java_com_magtile_studio_MainActivity_loadCatalog(
 ///   成功: {"inventory_configured": bool,
 ///          "models":[{"id","name","name_en","description","difficulty",
 ///                     "total_pieces","step_count","theme","file",
-///                     "bom_known","core9_only","can_build","missing_total"},
+///                     "bom_known","core9_only","can_build","missing_total",
+///                     "free"},
 ///                    ...]}
 ///   失败: {"error":"中文错误信息"}
 /// 卡片展示元数据外, 逐模型加载 BOM 做两项判定 (与桌面 GL/Qt 同口径):
@@ -232,6 +233,9 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MainActivity_listModels(
                 {"core9_only", core9_only},
                 {"can_build", bom_known && can_build},
                 {"missing_total", missing_total},
+                // 免费层判定与 CLI/GL/Qt 同一口径 (core::isFreeTierModel,
+                // 目录 tags 含「免费」); 非免费只作温和提示, 不锁浏览
+                {"free", magtile::core::isFreeTierModel(entry)},
             });
         }
         const nlohmann::json root = {

@@ -4,7 +4,7 @@
 体验」): `magtile_core` (C++20, 无桌面依赖) 通过 Android NDK 交叉
 编译为 `libmagtile_core.so`, 由 JNI 包装层暴露给 Kotlin; APK 内置
 `data/` 子集与全部缩略图, 首启解包后即可浏览 **全库模型库**
-(缩略图卡片 + 难度/主题/核心 9 片/「我能搭的」筛选), 登记家里的
+(缩略图卡片 + 难度/主题/免费/核心 9 片/「我能搭的」筛选), 登记家里的
 磁力片库存 (SQLite, 与桌面同一 schema), 并对任意模型按需执行完整
 物理校验 (R1~R8)。
 
@@ -12,8 +12,9 @@
 > 链路 (目录加载 / 模型库列表含 core-9 与「我能搭的」判定 / 物理校验 /
 > 教程步骤数 / 进度存档打开 / 库存读写 / 缺片清单)、RecyclerView 模型
 > 卡片列表 (缩略图 / 中文名 / 主题 / 难度星 / 片数·步数 / 「需要
-> 扩展装」角标)、筛选栏 (难度星级 / 主题 / 「只用核心 9 片」 /
-> 「我能搭的」, 口径与桌面 GL/Qt 一致)、磁力片库存录入屏 (片型 +
+> 扩展装」角标)、筛选栏 (难度星级 / 主题 / 「只看免费」 /
+> 「只用核心 9 片」 / 「我能搭的」, 口径与桌面 GL/Qt 一致)、磁力片
+> 库存录入屏 (片型 +
 > 数量步进器, 对齐桌面 InventoryPage)、数据资产打包与首启解包。
 > 尚未落地: 渲染循环 (GLES3 / Vulkan)、分步教程交互 UI (卡片详情当前
 > 为「教程即将上线」占位), 计划见下文与 `docs/ROADMAP.md`。
@@ -70,7 +71,9 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 安装启动后: 首次启动解包数据资产 (秒级) → 状态栏显示
 「N / N 个模型 · 13 种磁力片形状」(N = 全库模型数, 当前 139+) →
 滚动缩略图模型卡片列表;
-筛选栏可按难度星级 / 主题过滤, 勾选「只用核心 9 片」只看基础套装
+筛选栏可按难度星级 / 主题过滤, 勾选「只看免费」只看免费层 30 模型
+(目录「免费」标签, 非免费详情弹窗以温和订阅提示替换教程占位),
+勾选「只用核心 9 片」只看基础套装
 能搭的模型 (用到扩展片型的卡片带琥珀「需要扩展装」角标); 「我能搭的」
 只看家里磁力片库存足够搭建的模型 —— 未登记库存时该开关禁用, 由
 「去登记 ▶」引导进库存录入屏 (片型 + 数量步进器, 长按连加, 支持
@@ -119,7 +122,7 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 | Kotlin 声明 | 说明 |
 | --- | --- |
 | `loadCatalog(catalogPath: String): Int` | 加载 `tile_catalog.json`, 返回形状数量, 失败 -1 |
-| `listModels(dataDir: String): String` | 模型库目录 JSON: `{"inventory_configured":bool,"models":[{id/name/name_en/description/difficulty/total_pieces/step_count/theme/file/bom_known/core9_only/can_build/missing_total},...]}`, 失败 `{"error":"..."}`; 卡片元数据外逐模型加载 BOM 判定「只用核心 9 片」(`core::isCoreTile` 共享口径, 目录 tier 优先) 与库存已登记时的「我能搭的」(`can_build` / 共缺几片 `missing_total`); 模型文件有问题按 `bom_known=false` 降级, 139 模型后台线程百毫秒完成 |
+| `listModels(dataDir: String): String` | 模型库目录 JSON: `{"inventory_configured":bool,"models":[{id/name/name_en/description/difficulty/total_pieces/step_count/theme/file/bom_known/core9_only/can_build/missing_total/free},...]}`, 失败 `{"error":"..."}`; 卡片元数据外逐模型加载 BOM 判定「只用核心 9 片」(`core::isCoreTile` 共享口径, 目录 tier 优先) 与库存已登记时的「我能搭的」(`can_build` / 共缺几片 `missing_total`); `free` = 免费层判定 (`core::isFreeTierModel`, 目录 tags 含「免费」, 与桌面 CLI/GL/Qt 同口径); 模型文件有问题按 `bom_known=false` 降级, 139 模型后台线程百毫秒完成 |
 | `validateModel(jsonPath: String): String` | 加载模型并跑完整物理校验 (R1~R8), 返回中文摘要 |
 | `getTutorialStepCount(): Int` | 最近一次成功加载模型的教程步骤数, 未加载 -1 |
 
@@ -139,9 +142,11 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 
 筛选在 Kotlin 侧完成 (`MainActivity.applyFilters`), 口径与桌面
 GL/Qt 模型库一致: 难度星级精确匹配、规范主题 (目录 `theme` 字段)、
-「只用核心 9 片」要求 `bom_known && core9_only` (BOM 未知不进核心
-筛选)、「我能搭的」要求 `can_build` (库存未登记时开关禁用并引导
-录入, 不显示全空列表); 「需要扩展装」角标 = `bom_known && !core9_only`。
+「只看免费」要求 `free` (非免费照常可浏览, 详情弹窗以温和订阅提示
+替换教程占位)、「只用核心 9 片」要求 `bom_known && core9_only`
+(BOM 未知不进核心筛选)、「我能搭的」要求 `can_build` (库存未登记时
+开关禁用并引导录入, 不显示全空列表); 「需要扩展装」角标 =
+`bom_known && !core9_only`。
 
 ## 四、数据资产策略
 

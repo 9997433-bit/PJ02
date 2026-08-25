@@ -32,6 +32,9 @@ import java.util.concurrent.Executors
  * 筛选栏与桌面 GL/Qt 模型库同一套口径:
  *   - 难度: 星级精确匹配 (全部 / ★ ~ ★★★★★);
  *   - 主题: 规范主题 (目录 theme 字段, 缺省第一个标签/未分类);
+ *   - 只看免费: 免费层模型 (原生层 core::isFreeTierModel 共享判定,
+ *     目录 tags 含「免费」); 非免费模型照常可浏览, 详情弹窗以温和
+ *     订阅提示替换「教程即将上线」占位 (不锁内容不催促);
  *   - 只用核心 9 片: 原生层 core::isCoreTile 共享判定 (目录 tier 优先),
  *     BOM 未知 (模型文件有问题) 的模型不进核心筛选;
  *   - 我能搭的: 库存对照 BOM (原生层 tile_inventory 表快照); 未登记
@@ -64,6 +67,7 @@ class MainActivity : Activity() {
     private lateinit var filterBar: View
     private lateinit var difficultySpinner: Spinner
     private lateinit var themeSpinner: Spinner
+    private lateinit var freeCheckBox: CheckBox
     private lateinit var core9CheckBox: CheckBox
     private lateinit var buildableCheckBox: CheckBox
     private lateinit var inventoryButton: TextView
@@ -81,6 +85,8 @@ class MainActivity : Activity() {
     private var difficultyFilter = 0
     /** 空 = 全部主题, 否则匹配卡片规范主题。 */
     private var themeFilter = ""
+    /** 只显示免费层模型 (目录「免费」标签)。 */
+    private var freeFilter = false
     /** 只显示 BOM 已知且只用核心 9 片型的模型。 */
     private var core9Filter = false
     /** 只显示库存足够搭建的模型 (库存未登记时恒 false)。 */
@@ -95,6 +101,7 @@ class MainActivity : Activity() {
         filterBar = findViewById(R.id.filter_bar)
         difficultySpinner = findViewById(R.id.filter_difficulty)
         themeSpinner = findViewById(R.id.filter_theme)
+        freeCheckBox = findViewById(R.id.filter_free)
         core9CheckBox = findViewById(R.id.filter_core9)
         buildableCheckBox = findViewById(R.id.filter_buildable)
         inventoryButton = findViewById(R.id.filter_inventory)
@@ -199,6 +206,11 @@ class MainActivity : Activity() {
             applyFilters()
         }
 
+        freeCheckBox.setOnCheckedChangeListener { _, checked ->
+            freeFilter = checked
+            applyFilters()
+        }
+
         core9CheckBox.setOnCheckedChangeListener { _, checked ->
             core9Filter = checked
             applyFilters()
@@ -249,6 +261,8 @@ class MainActivity : Activity() {
         val filtered = allCards.filter { card ->
             (difficultyFilter == 0 || card.difficulty == difficultyFilter) &&
                 (themeFilter.isEmpty() || card.theme == themeFilter) &&
+                // 「只看免费」: 免费层判定与桌面 CLI/GL/Qt 同一口径
+                (!freeFilter || card.isFree) &&
                 // BOM 未知的模型不进核心筛选 (与桌面 GL 同一降级策略)
                 (!core9Filter || (card.bomKnown && card.core9Only)) &&
                 // 「我能搭的」: 库存对照 BOM (BOM 未知的不进筛选)
@@ -276,7 +290,8 @@ class MainActivity : Activity() {
 
     // ---- 卡片详情与物理校验 -------------------------------------------
 
-    /** 卡片详情: 简介 + 套装说明 + 库存对照 + 教程占位 + 按需物理校验入口。 */
+    /** 卡片详情: 简介 + 套装说明 + 库存对照 + 教程占位 (非免费为温和
+     *  订阅提示) + 按需物理校验入口。 */
     private fun showModelDialog(card: ModelCard) {
         val message = buildString {
             append(card.difficultyStars)
@@ -298,7 +313,10 @@ class MainActivity : Activity() {
                 }
             }
             if (card.description.isNotBlank()) append("\n\n").append(card.description)
-            append("\n\n").append(getString(R.string.dialog_tutorial_coming))
+            // 非免费模型以温和订阅提示替换教程占位 (仍可浏览/校验, 不锁内容)
+            append("\n\n").append(getString(
+                if (card.isFree) R.string.dialog_tutorial_coming
+                else R.string.dialog_subscription_note))
         }
         val builder = AlertDialog.Builder(this)
             .setTitle(card.name)
