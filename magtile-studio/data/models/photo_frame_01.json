@@ -5,7 +5,7 @@
   "name_en": "Photo Frame Easel 01",
   "description": "实用功能 D1 引流作: 3x2 黄橙双层地台留出一道竖缝即插纸槽,粉色窗格框立在台前, 灰色直角三角从框背斜撑到地台后缘,照片从槽顶一插就展示, 相框自己站住。",
   "difficulty": 1,
-  "total_pieces": 21,
+  "total_pieces": 22,
   "tags": [
     "实用功能",
     "相框",
@@ -17,11 +17,17 @@
     "series": "practical_utility",
     "structural_signature": {
       "tile_histogram": {
-        "square": 16,
+        "square": 17,
         "equilateral_triangle": 3,
         "right_triangle": 1,
         "window_square": 1
       }
+    },
+    "technique_tags": {
+      "primary": "T01_box_frame",
+      "secondary": [
+        "T14_diagonal_bracing"
+      ]
     }
   },
   "final_assembly": [
@@ -251,6 +257,21 @@
       "color": "yellow"
     },
     {
+      "id": "foot_mid",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
       "id": "foot_r",
       "type": "square",
       "position": [
@@ -263,7 +284,7 @@
         0.0,
         0.0
       ],
-      "color": "orange"
+      "color": "yellow"
     },
     {
       "id": "back_l",
@@ -398,10 +419,11 @@
     },
     {
       "step_number": 5,
-      "description": "铺后脚: 两片方板沿底板北缘向东延伸, 给画架一个更大的后脚。",
+      "description": "铺后脚: 三片方板沿底板北缘连成更宽后脚, 给画架更大支撑面。",
       "tip": "",
       "tiles_to_add": [
         "foot_l",
+        "foot_mid",
         "foot_r"
       ],
       "highlight_tiles": [

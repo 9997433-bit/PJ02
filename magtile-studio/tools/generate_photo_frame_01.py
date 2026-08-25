@@ -38,7 +38,8 @@ b.flat("frame_top", 1, 0, 1.0, FRAME)
 b.crest_ns("frame_flower", 1, 0.0, 1.0, TRIM)
 
 b.flat("foot_l", 0, 2, 0.0, WOOD_B)
-b.flat("foot_r", 2, 2, 0.0, WOOD_A)
+b.flat("foot_mid", 1, 2, 0.0, WOOD_A)
+b.flat("foot_r", 2, 2, 0.0, WOOD_B)
 b.wall_ns("back_l", 0, 2.0, 0, WOOD_A)
 b.wall_ns("back_r", 2, 2.0, 0, WOOD_B)
 b.brace("easel", (2.0, 2.0, 0.0), "-x", BRACE)
@@ -65,8 +66,8 @@ b.step(
     highlight=["base_1_0"],
 )
 b.step(
-    "铺后脚: 两片方板沿底板北缘向东延伸, 给画架一个更大的后脚。",
-    ["foot_l", "foot_r"],
+    "铺后脚: 三片方板沿底板北缘连成更宽后脚, 给画架更大支撑面。",
+    ["foot_l", "foot_mid", "foot_r"],
     highlight=["base_0_1", "base_2_1"],
 )
 b.step(
@@ -96,7 +97,7 @@ b.finalize(
     ),
     difficulty=1,
     tags=["实用功能", "相框", "画架", "照片", "桌面"],
-    min_pieces=21,
+    min_pieces=22,
     min_steps=8,
     series="practical_utility",
 )
