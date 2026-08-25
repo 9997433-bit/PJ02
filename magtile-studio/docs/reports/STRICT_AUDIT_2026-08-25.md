@@ -102,7 +102,7 @@
 
 1. **全库 strict 审计**: 131 个模型逐一 `validate --profile strict`, 零警告政策 (`tools/audit_strict_physics.sh`), 结果 130 通过 + 1 白名单豁免 + 0 失败;
 2. **逐步装配质检**: `tests/test_step_assembly.py` 逐片连通/引用对账/步骤粒度, 131/131 通过;
-3. **CTest 全量回归**: 291/291 通过 (含 3 个旗舰 `validate_strict_*` 用例与 9 个物理负例夹具);
+3. **CTest 全量回归**: 巡检起点 291/291 通过 (含 3 个旗舰 `validate_strict_*` 用例与 9 个物理负例夹具); 修复回填后终态 292/292 通过 (新增 `strict_profile_message`), 并在干净检出上跑通 `tests/run_full_qa.sh` 全部 22 个关卡 (含新可选关卡 14 弱磁严格档全库巡检);
 4. **档位差分探针** (防"strict 假绿"): 构造 3 片正方形悬挂链 (90g) 临时夹具 —— 落在 default 预算 (120g/边长) 之内、strict 预算 (84g/边长) 之外。实测 default 档不报 R5、strict 档正确报 `hanging_chain_overload` 并拒绝, 证明 strict 档参数真实生效而非空转。
 
 ### 6.2 发现并修复的引擎缺陷 (非内容问题)
