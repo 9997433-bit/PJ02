@@ -27,6 +27,33 @@
 2. strict 档报 Warning/Error 的模型, 实物复核时**优先安排弱磁品牌或旧片实搭**, 让实物测试覆盖软件标出的最薄弱连接;
 3. strict 档有未豁免警告的模型不要开始实物复核 —— 先按 [STRICT_PHYSICS_AUDIT.md](STRICT_PHYSICS_AUDIT.md) 的零警告政策处理 (整改或书面论证豁免), 再进入实物环节。
 
+## 0.5 先跑 L2 再决定人手范围 (仿真先行)
+
+实物复核是三层验证里最贵的一层 (0.5~2 小时/模型)。排产人手之前, 先把 L2 仿真层 (jitter 蒙特卡洛 + 风险标记, [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 2.1 节接口约定) 跑完, 用机器结果决定"谁先搭、谁后搭、抽检抽谁":
+
+```bash
+# 1) 风险报告: 列出被 L2 标记的模型与命中编码 (l1_warning / tall_structure / tall_wall_chain /
+#    critical_com_margin / weak_edge_load_bearing / manual_flag, 编码表见 BUILD_VERIFICATION.md 第 2 节)
+python3 tools/physical_risk_report.py data/models --json
+
+# 2) 对 l2_required 模型跑 jitter 蒙特卡洛 (±1.5mm/±2° × 20 副本, 通过率 ≥ 90% 才算过)
+./build/magtile_app validate data/models/<model_id>.json --data-dir data --jitter
+```
+
+**L2 结果 → 人手范围决策**:
+
+| L2 结果 | 人手动作 |
+| --- | --- |
+| jitter 未过 (通过率 < 90%) | **不要开始实搭** —— 先回设计端加固/调序, 软件层修绿再排人手; 实搭一个 jitter 已判失稳的模型是纯浪费人时 |
+| 被标记 (flagged) 且 jitter 通过 | **优先排产实搭**, 且实搭时重点盯风险报告命中的位置 (临界重心、垂直墙链、弱磁承重位) —— 让最贵的人时先花在机器认为最可疑的模型上 |
+| 未被标记且 jitter 通过 | 排后; 抽检类分级 (D3 30% / D1–D2 10%) 的抽样名额**优先分给被标记模型**, 全绿模型在剩余名额内随机补足 |
+
+**边界 (不因 L2 全绿而放松)**:
+
+1. D4+ 每模型必做实搭的覆盖率承诺**不因 L2 全绿而豁免** ([CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 4.3 节) —— L2 只决定顺序与抽检取舍, 不缩小 D4+ 全集;
+2. L2 只覆盖错位累积失稳 (F08) 与静力判定的扰动稳健性; 品牌磁力差异 (F05)、手抖连锁塌 (F07)、拆不下来 (F10) 等"仅 L3"失效模式仍只有实物层能发现 (BUILD_VERIFICATION.md 第 4 节"首个能发现的层");
+3. 抽样包排产 (第 8 节) 同理: 先跑 L2 再定场次顺序, jitter 未过的模型不进入当期抽样场次。
+
 ## 1. 准备
 
 | 项目 | 要求 |
