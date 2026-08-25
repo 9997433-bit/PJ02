@@ -1,0 +1,61 @@
+# =============================================================
+# MagTile Studio - 全量 QA 流水线 (CI)
+#
+# 每次 push 都完整运行 tests/run_full_qa.sh:
+#   构建 -> CTest 全量回归 -> 模型库质检 -> 反平凡检查 ->
+#   模型逻辑质检 -> 教程完整性 -> 物理负例/正例 -> GL 渲染冒烟。
+#
+# 质量关卡的对象不只是代码, 更是内容: 任何一个模型 JSON 的物理
+# 合理性/教程逻辑/内容体量不达标, CI 即红灯, 不允许合入。
+# 各关卡说明见 magtile-studio/docs/TESTING.md。
+# =============================================================
+name: QA
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  full-qa:
+    name: full-qa (build + ctest + content gates + gl smoke)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: magtile-studio
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # X11 开发库: FetchContent 源码构建 GLFW 所需;
+      # xvfb + Mesa: 无显卡 runner 上的无头 OpenGL 渲染 (llvmpipe),
+      # 让 GL 冒烟测试跑"真渲染 + 截图校验"而不是降级链接检查。
+      - name: 安装系统依赖
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake g++ make python3 \
+            libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev \
+            xvfb libgl1 libglx-mesa0
+
+      # GLFW / ImGui 经 FetchContent 拉取, 按 CMakeLists 哈希缓存源码,
+      # 避免每次 CI 重复克隆外部仓库
+      - name: 缓存 FetchContent 依赖
+        uses: actions/cache@v4
+        with:
+          path: magtile-studio/build/_deps
+          key: fetchcontent-${{ runner.os }}-${{ hashFiles('magtile-studio/CMakeLists.txt') }}
+
+      - name: 运行全量 QA 流水线
+        env:
+          FORCE_COLOR: "1"   # GitHub Actions 日志支持 ANSI 颜色
+        run: bash tests/run_full_qa.sh
+
+      # 失败时把分项日志留档, 便于不拉环境直接定位失败关卡
+      - name: 上传失败日志
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-stage-logs
+          path: /tmp/magtile_qa_*
+          if-no-files-found: ignore
