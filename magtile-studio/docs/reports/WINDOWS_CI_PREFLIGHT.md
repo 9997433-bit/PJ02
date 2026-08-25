@@ -1,8 +1,8 @@
 # Windows CI 首跑预检清单 (Pre-dispatch Preflight)
 
 - 生成时间: 2026-08-25 (UTC)
-- 基线提交: `95c26cd` (`cursor/magtile-studio-foundation-a95b`) + 本提交的
-  workflow 加固 (标签校验步 env 间接注入, 见 §2 A-5)
+- 基线提交: `2b2c4ff` (`cursor/magtile-studio-foundation-a95b`, 250 模型
+  基线), 已含 workflow 加固 (标签校验步 env 间接注入, 见 §2 A-5)
 - 定位: `windows-release` 流水线**触发之前**的把关清单。触发方法、
   预期产物、失败排查与签核登记见
   [`../../scripts/package_windows.md`](../../scripts/package_windows.md) §8
@@ -22,7 +22,7 @@
 | 4 | 「提取 CMake 工程版本号」步逻辑复刻: 对真实 CMakeCache.txt 提取 | pwsh 7.4.6 (与 runner 同大版本) | **通过** (提取到 `0.1.0`) |
 | 5 | 「校验标签与工程版本号一致」步 (加固后) 三用例: 一致通过 / 不一致检出 / 含单引号注入载荷的恶意标签名仅作数据比较不执行 | pwsh 7.4.6 | **3/3 通过** |
 | 6 | `scripts/smoke_qt_linux_pack.sh` 全量替身冒烟 (并存 TGZ / NSIS makensis 编译 / Qt-only / starter 30 子集 / 解包 offscreen 启动 / LGPL 合规) | Ubuntu, CMake 3.28.3, Qt 6.4.2, makensis 3.09, Python 3.12.3 | **41 项通过, 0 项失败** (3 项 WARN 为发布前追加项: Qt 精确版本注记 + LGPL/GPL 许可全文, 冒烟档不阻塞, 见手册第十一节待办) |
-| 7 | starter 清单漂移守卫 `tools/verify_free_tier.py` | python3 | **通过** (扫描 209 模型, 免费标签 30 = starter 清单 30, 全 core-9, 零差异) |
+| 7 | starter 清单漂移守卫 `tools/verify_free_tier.py` | python3 | **通过** (扫描 250 模型, 免费标签 30 = starter 清单 30, 全 core-9, 零差异) |
 
 本地验证的**边界** (首跑仍可能暴露、无法在 Linux 侧预验的项):
 MSVC 平台编译差异、Windows runner 上 choco/NSIS 实装、FetchContent
@@ -71,7 +71,7 @@ MSVC 平台编译差异、Windows runner 上 choco/NSIS 实装、FetchContent
 - [ ] **C-2 产物勿混放**: starter 档产物**文件名与 full 档相同**
       (CPack 包名不带档位后缀), 两场下载物分目录存放; 甄别看包内
       `data/models/` 条数 (starter 恰 30, full 与
-      `model_catalog.json` 登记条数一致, 本基线 209)。
+      `model_catalog.json` 登记条数一致, 本基线 250)。
 - [ ] **C-3 逐场登记**: 每场按 §8.4 签核表登记 run 链接、提交、
       SHA256 与结果; 两场全绿后按 §8.5 一次性翻状态
       (D2 ✅ / README 打钩 / 去「草案」注记)。
