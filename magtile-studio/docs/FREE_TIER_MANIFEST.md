@@ -89,3 +89,16 @@ MAGTILE_FREE_TIER_CHECK=1 tests/run_full_qa.sh    # 随 QA 流水线 (可选关�
 1. 给 `stageMagTileAssets` 增加 Gradle 属性开关 (如 `-PmagtileModelSet=starter`), 在同步前调用 `tools/make_data_subset.py --manifest platforms/windows/packaging/starter_models.txt` 产出裁剪目录, 再以该目录为 `from()` 源 —— 与 Windows CPack 的 `-DMAGTILE_PACKAGE_MODEL_SET=starter` 复用**同一份清单与同一个装配脚本**, 不产生第四份清单;
 2. 缩略图随清单同裁 (make_data_subset 已处理, 缺图仅警告);
 3. 打包后跑 `tools/verify_free_tier.py` 确认清单未漂移。
+
+## 6. 三端「仅免费 / 全部」浏览体验 (产品层, 2026-08)
+
+清单对齐后, 三端产品界面统一落地了免费层的筛选与温和引导 (不改 30 个 `免费` 标签集合, 判定统一走 `core::isFreeTierModel` —— 目录 `tags` 含 `免费`, 定义在 `include/magtile/core/model_catalog.hpp`; Android Kotlin 侧以同一标签直读目录 JSON):
+
+| 端 | 筛选「仅免费」 | 非免费模型的温和引导 |
+| --- | --- | --- |
+| CLI | `magtile_app library --free-only` (可与 `--core-only` 叠加; 目录/模型对账照常覆盖全库) | — (列表工具, 不设引导) |
+| ImGui 版 (`library --gui`) | 筛选行「免费模型」勾选 | 卡片「订阅解锁」角标 (温和紫, 元数据/收藏照常); 点卡片弹订阅引导弹窗: 「请家长来解锁」(经家长门进家长区订阅占位) /「先看免费模型」(一键切免费筛选) /「回模型库」; `--open` 深链是内容制作/CI 入口, 刻意不过引导 |
+| Qt 版 | 筛选侧栏「🎁 免费模型」chip (`LibraryFilterModel::freeOnly`) | 卡片「🔒 订阅解锁」徽标; 详情页元数据/BOM 照常可看 + 温和说明条 (免费数实时读 `freeModelCount`), 「开始搭建」改「请家长来解锁」→ `openSubscriptionZone` 经家长门导向订阅页 (QT-5, §11) |
+| Android | 筛选栏「只看免费模型」勾选 (Kotlin 读解包后的 `model_catalog.json` 标签; JNI 载荷刻意不动 —— 库存/进度链路另有并行在途改动; 目录读取失败时筛选温和禁用) | 详情弹窗将「教程即将上线」替换为温和订阅提示 (简介/物理校验照常可用) |
+
+口径铁律不变: **只锁教程入口, 不锁浏览** (COMMERCIAL_PLAN §2.1 只锁内容不锁功能); 儿童侧只说「请家长来解锁」, 无价格/无倒计时/无催促/不用红色 (UI_UX_SPEC §11/§12.2); 标签数据缺失时一律**宁可放行, 不误锁免费内容**。

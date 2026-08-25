@@ -31,6 +31,12 @@ struct LibraryRow {
     int status = 0;         ///< 0 未开始 / 1 进行中 / 2 已完成 (见 Status 枚举)
     bool favorited = false;
 
+    /// 免费层模型 (目录 tags 含「免费」, core::isFreeTierModel 同一口径);
+    /// false 时卡片显示温和「订阅解锁」角标, 详情页「开始搭建」改走
+    /// 订阅引导 (家长门后, 元数据照常可浏览)。缺省 true: 无标签数据
+    /// 时不上锁 (宁可放行, 不误锁免费内容)。
+    bool is_free = true;
+
     bool bom_known = false;   ///< 模型 JSON 成功加载, bom / core9_only 有效
     bool core9_only = false;  ///< BOM 只用核心 9 片型 (基础套装即可搭)
     bool can_build = false;   ///< 库存足够搭建 (未登记库存时恒为 false)
@@ -63,6 +69,7 @@ public:
         CanBuildRole,       ///< bool: 库存足够搭建
         MissingTotalRole,   ///< int: 缺片总数
         BomKnownRole,       ///< bool: BOM 数据有效 (模型 JSON 已加载)
+        FreeRole,           ///< bool: 免费层模型 (tags 含「免费」)
     };
 
     explicit LibraryModel(QObject* parent = nullptr);

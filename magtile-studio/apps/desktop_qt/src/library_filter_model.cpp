@@ -30,6 +30,13 @@ void LibraryFilterModel::setTheme(const QString& theme) {
     emit filtersChanged();
 }
 
+void LibraryFilterModel::setFreeOnly(bool on) {
+    if (free_only_ == on) return;
+    free_only_ = on;
+    invalidateRowsFilter();
+    emit filtersChanged();
+}
+
 void LibraryFilterModel::setCore9Only(bool on) {
     if (core9_only_ == on) return;
     core9_only_ = on;
@@ -48,6 +55,7 @@ void LibraryFilterModel::clearFilters() {
     if (!hasActiveFilters()) return;
     difficulty_ = 0;
     theme_.clear();
+    free_only_ = false;
     core9_only_ = false;
     buildable_only_ = false;
     invalidateRowsFilter();
@@ -101,6 +109,9 @@ bool LibraryFilterModel::filterAcceptsRow(int source_row,
         return false;
     }
     if (!theme_.isEmpty() && src->data(idx, LibraryModel::ThemeRole).toString() != theme_) {
+        return false;
+    }
+    if (free_only_ && !src->data(idx, LibraryModel::FreeRole).toBool()) {
         return false;
     }
     if (core9_only_ && !src->data(idx, LibraryModel::Core9OnlyRole).toBool()) {

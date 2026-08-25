@@ -394,6 +394,9 @@ private:
     bool library_core9_only_ = false;      ///< "只用核心 9 片": 只看基础套装能搭的模型
     bool library_buildable_only_ = false;  ///< "我能搭的": 只看库存足够的模型
     bool library_free_only_ = false;       ///< "免费模型": 只看免费层 (tags 含「免费」)
+    /// 筛选行是否可见 (4-6 启蒙档隐藏): 订阅引导弹窗据此决定
+    /// 是否提供「先看免费模型」一键切筛选
+    bool library_filter_row_visible_ = true;
 
     // 家长门软键盘的跨帧输入缓冲 (中文大写数字; 提交/返回时清空)
     std::string parent_gate_input_;
