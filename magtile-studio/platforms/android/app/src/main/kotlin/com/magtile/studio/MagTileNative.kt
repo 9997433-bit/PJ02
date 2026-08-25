@@ -138,10 +138,24 @@ object MagTileNative {
      */
     external fun parentGateSessionActive(): Boolean
 
+    /**
+     * 立即结束家长会话 (幂等): 清除本地数据成功后调用 —— 一切回到
+     * 首次启动状态, 会话也一并收回, 再进家长入口需重新验证 (与桌面
+     * Qt onDataCleared 里 parentGate.lockSession 同口径)。
+     */
+    external fun parentGateLockSession()
+
     // ---- 隐私与数据 (SECURITY_AND_PRIVACY.md §3/§4 C4/Z8: 家长可
     //      查看/导出/删除全部本地数据; 复用核心库
     //      progress::exportLocalDataJson / ProgressStore::clearAllData,
     //      与桌面 Qt 家长中心「隐私与数据」区同一实现与导出格式) ------
+
+    /**
+     * 进度存档是否已打开 (与 Qt PrivacyBackend::storeAvailable 同
+     * 角色): false 时隐私面板温和禁用导出/清除按钮并提示「先歇一
+     * 会儿」, 而不是点了才报错 (P3 零挫败)。纯内存查询, 主线程可调。
+     */
+    external fun progressStoreAvailable(): Boolean
 
     /**
      * 导出全部本地数据 (进度/成就/磁力片库存/设置 —— 应用在本机的

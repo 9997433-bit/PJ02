@@ -329,11 +329,16 @@ jni_symbol_list() {
             MagTileNative_saveInventory MagTileNative_canBuildModel \
             MagTileNative_missingPiecesJson \
             MagTileNative_ageModeId MagTileNative_setAgeModeId \
+            MagTileNative_reduceMotion \
             MagTileNative_progressOverviewJson \
             MagTileNative_getTutorialSteps MagTileNative_savedTutorialStep \
             MagTileNative_saveTutorialStep \
             MagTileNative_parentGateOpenJson MagTileNative_parentGateSubmitJson \
-            MagTileNative_parentGateSessionActive \
+            MagTileNative_parentGateSessionActive MagTileNative_parentGateLockSession \
+            MagTileNative_progressStoreAvailable \
+            MagTileNative_exportLocalDataJson MagTileNative_clearLocalData \
+            MagTileNative_subscriptionActive MagTileNative_subscriptionProductId \
+            MagTileNative_setSubscriptionActive \
             TutorialSceneNative_loadScene TutorialSceneNative_setStep \
             TutorialSceneNative_releaseScene \
             TutorialSceneNative_dragRotate TutorialSceneNative_pinchZoom \

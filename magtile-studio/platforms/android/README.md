@@ -56,7 +56,7 @@ platforms/android/
 ├── keystore.properties.example  release 签名配置模板 (真实密钥不入库)
 ├── CMakeLists.txt            JNI 共享库构建脚本 (双入口: 仓库根 / Gradle)
 ├── jni/
-│   ├── magtile_jni.cpp       JNI 包装层 (模型库/存档/教程/家长门/隐私/订阅 25 个入口, 见下表)
+│   ├── magtile_jni.cpp       JNI 包装层 (模型库/存档/教程/家长门/隐私/订阅 26 个入口, 见下表)
 │   └── magtile_scene_jni.cpp 3D 教程视口 JNI 桥 (场景/相机/渲染循环 8 个入口, 见下表)
 ├── settings.gradle.kts       Gradle 工程入口 (工程根 = 本目录)
 ├── build.gradle.kts          插件版本 (AGP 8.7.3 / Kotlin 2.0.21)
@@ -443,10 +443,10 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 
 `.github/workflows/android.yml` (仓库根) 包含两个任务:
 
-- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 33 个 JNI
-  符号齐全 (模型库 4 个 + 进度存档/库存/年龄段/进度页 8 个 +
-  分步教程 3 个 + 家长门 4 个 + 隐私与数据 3 个 + 订阅状态 3 个 +
-  3D 教程视口 8 个) —— 持续保证 `magtile_core` 无平台依赖。
+- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 34 个 JNI
+  符号齐全 (模型库 4 个 + 进度存档/库存/年龄段/减少动效/进度页
+  9 个 + 分步教程 3 个 + 家长门 4 个 + 隐私与数据 3 个 + 订阅状态
+  3 个 + 3D 教程视口 8 个) —— 持续保证 `magtile_core` 无平台依赖。
 - `assemble-debug`: Gradle 全量打包 debug APK, 校验 APK 内容
   (原生库 / 数据资产 / 缩略图已打包; 缩略图数量落后于模型数量时
   只告警 —— 内容制作期新模型缩略图可能滞后生成, 缺图卡片显示占位)

@@ -512,46 +512,93 @@ class MainActivity : Activity() {
     // ---- 隐私与数据 (SECURITY_AND_PRIVACY.md §3/§4 C4/Z8, 家长门后;
     //      文案口径与桌面 Qt 家长中心「隐私与数据」区一致) ---------------
 
-    /** 隐私面板: 我们收集什么 / 数据存在哪 (存档路径) / 隐私政策文档
-     *  路径 + 「导出进度 (JSON)」与「清除本地数据」(带二次确认)。 */
+    /** 最近一次导出文件的完整路径 (面板内回显, 家长好找到文件 ——
+     *  与 Qt ParentAreaPage.lastExportPath 同角色; 只存内存)。 */
+    private var lastExportPath = ""
+
+    /** 隐私面板 (查阅口径与 Qt 家长中心一致): 我们收集什么 / 数据存
+     *  在哪 (存档路径) / 模型库目录 (诊断) / 隐私政策文档路径 +
+     *  「导出进度 (JSON)」与「清除本地数据」(带二次确认)。存档不可用
+     *  时两个操作温和禁用并提示「先歇一会儿」(P3 零挫败, 与 Qt
+     *  storeAvailable 禁用策略一致), 而不是点了才报错。 */
     private fun showPrivacyDialog() {
         val dbPath = File(filesDir, PROGRESS_DB_NAME).absolutePath
-        AlertDialog.Builder(this)
+        val dataDirPath = DataAssetInstaller.dataDir(this).absolutePath
+        val storeAvailable = MagTileNative.progressStoreAvailable()
+        val message = buildString {
+            append(getString(R.string.privacy_summary, dbPath, dataDirPath))
+            if (lastExportPath.isNotEmpty()) {
+                append("\n\n")
+                append(getString(R.string.privacy_last_export, lastExportPath))
+            }
+            if (!storeAvailable) {
+                append("\n\n")
+                append(getString(R.string.privacy_store_unavailable))
+            }
+        }
+        val dialog = AlertDialog.Builder(this)
             .setTitle(R.string.privacy_dialog_title)
-            .setMessage(getString(R.string.privacy_summary, dbPath))
+            .setMessage(message)
             .setPositiveButton(R.string.privacy_export) { _, _ -> exportLocalData() }
             .setNeutralButton(R.string.privacy_clear) { _, _ -> confirmClearLocalData() }
             .setNegativeButton(R.string.dialog_close, null)
             .show()
+        if (!storeAvailable) {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = false
+            dialog.getButton(AlertDialog.BUTTON_NEUTRAL)?.isEnabled = false
+        }
     }
 
     /** 导出全部本地数据为 JSON 文件 (复用核心库导出, 与桌面同格式):
      *  写入应用专属外部目录 (无需任何权限, 家长可用文件管理器取走;
-     *  外部存储不可用时退回 filesDir), 文件名带时间戳互不覆盖。 */
+     *  外部存储不可用时退回 filesDir)。与 Qt PrivacyBackend::exportData
+     *  同口径: 时间戳到毫秒 + 已存在则追加序号 (多次导出互不覆盖,
+     *  家长可留多份存档), 先写临时文件再改名 (原子落盘, 写一半失败
+     *  不留残缺文件)。 */
     private fun exportLocalData() {
         backgroundExecutor.execute {
             val result = try {
                 val payload = MagTileNative.exportLocalDataJson()
-                if (payload.startsWith("{\"error\"")) {
-                    null
-                } else {
-                    val stamp = java.text.SimpleDateFormat(
-                        "yyyyMMdd_HHmmss", java.util.Locale.US).format(java.util.Date())
-                    val dir = getExternalFilesDir(null) ?: filesDir
-                    File(dir, "magtile_export_$stamp.json").apply { writeText(payload) }
-                }
+                if (payload.startsWith("{\"error\"")) null else writeExportFile(payload)
             } catch (t: Throwable) {
                 Log.e(TAG, "本地数据导出失败", t)
                 null
             }
             runOnUiThread {
                 if (isFinishing || isDestroyed) return@runOnUiThread
+                if (result != null) lastExportPath = result.absolutePath
                 android.widget.Toast.makeText(
                     this,
                     if (result != null) getString(R.string.privacy_export_done, result.absolutePath)
                     else getString(R.string.privacy_export_soft_fail),
                     android.widget.Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    /** 落盘导出 JSON (工作线程): 毫秒时间戳 + 序号防覆盖 + 临时文件
+     *  改名原子替换; 任一步失败返回 null (调用方温和提示)。 */
+    private fun writeExportFile(payload: String): File? {
+        val stamp = java.text.SimpleDateFormat(
+            "yyyyMMdd_HHmmss_SSS", java.util.Locale.US).format(java.util.Date())
+        val dir = getExternalFilesDir(null) ?: filesDir
+        var file = File(dir, "magtile_export_$stamp.json")
+        var seq = 2
+        while (file.exists()) {
+            file = File(dir, "magtile_export_${stamp}_$seq.json")
+            seq += 1
+        }
+        // 同一目录内 rename 原子替换 (与 Qt QSaveFile 同角色):
+        // 写临时文件失败/中断只留 .tmp 残件, 绝不产出半截导出文件
+        val tmp = File(dir, "${file.name}.tmp")
+        return try {
+            tmp.writeText(payload)
+            if (tmp.renameTo(file)) file else null
+        } catch (t: Throwable) {
+            Log.e(TAG, "导出文件写入失败", t)
+            null
+        } finally {
+            if (tmp.exists() && !tmp.delete()) tmp.deleteOnExit()
         }
     }
 
@@ -567,7 +614,9 @@ class MainActivity : Activity() {
     }
 
     /** 执行清除 (单事务原子清空) 并温和回到首次状态: 年龄段回默认档、
-     *  重拉模型库 (库存回未登记引导态), 只报结果不弹「失败」。 */
+     *  重拉模型库 (库存回未登记引导态)、家长会话一并收回 (再进家长
+     *  入口需重新验证, 与 Qt onDataCleared 锁会话同口径), 只报结果
+     *  不弹「失败」。 */
     private fun clearLocalData() {
         backgroundExecutor.execute {
             val cleared = try {
@@ -576,6 +625,9 @@ class MainActivity : Activity() {
                 Log.e(TAG, "本地数据清除失败", t)
                 false
             }
+            // 一切回到首次启动状态, 会话也收回 (清除失败不锁: 家长
+            // 大概率要留在门后重试或改用导出)
+            if (cleared) MagTileNative.parentGateLockSession()
             runOnUiThread {
                 if (isFinishing || isDestroyed) return@runOnUiThread
                 if (cleared) {

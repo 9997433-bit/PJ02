@@ -21,9 +21,13 @@ object DataAssetInstaller {
     private const val ASSET_ROOT = "data"
     private const val STAMP_FILE = ".data_stamp"
 
+    /** 解包目标目录 (filesDir/data) 的路径, 不触发解包 —— 家长中心
+     *  「隐私与数据」面板的诊断展示用 (与 Qt studio.dataDirText 同角色)。 */
+    fun dataDir(context: Context): File = File(context.filesDir, ASSET_ROOT)
+
     /** 确保数据资产已解包, 返回 filesDir/data 目录。在工作线程调用。 */
     fun ensureInstalled(context: Context): File {
-        val targetDir = File(context.filesDir, ASSET_ROOT)
+        val targetDir = dataDir(context)
         val stampFile = File(context.filesDir, STAMP_FILE)
         val currentStamp = context.packageManager
             .getPackageInfo(context.packageName, 0)

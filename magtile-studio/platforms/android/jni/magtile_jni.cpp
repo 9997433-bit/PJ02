@@ -45,11 +45,16 @@
 //   parentGateOpenJson()          -> 进门出新题, 返回门状态 JSON
 //   parentGateSubmitJson(answer)  -> 提交答案, 返回结果 + 剩余次数/冷却
 //   parentGateSessionActive()     -> 家长会话是否仍有效 (免重复验证)
+//   parentGateLockSession()       -> 立即结束家长会话 (清除本地数据后
+//                                    调用, 与 Qt 清除后锁会话同口径)
 //
 // 隐私与数据链路 (绑定 com.magtile.studio.MagTileNative, 直接复用
 // progress::exportLocalDataJson / ProgressStore::clearAllData ——
 // 与桌面 Qt 家长中心「隐私与数据」区同一核心实现与导出格式,
 // SECURITY_AND_PRIVACY.md §4 C4/Z8; 入口在家长门后):
+//   progressStoreAvailable()      -> 进度存档是否已打开 (与 Qt
+//                                    PrivacyBackend::storeAvailable 同
+//                                    角色: 不可用时界面温和禁用导出/清除)
 //   exportLocalDataJson()         -> 全部本地数据 JSON (进度/成就/库存/
 //                                    设置), 写文件由 Kotlin 侧完成
 //   clearLocalData()              -> 单事务原子清空四张表 (二次确认在
@@ -1014,6 +1019,17 @@ JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_parentGateSessi
     return ctx.gate.sessionActive() ? JNI_TRUE : JNI_FALSE;
 }
 
+/// 立即结束家长会话 (core::ParentGate::endSession, 幂等): 清除本地
+/// 数据成功后由 Kotlin 侧调用 —— 一切回到首次启动状态, 会话也一并
+/// 收回, 再进家长入口需重新验证 (与桌面 Qt onDataCleared 里
+/// parentGate.lockSession 同口径)。
+JNIEXPORT void JNICALL Java_com_magtile_studio_MagTileNative_parentGateLockSession(
+    JNIEnv* /*env*/, jobject /*thiz*/) {
+    auto& ctx = gateContext();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    ctx.gate.endSession();
+}
+
 // =============================================================
 // 隐私与数据 (SECURITY_AND_PRIVACY.md §3 / §4 C4/Z8, 绑定
 // com.magtile.studio.MagTileNative): 家长可查看、导出、删除全部
@@ -1021,6 +1037,17 @@ JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_parentGateSessi
 // ProgressStore::clearAllData —— 与桌面 Qt 家长中心「隐私与数据」
 // 区同一实现与导出格式; Kotlin 侧入口在家长门后, 清除另有二次确认。
 // =============================================================
+
+/// 进度存档是否已打开 (与 Qt PrivacyBackend::storeAvailable 同角色):
+/// false = 存档打不开 (openProgressStore 失败或尚未调用), 界面据此
+/// 温和禁用导出/清除按钮并提示「先歇一会儿」—— 而不是点了才报错
+/// (P3 零挫败, 与桌面家长中心同策略)。纯内存查询, 主线程可调。
+JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_progressStoreAvailable(
+    JNIEnv* /*env*/, jobject /*thiz*/) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    return ctx.store.has_value() ? JNI_TRUE : JNI_FALSE;
+}
 
 /// 导出全部本地数据 (进度/成就/磁力片库存/设置, 即 §3.1 数据清单的
 /// 本地全集) 为家长可读的 JSON 文本 (缩进 2 空格, 与桌面同格式);
