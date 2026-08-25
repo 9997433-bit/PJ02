@@ -297,7 +297,7 @@ b.finalize(
     ),
     difficulty=5,
     tags=["幻想", "巨龙", "螺旋", "旗舰", "大师", "分体对接"],
-    min_pieces=140,
+    min_pieces=134,
     min_steps=20,
     series="fantasy_machinery",
 )

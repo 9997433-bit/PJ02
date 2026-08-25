@@ -2,7 +2,6 @@
 """生成模型 data/models/marble_relay_city_01.json (四塔接力滚珠城)。
 
 四座 2x2 发球塔 + 十字连廊 + 四条换轨顺时针接力 (T08/T16)。
-换轨转角台在连廊格 z=1, 桥墩由发球塔出珠面墙兼任 (零重叠)。
 
 用法: python3 tools/generate_marble_relay_city_01.py
 """
@@ -26,10 +25,10 @@ TOWERS = [
 ]
 
 LINKS = {
-    "ab": {"cx": 2, "cy": 0, "rails": [("ns", 2, 1.0, 2.0), ("ew", 3.0, 0, 2.0)]},
-    "bc": {"cx": 4, "cy": 2, "rails": [("ew", 4.0, 2, 2.0), ("ns", 3, 3.0, 2.0)]},
-    "cd": {"cx": 2, "cy": 4, "rails": [("ns", 2, 3.0, 2.0), ("ew", 3.0, 3, 2.0)]},
-    "da": {"cx": 0, "cy": 2, "rails": [("ew", 0.0, 2, 2.0), ("ns", 0, 3.0, 2.0)]},
+    "ab": {"cx": 2, "cy": 0, "rails": [], "gps": [("ns", 2, 0.0), ("ns", 2, 1.0)]},
+    "bc": {"cx": 4, "cy": 2, "rails": [], "gps": [("ew", 4.0, 2), ("ew", 4.0, 3)]},
+    "cd": {"cx": 2, "cy": 4, "rails": [], "gps": [("ns", 2, 3.0), ("ns", 2, 4.0)]},
+    "da": {"cx": 0, "cy": 2, "rails": [], "gps": [("ew", 1.0, 2), ("ew", 0.0, 2)]},
 }
 
 
@@ -88,7 +87,7 @@ def build_tower(prefix, x0, y0, exit_side, colors):
     elif exit_side == "w":
         b.crest_ns(f"{prefix}_cr0", x0, float(y0 + 1), 2.0, RAIL)
     else:
-        b.crest_ns(f"{prefix}_cr0", x0 + 1, float(y0 + 2), 2.0, RAIL)
+        b.crest_ns(f"{prefix}_cr0", x0 + 1, float(y0), 2.0, RAIL)
     ids.append(f"{prefix}_cr0")
     b.spire_ns(f"{prefix}_rn", x0 + 1, float(y0 + 2), 2.0, "purple")
     ids.append(f"{prefix}_rn")
@@ -100,7 +99,16 @@ def build_link(key):
     cx, cy = s["cx"], s["cy"]
     c = f"lk_{key}_c"
     b.flat(c, cx, cy, 2.0, PLAT)
-    b.brace(f"lk_{key}_br", (float(cx), float(cy), 1.0), "+y" if cy <= 2 else "-y", PIER)
+    gps = []
+    for i, (gk, ga, gl) in enumerate(s["gps"]):
+        for z0 in (0, 1):
+            gid = f"lk_{key}_gp{i}_{z0}"
+            if gk == "ns":
+                b.wall_ns(gid, ga, float(gl), z0, PIER)
+            else:
+                b.wall_ew(gid, float(ga), gl, z0, PIER)
+        gps.append(f"lk_{key}_gp{i}_0")
+        gps.append(f"lk_{key}_gp{i}_1")
     rails = []
     for i, (kind, a, lane, z) in enumerate(s["rails"]):
         rid = f"lk_{key}_r{i}"
@@ -109,26 +117,25 @@ def build_link(key):
         else:
             b.crest_ns(rid, a, lane, z, RAIL)
         rails.append(rid)
-    return [c, f"lk_{key}_br"] + rails
+    return gps + [c] + rails
 
 
 BRIDGE = []
 for y in (0, 1):
     b.flat(f"bridge_ab_{y}", 2, y, 0.0, "gray")
-    b.flat(f"bridge_ab_{y}_d", 2, y, 1.0, "gray")
-    BRIDGE += [f"bridge_ab_{y}", f"bridge_ab_{y}_d"]
+    BRIDGE.append(f"bridge_ab_{y}")
 for x in (3, 4):
-    b.flat(f"bridge_bc_{x}", x, 2, 0.0, "gray")
-    b.flat(f"bridge_bc_{x}_d", x, 2, 1.0, "gray")
-    BRIDGE += [f"bridge_bc_{x}", f"bridge_bc_{x}_d"]
-for y in (3, 4):
-    b.flat(f"bridge_cd_{y}", 2, y, 0.0, "gray")
-    b.flat(f"bridge_cd_{y}_d", 2, y, 1.0, "gray")
-    BRIDGE += [f"bridge_cd_{y}", f"bridge_cd_{y}_d"]
+    tid = f"bridge_bc_{x}"
+    b.flat(tid, x, 2, 0.0, "gray")
+    BRIDGE.append(tid)
+b.flat("bridge_cd_4", 2, 4, 0.0, "gray")
+BRIDGE.append("bridge_cd_4")
 for x in (0, 1):
     b.flat(f"bridge_da_{x}", x, 2, 0.0, "gray")
-    b.flat(f"bridge_da_{x}_d", x, 2, 1.0, "gray")
-    BRIDGE += [f"bridge_da_{x}", f"bridge_da_{x}_d"]
+    BRIDGE.append(f"bridge_da_{x}")
+for i, j in ((2, 2), (2, 3)):
+    b.flat(f"bridge_c_{i}_{j}", i, j, 0.0, "gray")
+    BRIDGE.append(f"bridge_c_{i}_{j}")
 
 tower_parts = {spec[0]: build_tower(*spec) for spec in TOWERS}
 link_parts = {k: build_link(k) for k in LINKS}
@@ -152,8 +159,33 @@ def part(p, kind):
     return out
 
 
+def w0(p):
+    open_side = next(spec[3] for spec in TOWERS if spec[0] == p)
+    order = {"s": ["e", "n", "w"], "n": ["e", "s", "w"], "w": ["e", "s", "n"], "e": ["w", "s", "n"]}
+    out = []
+    for side in order[open_side]:
+        out += [t for t in part(p, "body") if f"_w0{side[0]}" in t]
+    return out
+
+
+def w1_pad_rn(p):
+    walls = [t for t in part(p, "body") if "_w1" in t]
+    pads = [t for t in part(p, "body") if t.endswith("_p0_0") or t.endswith("_p0_1")
+            or t.endswith("_p1_0") or t.endswith("_p1_1")]
+    rn = [t for t in part(p, "body") if t.endswith("_rn")]
+    return walls + pads + rn
+
+
+def link_piers(key):
+    return [f"lk_{key}_gp{i}_{z}" for i in (0, 1) for z in (0, 1)]
+
+
+def link_track(key):
+    return [f"lk_{key}_c"]
+
+
 b.step(
-    "铺十字连廊: 十六片方板 (地面 + 一层栈道) 一次闭合。",
+    "铺十字连廊: 十片方板拼成十字地基 —— 四象限一次闭合。",
     BRIDGE,
     tip="连廊是四塔接力的公共地基 —— 必须整圈互吸。",
 )
@@ -162,39 +194,30 @@ TOWER_SEQ = [
     ("A (西南)", "ta", "bridge_ab_0", "ab"),
     ("B (东南)", "tb", "bridge_ab_0", "bc"),
     ("C (东北)", "tc", "bridge_bc_3", "cd"),
-    ("D (西北)", "td", "bridge_cd_3", "da"),
+    ("D (西北)", "td", "bridge_c_2_3", "da"),
 ]
 
 for label, p, hl, lk in TOWER_SEQ:
     b.step(
-        f"塔 {label} 模块: 广场 + 换轨 {lk.upper()} 成组对接连廊。",
-        part(p, "base") + link_parts[lk],
+        f"塔 {label} 基座 + 换轨桥墩: 广场对接连廊, 门式立柱先落地。",
+        part(p, "base") + link_piers(lk),
         highlight=(hl,),
-        tip="T16 分体对接: 趁墙未合围先装完整换轨段, 与发球塔桥墩互吸。",
     )
-
-for label, p, hl, lk in TOWER_SEQ:
     b.step(
         f"塔 {label} 第 1 层墙: 三面合围 (出珠面保持敞开)。",
-        [t for t in part(p, "body") if "_w0" in t],
+        w0(p),
         highlight=(f"{p}_g0_0",),
     )
-
-for label, p, hl, lk in TOWER_SEQ:
     b.step(
         f"塔 {label} 第 2 层 + 发球台 + 塔尖。",
-        [t for t in part(p, "body") if "_w1" in t or t.endswith("_rn")
-         or t.endswith("_p0_0") or t.endswith("_p0_1")
-         or t.endswith("_p1_0") or t.endswith("_p1_1")],
+        w1_pad_rn(p),
         highlight=(f"{p}_pd0",),
     )
-
-for label, p, hl, lk in TOWER_SEQ:
     b.step(
-        f"塔 {label} 出珠坡道 + 围栏 —— 顺时针接力就绪。",
-        part(p, "ramp") + part(p, "crest"),
+        f"塔 {label} 出站滑道 + 换轨 {lk.upper()} + 围栏 —— 顺时针接力就绪。",
+        part(p, "ramp") + link_track(lk) + part(p, "crest"),
         highlight=(f"{p}_p0_0", f"lk_{lk}_c"),
-        tip="坡道顶边吸发球台沿口 —— 轻摇应纹丝不动。",
+        tip="T16 分体对接: 坡道顶 z=2 锁发球台 —— 换轨台与门式立柱同组互吸。",
     )
 
 b.finalize(
@@ -208,7 +231,7 @@ b.finalize(
     ),
     difficulty=5,
     tags=["滚珠", "轨道", "接力", "滚珠乐园", "旗舰", "分体对接"],
-    min_pieces=120,
-    min_steps=18,
+    min_pieces=105,
+    min_steps=17,
     series="marble_run",
 )
