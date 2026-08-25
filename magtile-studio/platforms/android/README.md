@@ -68,9 +68,15 @@ platforms/android/
 └── app/
     ├── build.gradle.kts      externalNativeBuild + assets 打包接线
     │                         (-PmagtileAssets=starter 打入门子集, 见第四节)
-    ├── src/androidTest/kotlin/com/magtile/studio/
-    │   └── MainActivitySmokeTest.kt 主路径仪器冒烟 (启动 -> 列表非空
-    │                             -> 首张免费卡 -> 详情弹窗, 见第五节)
+    ├── src/androidTest/kotlin/com/magtile/studio/  (仪器测试套件, 见第五节)
+    │   ├── MainActivitySmokeTest.kt 主路径冒烟 (启动 -> 列表非空
+    │   │                         -> 首张免费卡 -> 详情弹窗)
+    │   ├── TutorialFlowTest.kt   分步教程 (断点续搭 / 完成链路 +
+    │   │                         首搭成就 / 视口与手势事件链路)
+    │   ├── ParentGateFlowTest.kt 家长门入口 (出门/答错温和/作答放行/会话守卫)
+    │   ├── SubscriptionLockTest.kt 订阅锁可见性 (非免费温和提示/订阅解锁)
+    │   ├── DeviceManualQaTest.kt 真机人工项占位骨架 (@Ignore, 挂人工勾选表)
+    │   └── TestSupport.kt        共享工具 (轮询等待 / 存档归零 / 目录选模型)
     └── src/main/
         ├── AndroidManifest.xml
         ├── kotlin/com/magtile/studio/
@@ -452,17 +458,44 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
   只告警 —— 内容制作期新模型缩略图可能滞后生成, 缺图卡片显示占位)
   并上传为构建产物。
 
-### 仪器测试 (androidTest): 主路径冒烟
+### 仪器测试 (androidTest): 主路径冒烟 + 真机 QA 可自动化部分
 
-`app/src/androidTest/kotlin/com/magtile/studio/MainActivitySmokeTest.kt`
-覆盖 Android 主路径一条链 (口径对齐桌面 GL/Qt 冒烟):
-**MainActivity 启动** (解包资产 + JNI 加载目录 + 打开进度存档) →
-**模型库列表非空** → 勾选「只看免费」后**点击首张免费卡** →
-**详情弹窗出现** (标题 = 卡片中文名 + 「物理校验」按钮在场 +
-免费卡带「🧲 开始搭建」入口, 免费层无订阅锁)。测试前删除
-`progress.db` 回到首启状态 (默认 7-9 档 / 未订阅 / 库存未登记),
-断言不受上次运行残留影响; 依赖只有 androidx.test 四件套 +
-espresso-core (仅 androidTest 变体, 不进产品 APK)。
+`app/src/androidTest/kotlin/com/magtile/studio/` 是一套仪器测试
+(对应真机 QA 报告 `docs/reports/QA_ANDROID_CHILD_PLAYTHROUGH.md`
+Manual 缺口 M-01~M-05 的可自动化部分; 人工执行载体为勾选表
+`docs/reports/QA_ANDROID_DEVICE_CHECKLIST.md`):
+
+- **MainActivitySmokeTest** — 主路径一条链 (口径对齐桌面 GL/Qt
+  冒烟): 启动 (解包资产 + JNI 加载目录 + 打开进度存档) → 模型库
+  列表非空 → 勾选「只看免费」后点击首张免费卡 → 详情弹窗出现
+  (标题 = 卡片中文名 + 「物理校验」按钮在场 + 免费卡带
+  「🧲 开始搭建」入口, 免费层无订阅锁);
+- **TutorialFlowTest** — 分步教程 (E2E-15 可自动化部分): M-04
+  断点续搭 (走 3 步退出重进回第 4 步, 进度头与存档双向对账)、
+  M-05 完成链路 (走完全程 → 完成横幅 + 存档记完成 + 首搭成就
+  `first_model_completed` 点亮, `progressOverviewJson` 对账)、
+  已完成档回读 (不带 `EXTRA_RESTART` 直落完成态 / 「再搭一次」
+  从头)、M-01~M-03 可自动化外围 (3D 视口在场 + 渲染模式对应减少
+  动效档位 + 单指/双指合成手势事件被视口消费不崩溃); 模型运行期
+  从目录挑「步数最少的免费模型」, 不硬编码 id;
+- **ParentGateFlowTest** — 家长门入口 (E2E-08 Android 侧): 年龄段
+  入口必出门 → 解析中文数字乘法题面经软键盘作答 → 答错温和提示
+  (无苛责语) → 答对放行开 15 分钟会话 → 会话守卫免重复验证
+  (冷却路径由 `parent_gate` CTest 单测覆盖, 仪器侧不等 60 秒);
+- **SubscriptionLockTest** — 订阅锁可见性 (E2E-11 Android 侧):
+  未订阅非免费卡只锁「开始搭建」(温和订阅提示在场, 物理校验照常);
+  经 JNI 写订阅契约键后重建 Activity, 同一张卡解锁、提示退场;
+- **DeviceManualQaTest** — M-01/M-02/M-03 的**人工项占位骨架**
+  (@Ignore): 3D 渲染正确性 / 手势手感 / 呼吸动画属人眼与手感判断,
+  无法自动化, 以 skipped 形式常驻测试报告作提醒, 执行按勾选表
+  §2 签核; 人工核验一旦可自动化 (如截图比对基线) 移出本类。
+
+各测试 @Before 删除 `progress.db` 回到首启状态 (默认 7-9 档 /
+未订阅 / 库存未登记), 断言不受上次运行残留影响; 依赖只有
+androidx.test 四件套 + espresso-core (仅 androidTest 变体, 不进
+产品 APK, 条目点击经 ViewHolder.performClick 免引 espresso-contrib)。
+注: 除 MainActivitySmokeTest 外的测试在无设备环境编写 (编译门已
+绿), 首次真机运行按勾选表 §1 甄别并登记。
 
 - **有设备** (真机/模拟器, 需支持 arm64-v8a — APK 首发只出 arm64):
 

@@ -11,8 +11,14 @@
 #   3. 设备 ABI 不含 arm64-v8a (APK 首发只出 arm64) 同样温和跳过;
 #   4. 唤醒屏幕 + 解锁 keyguard (Espresso 点击需要窗口焦点), 然后
 #      ./gradlew :app:connectedDebugAndroidTest 一条龙:
-#      构建 app APK + 测试 APK -> 安装 -> 跑 MainActivitySmokeTest
-#      (启动 -> 模型列表非空 -> 点首张免费卡 -> 详情弹窗) -> 卸载。
+#      构建 app APK + 测试 APK -> 安装 -> 跑仪器测试套件 -> 卸载。
+#      套件 (README 第五节; 真机 QA 可自动化部分, 人工项另见
+#      docs/reports/QA_ANDROID_DEVICE_CHECKLIST.md):
+#        MainActivitySmokeTest  启动 -> 列表非空 -> 首张免费卡 -> 详情弹窗
+#        TutorialFlowTest       断点续搭 / 完成链路+首搭成就 / 手势事件链路
+#        ParentGateFlowTest     家长门出门/答错温和/作答放行/会话守卫
+#        SubscriptionLockTest   订阅锁可见性 (非免费温和提示 / 订阅解锁)
+#        DeviceManualQaTest     人工项占位 (@Ignore, 报告中为 skipped)
 #
 # 用法 (任意目录均可):
 #   platforms/android/run_instrumented_smoke.sh
