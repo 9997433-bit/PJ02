@@ -19,7 +19,7 @@ MagTile Studio 本体为专有商业软件, 最终用户许可协议见同目录
 
 | 组件 | 版本 | 许可 | 说明 |
 | --- | --- | --- | --- |
-| [Qt](https://www.qt.io/) (Core/Gui/Qml/Quick/QuickControls2) | ≥ 6.4, 动态链接 | LGPLv3 (或商业许可) | LGPL 分发要求: 动态链接、随包提供本声明、允许用户替换 Qt 库; 商用闭源分发前由法务确认走 LGPL 合规或购买 Qt 商业许可 |
+| [Qt](https://www.qt.io/) (Core/Gui/Qml/Quick/QuickControls2/OpenGL/QmlModels/Network + 可选 TextToSpeech; 均为 Essentials/LGPLv3 模块) | ≥ 6.4, 动态链接 | LGPLv3 (或商业许可) | LGPL 分发要求: 动态链接、随包提供本声明、允许用户替换 Qt 库; 商用闭源分发前由法务确认走 LGPL 合规或购买 Qt 商业许可 (逐项核对 `scripts/package_qt_desktop.md` 第八节, 自动核对 `scripts/check_lgpl_compliance.sh`) |
 
 各组件完整许可文本以其官方仓库/发行物为准。本文件为声明索引;
 若正式发布要求捆绑完整许可文本副本, 在发布前清单

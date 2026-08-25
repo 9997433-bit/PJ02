@@ -223,7 +223,7 @@ Qt 以 **LGPLv3 动态链接** 使用 (`docs/QT_UI_PLAN.md` §2 既定决策)。
 > `bash scripts/check_lgpl_compliance.sh <包.tar.gz|解包目录>` 对出包
 > 产物自动断言下表标 **[自动]** 的项 —— 动态链接非静态链 (DT_NEEDED/
 > ldd 全共享库 + 动态符号表零 Qt 定义符号的静态吸入检测)、仅 LGPL
-> 模块白名单 (直接链接 ⊆ 本节第二项 7 模块, 传递闭包 ⊆ Essentials
+> 模块白名单 (直接链接 ⊆ 本节第二项 9 模块, 传递闭包 ⊆ Essentials
 > 白名单, 白名单外任何 Qt 库当场失败)、必备文件清单
 > (THIRD_PARTY_NOTICES.md 含 Qt+LGPL 条目 / License.rtf / README.md)。
 > 标 **[自动·发布档]** 的"正式发布前追加"项 (LGPLv3+GPLv3 全文、精确
@@ -239,13 +239,14 @@ Qt 以 **LGPLv3 动态链接** 使用 (`docs/QT_UI_PLAN.md` §2 既定决策)。
       符号检测, 随第九节冒烟常跑); Windows 核验包内存在 `Qt6*.dll`
       而非被吸进 exe。
 - [ ] **仅 LGPL 模块** [自动]: 当前链接 Core/Gui/Qml/Quick/
-      QuickControls2/OpenGL (+ 可选 TextToSpeech), 全部
+      QuickControls2/OpenGL (+ 可选 TextToSpeech), 另有
+      qt_add_qml_module/Quick 自动随链的 QML 运行时库 QmlModels/
+      Network (Linux 实测 DT_NEEDED 共 9 个 libQt6*.so), 全部
       Essentials/LGPLv3 (`check_lgpl_compliance.sh` 白名单断言:
-      直接链接限上述 7 模块, 传递闭包另放行 QuickTemplates2/
-      QmlModels/QmlWorkerScript/QmlMeta/Network/DBus)。新增
-      Qt 模块前先核对许可再扩脚本白名单 —— 部分 Add-on (Charts、
-      Data Visualization 等) 是 GPL-only, 引入即传染整包, 白名单外
-      模块脚本当场失败。
+      直接链接限上述 9 模块, 传递闭包另放行 QuickTemplates2/
+      QmlWorkerScript/QmlMeta/DBus)。新增 Qt 模块前先核对许可再扩
+      脚本白名单 —— 部分 Add-on (Charts、Data Visualization 等) 是
+      GPL-only, 引入即传染整包, 白名单外模块脚本当场失败。
 - [ ] **未修改 Qt 源码** [人工]: 使用官方二进制发行。若将来自编译
       打补丁, 必须随包公开对应源码修改 (LGPLv3 §4)。
 - [ ] **随包许可声明** [自动; 追加项为自动·发布档]:

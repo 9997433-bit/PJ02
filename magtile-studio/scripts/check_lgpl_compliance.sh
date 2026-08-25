@@ -7,10 +7,12 @@
 #   §8-1 仅动态链接: DT_NEEDED 含 libQt6*.so + ldd 全为共享库且
 #        无 not found + 二进制动态符号表零 Qt 定义符号 (静态吸入检测)
 #   §8-2 仅 LGPL 模块: 直接链接 ⊆ {Core,Gui,Qml,Quick,QuickControls2,
-#        OpenGL,TextToSpeech}; 传递闭包再放行 Essentials 白名单
-#        (QuickTemplates2/QmlModels/QmlWorkerScript/QmlMeta/Network/
-#        DBus)。白名单外任何 Qt 库 (如 GPL-only 的 Charts/
-#        DataVisualization) 当场失败 —— 扩白名单必须先过许可核对。
+#        OpenGL,TextToSpeech} + QML 运行时随链 {QmlModels,Network}
+#        (qt_add_qml_module/Quick 自动拉入, 同为 Essentials/LGPLv3);
+#        传递闭包再放行 Essentials 白名单 (QuickTemplates2/
+#        QmlWorkerScript/QmlMeta/DBus)。白名单外任何 Qt 库 (如
+#        GPL-only 的 Charts/DataVisualization) 当场失败 —— 扩白名单
+#        必须先过许可核对。
 #   §8-4 随包许可声明 (LGPL 必备文件清单): licenses/
 #        THIRD_PARTY_NOTICES.md (含 Qt+LGPL 条目) + licenses/
 #        License.rtf + README.md 必须在包内。
@@ -116,11 +118,12 @@ else
 fi
 
 # ---- §8-2 仅 LGPL 模块 (白名单) -----------------------------------
-# 直接链接口径 = 手册 §8-2 原文: Core/Gui/Qml/Quick/QuickControls2/
-# OpenGL + 可选 TextToSpeech (全部 Essentials/LGPLv3)
-DIRECT_ALLOWED="Core Gui Qml Quick QuickControls2 OpenGL TextToSpeech"
+# 直接链接口径 = 手册 §8-2: Core/Gui/Qml/Quick/QuickControls2/OpenGL
+# + 可选 TextToSpeech, 另加 qt_add_qml_module/Quick 自动随链的 QML
+# 运行时库 QmlModels/Network (全部 Essentials/LGPLv3)
+DIRECT_ALLOWED="Core Gui Qml Quick QuickControls2 OpenGL TextToSpeech QmlModels Network"
 # 传递闭包额外放行的 Essentials/LGPLv3 依赖 (上述模块自身拉进来的):
-TRANSITIVE_ALLOWED="$DIRECT_ALLOWED QuickTemplates2 QmlModels QmlWorkerScript QmlMeta Network DBus"
+TRANSITIVE_ALLOWED="$DIRECT_ALLOWED QuickTemplates2 QmlWorkerScript QmlMeta DBus"
 
 check_whitelist() {  # check_whitelist <库名列表> <白名单> <标签>
     local libs="$1" allowed="$2" label="$3" bad_mods="" lib mod
