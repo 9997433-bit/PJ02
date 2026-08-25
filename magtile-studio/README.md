@@ -7,15 +7,28 @@ MagTile Studio 是一款面向消费市场的桌面应用: 用交互式 3D 分�
 - **标准磁力片形状库**: 正方形、等边三角形、直角三角形、等腰三角形、长方形、菱形、梯形、六边形、扇形, 共 9 种, 几何数据由 `data/tile_catalog.json` 驱动, 可扩展非标配件。
 - **分步教程引擎**: 上一步 / 下一步 / 跳转 / 进度, 每一步给出中文说明、操作提示、新增磁力片与高亮参照片。
 - **物理规则校验**: 接地支撑、磁力边吸合、无重叠、重心稳定四大规则; 不仅校验成品, 还逐步校验教程每个中间状态 (保证不会"搭到一半塌掉")。
-- **渲染层解耦**: 核心逻辑与渲染完全隔离, 第一阶段提供无窗口渲染器用于 CLI 与 CI, 正式 3D 后端采用 GLFW + OpenGL (详见架构文档)。
+- **3D 交互教程**: GLFW + OpenGL 4.1 渲染后端 —— 半透明彩色磁力片、成品轮廓虚影、当前步骤高亮描边、轨道相机, 教程 HUD 支持按钮与键盘双通道导航。
+- **渲染层解耦**: 核心逻辑与渲染完全隔离; 无窗口渲染器用于 CLI 与 CI, 窗口后端隐藏在同一 `IRenderer` 接口之后 (详见架构文档)。
 
 ## 快速开始
 
 要求: CMake ≥ 3.20, 支持 C++20 的编译器 (MSVC 2022 / Clang 14+ / GCC 11+)。
 
+图形后端默认开启, GLFW 与 Dear ImGui 在配置阶段自动获取 (优先系统安装的 GLFW, 否则 FetchContent 联网拉取)。Linux 额外需要 X11 开发头文件:
+
+```bash
+# Ubuntu / Debian
+sudo apt install libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+# 可选: 无显示环境的纯 CI 构建可完全跳过图形后端
+#   cmake -S . -B build -DMAGTILE_BUILD_GL_RENDERER=OFF
+```
+
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build -j
+
+# 打开 3D 交互教程窗口 (鼠标左键旋转 / 右键平移 / 滚轮缩放, ←→ 切换步骤)
+./build/magtile_app tutorial data/models/castle_foundation_01.json --gui
 
 # 查看磁力片形状目录
 ./build/magtile_app catalog
@@ -28,6 +41,10 @@ cmake --build build -j
 
 # 运行测试
 ctest --test-dir build --output-on-failure
+
+# 图形模式冒烟测试 (无显示环境, 需 xvfb): 渲染 30 帧并保存截图
+xvfb-run -a ./build/magtile_app tutorial data/models/castle_foundation_01.json \
+    --gui --step 10 --frames 30 --screenshot /tmp/magtile.ppm
 ```
 
 ## 目录结构
@@ -41,8 +58,8 @@ magtile-studio/
 │   ├── core/               # 磁力片类型、模型数据结构、JSON 读写
 │   ├── physics/            # 几何工具与物理规则校验器
 │   ├── tutorial/           # 分步教程引擎
-│   ├── render/             # 渲染接口与无窗口实现 (GL 后端规划中)
-│   └── app/                # 命令行入口
+│   ├── render/             # 渲染接口、轨道相机、无窗口实现与 GL 后端 (gl/)
+│   └── app/                # 应用入口 (CLI + 3D 教程窗口)
 ├── data/
 │   ├── tile_catalog.json   # 9 种标准磁力片的几何与磁力边定义
 │   └── models/             # 模型定义 (含示例: 城堡地基与城墙, 72 片 / 16 步)
@@ -66,4 +83,4 @@ magtile-studio/
 
 ## 许可
 
-商业项目, 版权所有。第三方组件: [nlohmann/json](https://github.com/nlohmann/json) (MIT)。
+商业项目, 版权所有。第三方组件: [nlohmann/json](https://github.com/nlohmann/json) (MIT)、[GLFW](https://www.glfw.org/) (zlib/libpng)、[Dear ImGui](https://github.com/ocornut/imgui) (MIT)。

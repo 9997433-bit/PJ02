@@ -28,8 +28,8 @@
 | core | `src/core` | `TileType`、`TileInstance`、`BuildStep`、`ModelDefinition`、`TileCatalog`、JSON 读写、向量/矩阵 | nlohmann/json (仅 .cpp 内) |
 | physics | `src/physics` | 世界坐标几何 (`TransformedTile`)、分离轴重叠检测、凸包、`PhysicsValidator` | core |
 | tutorial | `src/tutorial` | `TutorialEngine`: 步骤导航、场景查询、步骤一致性质检 | core |
-| render | `src/render` | `IRenderer` 接口 + `NullRenderer`; GL 后端规划中 | core |
-| app | `src/app` | 命令行入口 (`catalog` / `validate` / `tutorial`) | 全部 |
+| render | `src/render` | `IRenderer` 接口 + `NullRenderer` + `OrbitCamera` (核心库内, 无图形依赖); `src/render/gl/` 为 GLFW + OpenGL 4.1 窗口后端 (独立库 `magtile_render_gl`) | core (GL 后端另依赖 GLFW / ImGui) |
+| app | `src/app` | 应用入口: CLI (`catalog` / `validate` / `tutorial`) 与 3D 教程窗口 (`tutorial --gui`) | 全部 |
 
 依赖方向严格自上而下, core 不反向依赖任何模块。所有公共头文件位于 `include/magtile/<module>/`, 命名空间与目录一一对应 (`magtile::core` 等)。
 
@@ -75,7 +75,16 @@ BuildStep    = { step_number, description(中文), tip, tiles_to_add[], highligh
 
 磁力片渲染的真实需求是: 数百个半透明凸多边形 + 磁吸点提示 + 教程高亮描边 + 轨道相机。OpenGL 4.1 足以覆盖, 且三平台单一代码路径。`IRenderer` 只暴露 `beginFrame / submitTile / endFrame`, 未来切换 Vulkan/Metal 后端不影响 core、physics、tutorial 与内容数据。
 
-第一阶段仓库内仅包含 `NullRenderer` (无窗口, 供 CLI/CI 使用); GL 后端将以 CMake 选项 `MAGTILE_BUILD_GL_RENDERER` 引入, GLFW 通过 `find_package` + `FetchContent` 回退获取。
+### 5.1 GL 后端实现 (`src/render/gl/`)
+
+- **构建**: CMake 选项 `MAGTILE_BUILD_GL_RENDERER` (默认 ON) 引入独立静态库 `magtile_render_gl`; GLFW 优先 `find_package`, 缺失时 FetchContent 获取 3.4 (Linux 上若无 wayland-scanner 自动退回仅 X11); Dear ImGui 经 FetchContent 直接编译源码。关闭该选项即回到零网络、零图形依赖的纯 CLI 构建。
+- **GL 加载**: 自研最小加载器 `gl_api.hpp` (约 40 个入口, 经 `glfwGetProcAddress` 解析), 不引入 glad 及系统 GL 头, 全部符号收敛于 `magtile::render::glapi`。
+- **接口分层**: `IWindowRenderer : IRenderer` 增加 `pollEvents / orbitCamera / consumeActions / submitHud`, 头文件不暴露任何 GLFW/GL/ImGui 类型; 应用层通过 `MAGTILE_HAS_GL_RENDERER` 宏感知后端是否可用。
+- **磁力片绘制**: 每片经 `physics::transformTile` 展开为世界坐标后挤出为带厚度薄板 (≈4mm 实物比例), 半透明填充按质心深度排序 (画家算法) 关闭深度写入绘制; 片状态映射 —— 已放置: 本色 55% 不透明; 本步新增 (`just_placed`): 呼吸动画 + 橙色描边; 参照片 (`highlighted`): 金色描边; 未放置 (`ghost`): 褪色 10% 透明虚影, 提示成品轮廓。
+- **描边**: Core Profile 前向兼容上下文中 `glLineWidth > 1` 不可用, 描边以面内不透明色带三角形实现, 三平台表现一致。
+- **HUD**: Dear ImGui 绘制步骤面板 (说明 / 提示 / 进度 / 上一步 / 下一步 / 重来) 与操作说明, 自动加载系统中文字体 (Windows: 微软雅黑; macOS: 苹方; Linux: Noto CJK / 文泉驿)。
+- **交互**: `OrbitCamera` (核心库内, 纯数学) 提供旋转 / 平移 / 缩放 / 包围盒取景; 键盘 ←→/PgUp/PgDn 切换步骤, Home 重来, R 重置视角, Esc 退出。
+- **可测试性**: `tutorial --gui --step N --frames N --screenshot x.ppm` 支持无头冒烟测试 (CI 中经 xvfb 运行并核对截图)。
 
 ## 6. 数据文件格式
 
@@ -134,8 +143,8 @@ CI 中 `ctest` 会对仓库内全部模型执行 `validate`, 物理不合法的�
 
 ## 8. 后续架构演进
 
-- **render**: GL 后端落地 (窗口、相机、拾取、步骤动画)。
-- **app**: 由 CLI 升级为 GUI 应用 (Dear ImGui 做工具面板, 教程 UI 自绘)。
+- **render**: 磁吸点/吸合边可视化、放置动画 (新增片飞入)、拾取 (点击查看磁力片信息)、抗锯齿与阴影质量提升。
+- **app**: 模型库浏览界面 (列表 / 缩略图 / 难度筛选), 教程 UI 品牌化自绘。
 - **core**: 用户进度存档、多语言文案表 (当前中文内嵌于数据)。
 - **physics**: 规则从"基础版"演进 (见 PHYSICS_RULES.md 第 5 节)。
 - **编辑器**: 面向内容团队的可视化模型/教程编辑器, 复用同一核心库。
