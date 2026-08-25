@@ -38,7 +38,8 @@ apps/desktop_qt/
 │                           #   + Qt 侧测试注册 (qt_backend_bridges 后端桥单测 / qt_gui_smoke QML 冒烟)
 ├── src/
 │   ├── main.cpp            # 入口: --data-dir/--db 解析, 数据目录向上探测, 存档路径与 CLI 逐字节一致
-│   │                       #   + --parent-gate 深链 / --smoke-quit-ms + --smoke-parent-flow 无头冒烟
+│   │                       #   + --parent-gate 深链 / --smoke-quit-ms + --smoke-parent-flow
+│   │                       #   / --smoke-age-onboarding (QT-5 首启引导) 无头冒烟
 │   ├── studio_backend.*    # QML 后端桥: 模型库目录 + 进度存档 + BOM/库存对照 (canBuild/缺片/core-9)
 │   │                       #   + modelDetail/bomForModel/toggleFavorite + startBuild -> buildRequested 信号
 │   │                       #   + freeModelCount (QT-5: 目录「免费」标签计数, 订阅页对比数据源)
@@ -51,6 +52,8 @@ apps/desktop_qt/
 │   │                           #   内存会话, 与 GL 版同一状态机) + 秒级倒计时通知, 不接触存档
 │   ├── settings_backend.*      # 设置桥 (QT-2): 字号三档/减少动效 (progress/ui_settings) + 年龄段
 │   │                           #   (progress/age_settings), 与 GL 版 / CLI 共用 SQLite 键名契约
+│   │                           #   + 首启年龄段引导判定/落盘 (QT-5: ageOnboardingPending
+│   │                           #   / completeAgeOnboarding, ui_settings "onboarding_age_done")
 │   ├── tts_backend.*           # 步骤朗读桥 (QT-4, §4.2): QtTextToSpeech 系统引擎封装 (可选依赖,
 │   │                           #   缺模块/缺引擎静默降级), 开关经 progress/ui_settings "tts_enabled" 持久化 (设置页开关同键)
 │   └── tutorial_viewport.*     # 3D 教程视口 (QT-3): QQuickFramebufferObject + 共用 GlSceneRenderer,
@@ -65,6 +68,8 @@ apps/desktop_qt/
     │                       #   + openSubscriptionZone 订阅统一路由 (QT-5: 任意入口先过家长门, 深度保持 1)
     ├── HomePage.qml        # 首页: 超大主按钮 + "继续上次"卡片 (直达断点模型详情) + 32px 家长区入口 (§5.3)
     │                       #   + 儿童侧订阅温和入口 (QT-5, §12.2: 只说"请家长来解锁", 无价格无催促)
+    ├── AgeOnboardingPage.qml # 首启年龄段引导 (QT-5, §10.1): 盖在首页上的温和全屏引导, 三档大卡片
+    │                       #   (4-6/7-9/10+) 选完即落盘 (age_mode + onboarding_age_done) 只出现一次
     ├── LibraryPage.qml     # 模型库: 筛选侧栏 (难度/主题/只用核心9片/我能搭的) + 卡片网格
     │                       #   + 分龄三档 (4-6 超大卡无筛选/7-9 难度+主题/10+ 全量+紧凑)
     │                       #   + 我能搭的空态推荐 3 个可搭模型 (难度升序, 点击直达详情)
@@ -101,6 +106,8 @@ QT-2 补充说明：家长门/冷却/会话逻辑**零重复实现**——Qt 版
 QT-3 补充说明（3D 教程播放器）：3D 绘制**零重复实现**——把原 GLFW/ImGui 渲染器中"画场景"的部分（地面网格 + 半透明彩色薄板 + 高亮描边 + 呼吸动画）抽成无窗口的 `render::GlSceneRenderer`（新静态库 `magtile_render_scene`，不含 GLFW/ImGui/Qt，GL 入口经调用方回调在运行时解析），GLFW 版 `GlRenderer` 与 Qt 版视口链接同一份实现，两个外壳画面口径一致。Qt 侧 `TutorialViewport`（`QQuickFramebufferObject`，多重采样 + 深度缓冲）在渲染线程画进场景图分配的 FBO，GUI 线程持有 `tutorial::TutorialEngine` / `render::OrbitCamera` / `progress::ProgressStore`，经 `synchronize()` 拷贝相机与本帧片集合跨线程；alpha 通道用 `glBlendFuncSeparate` 强制写不透明，避免 FBO 在场景图合成阶段透底发白。交互与 GL 版对齐：左键拖动转圈、滚轮缩放、右键平移、「回到最佳视角」按钮，键盘 ←/→ 翻步；当前步新增片橙色描边呼吸提示、未放置片褪色 ghost 只显轮廓。触屏手势已接（多点触控直入 `TutorialViewport::touchEvent`，QML 零改动）：单指拖动 = 轨道旋转（与左键拖动同口径同灵敏度）、双指捏合 = 缩放（指距比经对数换算成等效滚轮格数，与滚轮共用 `OrbitCamera::kZoomStepFactor`（12%/格）单一常量——指距张大一倍成品视觉恰好放大一倍，跟手不窜）、双指同向滑动 = 平移（中点位移，与右键拖动同口径）；手指数变化（落下/抬起第二指）的当帧只重定基准不产生位移，画面不跳变；视口接管触点后 Qt 不再为其合成鼠标事件，触屏与鼠标两套输入并存互不干扰、桌面操作不变；手势直接改相机并请求重绘、不经动画系统，「减少动态效果」开启时照常可用（手势是输入不是装饰动画，UI_UX_SPEC §4.7）；详情页只读 previewMode 复用同一视口，手势自动同样生效。触屏验证步骤：真机（Windows 触屏本 / Linux 触屏设备）直接跑教程页与详情页预览，逐条过上述手势并确认鼠标三键 + 滚轮不受影响；无真机时的触摸模拟——进程内用 `QTest::QTouchEventSequence` 走真实投递管线（含触点抓取/本地化）驱动视口并断言相机数值（本次交付即以该方式在 xvfb 下全量验证：旋转同口径、指距翻倍距离精确减半且捏回还原、中点平移、1↔2 指切换零跳变、TouchCancel 清态），或 Linux 下以内核 uinput 造虚拟多点触屏（evemu / python3-evdev 注入 ABS_MT 双指轨迹，X11 经 XInput2 送达 Qt）；注意 QtQuick 对触摸移动按帧同步压缩（`compressTouchEvent`），offscreen 无帧平台不投递 TouchUpdate，触摸模拟须在真渲染窗口（如 xcb + xvfb）下进行；`--smoke-open-model` 冒烟与手势无关（手势只改输入层），照常通过。存档与 GL 版/CLI 共库：进教程即建档（模型库立刻显示"进行中"），切步/退出/应用退出均落 `ProgressStore`（含用时累计），再次进入自动回到断点步。因 `QQuickFramebufferObject` 依赖 GL 后端，`main.cpp` 默认把场景图钉在 OpenGL（`QSG_RHI_BACKEND` 环境变量可覆盖）；若未来需要 Metal/D3D 原生后端，按 §2 的既定路线以 `QRhi` 重写场景层。无头冒烟：`--smoke-open-model <id>` 启动直进该模型教程（走与用户一致的 `buildRequested` 路由），配合 `--smoke-screenshot <png>` 抓屏自动退出。详情页 3D 预览已复用本视口（只读 `previewMode`，见 QT-1 补充说明）。已知缺口：大模型 ghost 轮廓因多层薄板叠加视觉上偏实（与 GL 版同口径）。
 
 QT-5 补充说明（订阅页脚手架，家长门后）：文案按 UI_UX_SPEC §11 与 COMMERCIAL_PLAN 口径 —— 页首明示免费额度（反套路即信任），温和说明「订阅解锁全库 + 每周上新；免费层永久免费、只锁内容不锁功能」，全页无倒计时/无催促/无羞辱话术/不索取信息、不用红色。「免费 30 vs 全库」对比数字**实时读模型目录**：`StudioBackend::reload` 统计 tags 含「免费」的条目（与 `tools/check_core5_usage.py` 的 `FREE_TAG` 同一口径）暴露为 `freeModelCount`，全库数即既有 `modelCount` —— 选品或库容变化零代码同步。主 CTA 为「订阅即将上线」占位（点按只弹温和 toast），次级 CTA 为 mailto 联系通道（占位邮箱 `hello@magtile.example`，RFC 2606 保留域，上线前替换）；**不接任何 IAP/支付 SDK**，正式三卡定价（月/年/家庭年）、透明条款与「恢复购买」随 V1 付费闭环替换占位区。入口共三处且全部过同一道门：首页儿童侧温和入口（只说「请家长来解锁」，无价格，§12.2）、家长中心「订阅管理」、设置页「查看订阅说明」—— 统一走 Main.qml `openSubscriptionZone`（无会话先进家长门，过门后原位替换为订阅页；设置页进入用 `stack.replace`），订阅页导航深度恒为 1~2，满足「≤ 2 步回首页」与「订阅页只在家长门后可见」两条铁律；会话到期由既有守卫统一退回首页。
+
+QT-5 补充说明（首启年龄段引导，§10.1/§2）：首次启动（存档从未写过 `age_mode` 键且无 `onboarding_age_done` 完成标记，两者任一存在都视作"选过了"）时在首页之上弹出温和全屏引导：三档大卡片（4-6 🐣 启蒙 / 7-9 🦖 标准 / 10+ 🚀 进阶），文案儿童友好只描述体验，无对错无催促也无跳过焦虑——默认档就在三张卡里，选任何一档都对；选完经 `SettingsBackend::completeAgeOnboarding` 一次落盘 `age_mode` + `onboarding_age_done`（后者为 `progress/ui_settings` 新增键契约，与「`age_mode` 非空」互为双保险——CLI/GL 已设过年龄段的存量存档不再打扰）并淡出露出首页。分龄与 LibraryPage 现有口径**同源**：卡片标识就是 `age_4_6/age_7_9/age_10_12` 那组共库键值，选完模型库分龄布局即刻生效；家长之后随时在设置页改档（§8），引导只出现一次不再回弹。入场整页淡入 + 内容轻微上浮、退场淡出，时长全走 `Theme.animMs`——「减少动态效果」开启时归零降级为静态直出直收（§4.7）；引导期间全屏拦截指针事件（选档前下层首页不可点）；存档不可用时不弹引导（不打扰，默认 7-9 档直接可用，P3 零挫败）。测试：`qt_backend_bridges` 新增第 6 节（全新存档待引导 / 选档落盘且只出现一次 / 选默认 7-9 档同样落盘 / CLI-GL 已设年龄段或只有完成标记都不再弹），`onboarding_age_done` 键往返入 `age_tts` 单测；`qt_gui_smoke` 扩为 6 步——`--smoke-age-onboarding` 自动驾驶首启断言引导出现并走与卡片点击同一条 choose 路径选 4-6 档，同库二次启动断言引导不再出现，随后 sqlite 直读校验 `age_mode`/`onboarding_age_done` 确已落盘。
 
 QT-4 补充说明（完成庆祝 + 步骤朗读骨架）：**完成链路单点收口**——`StudioBackend::completeBuild` 是唯一完成写入口（进度推到最后一步 + `markCompleted`（首次完成时刻只增不减）+ 首次完成成就，与 GL 版 `src/app/main.cpp` 同一口径），随后刷新模型库徽标并发 `buildCompleted` 信号，Main.qml 把教程页**原位替换**为 `CelebrationPage`（返回不会退回已完成的教程；「再搭一次」走既有 `startBuild -> buildRequested` 路由再原位替换回教程页，导航深度不增长；已完成模型重开自动从第 0 步开始）。教程内由视口 `finished` 状态触发（最后一片落位停留 0.9s 再庆祝，期间「上一步/从头再来」可自然取消）。庆祝页彩带/星星弹跳在「减少动态效果」开启时整体降级为静态展示（§4.7），页面上无分数无评价（§4.3 只有正向与中性）。朗读走 `TtsBackend`：QtTextToSpeech 封装系统引擎（不引入第三方语音 SDK），构建时 `Qt6TextToSpeech` 为**可选组件**、运行时无引擎则 `available=false` 静默降级；speak 先停旧朗读、切步/离开教程自动停（无叠音 §4.2）；总开关经 `progress/ui_settings` 的 `tts_enabled` 键持久化（默认开、脏值按开兜底，与字号/减少动效同一契约模式），设置页「步骤朗读」大开关直绑 `tts.enabled`（`enabledChanged` 教程页 🔊/自动朗读即时生效，引擎缺失时温和说明、开关照常可调）；4-6 岁启蒙模式（读共库 `age_mode` 键）进入步骤自动朗读，其余年龄段用教程页眉 🔊 按钮（≥48, 朗读中主色高亮）。无头冒烟：`--smoke-complete-model <id>` 走真实完成信号链直达庆祝页，`qt_gui_smoke` 第 4 步跑通后校验存档 `completed_at` 确已写入，并收集五链路全程输出扫描 QML 运行时错误（ReferenceError/TypeError 一票否决，防 tts 类上下文漏接线再犯）；朗读桥开关持久化/与 ui_settings 共键双向契约/无引擎静默降级入 `qt_backend_bridges` 单测，`tts_enabled` 键往返入 `age_tts` 单测。庆祝页「再搭一个」推荐（§6.2）：`LibraryFilterModel::recommendSimilar(modelId, max)` 桥单点承载业务逻辑（排除刚完成模型自身；只挑 canBuild **且免费层**——庆祝页点卡直接 `startBuild` 开搭、无订阅拦截，订阅内容进推荐会绕过 §11「订阅教程只在解锁后可开」故在桥内拦下；同难度最先、±1 次之、候选不足时放宽难度，同距离取更轻松一档、再按片数少者优先），QML 只消费快照；点卡与「再搭一次」同走 `startBuild -> buildRequested`，Main.qml 检测 `isCelebrationPage` 原位替换本页，导航深度不增长；4-6 岁启蒙模式推荐卡每行 1 张更大（读 `appSettings.ageModeId`）；无推荐时整块隐藏不显示空态文案；排序契约入 `qt_backend_bridges` 单测（同难度优先/排除自身/放宽难度/订阅与缺片排除/无库存为空）。尚未落地：🔊 波形动画。
 
@@ -143,7 +150,7 @@ cmake --build build-qt --target magtile_studio_qt -j
 | **QT-2 家长门与设置** | `core::ParentGate` 接 QML（算术题 + 中文大写软键盘复刻 GL 版）、家长中心、设置页（字号三档/减少动效/主题） | QT-0 | `IN_PROGRESS`（家长门 QML + 家长中心 + 设置页字号三档/减少动效/年龄段 + 订阅温和占位页（门后）+ 会话守卫 + 后端桥单测/QML 冒烟 DONE；主题亮暗切换、PIN、家长中心完整功能 PLANNED） |
 | **QT-3 3D 教程播放器** | `QQuickFramebufferObject` 集成 `magtile_render_gl`：步骤导航/高亮/ghost/轨道相机上屏；退出自动存档 | QT-1 | `DONE`（核心屏 ★：场景绘制抽成 GL/Qt 共用的 `GlSceneRenderer`，视口/导航/高亮/ghost/轨道相机/自动存档 + `--smoke-open-model` 无头冒烟已落地；详情页 3D 预览已以只读 previewMode 复用本视口（QT-1）；触屏手势 DONE（单指旋转 / 双指捏合缩放 / 双指平移，与鼠标并存同口径，previewMode 同享，减少动效下照常可用）） |
 | **QT-4 反馈与庆祝** | 每步星星反馈、完成庆祝页、成就墙 GUI、QtTextToSpeech 朗读（§4.2/4.3） | QT-3 | `IN_PROGRESS`（完成庆祝页（彩带/星星/成就卡/再搭一次/回模型库, 减少动效降级）+ 完成链路 `completeBuild -> buildCompleted`（写存档完成 + 首次完成成就, 与 GL 版同口径）+ QtTextToSpeech 步骤朗读（🔊 按钮 + 4-6 岁自动朗读 + 设置页「步骤朗读」开关, `tts_enabled` 契约收口 progress/ui_settings, 可选依赖静默降级）+ `--smoke-complete-model` 冒烟 DONE；进度页「我的作品」（三格统计 + 进行中/已完成/收藏列表, 行点击直达详情）+ 成就墙（首页温和统计卡片入口 + 徽章墙全览, 未解锁灰色剪影 + 达成条件, 按完成数 1/3/10/30 分档）+ `--smoke-open-progress` 冒烟 DONE；每步星星反馈 + 进度条 10% 里程碑小星 DONE（步骤前进落位成功后视口顶部弹出 1~3 颗小星（颗数 = 本步落位片数, ≤1s OutBack）, 快速连点 restart 合并不堆积、不阻塞交互, 减少动效降级为静态「好棒！」；进度条每 10% 一颗小星共 10 颗, 按会话内最高进度点亮,「上一步/从头再来」不回收, 分龄 4-6 更大 / 10+ 更克制, 无分数无惩罚 §4.3；教程视口不进无头冒烟（offscreen 无 GL）, 手动验证: `magtile_studio_qt --smoke-open-model castle_foundation_01` 连点「下一步」看弹星与小星逐颗点亮, 再开「减少动态效果」复验静态降级）；庆祝页「再搭一个」推荐 DONE（`LibraryFilterModel::recommendSimilar` 桥: 同难度 ±1 优先、canBuild 且免费层、排除刚完成模型, 不足时放宽难度；点卡走既有 `startBuild` 原位替换庆祝页深度不增长；4-6 岁每行 1 张大卡；无推荐整块隐藏 + `qt_backend_bridges` 单测）；🔊 波形动画 PLANNED） |
-| **QT-5 Onboarding 与订阅** | 年龄段选择、库存录入（大号 −/+ 步进器）、订阅页（家长门后, §11） | QT-2 | `IN_PROGRESS`（订阅页脚手架 DONE：温和文案 + 免费 30 vs 全库对比读目录 + 「即将上线」CTA/mailto 占位 + 首页儿童侧/家长中心/设置页三入口全过家长门，无 IAP；库存录入已随 QT-1 落地；年龄段前置流程、正式三卡定价/恢复购买 PLANNED——后者依赖 V1 付费闭环） |
+| **QT-5 Onboarding 与订阅** | 年龄段选择、库存录入（大号 −/+ 步进器）、订阅页（家长门后, §11） | QT-2 | `IN_PROGRESS`（订阅页脚手架 DONE：温和文案 + 免费 30 vs 全库对比读目录 + 「即将上线」CTA/mailto 占位 + 首页儿童侧/家长中心/设置页三入口全过家长门，无 IAP；库存录入已随 QT-1 落地；首启年龄段引导 DONE：首页上温和全屏三档大卡片（4-6/7-9/10+, 与 LibraryPage 分龄同一组 age_mode 键值），选完落盘 `age_mode` + `onboarding_age_done` 只出现一次、家长可在设置改档、减少动效降级静态、`--smoke-age-onboarding` 冒烟 + 桥单测；正式三卡定价/恢复购买 PLANNED——依赖 V1 付费闭环） |
 | **QT-6 打包发布** | windeployqt/MSIX、macdeployqt/DMG 公证、Linux AppImage；ImGui 版退役为内部工具 | QT-1~5 | `IN_PROGRESS`（打包脚手架 DONE：install 规则（Qt≥6.5 部署 API 自动收运行库 / 6.4 文档化 windeployqt/macdeployqt）+ CPack 并存/Qt-only 两种包形态（`MAGTILE_PACKAGE_QT_ONLY`）+ starter 30 模型子集叠加 + LGPL 合规清单，操作手册 `scripts/package_qt_desktop.md`，Linux 三档 TGZ 清单/解包冒烟/动态链接核验通过；windeployqt/macdeployqt 实机、MSIX、DMG 签名公证、AppImage、许可全文随包 PLANNED） |
 
 **退役条件**：QT-3 完成且教程播放器通过 UI_UX_SPEC §14 验收清单后，`library --gui` 从用户文档移除、降级为 `--dev-gui`（保留冒烟测试）；QT-6 完成后商店渠道只发 Qt 版。
@@ -159,7 +166,7 @@ cmake --build build-qt --target magtile_studio_qt -j
 | 进度与成就 §7 | CLI 有数据 | `DONE`（进度页「我的作品」: 三格统计 + 成就墙条带 + 进行中/已完成/收藏列表 + 空态引导；成就墙全览: 未解锁灰色剪影 + 达成条件, 不显示百分比；首页大按钮 + 温和统计卡片双入口）；成就触发定义表 `IN_PROGRESS`（展示层按完成数分档判定, 写库触发待统一收口） | QT-4 |
 | 设置 §8 | 无 | 字号三档/减少动效/步骤朗读开关/年龄段 `DONE`（家长门后设置页, 即时生效并落 SQLite）；主题/语言/库存复入口 `PLANNED` | QT-2 |
 | 家长门 §9 | 算术题门 + 中文大写软键盘 已可用 | 32px 入口 + 门界面（软键盘/冷却）+ 家长中心 + 会话守卫 `DONE`；PIN / 手写键盘 `PLANNED` | QT-2 |
-| Onboarding / 库存录入 §10 | 无 | 库存图形录入 `DONE`；年龄段前置流程 `PLANNED` | QT-5 |
+| Onboarding / 库存录入 §10 | 库存录入首启弹窗 + 图形录入 | 库存图形录入 `DONE`；年龄段前置流程 `DONE`（首启温和全屏引导：三档大卡片选完落盘只出现一次, 家长可在设置改档；GL 版年龄段前置 `PLANNED`）；快捷套装预填 `PLANNED` | QT-5 |
 | 订阅页 §11 | 无 | 脚手架 `DONE`（家长门后；免费 30 vs 全库对比实时读目录；温和文案 + 承诺清单；「即将上线」CTA + mailto 占位；首页/家长中心/设置页三入口）；正式订阅页（三卡定价/透明条款/恢复购买/IAP）`PLANNED` | QT-5 |
 
 ## 6. 风险与对策

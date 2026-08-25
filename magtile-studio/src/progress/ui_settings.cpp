@@ -47,4 +47,13 @@ bool getTtsEnabled(const ProgressStore& store) {
     return !stored.has_value() || *stored != "0";
 }
 
+void setAgeOnboardingDone(ProgressStore& store) {
+    store.setSetting(kAgeOnboardingDoneSettingKey, "1");
+}
+
+bool getAgeOnboardingDone(const ProgressStore& store) {
+    const auto stored = store.getSetting(kAgeOnboardingDoneSettingKey);
+    return stored.has_value() && *stored == "1";
+}
+
 }  // namespace magtile::progress

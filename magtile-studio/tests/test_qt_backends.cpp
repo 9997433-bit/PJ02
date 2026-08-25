@@ -16,7 +16,10 @@
 //      排除刚完成的自身、订阅内容与缺片模型, 无库存时为空;
 //   5. TtsBackend (QT-4): 朗读开关默认开 / 跨实例持久化 / 与
 //      ui_settings "tts_enabled" 键的双向契约 (设置页开关同键);
-//      本目标不定义 MAGTILE_QT_TTS, 顺带覆盖无引擎静默降级路径。
+//      本目标不定义 MAGTILE_QT_TTS, 顺带覆盖无引擎静默降级路径;
+//   6. 首启年龄段引导判定 (QT-5, §10.1): 全新存档待引导 / 选档落盘
+//      (age_mode + onboarding_age_done) 且只出现一次 / 选默认 7-9 档
+//      同样落盘 / CLI/GL 已设年龄段或只有完成标记都不再弹 (双保险)。
 // 用法: magtile_qt_backend_test <临时数据库路径>
 // =============================================================
 
@@ -74,6 +77,7 @@ int main(int argc, char** argv) {
     {
         SettingsBackend settings(db_path);
         expect(settings.storeAvailable(), "存档可用");
+        expect(settings.ageOnboardingPending(), "全新存档首启年龄段引导待完成 (QT-5)");
         expect(settings.fontScalePercent() == 100, "默认字号 100%");
         expect(!settings.reduceMotion(), "默认动效开启");
         expect(settings.ageModeId() == QStringLiteral("age_7_9"), "默认年龄段 7-9 标准模式");
@@ -331,6 +335,82 @@ int main(int argc, char** argv) {
     {
         magtile::qtui::TtsBackend tts(db_path);
         expect(tts.enabled(), "ui_settings 层写入能被桥读回 (反向契约)");
+    }
+
+    // ---- 6. 首启年龄段引导判定 (QT-5, §10.1) ---------------------------
+    {
+        // 主库此刻已写过 age_mode (前面几节写入): 引导不待完成
+        SettingsBackend settings(db_path);
+        expect(!settings.ageOnboardingPending(), "已有 age_mode 的存档不再弹首启引导");
+    }
+    {
+        // 全新存档: 引导待完成 -> 选档落盘 -> 只出现一次
+        const std::filesystem::path onboarding_db(db_path.string() + ".onboarding");
+        std::filesystem::remove(onboarding_db);
+        {
+            SettingsBackend settings(onboarding_db);
+            expect(settings.ageOnboardingPending(), "全新存档引导待完成");
+            settings.completeAgeOnboarding(QStringLiteral("age_99"));
+            expect(settings.ageOnboardingPending(), "未知档位标识不结束引导");
+            settings.completeAgeOnboarding(QStringLiteral("age_4_6"));
+            expect(!settings.ageOnboardingPending(), "选定档位后引导立即结束");
+            expect(settings.ageModeId() == QStringLiteral("age_4_6"), "引导选档即落年龄段");
+        }
+        {
+            SettingsBackend settings(onboarding_db);  // 重开桥: 引导只出现一次
+            expect(!settings.ageOnboardingPending(), "引导完成跨实例持久化 (只出现一次)");
+            expect(settings.ageModeId() == QStringLiteral("age_4_6"),
+                   "引导落盘的年龄段跨实例可读");
+        }
+        {
+            // 共库契约: 引导写的就是 CLI/GL 读的 age_mode 键 + 完成标记
+            progress::ProgressStore store(onboarding_db);
+            expect(progress::getAgeMode(store) == AgeMode::Age4_6,
+                   "CLI/GL 层读到引导写入的年龄段 (共用 age_mode 键)");
+            expect(progress::getAgeOnboardingDone(store),
+                   "ui_settings 层读到引导完成标记 (onboarding_age_done 契约)");
+        }
+    }
+    {
+        // 选的正是默认 7-9 档也要显式落盘 (引导只看 "选没选", 不看 "改没改")
+        const std::filesystem::path default_db(db_path.string() + ".onboarding_default");
+        std::filesystem::remove(default_db);
+        {
+            SettingsBackend settings(default_db);
+            expect(settings.ageOnboardingPending(), "全新存档 (将选默认档) 引导待完成");
+            settings.completeAgeOnboarding(QStringLiteral("age_7_9"));
+            expect(!settings.ageOnboardingPending(), "选默认 7-9 档同样结束引导");
+        }
+        {
+            SettingsBackend settings(default_db);
+            expect(!settings.ageOnboardingPending(),
+                   "默认档选择跨实例持久化 (age_mode 已非空)");
+        }
+    }
+    {
+        // 存量存档双保险: CLI/GL 先设过年龄段, 或只有完成标记, 都不再弹
+        const std::filesystem::path legacy_db(db_path.string() + ".onboarding_legacy");
+        std::filesystem::remove(legacy_db);
+        {
+            progress::ProgressStore store(legacy_db);
+            progress::setAgeMode(store, AgeMode::Age10_12);
+        }
+        {
+            SettingsBackend settings(legacy_db);
+            expect(!settings.ageOnboardingPending(),
+                   "CLI/GL 已设年龄段的存量存档不弹引导 (age_mode 非空判定)");
+        }
+        const std::filesystem::path marker_db(db_path.string() + ".onboarding_marker");
+        std::filesystem::remove(marker_db);
+        {
+            progress::ProgressStore store(marker_db);
+            progress::setAgeOnboardingDone(store);
+        }
+        {
+            SettingsBackend settings(marker_db);
+            expect(!settings.ageOnboardingPending(),
+                   "只有完成标记也不再弹引导 (双保险任一即生效)");
+        }
     }
 
     if (g_failures == 0) {

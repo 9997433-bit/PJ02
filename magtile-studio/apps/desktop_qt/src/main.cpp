@@ -15,7 +15,11 @@
 //   - --smoke-open-model: 启动后直接进入该模型的 3D 教程 (QT-3 冒烟);
 //   - --smoke-screenshot: 2.5s 后抓屏保存 PNG 并退出 (配合上一项);
 //   - --smoke-complete-model: 启动后直接完成该模型进庆祝页 (QT-4 冒烟);
-//   - --smoke-open-progress: 启动直开进度页「我的作品」(QT-4 评审/冒烟)。
+//   - --smoke-open-progress: 启动直开进度页「我的作品」(QT-4 评审/冒烟);
+//   - --smoke-age-onboarding: 首启年龄段引导自动驾驶 (QT-5 冒烟):
+//     首启选档落盘 / 二次启动引导不再出现, 退出码由断言决定;
+//   - --dev-billing: 订阅页显示「模拟已订阅」开发开关 (假计费适配层,
+//     零真实扣费; Debug 构建默认开, 商店档编译期恒关)。
 //
 // 场景图后端: 3D 教程视口 (QQuickFramebufferObject) 需要 OpenGL,
 // 未显式设置 QSG_RHI_BACKEND 时在此固定为 OpenGL (全平台桌面可用)。
@@ -34,6 +38,7 @@
 #include <cstdlib>
 #include <filesystem>
 
+#include "billing_backend.hpp"
 #include "inventory_backend.hpp"
 #include "parent_gate_backend.hpp"
 #include "settings_backend.hpp"
@@ -127,6 +132,14 @@ int main(int argc, char* argv[]) {
     const QCommandLineOption smoke_progress_opt(
         QStringLiteral("smoke-open-progress"),
         QStringLiteral("启动直开进度页「我的作品」(QT-4 评审/冒烟深链)"));
+    const QCommandLineOption smoke_age_opt(
+        QStringLiteral("smoke-age-onboarding"),
+        QStringLiteral("冒烟自动驾驶: 首启年龄段引导选档落盘 / 二次启动不再出现 "
+                       "(QT-5, 配合 --smoke-quit-ms)"));
+    const QCommandLineOption dev_billing_opt(
+        QStringLiteral("dev-billing"),
+        QStringLiteral("订阅页显示「模拟已订阅」开发开关 (假计费, 零真实扣费; "
+                       "Debug 构建默认开)"));
     parser.addOption(data_dir_opt);
     parser.addOption(db_opt);
     parser.addOption(parent_gate_opt);
@@ -136,6 +149,8 @@ int main(int argc, char* argv[]) {
     parser.addOption(smoke_shot_opt);
     parser.addOption(smoke_complete_opt);
     parser.addOption(smoke_progress_opt);
+    parser.addOption(smoke_age_opt);
+    parser.addOption(dev_billing_opt);
     parser.process(app);
 
     fs::path data_dir;
@@ -164,6 +179,22 @@ int main(int argc, char* argv[]) {
     magtile::qtui::SettingsBackend settings(db_file);
     // 步骤朗读后端桥 (§4.2, QT-4): 系统 TTS 封装, 开关与年龄段共库
     magtile::qtui::TtsBackend tts(db_file);
+    // 计费后端桥 (COMMERCIAL_PLAN §2.2): 订阅/IAP 适配层, 桌面开发档走
+    // 假计费 (零真实扣费); 「模拟已订阅」开发开关 Debug 构建默认开,
+    // Release 可经 --dev-billing 打开 (商店档编译期恒关)
+#ifdef NDEBUG
+    const bool dev_billing = parser.isSet(dev_billing_opt);
+#else
+    const bool dev_billing = true;
+#endif
+    magtile::qtui::BillingBackend billing(db_file, dev_billing);
+    // 订阅生效后庆祝页推荐不再排除订阅内容 (解锁即同权, 单向接线)
+    QObject::connect(&billing, &magtile::qtui::BillingBackend::billingChanged, &backend,
+                     [&backend, &billing]() {
+                         backend.libraryFilter()->setSubscriptionActive(
+                             billing.subscriptionActive());
+                     });
+    backend.libraryFilter()->setSubscriptionActive(billing.subscriptionActive());
 
     QQmlApplicationEngine engine;
     // Qt 6.4 的默认引擎导入路径不含 /qt/qml (6.5+ 才内置), 显式补上
@@ -173,10 +204,13 @@ int main(int argc, char* argv[]) {
     engine.rootContext()->setContextProperty(QStringLiteral("parentGate"), &parent_gate);
     engine.rootContext()->setContextProperty(QStringLiteral("appSettings"), &settings);
     engine.rootContext()->setContextProperty(QStringLiteral("tts"), &tts);
+    engine.rootContext()->setContextProperty(QStringLiteral("billing"), &billing);
     const bool smoke_flow = parser.isSet(smoke_flow_opt);
     engine.rootContext()->setContextProperty(QStringLiteral("smokeParentFlow"), smoke_flow);
     engine.rootContext()->setContextProperty(QStringLiteral("smokeOpenProgress"),
                                              parser.isSet(smoke_progress_opt));
+    const bool smoke_age = parser.isSet(smoke_age_opt);
+    engine.rootContext()->setContextProperty(QStringLiteral("smokeAgeOnboarding"), smoke_age);
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
@@ -213,20 +247,20 @@ int main(int argc, char* argv[]) {
     }
 
     // 无头冒烟: QML 全部加载成功后按时退出 (加载失败走上面的 exit(1));
-    // 自动驾驶模式下退出码由 Main.qml 的 smokeParentFlowOk 决定
+    // 自动驾驶模式下退出码由 Main.qml 的 smokeParentFlowOk /
+    // smokeAgeOnboardingOk 断言决定
     if (parser.isSet(smoke_quit_opt)) {
         bool ok = false;
         const int quit_ms = parser.value(smoke_quit_opt).toInt(&ok);
         if (ok && quit_ms > 0) {
-            QTimer::singleShot(quit_ms, &app, [&engine, smoke_flow]() {
+            QTimer::singleShot(quit_ms, &app, [&engine, smoke_flow, smoke_age]() {
                 int exit_code = 0;
-                if (smoke_flow) {
-                    const auto roots = engine.rootObjects();
-                    exit_code = (!roots.isEmpty() &&
-                                 roots.constFirst()->property("smokeParentFlowOk").toBool())
-                                    ? 0
-                                    : 1;
-                }
+                const auto roots = engine.rootObjects();
+                const auto root_flag = [&roots](const char* name) {
+                    return !roots.isEmpty() && roots.constFirst()->property(name).toBool();
+                };
+                if (smoke_flow && !root_flag("smokeParentFlowOk")) exit_code = 1;
+                if (smoke_age && !root_flag("smokeAgeOnboardingOk")) exit_code = 1;
                 QCoreApplication::exit(exit_code);
             });
         }

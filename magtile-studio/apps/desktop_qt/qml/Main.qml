@@ -89,6 +89,14 @@ ApplicationWindow {
         }
     }
 
+    // 首启年龄段引导 (QT-5, §10.1): 盖在首页之上的温和全屏引导, 从未
+    // 选过年龄段 (无 age_mode 键且无 onboarding_age_done 标记) 时出现
+    // 一次; 三档大卡片选完即落盘并淡出露出首页, 家长之后可在设置改档
+    AgeOnboardingPage {
+        id: ageOnboarding
+        anchors.fill: parent
+    }
+
     Component {
         id: homeComponent
         HomePage {
@@ -300,6 +308,35 @@ ApplicationWindow {
                 window.smokeParentFlowOk = parentGate.sessionActive
                     && stack.currentItem !== null
                     && stack.currentItem.requiresParentSession === true
+                stop()
+            }
+        }
+    }
+
+    // ---- 首启年龄段引导冒烟 (--smoke-age-onboarding, 无头 CI 专用) ----
+    // 首启 (存档无 age_mode): 断言引导已出现 -> 选 4-6 档 (与卡片点击
+    // 同一条 choose 路径) -> 断言引导收起且档位落盘; 二次启动 (已有
+    // 标记): 断言引导确实不再出现。全程无误后置 smokeAgeOnboardingOk,
+    // main.cpp 在 --smoke-quit-ms 到点时据此决定退出码。
+    property bool smokeAgeOnboardingOk: false
+    Timer {
+        id: smokeAgeTimer
+        property int stage: 0
+        interval: 400
+        repeat: true
+        running: smokeAgeOnboarding
+        onTriggered: {
+            stage += 1
+            if (stage === 1) {
+                if (appSettings.ageOnboardingPending) {
+                    if (!ageOnboarding.visible) { stop(); return }  // 该出现没出现: 判负
+                    ageOnboarding.choose("age_4_6")
+                }
+                // 已完成过引导: 本拍不动作, 下一拍复核引导确实没出现
+            } else {
+                window.smokeAgeOnboardingOk = !appSettings.ageOnboardingPending
+                    && !ageOnboarding.visible
+                    && appSettings.ageModeId !== ""
                 stop()
             }
         }

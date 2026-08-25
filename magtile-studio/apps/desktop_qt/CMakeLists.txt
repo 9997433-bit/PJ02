@@ -45,6 +45,7 @@ qt_add_executable(magtile_studio_qt
     src/parent_gate_backend.cpp
     src/settings_backend.cpp
     src/tts_backend.cpp
+    src/billing_backend.cpp
     src/tutorial_viewport.cpp
 )
 
@@ -64,6 +65,7 @@ qt_add_qml_module(magtile_studio_qt
     QML_FILES
         qml/Main.qml
         qml/HomePage.qml
+        qml/AgeOnboardingPage.qml
         qml/LibraryPage.qml
         qml/DetailPage.qml
         qml/TutorialPage.qml

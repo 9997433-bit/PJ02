@@ -8,6 +8,8 @@
 //      忽略、脏值兜底、跨连接持久化;
 //   2c. 步骤朗读总开关 (§4.2 "tts_enabled", Qt 版设置页/TtsBackend
 //      共用契约): 默认开、往返、脏值按开兜底、跨连接持久化;
+//   2d. 首启年龄段引导完成标记 (§10.1 "onboarding_age_done", Qt 版
+//      首启引导契约): 默认未完成、写入即完成、跨连接持久化;
 //   3. NullTts: speak 替换旧朗读 (无叠音语义)、stop 幂等、
 //      空文本等价于 stop;
 //   4. 系统 TTS 探测: createSystemTts 永不返回空指针, 无后端时
@@ -137,6 +139,20 @@ int main(int argc, char** argv) {
     {
         progress::ProgressStore store(db_path);  // 重开连接: 验证真正落盘
         expect(!progress::getTtsEnabled(store), "朗读开关跨连接持久化");
+    }
+
+    // ---- 2d. 首启年龄段引导完成标记 (§10.1 onboarding_age_done) --------
+    {
+        progress::ProgressStore store(db_path);
+        expect(!progress::getAgeOnboardingDone(store), "从未写入时引导未完成");
+        progress::setAgeOnboardingDone(store);
+        expect(progress::getAgeOnboardingDone(store), "写入完成标记后立即可读");
+        progress::setAgeOnboardingDone(store);
+        expect(progress::getAgeOnboardingDone(store), "完成标记写入幂等");
+    }
+    {
+        progress::ProgressStore store(db_path);  // 重开连接: 验证真正落盘
+        expect(progress::getAgeOnboardingDone(store), "引导完成标记跨连接持久化");
     }
 
     // ---- 3. NullTts: 无叠音语义 ---------------------------------------

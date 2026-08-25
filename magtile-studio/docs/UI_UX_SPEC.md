@@ -89,7 +89,7 @@ flowchart TD
 | 进度与成就 | §7 | `IN_PROGRESS`（SQLite 存档 + CLI 查询 DONE；Qt 版进度页「我的作品」+ 成就墙 GUI DONE：三格统计/进行中/已完成/收藏列表 + 徽章墙（未解锁灰色剪影 + 达成条件），见 QT_UI_PLAN.md QT-4；成就触发定义表与 GL 版界面 PLANNED） |
 | 设置 | §8 | `IN_PROGRESS`（键值存储 DONE；Qt 版家长门后设置页 DONE：字号三档/减少动效/年龄段，即时生效并与 CLI/GL 共库；主题/语言/库存复入口 PLANNED） |
 | 家长门 | §9 | `IN_PROGRESS`（算术题门 stub `DONE`：中文数字乘法题 + 中文大写数字软键盘 + 冷却 + 15 分钟内存会话 + 门后家长区占位页；Qt 版门界面 + 家长中心 + 会话守卫 `DONE`（同一 `core::ParentGate`）；PIN / 手写键盘 / 家长中心完整功能 PLANNED） |
-| Onboarding（库存录入） | §10 | `IN_PROGRESS`（结构化库存存取 API + CLI 录入 `inventory set` DONE；GL 版按片型计数的图形录入界面 DONE：全部片型中文名 + 大步进器/直接输入 + 保存后一键「看看我能搭什么」，首启弹窗主按钮直达录入，模型库页眉常驻「我的磁力片」入口；Qt 版录入界面与快捷套装预填 PLANNED） |
+| Onboarding（库存录入） | §10 | `IN_PROGRESS`（结构化库存存取 API + CLI 录入 `inventory set` DONE；GL 版按片型计数的图形录入界面 DONE：全部片型中文名 + 大步进器/直接输入 + 保存后一键「看看我能搭什么」，首启弹窗主按钮直达录入，模型库页眉常驻「我的磁力片」入口；Qt 版首启年龄段引导 DONE（QT-5：首页上温和全屏三档大卡片，选完落盘 `age_mode` + `onboarding_age_done` 只出现一次，家长可在设置改档）；快捷套装预填 PLANNED） |
 | 订阅页 | §11 | `IN_PROGRESS`（Qt 版家长门后温和占位页 DONE：「即将上线」，无倒计时/无催促/不索取信息；正式订阅页（三卡/透明条款/恢复购买）PLANNED） |
 
 ---
@@ -273,7 +273,7 @@ flowchart TD
 | 设置项 | 位置 | 状态 |
 |--------|------|------|
 | 音效/音乐音量、TTS 开关 | 儿童侧（播放器内浮层） | `PLANNED`（键值存储 DONE） |
-| 年龄段模式切换 | 家长区 | `IN_PROGRESS`（`AgeMode` 存储 + CLI `settings set-age`/`show` DONE；Qt 版家长区设置页三档选择 DONE，与 CLI/GL 共用同一设置键；Onboarding 前置流程 PLANNED） |
+| 年龄段模式切换 | 家长区 | `IN_PROGRESS`（`AgeMode` 存储 + CLI `settings set-age`/`show` DONE；Qt 版家长区设置页三档选择 DONE，与 CLI/GL 共用同一设置键；Qt 版首启 Onboarding 前置引导 DONE（三档大卡片、`onboarding_age_done` 标记只出现一次，见 QT_UI_PLAN.md QT-5）；GL 版前置流程 PLANNED） |
 | 字号缩放三档、减少动效 | 家长区（跟随系统 + 手动覆盖） | `IN_PROGRESS`（Qt 版设置页手动三档 100/125/150% + 减少动效开关 DONE，全应用即时生效并存 SQLite（`progress/ui_settings`）；跟随系统 PLANNED） |
 | 主题（亮/暗/跟随系统） | 家长区 | `PLANNED` |
 | 语言（简中首发；繁中/英文 M4+） | 家长区 | `PLANNED` |
@@ -332,9 +332,9 @@ flowchart TD
 
 **目标**：首启 ≤ 90 秒完成「家长设年龄 → 录库存 → 孩子开搭」。库存录入是「我能搭」筛选与 BOM 缺片提示的数据源。
 
-### 10.1 流程 — IN_PROGRESS（库存存取 API + CLI 录入 + GL 版图形录入界面 DONE；年龄段前置步骤与快捷套装预填 PLANNED）
+### 10.1 流程 — IN_PROGRESS（库存存取 API + CLI 录入 + GL 版图形录入界面 + Qt 版首启年龄段引导 DONE；GL 版年龄段前置步骤与快捷套装预填 PLANNED）
 
-现阶段的首启行为：模型库 GUI 启动时若从未登记库存（`hasInventory()` 为假）且未看过提示，弹出「先登记家里的磁力片」弹窗（压暗遮罩 + 价值说明），主按钮「现在登记」直达按片型计数的图形录入界面（§10.2）；「稍后再说」落盘 `inventory_onboarding_done` 标记后不再打扰——跳过永远可见，录库存不是付费墙。录入界面保存即写入与 CLI 共用的 `tile_inventory` 表（含 0 数量的「明确没有」），并可一键「保存，看看我能搭什么」跳回已开启「我能搭的」筛选的模型库；模型库页眉常驻「我的磁力片」入口供随时修改（冒烟：`tests/test_inventory_gui.sh` 校验图形路径写入后 CLI `inventory show/match` 能读到）。
+现阶段的首启行为：模型库 GUI 启动时若从未登记库存（`hasInventory()` 为假）且未看过提示，弹出「先登记家里的磁力片」弹窗（压暗遮罩 + 价值说明），主按钮「现在登记」直达按片型计数的图形录入界面（§10.2）；「稍后再说」落盘 `inventory_onboarding_done` 标记后不再打扰——跳过永远可见，录库存不是付费墙。录入界面保存即写入与 CLI 共用的 `tile_inventory` 表（含 0 数量的「明确没有」），并可一键「保存，看看我能搭什么」跳回已开启「我能搭的」筛选的模型库；模型库页眉常驻「我的磁力片」入口供随时修改（冒烟：`tests/test_inventory_gui.sh` 校验图形路径写入后 CLI `inventory show/match` 能读到）。Qt 版首启（存档从未写过 `age_mode` 键且无 `onboarding_age_done` 完成标记）在首页之上先弹温和全屏**年龄段引导**：三档大卡片（4-6/7-9/10+，儿童友好文案，无跳过焦虑——默认档就在卡里），选完即落盘并进入首页，只出现一次，家长随时可在设置页改档（实现与冒烟见 QT_UI_PLAN.md QT-5 补充说明）。
 
 ```mermaid
 flowchart LR
@@ -460,7 +460,7 @@ sequenceDiagram
 | 模型库 | Qt 版筛选器（难度/主题/「只用核心 9 片」/「我能搭的」+ 筛选空态）、Qt 版模型详情页（BOM 对照库存缺片琥珀提示 + 收藏 + 开始搭建）、分龄卡片密度与筛选器收放（Qt/GL 双端三档，读年龄段设置自动切换）、「我能搭的」空态推荐 3 个可搭模型（难度升序，Qt/GL 双端） | GL 卡片网格 + 进度徽标、「我能搭的」库存筛选 | 详情页 3D 预览、步骤级缺片提示 |
 | 进度成就 | 数据层 + CLI、Qt 版进度页「我的作品」+ 成就墙 GUI（未解锁灰色剪影 + 达成条件） | 成就定义与触发（展示层按完成数分档已判定, 写库触发待统一收口） | GL 版成就墙 |
 | 家长门/订阅 | 算术题门 stub（`core::ParentGate` + 软键盘门界面 + 15 分钟内存会话 + 家长区占位页 + 单元/冒烟测试）、Qt 版家长门 + 家长中心 + 门后设置页/订阅占位页 + 会话守卫（`qt_backend_bridges`/`qt_gui_smoke`） | 家长区入口已接入模型库 | PIN、手写键盘、家长中心完整功能、正式订阅页（M3 商用前置） |
-| Onboarding | 结构化库存 API + CLI 录入（`inventory set/show/match`）、首启空库存提示弹窗 stub | 年龄段选择（存储 + CLI `settings set-age` 已有，GUI 待做） | 按片型计数的图形录入界面 |
+| Onboarding | 结构化库存 API + CLI 录入（`inventory set/show/match`）、首启空库存提示弹窗 stub、Qt 版首启年龄段三档大卡片引导（只出现一次 + 设置页可改档） | 年龄段选择（存储 + CLI + Qt 版首启引导已有，GL 版前置流程待做） | 按片型计数的图形录入界面 |
 | 无障碍/分龄 | 字号三档缩放 + 减少动效（Qt 版设置页即时生效，`progress/ui_settings` 存储） | 年龄分层框架（AgeMode 三档 + 启蒙模式布局 + Qt 版家长区年龄段切换 + TTS 自动朗读，单元测试 `age_tts`） | 其余分龄细则、色盲安全、跟随系统 |
 
 > 状态变更须同步更新本表与 [PRODUCT_MASTER_PLAN.md](PRODUCT_MASTER_PLAN.md)「商用功能清单」。
