@@ -1,0 +1,1300 @@
+{
+  "schema_version": 1,
+  "id": "eye_clinic_01",
+  "name": "眼科诊所",
+  "name_en": "Eye Clinic 01",
+  "description": "全库第一座'把视力表搭成楼'的模型: 3x1 底 3 层高的双面视力表箱塔, 南北两面各用 8 片蓝方板拼出巨型 E 字 (留白格分居中层两侧 —— 南 E 开口朝东、北 E 开口朝西, 正是视力表上会转方向的 E), E 字本身就是承重墙, 塔高 3.0 靠层层箱形闭环通过高层检查; 塔前测距道透明格黄格相间笔直铺向南, 尽头红色站位格, 两侧橙色候诊长凳; 西侧 2x2 验光室平顶骑缝立一副巨型眼镜 —— 两扇青色窗格方镜片肩并肩竖边互吸, 镜框正对测距道; 塔顶红色检查灯压檐, 东北角院旗高扬 —— 站上红格伸手指方向, 眼睛越练越亮!",
+  "difficulty": 3,
+  "total_pieces": 71,
+  "tags": [
+    "医院",
+    "城市",
+    "职业体验",
+    "视力表",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 54,
+        "rectangle": 9,
+        "equilateral_triangle": 3,
+        "window_square": 3,
+        "door_frame": 1,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g0_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_a",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_b",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_spot",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "g0_c",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_e",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_w",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_path",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "g1_a",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_lane",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g1_e",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_fw",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g2_fe",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g2_a",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_lane",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "g2_e",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_fw",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g3_fe",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g3_a",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_lane",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g3_e",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g4_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g4_a",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g4_t0",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g4_t1",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g4_t2",
+      "type": "square",
+      "position": [
+        5.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g4_e",
+      "type": "square",
+      "position": [
+        6.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "t0_s0",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_n0",
+      "type": "square",
+      "position": [
+        3.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_s1",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_n1",
+      "type": "square",
+      "position": [
+        4.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_s2",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_n2",
+      "type": "square",
+      "position": [
+        5.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t0_w",
+      "type": "square",
+      "position": [
+        3.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t0_e",
+      "type": "square",
+      "position": [
+        6.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t1_s0",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t1_n0",
+      "type": "square",
+      "position": [
+        3.5,
+        5.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t1_s1",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t1_n1",
+      "type": "square",
+      "position": [
+        4.5,
+        5.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t1_s2",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t1_n2",
+      "type": "square",
+      "position": [
+        5.5,
+        5.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t1_w",
+      "type": "square",
+      "position": [
+        3.0,
+        4.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t1_e",
+      "type": "square",
+      "position": [
+        6.0,
+        4.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t2_s0",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t2_n0",
+      "type": "square",
+      "position": [
+        3.5,
+        5.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t2_s1",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t2_n1",
+      "type": "square",
+      "position": [
+        4.5,
+        5.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t2_s2",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t2_n2",
+      "type": "square",
+      "position": [
+        5.5,
+        5.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "t2_w",
+      "type": "square",
+      "position": [
+        3.0,
+        4.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "t2_e",
+      "type": "square",
+      "position": [
+        6.0,
+        4.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tcap_w",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        4.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tcap_e",
+      "type": "square",
+      "position": [
+        5.5,
+        4.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "t_lamp",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        4.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "c_win",
+      "type": "window_square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "c_door",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "c_n0",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "c_n1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "c_w2",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "c_w3",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "c_e2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "c_e3",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "c_rf_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "c_rf_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "c_rf_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "c_rf_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lens_w",
+      "type": "window_square",
+      "position": [
+        0.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "lens_e",
+      "type": "window_square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bench_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bench_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flag",
+      "type": "isosceles_triangle",
+      "position": [
+        6.5,
+        5.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺院子南排: 红色站位格居中 —— 测视力就站这里, 两侧方板给候诊长凳留落脚边。",
+      "tip": "站位格到视力表正好隔四格 —— 距离画在地上。",
+      "tiles_to_add": [
+        "g0_w",
+        "g0_a",
+        "g0_b",
+        "g0_spot",
+        "g0_c",
+        "g0_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺步道行: 橙色步道正对验光室门位, 测距道第一格接上站位格。",
+      "tip": "",
+      "tiles_to_add": [
+        "g1_w",
+        "g1_path",
+        "g1_a",
+        "g1_lane",
+        "g1_e"
+      ],
+      "highlight_tiles": [
+        "g0_spot"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺验光室地板两行: 白色地板居西, 黄色距离格嵌进测距道正中。",
+      "tip": "黄格是测距道的中点记号 —— 透明黄透明相间。",
+      "tiles_to_add": [
+        "g2_fw",
+        "g2_fe",
+        "g2_a",
+        "g2_lane",
+        "g2_e",
+        "g3_fw",
+        "g3_fe",
+        "g3_a",
+        "g3_lane",
+        "g3_e"
+      ],
+      "highlight_tiles": [
+        "g1_lane"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺箱塔落脚行: 三片白地板并排 —— 视力表箱塔的地基。",
+      "tip": "",
+      "tiles_to_add": [
+        "g4_w",
+        "g4_a",
+        "g4_t0",
+        "g4_t1",
+        "g4_t2",
+        "g4_e"
+      ],
+      "highlight_tiles": [
+        "g3_lane"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "起箱塔第一层: 南北各 3 片蓝方板 + 东西侧壁, 四面竖边互吸闭环 —— E 字的底横杠。",
+      "tip": "E 字是承重墙不是贴纸 —— 每片都在干活。",
+      "tiles_to_add": [
+        "t0_s0",
+        "t0_s1",
+        "t0_s2",
+        "t0_n0",
+        "t0_n1",
+        "t0_n2",
+        "t0_w",
+        "t0_e"
+      ],
+      "highlight_tiles": [
+        "g4_t0",
+        "g4_t2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "起箱塔第二层: 中层要留白! 南面东格、北面西格换透明方板 —— 南 E 开口朝东、北 E 开口朝西。",
+      "tip": "视力表上的 E 会转方向 —— 两面开口不一样才好玩。",
+      "tiles_to_add": [
+        "t1_s0",
+        "t1_s1",
+        "t1_s2",
+        "t1_n0",
+        "t1_n1",
+        "t1_n2",
+        "t1_w",
+        "t1_e"
+      ],
+      "highlight_tiles": [
+        "t0_s0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "起箱塔第三层: 再上一整圈蓝环 —— E 字的顶横杠, 塔高 3.0 全靠层层闭环站稳。",
+      "tip": "",
+      "tiles_to_add": [
+        "t2_s0",
+        "t2_s1",
+        "t2_s2",
+        "t2_n0",
+        "t2_n1",
+        "t2_n2",
+        "t2_w",
+        "t2_e"
+      ],
+      "highlight_tiles": [
+        "t1_s2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "箱塔压顶 + 检查灯: 长板与方板短边整边压东西壁顶, 红色等边检查灯立上南檐正中。",
+      "tip": "检查灯正对测距道 —— 亮灯就开测!",
+      "tiles_to_add": [
+        "tcap_w",
+        "tcap_e",
+        "t_lamp"
+      ],
+      "highlight_tiles": [
+        "t2_w",
+        "t2_e"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立验光室南立面与西墙: 窗格方+蓝色门框方朝南, 西墙 2 片。",
+      "tip": "",
+      "tiles_to_add": [
+        "c_win",
+        "c_door",
+        "c_w2",
+        "c_w3"
+      ],
+      "highlight_tiles": [
+        "g1_path"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "合验光室北墙与东墙: 各 2 片, 一层白盒箱形围合。",
+      "tip": "",
+      "tiles_to_add": [
+        "c_n0",
+        "c_n1",
+        "c_e2",
+        "c_e3"
+      ],
+      "highlight_tiles": [
+        "c_w3"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "盖验光室平顶: 4 片方板四边压墙顶 —— 顶上要骑眼镜, 必须用方板留出骑缝边。",
+      "tip": "",
+      "tiles_to_add": [
+        "c_rf_0_2",
+        "c_rf_1_2",
+        "c_rf_0_3",
+        "c_rf_1_3"
+      ],
+      "highlight_tiles": [
+        "c_n0",
+        "c_e2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "架巨型眼镜: 两扇青色窗格方镜片肩并肩骑上屋顶中缝, 镜片间竖边互吸 —— 镜框正对测距道。",
+      "tip": "窗格方的镂空格正好当镜片 —— 全城最大的一副眼镜。",
+      "tiles_to_add": [
+        "lens_w",
+        "lens_e"
+      ],
+      "highlight_tiles": [
+        "c_rf_0_2",
+        "c_rf_1_3"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "摆候诊长凳、升院旗: 两片橙等边面朝站位格, 红色等腰院旗立上东北角 —— 眼科诊所开诊, E 朝哪边?",
+      "tip": "站上红格、伸手指方向 —— 眼睛越练越亮!",
+      "tiles_to_add": [
+        "bench_w",
+        "bench_e",
+        "flag"
+      ],
+      "highlight_tiles": [
+        "g0_spot"
+      ]
+    }
+  ]
+}
