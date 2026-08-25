@@ -49,6 +49,10 @@ jobs:
       - name: 运行全量 QA 流水线
         env:
           FORCE_COLOR: "1"   # GitHub Actions 日志支持 ANSI 颜色
+          # 显式指定 GCC: 规避个别环境默认 c++ 指向缺 libstdc++ 搜索路径的
+          # Clang 导致的链接失败 (见 docs/TESTING.md 构建一节)
+          CC: gcc
+          CXX: g++
         run: bash tests/run_full_qa.sh
 
       # 失败时把分项日志留档, 便于不拉环境直接定位失败关卡
