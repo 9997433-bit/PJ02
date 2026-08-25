@@ -3,9 +3,18 @@
     <string name="app_name">MagTile Studio</string>
     <string name="library_title">模型库</string>
     <string name="library_loading">正在解包数据资产…</string>
-    <!-- %1$d = 模型数, %2$d = 磁力片形状数 -->
-    <string name="library_summary">共 %1$d 个模型 · %2$d 种磁力片形状</string>
+    <!-- %1$d = 筛选后模型数, %2$d = 模型总数, %3$d = 磁力片形状数 -->
+    <string name="library_summary">%1$d / %2$d 个模型 · %3$d 种磁力片形状</string>
     <string name="library_load_failed">模型库加载失败:\n%1$s</string>
+    <string name="library_filter_empty">没有符合当前筛选条件的模型</string>
+    <!-- 筛选栏 (口径与桌面 GL/Qt 模型库一致) -->
+    <string name="filter_all_difficulties">全部难度</string>
+    <string name="filter_all_themes">全部主题</string>
+    <string name="filter_core9">只用核心 9 片</string>
+    <string name="thumbnail_description">模型缩略图</string>
+    <string name="card_needs_expansion">需要扩展装</string>
+    <string name="dialog_core9_note">只用核心 9 片型即可搭建 (基础套装)</string>
+    <string name="dialog_expansion_note">需要扩展装 (用到核心 9 片之外的片型)</string>
     <!-- %1$d = 片数, %2$d = 步数 -->
     <string name="card_pieces_steps">%1$d 片 · %2$d 步</string>
     <string name="dialog_tutorial_coming">分步教程即将上线, 敬请期待!</string>

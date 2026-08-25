@@ -12,6 +12,9 @@ import java.io.File
  *
  * 解包完成后写入版本戳 (APK lastUpdateTime); 版本戳一致时直接复用,
  * 日常启动零拷贝。
+ *
+ * 缩略图 (assets/thumbnails, 约 4 MB) 刻意不在解包范围: 只被 Kotlin UI
+ * 消费, ThumbnailLoader 直接流式读 assets, 不占用 filesDir 空间。
  */
 object DataAssetInstaller {
 

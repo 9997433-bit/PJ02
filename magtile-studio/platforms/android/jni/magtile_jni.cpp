@@ -3,7 +3,7 @@
 //
 // 向 Kotlin 侧 (com.magtile.studio.MainActivity) 暴露四个入口:
 //   loadCatalog(catalogPath)      -> 加载磁力片形状目录, 返回形状数
-//   listModels(dataDir)           -> 模型库目录 (卡片元数据), 返回 JSON 字符串
+//   listModels(dataDir)           -> 模型库目录 (卡片元数据 + core-9 判定), 返回 JSON 字符串
 //   validateModel(jsonPath)       -> 加载模型并跑完整物理校验, 返回中文摘要
 //   getTutorialStepCount()        -> 最近一次成功加载模型的教程步骤数
 //
@@ -91,18 +91,45 @@ JNIEXPORT jint JNICALL Java_com_magtile_studio_MainActivity_loadCatalog(
 /// 加载 data 目录下的模型库目录 (model_catalog.json, 缺失时自动扫描
 /// models/*.json), 返回 UTF-8 JSON 字符串供 Kotlin 侧 (org.json) 解析:
 ///   成功: {"models":[{"id","name","name_en","description","difficulty",
-///                     "total_pieces","step_count","theme","file"}, ...]}
+///                     "total_pieces","step_count","theme","file",
+///                     "bom_known","core9_only"}, ...]}
 ///   失败: {"error":"中文错误信息"}
-/// 只含卡片展示元数据, 不加载几何与教程步骤 (模型库秒开);
+/// 卡片展示元数据外, 逐模型加载 BOM 判定「只用核心 9 片」——
+/// 与桌面 GL/Qt 同一共享判定口径 (core::isCoreTile, 目录 tier 优先,
+/// 形状缺失退回代码内白名单); 模型文件有问题的按 "BOM 未知" 降级
+/// (bom_known=false, 不进核心筛选也不显示角标), 不影响其余卡片。
+/// 131 模型量级后台线程百毫秒完成 (与桌面 GL 启动逐模型判定同策略)。
 /// file 为模型 JSON 绝对路径, 可直接传给 validateModel()。
 JNIEXPORT jstring JNICALL Java_com_magtile_studio_MainActivity_listModels(
     JNIEnv* env, jobject /*thiz*/, jstring data_dir) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
     try {
         const std::vector<magtile::core::ModelCatalogEntry> entries =
             magtile::core::loadModelCatalog(toUtf8(env, data_dir));
 
         nlohmann::json models = nlohmann::json::array();
         for (const auto& entry : entries) {
+            bool bom_known = false;
+            bool core9_only = false;
+            try {
+                const auto model = magtile::core::loadModelDefinition(entry.file);
+                core9_only = true;
+                for (const auto& [type, count] : model.pieceCountByType()) {
+                    (void)count;
+                    const bool is_core =
+                        ctx.catalog.has_value()
+                            ? magtile::core::isCoreTile(*ctx.catalog, type)
+                            : magtile::core::isCoreTileFallback(type);
+                    if (!is_core) {
+                        core9_only = false;
+                        break;
+                    }
+                }
+                bom_known = true;
+            } catch (const std::exception&) {
+                // 模型文件有问题由目录对账用例负责报告, 这里按 BOM 未知处理
+            }
             models.push_back({
                 {"id", entry.id},
                 {"name", entry.name},
@@ -113,6 +140,8 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MainActivity_listModels(
                 {"step_count", entry.step_count},
                 {"theme", entry.theme()},
                 {"file", entry.file.string()},
+                {"bom_known", bom_known},
+                {"core9_only", core9_only},
             });
         }
         const nlohmann::json root = {{"models", std::move(models)}};

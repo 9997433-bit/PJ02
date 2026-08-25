@@ -17,6 +17,10 @@ data class ModelCard(
     val theme: String,
     /** 模型 JSON 绝对路径 (filesDir 下), 可直接传给 validateModel()。 */
     val filePath: String,
+    /** BOM 是否判定成功 (模型文件有问题时 false, 按 "BOM 未知" 降级)。 */
+    val bomKnown: Boolean,
+    /** 只用核心 9 片型即可搭建 (原生层 core::isCoreTile 共享口径判定)。 */
+    val core9Only: Boolean,
 ) {
     /** 难度星显示: 实心 = 难度值, 补空心到 5 星, 如 ★★☆☆☆。 */
     val difficultyStars: String
@@ -24,6 +28,19 @@ data class ModelCard(
             val filled = difficulty.coerceIn(0, 5)
             return "★".repeat(filled) + "☆".repeat(5 - filled)
         }
+
+    /**
+     * 卡片缩略图在 APK assets 中的路径 (thumbnails/<id>.png 约定,
+     * 与核心库 findThumbnail 的 data/thumbnails/<id>.png 约定一致)。
+     * 缩略图只被 Kotlin UI 消费, 不解包到 filesDir, 由 ThumbnailLoader
+     * 直接流式读取; asset 不存在时显示占位背景。
+     */
+    val thumbnailAssetPath: String
+        get() = "thumbnails/$id.png"
+
+    /** 需要扩展装角标: BOM 已知且用到了核心 9 片之外的片型。 */
+    val needsExpansion: Boolean
+        get() = bomKnown && !core9Only
 
     companion object {
         /**
@@ -51,6 +68,8 @@ data class ModelCard(
             stepCount = obj.getInt("step_count"),
             theme = obj.optString("theme"),
             filePath = obj.getString("file"),
+            bomKnown = obj.optBoolean("bom_known", false),
+            core9Only = obj.optBoolean("core9_only", false),
         )
     }
 }

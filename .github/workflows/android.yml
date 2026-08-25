@@ -4,8 +4,8 @@
 # 两个任务 (详见 magtile-studio/platforms/android/README.md):
 #   ndk-so:         纯 NDK 交叉编译 libmagtile_core.so + JNI 符号断言
 #                   —— 持续保证 magtile_core 无平台依赖 (ROADMAP 移动端前提)
-#   assemble-debug: Gradle 全量打包 debug APK (含 data/ 子集 assets)
-#                   并上传为构建产物, 可直接侧载安装体验模型库列表
+#   assemble-debug: Gradle 全量打包 debug APK (含 data/ 子集 + 缩略图
+#                   assets) 并上传为构建产物, 可直接侧载安装体验模型库
 # =============================================================
 name: Android
 
@@ -87,13 +87,17 @@ jobs:
       - name: 打包 debug APK
         run: ./gradlew :app:assembleDebug
 
-      - name: 校验 APK 内容 (原生库 + 数据资产)
+      - name: 校验 APK 内容 (原生库 + 数据资产 + 缩略图)
         run: |
           APK=app/build/outputs/apk/debug/app-debug.apk
           unzip -l "$APK" | grep -q "lib/arm64-v8a/libmagtile_core.so" || { echo "APK 缺少原生库"; exit 1; }
           unzip -l "$APK" | grep -q "assets/data/tile_catalog.json"   || { echo "APK 缺少形状目录"; exit 1; }
           unzip -l "$APK" | grep -q "assets/data/model_catalog.json"  || { echo "APK 缺少模型库目录"; exit 1; }
-          echo "模型 JSON 数量: $(unzip -l "$APK" | grep -c 'assets/data/models/')"
+          MODEL_COUNT=$(unzip -l "$APK" | grep -c 'assets/data/models/.*\.json')
+          THUMB_COUNT=$(unzip -l "$APK" | grep -c 'assets/thumbnails/.*\.png')
+          echo "模型 JSON 数量: $MODEL_COUNT / 缩略图 PNG 数量: $THUMB_COUNT"
+          # 缩略图与模型一一对应 (thumbnails/<id>.png 约定); 数量脱节说明打包接线坏了
+          [ "$THUMB_COUNT" -ge "$MODEL_COUNT" ] || { echo "APK 缩略图数量 ($THUMB_COUNT) 少于模型数量 ($MODEL_COUNT)"; exit 1; }
 
       - name: 上传 APK 产物
         uses: actions/upload-artifact@v4

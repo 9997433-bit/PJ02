@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 模型卡片: 中文名 + 英文名/主题 + 难度星 + 片数·步数 -->
+<!-- 模型卡片: 缩略图 + 中文名 + 英文名/主题 + 扩展装角标 + 难度星 + 片数·步数 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:background="@drawable/bg_model_card"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="12dp">
+
+    <!-- 320x240 缩略图 (4:3), assets 流式加载; 无缩略图时显示占位底色 -->
+    <ImageView
+        android:id="@+id/model_thumbnail"
+        android:layout_width="96dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/bg_thumbnail_placeholder"
+        android:contentDescription="@string/thumbnail_description"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -29,6 +41,22 @@
             android:layout_marginTop="2dp"
             android:textColor="@color/magtile_text_secondary"
             android:textSize="12sp" />
+
+        <!-- 「需要扩展装」琥珀角标: 只在 BOM 已知且用到扩展片型时显示 -->
+        <TextView
+            android:id="@+id/model_expansion_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_badge_expansion"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="@string/card_needs_expansion"
+            android:textColor="@color/magtile_badge_expansion_text"
+            android:textSize="11sp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout

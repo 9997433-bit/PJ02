@@ -5,10 +5,15 @@
 //   1. externalNativeBuild 指向 ../CMakeLists.txt (双入口设计, 会
 //      add_subdirectory 仓库根, 交叉编译 magtile_core + JNI 为
 //      libmagtile_core.so; 桌面 GL/Qt/CTest 在 Android 下自动关闭)。
-//   2. stageMagTileAssets 任务把仓库根 data/ 的子集 (形状目录 +
-//      模型库目录 + 全部模型 JSON, 约 3.3 MB; 不含缩略图 PNG) 同步进
-//      build/magtile-assets/, 作为额外 assets 目录打进 APK。
-//      首次启动由 DataAssetInstaller 解包到 filesDir/data。
+//   2. stageMagTileAssets 任务把仓库根 data/ 的子集同步进
+//      build/magtile-assets/, 作为额外 assets 目录打进 APK:
+//        assets/data/       形状目录 + 模型库目录 + 全部模型 JSON
+//                           (约 3.3 MB), 首启由 DataAssetInstaller
+//                           解包到 filesDir/data 供原生层读取;
+//        assets/thumbnails/ 全部 131 张卡片缩略图 (320x240 PNG,
+//                           约 4 MB), 只被 Kotlin UI 消费, 经
+//                           ThumbnailLoader 直接流式读 assets,
+//                           不落盘 (刻意放在 data/ 之外避免解包)。
 //   3. minSdk 26: NDK libc++ 的 std::filesystem 自 android-26 起完整
 //      可用, magtile_core 的 JSON 加载依赖它。
 // =============================================================
@@ -70,13 +75,20 @@ android {
 }
 
 // 把仓库根 data/ 的子集同步进 build 目录作为 APK assets。
-// 用 Sync (而非 Copy) 保证删除模型后旧文件不会残留在 APK 里。
+// 用 Sync (而非 Copy) 保证删除模型/缩略图后旧文件不会残留在 APK 里。
+// 缩略图刻意放到 assets/thumbnails/ (data/ 之外): DataAssetInstaller
+// 只解包 assets/data, 缩略图由 Kotlin 直接流式读 assets, 不落盘。
 val stageMagTileAssets = tasks.register<Sync>("stageMagTileAssets") {
-    description = "同步仓库根 data/ 子集 (tile_catalog + model_catalog + models/) 到 APK assets"
+    description = "同步仓库根 data/ 子集 (tile_catalog + model_catalog + models/ + thumbnails/) 到 APK assets"
+    into(layout.buildDirectory.dir("magtile-assets"))
     from(rootProject.layout.projectDirectory.dir("../../data")) {
         include("tile_catalog.json", "model_catalog.json", "models/**")
+        into("data")
     }
-    into(layout.buildDirectory.dir("magtile-assets/data"))
+    from(rootProject.layout.projectDirectory.dir("../../data/thumbnails")) {
+        include("*.png")
+        into("thumbnails")
+    }
 }
 tasks.named("preBuild") { dependsOn(stageMagTileAssets) }
 
