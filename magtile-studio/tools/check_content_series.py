@@ -11,8 +11,8 @@ CONTENT_GAP_AUDIT.md §7.3 「series 回填 + 矩阵进度机检化」的机检�
      归类问题 (显式写 null 视同缺席, 回填工具对矩阵外模型即写
      series=null + matrix_bucket);
   2. 词值受控: series / matrix_bucket 取值必须落在
-     data/content_series_map.json 词表内 (series 取 series_slugs 的
-     13 个主题词值, matrix_bucket 取 matrix_bucket_slugs 的桶词值);
+     data/content_series_map.json 词表内 (series 取 series 节的
+     13 个主题词值, matrix_bucket 取 off_matrix_buckets 节的桶词值);
      中文主题名 / 词值写错字段等常见回填笔误会给出定向修复提示;
   3. 矩阵计数: 输出 13 主题 × D1–D5 现状计数与矩阵外桶计数, 供对照
      CONTENT_GAP_AUDIT.md 第 3 节复核 (520 目标对照表由
@@ -58,9 +58,10 @@ def _pad(text, width):
 def load_allowlists(map_path):
     """读取词表, 返回 (series 词值表, 矩阵外桶词值表, 修复提示索引)。
 
-    词表的 series_slugs (中文主题名 -> 词值) 定义 content_meta.series
-    的 13 个合法取值, matrix_bucket_slugs 定义 content_meta.matrix_bucket
-    的合法桶词值 (词表 schema 见 data/content_series_map.json 头部说明)。
+    词表的 series 节 (词值 -> {display_name_zh, matrix_bucket: null}) 定义
+    content_meta.series 的 13 个合法取值, off_matrix_buckets 节 (词值 ->
+    {display_name_zh}) 定义 content_meta.matrix_bucket 的合法桶词值
+    (权威 schema 见 data/content_series_map.README.md)。
     修复提示索引把中文名映射到应写的字段与词值, 用于定位常见回填笔误。
     """
     try:
@@ -69,39 +70,41 @@ def load_allowlists(map_path):
         print(f"[错误] 读取词表 {map_path} 失败: {exc}", file=sys.stderr)
         sys.exit(2)
 
-    series_slugs = data.get("series_slugs")
-    bucket_slugs = data.get("matrix_bucket_slugs")
-    if not isinstance(series_slugs, dict) or not series_slugs:
-        print(f"[错误] 词表 {map_path} 缺少非空的 series_slugs 对象",
+    series_table = data.get("series")
+    bucket_table = data.get("off_matrix_buckets")
+    if not isinstance(series_table, dict) or not series_table:
+        print(f"[错误] 词表 {map_path} 缺少非空的 series 对象",
               file=sys.stderr)
         sys.exit(2)
-    if not isinstance(bucket_slugs, dict) or not bucket_slugs:
-        print(f"[错误] 词表 {map_path} 缺少非空的 matrix_bucket_slugs 对象",
+    if not isinstance(bucket_table, dict) or not bucket_table:
+        print(f"[错误] 词表 {map_path} 缺少非空的 off_matrix_buckets 对象",
               file=sys.stderr)
         sys.exit(2)
 
-    series_allow = {slug: name for name, slug in series_slugs.items()}
-    bucket_allow = {slug: name for name, slug in bucket_slugs.items()}
-    if len(series_allow) != len(series_slugs) \
-            or len(bucket_allow) != len(bucket_slugs):
-        print("[错误] 词表存在重复词值 (series_slugs / matrix_bucket_slugs "
-              "的词值必须各自唯一)", file=sys.stderr)
+    series_allow = {slug: entry["display_name_zh"]
+                    for slug, entry in series_table.items()}
+    bucket_allow = {slug: entry["display_name_zh"]
+                    for slug, entry in bucket_table.items()}
+    if len(set(series_allow.values())) != len(series_allow) \
+            or len(set(bucket_allow.values())) != len(bucket_allow):
+        print("[错误] 词表存在重复中文名 (series / off_matrix_buckets "
+              "的 display_name_zh 必须各自唯一)", file=sys.stderr)
         sys.exit(2)
     overlap = set(series_allow) & set(bucket_allow)
     if overlap:
-        print(f"[错误] 词值同时出现在 series_slugs 与 matrix_bucket_slugs: "
+        print(f"[错误] 词值同时出现在 series 与 off_matrix_buckets: "
               f"{sorted(overlap)}", file=sys.stderr)
         sys.exit(2)
     if len(series_allow) != MATRIX_THEME_COUNT:
         print(f"[错误] 词表矩阵主题数 {len(series_allow)} != "
-              f"{MATRIX_THEME_COUNT} (series_slugs 应恰好覆盖"
+              f"{MATRIX_THEME_COUNT} (series 节应恰好覆盖"
               f" CONTENT_STRATEGY.md §2.2 的 13 主题): "
               f"{sorted(series_allow)}", file=sys.stderr)
         sys.exit(2)
 
-    zh_hint = {name: ("series", slug) for name, slug in series_slugs.items()}
+    zh_hint = {name: ("series", slug) for slug, name in series_allow.items()}
     zh_hint.update((name, ("matrix_bucket", slug))
-                   for name, slug in bucket_slugs.items())
+                   for slug, name in bucket_allow.items())
     return series_allow, bucket_allow, zh_hint
 
 
