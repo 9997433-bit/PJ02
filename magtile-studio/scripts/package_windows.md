@@ -155,6 +155,13 @@ Qt 运行库 (Core/Gui/Qml/Quick/QuickControls2 DLL + QML 模块) 的部署:
   (省略 magtile_app, 包名加 `-qt` 后缀, 详见
   `scripts/package_qt_desktop.md` 第六节); WiX 方式 B 不支持该形态。
 - MSI 路径 (第六节) 暂不收割 Qt 运行库, Qt 版分发走 NSIS/ZIP。
+- **MSIX 商店包 (Microsoft Store 渠道)**: 商店订阅计费仅 MSIX 商店包
+  身份下可用, 商店出包配置须加 `-DMAGTILE_BILLING_WINDOWS_STORE=ON`
+  (根 CMakeLists 选项, 默认 OFF, 本地开发档走假计费); MSIX 装配本身
+  待补 (见 `scripts/package_qt_desktop.md` 商店渠道待办)。Partner
+  Center 商品配置、测试安装与购买/恢复/断网宽限期沙盒验收步骤见
+  [`../docs/WINDOWS_STORE_BILLING_SANDBOX_QA.md`](../docs/WINDOWS_STORE_BILLING_SANDBOX_QA.md)
+  (V1 清单 §2 B3 Windows 侧)。
 
 不装 Qt / 不加开关时, 上述内容完全不影响 CLI/GL 版打包。
 

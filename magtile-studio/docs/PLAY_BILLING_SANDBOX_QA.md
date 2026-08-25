@@ -204,3 +204,6 @@
   就绪度总览 (B2 接线 🔶 自动探测 R11, B3 本验收 Manual)。
 - [UI_UX_SPEC.md](UI_UX_SPEC.md) §11 — 儿童侧零价格红线
   (价格文案只允许出现在家长门后)。
+- [WINDOWS_STORE_BILLING_SANDBOX_QA.md](WINDOWS_STORE_BILLING_SANDBOX_QA.md)
+  — Windows 商店侧姊妹篇 (Partner Center 配置 + MSIX 测试安装 +
+  同构勾选清单; 微软商店无沙盒/无时间压缩, 机制差异见其文首对照)。
