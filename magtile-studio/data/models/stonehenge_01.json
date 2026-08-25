@@ -1,0 +1,1897 @@
+{
+  "schema_version": 1,
+  "id": "stonehenge_01",
+  "name": "太阳石门阵",
+  "name_en": "Sun Stone Circle 01",
+  "description": "只用核心九片型的全库第一座史前巨石阵: 与凯旋门 / 中世纪城门的'一座门'都不同, 本作的招牌是'四门环阵' —— 四座两柱一梁的三石塔石门对准东南西北, 围着正中的日晷祭坛站成一圈; 每根石柱都带 L 形互咬扶壁两层通高 (薄柱的抗侧刚度来自直角折边), 长方形横梁两端竖边与柱顶互咬锁成门式刚架, 黄色晨光压顶石板同时咬住柱顶与扶壁顶双路吸合; 祭坛墙环四角互咬闭环, 红色日晷尖直上 2.94 全场制高 —— 太阳从东门升起, 光柱穿过门洞照在日晷尖上, 远古的人们就是这样读日历的!",
+  "difficulty": 4,
+  "total_pieces": 105,
+  "tags": [
+    "世界地标",
+    "建筑地标",
+    "巨石阵",
+    "史前",
+    "挑战"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 80,
+        "rectangle": 22,
+        "equilateral_triangle": 2,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g0_m",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g0_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_7",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_w",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_c",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_e",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_w",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g2_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_c",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_e",
+      "type": "square",
+      "position": [
+        7.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g5_w",
+      "type": "square",
+      "position": [
+        0.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g5_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g5_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g5_c",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g5_e",
+      "type": "square",
+      "position": [
+        7.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g6_w",
+      "type": "square",
+      "position": [
+        0.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g6_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g6_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g6_c",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g6_e",
+      "type": "square",
+      "position": [
+        7.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_w",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g3_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g3_c",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_e",
+      "type": "square",
+      "position": [
+        7.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g4_w",
+      "type": "square",
+      "position": [
+        0.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g4_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g4_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g4_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g4_c",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g4_e",
+      "type": "square",
+      "position": [
+        7.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g7_0",
+      "type": "square",
+      "position": [
+        0.5,
+        7.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g7_1",
+      "type": "square",
+      "position": [
+        1.5,
+        7.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g7_2",
+      "type": "square",
+      "position": [
+        2.5,
+        7.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g7_m",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        7.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g7_5",
+      "type": "square",
+      "position": [
+        5.5,
+        7.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g7_6",
+      "type": "square",
+      "position": [
+        6.5,
+        7.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g7_7",
+      "type": "square",
+      "position": [
+        7.5,
+        7.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sg_cw0",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sg_cw1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sg_ce0",
+      "type": "square",
+      "position": [
+        5.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sg_ce1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sg_bw0",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sg_bw1",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sg_be0",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sg_be1",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sg_lin",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sg_capw",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sg_cape",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wg_cs0",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wg_cs1",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wg_cn0",
+      "type": "square",
+      "position": [
+        1.0,
+        5.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wg_cn1",
+      "type": "square",
+      "position": [
+        1.0,
+        5.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wg_bs0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wg_bs1",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wg_bn0",
+      "type": "square",
+      "position": [
+        0.5,
+        6.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wg_bn1",
+      "type": "square",
+      "position": [
+        0.5,
+        6.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wg_lin",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wg_caps",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wg_capn",
+      "type": "square",
+      "position": [
+        0.5,
+        5.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "eg_cs0",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eg_cs1",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eg_cn0",
+      "type": "square",
+      "position": [
+        7.0,
+        5.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eg_cn1",
+      "type": "square",
+      "position": [
+        7.0,
+        5.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eg_bs0",
+      "type": "square",
+      "position": [
+        7.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eg_bs1",
+      "type": "square",
+      "position": [
+        7.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eg_bn0",
+      "type": "square",
+      "position": [
+        7.5,
+        6.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eg_bn1",
+      "type": "square",
+      "position": [
+        7.5,
+        6.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eg_lin",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eg_caps",
+      "type": "square",
+      "position": [
+        7.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "eg_capn",
+      "type": "square",
+      "position": [
+        7.5,
+        5.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ng_cw0",
+      "type": "square",
+      "position": [
+        2.5,
+        7.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ng_cw1",
+      "type": "square",
+      "position": [
+        2.5,
+        7.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ng_ce0",
+      "type": "square",
+      "position": [
+        5.5,
+        7.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ng_ce1",
+      "type": "square",
+      "position": [
+        5.5,
+        7.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ng_bw0",
+      "type": "square",
+      "position": [
+        2.0,
+        7.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ng_bw1",
+      "type": "square",
+      "position": [
+        2.0,
+        7.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ng_be0",
+      "type": "square",
+      "position": [
+        6.0,
+        7.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ng_be1",
+      "type": "square",
+      "position": [
+        6.0,
+        7.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ng_lin",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        7.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ng_capw",
+      "type": "square",
+      "position": [
+        2.5,
+        7.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ng_cape",
+      "type": "square",
+      "position": [
+        5.5,
+        7.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "a_s_w",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_s_e",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_n_w",
+      "type": "square",
+      "position": [
+        3.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_n_e",
+      "type": "square",
+      "position": [
+        4.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_w_s",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_w_n",
+      "type": "square",
+      "position": [
+        3.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_e_s",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_e_n",
+      "type": "square",
+      "position": [
+        5.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_cap_sw",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "a_cap_se",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "a_cap_nw",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "a_cap_ne",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "gnomon",
+      "type": "isosceles_triangle",
+      "position": [
+        4.0,
+        3.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flame_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flame_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        4.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南边两行: 南门柱脚下的透明石位是单位方板, 东西两端也各留一块。",
+      "tip": "远古的太阳日历开工啦 —— 石头脚下必须踩单位方板, 墙底边要和方板边等长吸合。",
+      "tiles_to_add": [
+        "g0_0",
+        "g0_1",
+        "g0_2",
+        "g0_m",
+        "g0_5",
+        "g0_6",
+        "g0_7",
+        "g1_w",
+        "g1_a",
+        "g1_b",
+        "g1_c",
+        "g1_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺第三行与祭坛南行: 透明石位给西门东门和祭坛留位。",
+      "tip": "东西两列单位方板从南贯到北 —— 整片草原吸成一体。",
+      "tiles_to_add": [
+        "g2_w",
+        "g2_a",
+        "g2_b",
+        "g2_c",
+        "g2_e",
+        "g3_w",
+        "g3_a",
+        "g3_3",
+        "g3_4",
+        "g3_c",
+        "g3_e"
+      ],
+      "highlight_tiles": [
+        "g1_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺祭坛北行与第六行: 祭坛脚下四块石位凑齐。",
+      "tip": "",
+      "tiles_to_add": [
+        "g4_w",
+        "g4_a",
+        "g4_3",
+        "g4_4",
+        "g4_c",
+        "g4_e",
+        "g5_w",
+        "g5_a",
+        "g5_b",
+        "g5_c",
+        "g5_e"
+      ],
+      "highlight_tiles": [
+        "g3_3"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺北边两行收口: 北门柱脚的两块石位就位, 草原完工。",
+      "tip": "",
+      "tiles_to_add": [
+        "g6_w",
+        "g6_a",
+        "g6_b",
+        "g6_c",
+        "g6_e",
+        "g7_0",
+        "g7_1",
+        "g7_2",
+        "g7_m",
+        "g7_5",
+        "g7_6",
+        "g7_7"
+      ],
+      "highlight_tiles": [
+        "g5_w"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立南门一层: 两根石柱踩住石位, 两片扶壁与柱竖边直角互咬成 L 形。",
+      "tip": "L 形折边就是薄柱的靠山 —— 巨石阵的立柱一站就是几千年。",
+      "tiles_to_add": [
+        "sg_cw0",
+        "sg_ce0",
+        "sg_bw0",
+        "sg_be0"
+      ],
+      "highlight_tiles": [
+        "g0_2",
+        "g0_5"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "摞南门二层: 柱与扶壁整边共线上叠, 互咬棱一通到顶。",
+      "tip": "",
+      "tiles_to_add": [
+        "sg_cw1",
+        "sg_ce1",
+        "sg_bw1",
+        "sg_be1"
+      ],
+      "highlight_tiles": [
+        "sg_cw0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "架南门横梁并放压顶: 横梁两端竖边与柱顶互咬锁成门式刚架, 两片黄色晨光石板同时咬住柱顶与扶壁顶。",
+      "tip": "两柱一梁就是'三石塔' —— 巨石阵最经典的一景。",
+      "tiles_to_add": [
+        "sg_lin",
+        "sg_capw",
+        "sg_cape"
+      ],
+      "highlight_tiles": [
+        "sg_cw1",
+        "sg_ce1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立西门一层: 石柱与扶壁换个方向, 同样的 L 形互咬。",
+      "tip": "",
+      "tiles_to_add": [
+        "wg_cs0",
+        "wg_cn0",
+        "wg_bs0",
+        "wg_bn0"
+      ],
+      "highlight_tiles": [
+        "g2_w",
+        "g5_w"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "摞西门二层: 四片石墙整边上叠。",
+      "tip": "",
+      "tiles_to_add": [
+        "wg_cs1",
+        "wg_cn1",
+        "wg_bs1",
+        "wg_bn1"
+      ],
+      "highlight_tiles": [
+        "wg_cs0"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "架西门横梁并放压顶: 第二座三石塔合拢。",
+      "tip": "",
+      "tiles_to_add": [
+        "wg_lin",
+        "wg_caps",
+        "wg_capn"
+      ],
+      "highlight_tiles": [
+        "wg_cs1",
+        "wg_cn1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "立东门一层: 日出方向的石门, 光柱要从这个门洞照进祭坛。",
+      "tip": "每年最长的白天, 太阳正好从东门门洞里升起来。",
+      "tiles_to_add": [
+        "eg_cs0",
+        "eg_cn0",
+        "eg_bs0",
+        "eg_bn0"
+      ],
+      "highlight_tiles": [
+        "g2_e",
+        "g5_e"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "摞东门二层: 柱与扶壁继续通高互咬。",
+      "tip": "",
+      "tiles_to_add": [
+        "eg_cs1",
+        "eg_cn1",
+        "eg_bs1",
+        "eg_bn1"
+      ],
+      "highlight_tiles": [
+        "eg_cs0"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "架东门横梁并放压顶: 日出之门完工。",
+      "tip": "",
+      "tiles_to_add": [
+        "eg_lin",
+        "eg_caps",
+        "eg_capn"
+      ],
+      "highlight_tiles": [
+        "eg_cs1",
+        "eg_cn1"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "立北门一层: 最后一座石门的柱脚踩上北行石位。",
+      "tip": "",
+      "tiles_to_add": [
+        "ng_cw0",
+        "ng_ce0",
+        "ng_bw0",
+        "ng_be0"
+      ],
+      "highlight_tiles": [
+        "g7_2",
+        "g7_5"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "摞北门二层: 四门环阵初见雏形。",
+      "tip": "",
+      "tiles_to_add": [
+        "ng_cw1",
+        "ng_ce1",
+        "ng_bw1",
+        "ng_be1"
+      ],
+      "highlight_tiles": [
+        "ng_cw0"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "架北门横梁并放压顶: 四座三石塔对准东南西北, 环阵合围。",
+      "tip": "站在场地正中转一圈 —— 四个门洞正好指着四个方向。",
+      "tiles_to_add": [
+        "ng_lin",
+        "ng_capw",
+        "ng_cape"
+      ],
+      "highlight_tiles": [
+        "ng_cw1",
+        "ng_ce1"
+      ]
+    },
+    {
+      "step_number": 17,
+      "description": "砌日晷祭坛墙环: 八片石墙踩住四块石位, 四角竖边互咬闭环。",
+      "tip": "祭坛在整个石阵的正中央 —— 它就是日历的表盘。",
+      "tiles_to_add": [
+        "a_s_w",
+        "a_s_e",
+        "a_n_w",
+        "a_n_e",
+        "a_w_s",
+        "a_w_n",
+        "a_e_s",
+        "a_e_n"
+      ],
+      "highlight_tiles": [
+        "g3_3",
+        "g4_4"
+      ]
+    },
+    {
+      "step_number": 18,
+      "description": "盖坛面, 竖日晷尖, 点日出火苗: 红色瘦高尖直上 2.94 全场制高, 两簇火苗骑在坛面板缝上。",
+      "tip": "太阳从东门升起, 光柱照在日晷尖上 —— 远古的日历走起来了!",
+      "tiles_to_add": [
+        "a_cap_sw",
+        "a_cap_se",
+        "a_cap_nw",
+        "a_cap_ne",
+        "gnomon",
+        "flame_w",
+        "flame_e"
+      ],
+      "highlight_tiles": [
+        "a_s_w"
+      ]
+    }
+  ]
+}
