@@ -23,6 +23,10 @@
 //   R8 结构冗余: 高层结构中警告单点失效连接与纯树状 (无环) 拓扑,
 //               鼓励三角桁架 (Warning 级); 无环高墙超过
 //               unbraced_wall_max_height 升级为 Error (阻断发布)
+//   -- 蒙特卡洛容差抖动 (验证金字塔 L2 的静态近似档, 按需开启) --
+//   R9 抖动稳定性: 对每片放置注入随机平移 (±1.5mm) 与偏航 (±2°) 误差
+//               后重复整套 R1~R8 校验 N 轮, 任一轮出错即拒绝 ——
+//               捕捉 "每步都在容差内、累积后失稳" (F08) 的临界设计
 //
 // R5/R6/R8 的静力学模型: 把每一组共线磁力边视为一条 "铰链线",
 // 假想剪断这条铰链后与地面失去联系的子结构, 其全部重量 (R5) 与
@@ -30,6 +34,7 @@
 // 乘以抗碰撞安全系数 (默认 0.8, 即保留 20% 抗震/碰撞裕量)。
 // =============================================================
 
+#include <cstdint>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -57,6 +62,7 @@ enum class IssueSeverity {
 ///   unplaceable_tile / enclosed_placement                  (R7)
 ///   single_point_of_failure / no_structural_redundancy
 ///   unbraced_wall_too_tall                                 (R8)
+///   placement_jitter_failure                               (R9 蒙特卡洛抖动)
 struct ValidationIssue {
     IssueSeverity severity = IssueSeverity::Error;
     std::string code;                    ///< 如 "floating_tile"、"cantilever_overload"
@@ -120,6 +126,32 @@ struct PhysicsConfig {
 /// 未知名称返回 std::nullopt, 由调用方 (CLI) 报错。
 [[nodiscard]] std::optional<PhysicsConfig> configForProfile(std::string_view name);
 
+/// R9 蒙特卡洛容差抖动参数 (docs/PHYSICS_RULES.md R9 节)。
+///
+/// 儿童实搭时每片都放不到理想位置: 单片误差在容差内, 十几步累积后
+/// 却可能 "对不上缝" 或整体歪斜失稳 (BUILD_VERIFICATION.md F08)。
+/// 抖动仿真对模型的每一片注入随机放置误差 (水平平移 + 偏航), 然后
+/// 重复整套静态校验 (最终成品 + 每步中间态 + R7 逐片放置), 共 N 轮;
+/// 任一轮出现 Error 即判定模型对放置误差没有足够裕量。
+struct JitterConfig {
+    int iterations = 50;                  ///< 仿真轮数 (CLI --jitter 的默认值)
+    double translation_amplitude = 0.021; ///< 每轴平移扰动幅度 (±0.021 单位 ≈ ±1.5mm)
+    double yaw_amplitude_deg = 2.0;       ///< 偏航扰动幅度 (绕世界 Z 轴, ±2°)
+    /// 随机种子: 固定值保证 CI 逐轮可复现 (实现自带确定性均匀分布,
+    /// 不依赖 std::uniform_real_distribution 的跨标准库实现差异)。
+    std::uint32_t seed = 20260825;
+};
+
+/// R9 抖动仿真结果: 任一轮失败时 report 内含一条汇总的
+/// `placement_jitter_failure` Error (附首个失败轮的底层规则线索)。
+struct JitterReport {
+    int iterations = 0;         ///< 实际执行的仿真轮数
+    int failed_iterations = 0;  ///< 出现 Error 的轮数
+    ValidationReport report;    ///< 失败时含 placement_jitter_failure 汇总 issue
+
+    [[nodiscard]] bool ok() const noexcept { return failed_iterations == 0; }
+};
+
 /// 已识别的一条磁力连接 (a、b 为 final_assembly 下标)。
 struct MagnetConnection {
     std::size_t tile_a = 0;
@@ -148,6 +180,20 @@ public:
     /// + 全程逐片放置可行性 (R7)。
     /// 逐步校验保证教程任意时刻的半成品都物理成立 (不会搭到一半塌掉)。
     [[nodiscard]] ValidationReport validateModel(const core::ModelDefinition& model) const;
+
+    /// R9 蒙特卡洛容差抖动 (验证金字塔 L2 的静态近似档, CLI --jitter):
+    /// 每轮对模型全部磁力片注入随机放置误差 (水平平移 ±translation_amplitude
+    /// / 轴、偏航 ±yaw_amplitude_deg), 再以放大后的几何识别容差重跑
+    /// validateModel —— 磁吸会把毫米级错位拉回贴合, 因此贴合/重叠等
+    /// "连接识别" 容差按注入误差的最坏情况放大, 而重心稳定裕量与
+    /// R5/R6 静力预算保持原档位不变: 抖动考核的正是这些预算在误差
+    /// 累积下是否仍然成立。任一轮出现 Error 即整体失败
+    /// (`placement_jitter_failure`), 严于深潜文档 "通过率 ≥ 90%" 的
+    /// 最低口径 (docs/PHYSICS_RULES.md 第 5 节: 宁严勿松)。
+    /// 前置约定: 模型应先通过常规 validateModel (对静态已不成立的
+    /// 模型做抖动仿真没有意义, CLI 层负责这一顺序)。
+    [[nodiscard]] JitterReport validateModelWithJitter(const core::ModelDefinition& model,
+                                                       const JitterConfig& jitter = {}) const;
 
     /// 枚举组合中的全部磁力连接 (供渲染层画吸附提示、教程层做讲解)。
     [[nodiscard]] std::vector<MagnetConnection> findConnections(

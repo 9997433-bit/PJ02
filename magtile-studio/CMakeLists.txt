@@ -436,6 +436,41 @@ if(MAGTILE_BUILD_TESTS)
             endforeach()
         endif()
 
+        # R9 蒙特卡洛容差抖动 (validate --jitter, docs/PHYSICS_RULES.md R9 节):
+        # 对每片放置注入 ±1.5mm 平移 + ±2° 偏航后重跑 R1~R8 x 50 轮,
+        # 捕捉 "静态全绿但误差累积失稳" (BUILD_VERIFICATION.md F08 /
+        # PHYSICS_VERIFICATION_DEEP_DIVE.md P1-3)。三向把守:
+        #   1. tests/test_physics_jitter/ 夹具: 带 .expected sidecar 的是
+        #      "静态放行但抖动必挂" 的边缘设计 (执行器先断言普通 validate
+        #      放行, 再断言 --jitter 以 placement_jitter_failure 拒绝) ——
+        #      锁定抖动关卡本身的检出能力;
+        #   2. 物理正例对照组: 裕量充足的合法结构在抖动下也必须全绿
+        #      (防抖动关卡矫枉过正);
+        #   3. 旗舰模型抖动回归: 核心内容对儿童的毫米级放置误差必须有
+        #      足够裕量 (与 validate_strict_* 同一批旗舰清单)。
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_physics_jitter.sh)
+            file(GLOB MAGTILE_JITTER_FIXTURES CONFIGURE_DEPENDS
+                ${MAGTILE_TESTS_DIR}/test_physics_jitter/*.json)
+            foreach(fixture_file IN LISTS MAGTILE_JITTER_FIXTURES)
+                get_filename_component(fixture_name ${fixture_file} NAME_WE)
+                add_test(NAME physics_jitter_${fixture_name}
+                    COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_jitter.sh
+                        $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR} ${fixture_file})
+            endforeach()
+            foreach(fixture_file IN LISTS MAGTILE_POSITIVE_FIXTURES)
+                get_filename_component(fixture_name ${fixture_file} NAME_WE)
+                add_test(NAME physics_jitter_positive_${fixture_name}
+                    COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_jitter.sh
+                        $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR} ${fixture_file})
+            endforeach()
+            foreach(flagship IN ITEMS castle_foundation_01 eiffel_tower_01 tokyo_tower_01)
+                add_test(NAME validate_jitter_${flagship}
+                    COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_jitter.sh
+                        $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR}
+                        ${MAGTILE_DATA_DIR}/models/${flagship}.json)
+            endforeach()
+        endif()
+
         # 设置 CLI 冒烟: set-age 写入 -> show 从同一数据库回读出启蒙模式
         # (覆盖 settings 命令解析、年龄映射与 SQLite 往返)
         add_test(NAME settings_cli_smoke
@@ -518,5 +553,20 @@ if(MAGTILE_BUILD_TESTS)
             COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_library_uniqueness.py
                 ${MAGTILE_DATA_DIR}/models
                 --catalog ${MAGTILE_DATA_DIR}/tile_catalog.json)
+    endif()
+
+    # L2 实物风险巡检回归 (Python): tools/physical_risk_report.py 的行为锁
+    # (BUILD_VERIFICATION.md 2.1 节 L2 工具接口约定) —— 用一组合成微模型
+    # (临时目录, 不进库) 验证 --json 契约字段 (条目 id / L2 标记数组 /
+    # 综合结论)、触发条件检出 (三连垂直墙链命中 tall_wall_chain / 手动
+    # 标记命中 manual_flag / 平铺低风险零标记)、风险分排序信号与报告型
+    # 退出码语义 (合法输入恒 0, 目录缺失非零拒绝)。全程 --no-validate,
+    # 不依赖 C++ 构建产物; 工具未入库的检出下自动跳过注册。
+    if(Python3_Interpreter_FOUND
+            AND EXISTS ${MAGTILE_TESTS_DIR}/test_physical_risk_report.py
+            AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tools/physical_risk_report.py)
+        add_test(NAME physical_risk_report_gate
+            COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_physical_risk_report.py
+                ${CMAKE_CURRENT_SOURCE_DIR})
     endif()
 endif()

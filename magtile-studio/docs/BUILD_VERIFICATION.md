@@ -34,7 +34,7 @@
 
 ### L2 物理仿真抽检 (容差抖动蒙特卡洛, 第一期已实现)
 
-- **落地形态 (第一期, 已实现)**: 不等完整刚体引擎, 先在校验器内落地**容差抖动蒙特卡洛 (jitter)** —— 对成品及关键中间状态的每片位姿注入 ±1.5mm / ±2° 随机误差, 生成 N=20 个扰动副本 (固定随机种子, CI 可复现), 逐副本重算稳定性判定 (连接拓扑按未扰动模型取定), 通过率 ≥ 90% 才算通过 —— 专门捕捉"微小错位累积坍塌" (失效分类 F08)。触发标记由 `tools/physical_risk_report.py` 自动判定, 执行入口与字段约定见 2.1 节接口约定。
+- **落地形态 (第一期, 已实现)**: 不等完整刚体引擎, 先在校验器内落地**容差抖动蒙特卡洛 (jitter)** —— 对成品及全部中间状态的每片位姿注入 ±1.5mm / ±2° 随机误差, 生成 N 个扰动副本 (默认 N=50, 固定随机种子, CI 可复现), 逐副本重跑整套 R1~R8 (连接识别容差按注入误差最坏情况放大, 等效于连接拓扑按未扰动模型取定), **任一副本任一装配体出错即拒绝** (严于最初设计"通过率 ≥ 90%"的最低口径, PHYSICS_RULES.md 第 5 节宁严勿松) —— 专门捕捉"微小错位累积坍塌" (失效分类 F08)。触发标记由 `tools/physical_risk_report.py` 自动判定, 执行入口与字段约定见 2.1 节接口约定, 规则细节见 PHYSICS_RULES.md R9 节。
 - **后续增强 (仍为规划)**: 接入刚体物理引擎 (候选: [Jolt Physics](https://github.com/jrouwe/JoltPhysics) 或 [Rapier](https://rapier.rs/)), 磁吸边建模为**可断裂约束** (按品牌标定的最大拉力/力矩), 补齐两段动力学测试: ① **静置沉降** —— 重力下模拟 5 秒, 任何片位移 > 5mm 或约束断裂即失败; ② **扰动脉冲** —— 对最高点施加水平小冲量 (模拟轻碰), 结构须回稳。任务登记: [PHYSICS_VERIFICATION_DEEP_DIVE.md](PHYSICS_VERIFICATION_DEEP_DIVE.md) 第 5 节 P1-3 剩余项。
 - **执行者**: 工程师本地与 CI 均可即刻执行 (工具入库, 门禁挂接见第 6 节), 不再依赖人工排期。QA 流水线门禁挂钩三接入点 (统一入口: D4+ 模型 `validate --profile strict --jitter 50`): `tools/run_strict_audit.sh` 阶段 3 / `tests/run_full_qa.sh` 可选关卡 19 / `tools/run_release_gate.sh --full --l2` —— CLI 实装 `--jitter` 前为占位, 实装后自动启用, 挂钩契约与启用条件见 [TESTING.md](TESTING.md) 3.17 节。
 - **成本**: 秒~分钟级/模型。**覆盖**: 被标记的模型 (见第 2 节触发条件, 全部可自动检测)。
@@ -84,10 +84,10 @@ L2 第一期由三件套落地 (与本约定同批并行入库; 名称与字段�
    - 输入: 模型目录或单个模型 JSON (+ `--data-dir data`); 默认人读报告, `--json` 输出机器可读;
    - 每模型输出至少含: `model_id`、`flags` (上表检测编码数组)、`flagged` (任一编码命中)、`l2_required` (综合结论: `flagged`, 或 `difficulty` 达到本节分级表 T4/T5 "每个模型必做"档; T3 另加随机 20% 抽检);
    - 退出码: 默认报告型 (恒 0); 门禁旗标 (`--fail-on-flagged` 语义) 下, 存在 `l2_required` 且无有效 L2 通过凭据的模型 → 非零。
-2. **jitter 蒙特卡洛** (校验器内建, `magtile_app validate` 的 `--jitter` 模式):
-   - 不变量 (约定, 不随实现漂移): 注入幅度 ±1.5mm / ±2°、副本数 N=20、通过率阈值 ≥ 90%、固定随机种子 (CI 逐次可复现)、连接拓扑按未扰动模型取定 (扰动只作用于几何量, 不重判吸合, 避免容差自嗨);
-   - 报告: 每个受测装配体 (成品 + 受测中间状态) 的通过率、失败副本数、失败副本的首个错误码分布; 任一受测装配体通过率 < 90% → 非零退出码。
-3. **回归夹具与 ctest**: 负例夹具复现 F08 型"长链累积歪斜" (jitter 必须抓住 —— 通过率 < 90% 被拒), 配平正例 (加固后同构造放行, 防矫枉过正); ctest 用例名前缀 `validate_jitter_*`; 夹具放入 `tests/test_physics_negative/` 与 `tests/test_physics_positive/` 后零配置进入全量 QA 负例/正例关卡。
+2. **jitter 蒙特卡洛** (校验器内建, `magtile_app validate` 的 `--jitter [N]` 模式, 实现 `PhysicsValidator::validateModelWithJitter`, 规则号 R9):
+   - 不变量 (约定, 不随实现漂移): 注入幅度 ±1.5mm (0.021 单位/轴, 水平) / ±2° (偏航)、副本数默认 N=50 (CLI 可调 1~10000, 显式 0/负数按参数错误退出码 2)、**任一副本任一受测装配体出错即非零退出** (收紧自最初设计的"通过率 ≥ 90%": 每 10 次搭建塌 1 次的模型不允许发布)、固定随机种子 + 自带均匀分布映射 (CI 跨平台逐轮可复现)、连接识别容差按注入误差最坏情况放大 (等效于连接拓扑按未扰动模型取定 —— 不把刻意注入的错位误判成"没连上", 避免容差自嗨; 稳定裕量与静力预算保持所选档位原值, 它们才是受测对象), 可与 `--profile strict` 叠加;
+   - 报告: 汇总一条 `placement_jitter_failure` Error —— 失败副本数/总副本数、涉及的底层错误码集合、首个失败样本的完整消息 (自带"最终成品/第 N 步"装配体上下文) 与涉事片 id; 全绿时打印 "N/N 轮全部通过" 统计行。
+3. **回归夹具与 ctest**: 抖动负例夹具 (静态 R1~R8 全绿但注入误差后必挂的边缘设计, 复现 F08 型累积失稳) 放入 `tests/test_physics_jitter/` 并配 `.expected` sidecar —— 专用执行器 `tests/test_physics_jitter.sh` 先断言普通 validate 放行 (证明静态规则原理上放不掉)、再断言 `--jitter` 以 `placement_jitter_failure` 拒绝, 目录 glob 零配置注册为 `physics_jitter_*`; 同目录不带 sidecar 的为抖动正例 (加固后同构造放行, 防矫枉过正), `tests/test_physics_positive/` 全部正例自动追加抖动档 (`physics_jitter_positive_*`); 旗舰模型抖动回归注册为 `validate_jitter_*` (与 `validate_strict_*` 同一批旗舰清单)。另一条并行通道: `tests/test_physics_negative/` 的负例执行器支持 sidecar 声明 `jitter=<N>` —— 声明后该负例改以 `validate --jitter N` 运行 (R9 型负例走此通道时进入负例注册表与 `physics_negative_*` 关卡, 如 `jitter_sensitive`); 两条通道的差异在于专用执行器额外断言 "名义模型普通 validate 放行" 这一前提, 负例通道只断言最终拒绝。
 
 机器结果落盘: 写入 5.2 节旁车文件 `records[]` 一条 `layer: "L2"` 记录, 至少含 `date`、执行方 (`ci` / 工程师)、jitter 参数 (副本数与注入幅度) 与 `pass_rate`, 状态机按 5.2 节进入 `sim_passed`。
 

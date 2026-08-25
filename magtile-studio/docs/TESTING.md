@@ -28,6 +28,7 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 11 | 教程完整性 | 静态走查 + 教程引擎实跑 |
 | 12 | 物理负例回归 | 夹具注册表完整性 (缺夹具即 FAIL) + 每个负例按 sidecar 期望报错/报警 |
 | 13 | 物理正例 × N | 预算内的合法结构必须放行 |
+| 13.5 | 物理抖动 R9 × N | 抖动负例 "静态放行 + `--jitter` 必拒" 双断言, 抖动正例放行 (见 3.18 节; 编号取 13.5 不动后续关卡的既有引用) |
 | 14 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
 | 15 | 弱磁严格档全库巡检 | 可选 (`MAGTILE_STRICT_AUDIT=1`): strict 零警告审计 + 逐步装配质检 + D4+ 抗扰动巡检 (auto 档, 见 3.17 节) |
 | 16 | L3 实物复核缺口报告 | 报告型: 输出 D4+ 未实物复核模型数量, 仅报告不阻断 (见 3.13 节) |
@@ -49,7 +50,7 @@ CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑
                ╱实物╲      L3 实物搭建验证 (人 + 真实磁力片)
               ╱ 验证 ╲        捕捉: 品牌磁力差异、儿童手部抖动、
              ╱────────╲             装配手感、"手伸不进去"的实操死角
-            ╱ 物理仿真 ╲    L2 刚体仿真抽检 (规划中; 门禁挂钩已就位, 3.17 节)
+            ╱ 物理仿真 ╲    L2 仿真抽检 (jitter 蒙特卡洛已实现, 见 3.18; 门禁挂钩 3.17)
            ╱   抽检     ╲      捕捉: 微小错位累积坍塌、扰动回稳性
           ╱──────────────╲
          ╱   GL 渲染冒烟   ╲  test_gl_smoke.sh
@@ -379,7 +380,7 @@ magtile_app validate <model.json> --profile strict --jitter 50
 
 `--jitter N` 为扰动采样次数 (门禁默认 50, 环境变量 `MAGTILE_JITTER_SAMPLES` 可覆盖), 任一 D4+ 模型退出码非零即失败, "D4+ jitter 全绿" 才判绿。
 
-**现状: CLI 尚未实装 `--jitter` (并行 L2 任务落地中), 本关卡为占位挂钩。** 挂钩契约: CLI 实装时按现有旗标惯例把 `--jitter` 登记进 `printUsage` 用法文本 (`src/app/main.cpp`); 门禁脚本以 `magtile_app --help` 输出是否含 `--jitter` 探测实装与否, 探测到即**自动由占位切换为实跑**, 无须再改任何门禁脚本。启用初期按退出码判定; 零警告政策与豁免白名单 ([STRICT_PHYSICS_AUDIT.md](STRICT_PHYSICS_AUDIT.md) 的 strict 口径) 是否套用到 jitter 输出, 待 CLI 落地时按其输出格式对齐本节与 `run_jitter_stage`。
+**现状: CLI 已实装 `--jitter [N]` (R9 蒙特卡洛容差抖动, 实现与回归夹具见 3.18 节), 门禁挂钩按下述契约自动由占位切换为实跑。** 挂钩契约: CLI 按现有旗标惯例把 `--jitter` 登记进 `printUsage` 用法文本 (`src/app/main.cpp`, 已登记); 门禁脚本以 `magtile_app --help` 输出是否含 `--jitter` 探测实装与否, 探测到即**自动由占位切换为实跑**, 无须再改任何门禁脚本。启用初期按退出码判定 (jitter 失败汇总为一条 `placement_jitter_failure` Error, 非零退出); 零警告政策与豁免白名单 ([STRICT_PHYSICS_AUDIT.md](STRICT_PHYSICS_AUDIT.md) 的 strict 口径) 是否套用到 jitter 输出, 按需对齐本节与 `run_jitter_stage`。
 
 三个接入点共用同一实现 (`tools/run_strict_audit.sh` 的阶段 3 `run_jitter_stage`), 差别只在模式:
 
@@ -396,6 +397,27 @@ tools/run_strict_audit.sh build --jitter-only --jitter require  # L2 判绿口�
 tools/run_strict_audit.sh build --jitter off           # 本次跳过阶段 3
 MAGTILE_L2_JITTER=1 tests/run_full_qa.sh               # 随全量 QA (可选关卡 19)
 tools/run_release_gate.sh --full --l2                  # 发布门禁 L2 抗扰动档 (第 5 节)
+```
+
+### 3.18 R9 蒙特卡洛容差抖动回归 (`physics_jitter_*` / `physics_jitter_positive_*` / `validate_jitter_*`)
+
+目录: `tests/test_physics_jitter/`, 执行器: `tests/test_physics_jitter.sh`
+
+验证金字塔 L2 层第一期 (jitter 蒙特卡洛, `magtile_app validate <model.json> --jitter [N]`, 默认 N=50) 的回归关卡: 对每片放置注入 ±1.5mm 水平平移 + ±2° 偏航随机误差后重跑整套 R1~R8, 任一轮出错即以 `placement_jitter_failure` 拒绝 —— 专门捕捉"每步都在容差内、累积后失稳" (BUILD_VERIFICATION.md 失效分类 F08), 规则细节见 [PHYSICS_RULES.md](PHYSICS_RULES.md) R9 节, 接口约定见 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 2.1 节。三向把守:
+
+| 用例 | 夹具/对象 | 断言 |
+| --- | --- | --- |
+| `physics_jitter_marginal_top_heavy_wall` | 抖动负例 (带 `.expected` sidecar): 两层竖墙 + 29° 外倾顶板, 重心距接地线 0.1458 单位, 贴着 `stability_margin` (0.15) 内侧 | **双断言**: 普通 `validate` 必须放行 (证明 R1~R8 静态规则原理上放不掉这个临界设计) + `--jitter 50` 必须以 `placement_jitter_failure` 拒绝 (实测 18/50 轮重心越线, 单轮命中率 ≥ 30%, 结论对种子/轮数不敏感) |
+| `physics_jitter_braced_top_heavy_wall` | 抖动正例 (无 sidecar): 同构造加翼墙, 接地区域从线扩成三角形 | `--jitter 50` 全轮放行 (防抖动关卡矫枉过正误杀已加固的常规设计) |
+| `physics_jitter_positive_*` | `tests/test_physics_positive/` 全部正例的抖动档 | 预算内的合法结构在抖动下也必须全绿, 且输出含 "N/N 轮全部通过" 统计行 (防关卡静默变空) |
+| `validate_jitter_*` | 旗舰模型 (castle_foundation_01 / eiffel_tower_01 / tokyo_tower_01, 与 `validate_strict_*` 同一批清单) | 核心内容对儿童的毫米级放置误差必须有足够裕量 |
+
+夹具按 `CONFIGURE_DEPENDS` 目录 glob 自动注册: 新增抖动负例 = JSON + `.expected` sidecar (声明 `expected_fail_rule` 与 `severity=error`), 新增抖动正例 = 只放 JSON。并行通道: `tests/test_physics_negative/` 的负例执行器支持 sidecar 声明 `jitter=<N>`, 声明后该负例改以 `validate --jitter N` 运行并进入负例注册表 (如 `jitter_sensitive`); 与 3.7 节负例通道的差异在于本节专用执行器额外断言"名义模型普通 validate 放行"这一前提 (锁定 R9 的**增量**检出能力), 负例通道只断言最终拒绝。抖动仿真固定随机种子逐轮可复现; 全库巡检口径 (2026-08-25, `--jitter 50`): 209 模型 208 全绿, 1 个真实边缘设计被抓出 (`lego_style_house_01`, 7/50 轮 `enclosed_placement`), 处置记录见 PHYSICS_RULES.md R9 节。
+
+```bash
+ctest --test-dir build -R "physics_jitter|validate_jitter" --output-on-failure
+./build/magtile_app validate data/models/<model_id>.json --data-dir data --jitter        # 单模型, 默认 50 轮
+./build/magtile_app validate <model.json> --data-dir data --jitter 200 --profile strict  # 加严: 更多轮数 + 弱磁档
 ```
 
 ## 4. 持续集成 (CI)

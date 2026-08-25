@@ -3,7 +3,9 @@
 #include <algorithm>
 #include <cmath>
 #include <iomanip>
+#include <numbers>
 #include <queue>
+#include <random>
 #include <set>
 #include <sstream>
 
@@ -705,6 +707,107 @@ ValidationReport PhysicsValidator::validateModel(const core::ModelDefinition& mo
     // R7: 全程逐片放置可行性 (需要精确到步骤内的先后顺序)
     report.merge(validatePlacements(model));
     return report;
+}
+
+JitterReport PhysicsValidator::validateModelWithJitter(const core::ModelDefinition& model,
+                                                       const JitterConfig& jitter) const {
+    JitterReport result;
+    result.iterations = std::max(jitter.iterations, 0);
+    if (result.iterations == 0 || model.final_assembly.empty()) return result;
+
+    // ---- 几何识别容差按注入误差的最坏情况放大 ----------------------
+    // 注入的偏航绕每片自身局部原点的竖直轴旋转, 顶点位移上界为
+    // 局部半径 x sin(偏航幅度); 平移每轴独立, 合位移上界为幅度 x √2。
+    // 两片各自取最坏方向时相对错位再翻倍。贴合 (R2/R7a)、共面重叠
+    // (R3) 与铰链共线分组 (R5/R6) 属于 "连接识别", 实物中毫米级错位
+    // 会被磁吸自动拉回, 识别容差必须放大到能容纳注入误差, 否则每一
+    // 轮都会把刻意注入的错位误报成 "没连上/穿插"。接地容差不放大
+    // (平移只在水平面内、偏航不改变任何顶点的 z), 重心稳定裕量与
+    // R5/R6 静力预算保持原档位 —— 它们才是抖动要考核的对象。
+    double max_local_radius = 0.0;
+    for (const TileInstance& tile : model.final_assembly) {
+        for (const Vec2& v : catalog_->get(tile.type).vertices) {
+            max_local_radius = std::max(max_local_radius, std::sqrt(v.x * v.x + v.y * v.y));
+        }
+    }
+    const double yaw_rad = jitter.yaw_amplitude_deg * std::numbers::pi / 180.0;
+    const double headroom = 2.0 * (jitter.translation_amplitude * std::numbers::sqrt2 +
+                                   max_local_radius * std::sin(yaw_rad));
+    PhysicsConfig jitter_config = config_;
+    jitter_config.connect_tolerance += headroom;
+    jitter_config.overlap_tolerance += headroom;
+    jitter_config.collinear_tolerance += headroom;
+    const PhysicsValidator jitter_validator(*catalog_, jitter_config);
+
+    // 确定性均匀分布: 直接映射 mt19937 输出, 不用
+    // std::uniform_real_distribution (标准未规定其算法, 跨标准库
+    // 实现结果不同, 会破坏 CI 逐轮可复现)。
+    std::mt19937 rng(jitter.seed);
+    const auto uniform = [&rng](double amplitude) {
+        constexpr double kRange = static_cast<double>(std::mt19937::max());
+        return (static_cast<double>(rng()) / kRange * 2.0 - 1.0) * amplitude;
+    };
+
+    std::set<std::string> failing_codes;
+    std::vector<std::string> sample_tile_ids;
+    std::string sample_message;
+    int first_failed_iteration = 0;
+
+    for (int iteration = 1; iteration <= result.iterations; ++iteration) {
+        // 逐字段构造扰动副本 (不整体拷贝: ModelDefinition 的惰性 id
+        // 索引按尺寸判断新鲜度, 整体拷贝会带着指向原模型未扰动片的
+        // 索引, 使 R7 逐片模拟悄悄校验回原始几何)。
+        core::ModelDefinition perturbed;
+        perturbed.id = model.id;
+        perturbed.difficulty = model.difficulty;
+        perturbed.total_pieces = model.total_pieces;
+        perturbed.final_assembly = model.final_assembly;
+        perturbed.steps = model.steps;
+
+        // 每片一份独立误差, 整轮教程期间保持不变 —— 模拟 "这一次
+        // 搭建中每片都放歪了一点且没有回调" 的误差累积场景 (每片在
+        // 教程中恰好放置一次, 扰动成品即等价于扰动每步放置位置)。
+        for (TileInstance& tile : perturbed.final_assembly) {
+            tile.position.x += uniform(jitter.translation_amplitude);
+            tile.position.y += uniform(jitter.translation_amplitude);
+            tile.rotation_deg.z += uniform(jitter.yaw_amplitude_deg);
+        }
+
+        const ValidationReport iteration_report = jitter_validator.validateModel(perturbed);
+        if (iteration_report.errorCount() == 0) continue;
+
+        ++result.failed_iterations;
+        for (const ValidationIssue& issue : iteration_report.issues) {
+            if (issue.severity != IssueSeverity::Error) continue;
+            failing_codes.insert(issue.code);
+            if (first_failed_iteration == 0 && sample_message.empty()) {
+                sample_message = issue.message;
+                sample_tile_ids = issue.tile_ids;
+            }
+        }
+        if (first_failed_iteration == 0) first_failed_iteration = iteration;
+    }
+
+    if (result.failed_iterations == 0) return result;
+
+    std::string codes_text;
+    for (const std::string& code : failing_codes) {
+        if (!codes_text.empty()) codes_text += ", ";
+        codes_text += code;
+    }
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(3);
+    oss << "蒙特卡洛抖动仿真失败: 注入放置误差 (平移每轴 ±"
+        << jitter.translation_amplitude << " 单位 ≈ ±"
+        << formatGrams(jitter.translation_amplitude * 70.0) << "mm, 偏航 ±"
+        << formatGrams(jitter.yaw_amplitude_deg) << "°) 后, " << result.iterations
+        << " 轮中有 " << result.failed_iterations << " 轮违反物理规则 (涉及: " << codes_text
+        << "); 首个失败样本 (第 " << first_failed_iteration << " 轮): " << sample_message
+        << "。模型对毫米级放置误差没有足够裕量, 儿童实搭时误差累积可能倾倒或脱落 "
+           "(BUILD_VERIFICATION.md F08), 请按 docs/PHYSICS_RULES.md R9 节加固";
+    result.report.issues.push_back({IssueSeverity::Error, "placement_jitter_failure",
+                                    oss.str(), std::move(sample_tile_ids)});
+    return result;
 }
 
 }  // namespace magtile::physics

@@ -78,6 +78,8 @@ struct CliArgs {
     std::string settings_action;  ///< settings 子命令: set-age / set-tts / show
     std::string settings_value;   ///< settings set-age 的年龄 (周岁) / set-tts 的 on|off
     std::string profile;          ///< validate 的物理校验档位 (default / strict)
+    bool jitter_enabled = false;  ///< validate --jitter: 开启 R9 蒙特卡洛容差抖动仿真
+    int jitter_iterations = 50;   ///< --jitter 的仿真轮数 (省略数值时的默认 50)
     bool tts = false;            ///< --tts: 教程切步时朗读步骤说明 (系统 TTS)
     std::string open_model;      ///< library --dev-gui: 启动后直接打开的模型 id
     bool open_parent_gate = false;  ///< library --dev-gui: 启动即显示家长门 (评审/冒烟)
@@ -103,9 +105,15 @@ void printUsage() {
         "  magtile_app catalog  [--core-only] [--data-dir DIR]  查看磁力片形状目录\n"
         "                       (--core-only 只列核心 9 片型)\n"
         "  magtile_app validate <model.json> [--data-dir DIR] [--profile default|strict]\n"
+        "                       [--jitter [N]]\n"
         "                       校验模型物理规则与教程步骤; --profile strict 使用弱磁\n"
         "                       严格档 (悬挂额定 120g/边长, 安全系数 0.7, 面向磁力较弱\n"
-        "                       的品牌与旧片, 详见 docs/PHYSICS_RULES.md)\n"
+        "                       的品牌与旧片, 详见 docs/PHYSICS_RULES.md);\n"
+        "                       --jitter [N] 追加 R9 蒙特卡洛容差抖动仿真 (默认 50 轮):\n"
+        "                       每轮对每片注入随机放置误差 (平移每轴 ±0.021 单位 ≈\n"
+        "                       ±1.5mm, 偏航 ±2°) 后重跑 R1~R8, 任一轮出错即以\n"
+        "                       placement_jitter_failure 拒绝 (捕捉误差累积失稳 F08,\n"
+        "                       可与 --profile 叠加, 详见 docs/PHYSICS_RULES.md R9 节)\n"
         "  magtile_app tutorial <model.json> [--dev-gui] [--data-dir DIR]\n"
         "                       分步教程: 默认在终端预览, --dev-gui 打开 3D 交互窗口\n"
         "                       (内容制作/调试用)\n"
@@ -188,6 +196,18 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
         } else if (arg == "--profile") {
             if (i + 1 >= argc) return false;
             args.profile = argv[++i];
+        } else if (arg == "--jitter") {
+            // 轮数可省略 (默认 50): 下一个参数是完整整数时才吞掉,
+            // 否则按后续开关/位置参数继续解析 (如 --jitter --profile strict)
+            args.jitter_enabled = true;
+            if (i + 1 < argc) {
+                char* end = nullptr;
+                const long value = std::strtol(argv[i + 1], &end, 10);
+                if (end != argv[i + 1] && *end == '\0') {
+                    args.jitter_iterations = static_cast<int>(value);
+                    ++i;
+                }
+            }
         } else if (arg == "--db") {
             if (i + 1 >= argc) return false;
             args.db_file = argv[++i];
@@ -290,6 +310,15 @@ int runValidate(const CliArgs& args) {
                      args.profile.c_str());
         return 2;
     }
+    // --jitter 轮数护栏: 显式 0/负数是无声放水 (0 轮 = 没测), 超大
+    // 轮数会把 CI 拖入小时级 —— 都按参数错误处理 (退出码 2)。
+    if (args.jitter_enabled &&
+        (args.jitter_iterations < 1 || args.jitter_iterations > 10000)) {
+        std::fprintf(stderr,
+                     "错误: --jitter 轮数必须在 1~10000 之间 (实际: %d); 省略数值时默认 50\n",
+                     args.jitter_iterations);
+        return 2;
+    }
 
     const auto catalog = core::loadTileCatalog(args.data_dir / "tile_catalog.json");
     const auto model = core::loadModelDefinition(args.model_file);
@@ -325,7 +354,37 @@ int runValidate(const CliArgs& args) {
     }
     failures += static_cast<int>(report.errorCount());
 
-    if (report.ok() && step_problems.empty()) {
+    // R9 蒙特卡洛容差抖动 (--jitter, docs/PHYSICS_RULES.md R9 节):
+    // 静态规则全绿之后的加练 —— 对静态已不成立的模型做抖动仿真
+    // 没有意义, 先修基础错误再谈误差裕量。
+    bool jitter_ok = true;
+    if (args.jitter_enabled) {
+        if (failures > 0) {
+            std::printf("[提示] 基础校验未通过, 本次跳过蒙特卡洛抖动仿真 (--jitter)\n");
+        } else {
+            physics::JitterConfig jitter_config;
+            jitter_config.iterations = args.jitter_iterations;
+            const auto jitter_result = validator.validateModelWithJitter(model, jitter_config);
+            for (const auto& issue : jitter_result.report.issues) {
+                const char* tag =
+                    issue.severity == physics::IssueSeverity::Error ? "错误" : "警告";
+                std::printf("[%s] %s (%s)\n", tag, issue.message.c_str(), issue.code.c_str());
+            }
+            failures += static_cast<int>(jitter_result.report.errorCount());
+            jitter_ok = jitter_result.ok();
+            if (jitter_ok) {
+                std::printf(
+                    "[通过] 蒙特卡洛抖动仿真 (R9): %d/%d 轮全部通过 "
+                    "(平移每轴 ±%.3f 单位 ≈ ±%.1fmm, 偏航 ±%.0f°)\n",
+                    jitter_result.iterations, jitter_result.iterations,
+                    jitter_config.translation_amplitude,
+                    jitter_config.translation_amplitude * 70.0,
+                    jitter_config.yaw_amplitude_deg);
+            }
+        }
+    }
+
+    if (report.ok() && step_problems.empty() && jitter_ok) {
         std::printf(
             "[通过] 物理规则检查: 接地支撑 / 磁力连接 / 无重叠 / 重心稳定 / "
             "悬挂承重 / 悬臂力矩 / 装配可达 / 结构冗余\n");

@@ -227,6 +227,24 @@ if [ "$positive_found" -eq 0 ]; then
     skip_stage "物理正例" "tests/test_physics_positive/ 下没有夹具 (可用 tools/generate_test_models.py 生成)"
 fi
 
+# ---- 13.5: R9 蒙特卡洛容差抖动 (每个夹具一个关卡) ------------------
+# 带 .expected sidecar 的是抖动负例 ("静态全绿但注入 ±1.5mm/±2° 误差
+# 后必挂" 的边缘设计, 执行器先断言普通 validate 放行再断言 --jitter
+# 拒绝); 不带 sidecar 的是抖动正例 (加固后同构造放行, 防矫枉过正)。
+# 物理正例对照组的抖动档与旗舰模型抖动回归由 CTest 关卡覆盖
+# (physics_jitter_positive_* / validate_jitter_*), 详见 TESTING.md 3.18。
+jitter_found=0
+for fixture in "$TESTS_DIR"/test_physics_jitter/*.json; do
+    [ -e "$fixture" ] || continue
+    jitter_found=$((jitter_found + 1))
+    fixture_name="$(basename "$fixture" .json)"
+    run_stage "物理抖动 R9: $fixture_name" \
+        bash "$TESTS_DIR/test_physics_jitter.sh" "$APP" "$DATA_DIR" "$fixture"
+done
+if [ "$jitter_found" -eq 0 ]; then
+    skip_stage "物理抖动 R9" "tests/test_physics_jitter/ 下没有夹具"
+fi
+
 # ---- 14: GL 渲染冒烟 --------------------------------------------
 run_stage "GL 渲染冒烟" bash "$TESTS_DIR/test_gl_smoke.sh" "$BUILD_DIR"
 

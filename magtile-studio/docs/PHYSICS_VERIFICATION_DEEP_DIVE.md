@@ -167,7 +167,7 @@
 
 L2 的三段测试按"先能落地、后动力学增强"分两期:
 
-1. **蒙特卡洛容差抖动 (jitter) —— 已实现**: 对每片位姿注入 ±1.5mm / ±2° 随机误差, 生成 N=20 个扰动副本 (固定随机种子, CI 逐次可复现; 连接拓扑按未扰动模型取定, 扰动只作用于几何量), 逐副本重算稳定性判定, 通过率 ≥ 90% 才算过 —— 专门捕捉"微小错位累积坍塌" (F08), 这是静力预算原理上算不了的。执行入口、报告字段与退出码的权威约定: [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 2.1 节; F08 型负例夹具 + 正例夹具锁死行为, ctest 前缀 `validate_jitter_*`;
+1. **蒙特卡洛容差抖动 (jitter) —— 已实现** (`magtile_app validate --jitter [N]`, 规则号 R9): 对每片位姿注入 ±1.5mm / ±2° 随机误差, 生成 N 个扰动副本 (默认 50; 固定随机种子, CI 逐次可复现; 连接识别容差按注入误差最坏情况放大, 等效于连接拓扑按未扰动模型取定), 逐副本重跑整套 R1~R8, **任一副本出错即拒** (严于最初设计"通过率 ≥ 90%"的最低口径) —— 专门捕捉"微小错位累积坍塌" (F08), 这是静力预算原理上算不了的。执行入口、报告字段与退出码的权威约定: [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 2.1 节, 规则细节 [PHYSICS_RULES.md](PHYSICS_RULES.md) R9 节; 抖动负例/正例夹具 (`tests/test_physics_jitter/`) 锁死行为, ctest 前缀 `physics_jitter_*` / `validate_jitter_*`;
 2. **静置沉降 + 扰动脉冲 —— 后续增强 (P1-3 剩余项)**: 接入刚体物理引擎 (候选 Jolt Physics / Rapier), 磁吸边建模为**可断裂约束** (断裂阈值 = 各品牌实测拉力/力矩, 来自 L3 的季度磁力标定): 重力下模拟 5 秒, 任何片位移 > 5mm 或约束断裂即失败; 对最高点施加水平小冲量 (模拟轻碰) 结构须回稳 —— 这是对 `knock_safety_factor` 静态近似的动力学复核。
 
 定位: L2 是 L1 的**抽检补强**, 不是替代 —— L1 永远先跑、永远全量。触发条件 (L1 有 Warning; 结构高 > 6 单位或连续 ≥ 3 片垂直墙链; 重心距接地凸包边界 < `stability_margin` 的 50%; 弱磁形状承重; 设计师手动标记) 已全部落实为 `tools/physical_risk_report.py` 的可检测项 (检测编码表: BUILD_VERIFICATION.md 第 2 节), 被标记模型经内容门禁强制走 jitter (BUILD_VERIFICATION.md 第 6 节); L3 人手排产先看 L2 结果 (PHYSICAL_REBUILD_CHECKLIST.md 0.5 节)。
@@ -223,10 +223,10 @@ L2 的三段测试按"先能落地、后动力学增强"分两期:
 
 ### P1-3 D4+ 蒙特卡洛容差抖动 (±1.5mm / ±2°)
 
-- **现状**: **第一期已实现** —— jitter 蒙特卡洛以校验器内建模式落地 (±1.5mm / ±2° × N=20 副本, 通过率 ≥ 90%, 固定种子; 接口约定 BUILD_VERIFICATION.md 2.1 节), 配 F08 型负例/正例夹具与 `validate_jitter_*` ctest 注册; 触发标记由 `tools/physical_risk_report.py` 自动判定并接入门禁 —— F08 的发现路径已从"只有 L3 人工"下沉到 L2 机器抽检。
+- **现状**: **第一期已实现** —— jitter 蒙特卡洛以校验器内建模式落地 (`magtile_app validate --jitter [N]`, 规则号 R9: ±1.5mm / ±2° × 默认 N=50 副本, 任一副本出错即拒 —— 收紧自最初设计的"通过率 ≥ 90%", 固定种子; 接口约定 BUILD_VERIFICATION.md 2.1 节, 规则细节 PHYSICS_RULES.md R9 节), 配抖动负例/正例夹具 (`tests/test_physics_jitter/`) 与 `physics_jitter_*` / `validate_jitter_*` ctest 注册; 触发标记由 `tools/physical_risk_report.py` 自动判定并接入门禁 —— F08 的发现路径已从"只有 L3 人工"下沉到 L2 机器抽检。首次全库巡检 (`--jitter 50`): 209 模型 208 全绿, 1 个真实边缘设计被抓出 (`lego_style_house_01` 7/50 轮 `enclosed_placement`, 第 14 步补片手部通道对毫米级误差无裕量)。
 - **缺口 (剩余)**: 动力学两段 (静置沉降、扰动脉冲) 未实现 —— 当前 jitter 在静力学判定框架内重算扰动副本, 不含时域沉降; 磁吸断裂阈值也尚未与品牌标定表打通。
 - **工程内容 (剩余)**: ① 接入刚体引擎 (建议 Jolt: C++、静态可链、确定性模式利于 CI 复现); ② 磁吸边→可断裂 6 自由度约束, 断裂阈值取品牌标定表; ③ 对 D4+ 模型的成品 + 被标记中间态执行沉降 + 脉冲; ④ 作为 CI 可选 Job 起步 (nightly), 稳定后对 D4+ 转强制。
-- **验收标准**: 已达成 —— 历史 F08 案例 (16 步累积歪斜坍塌) 的复现夹具被抖动测试抓住 (通过率 < 90%) 并锁为负例; 剩余 —— 全库 D4+ 跑通刚体沉降/脉冲且时长可控 (分钟级/模型)。
+- **验收标准**: 已达成 —— F08 型边缘设计的复现夹具 (`tests/test_physics_jitter/marginal_top_heavy_wall.json`: 静态 R1~R8 全绿、重心贴 `stability_margin` 内侧) 被抖动测试抓住 (18/50 副本失稳, 单轮命中率 ≥ 30% 对种子不敏感) 并锁为回归; 全库 209 模型 `--jitter 50` 单模型秒级跑通。剩余 —— 全库 D4+ 跑通刚体沉降/脉冲且时长可控 (分钟级/模型)。
 
 ### P2-1 默认内容库 core-9 片型 BOM 门禁
 
