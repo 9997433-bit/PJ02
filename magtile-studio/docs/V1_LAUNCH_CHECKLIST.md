@@ -35,21 +35,20 @@ tools/check_v1_readiness.sh --strict   # 签核档: E2E 冒烟用 --strict (SKIP
 tools/check_v1_readiness.sh --help     # 完整用法
 ```
 
-退出码: **0** = 无 P0 失败; **1** = 存在 P0 失败 (2026-08-25 21:28 UTC
-`--quick` 实跑为 1: 合计 25 项 13 PASS / 2 FAIL / 10 SKIP —— 自动侧
-P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项全 PASS (探测
-合计项 24 → 25 系新增 R18 系列归类机检所致, 首跑即绿; 本次环境无
-构建目录 R10 记 SKIP); **250 基线后 R6/R7 仍为唯二 P0 FAIL**,
-D4+ 待复核全集 45 → 46);
+退出码: **0** = 无 P0 失败; **1** = 存在 P0 失败 (2026-08-25 22:03 UTC
+`--quick` 实跑为 1: 合计 25 项 **14 PASS / 2 FAIL / 9 SKIP** —— 自动侧
+P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项全 PASS (含 R18
+系列归类机检首跑即绿); **250 基线后 R6/R7 仍为唯二 P0 FAIL**,
+D4+ 待复核 46 个 0/46);
 **2** = 环境/参数不满足。**内容库已扩容收官至 250 模型** (`2b2c4ff`,
 内容批 F~I 合计 234→250; 收官批全量 QA 38 关卡全过 —— strict 巡检 +
 L2 jitter + 免费层对齐全开)。全量档 (QA + L2 + L3 硬闸门) 最新实跑
 留痕: [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md)
-(**已刷新至 250 基线**: 2026-08-25 20:53 UTC, 基线 `ced770c`, 刷新批
-`9955aaa`; QA 全过 —— CTest 554/554 + 模型库 250/250 + 唯一性 31125
-对 0 警告, L2 抗扰动 46/46 x 50 轮全绿, 仅 L3 实物硬闸门红 0/46;
-治理批 `324e1b9` 后 `--full` 档另挂难度配额 strict 守卫 —— D3 冻结
-生效期间与 L3 并列**双红灯**, 口径见 §7 G2);
+(**已刷新至治理批后 250 基线**: 2026-08-25 21:53 UTC, 基线 `b369bad`;
+软件侧全绿 —— CTest **556/556** + 模型库 250/250 + 唯一性 31125
+对 0 警告 + 系列归类 176+74 全合法, L2 抗扰动 46/46 x 50 轮全绿;
+`--full --l2` 总退出码 1 来自两道**预期红**: L3 实物 0/46 + 难度配额
+strict (D3 冻结 D1 0/20 / D5 1/6), 口径见 §7 G2);
 全量就绪探测留痕:
 [reports/READINESS_FULL_2026-08-25.md](reports/READINESS_FULL_2026-08-25.md)
 (**已刷新至 250 基线** `2b2c4ff` 全量档实跑: 合计 24 项 16 PASS /
@@ -151,8 +150,8 @@ D4+ 46/46 x 50 轮全绿)。
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| G1 | 快检档常绿 (免费层对齐 + strict 全库巡检 + 待复核报告) | P0 | Auto (R5) | `tools/run_release_gate.sh`; 最新全量实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) | ✅ 探测通过 (报告型 L3 项不阻断); 全量档 QA 39 子关卡 + L2 抗扰动档亦全绿 (**250 基线刷新实跑** `9955aaa`: CTest 554/554, 模型库 250/250, D4+ jitter 46/46) |
-| G2 | 出包终防线全绿: `tools/run_release_gate.sh --full --fail-on-pending` | P0 | Auto + 线下 | 同上; `--full` 档四道发布专项全开 (免费层对齐 / strict 巡检 / 系列归类机检 `tools/check_content_series.py --strict` / 难度配额守卫 `tools/check_difficulty_quota.py --strict` = 全量 QA 关卡 10/15/20/21, 口径 [TESTING.md](TESTING.md) 3.19 与第 5 节); D4+ 实物复核清零 (见 §8) 与 D3 解冻 (D1 >= 20 且 D5 >= 6) 是两道并列前置 | ⬜ **双红灯口径 (治理批 `324e1b9` 后)**: `--full --fail-on-pending` 同时被两道硬闸卡红 —— ① L3 实物硬闸门: **250 基线 D4+ 待复核 46 个 0/46** (见 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md)), §8 实搭清零前红灯; ② 难度配额 strict 守卫 (QA 关卡 21, `tools/check_difficulty_quota.py --strict`): D3 冻结生效 (当前 D1 0/20、D5 1/6), **D1 >= 20 且 D5 >= 6 补齐前红灯** (属预期告警, 不允许占位交差); 两道红灯之外软件侧全绿 —— 250 基线刷新实跑 `--full --l2` QA + L2 全绿 (`9955aaa`, 治理守卫入 `--full` 前仅 L3 红); 解除路径分别为 §8 缩减集实搭清零与 D1/D5 内容补齐 |
+| G1 | 快检档常绿 (免费层对齐 + strict 全库巡检 + 待复核报告) | P0 | Auto (R5) | `tools/run_release_gate.sh`; 最新全量实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) | ✅ 探测通过 (报告型 L3 项不阻断); 全量档 QA 41 子关卡 (软件侧 38 过) + L2 抗扰动档全绿 (**治理批后基线实跑** `b369bad`: CTest 556/556, 模型库 250/250, D4+ jitter 46/46) |
+| G2 | 出包终防线全绿: `tools/run_release_gate.sh --full --fail-on-pending` | P0 | Auto + 线下 | 同上; `--full` 档四道发布专项全开 (免费层对齐 / strict 巡检 / 系列归类机检 `tools/check_content_series.py --strict` / 难度配额守卫 `tools/check_difficulty_quota.py --strict` = 全量 QA 关卡 10/15/20/21, 口径 [TESTING.md](TESTING.md) 3.19 与第 5 节); D4+ 实物复核清零 (见 §8) 与 D3 解冻 (D1 >= 20 且 D5 >= 6) 是两道并列前置 | ⬜ **双红灯口径 (治理批 `324e1b9` 后)**: `--full --fail-on-pending` 同时被两道硬闸卡红 —— ① L3 实物硬闸门: **250 基线 D4+ 待复核 46 个 0/46** (见 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md)), §8 实搭清零前红灯; ② 难度配额 strict 守卫 (QA 关卡 21, `tools/check_difficulty_quota.py --strict`): D3 冻结生效 (当前 D1 0/20、D5 1/6), **D1 >= 20 且 D5 >= 6 补齐前红灯** (属预期告警, 不允许占位交差); 两道红灯之外软件侧全绿 —— `b369bad` 基线 `--full --l2` 实跑 QA+L2 全绿, 总退出码 1 仅来自难度配额守卫; 解除路径分别为 §8 缩减集实搭清零与 D1/D5 内容补齐 |
 
 ## 8. 实物复核 (L2 三层缩减流程)
 
@@ -201,12 +200,12 @@ D4+ 46/46 x 50 轮全绿)。
 D4+ `--jitter 50` 全绿 (234 基线 45/45; **250 基线全集 46** —— 内容批
 F~I 旗舰 `stonehenge_01` D4 入列, 250 基线 46x50 全绿见
 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md)),
-`run_release_gate --full --l2` QA+L2 全绿 (仅 L3 实物硬闸门红, 见
-[reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md), **已刷新至 250 基线** `9955aaa`)。
+`run_release_gate --full --l2` 软件侧 QA+L2 全绿 (L3 + 难度配额两道预期红, 见
+[reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md), **已刷新至治理批后 250 基线** `b369bad`)。
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| S0 | 第二层虚拟物理验证全绿 (D4+ 默认 `--jitter 50` + 风险报告 + 自动标记) | P0 | Auto (R17) | `magtile_app validate --jitter N` (蒙特卡洛 ±1.5mm/±2° 逐步扰动, 失败记 F08 类) + `tools/physical_risk_report.py` + [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件代码化; 门禁接入 `tools/run_strict_audit.sh` / `tools/run_release_gate.sh`; jitter 夹具与 risk report 单测随 ctest; 就绪探测载体 `tools/check_v1_readiness.sh` R17 (P1 报告档): D4+ 确定性抽检 —— D5 全数优先 + 大体量 D4 按总片数降序补足 (默认 10 个, `--jitter-sample` 可调; 与 `physical_sample_pack.py` 同一风险代理口径), 逐个 `validate --jitter 50`; 慢项 `--quick` 记 SKIP 而**全量签核必跑**: 二进制缺失 / `--jitter` 特性不可用 / 抽样为空一律显式 FAIL 不静默跳过; `physical_risk_report.py` 落地后抽样源可切换其高风险 Top 子集 | ✅ 工具链 + 4 边缘模型加固全部入库; D4+ jitter 全绿 (234 基线 45/45 复验 `3d24d74`; **250 基线 D4+ 全集 46** —— 内容批 F~I 旗舰 `stonehenge_01` D4 入列, 其余 15 个全部 D2/D3, 逐个 `--jitter 50` 全绿入库, 250 基线 46x50 全绿见 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md)); `run_release_gate --full --l2` QA+L2 全绿 (实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md), **已刷新至 250 基线** `9955aaa`) |
+| S0 | 第二层虚拟物理验证全绿 (D4+ 默认 `--jitter 50` + 风险报告 + 自动标记) | P0 | Auto (R17) | `magtile_app validate --jitter N` (蒙特卡洛 ±1.5mm/±2° 逐步扰动, 失败记 F08 类) + `tools/physical_risk_report.py` + [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件代码化; 门禁接入 `tools/run_strict_audit.sh` / `tools/run_release_gate.sh`; jitter 夹具与 risk report 单测随 ctest; 就绪探测载体 `tools/check_v1_readiness.sh` R17 (P1 报告档): D4+ 确定性抽检 —— D5 全数优先 + 大体量 D4 按总片数降序补足 (默认 10 个, `--jitter-sample` 可调; 与 `physical_sample_pack.py` 同一风险代理口径), 逐个 `validate --jitter 50`; 慢项 `--quick` 记 SKIP 而**全量签核必跑**: 二进制缺失 / `--jitter` 特性不可用 / 抽样为空一律显式 FAIL 不静默跳过; `physical_risk_report.py` 落地后抽样源可切换其高风险 Top 子集 | ✅ 工具链 + 4 边缘模型加固全部入库; D4+ jitter 全绿 (234 基线 45/45 复验 `3d24d74`; **250 基线 D4+ 全集 46** —— 内容批 F~I 旗舰 `stonehenge_01` D4 入列, 其余 15 个全部 D2/D3, 逐个 `--jitter 50` 全绿入库, 250 基线 46x50 全绿见 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md)); `run_release_gate --full --l2` QA+L2 全绿 (实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md), **已刷新至治理批后 250 基线** `b369bad`) |
 | S1 | 缩减人手集实搭签核: **risk Top 15 + 结构族代表** (并集去重, 清单以两份报告实跑输出钉死) | P0 | Auto 报告 (R6 + R17) + Manual 实搭 | `tools/physical_risk_report.py` Top 15 人手建议 (实跑报告 [reports/PHYSICAL_RISK_REPORT.md](reports/PHYSICAL_RISK_REPORT.md), **已刷新至 250 基线** `ced770c`: 250 全扫, L2 标记 163 / l2_required 172, Top3 `skyscraper_01` 63.9 / `suspension_bridge_01` 55.4 / `lighthouse_01` 54.6 与 234 库持平, Top15 清单 ≈ 17.3 小时不变) + `tools/physical_family_pack.py` 结构族代表 (实跑报告 [reports/PHYSICAL_FAMILY_PACK.md](reports/PHYSICAL_FAMILY_PACK.md), **已刷新至 250 基线**: 185 族, 多成员 52, 必搭 36 / 可缓建 10 省 21%); 规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) + 上手指南 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + 工作单 [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md); 原 V1 抽样包 10 个 ([reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md), `tools/physical_sample_pack.py --fail-on-missing-sample`) 预计与 Top 15 高度重合, 作首批排产兼第二层校准数据 | ⬜ 0 已复核 —— 人手范围由报告钉死, **不必 250 全搭** |
 | S2 | D4+ 实物风险全覆盖清零 (缩减集实搭 + 同族代表结论 + 第二层全绿合围) | P0 | Auto 报告 (R7, 覆盖口径随 L2 门禁接入升级) + Manual 实搭 | `tools/list_physical_pending.py --fail-on-pending` + `tools/physical_family_pack.py` 族谱; 落盘口径见 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 5.2 | ⬜ 三层覆盖口径已定 (原「45 个逐个实搭」改为缩减集 + 族代表覆盖); 实搭失败经 `tools/physical_failure_registry.py` 登记整改, 整改后同族复验 |
 | S3 | 免费层 D3 抽检 30% (免费层无 D4+, 实物风险由抽检政策覆盖) | P1 | Manual | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §4.3; [reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md) §2 免费层说明 | 🔶 已有 3 个 D3 实物复核落盘 (`content_meta.physical_verified`, R6 报告一致性核对可见) |

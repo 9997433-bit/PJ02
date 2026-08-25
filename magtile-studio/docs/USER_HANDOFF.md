@@ -8,14 +8,15 @@
 > [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md), 本单不另立口径,
 > 只做「工程 vs 你」的分工切面。
 >
-> **状态快照**: 2026-08-25 21:50 UTC 文档同步 —— 内容库扩容收官至
+> **状态快照**: 2026-08-25 22:03 UTC 文档同步 —— 内容库扩容收官至
 > **250 模型** (`2b2c4ff` 基线, 内容批 F~I 合计 234→250, **200~250
 > 上限目标达成**; 收官批全量 QA 38 关卡全过: strict 巡检 + L2 jitter +
 > 免费层对齐全开, 唯一性 31125 对 0 警告); D4+ 全集 45 → 46 (新增批
 > 旗舰 `stonehenge_01` D4)。L2 风险报告与结构族包 (`ced770c`: 185 族,
 > 必搭 36 / 可缓建 10 省 21%) 及 strict 巡检深报告 (`2b2c4ff` 基线
 > 实跑: 249 通过 + 1 白名单豁免, D4+ 46x50 全绿)、发布门禁报告
-> (`9955aaa`: QA 250/250 + L2 46/46 全绿, 仅 L3 红 0/46) 及全量就绪
+> (`b369bad`: 软件侧 QA+L2 全绿, CTest 556/556, 双预期红 L3 0/46 +
+> 难度配额 strict D1 0/20 / D5 1/6) 及全量就绪
 > 报告 (`2b2c4ff` 基线全量档实跑: 16 PASS / 2 FAIL 仅 R6/R7 / 6 SKIP)
 > **全部已刷新至 250 基线** —— 结论不受扩容影响, R6/R7 实物复核仍为
 > 唯二 P0 FAIL。
@@ -49,12 +50,12 @@
 > 实搭量大幅缩减 (§4.3); **L2 批次 10 槽 + 接力批 4 模型加固均已交付** (§2)。
 
 **快照时自动探测实跑** (`tools/check_v1_readiness.sh --quick`,
-21:28 UTC / 250 模型 + 治理波次时点; **250 基线全量档复跑已完成** ——
+22:03 UTC / `b3c12f1` 基线; **250 基线全量档复跑已完成** ——
 `2b2c4ff` 基线实跑 16 PASS / 2 FAIL 仅 R6/R7 / 6 SKIP, 结论不变, 见
 [reports/READINESS_FULL_2026-08-25.md](reports/READINESS_FULL_2026-08-25.md)):
 
 ```
-合计 25 项: 13 PASS / 2 FAIL / 10 SKIP (其中 P0 失败 2 项)
+合计 25 项: 14 PASS / 2 FAIL / 9 SKIP (其中 P0 失败 2 项)
 ```
 
 仅有的 2 项 FAIL 仍是 **R6/R7 实物复核** —— 唯一无法**完全**由软件
@@ -76,7 +77,7 @@
 | 项 | 状态 | 交付物 | commit / 依据 |
 | --- | --- | --- | --- |
 | C1 模型库体量 | ✅ | **250 个模型 JSON** (探测门槛 200, **200~250 目标区间上限达成**) | 最近登记批 `2b2c4ff` (247→250; 内容批 F~I 合计 234→250, 此前批 A~E 209→234); R1 门槛 200 恒过 |
-| C2 全库质量门禁 | ✅ | 全库 250 模型 strict 双档零未豁免警告 (收官批全量 QA 38 关卡全过: strict 巡检 + L2 jitter + 免费层对齐全开, 唯一性 31125 对 0 警告; D4+ 全集 45 → 46 —— 新增批旗舰 `stonehenge_01` D4; 唯一豁免 `suspension_bridge_01` 已文档化) | 收官批 `2b2c4ff`; 巡检深报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) (**已刷新至 250 基线**: 249 通过 + 1 白名单豁免, D4+ 46x50 全绿) + 最新全库实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) (**已刷新至 250 基线** `9955aaa`: QA + L2 全绿仅 L3 红); R5 实跑 |
+| C2 全库质量门禁 | ✅ | 全库 250 模型 strict 双档零未豁免警告 (收官批全量 QA 38 关卡全过: strict 巡检 + L2 jitter + 免费层对齐全开, 唯一性 31125 对 0 警告; D4+ 全集 45 → 46 —— 新增批旗舰 `stonehenge_01` D4; 唯一豁免 `suspension_bridge_01` 已文档化) | 收官批 `2b2c4ff`; 巡检深报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) (**已刷新至 250 基线**: 249 通过 + 1 白名单豁免, D4+ 46x50 全绿) + 最新全库实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) (**已刷新至治理批后 250 基线** `b369bad`: 软件侧全绿, 双预期红 L3+配额); R5 实跑 |
 | C3 目录 + 缩略图 | ✅ | JSON / 目录登记 / 缩略图 250 三方对账一致 (难度分布 D2 x23 / D3 x181 / D4 x45 / D5 x1) | `2b2c4ff` 收官重登记 |
 | C4 免费层 30 对齐 | ✅ | 标签 = starter 清单, 全 core-9, 三条断言常绿 | [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md); R3 实跑 PASS |
 | C5 主题/难度终审 | 🔶 | **series 归类回填收官 250/250** + R18 归类机检全绿 (`check_content_series.py --strict`: 矩阵内 176 + 矩阵外聚桶 74, 缺失/非法 0; 词表 `data/content_series_map.json`; CTest 硬闸门 `content_series_gate` 常开 + QA 可选关卡 20); 矩阵进度机器快照自动生成 (176/520 = 34%, 断档格/超编格以快照为准); 分布数据可一键输出 (`magtile_app library`); **矩阵判读与人工终审留待上架前 (归你)** | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2; 快照 [reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md) (`update_model_catalog.py --matrix-report`); 回填 `81cf682` + 机检 `fe05bab` + R18 探测 `f0947b5` |
