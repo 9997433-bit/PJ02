@@ -61,6 +61,7 @@ magtile-studio/
 | --- | --- |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 模块划分、坐标约定、渲染选型、数据格式 |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | 面向 500+ 模型内容库的分阶段商业化路线 |
+| [docs/CONTENT_STRATEGY.md](docs/CONTENT_STRATEGY.md) | 内容策略: 技法分类学、主题矩阵、反批量生成规则、生产管线 |
 | [docs/PHYSICS_RULES.md](docs/PHYSICS_RULES.md) | 物理校验规则的精确定义与判定算法 |
 
 ## 许可
