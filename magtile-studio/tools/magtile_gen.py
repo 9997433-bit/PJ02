@@ -406,7 +406,7 @@ class ModelBuilder:
 
     # ---- 汇总输出 --------------------------------------------------
     def finalize(self, *, model_id, name, name_en, description, difficulty, tags,
-                 min_pieces, min_steps):
+                 min_pieces, min_steps, series=None, matrix_bucket=None):
         placed = [tid for s in self.steps for tid in s["tiles_to_add"]]
         assert len(placed) == len(self.tiles) == len(set(placed)), \
             "步骤必须恰好覆盖全部磁力片"
@@ -440,14 +440,16 @@ class ModelBuilder:
             "difficulty": difficulty,
             "total_pieces": len(self.tiles),
             "tags": list(tags),
-            "content_meta": {
-                "structural_signature": {
-                    "tile_histogram": bom,
-                },
-            },
+            "content_meta": {},
             "final_assembly": self.tiles,
             "steps": self.steps,
         }
+        meta = model["content_meta"]
+        if series is not None:
+            meta["series"] = series
+        if matrix_bucket is not None:
+            meta["matrix_bucket"] = matrix_bucket
+        meta["structural_signature"] = {"tile_histogram": bom}
 
         out = Path(__file__).resolve().parent.parent / "data" / "models" / f"{model_id}.json"
         out.write_text(json.dumps(model, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

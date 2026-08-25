@@ -1,0 +1,549 @@
+{
+  "schema_version": 1,
+  "id": "star_octahedron_01",
+  "name": "星形八面体摆件",
+  "name_en": "Star Octahedron Display 01",
+  "description": "几何艺术 D2: 2x2 底座对角直角三角互锁, 上下两组等边三角互穿成星芒, 顶上一枚等边四坡锥合拢上四面体 —— T05 翻折 + T11 镜像的入库示范。与密铺屏风/测地穹顶完全不同, 这是全库第一座星形多面体摆件。",
+  "difficulty": 2,
+  "total_pieces": 30,
+  "tags": [
+    "几何艺术",
+    "多面体",
+    "星形",
+    "摆件",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "geometric_art",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 16,
+        "equilateral_triangle": 8,
+        "isosceles_triangle": 4,
+        "right_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "base_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "base_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "base_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_n0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_n1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pad_e0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_e1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lock_a",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        0.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "lock_b",
+      "type": "right_triangle",
+      "position": [
+        0.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "ped_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ped_n",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ped_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ped_e",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "deck_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "deck_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "low_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "low_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "low_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "low_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "apex_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "apex_e",
+      "type": "equilateral_triangle",
+      "position": [
+        0.833333,
+        0.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "apex_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "apex_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.166667,
+        0.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "spk_sw",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        1.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "spk_ne",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        2.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "spk_nw",
+      "type": "isosceles_triangle",
+      "position": [
+        0.0,
+        1.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "spk_se",
+      "type": "isosceles_triangle",
+      "position": [
+        2.0,
+        1.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺底座并装对角自锁: 四片方板 + 四片外扩台沿, 两片直角三角互穿 (T11)。",
+      "tip": "正对角自锁 —— 底座从此推不散。",
+      "tiles_to_add": [
+        "base_0_0",
+        "base_1_0",
+        "base_0_1",
+        "base_1_1",
+        "pad_n0",
+        "pad_n1",
+        "pad_e0",
+        "pad_e1",
+        "lock_a",
+        "lock_b"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立底坐墙环并铺中台: 四片立墙 + 四片方板封住 z=1 平台。",
+      "tip": "墙环是下星芒的沿口。",
+      "tiles_to_add": [
+        "ped_s",
+        "ped_n",
+        "ped_w",
+        "ped_e",
+        "deck_0_0",
+        "deck_1_0",
+        "deck_0_1",
+        "deck_1_1"
+      ],
+      "highlight_tiles": [
+        "base_0_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "装下星芒与中心四坡锥: 四片沿口三角 + 四坡锥在 1x1 洞口自锁 (T05)。",
+      "tip": "先在桌面拼展开图, 再整体翻折立起。",
+      "tiles_to_add": [
+        "low_s",
+        "low_n",
+        "low_w",
+        "low_e",
+        "apex_s",
+        "apex_e",
+        "apex_n",
+        "apex_w"
+      ],
+      "highlight_tiles": [
+        "deck_0_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "装台内立柱并收尾: 四片瘦高三角点缀台面 (T11 镜像) —— 星形八面体摆件落成!",
+      "tip": "上下体互穿成星芒 —— 几何艺术第一座多面体作品。",
+      "tiles_to_add": [
+        "spk_sw",
+        "spk_ne",
+        "spk_nw",
+        "spk_se"
+      ],
+      "highlight_tiles": [
+        "apex_s"
+      ]
+    }
+  ]
+}
