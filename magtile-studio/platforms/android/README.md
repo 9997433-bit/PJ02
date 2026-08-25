@@ -1,12 +1,16 @@
-# MagTile Studio — Android 平台外壳 (脚手架)
+# MagTile Studio — Android 平台外壳
 
-本目录是 Android 端的最小脚手架, 用于证明跨平台路径成立:
-`magtile_core` (C++20, 无桌面依赖) 通过 Android NDK 交叉编译为
-`libmagtile_core.so`, 由 JNI 包装层暴露给 Kotlin 调用。
+本目录是 Android 端的完整 Gradle 工程 (从脚手架推进到「可安装最小
+体验」): `magtile_core` (C++20, 无桌面依赖) 通过 Android NDK 交叉
+编译为 `libmagtile_core.so`, 由 JNI 包装层暴露给 Kotlin; APK 内置
+`data/` 子集, 首启解包后即可展示 **131 个模型的模型库列表** 并对任意
+模型按需执行完整物理校验 (R1~R8)。
 
-> 状态: **脚手架**。JNI 链路 (目录加载 / 模型物理校验 / 教程步骤数)
-> 已可用; 渲染循环 (GLSurfaceView / Vulkan)、教程交互 UI、完整
-> Gradle 工程尚未落地, 计划见下文与 `docs/ROADMAP.md`。
+> 状态: **可安装最小体验**。已落地: Gradle 工程 (含 wrapper)、JNI
+> 链路 (目录加载 / 模型库列表 / 物理校验 / 教程步骤数)、RecyclerView
+> 模型卡片列表 (中文名 / 主题 / 难度星 / 片数·步数)、数据资产打包与
+> 首启解包。尚未落地: 渲染循环 (GLES3 / Vulkan)、分步教程交互 UI
+> (卡片详情当前为「教程即将上线」占位), 计划见下文与 `docs/ROADMAP.md`。
 
 ## 目录结构
 
@@ -15,17 +19,61 @@ platforms/android/
 ├── README.md                 本文档
 ├── CMakeLists.txt            JNI 共享库构建脚本 (双入口: 仓库根 / Gradle)
 ├── jni/
-│   └── magtile_jni.cpp       JNI 包装层: loadCatalog / validateModel / getTutorialStepCount
-└── app/src/main/kotlin/com/magtile/studio/
-    └── MainActivity.kt       最小 Kotlin 壳 (System.loadLibrary + 冒烟验证)
+│   └── magtile_jni.cpp       JNI 包装层 (4 个入口, 见下表)
+├── settings.gradle.kts       Gradle 工程入口 (工程根 = 本目录)
+├── build.gradle.kts          插件版本 (AGP 8.7.3 / Kotlin 2.0.21)
+├── gradle.properties         AndroidX / 配置缓存
+├── gradlew / gradle/         Gradle Wrapper (8.13)
+└── app/
+    ├── build.gradle.kts      externalNativeBuild + assets 打包接线
+    └── src/main/
+        ├── AndroidManifest.xml
+        ├── kotlin/com/magtile/studio/
+        │   ├── MainActivity.kt        模型库列表 + 详情弹窗 + 按需校验
+        │   ├── ModelCard.kt           卡片元数据 (listModels JSON 解析)
+        │   ├── ModelCardAdapter.kt    RecyclerView 适配器
+        │   └── DataAssetInstaller.kt  assets/data -> filesDir/data 解包
+        └── res/                       布局 / 主题 / 自适应启动图标
 ```
 
-## 一、纯 NDK 交叉编译 .so (不需要 Gradle)
+## 一、构建 APK (Gradle, 推荐)
 
-适合 CI 与本地快速验证。前置条件:
+前置条件:
 
-- Android NDK **r26 及以上** (自带 Clang 17+, 完整支持 C++20)
-- CMake ≥ 3.22, Ninja
+- JDK **17+** (AGP 8.7 要求; JDK 21 亦可)
+- Android SDK: `platforms;android-35`、`build-tools;35.0.0`、
+  `ndk;27.2.12479018` (r27c)、`cmake;3.22.1`
+  (缺失组件在 SDK 许可已接受时由 AGP 自动补装)
+
+```bash
+cd platforms/android
+# 指定 SDK 位置 (二选一): export ANDROID_HOME=~/Android/Sdk
+# 或写 local.properties: echo "sdk.dir=$HOME/Android/Sdk" > local.properties
+
+./gradlew :app:assembleDebug
+# 产物: app/build/outputs/apk/debug/app-debug.apk (约 4.5 MB, arm64-v8a)
+
+adb install app/build/outputs/apk/debug/app-debug.apk
+```
+
+安装启动后: 首次启动解包数据资产 (秒级) → 状态栏显示
+「共 131 个模型 · 13 种磁力片形状」→ 滚动模型卡片列表; 点击卡片弹出
+简介与「教程即将上线」占位, 「物理校验」按钮按需加载模型并展示
+R1~R8 中文校验摘要与教程步骤数。
+
+要点:
+
+- `app/build.gradle.kts` 的 `externalNativeBuild` 指向本目录
+  `CMakeLists.txt` (双入口设计, 会 `add_subdirectory` 仓库根拉起
+  `magtile_core`; 桌面 GL/Qt/CTest 在 Android 下自动强制关闭)。
+- 首发只出 `arm64-v8a`; 模拟器调试可在 `abiFilters` 临时追加 `x86_64`。
+- `minSdk 26` (Android 8.0): NDK libc++ 的 `std::filesystem` 自
+  android-26 起完整可用, `magtile_core` 的 JSON 加载依赖它。
+
+## 二、纯 NDK 交叉编译 .so (不需要 Gradle / SDK)
+
+适合 CI 与本地快速验证。前置条件: Android NDK **r26+** (自带
+Clang 17+, 完整支持 C++20)、CMake ≥ 3.22、Ninja。
 
 ```bash
 # ANDROID_NDK 指向 NDK 根目录, 例如 ~/Android/Sdk/ndk/27.2.12479018
@@ -38,19 +86,12 @@ cmake --build build-android
 # 产物: build-android/platforms/android/libmagtile_core.so
 ```
 
-要点:
+其他 ABI 依次替换 `ANDROID_ABI`: `armeabi-v7a`、`x86_64`。
 
-- NDK 工具链文件会定义 `ANDROID`, 仓库根 `CMakeLists.txt` 据此:
-  强制关闭桌面 GL 后端 (GLFW/ImGui) 与 CTest, 跳过命令行应用,
-  只构建 `magtile_core` 静态库 + 本目录的 JNI 共享库。
-- `ANDROID_PLATFORM=android-26` (Android 8.0) 起 `std::filesystem`
-  在 NDK libc++ 中可完整使用; `magtile_core` 的 JSON 加载依赖它。
-- 其他 ABI 依次替换 `ANDROID_ABI`: `armeabi-v7a`、`x86_64`。
-
-## 二、magtile_core 的链接方式
+## 三、JNI 接口与链接方式
 
 `platforms/android/CMakeLists.txt` 将仓库根的 **静态库** `magtile_core`
-与 `jni/magtile_jni.cpp` 一起链接为 **一个** 共享库, 并把产物命名为
+与 `jni/magtile_jni.cpp` 一起链接为 **一个** 共享库, 产物命名为
 `libmagtile_core.so` (Kotlin 侧 `System.loadLibrary("magtile_core")`)。
 单 .so 方案下 STL 使用默认的 `c++_static` 即可; 若日后拆分多个原生库,
 需统一切换 `-DANDROID_STL=c++_shared`。
@@ -60,59 +101,46 @@ JNI 接口一览 (符号绑定到 `com.magtile.studio.MainActivity`):
 | Kotlin 声明 | 说明 |
 | --- | --- |
 | `loadCatalog(catalogPath: String): Int` | 加载 `tile_catalog.json`, 返回形状数量, 失败 -1 |
+| `listModels(dataDir: String): String` | 模型库目录 JSON: `{"models":[{id/name/name_en/description/difficulty/total_pieces/step_count/theme/file},...]}`, 失败 `{"error":"..."}`; 只含卡片元数据, 不加载几何 (模型库秒开) |
 | `validateModel(jsonPath: String): String` | 加载模型并跑完整物理校验 (R1~R8), 返回中文摘要 |
 | `getTutorialStepCount(): Int` | 最近一次成功加载模型的教程步骤数, 未加载 -1 |
 
-## 三、Gradle 工程接入 (计划, 尚未提交)
+## 四、数据资产策略
 
-为保持脚手架轻量, 本目录暂不包含 Gradle Wrapper 与构建脚本;
-新建 Gradle 工程时按以下要点接入即可:
+- 构建期: `app/build.gradle.kts` 的 `stageMagTileAssets` 任务 (Sync)
+  把仓库根 `data/` 的**子集**同步进 APK assets —— `tile_catalog.json`
+  + `model_catalog.json` + `models/*.json` (约 3.3 MB); **不含**
+  `thumbnails/` (约 4 MB PNG, 列表暂不显示缩略图, 核心库对缺失缩略图
+  自动降级为占位)。数据单一来源是仓库根 `data/`, 不做第二份拷贝。
+- 运行期: `magtile_core` 走 `std::filesystem` 读真实文件路径, 不能直接
+  读 assets 流, 故 `DataAssetInstaller` 在首次启动 (或 APK 更新后, 以
+  `lastUpdateTime` 版本戳判断) 把 assets/data 解包到 `filesDir/data`;
+  版本戳一致时零拷贝, 日常启动无 IO 开销。
 
-1. `app/build.gradle.kts` 中指向本目录的 CMake 入口:
+## 五、CI
 
-```kotlin
-android {
-    namespace = "com.magtile.studio"
-    compileSdk = 35
-    defaultConfig {
-        minSdk = 26          // std::filesystem 需要 android-26+
-        externalNativeBuild {
-            cmake { arguments += listOf("-DANDROID_PLATFORM=android-26") }
-        }
-        ndk { abiFilters += listOf("arm64-v8a") }
-    }
-    externalNativeBuild {
-        cmake {
-            path = file("../CMakeLists.txt")   // platforms/android/CMakeLists.txt
-            version = "3.22.1"
-        }
-    }
-}
-```
+`.github/workflows/android.yml` (仓库根) 包含两个任务:
 
-   该 CMakeLists 是双入口设计: 被 Gradle 直接调用时会自动
-   `add_subdirectory` 仓库根目录, 拉起 `magtile_core`。
+- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 4 个 JNI
+  符号齐全 —— 持续保证 `magtile_core` 无平台依赖。
+- `assemble-debug`: Gradle 全量打包 debug APK 并上传为构建产物。
 
-2. **数据资产**: 把仓库根 `data/` (形状目录 + 模型库) 打进 APK assets
-   (`sourceSets` 里追加 `assets.srcDirs += "../../../data"` 或用
-   Gradle copy 任务), 首次启动时解包到 `filesDir/data` 再把路径传给
-   JNI —— `MainActivity.kt` 的冒烟验证即按此约定读取。
-3. `MainActivity.kt` 刻意只依赖 `android.app.Activity` (无 AndroidX),
-   可直接作为最小可编译起点。
-
-## 四、后续计划
+## 六、后续计划
 
 - 渲染: 复用 `include/magtile/render/renderer.hpp` 抽象接口, Android 端
   实现 GLES3 / Vulkan 后端 (桌面 GLFW+GL4.1 后端不上移动端)。
-- 教程交互: `TutorialEngine` 已与 UI 解耦, Kotlin 侧仅做手势与 HUD。
-- CI: 在桌面构建旁增加 NDK 交叉编译任务, 保证 `magtile_core`
-  持续保持无平台依赖。
+- 教程交互: `TutorialEngine` 已与 UI 解耦, Kotlin 侧仅做手势与 HUD;
+  卡片详情的「教程即将上线」占位替换为分步教程页。
+- 模型库增强: 缩略图入卡片 (assets 追加 thumbnails/ 或按需下载)、
+  主题筛选与难度筛选 (对齐 Qt 桌面端 QT-1 模型库)。
+- 进度存档: `progress_store` (SQLite) 已随 .so 编译进 APK, 待接
+  完成状态 / 收藏到列表 UI。
 
 ## 相关文档
 
 - `docs/PLATFORM_ARCHITECTURE.md` — 跨平台技术架构总纲 (共享 C++ 核心 +
   平台外壳、渲染后端矩阵、CI 矩阵); 本目录即其第 8 节规划的
-  `platforms/android/` 落地脚手架。
+  `platforms/android/` 落地。
 - `docs/ARCHITECTURE.md` — 核心分层与模块职责。
 - `docs/PHYSICS_RULES.md` — validateModel 执行的 R1~R8 物理规则。
 - `platforms/windows/README.md` — Windows 端构建与安装包规划。
