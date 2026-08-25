@@ -52,4 +52,21 @@ private:
     std::map<TileType, TileShape> shapes_;
 };
 
+// ---- 核心 9 片型 (core-9) 判定 --------------------------------------
+// 套装分层的事实来源是 data/tile_catalog.json 的 tier 字段
+// (docs/TILE_CATALOG.md §3); 下面两个函数是全部 UI 外壳 (CLI / GL /
+// Qt) 共用的判定入口, 保证 "只用核心片" 筛选与 "需要扩展装" 角标
+// 在各端使用同一套口径。
+
+/// 兜底白名单: 目录不可用 (加载失败 / 形状缺失) 时的核心 9 片型
+/// 判定, 必须与 data/tile_catalog.json 的 tier=core 标注保持一致
+/// (docs/TILE_CATALOG.md): square / large_square / window_square /
+/// door_frame / equilateral_triangle / right_triangle /
+/// isosceles_triangle / rectangle / wheel_base。
+[[nodiscard]] bool isCoreTileFallback(TileType type) noexcept;
+
+/// 片型是否属于核心 9 片 (基础套装): 目录中的 tier 标注优先,
+/// 形状缺失时退回 isCoreTileFallback 的代码内白名单。
+[[nodiscard]] bool isCoreTile(const TileCatalog& catalog, TileType type) noexcept;
+
 }  // namespace magtile::core

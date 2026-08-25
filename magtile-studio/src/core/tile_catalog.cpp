@@ -41,4 +41,32 @@ const TileShape& TileCatalog::get(TileType type) const {
     return *shape;
 }
 
+bool isCoreTileFallback(TileType type) noexcept {
+    switch (type) {
+        case TileType::Square:
+        case TileType::LargeSquare:
+        case TileType::WindowSquare:
+        case TileType::DoorFrame:
+        case TileType::EquilateralTriangle:
+        case TileType::RightTriangle:
+        case TileType::IsoscelesTriangle:
+        case TileType::Rectangle:
+        case TileType::WheelBase:
+            return true;
+        case TileType::Rhombus:
+        case TileType::Trapezoid:
+        case TileType::Hexagon:
+        case TileType::Sector:
+            return false;
+    }
+    return false;
+}
+
+bool isCoreTile(const TileCatalog& catalog, TileType type) noexcept {
+    if (const TileShape* shape = catalog.find(type)) {
+        return shape->tier == "core";
+    }
+    return isCoreTileFallback(type);
+}
+
 }  // namespace magtile::core

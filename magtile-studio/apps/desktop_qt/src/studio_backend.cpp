@@ -11,6 +11,7 @@
 #include "magtile/core/json_io.hpp"
 #include "magtile/core/model_catalog.hpp"
 #include "magtile/core/model_definition.hpp"
+#include "magtile/core/tile_catalog.hpp"
 #include "magtile/core/types.hpp"
 
 namespace magtile::qtui {
@@ -43,33 +44,12 @@ StudioBackend::StudioBackend(std::filesystem::path data_dir, std::filesystem::pa
 StudioBackend::~StudioBackend() = default;
 
 bool StudioBackend::isCoreTile(core::TileType type) const {
+    // 共享判定 (core::isCoreTile): 目录 tier 优先, 目录不可用时
+    // 退回核心库内的兜底白名单 —— CLI / GL / Qt 三端同一口径。
     if (tile_catalog_loaded_) {
-        if (const core::TileShape* shape = tile_catalog_.find(type)) {
-            return shape->tier == "core";
-        }
+        return core::isCoreTile(tile_catalog_, type);
     }
-    // 兜底白名单 —— 与 data/tile_catalog.json 的 tier=core 标注保持一致
-    // (核心 9 片型, 见 docs/TILE_CATALOG.md): square / large_square /
-    // window_square / door_frame / equilateral_triangle / right_triangle /
-    // isosceles_triangle / rectangle / wheel_base。
-    switch (type) {
-        case core::TileType::Square:
-        case core::TileType::LargeSquare:
-        case core::TileType::WindowSquare:
-        case core::TileType::DoorFrame:
-        case core::TileType::EquilateralTriangle:
-        case core::TileType::RightTriangle:
-        case core::TileType::IsoscelesTriangle:
-        case core::TileType::Rectangle:
-        case core::TileType::WheelBase:
-            return true;
-        case core::TileType::Rhombus:
-        case core::TileType::Trapezoid:
-        case core::TileType::Hexagon:
-        case core::TileType::Sector:
-            return false;
-    }
-    return false;
+    return core::isCoreTileFallback(type);
 }
 
 QString StudioBackend::shapeNameZh(core::TileType type) const {

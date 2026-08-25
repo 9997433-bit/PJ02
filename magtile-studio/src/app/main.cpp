@@ -32,6 +32,7 @@
 #include "magtile/core/age_mode.hpp"
 #include "magtile/core/json_io.hpp"
 #include "magtile/core/model_catalog.hpp"
+#include "magtile/core/tile_catalog.hpp"
 #include "magtile/physics/physics_validator.hpp"
 #include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/progress_store.hpp"
@@ -40,6 +41,7 @@
 
 #if defined(MAGTILE_HAS_GL_RENDERER)
 #include <chrono>
+#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 
@@ -58,6 +60,7 @@ struct CliArgs {
     std::string model_file;
     fs::path data_dir = "data";
     bool gui = false;
+    bool core_only = false;      ///< --core-only: 只列核心 9 片型 / 只用核心片的模型
     int start_step = 1;          ///< 图形模式的起始步骤
     long max_frames = 0;         ///< >0 时渲染指定帧数后自动退出 (冒烟测试)
     std::string screenshot_file; ///< 非空时在最后一帧保存 PPM 图片 (冒烟测试)
@@ -82,10 +85,12 @@ void printUsage() {
         "MagTile Studio - 磁力片搭建教程\n"
         "\n"
         "用法:\n"
-        "  magtile_app library  [--gui] [--data-dir DIR] [--db FILE]\n"
+        "  magtile_app library  [--gui] [--core-only] [--data-dir DIR] [--db FILE]\n"
         "                       模型库 (商业版主入口): --gui 打开图形界面, 浏览/搜索/\n"
-        "                       筛选模型卡片并进入教程; 默认在终端列出模型与进度\n"
-        "  magtile_app catalog  [--data-dir DIR]              查看磁力片形状目录\n"
+        "                       筛选模型卡片并进入教程; 默认在终端列出模型与进度;\n"
+        "                       --core-only 只列基础套装 (核心 9 片型) 就能搭的模型\n"
+        "  magtile_app catalog  [--core-only] [--data-dir DIR]  查看磁力片形状目录\n"
+        "                       (--core-only 只列核心 9 片型)\n"
         "  magtile_app validate <model.json> [--data-dir DIR] [--profile default|strict]\n"
         "                       校验模型物理规则与教程步骤; --profile strict 使用弱磁\n"
         "                       严格档 (悬挂额定 120g/边长, 安全系数 0.7, 面向磁力较弱\n"
@@ -135,6 +140,8 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
             args.data_dir = argv[++i];
         } else if (arg == "--gui") {
             args.gui = true;
+        } else if (arg == "--core-only") {
+            args.core_only = true;
         } else if (arg == "--step") {
             if (i + 1 >= argc) return false;
             args.start_step = static_cast<int>(std::strtol(argv[++i], nullptr, 10));
@@ -213,8 +220,22 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
 
 int runCatalog(const CliArgs& args) {
     const auto catalog = core::loadTileCatalog(args.data_dir / "tile_catalog.json");
-    std::printf("磁力片形状目录 (共 %zu 种):\n\n", catalog.size());
+    // --core-only: 只列核心 9 片型 (基础套装, tier=core), 供内容制作
+    // 与免费层选品核对 (docs/TILE_CATALOG.md / CONTENT_STRATEGY.md §2.5)
+    std::size_t core_count = 0;
     for (const auto& [type, shape] : catalog.shapes()) {
+        (void)shape;
+        if (core::isCoreTile(catalog, type)) ++core_count;
+    }
+    if (args.core_only) {
+        std::printf("磁力片形状目录 (核心 9 片型, 共 %zu 种; 全目录 %zu 种):\n\n", core_count,
+                    catalog.size());
+    } else {
+        std::printf("磁力片形状目录 (共 %zu 种, 其中核心 %zu 种):\n\n", catalog.size(),
+                    core_count);
+    }
+    for (const auto& [type, shape] : catalog.shapes()) {
+        if (args.core_only && !core::isCoreTile(catalog, type)) continue;
         std::printf("  %-22s %s [%s]%s  顶点 %zu 个, 磁力边 %zu 条, 面积 %.3f\n",
                     std::string(core::toString(type)).c_str(), shape.name_zh.c_str(),
                     shape.tier.c_str(), shape.hollow ? " (镂空)" : "",
@@ -803,6 +824,28 @@ int runLibraryGui(const CliArgs& args) {
                     tts_engine->available() ? "" : " (无可用朗读器, 静音降级)");
     }
 
+    // ---- 片型分层: "只用核心 9 片" 筛选与 "需要扩展装" 角标 -------------
+    // 启动时逐模型加载 BOM, 对照片型目录 tier 判定是否只用核心 9 片型
+    // (与 Qt 版同一共享判定 core::isCoreTile); 模型文件有问题的按
+    // "BOM 未知" 降级 (不进核心筛选也不显示角标), 不影响其余卡片。
+    std::unordered_map<std::string, bool> core9_by_id;  // 无条目 = BOM 未知
+    for (const auto& entry : entries) {
+        try {
+            const auto model = core::loadModelDefinition(entry.file);
+            bool core9 = true;
+            for (const auto& [type, count] : model.pieceCountByType()) {
+                (void)count;
+                if (!core::isCoreTile(catalog, type)) {
+                    core9 = false;
+                    break;
+                }
+            }
+            core9_by_id.emplace(entry.id, core9);
+        } catch (const std::exception&) {
+            // 模型文件有问题由目录对账用例负责报告, 这里按 BOM 未知处理
+        }
+    }
+
     // ---- 磁力片库存: "我能搭的" 筛选 + 首启 onboarding -----------------
     // 已登记库存时对照每个模型的 BOM 预判 "能不能搭"; 库存经图形录入
     // 界面保存后就地重算 (模型 JSON 重新加载, 数百个模型量级毫秒完成)。
@@ -978,6 +1021,10 @@ int runLibraryGui(const CliArgs& args) {
                 card.theme = entry.theme();
                 card.tags = entry.tags;
                 if (!entry.thumbnail.empty()) card.thumbnail_path = entry.thumbnail.string();
+                if (const auto it = core9_by_id.find(entry.id); it != core9_by_id.end()) {
+                    card.bom_known = true;
+                    card.core9_only = it->second;
+                }
                 card.buildable = buildable_ids.count(entry.id) > 0;
                 if (const auto record = store.loadProgress(entry.id); record.has_value()) {
                     card.completed = record->isCompleted();
@@ -1174,9 +1221,21 @@ int runLibrary(const CliArgs& args) {
     const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
     progress::ProgressStore store(db_file);
 
-    std::printf("MagTile Studio 模型库 (%zu 个模型):\n\n", entries.size());
+    // --core-only: 只列基础套装 (核心 9 片型) 就能搭的模型 —— 判定
+    // 口径与图形版筛选一致 (core::isCoreTile, 目录 tier 优先)。
+    // 目录/模型对账照常覆盖全库, 过滤只影响列表输出。
+    const auto catalog = core::loadTileCatalog(args.data_dir / "tile_catalog.json");
+
+    if (args.core_only) {
+        std::printf("MagTile Studio 模型库 (只用核心 9 片型的模型, 全库 %zu 个):\n\n",
+                    entries.size());
+    } else {
+        std::printf("MagTile Studio 模型库 (%zu 个模型):\n\n", entries.size());
+    }
     int failures = 0;
+    std::size_t listed = 0;
     for (const auto& entry : entries) {
+        bool core9_only = true;
         try {
             const auto model = core::loadModelDefinition(entry.file);
             if (model.name != entry.name || model.difficulty != entry.difficulty ||
@@ -1192,11 +1251,20 @@ int runLibrary(const CliArgs& args) {
                 ++failures;
                 continue;
             }
+            for (const auto& [type, count] : model.pieceCountByType()) {
+                (void)count;
+                if (!core::isCoreTile(catalog, type)) {
+                    core9_only = false;
+                    break;
+                }
+            }
         } catch (const std::exception& e) {
             std::printf("[错误] %s: 模型文件加载失败: %s\n", entry.id.c_str(), e.what());
             ++failures;
             continue;
         }
+        if (args.core_only && !core9_only) continue;
+        ++listed;
 
         std::string stars;
         for (int i = 1; i <= entry.difficulty; ++i) stars += "★";
@@ -1220,7 +1288,12 @@ int runLibrary(const CliArgs& args) {
         std::printf("\n结论: 模型库目录有 %d 个条目未通过对账\n", failures);
         return 1;
     }
-    std::printf("\n结论: 模型库目录与模型文件一致 (%zu 个模型)\n", entries.size());
+    if (args.core_only) {
+        std::printf("\n结论: 全库 %zu 个模型中 %zu 个只用核心 9 片型 (目录对账通过)\n",
+                    entries.size(), listed);
+    } else {
+        std::printf("\n结论: 模型库目录与模型文件一致 (%zu 个模型)\n", entries.size());
+    }
     std::printf("提示: magtile_app library --gui 打开图形模型库\n");
     return 0;
 }

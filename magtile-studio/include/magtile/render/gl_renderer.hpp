@@ -61,6 +61,11 @@ struct LibraryCard {
     std::vector<std::string> tags;
     std::string thumbnail_path;  ///< 缩略图 PNG 路径 (空 = 无, 显示主题色占位)
 
+    // ---- 来自模型 BOM (对照片型目录 tier, 见 core::isCoreTile) ----
+    bool bom_known = false;   ///< 模型 JSON 成功加载, core9_only 有效
+    bool core9_only = false;  ///< BOM 只用核心 9 片型 (基础套装即可搭;
+                              ///< false 且 bom_known 时卡片显示 "需要扩展装" 角标)
+
     // ---- 来自进度存档 -------------------------------------------
     bool started = false;    ///< 有进度记录且未完成 (显示 "继续搭建")
     bool completed = false;  ///< 已完成 (显示绿色对勾)
