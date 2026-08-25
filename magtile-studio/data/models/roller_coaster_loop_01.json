@@ -689,7 +689,7 @@
       "id": "car1_nose",
       "type": "equilateral_triangle",
       "position": [
-        7.0,
+        8.0,
         1.5,
         0.288675
       ],
@@ -704,7 +704,7 @@
       "id": "car1_s",
       "type": "square",
       "position": [
-        7.5,
+        8.5,
         1.0,
         0.5
       ],
@@ -719,7 +719,7 @@
       "id": "car1_n",
       "type": "square",
       "position": [
-        7.5,
+        8.5,
         2.0,
         0.5
       ],
@@ -734,7 +734,7 @@
       "id": "car1_tail",
       "type": "square",
       "position": [
-        8.0,
+        9.0,
         1.5,
         0.5
       ],
@@ -749,7 +749,7 @@
       "id": "car2_s",
       "type": "square",
       "position": [
-        8.5,
+        9.5,
         1.0,
         0.5
       ],
@@ -764,7 +764,7 @@
       "id": "car2_n",
       "type": "square",
       "position": [
-        8.5,
+        9.5,
         2.0,
         0.5
       ],
@@ -779,7 +779,7 @@
       "id": "car2_tail",
       "type": "square",
       "position": [
-        9.0,
+        10.0,
         1.5,
         0.5
       ],
@@ -791,11 +791,11 @@
       "color": "orange"
     },
     {
-      "id": "buffer",
+      "id": "finish_flag",
       "type": "equilateral_triangle",
       "position": [
-        10.0,
-        1.5,
+        9.0,
+        0.5,
         0.288675
       ],
       "rotation": [
@@ -803,7 +803,7 @@
         0.0,
         90.0
       ],
-      "color": "gray"
+      "color": "purple"
     },
     {
       "id": "start_gate",
@@ -1063,7 +1063,7 @@
         "car1_tail"
       ],
       "highlight_tiles": [
-        "track_c0"
+        "track_c1"
       ]
     },
     {
@@ -1096,15 +1096,15 @@
     },
     {
       "step_number": 16,
-      "description": "装缓冲挡与起点闸门: 轨道尽头立缓冲挡, 起点立闸门 —— 过山车环圈段正式营业!",
+      "description": "装起点闸门与终点冲线旗: 起点立闸门, 停靠区旁插冲线旗 —— 过山车环圈段正式营业!",
       "tip": "从侧面看: 站台-小丘-大环圈-列车连成一条完整赛道。",
       "tiles_to_add": [
-        "buffer",
-        "start_gate"
+        "start_gate",
+        "finish_flag"
       ],
       "highlight_tiles": [
-        "track_end",
-        "track_w"
+        "track_w",
+        "apron_s5"
       ]
     }
   ]
