@@ -1,0 +1,869 @@
+{
+  "schema_version": 1,
+  "id": "robot_arm_01",
+  "name": "机械臂工位",
+  "name_en": "Robot Arm Workcell 01",
+  "description": "全库第一座工业机器人工位: 蓝色双层闭合环肩座顶起橙色水平大臂, 大臂远端稳稳搭在前臂立柱顶上 (逐片双端受力零悬挑), 腹下倒挂红色三角夹爪 (悬挂 13g 远低于 strict 预算), 正对下方绿色四坡料堆; 柱顶警示灯、紫色斜面控制台与三面黄色安全围栏把工位围出真实的车间秩序 —— 机械臂就位, 开始作业!",
+  "difficulty": 2,
+  "total_pieces": 46,
+  "tags": [
+    "工程",
+    "工业机器人",
+    "机械臂",
+    "职业体验",
+    "入门进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 29,
+        "equilateral_triangle": 12,
+        "rectangle": 4,
+        "right_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "fl_a_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_b_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_c_0",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_d_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_e_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_a_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_b_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fl_c_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_d_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fl_e_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_a_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_b_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fl_c_2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_d_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fl_e_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_a_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_b_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_c_3",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_d_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_e_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pd_s_0",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pd_n_0",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pd_w_0",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pd_e_0",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pd_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pd_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pd_w_1",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pd_e_1",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "fa_0",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fa_1",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "shoulder",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "arm_a",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "arm_b",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "claw",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "beacon",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        2.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "part_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "part_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "part_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "part_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "console",
+      "type": "right_triangle",
+      "position": [
+        5.0,
+        1.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "fn_s0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fn_s1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fn_n0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fn_n1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fn_e0",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        2.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fn_e1",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        3.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺地坪南半: 2 行各 5 片 (方板x2 + 长板 + 方板x2), 黄色格是设备落点。",
+      "tip": "拼缝 x=1,2,4,5 一条都不能错 —— 立柱脚全踩在这些缝上。",
+      "tiles_to_add": [
+        "fl_a_0",
+        "fl_b_0",
+        "fl_c_0",
+        "fl_d_0",
+        "fl_e_0",
+        "fl_a_1",
+        "fl_b_1",
+        "fl_c_1",
+        "fl_d_1",
+        "fl_e_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺地坪北半: 再铺 2 行, 车间地坪合拢成 6x4。",
+      "tip": "机械臂的世界坐标系原点, 就定在这块地坪上。",
+      "tiles_to_add": [
+        "fl_a_2",
+        "fl_b_2",
+        "fl_c_2",
+        "fl_d_2",
+        "fl_e_2",
+        "fl_a_3",
+        "fl_b_3",
+        "fl_c_3",
+        "fl_d_3",
+        "fl_e_3"
+      ],
+      "highlight_tiles": [
+        "fl_b_1",
+        "fl_d_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "砌肩座下环: 围合黄色肩座格, 4 片蓝色立墙四角竖边互吸。",
+      "tip": "闭合环是最强的结构 —— 肩座要扛起整条大臂。",
+      "tiles_to_add": [
+        "pd_s_0",
+        "pd_n_0",
+        "pd_w_0",
+        "pd_e_0"
+      ],
+      "highlight_tiles": [
+        "fl_b_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "砌肩座上环: 再叠 4 片, 底边整边吸下环顶边。",
+      "tip": "两层环精确对位 —— 肩座升到 2 格高。",
+      "tiles_to_add": [
+        "pd_s_1",
+        "pd_n_1",
+        "pd_w_1",
+        "pd_e_1"
+      ],
+      "highlight_tiles": [
+        "pd_s_0",
+        "pd_e_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立前臂柱: x=4 拼缝上叠 2 片灰色方墙, 与肩座同高。",
+      "tip": "先立远端支点 —— 大臂伸过来时才有地方落脚。",
+      "tiles_to_add": [
+        "fa_0",
+        "fa_1"
+      ],
+      "highlight_tiles": [
+        "fl_d_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "架肩顶平台与大臂: 平台四边压环顶, 大臂 2 片向东接力, 远端稳稳搭上前臂柱顶。",
+      "tip": "大臂第 1 片力矩 15 <= 预算 17.5, 第 2 片双端受力 —— 零悬挑。",
+      "tiles_to_add": [
+        "shoulder",
+        "arm_a",
+        "arm_b"
+      ],
+      "highlight_tiles": [
+        "pd_s_1",
+        "fa_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "挂夹爪、点警示灯: 红色三角倒挂大臂南沿, 柱顶再立警示灯。",
+      "tip": "夹爪悬挂仅 13 克, 远低于磁力边 84 克的 strict 承重预算。",
+      "tiles_to_add": [
+        "claw",
+        "beacon"
+      ],
+      "highlight_tiles": [
+        "arm_b",
+        "fa_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "码待加工件: 夹爪正下方 4 片绿色三角四棱互吸, 合拢成料堆。",
+      "tip": "四坡自锁 —— 这就是机械臂今天要抓的工件。",
+      "tiles_to_add": [
+        "part_s",
+        "part_e",
+        "part_n",
+        "part_w"
+      ],
+      "highlight_tiles": [
+        "fl_d_0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立控制台: 紫色直角三角斜面, 两条直角边分别吸拼缝与竖直立起。",
+      "tip": "斜面朝向操作员 —— 一键启动, 大臂开始巡回。",
+      "tiles_to_add": [
+        "console"
+      ],
+      "highlight_tiles": [
+        "fl_e_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "围安全栏: 南北东三面各 2 片黄色三角, 底边整边吸地坪格边。",
+      "tip": "人机隔离 —— 黄色警示三角一圈立好, 工位验收合格!",
+      "tiles_to_add": [
+        "fn_s0",
+        "fn_s1",
+        "fn_n0",
+        "fn_n1",
+        "fn_e0",
+        "fn_e1"
+      ],
+      "highlight_tiles": [
+        "fl_a_0",
+        "fl_e_3"
+      ]
+    }
+  ]
+}
