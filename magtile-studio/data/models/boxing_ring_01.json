@@ -1,0 +1,865 @@
+{
+  "schema_version": 1,
+  "id": "boxing_ring_01",
+  "name": "拳击台",
+  "name_en": "Boxing Ring 01",
+  "description": "只用核心九片型的格斗擂台: 与围栏球场和立式攀岩塔都不同, 主角是'抬升箱体 + 开顶围绳环'这对全库唯一的组合 —— 2x2 擂台先环墙合环再白帆布台面压顶, 台面沿口整边骑上一圈红白相间的开顶围绳 (同吸台面边与下层墙顶, 一线双吸, 只围不盖照样闭环), 红角蓝角与两个中立角的角旗重心正压铰链线; 台边灰色底柱托起 3.0 高的红色训练锥, 青色计时台两墙夹一盖面朝擂台 —— 铃声一响, 第一回合开始!",
+  "difficulty": 2,
+  "total_pieces": 46,
+  "tags": [
+    "运动",
+    "健身",
+    "拳击",
+    "擂台",
+    "格斗"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 37,
+        "equilateral_triangle": 4,
+        "rectangle": 4,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "mat_u_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mat_u_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mat_u_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mat_u_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mat_w_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mat_e_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mat_t_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mat_w_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mat_e_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mat_t_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mat_s_w",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mat_s_e",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mat_n_w",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mat_n_e",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ring_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ring_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ring_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ring_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ring_w_2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ring_e_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ring_w_3",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ring_e_3",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "canvas_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "canvas_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "canvas_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "canvas_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rope_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rope_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rope_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rope_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rope_w_2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rope_w_3",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rope_e_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rope_e_3",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "flag_red",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_blue",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "flag_nw",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        3.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "flag_se",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        2.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "post_s",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "post_n",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "post_w",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "post_e",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cone",
+      "type": "isosceles_triangle",
+      "position": [
+        5.5,
+        2.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "desk_s",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "desk_n",
+      "type": "square",
+      "position": [
+        1.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "desk_top",
+      "type": "square",
+      "position": [
+        1.5,
+        4.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺台下与两廊地垫: 台下四片灰色方板, 东西两廊与训练角绿色方板。",
+      "tip": "擂台的八道墙脚全踩在灰色方板的拼缝上 —— 先把地基铺方正。",
+      "tiles_to_add": [
+        "mat_u_2_2",
+        "mat_u_3_2",
+        "mat_u_2_3",
+        "mat_u_3_3",
+        "mat_w_2",
+        "mat_w_3",
+        "mat_e_2",
+        "mat_e_3",
+        "mat_t_2",
+        "mat_t_3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺南北长板: 四条绿色长板短边互吸, 场地垫连成一整张。",
+      "tip": "长板与方板行行相咬 —— 观众区和擂台区从此连成一体。",
+      "tiles_to_add": [
+        "mat_s_w",
+        "mat_s_e",
+        "mat_n_w",
+        "mat_n_e"
+      ],
+      "highlight_tiles": [
+        "mat_u_2_2"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立擂台南墙与西墙: 蓝色围裙墙踩灰板拼缝, 拐角竖边互咬。",
+      "tip": "拐角一咬, 排墙就立成了直角 —— 擂台从西南角长起。",
+      "tiles_to_add": [
+        "ring_s_2",
+        "ring_s_3",
+        "ring_w_2",
+        "ring_w_3"
+      ],
+      "highlight_tiles": [
+        "mat_u_2_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立擂台北墙与东墙合环: 环墙处处闭合, 箱体成形。",
+      "tip": "闭环的墙才扛得住冠军的重拳 —— 四角都要咬紧。",
+      "tiles_to_add": [
+        "ring_n_2",
+        "ring_n_3",
+        "ring_e_2",
+        "ring_e_3"
+      ],
+      "highlight_tiles": [
+        "ring_s_2",
+        "ring_w_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖台面帆布: 四片白色方板压顶, 每片吸墙顶又互吸拼缝。",
+      "tip": "台面锁住环墙 —— 擂台抬高一层, 观众才看得清。",
+      "tiles_to_add": [
+        "canvas_2_2",
+        "canvas_3_2",
+        "canvas_2_3",
+        "canvas_3_3"
+      ],
+      "highlight_tiles": [
+        "ring_n_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "骑南沿与西沿围绳: 红白相间整边骑台面沿口, 同吸下层墙顶。",
+      "tip": "围绳一线双吸: 台面边 + 墙顶边, 两条保险。",
+      "tiles_to_add": [
+        "rope_s_2",
+        "rope_s_3",
+        "rope_w_2",
+        "rope_w_3"
+      ],
+      "highlight_tiles": [
+        "canvas_2_2"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "骑北沿与东沿围绳合环: 开顶围绳环四角竖边互咬。",
+      "tip": "只围不盖 —— 开顶的环照样闭合, 拳手从绳间钻进场。",
+      "tiles_to_add": [
+        "rope_n_2",
+        "rope_n_3",
+        "rope_e_2",
+        "rope_e_3"
+      ],
+      "highlight_tiles": [
+        "rope_s_2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "插四面角旗: 红角对蓝角, 两个中立角白色, 骑围绳顶沿。",
+      "tip": "旗子重心正压铰链线, 力矩为零 —— 红角蓝角, 各就各位!",
+      "tiles_to_add": [
+        "flag_red",
+        "flag_blue",
+        "flag_nw",
+        "flag_se"
+      ],
+      "highlight_tiles": [
+        "rope_w_3"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "装立式训练锥: 灰色底柱四墙合环踩拼缝, 红锥骑柱顶。",
+      "tip": "赛前先打十组锥靶 —— 锥尖 3.0, 比角旗还高半头。",
+      "tiles_to_add": [
+        "post_s",
+        "post_n",
+        "post_w",
+        "post_e",
+        "cone"
+      ],
+      "highlight_tiles": [
+        "mat_t_2"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "搭计时台收尾: 两道青墙夹一片台面, 面朝擂台 —— 开赛!",
+      "tip": "台面两边各吸一道墙顶 —— 铃声一响, 第一回合开始!",
+      "tiles_to_add": [
+        "desk_s",
+        "desk_n",
+        "desk_top"
+      ],
+      "highlight_tiles": [
+        "flag_red"
+      ]
+    }
+  ]
+}
