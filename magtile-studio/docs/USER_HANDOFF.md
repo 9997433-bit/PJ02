@@ -44,7 +44,7 @@ P0 缺口 (见 §4.3); 8 项 SKIP = 快检刻意跳过的 R4/R5 两个长跑项 
 | 项 | 状态 | 交付物 | commit / 依据 |
 | --- | --- | --- | --- |
 | B1 假计费闭环 | ✅ | 计费适配层 + 三档商品 + 购买/恢复 + 统一解锁口径, 41 断言单测 | `f4bb5c7`; R10 PASS |
-| B2 真实商店接线 | 🔶 | **Google Play**: Play Billing 6.x 购买/恢复/回执 + 启动静默恢复 (`a694a17`); **Windows 商店**: WinRT 全链 + MTA 线程模型 (`aa50909`); **Qt 订阅页商店档 UI**: 真实价格卡 + 恢复购买 + `simulatedBilling` 分流 (`aa50909`); **Android 订阅页 UI** (家长门后档位卡 + 恢复购买): `fdc0082` (drawable 先行 `9d9ad0a`) | R11 / R11W 实跑 PASS; 商品 id 三端统一 `sub_monthly`/`sub_yearly`/`sub_family_yearly` |
+| B2 真实商店接线 | 🔶 | **Google Play**: Play Billing 6.x 购买/恢复/回执 + 启动静默恢复 (`a694a17`); **Windows 商店**: WinRT 全链 + MTA 线程模型 (`aa50909`); **Qt 订阅页商店档 UI**: 真实价格卡 + 恢复购买 + `simulatedBilling` 分流 (`aa50909`); **Android 订阅页 UI** (家长门后档位卡 + 恢复购买): `1333f8e` (drawable 先行 `9d9ad0a`) | R11 / R11W 实跑 PASS; 商品 id 三端统一 `sub_monthly`/`sub_yearly`/`sub_family_yearly` |
 | B5 儿童零价格红线 | 🔶 | 家长门流随 E2E 常绿 + R16 文案守卫常态扫描 (260 文件 7714 段, 0 违规); 视觉/语气人工终审留待上架前 | 守卫 `654d775`/`61b514c`, 违规修复 `a128acd`/`5023313` |
 
 ### 1.3 §3 桌面 (D1/D7 ✅, D2/D6 🔶)
@@ -103,7 +103,7 @@ P0 缺口 (见 §4.3); 8 项 SKIP = 快检刻意跳过的 R4/R5 两个长跑项 
 | --- | --- | --- | --- |
 | 1 | 审计工程 vs 用户分工 | 本单 | **运行中** —— 本文件即其产物 (初版 `4f1dc10` + 顶部挂链 `91f7671`, 本次扩写) |
 | 2 | D6 LGPL 自动核对 | D6 | **已交付** `2605e34` (合规自动核对脚本) |
-| 3 | Android 订阅页 UI | B2 | **已交付** `fdc0082` (家长门后档位卡 + 恢复购买; drawable 先行 `9d9ad0a`) |
+| 3 | Android 订阅页 UI | B2 | **已交付** `1333f8e` (家长门后档位卡 + 恢复购买; drawable 先行 `9d9ad0a`) |
 | 4 | 软著/备案办理清单 | §9 L1~L5 | **已交付** `be708d3` ([ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md)) |
 | 5 | Android 真机 QA 仪器测试 | A4 前置 | 骨架 `9d9ad0a` + 真机验收单 [reports/QA_ANDROID_DEVICE_CHECKLIST.md](reports/QA_ANDROID_DEVICE_CHECKLIST.md) `f60e31e` 已交付 |
 | 6 | Windows 商店沙盒验收文档 | B3 | **已交付** `721a594` |
@@ -122,7 +122,7 @@ B2 双端订阅页 UI 全部入库; 清单工程侧行无 ⬜。
 
 ## 3. 工程侧下一波可继续做 (不依赖你的资源)
 
-1. **B2 收尾**: 双端订阅页回归复跑 + 清单 B2 状态收敛 (Android 订阅页 UI 已入库 `fdc0082`);
+1. **B2 收尾**: 双端订阅页回归复跑 + 清单 B2 状态收敛 (Android 订阅页 UI 已入库 `1333f8e`);
 2. **D6 收尾**: 把 LGPL 自动核对脚本 (`2605e34`) 纳入出包流程与手册勾选项;
 3. **内容 209 → 250**: 继续按主题池补批; 并输出主题/难度分布报表, 给 C5 人工终审当底稿;
 4. **D8 自动更新决策文档**: COMMERCIAL_PLAN §8 列为 V1 交付物但未实现 —— 工程可先出「实现 vs 降级 V1.1」决策文档与最小方案, 决策本身留你签字;
