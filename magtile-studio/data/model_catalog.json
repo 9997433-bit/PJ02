@@ -3,6 +3,42 @@
   "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 与 thumbnail 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。theme 为卡片主题 (由标签推导), thumbnail 由 tools/generate_thumbnails.py 生成。本文件由 tools/update_model_catalog.py 自动生成, 请勿手工编辑。",
   "models": [
     {
+      "id": "beach_hut_01",
+      "file": "models/beach_hut_01.json",
+      "name": "海滩小屋",
+      "name_en": "Beach Hut 01",
+      "description": "全库第一栋高脚海滩小屋: 四根桩柱踩沙滩拼缝托起木甲板, 粉墙小屋西窗东门, 平顶长板双长边压墙顶锁成箱形露台, 两端女儿墙小三角正压山墙顶; 甲板东沿一条 30 度栈道斜下沙滩 (顶铰链+接地坡尾); 屋旁黄色伞座撑起红色四坡伞盖, 两块冲浪板插在浪花线拼缝上 —— 潮起潮落, 假期开始!",
+      "difficulty": 2,
+      "total_pieces": 44,
+      "step_count": 12,
+      "theme": "海洋航行",
+      "tags": [
+        "海岸",
+        "沙滩",
+        "小屋",
+        "度假"
+      ]
+    },
+    {
+      "id": "city_bus_stop_01",
+      "file": "models/city_bus_stop_01.json",
+      "name": "街头公交站",
+      "name_en": "City Bus Stop 01",
+      "description": "全库第一座街头公交站: 蓝色候车亭三片背墙与两根门柱托起三片透明玻璃雨棚 (每片双支点、中片最后合拢, 零悬臂), 两柱间斜嵌橙色广告牌 (竖边吸门柱棱、绕竖轴零力矩), 路缘站牌塔尖直上 3 格; 斑马线过街, 红色售货机、粉色花坛与东西两盏路灯点亮街角 —— 3 路车进站, 请排队上车!",
+      "difficulty": 2,
+      "total_pieces": 46,
+      "step_count": 10,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "公交站",
+        "街景",
+        "入门进阶"
+      ],
+      "thumbnail": "thumbnails/city_bus_stop_01.png"
+    },
+    {
       "id": "forklift_01",
       "file": "models/forklift_01.json",
       "name": "叉车",
@@ -18,7 +54,8 @@
         "车轮底座",
         "物流",
         "职业体验"
-      ]
+      ],
+      "thumbnail": "thumbnails/forklift_01.png"
     },
     {
       "id": "robot_arm_01",
@@ -36,7 +73,8 @@
         "机械臂",
         "职业体验",
         "入门进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/robot_arm_01.png"
     },
     {
       "id": "geodesic_dome_01",
@@ -192,6 +230,25 @@
         "车轮底座"
       ],
       "thumbnail": "thumbnails/police_car_01.png"
+    },
+    {
+      "id": "solar_farm_01",
+      "file": "models/solar_farm_01.json",
+      "name": "光伏阵列",
+      "name_en": "Solar Farm 01",
+      "description": "全库第一座太阳能电站: 两排共 6 片蓝色光伏板以 30 度仰角朝南列阵, 每片顶边与支架墙顶等长整边贴合、坡尾贴地生根 (顶铰链 + 接地斜撑, 6 片独立受力), 排距 2 格互不遮挡; 逆变器房与储能电池柜共用隔墙两环相扣, 红色告警灯与 3 格高监测塔尖点睛, 黄色围栏封场 —— 并网发电, 绿电入城!",
+      "difficulty": 3,
+      "total_pieces": 53,
+      "step_count": 13,
+      "theme": "工程结构",
+      "tags": [
+        "工程",
+        "光伏",
+        "太阳能",
+        "新能源",
+        "电站"
+      ],
+      "thumbnail": "thumbnails/solar_farm_01.png"
     },
     {
       "id": "taxi_01",
@@ -385,7 +442,8 @@
         "拖拉机",
         "车轮底座",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/tractor_01.png"
     },
     {
       "id": "windmill_01",
@@ -655,7 +713,8 @@
         "鸡舍",
         "动物世界",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/chicken_coop_01.png"
     },
     {
       "id": "hydro_dam_01",
@@ -789,7 +848,8 @@
         "木桥",
         "河流",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/bridge_wood_01.png"
     },
     {
       "id": "cable_car_01",
@@ -863,7 +923,8 @@
         "谷仓",
         "人字坡",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/farm_barn_01.png"
     },
     {
       "id": "water_slide_park_01",
@@ -882,6 +943,44 @@
         "游乐场"
       ],
       "thumbnail": "thumbnails/water_slide_park_01.png"
+    },
+    {
+      "id": "cabin_lake_01",
+      "file": "models/cabin_lake_01.json",
+      "name": "湖边木屋",
+      "name_en": "Lakeside Cabin 01",
+      "description": "湖畔度假小屋三件套: 原木小屋 (门框方木门 + 窗格方观湖窗, 60 度人字坡先北后南合脊, 等边山花封两端); 石砌烟囱塔与木屋共墙, 二层西面恰好嵌着东山花的负空间, 压顶 2 格高过屋脊半头; 蓝湖上两桩三板搭出栈桥, 30 度跳板缓接草地, 桥尾系船桩迎着湖心 —— 桥尾板单边悬挑力矩 28 在预算 40 之内, strict 档也稳稳通过。",
+      "difficulty": 3,
+      "total_pieces": 66,
+      "step_count": 17,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "自然",
+        "木屋",
+        "湖泊",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/cabin_lake_01.png"
+    },
+    {
+      "id": "campfire_site_01",
+      "file": "models/campfire_site_01.json",
+      "name": "篝火营地",
+      "name_en": "Campfire Site 01",
+      "description": "林间露营三件套一次学会: 篝火 = 竖直石圈与 75.5 度内倾火舌共享同一圈格边互不穿插 (火尖 1.94 格); 帐篷 = 最小人字屋, 60 度坡面直接落地、脊线互吸、等边山墙封门; 野餐桌 = 两桩一板双端受力如桥; 原木坐凳围炉、四树定界、灌木花丛点景 —— 低重心宽基座, 全场最高 2 格, 稳如营地。",
+      "difficulty": 3,
+      "total_pieces": 66,
+      "step_count": 16,
+      "theme": "自然世界",
+      "tags": [
+        "自然",
+        "露营",
+        "篝火",
+        "帐篷",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/campfire_site_01.png"
     },
     {
       "id": "greenhouse_dome_01",
@@ -976,6 +1075,25 @@
         "载具"
       ],
       "thumbnail": "thumbnails/trailer_home_01.png"
+    },
+    {
+      "id": "canoe_01",
+      "file": "models/canoe_01.json",
+      "name": "湖上独木舟",
+      "name_en": "Lake Canoe 01",
+      "description": "全库第一条独木舟: 船底长板嵌进水面同层平铺 (与湖面锁成连续水面), 八片舷墙方板竖边连吸、与端墙四角咬合成环, 船首船尾等边翘头昂起 1.87 格; 舱内座板三边整边吸船帮顶边横跨如桥, 船头行囊四坡自锁; 湖面两座浮标锥画定航道, 鸭妈妈带小鸭让路, 岸上沙滩、绿树、芦苇点景 —— 桨声欸乃, 湖光十里。",
+      "difficulty": 3,
+      "total_pieces": 68,
+      "step_count": 16,
+      "theme": "自然世界",
+      "tags": [
+        "自然",
+        "湖泊",
+        "独木舟",
+        "海洋",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/canoe_01.png"
     },
     {
       "id": "crane_tower_01",
@@ -1090,7 +1208,8 @@
         "筒仓",
         "双塔",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/farm_silo_01.png"
     },
     {
       "id": "fire_truck_01",
@@ -1187,7 +1306,8 @@
         "流水线",
         "传送带",
         "职业体验"
-      ]
+      ],
+      "thumbnail": "thumbnails/conveyor_factory_01.png"
     },
     {
       "id": "helicopter_pad_01",
@@ -1245,6 +1365,24 @@
         "载具"
       ],
       "thumbnail": "thumbnails/bulldozer_01.png"
+    },
+    {
+      "id": "cactus_desert_01",
+      "file": "models/cactus_desert_01.json",
+      "name": "沙漠仙人掌",
+      "name_en": "Cactus Desert 01",
+      "description": "全库第一片沙漠造景: 两层箱式巨型萨瓜罗仙人掌戴瘦高四坡尖冠 (顶尖 3.94 全场最高), 腰间两片等边花苞从层间拼缝外倾 30 度探出 (力矩 1.9 远在预算内); 东侧红岩平顶台地箱壁闭环岩顶锁箱, 西角桶形仙人球顶开粉色四坡花冠, 沙面两株外倾幼苗与一堆四坡砾石 —— 烈日当空, 沙漠也生机勃勃!",
+      "difficulty": 3,
+      "total_pieces": 72,
+      "step_count": 15,
+      "theme": "自然世界",
+      "tags": [
+        "自然",
+        "沙漠",
+        "仙人掌",
+        "造景",
+        "进阶"
+      ]
     },
     {
       "id": "castle_foundation_01",
@@ -1382,6 +1520,25 @@
       "thumbnail": "thumbnails/trex_skeleton_01.png"
     },
     {
+      "id": "dump_truck_01",
+      "file": "models/dump_truck_01.json",
+      "name": "自卸卡车",
+      "name_en": "Dump Truck 01",
+      "description": "全库第一辆正在卸料的自卸卡车: 黄色矿用卡车两对车轮底座托起 4x2 底盘, 驾驶室透明挡风+窗格方车门窗锁成箱形环, 斗前壁一墙两用; 车斗的核心是尾梁桥 —— 长板双端简支在斗侧板顶上, 斗底板绕它的西长边铰链抬起 45 度 (力矩 21 < 35), 尾门绕东长边向下甩开 60 度 (悬挂力矩 15 < 35), 一斗碎石刚倾泻到车尾 —— 等边四坡碎石堆+两簇石尖; 北缘两级台阶采石岩壁顶着橙色矿石, 出口警示牌与雪糕筒就位 —— 倒车, 请注意!",
+      "difficulty": 3,
+      "total_pieces": 74,
+      "step_count": 18,
+      "theme": "工程结构",
+      "tags": [
+        "自卸卡车",
+        "工程",
+        "载具",
+        "采石场",
+        "车轮底座"
+      ],
+      "thumbnail": "thumbnails/dump_truck_01.png"
+    },
+    {
       "id": "robot_01",
       "file": "models/robot_01.json",
       "name": "机器人卫士",
@@ -1420,6 +1577,25 @@
       "thumbnail": "thumbnails/suspension_bridge_01.png"
     },
     {
+      "id": "water_tower_01",
+      "file": "models/water_tower_01.json",
+      "name": "市政水塔",
+      "name_en": "Water Tower 01",
+      "description": "全库第一座市政水塔与最高纯受压结构: 2x2 闭合环塔身两层叠起, 塔脚四片橙色直角斜撑风车形外展 (竖边吸塔角竖棱、各占一个墙面平面), 塔顶平台托起青色储水箱环, 箱盖四沿山墙饰环立, 中央透明避雷尖直上 5 格 —— 逐层闭环 + 四角斜撑, R8 高层检查零警告; 塔下老井静照塔影 —— 水压来自高度, 高度来自秩序!",
+      "difficulty": 3,
+      "total_pieces": 74,
+      "step_count": 12,
+      "theme": "工程结构",
+      "tags": [
+        "工程",
+        "水塔",
+        "市政",
+        "供水",
+        "高塔"
+      ],
+      "thumbnail": "thumbnails/water_tower_01.png"
+    },
+    {
       "id": "drone_pad_01",
       "file": "models/drone_pad_01.json",
       "name": "无人机停机坪",
@@ -1435,7 +1611,8 @@
         "停机坪",
         "低空物流",
         "科技"
-      ]
+      ],
+      "thumbnail": "thumbnails/drone_pad_01.png"
     },
     {
       "id": "merry_go_round_01",
@@ -2082,7 +2259,8 @@
         "物流",
         "门式框架",
         "职业体验"
-      ]
+      ],
+      "thumbnail": "thumbnails/warehouse_01.png"
     },
     {
       "id": "hospital_01",
