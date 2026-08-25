@@ -61,7 +61,8 @@ cd platforms/android
 # 或写 local.properties: echo "sdk.dir=$HOME/Android/Sdk" > local.properties
 
 ./gradlew :app:assembleDebug
-# 产物: app/build/outputs/apk/debug/app-debug.apk (约 8.5 MB, arm64-v8a)
+# 产物: app/build/outputs/apk/debug/app-debug.apk (全库约 12.5 MB, arm64-v8a;
+#        追加 -PmagtileAssets=starter 只打 30 个入门模型, 见第四节)
 
 adb install app/build/outputs/apk/debug/app-debug.apk
 ```
