@@ -133,19 +133,51 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | G1 | 快检档常绿 (免费层对齐 + strict 全库巡检 + 待复核报告) | P0 | Auto (R5) | `tools/run_release_gate.sh` | ✅ 探测通过 (报告型 L3 项不阻断) |
 | G2 | 出包终防线全绿: `tools/run_release_gate.sh --full --fail-on-pending` | P0 | Auto + 线下 | 同上; D4+ 实物复核清零是前置 (见 §8) | ⬜ 被 §8 实物复核卡住 (45 个待复核即红灯) |
 
-## 8. 实物抽样复核
+## 8. 实物复核 (L2 三层缩减流程)
 
-软件 strict 全绿**不豁免**实物复核 —— D4+ 逐个实搭是商用上架硬门槛。
-规程: [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md);
+**口径升级 (2026-08-25 L2 决议)**: [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md)
+的 L2 物理仿真层从规划转入工程实现, 实物验证升级为**三层流程** ——
+上一层全绿才进下一层, 人手实搭量随之大幅缩减:
+
+1. **第一层 软件全绿 (Auto, 既有)**: strict 双档零未豁免警告 +
+   16 关 QA (§1 C2, 探测 R5);
+2. **第二层 虚拟物理验证 (Auto, L2 新增)**: `magtile_app validate
+   --jitter N` 蒙特卡洛容差抖动 (逐步注入 ±1.5mm/±2° 位姿扰动,
+   D4+ 默认 50 次全绿, 专门捕捉 F08 错位累积失稳,
+   [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §4 失效分类) +
+   `tools/physical_risk_report.py` 全库风险评分排序 (JSON/Markdown
+   报告, 输出「建议人手验 Top 15」) + [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md)
+   §2 触发条件自动标记 (L1 Warning / 高墙链 / 临界重心 / 弱磁承重)
+   代码化; 门禁接入 `tools/run_strict_audit.sh` /
+   `tools/run_release_gate.sh`, 就绪探测 R17;
+3. **第三层 缩减后人手实搭 (Manual)**: 只搭 **risk Top 15 + 结构族
+   代表** (`tools/physical_family_pack.py` 结构族聚类, 每族一个代表
+   实搭, 同族其余成员由「代表实搭通过 + 第二层全绿」覆盖) ——
+   **全库 209 个模型不必全搭, D4+ 也不再逐个人手清零**; 实搭失败经
+   `tools/physical_failure_registry.py` 登记入账, 按四步闭环手册
+   [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md)
+   提炼为负例夹具, 回灌第二层参数校准。
+
+**红线不变**: 软件与仿真全绿仍**不豁免**人手实搭 —— 第二层只缩减
+「搭哪些」, 不放松「怎么搭」; 缩减集内**未实搭严禁标记
+`physical_verified`**; 模型结构改动后旧结论作废, 同族代表结论一并
+复验。规程: [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md);
 抽样报告: [reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md);
 复核人上手指南 (备料/工时/打印/落盘/照片归档):
 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md)。
 
+**载体状态注**: L2 工具链 (jitter / 风险报告 / 结构族 / 失败登记 /
+R17 探测 / 门禁接入) 为 2026-08-25 L2 批次交付物, 满槽并行落地中
+(失败登记账本与校准手册已先行入库 `08d3018`); 本节口径与挂链先行
+登记, 各载体入库与实跑状态以 `tools/check_v1_readiness.sh` 输出为准。
+
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| S1 | V1 优先抽样包 10 个实搭签核 (S2 旗舰 D5 + S3 大体量 D4, 预算约 12.5 小时) | P0 | Auto 报告 (R6) + Manual 实搭 | `tools/physical_sample_pack.py --fail-on-missing-sample`; 上手指南 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + 工作单 [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md) | ⬜ 0/10 已复核 (用户告知与准备清单已备) |
-| S2 | D4+ 全集清零 (45 个全部实物复核落盘 `physical_verified`) | P0 | Auto 报告 (R7) + Manual 实搭 | `tools/list_physical_pending.py --fail-on-pending`; 落盘口径见 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 5.2; 上手指南 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) §1/§6 | ⬜ 0/45 已复核 (抽样包先行, 见 S1) |
+| S0 | 第二层虚拟物理验证全绿 (D4+ 默认 `--jitter 50` + 风险报告 + 自动标记) | P0 | Auto (R17) | `magtile_app validate --jitter N` (蒙特卡洛 ±1.5mm/±2° 逐步扰动, 失败记 F08 类) + `tools/physical_risk_report.py` + [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件代码化; 门禁接入 `tools/run_strict_audit.sh` / `tools/run_release_gate.sh`; jitter 夹具与 risk report 单测随 ctest | 🔶 L2 批次并行落地中 (口径与挂链先行登记, 状态以 R17 实跑为准) |
+| S1 | 缩减人手集实搭签核: **risk Top 15 + 结构族代表** (并集去重, 清单以两份报告实跑输出钉死) | P0 | Auto 报告 (R6 + R17) + Manual 实搭 | `tools/physical_risk_report.py` Top 15 人手建议 + `tools/physical_family_pack.py` 结构族代表; 规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) + 上手指南 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + 工作单 [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md); 原 V1 抽样包 10 个 ([reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md), `tools/physical_sample_pack.py --fail-on-missing-sample`) 预计与 Top 15 高度重合, 作首批排产兼第二层校准数据 | ⬜ 0 已复核 —— 人手范围由报告钉死, **不必 209 全搭** |
+| S2 | D4+ 实物风险全覆盖清零 (缩减集实搭 + 同族代表结论 + 第二层全绿合围) | P0 | Auto 报告 (R7, 覆盖口径随 L2 门禁接入升级) + Manual 实搭 | `tools/list_physical_pending.py --fail-on-pending` + `tools/physical_family_pack.py` 族谱; 落盘口径见 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 5.2 | ⬜ 三层覆盖口径已定 (原「45 个逐个实搭」改为缩减集 + 族代表覆盖); 实搭失败经 `tools/physical_failure_registry.py` 登记整改, 整改后同族复验 |
 | S3 | 免费层 D3 抽检 30% (免费层无 D4+, 实物风险由抽检政策覆盖) | P1 | Manual | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §4.3; [reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md) §2 免费层说明 | 🔶 已有 3 个 D3 实物复核落盘 (`content_meta.physical_verified`, R6 报告一致性核对可见) |
+| S4 | 实搭结果回灌校准 (实物失败 → 登记账本 → 负例夹具 → 第二层参数校准) | P1 | Auto(部分) (账本完整性 `check` 可门禁) | `tools/physical_failure_registry.py` (失效账本 `data/physical_failures.json`: add 登记 / mark-sunk 关账 / check 完整性门禁) + 四步闭环手册 [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md) | ⬜ 载体已入库 (账本工具 + 手册, `08d3018`), 执行随缩减集实搭同步 (首批 10 个实搭结果即首轮校准输入) |
 
 ## 9. 软著 / 备案 / 商店资质
 

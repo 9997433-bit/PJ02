@@ -8,9 +8,15 @@
 > [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md), 本单不另立口径,
 > 只做「工程 vs 你」的分工切面。
 >
-> **状态快照**: 2026-08-25 16:05 UTC。工作区多代理并行推进, 状态以
+> **状态快照**: 2026-08-25 16:20 UTC (`--quick` 实跑场次为 16:05,
+> 其后无自动侧载体变动)。工作区多代理并行推进, 状态以
 > `tools/check_v1_readiness.sh` 实跑与清单最新快照为准; 本单引用的
 > commit 均已推送 origin (并行工作区偶有变基, 哈希漂移时按提交信息检索)。
+>
+> **L2 决议 (2026-08-25 16:03 用户指令)**: 实物验证工程 (L2) 全套
+> 必做 —— 风险报告 + 蒙特卡洛抖动 + 结构族去重 + 文档/CI 接入,
+> 效率可慢、质量优先。实物复核随之升级为**三层流程**, 你的人手
+> 实搭量大幅缩减 (§4.3); 当前 10 个工程槽已满槽派给 L2 批次 (§2)。
 
 **快照时自动探测实跑** (`tools/check_v1_readiness.sh --quick`):
 
@@ -18,9 +24,10 @@
 合计 23 项: 13 PASS / 2 FAIL / 8 SKIP (其中 P0 失败 2 项)
 ```
 
-仅有的 2 项 FAIL 是 **R6/R7 实物复核** —— 唯一无法由软件代劳的自动侧
-P0 缺口 (见 §4.3); 8 项 SKIP = 快检刻意跳过的 R4/R5 两个长跑项 (全量档
-会实跑) + M1~M6 六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)。
+仅有的 2 项 FAIL 是 **R6/R7 实物复核** —— 唯一无法**完全**由软件代劳
+的自动侧 P0 缺口, 但 L2 三层流程已把其中的人手量大幅缩减 (见 §4.3);
+8 项 SKIP = 快检刻意跳过的 R4/R5 两个长跑项 (全量档会实跑) + M1~M6
+六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)。
 
 ---
 
@@ -97,26 +104,31 @@ P0 缺口 (见 §4.3); 8 项 SKIP = 快检刻意跳过的 R4/R5 两个长跑项 
 
 ---
 
-## 2. 工程侧仍在跑 (10 槽状态, 2026-08-25 16:05 UTC 时点)
+## 2. 工程侧仍在跑 (10 槽状态, 2026-08-25 16:20 UTC 时点: L2 批次满槽)
 
-| 槽 | 任务 | 清单项 | 截至快照的落地状态 |
+上一批 10 槽产物已**全部入库**并登记于 §1 (本交接单即原槽 1 产物)。
+16:03 用户决议后, 10 槽整体切换为 **L2 实物验证工程批次** (三层流程
+定义见 §4.3 与 [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §8):
+
+| 槽 | 任务 (L2 批次) | 服务清单项 | 截至快照的落地状态 |
 | --- | --- | --- | --- |
-| 1 | 审计工程 vs 用户分工 | 本单 | **运行中** —— 本文件即其产物 (初版 `4f1dc10` + 顶部挂链 `91f7671`, 本次扩写) |
-| 2 | D6 LGPL 自动核对 | D6 | **已交付** `2605e34` (合规自动核对脚本) |
-| 3 | Android 订阅页 UI | B2 | **已交付** `1333f8e` (家长门后档位卡 + 恢复购买; drawable 先行 `9d9ad0a`) |
-| 4 | 软著/备案办理清单 | §9 L1~L5 | **已交付** `be708d3` ([ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md)) |
-| 5 | Android 真机 QA 仪器测试 | A4 前置 | 骨架 `9d9ad0a` + 真机验收单 [reports/QA_ANDROID_DEVICE_CHECKLIST.md](reports/QA_ANDROID_DEVICE_CHECKLIST.md) `f60e31e` 已交付 |
-| 6 | Windows 商店沙盒验收文档 | B3 | **已交付** `721a594` |
-| 7 | Qt 订阅页商店档收口 | B2 | **已交付** (随 `aa50909` 入库) |
-| 8 | macOS 实机验收模板 | D4 | **已交付** `06e5e9f` |
-| 9 | 隐私安全可执行自查单 | V4 | **已交付** `2750313` |
-| 10 | 生成器文案措辞同步 | B5/R16 | **已交付** `5023313` |
+| 1 | `tools/physical_risk_report.py` 全库风险评分 + 「建议人手验 Top 15」(JSON/Markdown 报告) | §8 S0/S1 | 运行中 |
+| 2 | `magtile_app validate --jitter N` 蒙特卡洛容差抖动 (C++, ±1.5mm/±2° 逐步扰动, 失败记 F08 类) | §8 S0 | 运行中 |
+| 3 | `tools/physical_family_pack.py` 结构族聚类 (每族一个代表实搭, 削减重复) | §8 S1/S2 | 运行中 |
+| 4 | [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件自动标记代码化 (L1 Warning / 高墙链 / 临界重心 / 弱磁承重) | §8 S0 | 运行中 |
+| 5 | `run_strict_audit.sh` / `run_release_gate.sh` 门禁接入 | §7 G1/G2 | 运行中 |
+| 6 | jitter 测试夹具 + risk report 单测 (ctest 注册) | §8 S0 | 运行中 |
+| 7 | `tools/physical_failure_registry.py` 实物失败登记与校准工作流 | §8 S4 | **已交付** `08d3018` (失效账本工具 + 四步闭环手册 [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md)) |
+| 8 | `check_v1_readiness.sh` 新增 R17 L2 探测 | §0 | 运行中 |
+| 9 | V1 清单 §8 + 本交接单 L2 流程更新 | 本单 | 运行中 (本次编辑即其产物) |
+| 10 | Android B2 订阅页提交收口 | B2 | 收尾 (代码 `1333f8e` 与文档 `5eb27a9` 已入库) |
 
-排队中 (槽满未启动, 释放后补位): 商店素材规格单、Android Debug/Release
-双档文档 (Qt/Android 订阅页与文档批次的收尾提交请求已由上表交付覆盖)。
+**L2 完成定义**: D4+ 模型默认跑 `--jitter 50` 全绿; risk report 可
+输出「建议人手验 Top 15」; 结构族报告可削减 30%+ 重复实搭。
 
-**工程收口标准**: `check_v1_readiness.sh --quick` 只剩 R6/R7 FAIL;
-B2 双端订阅页 UI 全部入库; 清单工程侧行无 ⬜。
+**工程收口标准**: `check_v1_readiness.sh --quick` 只剩 R6/R7 FAIL
+(R17 及其余自动项全绿); L2 工具链全部入库且门禁接入; 清单工程侧行
+无 ⬜。
 
 ---
 
@@ -138,8 +150,9 @@ B2 双端订阅页 UI 全部入库; 清单工程侧行无 ⬜。
 
 四要素口径: **做什么 / 准备什么 / 指向文档 / 预估工时**。「动手工时」
 指你 (或你请的人) 实际投入; 机构审查等待另列「外部周期」, 可全程并行。
-探测编号对照: 实物 = R6/R7 (提醒项 M5); 行政 = L1~L5 (提醒项 M6);
-实机/真机 = M1/M2; 法务 = M3; 签核 = M4; 真钱验收 = B3; 证书 = D5。
+探测编号对照: 实物 = R6/R7 (提醒项 M5; L2 虚拟验证层 = R17);
+行政 = L1~L5 (提醒项 M6); 实机/真机 = M1/M2; 法务 = M3; 签核 = M4;
+真钱验收 = B3; 证书 = D5。
 
 ### 4.1 第 0 步: 运营主体定稿 (L4, 阻塞全部行政与法务)
 
@@ -160,15 +173,33 @@ B2 双端订阅页 UI 全部入库; 清单工程侧行无 ⬜。
 | L5 商标 (P1) | 「MagTile Studio」近似检索 + 中国 9/28/41 类 + 美国同步提交 (可代理) | 定稿名称与图形 | [ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) §5 | 2~4 小时 | 以年计, **不阻塞 V1** |
 | D5 代码签名证书 | 以公司主体向 CA 申请 Windows Authenticode (OV/EV); macOS 签名用 Apple Developer ID (含在 L3 Apple 账号内) | 营业执照 + 邓白氏/电话核验材料 (CA 要求) | [../scripts/package_windows.md](../scripts/package_windows.md) 第十一节 | 1~2 小时申请 | CA 验证数天 (未签名会被 SmartScreen 拦截) |
 
-### 4.3 实物复核 (R6/R7, **随时可开工, 不依赖行政**, 上架最大硬门槛)
+### 4.3 实物复核 (R6/R7, **随时可开工, 不依赖行政**; L2 三层流程已大幅缩减人手量)
+
+**新口径 (2026-08-25 L2 决议)**: 你**不必把全库 209 个模型全搭一遍,
+也不再逐个搭完 45 个 D4+ 全集**。实物验证升级为三层流程 (对账口径
+[V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §8): 第一层软件全绿
+(strict 双档, 既有) 与第二层虚拟物理验证 (`magtile_app validate
+--jitter N` 蒙特卡洛抖动 + 全库风险评分 + 自动标记, 探测 R17) 全部由
+软件自动跑; 你只需人手实搭第三层**缩减集 = risk Top 15 + 结构族代表**
+(并集去重, 清单由工具实跑输出钉死, 不靠拍脑袋):
+
+```bash
+python3 tools/physical_risk_report.py    # 全库风险评分排序 + 「建议人手验 Top 15」(JSON/Markdown)
+python3 tools/physical_family_pack.py    # 结构族聚类: 每族一个代表, 同族其余由代表结论覆盖
+```
+
+(两工具与 `--jitter` 均为 L2 批次交付物, 落地进度见 §2; 具体旗标以
+各自 `--help` 为准。)
 
 | # | 做什么 | 准备什么 | 文档 | 预估工时 |
 | --- | --- | --- | --- | --- |
-| R6 抽样包 10 个实搭签核 | 逐模型: strict 预检 → 只看教程实搭 → 敲击/提起/拆解重搭 → 拍照 → 通过则落盘 `physical_verified` 三字段 | 官方基准品牌磁力片按**单模型最大需求**备料 (最多 122 片; 颜色瓶颈: 灰方 65 / 蓝方 43 / 橙方 34); 平整硬桌面 + 秒表 + 录像 + 打印工作单 | [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md) + 规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) | **约 12.5 小时** (D5 旗舰 120 分钟单独一场 + 9×D4 各 70 分钟) |
-| R7 D4+ 全集 45 个清零 | 同上, 剩余 35 个 D4; 可多人按模型切分 (每模型一人走完全程) | 同上 | 同上 §1/§6 | **全集合计约 53 小时** (含 R6 的 12.5) |
+| R6 首批: 抽样包 10 个实搭签核 (预计与 risk Top 15 高度重合, 结果兼作第二层首轮校准数据) | 逐模型: strict (+ `--jitter`) 预检 → 只看教程实搭 → 敲击/提起/拆解重搭 → 拍照 → 通过则落盘 `physical_verified` 三字段; 失败按失效编码经 `tools/physical_failure_registry.py` 登记 (回灌负例夹具) | 官方基准品牌磁力片按**单模型最大需求**备料 (最多 122 片; 颜色瓶颈: 灰方 65 / 蓝方 43 / 橙方 34); 平整硬桌面 + 秒表 + 录像 + 打印工作单 | [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md) + 规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) | **约 12.5 小时** (D5 旗舰 120 分钟单独一场 + 9×D4 各 70 分钟) |
+| R7 缩减集清零: risk Top 15 + 结构族代表 (扣除与抽样包重合部分) | 同上; **非代表模型不用搭** —— 由「同族代表实搭通过 + 第二层 jitter 全绿」覆盖; 可多人按模型切分 (每模型一人走完全程) | 同上 | 同上 §1/§6 | **以两份报告实跑清单为准, 预计合计 20~30 小时** (原全集口径 53 小时; 结构族目标削减 30%+ 重复实搭) |
 
-红线: 抽样全绿**不豁免**全集清零; **未实搭严禁标记通过**; 模型结构改动
-后旧结论作废 (三字段一并清除)。
+红线: 缩减是「搭哪些」的缩减, 不是「怎么搭」的放松 —— 缩减集内
+**未实搭严禁标记通过**, 固定动作 (敲击/提起/拆解重搭) 与落盘纪律不变;
+模型结构改动后旧结论作废 (三字段一并清除), 同族代表结论一并复验;
+实搭失败的模型整改后从规程第 0 节重走, 同族全员重新覆盖。
 
 ### 4.4 法务批 (M3: 隐私政策定稿 V2, 依赖 L4)
 
@@ -207,10 +238,12 @@ B2 双端订阅页 UI 全部入库; 清单工程侧行无 ⬜。
 | 三平台隐私安全自查单对**候选出包产物**逐项签核 | [reports/PRIVACY_SECURITY_SIGNOFF.md](reports/PRIVACY_SECURITY_SIGNOFF.md) | 每平台 1~2 小时 |
 | V1 清单全部 Manual 行回填状态 + 签核记录 | [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §10 | 1 小时 |
 
-**工时汇总** (单人动手, 可多人并行压缩): 实物约 53 小时 + 实机/真机/
-签核约 3~4 个工作日 + 行政动手约 2~3 个工作日 + 付费验收约 1 个工作日
-+ 法务协调约 1 个工作日 ≈ **15 个工作日量级**; 外部等待关键路径 =
-软著 30~40 个工作日, 与全部动手项并行。
+**工时汇总** (单人动手, 可多人并行压缩): 实物缩减集约 20~30 小时
+(L2 三层流程削减后, 以报告实跑清单为准; 原全集口径 53 小时) +
+实机/真机/签核约 3~4 个工作日 + 行政动手约 2~3 个工作日 + 付费验收
+约 1 个工作日 + 法务协调约 1 个工作日 ≈ **11~13 个工作日量级**
+(原全集口径 ≈ 15); 外部等待关键路径 = 软著 30~40 个工作日, 与全部
+动手项并行。
 
 ---
 
@@ -220,16 +253,28 @@ B2 双端订阅页 UI 全部入库; 清单工程侧行无 ⬜。
 
 ### 5.1 实物复核落盘后 (§4.3)
 
+开工前先用 L2 报告拿实搭清单, 完成后跑验收:
+
 ```bash
-python3 tools/list_physical_pending.py data/models --fail-on-pending
-# 预期: 待复核清单为空, 退出码 0 (还有剩余时列出剩余模型并退出码 1)
+python3 tools/physical_risk_report.py
+# 开工前: 输出全库风险评分排序与「建议人手验 Top 15」(JSON/Markdown)
+python3 tools/physical_family_pack.py
+# 开工前: 输出结构族与每族代表清单 (与 Top 15 取并集 = 你的实搭范围)
 python3 tools/physical_sample_pack.py --fail-on-missing-sample
 # 预期: 抽样包 10/10 已复核, 退出码 0
+python3 tools/list_physical_pending.py data/models --fail-on-pending
+# 预期: 待复核清单为空, 退出码 0 (覆盖口径 = 缩减集实搭 + 同族代表
+# 结论 + 第二层全绿, 随 L2 门禁接入落地, 以工具实跑输出为准)
 tools/check_v1_readiness.sh --quick
-# 预期: R6/R7 转 PASS, 摘要「15 PASS / 0 FAIL / 8 SKIP」, 退出码 0
+# 预期: R6/R7 与 L2 探测 R17 全部 PASS, 摘要零 FAIL, 退出码 0
 tools/run_release_gate.sh --full --fail-on-pending
-# 预期: 全绿 —— G2 出包终防线解锁 (此前被 45 个待复核卡红灯)
+# 预期: 全绿 —— G2 出包终防线解锁
 ```
+
+实搭中任何失败: 按失效编码经 `tools/physical_failure_registry.py`
+登记 (照片 + 模型 id + 步骤号; 四步闭环见
+[PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md)),
+工程侧据此整改并回灌第二层负例夹具 (§4.3 红线: 整改后同族全员重新覆盖)。
 
 ### 5.2 Android keystore 就位后 (§4.6 A3)
 
@@ -304,8 +349,8 @@ tools/run_release_gate.sh --full --fail-on-pending
 
 | 谁 | 负责什么 |
 | --- | --- |
-| **工程 (Agent)** | 代码、内容、测试、CI、打包脚本、全部执行文档脚手架; 自动探测除 R6/R7 外全绿并保持 |
-| **你** | 磁力片实搭 (R6/R7)、运营主体与行政五件 (L1~L5)、证书 (D5)、实机真机验收 (M1/M2/M4)、法务定稿 (M3)、真钱付费验收 (B3)、商店素材终稿与提审 |
+| **工程 (Agent)** | 代码、内容、测试、CI、打包脚本、全部执行文档脚手架、L2 虚拟物理验证工具链 (jitter / 风险报告 / 结构族 / 失败登记); 自动探测除 R6/R7 外全绿并保持 |
+| **你** | 磁力片实搭**缩减集** (risk Top 15 + 结构族代表, R6/R7 —— 不必 209 全搭)、运营主体与行政五件 (L1~L5)、证书 (D5)、实机真机验收 (M1/M2/M4)、法务定稿 (M3)、真钱付费验收 (B3)、商店素材终稿与提审 |
 
 工程侧收口后, 你手上是**一套按步骤可执行、可验收的清单**, 每一项都有
 对应文档、命令与预期输出 —— 而不是一堆半成品代码。
