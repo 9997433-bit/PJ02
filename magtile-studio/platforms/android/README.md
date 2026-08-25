@@ -59,9 +59,15 @@ platforms/android/
 ├── build.gradle.kts          插件版本 (AGP 8.7.3 / Kotlin 2.0.21)
 ├── gradle.properties         AndroidX / 配置缓存
 ├── gradlew / gradle/         Gradle Wrapper (8.13)
+├── run_instrumented_smoke.sh 主路径仪器冒烟设备执行脚本
+│                             (有设备跑 connectedDebugAndroidTest,
+│                             无设备温和跳过, 见第五节)
 └── app/
     ├── build.gradle.kts      externalNativeBuild + assets 打包接线
     │                         (-PmagtileAssets=starter 打入门子集, 见第四节)
+    ├── src/androidTest/kotlin/com/magtile/studio/
+    │   └── MainActivitySmokeTest.kt 主路径仪器冒烟 (启动 -> 列表非空
+    │                             -> 首张免费卡 -> 详情弹窗, 见第五节)
     └── src/main/
         ├── AndroidManifest.xml
         ├── kotlin/com/magtile/studio/
@@ -403,6 +409,37 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
   (原生库 / 数据资产 / 缩略图已打包; 缩略图数量落后于模型数量时
   只告警 —— 内容制作期新模型缩略图可能滞后生成, 缺图卡片显示占位)
   并上传为构建产物。
+
+### 仪器测试 (androidTest): 主路径冒烟
+
+`app/src/androidTest/kotlin/com/magtile/studio/MainActivitySmokeTest.kt`
+覆盖 Android 主路径一条链 (口径对齐桌面 GL/Qt 冒烟):
+**MainActivity 启动** (解包资产 + JNI 加载目录 + 打开进度存档) →
+**模型库列表非空** → 勾选「只看免费」后**点击首张免费卡** →
+**详情弹窗出现** (标题 = 卡片中文名 + 「物理校验」按钮在场 +
+免费卡带「🧲 开始搭建」入口, 免费层无订阅锁)。测试前删除
+`progress.db` 回到首启状态 (默认 7-9 档 / 未订阅 / 库存未登记),
+断言不受上次运行残留影响; 依赖只有 androidx.test 四件套 +
+espresso-core (仅 androidTest 变体, 不进产品 APK)。
+
+- **有设备** (真机/模拟器, 需支持 arm64-v8a — APK 首发只出 arm64):
+
+  ```bash
+  ./run_instrumented_smoke.sh
+  # 等价直跑: ./gradlew :app:connectedDebugAndroidTest
+  # 报告: app/build/reports/androidTests/connected/
+  ```
+
+  脚本自动定位 adb (PATH / ANDROID_HOME / local.properties)、逐台
+  校验 ABI、唤醒屏幕并解锁 keyguard (Espresso 点击需要窗口焦点),
+  然后交给 Gradle 一条龙 (构建 → 安装 → 执行 → 卸载)。
+- **无设备**: 脚本打印原因后温和跳过 (exit 0, 无设备的流水线不红);
+  `MAGTILE_REQUIRE_DEVICE=1` 时改为报错 exit 1 (真机流水线用)。
+  无设备的 CI 以编译门兜底 —— 只编译测试 APK, 不需要任何设备:
+
+  ```bash
+  ./gradlew :app:assembleDebugAndroidTest
+  ```
 
 ## 六、后续计划
 

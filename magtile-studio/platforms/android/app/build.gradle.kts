@@ -62,6 +62,13 @@ android {
         }
         // 首发只出 arm64 (实机全覆盖); 模拟器调试可临时追加 x86_64
         ndk { abiFilters += listOf("arm64-v8a") }
+
+        // 仪器测试 (androidTest) 执行器: 主路径冒烟 MainActivitySmokeTest
+        // (启动 -> 列表非空 -> 首张免费卡 -> 详情弹窗)。无设备的 CI 用
+        // :app:assembleDebugAndroidTest 只编译测试 APK 作编译门; 有设备
+        // 时用 ../run_instrumented_smoke.sh 跑 connectedDebugAndroidTest
+        // (无设备温和跳过, 见 README 第五节)
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     externalNativeBuild {
@@ -230,4 +237,12 @@ tasks.named("preBuild") { dependsOn(stageMagTileAssets) }
 dependencies {
     // 模型卡片列表; 刻意不引 appcompat/material, 保持依赖面最小
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    // 仪器测试 (仅 androidTest 变体, 不进产品 APK; 依赖面同样保持最小:
+    // 不引 espresso-contrib —— RecyclerView 条目点击用原生 ViewHolder)
+    androidTestImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test:core:1.6.1")
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 }
