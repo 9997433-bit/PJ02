@@ -1,0 +1,89 @@
+# =============================================================
+# MagTile Studio - 发布门禁流水线 (手动触发)
+#
+# 日常 push 的 qa.yml 为控制时长默认跳过两道发布专项关卡 (免费层
+# 清单对齐 / strict 全库巡检)。本流水线不挂 push/pull_request ——
+# 发布门禁不应拖慢日常 PR, 何时跑由人决定: 内容批量合入后、发布
+# 打包前, 在 Actions 页手动触发 (workflow_dispatch)。
+#
+# 执行入口与本地完全同一脚本 (magtile-studio/tools/run_release_gate.sh):
+#   mode=full (默认)  = MAGTILE_FREE_TIER_CHECK=1 MAGTILE_STRICT_AUDIT=1
+#                       tests/run_full_qa.sh (16 关全量 QA + 免费层对齐
+#                       + strict 全库巡检 + L3 待复核报告)
+#   mode=gate-only    只跑三道发布专项 (免费层对齐 + strict 巡检 +
+#                       待复核报告), 内容批量合入后的快检档
+#   fail_on_pending   D4+ 实物待复核清单非空即红灯 (正式出包终防线)
+#
+# 时机与人工流程见 magtile-studio/docs/TESTING.md 「发布门禁」一节。
+# 工程位于 magtile-studio/ 子目录, workflow 放仓库根 .github/workflows
+# 才会被 GitHub 识别 (与 qa.yml 同理)。
+# =============================================================
+name: release-gate
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: full=16 关全量 QA + 发布专项 (发布前推荐) / gate-only=只跑三道发布专项 (内容批量合入后快检)
+        type: choice
+        options: [full, gate-only]
+        default: full
+      fail_on_pending:
+        description: D4+ 实物待复核清单非空时红灯 (--fail-on-pending, 正式出包终防线)
+        type: boolean
+        default: false
+
+jobs:
+  release-gate:
+    name: release-gate (${{ inputs.mode }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: magtile-studio
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 与 qa.yml 同一套依赖: X11 开发库 (FetchContent 源码构建 GLFW),
+      # xvfb + Mesa (llvmpipe 软件渲染) 让 GL 冒烟跑真渲染; gate-only 档
+      # strict 巡检缺 magtile_app 时自动构建, 同样需要这套工具链。
+      - name: 安装系统依赖
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake g++ make python3 \
+            libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev \
+            xvfb libgl1 libglx-mesa0 libgl1-mesa-dri fonts-noto-cjk
+
+      # GLFW / ImGui 经 FetchContent 拉取, 按 CMakeLists 哈希缓存源码
+      - name: 缓存 FetchContent 依赖
+        uses: actions/cache@v4
+        with:
+          path: magtile-studio/build/_deps
+          key: fetchcontent-${{ runner.os }}-${{ hashFiles('magtile-studio/CMakeLists.txt') }}
+
+      - name: 运行发布门禁
+        env:
+          FORCE_COLOR: "1"   # GitHub Actions 日志支持 ANSI 颜色
+          # 显式指定 GCC: 规避个别环境默认 c++ 指向缺 libstdc++ 搜索路径的
+          # Clang 导致的链接失败 (见 docs/TESTING.md 构建一节)
+          CC: gcc
+          CXX: g++
+        run: >
+          bash tools/run_release_gate.sh
+          ${{ inputs.mode == 'full' && '--full' || '' }}
+          ${{ inputs.fail_on_pending && '--fail-on-pending' || '' }}
+
+      # 失败时把分项日志留档 (门禁自身 + 全量 QA + strict 巡检),
+      # 便于不拉环境直接定位失败关卡
+      - name: 上传失败日志
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-gate-logs
+          path: |
+            /tmp/magtile_release_gate_*
+            /tmp/magtile_qa_*
+            /tmp/magtile_strict_audit_*
+          if-no-files-found: ignore

@@ -291,7 +291,7 @@ python3 tools/list_physical_pending.py data/models --json             # 机器�
 python3 tools/list_physical_pending.py data/models --fail-on-pending  # 发布门禁模式
 ```
 
-全量 QA 中该关卡**只报告未复核数量, 不阻断 CI** (实物复核是线下人工流程, 进度不应卡住代码/内容合入); 发布打包前可用 `--fail-on-pending` 作为终防线。
+全量 QA 中该关卡**只报告未复核数量, 不阻断 CI** (实物复核是线下人工流程, 进度不应卡住代码/内容合入); 发布打包前可用 `--fail-on-pending` 作为终防线 (一键入口: `tools/run_release_gate.sh --fail-on-pending`, 见第 5 节)。
 
 ### 3.14 免费层清单对齐核验 (`tools/verify_free_tier.py`)
 
@@ -302,7 +302,7 @@ python3 tools/verify_free_tier.py                # 仓库默认路径, 日常裸
 MAGTILE_FREE_TIER_CHECK=1 tests/run_full_qa.sh   # 随全量 QA (可选关卡 10)
 ```
 
-全量 QA 中默认跳过 (免费层清单只在选品换血时变化, 日常内容合入不受它约束), **发布打包前必须开启**; 片型红线本身另有常开关卡 9 兜底 (`check_core5_usage.py --strict`)。换血流程见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2.5.1。
+全量 QA 中默认跳过 (免费层清单只在选品换血时变化, 日常内容合入不受它约束), **发布打包前必须开启** (一键入口: `tools/run_release_gate.sh`, 见第 5 节); 片型红线本身另有常开关卡 9 兜底 (`check_core5_usage.py --strict`)。换血流程见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2.5.1。
 
 ### 3.15 Qt 界面测试 (`qt_backend_bridges` / `qt_gui_smoke`)
 
@@ -326,7 +326,43 @@ ctest --test-dir build-qt -R "qt_backend_bridges|qt_gui_smoke" --output-on-failu
 - 失败时自动上传各关卡分项日志 (`qa-stage-logs` 工件);
 - 本地与 CI 跑的是同一个脚本: 提交前先 `tests/run_full_qa.sh` 跑绿, CI 不会有意外。
 
-## 5. 如何新增一个模型 (必须全绿才能入库)
+发布专项关卡 (可选关卡 10/15) 不在每次 push 的 qa.yml 内, 由手动触发的 `.github/workflows/release-gate.yml` 补齐, 见第 5 节。
+
+## 5. 发布门禁 (Release Gate)
+
+日常 push CI 为控制流水线时长默认跳过两道发布专项关卡 (可选关卡 10 免费层清单对齐、15 strict 全库巡检)。**内容批量合入后与发布打包前**必须用发布门禁把它们补齐, 一键入口:
+
+```bash
+tools/run_release_gate.sh              # 快检档: 三道发布专项 (默认构建目录 build)
+tools/run_release_gate.sh --full       # 发布档: 16 关全量 QA + 发布专项一次跑全
+                                       #   = MAGTILE_FREE_TIER_CHECK=1 MAGTILE_STRICT_AUDIT=1 tests/run_full_qa.sh
+tools/run_release_gate.sh --fail-on-pending   # 终防线: D4+ 实物待复核非空即红灯
+tools/run_release_gate.sh --report docs/reports/STRICT_AUDIT_$(date +%F).md  # 附带 strict 巡检 Markdown 报告
+tools/run_release_gate.sh --dry-run    # 只打印将执行的关卡与命令
+tools/run_release_gate.sh --help       # 完整用法
+```
+
+### 5.1 门禁关卡
+
+| 关卡 | 工具 | 阻断性 | 依据 |
+| --- | --- | --- | --- |
+| 免费层清单对齐核验 | `tools/verify_free_tier.py` (3.14 节) | 阻断 | 免费标签恰 30 + 全 core-9 + 与 starter 打包清单一致, 决议见 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) |
+| 弱磁严格档全库巡检 | `tools/run_strict_audit.sh` | 阻断 | strict 零警告审计 + 逐步装配质检 (缺 `magtile_app` 时自动构建), 政策见 [STRICT_PHYSICS_AUDIT.md](STRICT_PHYSICS_AUDIT.md) |
+| L3 实物复核缺口报告 | `tools/list_physical_pending.py` (3.13 节) | 报告型, 与 run_full_qa.sh 关卡 16 同一口径; `--fail-on-pending` 时升级为硬闸门 | 规程见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) |
+
+退出码与 run_full_qa.sh 同一约定: 0 = 全部阻断关卡通过, 1 = 存在失败关卡, 2 = 环境/参数不满足; 结尾输出 PASS/FAIL 分项摘要, 失败时保留分项日志目录。
+
+### 5.2 何时跑哪一档
+
+| 时机 | 命令 | 说明 |
+| --- | --- | --- |
+| 内容批量合入后 (一次合入多个模型 / 免费层选品变动) | `tools/run_release_gate.sh` | 快检: 日常 CI 跳过的两道专项 + 待复核缺口盘点 |
+| 发布打包前 (Windows / Qt 桌面 / Android 出包) | `tools/run_release_gate.sh --full` | 全量 QA 与发布专项一次跑全, 全绿才进入打包手册流程: [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) / [../scripts/package_windows.md](../scripts/package_windows.md) |
+| 正式对外发布 (终防线) | 上一档追加 `--fail-on-pending` | D4+ 模型必须全部完成实物复核 (3.13 节口径) |
+
+CI 侧: `.github/workflows/release-gate.yml` 仅 `workflow_dispatch` 手动触发 (发布门禁不拖慢日常 PR —— push/PR 仍只跑 qa.yml), Actions 页可选 `mode` (full / gate-only) 与 `fail_on_pending`, 跑的与本地是同一个脚本。
+
+## 6. 如何新增一个模型 (必须全绿才能入库)
 
 1. **生成或搭建模型 JSON**: 用编辑器/生成工具产出 `data/models/<model_id>.json`, BOM 等元数据由工具写入 `content_meta` (勿手写);
 2. **对照内容策略自检**: 难度与片数区间匹配 (CONTENT_STRATEGY.md 2.1 节)、≥ 3 种片形、≥ 2 个 Z 层、步骤 1~12 片/步、每步中文说明;
@@ -336,7 +372,7 @@ ctest --test-dir build-qt -R "qt_backend_bridges|qt_gui_smoke" --output-on-failu
 6. **高难模型走实物层**: difficulty ≥ 3 按 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 完成实物验证 (T3+ 硬性要求), difficulty ≥ 4 另需目标年龄段儿童测试; 作者级逐步实搭规程与结论落盘方式见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md), 待复核清单由 `tools/list_physical_pending.py` 跟踪;
 7. **提交**: CI 会在 push 时把第 4 步整套重跑一遍, 红灯不允许合入。
 
-## 6. 内容入库标准 (Definition of Done)
+## 7. 内容入库标准 (Definition of Done)
 
 一个模型 JSON 只有同时满足以下条件才允许合入 `data/models/`:
 
