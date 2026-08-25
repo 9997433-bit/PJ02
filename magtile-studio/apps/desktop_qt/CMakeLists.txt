@@ -142,14 +142,38 @@ if(MAGTILE_BUILD_TESTS)
     endif()
 endif()
 
-# ---- 打包安装规则 (安装布局见 platforms/windows/packaging) --------
-# 安装到安装根, 与 magtile_app 并列。Qt 运行库 (DLL + QML 模块) 部署:
-#   - Qt >= 6.5: 官方部署 API 在 install/cpack 阶段自动收集
-#     (Windows/macOS 支持; 其余平台经 NO_UNSUPPORTED_PLATFORM_ERROR
-#     静默跳过, Linux TGZ 冒烟不受影响);
-#   - Qt 6.4: 部署 API 尚为技术预览, 不启用 —— 打包后手动对安装目录
-#     运行 windeployqt (命令见 scripts/package_windows.md 第五节)。
-install(TARGETS magtile_studio_qt RUNTIME DESTINATION .)
+# ---- 打包安装规则 (QT-6; 操作手册 scripts/package_qt_desktop.md) --
+# 安装到安装根, 与 magtile_app 并列 (Qt-only 包见 CPackWindows.cmake
+# 的 MAGTILE_PACKAGE_QT_ONLY 开关); QML 界面文件已经 qt_add_qml_module
+# 编进可执行体资源, 无需单独安装 qml/ 目录。
+#
+# Qt 运行库 (共享库 + 平台插件 + QML 模块) 的部署途径按 Qt 版本分流:
+#
+#   Qt >= 6.5 (Windows/macOS): 官方部署 API 在 install/cpack 阶段自动
+#     收集 (下方 qt_generate_deploy_qml_app_script); 其余平台经
+#     NO_UNSUPPORTED_PLATFORM_ERROR 静默跳过, Linux TGZ 冒烟产物只含
+#     应用本体, 不受影响。
+#
+#   Qt 6.4 (apt 版兼容下限): 部署 API 尚为技术预览, 不启用 ——
+#     cpack 产物只含 magtile_studio_qt 本体, 分发前手动对"解包后的
+#     安装目录"补 Qt 运行库再重新压包:
+#       Windows:
+#         C:\Qt\6.x.y\msvc2022_64\bin\windeployqt.exe ^
+#             --qmldir apps\desktop_qt\qml <安装目录>\magtile_studio_qt.exe
+#       macOS (先以 MACOSX_BUNDLE TRUE 出 .app, 见下方属性说明):
+#         $(brew --prefix qt)/bin/macdeployqt <安装目录>/magtile_studio_qt.app \
+#             -qmldir=apps/desktop_qt/qml [-dmg]
+#     --qmldir/-qmldir 必须指向本目录的 qml/ 源码 —— 部署工具靠静态
+#     扫描 import 语句决定收集哪些 QML 模块, 不给则裁不出 Quick 依赖。
+#
+#   Linux: 官方部署 API 不支持 -> AppImage (linuxdeploy + Qt 插件) 为
+#     后续发布路线; 当前 Linux 产物 (TGZ) 仅作安装规则/清单冒烟,
+#     依赖系统 Qt 运行 (LGPL 合规清单与完整步骤见
+#     scripts/package_qt_desktop.md 第五/八节)。
+install(TARGETS magtile_studio_qt
+    RUNTIME DESTINATION .   # Windows/Linux: 可执行文件落安装根
+    BUNDLE  DESTINATION .   # macOS: 切 MACOSX_BUNDLE TRUE 后 .app 落安装根
+)
 if(Qt6_VERSION VERSION_GREATER_EQUAL 6.5)
     qt_generate_deploy_qml_app_script(
         TARGET magtile_studio_qt
@@ -161,5 +185,5 @@ if(Qt6_VERSION VERSION_GREATER_EQUAL 6.5)
 else()
     message(STATUS
         "MagTile: Qt ${Qt6_VERSION} < 6.5 无稳定部署 API, 打包后请手动运行 "
-        "windeployqt (见 scripts/package_windows.md 第五节)")
+        "windeployqt / macdeployqt (见 scripts/package_qt_desktop.md 第五节)")
 endif()

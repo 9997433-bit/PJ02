@@ -116,6 +116,10 @@ magtile_app.exe validate data\models\castle_foundation_01.json --data-dir data
 
 ## 五、Qt 商用界面打包 (可选, -DMAGTILE_BUILD_QT=ON)
 
+> Qt 界面打包的完整操作手册 (windeployqt/macdeployqt 步骤、Qt-only
+> 包形态 `-DMAGTILE_PACKAGE_QT_ONLY=ON`、LGPL 合规清单、Linux 冒烟)
+> 见 `scripts/package_qt_desktop.md`; 本节只保留 Windows 侧摘要。
+
 Qt 界面 (`magtile_studio_qt.exe`, QML) 默认**不参与**构建与打包;
 需要随包分发时:
 
@@ -143,8 +147,12 @@ Qt 运行库 (Core/Gui/Qml/Quick/QuickControls2 DLL + QML 模块) 的部署:
   ```
 
 - Qt 采用 LGPLv3 动态链接分发, 许可合规说明见随包
-  `licenses/THIRD_PARTY_NOTICES.md`; 商用闭源发布前由法务确认走
-  LGPL 合规或购买 Qt 商业许可。
+  `licenses/THIRD_PARTY_NOTICES.md`, 逐项核对清单见
+  `scripts/package_qt_desktop.md` 第八节; 商用闭源发布前由法务确认
+  走 LGPL 合规或购买 Qt 商业许可。
+- 只发 Qt 界面的 **Qt-only 包**: 追加 `-DMAGTILE_PACKAGE_QT_ONLY=ON`
+  (省略 magtile_app, 包名加 `-qt` 后缀, 详见
+  `scripts/package_qt_desktop.md` 第六节); WiX 方式 B 不支持该形态。
 - MSI 路径 (第六节) 暂不收割 Qt 运行库, Qt 版分发走 NSIS/ZIP。
 
 不装 Qt / 不加开关时, 上述内容完全不影响 CLI/GL 版打包。

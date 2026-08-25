@@ -25,22 +25,46 @@
 # "目录登记了但文件缺失" 的条目直接报错, 两者必须一致。
 #
 # Qt 界面 (magtile_studio_qt) 的安装规则在 apps/desktop_qt/CMakeLists.txt
-# 尾部 (仅 -DMAGTILE_BUILD_QT=ON 时生效), 本文件只负责其 NSIS 快捷方式。
+# 尾部 (仅 -DMAGTILE_BUILD_QT=ON 时生效), 本文件只负责其 NSIS 快捷方式
+# 与打包形态开关 (QT-6):
+#   -DMAGTILE_PACKAGE_QT_ONLY=OFF  默认: magtile_app 必装, Qt 界面
+#                                  构建了就一并装 (两个主程序并存一包)
+#   -DMAGTILE_PACKAGE_QT_ONLY=ON   Qt-only 包: 省略 magtile_app, 只装
+#                                  magtile_studio_qt (+ data/licenses/
+#                                  README), 包名加 -qt 后缀; 需要
+#                                  -DMAGTILE_BUILD_QT=ON。WiX 方式 B
+#                                  (Product.wxs) 不支持此形态。
 #
-# 用法 (详见 scripts/package_windows.md):
+# 用法 (详见 scripts/package_windows.md; Qt 界面打包与 LGPL 合规
+# 详见 scripts/package_qt_desktop.md):
 #   cmake --build build-win --config Release
 #   cd build-win && cpack -G "NSIS;ZIP" -C Release
 # =============================================================
 
+# ---- 打包形态: 并存 (默认) 或 Qt-only ------------------------------
+option(MAGTILE_PACKAGE_QT_ONLY
+    "打包时省略 magtile_app, 产出 Qt-only 安装包 (需 -DMAGTILE_BUILD_QT=ON)" OFF)
+if(MAGTILE_PACKAGE_QT_ONLY AND NOT TARGET magtile_studio_qt)
+    message(FATAL_ERROR
+        "MAGTILE_PACKAGE_QT_ONLY=ON 但 magtile_studio_qt 未参与构建; "
+        "请同时开启 -DMAGTILE_BUILD_QT=ON (见 scripts/package_qt_desktop.md), "
+        "或改回 -DMAGTILE_PACKAGE_QT_ONLY=OFF。")
+endif()
+if(MAGTILE_PACKAGE_QT_ONLY)
+    message(STATUS "MagTile: 打包形态 = Qt-only (不含 magtile_app, 包名加 -qt 后缀)")
+endif()
+
 # ---- 安装布局 ---------------------------------------------------
 # <安装根>/
-# ├── magtile_app.exe        主程序 (CLI + GUI 一体)
+# ├── magtile_app.exe        主程序 (CLI + GUI 一体; Qt-only 包省略)
 # ├── magtile_studio_qt.exe  Qt 商用界面 (仅 MAGTILE_BUILD_QT=ON; 含 Qt 运行库)
 # ├── data/                  磁力片形状目录 + 模型库 (full 或子集, 运行必需)
 # ├── licenses/              EULA (License.rtf) + 第三方许可声明
 # ├── README.md
 # └── vc_redist DLLs         MSVC CRT 运行库 (/MD 构建需要)
-install(TARGETS magtile_app RUNTIME DESTINATION .)
+if(NOT MAGTILE_PACKAGE_QT_ONLY)
+    install(TARGETS magtile_app RUNTIME DESTINATION .)
+endif()
 install(FILES ${PROJECT_SOURCE_DIR}/README.md DESTINATION .)
 install(FILES
     ${CMAKE_CURRENT_LIST_DIR}/License.rtf
@@ -153,19 +177,28 @@ set(CPACK_NSIS_DISPLAY_NAME "MagTile Studio")
 set(CPACK_NSIS_PACKAGE_NAME "MagTile Studio")
 set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
 set(CPACK_NSIS_MODIFY_PATH OFF)
-# 开始菜单快捷方式直达模型库主界面; SetOutPath 保证工作目录为
-# 安装根, 使默认 --data-dir data 相对路径可用。Qt 界面在构建时
-# 追加第二个快捷方式。
-set(_magtile_nsis_create_icons
-    "SetOutPath '$INSTDIR'
-     CreateShortCut '$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\MagTile Studio.lnk' '$INSTDIR\\\\magtile_app.exe' 'library --gui'")
-set(_magtile_nsis_delete_icons
-    "Delete '$SMPROGRAMS\\\\$START_MENU\\\\MagTile Studio.lnk'")
-if(TARGET magtile_studio_qt)
+# 开始菜单快捷方式; SetOutPath 保证工作目录为安装根, 使默认
+# --data-dir data 相对路径可用。并存包 (默认): 主快捷方式直达
+# magtile_app 模型库主界面, Qt 界面构建时追加 "(Qt)" 快捷方式;
+# Qt-only 包: 唯一主快捷方式即 Qt 商用界面。
+set(_magtile_nsis_create_icons "SetOutPath '$INSTDIR'")
+set(_magtile_nsis_delete_icons "")
+if(NOT MAGTILE_PACKAGE_QT_ONLY)
     string(APPEND _magtile_nsis_create_icons "
-     CreateShortCut '$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\MagTile Studio (Qt).lnk' '$INSTDIR\\\\magtile_studio_qt.exe'")
+     CreateShortCut '$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\MagTile Studio.lnk' '$INSTDIR\\\\magtile_app.exe' 'library --gui'")
     string(APPEND _magtile_nsis_delete_icons "
-     Delete '$SMPROGRAMS\\\\$START_MENU\\\\MagTile Studio (Qt).lnk'")
+     Delete '$SMPROGRAMS\\\\$START_MENU\\\\MagTile Studio.lnk'")
+endif()
+if(TARGET magtile_studio_qt)
+    if(MAGTILE_PACKAGE_QT_ONLY)
+        set(_magtile_qt_shortcut_name "MagTile Studio")
+    else()
+        set(_magtile_qt_shortcut_name "MagTile Studio (Qt)")
+    endif()
+    string(APPEND _magtile_nsis_create_icons "
+     CreateShortCut '$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\${_magtile_qt_shortcut_name}.lnk' '$INSTDIR\\\\magtile_studio_qt.exe'")
+    string(APPEND _magtile_nsis_delete_icons "
+     Delete '$SMPROGRAMS\\\\$START_MENU\\\\${_magtile_qt_shortcut_name}.lnk'")
 endif()
 set(CPACK_NSIS_CREATE_ICONS_EXTRA "${_magtile_nsis_create_icons}")
 set(CPACK_NSIS_DELETE_ICONS_EXTRA "${_magtile_nsis_delete_icons}")
@@ -181,13 +214,19 @@ set(CPACK_WIX_ROOT_FEATURE_TITLE "MagTile Studio")
 set(CPACK_WIX_CULTURES "zh-CN;en-US")
 # CMake ≥ 3.27 可切换 WiX v4 工具链: set(CPACK_WIX_VERSION 4)
 
+# Qt-only 包名加 -qt 后缀, 与并存包产物同目录共存不互覆
+set(_magtile_pkg_suffix "")
+if(MAGTILE_PACKAGE_QT_ONLY)
+    set(_magtile_pkg_suffix "-qt")
+endif()
 if(WIN32)
-    set(CPACK_PACKAGE_FILE_NAME "MagTileStudio-${PROJECT_VERSION}-win64")
+    set(CPACK_PACKAGE_FILE_NAME
+        "MagTileStudio-${PROJECT_VERSION}-win64${_magtile_pkg_suffix}")
     set(CPACK_GENERATOR "ZIP;NSIS")
 else()
     # 非 Windows 平台仅为脚手架冒烟验证: cpack -G TGZ
     set(CPACK_PACKAGE_FILE_NAME
-        "MagTileStudio-${PROJECT_VERSION}-${CMAKE_SYSTEM_NAME}")
+        "MagTileStudio-${PROJECT_VERSION}-${CMAKE_SYSTEM_NAME}${_magtile_pkg_suffix}")
     set(CPACK_GENERATOR "TGZ")
 endif()
 

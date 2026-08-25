@@ -198,7 +198,9 @@ endif()
 # PROJECT_VERSION。Windows 产出 NSIS 安装器 + 便携 ZIP (WiX/MSI 见
 # platforms/windows/packaging/Product.wxs); 其它桌面平台产出 TGZ
 # 仅作安装规则冒烟。随包模型库范围由 -DMAGTILE_PACKAGE_MODEL_SET
-# 控制 (full / starter / 自定义清单)。用法详见 scripts/package_windows.md。
+# 控制 (full / starter / 自定义清单), 包形态由 -DMAGTILE_PACKAGE_QT_ONLY
+# 控制 (默认 magtile_app 与 Qt 界面并存, ON 时只装 Qt 界面)。
+# 用法详见 scripts/package_windows.md 与 scripts/package_qt_desktop.md。
 if(NOT ANDROID)
     include(platforms/windows/packaging/CPackWindows.cmake)
 endif()

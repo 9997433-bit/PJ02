@@ -130,6 +130,9 @@ platforms/windows/
 - `scripts/package_windows.md` — Windows 构建/打包完整操作手册
   (前置条件、CPack/NSIS、WiX/MSI、模型子集、Qt 打包、版本号管理、
   常见失败排查、发布前清单)。
+- `scripts/package_qt_desktop.md` — Qt 商用界面打包手册 (QT-6:
+  windeployqt/macdeployqt、Qt-only 包形态 `MAGTILE_PACKAGE_QT_ONLY`、
+  LGPL 合规清单、Linux 冒烟)。
 - 仓库根 `.github/workflows/windows-release.yml` — Windows 发布
   流水线 (标签触发, 构建 + 测试 + 打包 + Release 草稿; 手动试跑
   支持 starter 档)。
