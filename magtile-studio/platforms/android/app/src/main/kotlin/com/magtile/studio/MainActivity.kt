@@ -52,9 +52,10 @@ import java.util.concurrent.Executors
  * 可切换档位, 立即生效并经 setAgeModeId 落盘。
  *
  * 点击卡片弹出详情: 简介 + 套装说明 + 库存对照 (够搭 / 还差几片,
- * 「缺什么片?」按需展开清单) + 「教程即将上线」占位; 「物理校验」
+ * 「缺什么片?」按需展开清单) + 免费模型「开始搭建」直达
+ * TutorialActivity 分步教程 (非免费为温和订阅提示); 「物理校验」
  * 按钮按需加载模型并跑完整 R1~R8 校验, 展示中文摘要与教程步骤数。
- * 渲染循环 (GLSurfaceView / Vulkan) 与分步教程 UI 后续在此接入。
+ * 渲染循环 (GLSurfaceView / Vulkan) 与 3D 教程视口后续在此接入。
  */
 class MainActivity : Activity() {
 
@@ -397,9 +398,13 @@ class MainActivity : Activity() {
 
     // ---- 卡片详情与物理校验 -------------------------------------------
 
-    /** 卡片详情: 简介 + 套装说明 + 库存对照 + 教程占位 (非免费为温和
-     *  订阅提示) + 按需物理校验入口。 */
+    /** 卡片详情: 简介 + 套装说明 + 库存对照 + 「开始搭建」直达分步
+     *  教程 (免费模型; 非免费为温和订阅提示) + 按需物理校验入口。 */
     private fun showModelDialog(card: ModelCard) {
+        // 免费且有步骤数据 -> 「开始搭建」大按钮直达 TutorialActivity
+        // (占位文案退场); 非免费保持温和订阅提示 (教程随订阅上线,
+        // 浏览/校验不受限); 免费但无步骤 (数据缺失) 退回教程占位。
+        val startable = card.isFree && card.stepCount > 0
         val message = buildString {
             append(card.difficultyStars)
             append("  ")
@@ -420,10 +425,11 @@ class MainActivity : Activity() {
                 }
             }
             if (card.description.isNotBlank()) append("\n\n").append(card.description)
-            // 非免费模型以温和订阅提示替换教程占位 (仍可浏览/校验, 不锁内容)
-            append("\n\n").append(getString(
-                if (card.isFree) R.string.dialog_tutorial_coming
-                else R.string.dialog_subscription_note))
+            if (!startable) {
+                append("\n\n").append(getString(
+                    if (card.isFree) R.string.dialog_tutorial_coming
+                    else R.string.dialog_subscription_note))
+            }
         }
         val builder = AlertDialog.Builder(this)
             .setTitle(card.name)
@@ -435,7 +441,21 @@ class MainActivity : Activity() {
                 showMissingPieces(card)
             }
         }
-        builder.show()
+        if (!startable) {
+            builder.show()
+            return
+        }
+        // 「开始搭建」以自定义视图挂在消息下方 (弹窗三个按钮位留给
+        // 物理校验 / 缺什么片? / 关闭, 功能不减, 主行动更醒目)
+        val startView = layoutInflater.inflate(R.layout.dialog_start_build, null)
+        builder.setView(startView)
+        val dialog = builder.show()
+        startView.findViewById<View>(R.id.dialog_start_build).setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, TutorialActivity::class.java)
+                .putExtra(TutorialActivity.EXTRA_MODEL_ID, card.id)
+                .putExtra(TutorialActivity.EXTRA_MODEL_NAME, card.name))
+        }
     }
 
     /** 缺片清单: JNI missingPiecesJson 按需加载 BOM 与库存对照。 */

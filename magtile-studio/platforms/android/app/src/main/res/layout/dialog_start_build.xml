@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 模型详情弹窗的搭建入口 (免费模型): 经 AlertDialog.setView 挂在
+     消息文本下方, 大触控目标 (52dp) 直达 TutorialActivity 分步教程;
+     物理校验 / 缺什么片? / 关闭 仍走弹窗自带按钮位, 功能不减。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="4dp">
+
+    <Button
+        android:id="@+id/dialog_start_build"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:backgroundTint="@color/magtile_primary"
+        android:text="@string/dialog_start_build"
+        android:textColor="#FFFFFFFF"
+        android:textSize="16sp" />
+
+</LinearLayout>

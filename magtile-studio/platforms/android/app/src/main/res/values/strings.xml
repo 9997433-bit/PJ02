@@ -32,6 +32,8 @@
     <!-- %1$d = 片数, %2$d = 步数 -->
     <string name="card_pieces_steps">%1$d 片 · %2$d 步</string>
     <string name="dialog_tutorial_coming">分步教程即将上线, 敬请期待!</string>
+    <!-- 免费模型详情弹窗的搭建入口 (进 TutorialActivity 分步浏览) -->
+    <string name="dialog_start_build">🧲 开始搭建</string>
     <!-- 非免费模型详情的温和订阅提示 (不锁浏览/不用催促话术) -->
     <string name="dialog_subscription_note">本模型属于订阅内容: 简介和物理校验随时可用, 完整分步教程将随订阅上线; 免费区的模型永久免费, 用「只看免费」就能找到它们。</string>
     <string name="dialog_validate">物理校验</string>
@@ -95,6 +97,25 @@
     <string name="progress_step_of">第 %1$d/%2$d 步</string>
     <!-- %1$d = 片数 -->
     <string name="progress_pieces">%1$d 片</string>
+    <!-- 分步教程页 (TutorialActivity; 3D 渲染接入前为文字分步浏览,
+         措辞对齐桌面 GL/Qt 教程 HUD 的 "第 x/y 步 · 已放 n/m 片") -->
+    <string name="tutorial_title_fallback">分步搭建</string>
+    <string name="tutorial_loading">正在准备分步教程…</string>
+    <string name="tutorial_load_failed">分步教程加载失败:\n%1$s</string>
+    <!-- 温和占位 (§4.3: 不锁功能, 先给出当下能用的玩法) -->
+    <string name="tutorial_placeholder_3d">🧊 3D 搭建视图即将上线 — 先照着下面的分步说明, 拿出磁力片跟着搭吧</string>
+    <!-- %1$d = 当前步, %2$d = 总步数, %3$d = 已放片数, %4$d = 总片数 -->
+    <string name="tutorial_step_of">第 %1$d/%2$d 步 · 已放 %3$d/%4$d 片</string>
+    <!-- %1$d = 总步数, %2$d = 总片数 (完成态的进度头) -->
+    <string name="tutorial_finished_label">全部 %1$d 步搭完 · 共 %2$d 片</string>
+    <string name="tutorial_finished_banner">🎉 搭好啦! 这个作品已经记进「我的进度」</string>
+    <string name="tutorial_prev">◀ 上一步</string>
+    <string name="tutorial_next">下一步 ▶</string>
+    <string name="tutorial_next_finish">完成 🎉</string>
+    <!-- %1$d = 本步骤新增片数 -->
+    <string name="tutorial_step_pieces">+%1$d 片</string>
+    <!-- %1$s = 步骤小提示 -->
+    <string name="tutorial_step_tip">💡 %1$s</string>
     <!-- 成就墙全览屏 -->
     <string name="achievements_title">🏅 成就墙</string>
     <string name="achievements_hint">每完成一个新模型, 就会点亮新的徽章</string>

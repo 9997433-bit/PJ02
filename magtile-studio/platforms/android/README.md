@@ -11,7 +11,7 @@
 > 状态: **可安装最小体验**。已落地: Gradle 工程 (含 wrapper)、JNI
 > 链路 (目录加载 / 模型库列表含 core-9 与「我能搭的」判定 / 物理校验 /
 > 教程步骤数 / 进度存档打开 / 库存读写 / 缺片清单 / 年龄段设置读写 /
-> 进度页与成就墙数据源)、
+> 进度页与成就墙数据源 / 教程步骤数据与进度读写)、
 > RecyclerView 模型卡片列表 (缩略图 / 中文名 / 主题 / 难度星 /
 > 片数·步数 / 「需要扩展装」角标)、筛选栏 (难度星级 / 主题 /
 > 「只看免费」 / 「只用核心 9 片」 / 「我能搭的」, 口径与桌面
@@ -20,10 +20,12 @@
 > 年龄段与桌面 settings 同键)、磁力片库存录入屏 (片型 +
 > 数量步进器, 对齐桌面 InventoryPage)、进度页「我的作品」与成就墙
 > (统计 + 进行中/已完成/收藏列表 + 徽章墙, 对齐桌面 Qt
-> ProgressPage/AchievementsPage 口径)、数据资产打包与首启解包。
-> 尚未落地: 渲染循环 (GLES3 / Vulkan)、分步教程交互 UI (卡片详情当前
-> 为「教程即将上线」占位, 进度页作品行暂不直达教程)、家长门
-> (年龄段切换入口暂未上锁), 计划见下文与 `docs/ROADMAP.md`。
+> ProgressPage/AchievementsPage 口径)、分步教程页 (文字分步浏览:
+> 步骤列表 + 上一步/下一步 + 断点续搭 + 当前步写进度存档, 3D 搭建
+> 视图为温和占位)、数据资产打包与首启解包。
+> 尚未落地: 渲染循环 (GLES3 / Vulkan) 与 3D 教程视口 (教程页当前为
+> 文字分步 + 「3D 搭建即将上线」占位, 进度页作品行暂不直达教程)、
+> 家长门 (年龄段切换入口暂未上锁), 计划见下文与 `docs/ROADMAP.md`。
 
 ## 目录结构
 
@@ -32,7 +34,7 @@ platforms/android/
 ├── README.md                 本文档
 ├── CMakeLists.txt            JNI 共享库构建脚本 (双入口: 仓库根 / Gradle)
 ├── jni/
-│   └── magtile_jni.cpp       JNI 包装层 (12 个入口, 见下表)
+│   └── magtile_jni.cpp       JNI 包装层 (15 个入口, 见下表)
 ├── settings.gradle.kts       Gradle 工程入口 (工程根 = 本目录)
 ├── build.gradle.kts          插件版本 (AGP 8.7.3 / Kotlin 2.0.21)
 ├── gradle.properties         AndroidX / 配置缓存
@@ -47,7 +49,9 @@ platforms/android/
         │   ├── InventoryActivity.kt   磁力片库存录入屏 (片型 + 数量步进器)
         │   ├── ProgressActivity.kt    进度页「我的作品」(统计 + 作品列表)
         │   ├── AchievementsActivity.kt 成就墙全览 (徽章两列网格)
-        │   ├── MagTileNative.kt       进度存档/库存/年龄段/进度页 JNI 桥 (进程级单例)
+        │   ├── TutorialActivity.kt    分步教程页 (步骤列表 + 上一步/下一步 + 进度落盘)
+        │   ├── TutorialStepAdapter.kt 教程步骤行适配器 (已完成/当前/待搭三态)
+        │   ├── MagTileNative.kt       进度存档/库存/年龄段/进度页/教程 JNI 桥 (进程级单例)
         │   ├── ModelCard.kt           卡片元数据 (listModels JSON 解析)
         │   ├── ModelCardAdapter.kt    RecyclerView 适配器 (标准/启蒙双卡片布局)
         │   ├── ThumbnailLoader.kt     assets/thumbnails 异步解码 + LruCache
@@ -87,8 +91,21 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 「去登记 ▶」引导进库存录入屏 (片型 + 数量步进器, 长按连加, 支持
 直接输入; 「保存, 看看我能搭什么 ▶」保存后直接勾上筛选), 已登记后
 入口变为「改库存」。点击卡片弹出简介 + 套装说明 + 库存对照 (够搭 /
-还差几片, 「缺什么片?」展开清单) 与「教程即将上线」占位, 「物理校验」
-按钮按需加载模型并展示 R1~R8 中文校验摘要与教程步骤数。
+还差几片, 「缺什么片?」展开清单), 免费模型带「🧲 开始搭建」大按钮
+直达分步教程页 (非免费为温和订阅提示), 「物理校验」按钮按需加载
+模型并展示 R1~R8 中文校验摘要与教程步骤数。
+
+分步教程页 (3D 渲染接入前的文字分步浏览, 措辞对齐桌面 GL/Qt 教程
+HUD): 进度头「第 x/y 步 · 已放 n/m 片」+ 进度条, 步骤列表逐行显示
+序号圆徽 + 中文说明 + 小提示 (💡) + 片数增量 (+N 片), 当前步主色
+高亮并自动滚动定位, 已完成步换 ✓ 绿徽; 底部「◀ 上一步 / 下一步 ▶」
+大按钮 (末步变「完成 🎉」), 页顶为「3D 搭建视图即将上线」温和占位
+条 (不锁功能 §4.3)。进度写档口径对齐桌面 Qt TutorialViewport:
+会话开始即建档 (模型库/进度页立刻显示进行中), 每次步骤导航把当前
+步与增量游玩时长写进 `model_progress` 表 (与桌面同一份 SQLite
+schema, 断点续搭跨端互通), 走完最后一步记完成 + 解锁首搭成就
+first_model_completed (进度页/成就墙即时可见); 存档写入失败只降级
+不打断搭建 (P3 零挫败)。
 
 标题栏右侧是年龄段模式入口 (三档单选, UI_UX_SPEC.md §2), 切换立即
 生效并落盘 (settings 表 `age_mode` 键, 与桌面 GL/Qt/CLI 同键):
@@ -158,8 +175,8 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 | `validateModel(jsonPath: String): String` | 加载模型并跑完整物理校验 (R1~R8), 返回中文摘要 |
 | `getTutorialStepCount(): Int` | 最近一次成功加载模型的教程步骤数, 未加载 -1 |
 
-进度存档 / 磁力片库存 / 年龄段设置 / 进度页与成就墙链路绑定
-`com.magtile.studio.MagTileNative` (直接复用核心库
+进度存档 / 磁力片库存 / 年龄段设置 / 进度页与成就墙 / 分步教程
+链路绑定 `com.magtile.studio.MagTileNative` (直接复用核心库
 `progress::ProgressStore` —— 与桌面 CLI `inventory set` / GL / Qt
 录入界面同一份 SQLite schema (`tile_inventory` 表 + `settings` 表),
 存档文件互相兼容; Android 端存档在 `filesDir/progress.db`):
@@ -174,6 +191,9 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 | `ageModeId(): String` | 年龄段模式标识 (`settings` 表 `age_mode` 键, 与桌面 GL/Qt/CLI `settings set-age` 同键): `"age_4_6"` / `"age_7_9"` / `"age_10_12"`; 存档未打开 / 从未设置 / 存量脏值一律返回默认档 `"age_7_9"` (`progress::getAgeMode` 自带兜底), 调用方无需判空 |
 | `setAgeModeId(modeId: String): Boolean` | 保存年龄段模式 (立即落盘): 未知标识返回 false 并忽略 (与桌面 SettingsBackend 一致); 存档未打开 / 落盘失败仍返回 true —— 本次运行内生效, 重启后回读不到 (温和降级) |
 | `progressOverviewJson(dataDir: String): String` | 进度页「我的作品」/ 成就墙数据源 (口径与桌面 Qt StudioBackend 的 `inProgressList`/`completedList`/`favoritesList`/`achievementsList` 一致): `{"store_ready","completed_count","in_progress_count","favorite_count","achievement_count","in_progress":[{id/name/current_step/step_count/play_text}],"completed":[{id/name/pieces/meta_text}],"favorites":[{id/name}],"achievements":[{id/name/condition/unlocked/unlocked_text}]}`, 失败 `{"error":"..."}`; 只统计仍在目录中的模型, 进行中要求已真正开动 (current_step > 0); 徽章按完成数 1/3/10/30 分档 (存档 achievements 表已解锁或达到阈值即点亮, 未点亮带一句话达成条件, 不下发进度百分比 §7.1), 存档中额外成就以通用徽章补列; "用时 23 分钟"/"解锁于 8月20日" 等措辞与桌面一致; 徽章 emoji 由 Kotlin 侧按 id 映射 (增补平面字符不过 `NewStringUTF`); 存档不可用时 `store_ready=false`, 列表为空、徽章全未点亮, 页面照常可看 |
+| `getTutorialSteps(dataDir: String, modelId: String): String` | 分步教程步骤数据源 (modelId 经模型库目录解析到模型 JSON, 与进度页"只认仍在库中的模型"同一口径): `{"model_id","name","step_count","total_pieces","steps":[{step_number/description/tip/pieces_added/pieces_total},...]}`, 失败 `{"error":"..."}`; `pieces_added` = 本步骤新增片数 (片数增量), `pieces_total` = 累计已放片数 (末步 = 模型总片数) |
+| `savedTutorialStep(modelId: String): Int` | 存档中该模型的当前步 (断点续搭): 无记录 / 存档不可用一律 0 (从头开始, 温和降级); 已完成模型返回总步数 (完成链路推到最后一步), 调用方据此进入完成态 |
+| `saveTutorialStep(modelId: String, step: Int, stepCount: Int, playSeconds: Long): Boolean` | 写教程进度 (口径与桌面 Qt TutorialViewport 的 `flushProgress`/`applyStepChange` 一致, 同一份 `model_progress` 表): step = 已完成到第几步, playSeconds = 本次新增游玩秒数 (存储层累加只增不减); step >= stepCount 时记完成 (首次完成时刻不覆盖) + 解锁首搭成就 `first_model_completed`; 存档未打开 / 写入失败返回 false (调用方不打断搭建, P3 零挫败) |
 
 筛选在 Kotlin 侧完成 (`MainActivity.applyFilters`), 口径与桌面
 GL/Qt 模型库一致: 难度星级精确匹配、规范主题 (目录 `theme` 字段)、
@@ -223,9 +243,9 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 
 `.github/workflows/android.yml` (仓库根) 包含两个任务:
 
-- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 12 个 JNI
-  符号齐全 (模型库 4 个 + 进度存档/库存/年龄段/进度页 8 个) —— 持续
-  保证 `magtile_core` 无平台依赖。
+- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 15 个 JNI
+  符号齐全 (模型库 4 个 + 进度存档/库存/年龄段/进度页 8 个 +
+  分步教程 3 个) —— 持续保证 `magtile_core` 无平台依赖。
 - `assemble-debug`: Gradle 全量打包 debug APK, 校验 APK 内容
   (原生库 / 数据资产 / 缩略图已打包; 缩略图数量落后于模型数量时
   只告警 —— 内容制作期新模型缩略图可能滞后生成, 缺图卡片显示占位)
@@ -234,15 +254,15 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 ## 六、后续计划
 
 - 渲染: 复用 `include/magtile/render/renderer.hpp` 抽象接口, Android 端
-  实现 GLES3 / Vulkan 后端 (桌面 GLFW+GL4.1 后端不上移动端)。
-- 教程交互: `TutorialEngine` 已与 UI 解耦, Kotlin 侧仅做手势与 HUD;
-  卡片详情的「教程即将上线」占位替换为分步教程页。
+  实现 GLES3 / Vulkan 后端 (桌面 GLFW+GL4.1 后端不上移动端);
+  接入后教程页的「3D 搭建即将上线」占位条替换为 3D 教程视口
+  (步骤数据与进度写档链路已就位, 视口只增不改)。
 - 模型库增强: 搜索框、「只看收藏」筛选 (「我能搭的」与库存录入
   已落地, 对齐桌面 GL 模型库全量筛选器还差收藏/完成状态维度)。
 - 进度存档: `progress_store` (SQLite) 已开箱接入 (库存 + 年龄段 +
-  进度页/成就墙链路); 模型卡片上的完成/进行中徽标、收藏切换与
-  「继续上次」大卡片待接入模型库列表 UI, 进度页作品行直达教程随
-  分步教程页一并落地。
+  进度页/成就墙 + 教程进度链路); 模型卡片上的完成/进行中徽标、
+  收藏切换与「继续上次」大卡片待接入模型库列表 UI, 进度页作品行
+  「继续搭建 / 再搭一次」直达教程页待接入。
 - 家长门: 年龄段切换入口 (标题栏) 暂未上锁; 对齐桌面 UI_UX_SPEC.md
   §9 需把入口挪进家长区 (`core/parent_gate.hpp` 已具备共享校验逻辑)。
 

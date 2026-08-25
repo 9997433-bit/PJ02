@@ -1,15 +1,16 @@
 package com.magtile.studio
 
 /**
- * 进度存档 / 磁力片库存的 JNI 桥 (实现见 jni/magtile_jni.cpp)。
+ * 进度存档 / 磁力片库存 / 分步教程的 JNI 桥 (实现见 jni/magtile_jni.cpp)。
  *
  * 直接复用核心库 progress::ProgressStore —— 与桌面 CLI `inventory set`
  * / GL / Qt 录入界面同一份 SQLite schema (tile_inventory 表), 存档文件
  * 互相兼容。数据库放在 filesDir/progress.db (应用私有目录, 随
  * allowBackup 自动备份)。
  *
- * 放在独立 object 上 (而非 MainActivity): MainActivity 与
- * InventoryActivity 都要调用, 且原生上下文本就是进程级单例。
+ * 放在独立 object 上 (而非 MainActivity): MainActivity /
+ * InventoryActivity / ProgressActivity / TutorialActivity 都要调用,
+ * 且原生上下文本就是进程级单例。
  */
 object MagTileNative {
 
@@ -71,6 +72,34 @@ object MagTileNative {
      * 页面照常可看 (P3 零挫败)。
      */
     external fun progressOverviewJson(dataDir: String): String
+
+    /**
+     * 分步教程步骤数据源 JSON (dataDir = 解包后的数据目录, 与
+     * listModels 同一入参; modelId 经模型库目录解析到模型 JSON):
+     * {"model_id","name","step_count","total_pieces",
+     *  "steps":[{"step_number","description","tip","pieces_added",
+     *            "pieces_total"}]} 或 {"error":"..."}。
+     * pieces_added = 本步骤新增片数, pieces_total = 累计已放片数
+     * (末步 = total_pieces)。供 TutorialActivity 步骤浏览使用。
+     */
+    external fun getTutorialSteps(dataDir: String, modelId: String): String
+
+    /**
+     * 存档中该模型的当前步 (断点续搭): 无记录 / 存档不可用一律返回 0
+     * (从头开始, 温和降级)。已完成模型返回总步数 (完成链路推到最后
+     * 一步), 调用方据此进入完成态。
+     */
+    external fun savedTutorialStep(modelId: String): Int
+
+    /**
+     * 写教程进度 (与桌面 Qt TutorialViewport 同一口径, 同一份 SQLite
+     * schema): step = 已完成到第几步, playSeconds = 本次新增游玩秒数
+     * (存储层累加); 走到最后一步 (step >= stepCount) 记完成 + 解锁
+     * 首搭成就。存档未打开 / 写入失败返回 false (不打断搭建, 进度仍
+     * 在内存中 —— P3 零挫败)。
+     */
+    external fun saveTutorialStep(
+        modelId: String, step: Int, stepCount: Int, playSeconds: Long): Boolean
 
     init {
         // 与 MainActivity 共用同一 libmagtile_core.so (loadLibrary 幂等)

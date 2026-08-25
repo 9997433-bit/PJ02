@@ -25,8 +25,8 @@ import java.util.concurrent.Executors
  * 数据经 MagTileNative.progressOverviewJson (JNI) 读核心库
  * ProgressStore —— 与桌面 CLI `progress list` / GL / Qt 同一份
  * SQLite 存档 (filesDir/progress.db)。本屏纯只读不写档; 行目前仅作
- * 展示, 「继续搭建/再搭一次」直达教程待分步教程 UI 落地后接入
- * (与卡片详情「教程即将上线」同一占位口径)。
+ * 展示, 「继续搭建/再搭一次」直达 TutorialActivity 待接入 (分步
+ * 教程页已上线, 当前从模型库详情弹窗「开始搭建」进入)。
  */
 class ProgressActivity : Activity() {
 

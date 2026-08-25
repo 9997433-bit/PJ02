@@ -23,7 +23,16 @@
 //                                    进行中/已完成/收藏列表 + 徽章墙,
 //                                    口径与桌面 Qt StudioBackend 一致)
 //
-// 说明: 渲染循环 (GLSurfaceView / Vulkan) 与逐步教程交互接口后续在此扩展。
+// 分步教程链路 (绑定 com.magtile.studio.MagTileNative, 供
+// TutorialActivity 步骤浏览使用; 3D 渲染接入前为纯文字分步):
+//   getTutorialSteps(dataDir, modelId) -> 教程步骤 JSON (步序 + 中文
+//                                    说明/提示 + 片数增量/累计)
+//   savedTutorialStep(modelId)    -> 存档中的当前步 (断点续搭; 无记录 0)
+//   saveTutorialStep(modelId, step, stepCount, playSeconds)
+//                                 -> 写当前步到进度存档 (与桌面共库
+//                                    schema; 走到最后一步记完成 + 首搭成就)
+//
+// 说明: 渲染循环 (GLSurfaceView / Vulkan) 与 3D 教程视口后续在此扩展。
 // =============================================================
 
 #include <jni.h>
@@ -724,6 +733,126 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_progressOverview
         MAGTILE_LOGE("progressOverviewJson 失败: %s", e.what());
         const nlohmann::json error = {{"error", std::string("错误: ") + e.what()}};
         return toJString(env, error.dump());
+    }
+}
+
+// =============================================================
+// 分步教程 (TutorialActivity 步骤浏览; 3D 渲染接入前为纯文字分步)
+// =============================================================
+
+/// 教程步骤数据源 (data_dir 为解包后的数据目录, model_id 为模型标识;
+/// 经模型库目录解析到模型 JSON —— 与进度页"只认仍在库中的模型"同一
+/// 口径, 目录条目缺失时温和报错而非崩溃):
+///   成功: {"model_id","name","step_count","total_pieces",
+///          "steps":[{"step_number","description","tip",
+///                    "pieces_added","pieces_total"}, ...]}
+///   失败: {"error":"中文错误信息"}
+/// pieces_added = 本步骤新增磁力片数 (tiles_to_add 长度),
+/// pieces_total = 截至本步骤累计已放片数 (末步 = total_pieces,
+/// 加载时经 ModelDefinition 与 final_assembly 对账)。步骤文本均为
+/// 基本多文种平面字符 (与目录简介同一约束), 可安全过 NewStringUTF。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_getTutorialSteps(
+    JNIEnv* env, jobject /*thiz*/, jstring data_dir, jstring model_id) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    try {
+        const std::string id = toUtf8(env, model_id);
+        const std::vector<magtile::core::ModelCatalogEntry> entries =
+            magtile::core::loadModelCatalog(toUtf8(env, data_dir));
+        const magtile::core::ModelCatalogEntry* found = nullptr;
+        for (const auto& entry : entries) {
+            if (entry.id == id) {
+                found = &entry;
+                break;
+            }
+        }
+        if (found == nullptr) {
+            const nlohmann::json error = {
+                {"error", "错误: 模型 " + id + " 不在模型库目录中"}};
+            return toJString(env, error.dump());
+        }
+        const magtile::core::ModelDefinition model =
+            magtile::core::loadModelDefinition(found->file);
+
+        nlohmann::json steps = nlohmann::json::array();
+        int pieces_total = 0;
+        for (const magtile::core::BuildStep& step : model.steps) {
+            const int pieces_added = static_cast<int>(step.tiles_to_add.size());
+            pieces_total += pieces_added;
+            steps.push_back({
+                {"step_number", step.step_number},
+                {"description", step.description},
+                {"tip", step.tip},
+                {"pieces_added", pieces_added},
+                {"pieces_total", pieces_total},
+            });
+        }
+        const nlohmann::json root = {
+            {"model_id", model.id},
+            {"name", model.name},
+            {"step_count", static_cast<int>(model.steps.size())},
+            {"total_pieces", model.total_pieces},
+            {"steps", std::move(steps)},
+        };
+        return toJString(env, root.dump());
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("getTutorialSteps 失败: %s", e.what());
+        const nlohmann::json error = {{"error", std::string("错误: ") + e.what()}};
+        return toJString(env, error.dump());
+    }
+}
+
+/// 存档中该模型的当前步 (断点续搭入口): 无记录 / 存档未打开 / 读取
+/// 失败一律返回 0 (从头开始, 温和降级不报错)。已完成模型的存档值
+/// 为总步数 (桌面完成链路推到最后一步), Kotlin 侧据此进入完成态。
+JNIEXPORT jint JNICALL Java_com_magtile_studio_MagTileNative_savedTutorialStep(
+    JNIEnv* env, jobject /*thiz*/, jstring model_id) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    if (!ctx.store.has_value()) {
+        return 0;
+    }
+    try {
+        const auto progress = ctx.store->loadProgress(toUtf8(env, model_id));
+        return progress.has_value() ? std::max(progress->current_step, 0) : 0;
+    } catch (const magtile::progress::ProgressError& e) {
+        MAGTILE_LOGE("savedTutorialStep 读取失败: %s", e.what());
+        return 0;
+    }
+}
+
+/// 写教程进度到存档 (与桌面 Qt TutorialViewport::flushProgress /
+/// applyStepChange 同一口径, 同一份 SQLite schema):
+///   - saveProgress(modelId, step, playSeconds): step 为已完成到第几步,
+///     playSeconds 为本次新增游玩秒数 (存储层累加, 只增不减);
+///   - 走到最后一步 (step >= stepCount 且 stepCount > 0) 时记完成
+///     (首次完成时刻不覆盖) + 解锁首搭成就 first_model_completed
+///     (与桌面 GL/Qt 完成链路同名同口径)。
+/// 存档未打开 / 写入失败返回 false (Kotlin 侧不打断搭建, 进度仍在
+/// 内存中 —— P3 零挫败, 与桌面同策略)。
+JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_saveTutorialStep(
+    JNIEnv* env, jobject /*thiz*/, jstring model_id, jint step, jint step_count,
+    jlong play_seconds) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    if (!ctx.store.has_value()) {
+        return JNI_FALSE;
+    }
+    try {
+        const std::string id = toUtf8(env, model_id);
+        ctx.store->saveProgress(id, std::max(static_cast<int>(step), 0),
+                                std::max(static_cast<std::int64_t>(play_seconds),
+                                         std::int64_t{0}));
+        if (step_count > 0 && step >= step_count) {
+            ctx.store->markCompleted(id);
+            if (!ctx.store->isAchievementUnlocked("first_model_completed")) {
+                ctx.store->unlockAchievement("first_model_completed");
+            }
+        }
+        return JNI_TRUE;
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("saveTutorialStep 失败: %s", e.what());
+        return JNI_FALSE;
     }
 }
 
