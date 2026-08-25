@@ -1019,22 +1019,33 @@
     },
     {
       "step_number": 13,
-      "description": "盖身体背板: 5 片橙黄相间的方板压在立壁顶上, 身体隆起完成。",
+      "description": "盖身体背板尾段: 3 片橙黄相间的方板压在立壁顶上 (y 0..3)。",
       "tip": "橙黄条纹就是蝴蝶的绒毛节环, 每片两长边都要吸牢。",
       "tiles_to_add": [
         "bd_bk_0",
         "bd_bk_1",
-        "bd_bk_2",
-        "bd_bk_3",
-        "bd_bk_4"
+        "bd_bk_2"
       ],
       "highlight_tiles": [
-        "bd_w_2",
-        "bd_e_2"
+        "bd_w_1",
+        "bd_e_1"
       ]
     },
     {
       "step_number": 14,
+      "description": "盖完背板头段: 再压 2 片 (y 3..5), 身体隆起完成。",
+      "tip": "背板与头板顶边吸合的瞬间, 整个身体箱就自锁成环了。",
+      "tiles_to_add": [
+        "bd_bk_3",
+        "bd_bk_4"
+      ],
+      "highlight_tiles": [
+        "bd_bk_2",
+        "bd_head"
+      ]
+    },
+    {
+      "step_number": 15,
       "description": "立触角与头饰: 头段背板两侧沿立 2 根紫色等腰触角, 前沿立 1 片红色三角头饰。",
       "tip": "触角底边同时吸背板侧边与立壁顶边, 又高又稳。",
       "tiles_to_add": [
@@ -1047,7 +1058,7 @@
       ]
     },
     {
-      "step_number": 15,
+      "step_number": 16,
       "description": "挂眼斑: 两扇前翅上沿各吸 1 枚黄色六边形眼斑, 大蝴蝶展翅!",
       "tip": "六边形眼斑是蝴蝶吓退小鸟的\"大眼睛\" —— 也是你的收尾印章。",
       "tiles_to_add": [

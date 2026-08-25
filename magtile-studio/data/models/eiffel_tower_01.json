@@ -3,9 +3,9 @@
   "id": "eiffel_tower_01",
   "name": "埃菲尔铁塔",
   "name_en": "Eiffel Tower 01",
-  "description": "世界地标系列: 3x3 广场上四条 L 形塔脚围出四面大拱门, 八根斜撑张开拱脚、八根斜撑收出肩线, 第一观景台红色护栏环绕, 1x1 箱形塔身经第二观景台直上塔顶, 四坡红色塔尖在 5.87 格高处自锁会合 —— 从侧面看就是那个经典的 A 字剪影。",
+  "description": "世界地标系列: 5x5 林荫广场中央四条 L 形塔脚围出四面大拱门 (灰色石板走道正对拱门), 八根斜撑张开拱脚、八根斜撑收出肩线, 第一观景台红色护栏环绕, 1x1 箱形塔身经第二观景台直上塔顶, 四坡红色塔尖在 5.87 格高处自锁会合 —— 从侧面看就是那个经典的 A 字剪影。",
   "difficulty": 4,
-  "total_pieces": 79,
+  "total_pieces": 95,
   "tags": [
     "世界地标",
     "高塔",
@@ -15,7 +15,7 @@
   "content_meta": {
     "structural_signature": {
       "tile_histogram": {
-        "square": 51,
+        "square": 67,
         "right_triangle": 16,
         "equilateral_triangle": 8,
         "isosceles_triangle": 4
@@ -134,6 +134,246 @@
       "position": [
         2.5,
         2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_0_0",
+      "type": "square",
+      "position": [
+        -0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_2_0",
+      "type": "square",
+      "position": [
+        1.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rg_3_0",
+      "type": "square",
+      "position": [
+        2.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_4_0",
+      "type": "square",
+      "position": [
+        3.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_0_1",
+      "type": "square",
+      "position": [
+        -0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_4_1",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_0_2",
+      "type": "square",
+      "position": [
+        -0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rg_4_2",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rg_0_3",
+      "type": "square",
+      "position": [
+        -0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_4_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_0_4",
+      "type": "square",
+      "position": [
+        -0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_1_4",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_2_4",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rg_3_4",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rg_4_4",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
         0.0
       ],
       "rotation": [
@@ -1228,6 +1468,44 @@
     },
     {
       "step_number": 2,
+      "description": "铺设外环林荫道南半圈: 7 片方板贴着绿地外沿铺开 (南面正中的灰色石板走道正对将来的南拱门)。",
+      "tip": "外圈每片都与内圈绿地或相邻外圈板整边吸合, 广场才是一整块。",
+      "tiles_to_add": [
+        "rg_0_0",
+        "rg_1_0",
+        "rg_2_0",
+        "rg_3_0",
+        "rg_4_0",
+        "rg_0_1",
+        "rg_4_1"
+      ],
+      "highlight_tiles": [
+        "pz_1_0",
+        "pz_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺完外环林荫道北半圈: 再补 9 片, 5x5 林荫广场合拢, 四条灰色走道正对四面拱门。",
+      "tip": "从上往下看: 绿地环抱塔基, 四条石板道通向四方 —— 战神广场就绪。",
+      "tiles_to_add": [
+        "rg_0_2",
+        "rg_4_2",
+        "rg_0_3",
+        "rg_4_3",
+        "rg_0_4",
+        "rg_1_4",
+        "rg_2_4",
+        "rg_3_4",
+        "rg_4_4"
+      ],
+      "highlight_tiles": [
+        "rg_0_0",
+        "rg_4_0"
+      ]
+    },
+    {
+      "step_number": 4,
       "description": "竖立南侧两条塔脚下层: 西南、东南脚各 2 面灰色外壳墙, 在拐角处竖边互吸成 L 形。",
       "tip": "L 形双墙比单面墙稳得多 —— 每条塔脚都是一个直角外壳。",
       "tiles_to_add": [
@@ -1242,7 +1520,7 @@
       ]
     },
     {
-      "step_number": 3,
+      "step_number": 5,
       "description": "竖立北侧两条塔脚下层: 东北、西北脚与南侧镜像。",
       "tip": "四条塔脚立好后, 从正上方看是 4 个指向中心的直角。",
       "tiles_to_add": [
@@ -1256,7 +1534,7 @@
       ]
     },
     {
-      "step_number": 4,
+      "step_number": 6,
       "description": "安装南侧塔脚护撑: 西南、东南脚外侧各 2 根橙色直角三角斜撑, 竖直边吸塔脚竖边、水平边落地。",
       "tip": "斜撑向外张开 —— 正是铁塔拱脚外扩的经典姿态。",
       "tiles_to_add": [
@@ -1270,7 +1548,7 @@
       ]
     },
     {
-      "step_number": 5,
+      "step_number": 7,
       "description": "安装北侧塔脚护撑: 其余 4 根, 八方位全部锁定。",
       "tip": "八根斜撑装完, 用手轻推任何一条塔脚都纹丝不动。",
       "tiles_to_add": [
@@ -1284,7 +1562,7 @@
       ]
     },
     {
-      "step_number": 6,
+      "step_number": 8,
       "description": "塔脚加高到 2 层: 南侧两脚各叠 2 面墙。",
       "tip": "上下层墙横边对齐吸合, 塔脚升到拱门的高度。",
       "tiles_to_add": [
@@ -1298,7 +1576,7 @@
       ]
     },
     {
-      "step_number": 7,
+      "step_number": 9,
       "description": "北侧两脚同样加高: 四脚齐平 2 层。",
       "tip": "检查四脚等高 —— 观景台要同时压住它们。",
       "tiles_to_add": [
@@ -1312,7 +1590,7 @@
       ]
     },
     {
-      "step_number": 8,
+      "step_number": 10,
       "description": "安装拱门楣板: 四面拱门上沿各 1 片黄色正方形 (z 1..2), 两条竖边分别吸左右塔脚竖边。",
       "tip": "楣板一装, 四条塔脚就连成了著名的四面大拱门。",
       "tiles_to_add": [
@@ -1327,7 +1605,7 @@
       ]
     },
     {
-      "step_number": 9,
+      "step_number": 11,
       "description": "铺设第一观景台南两排: 6 片灰色方板压在塔脚与楣板顶上。",
       "tip": "平台边要与墙顶边整边吸合, 中央那片悬在庭院上空。",
       "tiles_to_add": [
@@ -1343,7 +1621,7 @@
       ]
     },
     {
-      "step_number": 10,
+      "step_number": 12,
       "description": "铺完第一观景台: 北排 3 片, 3x3 平台合拢。",
       "tip": "9 片平台缝缝相吸 —— 这是整座铁塔的腰部铁环。",
       "tiles_to_add": [
@@ -1356,7 +1634,7 @@
       ]
     },
     {
-      "step_number": 11,
+      "step_number": 13,
       "description": "安装南北护栏: 观景台南北沿各 2 片红色等边三角。",
       "tip": "护栏立在平台边沿, 中间留出观景缺口。",
       "tiles_to_add": [
@@ -1371,7 +1649,7 @@
       ]
     },
     {
-      "step_number": 12,
+      "step_number": 14,
       "description": "安装东西护栏: 再立 4 片, 第一观景台完工。",
       "tip": "8 片红色护栏就位, 游客可以凭栏看巴黎了。",
       "tiles_to_add": [
@@ -1385,7 +1663,7 @@
       ]
     },
     {
-      "step_number": 13,
+      "step_number": 15,
       "description": "竖立塔身第一层: 观景台正中围出 1x1 箱形筒 (z 2..3), 四面墙在四角竖边互吸。",
       "tip": "墙底边吸平台接缝 —— 塔身正好骑在观景台正中。",
       "tiles_to_add": [
@@ -1399,7 +1677,7 @@
       ]
     },
     {
-      "step_number": 14,
+      "step_number": 16,
       "description": "安装肩线斜撑: 塔身四角各 2 根橙色直角三角形, 水平边吸平台接缝、竖直边吸塔身竖边。",
       "tip": "八根斜撑收出铁塔的\"肩线\" —— A 字剪影的关键一笔。",
       "tiles_to_add": [
@@ -1417,7 +1695,7 @@
       ]
     },
     {
-      "step_number": 15,
+      "step_number": 17,
       "description": "塔身升到第二层: 4 面透明墙叠上箱形筒 (z 3..4)。",
       "tip": "透明层是电梯井 —— 想象小电梯正沿塔身爬升。",
       "tiles_to_add": [
@@ -1431,7 +1709,7 @@
       ]
     },
     {
-      "step_number": 16,
+      "step_number": 18,
       "description": "压上第二观景台: 1 片黄色方板盖住箱形筒 (z=4)。",
       "tip": "四边同时吸住四面墙顶, 塔身又锁紧一环。",
       "tiles_to_add": [
@@ -1442,7 +1720,7 @@
       ]
     },
     {
-      "step_number": 17,
+      "step_number": 19,
       "description": "竖立塔顶层: 再围 1 层 1x1 箱形筒 (z 4..5)。",
       "tip": "越往上越细的错觉来自肩线 —— 顶层依旧是稳稳的箱形筒。",
       "tiles_to_add": [
@@ -1456,7 +1734,7 @@
       ]
     },
     {
-      "step_number": 18,
+      "step_number": 20,
       "description": "封顶板: 1 片黄色方板盖住塔顶层 (z=5)。",
       "tip": "这是塔尖的底座, 四边都要吸牢。",
       "tiles_to_add": [
@@ -1467,7 +1745,7 @@
       ]
     },
     {
-      "step_number": 19,
+      "step_number": 21,
       "description": "安装塔尖: 4 片红色等腰三角形底边吸顶板四边, 斜棱两两互吸, 锥尖在 5.87 格高处会合 —— 铁塔落成!",
       "tip": "最后一片卡进去, 整个塔尖咔哒自锁 —— 向巴黎致敬!",
       "tiles_to_add": [
