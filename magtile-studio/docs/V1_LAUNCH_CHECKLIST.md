@@ -52,7 +52,9 @@ strict (D3 冻结 D1 0/20 / D5 1/6), 口径见 §7 G2);
 全量就绪探测留痕:
 [reports/READINESS_FULL_2026-08-25.md](reports/READINESS_FULL_2026-08-25.md)
 (**已刷新至 250 基线** `2b2c4ff` 全量档实跑: 合计 24 项 16 PASS /
-2 FAIL 仅 R6/R7 实物硬闸门 / 6 SKIP)。L2 风险报告与结构族包**已刷新至 250
+2 FAIL 仅 R6/R7 实物硬闸门 / 6 SKIP)。**阻塞项决策单** (三条并行解阻路径):
+[reports/LAUNCH_BLOCKERS_2026-08-25.md](reports/LAUNCH_BLOCKERS_2026-08-25.md)。
+L2 风险报告与结构族包**已刷新至 250
 基线** (`ced770c`, 见 §8); strict 巡检深报告**已刷新至 250 基线**
 (基线 `2b2c4ff` 实跑: 249 通过 + 1 白名单豁免, 逐步装配 250/250,
 D4+ 46/46 x 50 轮全绿)。

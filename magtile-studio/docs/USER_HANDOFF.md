@@ -179,25 +179,29 @@ D4+ 全集 46 —— 新增批旗舰 `stonehenge_01` D4, 其余 15 个全部 D2/
 (QA + L2 全绿, 仅 L3 实物硬闸门红)。
 
 **工程收口标准**: `check_v1_readiness.sh --quick` 只剩 R6/R7 FAIL ——
-**当前已达成** (24 项: 13 PASS / 2 FAIL / 9 SKIP); L2 工具链 + 内容加固
-全部入库 ✅; `run_release_gate.sh --full --l2` QA+L2 全绿 ✅;
-**内容扩至 250 已收官** (`2b2c4ff`, 内容批 F~I) ✅; 五份留痕报告
-(L2 风险/结构族/strict 巡检/发布门禁/全量就绪) 已全部刷新至 250
-基线 ✅; 剩余工程侧: 清单 §8 S1/S2 实物复核 (用户侧)。
+**当前已达成** (25 项: **14 PASS / 2 FAIL / 9 SKIP**); L2 工具链 + 内容加固
+全部入库 ✅; `run_release_gate.sh --full --l2` 软件侧 QA+L2 全绿 ✅
+(双预期红: L3 0/46 + 难度配额 strict); **内容扩至 250 已收官**
+(`2b2c4ff`, 内容批 F~I) ✅; 五份留痕报告已全部刷新至 250 基线 ✅;
+**工程天花板已确认** —— 见 [reports/ENGINEERING_CEILING_2026-08-25.md](reports/ENGINEERING_CEILING_2026-08-25.md)
+与 [reports/LAUNCH_BLOCKERS_2026-08-25.md](reports/LAUNCH_BLOCKERS_2026-08-25.md);
+剩余: 路径 A 实物 / 路径 B 配额决策 / 路径 C Manual P0 (用户侧)。
 
 ---
 
-## 3. 工程侧下一波可继续做 (不依赖你的资源)
+## 3. 工程侧下一波 (全部需用户决策后启动)
 
-1. **B2 收尾**: 双端订阅页回归复跑 + 清单 B2 状态收敛 (Android 订阅页 UI 已入库 `1333f8e`);
-2. **D6 收尾**: 把 LGPL 自动核对脚本 (`2605e34`) 纳入出包流程与手册勾选项;
-3. **内容 234 → 250 已收官** (`2b2c4ff`, 内容批 F~I; L2 风险/结构族/strict 巡检/发布门禁/全量就绪五报告已刷新至 250 基线), **C5 治理机制三件套亦已随治理波次落地** (缺口审计 `a5ed585` §7.3 三条建议全部机检化): series 回填 250/250 + R18 机检 / D3 冻结硬闸门 (`check_difficulty_quota.py` + 回归测试 `test_difficulty_quota.py`) / 矩阵进度机器快照 ([reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md), 176/520 = 34%); 内容批 PR 评审一键机检 `tools/review_content_batch.sh` 五道阻断关卡 (逐文件 strict 零警告 / D3 冻结 `--batch` / 系列归类 strict / core5 片型分层 / 唯一性抽查) 串成一条命令。**下一波内容侧重点 = 按矩阵缺口补 D1 (0/20) 与 D5 (1/6)** —— 两项达标即解冻 D3 且 `--full` 档难度配额 strict 红灯自动转绿; C5 人工终审以快照为底稿 (归你, 上架前一次);
-4. **D8 自动更新决策文档**: COMMERCIAL_PLAN §8 列为 V1 交付物但未实现 —— 工程可先出「实现 vs 降级 V1.1」决策文档与最小方案, 决策本身留你签字;
-5. **B4 首批一次性内容包**: 内容与打包侧可先做 (P1, 商店后台配置属你);
-6. **A7 体验缺口**: Android 视口 MSAA、按需渲染节电等 (P1, 已留痕);
-7. **Android 仪器测试 M-01~M-05 实装**: 骨架已入库 (`9d9ad0a`), 用例填充可继续;
-8. **商店素材底稿**: 按 [STORE_LISTING.md](STORE_LISTING.md) 规格出桌面/模拟器截图草稿 (**终稿须真机截图**, 归你 §4.6);
-9. **D2 试跑标签**: 真实 runner 首跑也可由工程打 `v*` 试跑标签触发 ([../scripts/package_windows.md](../scripts/package_windows.md) §8.1); 你若想自己控制发版节奏, 按 §4.5 执行即可。
+依据 [reports/ENGINEERING_CEILING_2026-08-25.md](reports/ENGINEERING_CEILING_2026-08-25.md),
+**无可自主推进项**。下列仅为决策落地后工程可接手的范围 (详见
+[reports/LAUNCH_BLOCKERS_2026-08-25.md](reports/LAUNCH_BLOCKERS_2026-08-25.md)):
+
+1. **路径 B — 配额解冻 (你选 B1/B2/B3 后)**: 批 J–M 置换/扩库执行
+   (`review_content_batch.sh` 五关机检 + D3 冻结闸门);
+2. **路径 C — D8 自动更新**: 你签字「实现 vs 降级 V1.1」后工程可起草方案;
+3. **路径 C — D2 试跑**: 你授权或自行触发 `windows-release` dispatch;
+4. **P1 项**: B4 内容包 / A7 体验缺口 / 商店截图草稿 (不阻断 V1)。
+
+**不要期待工程在无决策情况下继续扩内容或清零红灯。**
 
 ---
 
@@ -241,10 +245,15 @@ D4+ 全集 46 —— 新增批旗舰 `stonehenge_01` D4, 其余 15 个全部 D2/
 ```bash
 python3 tools/physical_risk_report.py    # 全库风险评分排序 + 「建议人手验 Top 15」(JSON/Markdown)
 python3 tools/physical_family_pack.py    # 结构族聚类: 每族一个代表, 同族其余由代表结论覆盖
+python3 tools/export_physical_review_queue.py \
+  --csv docs/reports/PHYSICAL_REVIEW_QUEUE.csv \
+  --markdown docs/reports/PHYSICAL_REVIEW_QUEUE.md   # 排产单表 (风险分降序, 必搭/可缓建)
 ```
 
-(两工具与 `--jitter` 均为 L2 批次交付物, **已全部入库** —— 逐槽
-哈希见 §2; 具体旗标以各自 `--help` 为准。)
+排产队列最新导出: [PHYSICAL_REVIEW_QUEUE.md](reports/PHYSICAL_REVIEW_QUEUE.md)
+(250 基线: 必搭 36 ≈ 42.8h + 可缓建 10 ≈ 11.7h)。三工具与 `--jitter`
+均为 L2 批次交付物 (**已全部入库**, 逐槽哈希见 §2); 具体旗标以各自
+`--help` 为准。
 
 | # | 做什么 | 准备什么 | 文档 | 预估工时 |
 | --- | --- | --- | --- | --- |
