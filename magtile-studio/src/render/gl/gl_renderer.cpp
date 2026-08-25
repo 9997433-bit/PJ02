@@ -21,7 +21,10 @@
 #include <cmath>
 #include <cstdio>
 #include <filesystem>
+#include <functional>
+#include <iterator>
 #include <string>
+#include <utility>
 #include <vector>
 
 #ifndef GLFW_INCLUDE_NONE
@@ -213,6 +216,84 @@ void glfwErrorCallback(int error, const char* description) {
     std::fprintf(stderr, "[render] GLFW 错误 %d: %s\n", error, description);
 }
 
+// ---- 模型库界面辅助 ------------------------------------------------
+
+/// 品牌与状态色 (模型库界面)。
+constexpr ImU32 kColorGreen = IM_COL32(43, 158, 78, 255);      ///< 已完成
+constexpr ImU32 kColorGold = IM_COL32(240, 173, 30, 255);      ///< 星级 / 收藏
+constexpr ImU32 kColorInk = IM_COL32(38, 43, 54, 255);         ///< 主文字
+const ImVec4 kAccentVec{0.28f, 0.44f, 0.93f, 1.0f};            ///< 品牌蓝
+
+/// 主题标签 -> 卡片主题色: 常见主题固定配色, 其余从调色板哈希取色,
+/// 同一主题在任何一次运行中颜色稳定。
+ImU32 themeColor32(const std::string& theme) {
+    static const std::pair<const char*, ImU32> kKnown[] = {
+        {"城堡", IM_COL32(103, 111, 219, 255)},
+        {"建筑基础", IM_COL32(66, 133, 244, 255)},
+        {"进阶", IM_COL32(230, 124, 55, 255)},
+        {"动物", IM_COL32(52, 168, 111, 255)},
+        {"车辆", IM_COL32(220, 88, 70, 255)},
+        {"太空", IM_COL32(126, 87, 194, 255)},
+        {"入门", IM_COL32(38, 166, 154, 255)},
+    };
+    for (const auto& [name, color] : kKnown) {
+        if (theme == name) return color;
+    }
+    static constexpr ImU32 kPalette[] = {
+        IM_COL32(66, 133, 244, 255),  IM_COL32(219, 68, 55, 255),  IM_COL32(244, 160, 0, 255),
+        IM_COL32(15, 157, 88, 255),   IM_COL32(171, 71, 188, 255), IM_COL32(0, 172, 193, 255),
+    };
+    const std::size_t index = std::hash<std::string>{}(theme) % std::size(kPalette);
+    return kPalette[index];
+}
+
+/// 难度 -> 星级字符串, 如 3 -> "★★★☆☆"。
+std::string difficultyStars(int difficulty) {
+    std::string stars;
+    for (int i = 1; i <= 5; ++i) stars += (i <= difficulty) ? "★" : "☆";
+    return stars;
+}
+
+/// 大小写不敏感 (仅 ASCII) 的子串匹配; 中文按 UTF-8 字节精确匹配。
+bool matchesSearch(const std::string& haystack, const std::string& needle) {
+    if (needle.empty()) return true;
+    const auto lower = [](std::string text) {
+        for (char& c : text) {
+            if (c >= 'A' && c <= 'Z') c = static_cast<char>(c - 'A' + 'a');
+        }
+        return text;
+    };
+    return lower(haystack).find(lower(needle)) != std::string::npos;
+}
+
+/// 绿色圆底对勾角标 (字体无关, 直接用 DrawList 画)。
+void drawCheckBadge(ImDrawList* draw_list, const ImVec2& center, float radius, ImU32 color) {
+    draw_list->AddCircleFilled(center, radius, color);
+    const ImU32 white = IM_COL32(255, 255, 255, 255);
+    const float t = radius * 0.24f;
+    draw_list->AddLine(ImVec2(center.x - radius * 0.42f, center.y + radius * 0.02f),
+                       ImVec2(center.x - radius * 0.10f, center.y + radius * 0.36f), white, t);
+    draw_list->AddLine(ImVec2(center.x - radius * 0.10f, center.y + radius * 0.36f),
+                       ImVec2(center.x + radius * 0.46f, center.y - radius * 0.30f), white, t);
+}
+
+/// 主题色圆角小徽章 (占位为一个 ImGui item, 参与布局)。
+void drawThemeBadge(const std::string& theme, ImU32 theme_color) {
+    ImDrawList* draw_list = ImGui::GetWindowDrawList();
+    const ImVec2 text_size = ImGui::CalcTextSize(theme.c_str());
+    const ImVec2 pad{9.0f, 3.0f};
+    const ImVec2 top_left = ImGui::GetCursorScreenPos();
+    const ImVec2 bottom_right{top_left.x + text_size.x + pad.x * 2.0f,
+                              top_left.y + text_size.y + pad.y * 2.0f};
+    // 半透明主题色底 + 主题色文字, 视觉轻但辨识度高
+    const ImU32 bg = (theme_color & 0x00FFFFFF) | 0x2E000000;
+    draw_list->AddRectFilled(top_left, bottom_right, bg,
+                             (bottom_right.y - top_left.y) * 0.5f);
+    draw_list->AddText(ImVec2(top_left.x + pad.x, top_left.y + pad.y), theme_color,
+                       theme.c_str());
+    ImGui::Dummy(ImVec2(bottom_right.x - top_left.x, bottom_right.y - top_left.y));
+}
+
 // ---- 渲染器实现 ---------------------------------------------------
 class GlRenderer final : public IWindowRenderer {
 public:
@@ -237,6 +318,7 @@ public:
         return actions;
     }
     [[nodiscard]] TutorialActions submitHud(const TutorialHudState& hud) override;
+    [[nodiscard]] LibraryActions submitLibrary(const std::vector<LibraryCard>& cards) override;
     void requestScreenshot(const std::string& ppm_path) override { screenshot_path_ = ppm_path; }
 
 private:
@@ -251,6 +333,9 @@ private:
     void createBuffers();
     void buildGridGeometry();
     void setupImGui();
+    /// 模型卡片: 大卡 (网格) 与小卡 (继续搭建区), 点击写入 actions。
+    void drawLibraryCard(const LibraryCard& card, const ImVec2& size, bool compact,
+                         LibraryActions& actions);
     void drawVertexBuffer(GLuint vao, GLuint vbo, const std::vector<float>& data, GLenum mode,
                           bool unlit);
     void appendTileGeometry(const PendingTile& tile);
@@ -262,6 +347,16 @@ private:
     GLFWwindow* window_ = nullptr;
     bool glfw_initialized_ = false;
     bool imgui_initialized_ = false;
+
+    // 字体 (正文 19px 为 ImGui 默认字体, 标题 28px 供模型库页眉)
+    ImFont* font_title_ = nullptr;
+    ImVector<ImWchar> glyph_ranges_;  ///< 字体图集构建期间必须保持存活
+
+    // 模型库界面的跨帧 UI 状态 (搜索词与筛选条件)
+    std::array<char, 128> library_search_{};
+    int library_difficulty_filter_ = 0;  ///< 0 = 全部难度, 1~5 = 对应星级
+    std::string library_theme_filter_;   ///< 空 = 全部主题
+    bool library_favorites_only_ = false;
 
     // GL 资源
     GLuint program_ = 0;
@@ -455,16 +550,38 @@ void GlRenderer::setupImGui() {
 
     ImGui::StyleColorsLight();
     ImGuiStyle& style = ImGui::GetStyle();
-    style.WindowRounding = 8.0f;
-    style.FrameRounding = 6.0f;
+    style.WindowRounding = 10.0f;
+    style.ChildRounding = 12.0f;
+    style.FrameRounding = 7.0f;
+    style.GrabRounding = 7.0f;
+    style.PopupRounding = 8.0f;
     style.WindowBorderSize = 0.0f;
+    style.FramePadding = ImVec2(10.0f, 6.0f);
+    style.ItemSpacing = ImVec2(10.0f, 8.0f);
+    // 品牌蓝作为交互控件的主色 (模型库 + 教程 HUD 统一观感)
+    ImVec4* colors = style.Colors;
+    colors[ImGuiCol_Button] = ImVec4(0.28f, 0.44f, 0.93f, 0.12f);
+    colors[ImGuiCol_ButtonHovered] = ImVec4(0.28f, 0.44f, 0.93f, 0.28f);
+    colors[ImGuiCol_ButtonActive] = ImVec4(0.28f, 0.44f, 0.93f, 0.45f);
+    colors[ImGuiCol_FrameBg] = ImVec4(0.93f, 0.94f, 0.97f, 1.0f);
+    colors[ImGuiCol_FrameBgHovered] = ImVec4(0.88f, 0.90f, 0.96f, 1.0f);
+    colors[ImGuiCol_FrameBgActive] = ImVec4(0.83f, 0.87f, 0.96f, 1.0f);
+    colors[ImGuiCol_PlotHistogram] = ImVec4(0.28f, 0.44f, 0.93f, 1.0f);
+    colors[ImGuiCol_CheckMark] = ImVec4(0.28f, 0.44f, 0.93f, 1.0f);
 
     if (const char* font_path = findCjkFontPath(); font_path != nullptr) {
-        io.Fonts->AddFontFromFileTTF(font_path, 19.0f, nullptr,
-                                     io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+        // 常用简体字形之外补充模型库界面用到的符号 (星级/角标/箭头)
+        ImFontGlyphRangesBuilder ranges_builder;
+        ranges_builder.AddRanges(io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+        ranges_builder.AddText("★☆●○◆▶◀·");
+        glyph_ranges_.clear();
+        ranges_builder.BuildRanges(&glyph_ranges_);
+        io.Fonts->AddFontFromFileTTF(font_path, 19.0f, nullptr, glyph_ranges_.Data);
+        font_title_ = io.Fonts->AddFontFromFileTTF(font_path, 28.0f, nullptr, glyph_ranges_.Data);
         std::printf("[render] HUD 字体: %s\n", font_path);
     } else {
         io.Fonts->AddFontDefault();
+        font_title_ = nullptr;
         std::fprintf(stderr, "[render] 警告: 未找到中文字体, HUD 中文可能无法显示\n");
     }
 
@@ -648,6 +765,10 @@ TutorialActions GlRenderer::submitHud(const TutorialHudState& hud) {
     ImGui::SetNextWindowPos(ImVec2(14.0f, 14.0f));
     ImGui::SetNextWindowBgAlpha(0.72f);
     if (ImGui::Begin("##model_info", nullptr, overlay_flags)) {
+        if (hud.show_back_button) {
+            if (ImGui::Button("◀ 返回模型库")) actions.back_to_library = true;
+            ImGui::SameLine();
+        }
         ImGui::Text("%s", hud.model_name.c_str());
         ImGui::Separator();
         ImGui::TextDisabled("鼠标左键 旋转 | 右键 平移 | 滚轮 缩放 | R 重置视角");
@@ -695,6 +816,317 @@ TutorialActions GlRenderer::submitHud(const TutorialHudState& hud) {
         ImGui::EndDisabled();
     }
     ImGui::End();
+    return actions;
+}
+
+// ---- 模型库界面 ----------------------------------------------------
+
+/// 截断到 UTF-8 字符边界并追加省略号 (卡片简介防溢出)。
+static std::string truncateUtf8(const std::string& text, std::size_t max_bytes) {
+    if (text.size() <= max_bytes) return text;
+    std::size_t cut = max_bytes;
+    while (cut > 0 && (static_cast<unsigned char>(text[cut]) & 0xC0) == 0x80) --cut;
+    return text.substr(0, cut) + "…";
+}
+
+void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bool compact,
+                                 LibraryActions& actions) {
+    const ImU32 theme_color = themeColor32(card.theme);
+    const ImVec4 ink = ImGui::ColorConvertU32ToFloat4(kColorInk);
+    const float pad = 16.0f;
+
+    ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+    ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.85f, 0.87f, 0.91f, 1.0f));
+    ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 12.0f);
+    const std::string child_id = (compact ? "resume_" : "card_") + card.model_id;
+    if (ImGui::BeginChild(child_id.c_str(), size, ImGuiChildFlags_Borders,
+                          ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse)) {
+        ImDrawList* draw_list = ImGui::GetWindowDrawList();
+        const ImVec2 origin = ImGui::GetWindowPos();
+
+        // 整卡可点: 先提交并允许覆盖, 卡内的按钮 (收藏/继续) 优先响应
+        ImGui::SetCursorPos(ImVec2(0.0f, 0.0f));
+        ImGui::SetNextItemAllowOverlap();
+        if (ImGui::InvisibleButton(("open_" + child_id).c_str(), size)) {
+            actions.open_model_id = card.model_id;
+        }
+        const bool hovered = ImGui::IsItemHovered();
+        if (hovered) ImGui::SetMouseCursor(ImGuiMouseCursor_Hand);
+
+        // 顶部主题色条 + 悬停时主题色描边
+        draw_list->AddRectFilled(origin, ImVec2(origin.x + size.x, origin.y + 5.0f), theme_color,
+                                 12.0f, ImDrawFlags_RoundCornersTop);
+        if (hovered) {
+            draw_list->AddRect(origin, ImVec2(origin.x + size.x, origin.y + size.y), theme_color,
+                               12.0f, 0, 2.0f);
+        }
+
+        // ---- 标题行 -------------------------------------------------
+        ImGui::SetCursorPos(ImVec2(pad, 14.0f));
+        ImGui::TextColored(ink, "%s", card.name.c_str());
+        if (card.completed) {
+            ImGui::SameLine();
+            const ImVec2 badge_pos = ImGui::GetCursorScreenPos();
+            drawCheckBadge(draw_list, ImVec2(badge_pos.x + 10.0f, badge_pos.y + 10.0f), 9.0f,
+                           kColorGreen);
+            ImGui::Dummy(ImVec2(22.0f, 0.0f));
+        }
+
+        if (compact) {
+            // ---- 小卡 (继续搭建区): 名称 / 进度条 / 继续按钮 ----------
+            const std::string step_text = "第 " + std::to_string(card.current_step) + " / " +
+                                          std::to_string(card.step_count) + " 步";
+            const float step_text_w = ImGui::CalcTextSize(step_text.c_str()).x;
+            ImGui::SetCursorPos(ImVec2(size.x - pad - step_text_w, 15.0f));
+            ImGui::TextColored(kAccentVec, "%s", step_text.c_str());
+
+            const float fraction =
+                card.step_count > 0
+                    ? static_cast<float>(card.current_step) / static_cast<float>(card.step_count)
+                    : 0.0f;
+            ImGui::SetCursorPos(ImVec2(pad, 46.0f));
+            ImGui::ProgressBar(fraction, ImVec2(size.x - pad * 2.0f, 8.0f), "");
+
+            ImGui::SetCursorPos(ImVec2(pad, 70.0f));
+            ImGui::TextDisabled("难度 %s · %d 片", difficultyStars(card.difficulty).c_str(),
+                                card.total_pieces);
+
+            ImGui::SetCursorPos(ImVec2(size.x - pad - 126.0f, 64.0f));
+            ImGui::PushStyleColor(ImGuiCol_Button, kAccentVec);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.36f, 0.52f, 0.96f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.22f, 0.36f, 0.82f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+            if (ImGui::Button(("继续搭建 ▶##resume_" + card.model_id).c_str(),
+                              ImVec2(126.0f, 32.0f))) {
+                actions.open_model_id = card.model_id;
+            }
+            ImGui::PopStyleColor(4);
+        } else {
+            // ---- 大卡 (模型网格) ------------------------------------
+            // 收藏星标 (右上角)
+            ImGui::SetCursorPos(ImVec2(size.x - 44.0f, 9.0f));
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.94f, 0.68f, 0.12f, 0.18f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.94f, 0.68f, 0.12f, 0.35f));
+            ImGui::PushStyleColor(ImGuiCol_Text,
+                                  card.favorited ? ImGui::ColorConvertU32ToFloat4(kColorGold)
+                                                 : ImVec4(0.66f, 0.68f, 0.73f, 1.0f));
+            if (ImGui::Button(((card.favorited ? "★##fav_" : "☆##fav_") + card.model_id).c_str(),
+                              ImVec2(32.0f, 30.0f))) {
+                actions.toggle_favorite_id = card.model_id;
+            }
+            ImGui::PopStyleColor(4);
+
+            if (!card.name_en.empty()) {
+                ImGui::SetCursorPos(ImVec2(pad, 41.0f));
+                ImGui::TextDisabled("%s", card.name_en.c_str());
+            }
+
+            // 星级难度 + 片数/步数
+            ImGui::SetCursorPos(ImVec2(pad, 66.0f));
+            std::string filled, hollow;
+            for (int i = 1; i <= 5; ++i) ((i <= card.difficulty) ? filled : hollow) += "★";
+            ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorGold), "%s", filled.c_str());
+            if (!hollow.empty()) {
+                ImGui::SameLine(0.0f, 0.0f);
+                ImGui::TextColored(ImVec4(0.80f, 0.82f, 0.86f, 1.0f), "%s", hollow.c_str());
+            }
+            ImGui::SameLine(0.0f, 12.0f);
+            ImGui::TextDisabled("%d 片 · %d 步", card.total_pieces, card.step_count);
+
+            // 主题徽章
+            ImGui::SetCursorPos(ImVec2(pad, 92.0f));
+            drawThemeBadge(card.theme, theme_color);
+
+            // 简介 (两行内, 超长截断)
+            if (!card.description.empty()) {
+                ImGui::SetCursorPos(ImVec2(pad, 124.0f));
+                ImGui::PushTextWrapPos(size.x - pad);
+                ImGui::TextDisabled("%s", truncateUtf8(card.description, 78).c_str());
+                ImGui::PopTextWrapPos();
+            }
+
+            // ---- 底部状态行 ------------------------------------------
+            ImGui::SetCursorPos(ImVec2(pad, size.y - 32.0f));
+            if (card.completed) {
+                ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorGreen),
+                                   "已完成 · 点击可重新搭建");
+            } else if (card.started) {
+                const float fraction =
+                    card.step_count > 0 ? static_cast<float>(card.current_step) /
+                                              static_cast<float>(card.step_count)
+                                        : 0.0f;
+                ImGui::ProgressBar(fraction, ImVec2(size.x * 0.42f, 8.0f), "");
+                ImGui::SameLine();
+                ImGui::TextColored(kAccentVec, "第 %d / %d 步", card.current_step,
+                                   card.step_count);
+            } else {
+                ImGui::TextDisabled("未开始 · 点击开始搭建");
+            }
+        }
+    }
+    ImGui::EndChild();
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor(2);
+}
+
+LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards) {
+    LibraryActions actions;
+    const ImGuiIO& io = ImGui::GetIO();
+
+    // 主题筛选候选: 全部卡片标签去重, 保持出现顺序
+    std::vector<std::string> all_tags;
+    for (const auto& card : cards) {
+        for (const auto& tag : card.tags) {
+            if (std::find(all_tags.begin(), all_tags.end(), tag) == all_tags.end()) {
+                all_tags.push_back(tag);
+            }
+        }
+    }
+
+    const float margin = 26.0f;
+    const float panel_width = std::min(io.DisplaySize.x - margin * 2.0f, 1240.0f);
+    const float panel_height = io.DisplaySize.y - margin * 2.0f;
+    ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, margin), ImGuiCond_Always,
+                            ImVec2(0.5f, 0.0f));
+    ImGui::SetNextWindowSize(ImVec2(panel_width, panel_height));
+    ImGui::SetNextWindowBgAlpha(0.965f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 16.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(26.0f, 22.0f));
+    const ImGuiWindowFlags panel_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
+                                         ImGuiWindowFlags_NoSavedSettings |
+                                         ImGuiWindowFlags_NoFocusOnAppearing;
+    if (ImGui::Begin("##library_screen", nullptr, panel_flags)) {
+        // ---- 页眉 ----------------------------------------------------
+        if (font_title_ != nullptr) ImGui::PushFont(font_title_);
+        ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorInk), "MagTile Studio 模型库");
+        if (font_title_ != nullptr) ImGui::PopFont();
+        ImGui::TextDisabled("挑选一个模型, 跟随 3D 分步教程开始搭建 · 共 %d 个模型 · Esc 退出",
+                            static_cast<int>(cards.size()));
+        ImGui::Spacing();
+
+        // ---- 筛选行: 搜索 / 难度 / 主题 / 收藏 -------------------------
+        ImGui::SetNextItemWidth(300.0f);
+        ImGui::InputTextWithHint("##library_search", "搜索模型名称…", library_search_.data(),
+                                 library_search_.size());
+        ImGui::SameLine();
+        static const char* kDifficultyItems[] = {"全部难度", "★",     "★★",
+                                                 "★★★",   "★★★★", "★★★★★"};
+        ImGui::SetNextItemWidth(140.0f);
+        if (ImGui::BeginCombo("##difficulty_filter",
+                              kDifficultyItems[library_difficulty_filter_])) {
+            for (int i = 0; i < 6; ++i) {
+                if (ImGui::Selectable(kDifficultyItems[i], i == library_difficulty_filter_)) {
+                    library_difficulty_filter_ = i;
+                }
+            }
+            ImGui::EndCombo();
+        }
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(170.0f);
+        const std::string theme_preview =
+            library_theme_filter_.empty() ? "全部主题" : library_theme_filter_;
+        if (ImGui::BeginCombo("##theme_filter", theme_preview.c_str())) {
+            if (ImGui::Selectable("全部主题", library_theme_filter_.empty())) {
+                library_theme_filter_.clear();
+            }
+            for (const auto& tag : all_tags) {
+                if (ImGui::Selectable(tag.c_str(), tag == library_theme_filter_)) {
+                    library_theme_filter_ = tag;
+                }
+            }
+            ImGui::EndCombo();
+        }
+        ImGui::SameLine();
+        ImGui::Checkbox("只看收藏", &library_favorites_only_);
+
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::Spacing();
+
+        ImGui::BeginChild("##library_scroll", ImVec2(0.0f, 0.0f), ImGuiChildFlags_None,
+                          ImGuiWindowFlags_NoBackground);
+        const float spacing = 16.0f;
+        const float avail_width = ImGui::GetContentRegionAvail().x;
+        const auto columnsFor = [&](float card_width) {
+            return std::max(1, static_cast<int>((avail_width + spacing) /
+                                                (card_width + spacing)));
+        };
+
+        // ---- 继续搭建 (进行中的模型, 不受筛选影响置顶展示) --------------
+        std::vector<const LibraryCard*> in_progress;
+        for (const auto& card : cards) {
+            if (card.started && !card.completed) in_progress.push_back(&card);
+        }
+        if (!in_progress.empty()) {
+            ImGui::TextColored(kAccentVec, "▶ 继续搭建");
+            ImGui::SameLine();
+            ImGui::TextDisabled("上次没搭完的模型 (%d 个)",
+                                static_cast<int>(in_progress.size()));
+            ImGui::Spacing();
+            const ImVec2 resume_size{392.0f, 106.0f};
+            const int columns = columnsFor(resume_size.x);
+            int index = 0;
+            for (const LibraryCard* card : in_progress) {
+                drawLibraryCard(*card, resume_size, /*compact=*/true, actions);
+                ++index;
+                if (index % columns != 0 && index < static_cast<int>(in_progress.size())) {
+                    ImGui::SameLine(0.0f, spacing);
+                }
+            }
+            ImGui::Spacing();
+            ImGui::Spacing();
+        }
+
+        // ---- 全部模型 (按搜索与筛选条件过滤) ---------------------------
+        std::vector<const LibraryCard*> filtered;
+        const std::string search = library_search_.data();
+        for (const auto& card : cards) {
+            if (library_difficulty_filter_ != 0 &&
+                card.difficulty != library_difficulty_filter_) {
+                continue;
+            }
+            if (!library_theme_filter_.empty() &&
+                std::find(card.tags.begin(), card.tags.end(), library_theme_filter_) ==
+                    card.tags.end()) {
+                continue;
+            }
+            if (library_favorites_only_ && !card.favorited) continue;
+            if (!matchesSearch(card.name, search) && !matchesSearch(card.name_en, search) &&
+                !matchesSearch(card.model_id, search)) {
+                continue;
+            }
+            filtered.push_back(&card);
+        }
+
+        ImGui::TextColored(ImGui::ColorConvertU32ToFloat4(kColorInk), "全部模型");
+        ImGui::SameLine();
+        ImGui::TextDisabled("%d / %d 个", static_cast<int>(filtered.size()),
+                            static_cast<int>(cards.size()));
+        ImGui::Spacing();
+
+        if (filtered.empty()) {
+            ImGui::Dummy(ImVec2(0.0f, 36.0f));
+            const char* empty_text = "没有找到匹配的模型, 试试清空搜索或放宽筛选条件";
+            const float text_width = ImGui::CalcTextSize(empty_text).x;
+            ImGui::SetCursorPosX(std::max(0.0f, (avail_width - text_width) * 0.5f));
+            ImGui::TextDisabled("%s", empty_text);
+        } else {
+            const ImVec2 card_size{300.0f, 202.0f};
+            const int columns = columnsFor(card_size.x);
+            int index = 0;
+            for (const LibraryCard* card : filtered) {
+                drawLibraryCard(*card, card_size, /*compact=*/false, actions);
+                ++index;
+                if (index % columns != 0 && index < static_cast<int>(filtered.size())) {
+                    ImGui::SameLine(0.0f, spacing);
+                }
+            }
+        }
+        ImGui::EndChild();
+    }
+    ImGui::End();
+    ImGui::PopStyleVar(2);
     return actions;
 }
 
