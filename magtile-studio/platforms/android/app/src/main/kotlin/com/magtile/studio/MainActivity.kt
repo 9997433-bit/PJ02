@@ -70,9 +70,11 @@ import java.util.concurrent.Executors
  * 生效后全库直达教程。订阅状态经 MagTileNative.subscriptionActive()
  * 读进度存档 settings 表 (progress/subscription_settings 契约键,
  * 与桌面 BillingBackend 同键, 缺键/脏值按未订阅兜底宁可锁)。
- * Debug 构建另有「模拟已订阅」QA 开关 (家长门后的年龄段对话框内,
- * BuildConfig.DEBUG 恒 false 的 Release 档不可见), 与桌面订阅页
- * devControlsEnabled 开发开关同角色; 不接任何真实商店 SDK。
+ * 订阅页入口在家长门后的年龄段对话框 (正键「订阅」, §11 价格只
+ * 出现在门后) -> SubscriptionActivity (三档档位卡 + 恢复购买;
+ * Debug 档「模拟已订阅」QA 开关也住在订阅页里, 与桌面订阅页
+ * devControlsEnabled 开发开关同位置策略), 返回时重读契约键刷新
+ * 免费层锁 (购买 / 恢复 / 模拟开关都可能翻转订阅状态)。
  */
 class MainActivity : Activity() {
 
@@ -331,6 +333,11 @@ class MainActivity : Activity() {
                 ?.takeIf { it.isNotBlank() }
                 ?.let { openModelDetailById(it) }
         }
+        // 订阅页返回 RESULT_OK = 订阅状态可能已翻转 (购买/恢复/模拟
+        // 开关): 重读契约键刷新详情弹窗的免费层锁
+        if (requestCode == REQUEST_SUBSCRIPTION && resultCode == RESULT_OK) {
+            refreshSubscriptionState()
+        }
     }
 
     /**
@@ -444,67 +451,57 @@ class MainActivity : Activity() {
 
     /** 三档单选对话框 (展示名对齐 core::displayNameZh); 家长门通过
      *  后由标题栏入口调起 (ParentGateDialog.requireParent)。中性键
-     *  「隐私与数据」进隐私面板 (同在家长门后, 与桌面家长中心一致);
-     *  Debug 构建的正键为「模拟已订阅」QA 开关 (见 toggleDevBilling)。 */
+     *  「隐私与数据」进隐私面板, 正键「订阅」进订阅页 (两者同在
+     *  家长门后, 与桌面家长中心的入口聚合一致; 价格只出现在订阅页
+     *  §11, Debug 档「模拟已订阅」QA 开关也住在订阅页里)。 */
     private fun showAgeModeDialog() {
         val ids = listOf(AGE_4_6, AGE_7_9, AGE_10_12)
         val labels = arrayOf(
             getString(R.string.age_mode_4_6),
             getString(R.string.age_mode_7_9),
             getString(R.string.age_mode_10_12))
-        val builder = AlertDialog.Builder(this)
+        AlertDialog.Builder(this)
             .setTitle(R.string.age_mode_dialog_title)
             .setSingleChoiceItems(labels, ids.indexOf(ageModeId)) { dialog, which ->
                 dialog.dismiss()
                 switchAgeMode(ids[which])
             }
             .setNeutralButton(R.string.privacy_entry) { _, _ -> showPrivacyDialog() }
-            .setNegativeButton(R.string.dialog_close, null)
-        if (BuildConfig.DEBUG) {
-            // 「模拟已订阅」QA 开关 (仅 Debug 构建; BuildConfig.DEBUG 为
-            // 编译期常量, Release 档此分支不可达 —— 与桌面订阅页
-            // devControlsEnabled 开发开关同角色同位置策略: 家长门后)。
-            // 按钮标签描述将要执行的动作 (当前未订阅 -> 「开」)。
-            builder.setPositiveButton(
-                getString(if (subscriptionActive) R.string.dev_billing_turn_off
-                          else R.string.dev_billing_turn_on)) { _, _ ->
-                toggleDevBilling()
+            .setPositiveButton(R.string.subscription_entry) { _, _ ->
+                openSubscriptionPage()
             }
-        }
-        builder.show()
+            .setNegativeButton(R.string.dialog_close, null)
+            .show()
     }
 
     /**
-     * Debug 档「模拟已订阅」切换 (QA 用, 与桌面 FakeBillingClient::
-     * devSetSubscribed 同口径): 打开时以年度主推档 sub_yearly 为模拟
-     * 档位, 经 JNI 写 progress/subscription_settings 契约键落盘 ——
-     * 与桌面同键, 存档跨端互认; 落盘失败不翻转界面解锁状态 (订阅
-     * 权益以落盘为准), 只温和提示。不产生任何真实扣费。
+     * 进订阅页 (家长门后, UI_UX_SPEC §11): 三档档位卡 + 恢复购买
+     * (SubscriptionActivity, 价格实时读 Play 后台); 带上免费层模型数
+     * 供页首「免费额度明示」(与桌面 studio.freeModelCount 同口径)。
+     * 带 result 启动: 购买 / 恢复 / Debug 模拟开关都可能翻转订阅
+     * 状态, 返回 RESULT_OK 时重读契约键刷新免费层锁。
      */
-    private fun toggleDevBilling() {
-        if (!BuildConfig.DEBUG) return  // Release 档误接线也改不了订阅状态
-        val target = !subscriptionActive
+    private fun openSubscriptionPage() {
+        startActivityForResult(
+            Intent(this, SubscriptionActivity::class.java)
+                .putExtra(SubscriptionActivity.EXTRA_FREE_MODEL_COUNT,
+                          allCards.count { it.isFree }),
+            REQUEST_SUBSCRIPTION)
+    }
+
+    /** 订阅页返回后的免费层锁刷新: 重读契约键 (SQLite IO 放工作
+     *  线程), 与启动链路同一读取口径 —— 界面解锁状态只信落盘值。 */
+    private fun refreshSubscriptionState() {
         backgroundExecutor.execute {
-            val persisted = try {
-                MagTileNative.setSubscriptionActive(
-                    target, if (target) DEV_BILLING_PRODUCT_ID else "")
+            val active = try {
+                MagTileNative.subscriptionActive()
             } catch (t: Throwable) {
-                Log.e(TAG, "模拟订阅切换失败", t)
-                false
+                Log.e(TAG, "订阅状态重读没成功", t)
+                return@execute
             }
             runOnUiThread {
                 if (isFinishing || isDestroyed) return@runOnUiThread
-                if (persisted) {
-                    subscriptionActive = target
-                }
-                android.widget.Toast.makeText(
-                    this,
-                    getString(when {
-                        !persisted -> R.string.dev_billing_soft_fail
-                        target -> R.string.dev_billing_on_toast
-                        else -> R.string.dev_billing_off_toast
-                    }),
-                    android.widget.Toast.LENGTH_LONG).show()
+                subscriptionActive = active
             }
         }
     }
@@ -896,6 +893,7 @@ class MainActivity : Activity() {
         private const val TAG = "MagTileMain"
         private const val REQUEST_INVENTORY = 1001
         private const val REQUEST_PROGRESS = 1002
+        private const val REQUEST_SUBSCRIPTION = 1003
 
         /** 进度存档文件名 (filesDir 下; 与桌面同一 SQLite schema)。 */
         const val PROGRESS_DB_NAME = "progress.db"
@@ -904,10 +902,6 @@ class MainActivity : Activity() {
         private const val AGE_4_6 = "age_4_6"
         private const val AGE_7_9 = "age_7_9"
         private const val AGE_10_12 = "age_10_12"
-
-        /** Debug 档「模拟已订阅」写档的模拟档位: 年度主推 (与桌面
-         *  FakeBillingClient::devSetSubscribed 同一档位约定)。 */
-        private const val DEV_BILLING_PRODUCT_ID = "sub_yearly"
 
         init {
             // 对应 platforms/android/CMakeLists.txt 产出的 libmagtile_core.so

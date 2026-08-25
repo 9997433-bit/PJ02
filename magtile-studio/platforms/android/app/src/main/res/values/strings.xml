@@ -57,12 +57,10 @@
          搭建」入口, 不锁浏览/校验; 无价格无催促 §12.2, 措辞对齐
          桌面 Qt DetailPage 订阅横幅; 订阅生效后本提示退场, 直达教程) -->
     <string name="dialog_subscription_note">🔒 这个模型属于订阅内容: 简介和物理校验随时可以看, 完整分步教程订阅后解锁; 免费区的模型永久免费, 用「只看免费」随时开搭。</string>
-    <!-- Debug 构建的「模拟已订阅」QA 开关 (家长门后的年龄段对话框
-         正键; Release 档 BuildConfig.DEBUG 恒 false 不可见。写
-         progress/subscription_settings 契约键, 与桌面订阅页
-         devControlsEnabled 开发开关同角色, 零真实扣费) -->
-    <string name="dev_billing_turn_on">🧪 模拟订阅: 开</string>
-    <string name="dev_billing_turn_off">🧪 模拟订阅: 关</string>
+    <!-- Debug 构建的「模拟已订阅」QA 开关提示 (订阅页内的开发档
+         开关行, 与桌面订阅页 devControlsEnabled 开发开关同角色
+         同位置; Release 档 BuildConfig.DEBUG 恒 false 不可见。写
+         progress/subscription_settings 契约键, 零真实扣费) -->
     <string name="dev_billing_on_toast">模拟订阅已开启 (仅测试构建, 未产生任何扣费) —— 全库已解锁</string>
     <string name="dev_billing_off_toast">模拟订阅已关闭 —— 回到免费层</string>
     <string name="dev_billing_soft_fail">这次没切换成功, 稍后再试一次就好</string>
@@ -203,4 +201,65 @@
     <string name="privacy_clear_confirm_no">先不清除</string>
     <string name="privacy_clear_done">本机数据已清除, 一切回到最初的样子</string>
     <string name="privacy_clear_soft_fail">这次没清除成功, 稍后再试一次就好</string>
+    <!-- 订阅页 (家长门后, UI_UX_SPEC.md §11; 对齐桌面 Qt
+         SubscriptionPage 的结构与措辞): 价格只出现在本页 —— 儿童侧
+         界面零价格信息; 无倒计时/无催促话术/不索取任何个人信息。
+         入口在家长门后的年龄段对话框 (与「隐私与数据」同位)。 -->
+    <string name="subscription_entry">订阅</string>
+    <string name="subscription_title">订阅</string>
+    <string name="subscription_back">← 返回</string>
+    <!-- 页首免费额度明示 (§11 反套路即信任; %1$d = 免费层模型数,
+         模型库尚未加载完时退回不带数字的版本) -->
+    <string name="subscription_free_notice">✓ 无需付费, 现在就能玩 %1$d 个精选模型 —— 永久免费, 功能不打折</string>
+    <string name="subscription_free_notice_no_count">✓ 无需付费也可以玩精选模型 —— 永久免费, 功能不打折</string>
+    <string name="subscription_intro_title">订阅能解锁什么</string>
+    <string name="subscription_intro_body">一份订阅解锁模型库里的全部模型, 以及之后每周的新模型。免费的精选模型永远免费; 订阅只增加内容, 不锁任何功能 —— 3D 教程、物理校验、进度存档对所有家庭完全一样。</string>
+    <!-- 订阅生效状态卡 (完成绿「已拥有」; %1$s = 生效档位中文名) -->
+    <string name="subscription_active_title">✓ 订阅生效中</string>
+    <string name="subscription_active_title_plan">✓ 订阅生效中 · %1$s</string>
+    <string name="subscription_active_body">全库模型已解锁, 每周上新自动包含。取消入口在 Google Play「付款与订阅」, 一步直达, 不设挽留关卡。</string>
+    <!-- 档位卡数据: 三端统一商品 id 的中文名与说明 (与桌面
+         FakeBillingClient / store_billing_client 档位表同文案,
+         COMMERCIAL_PLAN §3.1); 价格不在本地写死 —— 实时经
+         PlayBillingManager.queryProducts 读 Play 后台本地化价格 -->
+    <string name="plan_monthly_name">月度订阅</string>
+    <string name="plan_monthly_blurb">先试试水, 随时取消</string>
+    <string name="plan_yearly_name">年度订阅</string>
+    <string name="plan_yearly_blurb">一次开通一整年, 7 天无理由退款</string>
+    <string name="plan_family_name">家庭年度</string>
+    <string name="plan_family_blurb">最多 4 个儿童档案 + 6 台设备</string>
+    <!-- %1$s = Play 后台下发的本地化价格 (如 ¥198.00) -->
+    <string name="plan_price_per_month">%1$s / 月</string>
+    <string name="plan_price_per_year">%1$s / 年</string>
+    <!-- 主推徽标 (中性推荐, 非稀缺/催促话术, 与桌面同文案) -->
+    <string name="subscription_recommended_badge">多数家庭的选择</string>
+    <!-- 商品查询中 / 查询不可用 (无网/商店没连上/Debug 档温和短路)
+         的温和占位: 不显示空价格卡, 与桌面「即将上线」同语义 -->
+    <string name="subscription_loading_products">正在向商店查询订阅档位与价格…</string>
+    <string name="subscription_placeholder">订阅功能正在准备中, 上线后会在这里开放 —— 免费模型现在就能玩</string>
+    <!-- 主 CTA (点卡只是选择, 购买必须再按这里 —— 无预勾选加购语义) -->
+    <string name="subscription_cta">🌱 开通订阅</string>
+    <string name="subscription_cta_coming">🌱 订阅即将上线</string>
+    <string name="subscription_restore">↺ 恢复购买</string>
+    <!-- 购买/恢复结果 (与桌面 BillingBackend 同措辞: 中性/正向两档,
+         儿童友好红线同样适用 —— 家长页也不用「失败」恐吓) -->
+    <string name="subscription_purchase_done">订阅已开通 —— 全库已解锁</string>
+    <string name="subscription_purchase_cancelled">已取消, 随时可以再来</string>
+    <string name="subscription_purchase_unavailable">这次没开通成功, 稍后再试一次就好 —— 免费模型现在就能玩</string>
+    <string name="subscription_restore_done">已恢复订阅 —— 全库重新解锁</string>
+    <string name="subscription_restore_nothing">这个账户下暂时没有可恢复的订阅</string>
+    <string name="subscription_restore_unavailable">商店这次没连上, 稍后再试一次就好</string>
+    <string name="subscription_restore_coming">恢复购买将随正式商店版开放</string>
+    <!-- 我们的承诺 (透明条款, §11 / COMMERCIAL_PLAN §2-3) -->
+    <string name="subscription_promises_title">我们的承诺</string>
+    <string name="subscription_promise_1">✓ 儿童界面永远不显示价格与付费入口, 付费只由家长在这里决定</string>
+    <string name="subscription_promise_2">✓ 无倒计时、无「即将涨价」、无预勾选加购; 订阅前不索取任何个人信息</string>
+    <string name="subscription_promise_3">✓ 条款透明: 自动续费规则以商店页为准, 取消一步直达 Google Play「付款与订阅」, 年度档 7 天无理由退款</string>
+    <string name="subscription_promise_4">✓ 换机或重装后, 用本页的「恢复购买」一键找回订阅</string>
+    <string name="subscription_footer">本页只在家长验证之后可见; 这里的一切都不会出现在孩子的界面里。</string>
+    <!-- 开发档「模拟已订阅」开关行 (仅 Debug 构建可见, 与桌面订阅页
+         devControlsEnabled 开发开关同角色同位置; 开关结果沿用上方
+         dev_billing_* 提示串) -->
+    <string name="subscription_dev_title">开发档: 模拟已订阅</string>
+    <string name="subscription_dev_body">仅测试构建可见 (与桌面订阅页开发开关同角色): 不接商店、不产生扣费, 用于演练免费层锁的解锁与回锁。</string>
 </resources>

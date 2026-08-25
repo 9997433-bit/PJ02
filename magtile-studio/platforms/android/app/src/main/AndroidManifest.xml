@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- MagTile Studio Android 清单: 模型库 + 库存录入 + 进度页 + 成就墙
-     + 分步教程 五个 Activity, 无任何权限申请 (数据资产随 APK assets
+     + 分步教程 + 订阅页 六个 Activity, 无任何权限申请 (数据资产随 APK assets
      分发, 首启解包到应用私有目录; 进度存档 SQLite 亦在应用私有目录;
      Play Billing 的 com.android.vending.BILLING 权限由计费库清单
      自动合入, 不属"申请系统权限"范畴)。 -->
@@ -51,6 +51,13 @@
              文字分步, 当前步写进度存档) -->
         <activity
             android:name=".TutorialActivity"
+            android:exported="false" />
+
+        <!-- 订阅页 (家长门后的年龄段对话框「订阅」键进入, UI_UX_SPEC
+             §11: 三档档位卡 + 恢复购买; 价格只出现在本页, 家长会话
+             到期自动退场 —— 儿童侧零价格红线) -->
+        <activity
+            android:name=".SubscriptionActivity"
             android:exported="false" />
     </application>
 

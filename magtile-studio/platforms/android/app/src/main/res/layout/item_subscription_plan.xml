@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 订阅页档位卡 (对齐桌面 Qt SubscriptionPage 档位卡): 中文档位名
+     + 主推徽标 (仅年度档) + 一句话说明 + Play 后台本地化价格。
+     整卡可点 = 选择该档位 (state_selected 换主色浅底加粗描边,
+     bg_plan_card); 购买必须再按页面主 CTA, 无预勾选加购语义 §11。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_plan_card"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/button_height"
+    android:orientation="horizontal"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/plan_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/magtile_text_primary"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/plan_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_plan_badge"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="@string/subscription_recommended_badge"
+                android:textColor="@color/magtile_on_primary"
+                android:textSize="@dimen/text_caption"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/plan_blurb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/magtile_text_secondary"
+            android:textSize="@dimen/text_secondary" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/plan_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textColor="@color/magtile_text_primary"
+        android:textSize="@dimen/text_section"
+        android:textStyle="bold" />
+</LinearLayout>
