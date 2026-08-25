@@ -1,0 +1,1286 @@
+{
+  "schema_version": 1,
+  "id": "canoe_01",
+  "name": "湖上独木舟",
+  "name_en": "Lake Canoe 01",
+  "description": "全库第一条独木舟: 船底长板嵌进水面同层平铺 (与湖面锁成连续水面), 八片舷墙方板竖边连吸、与端墙四角咬合成环, 船首船尾等边翘头昂起 1.87 格; 舱内座板三边整边吸船帮顶边横跨如桥, 船头行囊四坡自锁; 湖面两座浮标锥画定航道, 鸭妈妈带小鸭让路, 岸上沙滩、绿树、芦苇点景 —— 桨声欸乃, 湖光十里。",
+  "difficulty": 3,
+  "total_pieces": 68,
+  "tags": [
+    "自然",
+    "湖泊",
+    "独木舟",
+    "海洋",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 29,
+        "equilateral_triangle": 23,
+        "rectangle": 14,
+        "isosceles_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "sh_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sh_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sh_r_1",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sh_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sh_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sh_r_3",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sh_0_4",
+      "type": "square",
+      "position": [
+        0.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sh_1_4",
+      "type": "square",
+      "position": [
+        1.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sd_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sd_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sd_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sd_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sd_4",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lk_a0",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_b0",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_7_0",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_8_0",
+      "type": "square",
+      "position": [
+        8.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_a1",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_b1",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_c1",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_c2",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_b3",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_7_3",
+      "type": "square",
+      "position": [
+        7.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_8_3",
+      "type": "square",
+      "position": [
+        8.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_a4",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_b4",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lk_c4",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hl_w",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hl_e",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_s_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_s_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_n_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_n_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_bow",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gw_stn",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bow_tip",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stn_tip",
+      "type": "equilateral_triangle",
+      "position": [
+        7.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "seat_bow",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "seat_stn",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pack_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pack_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pack_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pack_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "buoy_s_s",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "buoy_s_e",
+      "type": "equilateral_triangle",
+      "position": [
+        7.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "buoy_s_n",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "buoy_s_w",
+      "type": "equilateral_triangle",
+      "position": [
+        7.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "buoy_n_s",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        3.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "buoy_n_e",
+      "type": "equilateral_triangle",
+      "position": [
+        7.833333,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "buoy_n_n",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        3.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "buoy_n_w",
+      "type": "equilateral_triangle",
+      "position": [
+        7.166667,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "duck_a",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "duck_b",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fish",
+      "type": "equilateral_triangle",
+      "position": [
+        8.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "tr_a",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_b",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        5.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "reed",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        5.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_e",
+      "type": "equilateral_triangle",
+      "position": [
+        0.833333,
+        2.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.166667,
+        2.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fl",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺西岸草地: 8 片绿色地坪铺出湖岸。",
+      "tip": "岸边角落交替用方板 —— 树和灌木都要吸方板格边。",
+      "tiles_to_add": [
+        "sh_0_0",
+        "sh_1_0",
+        "sh_r_1",
+        "sh_0_2",
+        "sh_1_2",
+        "sh_r_3",
+        "sh_0_4",
+        "sh_1_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺沙滩: 5 片金黄方板一列排开, 这是下水的地方。",
+      "tip": "沙滩东格边就是湖岸线 —— 船底马上要吸这条边。",
+      "tiles_to_add": [
+        "sd_0",
+        "sd_1",
+        "sd_2",
+        "sd_3",
+        "sd_4"
+      ],
+      "highlight_tiles": [
+        "sh_1_0",
+        "sh_1_4"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺湖面南半: 7 片蓝色湖水由岸向湖心铺开。",
+      "tip": "浮标位 (7,0) 要用方板 —— 四坡锥的底边要吸格边。",
+      "tiles_to_add": [
+        "lk_a0",
+        "lk_b0",
+        "lk_7_0",
+        "lk_8_0",
+        "lk_a1",
+        "lk_b1",
+        "lk_c1"
+      ],
+      "highlight_tiles": [
+        "sd_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺湖面北半: 8 片合拢, 湖心留出 [3,7] 一条船位。",
+      "tip": "鸭群一行用方板 —— 母鸭小鸭都要站格边。",
+      "tiles_to_add": [
+        "lk_3_3",
+        "lk_4_3",
+        "lk_b3",
+        "lk_7_3",
+        "lk_8_3",
+        "lk_a4",
+        "lk_b4",
+        "lk_c4"
+      ],
+      "highlight_tiles": [
+        "lk_a1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "嵌船底: 2 片橙色长板嵌进船位, 西短边吸沙滩格边、长边吸湖面长板, 再补船尾外 1 片湖水。",
+      "tip": "船底与湖面同层平铺零重叠 —— 船就是湖面的一部分。",
+      "tiles_to_add": [
+        "hl_w",
+        "hl_e",
+        "lk_c2"
+      ],
+      "highlight_tiles": [
+        "sd_2",
+        "lk_b1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立南舷墙: 4 片橙色方板沿 y=2 一字排开, 相邻竖边互吸。",
+      "tip": "底边完整落在船底长边内 —— 长短边贴合同样牢固。",
+      "tiles_to_add": [
+        "gw_s_3",
+        "gw_s_4",
+        "gw_s_5",
+        "gw_s_6"
+      ],
+      "highlight_tiles": [
+        "hl_w",
+        "hl_e"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立北舷墙: 北侧再立 4 片, 船帮两舷成形。",
+      "tip": "两舷平行如轨 —— 座板要横跨在它们顶上。",
+      "tiles_to_add": [
+        "gw_n_3",
+        "gw_n_4",
+        "gw_n_5",
+        "gw_n_6"
+      ],
+      "highlight_tiles": [
+        "gw_s_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "封船首船尾: 2 片端墙方板, 竖边与两舷四角咬合成环。",
+      "tip": "端墙一封, 船体锁成一只不进水的浅盒。",
+      "tiles_to_add": [
+        "gw_bow",
+        "gw_stn"
+      ],
+      "highlight_tiles": [
+        "gw_s_3",
+        "gw_n_6"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "竖翘头: 船首船尾端墙顶上各立 1 片等边三角, 昂起 1.87 格。",
+      "tip": "独木舟的招牌翘头 —— 重心正压铰链, 劈波不低头。",
+      "tiles_to_add": [
+        "bow_tip",
+        "stn_tip"
+      ],
+      "highlight_tiles": [
+        "gw_bow",
+        "gw_stn"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "架座板: 2 片黄色方板横跨船帮, 三边整边吸舷墙与端墙顶边。",
+      "tip": "座板如桥双边受力 —— 一前一后, 双人划桨的位置。",
+      "tiles_to_add": [
+        "seat_bow",
+        "seat_stn"
+      ],
+      "highlight_tiles": [
+        "gw_s_3",
+        "gw_s_6"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "绑行囊: 船头座板上 4 片红色等边三角合拢成四坡行囊。",
+      "tip": "露营装备打成锥形包 —— 斜棱互吸, 浪再大也不散。",
+      "tiles_to_add": [
+        "pack_s",
+        "pack_e",
+        "pack_n",
+        "pack_w"
+      ],
+      "highlight_tiles": [
+        "seat_bow"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "抛南浮标: 湖面 (7,0) 方板上 4 片青色等边三角合拢成航标锥。",
+      "tip": "浮标锥立在航道南侧 —— 独木舟从两标之间穿过。",
+      "tiles_to_add": [
+        "buoy_s_s",
+        "buoy_s_e",
+        "buoy_s_n",
+        "buoy_s_w"
+      ],
+      "highlight_tiles": [
+        "lk_7_0"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "抛北浮标: 同法再抛一座, 航道画定。",
+      "tip": "两座浮标一南一北, 湖心的水路有了规矩。",
+      "tiles_to_add": [
+        "buoy_n_s",
+        "buoy_n_e",
+        "buoy_n_n",
+        "buoy_n_w"
+      ],
+      "highlight_tiles": [
+        "lk_7_3",
+        "buoy_s_s"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "放鸭群与青鱼: 鸭妈妈带小鸭浮水, 青鱼在东南跃波。",
+      "tip": "嘎嘎嘎 —— 鸭群给独木舟让出航道。",
+      "tiles_to_add": [
+        "duck_a",
+        "duck_b",
+        "fish"
+      ],
+      "highlight_tiles": [
+        "lk_3_3",
+        "lk_8_0"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "种岸树与芦苇: 2 棵等腰绿树立岸边, 芦苇守在沙滩北头。",
+      "tip": "树梢 2 格是湖岸制高点 —— 芦苇丛里藏着蜻蜓。",
+      "tiles_to_add": [
+        "tr_a",
+        "tr_b",
+        "reed"
+      ],
+      "highlight_tiles": [
+        "sh_0_0",
+        "sd_4"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "栽灌木与花丛: 灌木四坡合拢, 花丛点在南沿 —— 独木舟启航!",
+      "tip": "从沙滩望去: 翘头、行囊、浮标、鸭群一线排开 —— 欸乃一声山水绿。",
+      "tiles_to_add": [
+        "bush_s",
+        "bush_e",
+        "bush_n",
+        "bush_w",
+        "fl"
+      ],
+      "highlight_tiles": [
+        "sh_0_2",
+        "sh_1_0"
+      ]
+    }
+  ]
+}
