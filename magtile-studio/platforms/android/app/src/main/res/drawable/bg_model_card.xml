@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 模型卡片背景: 白底圆角 + 点按水波纹 -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#332E86AB">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/magtile_card" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+</ripple>

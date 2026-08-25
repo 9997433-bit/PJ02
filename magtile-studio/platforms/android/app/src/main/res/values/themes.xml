@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 平台 Material 主题 (不引 appcompat), 保持依赖面最小 -->
+    <style name="Theme.MagTile" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/magtile_primary</item>
+        <item name="android:colorPrimaryDark">@color/magtile_primary_dark</item>
+        <item name="android:colorAccent">@color/magtile_star</item>
+        <item name="android:statusBarColor">@color/magtile_primary_dark</item>
+        <item name="android:windowBackground">@color/magtile_background</item>
+    </style>
+</resources>
