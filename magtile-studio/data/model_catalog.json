@@ -765,6 +765,25 @@
       "thumbnail": "thumbnails/bullet_train_01.png"
     },
     {
+      "id": "flag_plaza_01",
+      "file": "models/flag_plaza_01.json",
+      "name": "升旗广场",
+      "name_en": "Flag Plaza 01",
+      "description": "只用核心九片型的校园升旗广场, 结构签名是'检阅台 + 细高旗杆环塔': 3x1 检阅台墙环合环红毯压顶, 台面正中骑上 1x1 截面的旗杆塔 —— 第一节墙环'台面沿+台墙顶'一线双吸摞上家具, 三节墙环逐层整边共线上叠到 4.0 (R8 高层检查全程闭环天然通过, 全塔受压无悬挂链), 灰色等腰杆尖直上 6.0 全场制高, 红旗骑压顶东沿迎风力矩为零; 东西两条 30 度无障碍坡道顶边同吸'侧墙顶+台面沿'、坡尾落地生根, 红毯通道 2.0 对 2.0 整边互吸直通台前, 两座绿篱四坡锥分列左右四棱自锁 —— 全体肃立, 升旗仪式现在开始!",
+      "difficulty": 3,
+      "total_pieces": 60,
+      "step_count": 13,
+      "theme": "校园",
+      "tags": [
+        "校园",
+        "升旗台",
+        "广场",
+        "仪式",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/flag_plaza_01.png"
+    },
+    {
       "id": "roller_coaster_hill_01",
       "file": "models/roller_coaster_hill_01.json",
       "name": "过山车爬升段",
@@ -1363,6 +1382,25 @@
       "thumbnail": "thumbnails/farm_barn_01.png"
     },
     {
+      "id": "jungle_gym_01",
+      "file": "models/jungle_gym_01.json",
+      "name": "操场攀爬架",
+      "name_en": "Jungle Gym 01",
+      "description": "只用核心九片型的操场攀爬架, 结构签名是'窗格方攀爬墙阵 + 云梯双端桥': 2x2 田字格攀爬墙阵四道墙在十字中心共一条竖线四片互咬 (全库第一次四墙共线锁扣), 格格成环拆一片不倒, 满墙窗格方就是攀爬洞; 二层收成外圈环整边骑一层墙顶, 瞭望平台开 1x1 天窗洞由黄色四坡瞭望帽三边吸沿四棱自锁封住; 云梯桥两短边各同吸'塔墙顶+台沿'双共线连接双端受力跨到东侧两层爬塔, 透明护栏整长边压桥沿; 西侧 30 度攀爬坡道顶边吸墙顶坡尾落地, 塔顶红旗骑沿力矩为零 —— 谁先爬到旗下谁赢!",
+      "difficulty": 3,
+      "total_pieces": 65,
+      "step_count": 13,
+      "theme": "校园",
+      "tags": [
+        "校园",
+        "操场",
+        "攀爬架",
+        "游乐设施",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/jungle_gym_01.png"
+    },
+    {
       "id": "pedestrian_overpass_01",
       "file": "models/pedestrian_overpass_01.json",
       "name": "人行过街天桥",
@@ -1573,6 +1611,25 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/satellite_dish_01.png"
+    },
+    {
+      "id": "science_lab_01",
+      "file": "models/science_lab_01.json",
+      "name": "科学实验室",
+      "name_en": "School Science Lab 01",
+      "description": "只用核心九片型的校园科学实验室, 结构签名是'剖面教室 + 玻璃天窗锥 + 排风塔': 三面墙的教室南面整个敞开, 二层高窗窗格方与素墙相间; 屋顶只盖北半跨, 正中 1x1 洞口由透明等边四坡玻璃天窗锥封住 —— 南底边临空, 三边吸沿加四棱互吸照样自锁成环; 西山墙外两层排风塔借教室西墙合环 (共墙即共保险), 塔顶压顶东沿与屋顶共线互吸, 灰色排风尖一线双吸直上 4.0 全场制高; 敞开的前半间里长台与方台共墙连成实验台矩阵, 台面四边全锁, 红/绿/橙三只烧瓶骑沿口力矩为零 —— 上课铃响, 开始做实验!",
+      "difficulty": 3,
+      "total_pieces": 67,
+      "step_count": 14,
+      "theme": "校园",
+      "tags": [
+        "校园",
+        "实验室",
+        "科学课",
+        "玻璃天窗",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/science_lab_01.png"
     },
     {
       "id": "slide_playground_01",
@@ -2759,6 +2816,26 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/police_station_01.png"
+    },
+    {
+      "id": "schoolyard_stand_01",
+      "file": "models/schoolyard_stand_01.json",
+      "name": "操场看台",
+      "name_en": "Schoolyard Grandstand 01",
+      "description": "只用核心九片型的校园运动会看台: 与放射环带的圆形剧场和门楼式体育场大门都不同, 这是'直线两级退台'的校园看台 —— 前后两级墙环合环 + 座板压顶的闭环箱体背靠背, 后排二层墙环整边骑上一层墙顶, 两片红色直角三角斜撑竖边吸二层墙棱、横边吸前排座板沿 (双边受力零悬挑), 红黄彩旗骑顶沿力矩为零; 台前红色跑道冲向白色终点线, 1-2-3 三连领奖台四道隔墙共墙成环, 金色冠军台二层墙环再压金色台面全场最高 —— 三、二、一, 冲线!",
+      "difficulty": 3,
+      "total_pieces": 75,
+      "step_count": 15,
+      "theme": "校园",
+      "tags": [
+        "校园",
+        "操场",
+        "看台",
+        "运动会",
+        "领奖台",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/schoolyard_stand_01.png"
     },
     {
       "id": "submarine_01",
