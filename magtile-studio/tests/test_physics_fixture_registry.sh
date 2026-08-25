@@ -27,8 +27,9 @@ NEG_DIR="$TESTS_DIR/test_physics_negative"
 POS_DIR="$TESTS_DIR/test_physics_positive"
 failures=0
 
-# 必备负例清单: 覆盖 R1~R8 与数据层/中间态的全部关键失效模式。
+# 必备负例清单: 覆盖 R1~R9 与数据层/中间态的全部关键失效模式。
 # 新增负例后请在此登记 (删除任何一行都必须有书面评审理由)。
+# jitter_sensitive 为 R9 抖动负例 (sidecar 带 jitter= 键, 以 --jitter 运行)。
 REQUIRED_NEGATIVE="
 below_ground_tile
 cantilever_overload
@@ -38,6 +39,7 @@ floating_tile
 hanging_chain_long
 hanging_chain_overload
 isolated_tile
+jitter_sensitive
 midstep_collapse
 no_structural_redundancy
 overlapping_tiles

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "id": "fixture_jitter_reinforced_cantilever",
+  "name": "抖动正例: 加固后的外挑",
+  "name_en": "fixture_jitter_reinforced_cantilever",
+  "description": "R9 抖动正例 (jitter_sensitive 的配平对照组): 与抖动负例完全同构 (大方片立墙 + 墙顶外挑长方形 + 外沿斜挂三角形), 仅在外挑远端按负例报错文案的建议增加一根大方片立柱支撑 —— 门式框架成环后剪断任何一条铰链都仍有到地面的支撑路径, 悬臂力矩分析自然消失。名义校验与 ±1.5mm/±2° 蒙特卡洛抖动 (--jitter) 必须全部放行, 防止 R9 抖动仿真矫枉过正, 把加固到位的常规玩法也误杀。",
+  "difficulty": 1,
+  "total_pieces": 8,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "g0",
+      "type": "square",
+      "position": [0.5, -0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "g1",
+      "type": "square",
+      "position": [0.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "cyan"
+    },
+    {
+      "id": "g2",
+      "type": "square",
+      "position": [1.5, -0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "cyan"
+    },
+    {
+      "id": "g3",
+      "type": "square",
+      "position": [1.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "w1",
+      "type": "large_square",
+      "position": [1.0, 0.0, 1.0],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    },
+    {
+      "id": "p1",
+      "type": "large_square",
+      "position": [1.0, 1.0, 1.0],
+      "rotation": [90, 0, 0],
+      "color": "purple"
+    },
+    {
+      "id": "c1",
+      "type": "rectangle",
+      "position": [1.0, 0.5, 2.0],
+      "rotation": [0, 0, 0],
+      "color": "yellow"
+    },
+    {
+      "id": "t1",
+      "type": "equilateral_triangle",
+      "position": [1.0, 0.762095372, 1.83649268],
+      "rotation": [214.5, 0, 0],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平放四片正方形, 拼成 2 x 2 的地板。",
+      "tip": "",
+      "tiles_to_add": ["g0", "g1", "g2", "g3"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "在地板中线与前沿各立起一片大正方形, 组成一前一后两面墙。",
+      "tip": "前沿这根立柱就是负例缺少的远端支撑, 顶板吸上后结构成环。",
+      "tiles_to_add": ["w1", "p1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "把一片长方形平放在两面墙顶, 搭成一座门式小桥。",
+      "tip": "长方形两条长边分别吸住两面墙顶, 不再是单边外挑。",
+      "tiles_to_add": ["c1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 4,
+      "description": "在小桥前沿, 向内下方斜挂一片等边三角形。",
+      "tip": "与负例同一位置同一倾角 (34.5°), 加固后抖动仿真应当全绿。",
+      "tiles_to_add": ["t1"],
+      "highlight_tiles": []
+    }
+  ]
+}

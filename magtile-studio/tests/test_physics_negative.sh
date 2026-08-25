@@ -8,6 +8,9 @@
 #
 #   expected_fail_rule=<grep 正则>   # 输出必须匹配的错误/警告码
 #   severity=error|warning           # 期望级别
+#   jitter=<正整数>                  # 可选: 以 --jitter N 运行 (R9 蒙特卡洛
+#                                    # 容差抖动)。R9 型负例名义几何压线合法
+#                                    # (静态校验放行), 必须靠抖动仿真拒绝
 #
 # 断言逻辑:
 #   - severity=error:   validate 必须以非零退出码拒绝, 且输出匹配
@@ -42,6 +45,7 @@ fi
 
 EXPECTED_RULE="$(sed -n 's/^expected_fail_rule=//p' "$SIDECAR" | head -n 1)"
 SEVERITY="$(sed -n 's/^severity=//p' "$SIDECAR" | head -n 1)"
+JITTER="$(sed -n 's/^jitter=//p' "$SIDECAR" | head -n 1)"
 
 if [ -z "$EXPECTED_RULE" ]; then
     echo "[失败] sidecar 未声明 expected_fail_rule: $SIDECAR"
@@ -54,11 +58,31 @@ case "$SEVERITY" in
         exit 1
         ;;
 esac
+if [ -n "$JITTER" ]; then
+    case "$JITTER" in
+        *[!0-9]*)
+            echo "[失败] sidecar 的 jitter 必须是正整数 (实际: '$JITTER'): $SIDECAR"
+            exit 1
+            ;;
+    esac
+    if [ "$JITTER" -eq 0 ]; then
+        echo "[失败] sidecar 的 jitter 必须是正整数 (实际: '$JITTER'): $SIDECAR"
+        exit 1
+    fi
+fi
 
-echo "负例夹具: $(basename "$FIXTURE") (期望: $SEVERITY 级, 匹配 '$EXPECTED_RULE')"
+if [ -n "$JITTER" ]; then
+    echo "负例夹具: $(basename "$FIXTURE") (期望: $SEVERITY 级, 匹配 '$EXPECTED_RULE'; --jitter $JITTER)"
+else
+    echo "负例夹具: $(basename "$FIXTURE") (期望: $SEVERITY 级, 匹配 '$EXPECTED_RULE')"
+fi
 echo "--------------------------------------------------------------"
 
-output="$("$APP" validate "$FIXTURE" --data-dir "$DATA_DIR" 2>&1)"
+if [ -n "$JITTER" ]; then
+    output="$("$APP" validate "$FIXTURE" --data-dir "$DATA_DIR" --jitter "$JITTER" 2>&1)"
+else
+    output="$("$APP" validate "$FIXTURE" --data-dir "$DATA_DIR" 2>&1)"
+fi
 status=$?
 echo "$output"
 echo "--------------------------------------------------------------"

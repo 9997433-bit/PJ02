@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "id": "fixture_jitter_sensitive",
+  "name": "抖动负例: 零裕量外挑",
+  "name_en": "fixture_jitter_sensitive",
+  "description": "R9 抖动负例 (F08 误差累积失稳): 大方片立墙 (铰链长 2, 抗弯预算 40g·单位) 顶部平挑一片长方形 (力矩 30), 外沿再斜挂一片等边三角形 (倾角 34.5°, 力矩 9.9), 合计 39.9 —— 名义几何恰好压线通过, 静态校验放行; 但对毫米级放置误差零裕量, 注入 ±1.5mm/±2° 抖动后大量轮次悬臂力矩越过预算。validate 必须放行名义模型、--jitter 必须以 placement_jitter_failure 拒绝 (锁住 R9 的检出能力: 该抓不抓即回归)。",
+  "difficulty": 1,
+  "total_pieces": 7,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "g0",
+      "type": "square",
+      "position": [0.5, -0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "g1",
+      "type": "square",
+      "position": [0.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "cyan"
+    },
+    {
+      "id": "g2",
+      "type": "square",
+      "position": [1.5, -0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "cyan"
+    },
+    {
+      "id": "g3",
+      "type": "square",
+      "position": [1.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "w1",
+      "type": "large_square",
+      "position": [1.0, 0.0, 1.0],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    },
+    {
+      "id": "c1",
+      "type": "rectangle",
+      "position": [1.0, 0.5, 2.0],
+      "rotation": [0, 0, 0],
+      "color": "yellow"
+    },
+    {
+      "id": "t1",
+      "type": "equilateral_triangle",
+      "position": [1.0, 0.762095372, 1.83649268],
+      "rotation": [214.5, 0, 0],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平放四片正方形, 拼成 2 x 2 的地板。",
+      "tip": "",
+      "tiles_to_add": ["g0", "g1", "g2", "g3"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "在地板中线上立起一片大正方形当墙。",
+      "tip": "",
+      "tiles_to_add": ["w1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "把一片长方形平放在墙顶, 向前方水平外挑。",
+      "tip": "长方形整条长边吸在墙顶铰链上 (铰链长 2, 力矩 30 在预算 40 之内)。",
+      "tiles_to_add": ["c1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 4,
+      "description": "在外挑长方形的外沿, 向内下方斜挂一片等边三角形。",
+      "tip": "倾角 34.5° 让总力矩达到 39.9 —— 距预算 40 只剩 0.1 的零裕量压线设计。",
+      "tiles_to_add": ["t1"],
+      "highlight_tiles": []
+    }
+  ]
+}

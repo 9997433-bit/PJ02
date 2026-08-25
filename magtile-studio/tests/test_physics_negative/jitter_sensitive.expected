@@ -1,0 +1,10 @@
+# jitter_sensitive.expected — 物理负例期望声明 (sidecar, 由 test_physics_negative.sh 读取)
+# expected_fail_rule: validate 输出必须匹配的错误/警告码 (grep 正则)
+# severity: error = 必须以非零退出码拒绝; warning = 必须零退出且输出 [警告] 行
+# jitter: 以 --jitter N 运行 validate (R9 蒙特卡洛容差抖动; 不声明则按普通 validate)
+# R9/F08: 零裕量外挑 —— 名义力矩 39.9 恰在预算 40 之内 (静态校验放行),
+# 注入 ±1.5mm/±2° 放置误差后大量轮次悬臂力矩越过预算, 抖动仿真必须拒绝。
+# 本夹具锁住 R9 的检出能力: 若抖动仿真"该抓不抓", 本用例变红。
+expected_fail_rule=placement_jitter_failure
+severity=error
+jitter=50
