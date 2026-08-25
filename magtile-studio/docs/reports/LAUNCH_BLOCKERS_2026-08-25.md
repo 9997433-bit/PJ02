@@ -69,7 +69,7 @@ D3 冻结硬闸门 (`check_difficulty_quota.py --strict`) 要求 **D1 ≥ 20 且
 | **B2 扩库** | 上调 250 上限, 净增 D1/D5 | ✅ 工程可产, 需改 CONTENT_STRATEGY 决议 | 超原 V1 体量目标 |
 | **B3 豁免** | V1 出包档调整配额守卫口径并留痕签核 | 文档 + 闸门配置变更 | 产品/合规决策 |
 
-**你若选 B1**: 回复「批准批 J–M 置换模式」—— 工程侧按 `review_content_batch.sh` 五关机检 + D3 冻结闸门执行, 每批 4 模型、零 D3。退役候选序与分阶段演算见 [QUOTA_SUBSTITUTION_PLAN_2026-08-25.md](QUOTA_SUBSTITUTION_PLAN_2026-08-25.md) (`tools/plan_quota_substitution.py` 生成; **批 J–M 仅解到 D1=8/D5=4, 仍冻结; 全解冻需再置换 9 次**)。
+**你若选 B1**: 回复「批准批 J–M 置换模式」—— 工程侧按 `review_content_batch.sh` 五关机检 + D3 冻结闸门执行。退役候选序与分阶段演算见 [QUOTA_SUBSTITUTION_PLAN_2026-08-25.md](QUOTA_SUBSTITUTION_PLAN_2026-08-25.md) (`tools/plan_quota_substitution.py`); **批 J–M 仅到 D1=8/D5=4 仍冻结, 全解冻还需再置换 14 次**。
 
 ### 验收
 
