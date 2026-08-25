@@ -106,7 +106,7 @@ tools/check_v1_readiness.sh --quick                            # 全部落盘后
 | 提起悬停中 | 提起测试适用时 | `lift_hold.jpg` |
 | 失效瞬间 | 每次失效一张 | `fail_step<NN>_F<XX>.jpg` (NN=步骤号, F<XX>=失效编码) |
 
-- **失效编码** F01~F12 的定义与典型照片描述见 [BUILD_VERIFICATION.md](../BUILD_VERIFICATION.md) 第 4 节; 每次失效必须归档「编码 + 照片 + 模型 id + 步骤号」, 这是回填软件规则回归用例的原料。
+- **失效编码** F01~F12 的定义与典型照片描述见 [BUILD_VERIFICATION.md](../BUILD_VERIFICATION.md) 第 4 节 (桌边速查: `python3 tools/physical_failure_registry.py codes`); 每次失效必须归档「编码 + 照片 + 模型 id + 步骤号」, 这是回填软件规则回归用例的原料 —— 回到电脑前用登记工具入账 (`python3 tools/physical_failure_registry.py add --model <id> --step <N> --code F<XX> --photo <照片路径>`), 后续「登记 → 下沉负例夹具 → CI 回归」的闭环见 [PHYSICAL_CALIBRATION_WORKFLOW.md](../PHYSICAL_CALIBRATION_WORKFLOW.md)。
 - **隐私**: 只拍结构与必要的手部特写, 不入镜人物面部; 涉及儿童测试的拍摄须单独同意 (BUILD_VERIFICATION.md 3.6.1 节)。
 
 ## 8. 常见问题
@@ -114,5 +114,5 @@ tools/check_v1_readiness.sh --quick                            # 全部落盘后
 - **手上不是官方基准品牌 / 只有旧片?** 可以搭, 但 strict 预检必须通过 (弱磁片更接近 strict 档参数), 并在工作单表头「磁力片品牌/状态」如实登记; strict 有豁免须注明。
 - **平铺类模型提不起来怎么办?** 教程明确注明「不可移动」的平铺类, 提起测试圈 n-a 跳过, 不算 Fail。
 - **拆解重搭是必须的吗?** D4+ 为建议项但强烈建议做 —— 第二次耗时 ≤ 第一次 80% 且零失效, 是步骤设计质量最便宜的复检。
-- **搭到一半塌了还继续吗?** 记失效编码 + 拍照后, 修复继续或终止由 QA 决定 (规程 §2); 无论继续与否, 该步的失效记录都要保留。
+- **搭到一半塌了还继续吗?** 记失效编码 + 拍照后, 修复继续或终止由 QA 决定 (规程 §2); 无论继续与否, 该步的失效记录都要保留, 并按第 7 节登记进失效账本。
 - **儿童测试也要现在做吗?** 不阻塞 R6/R7 —— 本指南覆盖的是成人复核人按规程实搭落盘 `physical_verified`; T4/T5 的儿童测试与品牌兼容性全测按 [BUILD_VERIFICATION.md](../BUILD_VERIFICATION.md) 第 3 节由 QA 另行组织。

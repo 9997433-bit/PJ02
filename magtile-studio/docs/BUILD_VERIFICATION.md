@@ -195,7 +195,7 @@
 | F11 | 重心出界 | 单侧加装饰后整体缓慢倾倒, 照片为倾倒后全景 | R4 重心稳定 (`unstable_center_of_mass`) | L1 |
 | F12 | 磁力衰减片 | 库存旧片磁力减弱, 标准结构也挂不住 | 非内容缺陷 → 测试套件管理 (3.0 剔除 + 3.5 季度标定) | L3 |
 
-维护要求: 每次 L3 失效必须归档"编码 + 照片 + 模型 id + 步骤号"; 每季度复盘一次分类表, 出现 ≥ 3 次的"仅 L3"失效模式, 立项评估能否规则化下沉到 L1/L2。
+维护要求: 每次 L3 失效必须归档"编码 + 照片 + 模型 id + 步骤号" —— 归档载体是登记工具 `tools/physical_failure_registry.py` 维护的账本 `data/physical_failures.json` (逐条跟踪"是否已下沉 L1 负例夹具", `check` 子命令校验账本完整性并列出待下沉欠账); 每季度复盘一次分类表, 出现 ≥ 3 次的"仅 L3"失效模式, 立项评估能否规则化下沉到 L1/L2 (`check` 自动盘点该信号)。从实搭失败到负例夹具到 CI 回归的完整闭环规程见 [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md)。
 
 ## 5. 内容编辑器集成 (规划: 阶段 2 编辑器)
 
@@ -343,6 +343,7 @@ jobs:
 
 - 作者级逐步实搭执行清单 (敲击/提起/记录模板/`content_meta.physical_verified` 轻量落盘): [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md), D4+ 待复核清单由 `tools/list_physical_pending.py` 跟踪 (本文档 5.2 节旁车文件与轻量字段两种凭据都认, 旁车带内容哈希绑定为权威);
 - 面向用户/QA 复核人的上手指南 (V1 抽样包需备哪些磁力片、预估工时、打印工作单、落盘与照片归档约定): [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md);
+- 实物失效回填软件规则的闭环规程 (抽样实搭 → 失败登记 `tools/physical_failure_registry.py` → 生成负例夹具 → CI 回归, 即第 4 节维护要求的执行载体): [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md);
 - 软件规则 (L1) 的精确定义与演进路线: [PHYSICS_RULES.md](PHYSICS_RULES.md);
 - 编辑器与内容量产管线的阶段规划: [ROADMAP.md](ROADMAP.md) 阶段 2 与阶段 4;
 - 本文档新增的规划项 (L2 仿真管线、验证旁车文件、门禁脚本、编辑器复核面板) 随阶段 2 编辑器一并落地, 在此之前 L3 流程即刻以人工表单执行 —— **实物验证从今天起就是 T3+ 模型入库的硬性要求, 不等工具**。
