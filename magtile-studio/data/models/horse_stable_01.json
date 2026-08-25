@@ -1,0 +1,1055 @@
+{
+  "schema_version": 1,
+  "id": "horse_stable_01",
+  "name": "马术俱乐部",
+  "name_en": "Horse Stable 01",
+  "description": "只用核心九片型的马术场景: 主角是跳栏训练 —— 沙地训练场里两道结构不同的跳栏: 低栏双柱夹横杆纯剪互锁 (竖直铰链轴力矩恒为零), 高栏立柱托横板、东端直接借围栏当柱 (共构技法, 双端受力零悬挑); 橙色小马刚越过高栏, 双侧板立沙缝背板压顶锁成门式框架, 扬起的等腰长脖子是全场焦点, 尾巴正翘在横板上方; 北侧马厩三开间格格成环、屋面三边受力, 两匹马从敞开的栏门探出头, 草料垛四坡自锁堆在草地上 —— 下一跳, 轮到你了!",
+  "difficulty": 3,
+  "total_pieces": 56,
+  "tags": [
+    "田园",
+    "马术",
+    "动物",
+    "俱乐部",
+    "运动"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 44,
+        "equilateral_triangle": 7,
+        "isosceles_triangle": 2,
+        "rectangle": 2,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "fld_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_5_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fld_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fld_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "barn_n_0",
+      "type": "window_square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "barn_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "barn_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "barn_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "barn_p_1",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "barn_p_2",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "barn_e_3",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "barn_r_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "barn_r_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "barn_r_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head_a",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "head_b",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "barn_flag",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        4.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fn_e_1",
+      "type": "square",
+      "position": [
+        6.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_e_2",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_e_3",
+      "type": "square",
+      "position": [
+        6.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fn_n_5",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lj_post_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lj_post_e",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lj_rail",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hj_post",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hj_beam",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hs_side_w",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hs_side_e",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hs_back",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hs_neck",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        3.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hs_tail",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hay_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hay_e",
+      "type": "equilateral_triangle",
+      "position": [
+        0.833333,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hay_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hay_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.166667,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺场地南行: 西边三片草地, 东边三片沙地。",
+      "tip": "草绿和沙黄的分界线就是训练场的入口线。",
+      "tiles_to_add": [
+        "fld_0_0",
+        "fld_1_0",
+        "fld_2_0",
+        "fld_3_0",
+        "fld_4_0",
+        "fld_5_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺第二行: 行行等边互吸, 跳栏都要踩这行的拼缝。",
+      "tip": "沙地松软, 小马落地不伤蹄 —— 真正的马场也铺沙。",
+      "tiles_to_add": [
+        "fld_0_1",
+        "fld_1_1",
+        "fld_2_1",
+        "fld_3_1",
+        "fld_4_1",
+        "fld_5_1"
+      ],
+      "highlight_tiles": [
+        "fld_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺第三行: 训练场越来越大。",
+      "tip": "西边草地待会放草料垛, 东边沙地是小马的舞台。",
+      "tiles_to_add": [
+        "fld_0_2",
+        "fld_1_2",
+        "fld_2_2",
+        "fld_3_2",
+        "fld_4_2",
+        "fld_5_2"
+      ],
+      "highlight_tiles": [
+        "fld_0_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺第四行: 马厩地基与围栏墙脚线就位。",
+      "tip": "整片场地连成一张网, 每道拼缝都是一条磁力吸边。",
+      "tiles_to_add": [
+        "fld_0_3",
+        "fld_1_3",
+        "fld_2_3",
+        "fld_3_3",
+        "fld_4_3",
+        "fld_5_3"
+      ],
+      "highlight_tiles": [
+        "fld_0_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立马厩北墙: 窗格方后窗居西, 两片橙色木板墙接排。",
+      "tip": "北墙踩住场地北沿, 三片竖边互咬连成整面。",
+      "tiles_to_add": [
+        "barn_n_0",
+        "barn_n_1",
+        "barn_n_2"
+      ],
+      "highlight_tiles": [
+        "fld_0_3"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "插四道隔墙: 山墙加隔墙隔出三个单间马房。",
+      "tip": "每道隔墙都与北墙竖边互咬 —— 格格成环, 拆一片不倒。",
+      "tiles_to_add": [
+        "barn_w_0",
+        "barn_p_1",
+        "barn_p_2",
+        "barn_e_3"
+      ],
+      "highlight_tiles": [
+        "barn_n_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "盖马厩屋面, 屋脊旗骑上北墙顶。",
+      "tip": "每片屋面北边压北墙顶、东西两边压隔墙顶, 三边受力; 旗杆底边一线双吸直上 3.0。",
+      "tiles_to_add": [
+        "barn_r_0",
+        "barn_r_1",
+        "barn_r_2",
+        "barn_flag"
+      ],
+      "highlight_tiles": [
+        "barn_p_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "两匹马从栏门探出头: 底边整边吸住屋面南沿。",
+      "tip": "南面敞开就是栏门 —— 中间那间的小马已经出去训练啦。",
+      "tiles_to_add": [
+        "head_a",
+        "head_b"
+      ],
+      "highlight_tiles": [
+        "barn_r_0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "装训练场围栏: 东边三片、北边两片清色栏板。",
+      "tip": "围栏底边整边吸场地边沿, 竖边逐片成链。",
+      "tiles_to_add": [
+        "fn_e_1",
+        "fn_e_2",
+        "fn_e_3",
+        "fn_n_4",
+        "fn_n_5"
+      ],
+      "highlight_tiles": [
+        "fld_5_3"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "架低栏: 双柱踩沙缝, 红白横杆两竖边咬进柱棱。",
+      "tip": "横杆挂在两柱之间, 竖直接缝纯剪互锁 —— 新手先跳这道。",
+      "tiles_to_add": [
+        "lj_post_w",
+        "lj_post_e",
+        "lj_rail"
+      ],
+      "highlight_tiles": [
+        "fld_2_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "架高栏: 立柱托横板, 东端直接压在围栏顶上。",
+      "tip": "围栏就是另一根柱 (共构技法), 横板双端受力零悬挑。",
+      "tiles_to_add": [
+        "hj_post",
+        "hj_beam"
+      ],
+      "highlight_tiles": [
+        "fn_e_1"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "小马登场: 双侧板立沙缝, 背板两边各压一块侧板顶。",
+      "tip": "板-背-板锁成门式框架 —— 小马就站在高栏后面。",
+      "tiles_to_add": [
+        "hs_side_w",
+        "hs_side_e",
+        "hs_back"
+      ],
+      "highlight_tiles": [
+        "hj_beam"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "扬起长脖子, 尾巴翘上高栏 —— 这一跳真漂亮!",
+      "tip": "脖子底边整边吸背板北沿, 重心正压铰链线; 最后把草料垛四片斜棱互咬锁在草地上 —— 训练结束好好吃一顿!",
+      "tiles_to_add": [
+        "hs_neck",
+        "hs_tail",
+        "hay_s",
+        "hay_e",
+        "hay_n",
+        "hay_w"
+      ],
+      "highlight_tiles": [
+        "hs_back"
+      ]
+    }
+  ]
+}

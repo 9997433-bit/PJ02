@@ -1,0 +1,1018 @@
+{
+  "schema_version": 1,
+  "id": "open_air_cinema_01",
+  "name": "夏夜露天电影院",
+  "name_en": "Open-Air Cinema 01",
+  "description": "只用核心九片型的露天放映场: 3x2 的透明大银幕立在草坪北缘 (下环踩拼缝、上环整边压顶、红边柱收边), 两片直角三角斜撑从正面锁住幕墙两端成刚性节点, 幕顶三角彩旗迎风排开; 广场中央的放映亭窗格方正对银幕投出光路, 等边锥顶斜棱自锁; 东侧爆米花餐车驮在双车轮底座门式框架上, 红招牌与橙色遮阳伞立在甲板两端; 草坪上野餐垫散落, 三位小观众骑着拼缝面朝银幕坐好 —— 灯光暗下来, 夏夜的电影开场了!",
+  "difficulty": 3,
+  "total_pieces": 54,
+  "tags": [
+    "城市",
+    "电影",
+    "夏夜",
+    "广场",
+    "生活场景"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 32,
+        "equilateral_triangle": 11,
+        "isosceles_triangle": 3,
+        "rectangle": 2,
+        "right_triangle": 2,
+        "wheel_base": 2,
+        "door_frame": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "lawn_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "cart_base",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "lawn_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lawn_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "lawn_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "screen_lo_0",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "screen_lo_1",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "screen_lo_2",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pillar_w",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pillar_e",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "screen_hi_0",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "screen_hi_1",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "screen_hi_2",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "brace_w",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        3.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "brace_e",
+      "type": "right_triangle",
+      "position": [
+        4.0,
+        3.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        4.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flag_m",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        4.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "booth_s",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "booth_n",
+      "type": "window_square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "booth_w",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "booth_e",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "booth_roof_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "booth_roof_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.833333,
+        0.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "booth_roof_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "booth_roof_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.166667,
+        0.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "cart_wheel_s",
+      "type": "wheel_base",
+      "position": [
+        5.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cart_wheel_n",
+      "type": "wheel_base",
+      "position": [
+        5.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cart_deck",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pop_sign",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cart_brella",
+      "type": "isosceles_triangle",
+      "position": [
+        6.0,
+        0.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "lamp_w",
+      "type": "isosceles_triangle",
+      "position": [
+        0.0,
+        1.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "lamp_e",
+      "type": "isosceles_triangle",
+      "position": [
+        6.0,
+        2.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "kid_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "kid_m",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "kid_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南行草坪与餐车底长板: 长板两条长边是车轮的落脚缝。",
+      "tip": "夏夜的草坪电影院, 先把场地铺出来。",
+      "tiles_to_add": [
+        "lawn_0_0",
+        "lawn_1_0",
+        "lawn_2_0",
+        "lawn_3_0",
+        "cart_base"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺野餐垫行: 红蓝两块野餐垫散落在草坪里。",
+      "tip": "行行等边互吸 —— 观众提着零食已经在路上啦。",
+      "tiles_to_add": [
+        "lawn_0_1",
+        "lawn_1_1",
+        "lawn_2_1",
+        "lawn_3_1",
+        "lawn_4_1",
+        "lawn_5_1"
+      ],
+      "highlight_tiles": [
+        "lawn_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺观众行: 粉色野餐垫留给来得最晚的那一家。",
+      "tip": "小观众们就坐在这一行的拼缝上。",
+      "tiles_to_add": [
+        "lawn_0_2",
+        "lawn_1_2",
+        "lawn_2_2",
+        "lawn_3_2",
+        "lawn_4_2",
+        "lawn_5_2"
+      ],
+      "highlight_tiles": [
+        "lawn_0_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺银幕前行: 六片草坪合拢广场, 北缘拼缝就是幕墙的地基线。",
+      "tip": "银幕墙脚要整边吸住这条北缘拼缝。",
+      "tiles_to_add": [
+        "lawn_0_3",
+        "lawn_1_3",
+        "lawn_2_3",
+        "lawn_3_3",
+        "lawn_4_3",
+        "lawn_5_3"
+      ],
+      "highlight_tiles": [
+        "lawn_0_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立银幕下环与红边柱: 三片透明银幕一字排开, 两端红柱收边。",
+      "tip": "底边整边吸拼缝, 竖边逐片互吸 —— 幕墙先立第一环。",
+      "tiles_to_add": [
+        "screen_lo_0",
+        "screen_lo_1",
+        "screen_lo_2",
+        "pillar_w",
+        "pillar_e"
+      ],
+      "highlight_tiles": [
+        "lawn_1_3",
+        "lawn_3_3"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "叠银幕上环: 三片透明方板整边压上下环, 银幕升到两层高。",
+      "tip": "上环压下环竖直连续 —— 3x2 的大银幕拼好了。",
+      "tiles_to_add": [
+        "screen_hi_0",
+        "screen_hi_1",
+        "screen_hi_2"
+      ],
+      "highlight_tiles": [
+        "screen_lo_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "锁斜撑挂彩旗: 两片直角三角从正面锁住幕墙两端, 幕顶彩旗迎风。",
+      "tip": "斜撑两条直角边分别吸草坪拼缝与银幕竖边 —— 刚性节点锁定。",
+      "tiles_to_add": [
+        "brace_w",
+        "brace_e",
+        "flag_w",
+        "flag_m",
+        "flag_e"
+      ],
+      "highlight_tiles": [
+        "pillar_w",
+        "pillar_e"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立放映亭四墙: 窗格方放映窗正对银幕, 门框方朝南。",
+      "tip": "放映窗与银幕正对成一条光路 —— 电影从这里射向幕布。",
+      "tiles_to_add": [
+        "booth_s",
+        "booth_n",
+        "booth_w",
+        "booth_e"
+      ],
+      "highlight_tiles": [
+        "lawn_2_0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖放映亭锥顶: 四片紫色等边三角斜棱互咬自锁。",
+      "tip": "锥尖 1.71 —— 对角顺序合拢, 最后一片同时吸双棱。",
+      "tiles_to_add": [
+        "booth_roof_s",
+        "booth_roof_e",
+        "booth_roof_n",
+        "booth_roof_w"
+      ],
+      "highlight_tiles": [
+        "booth_n"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "架爆米花餐车: 双车轮底座沿长板拼缝立起, 黄甲板压双轮顶。",
+      "tip": "轮组+甲板锁成门式框架 —— 散场前的爆米花最抢手。",
+      "tiles_to_add": [
+        "cart_wheel_s",
+        "cart_wheel_n",
+        "cart_deck"
+      ],
+      "highlight_tiles": [
+        "cart_base"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "装招牌遮阳伞并点灯: 红招牌朝亭, 橙伞遮车, 两根紫灯柱立场边。",
+      "tip": "招牌和伞立在甲板短边上, 灯柱底边整边吸场边拼缝。",
+      "tiles_to_add": [
+        "pop_sign",
+        "cart_brella",
+        "lamp_w",
+        "lamp_e"
+      ],
+      "highlight_tiles": [
+        "cart_deck"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "请小观众入座: 三位小观众骑上拼缝, 面朝银幕坐好 —— 开演!",
+      "tip": "嘘 —— 灯光暗下来了, 夏夜的电影正式开场!",
+      "tiles_to_add": [
+        "kid_w",
+        "kid_m",
+        "kid_e"
+      ],
+      "highlight_tiles": [
+        "screen_hi_1"
+      ]
+    }
+  ]
+}
