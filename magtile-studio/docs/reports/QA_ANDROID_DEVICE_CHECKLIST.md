@@ -8,6 +8,9 @@
 Android 侧人工要点与 §3 签核规则 (真机至少一台 arm64 中端机,
 API 26+); 全部勾完并登记 §5 后, 方可在
 [../V1_LAUNCH_CHECKLIST.md](../V1_LAUNCH_CHECKLIST.md) §4 A4 签核。
+Debug/Release 档位差异、仪器测试执行与出包/测试轨总览见 QA 单页
+入口 [../QA_ANDROID_DEBUG_RELEASE.md](../QA_ANDROID_DEBUG_RELEASE.md)
+(本表对应其中的 Debug 档验收载体)。
 
 **状态约定**: ⬜ 未验 / ✅ 通过 / ❌ 不通过 (不通过项须开问题记录并
 在备注列写明现象与影响面; P0 项任一 ❌ 即 A4 不得签核)。
