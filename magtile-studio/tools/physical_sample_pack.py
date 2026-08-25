@@ -30,6 +30,12 @@ classify: content_meta.physical_verified == true, 或旁车验证文件哈希一
         --json                  机器可读 JSON 输出
         --markdown FILE         生成可签核 Markdown 报告
                                 (docs/reports/PHYSICAL_SAMPLE_V1.md 即由此生成)
+        --print-checklist [FILE]
+                                输出逐步搭建签核工作单 Markdown (每模型逐步
+                                勾选栏 + 问题记录栏 + 照片位; 省略 FILE 直出
+                                stdout 并跳过常规报告, 便于重定向/打印;
+                                docs/reports/PHYSICAL_SIGNOFF_WORKSHEET.md
+                                即由此生成)
         --fail-on-missing-sample
                                 抽样包内存在未实物复核模型时以退出码 1 结束
                                 (release gate 将来挂接用; 默认仅报告不阻断)
@@ -54,6 +60,7 @@ FREE_TAG = "免费"  # 与 tools/verify_free_tier.py 同一口径
 TIME_BUDGET_MIN = {1: 10, 2: 20, 3: 40, 4: 70, 5: 120}
 
 CHECKLIST_DOC = "PHYSICAL_REBUILD_CHECKLIST.md"
+WORKSHEET_DOC = "PHYSICAL_SIGNOFF_WORKSHEET.md"
 
 
 def load_json(path: Path):
@@ -252,7 +259,10 @@ def render_markdown(entries, rule_hits, annotated, target, free_d4_count,
     a("## 4. 逐模型签核勾选表")
     a("")
     a(f"检查项与判定标准以 [`docs/{CHECKLIST_DOC}`](../{CHECKLIST_DOC}) 对应章节为准; "
-      "全部适用项 Pass 才可按第 5 节落盘 `physical_verified`。")
+      "全部适用项 Pass 才可按第 5 节落盘 `physical_verified`。本节是**模型级**"
+      f"签核摘要; 桌边随搭随填的**逐步级**原始记录 (逐步勾选/问题记录/照片位) 用"
+      f"配套工作单 [`{WORKSHEET_DOC}`]({WORKSHEET_DOC}) "
+      "(`tools/physical_sample_pack.py --print-checklist` 生成)。")
     a("")
     for e in entries:
         a(f"### {e['id']} — {e['name']} (D{e['difficulty']}, "
@@ -314,6 +324,146 @@ def render_markdown(entries, rule_hits, annotated, target, free_d4_count,
     return "\n".join(lines) + "\n"
 
 
+def md_cell(text: str, limit: int = 0) -> str:
+    """Markdown 表格单元格安全化: 去换行/转义竖线; limit > 0 时截断。"""
+    text = str(text).replace("\n", " ").replace("|", "\\|")
+    if limit and len(text) > limit:
+        text = text[: limit - 1] + "…"
+    return text
+
+
+def render_worksheet(entries, tile_names, target) -> str:
+    """逐步搭建签核工作单: 每模型 逐步勾选栏 + 问题记录栏 + 照片位。
+
+    与第 4 节模型级勾选表的分工: 那张表签"这个模型过没过", 本工作单是
+    桌边随搭随填的原始记录载体 (打印或复制到 QA 工单后填写)。
+    """
+    pending = [e for e in entries if not e["verified"]]
+    total_minutes = sum(e["est_minutes"] for e in pending)
+    lines = []
+    a = lines.append
+    a("# V1 抽样包实物复核逐步签核工作单 (Physical Sign-off Worksheet)")
+    a("")
+    a(f"- 生成日期: {date.today().isoformat()}")
+    a("- 生成工具: `tools/physical_sample_pack.py --print-checklist "
+      f"docs/reports/{WORKSHEET_DOC}` —— 模型库 / 免费层 / 复核状态变化后"
+      "**重新生成**, 勿手改; 仓库内只保存空白模板, 实际勾选与笔记**打印或"
+      "复制到 QA 工单**后填写 (已复核模型重新生成时自动折叠为一行)")
+    a("- 抽样口径: 与 [`PHYSICAL_SAMPLE_V1.md`](PHYSICAL_SAMPLE_V1.md) 同一"
+      "确定性抽样规则 (S1/S2/S3), 判定标准以 "
+      f"[`docs/{CHECKLIST_DOC}`](../{CHECKLIST_DOC}) 对应章节 (§0~§7) 为准; "
+      "本工作单是其**逐步级**的原始记录载体, 模型级签核摘要仍看 "
+      "PHYSICAL_SAMPLE_V1.md 第 4 节")
+    a("- 照片归档约定: 每模型一个目录 `docs/reports/qa_photos/<model_id>/` "
+      "(或 QA 工单附件, 「照片位」表填链接); 失效编码 F01~F12 见 "
+      "BUILD_VERIFICATION.md 第 4 节")
+    a("")
+    a("## 0. 使用方法 (复核人开工前读一遍)")
+    a("")
+    a("1. **开始前**: 完成该模型「复核前置」三个勾选 (软件双档预检 + 环境), "
+      "按「备料 BOM」逐行清点勾「备齐」—— 不多备, BOM 之外的片不上桌;")
+    a("2. **搭建中**: 只看教程 (平板 tutorial GUI 或打印分步图, 不看模型 "
+      "JSON), 每完成一步勾「完成」并记耗时; 卡壳 / 说明歧义 / 掉片**当场**"
+      "写入「问题记录」, 非人为失误的掉片或坍塌记失效编码并拍照;")
+    a("3. **成品后**: 静置 30 秒, 依次执行敲击 (§3) / 提起 (§4) / 拆解重搭 "
+      "(§5), 在「固定动作测试」表圈选结果;")
+    a("4. **收尾**: 补齐「照片位」与「结论与签核」; 通过 → 按 "
+      "PHYSICAL_SAMPLE_V1.md 第 5 节把 `content_meta` 三字段落盘并重新生成"
+      "两份报告; 不通过 → 失效编码 + 照片反馈设计师。**严禁未实搭勾选或"
+      "事后补签** —— 伪造复核结论比不复核更危险。")
+    a("")
+    a(f"## 抽样总览 ({len(entries)} 个, 待复核 {len(pending)} 个, "
+      f"待复核预算合计 {total_minutes} 分钟)")
+    a("")
+    a("| # | 模型 | 名称 | 难度 | 片数 | 步骤 | 耗时预算 | 复核状态 |")
+    a("| --- | --- | --- | --- | --- | --- | --- | --- |")
+    for i, e in enumerate(entries, 1):
+        status = f"已复核 ({e['verified_via']})" if e["verified"] else "**待复核**"
+        a(f"| {i} | `{e['id']}` | {e['name']} | D{e['difficulty']} "
+          f"| {e['total_pieces']} | {e['steps']} | {e['est_minutes']} 分钟 "
+          f"| {status} |")
+    a("")
+    for i, e in enumerate(entries, 1):
+        m = e["_model"]
+        a(f"## {i}. {e['id']} — {e['name']} (D{e['difficulty']}, "
+          f"{e['total_pieces']} 片, {e['steps']} 步, "
+          f"预算 {e['est_minutes']} 分钟)")
+        a("")
+        if e["verified"]:
+            a(f"已复核 ({e['verified_via']}), 本轮无需填写; "
+              "`final_assembly` / `steps` 变更后三字段作废, "
+              "重新生成本工作单再走一遍。")
+            a("")
+            continue
+        a("复核人: ______  日期: ______  磁力片品牌/状态: ______ "
+          "(新片 / 旧片; 弱磁 strict 预检: 通过 / 豁免)")
+        a("")
+        a(f"### {i}.1 复核前置 (§0 软件预检 + §1 准备)")
+        a("")
+        a(f"- [ ] default 档零 Error: `./build/magtile_app validate "
+          f"data/models/{e['id']}.json --data-dir data`")
+        a("- [ ] strict 档零 Error (同命令加 `--profile strict`; "
+          "有豁免须注明: ______)")
+        a("- [ ] §1 环境合规: 平整硬质桌面 / 15~30°C / 秒表与录像机位就绪 / "
+          "只看教程不看设计源文件")
+        a("")
+        a(f"### {i}.2 备料 BOM (共 {e['total_pieces']} 片, 逐行清点)")
+        a("")
+        a("| 片型 | 颜色分布 | 数量 | 备齐 |")
+        a("| --- | --- | ---: | :---: |")
+        for t, n, colors in total_bom(m):
+            color_txt = ", ".join(f"{c} {k}" for c, k in colors)
+            a(f"| {md_cell(tile_names.get(t, t))} | {md_cell(color_txt)} "
+              f"| {n} | ☐ |")
+        a("")
+        a(f"### {i}.3 逐步搭建签核 ({e['steps']} 步, "
+          f"总耗时预算 {e['est_minutes']} 分钟)")
+        a("")
+        a("| 步 | +片 | 本步片型 | 步骤摘要 | 完成 | 耗时(分) "
+          "| 问题记录 (卡壳/歧义/掉片, 失效编码) |")
+        a("| ---: | ---: | --- | --- | :---: | --- | --- |")
+        for no, counts, desc in step_bom(m):
+            added = sum(n for _, n in counts)
+            a(f"| {no} | +{added} | {md_cell(fmt_piece_counts(counts, tile_names))} "
+              f"| {md_cell(desc, 26)} | ☐ | | |")
+        a(f"| 合计 | {e['total_pieces']} | — | — | — "
+          f"| ____ / {e['est_minutes']} | 超时记 Warning 并反馈步骤拆分 |")
+        a("")
+        a(f"### {i}.4 固定动作测试 (§3 敲击 / §4 提起 / §5 拆解重搭)")
+        a("")
+        a("| 测试 | 结果 (圈选) | 细节 / 失效编码 |")
+        a("| --- | --- | --- |")
+        a("| §3 敲击 (静置 30 秒后, 最高点 + 几何中部侧面各 3 次) "
+          "| Pass / Conditional / Fail | |")
+        a("| §4 提起 (托底座两侧提 5cm, 悬停 10 秒) "
+          "| Pass / Fail / n-a (平铺类须教程注明不可移动) | |")
+        a("| §5 拆解重搭 (D4+ 建议项, 逆序拆解后二搭) "
+          "| 第二次 ____ 分钟; ≤ 第一次 80%: 是 / 否; 零失效: 是 / 否 | |")
+        a("")
+        a(f"### {i}.5 照片位 (拍到后勾选并填路径 / 工单附件链接)")
+        a("")
+        a(f"| 照片 | 何时必拍 | 建议文件名 (`qa_photos/{e['id']}/`) "
+          "| 已拍 | 路径 / 链接 |")
+        a("| --- | --- | --- | :---: | --- |")
+        a("| 成品全景 | 必拍 | `final_overview.jpg` | ☐ | |")
+        a("| 敲击后状态 (最高点 + 中部敲击点) | 必拍 | `after_knock.jpg` "
+          "| ☐ | |")
+        a("| 提起悬停中 | 提起测试适用时 | `lift_hold.jpg` | ☐ | |")
+        a("| 失效瞬间 (每次失效一张) | 有失效时 | `fail_step<NN>_F<XX>.jpg` "
+          "| ☐ | |")
+        a("")
+        a(f"### {i}.6 结论与签核")
+        a("")
+        a("- [ ] 通过 —— 全部适用项 Pass, 已按 PHYSICAL_SAMPLE_V1.md 第 5 节"
+          "写入 `content_meta` 三字段 (physical_verified / _at / _notes)")
+        a("- [ ] 不通过 —— 失效编码: ______, 已反馈设计师 "
+          "(issue / 工单: ______), 不写 verified 字段")
+        a("- §6 复核记录归档: issue / QA 工单链接: ______")
+        a("- 复核人签名: ______  完成日期: ______")
+        a("")
+    return "\n".join(lines) + "\n"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="D4+ 实物复核 V1 上架优先抽样包 (清单 + 逐模型 BOM 摘要)")
@@ -325,6 +475,10 @@ def main() -> int:
     parser.add_argument("--no-bom", action="store_true")
     parser.add_argument("--json", action="store_true", dest="as_json")
     parser.add_argument("--markdown", default=None, metavar="FILE")
+    parser.add_argument("--print-checklist", nargs="?", const="-", default=None,
+                        metavar="FILE",
+                        help="输出逐步搭建签核工作单 Markdown (勾选栏/问题记录/"
+                             "照片位); 省略 FILE 直出 stdout 并跳过常规报告")
     parser.add_argument("--fail-on-missing-sample", action="store_true")
     args = parser.parse_args()
 
@@ -363,6 +517,20 @@ def main() -> int:
         out = Path(args.markdown)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(md, encoding="utf-8")
+        print(f"已生成: {out}")
+
+    if args.print_checklist:
+        ws = render_worksheet(entries, tile_names, args.target)
+        if args.print_checklist == "-":
+            if args.as_json:
+                print("错误: --print-checklist 直出 stdout 时不能与 --json 混用 "
+                      "(给 --print-checklist 一个 FILE 即可共存)", file=sys.stderr)
+                return 2
+            sys.stdout.write(ws)
+            return 1 if (args.fail_on_missing_sample and missing) else 0
+        out = Path(args.print_checklist)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(ws, encoding="utf-8")
         print(f"已生成: {out}")
 
     if args.as_json:

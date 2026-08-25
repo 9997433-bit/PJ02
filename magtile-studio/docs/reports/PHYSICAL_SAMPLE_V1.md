@@ -42,7 +42,7 @@ python3 tools/physical_sample_pack.py --json          # 机器可读 (含逐步 
 
 ## 4. 逐模型签核勾选表
 
-检查项与判定标准以 [`docs/PHYSICAL_REBUILD_CHECKLIST.md`](../PHYSICAL_REBUILD_CHECKLIST.md) 对应章节为准; 全部适用项 Pass 才可按第 5 节落盘 `physical_verified`。
+检查项与判定标准以 [`docs/PHYSICAL_REBUILD_CHECKLIST.md`](../PHYSICAL_REBUILD_CHECKLIST.md) 对应章节为准; 全部适用项 Pass 才可按第 5 节落盘 `physical_verified`。本节是**模型级**签核摘要; 桌边随搭随填的**逐步级**原始记录 (逐步勾选/问题记录/照片位) 用配套工作单 [`PHYSICAL_SIGNOFF_WORKSHEET.md`](PHYSICAL_SIGNOFF_WORKSHEET.md) (`tools/physical_sample_pack.py --print-checklist` 生成)。
 
 ### skyscraper_01 — 城市摩天大楼 (D5, 122 片, 26 步)
 
