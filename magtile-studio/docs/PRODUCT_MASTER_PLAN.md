@@ -176,7 +176,9 @@ flowchart TB
 | [PLATFORM_ARCHITECTURE.md](PLATFORM_ARCHITECTURE.md) | 跨平台技术（子代理生成中） |
 | [TECH_ROADMAP.md](TECH_ROADMAP.md) | 工程总路线（子代理生成中） |
 | [TESTING.md](TESTING.md) | 测试手册（子代理生成中） |
-| [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) | 实物验证（子代理生成中） |
+| [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) | 三层验证金字塔 + 儿童实测协议 |
+| [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) | 商业化策略（定价/合规/GTM/KPI） |
+| [PLATFORM_ARCHITECTURE.md](PLATFORM_ARCHITECTURE.md) | 跨平台架构（Qt 6 + NDK + SQLite） |
 
 ---
 
