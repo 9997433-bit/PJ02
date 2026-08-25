@@ -28,6 +28,11 @@ data class ModelCard(
     /** 免费层模型 (原生层 core::isFreeTierModel 共享口径: 目录 tags
      *  含「免费」); 非免费只在详情作温和订阅提示, 浏览不受限。 */
     val isFree: Boolean,
+    /** 预计用时档位 (分钟, UI_UX_SPEC §5.4): 原生层
+     *  core::estimateBuildMinutes 纯函数, 与桌面 Qt 详情页同一实现
+     *  同一口径 (5/10/15/20/30/45 分钟六档, 只说「大约」不假精确);
+     *  0 = 步数未知, 详情弹窗隐藏该行 (Kotlin 侧零公式)。 */
+    val estimatedMinutes: Int,
 ) {
     /** 难度星显示: 实心 = 难度值, 补空心到 5 星, 如 ★★☆☆☆。 */
     val difficultyStars: String
@@ -84,6 +89,8 @@ data class ModelCard(
             missingTotal = obj.optInt("missing_total", 0),
             // 字段缺失按免费处理 (宁可少提示, 不误锁内容)
             isFree = obj.optBoolean("free", true),
+            // 字段缺失按 0 处理 (界面隐藏用时行, 温和降级不报错)
+            estimatedMinutes = obj.optInt("estimated_minutes", 0),
         )
     }
 }

@@ -159,11 +159,13 @@ if(MAGTILE_BUILD_TESTS)
     # 详情页「预计用时」纯函数单测 (QT-1, §5.4): 档位归整 (5/10/15/20/
     # 30/45 分钟, 平票取小档) / 上限封顶 / 步数未知返回 0 / 全库代表值
     # 回归 / 单调性; build_time_estimate.hpp 纯头文件零 Qt 依赖,
-    # 故用普通 add_executable, 不链任何 Qt 库
+    # 故用普通 add_executable, 不链任何 Qt 库 (实现在核心层
+    # include/magtile/core/, 与 Android 共享, 故补 include/ 搜索路径)
     if(EXISTS ${CMAKE_SOURCE_DIR}/tests/test_qt_estimate.cpp)
         add_executable(magtile_qt_estimate_test
             ${CMAKE_SOURCE_DIR}/tests/test_qt_estimate.cpp)
-        target_include_directories(magtile_qt_estimate_test PRIVATE src)
+        target_include_directories(magtile_qt_estimate_test
+            PRIVATE src ${CMAKE_SOURCE_DIR}/include)
         target_link_libraries(magtile_qt_estimate_test PRIVATE magtile_warnings)
         add_test(NAME qt_build_time_estimate COMMAND magtile_qt_estimate_test)
     endif()

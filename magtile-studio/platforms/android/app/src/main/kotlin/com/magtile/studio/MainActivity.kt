@@ -607,9 +607,9 @@ class MainActivity : Activity() {
 
     // ---- 卡片详情与物理校验 -------------------------------------------
 
-    /** 卡片详情: 简介 + 套装说明 + 库存对照 + 「开始搭建」直达分步
-     *  教程 (免费或订阅生效; 未订阅的非免费为温和订阅解锁提示) +
-     *  按需物理校验入口。 */
+    /** 卡片详情: 简介 + 预计用时 (§5.4, 步数未知隐藏) + 套装说明 +
+     *  库存对照 + 「开始搭建」直达分步教程 (免费或订阅生效; 未订阅
+     *  的非免费为温和订阅解锁提示) + 按需物理校验入口。 */
     private fun showModelDialog(card: ModelCard) {
         // 解锁口径与桌面 billing::isContentUnlocked / DetailPage 锁
         // 完全一致: 免费层 或 订阅有效 即解锁。已解锁且有步骤数据 ->
@@ -618,10 +618,21 @@ class MainActivity : Activity() {
         // 价格无催促 §12.2); 已解锁但无步骤 (数据缺失) 退回教程占位。
         val unlocked = card.isFree || subscriptionActive
         val startable = unlocked && card.stepCount > 0
+        // 预计用时 (UI_UX_SPEC §5.4, 与桌面 Qt DetailPage 同口径):
+        // 原生层 core::estimateBuildMinutes 档位估算随 listModels 下发
+        // (每步 1.5 分钟 + 每片 0.1 分钟归整到 5/10/15/20/30/45 分钟
+        // 六档), 只说「大约 N 分钟」不假精确; 0 = 步数未知时整行隐藏;
+        // 用时是信息不是门槛 —— 与缺片/订阅锁无关照常显示
+        val estimateLine = if (card.estimatedMinutes > 0) {
+            getString(R.string.dialog_estimated_minutes, card.estimatedMinutes)
+        } else {
+            ""
+        }
         val message = buildString {
             append(card.difficultyStars)
             append("  ")
             append(getString(R.string.card_pieces_steps, card.totalPieces, card.stepCount))
+            if (estimateLine.isNotEmpty()) append("\n").append(estimateLine)
             if (card.theme.isNotBlank()) append("\n主题: ").append(card.theme)
             // 套装说明 (BOM 未知时不显示, 与卡片角标同一口径)
             if (card.bomKnown) {
@@ -644,9 +655,23 @@ class MainActivity : Activity() {
                     else R.string.dialog_subscription_note))
             }
         }
+        // 预计用时行加粗 (与桌面 Qt font.bold 一致); 4-6 岁启蒙模式
+        // 更大字 (分龄可读 §2, 对齐 Qt bandJunior 换 fontButton 大字号)
+        val styledMessage: CharSequence = if (estimateLine.isEmpty()) message else {
+            android.text.SpannableString(message).apply {
+                val start = message.indexOf(estimateLine)
+                val end = start + estimateLine.length
+                setSpan(android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
+                        start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                if (bandJunior) {
+                    setSpan(android.text.style.RelativeSizeSpan(1.4f),
+                            start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+            }
+        }
         val builder = AlertDialog.Builder(this)
             .setTitle(card.name)
-            .setMessage(message)
+            .setMessage(styledMessage)
             .setPositiveButton(R.string.dialog_validate) { _, _ -> runValidation(card) }
             .setNegativeButton(R.string.dialog_close, null)
         if (inventoryConfigured && card.bomKnown && !card.canBuild) {

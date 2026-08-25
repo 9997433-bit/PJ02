@@ -31,6 +31,10 @@
     <string name="dialog_expansion_note">需要扩展装 (用到核心 9 片之外的片型)</string>
     <!-- %1$d = 片数, %2$d = 步数 -->
     <string name="card_pieces_steps">%1$d 片 · %2$d 步</string>
+    <!-- 预计用时 (UI_UX_SPEC §5.4): %1$d = 档位分钟数 (5/10/15/20/30/45
+         六档, 原生层 core::estimateBuildMinutes 与桌面 Qt 详情页同一
+         纯函数); 只说「大约」不假精确, 步数未知时详情弹窗整行隐藏 -->
+    <string name="dialog_estimated_minutes">🕒 大约 %1$d 分钟</string>
     <string name="dialog_tutorial_coming">分步教程即将上线, 敬请期待!</string>
     <!-- 免费模型详情弹窗的搭建入口 (进 TutorialActivity 分步浏览) -->
     <string name="dialog_start_build">🧲 开始搭建</string>

@@ -4,7 +4,10 @@
 // 模型库链路 (绑定 com.magtile.studio.MainActivity):
 //   loadCatalog(catalogPath)      -> 加载磁力片形状目录, 返回形状数
 //   listModels(dataDir)           -> 模型库目录 (卡片元数据 + core-9 判定
-//                                    + 库存已登记时的「我能搭的」判定), 返回 JSON 字符串
+//                                    + 库存已登记时的「我能搭的」判定
+//                                    + 预计用时档位 estimated_minutes,
+//                                    core::estimateBuildMinutes 与桌面
+//                                    Qt 详情页同一纯函数), 返回 JSON 字符串
 //   validateModel(jsonPath)       -> 加载模型并跑完整物理校验, 返回中文摘要
 //   getTutorialStepCount()        -> 最近一次成功加载模型的教程步骤数
 //
@@ -97,6 +100,7 @@
 #include "magtile/core/tile_catalog.hpp"
 #include "magtile/core/types.hpp"
 #include "magtile/core/age_mode.hpp"
+#include "magtile/core/build_time_estimate.hpp"
 #include "magtile/physics/physics_validator.hpp"
 #include "magtile/progress/achievements.hpp"
 #include "magtile/progress/age_settings.hpp"
@@ -284,7 +288,7 @@ JNIEXPORT jint JNICALL Java_com_magtile_studio_MainActivity_loadCatalog(
 ///          "models":[{"id","name","name_en","description","difficulty",
 ///                     "total_pieces","step_count","theme","file",
 ///                     "bom_known","core9_only","can_build","missing_total",
-///                     "free"},
+///                     "free","estimated_minutes"},
 ///                    ...]}
 ///   失败: {"error":"中文错误信息"}
 /// 卡片展示元数据外, 逐模型加载 BOM 做两项判定 (与桌面 GL/Qt 同口径):
@@ -294,6 +298,10 @@ JNIEXPORT jint JNICALL Java_com_magtile_studio_MainActivity_loadCatalog(
 ///     表非空) 时对照 BOM 得出 can_build 与 missing_total (缺几片);
 ///     未登记时 inventory_configured=false, can_build 恒 false,
 ///     Kotlin 侧应禁用该筛选并引导录入。
+/// estimated_minutes 为预计用时档位 (§5.4, core::estimateBuildMinutes
+/// 纯函数 —— 与桌面 Qt 详情页同一实现同一口径: 每步 1.5 分钟 +
+/// 每片 0.1 分钟归整到 5/10/15/20/30/45 分钟六档; 0 = 步数未知,
+/// Kotlin 侧据此隐藏该行; 与缺片/订阅状态无关照常下发)。
 /// 模型文件有问题的按 "BOM 未知" 降级 (bom_known=false, 不进核心
 /// 筛选也不显示角标, 不进「我能搭的」), 不影响其余卡片。
 /// 139 模型量级后台线程百毫秒完成 (与桌面 GL 启动逐模型判定同策略)。
@@ -355,6 +363,12 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MainActivity_listModels(
                 // 免费层判定与 CLI/GL/Qt 同一口径 (core::isFreeTierModel,
                 // 目录 tags 含「免费」); 非免费只作温和提示, 不锁浏览
                 {"free", magtile::core::isFreeTierModel(entry)},
+                // 预计用时档位 (§5.4, 与桌面 Qt 详情页同一纯函数;
+                // 0 = 步数未知, 界面隐藏; 用时是信息不是门槛,
+                // 与缺片/订阅状态无关照常下发)
+                {"estimated_minutes",
+                 magtile::core::estimateBuildMinutes(entry.step_count,
+                                                     entry.total_pieces)},
             });
         }
         const nlohmann::json root = {
