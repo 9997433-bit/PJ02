@@ -89,7 +89,7 @@ flowchart TD
 | 进度与成就 | §7 | `IN_PROGRESS`（SQLite 存档 + CLI 查询 DONE；图形界面 PLANNED） |
 | 设置 | §8 | `IN_PROGRESS`（键值存储 DONE；设置界面 PLANNED） |
 | 家长门 | §9 | `IN_PROGRESS`（算术题门 stub `DONE`：中文数字乘法题 + 中文大写数字软键盘 + 冷却 + 15 分钟内存会话 + 门后家长区占位页；PIN / 手写键盘 / 家长中心完整功能 PLANNED） |
-| Onboarding（库存录入） | §10 | `IN_PROGRESS`（结构化库存存取 API + CLI 录入 `inventory set` DONE；首启空库存提示弹窗 stub DONE；按片型计数的图形录入界面 PLANNED） |
+| Onboarding（库存录入） | §10 | `IN_PROGRESS`（结构化库存存取 API + CLI 录入 `inventory set` DONE；GL 版按片型计数的图形录入界面 DONE：全部片型中文名 + 大步进器/直接输入 + 保存后一键「看看我能搭什么」，首启弹窗主按钮直达录入，模型库页眉常驻「我的磁力片」入口；Qt 版录入界面与快捷套装预填 PLANNED） |
 | 订阅页 | §11 | `PLANNED` |
 
 ---
@@ -176,7 +176,7 @@ flowchart TD
 |------|------|------|
 | 继续上次 | 首页最顶部大卡片，一键回到断点步骤 | `IN_PROGRESS`（进度数据 DONE，GUI 大卡片 PLANNED；GL 库窗口已显示进行中徽标） |
 | 模型卡片 | 预览渲染图 + 名称 + 难度星 + 片数 + 状态徽标（✓完成 / ▶进行中 / 🔒订阅） | `IN_PROGRESS`（GL 版卡片网格已有；预览图管线 PLANNED） |
-| 「我能搭」筛选 | 依据库存（§10）过滤片数与片型 BOM 满足的模型 | `IN_PROGRESS`（GL 模型库「我能搭的」勾选框 DONE：依 `canBuild` BOM 对照过滤，未登记库存时禁用并引导登记；步骤级缺片提示 PLANNED） |
+| 「我能搭」筛选 | 依据库存（§10）过滤片数与片型 BOM 满足的模型 | `IN_PROGRESS`（GL 模型库「我能搭的」勾选框 DONE：依 `canBuild` BOM 对照过滤，未登记库存时禁用并就地给「去登记」图形录入入口；库存保存后即刻重算并可一键跳回已开筛选的模型库；步骤级缺片提示 PLANNED） |
 | 筛选器分龄 | 4–6 无筛选 / 7–9 两项 / 10–12 全量（§2） | `IN_PROGRESS`（4–6 启蒙模式已落地：隐藏搜索/筛选行 + 超大卡片（约每行 2 张）+ 加大间距，按 SQLite 年龄段设置自动切换；7–9 / 10–12 差异化筛选 PLANNED） |
 | 空态 | 筛选无结果时给「换个条件试试」+ 推荐 3 个可搭模型，不出现空白页 | `PLANNED` |
 | 加载性能 | 首页冷启动 → 可交互 ≤ 2s（中端平板）；卡片图懒加载 | `PLANNED` |
@@ -328,9 +328,9 @@ flowchart TD
 
 **目标**：首启 ≤ 90 秒完成「家长设年龄 → 录库存 → 孩子开搭」。库存录入是「我能搭」筛选与 BOM 缺片提示的数据源。
 
-### 10.1 流程 — IN_PROGRESS（库存存取 API + CLI 录入 + 首启提示弹窗 stub DONE；图形化流程 PLANNED）
+### 10.1 流程 — IN_PROGRESS（库存存取 API + CLI 录入 + GL 版图形录入界面 DONE；年龄段前置步骤与快捷套装预填 PLANNED）
 
-现阶段的首启行为：模型库 GUI 启动时若从未登记库存（`hasInventory()` 为假）且未看过提示，弹出「先登记家里的磁力片」占位弹窗（压暗遮罩 + 价值说明 + CLI 录入指引）；「稍后再说」落盘 `inventory_onboarding_done` 标记后不再打扰——跳过永远可见，录库存不是付费墙。
+现阶段的首启行为：模型库 GUI 启动时若从未登记库存（`hasInventory()` 为假）且未看过提示，弹出「先登记家里的磁力片」弹窗（压暗遮罩 + 价值说明），主按钮「现在登记」直达按片型计数的图形录入界面（§10.2）；「稍后再说」落盘 `inventory_onboarding_done` 标记后不再打扰——跳过永远可见，录库存不是付费墙。录入界面保存即写入与 CLI 共用的 `tile_inventory` 表（含 0 数量的「明确没有」），并可一键「保存，看看我能搭什么」跳回已开启「我能搭的」筛选的模型库；模型库页眉常驻「我的磁力片」入口供随时修改（冒烟：`tests/test_inventory_gui.sh` 校验图形路径写入后 CLI `inventory show/match` 能读到）。
 
 ```mermaid
 flowchart LR
