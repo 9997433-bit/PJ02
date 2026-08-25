@@ -152,7 +152,7 @@ flowchart TB
 | 功能 | 说明 | 状态 | 规范出处 |
 |------|------|------|----------|
 | OpenGL 渲染 + 轨道相机 | 桌面 GL 窗口, 拖旋/缩放/阻尼 | `DONE` | [PLATFORM_ARCHITECTURE.md](PLATFORM_ARCHITECTURE.md) |
-| 教程 GUI（步骤导航/高亮/ghost/进度条/退出即存档） | `tutorial --gui` 已可运行 | `DONE` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §6 |
+| 教程 GUI（步骤导航/高亮/ghost/进度条/退出即存档） | GL 版 `tutorial --dev-gui`（内部工具）与 Qt 版教程播放器均可运行 | `DONE` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §6 |
 | 呼吸高亮动画 / 相机姿态恢复 | 播放器打磨 | `IN_PROGRESS` | 同上 |
 | TTS 步骤朗读（系统 TTS） **[M3 门槛]** | 分龄自动/手动朗读, 无第三方语音 SDK | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.2 |
 | 旋转引导（动画手势） | 首次进入 3D 的👋提示 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §6.2 |
@@ -163,7 +163,7 @@ flowchart TB
 
 | 功能 | 说明 | 状态 | 规范出处 |
 |------|------|------|----------|
-| 模型库 GUI（卡片网格 + 进度徽标） | `library --gui` 已可运行 | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §5 |
+| 模型库 GUI（卡片网格 + 进度徽标） | 用户入口为 Qt 版 `magtile_studio_qt`（[QT_UI_PLAN.md](QT_UI_PLAN.md)）；GL 版 `library --dev-gui` 退役为内部工具 | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §5 |
 | 模型详情页（BOM 对照库存/缺片提示） | 开搭前确认页 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §5.4 |
 | 年龄分层三模式（4–6/7–9/10–12） **[M3 门槛]** | 布局/文字量/相机/反馈分龄 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §2 |
 | 触控目标 ≥48dp / 无微型按钮 **[M3 门槛]** | 儿童侧验收红线 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.1 |

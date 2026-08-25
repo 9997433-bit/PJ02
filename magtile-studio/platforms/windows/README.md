@@ -29,7 +29,7 @@ cmake --build build-win --config Release
 ctest --test-dir build-win -C Release --output-on-failure
 
 build-win\Release\magtile_app.exe validate data\models\castle_foundation_01.json --data-dir data
-build-win\Release\magtile_app.exe tutorial data\models\castle_foundation_01.json --data-dir data --gui
+build-win\Release\magtile_app.exe tutorial data\models\castle_foundation_01.json --data-dir data --dev-gui
 ```
 
 要点:
@@ -101,8 +101,8 @@ TGZ 生成器走同一套安装规则); 标 `[ ]` 的项必须在 Windows 实机
       project VERSION 一致。
 - [ ] NSIS 安装器: 许可页正常显示 → 安装到 `%ProgramFiles%\MagTile
       Studio\` → 开始菜单快捷方式启动模型库 GUI → 中文界面无乱码。
-- [ ] 便携 ZIP 解压即用: `magtile_app.exe library --gui` 可启动,
-      教程进度存档写入用户目录。
+- [ ] 便携 ZIP 解压即用: `magtile_app.exe library --dev-gui` (GL 内部
+      工具) 可启动, 教程进度存档写入用户目录。
 - [ ] starter 子集安装包: 模型库界面恰显示 30 个模型, 卡片缩略图齐全。
 - [ ] 卸载干净: `%ProgramFiles%` 目录与开始菜单项移除 (用户存档保留)。
 - [ ] WiX 方式 B `wix build` 出 MSI; `msiexec /qn` 静默安装可用;

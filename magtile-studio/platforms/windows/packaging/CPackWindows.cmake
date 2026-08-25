@@ -178,14 +178,15 @@ set(CPACK_NSIS_PACKAGE_NAME "MagTile Studio")
 set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
 set(CPACK_NSIS_MODIFY_PATH OFF)
 # 开始菜单快捷方式; SetOutPath 保证工作目录为安装根, 使默认
-# --data-dir data 相对路径可用。并存包 (默认): 主快捷方式直达
-# magtile_app 模型库主界面, Qt 界面构建时追加 "(Qt)" 快捷方式;
-# Qt-only 包: 唯一主快捷方式即 Qt 商用界面。
+# --data-dir data 相对路径可用。并存包 (默认, 过渡/内部评审形态):
+# 主快捷方式直达 magtile_app GL 开发者模型库 (library --dev-gui,
+# 已退役为内部工具), Qt 界面构建时追加 "(Qt)" 快捷方式;
+# Qt-only 包: 唯一主快捷方式即 Qt 商用界面 (商店渠道形态)。
 set(_magtile_nsis_create_icons "SetOutPath '$INSTDIR'")
 set(_magtile_nsis_delete_icons "")
 if(NOT MAGTILE_PACKAGE_QT_ONLY)
     string(APPEND _magtile_nsis_create_icons "
-     CreateShortCut '$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\MagTile Studio.lnk' '$INSTDIR\\\\magtile_app.exe' 'library --gui'")
+     CreateShortCut '$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\MagTile Studio.lnk' '$INSTDIR\\\\magtile_app.exe' 'library --dev-gui'")
     string(APPEND _magtile_nsis_delete_icons "
      Delete '$SMPROGRAMS\\\\$START_MENU\\\\MagTile Studio.lnk'")
 endif()

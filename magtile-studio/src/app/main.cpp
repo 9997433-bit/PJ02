@@ -3,16 +3,19 @@
 //
 // 同一个可执行文件提供两种形态:
 //   - CLI: 内容制作与质检 (catalog / validate / tutorial / library);
-//   - GUI: 商业版应用 —— library --gui 打开模型库主界面,
+//   - GUI (内部开发工具): library --dev-gui 打开 GL/ImGui 模型库界面,
 //     点击卡片进入 3D 交互教程, 进度自动写入存档;
-//     tutorial --gui 直接打开单个模型的教程窗口
+//     tutorial --dev-gui 直接打开单个模型的教程窗口
 //     (均需构建时开启 MAGTILE_BUILD_GL_RENDERER)。
+//     GL/ImGui 壳已退役为内容制作/调试/CI 冒烟工具, 面向家庭用户的
+//     桌面图形界面是 Qt 版 magtile_studio_qt (docs/QT_UI_PLAN.md);
+//     旧拼写 --gui 一期保留为别名并给温和迁移提示。
 //
 // 用法:
-//   magtile_app library  [--gui] [--data-dir DIR] [--db FILE]    模型库 (商业版主入口)
+//   magtile_app library  [--dev-gui] [--data-dir DIR] [--db FILE]  模型库 (终端对账 / 开发者图形界面)
 //   magtile_app catalog  [--data-dir DIR]                查看磁力片形状目录
 //   magtile_app validate <model.json> [--data-dir DIR]   物理与教程质检
-//   magtile_app tutorial <model.json> [--gui] [--data-dir DIR]  分步教程
+//   magtile_app tutorial <model.json> [--dev-gui] [--data-dir DIR]  分步教程
 //   magtile_app progress list|show|reset [...] [--db FILE]      进度存档
 //   magtile_app inventory set|show|match [...] [--db FILE]      磁力片库存
 //   magtile_app settings set-age|set-tts|show [...] [--db FILE]  年龄段/朗读等设置
@@ -61,7 +64,8 @@ struct CliArgs {
     std::string command;
     std::string model_file;
     fs::path data_dir = "data";
-    bool gui = false;
+    bool gui = false;            ///< --dev-gui: 打开 GL/ImGui 开发者图形界面
+    bool gui_alias_used = false; ///< 经已退役的 --gui 别名开启 (一期保留, 打温和提示)
     bool core_only = false;      ///< --core-only: 只列核心 9 片型 / 只用核心片的模型
     bool free_only = false;      ///< --free-only: 只列免费层 (带「免费」标签) 的模型
     int start_step = 1;          ///< 图形模式的起始步骤
@@ -75,9 +79,9 @@ struct CliArgs {
     std::string settings_value;   ///< settings set-age 的年龄 (周岁) / set-tts 的 on|off
     std::string profile;          ///< validate 的物理校验档位 (default / strict)
     bool tts = false;            ///< --tts: 教程切步时朗读步骤说明 (系统 TTS)
-    std::string open_model;      ///< library --gui: 启动后直接打开的模型 id
-    bool open_parent_gate = false;  ///< library --gui: 启动即显示家长门 (评审/冒烟)
-    bool open_inventory = false;    ///< library --gui: 启动即打开库存录入界面
+    std::string open_model;      ///< library --dev-gui: 启动后直接打开的模型 id
+    bool open_parent_gate = false;  ///< library --dev-gui: 启动即显示家长门 (评审/冒烟)
+    bool open_inventory = false;    ///< library --dev-gui: 启动即打开库存录入界面
     std::string smoke_inventory;    ///< 冒烟自动驾驶: "square=40,rectangle=8" 经图形
                                     ///< 录入路径写入并保存 (供 CI 验证图形写库存)
     fs::path db_file;            ///< 进度存档路径; 为空时用平台默认路径
@@ -88,9 +92,11 @@ void printUsage() {
         "MagTile Studio - 磁力片搭建教程\n"
         "\n"
         "用法:\n"
-        "  magtile_app library  [--gui] [--core-only] [--free-only] [--data-dir DIR] [--db FILE]\n"
-        "                       模型库 (商业版主入口): --gui 打开图形界面, 浏览/搜索/\n"
-        "                       筛选模型卡片并进入教程; 默认在终端列出模型与进度;\n"
+        "  magtile_app library  [--dev-gui] [--core-only] [--free-only] [--data-dir DIR] [--db FILE]\n"
+        "                       模型库: 默认在终端列出模型与进度 (兼作目录对账);\n"
+        "                       --dev-gui 打开 GL/ImGui 开发者图形界面 (内容制作/调试/\n"
+        "                       CI 冒烟用; 家庭用户请使用 Qt 版 magtile_studio_qt,\n"
+        "                       见 docs/QT_UI_PLAN.md);\n"
         "                       --core-only 只列基础套装 (核心 9 片型) 就能搭的模型;\n"
         "                       --free-only 只列免费层模型 (带「免费」标签, 与\n"
         "                       starter 安装包同一清单口径, 可与 --core-only 叠加)\n"
@@ -100,8 +106,9 @@ void printUsage() {
         "                       校验模型物理规则与教程步骤; --profile strict 使用弱磁\n"
         "                       严格档 (悬挂额定 120g/边长, 安全系数 0.7, 面向磁力较弱\n"
         "                       的品牌与旧片, 详见 docs/PHYSICS_RULES.md)\n"
-        "  magtile_app tutorial <model.json> [--gui] [--data-dir DIR]\n"
-        "                       分步教程: 默认在终端预览, --gui 打开 3D 交互窗口\n"
+        "  magtile_app tutorial <model.json> [--dev-gui] [--data-dir DIR]\n"
+        "                       分步教程: 默认在终端预览, --dev-gui 打开 3D 交互窗口\n"
+        "                       (内容制作/调试用)\n"
         "  magtile_app progress list                          查看全部教程进度与成就\n"
         "  magtile_app progress show  <model_id>              查看单个模型的进度详情\n"
         "  magtile_app progress reset <model_id>              重置单个模型的进度\n"
@@ -122,7 +129,7 @@ void printUsage() {
         "                       4-6 岁启蒙模式下图形教程自动开启; 均受\n"
         "                       settings set-tts 朗读总开关约束)\n"
         "\n"
-        "图形模式选项:\n"
+        "图形模式选项 (--dev-gui, 内部开发工具):\n"
         "  --step N            (tutorial) 从第 N 步开始 (默认 1)\n"
         "  --open MODEL_ID     (library) 启动后直接进入指定模型的教程\n"
         "  --parent-gate       (library) 启动即显示家长门界面 (评审/冒烟测试)\n"
@@ -147,8 +154,12 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
         if (arg == "--data-dir") {
             if (i + 1 >= argc) return false;
             args.data_dir = argv[++i];
-        } else if (arg == "--gui") {
+        } else if (arg == "--dev-gui") {
             args.gui = true;
+        } else if (arg == "--gui") {
+            // 一期保留的退役别名: 行为等同 --dev-gui, main() 打温和迁移提示
+            args.gui = true;
+            args.gui_alias_used = true;
         } else if (arg == "--core-only") {
             args.core_only = true;
         } else if (arg == "--free-only") {
@@ -1298,7 +1309,7 @@ int runLibraryGui(const CliArgs& /*args*/) {
     std::fprintf(stderr,
                  "错误: 本构建未包含图形渲染后端, 无法打开模型库界面。\n"
                  "请以 -DMAGTILE_BUILD_GL_RENDERER=ON 重新构建 (默认开启), "
-                 "或不带 --gui 在终端查看模型库。\n");
+                 "或不带 --dev-gui 在终端查看模型库。\n");
     return 2;
 }
 
@@ -1349,7 +1360,7 @@ int runTutorial(const CliArgs& args) {
     return 0;
 }
 
-/// library (无 --gui): 终端列出模型库与进度, 并对账目录元数据与模型
+/// library (无 --dev-gui): 终端列出模型库与进度, 并对账目录元数据与模型
 /// 文件 (名称/难度/片数/步数), 不一致即非零退出 —— 兼作 CI 质量关卡,
 /// 防止模型卡片信息与实际内容漂移。
 int runLibrary(const CliArgs& args) {
@@ -1445,7 +1456,9 @@ int runLibrary(const CliArgs& args) {
     } else {
         std::printf("\n结论: 模型库目录与模型文件一致 (%zu 个模型)\n", entries.size());
     }
-    std::printf("提示: magtile_app library --gui 打开图形模型库\n");
+    std::printf(
+        "提示: 家庭用户图形界面请使用 Qt 版 magtile_studio_qt (docs/QT_UI_PLAN.md);\n"
+        "      magtile_app library --dev-gui 为内容制作/调试用的开发者图形模型库\n");
     return 0;
 }
 
@@ -1456,6 +1469,13 @@ int main(int argc, char** argv) {
     if (!parseArgs(argc, argv, args)) {
         printUsage();
         return 2;
+    }
+    if (args.gui_alias_used) {
+        // 一期温和提示 (不改变行为, 不影响退出码); 后续版本移除 --gui 别名
+        std::fprintf(stderr,
+                     "提示: --gui 已更名为 --dev-gui (GL/ImGui 界面退役为内部开发工具, "
+                     "家庭用户请使用 Qt 版 magtile_studio_qt, 见 docs/QT_UI_PLAN.md); "
+                     "--gui 别名本期仍可用, 后续版本将移除。\n");
     }
 
     try {

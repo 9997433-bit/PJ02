@@ -30,7 +30,7 @@
 | tutorial | `src/tutorial` | `TutorialEngine`: 步骤导航、场景查询、步骤一致性质检 | core |
 | render | `src/render` | `IRenderer` 接口 + `NullRenderer` + `OrbitCamera` (核心库内, 无图形依赖); `src/render/gl/` 为 GLFW + OpenGL 4.1 窗口后端 (独立库 `magtile_render_gl`) | core (GL 后端另依赖 GLFW / ImGui) |
 | progress | `src/progress` | `ProgressStore`: 教程进度 / 完成 / 收藏 / 成就 / 磁力片库存 (`tile_inventory` 表 + `canBuild` BOM 对照) 的本地 SQLite 存档 (详见 [PROGRESS.md](PROGRESS.md)) | core; SQLite 3 + nlohmann/json (仅 .cpp 内) |
-| app | `src/app` | 应用入口: CLI (`catalog` / `validate` / `tutorial` / `progress` / `inventory`) 与 3D 教程窗口 (`tutorial --gui`) | 全部 |
+| app | `src/app` | 应用入口: CLI (`catalog` / `validate` / `tutorial` / `progress` / `inventory`) 与 3D 教程窗口 (`tutorial --dev-gui`, 内部开发工具) | 全部 |
 
 依赖方向严格自上而下, core 不反向依赖任何模块。所有公共头文件位于 `include/magtile/<module>/`, 命名空间与目录一一对应 (`magtile::core` 等)。
 
@@ -85,7 +85,7 @@ BuildStep    = { step_number, description(中文), tip, tiles_to_add[], highligh
 - **描边**: Core Profile 前向兼容上下文中 `glLineWidth > 1` 不可用, 描边以面内不透明色带三角形实现, 三平台表现一致。
 - **HUD**: Dear ImGui 绘制步骤面板 (说明 / 提示 / 进度 / 上一步 / 下一步 / 重来) 与操作说明, 自动加载系统中文字体 (Windows: 微软雅黑; macOS: 苹方; Linux: Noto CJK / 文泉驿)。
 - **交互**: `OrbitCamera` (核心库内, 纯数学) 提供旋转 / 平移 / 缩放 / 包围盒取景; 键盘 ←→/PgUp/PgDn 切换步骤, Home 重来, R 重置视角, Esc 退出。
-- **可测试性**: `tutorial --gui --step N --frames N --screenshot x.ppm` 支持无头冒烟测试 (CI 中经 xvfb 运行并核对截图)。
+- **可测试性**: `tutorial --dev-gui --step N --frames N --screenshot x.ppm` 支持无头冒烟测试 (CI 中经 xvfb 运行并核对截图)。
 
 ## 6. 数据文件格式
 

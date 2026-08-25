@@ -138,7 +138,7 @@
 2. **同步 starter 打包清单**: 同一改动落到 `platforms/windows/packaging/starter_models.txt` (Windows starter 安装包的裁剪清单, 与 `免费` 标签集合**必须相等** —— 对齐决议见 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md))。
 3. **重跑目录登记**: `python3 tools/update_model_catalog.py` (目录 `data/model_catalog.json` 由工具生成, 禁止手工编辑)。
 4. **核对红线与对齐**: `python3 tools/check_core5_usage.py --strict` (免费层 core-9 占比、标签一致性, 随 `tests/run_full_qa.sh` 在 CI 强制) + `python3 tools/verify_free_tier.py` (免费标签数=30、全 core-9、与 starter 清单一致; QA 可选关卡, `MAGTILE_FREE_TIER_CHECK=1` 开启, 发布打包前必须跑)。
-5. **产品端核对**: 桌面端 `magtile_app library --core-only` 在终端列出全部纯 core-9 模型 (免费选品的候选池); GL 图形库 (`library --gui`) 与 Qt 版模型库均提供「只用核心 9 片」筛选, 用到扩展片型的模型显示「需要扩展装」角标 —— 三端判定共用 `core::isCoreTile` (目录 `tier` 优先, 代码内白名单兜底)。
+5. **产品端核对**: 桌面端 `magtile_app library --core-only` 在终端列出全部纯 core-9 模型 (免费选品的候选池); Qt 版模型库与 GL 图形库 (内部工具 `library --dev-gui`) 均提供「只用核心 9 片」筛选, 用到扩展片型的模型显示「需要扩展装」角标 —— 三端判定共用 `core::isCoreTile` (目录 `tier` 优先, 代码内白名单兜底)。
 
 ## 3. 反批量生成规则 (Anti-Batch-Generation)
 

@@ -54,7 +54,7 @@
 当前 `magtile_render_gl` 把 **GLFW 窗口管理** 与 **GL 绘制逻辑** 耦合在同一目标里。跨平台化的第一步是把二者拆开:
 
 - `render/gl_draw/` — 纯绘制: shader、VBO 组装、`submitTile` 实现, 只假设"当前线程已有一个 GL/GLES 上下文", 不 include GLFW。GL 4.1 与 GLES 3.0 共用此层 (见 §3.3)。
-- `render/context_glfw/` — 桌面独立窗口路径 (保留, 供 CLI `--gui` 与开发调试用)。
+- `render/context_glfw/` — 桌面独立窗口路径 (保留, 供 CLI `--dev-gui` 内部开发工具与开发调试用)。
 - 平台外壳 (Qt / Android GLSurfaceView) 各自创建上下文后调用 `gl_draw`。
 
 `IRenderer` 接口 (`initialize / beginFrame / submitTile / endFrame / shouldClose`) 不变, 仅新增一个"外部上下文"构造路径。
@@ -209,7 +209,7 @@ CDN (对象存储 + CDN, 国内阿里云 OSS/腾讯 COS, 海外 CloudFront):
 | Job | Runner | 工具链 | 内容 |
 | --- | --- | --- | --- |
 | `linux-gcc` | ubuntu-24.04 | GCC 13 | 配置(GL OFF) + 构建 + `ctest` (含全部模型 `validate`) |
-| `linux-clang-gl` | ubuntu-24.04 | Clang 17 | GL ON + xvfb 冒烟 (`--gui --frames 30 --screenshot`) |
+| `linux-clang-gl` | ubuntu-24.04 | Clang 17 | GL ON + xvfb 冒烟 (`--dev-gui --frames 30 --screenshot`) |
 | `windows-msvc` | windows-2022 | MSVC 2022 | GL ON 构建 + `ctest` |
 | `macos-arm64` | macos-14 | Apple Clang | GL ON 构建 + `ctest` |
 | `android-core` | ubuntu-24.04 | NDK r27 + CMake toolchain | 交叉编译 `magtile_core` + `gl_draw` (arm64-v8a, GLES 头), **不跑测试, 只保证编译通过** —— 这是 §3.3 禁用清单的执行点 |

@@ -7,8 +7,8 @@ MagTile Studio 是一款面向消费市场的桌面应用: 用交互式 3D 分�
 - **标准磁力片形状库**: 共 13 种, 分核心/扩展两层 (见 `docs/TILE_CATALOG.md` 与 `docs/TILE_SET.md`) —— 核心 9 种 = 6 基础片型 (实物照片确认的 正方形、等边三角形、直角三角形、等腰三角形 [瘦高, 底 1 高 2]、长方形, 加新增核心大片 大正方形 [边长 2, 每边可吸 1 条长边或 2 片共线小方]) + 3 变体 (窗格方、门框方、车轮底座); 扩展 4 种: 菱形、梯形、六边形、扇形。几何数据由 `data/tile_catalog.json` 驱动, 可扩展非标配件。
 - **分步教程引擎**: 上一步 / 下一步 / 跳转 / 进度, 每一步给出中文说明、操作提示、新增磁力片与高亮参照片。
 - **物理规则校验**: 八条规则两组把关 —— 几何/拓扑 (接地支撑、磁力边吸合、无重叠、重心稳定) + 静力学/工艺 (悬挂承重、悬臂力矩、装配可达、结构冗余, 磁吸边按"铰链"而非刚性节点建模); 不仅校验成品, 还逐步校验教程每个中间状态乃至步骤内逐片放置顺序 (保证不会"搭到一半塌掉"或"照着图纸搭却掉下来"), 详见 `docs/PHYSICS_RULES.md`。
-- **模型库主界面**: `library --gui` 打开商业版主入口 —— 模型卡片网格 (难度星级 / 片数步数 / 主题色徽章 / 完成对勾), 按名称搜索、按难度与主题筛选、收藏置顶查看, 进行中的模型在顶部"继续搭建"区一键断点续搭, 点击卡片即进入 3D 教程并自动记录进度。
-- **3D 交互教程**: GLFW + OpenGL 4.1 渲染后端 —— 半透明彩色磁力片、成品轮廓虚影、当前步骤高亮描边、轨道相机, 教程 HUD 支持按钮与键盘双通道导航。
+- **Qt 桌面商用界面**: `magtile_studio_qt` 是面向家庭用户的桌面主入口 (Qt 6 + QML, 见 `docs/QT_UI_PLAN.md`) —— 模型库卡片网格与筛选、模型详情 3D 预览、3D 交互教程、完成庆祝与成就墙、家长门与订阅占位、分龄布局与无障碍三档字号, 与 CLI/GL 版共用同一份进度存档。
+- **3D 交互教程**: GLFW + OpenGL 4.1 渲染后端 —— 半透明彩色磁力片、成品轮廓虚影、当前步骤高亮描边、轨道相机; 场景绘制层 (`GlSceneRenderer`) 与 Qt 版教程视口共用同一实现。GL/ImGui 壳 (`library --dev-gui`) 已退役为内容制作/调试/CI 冒烟的内部开发工具, 不再作为用户入口。
 - **渲染层解耦**: 核心逻辑与渲染完全隔离; 无窗口渲染器用于 CLI 与 CI, 窗口后端隐藏在同一 `IRenderer` 接口之后 (详见架构文档)。
 - **本地进度存档**: SQLite 单文件存档 —— 每个模型的教程进度、完成状态、收藏、成就与磁力片库存; 离线优先, 写入语义天然支持未来云同步 (详见 `docs/PROGRESS.md`)。
 
@@ -29,15 +29,15 @@ sudo apt install libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-d
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build -j
 
-# 打开模型库主界面 (商业版入口): 搜索/筛选模型卡片, 点击进入 3D 教程,
-# 进度自动存档, 未搭完的模型下次启动出现在顶部"继续搭建"区
-./build/magtile_app library --gui
-
 # 终端查看模型库与进度 (兼作目录元数据与模型文件的一致性对账)
 ./build/magtile_app library
 
-# 直接打开单个模型的 3D 教程窗口 (鼠标左键旋转 / 右键平移 / 滚轮缩放, ←→ 切换步骤)
-./build/magtile_app tutorial data/models/castle_foundation_01.json --gui
+# [内部开发工具] GL/ImGui 开发者模型库: 内容制作/调试/CI 冒烟用,
+# 家庭用户请使用下方 Qt 版图形界面 (--gui 旧拼写一期保留为别名)
+./build/magtile_app library --dev-gui
+
+# [内部开发工具] 直接打开单个模型的 3D 教程窗口 (左键旋转 / 右键平移 / 滚轮缩放, ←→ 切步)
+./build/magtile_app tutorial data/models/castle_foundation_01.json --dev-gui
 
 # 查看磁力片形状目录
 ./build/magtile_app catalog
@@ -60,14 +60,34 @@ ctest --test-dir build --output-on-failure
 
 # 图形模式冒烟测试 (无显示环境, 需 xvfb): 渲染 30 帧并保存截图
 xvfb-run -a ./build/magtile_app tutorial data/models/castle_foundation_01.json \
-    --gui --step 10 --frames 30 --screenshot /tmp/magtile.ppm
+    --dev-gui --step 10 --frames 30 --screenshot /tmp/magtile.ppm
 ```
+
+### Qt 桌面图形界面 (家庭用户主入口)
+
+面向用户的桌面图形界面是 Qt 6 + QML 版 `magtile_studio_qt` (Windows / macOS /
+Linux, 构建开关 `MAGTILE_BUILD_QT` 默认 OFF, 不装 Qt 完全不影响上述构建):
+
+```bash
+# Ubuntu / Debian 依赖 (Qt >= 6.4), 其他平台见 docs/QT_UI_PLAN.md §3.1
+sudo apt install qt6-base-dev qt6-declarative-dev \
+    qml6-module-qtquick qml6-module-qtquick-controls qml6-module-qtquick-layouts \
+    qml6-module-qtquick-templates qml6-module-qtquick-window qml6-module-qtqml-workerscript
+
+cmake -S . -B build-qt -DMAGTILE_BUILD_QT=ON
+cmake --build build-qt --target magtile_studio_qt -j
+./build-qt/apps/desktop_qt/magtile_studio_qt
+```
+
+Qt 版与 CLI / GL 开发工具共用同一份进度存档, 打包与商店发布路线见
+[docs/QT_UI_PLAN.md](docs/QT_UI_PLAN.md) 与 [scripts/package_qt_desktop.md](scripts/package_qt_desktop.md)。
 
 ## 目录结构
 
 ```
 magtile-studio/
 ├── CMakeLists.txt          # 构建入口
+├── apps/desktop_qt/        # Qt 6 + QML 桌面商用界面 (家庭用户主入口, docs/QT_UI_PLAN.md)
 ├── docs/                   # 架构 / 路线图 / 物理规则文档
 ├── include/magtile/        # 公共头文件 (core / physics / tutorial / render / progress)
 ├── src/
@@ -76,7 +96,7 @@ magtile-studio/
 │   ├── tutorial/           # 分步教程引擎
 │   ├── render/             # 渲染接口、轨道相机、无窗口实现与 GL 后端 (gl/)
 │   ├── progress/           # 本地进度存档 (SQLite)
-│   └── app/                # 应用入口 (CLI + 3D 教程窗口)
+│   └── app/                # magtile_app 入口 (CLI + GL 开发者图形工具 --dev-gui)
 ├── data/
 │   ├── tile_catalog.json   # 13 种标准磁力片的几何与磁力边定义 (核心 9 + 扩展 4)
 │   ├── model_catalog.json  # 模型库目录 (library 界面的卡片元数据)
@@ -121,6 +141,7 @@ cd build-win && cpack -G "NSIS;ZIP" -C Release
 | --- | --- |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 模块划分、坐标约定、渲染选型、数据格式 |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | 面向 500+ 模型内容库的分阶段商业化路线 |
+| [docs/QT_UI_PLAN.md](docs/QT_UI_PLAN.md) | Qt 6 商用桌面界面: 迁移计划、构建运行、打包发布与 ImGui 壳退役 |
 | [docs/CONTENT_STRATEGY.md](docs/CONTENT_STRATEGY.md) | 内容策略: 技法分类学、主题矩阵、反批量生成规则、生产管线 |
 | [docs/PHYSICS_RULES.md](docs/PHYSICS_RULES.md) | 物理校验规则的精确定义与判定算法 |
 | [docs/PROGRESS.md](docs/PROGRESS.md) | 进度存档模块: SQLite 结构、C++ API、CLI 命令与测试 |

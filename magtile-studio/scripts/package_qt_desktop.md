@@ -32,8 +32,9 @@ LGPL 合规清单。通用打包基座 (NSIS/ZIP/WiX、版本号管理、CI 流�
 
 两种 Qt 形态的 `data/` 范围都由 `-DMAGTILE_PACKAGE_MODEL_SET`
 (full / starter / 自定义清单) 决定, 见第七节。NSIS 开始菜单快捷方式
-随形态自动调整: 并存包主快捷方式直达 `magtile_app library --gui`,
-Qt 界面另建 "MagTile Studio (Qt)"; Qt-only 包唯一主快捷方式即 Qt 界面。
+随形态自动调整: 并存包主快捷方式直达 `magtile_app library --dev-gui`
+(GL 内部工具), Qt 界面另建 "MagTile Studio (Qt)"; Qt-only 包唯一主
+快捷方式即 Qt 界面 (商店渠道形态)。
 
 注意: 并存包与 Qt-only 包共用同一 NSIS 安装目录与 WiX UpgradeCode
 语义, **不要**在同一台机器同时安装两种形态; Qt-only 形态当前定位为
@@ -257,7 +258,7 @@ bash scripts/smoke_qt_linux_pack.sh          # 构建目录默认 build-pack
 2) **NSIS 冒烟**: `cpack -G NSIS` 走完 CPackWindows.cmake 生成
 `project.nsi` 并经 makensis 编译出安装器 (装的是 Linux 二进制, 仅验
 安装器脚本能过编译, 不可分发), 另断言并存包快捷方式两条 (主快捷方式
-`library --gui` + "MagTile Studio (Qt)") 已进脚本 —— 需
+`library --dev-gui` + "MagTile Studio (Qt)") 已进脚本 —— 需
 `apt install nsis`, 未装时该档跳过; 3) Qt-only 包 (无 magtile_app,
 -qt 后缀); 4) starter 子集 (模型恰 30 个 + 目录同步过滤 + 解包后
 目录登记一致性复核); 5) offscreen 启动实测吃包内 data/;

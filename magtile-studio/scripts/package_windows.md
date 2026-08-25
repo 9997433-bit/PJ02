@@ -98,7 +98,7 @@ cpack -G "NSIS;ZIP" -C Release
 
 | 文件 | 内容 |
 | --- | --- |
-| `MagTileStudio-<版本>-win64.exe` | NSIS 安装器: 装入 `%ProgramFiles%\MagTile Studio\`, 创建开始菜单快捷方式 (直达 `library --gui` 模型库主界面; Qt 构建时另有 "MagTile Studio (Qt)" 快捷方式), 带卸载器 |
+| `MagTileStudio-<版本>-win64.exe` | NSIS 安装器: 装入 `%ProgramFiles%\MagTile Studio\`, 创建开始菜单快捷方式 (直达 `library --dev-gui` GL 开发者模型库; Qt 构建时另有 "MagTile Studio (Qt)" 快捷方式, 商用主入口), 带卸载器 |
 | `MagTileStudio-<版本>-win64.zip` | 便携版: 解压即用, 免安装 |
 
 打包配置见 `platforms/windows/packaging/CPackWindows.cmake`;

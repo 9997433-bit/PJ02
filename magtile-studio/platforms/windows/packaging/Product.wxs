@@ -110,7 +110,7 @@
                   Name="MagTile Studio"
                   Description="磁力片搭建教程 - 模型库"
                   Target="[INSTALLFOLDER]magtile_app.exe"
-                  Arguments="library --gui"
+                  Arguments="library --dev-gui"
                   WorkingDirectory="INSTALLFOLDER" />
         <RemoveFolder Id="RemoveAppMenuFolder" On="uninstall" />
         <RegistryValue Root="HKCU"

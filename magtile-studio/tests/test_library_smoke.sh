@@ -4,13 +4,13 @@
 #
 # 检查项:
 #   1. library CLI: 终端列出模型库并完成目录/模型文件对账;
-#   2. library --gui 无头渲染模型库界面 (优先 xvfb-run, 其次现有
+#   2. library --dev-gui 无头渲染模型库界面 (优先 xvfb-run, 其次现有
 #      DISPLAY), 渲染 5 帧并保存 PPM 截图, 校验格式与内容非纯色;
-#   3. library --gui --open <model>: 深链直接进入教程会话, 渲染数帧
+#   3. library --dev-gui --open <model>: 深链直接进入教程会话, 渲染数帧
 #      后退出, 校验进度存档中确实建档 (库与教程/进度模块联动);
-#   4. library --gui --parent-gate: 渲染家长门界面 (算术题 + 中文
+#   4. library --dev-gui --parent-gate: 渲染家长门界面 (算术题 + 中文
 #      大写数字软键盘) 并截图, 校验非纯色 (家长门 UI 冒烟);
-#   5. 无显示环境时 2/3/4 降级为链接检查 (--gui 退出码不为 2)。
+#   5. 无显示环境时 2/3/4 降级为链接检查 (--dev-gui 退出码不为 2)。
 #
 # 用法:
 #   tests/test_library_smoke.sh <magtile_app 路径> <项目根>
@@ -58,12 +58,12 @@ elif [[ -n "${DISPLAY:-}" ]]; then
     RUNNER=()
 else
     echo "[信息] 无 xvfb-run 也无 DISPLAY, 降级为链接检查..."
-    "$APP" library --data-dir "$DATA_DIR" --db "$DB" --gui --frames 1 >/dev/null 2>&1
+    "$APP" library --data-dir "$DATA_DIR" --db "$DB" --dev-gui --frames 1 >/dev/null 2>&1
     link_exit=$?
     if [[ "$link_exit" -eq 2 ]]; then
-        fail "构建未包含渲染后端 (--gui 退出码 2)"
+        fail "构建未包含渲染后端 (--dev-gui 退出码 2)"
     else
-        pass "渲染后端已链接 (--gui 退出码 $link_exit, 非 2; 无显示环境, 跳过实际渲染)"
+        pass "渲染后端已链接 (--dev-gui 退出码 $link_exit, 非 2; 无显示环境, 跳过实际渲染)"
     fi
     [[ "$failures" -eq 0 ]] && { echo; echo "模型库冒烟测试通过 (降级模式)"; exit 0; }
     exit 1
@@ -73,7 +73,7 @@ fi
 echo "[信息] 无头渲染模型库界面 $FRAMES 帧..."
 "${TIMEOUT_CMD[@]}" "${RUNNER[@]}" \
     "$APP" library --data-dir "$DATA_DIR" --db "$DB" \
-    --gui --frames "$FRAMES" --screenshot "$SHOT"
+    --dev-gui --frames "$FRAMES" --screenshot "$SHOT"
 gui_exit=$?
 if [[ "$gui_exit" -eq 0 ]]; then
     pass "模型库界面渲染 $FRAMES 帧后正常退出"
@@ -102,7 +102,7 @@ fi
 echo "[信息] 深链进入 $MODEL_ID 教程会话并渲染数帧..."
 "${TIMEOUT_CMD[@]}" "${RUNNER[@]}" \
     "$APP" library --data-dir "$DATA_DIR" --db "$DB" \
-    --gui --open "$MODEL_ID" --frames 8 >/dev/null 2>&1
+    --dev-gui --open "$MODEL_ID" --frames 8 >/dev/null 2>&1
 open_exit=$?
 if [[ "$open_exit" -eq 0 ]]; then
     pass "--open 深链教程会话渲染后正常退出"
@@ -123,7 +123,7 @@ GATE_SHOT="$WORK_DIR/parent_gate.ppm"
 echo "[信息] 无头渲染家长门界面 $FRAMES 帧..."
 "${TIMEOUT_CMD[@]}" "${RUNNER[@]}" \
     "$APP" library --data-dir "$DATA_DIR" --db "$DB" \
-    --gui --parent-gate --frames "$FRAMES" --screenshot "$GATE_SHOT"
+    --dev-gui --parent-gate --frames "$FRAMES" --screenshot "$GATE_SHOT"
 gate_exit=$?
 if [[ "$gate_exit" -eq 0 ]]; then
     pass "家长门界面渲染 $FRAMES 帧后正常退出"

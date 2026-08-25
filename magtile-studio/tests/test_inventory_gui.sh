@@ -3,7 +3,7 @@
 # MagTile Studio - 磁力片库存图形录入冒烟测试 (ctest: inventory_gui_smoke)
 #
 # 检查项 (核心承诺: 图形录入与 CLI 共用同一份 SQLite 库存):
-#   1. library --gui --inventory 无头渲染库存录入界面并截图,
+#   1. library --dev-gui --inventory 无头渲染库存录入界面并截图,
 #      校验 PPM 格式与内容非纯色;
 #   2. --smoke-inventory 自动驾驶: 模拟用户在图形界面修改数量并点击
 #      "保存, 看看我能搭什么" (与真实点击相同的 action -> 保存管线),
@@ -11,7 +11,7 @@
 #   3. 保存的库存对 inventory match 生效 (跨界面数据一致);
 #   4. 未在 --smoke-inventory 中指定的片型按 0 落库 ("明确没有"),
 #      onboarding 完成标记写入 (下次启动不再弹提示);
-#   5. 无显示环境时降级为链接检查 (--gui 退出码不为 2)。
+#   5. 无显示环境时降级为链接检查 (--dev-gui 退出码不为 2)。
 #
 # 用法:
 #   tests/test_inventory_gui.sh <magtile_app 路径> <项目根>
@@ -47,12 +47,12 @@ elif [[ -n "${DISPLAY:-}" ]]; then
     RUNNER=()
 else
     echo "[信息] 无 xvfb-run 也无 DISPLAY, 降级为链接检查..."
-    "$APP" library --data-dir "$DATA_DIR" --db "$DB" --gui --inventory --frames 1 >/dev/null 2>&1
+    "$APP" library --data-dir "$DATA_DIR" --db "$DB" --dev-gui --inventory --frames 1 >/dev/null 2>&1
     link_exit=$?
     if [[ "$link_exit" -eq 2 ]]; then
-        fail "构建未包含渲染后端 (--gui 退出码 2)"
+        fail "构建未包含渲染后端 (--dev-gui 退出码 2)"
     else
-        pass "渲染后端已链接 (--gui 退出码 $link_exit, 非 2; 无显示环境, 跳过实际渲染)"
+        pass "渲染后端已链接 (--dev-gui 退出码 $link_exit, 非 2; 无显示环境, 跳过实际渲染)"
     fi
     [[ "$failures" -eq 0 ]] && { echo; echo "库存图形录入冒烟测试通过 (降级模式)"; exit 0; }
     exit 1
@@ -62,7 +62,7 @@ fi
 echo "[信息] 无头渲染库存录入界面 $FRAMES 帧..."
 "${TIMEOUT_CMD[@]}" "${RUNNER[@]}" \
     "$APP" library --data-dir "$DATA_DIR" --db "$DB" \
-    --gui --inventory --frames "$FRAMES" --screenshot "$EDITOR_SHOT"
+    --dev-gui --inventory --frames "$FRAMES" --screenshot "$EDITOR_SHOT"
 editor_exit=$?
 if [[ "$editor_exit" -eq 0 ]]; then
     pass "库存录入界面渲染 $FRAMES 帧后正常退出"
@@ -99,7 +99,7 @@ fi
 echo "[信息] 冒烟自动驾驶: 图形录入 square=42 等 4 种片型并保存..."
 "${TIMEOUT_CMD[@]}" "${RUNNER[@]}" \
     "$APP" library --data-dir "$DATA_DIR" --db "$DB" \
-    --gui --smoke-inventory "square=42,equilateral_triangle=24,right_triangle=8,rectangle=6" \
+    --dev-gui --smoke-inventory "square=42,equilateral_triangle=24,right_triangle=8,rectangle=6" \
     --frames 8 >/dev/null 2>&1
 save_exit=$?
 if [[ "$save_exit" -eq 0 ]]; then

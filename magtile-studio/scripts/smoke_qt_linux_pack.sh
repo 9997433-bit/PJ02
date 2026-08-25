@@ -123,8 +123,8 @@ if command -v makensis >/dev/null; then
             grep -q "MagTile Studio (Qt).lnk" "$NSI" \
                 && ok "NSIS 快捷方式: 并存包含 'MagTile Studio (Qt)'" \
                 || bad "NSIS 脚本缺 Qt 界面快捷方式"
-            grep -q "magtile_app.exe' 'library --gui'" "$NSI" \
-                && ok "NSIS 快捷方式: 主快捷方式直达 library --gui" \
+            grep -q "magtile_app.exe' 'library --dev-gui'" "$NSI" \
+                && ok "NSIS 快捷方式: 主快捷方式直达 library --dev-gui" \
                 || bad "NSIS 脚本缺 magtile_app 主快捷方式"
         fi
     else

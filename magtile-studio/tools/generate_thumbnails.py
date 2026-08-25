@@ -4,7 +4,7 @@
 对每个 data/models/*.json 模型, 按优先级尝试三种渲染方式:
 
   1. gl 离线渲染 (mode=auto/gl): 调用
-         magtile_app tutorial <model> --gui --step <末步> --frames 5
+         magtile_app tutorial <model> --dev-gui --step <末步> --frames 5
                      --screenshot <tmp.ppm>
      在无头环境下经 xvfb-run 跑真实 OpenGL 管线, 截取最终成品画面,
      内容感知裁剪 (自动找到画面中的彩色模型区域, 避开 HUD 面板)
@@ -314,7 +314,7 @@ def render_gl(app, runner, model_file, step_count):
         shot_path = Path(tmp) / "shot.ppm"
         cmd = runner + [
             str(app), "tutorial", str(model_file), "--data-dir",
-            str(ROOT / "data"), "--gui", "--step", str(step_count),
+            str(ROOT / "data"), "--dev-gui", "--step", str(step_count),
             "--frames", "5", "--screenshot", str(shot_path),
         ]
         try:
