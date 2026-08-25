@@ -1,37 +1,49 @@
 {
   "schema_version": 1,
-  "id": "pumpkin_lantern_01",
-  "name": "南瓜灯小屋",
-  "name_en": "Pumpkin Lantern House 01",
-  "description": "只用核心九片型的万圣节首秀: 与姜饼糖果屋和雪人的结构语言都不同, 这座小屋的脸就砌在墙上 —— 二层墙环的南立面用片型直接拼出南瓜灯的表情: 两扇黄色窗格方是发光的眼睛, 黄色门框方是咧开的嘴巴, 也是从石板小径走进来的大门; 瓜顶四条橙色瓜棱等边三角骑满盖板拼缝, 绿色瓜蒂瘦高尖从顶心直上; 瓜田东南东北各结一只四棱自锁的小南瓜, 小灰猫蹲在小径旁 —— 秋收之夜, 提着小灯笼来讨糖果吧!",
+  "id": "hedgehog_01",
+  "name": "森林小刺猬",
+  "name_en": "Forest Hedgehog 01",
+  "description": "只用核心九片型的刺猬首秀: 与坐姿大熊猫的头部墙环和猫头鹰的图腾柱都不同, 小刺猬是'满背芒刺骑满每一条拼缝' —— 3x2 伏卧墙环上六片背甲盖板拼出五条拼缝与东侧沿口, 每一段都骑一片灰色等边三角背刺, 九根芒刺根根双边受力, 拼缝本身成了造型主角; 清色脸颊朝西, 双耳骑背甲西沿, 小灰鼻蹲在脸前地缝上; 身旁一只四棱自锁的红苹果, 东北角冒出两朵小蘑菇 —— 秋天的傍晚, 小刺猬正忙着把过冬的粮食运回落叶窝呢!",
   "difficulty": 3,
-  "total_pieces": 62,
+  "total_pieces": 53,
   "tags": [
-    "节日",
-    "万圣节",
-    "南瓜灯",
-    "小屋",
-    "秋收",
+    "自然",
+    "动物世界",
+    "刺猬",
+    "森林",
+    "秋天",
     "进阶"
   ],
   "content_meta": {
     "structural_signature": {
       "tile_histogram": {
-        "square": 37,
-        "equilateral_triangle": 16,
-        "rectangle": 5,
-        "window_square": 2,
-        "door_frame": 1,
-        "isosceles_triangle": 1
+        "square": 28,
+        "equilateral_triangle": 19,
+        "rectangle": 6
       }
     }
   },
   "final_assembly": [
     {
-      "id": "field_0_0",
+      "id": "ground_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_1_0",
       "type": "rectangle",
       "position": [
-        1.0,
+        2.0,
         0.5,
         0.0
       ],
@@ -43,717 +55,627 @@
       "color": "green"
     },
     {
-      "id": "path",
+      "id": "ground_3_0",
       "type": "square",
       "position": [
-        2.5,
+        3.5,
         0.5,
         0.0
       ],
       "rotation": [
         0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_4_0",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "nest_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nest_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nest_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ground_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "nest_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nest_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nest_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ground_4_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_0_3",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_2_3",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_4_3",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "body_s_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_s_m",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_s_e",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_n_m",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_n_e",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "face_s",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "face_n",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_e_s",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "body_e_n",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_w_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_m_s",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_e_s",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_w_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_m_n",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "back_e_n",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "spike_mid_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
         0.0,
         0.0
       ],
       "color": "gray"
     },
     {
-      "id": "field_3_0",
-      "type": "square",
+      "id": "spike_mid_m",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_mid_e",
+      "type": "equilateral_triangle",
       "position": [
         3.5,
-        0.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "purple"
-    },
-    {
-      "id": "field_4_0",
-      "type": "square",
-      "position": [
-        4.5,
-        0.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "field_5_0",
-      "type": "square",
-      "position": [
-        5.5,
-        0.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "purple"
-    },
-    {
-      "id": "field_0_1",
-      "type": "square",
-      "position": [
-        0.5,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "purple"
-    },
-    {
-      "id": "floor_1_1",
-      "type": "square",
-      "position": [
-        1.5,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "floor_2_1",
-      "type": "square",
-      "position": [
-        2.5,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "floor_3_1",
-      "type": "square",
-      "position": [
-        3.5,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "field_4_1",
-      "type": "rectangle",
-      "position": [
-        5.0,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "field_0_2",
-      "type": "square",
-      "position": [
-        0.5,
-        2.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "floor_1_2",
-      "type": "square",
-      "position": [
-        1.5,
-        2.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "floor_2_2",
-      "type": "square",
-      "position": [
-        2.5,
-        2.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "floor_3_2",
-      "type": "square",
-      "position": [
-        3.5,
-        2.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "field_4_2",
-      "type": "rectangle",
-      "position": [
-        5.0,
-        2.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "purple"
-    },
-    {
-      "id": "field_0_3",
-      "type": "rectangle",
-      "position": [
-        1.0,
-        3.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "purple"
-    },
-    {
-      "id": "field_2_3",
-      "type": "rectangle",
-      "position": [
-        3.0,
-        3.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "field_4_3",
-      "type": "square",
-      "position": [
-        4.5,
-        3.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "field_5_3",
-      "type": "square",
-      "position": [
-        5.5,
-        3.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "purple"
-    },
-    {
-      "id": "w1_s_w",
-      "type": "square",
-      "position": [
-        1.5,
-        1.0,
-        0.5
+        2.0,
+        1.288675
       ],
       "rotation": [
         90.0,
         0.0,
         0.0
       ],
-      "color": "orange"
+      "color": "gray"
     },
     {
-      "id": "mouth",
-      "type": "door_frame",
-      "position": [
-        2.5,
-        1.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "w1_s_e",
-      "type": "square",
-      "position": [
-        3.5,
-        1.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w1_n_w",
-      "type": "square",
-      "position": [
-        1.5,
-        3.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w1_n_m",
-      "type": "square",
-      "position": [
-        2.5,
-        3.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w1_n_e",
-      "type": "square",
-      "position": [
-        3.5,
-        3.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w1_w_s",
-      "type": "square",
-      "position": [
-        1.0,
-        1.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w1_w_n",
-      "type": "square",
-      "position": [
-        1.0,
-        2.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w1_e_s",
-      "type": "square",
-      "position": [
-        4.0,
-        1.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w1_e_n",
-      "type": "square",
-      "position": [
-        4.0,
-        2.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "eye_w",
-      "type": "window_square",
-      "position": [
-        1.5,
-        1.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "w2_s_m",
-      "type": "square",
-      "position": [
-        2.5,
-        1.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "eye_e",
-      "type": "window_square",
-      "position": [
-        3.5,
-        1.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "w2_n_w",
-      "type": "square",
-      "position": [
-        1.5,
-        3.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w2_n_m",
-      "type": "square",
-      "position": [
-        2.5,
-        3.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w2_n_e",
-      "type": "square",
-      "position": [
-        3.5,
-        3.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w2_w_s",
-      "type": "square",
-      "position": [
-        1.0,
-        1.5,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w2_w_n",
-      "type": "square",
-      "position": [
-        1.0,
-        2.5,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w2_e_s",
-      "type": "square",
-      "position": [
-        4.0,
-        1.5,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "w2_e_n",
-      "type": "square",
-      "position": [
-        4.0,
-        2.5,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "cap_w_s",
-      "type": "square",
-      "position": [
-        1.5,
-        1.5,
-        2.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "cap_m_s",
-      "type": "square",
-      "position": [
-        2.5,
-        1.5,
-        2.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "cap_e_s",
-      "type": "square",
-      "position": [
-        3.5,
-        1.5,
-        2.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "cap_w_n",
-      "type": "square",
-      "position": [
-        1.5,
-        2.5,
-        2.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "cap_m_n",
-      "type": "square",
-      "position": [
-        2.5,
-        2.5,
-        2.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "cap_e_n",
-      "type": "square",
-      "position": [
-        3.5,
-        2.5,
-        2.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "ridge_w_s",
+      "id": "spike_w_s",
       "type": "equilateral_triangle",
       "position": [
         2.0,
         1.5,
-        2.288675
+        1.288675
       ],
       "rotation": [
         90.0,
         0.0,
         90.0
       ],
-      "color": "orange"
+      "color": "gray"
     },
     {
-      "id": "ridge_w_n",
+      "id": "spike_w_n",
       "type": "equilateral_triangle",
       "position": [
         2.0,
         2.5,
-        2.288675
+        1.288675
       ],
       "rotation": [
         90.0,
         0.0,
         90.0
       ],
-      "color": "orange"
+      "color": "gray"
     },
     {
-      "id": "ridge_e_s",
+      "id": "spike_e_s",
       "type": "equilateral_triangle",
       "position": [
         3.0,
         1.5,
-        2.288675
+        1.288675
       ],
       "rotation": [
         90.0,
         0.0,
         90.0
       ],
-      "color": "orange"
+      "color": "gray"
     },
     {
-      "id": "ridge_e_n",
+      "id": "spike_e_n",
       "type": "equilateral_triangle",
       "position": [
         3.0,
         2.5,
-        2.288675
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_tail_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "spike_tail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ear_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        1.288675
       ],
       "rotation": [
         90.0,
@@ -763,25 +685,40 @@
       "color": "orange"
     },
     {
-      "id": "stem",
-      "type": "isosceles_triangle",
+      "id": "ear_n",
+      "type": "equilateral_triangle",
       "position": [
+        1.0,
         2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nose",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
         2.0,
-        2.666667
+        0.288675
       ],
       "rotation": [
         90.0,
         0.0,
         0.0
       ],
-      "color": "green"
+      "color": "gray"
     },
     {
-      "id": "mini_a_s",
+      "id": "apple_s",
       "type": "equilateral_triangle",
       "position": [
-        4.5,
+        3.5,
         0.166667,
         0.235702
       ],
@@ -790,13 +727,13 @@
         0.0,
         0.0
       ],
-      "color": "orange"
+      "color": "red"
     },
     {
-      "id": "mini_a_e",
+      "id": "apple_e",
       "type": "equilateral_triangle",
       "position": [
-        4.833333,
+        3.833333,
         0.5,
         0.235702
       ],
@@ -805,13 +742,13 @@
         0.0,
         90.0
       ],
-      "color": "orange"
+      "color": "red"
     },
     {
-      "id": "mini_a_n",
+      "id": "apple_n",
       "type": "equilateral_triangle",
       "position": [
-        4.5,
+        3.5,
         0.833333,
         0.235702
       ],
@@ -820,74 +757,14 @@
         0.0,
         180.0
       ],
-      "color": "orange"
+      "color": "red"
     },
     {
-      "id": "mini_a_w",
+      "id": "apple_w",
       "type": "equilateral_triangle",
       "position": [
-        4.166667,
-        0.5,
-        0.235702
-      ],
-      "rotation": [
-        54.735619,
-        0.0,
-        -90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "mini_b_s",
-      "type": "equilateral_triangle",
-      "position": [
-        5.5,
         3.166667,
-        0.235702
-      ],
-      "rotation": [
-        54.735619,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "mini_b_e",
-      "type": "equilateral_triangle",
-      "position": [
-        5.833333,
-        3.5,
-        0.235702
-      ],
-      "rotation": [
-        54.735619,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "mini_b_n",
-      "type": "equilateral_triangle",
-      "position": [
-        5.5,
-        3.833333,
-        0.235702
-      ],
-      "rotation": [
-        54.735619,
-        0.0,
-        180.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "mini_b_w",
-      "type": "equilateral_triangle",
-      "position": [
-        5.166667,
-        3.5,
+        0.5,
         0.235702
       ],
       "rotation": [
@@ -895,14 +772,14 @@
         0.0,
         -90.0
       ],
-      "color": "orange"
+      "color": "red"
     },
     {
-      "id": "fence_sw",
+      "id": "shroom_a",
       "type": "equilateral_triangle",
       "position": [
-        0.0,
-        0.5,
+        5.0,
+        1.5,
         0.288675
       ],
       "rotation": [
@@ -910,25 +787,10 @@
         0.0,
         90.0
       ],
-      "color": "gray"
+      "color": "red"
     },
     {
-      "id": "fence_nw",
-      "type": "equilateral_triangle",
-      "position": [
-        0.0,
-        3.5,
-        0.288675
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "fence_e",
+      "id": "shroom_b",
       "type": "equilateral_triangle",
       "position": [
         6.0,
@@ -940,13 +802,13 @@
         0.0,
         90.0
       ],
-      "color": "gray"
+      "color": "clear"
     },
     {
-      "id": "cat",
+      "id": "leaf_pile",
       "type": "equilateral_triangle",
       "position": [
-        3.5,
+        0.5,
         0.0,
         0.288675
       ],
@@ -955,189 +817,180 @@
         0.0,
         0.0
       ],
-      "color": "gray"
+      "color": "yellow"
     }
   ],
   "steps": [
     {
       "step_number": 1,
-      "description": "铺瓜田南行: 石板小径正对将来的大门, 东边留出小南瓜的底格。",
-      "tip": "秋收之夜, 瓜田里要点起一盏大灯笼 —— 先把小院铺平整。",
+      "description": "铺林地南行: 苔藓长板与落叶方板互吸, 东边留出苹果的底格。",
+      "tip": "秋天的森林里沙沙作响 —— 是谁在落叶堆里忙着运粮?",
       "tiles_to_add": [
-        "field_0_0",
-        "path",
-        "field_3_0",
-        "field_4_0",
-        "field_5_0"
+        "ground_0_0",
+        "ground_1_0",
+        "ground_3_0",
+        "ground_4_0"
       ],
       "highlight_tiles": []
     },
     {
       "step_number": 2,
-      "description": "铺中段两行: 黄色的是屋里的烛光地板, 墙脚要踩住这些拼缝。",
-      "tip": "行行等边互吸 —— 屋里先铺一层暖暖的烛光色。",
+      "description": "铺中段两行: 橙色的是刺猬的落叶窝, 墙脚要踩住这些拼缝。",
+      "tip": "行行等边互吸 —— 窝底铺的全是单位方板。",
       "tiles_to_add": [
-        "field_0_1",
-        "floor_1_1",
-        "floor_2_1",
-        "floor_3_1",
-        "field_4_1",
-        "field_0_2",
-        "floor_1_2",
-        "floor_2_2",
-        "floor_3_2",
-        "field_4_2"
+        "ground_0_1",
+        "nest_1_1",
+        "nest_2_1",
+        "nest_3_1",
+        "ground_4_1",
+        "ground_5_1",
+        "ground_0_2",
+        "nest_1_2",
+        "nest_2_2",
+        "nest_3_2",
+        "ground_4_2"
       ],
       "highlight_tiles": [
-        "path"
+        "ground_1_0"
       ]
     },
     {
       "step_number": 3,
-      "description": "铺瓜田北行: 西边紫色花圃, 东边再留一格小南瓜底格。",
-      "tip": "单位方板的四条边都能整边吸合 —— 小南瓜就要种在那格上。",
+      "description": "铺林地北行: 三条长板收口, 林间空地铺满。",
+      "tip": "东北角的苔藓地上, 待会儿要冒出小蘑菇。",
       "tiles_to_add": [
-        "field_0_3",
-        "field_2_3",
-        "field_4_3",
-        "field_5_3"
+        "ground_0_3",
+        "ground_2_3",
+        "ground_4_3"
       ],
       "highlight_tiles": [
-        "floor_1_2"
+        "nest_1_2"
       ]
     },
     {
       "step_number": 4,
-      "description": "立一层南墙与西墙: 黄色门框方是南瓜灯咧开的嘴巴, 也是大门。",
-      "tip": "嘴巴先上墙 —— 从小径走过来, 正好走进南瓜的笑容里。",
+      "description": "立身体南墙与脸颊: 清色的两片是刺猬的白脸颊, 朝西。",
+      "tip": "刺猬伏卧的身体是 3x2 的墙环 —— 墙脚踩住拼缝才稳。",
       "tiles_to_add": [
-        "w1_s_w",
-        "mouth",
-        "w1_s_e",
-        "w1_w_s",
-        "w1_w_n"
+        "body_s_w",
+        "body_s_m",
+        "body_s_e",
+        "face_s",
+        "face_n"
       ],
       "highlight_tiles": [
-        "floor_1_1"
+        "nest_1_1"
       ]
     },
     {
       "step_number": 5,
-      "description": "合一层北墙与东墙: 十片墙环四角竖边互咬闭环。",
-      "tip": "闭环墙才站得稳 —— 每个拐角都有两条竖边互相咬住。",
+      "description": "合身体北墙与尾墙: 十片墙环四角竖边互咬闭环。",
+      "tip": "墙环合拢 —— 圆滚滚的小身子有了。",
       "tiles_to_add": [
-        "w1_n_w",
-        "w1_n_m",
-        "w1_n_e",
-        "w1_e_s",
-        "w1_e_n"
+        "body_n_w",
+        "body_n_m",
+        "body_n_e",
+        "body_e_s",
+        "body_e_n"
       ],
       "highlight_tiles": [
-        "w1_s_w"
+        "body_s_w"
       ]
     },
     {
       "step_number": 6,
-      "description": "摞二层南墙与西墙: 两扇黄窗格一左一右, 是南瓜灯发光的眼睛。",
-      "tip": "底边与一层墙顶整边共线吸合 —— 眼睛亮起来啦!",
+      "description": "盖背甲: 六片橙色盖板边边入扣墙顶, 板板互吸。",
+      "tip": "盖板拼出的每一条缝都记好位置 —— 那是背刺的家。",
       "tiles_to_add": [
-        "eye_w",
-        "w2_s_m",
-        "eye_e",
-        "w2_w_s",
-        "w2_w_n"
+        "back_w_s",
+        "back_m_s",
+        "back_e_s",
+        "back_w_n",
+        "back_m_n",
+        "back_e_n"
       ],
       "highlight_tiles": [
-        "w1_s_w"
+        "body_s_m"
       ]
     },
     {
       "step_number": 7,
-      "description": "合二层北墙与东墙: 南瓜的脸砌完整。",
-      "tip": "两层墙环层层互压 —— 荷载沿墙面一路传到瓜田里。",
+      "description": "立中线刺: 三根灰刺骑住背甲正中的拼缝, 一根挨一根。",
+      "tip": "每根刺的底边同时咬住两侧盖板 —— 双路受力才结实。",
       "tiles_to_add": [
-        "w2_n_w",
-        "w2_n_m",
-        "w2_n_e",
-        "w2_e_s",
-        "w2_e_n"
+        "spike_mid_w",
+        "spike_mid_m",
+        "spike_mid_e"
       ],
       "highlight_tiles": [
-        "eye_w"
+        "back_w_s"
       ]
     },
     {
       "step_number": 8,
-      "description": "盖瓜顶: 六片橙色盖板边边入扣墙顶, 板板互吸。",
-      "tip": "每片盖板至少一条边咬住墙顶 —— 圆滚滚的瓜顶合拢。",
+      "description": "立双缝刺: 四根灰刺骑住南北向的两条拼缝。",
+      "tip": "拼缝本身就是造型主角 —— 背上的刺越来越密了。",
       "tiles_to_add": [
-        "cap_w_s",
-        "cap_m_s",
-        "cap_e_s",
-        "cap_w_n",
-        "cap_m_n",
-        "cap_e_n"
+        "spike_w_s",
+        "spike_w_n",
+        "spike_e_s",
+        "spike_e_n"
       ],
       "highlight_tiles": [
-        "w2_s_m"
+        "spike_mid_m"
       ]
     },
     {
       "step_number": 9,
-      "description": "立瓜棱插瓜蒂: 四片等边三角骑住盖板拼缝, 绿色瓜蒂从顶心直上。",
-      "tip": "瓜棱底边同时咬住两侧盖板 —— 这才像一只饱满的大南瓜。",
+      "description": "立尾刺: 两根灰刺骑住东沿口, 同时咬住盖板沿边和墙顶边。",
+      "tip": "沿口的刺也有两条受力路 —— 小刺猬从头武装到尾。",
       "tiles_to_add": [
-        "ridge_w_s",
-        "ridge_w_n",
-        "ridge_e_s",
-        "ridge_e_n",
-        "stem"
+        "spike_tail_s",
+        "spike_tail_n"
       ],
       "highlight_tiles": [
-        "cap_m_s"
+        "body_e_s"
       ]
     },
     {
       "step_number": 10,
-      "description": "种东南角小南瓜: 四片等边三角斜棱互吸, 自锁成锥。",
-      "tip": "四条底边都要整边吸住脚下的方板 —— 丰收的第一只小南瓜。",
+      "description": "竖耳朵, 放鼻头: 双耳骑背甲西沿, 小鼻头蹲在脸前的地缝上。",
+      "tip": "清色脸颊配小灰鼻 —— 嗅嗅, 苹果在哪儿?",
       "tiles_to_add": [
-        "mini_a_s",
-        "mini_a_e",
-        "mini_a_n",
-        "mini_a_w"
+        "ear_s",
+        "ear_n",
+        "nose"
       ],
       "highlight_tiles": [
-        "field_4_0"
+        "face_s"
       ]
     },
     {
       "step_number": 11,
-      "description": "种东北角小南瓜: 同样的四坡锥, 瓜田更热闹了。",
-      "tip": "大瓜带小瓜 —— 谁提走一只当灯笼?",
+      "description": "结红苹果: 四片红色等边三角斜棱互吸, 自锁成锥。",
+      "tip": "四条底边都要整边吸住脚下的方板 —— 今晚的粮食找到了!",
       "tiles_to_add": [
-        "mini_b_s",
-        "mini_b_e",
-        "mini_b_n",
-        "mini_b_w"
+        "apple_s",
+        "apple_e",
+        "apple_n",
+        "apple_w"
       ],
       "highlight_tiles": [
-        "field_5_3"
+        "ground_3_0"
       ]
     },
     {
       "step_number": 12,
-      "description": "围篱笆, 请小灰猫入座: 南瓜灯小屋点灯迎客!",
-      "tip": "小灰猫蹲在小径旁 —— 提着小灯笼的朋友们, 快来讨糖果吧!",
+      "description": "冒蘑菇丛, 堆落叶: 森林小刺猬完工!",
+      "tip": "传说刺猬会用背刺扎起苹果搬回家 —— 你信不信?",
       "tiles_to_add": [
-        "fence_sw",
-        "fence_nw",
-        "fence_e",
-        "cat"
+        "shroom_a",
+        "shroom_b",
+        "leaf_pile"
       ],
       "highlight_tiles": [
-        "mouth",
-        "path"
+        "nose",
+        "apple_s"
       ]
     }
   ]
