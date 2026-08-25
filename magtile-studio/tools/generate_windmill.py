@@ -108,8 +108,8 @@ b.place_edge("tree_crown", "hexagon", 4,
              (3.0, 4.0, 1.0), (4.0, 4.0, 1.0), (0, 0, 1), "green")
 b.crest_ns("bush_w", 0, 1, 0, "green")              # 场边灌木
 b.crest_ns("bush_e", 3, 1, 0, "green")
-b.spire_ns("flower_w", 1, 1, 0, "pink")             # 门前花朵
-b.spire_ns("flower_e", 2, 1, 0, "pink")
+b.crest_ns("flower_w", 1, 1, 0, "pink")             # 门前花朵 (等边矮花丛,
+b.crest_ns("flower_e", 2, 1, 0, "pink")             #  不与门楣圈同面重叠)
 
 # =================================================================
 # 教程步骤 (16 步)
@@ -212,7 +212,7 @@ b.step(
     tip="底边正好吸在两片地板共享的拼缝边上。",
 )
 b.step(
-    "种两株门前花: 2 片粉色等腰三角形立在大门两侧 —— 风车磨坊落成!",
+    "种两株门前花: 2 片粉色等边三角形立在大门两侧 —— 风车磨坊落成!",
     ["flower_w", "flower_e"],
     highlight=["fence_1", "fence_2"],
     tip="从南面看: 大门、门楣、裙檐、锥帽与风车 X 排成一条中轴线。",

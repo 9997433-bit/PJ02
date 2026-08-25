@@ -3,7 +3,7 @@
   "id": "greenhouse_dome_01",
   "name": "穹顶温室",
   "name_en": "Dome Greenhouse 01",
-  "description": "田园农业主题: 6x6 花园地块 (草甸、花圃与入口步道) 中央立起 3x3 玻璃温室 —— 透明墙板配绿色骨架转角, 南面留 1 格负空间门洞; 屋面用 8 片透明方板围出 1x1 天窗, 门洞上方的屋面片两侧整边吸角片自然成楣, 天窗上再冠以 4 片等腰三角合拢的采光穹顶; 园区四角花篱、东侧红黄郁金香、西侧六边形雨水罐 —— 阳光洒满苗床, 开园!",
+  "description": "田园农业主题: 6x6 花园地块 (草甸、花圃与入口步道) 中央立起 3x3 玻璃温室 —— 透明墙板配绿色骨架转角, 南面留 1 格负空间门洞; 屋面用 8 片透明方板围出 1x1 天窗, 门洞上方的屋面片两侧整边吸角片自然成楣, 天窗上再冠以 4 片等边三角合拢的采光穹顶; 园区四角花篱、东侧红黄郁金香、西侧六边形雨水罐 —— 阳光洒满苗床, 开园!",
   "difficulty": 3,
   "total_pieces": 66,
   "tags": [
@@ -17,8 +17,8 @@
     "structural_signature": {
       "tile_histogram": {
         "square": 55,
-        "isosceles_triangle": 6,
-        "equilateral_triangle": 4,
+        "equilateral_triangle": 8,
+        "isosceles_triangle": 2,
         "hexagon": 1
       }
     }
@@ -851,14 +851,14 @@
     },
     {
       "id": "dome_s",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         3.5,
         3.166667,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         0.0
       ],
@@ -866,14 +866,14 @@
     },
     {
       "id": "dome_e",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         3.833333,
         3.5,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         90.0
       ],
@@ -881,14 +881,14 @@
     },
     {
       "id": "dome_n",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         3.5,
         3.833333,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         180.0
       ],
@@ -896,14 +896,14 @@
     },
     {
       "id": "dome_w",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         3.166667,
         3.5,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         -90.0
       ],
@@ -975,7 +975,7 @@
       "position": [
         6.0,
         2.5,
-        0.333333
+        0.666667
       ],
       "rotation": [
         90.0,
@@ -990,7 +990,7 @@
       "position": [
         6.0,
         3.5,
-        0.333333
+        0.666667
       ],
       "rotation": [
         90.0,
@@ -1186,7 +1186,7 @@
     },
     {
       "step_number": 12,
-      "description": "起穹顶: 先立南北 2 片相对的等腰三角形, 底边吸天窗沿口。",
+      "description": "起穹顶: 先立南北 2 片相对的等边三角形, 底边吸天窗沿口。",
       "tip": "两片先互相扶持着别松手 —— 马上就来另外两片。",
       "tiles_to_add": [
         "dome_s",
@@ -1199,7 +1199,7 @@
     },
     {
       "step_number": 13,
-      "description": "穹顶合拢: 再补东西 2 片, 四条斜棱两两互吸, 锥尖在 1.87 高处自锁。",
+      "description": "穹顶合拢: 再补东西 2 片, 四条斜棱两两互吸, 锥尖在 1.71 高处自锁。",
       "tip": "咔哒一声合拢成环 —— 越按越紧, 这就是穹顶的魔法。",
       "tiles_to_add": [
         "dome_e",

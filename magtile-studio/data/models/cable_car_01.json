@@ -3,7 +3,7 @@
   "id": "cable_car_01",
   "name": "缆车站",
   "name_en": "Cable Car Station 01",
-  "description": "高山交通主题: 4x4 山地上立起 2x2 两层山顶站塔, 塔顶平台东沿挂着红色六边形驱动轮, 一条 30 度索道分两段滑向山脚 —— 第一段坡尾由中途支架塔整边接住, 第二段自然落地滑进 3x3 山脚站台; 站台上停着戴等腰四坡尖顶的红色缆车吊舱 (透明观景舷窗), 联络步道把全场连成一个磁力整体 —— 检票上车, 上山看云海。",
+  "description": "高山交通主题: 4x4 山地上立起 2x2 两层山顶站塔, 塔顶平台东沿挂着红色六边形驱动轮, 一条 30 度索道分两段滑向山脚 —— 第一段坡尾由中途支架塔整边接住, 第二段自然落地滑进 3x3 山脚站台; 站台上停着戴等边四坡尖顶的红色缆车吊舱 (透明观景舷窗), 联络步道把全场连成一个磁力整体 —— 检票上车, 上山看云海。",
   "difficulty": 3,
   "total_pieces": 64,
   "tags": [
@@ -17,10 +17,10 @@
     "structural_signature": {
       "tile_histogram": {
         "square": 52,
-        "isosceles_triangle": 5,
-        "equilateral_triangle": 4,
+        "equilateral_triangle": 8,
         "rectangle": 2,
-        "hexagon": 1
+        "hexagon": 1,
+        "isosceles_triangle": 1
       }
     }
   },
@@ -601,7 +601,7 @@
       "position": [
         1.5,
         3.0,
-        2.333333
+        2.666667
       ],
       "rotation": [
         90.0,
@@ -882,14 +882,14 @@
     },
     {
       "id": "car_top_s",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         7.5,
         1.166667,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         0.0
       ],
@@ -897,14 +897,14 @@
     },
     {
       "id": "car_top_e",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         7.833333,
         1.5,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         90.0
       ],
@@ -912,14 +912,14 @@
     },
     {
       "id": "car_top_n",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         7.5,
         1.833333,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         180.0
       ],
@@ -927,14 +927,14 @@
     },
     {
       "id": "car_top_w",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         7.166667,
         1.5,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         -90.0
       ],
@@ -1192,7 +1192,7 @@
     },
     {
       "step_number": 15,
-      "description": "盖吊舱尖顶: 4 片红色等腰三角形底边吸舱顶四边, 斜棱互吸合拢成锥。",
+      "description": "盖吊舱尖顶: 4 片红色等边三角形底边吸舱顶四边, 斜棱互吸合拢成锥。",
       "tip": "先立两片相对的, 再补另外两片 —— 四条斜棱自锁成环。",
       "tiles_to_add": [
         "car_top_s",

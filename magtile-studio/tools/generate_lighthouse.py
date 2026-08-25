@@ -119,7 +119,7 @@ for k in range(6):
     e0, e1 = hex_edge(k, 4.0)
     b.place_edge(f"lamp_{k}", "square", 0, e0, e1, (0, 0, 1), "clear")
 b.add("lamp_cap", "hexagon", (0, 0, 5.0), (0, 0, 30), "gray")
-APEX = (0.0, 0.0, 5.5)
+APEX = (0.0, 0.0, 5 + 1.802776)     # 瘦高等腰锥冠, 冠尖高 √3.25≈1.80
 for k in range(6):
     e0, e1 = hex_edge(k, 5.0)
     b.place_tri(f"crown_{k}", "isosceles_triangle", e0, e1, APEX, "red")

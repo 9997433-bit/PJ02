@@ -18,9 +18,9 @@
       "tile_histogram": {
         "square": 24,
         "rectangle": 18,
-        "equilateral_triangle": 8,
-        "isosceles_triangle": 7,
-        "trapezoid": 4
+        "equilateral_triangle": 12,
+        "trapezoid": 4,
+        "isosceles_triangle": 3
       }
     }
   },
@@ -586,7 +586,7 @@
       "position": [
         2.0,
         1.5,
-        3.04044
+        3.373774
       ],
       "rotation": [
         90.0,
@@ -762,14 +762,14 @@
     },
     {
       "id": "dog_s",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         4.5,
         3.166667,
-        0.288675
+        0.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         0.0
       ],
@@ -777,14 +777,14 @@
     },
     {
       "id": "dog_e",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         4.833333,
         3.5,
-        0.288675
+        0.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         90.0
       ],
@@ -792,14 +792,14 @@
     },
     {
       "id": "dog_n",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         4.5,
         3.833333,
-        0.288675
+        0.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         180.0
       ],
@@ -807,14 +807,14 @@
     },
     {
       "id": "dog_w",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         4.166667,
         3.5,
-        0.288675
+        0.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         -90.0
       ],
@@ -886,7 +886,7 @@
       "position": [
         6.0,
         2.5,
-        0.333333
+        0.666667
       ],
       "rotation": [
         90.0,
@@ -901,7 +901,7 @@
       "position": [
         6.0,
         4.5,
-        0.333333
+        0.666667
       ],
       "rotation": [
         90.0,
@@ -1139,7 +1139,7 @@
     },
     {
       "step_number": 15,
-      "description": "搭狗窝: 院子东北角 4 片红色等腰三角形直接在草坪上合拢成小尖屋。",
+      "description": "搭狗窝: 院子东北角 4 片红色等边三角形直接在草坪上合拢成小尖屋。",
       "tip": "先立两片相对的再补另外两片 —— 旺财的家也要自锁成环。",
       "tiles_to_add": [
         "dog_s",

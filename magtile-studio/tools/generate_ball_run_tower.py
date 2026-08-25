@@ -36,7 +36,7 @@ import math
 from pathlib import Path
 
 TRI_CENTROID = round(math.sqrt(3) / 6, 6)     # 等边三角形质心到底边 0.288675
-ISO_CENTROID = 0.333333                       # 等腰三角形质心到底边
+ISO_CENTROID = 0.666667                       # 等腰三角形质心到底边 (底 1 高 2)
 HEX_CENTROID = round(math.sqrt(3) / 2, 6)     # 六边形中心到边 0.866025
 COS30 = round(math.cos(math.radians(30)), 6)  # 0.866025
 SQ3 = round(math.sqrt(3), 6)                  # 30 度坡道的水平投影长 1.732051

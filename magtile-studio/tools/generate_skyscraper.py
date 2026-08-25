@@ -177,11 +177,12 @@ wall_ew("cr_e", 3.0, 2, 5, "purple")
 wall_ns("cr_n", 2, 3.0, 5, "purple")
 wall_ew("cr_w", 2.0, 2, 5, "purple")
 
-# 锥形金顶: 4 片等腰三角形各内倾 30 度, 塔尖交汇于 (2.5, 2.5, 6.866)
-add("roof_s", "isosceles_triangle", (2.5, 2 + 1 / 6, 6 + 0.288675), (60, 0, 0), "yellow")
-add("roof_e", "isosceles_triangle", (3 - 1 / 6, 2.5, 6 + 0.288675), (60, 0, 90), "yellow")
-add("roof_n", "isosceles_triangle", (2.5, 3 - 1 / 6, 6 + 0.288675), (120, 0, 0), "yellow")
-add("roof_w", "isosceles_triangle", (2 + 1 / 6, 2.5, 6 + 0.288675), (120, 0, 90), "yellow")
+# 锥形金顶: 4 片瘦高等腰三角形 (底 1 高 2) 各内倾 14.48 度,
+# 塔尖交汇于 (2.5, 2.5, 7.936); 倾角满足 cos(75.522488°) = 0.25
+add("roof_s", "isosceles_triangle", (2.5, 2 + 1 / 6, 6 + 0.645497), (75.522488, 0, 0), "yellow")
+add("roof_e", "isosceles_triangle", (3 - 1 / 6, 2.5, 6 + 0.645497), (75.522488, 0, 90), "yellow")
+add("roof_n", "isosceles_triangle", (2.5, 3 - 1 / 6, 6 + 0.645497), (104.477512, 0, 0), "yellow")
+add("roof_w", "isosceles_triangle", (2 + 1 / 6, 2.5, 6 + 0.645497), (104.477512, 0, 90), "yellow")
 
 # =================================================================
 # 教程步骤 (26 步)

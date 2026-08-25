@@ -16,8 +16,8 @@
     "structural_signature": {
       "tile_histogram": {
         "square": 41,
-        "equilateral_triangle": 5,
-        "isosceles_triangle": 4,
+        "equilateral_triangle": 7,
+        "isosceles_triangle": 2,
         "right_triangle": 2
       }
     }
@@ -670,9 +670,9 @@
     },
     {
       "id": "muzzle",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
-        0.666667,
+        0.711325,
         0.5,
         7.0
       ],
@@ -719,7 +719,7 @@
       "position": [
         1.5,
         0.0,
-        8.333333
+        8.666667
       ],
       "rotation": [
         90.0,
@@ -734,7 +734,7 @@
       "position": [
         1.5,
         1.0,
-        8.333333
+        8.666667
       ],
       "rotation": [
         90.0,
@@ -745,9 +745,9 @@
     },
     {
       "id": "tail",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
-        5.333333,
+        5.288675,
         -0.0,
         2.5
       ],
@@ -984,7 +984,7 @@
     },
     {
       "step_number": 14,
-      "description": "颅顶与吻部: 颅顶板封箱, 1 片等腰三角形底边吸头底板西沿竖边, 水平向西收出低头觅食的吻部。",
+      "description": "颅顶与吻部: 颅顶板封箱, 1 片等边三角形底边吸头底板西沿竖边, 水平向西收出低头觅食的吻部。",
       "tip": "吻部挂在竖直磁边上水平前伸, 小小一片不产生超预算力矩。",
       "tiles_to_add": [
         "hd_top",
@@ -1010,7 +1010,7 @@
     },
     {
       "step_number": 16,
-      "description": "尾巴与围栏: 等腰尾巴底边吸躯干左壁东端竖边、水平向东收尖, 草地南沿立 3 面紫色围栏旗 —— 草原上的长颈鹿落成!",
+      "description": "尾巴与围栏: 等边尾巴底边吸躯干左壁东端竖边、水平向东收尖, 草地南沿立 3 面紫色围栏旗 —— 草原上的长颈鹿落成!",
       "tip": "退后一步看: 四腿一躯一长颈, 昂首站在草原上。",
       "tiles_to_add": [
         "tail",

@@ -104,7 +104,7 @@ for i in range(6):                                  # 上层: 六片成环
     drum_wall(f"dr1_{i}", i, 1, DOME if i != 1 else "clear")
 b.add("hex_cl", "hexagon", (CX, CY, 2.0), (0, 0, 0), "blue")   # 天花
 
-APEX = (CX, CY, 2.5)                                # 浅锥锥尖 (高 0.5)
+APEX = (CX, CY, 2 + 1.802776)                       # 瘦高锥尖 (高 √3.25≈1.80)
 for i in range(6):
     (x0, y0), (x1, y1) = HEXV[i], HEXV[(i + 1) % 6]
     b.place_tri(f"cone_{i}", "isosceles_triangle",

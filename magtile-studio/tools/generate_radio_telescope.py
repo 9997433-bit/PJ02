@@ -90,7 +90,8 @@ for i in range(6):
     mid = tuple((a[k] + c[k]) / 2 for k in range(3))
     rad = tuple(mid[k] - DISH_CENTER[k] for k in range(3))
     norm = math.sqrt(sum(v * v for v in rad))
-    apex = tuple(round(mid[k] + rad[k] / norm, 6) for k in range(3))
+    # 瘦高等腰片高 2: 接收瓣沿径向伸出 2 个单位
+    apex = tuple(round(mid[k] + 2.0 * rad[k] / norm, 6) for k in range(3))
     tid = f"petal_{len(PETALS)}"
     b.place_tri(tid, "isosceles_triangle", a, c, apex, "clear")
     PETALS.append(tid)

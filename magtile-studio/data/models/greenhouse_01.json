@@ -17,9 +17,8 @@
     "structural_signature": {
       "tile_histogram": {
         "square": 34,
-        "equilateral_triangle": 12,
-        "rectangle": 8,
-        "isosceles_triangle": 2
+        "equilateral_triangle": 14,
+        "rectangle": 8
       }
     }
   },
@@ -401,11 +400,11 @@
     },
     {
       "id": "plant_1",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         4.0,
         2.5,
-        0.333333
+        0.288675
       ],
       "rotation": [
         90.0,
@@ -431,11 +430,11 @@
     },
     {
       "id": "plant_3",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         4.0,
         4.5,
-        0.333333
+        0.288675
       ],
       "rotation": [
         90.0,
@@ -930,7 +929,7 @@
     },
     {
       "step_number": 5,
-      "description": "种作物: 沿中缝立 4 株 幼苗-番茄-幼苗-番茄 (等边/等腰交替)。务必先种菜再盖顶 —— 盖完顶手就伸不进去了!",
+      "description": "种作物: 沿中缝立 4 株等边三角作物 (幼苗-番茄-幼苗-番茄)。务必先种菜再盖顶 —— 盖完顶手就伸不进去了!",
       "tip": "作物在脊线正下方, 头顶还有富余不会顶到玻璃。",
       "tiles_to_add": [
         "plant_0",

@@ -30,14 +30,16 @@ from pathlib import Path
 
 # ---- 常量 (与 data/tile_catalog.json 一致) ------------------------
 TRI_CENTROID = round(math.sqrt(3) / 6, 6)      # 等边三角形质心到底边 0.288675
-ISO_CENTROID = 0.333333                        # 等腰三角形质心到底边 (底 1 高 1)
+ISO_CENTROID = 0.666667                        # 等腰三角形质心到底边 (底 1 高 2 瘦高片)
+ISO_H = 2.0                                    # 等腰三角形高 (实物瘦高比例)
+ISO_SIDE = round(math.sqrt(4.25), 6)           # 等腰三角形腰长 2.061553
 RT_THIRD = 1 / 3                               # 直角三角形质心到直角边
 HEX_APOTHEM = round(math.sqrt(3) / 2, 6)       # 六边形中心到边 0.866025
 COS30 = round(math.cos(math.radians(30)), 6)   # 0.866025
 SQ3 = round(math.sqrt(3), 6)                   # 30 度坡道水平投影长 1.732051
 PYR_TILT = round(math.degrees(math.atan(math.sqrt(2))), 6)  # 54.735610
 EQ_APEX = round(math.sqrt(0.5), 6)             # 等边四坡锥顶高 0.707107
-ISO_APEX = round(math.sqrt(3) / 2, 6)          # 等腰四坡锥顶高 0.866025
+ISO_APEX = round(math.sqrt(3.75), 6)           # 等腰四坡锥顶高 1.936492 (高 2 瘦高片)
 TRAP_H = 0.866025                              # 梯形高
 TRAP_CENTROID = 0.3849                         # 梯形质心到下底
 
@@ -51,7 +53,7 @@ SHAPES = {
     "door_frame": [(-0.5, -0.5), (0.5, -0.5), (0.5, 0.5), (-0.5, 0.5)],
     "equilateral_triangle": [(-0.5, -0.288675), (0.5, -0.288675), (0.0, 0.57735)],
     "right_triangle": [(-0.333333, -0.333333), (0.666667, -0.333333), (-0.333333, 0.666667)],
-    "isosceles_triangle": [(-0.5, -0.333333), (0.5, -0.333333), (0.0, 0.666667)],
+    "isosceles_triangle": [(-0.5, -0.666667), (0.5, -0.666667), (0.0, 1.333333)],
     "rectangle": [(-1.0, -0.5), (1.0, -0.5), (1.0, 0.5), (-1.0, 0.5)],
     # 车轮底座: 外框与长方形完全一致, 车轮仅为语义标记 (wheeled)
     "wheel_base": [(-1.0, -0.5), (1.0, -0.5), (1.0, 0.5), (-1.0, 0.5)],
@@ -299,7 +301,8 @@ class ModelBuilder:
     def hat4(self, prefix, x0, y0, z, color, shape="isosceles_triangle"):
         """1x1 洞口 [x0,x0+1]x[y0,y0+1] 的四坡三角锥顶, 返回 4 个 id。
 
-        等腰: 内倾 60 度, 锥尖高 z+0.866; 等边: 内倾 54.74 度, 锥尖高 z+0.707。
+        等腰 (瘦高片): 内倾 75.52 度, 锥尖高 z+1.936;
+        等边: 内倾 54.74 度, 锥尖高 z+0.707。
         四条斜棱两两互吸, 自锁成环 (摩天大楼金顶同款)。
         """
         apex_h = ISO_APEX if shape == "isosceles_triangle" else EQ_APEX

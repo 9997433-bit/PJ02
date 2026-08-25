@@ -32,7 +32,7 @@ import math
 from pathlib import Path
 
 TRI_CENTROID = round(math.sqrt(3) / 6, 6)   # 等边三角形质心到底边距离 0.288675
-ISO_CENTROID = 0.333333                     # 等腰三角形质心到底边距离
+ISO_CENTROID = 0.666667                     # 等腰三角形质心到底边距离 (底 1 高 2)
 COS30 = round(math.cos(math.radians(30)), 6)  # 0.866025
 SIN30 = 0.5
 
@@ -209,7 +209,7 @@ step(
     "立起车库与塔楼之间的橙色隔墙 (3 片), 再给车库大门两侧装上黄色桁架护角: "
     "直角三角形底边吸地台南缘, 竖直边贴住墙角。",
     [f"gar_d_{j}" for j in range(3)] + ["gar_tr_w", "gar_tr_e"],
-    highlight=[f"g_2_{j}" for j in range(3)] + ["gar_w_0", "gar_d_0"],
+    highlight=[f"g_2_{j}" for j in range(3)] + ["gar_w_0"],
     tip="护角三角形要两条边同时吸住: 底边贴地台, 竖边贴墙角, 车库门就不会晃。",
 )
 step(

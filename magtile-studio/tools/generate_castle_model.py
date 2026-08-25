@@ -22,7 +22,7 @@ from pathlib import Path
 
 # 质心到底边的距离 (与 data/tile_catalog.json 中的顶点一致)
 TRI_CENTROID = round(math.sqrt(3) / 6, 6)  # 等边三角形: 0.288675
-ISO_CENTROID = round(1.0 / 3.0, 6)         # 等腰三角形 (底 1 高 1): 0.333333
+ISO_CENTROID = round(2.0 / 3.0, 6)         # 等腰三角形 (底 1 高 2 瘦高片): 0.666667
 
 SIZE = 4  # 地台为 SIZE x SIZE 个正方形
 
@@ -72,7 +72,7 @@ for side, k in CORNER_SEGMENTS:
     center, rot = WALL_SIDES[side]
     add(f"w3_{side}_{k}", "square", center(k, 2.5), rot, "purple")
 
-# ---- 4. 角楼顶尖塔: 等腰三角形 (底 1 高 1), 底边落在 z=3 --------
+# ---- 4. 角楼顶尖塔: 等腰三角形 (底 1 高 2 瘦高片), 底边落在 z=3 --
 # 用比城齿更高的等腰三角形收顶, 让四座角楼在轮廓上明显高于城墙,
 # 同时引入第 3 种磁力片形状 (正方形 / 等边三角形 / 等腰三角形)。
 for side, k in CORNER_SEGMENTS:
