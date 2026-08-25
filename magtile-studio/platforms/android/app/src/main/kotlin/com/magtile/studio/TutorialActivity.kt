@@ -15,8 +15,8 @@ import java.io.File
 import java.util.concurrent.Executors
 
 /**
- * 分步教程页 (从模型库详情弹窗的「开始搭建」进入): 进度头
- * ("第 x/y 步 · 已放 n/m 片" + 进度条) + 3D 教程视口 (GLES3,
+ * 分步教程页 (从模型库详情弹窗的「开始搭建」或进度页作品行进入):
+ * 进度头 ("第 x/y 步 · 已放 n/m 片" + 进度条) + 3D 教程视口 (GLES3,
  * 单指旋转 / 双指捏合缩放 / 双指平移; 当前步新增片橙色描边呼吸 +
  * 未放片 ghost 轮廓, 复用与桌面 GL/Qt 同一份场景渲染器
  * GlSceneRenderer, 见 TutorialSceneView/TutorialSceneNative) +
@@ -30,7 +30,11 @@ import java.util.concurrent.Executors
  * TutorialViewport: 会话开始即建档 (模型库/进度页立刻显示进行中),
  * 每次步骤导航落盘当前步并按增量累计游玩时长, 走到最后一步记完成
  * + 解锁首搭成就; 存档写入失败只降级不打断搭建 (P3 零挫败)。
- * 断点续搭: 进入时经 savedTutorialStep 读回上次的当前步。
+ * 断点续搭: 进入时经 savedTutorialStep 读回上次的当前步; 带
+ * EXTRA_RESTART 时忽略断点从头开始 (进度页已完成行「再搭一次」,
+ * 口径与桌面 Qt StudioBackend::startBuild 一致 —— 已完成的存档值
+ * 为总步数, 不从头会直接落在末步完成态; 完成时刻由存储层 COALESCE
+ * 只记首次, 重搭不丢已完成徽标)。
  * 3D 场景加载失败只降级为文字分步 (视口显示地面网格), 不报错。
  */
 class TutorialActivity : Activity() {
@@ -118,8 +122,12 @@ class TutorialActivity : Activity() {
                 val root = JSONObject(
                     MagTileNative.getTutorialSteps(dataDir.absolutePath, modelId))
                 check(!root.has("error")) { root.getString("error") }
-                // 断点续搭: 上次搭到第几步 (无记录 0; 已完成 = 总步数)
-                val savedStep = MagTileNative.savedTutorialStep(modelId)
+                // 断点续搭: 上次搭到第几步 (无记录 0; 已完成 = 总步数);
+                // EXTRA_RESTART (已完成行「再搭一次」) 忽略断点从头开始
+                // (桌面 Qt startBuild 同口径, 见类注释)
+                val savedStep =
+                    if (intent.getBooleanExtra(EXTRA_RESTART, false)) 0
+                    else MagTileNative.savedTutorialStep(modelId)
                 // 3D 场景与文字分步同一断点 ("当前展示步" = 已完成步 + 1,
                 // 夹到末步); 加载失败只降级为文字分步 (视口画地面网格),
                 // 不打断教程 (P3 零挫败)
@@ -138,8 +146,14 @@ class TutorialActivity : Activity() {
                 Log.e(TAG, "分步教程加载失败: $modelId", t)
                 runOnUiThread {
                     if (isFinishing || isDestroyed) return@runOnUiThread
+                    // 模型已下架 (不在模型库目录中, 如进度页存档里的旧作品):
+                    // 温和提示先去挑别的, 不出现「失败」字样 (P3 零挫败;
+                    // 标记文本与 magtile_jni.cpp getTutorialSteps 报错一致)
                     findViewById<TextView>(R.id.tutorial_status).text =
-                        getString(R.string.tutorial_load_failed, t.message ?: t.toString())
+                        if (t.message?.contains("不在模型库目录中") == true)
+                            getString(R.string.tutorial_model_unavailable)
+                        else getString(
+                            R.string.tutorial_load_failed, t.message ?: t.toString())
                 }
             }
         }
@@ -240,5 +254,10 @@ class TutorialActivity : Activity() {
 
         /** Intent 附加项: 模型中文名 (选填, 数据加载前先撑起标题)。 */
         const val EXTRA_MODEL_NAME = "model_name"
+
+        /** Intent 附加项 (选填, 默认 false): true = 忽略存档断点从头
+         *  开始 (进度页已完成行「再搭一次」, 桌面 Qt startBuild 同口径:
+         *  已完成存档值为总步数, 不从头会直接落在末步完成态)。 */
+        const val EXTRA_RESTART = "restart_from_beginning"
     }
 }

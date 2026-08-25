@@ -97,11 +97,19 @@
     <string name="progress_step_of">第 %1$d/%2$d 步</string>
     <!-- %1$d = 片数 -->
     <string name="progress_pieces">%1$d 片</string>
+    <!-- 作品行直达教程的行尾动作 (对齐桌面 Qt ProgressPage 行尾:
+         进行中断点续搭 / 已完成从头再搭, startBuild 同口径) -->
+    <string name="progress_row_continue">继续搭建 ▶</string>
+    <string name="progress_row_rebuild">再搭一次 ▶</string>
+    <!-- 收藏行直达详情时模型已不在库中的温和提示 (模型库侧弹出) -->
+    <string name="progress_model_unavailable">这个模型暂时不在模型库里, 先去挑别的试试吧</string>
     <!-- 分步教程页 (TutorialActivity; 3D 教程视口 + 文字分步,
          措辞对齐桌面 GL/Qt 教程 HUD 的 "第 x/y 步 · 已放 n/m 片") -->
     <string name="tutorial_title_fallback">分步搭建</string>
     <string name="tutorial_loading">正在准备分步教程…</string>
     <string name="tutorial_load_failed">分步教程加载失败:\n%1$s</string>
+    <!-- 模型已下架 (不在模型库目录中) 的温和降级, 不出现「失败」字样 -->
+    <string name="tutorial_model_unavailable">这个模型暂时不在模型库里, 先去挑别的试试吧</string>
     <!-- 3D 视口手势提示 (单指旋转 / 双指捏合缩放, 与桌面 Qt 同口径) -->
     <string name="tutorial_scene_hint">👆 单指转一转 · 双指捏一捏放大缩小</string>
     <!-- %1$d = 当前步, %2$d = 总步数, %3$d = 已放片数, %4$d = 总片数 -->

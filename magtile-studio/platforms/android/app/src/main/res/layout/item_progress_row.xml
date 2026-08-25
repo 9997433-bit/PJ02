@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 进度页列表行 (进行中/已完成/收藏三处共用): 状态图形 + 模型名 +
-     可选元信息行 + 可选进度条 (图形 + "第 x/y 步" 文字双编码 §4.7) -->
+     可选元信息行 + 可选进度条 (图形 + "第 x/y 步" 文字双编码 §4.7) +
+     可选行尾动作标签 ("继续搭建 ▶"/"再搭一次 ▶", 整行可点直达教程,
+     与桌面 Qt ProgressPage 行尾同款); foreground 提供点按水波反馈 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:background="@drawable/bg_progress_card"
+    android:foreground="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:minHeight="56dp"
     android:orientation="horizontal"
@@ -61,5 +64,15 @@
             android:textSize="13sp"
             android:visibility="gone" />
     </LinearLayout>
+
+    <!-- 行尾动作: "继续搭建 ▶" (主色) / "再搭一次 ▶" (完成绿) -->
+    <TextView
+        android:id="@+id/row_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 </LinearLayout>

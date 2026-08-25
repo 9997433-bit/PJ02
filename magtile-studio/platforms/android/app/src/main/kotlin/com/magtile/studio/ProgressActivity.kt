@@ -24,13 +24,27 @@ import java.util.concurrent.Executors
  *
  * 数据经 MagTileNative.progressOverviewJson (JNI) 读核心库
  * ProgressStore —— 与桌面 CLI `progress list` / GL / Qt 同一份
- * SQLite 存档 (filesDir/progress.db)。本屏纯只读不写档; 行目前仅作
- * 展示, 「继续搭建/再搭一次」直达 TutorialActivity 待接入 (分步
- * 教程页已上线, 当前从模型库详情弹窗「开始搭建」进入)。
+ * SQLite 存档 (filesDir/progress.db)。本屏纯只读不写档。
+ *
+ * 作品行路由 (对齐桌面 Qt StudioBackend::startBuild 口径):
+ *   - 进行中「继续搭建」直达 TutorialActivity 断点续搭 (教程页自读
+ *     savedTutorialStep, 视口停在上次的当前步);
+ *   - 已完成「再搭一次」带 EXTRA_RESTART 从头开始 —— 已完成的存档值
+ *     为总步数, 不从头会直接落在末步完成态 (桌面同理由); 完成时刻
+ *     存储层只记首次, 重搭不丢已完成徽标;
+ *   - 收藏与桌面同为「点击直达详情」: 详情弹窗在模型库 (MainActivity),
+ *     经 activity result 带模型 id 返回并弹出 —— 免费判定/订阅提示
+ *     留在详情一处, 本屏保持儿童可达无家长门 (§5.3)。
+ * 教程页返回后 onResume 重拉总览 (进度条/统计即时跟上新进度)。
+ * 行对应模型已下架时: 教程页温和提示 (不崩溃), 详情路由由模型库
+ * 侧温和提示; 空态引导保持不变。
  */
 class ProgressActivity : Activity() {
 
     private val backgroundExecutor = Executors.newSingleThreadExecutor()
+
+    /** 首次 onResume 跳过重拉 (onCreate 已加载)。 */
+    private var firstResume = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +57,17 @@ class ProgressActivity : Activity() {
         // 「去模型库挑一个」: 模型库即主界面, 关屏即回 (温和引导 §4.3)
         findViewById<Button>(R.id.empty_go_library).setOnClickListener { finish() }
 
+        loadOverviewAsync()
+    }
+
+    /** 从教程页返回时重拉总览 (进度条/统计即时跟上新进度); 首次
+     *  onResume 紧跟 onCreate 的加载, 跳过避免重复 IO。 */
+    override fun onResume() {
+        super.onResume()
+        if (firstResume) {
+            firstResume = false
+            return
+        }
         loadOverviewAsync()
     }
 
@@ -136,6 +161,11 @@ class ProgressActivity : Activity() {
             setMeta(row, listOf(
                 getString(R.string.progress_step_of, currentStep, stepCount),
                 item.optString("play_text")))
+            // 断点续搭: 教程页自读 savedTutorialStep, 视口停在上次当前步
+            setAction(row, R.string.progress_row_continue, R.color.magtile_primary)
+            row.setOnClickListener {
+                openTutorial(item, restartFromBeginning = false)
+            }
         }
 
         renderRows(completed, R.id.rows_completed) { item, row ->
@@ -149,12 +179,28 @@ class ProgressActivity : Activity() {
             setMeta(row, listOf(
                 item.optString("meta_text"),
                 if (pieces > 0) getString(R.string.progress_pieces, pieces) else ""))
+            // 「再搭一次」从头开始 (桌面 Qt startBuild 同口径: 已完成的
+            // 存档值为总步数, 不从头会直接落在末步完成态; 完成时刻存储层
+            // 只记首次, 重搭不丢 ✓ 已完成徽标)
+            setAction(row, R.string.progress_row_rebuild, R.color.magtile_success)
+            row.setOnClickListener {
+                openTutorial(item, restartFromBeginning = true)
+            }
         }
 
         renderRows(favorites, R.id.rows_favorites) { item, row ->
             row.findViewById<TextView>(R.id.row_icon).apply {
                 text = "⭐"
                 setTextColor(getColor(R.color.magtile_warning))
+            }
+            // 收藏与桌面同为「点击直达详情」(免费判定/订阅提示留在详情):
+            // 详情弹窗在模型库, 带模型 id 收屏返回, MainActivity 接力弹出
+            row.setOnClickListener {
+                val modelId = item.optString("id")
+                if (modelId.isBlank()) return@setOnClickListener
+                setResult(RESULT_OK,
+                          Intent().putExtra(RESULT_EXTRA_MODEL_ID, modelId))
+                finish()
             }
         }
 
@@ -193,7 +239,31 @@ class ProgressActivity : Activity() {
         }
     }
 
+    /** 行尾动作标签 ("继续搭建 ▶" 主色 / "再搭一次 ▶" 完成绿, 与桌面
+     *  Qt ProgressPage 行尾同款; 整行可点, 标签只作视觉引导)。 */
+    private fun setAction(row: View, template: Int, colorRes: Int) {
+        row.findViewById<TextView>(R.id.row_action).apply {
+            visibility = View.VISIBLE
+            text = getString(template)
+            setTextColor(getColor(colorRes))
+        }
+    }
+
+    /** 作品行直达教程 (id 为空的脏数据行只当展示, 不响应)。 */
+    private fun openTutorial(item: JSONObject, restartFromBeginning: Boolean) {
+        val modelId = item.optString("id")
+        if (modelId.isBlank()) return
+        startActivity(Intent(this, TutorialActivity::class.java)
+            .putExtra(TutorialActivity.EXTRA_MODEL_ID, modelId)
+            .putExtra(TutorialActivity.EXTRA_MODEL_NAME, item.optString("name"))
+            .putExtra(TutorialActivity.EXTRA_RESTART, restartFromBeginning))
+    }
+
     companion object {
         private const val TAG = "MagTileProgress"
+
+        /** activity result 附加项: 请模型库弹出该模型的详情弹窗
+         *  (收藏行点击直达详情, 与桌面 Qt ProgressPage openModel 同路由)。 */
+        const val RESULT_EXTRA_MODEL_ID = "open_model_id"
     }
 }

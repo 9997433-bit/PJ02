@@ -97,6 +97,9 @@ class MainActivity : Activity() {
      *  「我能搭的」筛选禁用并引导录入)。 */
     private var inventoryConfigured = false
 
+    /** 进度页收藏行带回的待弹详情模型 id (列表加载完成后补弹)。 */
+    private var pendingDetailModelId: String? = null
+
     // ---- 年龄段模式 (UI_UX_SPEC.md §2, 与桌面 settings 同键) ----------
     /** 当前年龄段模式标识 (启动时经 JNI 从进度存档读取, 默认 7-9 标准档)。 */
     private var ageModeId = AGE_7_9
@@ -139,9 +142,13 @@ class MainActivity : Activity() {
         }
 
         // 进度页「我的作品」入口 (统计 + 作品列表 + 成就墙; 纯只读看板,
-        // 返回后无需刷新模型库)
+        // 返回后无需刷新模型库): 带 result 启动 —— 收藏行「点击直达
+        // 详情」时进度页带模型 id 收屏返回, 本屏接力弹详情弹窗
+        // (与桌面 Qt ProgressPage openModel 同路由, 免费判定/订阅
+        // 提示留在详情一处)
         findViewById<TextView>(R.id.progress_button).setOnClickListener {
-            startActivity(Intent(this, ProgressActivity::class.java))
+            startActivityForResult(
+                Intent(this, ProgressActivity::class.java), REQUEST_PROGRESS)
         }
 
         adapter = ModelCardAdapter(::showModelDialog)
@@ -190,6 +197,11 @@ class MainActivity : Activity() {
                     applyAgeMode()
                     filterBar.visibility = View.VISIBLE
                     applyFilters()
+                    // 进度页收藏行的详情请求先于数据到达时在此补弹
+                    pendingDetailModelId?.let {
+                        pendingDetailModelId = null
+                        openModelDetailById(it)
+                    }
                 }
             } catch (t: Throwable) {
                 Log.e(TAG, "模型库加载失败", t)
@@ -230,12 +242,38 @@ class MainActivity : Activity() {
         }
     }
 
-    /** 库存录入屏返回: 保存成功 (RESULT_OK) 时刷新「我能搭的」数据。 */
+    /** 库存录入屏返回: 保存成功 (RESULT_OK) 时刷新「我能搭的」数据;
+     *  进度页返回: 收藏行带回模型 id 时接力弹详情弹窗。 */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_INVENTORY && resultCode == RESULT_OK) {
             refreshLibraryAsync(enableBuildable = data?.getBooleanExtra(
                 InventoryActivity.EXTRA_LOOK_WHAT_I_CAN_BUILD, false) == true)
+        }
+        if (requestCode == REQUEST_PROGRESS && resultCode == RESULT_OK) {
+            data?.getStringExtra(ProgressActivity.RESULT_EXTRA_MODEL_ID)
+                ?.takeIf { it.isNotBlank() }
+                ?.let { openModelDetailById(it) }
+        }
+    }
+
+    /**
+     * 按模型 id 弹详情弹窗 (进度页收藏行「点击直达详情」的落点):
+     * 列表尚未加载完 (进程重建后 result 先于数据到达) 先记下, 加载
+     * 完成后补弹; 模型已下架 (不在当前目录中) 温和提示不崩溃。
+     */
+    private fun openModelDetailById(modelId: String) {
+        if (allCards.isEmpty()) {
+            pendingDetailModelId = modelId
+            return
+        }
+        val card = allCards.find { it.id == modelId }
+        if (card != null) {
+            showModelDialog(card)
+        } else {
+            android.widget.Toast.makeText(
+                this, R.string.progress_model_unavailable,
+                android.widget.Toast.LENGTH_LONG).show()
         }
     }
 
@@ -536,6 +574,7 @@ class MainActivity : Activity() {
     companion object {
         private const val TAG = "MagTileMain"
         private const val REQUEST_INVENTORY = 1001
+        private const val REQUEST_PROGRESS = 1002
 
         /** 进度存档文件名 (filesDir 下; 与桌面同一 SQLite schema)。 */
         const val PROGRESS_DB_NAME = "progress.db"
