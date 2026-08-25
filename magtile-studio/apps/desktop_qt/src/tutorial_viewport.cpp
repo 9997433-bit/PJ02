@@ -146,6 +146,13 @@ void TutorialViewport::setResumeStep(int step) {
     emit sourceChanged();
 }
 
+void TutorialViewport::setPreviewMode(bool preview) {
+    if (preview_mode_ == preview) return;
+    preview_mode_ = preview;
+    emit sourceChanged();
+    if (isComponentComplete()) startSession();
+}
+
 void TutorialViewport::componentComplete() {
     QQuickFramebufferObject::componentComplete();
     startSession();
@@ -162,7 +169,9 @@ void TutorialViewport::startSession() {
     session_flushed_ = false;
     last_saved_step_ = -1;
     // 温和降级 (P3 零挫败): 打不开只说 "正在准备", 永不弹 "失败"
-    status_text_ = QStringLiteral("这个教程正在准备中, 先去挑别的模型试试吧");
+    status_text_ = preview_mode_
+                       ? QStringLiteral("3D 预览正在准备中")
+                       : QStringLiteral("这个教程正在准备中, 先去挑别的模型试试吧");
 
     if (model_file_.isEmpty() || data_dir_.isEmpty()) {
         emit stateChanged();
@@ -176,15 +185,18 @@ void TutorialViewport::startSession() {
         core::ModelDefinition model =
             core::loadModelDefinition(std::filesystem::path(model_file_.toStdString()));
 
-        // 内容有问题的模型不进教程 (与 GL 版一致), 具体问题走质检工具
+        // 内容有问题的模型不进教程 (与 GL 版一致), 具体问题走质检工具;
+        // 只读预览只画 final_assembly, 步骤一致性问题不阻断成品展示
         const auto problems = tutorial::TutorialEngine::checkConsistency(model);
         if (!problems.empty()) {
             for (const auto& problem : problems) {
                 std::fprintf(stderr, "[qt-viewport] 步骤一致性: %s\n", problem.c_str());
             }
-            emit stateChanged();
-            update();
-            return;
+            if (!preview_mode_) {
+                emit stateChanged();
+                update();
+                return;
+            }
         }
 
         tile_catalog_ = std::move(catalog);
@@ -196,8 +208,11 @@ void TutorialViewport::startSession() {
         return;
     }
 
-    // 断点续搭: 0 = 从头 -> 第 1 步; 越界由 goToStep 拒绝后回退第 1 步
-    const int start_step = std::clamp(std::max(resume_step_, 1), 1, engine_->stepCount());
+    // 断点续搭: 0 = 从头 -> 第 1 步; 越界由 goToStep 拒绝后回退第 1 步;
+    // 只读预览直接跳到最后一步 (成品全貌)
+    const int start_step = preview_mode_
+                               ? engine_->stepCount()
+                               : std::clamp(std::max(resume_step_, 1), 1, engine_->stepCount());
     if (!engine_->goToStep(start_step)) engine_->nextStep();
 
     // 初始取景: 最终成品的包围盒 (与 GL 版 frameModelBounds 一致)
@@ -212,8 +227,8 @@ void TutorialViewport::startSession() {
     camera_.frameBounds(bb_min, bb_max);
 
     // 进度存档: 与 CLI/GL 版共用同一 SQLite (多连接安全);
-    // 打不开只影响存档, 教程照常可玩
-    if (!db_file_.isEmpty()) {
+    // 打不开只影响存档, 教程照常可玩; 只读预览纯看不写, 不建档
+    if (!preview_mode_ && !db_file_.isEmpty()) {
         try {
             store_ = std::make_unique<progress::ProgressStore>(
                 std::filesystem::path(db_file_.toStdString()));
@@ -300,10 +315,13 @@ void TutorialViewport::rebuildSceneTiles() {
     ++scene_version_;
     if (engine_ == nullptr || tile_catalog_ == nullptr) return;
 
+    // 只读预览不标注步骤状态 (空集合 -> 全部实体片, 无 ghost/高亮/呼吸)
     std::unordered_set<const core::TileInstance*> placed, added, referenced;
-    for (const auto* tile : engine_->visibleTiles()) placed.insert(tile);
-    for (const auto* tile : engine_->tilesAddedThisStep()) added.insert(tile);
-    for (const auto* tile : engine_->highlightTiles()) referenced.insert(tile);
+    if (!preview_mode_) {
+        for (const auto* tile : engine_->visibleTiles()) placed.insert(tile);
+        for (const auto* tile : engine_->tilesAddedThisStep()) added.insert(tile);
+        for (const auto* tile : engine_->highlightTiles()) referenced.insert(tile);
+    }
 
     scene_tiles_.reserve(engine_->model().final_assembly.size());
     for (const auto& tile : engine_->model().final_assembly) {
@@ -311,7 +329,9 @@ void TutorialViewport::rebuildSceneTiles() {
         scene_tile.instance = tile;
         scene_tile.shape = &tile_catalog_->get(tile.type);
         scene_tile.just_placed = added.count(&tile) > 0;
-        scene_tile.ghost = !scene_tile.just_placed && placed.count(&tile) == 0;
+        scene_tile.ghost = preview_mode_
+                               ? false
+                               : (!scene_tile.just_placed && placed.count(&tile) == 0);
         scene_tile.highlighted = referenced.count(&tile) > 0;
         scene_tiles_.push_back(std::move(scene_tile));
     }

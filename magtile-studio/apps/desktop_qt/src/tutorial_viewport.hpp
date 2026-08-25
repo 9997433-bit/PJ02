@@ -17,6 +17,11 @@
 // 会话输入 (modelFile/dataDir/dbFile/resumeStep) 由 TutorialPage
 // 在组件创建时一次性注入; 退出时 finishSession 落盘进度 (析构
 // 兜底), 与 GL 版 "返回即存档, 不弹确认框" 行为一致 (§4.4)。
+//
+// 只读预览模式 (previewMode=true, QT-1 详情页 §5.4): 同一视口的
+// 轻量用法 —— 直接加载模型最终态展示成品全貌, 不显示 ghost/步骤
+// 高亮/呼吸动画, 不开进度存档 (纯看不写); 轨道相机交互 (拖动旋转/
+// 滚轮缩放/右键平移) 与教程模式完全一致。
 // =============================================================
 
 #include <QElapsedTimer>
@@ -45,6 +50,8 @@ class TutorialViewport : public QQuickFramebufferObject {
     Q_PROPERTY(QString dbFile READ dbFile WRITE setDbFile NOTIFY sourceChanged)
     /// 进入时恢复到的步骤 (0 = 从头开始 -> 第 1 步)。
     Q_PROPERTY(int resumeStep READ resumeStep WRITE setResumeStep NOTIFY sourceChanged)
+    /// 只读预览 (详情页): 加载最终态, 无 ghost/高亮, 不写进度存档。
+    Q_PROPERTY(bool previewMode READ previewMode WRITE setPreviewMode NOTIFY sourceChanged)
 
     // ---- 会话状态 (只读, 步骤面板数据源) -----------------------------
     Q_PROPERTY(bool sessionReady READ sessionReady NOTIFY stateChanged)
@@ -74,6 +81,8 @@ public:
     void setDbFile(const QString& path);
     [[nodiscard]] int resumeStep() const noexcept { return resume_step_; }
     void setResumeStep(int step);
+    [[nodiscard]] bool previewMode() const noexcept { return preview_mode_; }
+    void setPreviewMode(bool preview);
 
     [[nodiscard]] bool sessionReady() const noexcept { return engine_ != nullptr; }
     [[nodiscard]] QString statusText() const { return status_text_; }
@@ -135,6 +144,7 @@ private:
     QString data_dir_;
     QString db_file_;
     int resume_step_ = 0;
+    bool preview_mode_ = false;
 
     // 会话状态 (GUI 线程)
     std::shared_ptr<core::TileCatalog> tile_catalog_;

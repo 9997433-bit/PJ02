@@ -5,12 +5,14 @@ import MagTile.Studio
 
 // =============================================================
 // 模型详情页 (UI_UX_SPEC.md §5.4, QT-1): 进教程前的确认页。
-// 大预览位 (3D 可旋转预览属 QT-3, 先用主题色占位) + 难度/片数/
-// 步数 + 所需片型 BOM 清单 (对照家庭库存, 缺片琥珀提示, 不用红色
-// 表达"错误") + 收藏 + 「开始搭建」大按钮 (高 64, 占宽 80%)。
+// 大预览位: 3D 可旋转成品预览 (复用 QT-3 TutorialViewport 的只读
+// previewMode —— 最终态全貌, 无 ghost/步骤高亮, 不写进度存档;
+// 拖动旋转 / 滚轮缩放 / 右键平移与教程一致) + 难度/片数/步数 +
+// 所需片型 BOM 清单 (对照家庭库存, 缺片琥珀提示, 不用红色表达
+// "错误") + 收藏 + 「开始搭建」大按钮 (高 64, 占宽 80%)。
 // 数据经 studio.modelDetail / studio.bomForModel 读取;
 // 「开始搭建」走 studio.startBuild -> buildRequested 信号,
-// 路由在 Main.qml (QT-3 教程视口就绪后本页无需改动)。
+// 路由在 Main.qml。
 // =============================================================
 Page {
     id: page
@@ -109,19 +111,79 @@ Page {
         anchors.margins: Theme.spacingLarge
         spacing: Theme.spacingLarge
 
-        // ---- 预览位 (3D 可旋转预览在 QT-3 接入, 先用主题色占位) ----------
+        // ---- 3D 可旋转成品预览 (只读 previewMode, 复用 QT-3 视口) --------
         Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             radius: Theme.radiusCard
-            color: Theme.surface
+            color: "#E6ECF2"   // 与场景清屏色同族, 圆角边不突兀
             border.color: Theme.cardBorder
             border.width: 1
 
+            TutorialViewport {
+                id: previewViewport
+                anchors.fill: parent
+                anchors.margins: 2
+                previewMode: true
+                modelFile: studio.modelFilePath(page.modelId)
+                dataDir: studio.dataDirText
+                // 只读预览不设 dbFile: 纯看不写, 不建进度存档
+            }
+
+            // 操作提示 (左下角浮层, 常驻但视觉很轻, 与教程页同款)
+            Rectangle {
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                anchors.margins: Theme.spacing
+                radius: Theme.radiusButton
+                color: "#CCFFFFFF"
+                width: previewHintLabel.implicitWidth + 2 * Theme.spacing
+                height: 40
+                visible: previewViewport.sessionReady
+                Text {
+                    id: previewHintLabel
+                    anchors.centerIn: parent
+                    text: "🖱 拖动转圈看成品 · 滚轮放大"
+                    font.pixelSize: Theme.fontSmall
+                    color: Theme.textSecondary
+                }
+            }
+
+            // 复位视角 (右下角, >= 48 触控目标)
+            AbstractButton {
+                id: previewResetButton
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.margins: Theme.spacing
+                width: previewResetLabel.implicitWidth + 2 * Theme.spacing
+                height: Theme.touchTarget
+                visible: previewViewport.sessionReady
+                onClicked: previewViewport.resetView()
+                scale: pressed ? 0.96 : 1.0
+                Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+                background: Rectangle {
+                    radius: Theme.radiusButton
+                    color: previewResetButton.pressed ? Theme.primarySoft : Theme.surface
+                    border.color: Theme.cardBorder
+                    border.width: 1
+                }
+                contentItem: Text {
+                    id: previewResetLabel
+                    text: "🔄 回到最佳视角"
+                    color: Theme.textPrimary
+                    font.pixelSize: Theme.fontSmall
+                    font.bold: true
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            // 预览未就绪的温和降级 (P3 零挫败: 名称卡片占位, 不说 "失败")
             Rectangle {
                 anchors.fill: parent
-                anchors.margins: Theme.spacing
+                anchors.margins: 2
                 radius: Theme.radiusCard
+                visible: !previewViewport.sessionReady
                 color: page.detail.found ? Qt.lighter(Theme.themeColor(page.detail.theme), 1.75)
                                          : Theme.surfaceAlt
 
@@ -153,7 +215,8 @@ Page {
                     }
                     Text {
                         Layout.alignment: Qt.AlignHCenter
-                        text: "可旋转的 3D 预览即将上线"
+                        text: previewViewport.statusText !== ""
+                              ? previewViewport.statusText : "3D 预览正在准备中"
                         font.pixelSize: Theme.fontSmall
                         color: Theme.textSecondary
                     }
