@@ -1,0 +1,880 @@
+{
+  "schema_version": 1,
+  "id": "weather_station_01",
+  "name": "山地气象观测站",
+  "name_en": "Weather Station 01",
+  "description": "只用核心九片型的气象观测场景: 没有一栋主楼, 主角是观测坪上的三件仪器 —— 测风塔两层墙环层层闭环, 清色风杆一线双吸直上 4.0, 红色风向旗骑沿零力矩; 百叶箱下层清色支架墙环架空, 上层整圈窗格方就是百叶, 风穿箱而过; 雨量筒开顶墙环只围不盖, 雨水直接落进蓝色底格。东南角光伏板顶边吸墙顶、坡尾落地生根, 青色数据屏立在坪缝上 —— 今天的风从哪边来?",
+  "difficulty": 2,
+  "total_pieces": 47,
+  "tags": [
+    "自然",
+    "科学",
+    "气象",
+    "观测站"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 39,
+        "window_square": 5,
+        "equilateral_triangle": 1,
+        "isosceles_triangle": 1,
+        "rectangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "pad_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pad_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tw0_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw0_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw0_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw0_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw1_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw1_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw1_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw1_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_cap",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw_mast",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        1.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw_vane",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        0.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sc_leg_s",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sc_leg_n",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sc_leg_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sc_leg_e",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sc_lv_s",
+      "type": "window_square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sc_lv_n",
+      "type": "window_square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sc_lv_w",
+      "type": "window_square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sc_lv_e",
+      "type": "window_square",
+      "position": [
+        3.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sc_cap",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rg_s",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rg_n",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rg_w",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rg_e",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pv_stand",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pv_panel",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        4.866025,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "data_screen",
+      "type": "window_square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺观测坪南两行: 灰绿相间的单位方板行行等边互吸。",
+      "tip": "蓝色那格要放在东边第二行 —— 它是雨量筒的接水底格。",
+      "tiles_to_add": [
+        "pad_0_0",
+        "pad_1_0",
+        "pad_2_0",
+        "pad_3_0",
+        "pad_4_0",
+        "pad_0_1",
+        "pad_1_1",
+        "pad_2_1",
+        "pad_3_1",
+        "pad_4_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺观测坪北两行: 再来十片, 整片场坪连成一张网。",
+      "tip": "所有仪器都要踩坪上的拼缝, 每一道缝都是一条磁力吸边。",
+      "tiles_to_add": [
+        "pad_0_2",
+        "pad_1_2",
+        "pad_2_2",
+        "pad_3_2",
+        "pad_4_2",
+        "pad_0_3",
+        "pad_1_3",
+        "pad_2_3",
+        "pad_3_3",
+        "pad_4_3"
+      ],
+      "highlight_tiles": [
+        "pad_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立测风塔第一层: 四片灰墙合环, 四角竖边互咬。",
+      "tip": "墙脚整边吸住坪缝, 闭环墙筒是最稳的塔身。",
+      "tiles_to_add": [
+        "tw0_s",
+        "tw0_n",
+        "tw0_w",
+        "tw0_e"
+      ],
+      "highlight_tiles": [
+        "pad_0_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "测风塔第二层墙环整边骑上第一层墙顶。",
+      "tip": "上层每片墙底边都要与下层墙顶整边对齐再松手。",
+      "tiles_to_add": [
+        "tw1_s",
+        "tw1_n",
+        "tw1_w",
+        "tw1_e"
+      ],
+      "highlight_tiles": [
+        "tw0_s"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "塔顶压顶四边全吸, 风杆与风向旗骑上塔顶。",
+      "tip": "风杆底边同时吸住压顶北沿和北墙顶 —— 一条线上两道保险, 杆尖直上 4.0。",
+      "tiles_to_add": [
+        "tw_cap",
+        "tw_mast",
+        "tw_vane"
+      ],
+      "highlight_tiles": [
+        "tw1_n"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "搭百叶箱支架层: 四片清色墙把箱体架离地面。",
+      "tip": "百叶箱要离地通风, 温度计才量得准。",
+      "tiles_to_add": [
+        "sc_leg_s",
+        "sc_leg_n",
+        "sc_leg_w",
+        "sc_leg_e"
+      ],
+      "highlight_tiles": [
+        "pad_2_2"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "百叶层上箱: 整圈窗格方骑上支架墙顶, 再盖青色压顶。",
+      "tip": "窗格方的镂空就是百叶 —— 风穿箱而过, 太阳晒不进去。",
+      "tiles_to_add": [
+        "sc_lv_s",
+        "sc_lv_n",
+        "sc_lv_w",
+        "sc_lv_e",
+        "sc_cap"
+      ],
+      "highlight_tiles": [
+        "sc_leg_s"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "围雨量筒: 四片青色墙开顶合环, 蓝色底格在筒心。",
+      "tip": "只围不盖, 雨水才落得进来; 四角竖边互咬照样闭环。",
+      "tiles_to_add": [
+        "rg_s",
+        "rg_n",
+        "rg_w",
+        "rg_e"
+      ],
+      "highlight_tiles": [
+        "pad_4_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立数据屏: 窗格方立牌插在坪缝上, 面向观测坪。",
+      "tip": "今天的风速、气温、雨量, 都会显示在这块屏上。",
+      "tiles_to_add": [
+        "data_screen"
+      ],
+      "highlight_tiles": [
+        "sc_lv_s"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "装光伏板收尾: 支撑墙立在北沿, 斜板顶边吸墙顶、坡尾落地。",
+      "tip": "30 度朝天正对太阳 —— 观测站开始记录今天的天气!",
+      "tiles_to_add": [
+        "pv_stand",
+        "pv_panel"
+      ],
+      "highlight_tiles": [
+        "data_screen"
+      ]
+    }
+  ]
+}
