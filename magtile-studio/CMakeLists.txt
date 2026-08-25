@@ -278,4 +278,24 @@ if(MAGTILE_BUILD_TESTS)
             COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_model_logic.py
                 ${MAGTILE_DATA_DIR}/models)
     endif()
+
+    # 逐步装配质检 (Python): 逐片零差错承诺 P1~P8 (docs/MODEL_QUALITY.md):
+    # 片 id 唯一、每片恰好放置一次、高亮只引用已放置片、成品与教程严格
+    # 集合对账 (无孤儿/无幽灵)、逐片空间连续性 (接地或磁力吸合)、
+    # 步骤序号连续。纯数据层检查, 不依赖构建产物, 全库秒级。
+    if(Python3_Interpreter_FOUND AND EXISTS ${MAGTILE_TESTS_DIR}/test_step_assembly.py)
+        add_test(NAME step_assembly_gate
+            COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_step_assembly.py
+                ${MAGTILE_DATA_DIR}/models
+                --catalog ${MAGTILE_DATA_DIR}/tile_catalog.json)
+    endif()
+
+    # 模型库唯一性 (Python): 结构签名 (WL 连接图指纹 + 片形直方图 +
+    # 步骤节奏) 两两比对, sim > 0.85 判为换皮克隆并拒绝入库 (P10)
+    if(Python3_Interpreter_FOUND AND EXISTS ${MAGTILE_TESTS_DIR}/test_library_uniqueness.py)
+        add_test(NAME library_uniqueness_gate
+            COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_library_uniqueness.py
+                ${MAGTILE_DATA_DIR}/models
+                --catalog ${MAGTILE_DATA_DIR}/tile_catalog.json)
+    endif()
 endif()

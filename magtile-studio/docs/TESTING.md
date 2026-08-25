@@ -19,10 +19,12 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 4 | 模型库全量质检 | 逐模型 validate + 片数 ≥ 40 门槛 |
 | 5 | 反平凡模型检查 | ≥ 3 种片形、≥ 2 个 Z 层、有立置片 |
 | 6 | 模型逻辑质检 | 步骤粒度 / 中文说明 / 对账 / 难度区间 / BOM |
-| 7 | 教程完整性 | 静态走查 + 教程引擎实跑 |
-| 8 | 物理负例 × N | 不成立的结构必须被拒绝, 且错误码正确 |
-| 9 | 物理正例 × N | 预算内的合法结构必须放行 |
-| 10 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
+| 7 | 逐步装配质检 | 逐片零差错 P1~P8 (见 [MODEL_QUALITY.md](MODEL_QUALITY.md)) |
+| 8 | 模型库唯一性 | 结构签名两两比对, 拒绝换皮克隆 |
+| 9 | 教程完整性 | 静态走查 + 教程引擎实跑 |
+| 10 | 物理负例 × N | 不成立的结构必须被拒绝, 且错误码正确 |
+| 11 | 物理正例 × N | 预算内的合法结构必须放行 |
+| 12 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
 
 环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
 
@@ -58,7 +60,7 @@ CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑
 各层职责与边界:
 
 - **C++ 回归** 保证代码不退化 —— 但代码全对, 内容照样可能是垃圾;
-- **内容质量关卡 (L1)** 保证每个模型"搭得起来、讲得通、值得搭" —— 这是本项目区别于普通软件测试的核心层, 覆盖物理常识 (静力学预算)、教程逻辑 (逐片放置可行) 与商业合理性 (体量/难度/BOM);
+- **内容质量关卡 (L1)** 保证每个模型"搭得起来、讲得通、值得搭" —— 这是本项目区别于普通软件测试的核心层, 覆盖物理常识 (静力学预算)、教程逻辑 (逐片放置可行)、商业合理性 (体量/难度/BOM), 以及**逐片零差错** (`test_step_assembly.py`) 与**全库唯一性** (`test_library_uniqueness.py`, 克隆检测), 见 [MODEL_QUALITY.md](MODEL_QUALITY.md);
 - **GL 冒烟** 保证 3D 教程画面真的画得出来;
 - **L2/L3 实物层** 兜住纯软件无法覆盖的真实世界因素 (品牌差异、手感、儿童行为), 分级要求与规程见 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md)。
 
@@ -227,6 +229,46 @@ xvfb-run -a ./build/magtile_app tutorial data/models/castle_foundation_01.json \
 
 `--frames N` 渲染 N 帧后自动退出, `--screenshot FILE` 在最后一帧保存画面, 两者专为 CI 冒烟测试设计。
 
+### 3.11 逐步装配质检 (`step_assembly_gate`)
+
+脚本: `tests/test_step_assembly.py <models目录或模型文件...> [--catalog tile_catalog.json]`
+
+**逐片零差错**承诺 (P1~P8) 的数据层关卡, 承诺的精确定义与规模化方案见 [MODEL_QUALITY.md](MODEL_QUALITY.md)。教程是逐片摆放的, 本关保证 4 万次放置指令 (500 模型规划规模) 中没有一片错乱:
+
+| 检查 | 判定 | 结果 |
+| --- | --- | --- |
+| 1 (P1) | `final_assembly` 中片 id 重复 | FAIL |
+| 2/3 (P2/P3) | 某片被多个步骤放置 (含同一步内重复), 或第 K 步的片已在第 J < K 步出现 | FAIL |
+| 4 (P4) | `highlight_tiles` 引用了本步才放 / 尚未放 / 不存在的片 | FAIL |
+| 5 (P6) | `final_assembly` id 集合 ≠ 全部 `tiles_to_add` id 集合 (孤儿片 / 幽灵片), 或 `total_pieces` 不符 | FAIL |
+| 6 (P6) | 片数据损坏: type 未登记 / position・rotation 非 3 维有限数值 / 两片位姿完全相同 / 步骤内嵌数据与成品漂移 | FAIL |
+| 7 (P7) | 空间连续性: 某片放下瞬间既不接地 (z ≤ 0.02) 也没有磁力边与已放置结构吸合 (容差 0.02) | FAIL |
+| 8 (P8) | `step_number` 非 1..N 严格连续 | FAIL |
+
+几何复算 (旋转 R = Rz·Ry·Rx、磁力边吸合、接地) 与 C++ 端严格一致, 实现在 `tests/magtile_geom.py`。纯数据层, 不依赖构建产物, 全库秒级; 失败输出人类可读差异明细 (哪一步、哪一片、期望什么、实际什么)。
+
+```bash
+python3 tests/test_step_assembly.py data/models
+```
+
+### 3.12 模型库唯一性 (`library_uniqueness_gate`)
+
+脚本: `tests/test_library_uniqueness.py <models目录或模型文件...> [--catalog tile_catalog.json]`
+
+批量克隆检测 (承诺 P10)。对全库模型两两计算结构签名相似度 (算法见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 5.2 节): `sim = 0.6 × WL 连接图指纹 Jaccard + 0.25 × 片形直方图余弦 + 0.15 × 步骤节奏 DTW`。WL 指纹对颜色、全局平移/旋转、id 命名不敏感——换色与镜像翻版无法规避。
+
+| 判定 | 结果 |
+| --- | --- |
+| 任意一对模型 sim > 0.85 | FAIL (换皮克隆, 拒绝入库) |
+| 0.70 < sim ≤ 0.85 | WARN (边界案例送人工比对) |
+| 同主题 (`content_meta.series`) + 同主技法 (`technique_tags.primary`) 的模型 > 2 个 | WARN (组合过度开采) |
+
+签名每模型只计算一次, 两两比对为纯字典运算; 500 模型 (124,750 对) 在单机分钟级以内, 报告只展开可疑对与全库最相似对。
+
+```bash
+python3 tests/test_library_uniqueness.py data/models
+```
+
 ## 4. 持续集成 (CI)
 
 `.github/workflows/qa.yml` 在**每次 push** 时于 Ubuntu runner 上执行 `tests/run_full_qa.sh` 全流程:
@@ -254,5 +296,7 @@ xvfb-run -a ./build/magtile_app tutorial data/models/castle_foundation_01.json \
 2. `all_models_quality_gate` 通过 (≥ 40 片);
 3. `anti_trivial_models` 通过 (≥ 3 种形状、≥ 2 个 Z 层、存在立置片);
 4. `model_logic_gate` 通过 (步骤粒度、中文说明、教程对账、难度区间、BOM 一致);
-5. `tutorial_integrity` 通过 (步骤恰好覆盖全部磁力片, 教程引擎实跑成功);
-6. 按难度分级完成实物验证要求 (BUILD_VERIFICATION.md 第 2 节)。
+5. `step_assembly_gate` 通过 (逐片零差错 P1~P8: id 唯一、每片恰好放置一次、高亮只引用已放置片、无孤儿/幽灵、逐片空间连续, 见 [MODEL_QUALITY.md](MODEL_QUALITY.md));
+6. `library_uniqueness_gate` 通过 (与全库任何模型的结构签名相似度 ≤ 0.85);
+7. `tutorial_integrity` 通过 (步骤恰好覆盖全部磁力片, 教程引擎实跑成功);
+8. 按难度分级完成实物验证要求 (BUILD_VERIFICATION.md 第 2 节)。

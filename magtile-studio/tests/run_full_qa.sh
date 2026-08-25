@@ -13,10 +13,12 @@
 #    4. 模型库全量质检       (>= 40 片 + validate 全绿)
 #    5. 反平凡模型检查       (>= 3 种片形, >= 2 个 Z 层, 有立置片)
 #    6. 模型逻辑质检         (步骤粒度/中文说明/对账/难度区间/BOM)
-#    7. 教程完整性           (静态走查 + 教程引擎实跑)
-#    8. 物理负例 x N         (不成立的结构必须被拒绝, 错误码必须正确)
-#    9. 物理正例 x N         (预算内的合法结构必须放行)
-#   10. GL 渲染冒烟          (无头渲染 + 截图校验, 无显示环境自动降级)
+#    7. 逐步装配质检         (逐片零差错 P1~P8, 见 docs/MODEL_QUALITY.md)
+#    8. 模型库唯一性         (结构签名两两比对, 拒绝换皮克隆)
+#    9. 教程完整性           (静态走查 + 教程引擎实跑)
+#   10. 物理负例 x N         (不成立的结构必须被拒绝, 错误码必须正确)
+#   11. 物理正例 x N         (预算内的合法结构必须放行)
+#   12. GL 渲染冒烟          (无头渲染 + 截图校验, 无显示环境自动降级)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -125,7 +127,7 @@ fi
 # ---- 3: CTest 全量回归 ------------------------------------------
 run_stage "CTest 全量回归" ctest --test-dir "$BUILD_DIR" --output-on-failure
 
-# ---- 4~7: 内容质量关卡 (脚本直跑, 与 CTest 注册互为冗余防线) -----
+# ---- 4~9: 内容质量关卡 (脚本直跑, 与 CTest 注册互为冗余防线) -----
 run_stage "模型库全量质检 (>=40 片)" \
     bash "$TESTS_DIR/test_all_models.sh" "$APP" "$ROOT" 40
 
@@ -135,10 +137,18 @@ run_stage "反平凡模型检查" \
 run_stage "模型逻辑质检" \
     "$PYTHON" "$TESTS_DIR/test_model_logic.py" "$DATA_DIR/models"
 
+run_stage "逐步装配质检 (逐片零差错)" \
+    "$PYTHON" "$TESTS_DIR/test_step_assembly.py" "$DATA_DIR/models" \
+    --catalog "$DATA_DIR/tile_catalog.json"
+
+run_stage "模型库唯一性 (克隆检测)" \
+    "$PYTHON" "$TESTS_DIR/test_library_uniqueness.py" "$DATA_DIR/models" \
+    --catalog "$DATA_DIR/tile_catalog.json"
+
 run_stage "教程完整性" \
     bash "$TESTS_DIR/test_tutorial_integrity.sh" "$APP" "$ROOT"
 
-# ---- 8: 物理负例 (每个夹具一个关卡) ------------------------------
+# ---- 10: 物理负例 (每个夹具一个关卡) -----------------------------
 # 期望错误码默认与夹具文件名一致, 少数历史夹具通过下表映射
 # (与 CMakeLists.txt 中的注册列表保持一致)。
 expected_code_for() {
@@ -162,7 +172,7 @@ if [ "$negative_found" -eq 0 ]; then
     skip_stage "物理负例" "tests/test_physics_negative/ 下没有夹具 (可用 tools/generate_test_models.py 生成)"
 fi
 
-# ---- 9: 物理正例 (每个夹具一个关卡) ------------------------------
+# ---- 11: 物理正例 (每个夹具一个关卡) -----------------------------
 positive_found=0
 for fixture in "$TESTS_DIR"/test_physics_positive/*.json; do
     [ -e "$fixture" ] || continue
@@ -175,7 +185,7 @@ if [ "$positive_found" -eq 0 ]; then
     skip_stage "物理正例" "tests/test_physics_positive/ 下没有夹具 (可用 tools/generate_test_models.py 生成)"
 fi
 
-# ---- 10: GL 渲染冒烟 --------------------------------------------
+# ---- 12: GL 渲染冒烟 --------------------------------------------
 run_stage "GL 渲染冒烟" bash "$TESTS_DIR/test_gl_smoke.sh" "$BUILD_DIR"
 
 # ---- 总结报告 ---------------------------------------------------
