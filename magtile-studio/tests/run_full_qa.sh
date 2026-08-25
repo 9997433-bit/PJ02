@@ -149,11 +149,12 @@ run_stage "模型库唯一性 (克隆检测)" \
     "$PYTHON" "$TESTS_DIR/test_library_uniqueness.py" "$DATA_DIR/models" \
     --catalog "$DATA_DIR/tile_catalog.json"
 
-# 片型分层 (core-9 覆盖率 + 需要扩展装标签 + 免费层红线): 现阶段
-# WARN 不计失败 (工具默认退出码 0), 免费 30 选品定稿后加 --strict
-run_stage "片型分层检查 (core-9)" \
+# 片型分层 (core-9 覆盖率 + 需要扩展装标签 + 免费层红线): 免费 30
+# 选品已定稿 (CONTENT_STRATEGY.md §2.5.1), --strict 使任何 WARN
+# (缺标 / 多标 / 免费层 core-9 占比 < 80%) 都作为硬失败
+run_stage "片型分层检查 (core-9, strict)" \
     "$PYTHON" "$ROOT/tools/check_core5_usage.py" "$DATA_DIR/models" \
-    --catalog "$DATA_DIR/tile_catalog.json"
+    --catalog "$DATA_DIR/tile_catalog.json" --strict
 
 run_stage "教程完整性" \
     bash "$TESTS_DIR/test_tutorial_integrity.sh" "$APP" "$ROOT"

@@ -48,7 +48,8 @@
 
 ## 3. 内容生产口径
 
-1. **免费库以核心片型为默认**: 免费层 ≥80% 的模型只使用核心片型 (硬性质检口径见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 的核心片型规则);
-2. **用了扩展片型必须打标**: 模型 tags 加 `需要扩展装`, 产品端展示对应角标与购前提示;
-3. **自动检查**: `python3 tools/check_core5_usage.py` 输出全库核心片型覆盖率报告, 免费层模型使用扩展片型时给出 WARN (暂不作为 CI 硬失败; 文件名保留 core5 以兼容既有流程);
-4. **tier 的唯一事实来源**是 `data/tile_catalog.json` 的 `tier` 字段 (`core` / `expansion`), C++ / Python 工具链一律从该文件读取, 不得在代码里另立清单 (check_core5_usage.py 以核心片型白名单双重校验目录一致性)。
+1. **免费库以核心片型为默认**: 免费层 ≥80% 的模型只使用核心片型 (硬性质检口径与免费 30 选品操作流程见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2.5 / §2.5.1);
+2. **用了扩展片型必须打标**: 模型 tags 加 `需要扩展装`, 产品端展示对应角标与购前提示 (GL 图形库与 Qt 版模型卡片均已实现);
+3. **自动检查**: `python3 tools/check_core5_usage.py` 输出全库核心片型覆盖率报告; 免费 30 选品定稿后 `tests/run_full_qa.sh` 以 `--strict` 运行, 标签不一致与免费层红线违规均为 CI 硬失败 (文件名保留 core5 以兼容既有流程);
+4. **tier 的唯一事实来源**是 `data/tile_catalog.json` 的 `tier` 字段 (`core` / `expansion`), C++ / Python 工具链一律从该文件读取, 不得在代码里另立清单 (C++ 侧统一走 `core::isCoreTile` —— 目录 tier 优先、白名单只作目录不可用时的兜底; check_core5_usage.py 以核心片型白名单双重校验目录一致性);
+5. **产品端核对入口**: `magtile_app catalog --core-only` 只列核心 9 片型; `magtile_app library --core-only` 只列纯 core-9 的模型; 图形模型库 (GL `library --gui` 与 Qt 版) 提供「只用核心 9 片」筛选。
