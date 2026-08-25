@@ -5,7 +5,7 @@
   "name_en": "Spiral Ball Run Tower 01",
   "description": "双轨竞速弹珠机: 三层发球塔向东西两侧甩出严格镜像的双螺旋轨道, 每段 30 度坡道的顶边整边吸在平台沿口、坡尾由栈桥墩接住, 弹珠沿 东坡道-转角-南坡道-转角-冲线坡道 盘旋而下冲进接珠港。两颗弹珠同时出发, 听哪边先撞响旗门 —— 这不是看的模型, 是每天都会拿出来玩的玩具。",
   "difficulty": 4,
-  "total_pieces": 90,
+  "total_pieces": 94,
   "tags": [
     "滚珠",
     "轨道",
@@ -17,7 +17,7 @@
   "content_meta": {
     "structural_signature": {
       "tile_histogram": {
-        "square": 66,
+        "square": 70,
         "equilateral_triangle": 12,
         "rectangle": 8,
         "hexagon": 2,
@@ -987,6 +987,36 @@
       "color": "gray"
     },
     {
+      "id": "tre_e1c",
+      "type": "square",
+      "position": [
+        4.732051,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tre_e1d",
+      "type": "square",
+      "position": [
+        4.732051,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "gray"
+    },
+    {
       "id": "ramp_e1",
       "type": "rectangle",
       "position": [
@@ -1156,6 +1186,36 @@
       "type": "square",
       "position": [
         -1.732051,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tre_w1c",
+      "type": "square",
+      "position": [
+        -2.732051,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tre_w1d",
+      "type": "square",
+      "position": [
+        -2.732051,
         1.5,
         1.5
       ],
@@ -1553,11 +1613,13 @@
     },
     {
       "step_number": 11,
-      "description": "东线第 1 段 (整段成组安装): 先在塔东侧立双层灰色栈桥墩, 再把橙色坡道顶边整边吸在发球台东缘出珠口, 坡尾搭上墩顶, 最后铺黄色转角台压住墩顶与坡尾。",
-      "tip": "坡道-桥墩-转角台三件互相吸住才算装好: 这是一个三角刚性节点。",
+      "description": "东线第 1 段 (整段成组安装): 先在塔东侧立双层灰色栈桥墩, 再在墩外一格立双层门式立柱, 把橙色坡道顶边整边吸在发球台东缘出珠口, 坡尾搭上墩顶, 最后铺黄色转角台 —— 西缘压住墩顶与坡尾, 东缘压住立柱顶。",
+      "tip": "桥墩与立柱像门框一样从两侧顶住转角台: 台面两条边都有支撑才扛得住碰撞。",
       "tiles_to_add": [
         "tre_e1a",
         "tre_e1b",
+        "tre_e1c",
+        "tre_e1d",
         "ramp_e1",
         "cor_e1"
       ],
@@ -1608,11 +1670,13 @@
     },
     {
       "step_number": 15,
-      "description": "西线第 1 段: 与东线镜像 —— 塔西侧立双层栈桥墩, 坡道吸住发球台西缘出珠口, 铺转角台。",
+      "description": "西线第 1 段: 与东线镜像 —— 塔西侧立双层栈桥墩与双层门式立柱, 坡道吸住发球台西缘出珠口, 转角台两缘分别压住墩顶/坡尾与立柱顶。",
       "tip": "对照东线检查: 西线每一件都应出现在镜像位置上。",
       "tiles_to_add": [
         "tre_w1a",
         "tre_w1b",
+        "tre_w1c",
+        "tre_w1d",
         "ramp_w1",
         "cor_w1"
       ],
