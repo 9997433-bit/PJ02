@@ -44,6 +44,8 @@
 ```
 platforms/android/
 ├── README.md                 本文档
+├── SIGNING.md                release 签名与出包手册 (清单 §4 A3 / 探测 R13)
+├── keystore.properties.example  release 签名配置模板 (真实密钥不入库)
 ├── CMakeLists.txt            JNI 共享库构建脚本 (双入口: 仓库根 / Gradle)
 ├── jni/
 │   ├── magtile_jni.cpp       JNI 包装层 (模型库/存档/教程/家长门/隐私/订阅 23 个入口, 见下表)
@@ -95,6 +97,11 @@ cd platforms/android
 
 adb install app/build/outputs/apk/debug/app-debug.apk
 ```
+
+Release 出包 (`assembleRelease` / `bundleRelease`): 签名从工程根
+`keystore.properties` 读取 (不入库, 模板 `keystore.properties.example`),
+生成密钥 / 配置 / 出包 / 核验的完整流程见 [SIGNING.md](SIGNING.md)
+(对应上架清单 `docs/V1_LAUNCH_CHECKLIST.md` §4 A3, 自动探测 R13)。
 
 安装启动后: 首次启动解包数据资产 (秒级) → 状态栏显示
 「N / N 个模型 · 13 种磁力片形状」(N = 全库模型数, 当前 139+) →

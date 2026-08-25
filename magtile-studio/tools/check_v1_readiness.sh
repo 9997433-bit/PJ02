@@ -4,7 +4,7 @@
 #
 # docs/V1_LAUNCH_CHECKLIST.md 的自动侧执行器: 把清单中所有能自动
 # 探测的项串成一条命令跑一遍, 输出 PASS/FAIL/SKIP 摘要。每个检查
-# 号 (R1..R13) 与清单「探测」列一一对应; 纯人工项 (实机验收 /
+# 号 (R1..R15) 与清单「探测」列一一对应; 纯人工项 (实机验收 /
 # 法务定稿 / 软著备案等) 以 SKIP[Manual] 列出提醒, 不参与判定。
 #
 # 检查项 (P0 = 上架阻断, 任一 FAIL 退出码非零; P1 = 报告不阻断):
@@ -21,7 +21,9 @@
 #   R11 [P0] 真实商店计费    store_billing_client.cpp 不再是空实现档
 #                            (探测口径: 文件内含 static_assert(false 即视为未接入)
 #   R12 [P1] Android 链路资产 android.yml + build.gradle.kts + README 存在
-#   R13 [P0] Android 签名    build.gradle.kts 含 signingConfigs (release 出包前置)
+#   R13 [P0] Android 签名    signingConfigs 接线 + keystore.properties.example
+#                            模板齐备 (真实 keystore 不入库, 生成与商店
+#                            出包属人工项 M2; 流程 platforms/android/SIGNING.md)
 #
 # 用法:
 #   tools/check_v1_readiness.sh [选项]
@@ -300,18 +302,33 @@ check_android_assets() {
 }
 
 # =============================================================
-# R13 Android release 签名配置 (清单 §4 A3)
+# R13 Android release 签名接线 (清单 §4 A3)
+# 口径: build.gradle.kts 含 signingConfigs 块 + 签名配置模板
+# keystore.properties.example 存在。真实 keystore 刻意不入库
+# (从工程根 keystore.properties 运行期读取, .gitignore 已排除),
+# 密钥生成与商店档出包属人工项 M2; 流程见 platforms/android/SIGNING.md。
 # =============================================================
 check_android_signing() {
     local gradle="$ROOT/platforms/android/app/build.gradle.kts"
+    local example="$ROOT/platforms/android/keystore.properties.example"
+    local failed=0
     [ -f "$gradle" ] || { echo "[断言失败] 缺少 $gradle"; return 1; }
     if grep -q "signingConfigs" "$gradle"; then
-        echo "[断言通过] build.gradle.kts 已配置 signingConfigs (密钥安全管理仍需人工核对)"
+        echo "  存在: signingConfigs 块 (app/build.gradle.kts)"
     else
-        echo "[断言失败] build.gradle.kts 无 signingConfigs —— 当前只能出 debug 包,"
-        echo "  商店 release 出包前须补签名配置与密钥管理 (清单 §4 A3)"
-        return 1
+        echo "[断言失败] build.gradle.kts 无 signingConfigs —— release 签名未接线,"
+        echo "  商店 release 出包前须补签名配置 (清单 §4 A3, 流程 platforms/android/SIGNING.md)"
+        failed=1
     fi
+    if [ -f "$example" ]; then
+        echo "  存在: platforms/android/keystore.properties.example (配置模板)"
+    else
+        echo "[断言失败] 缺少 platforms/android/keystore.properties.example ——"
+        echo "  签名配置模板缺失 (密钥不入库, 模板是唯一入库载体, 见 SIGNING.md)"
+        failed=1
+    fi
+    [ "$failed" -eq 0 ] || return 1
+    echo "[断言通过] release 签名已接线 (真实 keystore 生成与商店出包仍属人工项 M2, 见 SIGNING.md)"
 }
 
 # ---- 检查编排 ----------------------------------------------------

@@ -90,7 +90,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | --- | --- | --- | --- | --- | --- |
 | A1 | APK 构建 + 包内容校验 CI 常绿 (原生库 / 数据 / 缩略图) | P0 | Auto | `.github/workflows/android.yml` (assemble-debug + ndk-so 双 job) | ✅ CI 常跑 |
 | A2 | JNI 符号与 NDK 交叉编译本地断言 | P0 | Auto (R4 内 E2E-14a) | `tools/run_e2e_smoke.sh` (符号清单解析自 `android.yml`, 口径自动同步) | ✅ 随 E2E 冒烟 |
-| A3 | release 签名配置 (signingConfig + 密钥管理; 商店档产物) | P0 | Auto (R13) | `platforms/android/app/build.gradle.kts` (当前仅 debug 产物, README 第一节) | ⬜ 无 signingConfig, 密钥未生成 |
+| A3 | release 签名配置 (signingConfig + 密钥管理; 商店档产物) | P0 | Auto (R13: signingConfigs 块 + `keystore.properties.example` 齐备) | `platforms/android/app/build.gradle.kts` signingConfigs (从不入库的 `keystore.properties` 读取) + [../platforms/android/SIGNING.md](../platforms/android/SIGNING.md) (生成/出包/CI 口径) | 🔶 签名接线与模板/手册已落地 (缺配置时 release 报错指引, debug 不受影响); 真实 keystore 生成与商店档出包属人工 (随 A4/A5) |
 | A4 | 真机验收 (arm64 API 26+; E2E-03/14/15 + 触屏手势 + 首启解包) | P0 | Manual | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) §1/§3; [../platforms/android/README.md](../platforms/android/README.md) 第一节走查 | ⬜ 无真机验收记录 |
 | A5 | 商店上架资料 (图标/截图/儿童类目分级问卷; Google Play 亲子政策 / 国内商店资质) | P0 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.2 (优先华为/应用宝) + §6.3 | ⬜ 未开始 (国内商店依赖 L1/L2) |
 | A6 | starter 子集包验证 (`-PmagtileAssets=starter` 恰 30 模型) | P1 | Manual | [../platforms/android/README.md](../platforms/android/README.md) 第四节; [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) §1 | 🔶 构建选项已落地, 出包前抽验一次 |

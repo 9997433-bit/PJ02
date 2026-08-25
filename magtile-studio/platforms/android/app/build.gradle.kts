@@ -1,7 +1,7 @@
 // =============================================================
 // MagTile Studio - Android app 模块
 //
-// 三条与常规工程不同的接线 (均回引仓库根, 保持单一数据源):
+// 四条与常规工程不同的接线 (均回引仓库根/工程根, 保持单一数据源):
 //   1. externalNativeBuild 指向 ../CMakeLists.txt (双入口设计, 会
 //      add_subdirectory 仓库根, 交叉编译 magtile_core + JNI 为
 //      libmagtile_core.so; 桌面 GL/Qt/CTest 在 Android 下自动关闭)。
@@ -16,12 +16,28 @@
 //                           data/ 之外避免解包)。
 //   3. minSdk 26: NDK libc++ 的 std::filesystem 自 android-26 起完整
 //      可用, magtile_core 的 JSON 加载依赖它。
+//   4. release 签名从工程根 keystore.properties 读取 (不入库, 模板
+//      keystore.properties.example, 流程 ../SIGNING.md): 文件不存在时
+//      debug 照常, release 任务执行期给中文指引报错 (见文内守卫)。
 // =============================================================
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
+
+// ---- Release 签名 (密钥不入库; 生成/配置/出包流程见 ../SIGNING.md) ----
+// keystore.properties (工程根 platforms/android/, .gitignore 已排除,
+// 模板 keystore.properties.example) 存在时读取签名四元组; 不存在时
+// assembleDebug 照常, release 任务在执行期给出中文指引报错 (见下方
+// 守卫) —— 刻意不在配置期失败, 否则连 debug 构建/IDE 同步都会被拖垮。
+val keystorePropsFile = rootProject.file("keystore.properties")
+val keystoreProps: java.util.Properties? =
+    if (keystorePropsFile.isFile) {
+        java.util.Properties().apply { keystorePropsFile.inputStream().use { load(it) } }
+    } else {
+        null
+    }
 
 android {
     namespace = "com.magtile.studio"
@@ -52,9 +68,36 @@ android {
         }
     }
 
+    signingConfigs {
+        // 仅在 keystore.properties 就位时注册 (V1 清单 §4 A3, 探测 R13);
+        // 四个键全部必填, 缺失/留空立刻报错指回模板, 不带病出包
+        if (keystoreProps != null) {
+            create("release") {
+                fun prop(key: String): String =
+                    keystoreProps.getProperty(key)?.trim()?.takeIf { it.isNotEmpty() }
+                        ?: throw GradleException(
+                            "keystore.properties 缺少 $key (四个键都必填, " +
+                                "模板见 keystore.properties.example, 流程见 SIGNING.md)"
+                        )
+                storeFile = rootProject.file(prop("storeFile"))
+                storePassword = prop("storePassword")
+                keyAlias = prop("keyAlias")
+                keyPassword = prop("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            // 混淆当前关闭 (出包即真机验收口径); proguard-rules.pro 已
+            // 预置 JNI keep 规则, 日后开启 minify 不会破坏 external fun
+            // 与 Java_com_magtile_studio_* 符号的静态匹配 (SIGNING.md 第四节)
             isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.findByName("release")
         }
     }
 
@@ -76,6 +119,29 @@ android {
         getByName("main") {
             // stageMagTileAssets 的输出目录 (内容为 data/...)
             assets.srcDir(layout.buildDirectory.dir("magtile-assets"))
+        }
+    }
+}
+
+// ---- Release 出包守卫: 无签名配置时给清晰错误, 不产未签名包 ----------
+// 用 doFirst 而非 taskGraph.whenReady —— 后者与配置缓存不兼容
+// (gradle.properties 已开启 org.gradle.configuration-cache)。
+if (keystoreProps == null) {
+    val guardedReleaseTasks = setOf("assembleRelease", "bundleRelease", "installRelease")
+    tasks.configureEach {
+        if (name in guardedReleaseTasks) {
+            doFirst {
+                throw GradleException(
+                    """
+                    Release 签名未配置: 缺少 platforms/android/keystore.properties (密钥不入库)。
+                      1. 复制模板: cp keystore.properties.example keystore.properties
+                      2. 按 SIGNING.md 生成 release keystore 并填入四个键
+                         (storeFile / storePassword / keyAlias / keyPassword)
+                      3. 重跑 ./gradlew :app:assembleRelease (或 :app:bundleRelease)
+                    debug 构建不受影响: ./gradlew :app:assembleDebug 照常可用。
+                    """.trimIndent()
+                )
+            }
         }
     }
 }
