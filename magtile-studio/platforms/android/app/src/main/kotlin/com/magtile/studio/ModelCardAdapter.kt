@@ -11,12 +11,26 @@ import androidx.recyclerview.widget.RecyclerView
  * 模型库卡片列表适配器: 缩略图 + 中文名 + 英文名/主题 + 扩展装角标 +
  * 难度星 + 片数·步数。缩略图经 ThumbnailLoader 异步流式读 APK assets,
  * 缺失/解码中显示占位底色。
+ *
+ * 分龄卡片密度 (UI_UX_SPEC.md §2, 与桌面 Qt LibraryPage 同一口径):
+ * [junior] 为 true (4-6 启蒙模式) 时换用超大卡片布局
+ * item_model_card_junior (大缩略图竖排 + 大字号 + 最少文字);
+ * 7-9 / 10+ 用标准布局 item_model_card。
  */
 class ModelCardAdapter(
     private val onCardClick: (ModelCard) -> Unit,
 ) : RecyclerView.Adapter<ModelCardAdapter.CardHolder>() {
 
     private val cards = mutableListOf<ModelCard>()
+
+    /** 4-6 启蒙模式超大卡片; 切换时整表重建 (两种布局不可复用)。 */
+    var junior: Boolean = false
+        set(value) {
+            if (field == value) return
+            field = value
+            @Suppress("NotifyDataSetChanged")  // 布局整体切换, 无增量更新场景
+            notifyDataSetChanged()
+        }
 
     fun submit(newCards: List<ModelCard>) {
         cards.clear()
@@ -25,9 +39,13 @@ class ModelCardAdapter(
         notifyDataSetChanged()
     }
 
+    // 布局资源 id 即视图类型: 两种布局的视图 id 一一对应, 共用 CardHolder
+    override fun getItemViewType(position: Int): Int =
+        if (junior) R.layout.item_model_card_junior else R.layout.item_model_card
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_model_card, parent, false)
+            .inflate(viewType, parent, false)
         return CardHolder(view)
     }
 
@@ -55,12 +73,22 @@ class ModelCardAdapter(
         fun bind(card: ModelCard) {
             ThumbnailLoader.load(thumbnail, card.thumbnailAssetPath)
             name.text = card.name
-            subtitle.text = listOf(card.theme, card.nameEn)
-                .filter { it.isNotBlank() }
-                .joinToString(" · ")
-            // 「需要扩展装」角标: 口径与桌面 GL 一致 (bom_known && !core9_only)
-            expansionBadge.visibility =
-                if (card.needsExpansion) View.VISIBLE else View.GONE
+            if (junior) {
+                // 启蒙模式减文字量 (§2): 副标题只留主题, 不显示英文名
+                // 与「需要扩展装」角标 (与 Qt bandJunior 卡片同一取舍)
+                subtitle.text = card.theme
+                subtitle.visibility =
+                    if (card.theme.isBlank()) View.GONE else View.VISIBLE
+                expansionBadge.visibility = View.GONE
+            } else {
+                subtitle.text = listOf(card.theme, card.nameEn)
+                    .filter { it.isNotBlank() }
+                    .joinToString(" · ")
+                subtitle.visibility = View.VISIBLE
+                // 「需要扩展装」角标: 口径与桌面 GL 一致 (bom_known && !core9_only)
+                expansionBadge.visibility =
+                    if (card.needsExpansion) View.VISIBLE else View.GONE
+            }
             difficulty.text = card.difficultyStars
             pieces.text = itemView.context.getString(
                 R.string.card_pieces_steps, card.totalPieces, card.stepCount)

@@ -16,6 +16,12 @@
 //   saveInventory(countsJson)     -> 保存库存快照 ({"square":3,...} upsert)
 //   canBuildModel(jsonPath)       -> 库存是否足够搭建 (1/0; 未登记/失败 -1)
 //   missingPiecesJson(jsonPath)   -> 缺片清单 JSON (片型 + 缺几片 + 中文摘要)
+//   ageModeId()                   -> 年龄段模式标识 (settings 表 age_mode 键,
+//                                    与桌面同键; 未设置/脏值回默认档 age_7_9)
+//   setAgeModeId(modeId)          -> 保存年龄段模式 (未知标识忽略并返回 false)
+//   progressOverviewJson(dataDir) -> 进度页/成就墙数据源 JSON (三格统计 +
+//                                    进行中/已完成/收藏列表 + 徽章墙,
+//                                    口径与桌面 Qt StudioBackend 一致)
 //
 // 说明: 渲染循环 (GLSurfaceView / Vulkan) 与逐步教程交互接口后续在此扩展。
 // =============================================================
@@ -23,13 +29,17 @@
 #include <jni.h>
 
 #include <algorithm>
+#include <cstdint>
+#include <ctime>
 #include <exception>
 #include <map>
 #include <mutex>
 #include <optional>
+#include <set>
 #include <sstream>
 #include <string>
 #include <utility>
+#include <vector>
 
 #include <nlohmann/json.hpp>
 
@@ -46,7 +56,9 @@
 #include "magtile/core/model_definition.hpp"
 #include "magtile/core/tile_catalog.hpp"
 #include "magtile/core/types.hpp"
+#include "magtile/core/age_mode.hpp"
 #include "magtile/physics/physics_validator.hpp"
+#include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/progress_store.hpp"
 #include "magtile/tutorial/tutorial_engine.hpp"
 
@@ -137,6 +149,55 @@ std::map<magtile::core::TileType, int> missingFor(
         }
     }
     return missing;
+}
+
+// ---- 进度页 / 成就墙 (progressOverviewJson) ----------------------------
+
+/// 成就徽章档位 (与桌面 Qt StudioBackend 的 kAchievementDefs 同一份
+/// 定义: 只与搭建行为挂钩, 按完成模型数 1/3/10/30 分档, §4.5)。
+/// first_model_completed 与完成链路写档 id 同名; 其余档位按已完成数
+/// 在展示层判定达成, 不新增写库触发点 (触发统一收口留待成就系统
+/// 完整落地)。emoji 不在此处下发: 徽章 emoji 为增补平面字符, 而
+/// NewStringUTF 只接受 Modified UTF-8 (BMP), 由 Kotlin 侧按 id 映射。
+struct AchievementDef {
+    const char* id;
+    const char* name;
+    const char* condition;    ///< 一句话达成条件 (未点亮时展示, §7.1)
+    int completed_threshold;  ///< 达成所需的已完成模型数
+};
+constexpr AchievementDef kAchievementDefs[] = {
+    {"first_model_completed", "首搭达成", "完成第 1 个模型", 1},
+    {"three_models_completed", "小小建造家", "完成 3 个模型", 3},
+    {"ten_models_completed", "建造能手", "完成 10 个模型", 10},
+    {"thirty_models_completed", "磁力片大师", "完成 30 个模型", 30},
+};
+
+/// unix 秒 -> "8月20日" (今年) / "2025年8月20日" (往年); 无记录返回
+/// 空串。本地时区, 措辞与桌面 Qt dayText 一致。
+std::string dayTextZh(std::int64_t unix_seconds) {
+    if (unix_seconds <= 0) return {};
+    const std::time_t t = static_cast<std::time_t>(unix_seconds);
+    std::tm day{};
+    localtime_r(&t, &day);
+    std::time_t now_t = std::time(nullptr);
+    std::tm now{};
+    localtime_r(&now_t, &now);
+    std::string text;
+    if (day.tm_year != now.tm_year) {
+        text += std::to_string(day.tm_year + 1900) + "年";
+    }
+    text += std::to_string(day.tm_mon + 1) + "月" + std::to_string(day.tm_mday) + "日";
+    return text;
+}
+
+/// 累计游玩时长 -> "用时 23 分钟" 式温和摘要; 不足 1 分钟返回空串
+/// (界面直接隐藏, 不显示 "0 分钟" 这类扫兴数字; 与桌面 Qt playText 一致)。
+std::string playTextZh(std::int64_t play_seconds) {
+    if (play_seconds < 60) return {};
+    const std::int64_t minutes = play_seconds / 60;
+    if (minutes < 60) return "用时 " + std::to_string(minutes) + " 分钟";
+    return "用时 " + std::to_string(minutes / 60) + " 小时 " +
+           std::to_string(minutes % 60) + " 分";
 }
 
 }  // namespace
@@ -460,6 +521,207 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_missingPiecesJso
         return toJString(env, root.dump());
     } catch (const std::exception& e) {
         MAGTILE_LOGE("missingPiecesJson 失败: %s", e.what());
+        const nlohmann::json error = {{"error", std::string("错误: ") + e.what()}};
+        return toJString(env, error.dump());
+    }
+}
+
+/// 当前年龄段模式标识 ("age_4_6" / "age_7_9" / "age_10_12"):
+/// 经 progress::getAgeMode 读 settings 表 age_mode 键 —— 与桌面
+/// GL/Qt/CLI (`settings set-age`) 同键同一份 SQLite 存档。
+/// 存档未打开 / 从未设置 / 存量脏值一律返回默认档 age_7_9
+/// (读取函数自带兜底), Kotlin 侧无需判空。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_ageModeId(
+    JNIEnv* env, jobject /*thiz*/) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    magtile::core::AgeMode mode = magtile::core::kDefaultAgeMode;
+    if (ctx.store.has_value()) {
+        try {
+            mode = magtile::progress::getAgeMode(*ctx.store);
+        } catch (const magtile::progress::ProgressError& e) {
+            MAGTILE_LOGE("ageModeId 读取失败: %s", e.what());  // 按默认档兜底
+        }
+    }
+    return toJString(env, std::string(magtile::core::toString(mode)));
+}
+
+/// 保存年龄段模式 (立即落盘, settings 表 age_mode 键): 未知标识
+/// 返回 false 并忽略 (与桌面 SettingsBackend::setAgeModeId 一致);
+/// 存档未打开 / 落盘失败仍返回 true —— 设置在本次运行内生效
+/// (Kotlin 侧内存态即真相), 只是重启后回读不到 (温和降级同桌面)。
+JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_setAgeModeId(
+    JNIEnv* env, jobject /*thiz*/, jstring mode_id) {
+    const auto mode = magtile::core::ageModeFromString(toUtf8(env, mode_id));
+    if (!mode.has_value()) {
+        return JNI_FALSE;
+    }
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    if (ctx.store.has_value()) {
+        try {
+            magtile::progress::setAgeMode(*ctx.store, *mode);
+        } catch (const magtile::progress::ProgressError& e) {
+            MAGTILE_LOGE("setAgeModeId 落盘失败: %s", e.what());
+        }
+    }
+    return JNI_TRUE;
+}
+
+/// 进度页「我的作品」/ 成就墙数据源 (data_dir 为解包后的数据目录,
+/// 即 listModels 的同一入参; 读同一份 SQLite 进度存档, 口径与桌面
+/// Qt StudioBackend 完全一致):
+///   成功: {"store_ready": bool,
+///          "completed_count": N, "in_progress_count": N,
+///          "favorite_count": N, "achievement_count": N,
+///          "in_progress":[{"id","name","current_step","step_count",
+///                          "play_text"}, ...],          (最近游玩倒序)
+///          "completed":[{"id","name","pieces","meta_text"}, ...],
+///                                                        (完成时间倒序)
+///          "favorites":[{"id","name"}, ...],             (目录顺序)
+///          "achievements":[{"id","name","condition","unlocked",
+///                           "unlocked_text"}, ...]}
+///   失败: {"error":"中文错误信息"}
+/// 口径要点 (与 Qt inProgressList/completedList/favoritesList/
+/// achievementsList 同):
+///   - 只统计仍在模型库目录中的模型; 进行中要求已真正开动
+///     (current_step > 0) 且未完成;
+///   - 徽章: 存档 achievements 表已解锁 或 已完成数达到档位阈值即点亮;
+///     未点亮带一句话达成条件, 不下发进度百分比 (§7.1 防焦虑);
+///     存档中额外成就以通用徽章补列, 永不缺席;
+///   - 存档不可用时 store_ready=false, 列表为空、徽章全未点亮,
+///     页面照常可看 (P3 零挫败)。
+/// 徽章 emoji 由 Kotlin 侧按 id 映射 (增补平面字符不过 NewStringUTF)。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_progressOverviewJson(
+    JNIEnv* env, jobject /*thiz*/, jstring data_dir) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    try {
+        const std::vector<magtile::core::ModelCatalogEntry> entries =
+            magtile::core::loadModelCatalog(toUtf8(env, data_dir));
+        std::map<std::string, const magtile::core::ModelCatalogEntry*> entry_by_id;
+        for (const auto& entry : entries) {
+            entry_by_id.emplace(entry.id, &entry);
+        }
+
+        // ---- 存档快照 (读取失败按空处理, 页面照常可看) ------------------
+        bool store_ready = ctx.store.has_value();
+        std::vector<magtile::progress::Progress> in_progress_rows;
+        std::vector<magtile::progress::Progress> completed_rows;
+        std::map<std::string, std::int64_t> unlocked;  // 成就 id -> 首次解锁时刻
+        if (store_ready) {
+            try {
+                in_progress_rows = ctx.store->listInProgress();
+                completed_rows = ctx.store->listCompleted();
+                for (const auto& a : ctx.store->listAchievements()) {
+                    unlocked.emplace(a.id, a.unlocked_at);
+                }
+            } catch (const magtile::progress::ProgressError& e) {
+                MAGTILE_LOGE("progressOverviewJson 读取存档失败: %s", e.what());
+                in_progress_rows.clear();
+                completed_rows.clear();
+                unlocked.clear();
+                store_ready = false;
+            }
+        }
+
+        // ---- 进行中 (最近游玩倒序; 只列已开动且仍在库中的) ---------------
+        nlohmann::json in_progress = nlohmann::json::array();
+        std::set<std::string> favorited_ids;
+        for (const auto& p : in_progress_rows) {
+            const auto it = entry_by_id.find(p.model_id);
+            if (it == entry_by_id.end()) continue;
+            if (p.favorited) favorited_ids.insert(p.model_id);
+            if (p.current_step <= 0 || p.isCompleted()) continue;
+            in_progress.push_back({
+                {"id", it->second->id},
+                {"name", it->second->name},
+                {"current_step", p.current_step},
+                {"step_count", it->second->step_count},
+                {"play_text", playTextZh(p.play_seconds)},
+            });
+        }
+
+        // ---- 已完成 (完成时间倒序; meta 措辞与桌面 completedList 一致) ---
+        nlohmann::json completed = nlohmann::json::array();
+        int completed_count = 0;
+        for (const auto& p : completed_rows) {
+            const auto it = entry_by_id.find(p.model_id);
+            if (it == entry_by_id.end() || !p.isCompleted()) continue;
+            if (p.favorited) favorited_ids.insert(p.model_id);
+            ++completed_count;
+            std::string meta;
+            if (const std::string day = dayTextZh(p.completed_at); !day.empty()) {
+                meta = day + " 完成";
+            }
+            if (const std::string play = playTextZh(p.play_seconds); !play.empty()) {
+                if (!meta.empty()) meta += " · ";
+                meta += play;
+            }
+            completed.push_back({
+                {"id", it->second->id},
+                {"name", it->second->name},
+                {"pieces", it->second->total_pieces},
+                {"meta_text", std::move(meta)},
+            });
+        }
+
+        // ---- 我的收藏 (目录顺序, 与桌面 favoritesList 一致) --------------
+        nlohmann::json favorites = nlohmann::json::array();
+        for (const auto& entry : entries) {
+            if (favorited_ids.count(entry.id) == 0) continue;
+            favorites.push_back({{"id", entry.id}, {"name", entry.name}});
+        }
+
+        // ---- 成就墙 (已解锁 或 完成数达档位阈值即点亮) --------------------
+        nlohmann::json achievements = nlohmann::json::array();
+        int achievement_count = 0;
+        for (const AchievementDef& def : kAchievementDefs) {
+            const auto it = unlocked.find(def.id);
+            const bool reached =
+                it != unlocked.end() || completed_count >= def.completed_threshold;
+            std::string when;
+            if (it != unlocked.end() && it->second > 0) {
+                when = "解锁于 " + dayTextZh(it->second);
+            } else if (reached) {
+                when = "已达成";
+            }
+            achievements.push_back({
+                {"id", def.id},
+                {"name", def.name},
+                {"condition", def.condition},
+                {"unlocked", reached},
+                {"unlocked_text", std::move(when)},
+            });
+            if (reached) ++achievement_count;
+            if (it != unlocked.end()) unlocked.erase(it);
+        }
+        // 存档中额外解锁的成就 (未来新增触发点): 通用徽章补列, 永不缺席
+        for (const auto& [id, at] : unlocked) {
+            achievements.push_back({
+                {"id", id},
+                {"name", id},
+                {"condition", ""},
+                {"unlocked", true},
+                {"unlocked_text", at > 0 ? "解锁于 " + dayTextZh(at) : "已达成"},
+            });
+            ++achievement_count;
+        }
+
+        const nlohmann::json root = {
+            {"store_ready", store_ready},
+            {"completed_count", completed_count},
+            {"in_progress_count", static_cast<int>(in_progress.size())},
+            {"favorite_count", static_cast<int>(favorites.size())},
+            {"achievement_count", achievement_count},
+            {"in_progress", std::move(in_progress)},
+            {"completed", std::move(completed)},
+            {"favorites", std::move(favorites)},
+            {"achievements", std::move(achievements)},
+        };
+        return toJString(env, root.dump());
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("progressOverviewJson 失败: %s", e.what());
         const nlohmann::json error = {{"error", std::string("错误: ") + e.what()}};
         return toJString(env, error.dump());
     }

@@ -41,6 +41,16 @@ import java.util.concurrent.Executors
  *     库存时禁用并以「去登记 ▶」引导进 InventoryActivity 录入
  *     (引导而非报错, 不显示全空列表 —— 与桌面 GL 同策略)。
  *
+ * 分龄 UI (UI_UX_SPEC.md §2, 与桌面 Qt LibraryPage 同一口径; 年龄段
+ * 经 MagTileNative.ageModeId() 读进度存档 settings 表 age_mode 键,
+ * 与桌面 GL/Qt/CLI 同键):
+ *   4-6 启蒙  超大卡片 (大缩略图竖排 + 少文字), 只留主题筛选;
+ *   7-9 标准  标准卡片, 难度 + 主题 + 只看免费 (库存录入入口保留);
+ *   10+ 进阶  全量筛选 (难度/主题/免费/核心 9 片/我能搭的)。
+ * 被收起的筛选维度同步清零 (applyAgeMode) —— 看不见的筛选绝不能
+ * 悄悄过滤列表 (与 Qt collapseHiddenFilters 同一策略)。标题栏入口
+ * 可切换档位, 立即生效并经 setAgeModeId 落盘。
+ *
  * 点击卡片弹出详情: 简介 + 套装说明 + 库存对照 (够搭 / 还差几片,
  * 「缺什么片?」按需展开清单) + 「教程即将上线」占位; 「物理校验」
  * 按钮按需加载模型并跑完整 R1~R8 校验, 展示中文摘要与教程步骤数。
@@ -71,6 +81,7 @@ class MainActivity : Activity() {
     private lateinit var core9CheckBox: CheckBox
     private lateinit var buildableCheckBox: CheckBox
     private lateinit var inventoryButton: TextView
+    private lateinit var ageModeButton: TextView
     private lateinit var adapter: ModelCardAdapter
 
     /** 全量模型列表 (筛选不改动源数据)。 */
@@ -79,6 +90,14 @@ class MainActivity : Activity() {
     /** 磁力片库存是否已登记 (含 0 数量的 "明确没有"; 未登记时
      *  「我能搭的」筛选禁用并引导录入)。 */
     private var inventoryConfigured = false
+
+    // ---- 年龄段模式 (UI_UX_SPEC.md §2, 与桌面 settings 同键) ----------
+    /** 当前年龄段模式标识 (启动时经 JNI 从进度存档读取, 默认 7-9 标准档)。 */
+    private var ageModeId = AGE_7_9
+    /** 4-6 启蒙模式: 超大卡片, 只留主题筛选。 */
+    private val bandJunior get() = ageModeId == AGE_4_6
+    /** 10+ 进阶模式: 全量筛选 (核心 9 片 / 我能搭的 仅此档可见)。 */
+    private val bandFull get() = ageModeId == AGE_10_12
 
     // ---- 筛选状态 (口径与桌面 GL 一致) -------------------------------
     /** 0 = 全部难度, 1~5 = 星级精确匹配。 */
@@ -105,6 +124,14 @@ class MainActivity : Activity() {
         core9CheckBox = findViewById(R.id.filter_core9)
         buildableCheckBox = findViewById(R.id.filter_buildable)
         inventoryButton = findViewById(R.id.filter_inventory)
+        ageModeButton = findViewById(R.id.age_mode_button)
+        ageModeButton.setOnClickListener { showAgeModeDialog() }
+
+        // 进度页「我的作品」入口 (统计 + 作品列表 + 成就墙; 纯只读看板,
+        // 返回后无需刷新模型库)
+        findViewById<TextView>(R.id.progress_button).setOnClickListener {
+            startActivity(Intent(this, ProgressActivity::class.java))
+        }
 
         adapter = ModelCardAdapter(::showModelDialog)
         findViewById<RecyclerView>(R.id.model_list).apply {
@@ -113,6 +140,7 @@ class MainActivity : Activity() {
         }
 
         setUpFilterBar()
+        applyAgeMode()  // 先按默认档渲染标题栏入口, 存档档位读到后再套用
         loadLibraryAsync()
     }
 
@@ -135,6 +163,9 @@ class MainActivity : Activity() {
                         File(filesDir, PROGRESS_DB_NAME).absolutePath)) {
                     Log.w(TAG, "进度存档打开失败, 库存功能降级 (详见 logcat)")
                 }
+                // 年龄段 (settings 表 age_mode 键, 与桌面同键):
+                // 存档打开失败 / 从未设置时原生层兜底返回默认档 7-9
+                val storedAgeMode = MagTileNative.ageModeId()
                 val library = ModelCard.libraryFromJson(
                     listModels(dataDir.absolutePath))
 
@@ -144,6 +175,8 @@ class MainActivity : Activity() {
                     inventoryConfigured = library.inventoryConfigured
                     populateThemeSpinner(library.cards)
                     updateInventoryUi()
+                    ageModeId = storedAgeMode
+                    applyAgeMode()
                     filterBar.visibility = View.VISIBLE
                     applyFilters()
                 }
@@ -173,7 +206,9 @@ class MainActivity : Activity() {
                     allCards = library.cards
                     inventoryConfigured = library.inventoryConfigured
                     updateInventoryUi()
-                    if (enableBuildable && inventoryConfigured) {
+                    // 「我能搭的」筛选仅 10+ 进阶档可见: 其他档位不悄悄
+                    // 开启被收起的筛选 (与 Qt collapseHiddenFilters 等效)
+                    if (enableBuildable && inventoryConfigured && bandFull) {
                         buildableCheckBox.isChecked = true  // 监听器随之 applyFilters
                     }
                     applyFilters()
@@ -226,6 +261,78 @@ class MainActivity : Activity() {
             startActivityForResult(
                 Intent(this, InventoryActivity::class.java), REQUEST_INVENTORY)
         }
+    }
+
+    // ---- 分龄 UI (UI_UX_SPEC.md §2, 与桌面 Qt LibraryPage 同一口径) ---
+
+    /**
+     * 按当前年龄段收放筛选控件并切换卡片密度:
+     *   4-6 启蒙  只留主题筛选 (难度/免费/核心 9 片/我能搭的/库存
+     *             入口收起), 超大卡片;
+     *   7-9 标准  难度 + 主题 + 只看免费 (库存录入入口保留 ——
+     *             录库存不设门槛, 与 Qt 同取舍), 标准卡片;
+     *   10+ 进阶  全量筛选。
+     * 被收起的筛选维度同步清零: 看不见的筛选绝不能悄悄过滤列表
+     * (否则孩子面对被过滤的列表却没有任何入口能解除筛选,
+     * 与 Qt collapseHiddenFilters 同一策略)。
+     */
+    private fun applyAgeMode() {
+        ageModeButton.text = getString(when (ageModeId) {
+            AGE_4_6 -> R.string.age_mode_badge_4_6
+            AGE_10_12 -> R.string.age_mode_badge_10_12
+            else -> R.string.age_mode_badge_7_9
+        })
+        difficultySpinner.visibility = if (bandJunior) View.GONE else View.VISIBLE
+        freeCheckBox.visibility = if (bandJunior) View.GONE else View.VISIBLE
+        core9CheckBox.visibility = if (bandFull) View.VISIBLE else View.GONE
+        buildableCheckBox.visibility = if (bandFull) View.VISIBLE else View.GONE
+        inventoryButton.visibility = if (bandJunior) View.GONE else View.VISIBLE
+
+        // 被收起的维度清零 (直接归零筛选变量; 控件同步复位, 值未变时
+        // 监听器不触发, 变了触发 applyFilters 也幂等)
+        if (bandJunior) {
+            if (difficultyFilter != 0) {
+                difficultyFilter = 0
+                difficultySpinner.setSelection(0)
+            }
+            freeFilter = false
+            freeCheckBox.isChecked = false
+        }
+        if (!bandFull) {
+            core9Filter = false
+            core9CheckBox.isChecked = false
+            buildableFilter = false
+            buildableCheckBox.isChecked = false
+        }
+        adapter.junior = bandJunior
+    }
+
+    /** 标题栏入口: 三档单选对话框 (展示名对齐 core::displayNameZh)。 */
+    private fun showAgeModeDialog() {
+        val ids = listOf(AGE_4_6, AGE_7_9, AGE_10_12)
+        val labels = arrayOf(
+            getString(R.string.age_mode_4_6),
+            getString(R.string.age_mode_7_9),
+            getString(R.string.age_mode_10_12))
+        AlertDialog.Builder(this)
+            .setTitle(R.string.age_mode_dialog_title)
+            .setSingleChoiceItems(labels, ids.indexOf(ageModeId)) { dialog, which ->
+                dialog.dismiss()
+                switchAgeMode(ids[which])
+            }
+            .setNegativeButton(R.string.dialog_close, null)
+            .show()
+    }
+
+    /** 切换年龄段: 立即生效 (收放筛选 + 换卡片密度), 工作线程落盘。 */
+    private fun switchAgeMode(newModeId: String) {
+        if (newModeId == ageModeId) return
+        ageModeId = newModeId
+        applyAgeMode()
+        applyFilters()
+        // 落盘 (SQLite IO) 放工作线程; 失败只影响下次启动回读,
+        // 本次运行已生效 (与桌面 SettingsBackend 同一温和降级)
+        backgroundExecutor.execute { MagTileNative.setAgeModeId(newModeId) }
     }
 
     /**
@@ -397,6 +504,11 @@ class MainActivity : Activity() {
 
         /** 进度存档文件名 (filesDir 下; 与桌面同一 SQLite schema)。 */
         const val PROGRESS_DB_NAME = "progress.db"
+
+        // 年龄段持久化标识 (与 core::AgeMode toString 一致, 持久化契约)
+        private const val AGE_4_6 = "age_4_6"
+        private const val AGE_7_9 = "age_7_9"
+        private const val AGE_10_12 = "age_10_12"
 
         init {
             // 对应 platforms/android/CMakeLists.txt 产出的 libmagtile_core.so

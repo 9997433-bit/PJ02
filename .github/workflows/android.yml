@@ -50,8 +50,9 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release
           cmake --build build-android
 
-      # 九个 JNI 入口一个都不能少 (Kotlin 侧 external fun 与之一一对应:
-      # MainActivity = 模型库链路, MagTileNative = 进度存档/磁力片库存链路)
+      # 十二个 JNI 入口一个都不能少 (Kotlin 侧 external fun 与之一一对应:
+      # MainActivity = 模型库链路, MagTileNative = 进度存档/磁力片库存/
+      # 年龄段设置/进度页与成就墙链路)
       - name: 断言 JNI 符号齐全
         run: |
           NM="$ANDROID_HOME/ndk/$NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-nm"
@@ -61,7 +62,9 @@ jobs:
             MainActivity_validateModel MainActivity_getTutorialStepCount \
             MagTileNative_openProgressStore MagTileNative_inventoryRows \
             MagTileNative_saveInventory MagTileNative_canBuildModel \
-            MagTileNative_missingPiecesJson; do
+            MagTileNative_missingPiecesJson \
+            MagTileNative_ageModeId MagTileNative_setAgeModeId \
+            MagTileNative_progressOverviewJson; do
             "$NM" -D --defined-only "$SO" | grep -q "Java_com_magtile_studio_$symbol" \
               || { echo "缺少 JNI 符号: $symbol"; exit 1; }
           done

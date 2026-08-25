@@ -1,24 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 主界面: 标题栏 + 状态行 + 筛选栏 (难度 / 主题 / 免费 / 核心 9 片 /
-     我能搭的) + 模型卡片列表 -->
+<!-- 主界面: 标题栏 (含年龄段模式入口) + 状态行 + 筛选栏 (难度 / 主题 /
+     免费 / 核心 9 片 / 我能搭的, 按年龄段收放: 4-6 只留主题 /
+     7-9 难度+主题 / 10+ 全量) + 模型卡片列表 -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/magtile_primary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        android:text="@string/library_title"
-        android:textColor="#FFFFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:paddingEnd="8dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:text="@string/library_title"
+            android:textColor="#FFFFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- 进度页「我的作品」入口: 统计 + 作品列表 + 成就墙
+             (儿童可达无家长门 §5.3; 48dp 触控高度) -->
+        <TextView
+            android:id="@+id/progress_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/main_progress_entry"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- 年龄段模式入口 (UI_UX_SPEC.md §2 三档分层): 显示当前档位,
+             点击弹三档单选; 与桌面 settings 表同键 age_mode, 切换即时
+             生效并落盘 (48dp 触控高度) -->
+        <TextView
+            android:id="@+id/age_mode_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/status"
@@ -33,7 +71,9 @@
         android:textSize="13sp" />
 
     <!-- 筛选栏: 与桌面 GL/Qt 模型库同一套口径 (难度精确匹配 / 规范主题 /
-         core::isCoreTile 判定); 数据加载完成前隐藏 -->
+         core::isCoreTile 判定); 数据加载完成前隐藏。控件按年龄段收放
+         (MainActivity.applyAgeMode, 与 Qt LibraryPage 一致): 4-6 只留
+         主题; 7-9 难度+主题 (库存入口保留); 10+ 全量 -->
     <LinearLayout
         android:id="@+id/filter_bar"
         android:layout_width="match_parent"

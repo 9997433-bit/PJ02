@@ -42,6 +42,36 @@ object MagTileNative {
      */
     external fun missingPiecesJson(jsonPath: String): String
 
+    /**
+     * 当前年龄段模式标识: "age_4_6" / "age_7_9" / "age_10_12"
+     * (settings 表 age_mode 键 —— 与桌面 GL/Qt/CLI 同键, 同一份
+     * SQLite 存档语义)。存档未打开 / 从未设置 / 存量脏值一律返回
+     * 默认档 "age_7_9" (原生层自带兜底), 调用方无需判空。
+     */
+    external fun ageModeId(): String
+
+    /**
+     * 保存年龄段模式 (立即落盘): 未知标识返回 false 并忽略 (与桌面
+     * SettingsBackend 一致); 存档未打开或落盘失败仍返回 true ——
+     * 设置在本次运行内生效, 只是重启后回读不到 (温和降级)。
+     */
+    external fun setAgeModeId(modeId: String): Boolean
+
+    /**
+     * 进度页「我的作品」/ 成就墙数据源 JSON (dataDir = 解包后的数据
+     * 目录, 与 listModels 同一入参; 口径与桌面 Qt StudioBackend 一致):
+     * {"store_ready","completed_count","in_progress_count",
+     *  "favorite_count","achievement_count",
+     *  "in_progress":[{"id","name","current_step","step_count","play_text"}],
+     *  "completed":[{"id","name","pieces","meta_text"}],
+     *  "favorites":[{"id","name"}],
+     *  "achievements":[{"id","name","condition","unlocked","unlocked_text"}]}
+     * 或 {"error":"..."}。徽章 emoji 由 Kotlin 侧按 id 映射 (增补平面
+     * 字符不过 NewStringUTF); 存档不可用时列表为空、徽章全未点亮,
+     * 页面照常可看 (P3 零挫败)。
+     */
+    external fun progressOverviewJson(dataDir: String): String
+
     init {
         // 与 MainActivity 共用同一 libmagtile_core.so (loadLibrary 幂等)
         System.loadLibrary("magtile_core")

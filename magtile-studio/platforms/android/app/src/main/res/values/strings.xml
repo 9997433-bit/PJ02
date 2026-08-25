@@ -15,6 +15,16 @@
     <string name="filter_buildable">我能搭的</string>
     <string name="filter_go_inventory">去登记 ▶</string>
     <string name="filter_edit_inventory">改库存</string>
+    <!-- 年龄段模式三档 (UI_UX_SPEC.md §2; 标识与桌面 settings 表同键
+         age_mode, 展示名对齐 core::displayNameZh) -->
+    <string name="age_mode_dialog_title">孩子的年龄段</string>
+    <string name="age_mode_4_6">4-6 岁 · 启蒙模式</string>
+    <string name="age_mode_7_9">7-9 岁 · 标准模式</string>
+    <string name="age_mode_10_12">10-12 岁 · 进阶模式</string>
+    <!-- 标题栏入口的短标签 -->
+    <string name="age_mode_badge_4_6">4-6 岁 ▾</string>
+    <string name="age_mode_badge_7_9">7-9 岁 ▾</string>
+    <string name="age_mode_badge_10_12">10-12 岁 ▾</string>
     <string name="thumbnail_description">模型缩略图</string>
     <string name="card_needs_expansion">需要扩展装</string>
     <string name="dialog_core9_note">只用核心 9 片型即可搭建 (基础套装)</string>
@@ -55,4 +65,40 @@
     <string name="inventory_save_soft_fail">库存暂时没保存上, 稍后再试一次就好</string>
     <string name="inventory_minus">−</string>
     <string name="inventory_plus">+</string>
+    <!-- 进度页「我的作品」/ 成就墙 (对齐桌面 Qt ProgressPage /
+         AchievementsPage 的字段与措辞) -->
+    <string name="back_button">← 返回</string>
+    <string name="main_progress_entry">🏆 我的进度</string>
+    <string name="progress_title">🏆 我的作品</string>
+    <string name="progress_loading">正在翻看进度存档…</string>
+    <string name="progress_load_failed">进度看板加载失败:\n%1$s</string>
+    <string name="progress_store_unavailable">进度存档暂不可用, 作品清单先歇一会儿</string>
+    <!-- 三格温和统计 (%1$d = 数量; 图形+数字+文字三重编码 §4.7) -->
+    <string name="progress_stat_completed">✓ %1$d\n已完成</string>
+    <string name="progress_stat_in_progress">▶ %1$d\n进行中</string>
+    <string name="progress_stat_favorites">⭐ %1$d\n收藏</string>
+    <!-- 成就墙条带 (进度页内入口) -->
+    <string name="progress_badge_strip_title">🏅 成就墙</string>
+    <!-- %1$d = 已点亮徽章数 -->
+    <string name="progress_badge_strip_some">已点亮 %1$d 枚徽章</string>
+    <string name="progress_badge_strip_none">完成第一个模型, 就能点亮第一枚徽章</string>
+    <string name="progress_open_achievements">看看全部徽章 ▶</string>
+    <!-- 温和空态 (§4.3: 只有引导, 没有"空空如也"的挫败感) -->
+    <string name="progress_empty_title">第一个作品在等你</string>
+    <string name="progress_empty_hint">从模型库挑一个喜欢的模型, 搭完它就会出现在这里啦</string>
+    <string name="progress_empty_go">🏰 去模型库挑一个</string>
+    <!-- 分区标题 (%1$d = 条数) -->
+    <string name="progress_section_in_progress">▶ 进行中 (%1$d)</string>
+    <string name="progress_section_completed">✓ 已完成 (%1$d)</string>
+    <string name="progress_section_favorites">⭐ 我的收藏 (%1$d)</string>
+    <!-- %1$d = 当前步, %2$d = 总步数 -->
+    <string name="progress_step_of">第 %1$d/%2$d 步</string>
+    <!-- %1$d = 片数 -->
+    <string name="progress_pieces">%1$d 片</string>
+    <!-- 成就墙全览屏 -->
+    <string name="achievements_title">🏅 成就墙</string>
+    <string name="achievements_hint">每完成一个新模型, 就会点亮新的徽章</string>
+    <!-- %1$d = 已点亮徽章数 (页脚只报喜不催促 §4.3) -->
+    <string name="achievements_footer_some">🏅 已点亮 %1$d 枚徽章, 继续加油!</string>
+    <string name="achievements_footer_none">完成第一个模型, 就能点亮第一枚徽章</string>
 </resources>
