@@ -3,9 +3,9 @@
   "id": "rainforest_canopy_01",
   "name": "雨林树冠天桥",
   "name_en": "Rainforest Canopy Walk 01",
-  "description": "全库第一座雨林树冠天桥: 两株三层箱式巨树隔空相望, 树腰 (z=2) 各探三片树冠平台 (单片平挑力矩 15, 互不串联), 四板天桥两端整边吸树身 —— 树-桥-树连成大环, 剪断任一端桥仍不塌; 树身拔高至第三层双双戴瘦高四坡绿冠 (树尖 4.94), 桥面黄色护栏对角守望; 青色小河畔四朵花冠立拼缝, 两株蕨苗外倾伸展 —— 走上天桥, 雨林在脚下沙沙作响!",
+  "description": "全库第一座雨林树冠天桥: 两株三层箱式巨树隔空相望, 树腰 (z=2) 各探三片树冠平台, 每片配一根直角三角形板根斜撑 —— 平台-斜撑-树身成环, 平挑经得起毫米级放置误差 (R9 抖动仿真全绿); 四板天桥两端整边吸树身 —— 树-桥-树连成大环, 剪断任一端桥仍不塌; 树身拔高至第三层双双戴瘦高四坡绿冠 (树尖 4.94), 桥面黄色护栏对角守望; 青色小河畔四朵花冠立拼缝, 两株蕨苗外倾伸展 —— 走上天桥, 雨林在脚下沙沙作响!",
   "difficulty": 4,
-  "total_pieces": 84,
+  "total_pieces": 90,
   "tags": [
     "自然",
     "雨林",
@@ -19,7 +19,8 @@
         "square": 58,
         "equilateral_triangle": 10,
         "isosceles_triangle": 8,
-        "rectangle": 8
+        "rectangle": 8,
+        "right_triangle": 6
       }
     }
   },
@@ -1075,6 +1076,96 @@
       "color": "green"
     },
     {
+      "id": "bc_w_n",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        3.333333,
+        1.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bc_w_w",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        2.0,
+        1.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bc_w_s",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        1.666667,
+        1.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bc_e_n",
+      "type": "right_triangle",
+      "position": [
+        7.0,
+        3.333333,
+        1.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bc_e_e",
+      "type": "right_triangle",
+      "position": [
+        7.333333,
+        2.0,
+        1.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bc_e_s",
+      "type": "right_triangle",
+      "position": [
+        7.0,
+        1.666667,
+        1.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
       "id": "br_2",
       "type": "square",
       "position": [
@@ -1426,12 +1517,15 @@
     },
     {
       "step_number": 10,
-      "description": "探西树树冠平台: 北/西/南三片绿板平挑树腰。",
-      "tip": "每片平台独吸一条树腰铰链 (力矩 15), 互不串联。",
+      "description": "探西树树冠平台: 北/西/南三片绿板平挑树腰, 各配一根板根斜撑。",
+      "tip": "斜撑两条直角边分别吸树身竖边与平台侧边 —— 平台-斜撑-树身成环, 平挑稳如板根。",
       "tiles_to_add": [
         "lf_w_n",
         "lf_w_w",
-        "lf_w_s"
+        "lf_w_s",
+        "bc_w_n",
+        "bc_w_w",
+        "bc_w_s"
       ],
       "highlight_tiles": [
         "tk1_n_1",
@@ -1440,12 +1534,15 @@
     },
     {
       "step_number": 11,
-      "description": "探东树树冠平台: 北/东/南三片。",
-      "tip": "东面平台朝林外 —— 观鸟的最佳机位。",
+      "description": "探东树树冠平台: 北/东/南三片, 同样各配一根板根斜撑。",
+      "tip": "东面平台朝林外 —— 观鸟的最佳机位, 板根斜撑托得稳稳的。",
       "tiles_to_add": [
         "lf_e_n",
         "lf_e_e",
-        "lf_e_s"
+        "lf_e_s",
+        "bc_e_n",
+        "bc_e_e",
+        "bc_e_s"
       ],
       "highlight_tiles": [
         "tk6_n_1",
