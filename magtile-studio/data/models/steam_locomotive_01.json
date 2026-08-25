@@ -18,10 +18,9 @@
       "tile_histogram": {
         "square": 72,
         "rectangle": 11,
+        "equilateral_triangle": 6,
         "hexagon": 6,
-        "equilateral_triangle": 5,
-        "trapezoid": 4,
-        "isosceles_triangle": 1
+        "trapezoid": 4
       }
     }
   },
@@ -1078,11 +1077,11 @@
     },
     {
       "id": "dome",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         3.5,
         1.0,
-        3.333333
+        3.288675
       ],
       "rotation": [
         90.0,

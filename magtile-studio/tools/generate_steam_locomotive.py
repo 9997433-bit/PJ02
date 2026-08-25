@@ -96,7 +96,7 @@ for row in (0, 1):
 # =================================================================
 b.wall_ns("funnel_shaft", 2, 1.0, 3, "gray")             # 烟囱方筒 (脊线 y=1)
 b.crest_ns("funnel_cap", 2, 1.0, 4.0, "red")             # 烟囱尖帽
-b.spire_ns("dome", 3, 1.0, 3.0, "yellow")                # 汽包
+b.crest_ns("dome", 3, 1.0, 3.0, "yellow")                # 汽包
 b.crest_ew("lamp_s", 1.0, 0, 3.0, "yellow")              # 南头灯
 b.crest_ew("lamp_n", 1.0, 1, 3.0, "yellow")              # 北头灯
 
