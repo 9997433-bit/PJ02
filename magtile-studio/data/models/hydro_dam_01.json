@@ -1,0 +1,1192 @@
+{
+  "schema_version": 1,
+  "id": "hydro_dam_01",
+  "name": "水电站大坝",
+  "name_en": "Hydroelectric Dam 01",
+  "description": "全库第一座挡水建筑: 7 格长的两级阶梯重力坝横锁河谷 —— 下级坝体双面立墙加压顶板锁成连续箱形环 (每片压顶双铰链互为保险), 上级挡水墙沿上游沿口退台升起、下游侧直角三角扶壁锁成刚性节点; 坝身中段 2 格溢洪道泻下两条透明水舌俯冲入消力池 (坡尾接地斜撑), 西端水轮机厂房经引水桥板与坝体相接, 东端输电塔顶着六边形变压线圈 —— 合闸, 送电!",
+  "difficulty": 3,
+  "total_pieces": 62,
+  "tags": [
+    "工程",
+    "大坝",
+    "水电站",
+    "溢洪道",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 36,
+        "rectangle": 17,
+        "equilateral_triangle": 5,
+        "right_triangle": 3,
+        "hexagon": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "yd_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dn_2",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dn_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "dn_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "dn_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pt_0",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pt_1",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rs_0",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rs_1",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rs_2",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rs_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rs_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rs_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rs_6",
+      "type": "rectangle",
+      "position": [
+        6.5,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "dw_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_s_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_n_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_s_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dw_n_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "uw_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "uw_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "uw_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "uw_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "uw_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_5",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        3.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bt_1",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        2.666667,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bt_2",
+      "type": "right_triangle",
+      "position": [
+        2.0,
+        2.666667,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bt_6",
+      "type": "right_triangle",
+      "position": [
+        6.0,
+        2.666667,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_w",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sp_e",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fm_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.267949,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fm_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.267949,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "th_s",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "th_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "th_n",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "th_e",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "th_rf",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "th_br",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "py_0",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "py_1",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "py_coil",
+      "type": "hexagon",
+      "position": [
+        6.0,
+        0.5,
+        2.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺厂房区地坪: 河谷西端铺 4 片灰色方板 ([0,2]x[0,2])。",
+      "tip": "水轮机厂房将坐在这块地坪上。",
+      "tiles_to_add": [
+        "yd_0_0",
+        "yd_0_1",
+        "yd_1_0",
+        "yd_1_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺下游河床: 4 片长板竖铺 (中段青色是消力池), 东端再补 2 片输电塔区方板。",
+      "tip": "长板短边吸地坪边 —— 下游河床一次铺通。",
+      "tiles_to_add": [
+        "dn_2",
+        "dn_3",
+        "dn_4",
+        "dn_5",
+        "pt_0",
+        "pt_1"
+      ],
+      "highlight_tiles": [
+        "yd_1_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺水库西半: 上游 y[3,5] 竖铺 4 片蓝色长板。",
+      "tip": "上游是一整片深水库 —— 大坝就横锁在河床与水库之间。",
+      "tiles_to_add": [
+        "rs_0",
+        "rs_1",
+        "rs_2",
+        "rs_3"
+      ],
+      "highlight_tiles": [
+        "yd_0_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺水库东半: 再铺 3 片, 水库贯通 7 格。",
+      "tip": "下一步开始筑坝 —— 从下游面开始。",
+      "tiles_to_add": [
+        "rs_4",
+        "rs_5",
+        "rs_6"
+      ],
+      "highlight_tiles": [
+        "rs_3"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立下游墙西段: y=2 线上立 4 片灰色立墙。",
+      "tip": "底边吸河床板边 —— 这是大坝的下游脸面。",
+      "tiles_to_add": [
+        "dw_s_0",
+        "dw_s_1",
+        "dw_s_2",
+        "dw_s_3"
+      ],
+      "highlight_tiles": [
+        "dn_2",
+        "dn_3"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立下游墙东段: 再立 3 片, 下游面贯通。",
+      "tip": "一字排开不留缝 —— 重力坝靠身板挡水。",
+      "tiles_to_add": [
+        "dw_s_4",
+        "dw_s_5",
+        "dw_s_6"
+      ],
+      "highlight_tiles": [
+        "dw_s_3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立上游墙: y=3 线上立 7 片, 与下游墙夹出 1 格厚的坝芯。",
+      "tip": "底边同时吸水库板边 —— 上游面直接泡在水里。",
+      "tiles_to_add": [
+        "dw_n_0",
+        "dw_n_1",
+        "dw_n_2",
+        "dw_n_3",
+        "dw_n_4",
+        "dw_n_5",
+        "dw_n_6"
+      ],
+      "highlight_tiles": [
+        "dw_s_0",
+        "rs_0"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖坝顶压顶: 7 片灰色压顶板逐格盖上, 每片同时压住上下游两面墙。",
+      "tip": "双铰链互为保险 —— 下级坝体锁成连续箱形环。",
+      "tiles_to_add": [
+        "cap_0",
+        "cap_1",
+        "cap_2",
+        "cap_3",
+        "cap_4",
+        "cap_5",
+        "cap_6"
+      ],
+      "highlight_tiles": [
+        "dw_s_0",
+        "dw_n_6"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "退台起上级挡水墙西段: 压顶北沿 x[0,3] 立 3 片立墙。",
+      "tip": "墙脚踩在 墙顶-压顶 的共线铰链上 —— 一条铰链三重吸合。",
+      "tiles_to_add": [
+        "uw_0",
+        "uw_1",
+        "uw_2"
+      ],
+      "highlight_tiles": [
+        "cap_0",
+        "cap_2"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "起上级挡水墙东段并装护栏: x[5,7] 再立 2 片, 墙顶点 3 片红色护栏三角 —— 中段留出的 2 格就是溢洪道。",
+      "tip": "溢洪道不是缺陷, 是设计: 洪水从这里过坝。",
+      "tiles_to_add": [
+        "uw_5",
+        "uw_6",
+        "rail_0",
+        "rail_2",
+        "rail_5"
+      ],
+      "highlight_tiles": [
+        "uw_0",
+        "cap_4"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "锁扶壁: 3 片直角三角在下游侧竖边吸上级墙、横边吸压顶拼缝。",
+      "tip": "斜撑 + 阶梯 = 重力坝剖面 —— 三角刚性节点抗水推力。",
+      "tiles_to_add": [
+        "bt_1",
+        "bt_2",
+        "bt_6"
+      ],
+      "highlight_tiles": [
+        "uw_1",
+        "uw_6"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "放泄流水舌: 2 片透明 30 度水舌顶边整边吸坝肩沿口, 俯冲入消力池。",
+      "tip": "坡尾自然落地就是接地斜撑 —— 水舌越冲越稳。",
+      "tiles_to_add": [
+        "sp_w",
+        "sp_e"
+      ],
+      "highlight_tiles": [
+        "cap_3",
+        "cap_4"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "溅浪花: 消力池里 2 片透明三角立在水舌尾线上。",
+      "tip": "消力池的使命就是把水的力气消掉 —— 浪花是它的勋章。",
+      "tiles_to_add": [
+        "fm_w",
+        "fm_e"
+      ],
+      "highlight_tiles": [
+        "sp_w",
+        "sp_e"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "砌水轮机厂房: 长方形前后墙 + 方形山墙圈层围合 (东面透明观察窗)。",
+      "tip": "长边给前后墙、短边给山墙 —— 圈层砌法的长短分工。",
+      "tiles_to_add": [
+        "th_s",
+        "th_w",
+        "th_n",
+        "th_e"
+      ],
+      "highlight_tiles": [
+        "yd_0_0",
+        "yd_1_1"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "盖厂房顶接引水桥: 红色厂房顶压住四面墙, 灰色引水桥板长边整边吸厂房顶北长边、伸向坝身。",
+      "tip": "桥板力矩 30 <= 长边铰链预算 40 —— 水从坝底引进厂房发电。",
+      "tiles_to_add": [
+        "th_rf",
+        "th_br"
+      ],
+      "highlight_tiles": [
+        "th_s",
+        "th_n"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "立输电塔: 东端 2 片红色立墙直上, 塔顶竖起六边形变压线圈 —— 合闸, 送电!",
+      "tip": "六边形重心正压塔顶铰链, 力臂为零 —— 电流已经出发。",
+      "tiles_to_add": [
+        "py_0",
+        "py_1",
+        "py_coil"
+      ],
+      "highlight_tiles": [
+        "pt_0",
+        "pt_1"
+      ]
+    }
+  ]
+}
