@@ -18,9 +18,14 @@
 # 用法:
 #   tools/run_release_gate.sh [build_dir] [选项]
 #     build_dir          构建目录 (默认 build)
-#     --full             发布档: 改为完整跑 19 关全量 QA 并开启
+#     --full             发布档: 改为完整跑 21 关全量 QA 并开启
 #                        发布专项可选关卡 (= MAGTILE_FREE_TIER_CHECK=1
-#                        MAGTILE_STRICT_AUDIT=1 tests/run_full_qa.sh),
+#                        MAGTILE_STRICT_AUDIT=1 MAGTILE_SERIES_CHECK=1
+#                        MAGTILE_DIFFICULTY_QUOTA=1 tests/run_full_qa.sh
+#                        —— 免费层对齐 / strict 巡检 / 系列归类机检 /
+#                        难度配额守卫分别是其中的关卡 10/15/20/21;
+#                        难度配额 strict 档在 D3 冻结生效期间保持红灯,
+#                        解冻线 D1 >= 20 且 D5 >= 6, 见 docs/TESTING.md 3.19),
 #                        CI 手动流水线 release-gate.yml 默认即此档
 #     --l2               (需与 --full 连用) 追加可选 L2 抗扰动档:
 #                        run_strict_audit.sh --jitter-only --jitter require,
@@ -45,7 +50,7 @@ FAIL_ON_PENDING=0
 REPORT_FILE=""
 DRY_RUN=0
 
-usage() { sed -n '2,37p' "$0"; }
+usage() { sed -n '2,42p' "$0"; }
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
@@ -144,8 +149,8 @@ run_gate() {
 
 TIER_DESC="默认 (三道发布专项)"
 if [ "$FULL" -eq 1 ]; then
-    TIER_DESC="--full (19 关全量 QA + 发布专项)"
-    [ "$L2" -eq 1 ] && TIER_DESC="--full --l2 (19 关全量 QA + 发布专项 + L2 抗扰动档)"
+    TIER_DESC="--full (21 关全量 QA + 发布专项)"
+    [ "$L2" -eq 1 ] && TIER_DESC="--full --l2 (21 关全量 QA + 发布专项 + L2 抗扰动档)"
 fi
 
 if [ "$DRY_RUN" -eq 1 ]; then
@@ -168,10 +173,14 @@ if [ "$FAIL_ON_PENDING" -eq 1 ]; then
 fi
 
 if [ "$FULL" -eq 1 ]; then
-    # 发布档: 全量 QA 一并跑, 免费层对齐/strict 巡检/待复核报告
-    # 分别是其中的关卡 10/15/16
-    run_gate "全量 QA (含免费层对齐 + strict 巡检)" \
+    # 发布档: 全量 QA 一并跑, 免费层对齐/strict 巡检/待复核报告/
+    # 系列归类机检/难度配额守卫分别是其中的关卡 10/15/16/20/21。
+    # 治理守卫 (20/21) 与免费层对齐同一接入模式: 日常 push CI 默认
+    # 跳过, 发布档强制开启; 难度配额 strict 档在 D3 冻结生效期间
+    # (D1 < 20 或 D5 < 6) 保持红灯, 不允许占位交差 (TESTING.md 3.19)。
+    run_gate "全量 QA (含免费层对齐 + strict 巡检 + 治理守卫)" \
         env MAGTILE_FREE_TIER_CHECK=1 MAGTILE_STRICT_AUDIT=1 \
+        MAGTILE_SERIES_CHECK=1 MAGTILE_DIFFICULTY_QUOTA=1 \
         bash "$ROOT/tests/run_full_qa.sh" "$BUILD_DIR"
     if [ "$L2" -eq 1 ]; then
         # 可选 L2 抗扰动档: D4+ 模型 validate --profile strict --jitter 50

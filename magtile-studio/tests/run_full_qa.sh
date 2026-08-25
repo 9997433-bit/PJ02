@@ -45,11 +45,13 @@
 #       content_meta.series (13 主题词值) 或 matrix_bucket (矩阵外桶),
 #       词值对照 data/content_series_map.json 词表, 输出主题 × 难度
 #       矩阵计数; CONTENT_GAP_AUDIT.md §7.3 机检化, 回填底稿见其附录 A)
-#   21. 难度配额报告            (报告型: D1–D5 分布与 D3 冻结状态,
-#       tools/check_difficulty_quota.py —— 冻结与否只报告不阻断,
-#       冻结期间新增 D3 的拦截由批次评审 --batch 闸门负责; 同口径
-#       CTest 关卡 content_series_gate / difficulty_quota_gate 已随
-#       关卡 3 全量回归常开, CONTENT_GAP_AUDIT.md §7.3)
+#   21. 难度配额 (报告/守卫)    (常开报告型: D1–D5 分布与 D3 冻结状态,
+#       tools/check_difficulty_quota.py —— 冻结与否默认只报告不阻断,
+#       置 MAGTILE_DIFFICULTY_QUOTA=1 升级为 --strict 守卫档: 冻结
+#       生效 (D1 < 20 或 D5 < 6, 两项同时达标方可解冻) 即红灯, 发布
+#       门禁 --full 即此档; 冻结期间新增 D3 的拦截由批次评审 --batch
+#       闸门负责; 同口径 CTest 关卡 content_series_gate /
+#       difficulty_quota_gate 已随关卡 3 全量回归常开, CONTENT_GAP_AUDIT.md §7.3)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -60,6 +62,8 @@
 #   MAGTILE_TUTORIAL_BENCH=1  启用可选关卡 17 (教程步进性能基准)
 #   MAGTILE_L2_JITTER=1  启用可选关卡 19 (L2 抗扰动巡检, D4+ jitter)
 #   MAGTILE_SERIES_CHECK=1  启用可选关卡 20 (内容系列归类机检)
+#   MAGTILE_DIFFICULTY_QUOTA=1  将常开关卡 21 难度配额升级为 strict 守卫档
+#                        (D3 冻结生效即红灯; 默认为报告型不阻断)
 #   FORCE_COLOR=1        非终端环境 (CI) 强制彩色输出
 #   NO_COLOR=1           禁用彩色输出
 #
@@ -332,13 +336,23 @@ else
         "可选关卡, 置 MAGTILE_SERIES_CHECK=1 开启 (tools/check_content_series.py --strict)"
 fi
 
-# ---- 21: 难度配额报告 (报告型, 不阻断) ----------------------------
+# ---- 21: 难度配额 (常开报告 / 可选 strict 守卫) --------------------
 # CONTENT_GAP_AUDIT.md §7.3 难度配额治理: D1–D5 分布与 D3 冻结状态
-# (D1 >= 20 且 D5 >= 6 方可解冻) 每次 QA 都报告供排产参考; 冻结与否
-# 不阻断 (存量 181 个 D3 不追责), 难度值非法仍按结构错误失败。冻结
-# 期间对新增 D3 的拦截由批次评审的 --batch 闸门负责, 不在此重复。
-run_stage "难度配额报告 (D3 冻结状态)" \
-    "$PYTHON" "$ROOT/tools/check_difficulty_quota.py" "$DATA_DIR/models"
+# (D1 >= 20 且 D5 >= 6 方可解冻) 每次 QA 都报告供排产参考; 默认
+# 报告型不阻断 (存量 181 个 D3 不追责), 难度值非法仍按结构错误失败。
+# 置 MAGTILE_DIFFICULTY_QUOTA=1 升级为 --strict 守卫档 (发布门禁
+# --full 即此档): 冻结生效即红灯 —— CI 对主库分布状态的告警闸,
+# D1/D5 补齐入库前该档开启即红, 与 L2 抗扰动档同一"不许占位交差"
+# 口径。冻结期间对新增 D3 的拦截由批次评审的 --batch 闸门负责,
+# 不在此重复。
+if [ -n "${MAGTILE_DIFFICULTY_QUOTA:-}" ]; then
+    run_stage "难度配额守卫 (D3 冻结, strict)" \
+        "$PYTHON" "$ROOT/tools/check_difficulty_quota.py" "$DATA_DIR/models" \
+        --strict
+else
+    run_stage "难度配额报告 (D3 冻结状态)" \
+        "$PYTHON" "$ROOT/tools/check_difficulty_quota.py" "$DATA_DIR/models"
+fi
 
 # ---- 总结报告 ---------------------------------------------------
 pass_count=0; fail_count=0; skip_count=0
