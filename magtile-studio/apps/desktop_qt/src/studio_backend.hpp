@@ -90,9 +90,10 @@ public:
     Q_INVOKABLE bool toggleFavorite(const QString& model_id);
 
     /// 模型详情页数据快照 (键: found/modelId/name/nameEn/description/
-    /// difficulty/pieces/steps/theme/status/currentStep/favorited/
-    /// bomKnown/core9Only/canBuild/missingTotal/missingText)。
-    /// 模型不存在时只含 found=false。
+    /// difficulty/pieces/steps/estimatedMinutes/theme/status/currentStep/
+    /// favorited/bomKnown/core9Only/canBuild/missingTotal/missingText)。
+    /// estimatedMinutes 为预计用时档位 (§5.4, build_time_estimate.hpp
+    /// 纯函数, 0 = 步数未知时界面隐藏)。模型不存在时只含 found=false。
     Q_INVOKABLE QVariantMap modelDetail(const QString& model_id) const;
 
     /// 模型 BOM 清单 (详情页 §5.4): 每项 {shapeName, needed, have,

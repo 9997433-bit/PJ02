@@ -12,6 +12,7 @@
 #include <utility>
 #include <vector>
 
+#include "build_time_estimate.hpp"
 #include "magtile/core/json_io.hpp"
 #include "magtile/core/model_catalog.hpp"
 #include "magtile/core/model_definition.hpp"
@@ -301,6 +302,9 @@ QVariantMap StudioBackend::modelDetail(const QString& model_id) const {
     detail.insert(QStringLiteral("difficulty"), e.difficulty);
     detail.insert(QStringLiteral("pieces"), e.total_pieces);
     detail.insert(QStringLiteral("steps"), e.step_count);
+    // 预计用时 (§5.4): 纯函数档位估算, 0 = 步数未知时界面隐藏该行
+    detail.insert(QStringLiteral("estimatedMinutes"),
+                  estimateBuildMinutes(e.step_count, e.total_pieces));
     detail.insert(QStringLiteral("theme"), fromUtf8(e.theme()));
     detail.insert(QStringLiteral("status"), row->status);
     detail.insert(QStringLiteral("currentStep"), row->current_step);

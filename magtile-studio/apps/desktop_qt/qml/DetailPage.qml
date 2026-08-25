@@ -14,6 +14,10 @@ import MagTile.Studio
 // 数据经 studio.modelDetail / studio.bomForModel 读取;
 // 「开始搭建」走 studio.startBuild -> buildRequested 信号,
 // 路由在 Main.qml。
+// 预计用时 (§5.4): 温和档位估算「🕒 大约 15 分钟」(纯函数
+// build_time_estimate.hpp, 5/10/15/20/30/45 分钟档, 不假精确);
+// 4-6 岁启蒙模式用更大字号; 与库存/缺片状态无关照常显示
+// (用时是信息不是门槛, 缺片提示另有温和横幅)。
 // 订阅内容 (非免费层): 元数据/BOM/3D 预览照常可浏览, 「开始搭建」
 // 改为「请家长来解锁」-> openSubscription 信号 -> Main.qml 经家长门
 // 导向订阅页 (§11, COMMERCIAL_PLAN §2.1 只锁内容不锁功能)。
@@ -31,6 +35,9 @@ Page {
     // (billing.subscriptionActive, 计费适配层) 时解锁全库。
     readonly property bool locked: detail.found === true && detail.isFree === false
                                    && !billing.subscriptionActive
+
+    // 分龄可读 (§2): 4-6 岁启蒙模式预计用时用更大字号
+    readonly property bool bandJunior: appSettings.ageModeId === "age_4_6"
 
     signal back()
     signal notify(string message)
@@ -293,6 +300,24 @@ Page {
                                 font.bold: true
                                 color: Theme.primary
                             }
+                        }
+                    }
+
+                    // -- 预计用时 (§5.4): 温和档位估算, 只说「大约」; 与库存
+                    //    缺片状态无关照常显示; 4-6 岁更大字 (分龄可读 §2) ----
+                    Rectangle {
+                        visible: page.detail.found && page.detail.estimatedMinutes > 0
+                        radius: Theme.radiusButton
+                        height: page.bandJunior ? Theme.touchTarget : 36
+                        width: estimateLabel.implicitWidth + 2 * Theme.spacing
+                        color: Theme.primarySoft
+                        Text {
+                            id: estimateLabel
+                            anchors.centerIn: parent
+                            text: "🕒 大约 " + page.detail.estimatedMinutes + " 分钟"
+                            font.pixelSize: page.bandJunior ? Theme.fontButton : Theme.fontBody
+                            font.bold: true
+                            color: Theme.primary
                         }
                     }
 

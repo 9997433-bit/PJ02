@@ -156,6 +156,18 @@ if(MAGTILE_BUILD_TESTS)
             COMMAND magtile_qt_billing_test ${CMAKE_BINARY_DIR}/qt_billing_test.db)
     endif()
 
+    # 详情页「预计用时」纯函数单测 (QT-1, §5.4): 档位归整 (5/10/15/20/
+    # 30/45 分钟, 平票取小档) / 上限封顶 / 步数未知返回 0 / 全库代表值
+    # 回归 / 单调性; build_time_estimate.hpp 纯头文件零 Qt 依赖,
+    # 故用普通 add_executable, 不链任何 Qt 库
+    if(EXISTS ${CMAKE_SOURCE_DIR}/tests/test_qt_estimate.cpp)
+        add_executable(magtile_qt_estimate_test
+            ${CMAKE_SOURCE_DIR}/tests/test_qt_estimate.cpp)
+        target_include_directories(magtile_qt_estimate_test PRIVATE src)
+        target_link_libraries(magtile_qt_estimate_test PRIVATE magtile_warnings)
+        add_test(NAME qt_build_time_estimate COMMAND magtile_qt_estimate_test)
+    endif()
+
     # QML 加载冒烟 (offscreen 平台, 与显示环境无关): 默认启动 + 家长门
     # 深链各跑一次, QML 有任何加载错误进程即非零退出
     find_program(MAGTILE_QT_BASH bash)
