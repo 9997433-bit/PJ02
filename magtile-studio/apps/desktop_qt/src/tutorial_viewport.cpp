@@ -19,6 +19,7 @@
 #include "magtile/core/json_io.hpp"
 #include "magtile/core/model_definition.hpp"
 #include "magtile/physics/geometry.hpp"
+#include "magtile/progress/achievements.hpp"
 #include "magtile/render/gl_scene_renderer.hpp"
 
 namespace magtile::qtui {
@@ -318,15 +319,14 @@ void TutorialViewport::applyStepChange() {
     session_flushed_ = false;
     rebuildSceneTiles();
 
-    // 步骤变化 -> 落盘; 走到最后一步 -> 记完成 + 首个完成成就
+    // 步骤变化 -> 落盘; 走到最后一步 -> 记完成 + 成就统一收口
+    // (progress/achievements.hpp: 达档幂等写库, 三端唯一触发点)
     if (store_ != nullptr && engine_->currentStepNumber() != last_saved_step_) {
         flushProgress();
         if (engine_->stepCount() > 0 && engine_->currentStepNumber() >= engine_->stepCount()) {
             try {
                 store_->markCompleted(engine_->model().id);
-                if (!store_->isAchievementUnlocked("first_model_completed")) {
-                    store_->unlockAchievement("first_model_completed");
-                }
+                progress::unlockAchievementsOnComplete(*store_);
             } catch (const progress::ProgressError&) {
                 // 完成标记失败不打断庆祝 (下次进入仍可重试)
             }

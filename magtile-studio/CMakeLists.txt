@@ -75,6 +75,7 @@ add_library(magtile_core STATIC
     src/physics/geometry.cpp
     src/physics/physics_validator.cpp
     src/progress/progress_store.cpp
+    src/progress/achievements.cpp
     src/progress/data_privacy.cpp
     src/progress/age_settings.cpp
     src/progress/ui_settings.cpp
@@ -227,6 +228,16 @@ if(MAGTILE_BUILD_TESTS)
         target_link_libraries(magtile_progress_test PRIVATE magtile_core magtile_warnings)
         add_test(NAME progress_roundtrip
             COMMAND magtile_progress_test ${CMAKE_CURRENT_BINARY_DIR}/progress_roundtrip_test.db)
+    endif()
+
+    # 成就解锁统一收口回归测试 (C++): 档位表契约 (1/3/10/30 升序)、
+    # 首次完成解锁、重复完成幂等不覆盖、分档边界 3/10/30、老档补录
+    # 与跨连接持久化, 详见 tests/test_achievements.cpp
+    if(EXISTS ${MAGTILE_TESTS_DIR}/test_achievements.cpp)
+        add_executable(magtile_achievements_test tests/test_achievements.cpp)
+        target_link_libraries(magtile_achievements_test PRIVATE magtile_core magtile_warnings)
+        add_test(NAME achievements_unlock
+            COMMAND magtile_achievements_test ${CMAKE_CURRENT_BINARY_DIR}/achievements_unlock_test.db)
     endif()
 
     # 进度存档 CLI 冒烟: 空库 list 必须正常退出 (同时覆盖建库建表路径)

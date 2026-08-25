@@ -98,6 +98,7 @@
 #include "magtile/core/types.hpp"
 #include "magtile/core/age_mode.hpp"
 #include "magtile/physics/physics_validator.hpp"
+#include "magtile/progress/achievements.hpp"
 #include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/data_privacy.hpp"
 #include "magtile/progress/progress_store.hpp"
@@ -221,24 +222,13 @@ std::map<magtile::core::TileType, int> missingFor(
 
 // ---- 进度页 / 成就墙 (progressOverviewJson) ----------------------------
 
-/// 成就徽章档位 (与桌面 Qt StudioBackend 的 kAchievementDefs 同一份
-/// 定义: 只与搭建行为挂钩, 按完成模型数 1/3/10/30 分档, §4.5)。
-/// first_model_completed 与完成链路写档 id 同名; 其余档位按已完成数
-/// 在展示层判定达成, 不新增写库触发点 (触发统一收口留待成就系统
-/// 完整落地)。emoji 不在此处下发: 徽章 emoji 为增补平面字符, 而
-/// NewStringUTF 只接受 Modified UTF-8 (BMP), 由 Kotlin 侧按 id 映射。
-struct AchievementDef {
-    const char* id;
-    const char* name;
-    const char* condition;    ///< 一句话达成条件 (未点亮时展示, §7.1)
-    int completed_threshold;  ///< 达成所需的已完成模型数
-};
-constexpr AchievementDef kAchievementDefs[] = {
-    {"first_model_completed", "首搭达成", "完成第 1 个模型", 1},
-    {"three_models_completed", "小小建造家", "完成 3 个模型", 3},
-    {"ten_models_completed", "建造能手", "完成 10 个模型", 10},
-    {"thirty_models_completed", "磁力片大师", "完成 30 个模型", 30},
-};
+/// 成就徽章档位: 定义收口在 progress/achievements.hpp 的
+/// kAchievementTiers (与桌面 GL/Qt 同一份: 只与搭建行为挂钩, 按完成
+/// 模型数 1/3/10/30 分档, §4.5), 写库触发同样收口在
+/// unlockAchievementsOnComplete (saveTutorialStep 完成时调用), 展示
+/// 与写库口径不可能分叉。emoji 不在此处下发: 徽章 emoji 为增补平面
+/// 字符, 而 NewStringUTF 只接受 Modified UTF-8 (BMP), 由 Kotlin 侧
+/// 按 id 映射 (AchievementsActivity.BADGE_EMOJI)。
 
 /// unix 秒 -> "8月20日" (今年) / "2025年8月20日" (往年); 无记录返回
 /// 空串。本地时区, 措辞与桌面 Qt dayText 一致。
@@ -741,10 +731,12 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_progressOverview
             favorites.push_back({{"id", entry.id}, {"name", entry.name}});
         }
 
-        // ---- 成就墙 (已解锁 或 完成数达档位阈值即点亮) --------------------
+        // ---- 成就墙 (已解锁 或 完成数达档位阈值即点亮 —— 后者为老档
+        // 兜底: 历史存档 3/10/30 档未落库, 下次完成才补录, 展示不等待) ----
         nlohmann::json achievements = nlohmann::json::array();
         int achievement_count = 0;
-        for (const AchievementDef& def : kAchievementDefs) {
+        for (const magtile::progress::AchievementTier& def :
+             magtile::progress::kAchievementTiers) {
             const auto it = unlocked.find(def.id);
             const bool reached =
                 it != unlocked.end() || completed_count >= def.completed_threshold;
@@ -756,7 +748,7 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_progressOverview
             }
             achievements.push_back({
                 {"id", def.id},
-                {"name", def.name},
+                {"name", def.title},
                 {"condition", def.condition},
                 {"unlocked", reached},
                 {"unlocked_text", std::move(when)},
@@ -885,8 +877,9 @@ JNIEXPORT jint JNICALL Java_com_magtile_studio_MagTileNative_savedTutorialStep(
 ///   - saveProgress(modelId, step, playSeconds): step 为已完成到第几步,
 ///     playSeconds 为本次新增游玩秒数 (存储层累加, 只增不减);
 ///   - 走到最后一步 (step >= stepCount 且 stepCount > 0) 时记完成
-///     (首次完成时刻不覆盖) + 解锁首搭成就 first_model_completed
-///     (与桌面 GL/Qt 完成链路同名同口径)。
+///     (首次完成时刻不覆盖) + 成就统一收口 (progress/achievements.hpp
+///     unlockAchievementsOnComplete: 按完成数 1/3/10/30 达档幂等写库,
+///     与桌面 GL/Qt 完成链路同一触发点同一口径)。
 /// 存档未打开 / 写入失败返回 false (Kotlin 侧不打断搭建, 进度仍在
 /// 内存中 —— P3 零挫败, 与桌面同策略)。
 JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_saveTutorialStep(
@@ -904,9 +897,7 @@ JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_saveTutorialSte
                                          std::int64_t{0}));
         if (step_count > 0 && step >= step_count) {
             ctx.store->markCompleted(id);
-            if (!ctx.store->isAchievementUnlocked("first_model_completed")) {
-                ctx.store->unlockAchievement("first_model_completed");
-            }
+            magtile::progress::unlockAchievementsOnComplete(*ctx.store);
         }
         return JNI_TRUE;
     } catch (const std::exception& e) {

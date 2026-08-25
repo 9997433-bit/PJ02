@@ -18,6 +18,7 @@
 #include "magtile/core/model_definition.hpp"
 #include "magtile/core/tile_catalog.hpp"
 #include "magtile/core/types.hpp"
+#include "magtile/progress/achievements.hpp"
 
 namespace magtile::qtui {
 
@@ -31,25 +32,22 @@ QString fromUtf8(std::string_view s) {
     return QString::fromUtf8(s.data(), static_cast<int>(s.size()));
 }
 
-/// 成就墙徽章档位定义 (QT-4, UI_UX_SPEC.md §4.5: 成就只与搭建行为
-/// 挂钩, 按完成模型数分档)。first_model_completed 与完成链路写入
-/// 存档的成就 id 同名 (completeBuild / 教程视口 / GL 版三处同一
-/// 口径); 其余档位按已完成模型数在展示层判定达成 —— 数据源仍是
-/// 同一份进度存档, 不新增写库触发点 (触发统一收口留待成就系统
-/// 完整落地, 见 QT_UI_PLAN.md QT-4)。
-struct AchievementDef {
-    const char* id;
-    const char* emoji;
-    const char* name;
-    const char* condition;    ///< 一句话达成条件 (未解锁时展示, §7.1)
-    int completed_threshold;  ///< 达成所需的已完成模型数
-};
-constexpr AchievementDef kAchievementDefs[] = {
-    {"first_model_completed", "🏗️", "首搭达成", "完成第 1 个模型", 1},
-    {"three_models_completed", "🏘️", "小小建造家", "完成 3 个模型", 3},
-    {"ten_models_completed", "🏰", "建造能手", "完成 10 个模型", 10},
-    {"thirty_models_completed", "🌟", "磁力片大师", "完成 30 个模型", 30},
-};
+/// 成就墙徽章 (QT-4, UI_UX_SPEC.md §4.5): 档位定义 (id/标题/条件/
+/// 阈值 1/3/10/30) 收口在 progress/achievements.hpp 的
+/// kAchievementTiers, 与完成链路写库 (unlockAchievementsOnComplete)
+/// 同一份, 口径不分叉; 这里只补每档的徽章 emoji (展示专属, 与
+/// Android Kotlin BADGE_EMOJI 同一套图形)。存档中未来新增的成就
+/// 回退通用徽章 🏅, 永不缺席。
+QString achievementEmoji(const std::string& achievement_id) {
+    static const std::map<std::string, QString> kEmoji = {
+        {"first_model_completed", QStringLiteral("🏗️")},
+        {"three_models_completed", QStringLiteral("🏘️")},
+        {"ten_models_completed", QStringLiteral("🏰")},
+        {"thirty_models_completed", QStringLiteral("🌟")},
+    };
+    const auto it = kEmoji.find(achievement_id);
+    return it != kEmoji.end() ? it->second : QStringLiteral("🏅");
+}
 
 /// unix 秒 -> "8月20日" (今年) / "2025年8月20日" (往年); 无记录返回空串。
 QString dayText(std::int64_t unix_seconds) {
@@ -361,13 +359,13 @@ void StudioBackend::completeBuild(const QString& model_id) {
 
     if (store_ != nullptr) {
         try {
-            // 与 GL 版完成口径一致 (src/app/main.cpp): 进度推到最后
-            // 一步 + 记完成时刻 (首次不覆盖) + 首次完成成就
+            // 完成口径三端一致 (GL 版 src/app/main.cpp / Android JNI
+            // saveTutorialStep 同源): 进度推到最后一步 + 记完成时刻
+            // (首次不覆盖) + 成就统一收口 (progress/achievements.hpp:
+            // 按完成数 1/3/10/30 达档幂等写库, 三端唯一触发点)
             store_->saveProgress(id, steps, 0);
             store_->markCompleted(id);
-            if (!store_->isAchievementUnlocked("first_model_completed")) {
-                store_->unlockAchievement("first_model_completed");
-            }
+            progress::unlockAchievementsOnComplete(*store_);
         } catch (const progress::ProgressError&) {
             // 落盘失败不打断庆祝 (P3 零挫败): 完成状态下次会话再补
         }
@@ -396,14 +394,17 @@ QVariantList StudioBackend::achievementsList() const {
         }
     }
 
+    // 档位表与写库触发共用同一份 (kAchievementTiers); "完成数达档即
+    // 点亮" 为老档兜底 (历史存档 3/10/30 档未落库, 下次完成才补录,
+    // 展示不等待、成就不丢失)
     QVariantList list;
-    for (const AchievementDef& def : kAchievementDefs) {
+    for (const progress::AchievementTier& def : progress::kAchievementTiers) {
         const auto it = unlocked.find(def.id);
         const bool reached = it != unlocked.end() || completed_count_ >= def.completed_threshold;
         QVariantMap item;
         item.insert(QStringLiteral("achievementId"), QString::fromUtf8(def.id));
-        item.insert(QStringLiteral("emoji"), QString::fromUtf8(def.emoji));
-        item.insert(QStringLiteral("name"), QString::fromUtf8(def.name));
+        item.insert(QStringLiteral("emoji"), achievementEmoji(def.id));
+        item.insert(QStringLiteral("name"), QString::fromUtf8(def.title));
         item.insert(QStringLiteral("condition"), QString::fromUtf8(def.condition));
         item.insert(QStringLiteral("unlocked"), reached);
         QString when;

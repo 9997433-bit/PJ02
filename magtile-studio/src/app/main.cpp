@@ -34,6 +34,7 @@
 #include "magtile/core/model_catalog.hpp"
 #include "magtile/core/tile_catalog.hpp"
 #include "magtile/physics/physics_validator.hpp"
+#include "magtile/progress/achievements.hpp"
 #include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/progress_store.hpp"
 #include "magtile/progress/ui_settings.hpp"
@@ -798,14 +799,14 @@ TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
             }
         }
 
-        // 步骤变化 -> 进度落盘; 走到最后一步 -> 记完成 + 首次完成成就
+        // 步骤变化 -> 进度落盘; 走到最后一步 -> 记完成 + 成就统一
+        // 收口 (progress/achievements.hpp: 按完成数 1/3/10/30 达档
+        // 幂等写库, 三端唯一触发点)
         if (store != nullptr && engine.currentStepNumber() != last_saved_step) {
             flushProgress(engine.currentStepNumber());
             if (engine.stepCount() > 0 && engine.currentStepNumber() >= engine.stepCount()) {
                 store->markCompleted(engine.model().id);
-                if (!store->isAchievementUnlocked("first_model_completed")) {
-                    store->unlockAchievement("first_model_completed");
-                }
+                progress::unlockAchievementsOnComplete(*store);
             }
         }
 
