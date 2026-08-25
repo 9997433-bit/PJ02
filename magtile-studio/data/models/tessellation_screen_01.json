@@ -1,0 +1,798 @@
+{
+  "schema_version": 1,
+  "id": "tessellation_screen_01",
+  "name": "三角密铺光影屏风",
+  "name_en": "Tessellation Light Screen 01",
+  "description": "几何艺术开篇: 正倒等边三角形的经典密铺带不铺地面, 竖着砌进三块屏板 —— 红橙、黄绿、青蓝三段彩虹花纹上下互咬, 清色悬排方板骑在倒三角上底, 紫色尖冠点在最高处; 三块屏板沿 Z 字折线竖缝互咬站立, 屏脚三片直角斜撑把屏板与步道锁成门式框架。迎着台灯摆好, 密铺花纹会把一整条彩虹影子投在桌面上。",
+  "difficulty": 2,
+  "total_pieces": 42,
+  "tags": [
+    "几何艺术",
+    "密铺",
+    "屏风",
+    "光影",
+    "彩虹"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 21,
+        "equilateral_triangle": 18,
+        "right_triangle": 3
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "fa_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fa_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fa_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fb_0",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fb_1",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fc_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fc_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fc_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "a_base_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_base_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_base_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "a_up_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "a_up_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "a_up_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "a_dn_0",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.0,
+        1.57735
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "a_dn_1",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.0,
+        1.57735
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "a_top_0",
+      "type": "square",
+      "position": [
+        1.0,
+        1.0,
+        2.366025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "a_top_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.0,
+        2.366025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "a_crown_0",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.0,
+        3.1547
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "a_crown_1",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.0,
+        3.1547
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "b_base_1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "b_base_2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "b_up_1",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "b_up_2",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "b_dn_0",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.0,
+        1.57735
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "b_top_0",
+      "type": "square",
+      "position": [
+        3.0,
+        2.0,
+        2.366025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "b_crown_0",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.0,
+        3.1547
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "c_base_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "c_base_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "c_base_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "c_up_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "c_up_4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "c_up_5",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "c_dn_0",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        3.0,
+        1.57735
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "c_dn_1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        3.0,
+        1.57735
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "c_top_0",
+      "type": "square",
+      "position": [
+        4.0,
+        3.0,
+        2.366025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "c_top_1",
+      "type": "square",
+      "position": [
+        5.0,
+        3.0,
+        2.366025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "c_crown_0",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        3.0,
+        3.1547
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "c_crown_1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        3.0,
+        3.1547
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "brace_w",
+      "type": "right_triangle",
+      "position": [
+        0.0,
+        0.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "brace_m",
+      "type": "right_triangle",
+      "position": [
+        3.333333,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "brace_e",
+      "type": "right_triangle",
+      "position": [
+        6.0,
+        3.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南段步道: 三片清灰相间的方板一字排开, 再沿步道北缝立起屏板 A 的灰色底排。",
+      "tip": "底排墙脚要正好踩在步道拼缝上, 整条底边吸住才站得稳。",
+      "tiles_to_add": [
+        "fa_0",
+        "fa_1",
+        "fa_2",
+        "a_base_0",
+        "a_base_1",
+        "a_base_2"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "砌屏板 A 的密铺带: 三片红色正三角先立在底排顶沿, 两片橙色倒三角再倒插进缺口。",
+      "tip": "倒三角两条斜边同时贴住左右正三角 —— 咔哒一声互咬, 这就是密铺!",
+      "tiles_to_add": [
+        "a_up_0",
+        "a_up_1",
+        "a_up_2",
+        "a_dn_0",
+        "a_dn_1"
+      ],
+      "highlight_tiles": [
+        "a_base_0",
+        "a_base_1",
+        "a_base_2"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "架屏板 A 的悬排: 两片清色方板骑在倒三角上底, 竖边互吸; 顶沿再立两片紫色尖冠。",
+      "tip": "悬排方板错开半格, 像悬在花纹上 —— 底边整边吸住倒三角就很牢。",
+      "tiles_to_add": [
+        "a_top_0",
+        "a_top_1",
+        "a_crown_0",
+        "a_crown_1"
+      ],
+      "highlight_tiles": [
+        "a_dn_0",
+        "a_dn_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺中段步道并立屏板 B 底排: 两片方板沿屏板 A 东端向北拐, 两片灰色底排踩上步道西缝, 竖缝与屏板 A 的东端互咬。",
+      "tip": "Z 字形的拐点到了 —— 两块屏板的竖边在拐角贴紧吸合, 转折处比平墙更结实。",
+      "tiles_to_add": [
+        "fb_0",
+        "fb_1",
+        "b_base_1",
+        "b_base_2"
+      ],
+      "highlight_tiles": [
+        "a_base_2",
+        "fa_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "砌屏板 B 的密铺带并封顶: 黄色正三角与绿色倒三角互咬, 悬排方板与尖冠骑上花纹。",
+      "tip": "中段窄一格, 花纹却和 A 段一模一样 —— 同一套密铺规则处处适用。",
+      "tiles_to_add": [
+        "b_up_1",
+        "b_up_2",
+        "b_dn_0",
+        "b_top_0",
+        "b_crown_0"
+      ],
+      "highlight_tiles": [
+        "b_base_1",
+        "b_base_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "铺北段步道: 三片方板沿 y=3 向东排开, 步道完成 Z 字的最后一横。",
+      "tip": "从空中看, 步道和屏风一起画出一个大大的 Z。",
+      "tiles_to_add": [
+        "fc_3",
+        "fc_4",
+        "fc_5"
+      ],
+      "highlight_tiles": [
+        "fb_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立屏板 C 底排: 三片灰色方板踩上北段步道拼缝, 竖缝与屏板 B 北端互咬。",
+      "tip": "第三块屏板与第一块朝向相同 —— Z 字的两横互相平行。",
+      "tiles_to_add": [
+        "c_base_3",
+        "c_base_4",
+        "c_base_5"
+      ],
+      "highlight_tiles": [
+        "b_base_2",
+        "fc_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "砌屏板 C 的密铺带: 青色正三角与蓝色倒三角收尾, 彩虹渐变到此完成。",
+      "tip": "红橙、黄绿、青蓝 —— 三段花纹连起来正好是一道彩虹。",
+      "tiles_to_add": [
+        "c_up_3",
+        "c_up_4",
+        "c_up_5",
+        "c_dn_0",
+        "c_dn_1"
+      ],
+      "highlight_tiles": [
+        "c_base_3",
+        "c_base_4",
+        "c_base_5"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "架屏板 C 悬排与尖冠, 最后装三片屏脚斜撑: 西端、拐点、东端各一片, 竖边吸屏缝、横边吸步道缝。",
+      "tip": "斜撑把屏板和步道锁成三角框 —— 迎着光摆好, 看花纹把影子投在桌上!",
+      "tiles_to_add": [
+        "c_top_0",
+        "c_top_1",
+        "c_crown_0",
+        "c_crown_1",
+        "brace_w",
+        "brace_m",
+        "brace_e"
+      ],
+      "highlight_tiles": [
+        "c_dn_0",
+        "c_dn_1"
+      ]
+    }
+  ]
+}
