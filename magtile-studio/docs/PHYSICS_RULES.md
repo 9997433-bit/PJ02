@@ -206,18 +206,18 @@ magtile_app validate <model.json> --jitter [N] [--profile strict]
 
 报告: 汇总为一条 `placement_jitter_failure` Error, 内含失败轮数/总轮数、涉及的底层错误码集合、首个失败样本的完整消息 (自带"最终成品/第 N 步"上下文) 与涉事片 id。执行顺序: 常规 R1~R8 未通过时跳过抖动仿真 (对静态已不成立的模型做抖动没有意义, CLI 打印提示)。
 
-回归载体 (`TESTING.md` 3.18 节): `tests/test_physics_jitter/` 下的"静态全绿但抖动必挂"边缘夹具 (执行器先断言普通 validate 放行、再断言 `--jitter` 以 `placement_jitter_failure` 拒绝, 配同构造加固后的抖动正例防矫枉过正) + 物理正例对照组抖动全绿 + 旗舰模型 `validate_jitter_*` 用例; 负例套件另有 `jitter=<N>` sidecar 通道 (`tests/test_physics_negative/jitter_sensitive`, 见 `TESTING.md` 3.7/3.18 节)。首次全库巡检 (2026-08-25, `--jitter 50`): 209 个模型 208 个全绿, 1 个 (`lego_style_house_01`) 在 7/50 轮出现 `enclosed_placement` —— 第 14 步补片的手部通道对毫米级误差没有裕量, 属于真实的边缘设计发现 (非误报), 待内容侧加固或调整放置顺序后按本节复验。strict 档 D4+ 首巡 (`tools/run_strict_audit.sh --jitter-only`, `--profile strict --jitter 50`): 45 个模型 42 个全绿, 3 个在 3~4/50 轮出现 `cantilever_overload` (`ball_run_tower_01` / `marble_run_spiral_01` / `rainforest_canopy_01`, 外挑力矩 35.1~35.3 贴着 strict 预算 35.0 的边) —— 名义几何恰好压线用满弱磁档抗弯预算, 零裕量外挑同样待内容侧加固后复验 (第 5 节宁严勿松: 修模型不放宽预算)。
+回归载体 (`TESTING.md` 3.18 节): `tests/test_physics_jitter/` 下的"静态全绿但抖动必挂"边缘夹具 (执行器先断言普通 validate 放行、再断言 `--jitter` 以 `placement_jitter_failure` 拒绝, 配同构造加固后的抖动正例防矫枉过正) + 物理正例对照组抖动全绿 + 旗舰模型 `validate_jitter_*` 用例; 负例套件另有 `jitter=<N>` sidecar 通道 (`tests/test_physics_negative/jitter_sensitive`, 见 `TESTING.md` 3.7/3.18 节)。首次全库巡检 (2026-08-25, `--jitter 50`) 曾抓出 4 个边缘设计 (见下表), 内容侧加固接力批已全部入库; 复验 (2026-08-25 17:38 UTC, 基线 `5b915a0`): default + strict 双档 `--jitter 50` 全库 209/209 全绿, D4+ 抗扰动巡检 45/45 全绿 (`run_strict_audit.sh --jitter-only --jitter require` 退出码 0)。
 
-**待复验清单处置状态 (2026-08-25 快照, 随修复入库滚动更新)**: 两轮首巡共抓出 4 个待加固模型, 内容侧加固接力批已全部立项并派发至并行工程槽; 截至本快照 **2 个已完成加固并随复验证据入库, 2 个加固进行中**:
+**待复验清单处置状态 (2026-08-25 终态, 4/4 已修复入库)**:
 
 | 模型 | 难度 | 被抓档位与轮数 | 底层错误码 | 处置状态 |
 | --- | --- | --- | --- | --- |
-| `lego_style_house_01` | D3 | 默认档 7/50 | `enclosed_placement` | **已修复入库** (`24fd0ec`): 教程步骤重排 —— 山花改在北坡合脊前放置 (几何零改动, 放置时北向通道完全敞开); 复验 default/strict × 静态/`--jitter 50` 四组全过, R9 50/50 轮全绿 |
-| `ball_run_tower_01` | D4 | strict 档 4/50 | `cantilever_overload` | **已修复入库** (`8d07fe5`): 两侧第 1 转角台外缘从地面加双层门式立柱 (90→94 片, 与栈桥墩成门式框架, 铰链剪切后转角台仍有接地路径, 悬臂分析自然消失 —— 与 `jitter_reinforced_cantilever` 正例同款手法); 复验 strict `--jitter 50` 50/50 轮全绿, default 双档放行 |
-| `marble_run_spiral_01` | D4 | strict 档 3/50 | `cantilever_overload` | 加固进行中 (并行工程槽): 外挑加斜撑/远端支撑或缩短悬挑; 复验口径 default + `--profile strict --jitter 50` 双档全绿 |
-| `rainforest_canopy_01` | D4 | strict 档 3/50 | `cantilever_overload` | 同上 |
+| `lego_style_house_01` | D3 | 默认档 7/50 | `enclosed_placement` | **已修复** (`24fd0ec`): 教程步骤重排 —— 山花改在北坡合脊前放置; 复验 50/50 全绿 |
+| `ball_run_tower_01` | D4 | strict 档 4/50 | `cantilever_overload` | **已修复** (`8d07fe5`/`5b915a0`): 转角台外缘双层门式立柱 (94 片); strict 零警告 + `--jitter 50` 50/50 全绿 |
+| `marble_run_spiral_01` | D4 | strict 档 3/50 | `cantilever_overload` | **已修复** (`114c154`): 三块转角台下挂直角三角斜撑 (80 片); 50/50 全绿 |
+| `rainforest_canopy_01` | D4 | strict 档 3/50 | `cantilever_overload` | **已修复** (`2ffc06e`): 树冠平台板根斜撑 (90 片); 50/50 全绿 |
 
-剩余 2 个 D4 模型复验入库前, `run_strict_audit.sh --jitter-only` 的 D4+ 抗扰动巡检保持红灯 (基线 262ebc3 时点的两条门禁命令实跑留痕见 `docs/reports/RELEASE_GATE_STATUS.md`), `run_release_gate.sh --full --l2` 的 L2 硬闸门不判绿; 修复批合入完毕后须重跑巡检刷新该报告并回写本节。加固提交必须随附上述口径的复验实跑证据 (两个已入库修复均照此执行); 处置纪律不变 —— 修模型, 不放宽预算 (第 5 节): 已入库的两例分别用"调放置顺序"与"外挑远端加支撑成环"完成, 零参数改动。
+门禁留痕: `run_release_gate.sh --full --l2` 的 QA + L2 关卡全绿; 仅 L3 实物复核硬闸门 (`--fail-on-pending`) 按设计置红 —— 见 `docs/reports/RELEASE_GATE_STATUS.md`。加固纪律: 修模型, 不放宽预算 (第 5 节)。
 
 ## 4. 报告格式
 
