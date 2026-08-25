@@ -275,8 +275,46 @@ QVariantList StudioBackend::bomForModel(const QString& model_id) const {
 void StudioBackend::startBuild(const QString& model_id) {
     const LibraryRow* row = library_model_.findRow(model_id.toStdString());
     if (row == nullptr) return;
-    emit buildRequested(fromUtf8(row->entry.id), fromUtf8(row->entry.name), row->current_step,
+    // 已完成的模型「再搭一次」从头开始 (否则会直接落在最后一步的
+    // 完成状态上); 进行中的照旧断点续搭。完成时刻在存档中只增不减,
+    // 重搭不会丢掉 ✓ 已完成徽标。
+    const int resume_step =
+        row->status == LibraryModel::StatusCompleted ? 0 : row->current_step;
+    emit buildRequested(fromUtf8(row->entry.id), fromUtf8(row->entry.name), resume_step,
                         row->entry.step_count);
+}
+
+void StudioBackend::completeBuild(const QString& model_id) {
+    const std::string id = model_id.toStdString();
+    const LibraryRow* row = library_model_.findRow(id);
+    if (row == nullptr) return;
+    // 庆祝页数据先于 reload 定格 (reload 会重建行, row 指针随即失效)
+    const QString name = fromUtf8(row->entry.name);
+    const int pieces = row->entry.total_pieces;
+    const int steps = row->entry.step_count;
+
+    if (store_ != nullptr) {
+        try {
+            // 与 GL 版完成口径一致 (src/app/main.cpp): 进度推到最后
+            // 一步 + 记完成时刻 (首次不覆盖) + 首次完成成就
+            store_->saveProgress(id, steps, 0);
+            store_->markCompleted(id);
+            if (!store_->isAchievementUnlocked("first_model_completed")) {
+                store_->unlockAchievement("first_model_completed");
+            }
+        } catch (const progress::ProgressError&) {
+            // 落盘失败不打断庆祝 (P3 零挫败): 完成状态下次会话再补
+        }
+    }
+
+    reload();  // ✓ 徽标 / 已完成计数 / 「继续上次」即刻刷新
+    emit buildCompleted(fromUtf8(id), name, pieces, steps);
+}
+
+QString StudioBackend::modelFilePath(const QString& model_id) const {
+    const LibraryRow* row = library_model_.findRow(model_id.toStdString());
+    if (row == nullptr) return {};
+    return QString::fromStdString(row->entry.file.string());
 }
 
 }  // namespace magtile::qtui

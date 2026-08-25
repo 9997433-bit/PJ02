@@ -88,6 +88,21 @@ target_include_directories(magtile_core
 )
 target_link_libraries(magtile_core PRIVATE magtile_warnings magtile_sqlite3)
 
+# ---- 无窗口 GL 磁力片场景渲染器 ----------------------------------
+# 只画场景不建窗口 (gl_scene_renderer.cpp + 自研 GL 加载器), 零外部
+# 依赖; 供 GLFW/ImGui 外壳与 Qt 教程视口 (QQuickFramebufferObject,
+# QT-3) 共用同一份 3D 绘制实现。
+if(MAGTILE_BUILD_GL_RENDERER OR MAGTILE_BUILD_QT)
+    add_library(magtile_render_scene STATIC
+        src/render/gl/gl_api.cpp
+        src/render/gl/gl_scene_renderer.cpp
+    )
+    target_link_libraries(magtile_render_scene
+        PUBLIC magtile_core
+        PRIVATE magtile_warnings
+    )
+endif()
+
 # ---- GLFW + OpenGL 4.1 渲染后端 ---------------------------------
 if(MAGTILE_BUILD_GL_RENDERER)
     include(FetchContent)
@@ -139,13 +154,12 @@ if(MAGTILE_BUILD_GL_RENDERER)
     target_link_libraries(magtile_imgui PUBLIC glfw)
 
     add_library(magtile_render_gl STATIC
-        src/render/gl/gl_api.cpp
         src/render/gl/gl_renderer.cpp
         src/render/gl/stb_image_impl.cpp   # stb_image 实现单元 (缩略图 PNG 解码)
     )
     target_include_directories(magtile_render_gl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/third_party)
     target_link_libraries(magtile_render_gl
-        PUBLIC magtile_core
+        PUBLIC magtile_core magtile_render_scene
         PRIVATE magtile_imgui glfw magtile_warnings
     )
     # 链接方可据此宏启用 --gui 代码路径

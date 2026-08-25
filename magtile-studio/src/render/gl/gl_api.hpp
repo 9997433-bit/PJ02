@@ -73,6 +73,7 @@ inline constexpr GLenum GL_INFO_LOG_LENGTH = 0x8B84;
     X(void, glEnable, (GLenum cap))                                                          \
     X(void, glDisable, (GLenum cap))                                                         \
     X(void, glBlendFunc, (GLenum sfactor, GLenum dfactor))                                   \
+    X(void, glColorMask, (GLboolean r, GLboolean g, GLboolean b, GLboolean a))               \
     X(void, glDepthFunc, (GLenum func))                                                      \
     X(void, glDepthMask, (GLboolean flag))                                                   \
     X(void, glClearColor, (GLfloat r, GLfloat g, GLfloat b, GLfloat a))                      \

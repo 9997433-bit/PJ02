@@ -46,6 +46,8 @@ class StudioBackend final : public QObject {
     Q_PROPERTY(QString continueModelId READ continueModelId NOTIFY catalogChanged)
     Q_PROPERTY(QString statusMessage READ statusMessage NOTIFY catalogChanged)
     Q_PROPERTY(QString dataDirText READ dataDirText NOTIFY catalogChanged)
+    /// 进度存档数据库路径 (QT-3 教程视口共用同一 SQLite)。
+    Q_PROPERTY(QString dbFileText READ dbFileText CONSTANT)
     /// 家庭磁力片库存是否已登记 (未登记时「我能搭的」筛选由界面禁用并引导)。
     Q_PROPERTY(bool inventoryConfigured READ inventoryConfigured NOTIFY catalogChanged)
     /// 免费层模型数 (目录 tags 含「免费」, COMMERCIAL_PLAN.md §2.1 免费 30):
@@ -70,6 +72,7 @@ public:
     [[nodiscard]] QString continueModelId() const { return continue_model_id_; }
     [[nodiscard]] QString statusMessage() const { return status_message_; }
     [[nodiscard]] QString dataDirText() const { return QString::fromStdString(data_dir_.string()); }
+    [[nodiscard]] QString dbFileText() const { return QString::fromStdString(db_file_.string()); }
     [[nodiscard]] bool inventoryConfigured() const noexcept { return inventory_configured_; }
     [[nodiscard]] int freeModelCount() const noexcept { return free_model_count_; }
     [[nodiscard]] QStringList themes() const { return themes_; }
@@ -95,10 +98,24 @@ public:
     /// 信号改接真 3D 教程, 详情页与路由契约不变。
     Q_INVOKABLE void startBuild(const QString& model_id);
 
+    /// 教程完成入口 (QT-4): 写存档完成状态 (进度推到最后一步 +
+    /// markCompleted + 首次完成成就, 与 GL 版同一口径), 刷新模型库
+    /// 徽标, 再发 buildCompleted 供 Main.qml 路由到完成庆祝页。
+    /// QT-3 视口就绪前由占位教程页「模拟完成」按钮触发 (冒烟),
+    /// 就绪后由视口 finished 状态触发, 信号契约不变。
+    Q_INVOKABLE void completeBuild(const QString& model_id);
+
+    /// 模型 JSON 文件路径 (QT-3 教程视口按需加载模型本体用);
+    /// 未知模型返回空串 (视口温和降级)。
+    Q_INVOKABLE QString modelFilePath(const QString& model_id) const;
+
 signals:
     void catalogChanged();
     /// 「开始搭建」请求 (current_step: 0 = 从头开始, >0 = 从断点继续)。
     void buildRequested(const QString& modelId, const QString& modelName, int currentStep,
+                        int stepCount);
+    /// 教程完成 (QT-4): Main.qml 据此路由到完成庆祝页 (§6.2)。
+    void buildCompleted(const QString& modelId, const QString& modelName, int pieces,
                         int stepCount);
 
 private:
