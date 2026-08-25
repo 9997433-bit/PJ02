@@ -34,8 +34,9 @@ tools/check_v1_readiness.sh --strict   # 签核档: E2E 冒烟用 --strict (SKIP
 tools/check_v1_readiness.sh --help     # 完整用法
 ```
 
-退出码: **0** = 无 P0 失败; **1** = 存在 P0 失败 (当前仓库状态下预期
-非零 —— 见下文各 ⬜ 项); **2** = 环境/参数不满足。
+退出码: **0** = 无 P0 失败; **1** = 存在 P0 失败 (2026-08-25 `--quick`
+实跑为 1: 自动侧 P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项
+全 PASS); **2** = 环境/参数不满足。
 
 ## 1. 内容 (目标 200~250 模型)
 
@@ -45,9 +46,9 @@ tools/check_v1_readiness.sh --help     # 完整用法
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| C1 | 模型库体量达 200~250 | P0 | Auto (R1) | `data/models/*.json` 计数; [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 产能与主题池 | 🔶 191 个 JSON (目标 200 还差 9, 内容批次仍在推进) |
+| C1 | 模型库体量达 200~250 | P0 | Auto (R1) | `data/models/*.json` 计数; [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 产能与主题池 | ✅ 205 个 JSON (R1 实跑 PASS: 门槛 200 已过, 处于 200~250 目标区间) |
 | C2 | 全库质量门禁全绿 (16 关 QA + strict 零未豁免警告) | P0 | Auto (R5) | `tests/run_full_qa.sh` / `tools/run_strict_audit.sh`; 最近报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) | ✅ 全库 strict 双档零未豁免警告 (唯一豁免 `suspension_bridge_01` 已文档化) |
-| C3 | 模型库目录全量登记 + 缩略图全覆盖 | P0 | Auto (R2) | `tools/update_model_catalog.py` / `tools/generate_thumbnails.py` | 🔶 目录登记 187 / 缩略图就绪 179 / JSON 191 (在制批次未收口, 以 R2 实时输出为准) |
+| C3 | 模型库目录全量登记 + 缩略图全覆盖 | P0 | Auto (R2) | `tools/update_model_catalog.py` / `tools/generate_thumbnails.py` | ✅ JSON 205 / 目录登记 205 / 缩略图就绪 205 三方对账一致 (R2 实跑 PASS) |
 | C4 | 免费层 30 对齐 (标签 = starter 清单, 全 core-9) | P0 | Auto (R3) | `tools/verify_free_tier.py`; 决议 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) | ✅ 三条断言常绿 (随发布门禁复跑) |
 | C5 | 主题覆盖与难度分布终审 (D1~D4 全覆盖, 系列不断档) | P1 | Manual | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2; `magtile_app library` 分布输出 | 🔶 主题池持续补批中, 上架前人工终审一次 |
 
@@ -59,8 +60,8 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
 | B1 | 计费适配层 + 假计费闭环 (三档商品 / 购买 / 恢复 / 统一解锁口径) | P0 | Auto (R10) | `src/billing/` + `magtile_billing_test` + `qt_billing_bridge`; [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §2.2 | ✅ 单测全绿, Qt 订阅页接假计费闭环 |
-| B2 | 真实商店计费接入 (Windows 商店 / Google Play `StoreBillingClient`) | P0 | Auto (R11 分平台: Google Play 接线 PASS / Windows 档 R11W SKIP) | Android: `platforms/android/app/.../PlayBillingManager.kt` (Play Billing 6.x 购买/恢复/回执确认 + 启动静默恢复 → 既有 `setSubscriptionActive` 契约键, 与 FakeBilling 同键; 接线说明 [../platforms/android/README.md](../platforms/android/README.md) 第三节); 桌面: `src/billing/store_billing_client.cpp` (跨商店接口缝) | 🔶 Google Play 侧已接线 (Release 走 Play Billing, Debug 保留模拟订阅; 商品 id 三端统一 `sub_monthly`/`sub_yearly`/`sub_family_yearly`); Windows 商店档未接 (MSIX 商店包前接入); Android 订阅页 UI (档位卡 + 恢复购买按钮) 随家长中心落地 |
-| B3 | 商店商品配置 + 沙箱付费验收 (真实账号购买 / 恢复 / 退款链路) | P0 | Manual | 商品 id 约定见 `store_billing_client.hpp` 注释; 价格表 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §3.1; Google Play 侧走 Play Console 内部测试轨 + 许可测试账号 ([../platforms/android/README.md](../platforms/android/README.md) 第三节沙盒验收要点) | ⬜ Google Play 代码侧已就绪 (B2 🔶), 仍依赖开发者账号 (L3) 与 Play Console 商品配置; Windows 依赖 B2 Windows 档 |
+| B2 | 真实商店计费接入 (Windows 商店 / Google Play `StoreBillingClient`) | P0 | Auto (R11 分平台: Google Play 接线 PASS / Windows 档 R11W SKIP) | Android: `platforms/android/app/.../PlayBillingManager.kt` (Play Billing 6.x 购买/恢复/回执确认 + 启动静默恢复 → 既有 `setSubscriptionActive` 契约键, 与 FakeBilling 同键; 接线说明 [../platforms/android/README.md](../platforms/android/README.md) 第三节); 桌面: `src/billing/store_billing_client.cpp` (跨商店接口缝) | 🔶 Google Play 侧已接线, R11 实跑 PASS (Release 走 Play Billing, Debug 保留模拟订阅; 商品 id 三端统一 `sub_monthly`/`sub_yearly`/`sub_family_yearly`); Windows 商店档未接 (R11W SKIP, MSIX 商店包前接入); Android 订阅页 UI (档位卡 + 恢复购买按钮) 随家长中心落地 |
+| B3 | 商店商品配置 + 沙箱付费验收 (真实账号购买 / 恢复 / 退款链路) | P0 | Manual | 商品 id 约定见 `store_billing_client.hpp` 注释; 价格表 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §3.1; Google Play 侧分步验收文档 [PLAY_BILLING_SANDBOX_QA.md](PLAY_BILLING_SANDBOX_QA.md) (内部测试轨 + 许可测试账号 + 购买/恢复/断网宽限期勾选清单; 接线概要 [../platforms/android/README.md](../platforms/android/README.md) 第三节) | ⬜ Google Play 代码侧已就绪 (B2 🔶) 且分步验收文档已备, 执行仍依赖开发者账号 (L3)、Play Console 商品配置与订阅页 UI 购买入口 (B2 剩余缺口); Windows 依赖 B2 Windows 档 |
 | B4 | 首批 3 个一次性内容包上线 | P1 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §2.3/§8 V1 交付物 | ⬜ 未开始 (订阅先行) |
 | B5 | 儿童侧零价格红线复核 (订阅入口必过家长门, 无倒计时/催购) | P0 | Auto(部分) (R16 文案红线守卫 + E2E 家长门流; 视觉/语气终审仍人工) | `qt_gui_smoke --smoke-parent-flow` 自动; 文案红线 `tools/check_child_friendly_copy.py` 全库扫描 (恐吓词/催促稀缺话术, [UI_UX_SPEC.md](UI_UX_SPEC.md) §11 无倒计时/无「即将涨价」等) | 🔶 家长门流随 E2E 常绿 + 文案红线随 R16 常态守卫, 上架前视觉与语气人工终审 |
 
@@ -78,7 +79,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | D4 | macOS 打包 (macdeployqt + DMG) + 签名公证 (Developer ID / notarytool) | P0 | Manual | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §5 macOS 小节 (公证步骤已写明) | ⬜ 仅手册, 无 macOS 实机记录 |
 | D5 | 代码签名证书 (Windows Authenticode; 依赖运营主体 L5) | P0 | Manual | [../scripts/package_windows.md](../scripts/package_windows.md) 第十一节 (`signtool`, 未签名会被 SmartScreen 拦截) | ⬜ 证书未申请 |
 | D6 | LGPL 合规逐项核对 (Qt 随包分发) | P0 | Manual | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §8 清单; `THIRD_PARTY_NOTICES.md` 已随包 | 🔶 清单与声明就绪, 出包时逐项打钩 |
-| D7 | Linux 打包冒烟 (无 Win/mac 机器时的链路自证) | P1 | Auto (单独跑) | `scripts/smoke_qt_linux_pack.sh`; [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §9 | 🔶 脚本可跑, 未纳入常跑 CI (出包前手动执行) |
+| D7 | Linux 打包冒烟 (无 Win/mac 机器时的链路自证) | P1 | Auto (单独跑) | `scripts/smoke_qt_linux_pack.sh`; [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §9 | ✅ 已实跑全绿 (Ubuntu, Qt 6.4.2 / NSIS 3.10: 三档 TGZ 清单断言 + NSIS 编译冒烟 + offscreen 启动 + ldd 核验, 落档 [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §9); 未纳入常跑 CI, 出包前复跑一次 |
 | D8 | 自动更新 (COMMERCIAL_PLAN §8 列为 V1 交付物) | P1 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §8 V1; [ROADMAP.md](ROADMAP.md) 阶段 3 | ⬜ 未实现 —— 上架前须决策: 实现, 或降级 V1.1 并在签核记录留痕 |
 
 ## 4. Android
@@ -106,7 +107,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | --- | --- | --- | --- | --- | --- |
 | V1 | 隐私政策草稿入库并随应用可查阅 | P0 | Auto (R8 存在性) | [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) | 🔶 草稿已起草 (家长一页纸 + 正文十节) |
 | V2 | 隐私政策法务定稿 (运营主体全称 / 注册地址 / 备案号 / 生效日期) | P0 | Manual | [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) 头部「状态: 草稿」标注; 依赖 L5 | ⬜ 未定稿 |
-| V3 | 应用内数据管理入口 (家长中心查阅 / 导出 / 删除) | P0 | Auto(部分) | 数据隐私后端 (`progress/data_privacy` + Qt `privacy_backend`, 在制) | 🔶 在制, 未收口 |
+| V3 | 应用内数据管理入口 (家长中心查阅 / 导出 / 删除) | P0 | Auto(部分) | 数据隐私后端 `progress/data_privacy` (三端同一导出契约) + Qt `privacy_backend` (家长中心「隐私与数据」区) + Android JNI `progressStoreAvailable`/`exportLocalDataJson`/`clearLocalData` (家长门后隐私面板, 与 Qt 同口径: 温和禁用 / 防覆盖原子导出 / 清除后锁家长会话) | 🔶 Qt + Android 双端在位 (同一核心实现同一导出格式); 真机走查随 V4 自查单 |
 | V4 | 上架前跑一遍安全与隐私自查单 (三平台逐项) | P0 | Manual | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) 合规检查清单 | ⬜ 待出包前执行并归档 |
 | V5 | 离线承诺断网复核 (断网走安装启动与教程主链路) | P1 | Manual | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) E2E-20 | ⬜ 随真机验收一并做 |
 
@@ -117,7 +118,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| E1 | 自动子集全绿: `tools/run_e2e_smoke.sh --strict` (Qt 与 Android 项不允许 SKIP) | P0 | Auto (R4) | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) §2/§3 | 🔶 默认档常绿; `--strict` 需 Qt6 + NDK 环境齐备后作为签核动作执行 |
+| E1 | 自动子集全绿: `tools/run_e2e_smoke.sh --strict` (Qt 与 Android 项不允许 SKIP) | P0 | Auto (R4) | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) §2/§3 | ✅ 签核档实跑全绿: `--strict` 9 项 0 SKIP (含 Qt 无头/按钮级路径冒烟与 NDK r27 JNI 符号断言, 2026-08-25 实跑); 上架签核时按 §10 复跑留痕 |
 | E2 | 矩阵 P0 的 Manual / Auto(部分) 人工要点逐条打钩, 归档签核记录 (执行人/日期/设备) | P0 | Manual | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) §1 「人工要点」列 | ⬜ 待真机与实机验收时执行 |
 | E3 | P1 路径已知问题留痕 (允许带问题上架但须记录) | P1 | Manual | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) §3 第 3 条 | ⬜ 随 E2 一并归档 |
 

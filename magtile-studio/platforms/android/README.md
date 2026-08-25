@@ -56,7 +56,7 @@ platforms/android/
 ├── keystore.properties.example  release 签名配置模板 (真实密钥不入库)
 ├── CMakeLists.txt            JNI 共享库构建脚本 (双入口: 仓库根 / Gradle)
 ├── jni/
-│   ├── magtile_jni.cpp       JNI 包装层 (模型库/存档/教程/家长门/隐私/订阅 23 个入口, 见下表)
+│   ├── magtile_jni.cpp       JNI 包装层 (模型库/存档/教程/家长门/隐私/订阅 25 个入口, 见下表)
 │   └── magtile_scene_jni.cpp 3D 教程视口 JNI 桥 (场景/相机/渲染循环 8 个入口, 见下表)
 ├── settings.gradle.kts       Gradle 工程入口 (工程根 = 本目录)
 ├── build.gradle.kts          插件版本 (AGP 8.7.3 / Kotlin 2.0.21)
@@ -292,6 +292,7 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 | `parentGateOpenJson(): String` | 进门出新题 (每次进门新题防背题, 与桌面 ParentGateBackend::openGate 同口径): `{"question":"叁 × 柒 = ?","attempts_remaining":N,"cooldown_seconds":N,"session_active":bool}`; 仍在上一轮冷却期时 `cooldown_seconds > 0`, 界面据此直接进温和的「休息一下」倒计时 |
 | `parentGateSubmitJson(answer: String): String` | 提交答案 (中文大写数字如 `贰拾壹`, 接受 `壹拾贰`/`拾贰` 变体): `{"result":"passed"/"wrong"/"cooling","attempts_remaining":N,"cooldown_seconds":N,"session_active":bool}`; passed = 15 分钟家长会话已开启, wrong/cooling 由界面给温和提示 (「再试一次吧」/「休息一下」) |
 | `parentGateSessionActive(): Boolean` | 家长会话是否仍有效: true = 守卫期内免重复验证 (时长读 `core::ParentGate::kDefaultSessionDuration`, 与桌面 Qt 会话守卫同策略) |
+| `parentGateLockSession()` | 立即结束家长会话 (幂等): 清除本地数据成功后调用 —— 一切回到首次启动状态, 会话一并收回, 再进家长入口需重新验证 (与桌面 Qt `onDataCleared` 里 `parentGate.lockSession` 同口径) |
 
 家长门入口 (`ParentGateDialog.requireParent`): 标题栏年龄段切换与
 筛选栏库存录入都先过门, 会话内免重复; 「我的进度」保持儿童可达
@@ -305,17 +306,23 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 
 | Kotlin 声明 | 说明 |
 | --- | --- |
-| `exportLocalDataJson(): String` | 导出全部本地数据 (进度/成就/磁力片库存/设置 —— 应用在本机的全部用户数据) 为家长可读 JSON 文本 (缩进 2 空格, 顶层 `format`/`format_version`/`exported_at`, 与桌面同格式); 写文件由 Kotlin 侧完成 (应用专属外部目录 `getExternalFilesDir`, 零权限, 家长可用文件管理器取走; 不可用时退回 `filesDir`), 文件名带时间戳互不覆盖; 存档未打开/读库失败返回 `{"error":"..."}` (界面温和提示) |
+| `progressStoreAvailable(): Boolean` | 进度存档是否已打开 (与 Qt `PrivacyBackend::storeAvailable` 同角色): false 时隐私面板**温和禁用**导出/清除按钮并提示「存档暂时不可用, 导出与清除先歇一会儿」—— 而不是点了才报错 (P3 零挫败); 纯内存查询, 主线程可调 |
+| `exportLocalDataJson(): String` | 导出全部本地数据 (进度/成就/磁力片库存/设置 —— 应用在本机的全部用户数据) 为家长可读 JSON 文本 (缩进 2 空格, 顶层 `format`/`format_version`/`exported_at`, 与桌面同格式); 写文件由 Kotlin 侧完成 (应用专属外部目录 `getExternalFilesDir`, 零权限, 家长可用文件管理器取走; 不可用时退回 `filesDir`), 与 Qt `exportData` 同口径: 毫秒时间戳 + 已存在追加序号 (多次导出互不覆盖), 先写临时文件再改名 (原子落盘不留残缺文件); 存档未打开/读库失败返回 `{"error":"..."}` (界面温和提示) |
 | `clearLocalData(): Boolean` | 清除全部本地数据: 进度/成就/库存/设置四张表**单事务原子清空** (要么全清要么不动), 表结构与 schema 版本保留, 清完等价首次启动空档; 成功 true, 存档未打开/失败 false (温和提示不弹「失败」) |
 
 隐私与数据入口: 年龄段对话框 (已在家长门后) 的中性键「隐私与
-数据」进隐私面板 —— 展示「我们收集什么 / 数据存在哪 (存档完整
-路径) / 隐私政策草稿文档路径 `docs/PRIVACY_POLICY_DRAFT.md`」,
-文案口径与桌面 Qt 家长中心一致; 「导出进度 (JSON)」直接导出,
-「清除本地数据」再过一道二次确认 (说清删什么 + 不可恢复 + 引导
-先导出, 「先不清除」为安全默认), 清除成功后年龄段回默认档、
-订阅状态回未订阅、模型库重拉 (库存回未登记引导态) —— 温和回到
-首次启动状态。
+数据」进隐私面板 —— 查阅区展示「我们收集什么 / 数据存在哪 (存档
+完整路径) / 模型库目录 (诊断, 与 Qt 家长中心同角色) / 隐私政策
+草稿文档路径 `docs/PRIVACY_POLICY_DRAFT.md`」+ 最近一次导出路径
+回显 (家长好找到文件), 文案口径与桌面 Qt 家长中心一致; 存档不可
+用时导出/清除按钮温和禁用 (`progressStoreAvailable`, 提示「先歇
+一会儿」不弹「失败」)。「导出进度 (JSON)」直接导出 (毫秒时间戳 +
+序号防覆盖 + 临时文件改名原子落盘), 「清除本地数据」再过一道
+二次确认 (说清删什么 + 不可恢复 + 引导先导出, 「先不清除」为
+安全默认), 清除成功后年龄段回默认档、订阅状态回未订阅、模型库
+重拉 (库存回未登记引导态)、家长会话一并收回
+(`parentGateLockSession`, 再进家长入口需重新验证) —— 温和回到
+首次启动状态, 与 Qt `onDataCleared` 链路同口径。
 
 订阅状态链路同样绑定 `com.magtile.studio.MagTileNative`
 (COMMERCIAL_PLAN §2.2: 直接复用 `progress/subscription_settings`
@@ -359,7 +366,9 @@ R11): 界面与免费层锁只面向订阅状态读取口径, 不感知商店 SD
   商品; 验收走内部测试轨 (Internal testing) + 许可测试账号
   (License testing, 沙盒扣费即时退款), 上传 release 签名包后在
   真机走「购买 → 详情弹窗解锁 → 清数据重装 → 启动静默恢复」
-  闭环;
+  闭环; 完整分步操作 (Play Console 商品/测试轨/测试账号配置 +
+  购买/恢复/断网宽限期逐项勾选清单 + 沙盒时间压缩表 + 排查表) 见
+  [`../../docs/PLAY_BILLING_SANDBOX_QA.md`](../../docs/PLAY_BILLING_SANDBOX_QA.md);
 - 原生侧 `billing::StoreBillingClient` 保留为跨商店接口缝, 在
   Android **不参与购买链路** (契约键读写已由 JNI + Kotlin 收口;
   各商店档现状与接法文档见
@@ -434,9 +443,9 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 
 `.github/workflows/android.yml` (仓库根) 包含两个任务:
 
-- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 31 个 JNI
+- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 33 个 JNI
   符号齐全 (模型库 4 个 + 进度存档/库存/年龄段/进度页 8 个 +
-  分步教程 3 个 + 家长门 3 个 + 隐私与数据 2 个 + 订阅状态 3 个 +
+  分步教程 3 个 + 家长门 4 个 + 隐私与数据 3 个 + 订阅状态 3 个 +
   3D 教程视口 8 个) —— 持续保证 `magtile_core` 无平台依赖。
 - `assemble-debug`: Gradle 全量打包 debug APK, 校验 APK 内容
   (原生库 / 数据资产 / 缩略图已打包; 缩略图数量落后于模型数量时
@@ -501,8 +510,10 @@ espresso-core (仅 androidTest 变体, 不进产品 APK)。
   收藏直达详情, 与桌面 startBuild 同口径); 模型卡片上的完成/
   进行中徽标、收藏切换与「继续上次」大卡片待接入模型库列表 UI。
 - 家长门: 年龄段切换与库存录入入口已上锁 (对齐 UI_UX_SPEC.md §9,
-  复用 `core::ParentGate` 共享状态机, 15 分钟会话守卫); 后续随
-  桌面 M3 推进可选 4 位 PIN 与家长中心完整功能 (订阅/数据管理)。
+  复用 `core::ParentGate` 共享状态机, 15 分钟会话守卫); **数据管理
+  (查阅/导出/清除) 已在家长门后隐私面板落地** (第三节, 与桌面 Qt
+  家长中心「隐私与数据」区同口径, 清单 §5 V3); 后续随桌面 M3
+  推进可选 4 位 PIN 与家长中心订阅页。
 - 订阅与计费: 订阅状态读写与免费层锁已对齐桌面 (`progress/
   subscription_settings` 同键同口径, Debug 档「模拟已订阅」QA
   开关); **Google Play Billing 已接线** (第三节: Release 档
@@ -511,7 +522,8 @@ espresso-core (仅 androidTest 变体, 不进产品 APK)。
   剩余缺口: 家长门后的订阅页 UI (三档档位卡 + 恢复购买按钮,
   对齐桌面 Qt SubscriptionPage —— 数据源 `queryProducts` /
   `purchase` / `restore` 已就绪) 待家长中心落地时一并接入;
-  Play Console 商品配置与沙盒付费验收属人工项 (清单 §2 B3)。
+  Play Console 商品配置与沙盒付费验收属人工项 (清单 §2 B3,
+  分步验收文档已备: `docs/PLAY_BILLING_SANDBOX_QA.md`)。
 
 ## 相关文档
 
