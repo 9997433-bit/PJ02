@@ -5,7 +5,9 @@ Windows 不需要独立的构建入口 —— 本目录只承载 **打包/安装
 (见 `packaging/`) 与本说明文档。
 
 > 状态: **脚手架**。MSVC 构建路径当前即可用 (仓库根 CMakeLists.txt
-> 已内置 `/W4 /utf-8` 等 MSVC 配置); 安装器为规划中, 资产目录已就位。
+> 已内置 `/W4 /utf-8` 等 MSVC 配置); 打包配置 (CPack/NSIS + WiX stub)
+> 已入库但尚未实机出包, 完整操作手册见 `scripts/package_windows.md`,
+> CI 流水线草案见 `.github/workflows/windows-release.yml`。
 
 ## 一、MSVC 构建
 
@@ -33,38 +35,49 @@ build-win\Release\magtile_app.exe tutorial data\models\castle_foundation_01.json
   控制台若中文乱码, 先执行 `chcp 65001`。
 - GL 渲染后端在 Windows 上使用 WGL (由 GLFW 封装), 无额外系统依赖。
 
-## 二、安装包规划 (MSI, 未实装)
+## 二、安装包 (脚手架已入库, 未实机出包)
 
-首选 **WiX Toolset v4** 产出标准 MSI (企业分发、组策略、静默安装
-`msiexec /qn` 都友好); 若后期需要更轻的自解压体验, 备选 **NSIS**。
+两条打包路径, 配置均已就位 (详细步骤见 `scripts/package_windows.md`):
 
-计划安装布局:
+1. **CPack — NSIS 安装器 + 便携 ZIP** (首选): 复用现有 CMake 工程,
+   版本号自动取自根 `project(VERSION)`。
+
+   ```bat
+   cd build-win
+   cpack -G "NSIS;ZIP" -C Release
+   ```
+
+2. **WiX v4 — 标准 MSI** (企业分发、组策略、静默安装 `msiexec /qn`):
+   独立描述文件 `packaging/Product.wxs`, 版本号经 `-d Version=` 注入。
+   两条路径共用固定 UpgradeCode, 互相可原地升级。
+
+安装布局 (两条路径一致):
 
 ```
 %ProgramFiles%\MagTile Studio\
-├── magtile_app.exe
-└── data\                 形状目录 + 模型库 (来自仓库 data/)
+├── magtile_app.exe       主程序 (CLI + GUI 一体)
+├── data\                 形状目录 + 模型库 (来自仓库 data/)
+├── README.md
+└── vcruntime140*.dll     MSVC CRT 运行库
 ```
 
-打包步骤 (待实装, 资产放入 `packaging/`):
-
-1. `cmake --build ... --config Release` 产出 exe;
-2. `wix build packaging\Product.wxs -d BuildDir=build-win\Release -o MagTileStudio.msi`;
-3. 后续接入代码签名 (signtool) 与升级码 (UpgradeCode 固定, 支持原地升级)。
-
-也会评估 CMake 自带的 CPack (`CPack WIX` 生成器), 若能满足需求则直接
-复用现有 CMake 工程, 减少一份独立的打包脚本。
+待办: 代码签名 (signtool)、安装器图标/横幅素材、正式许可文本
+(见 `scripts/package_windows.md` 第七节清单)。
 
 ## 目录结构
 
 ```
 platforms/windows/
 ├── README.md        本文档
-└── packaging/       MSI/安装器资产占位 (Product.wxs、图标、许可文本等)
+└── packaging/       安装器资产 (CPackWindows.cmake、Product.wxs、License.rtf)
 ```
 
 ## 相关文档
 
+- `scripts/package_windows.md` — Windows 构建/打包完整操作手册
+  (前置条件、CPack/NSIS、WiX/MSI、版本号管理、发布前清单)。
+- `.github/workflows/windows-release.yml` — Windows 发布流水线草案
+  (标签触发, 构建 + 测试 + 打包 + Release 草稿)。
 - `docs/PLATFORM_ARCHITECTURE.md` — 跨平台技术架构总纲 (含发布流水线
   与各平台打包策略); 本目录即其第 8 节规划的 `platforms/windows/`
   落地脚手架。

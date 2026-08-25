@@ -23,12 +23,19 @@ endif()
 option(MAGTILE_BUILD_GL_RENDERER "构建 GLFW + OpenGL 渲染后端 (GLFW/ImGui 经 FetchContent 获取)" ON)
 option(MAGTILE_BUILD_TESTS "构建并注册 CTest 用例" ON)
 
+# Qt 6 商用桌面界面 (apps/desktop_qt, QML): 默认关闭, 不安装 Qt 也能
+# 完整构建其余目标。开启需系统安装 Qt >= 6.4 (依赖清单与迁移计划见
+# docs/QT_UI_PLAN.md); 未找到 Qt 时给出带安装指引的明确报错。
+option(MAGTILE_BUILD_QT "构建 Qt 6 + QML 商用桌面界面 (需系统 Qt >= 6.4, 见 docs/QT_UI_PLAN.md)" OFF)
+
 # ---- Android 交叉编译 (NDK 工具链文件会定义 ANDROID) -------------
 # 用法见 platforms/android/README.md。手机端不使用桌面 GL 后端
 # (GLFW) 也无法跑 CTest, 强制关闭; 只产出 magtile_core + JNI 共享库。
+# Qt 桌面外壳同理不参与 Android 构建 (平板走 Compose, 见平台架构文档)。
 if(ANDROID)
     set(MAGTILE_BUILD_GL_RENDERER OFF CACHE BOOL "" FORCE)
     set(MAGTILE_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+    set(MAGTILE_BUILD_QT OFF CACHE BOOL "" FORCE)
 endif()
 
 # ---- 编译警告 --------------------------------------------------
@@ -148,10 +155,26 @@ if(NOT ANDROID)
     endif()
 endif()
 
+# ---- Qt 6 商用桌面界面 (QML 外壳, 复用 magtile_core) --------------
+# 与 GL/ImGui 后端并存: GL 版继续承担 3D 教程与冒烟测试,
+# Qt 版承载商用界面 (首页/模型库/家长门...), 迁移路线见 docs/QT_UI_PLAN.md。
+if(MAGTILE_BUILD_QT)
+    add_subdirectory(apps/desktop_qt)
+endif()
+
 # ---- 平台外壳 (Android JNI 共享库 / Windows 打包资产) -------------
 # 按存在性引入, 平台外壳资产分批合入期间仓库始终可配置。
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/platforms/CMakeLists.txt)
     add_subdirectory(platforms)
+endif()
+
+# ---- 安装与打包 (CPack; Windows 安装器脚手架) ---------------------
+# 版本号唯一来源是顶部 project(VERSION x.y.z), 打包配置一律引用
+# PROJECT_VERSION。Windows 产出 NSIS 安装器 + 便携 ZIP (WiX/MSI 见
+# platforms/windows/packaging/Product.wxs); 其它桌面平台产出 TGZ
+# 仅作安装规则冒烟。用法详见 scripts/package_windows.md。
+if(NOT ANDROID)
+    include(platforms/windows/packaging/CPackWindows.cmake)
 endif()
 
 # ---- 测试 (详见 docs/TESTING.md) --------------------------------

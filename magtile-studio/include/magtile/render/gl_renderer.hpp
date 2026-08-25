@@ -64,6 +64,8 @@ struct LibraryCard {
     bool completed = false;  ///< 已完成 (显示绿色对勾)
     bool favorited = false;
     int current_step = 0;    ///< started 时: 已搭到第几步
+    bool buildable = false;  ///< 磁力片库存足够搭建 ("我能搭的" 筛选依据;
+                             ///< 仅在已登记库存时有意义)
 };
 
 /// 模型库界面一帧内用户发出的操作 (为空字符串 = 无操作)。
@@ -71,6 +73,11 @@ struct LibraryActions {
     std::string open_model_id;       ///< 点击卡片 / 继续搭建: 打开该模型教程
     std::string toggle_favorite_id;  ///< 点击收藏星标: 切换收藏状态
     bool open_parent_area = false;   ///< 点击 "家长区" 入口 (须先过家长门)
+};
+
+/// 首启库存 onboarding 提示 (占位弹窗) 一帧内用户发出的操作。
+struct InventoryOnboardingActions {
+    bool dismissed = false;  ///< 点击 "稍后再说": 关闭提示 (应用层记入存档, 不再弹出)
 };
 
 /// 家长门界面一帧的展示状态 (验证逻辑由应用层 core::ParentGate
@@ -119,7 +126,10 @@ public:
     /// 用户操作。搜索与筛选状态由渲染器内部跨帧保持, 应用层每帧
     /// 提交全量卡片即可。须在 beginFrame 与 endFrame 之间调用,
     /// 每帧至多一次, 与 submitHud 互斥 (二者分属不同界面)。
-    [[nodiscard]] virtual LibraryActions submitLibrary(const std::vector<LibraryCard>& cards) = 0;
+    /// @param simple_layout 4-6 岁启蒙模式简化布局 (UI_UX_SPEC.md §2):
+    ///        超大卡片 + 隐藏搜索/筛选行, 由应用层按年龄段设置传入。
+    [[nodiscard]] virtual LibraryActions submitLibrary(const std::vector<LibraryCard>& cards,
+                                                       bool simple_layout) = 0;
 
     /// 绘制家长门界面 (算术题 + 中文大写数字软键盘) 并返回用户
     /// 操作。软键盘输入缓冲由渲染器跨帧保持, 提交/返回时自动清空。

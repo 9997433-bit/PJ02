@@ -1,7 +1,8 @@
 # =============================================================
 # MagTile Studio - 平台外壳分发
 #   android/  Android NDK 交叉编译时构建 JNI 共享库
-#   windows/  仅含打包脚本与文档, 不参与 CMake 构建
+#   windows/  打包资产与文档; 其 packaging/CPackWindows.cmake 由根
+#             CMakeLists 在非 Android 平台 include (CPack 安装器脚手架)
 # =============================================================
 
 if(ANDROID)

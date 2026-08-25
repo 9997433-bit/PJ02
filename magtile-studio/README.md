@@ -78,6 +78,8 @@ magtile-studio/
 │   ├── model_catalog.json  # 模型库目录 (library 界面的卡片元数据)
 │   └── models/             # 模型定义 (含示例: 城堡地基与城墙, 72 片 / 16 步)
 ├── assets/                 # 模型资源与贴图占位目录
+├── platforms/              # 平台外壳 (android/ JNI 构建, windows/ 打包资产)
+├── scripts/                # 操作手册 (Windows 构建与打包指南)
 ├── tools/                  # 内容生产脚本 (示例模型生成器)
 └── third_party/            # 第三方库 (nlohmann/json 单头文件, SQLite3 amalgamation)
 ```
@@ -85,6 +87,27 @@ magtile-studio/
 ## 示例模型: 城堡地基与城墙
 
 `data/models/castle_foundation_01.json` — 难度 3/5, 72 片 (56 正方形 + 16 等边三角形), 16 个教程步骤: 4×4 地台 → 双层四面围墙 → 四角角楼 → 三角城齿。由 `tools/generate_castle_model.py` 生成, 通过全部物理质检 (116 处磁力连接)。
+
+## 分发与打包 (Windows)
+
+Windows 端分发脚手架已就位 (配置入库, 尚未实机出包)。版本号唯一来源
+是根 `CMakeLists.txt` 的 `project(MagTileStudio VERSION x.y.z)`,
+安装包文件名与内部版本号全部自动跟随, 升版只改这一处。
+
+```bat
+:: MSVC 构建 + 打包: NSIS 安装器 + 便携 ZIP
+cmake -S . -B build-win -G "Visual Studio 17 2022" -A x64
+cmake --build build-win --config Release --parallel
+cd build-win && cpack -G "NSIS;ZIP" -C Release
+:: 产出 MagTileStudio-<版本>-win64.exe / .zip
+```
+
+- 完整操作手册 (前置条件 / WiX MSI 企业分发路径 / 版本号管理 /
+  发布前清单): [scripts/package_windows.md](scripts/package_windows.md)
+- 打包资产 (CPack 配置、WiX v4 stub、许可文本):
+  [platforms/windows/packaging/](platforms/windows/packaging/)
+- CI 发布流水线草案 (推送 `v*` 标签触发, 构建 + 测试 + 打包 +
+  Release 草稿): [.github/workflows/windows-release.yml](.github/workflows/windows-release.yml)
 
 ## 文档
 

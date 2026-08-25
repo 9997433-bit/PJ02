@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  =============================================================
+  MagTile Studio - WiX Toolset v4 MSI 描述文件 (stub, 未经实机验证)
+
+  这是独立于 CPack 的 MSI 打包路径, 面向企业分发 / 组策略 / 静默
+  安装 (msiexec /qn) 场景。版本号不在此硬编码, 由命令行注入, 且
+  必须与根 CMakeLists.txt 的 project(VERSION) 一致。先按
+  scripts/package_windows.md 第二节完成 MSVC Release 构建, 然后:
+
+    wix build platforms\windows\packaging\Product.wxs ^
+        -d Version=0.1.0 ^
+        -d BuildDir=build-win\Release ^
+        -d DataDir=data ^
+        -o build-win\MagTileStudio-0.1.0-win64.msi
+
+  (完整命令与版本号提取方式见 scripts/package_windows.md 第四节。
+  注: XML 注释内不允许出现连续两个连字符, 涉及命令行长选项的写法
+  一律参见上述手册。)
+
+  注意:
+  - UpgradeCode 永久固定, 与 CPackWindows.cmake 的
+    CPACK_WIX_UPGRADE_GUID 一致, 保证两条打包路径互相可原地升级。
+  - Language 2052 = 简体中文 (zh-CN)。
+  - 安装向导 UI 页与图标素材为 TODO, 需要 WixToolset.UI.wixext
+    扩展, 见文末注释。
+  =============================================================
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+  <!-- 命令行未注入时的兜底值, 便于本地快速试构建 -->
+  <?ifndef Version ?>
+    <?define Version = "0.1.0" ?>
+  <?endif?>
+  <?ifndef BuildDir ?>
+    <?define BuildDir = "..\..\..\build-win\Release" ?>
+  <?endif?>
+  <?ifndef DataDir ?>
+    <?define DataDir = "..\..\..\data" ?>
+  <?endif?>
+
+  <Package Name="MagTile Studio"
+           Manufacturer="MagTile Studio Team"
+           Version="$(var.Version)"
+           UpgradeCode="6FE5F9D7-79A7-4829-B13A-8C3B1517CA61"
+           Language="2052"
+           Codepage="65001"
+           Compressed="yes"
+           Scope="perMachine">
+
+    <MajorUpgrade DowngradeErrorMessage="已安装更高版本的 MagTile Studio, 请先卸载后再安装本版本。" />
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- 安装布局: %ProgramFiles%\MagTile Studio\{magtile_app.exe, data\} -->
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="MagTile Studio">
+        <Directory Id="DATAFOLDER" Name="data" />
+      </Directory>
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="AppMenuFolder" Name="MagTile Studio" />
+    </StandardDirectory>
+
+    <ComponentGroup Id="AppComponents" Directory="INSTALLFOLDER">
+      <Component Id="MainExecutable">
+        <File Id="MagTileAppExe"
+              Source="$(var.BuildDir)\magtile_app.exe"
+              KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <!-- data/ 整目录收割 (形状目录 + 模型库, 运行必需) -->
+    <ComponentGroup Id="DataComponents" Directory="DATAFOLDER">
+      <Files Include="$(var.DataDir)\**" />
+    </ComponentGroup>
+
+    <!-- 开始菜单快捷方式直达模型库主界面 (library 子命令的 GUI 模式);
+         WorkingDirectory 指向安装根, 使默认 data/ 相对路径可用 -->
+    <ComponentGroup Id="ShortcutComponents" Directory="AppMenuFolder">
+      <Component Id="StartMenuShortcut">
+        <Shortcut Id="LibraryShortcut"
+                  Name="MagTile Studio"
+                  Description="磁力片搭建教程 - 模型库"
+                  Target="[INSTALLFOLDER]magtile_app.exe"
+                  Arguments="library --gui"
+                  WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="RemoveAppMenuFolder" On="uninstall" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\MagTileStudio"
+                       Name="installed"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <Feature Id="Main" Title="MagTile Studio" Level="1">
+      <ComponentGroupRef Id="AppComponents" />
+      <ComponentGroupRef Id="DataComponents" />
+      <ComponentGroupRef Id="ShortcutComponents" />
+    </Feature>
+
+    <!-- TODO(发布前): 安装向导 UI 与素材, 需要 UI 扩展:
+           wix extension add WixToolset.UI.wixext
+         然后启用:
+           <ui:WixUI Id="WixUI_InstallDir"
+                     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui" />
+           <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+           <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+         以及 icon.ico / banner.bmp / dialog.bmp 素材与 signtool 签名。 -->
+
+  </Package>
+</Wix>

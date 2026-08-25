@@ -16,10 +16,14 @@
 
 #include <cstdint>
 #include <filesystem>
+#include <map>
 #include <optional>
 #include <stdexcept>
 #include <string>
 #include <vector>
+
+#include "magtile/core/model_definition.hpp"
+#include "magtile/core/types.hpp"
 
 struct sqlite3;  // 前置声明, 避免向使用方暴露 sqlite3.h
 
@@ -87,17 +91,32 @@ public:
     /// 全部已解锁成就, 按解锁时间倒序。
     [[nodiscard]] std::vector<Achievement> listAchievements() const;
 
-    // ---- 设置 / 磁力片库存 -----------------------------------------
-    /// 保存用户拥有的磁力片库存 (JSON 字符串, 结构由 UI 层约定)。
-    void saveTileInventory(const std::string& inventory_json);
-    /// 读取磁力片库存 JSON; 从未保存过时返回 std::nullopt。
-    [[nodiscard]] std::optional<std::string> loadTileInventory() const;
+    // ---- 磁力片库存 (tile_inventory 表) -----------------------------
+    /// 登记某种形状的拥有数量 (upsert)。shape_id 必须是合法的片型
+    /// 标识 (core::tileTypeFromString 可解析, 如 "square"), count >= 0,
+    /// 否则抛 ProgressError。count = 0 也会保留记录 ("明确没有" 与
+    /// "从未登记" 语义不同, 前者不再触发 onboarding)。
+    void setInventory(const std::string& shape_id, int count);
+    /// 全部已登记的库存, 键为片型标识; 从未登记时返回空表。
+    [[nodiscard]] std::map<std::string, int> getInventory() const;
+    /// 是否登记过库存 (onboarding 判定: 空 = 首次启动尚未录入)。
+    [[nodiscard]] bool hasInventory() const;
+    /// 对照模型 BOM (pieceCountByType) 与库存, 返回缺片清单
+    /// (片型 -> 缺几片); 空表 = 库存足够。未登记的片型按 0 计。
+    [[nodiscard]] std::map<core::TileType, int> missingPieces(
+        const core::ModelDefinition& model) const;
+    /// 库存是否足够搭建该模型 (即 missingPieces(model) 为空)。
+    [[nodiscard]] bool canBuild(const core::ModelDefinition& model) const;
+
+    // ---- 设置 -------------------------------------------------------
     /// 通用键值设置 (settings 表), 供音量 / 语言等杂项复用。
     void setSetting(const std::string& key, const std::string& value);
     [[nodiscard]] std::optional<std::string> getSetting(const std::string& key) const;
 
 private:
     void initializeSchema();
+    /// v1 遗留的库存 JSON (settings 表) 迁入 tile_inventory 表 (幂等)。
+    void migrateLegacyInventoryJson();
     /// 确保 model_progress 中存在 model_id 的行 (不存在则插入空进度)。
     void ensureRow(const std::string& model_id, std::int64_t now);
     [[nodiscard]] std::vector<Progress> queryProgressList(const char* sql) const;

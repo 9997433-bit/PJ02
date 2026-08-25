@@ -319,7 +319,8 @@ public:
         return actions;
     }
     [[nodiscard]] TutorialActions submitHud(const TutorialHudState& hud) override;
-    [[nodiscard]] LibraryActions submitLibrary(const std::vector<LibraryCard>& cards) override;
+    [[nodiscard]] LibraryActions submitLibrary(const std::vector<LibraryCard>& cards,
+                                               bool simple_layout) override;
     [[nodiscard]] ParentGateActions submitParentGate(const ParentGateState& state) override;
     [[nodiscard]] ParentAreaActions submitParentArea(int session_remaining_seconds) override;
     void requestScreenshot(const std::string& ppm_path) override { screenshot_path_ = ppm_path; }
@@ -977,7 +978,8 @@ void GlRenderer::drawLibraryCard(const LibraryCard& card, const ImVec2& size, bo
     ImGui::PopStyleColor(2);
 }
 
-LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards) {
+LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards,
+                                         bool simple_layout) {
     LibraryActions actions;
     const ImGuiIO& io = ImGui::GetIO();
 
@@ -1028,39 +1030,42 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards) 
         ImGui::Spacing();
 
         // ---- 筛选行: 搜索 / 难度 / 主题 / 收藏 -------------------------
-        ImGui::SetNextItemWidth(300.0f);
-        ImGui::InputTextWithHint("##library_search", "搜索模型名称…", library_search_.data(),
-                                 library_search_.size());
-        ImGui::SameLine();
-        static const char* kDifficultyItems[] = {"全部难度", "★",     "★★",
-                                                 "★★★",   "★★★★", "★★★★★"};
-        ImGui::SetNextItemWidth(140.0f);
-        if (ImGui::BeginCombo("##difficulty_filter",
-                              kDifficultyItems[library_difficulty_filter_])) {
-            for (int i = 0; i < 6; ++i) {
-                if (ImGui::Selectable(kDifficultyItems[i], i == library_difficulty_filter_)) {
-                    library_difficulty_filter_ = i;
+        // 4-6 岁启蒙模式整行隐藏 (无搜索、无筛选, UI_UX_SPEC.md §2/§4.6)
+        if (!simple_layout) {
+            ImGui::SetNextItemWidth(300.0f);
+            ImGui::InputTextWithHint("##library_search", "搜索模型名称…", library_search_.data(),
+                                     library_search_.size());
+            ImGui::SameLine();
+            static const char* kDifficultyItems[] = {"全部难度", "★",     "★★",
+                                                     "★★★",   "★★★★", "★★★★★"};
+            ImGui::SetNextItemWidth(140.0f);
+            if (ImGui::BeginCombo("##difficulty_filter",
+                                  kDifficultyItems[library_difficulty_filter_])) {
+                for (int i = 0; i < 6; ++i) {
+                    if (ImGui::Selectable(kDifficultyItems[i], i == library_difficulty_filter_)) {
+                        library_difficulty_filter_ = i;
+                    }
                 }
+                ImGui::EndCombo();
             }
-            ImGui::EndCombo();
-        }
-        ImGui::SameLine();
-        ImGui::SetNextItemWidth(170.0f);
-        const std::string theme_preview =
-            library_theme_filter_.empty() ? "全部主题" : library_theme_filter_;
-        if (ImGui::BeginCombo("##theme_filter", theme_preview.c_str())) {
-            if (ImGui::Selectable("全部主题", library_theme_filter_.empty())) {
-                library_theme_filter_.clear();
-            }
-            for (const auto& tag : all_tags) {
-                if (ImGui::Selectable(tag.c_str(), tag == library_theme_filter_)) {
-                    library_theme_filter_ = tag;
+            ImGui::SameLine();
+            ImGui::SetNextItemWidth(170.0f);
+            const std::string theme_preview =
+                library_theme_filter_.empty() ? "全部主题" : library_theme_filter_;
+            if (ImGui::BeginCombo("##theme_filter", theme_preview.c_str())) {
+                if (ImGui::Selectable("全部主题", library_theme_filter_.empty())) {
+                    library_theme_filter_.clear();
                 }
+                for (const auto& tag : all_tags) {
+                    if (ImGui::Selectable(tag.c_str(), tag == library_theme_filter_)) {
+                        library_theme_filter_ = tag;
+                    }
+                }
+                ImGui::EndCombo();
             }
-            ImGui::EndCombo();
+            ImGui::SameLine();
+            ImGui::Checkbox("只看收藏", &library_favorites_only_);
         }
-        ImGui::SameLine();
-        ImGui::Checkbox("只看收藏", &library_favorites_only_);
 
         ImGui::Spacing();
         ImGui::Separator();
@@ -1068,7 +1073,8 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards) 
 
         ImGui::BeginChild("##library_scroll", ImVec2(0.0f, 0.0f), ImGuiChildFlags_None,
                           ImGuiWindowFlags_NoBackground);
-        const float spacing = 16.0f;
+        // 启蒙模式加大卡片间距, 防胖手指误触 (§4.1 间距 >= 8dp 从宽执行)
+        const float spacing = simple_layout ? 24.0f : 16.0f;
         const float avail_width = ImGui::GetContentRegionAvail().x;
         const auto columnsFor = [&](float card_width) {
             return std::max(1, static_cast<int>((avail_width + spacing) /
@@ -1086,7 +1092,9 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards) 
             ImGui::TextDisabled("上次没搭完的模型 (%d 个)",
                                 static_cast<int>(in_progress.size()));
             ImGui::Spacing();
-            const ImVec2 resume_size{392.0f, 106.0f};
+            // 启蒙模式 "继续上次" 卡片同步放大 (首页大卡片, §4.6)
+            const ImVec2 resume_size = simple_layout ? ImVec2{560.0f, 132.0f}
+                                                     : ImVec2{392.0f, 106.0f};
             const int columns = columnsFor(resume_size.x);
             int index = 0;
             for (const LibraryCard* card : in_progress) {
@@ -1101,22 +1109,25 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards) 
         }
 
         // ---- 全部模型 (按搜索与筛选条件过滤) ---------------------------
+        // 启蒙模式无筛选器, 忽略跨帧残留的筛选状态, 永远全量展示
         std::vector<const LibraryCard*> filtered;
         const std::string search = library_search_.data();
         for (const auto& card : cards) {
-            if (library_difficulty_filter_ != 0 &&
-                card.difficulty != library_difficulty_filter_) {
-                continue;
-            }
-            if (!library_theme_filter_.empty() &&
-                std::find(card.tags.begin(), card.tags.end(), library_theme_filter_) ==
-                    card.tags.end()) {
-                continue;
-            }
-            if (library_favorites_only_ && !card.favorited) continue;
-            if (!matchesSearch(card.name, search) && !matchesSearch(card.name_en, search) &&
-                !matchesSearch(card.model_id, search)) {
-                continue;
+            if (!simple_layout) {
+                if (library_difficulty_filter_ != 0 &&
+                    card.difficulty != library_difficulty_filter_) {
+                    continue;
+                }
+                if (!library_theme_filter_.empty() &&
+                    std::find(card.tags.begin(), card.tags.end(), library_theme_filter_) ==
+                        card.tags.end()) {
+                    continue;
+                }
+                if (library_favorites_only_ && !card.favorited) continue;
+                if (!matchesSearch(card.name, search) && !matchesSearch(card.name_en, search) &&
+                    !matchesSearch(card.model_id, search)) {
+                    continue;
+                }
             }
             filtered.push_back(&card);
         }
@@ -1134,7 +1145,10 @@ LibraryActions GlRenderer::submitLibrary(const std::vector<LibraryCard>& cards) 
             ImGui::SetCursorPosX(std::max(0.0f, (avail_width - text_width) * 0.5f));
             ImGui::TextDisabled("%s", empty_text);
         } else {
-            const ImVec2 card_size{300.0f, 202.0f};
+            // 启蒙模式超大卡片: 约每行 2 张 (1240px 面板宽), 图文放大
+            // 便于 4-6 岁儿童辨认与点按 (UI_UX_SPEC.md §2 卡片密度)
+            const ImVec2 card_size = simple_layout ? ImVec2{560.0f, 280.0f}
+                                                   : ImVec2{300.0f, 202.0f};
             const int columns = columnsFor(card_size.x);
             int index = 0;
             for (const LibraryCard* card : filtered) {

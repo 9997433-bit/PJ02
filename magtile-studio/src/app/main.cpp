@@ -14,25 +14,31 @@
 //   magtile_app validate <model.json> [--data-dir DIR]   物理与教程质检
 //   magtile_app tutorial <model.json> [--gui] [--data-dir DIR]  分步教程
 //   magtile_app progress list|show|reset [...] [--db FILE]      进度存档
+//   magtile_app inventory set|show|match [...] [--db FILE]      磁力片库存
+//   magtile_app settings set-age 4|7|10 | show [--db FILE]      年龄段模式等设置
 // =============================================================
 
+#include <algorithm>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
 #include <exception>
 #include <filesystem>
+#include <map>
 #include <string>
 #include <vector>
 
+#include "magtile/core/age_mode.hpp"
 #include "magtile/core/json_io.hpp"
 #include "magtile/core/model_catalog.hpp"
 #include "magtile/physics/physics_validator.hpp"
+#include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/progress_store.hpp"
+#include "magtile/tts/tts_engine.hpp"
 #include "magtile/tutorial/tutorial_engine.hpp"
 
 #if defined(MAGTILE_HAS_GL_RENDERER)
-#include <algorithm>
 #include <chrono>
 #include <unordered_set>
 #include <utility>
@@ -57,6 +63,11 @@ struct CliArgs {
     std::string screenshot_file; ///< 非空时在最后一帧保存 PPM 图片 (冒烟测试)
     std::string progress_action; ///< progress 子命令: list / show / reset
     std::string model_id;        ///< progress show/reset 的目标模型 id
+    std::string inventory_action;  ///< inventory 子命令: set / show / match
+    std::vector<std::string> inventory_pairs;  ///< inventory set 的 <形状 数量> 对
+    std::string settings_action;  ///< settings 子命令: set-age / show
+    std::string settings_value;   ///< settings set-age 的年龄参数 (周岁)
+    bool tts = false;            ///< --tts: 教程切步时朗读步骤说明 (系统 TTS)
     std::string open_model;      ///< library --gui: 启动后直接打开的模型 id
     bool open_parent_gate = false;  ///< library --gui: 启动即显示家长门 (评审/冒烟)
     fs::path db_file;            ///< 进度存档路径; 为空时用平台默认路径
@@ -77,6 +88,18 @@ void printUsage() {
         "  magtile_app progress list                          查看全部教程进度与成就\n"
         "  magtile_app progress show  <model_id>              查看单个模型的进度详情\n"
         "  magtile_app progress reset <model_id>              重置单个模型的进度\n"
+        "  magtile_app inventory set <形状 数量>...            登记家里的磁力片库存\n"
+        "                       (示例: inventory set square 40 equilateral_triangle 24;\n"
+        "                        形状标识见 magtile_app catalog)\n"
+        "  magtile_app inventory show                         查看已登记的磁力片库存\n"
+        "  magtile_app inventory match [--data-dir DIR]       对照库存列出能搭建的模型\n"
+        "  magtile_app settings set-age <周岁>                 设置孩子年龄段模式\n"
+        "                       (4~6 启蒙 / 7~9 标准 / 10~12 进阶, 示例: set-age 4)\n"
+        "  magtile_app settings show                          查看当前设置与 TTS 后端\n"
+        "\n"
+        "教程选项:\n"
+        "  --tts               切换步骤时朗读步骤说明 (系统 TTS, 无后端时静音;\n"
+        "                       4-6 岁启蒙模式下模型库教程自动开启)\n"
         "\n"
         "图形模式选项:\n"
         "  --step N            (tutorial) 从第 N 步开始 (默认 1)\n"
@@ -135,6 +158,20 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
         if (args.progress_action == "show" || args.progress_action == "reset") {
             if (positional.size() != 2) return false;
             args.model_id = positional[1];
+            return true;
+        }
+        return false;
+    }
+    if (args.command == "inventory") {
+        if (positional.empty()) return false;
+        args.inventory_action = positional[0];
+        if (args.inventory_action == "show" || args.inventory_action == "match") {
+            return positional.size() == 1;
+        }
+        if (args.inventory_action == "set") {
+            // set 之后是 <形状 数量> 对: 至少一对且必须成对出现
+            if (positional.size() < 3 || (positional.size() - 1) % 2 != 0) return false;
+            args.inventory_pairs.assign(positional.begin() + 1, positional.end());
             return true;
         }
         return false;
@@ -329,6 +366,134 @@ int runProgress(const CliArgs& args) {
         std::printf("已重置模型 %s 的进度\n", args.model_id.c_str());
     } else {
         std::printf("模型 %s 暂无进度记录, 无需重置\n", args.model_id.c_str());
+    }
+    return 0;
+}
+
+// ---- 磁力片库存 (inventory set / show / match) --------------------
+
+/// 按形状目录的固定顺序打印库存清单 (只列已登记的形状) 与总片数。
+void printInventory(const std::map<std::string, int>& inventory) {
+    int total = 0;
+    std::printf("磁力片库存 (%zu 种形状):\n", inventory.size());
+    // 按 TileType 枚举顺序输出, 与 catalog 命令的形状目录一致
+    for (int i = 0; i < core::kTileTypeCount; ++i) {
+        const auto type = static_cast<core::TileType>(i);
+        const auto it = inventory.find(std::string(core::toString(type)));
+        if (it == inventory.end()) continue;
+        std::printf("  %-22s %-8s x %d\n", it->first.c_str(),
+                    std::string(core::displayNameZh(type)).c_str(), it->second);
+        total += it->second;
+    }
+    std::printf("合计: %d 片\n", total);
+}
+
+/// 缺片清单的单行摘要, 如 "正方形x4, 六边形x2"。
+std::string formatMissing(const std::map<core::TileType, int>& missing) {
+    std::string text;
+    for (const auto& [type, count] : missing) {
+        if (!text.empty()) text += ", ";
+        text += std::string(core::displayNameZh(type)) + "x" + std::to_string(count);
+    }
+    return text;
+}
+
+/// inventory match: 对照库存与每个模型的 BOM, 列出能搭建的模型;
+/// 差片的模型按缺片总数升序列出 (最接近能搭的排前面)。
+int runInventoryMatch(const CliArgs& args, progress::ProgressStore& store) {
+    if (!store.hasInventory()) {
+        std::printf("尚未登记磁力片库存, 无法匹配。\n");
+        std::printf("先登记: magtile_app inventory set square 40 equilateral_triangle 24 ...\n");
+        return 1;
+    }
+    const auto entries = core::loadModelCatalog(args.data_dir);
+
+    struct MatchResult {
+        const core::ModelCatalogEntry* entry = nullptr;
+        std::map<core::TileType, int> missing;
+        int missing_total = 0;
+    };
+    std::vector<MatchResult> buildable, short_of;
+    int load_failures = 0;
+    for (const auto& entry : entries) {
+        try {
+            const auto model = core::loadModelDefinition(entry.file);
+            MatchResult result;
+            result.entry = &entry;
+            result.missing = store.missingPieces(model);
+            for (const auto& [type, count] : result.missing) {
+                (void)type;
+                result.missing_total += count;
+            }
+            (result.missing.empty() ? buildable : short_of).push_back(std::move(result));
+        } catch (const std::exception& e) {
+            std::fprintf(stderr, "[警告] 跳过模型 %s: %s\n", entry.id.c_str(), e.what());
+            ++load_failures;
+        }
+    }
+    std::sort(short_of.begin(), short_of.end(),
+              [](const MatchResult& a, const MatchResult& b) {
+                  if (a.missing_total != b.missing_total) {
+                      return a.missing_total < b.missing_total;
+                  }
+                  return a.entry->id < b.entry->id;
+              });
+
+    std::printf("库存匹配: 共 %zu 个模型, 能搭 %zu 个\n\n", entries.size(), buildable.size());
+    std::printf("能搭的模型 (%zu 个):\n", buildable.size());
+    if (buildable.empty()) std::printf("  (暂无 —— 从下面缺片最少的模型补起最划算)\n");
+    for (const auto& result : buildable) {
+        std::string stars;
+        for (int i = 1; i <= result.entry->difficulty; ++i) stars += "★";
+        std::printf("  ✓ %-24s %s  难度 %s  %d 片 / %d 步\n", result.entry->id.c_str(),
+                    result.entry->name.c_str(), stars.c_str(), result.entry->total_pieces,
+                    result.entry->step_count);
+    }
+
+    if (!short_of.empty()) {
+        std::printf("\n还差一点的模型 (%zu 个, 按缺片数升序):\n", short_of.size());
+        for (const auto& result : short_of) {
+            std::printf("  · %-24s %s  还缺 %d 片: %s\n", result.entry->id.c_str(),
+                        result.entry->name.c_str(), result.missing_total,
+                        formatMissing(result.missing).c_str());
+        }
+    }
+    return load_failures > 0 ? 1 : 0;
+}
+
+int runInventory(const CliArgs& args) {
+    const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
+    progress::ProgressStore store(db_file);
+
+    if (args.inventory_action == "match") return runInventoryMatch(args, store);
+
+    if (args.inventory_action == "set") {
+        for (std::size_t i = 0; i + 1 < args.inventory_pairs.size(); i += 2) {
+            const std::string& shape_id = args.inventory_pairs[i];
+            const std::string& count_text = args.inventory_pairs[i + 1];
+            char* end = nullptr;
+            const long count = std::strtol(count_text.c_str(), &end, 10);
+            if (end == count_text.c_str() || *end != '\0' || count < 0 || count > 100000) {
+                std::fprintf(stderr, "错误: \"%s\" 不是合法的磁力片数量 (非负整数)\n",
+                             count_text.c_str());
+                return 1;
+            }
+            store.setInventory(shape_id, static_cast<int>(count));  // 形状标识由存储层校验
+        }
+        std::printf("已登记 %zu 种形状的库存\n\n", args.inventory_pairs.size() / 2);
+    }
+
+    // set 与 show 都以当前库存收尾, 方便立即核对
+    const auto inventory = store.getInventory();
+    if (inventory.empty()) {
+        std::printf("尚未登记磁力片库存。\n");
+        std::printf("用法: magtile_app inventory set square 40 equilateral_triangle 24 ...\n");
+        std::printf("      (形状标识见 magtile_app catalog)\n");
+        return 0;
+    }
+    printInventory(inventory);
+    if (args.inventory_action == "show") {
+        std::printf("\n提示: magtile_app inventory match 可对照库存列出能搭建的模型\n");
     }
     return 0;
 }
@@ -786,6 +951,7 @@ int main(int argc, char** argv) {
         if (args.command == "validate") return runValidate(args);
         if (args.command == "tutorial") return runTutorial(args);
         if (args.command == "progress") return runProgress(args);
+        if (args.command == "inventory") return runInventory(args);
         if (args.command == "library") return runLibrary(args);
     } catch (const std::exception& e) {
         std::fprintf(stderr, "错误: %s\n", e.what());

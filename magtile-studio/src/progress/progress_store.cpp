@@ -3,16 +3,19 @@
 #include <chrono>
 #include <utility>
 
+#include <nlohmann/json.hpp>
 #include <sqlite3.h>
 
 namespace magtile::progress {
 namespace {
 
 /// 当前 schema 版本 (PRAGMA user_version); 结构变更时递增并补迁移分支。
-constexpr int kSchemaVersion = 1;
+/// v1 -> v2: 磁力片库存从 settings 表的 JSON 字符串迁入结构化的
+/// tile_inventory 表 (shape_id, count), 供 canBuild BOM 对照查询。
+constexpr int kSchemaVersion = 2;
 
-/// 磁力片库存在 settings 表中的键名。
-constexpr const char* kTileInventoryKey = "tile_inventory";
+/// v1 时代磁力片库存 JSON 在 settings 表中的键名 (迁移后删除)。
+constexpr const char* kLegacyTileInventoryKey = "tile_inventory";
 
 [[nodiscard]] std::int64_t nowSeconds() {
     return std::chrono::duration_cast<std::chrono::seconds>(
@@ -173,12 +176,46 @@ void ProgressStore::initializeSchema() {
          "CREATE TABLE IF NOT EXISTS settings ("
          "  key   TEXT PRIMARY KEY,"
          "  value TEXT NOT NULL"
+         ");"
+         "CREATE TABLE IF NOT EXISTS tile_inventory ("
+         "  shape_id TEXT PRIMARY KEY,"               // core::toString(TileType)
+         "  count    INTEGER NOT NULL CHECK(count >= 0)"
          ");");
 
+    // v1 遗留的库存 JSON (settings 表) 迁入 tile_inventory 表。
+    // 按键存在性触发而非版本号, 幂等且顺带覆盖 "v2 库被旧版本写回" 的情形。
+    migrateLegacyInventoryJson();
+
     if (existing_version < kSchemaVersion) {
-        // v0 (新建库) -> v1: 上面的建表语句即全部内容; 未来版本在此追加迁移
-        exec(db_, "PRAGMA user_version = 1;");
+        // v0 (新建库) -> v2: 上面的建表语句即全部内容;
+        // v1 -> v2: 增加 tile_inventory 表 + 上方的 JSON 迁移
+        exec(db_, "PRAGMA user_version = 2;");
     }
+}
+
+void ProgressStore::migrateLegacyInventoryJson() {
+    const auto legacy_json = getSetting(kLegacyTileInventoryKey);
+    if (!legacy_json.has_value()) return;
+
+    // 旧格式为 UI 层约定的扁平对象 {"square": 24, ...}; 只迁移能识别的
+    // 片型与非负数量, 其余条目丢弃 (该格式从未有过正式 UI 写入方)。
+    const auto parsed = nlohmann::json::parse(*legacy_json, nullptr, /*allow_exceptions=*/false);
+    if (parsed.is_object()) {
+        for (const auto& [shape_id, value] : parsed.items()) {
+            if (!core::tileTypeFromString(shape_id).has_value()) continue;
+            if (!value.is_number_integer() || value.get<std::int64_t>() < 0) continue;
+            // 已有结构化记录优先, 不被旧 JSON 覆盖
+            Statement stmt(db_,
+                           "INSERT INTO tile_inventory (shape_id, count) VALUES (?1, ?2) "
+                           "ON CONFLICT(shape_id) DO NOTHING;");
+            stmt.bindText(1, shape_id);
+            stmt.bindInt64(2, value.get<std::int64_t>());
+            stmt.step();
+        }
+    }
+    Statement remove(db_, "DELETE FROM settings WHERE key = ?1;");
+    remove.bindText(1, kLegacyTileInventoryKey);
+    remove.step();
 }
 
 void ProgressStore::ensureRow(const std::string& model_id, std::int64_t now) {
@@ -310,12 +347,49 @@ std::vector<Achievement> ProgressStore::listAchievements() const {
     return result;
 }
 
-void ProgressStore::saveTileInventory(const std::string& inventory_json) {
-    setSetting(kTileInventoryKey, inventory_json);
+void ProgressStore::setInventory(const std::string& shape_id, int count) {
+    if (!core::tileTypeFromString(shape_id).has_value()) {
+        throw ProgressError("未知的磁力片形状标识: " + shape_id +
+                            " (合法值见 magtile_app catalog)");
+    }
+    if (count < 0) throw ProgressError("磁力片数量不能为负数");
+
+    Statement stmt(db_,
+                   "INSERT INTO tile_inventory (shape_id, count) VALUES (?1, ?2) "
+                   "ON CONFLICT(shape_id) DO UPDATE SET count = excluded.count;");
+    stmt.bindText(1, shape_id);
+    stmt.bindInt64(2, count);
+    stmt.step();
 }
 
-std::optional<std::string> ProgressStore::loadTileInventory() const {
-    return getSetting(kTileInventoryKey);
+std::map<std::string, int> ProgressStore::getInventory() const {
+    Statement stmt(db_, "SELECT shape_id, count FROM tile_inventory ORDER BY shape_id;");
+    std::map<std::string, int> inventory;
+    while (stmt.step()) {
+        inventory[stmt.columnText(0)] = static_cast<int>(stmt.columnInt64(1));
+    }
+    return inventory;
+}
+
+bool ProgressStore::hasInventory() const {
+    Statement stmt(db_, "SELECT 1 FROM tile_inventory LIMIT 1;");
+    return stmt.step();
+}
+
+std::map<core::TileType, int> ProgressStore::missingPieces(
+    const core::ModelDefinition& model) const {
+    const auto inventory = getInventory();
+    std::map<core::TileType, int> missing;
+    for (const auto& [type, needed] : model.pieceCountByType()) {
+        const auto it = inventory.find(std::string(core::toString(type)));
+        const int owned = it != inventory.end() ? it->second : 0;
+        if (owned < needed) missing[type] = needed - owned;
+    }
+    return missing;
+}
+
+bool ProgressStore::canBuild(const core::ModelDefinition& model) const {
+    return missingPieces(model).empty();
 }
 
 void ProgressStore::setSetting(const std::string& key, const std::string& value) {
