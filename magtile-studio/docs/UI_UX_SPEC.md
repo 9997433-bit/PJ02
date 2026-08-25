@@ -87,10 +87,10 @@ flowchart TD
 | 模型详情 | §5.4 | `IN_PROGRESS`（Qt 版详情页 DONE：难度/片数/步数、BOM 清单对照库存缺片琥珀提示、套装分层标签、收藏、「开始搭建」大按钮；可旋转 3D 预览与预计用时 PLANNED；GL 版仍从库直接进教程） |
 | 教程播放器 | §6 | `IN_PROGRESS`（GL 教程窗口已可运行：步骤导航/高亮/ghost/进度条/HUD 已有；TTS 切步朗读已接入（`ITtsEngine` stub，§4.2）；动画手势提示、庆祝动画 PLANNED） |
 | 进度与成就 | §7 | `IN_PROGRESS`（SQLite 存档 + CLI 查询 DONE；图形界面 PLANNED） |
-| 设置 | §8 | `IN_PROGRESS`（键值存储 DONE；设置界面 PLANNED） |
-| 家长门 | §9 | `IN_PROGRESS`（算术题门 stub `DONE`：中文数字乘法题 + 中文大写数字软键盘 + 冷却 + 15 分钟内存会话 + 门后家长区占位页；PIN / 手写键盘 / 家长中心完整功能 PLANNED） |
+| 设置 | §8 | `IN_PROGRESS`（键值存储 DONE；Qt 版家长门后设置页 DONE：字号三档/减少动效/年龄段，即时生效并与 CLI/GL 共库；主题/语言/库存复入口 PLANNED） |
+| 家长门 | §9 | `IN_PROGRESS`（算术题门 stub `DONE`：中文数字乘法题 + 中文大写数字软键盘 + 冷却 + 15 分钟内存会话 + 门后家长区占位页；Qt 版门界面 + 家长中心 + 会话守卫 `DONE`（同一 `core::ParentGate`）；PIN / 手写键盘 / 家长中心完整功能 PLANNED） |
 | Onboarding（库存录入） | §10 | `IN_PROGRESS`（结构化库存存取 API + CLI 录入 `inventory set` DONE；GL 版按片型计数的图形录入界面 DONE：全部片型中文名 + 大步进器/直接输入 + 保存后一键「看看我能搭什么」，首启弹窗主按钮直达录入，模型库页眉常驻「我的磁力片」入口；Qt 版录入界面与快捷套装预填 PLANNED） |
-| 订阅页 | §11 | `PLANNED` |
+| 订阅页 | §11 | `IN_PROGRESS`（Qt 版家长门后温和占位页 DONE：「即将上线」，无倒计时/无催促/不索取信息；正式订阅页（三卡/透明条款/恢复购买）PLANNED） |
 
 ---
 
@@ -273,8 +273,8 @@ flowchart TD
 | 设置项 | 位置 | 状态 |
 |--------|------|------|
 | 音效/音乐音量、TTS 开关 | 儿童侧（播放器内浮层） | `PLANNED`（键值存储 DONE） |
-| 年龄段模式切换 | 家长区 | `IN_PROGRESS`（`AgeMode` 存储 + CLI `settings set-age`/`show` DONE；家长区图形界面入口 PLANNED） |
-| 字号缩放三档、减少动效 | 家长区（跟随系统 + 手动覆盖） | `PLANNED` |
+| 年龄段模式切换 | 家长区 | `IN_PROGRESS`（`AgeMode` 存储 + CLI `settings set-age`/`show` DONE；Qt 版家长区设置页三档选择 DONE，与 CLI/GL 共用同一设置键；Onboarding 前置流程 PLANNED） |
+| 字号缩放三档、减少动效 | 家长区（跟随系统 + 手动覆盖） | `IN_PROGRESS`（Qt 版设置页手动三档 100/125/150% + 减少动效开关 DONE，全应用即时生效并存 SQLite（`progress/ui_settings`）；跟随系统 PLANNED） |
 | 主题（亮/暗/跟随系统） | 家长区 | `PLANNED` |
 | 语言（简中首发；繁中/英文 M4+） | 家长区 | `PLANNED` |
 | 磁力片库存管理（§10 复入口） | 家长区 | `PLANNED` |
@@ -285,7 +285,7 @@ flowchart TD
 
 ## 9. 家长门（Parent Gate）
 
-**定位**：儿童区与家长区之间的强制关卡。所有 **付费、设置、外链、账号、数据操作** 必须先过门（安全侧完整要求见 [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §6）。状态：`IN_PROGRESS`（算术题门 stub `DONE`，见 §9.0）。
+**定位**：儿童区与家长区之间的强制关卡。所有 **付费、设置、外链、账号、数据操作** 必须先过门（安全侧完整要求见 [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §6）。状态：`IN_PROGRESS`（算术题门 GL 版 stub + Qt 版门界面/家长中心/门后设置页 `DONE`，见 §9.0；PIN 与家长中心完整功能 PLANNED）。
 
 ### 9.0 已实现：家长门 stub — DONE
 
@@ -297,7 +297,9 @@ flowchart TD
 - **门后家长区占位页**：订阅管理（占位，即将上线）/ 设置（占位）/ 隐私与数据说明 + 会话剩余时间 +「锁定家长区」（立即结束会话）。
 - **冒烟测试**：`library --gui --parent-gate` 深链直开门界面，`library_gui_smoke` 无头渲染并截图校验。
 
-仍为 PLANNED：可选 4 位 PIN（哈希存储）、手写数字键盘、家长中心完整功能（§9.2）、订阅页（§11）。
+**Qt 版（QT-2）已复刻同一交互并接入同一 `core::ParentGate`**：首页 32dp 家长区入口 → 家长门（乘法题 + 中文大写数字软键盘 + 冷却「休息一下」，15 分钟会话内免重复验证）→ 家长中心（会话剩余倒计时 / 订阅占位入口 / 设置入口 / 隐私说明 /「锁定家长区」）。设置页（字号三档 / 减少动效 / 年龄段，即时生效并落 SQLite）与订阅温和占位页（「即将上线」，无倒计时无催促）均在门后；会话到期或锁定时由统一守卫自动退回首页。测试：后端桥单测 `qt_backend_bridges`（含与 CLI/GL 的共库契约）、无头 QML 冒烟 `qt_gui_smoke`（`--parent-gate` 深链 + `--smoke-parent-flow` 自动驾驶走完 门→家长中心→设置→订阅）。
+
+仍为 PLANNED：可选 4 位 PIN（哈希存储）、手写数字键盘、家长中心完整功能（§9.2）、正式订阅页（§11）。
 
 ### 9.1 交互规范
 
@@ -368,7 +370,7 @@ flowchart LR
 
 ## 11. 订阅页（家长门之后）
 
-**原则**：给家长看的页面 = 信息完整、无套路（定价策略见 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §2/§3）。状态：`PLANNED`。
+**原则**：给家长看的页面 = 信息完整、无套路（定价策略见 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §2/§3）。状态：`IN_PROGRESS`（Qt 版家长门后温和占位页 DONE：「即将上线」+ 免费可玩说明，无倒计时/无催促/不索取信息；下表正式订阅页 PLANNED）。
 
 | 条目 | 规范 |
 |------|------|
@@ -457,8 +459,8 @@ sequenceDiagram
 | 教程播放器 | GL 窗口步骤导航、高亮/ghost 渲染、退出存档 | 呼吸动画、相机姿态恢复、收藏按钮、TTS 切步朗读（`ITtsEngine` stub + Linux espeak/spd-say 后端 + `--tts`/启蒙模式自动开启；🔊 按钮与原生后端待做） | 手势提示、庆祝动画、完成页 |
 | 模型库 | Qt 版筛选器（难度/主题/「只用核心 9 片」/「我能搭的」+ 筛选空态）、Qt 版模型详情页（BOM 对照库存缺片琥珀提示 + 收藏 + 开始搭建） | GL 卡片网格 + 进度徽标、4–6 岁启蒙模式超大卡片简化布局（读年龄段设置自动切换）、「我能搭的」库存筛选 | 筛选器分龄收放、详情页 3D 预览、步骤级缺片提示 |
 | 进度成就 | 数据层 + CLI | 成就定义与触发 | 成就墙 GUI |
-| 家长门/订阅 | 算术题门 stub（`core::ParentGate` + 软键盘门界面 + 15 分钟内存会话 + 家长区占位页 + 单元/冒烟测试） | 家长区入口已接入模型库 | PIN、手写键盘、家长中心完整功能、订阅页（M3 商用前置） |
+| 家长门/订阅 | 算术题门 stub（`core::ParentGate` + 软键盘门界面 + 15 分钟内存会话 + 家长区占位页 + 单元/冒烟测试）、Qt 版家长门 + 家长中心 + 门后设置页/订阅占位页 + 会话守卫（`qt_backend_bridges`/`qt_gui_smoke`） | 家长区入口已接入模型库 | PIN、手写键盘、家长中心完整功能、正式订阅页（M3 商用前置） |
 | Onboarding | 结构化库存 API + CLI 录入（`inventory set/show/match`）、首启空库存提示弹窗 stub | 年龄段选择（存储 + CLI `settings set-age` 已有，GUI 待做） | 按片型计数的图形录入界面 |
-| 无障碍/分龄 | — | 年龄分层框架（AgeMode 三档 + 启蒙模式布局 + TTS 自动朗读，单元测试 `age_tts`） | 其余分龄细则、色盲安全、阅读友好 |
+| 无障碍/分龄 | 字号三档缩放 + 减少动效（Qt 版设置页即时生效，`progress/ui_settings` 存储） | 年龄分层框架（AgeMode 三档 + 启蒙模式布局 + Qt 版家长区年龄段切换 + TTS 自动朗读，单元测试 `age_tts`） | 其余分龄细则、色盲安全、跟随系统 |
 
 > 状态变更须同步更新本表与 [PRODUCT_MASTER_PLAN.md](PRODUCT_MASTER_PLAN.md)「商用功能清单」。

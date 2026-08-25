@@ -96,8 +96,11 @@ jobs:
           MODEL_COUNT=$(unzip -l "$APK" | grep -c 'assets/data/models/.*\.json')
           THUMB_COUNT=$(unzip -l "$APK" | grep -c 'assets/thumbnails/.*\.png')
           echo "模型 JSON 数量: $MODEL_COUNT / 缩略图 PNG 数量: $THUMB_COUNT"
-          # 缩略图与模型一一对应 (thumbnails/<id>.png 约定); 数量脱节说明打包接线坏了
-          [ "$THUMB_COUNT" -ge "$MODEL_COUNT" ] || { echo "APK 缩略图数量 ($THUMB_COUNT) 少于模型数量 ($MODEL_COUNT)"; exit 1; }
+          # 缩略图为 0 说明 assets/thumbnails 打包接线坏了, 硬性失败
+          [ "$THUMB_COUNT" -gt 0 ] || { echo "APK 缺少缩略图 (assets/thumbnails 未打包)"; exit 1; }
+          # 缩略图按 thumbnails/<id>.png 约定与模型对应; 内容制作期新模型
+          # 的缩略图可能滞后生成, 数量落后只告警不失败 (缺图卡片显示占位)
+          [ "$THUMB_COUNT" -ge "$MODEL_COUNT" ] || echo "::warning::缩略图数量 ($THUMB_COUNT) 少于模型数量 ($MODEL_COUNT), 新模型缩略图待生成"
 
       - name: 上传 APK 产物
         uses: actions/upload-artifact@v4

@@ -13,6 +13,7 @@ Page {
     signal openLibrary()
     signal openModel(string modelId)
     signal openInventory()
+    signal openParentArea()
     signal notify(string message)
 
     background: Rectangle { color: Theme.surfaceAlt }
@@ -31,7 +32,8 @@ Page {
             color: Theme.textPrimary
         }
 
-        // 家长区入口: 唯一允许 32px 的小按钮 (防儿童误入 + 家长门兜底)
+        // 家长区入口: 唯一允许 32px 的小按钮 (防儿童误入 + 家长门兜底,
+        // 无有效会话时 Main.qml 先路由进家长门, §5.3 / §9)
         AbstractButton {
             id: parentGateButton
             width: Theme.parentGateSize
@@ -39,7 +41,7 @@ Page {
             anchors.right: parent.right
             anchors.rightMargin: Theme.spacingLarge
             anchors.verticalCenter: parent.verticalCenter
-            onClicked: page.notify("家长区 (算术题家长门) 正在从 GL 版搬到 Qt 版, 即将上线")
+            onClicked: page.openParentArea()
             background: Rectangle {
                 radius: width / 2
                 color: parentGateButton.pressed ? Theme.primarySoft : "transparent"

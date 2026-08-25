@@ -141,7 +141,7 @@
 
 ## 6. 家长门（安全侧要求）
 
-交互规范见 [UI_UX_SPEC.md](UI_UX_SPEC.md) §9；本节为安全硬性要求。状态：`IN_PROGRESS`（算术题门 stub `DONE`，已在桌面 `library --gui` 拦截家长区（订阅/设置占位）入口，见 UI_UX_SPEC §9.0；PIN 与家长中心完整覆盖为 M3 商用前置）。
+交互规范见 [UI_UX_SPEC.md](UI_UX_SPEC.md) §9；本节为安全硬性要求。状态：`IN_PROGRESS`（算术题门 stub `DONE`，已在桌面 GL 版 `library --gui` 与 Qt 版 `magtile_studio_qt` 拦截家长区入口——两版共用同一 `core::ParentGate` 状态机，Qt 版门后含设置页与订阅占位页，且会话到期/锁定时自动退出家长区，见 UI_UX_SPEC §9.0；PIN 与家长中心完整覆盖为 M3 商用前置）。
 
 ### 6.1 必须置于家长门之后的操作（全量列表）
 

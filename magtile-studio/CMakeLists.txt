@@ -76,6 +76,7 @@ add_library(magtile_core STATIC
     src/physics/physics_validator.cpp
     src/progress/progress_store.cpp
     src/progress/age_settings.cpp
+    src/progress/ui_settings.cpp
     src/tts/tts_engine.cpp
     src/tutorial/tutorial_engine.cpp
     src/render/null_renderer.cpp
@@ -163,6 +164,11 @@ endif()
 # ---- Qt 6 商用桌面界面 (QML 外壳, 复用 magtile_core) --------------
 # 与 GL/ImGui 后端并存: GL 版继续承担 3D 教程与冒烟测试,
 # Qt 版承载商用界面 (首页/模型库/家长门...), 迁移路线见 docs/QT_UI_PLAN.md。
+# CTest 须在进入子目录前启用, 子目录内注册的用例 (qt_backend_bridges /
+# qt_gui_smoke) 才会被收进测试清单。
+if(MAGTILE_BUILD_TESTS)
+    enable_testing()
+endif()
 if(MAGTILE_BUILD_QT)
     add_subdirectory(apps/desktop_qt)
 endif()

@@ -35,29 +35,46 @@
 ```
 apps/desktop_qt/
 ├── CMakeLists.txt          # find_package(Qt6 6.4) + qt_add_qml_module; 未找到 Qt 时报错并给出各平台安装指引
+│                           #   + Qt 侧测试注册 (qt_backend_bridges 后端桥单测 / qt_gui_smoke QML 冒烟)
 ├── src/
 │   ├── main.cpp            # 入口: --data-dir/--db 解析, 数据目录向上探测, 存档路径与 CLI 逐字节一致
+│   │                       #   + --parent-gate 深链 / --smoke-quit-ms + --smoke-parent-flow 无头冒烟
 │   ├── studio_backend.*    # QML 后端桥: 模型库目录 + 进度存档 + BOM/库存对照 (canBuild/缺片/core-9)
 │   │                       #   + modelDetail/bomForModel/toggleFavorite + startBuild -> buildRequested 信号
 │   ├── library_model.*     # QAbstractListModel: 模型卡片 (名称/难度/片数/步数/主题/进度徽标/收藏
 │   │                       #   /core9Only/canBuild/missingTotal)
-│   └── library_filter_model.*  # QSortFilterProxyModel: 难度/主题/只用核心9片/我能搭的 四维筛选
+│   ├── library_filter_model.*  # QSortFilterProxyModel: 难度/主题/只用核心9片/我能搭的 四维筛选
+│   ├── inventory_backend.*     # 库存录入桥: tile_inventory 表读写 (与 CLI / GL 版共库)
+│   ├── parent_gate_backend.*   # 家长门桥 (QT-2): core::ParentGate 包装 (题目/验证/3 次错冷却/15 分钟
+│   │                           #   内存会话, 与 GL 版同一状态机) + 秒级倒计时通知, 不接触存档
+│   └── settings_backend.*      # 设置桥 (QT-2): 字号三档/减少动效 (progress/ui_settings) + 年龄段
+│                               #   (progress/age_settings), 与 GL 版 / CLI 共用 SQLite 键名契约
 └── qml/
     ├── Theme.qml           # 设计令牌单例 (UI_UX_SPEC §1.2: 磁力蓝 #2E7DD1 / 完成绿 #2C9F6B / 琥珀 #E8A13C, 圆角 16/24/20, 200ms ease-out)
+    │                       #   + fontScale/reduceMotion 无障碍属性 (§4.7 字号三档全应用即时缩放, 减少动效时长归零)
     ├── BigButton.qml       # 胶囊大按钮 (高度 >= 64, 字号 22, 按下缩放动效)
     ├── FilterChip.qml      # 筛选胶囊 (高度 48, 选中实心主色, 状态由外部绑定驱动)
-    ├── Main.qml            # 主窗口 + StackView 导航 (首页->库->详情->教程) + buildRequested 统一路由 + 底部温和提示
+    ├── Main.qml            # 主窗口 + StackView 导航 (首页->库->详情->教程 / 首页->家长门|家长中心->设置|订阅)
+    │                       #   + buildRequested 统一路由 + 家长会话守卫 (到期/锁定自动退回首页) + 底部温和提示
     ├── HomePage.qml        # 首页: 超大主按钮 + "继续上次"卡片 (直达断点模型详情) + 32px 家长区入口 (§5.3)
     ├── LibraryPage.qml     # 模型库: 筛选侧栏 (难度/主题/只用核心9片/我能搭的) + 卡片网格
     │                       #   + ✓/▶ 进度徽标 + "还缺 N 片"琥珀徽标 + 筛选空态 ("换个条件试试")
     ├── DetailPage.qml      # 模型详情 (§5.4): 预览占位 + 难度/片数/步数 + BOM 对照库存缺片提示
     │                       #   + 套装分层标签 + 收藏 + "开始搭建"大按钮 (高 64, 占宽 80%)
+    ├── InventoryPage.qml   # 磁力片库存图形录入 (§10.2): 大号 −/+ 步进器 + 直接输入, 保存与 CLI 共库
+    ├── ParentGatePage.qml  # 家长门 (§9, QT-2): 乘法题 + 中文大写数字软键盘 + 答错温和提示
+    │                       #   + 3 次错 60 秒冷却 "休息一下" (复刻 GL 版交互, 无任何价格信息)
+    ├── ParentAreaPage.qml  # 家长中心 (§9.2, QT-2): 会话剩余倒计时 + 订阅/设置入口 + 隐私说明 + 锁定家长区
+    ├── SettingsPage.qml    # 设置 (§8, QT-2): 字号三档 (100/125/150%, 即时生效) + 减少动效 + 年龄段三档
+    ├── SubscriptionPage.qml # 订阅占位 (§11): 家长门后温和 "即将上线", 无倒计时无催促不索取信息
     └── TutorialPage.qml    # 教程占位页: QT-3 视口就绪前温和提示, 路由契约与真教程一致
 ```
 
 已兑现的规范点：主色板与圆角令牌、可点元素 ≥ 48（家长区入口 32px 为规范内唯一例外）、主按钮 ≥ 64 高、状态三重编码（图形+文字+颜色, §4.7 色盲安全）、任意界面 ≤ 2 步回首页、无失败文案（占位功能一律"即将上线"温和提示，缺片用琥珀提示 + 替代建议，不用红色表达"错误"）。
 
 QT-1 补充说明：BOM 与库存对照在 `StudioBackend::reload` 一次性算好（与 GL 版同策略，模型 JSON 仅启动/重载时加载），核心 9 片分层以 `data/tile_catalog.json` 的 `tier` 标注为单一数据源（目录不可用时退回代码内同口径白名单）；「我能搭的」在未登记库存时禁用并温和引导（不显示全空列表）。「开始搭建」统一走 `startBuild -> buildRequested` 信号，Main.qml 据此路由到占位 TutorialPage —— QT-3 视口就绪后只需替换教程页内容，详情页与路由契约不变。
+
+QT-2 补充说明：家长门/冷却/会话逻辑**零重复实现**——Qt 版与 GL 版链接同一个 `core::ParentGate`（纯逻辑层，单测 `parent_gate` 不变），`ParentGateBackend` 只做属性包装与秒级倒计时通知；会话与冷却只存内存、永不落盘（SECURITY_AND_PRIVACY.md §6.2）。路由为 首页 32px 入口 → 无会话先进家长门（过门后**原位替换**为家长中心，导航深度保持 1）→ 设置/订阅在门后第 2 层；Main.qml 有统一的会话守卫，会话到期或点「锁定家长区」时自动退回首页并温和提示。设置三项（字号三档/减少动效/年龄段）经 `SettingsBackend` 写 `ProgressStore` settings 表：年龄段沿用 `age_settings` 键（CLI `settings set-age` / GL 版启蒙布局读同一键），字号与减少动效的键名契约新增在核心层 `progress/ui_settings`（GL/移动端外壳可直接复用，核心库依旧零 Qt 依赖）；字号与动效经 Theme 单例绑定即时全应用生效。订阅页当前为家长门后的温和「即将上线」占位（无倒计时/无催促/不索取信息），正式订阅页在 QT-5。测试：后端桥单测 `qt_backend_bridges`（含与 GL/CLI 的共库契约双向验证）+ 无头 QML 冒烟 `qt_gui_smoke`（offscreen 三连跑：首页 / `--parent-gate` 深链 / `--smoke-parent-flow` 自动驾驶走完 门→家长中心→设置→订阅）。
 
 Qt 版与 GL 版**共用同一份进度存档**（默认平台路径与 `magtile_app` 一致，见 docs/PROGRESS.md），家庭用户在两个外壳间切换进度不丢。
 
@@ -88,7 +105,7 @@ cmake --build build-qt --target magtile_studio_qt -j
 |------|------|------|------|
 | **QT-0 外壳落地** | CMake 可选子项目、Theme 令牌、Home + Library 占位、链接 magtile_core、进度徽标 | — | `DONE` |
 | **QT-1 模型库完整** | 筛选器（难度/主题/只用核心 9 片/我能搭）、分龄卡片密度（§2）、"继续上次"直达教程、模型详情页（BOM 缺片提示, §5.4） | QT-0 | `IN_PROGRESS`（筛选器 + 筛选空态 + 详情页 + 收藏 + "继续上次"直达详情 DONE；分龄卡片密度、筛选无结果时推荐 3 个可搭模型、详情页 3D 预览与预计用时 PLANNED） |
-| **QT-2 家长门与设置** | `core::ParentGate` 接 QML（算术题 + 中文大写软键盘复刻 GL 版）、家长中心、设置页（字号三档/减少动效/主题） | QT-0 | `PLANNED` |
+| **QT-2 家长门与设置** | `core::ParentGate` 接 QML（算术题 + 中文大写软键盘复刻 GL 版）、家长中心、设置页（字号三档/减少动效/主题） | QT-0 | `IN_PROGRESS`（家长门 QML + 家长中心 + 设置页字号三档/减少动效/年龄段 + 订阅温和占位页（门后）+ 会话守卫 + 后端桥单测/QML 冒烟 DONE；主题亮暗切换、PIN、家长中心完整功能 PLANNED） |
 | **QT-3 3D 教程播放器** | `QQuickFramebufferObject` 集成 `magtile_render_gl`：步骤导航/高亮/ghost/轨道相机上屏；退出自动存档 | QT-1 | `PLANNED`（核心屏 ★，工作量最大） |
 | **QT-4 反馈与庆祝** | 每步星星反馈、完成庆祝页、成就墙 GUI、QtTextToSpeech 朗读（§4.2/4.3） | QT-3 | `PLANNED` |
 | **QT-5 Onboarding 与订阅** | 年龄段选择、库存录入（大号 −/+ 步进器）、订阅页（家长门后, §11） | QT-2 | `PLANNED` |
@@ -105,10 +122,10 @@ cmake --build build-qt --target magtile_studio_qt -j
 | 教程播放器 §6 ★ | 步骤导航/高亮/ghost/相机 已可用 | `PLANNED`（占位页已接 buildRequested 路由并温和提示暂用 GL 版, 视口就绪后原位替换） | QT-3 |
 | 完成庆祝页 §6.2 | 无 | `PLANNED` | QT-4 |
 | 进度与成就 §7 | CLI 有数据 | 首页入口占位 `DONE`；成就墙 `PLANNED` | QT-4 |
-| 设置 §8 | 无 | `PLANNED` | QT-2 |
-| 家长门 §9 | 算术题门 + 中文大写软键盘 已可用 | 32px 入口占位 `DONE`；门界面 `PLANNED` | QT-2 |
-| Onboarding / 库存录入 §10 | 无 | `PLANNED` | QT-5 |
-| 订阅页 §11 | 无 | `PLANNED` | QT-5 |
+| 设置 §8 | 无 | 字号三档/减少动效/年龄段 `DONE`（家长门后设置页, 即时生效并落 SQLite）；主题/语言/库存复入口 `PLANNED` | QT-2 |
+| 家长门 §9 | 算术题门 + 中文大写软键盘 已可用 | 32px 入口 + 门界面（软键盘/冷却）+ 家长中心 + 会话守卫 `DONE`；PIN / 手写键盘 `PLANNED` | QT-2 |
+| Onboarding / 库存录入 §10 | 无 | 库存图形录入 `DONE`；年龄段前置流程 `PLANNED` | QT-5 |
+| 订阅页 §11 | 无 | 家长门后温和占位（即将上线）`DONE`；正式订阅页（三卡/透明条款/恢复购买）`PLANNED` | QT-5 |
 
 ## 6. 风险与对策
 

@@ -10,10 +10,10 @@
 //        assets/data/       形状目录 + 模型库目录 + 全部模型 JSON
 //                           (约 3.3 MB), 首启由 DataAssetInstaller
 //                           解包到 filesDir/data 供原生层读取;
-//        assets/thumbnails/ 全部 131 张卡片缩略图 (320x240 PNG,
-//                           约 4 MB), 只被 Kotlin UI 消费, 经
-//                           ThumbnailLoader 直接流式读 assets,
-//                           不落盘 (刻意放在 data/ 之外避免解包)。
+//        assets/thumbnails/ 全库卡片缩略图 (320x240 PNG, 约 4 MB),
+//                           只被 Kotlin UI 消费, 经 ThumbnailLoader
+//                           直接流式读 assets, 不落盘 (刻意放在
+//                           data/ 之外避免解包)。
 //   3. minSdk 26: NDK libc++ 的 std::filesystem 自 android-26 起完整
 //      可用, magtile_core 的 JSON 加载依赖它。
 // =============================================================

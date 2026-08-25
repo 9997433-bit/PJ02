@@ -39,15 +39,19 @@ QtObject {
     readonly property int bigButtonHeight: 64         // 主操作按钮
     readonly property int parentGateSize: 32          // 家长区入口 (全应用唯一例外)
 
-    // ---- 字号 (7-9 岁标准模式基准 18, §2) --------------------------
-    readonly property int fontSmall: 14
-    readonly property int fontBody: 18
-    readonly property int fontButton: 22
-    readonly property int fontTitle: 28
-    readonly property int fontHero: 44
+    // ---- 无障碍 (§4.7; Main.qml 启动时绑定到 appSettings 后端桥) ----
+    property real fontScale: 1.0        // 字号三档: 1.0 / 1.25 / 1.5
+    property bool reduceMotion: false   // 减少动效: 动效时长归零
 
-    // ---- 动效 (标准 200ms ease-out) --------------------------------
-    readonly property int animMs: 200
+    // ---- 字号 (7-9 岁标准模式基准 18, §2; 随 fontScale 三档缩放) ----
+    readonly property int fontSmall: Math.round(14 * fontScale)
+    readonly property int fontBody: Math.round(18 * fontScale)
+    readonly property int fontButton: Math.round(22 * fontScale)
+    readonly property int fontTitle: Math.round(28 * fontScale)
+    readonly property int fontHero: Math.round(44 * fontScale)
+
+    // ---- 动效 (标准 200ms ease-out; 减少动效时归零) ------------------
+    readonly property int animMs: reduceMotion ? 0 : 200
 
     /// 主题标签 → 卡片条带色 (稳定散列, 同主题永远同色)
     function themeColor(theme) {

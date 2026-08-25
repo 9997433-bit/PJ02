@@ -3,11 +3,15 @@ import QtQuick.Controls
 import MagTile.Studio
 
 // =============================================================
-// 主窗口: StackView 导航 (首页 -> 模型库 -> 模型详情 -> 教程,
-// 任意界面 <= 2 步回首页, UI_UX_SPEC.md §3 导航铁律)。
-// 最小窗口 1024x640 (§13)。后端桥 "studio" (StudioBackend) 由
-// main.cpp 注入; 「开始搭建」统一走 studio.buildRequested 信号
-// 路由 —— QT-3 教程视口就绪后只换 TutorialPage 内容, 路由不变。
+// 主窗口: StackView 导航 (首页 -> 模型库 -> 模型详情 -> 教程 /
+// 首页 -> 家长门|家长中心 -> 设置|订阅, 任意界面 <= 2 步回首页,
+// UI_UX_SPEC.md §3 导航铁律)。最小窗口 1024x640 (§13)。
+// 后端桥由 main.cpp 注入: studio (模型库) / inventory (库存) /
+// parentGate (家长门, §9) / appSettings (设置, §8)。
+// 家长区路由: 无有效会话先进家长门 (过门后原位替换为家长中心),
+// 15 分钟会话内免重复验证; 会话到期或锁定由下方守卫统一退回首页。
+// 「开始搭建」统一走 studio.buildRequested 信号路由 —— QT-3 教程
+// 视口就绪后只换 TutorialPage 内容, 路由不变。
 // =============================================================
 ApplicationWindow {
     id: window
@@ -20,11 +24,32 @@ ApplicationWindow {
     title: qsTr("MagTile 磁力片工坊")
     color: Theme.surfaceAlt
 
+    Component.onCompleted: {
+        // 字号三档与减少动效 (§4.7): 设置页改动经 Theme 单例即时全应用生效
+        Theme.fontScale = Qt.binding(function() { return appSettings.fontScalePercent / 100.0 })
+        Theme.reduceMotion = Qt.binding(function() { return appSettings.reduceMotion })
+        // --parent-gate 深链: 启动直开家长门 (评审 / 冒烟, 同 GL 版)
+        if (parentGate.deepLinkRequested) {
+            parentGate.openGate()
+            stack.push(parentGateComponent)
+        }
+    }
+
     /// 温和的占位提示 (P3 零挫败: 只说"即将上线", 永不弹"失败")
     function showToast(message) {
         toastLabel.text = message
         toast.open()
         toastTimer.restart()
+    }
+
+    /// 家长区入口 (§9): 15 分钟会话内直达家长中心, 否则先过家长门
+    function openParentZone() {
+        if (parentGate.sessionActive) {
+            stack.push(parentAreaComponent)
+        } else {
+            parentGate.openGate()   // 每次进门都是新题, 防背题
+            stack.push(parentGateComponent)
+        }
     }
 
     StackView {
@@ -46,7 +71,41 @@ ApplicationWindow {
             onOpenLibrary: stack.push(libraryComponent)
             onOpenModel: function(modelId) { stack.push(detailComponent, { modelId: modelId }) }
             onOpenInventory: stack.push(inventoryComponent)
+            onOpenParentArea: window.openParentZone()
             onNotify: function(message) { window.showToast(message) }
+        }
+    }
+
+    Component {
+        id: parentGateComponent
+        ParentGatePage {
+            // 过门后原位替换为家长中心 (导航深度保持 1, <= 2 步回首页)
+            onPassed: stack.replace(parentAreaComponent)
+            onDismissed: stack.pop()
+        }
+    }
+
+    Component {
+        id: parentAreaComponent
+        ParentAreaPage {
+            onBack: stack.pop()
+            onOpenSettings: stack.push(settingsComponent)
+            onOpenSubscription: stack.push(subscriptionComponent)
+            // 「锁定家长区」只结束会话, 退回首页由下方会话守卫统一处理
+        }
+    }
+
+    Component {
+        id: settingsComponent
+        SettingsPage {
+            onBack: stack.pop()
+        }
+    }
+
+    Component {
+        id: subscriptionComponent
+        SubscriptionPage {
+            onBack: stack.pop()
         }
     }
 
@@ -103,6 +162,50 @@ ApplicationWindow {
                 currentStep: currentStep,
                 stepCount: stepCount
             })
+        }
+    }
+
+    // 家长会话守卫 (SECURITY_AND_PRIVACY.md §6.2): 会话到期或被锁定时,
+    // 若仍停留在家长区任意页面 (requiresParentSession), 统一退回首页
+    Connections {
+        target: parentGate
+        function onSessionChanged() {
+            if (!parentGate.sessionActive && stack.currentItem
+                    && stack.currentItem.requiresParentSession === true) {
+                stack.pop(null)
+                window.showToast("家长区已锁上, 再进入需要重新答题")
+            }
+        }
+    }
+
+    // ---- 冒烟自动驾驶 (--smoke-parent-flow, 无头 CI 专用) -------------
+    // 家长门 -> 提交标准答案过门 -> 家长中心 -> 设置 -> 订阅, 逐页驻留;
+    // 全程无误后置 smokeParentFlowOk, main.cpp 在 --smoke-quit-ms 到点
+    // 时据此决定退出码 —— 保证四个新页面在 CI 里真实实例化过。
+    property bool smokeParentFlowOk: false
+    Timer {
+        id: smokeFlowTimer
+        property int stage: 0
+        interval: 250
+        repeat: true
+        running: smokeParentFlow
+        onTriggered: {
+            stage += 1
+            if (stage === 1) {
+                window.openParentZone()                              // 家长门
+            } else if (stage === 2) {
+                parentGate.submitAnswer(parentGate.expectedAnswer()) // 过门 -> 家长中心
+            } else if (stage === 3) {
+                stack.push(settingsComponent)                        // 设置页
+            } else if (stage === 4) {
+                stack.pop()
+                stack.push(subscriptionComponent)                    // 订阅占位页
+            } else {
+                window.smokeParentFlowOk = parentGate.sessionActive
+                    && stack.currentItem !== null
+                    && stack.currentItem.requiresParentSession === true
+                stop()
+            }
         }
     }
 

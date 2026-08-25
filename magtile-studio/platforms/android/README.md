@@ -61,7 +61,8 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 ```
 
 安装启动后: 首次启动解包数据资产 (秒级) → 状态栏显示
-「131 / 131 个模型 · 13 种磁力片形状」→ 滚动缩略图模型卡片列表;
+「N / N 个模型 · 13 种磁力片形状」(N = 全库模型数, 当前 131+) →
+滚动缩略图模型卡片列表;
 筛选栏可按难度星级 / 主题过滤, 勾选「只用核心 9 片」只看基础套装
 能搭的模型 (用到扩展片型的卡片带琥珀「需要扩展装」角标); 点击卡片
 弹出简介 + 套装说明与「教程即将上线」占位, 「物理校验」按钮按需
@@ -122,8 +123,8 @@ GL/Qt 模型库一致: 难度星级精确匹配、规范主题 (目录 `theme` �
   把仓库根 `data/` 的**子集**同步进 APK assets, 分两个目录:
   - `assets/data/`: `tile_catalog.json` + `model_catalog.json` +
     `models/*.json` (约 3.3 MB), 供原生层读取;
-  - `assets/thumbnails/`: 全部 131 张卡片缩略图 (320x240 PNG,
-    约 4 MB), 只被 Kotlin UI 消费。
+  - `assets/thumbnails/`: 全库卡片缩略图 (320x240 PNG, 约 30 KB/张,
+    全库约 4 MB), 只被 Kotlin UI 消费。
 
   数据单一来源是仓库根 `data/`, 不做第二份拷贝。
 - 运行期: `magtile_core` 走 `std::filesystem` 读真实文件路径, 不能直接
@@ -143,7 +144,9 @@ GL/Qt 模型库一致: 难度星级精确匹配、规范主题 (目录 `theme` �
 - `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 4 个 JNI
   符号齐全 —— 持续保证 `magtile_core` 无平台依赖。
 - `assemble-debug`: Gradle 全量打包 debug APK, 校验 APK 内容
-  (原生库 / 数据资产 / 缩略图数量 ≥ 模型数量) 并上传为构建产物。
+  (原生库 / 数据资产 / 缩略图已打包; 缩略图数量落后于模型数量时
+  只告警 —— 内容制作期新模型缩略图可能滞后生成, 缺图卡片显示占位)
+  并上传为构建产物。
 
 ## 六、后续计划
 

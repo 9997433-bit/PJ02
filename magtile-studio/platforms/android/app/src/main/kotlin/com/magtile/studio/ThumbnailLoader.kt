@@ -16,7 +16,7 @@ import java.util.concurrent.Executors
  *
  * - 解码在单线程池执行, 主线程只做缓存命中与 setImageBitmap;
  * - LruCache 以字节计容量 (上限取进程内存 1/8), 320x240 ARGB_8888
- *   单张约 300 KB, 全库 131 张约 38 MB, 低内存机型按 LRU 逐出;
+ *   单张约 300 KB, 全库 130+ 张约 40 MB, 低内存机型按 LRU 逐出;
  * - asset 缺失 (模型无缩略图) 记入负缓存, 避免复用滚动反复尝试 IO;
  * - RecyclerView 复用安全: ImageView 以 asset 路径作 tag, 解码完成
  *   回主线程时 tag 已变 (view 被复用于其他卡片) 则丢弃结果。

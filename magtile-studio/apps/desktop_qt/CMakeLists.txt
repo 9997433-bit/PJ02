@@ -7,10 +7,12 @@
 # 界面规范见 docs/UI_UX_SPEC.md, 迁移计划见 docs/QT_UI_PLAN.md。
 # =============================================================
 
-find_package(Qt6 6.4 QUIET COMPONENTS Core Gui Qml Quick QuickControls2)
+# OpenGL 组件: QT-3 教程视口 (QQuickFramebufferObject) 依赖
+# QOpenGLFramebufferObject; 随 qt6-base-dev 一并安装, 无额外依赖。
+find_package(Qt6 6.4 QUIET COMPONENTS Core Gui Qml Quick QuickControls2 OpenGL)
 if(NOT Qt6_FOUND)
     message(FATAL_ERROR
-        "MAGTILE_BUILD_QT=ON 但未找到 Qt 6 (>= 6.4, 组件 Core/Gui/Qml/Quick/QuickControls2)。\n"
+        "MAGTILE_BUILD_QT=ON 但未找到 Qt 6 (>= 6.4, 组件 Core/Gui/Qml/Quick/QuickControls2/OpenGL)。\n"
         "安装方式:\n"
         "  Ubuntu/Debian: sudo apt install qt6-base-dev qt6-declarative-dev \\\n"
         "      qml6-module-qtquick qml6-module-qtquick-controls qml6-module-qtquick-layouts \\\n"
@@ -30,7 +32,14 @@ qt_add_executable(magtile_studio_qt
     src/library_filter_model.cpp
     src/studio_backend.cpp
     src/inventory_backend.cpp
+    src/parent_gate_backend.cpp
+    src/settings_backend.cpp
+    src/tutorial_viewport.cpp
 )
+
+# qmltyperegistrar 生成的注册文件以 <tutorial_viewport.hpp> 形式包含
+# QML_ELEMENT 类型头, 须把 src/ 挂进目标包含路径
+target_include_directories(magtile_studio_qt PRIVATE src)
 
 # Theme.qml 是设计令牌单例 (pragma Singleton), 需在 qmldir 中登记为 singleton
 set_source_files_properties(qml/Theme.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
@@ -48,6 +57,10 @@ qt_add_qml_module(magtile_studio_qt
         qml/DetailPage.qml
         qml/TutorialPage.qml
         qml/InventoryPage.qml
+        qml/ParentGatePage.qml
+        qml/ParentAreaPage.qml
+        qml/SettingsPage.qml
+        qml/SubscriptionPage.qml
         qml/BigButton.qml
         qml/FilterChip.qml
         qml/Theme.qml
@@ -55,12 +68,14 @@ qt_add_qml_module(magtile_studio_qt
 
 target_link_libraries(magtile_studio_qt PRIVATE
     magtile_core
+    magtile_render_scene    # 3D 教程视口场景渲染 (与 GL 版共用, QT-3)
     magtile_warnings
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick
     Qt6::QuickControls2
+    Qt6::OpenGL
 )
 
 # 桌面应用外观: Windows 下不带控制台窗口; macOS 先不打 bundle

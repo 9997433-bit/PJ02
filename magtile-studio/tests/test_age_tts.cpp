@@ -4,6 +4,8 @@
 //   1. AgeMode: 持久化标识/中文名/周岁映射的往返与非法输入;
 //   2. 年龄段设置: SQLite settings 表往返、跨连接持久化、
 //      未设置与脏值的默认档兜底;
+//   2b. 界面设置 (§4.7/§8 字号三档 + 减少动效): 往返、非法档位
+//      忽略、脏值兜底、跨连接持久化;
 //   3. NullTts: speak 替换旧朗读 (无叠音语义)、stop 幂等、
 //      空文本等价于 stop;
 //   4. 系统 TTS 探测: createSystemTts 永不返回空指针, 无后端时
@@ -17,6 +19,7 @@
 
 #include "magtile/core/age_mode.hpp"
 #include "magtile/progress/age_settings.hpp"
+#include "magtile/progress/ui_settings.hpp"
 #include "magtile/tts/tts_engine.hpp"
 
 namespace {
@@ -88,6 +91,31 @@ int main(int argc, char** argv) {
         // 脏值兜底: 手改数据库/未来档位不能毒化 UI, 一律回默认档
         store.setSetting(progress::kAgeModeSettingKey, "age_100_200");
         expect(progress::getAgeMode(store) == AgeMode::Age7_9, "脏值回退默认档");
+    }
+
+    // ---- 2b. 界面设置 (字号三档 / 减少动效) 的 SQLite 往返 --------------
+    {
+        progress::ProgressStore store(db_path);
+        expect(progress::getFontScalePercent(store) == 100, "从未设置时字号为标准档 100%");
+        expect(!progress::getReduceMotion(store), "从未设置时动效开启");
+        expect(progress::isValidFontScalePercent(125) &&
+                   !progress::isValidFontScalePercent(137),
+               "档位校验: 125 合法, 137 非法");
+
+        progress::setFontScalePercent(store, 125);
+        progress::setReduceMotion(store, true);
+        expect(progress::getFontScalePercent(store) == 125, "字号 125% 立即可读");
+        expect(progress::getReduceMotion(store), "减少动效开启后立即可读");
+
+        progress::setFontScalePercent(store, 137);  // 非法档位不落盘
+        expect(progress::getFontScalePercent(store) == 125, "非法档位被忽略, 保留原档");
+
+        store.setSetting(progress::kFontScaleSettingKey, "abc");  // 脏值兜底
+        expect(progress::getFontScalePercent(store) == 100, "字号脏值回退标准档");
+    }
+    {
+        progress::ProgressStore store(db_path);  // 重开连接: 验证真正落盘
+        expect(progress::getReduceMotion(store), "减少动效跨连接持久化");
     }
 
     // ---- 3. NullTts: 无叠音语义 ---------------------------------------
