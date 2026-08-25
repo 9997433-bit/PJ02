@@ -1,0 +1,1415 @@
+{
+  "schema_version": 1,
+  "id": "police_station_01",
+  "name": "社区派出所",
+  "name_en": "Police Station 01",
+  "description": "城市守护者系列的政务小楼: 7x4 警务大院里, 4x2 两层派出所圈层砌法起楼 —— 一层户籍窗口与蓝色值班大门, 二层整排透明办案窗, 屋顶长板南北双边压墙顶锁成多环箱体; 门头两片发光窗格招牌顶着红蓝警灯 (重心正压铰链零力矩), 北沿通讯天线直指 4 格高; 大院南门双柱横楣岗门 (两端竖边传力) 也戴红蓝门灯, 东侧治安岗亭四墙自锁加等边四坡尖顶, 西侧绿篱收边 —— 有事找警察, 24 小时不打烊。",
+  "difficulty": 3,
+  "total_pieces": 75,
+  "tags": [
+    "城市",
+    "职业体验",
+    "派出所",
+    "建筑",
+    "进阶",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 45,
+        "equilateral_triangle": 11,
+        "rectangle": 9,
+        "window_square": 8,
+        "door_frame": 1,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g3_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_p",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_r",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_p",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g0_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_c",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bw1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bw1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bw1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bw1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ww1_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ew1_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ww1_3",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ew1_3",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fwin1_a",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fdoor",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "fwin1_b",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fsq1",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bw2_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bw2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bw2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bw2_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ww2_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ew2_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ww2_3",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ew2_3",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fw2_1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fw2_2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fw2_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fw2_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rf_1",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rf_2",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rf_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rf_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        3.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sign_w",
+      "type": "window_square",
+      "position": [
+        2.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sign_e",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "light_r",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "light_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ant",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        4.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gp_w1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gp_e1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gp_w2",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gp_e2",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "g_lintel",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gl_r",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "gl_b",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gb_s",
+      "type": "square",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gb_n",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gb_w",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gb_e",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gbr_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gbr_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gbr_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gbr_w",
+      "type": "equilateral_triangle",
+      "position": [
+        6.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hg_1",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hg_2",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        2.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hg_3",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        3.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺大院后排: 7 片地坪沿 y=3 排开, 两端与东角留草坪。",
+      "tip": "后排格线就是小楼后墙的落脚线 —— 每片都要对齐格子。",
+      "tiles_to_add": [
+        "g3_0",
+        "g3_1",
+        "g3_2",
+        "g3_3",
+        "g3_4",
+        "g3_5",
+        "g3_6"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺大院中排: 再铺 7 片, 小楼与岗亭的地基完成。",
+      "tip": "中排与后排整边互吸 —— 楼体四面墙都会踩在这两排的格线上。",
+      "tiles_to_add": [
+        "g2_0",
+        "g2_1",
+        "g2_2",
+        "g2_3",
+        "g2_4",
+        "g2_5",
+        "g2_6"
+      ],
+      "highlight_tiles": [
+        "g3_0",
+        "g3_6"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺前院与步道: 10 片铺满前院, 青色步道从大门直通院门。",
+      "tip": "长板拼缝错开受力 —— 青色步道正对将要立起的值班大门。",
+      "tiles_to_add": [
+        "g1_0",
+        "g1_1",
+        "g1_p",
+        "g1_3",
+        "g1_4",
+        "g1_r",
+        "g0_a",
+        "g0_p",
+        "g0_b",
+        "g0_c"
+      ],
+      "highlight_tiles": [
+        "g2_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立一层后墙与山墙: 后墙 4 片沿 y=4, 东西山墙各 2 片。",
+      "tip": "拐角竖边互吸 —— 圈层砌法从第一层就开始自锁。",
+      "tiles_to_add": [
+        "bw1_1",
+        "bw1_2",
+        "bw1_3",
+        "bw1_4",
+        "ww1_2",
+        "ww1_3",
+        "ew1_2",
+        "ew1_3"
+      ],
+      "highlight_tiles": [
+        "g3_1",
+        "g2_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装一层前脸: 户籍窗口 + 蓝色值班大门 + 接警窗口 + 实墙。",
+      "tip": "大门正对青色步道 —— 前脸四片与山墙竖边互吸合龙一层。",
+      "tiles_to_add": [
+        "fwin1_a",
+        "fdoor",
+        "fwin1_b",
+        "fsq1"
+      ],
+      "highlight_tiles": [
+        "ww1_2",
+        "ew1_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立二层后墙与山墙: 沿一层墙顶再起一圈 8 片。",
+      "tip": "上环整边压下环 —— 越按越紧, 这就是圈层砌法的力气。",
+      "tiles_to_add": [
+        "bw2_1",
+        "bw2_2",
+        "bw2_3",
+        "bw2_4",
+        "ww2_2",
+        "ww2_3",
+        "ew2_2",
+        "ew2_3"
+      ],
+      "highlight_tiles": [
+        "bw1_1",
+        "ww1_2"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "装二层办案窗: 4 片透明窗格方一字排开, 二层合龙。",
+      "tip": "整排透明大窗 —— 阳光照进办案区, 警务公开透明。",
+      "tiles_to_add": [
+        "fw2_1",
+        "fw2_2",
+        "fw2_3",
+        "fw2_4"
+      ],
+      "highlight_tiles": [
+        "fwin1_a",
+        "fdoor"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖屋顶: 4 片长板纵向铺过楼顶, 南北两端同时压住前后墙顶。",
+      "tip": "每片长板双端受力零悬挑 —— 屋顶把两层墙圈锁成整体。",
+      "tiles_to_add": [
+        "rf_1",
+        "rf_2",
+        "rf_3",
+        "rf_4"
+      ],
+      "highlight_tiles": [
+        "bw2_1",
+        "fw2_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立门头招牌: 2 片蓝色窗格方立在屋顶南沿正中。",
+      "tip": "底边同时吸住屋顶板边与二层墙顶 —— 双铰链线互为保险。",
+      "tiles_to_add": [
+        "sign_w",
+        "sign_e"
+      ],
+      "highlight_tiles": [
+        "rf_2",
+        "rf_3"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "装楼顶警灯: 招牌顶上红灯在西、蓝灯在东。",
+      "tip": "重心正压铰链线, 力臂为零 —— 红蓝灯昼夜值班。",
+      "tiles_to_add": [
+        "light_r",
+        "light_b"
+      ],
+      "highlight_tiles": [
+        "sign_w",
+        "sign_e"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "竖通讯天线: 屋顶北沿立起 1 片等腰高塔尖。",
+      "tip": "尖端高出屋面 2 格 —— 110 指挥中心的信号从这里进出。",
+      "tiles_to_add": [
+        "ant"
+      ],
+      "highlight_tiles": [
+        "rf_3"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "立岗门柱基: 步道两侧沿 y=1 各立 1 片灰色方柱。",
+      "tip": "两柱正好隔出 2 格门洞 —— 底边整边吸住地坪格线。",
+      "tiles_to_add": [
+        "gp_w1",
+        "gp_e1"
+      ],
+      "highlight_tiles": [
+        "g1_1",
+        "g1_4"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "加柱顶与横楣: 蓝色柱顶方板压柱, 长板横楣跨过门洞两端竖边互吸。",
+      "tip": "横楣两端竖边传力 —— 剪断任何一端, 力还能从另一端绕行。",
+      "tiles_to_add": [
+        "gp_w2",
+        "gp_e2",
+        "g_lintel"
+      ],
+      "highlight_tiles": [
+        "gp_w1",
+        "gp_e1"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "装岗门门灯: 柱顶红蓝双灯遥相呼应。",
+      "tip": "进出大院一抬头就能看见 —— 警灯是最醒目的路标。",
+      "tiles_to_add": [
+        "gl_r",
+        "gl_b"
+      ],
+      "highlight_tiles": [
+        "gp_w2",
+        "gp_e2"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "起治安岗亭四墙: 东侧 1x1 格子上四面青色方墙拐角互吸。",
+      "tip": "四墙竖边两两互吸自锁成筒 —— 单人岗亭也要有结构冗余。",
+      "tiles_to_add": [
+        "gb_s",
+        "gb_n",
+        "gb_w",
+        "gb_e"
+      ],
+      "highlight_tiles": [
+        "g2_6",
+        "g3_6"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "盖岗亭尖顶: 4 片等边三角四坡合拢, 斜棱两两互吸。",
+      "tip": "锥尖高 0.707, 四条斜棱一圈装完自锁成环。",
+      "tiles_to_add": [
+        "gbr_s",
+        "gbr_e",
+        "gbr_n",
+        "gbr_w"
+      ],
+      "highlight_tiles": [
+        "gb_s",
+        "gb_n"
+      ]
+    },
+    {
+      "step_number": 17,
+      "description": "种西侧绿篱: 大院西沿立 3 片绿色等边三角收边。",
+      "tip": "绿篱底边整边吸大院西沿 —— 派出所建成, 社区更安心!",
+      "tiles_to_add": [
+        "hg_1",
+        "hg_2",
+        "hg_3"
+      ],
+      "highlight_tiles": [
+        "g1_0",
+        "g2_0"
+      ]
+    }
+  ]
+}
