@@ -21,6 +21,9 @@
 //      debug 照常, release 任务执行期给中文指引报错 (见文内守卫)。
 // =============================================================
 
+// 顶层 import: 脚本体内 `java` 标识符被 Java 插件扩展遮蔽, 不能就地全限定
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -32,9 +35,9 @@ plugins {
 // assembleDebug 照常, release 任务在执行期给出中文指引报错 (见下方
 // 守卫) —— 刻意不在配置期失败, 否则连 debug 构建/IDE 同步都会被拖垮。
 val keystorePropsFile = rootProject.file("keystore.properties")
-val keystoreProps: java.util.Properties? =
+val keystoreProps: Properties? =
     if (keystorePropsFile.isFile) {
-        java.util.Properties().apply { keystorePropsFile.inputStream().use { load(it) } }
+        Properties().apply { keystorePropsFile.inputStream().use { load(it) } }
     } else {
         null
     }
@@ -126,8 +129,11 @@ android {
 // ---- Release 出包守卫: 无签名配置时给清晰错误, 不产未签名包 ----------
 // 用 doFirst 而非 taskGraph.whenReady —— 后者与配置缓存不兼容
 // (gradle.properties 已开启 org.gradle.configuration-cache)。
+// preReleaseBuild 是 release 变体一切构建路径的最早前置, 挂它实现
+// 快速失败 (报错在编译/原生构建之前); 三个生命周期任务兜底。
 if (keystoreProps == null) {
-    val guardedReleaseTasks = setOf("assembleRelease", "bundleRelease", "installRelease")
+    val guardedReleaseTasks =
+        setOf("preReleaseBuild", "assembleRelease", "bundleRelease", "installRelease")
     tasks.configureEach {
         if (name in guardedReleaseTasks) {
             doFirst {
