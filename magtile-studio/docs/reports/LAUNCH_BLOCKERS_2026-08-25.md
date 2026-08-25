@@ -127,6 +127,6 @@ tools/check_v1_readiness.sh --strict   # 签核档: SKIP 算失败
 
 **你的下一个动作** (任选其一即可推进):
 
-1. 实物: 按 `PHYSICAL_REVIEW_QUEUE.md` 排名第 1 的模型开搭
+1. 实物: 按 `PHYSICAL_REVIEW_QUEUE.md` 排名第 1 的模型开搭 —— **已开工单** [PATH_A_SESSION_01_SKYSCRAPER.md](PATH_A_SESSION_01_SKYSCRAPER.md) (`skyscraper_01`, 预算 120min)
 2. 配额: 回复 B1/B2/B3 决策
 3. 行政: 启动 L4 定稿 + L1 软著材料准备
