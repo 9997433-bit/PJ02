@@ -1,0 +1,779 @@
+{
+  "schema_version": 1,
+  "id": "rehab_park_01",
+  "name": "康复操场",
+  "name_en": "Rehab Park 01",
+  "description": "全库第一座康复训练操场, 主角是'上-平-下'无障碍训练环线: 中央康复山丘箱形围筒 + 长板台面, 西边 30 度上坡、东边 30 度下坡, 两坡顶边都同吸台面短边与壁顶 (共线双连接) 坡尾自然落地零悬臂, 台顶南北沿四片黄色安全护栏扶着走不怕摔 —— 与 skate_park_01/slide_playground_01 '冲下来'的坡道不同, 这里的双坡是'走上去再走下来'的对称慢动线; 山丘南边平行双杠步道 四片青色扶杆分立地缝, 东头接橙黄相间的平衡步石踩格折返; 北草坪休息凳面朝山丘, 加油旗高扬 —— 一步一步来, 每天都进步!",
+  "difficulty": 2,
+  "total_pieces": 41,
+  "tags": [
+    "医院",
+    "城市",
+    "运动",
+    "康复",
+    "无障碍"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 28,
+        "equilateral_triangle": 6,
+        "rectangle": 6,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g0_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "g0_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "g0_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "g1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_4",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_m0",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g2_m1",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g2_e",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m_s0",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m_s1",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m_n0",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m_n1",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m_e",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m_deck",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ramp_up",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ramp_down",
+      "type": "rectangle",
+      "position": [
+        4.866025,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "rail_s0",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail_s1",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail_n0",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail_n1",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bar_s0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bar_s1",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bar_n0",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bar_n1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bench_0",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bench_1",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flag",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        4.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺操场南排: 白色双杠步道两格居西, 橙黄相间的平衡步石三格接到东头。",
+      "tip": "步石颜色一格一换 —— 踩着格子练平衡。",
+      "tiles_to_add": [
+        "g0_0",
+        "g0_1",
+        "g0_2",
+        "g0_3",
+        "g0_4",
+        "g0_5"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺第二排草坪: 全部方板 —— 北排扶杆要吸这条格线。",
+      "tip": "",
+      "tiles_to_add": [
+        "g1_0",
+        "g1_1",
+        "g1_2",
+        "g1_3",
+        "g1_4"
+      ],
+      "highlight_tiles": [
+        "g0_1",
+        "g0_2"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺山丘行: 两片白色台基居中, 东西各一条灰色长板 —— 坡道就落在长板上。",
+      "tip": "",
+      "tiles_to_add": [
+        "g2_w",
+        "g2_m0",
+        "g2_m1",
+        "g2_e"
+      ],
+      "highlight_tiles": [
+        "g1_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺北草坪: 6 片方板合拢场地, 西端留旗位、东段留凳位。",
+      "tip": "",
+      "tiles_to_add": [
+        "g3_0",
+        "g3_1",
+        "g3_2",
+        "g3_3",
+        "g3_4",
+        "g3_5"
+      ],
+      "highlight_tiles": [
+        "g2_m0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立平行双杠: 4 片青色扶杆分立步道两侧地缝, 竖边成对互吸。",
+      "tip": "两侧扶杆间距一格 —— 双手扶杆, 一步一步来。",
+      "tiles_to_add": [
+        "bar_s0",
+        "bar_s1",
+        "bar_n0",
+        "bar_n1"
+      ],
+      "highlight_tiles": [
+        "g0_1",
+        "g0_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "起康复山丘围筒: 四面六片绿墙竖边互吸成环。",
+      "tip": "山丘是训练环线的制高点 —— 箱形闭环无单点失效。",
+      "tiles_to_add": [
+        "m_s0",
+        "m_s1",
+        "m_n0",
+        "m_n1",
+        "m_w",
+        "m_e"
+      ],
+      "highlight_tiles": [
+        "g2_m0",
+        "g2_m1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "盖台面、搭双坡: 长板台面短边压东西壁顶, 西坡上行、东坡下行, 坡顶边同吸台面边与壁顶, 坡尾自然落地。",
+      "tip": "从西边走上去、东边走下来 —— 上-平-下一条环线。",
+      "tiles_to_add": [
+        "m_deck",
+        "ramp_up",
+        "ramp_down"
+      ],
+      "highlight_tiles": [
+        "m_w",
+        "m_e"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立台顶安全护栏: 南北沿各 2 片黄等边, 底边吸壁顶边。",
+      "tip": "护栏与台面长边共线双吸 —— 扶着走, 不怕摔。",
+      "tiles_to_add": [
+        "rail_s0",
+        "rail_s1",
+        "rail_n0",
+        "rail_n1"
+      ],
+      "highlight_tiles": [
+        "m_deck"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "摆休息凳、升加油旗: 两片橙等边面朝山丘, 红色等腰旗立上西北角 —— 康复操场开练, 每天都进步!",
+      "tip": "",
+      "tiles_to_add": [
+        "bench_0",
+        "bench_1",
+        "flag"
+      ],
+      "highlight_tiles": [
+        "g3_3",
+        "g3_4"
+      ]
+    }
+  ]
+}
