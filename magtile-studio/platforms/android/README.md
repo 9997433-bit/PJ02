@@ -158,7 +158,7 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 | `validateModel(jsonPath: String): String` | 加载模型并跑完整物理校验 (R1~R8), 返回中文摘要 |
 | `getTutorialStepCount(): Int` | 最近一次成功加载模型的教程步骤数, 未加载 -1 |
 
-进度存档 / 磁力片库存 / 年龄段设置链路绑定
+进度存档 / 磁力片库存 / 年龄段设置 / 进度页与成就墙链路绑定
 `com.magtile.studio.MagTileNative` (直接复用核心库
 `progress::ProgressStore` —— 与桌面 CLI `inventory set` / GL / Qt
 录入界面同一份 SQLite schema (`tile_inventory` 表 + `settings` 表),
@@ -173,6 +173,7 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 | `missingPiecesJson(jsonPath: String): String` | 缺片清单: `{"configured","can_build","missing_total","missing":[{id/name_zh/count}],"text":"缺 2 片正方形、…"}` (措辞与桌面 Qt `missingText` 一致), 失败 `{"error":"..."}` |
 | `ageModeId(): String` | 年龄段模式标识 (`settings` 表 `age_mode` 键, 与桌面 GL/Qt/CLI `settings set-age` 同键): `"age_4_6"` / `"age_7_9"` / `"age_10_12"`; 存档未打开 / 从未设置 / 存量脏值一律返回默认档 `"age_7_9"` (`progress::getAgeMode` 自带兜底), 调用方无需判空 |
 | `setAgeModeId(modeId: String): Boolean` | 保存年龄段模式 (立即落盘): 未知标识返回 false 并忽略 (与桌面 SettingsBackend 一致); 存档未打开 / 落盘失败仍返回 true —— 本次运行内生效, 重启后回读不到 (温和降级) |
+| `progressOverviewJson(dataDir: String): String` | 进度页「我的作品」/ 成就墙数据源 (口径与桌面 Qt StudioBackend 的 `inProgressList`/`completedList`/`favoritesList`/`achievementsList` 一致): `{"store_ready","completed_count","in_progress_count","favorite_count","achievement_count","in_progress":[{id/name/current_step/step_count/play_text}],"completed":[{id/name/pieces/meta_text}],"favorites":[{id/name}],"achievements":[{id/name/condition/unlocked/unlocked_text}]}`, 失败 `{"error":"..."}`; 只统计仍在目录中的模型, 进行中要求已真正开动 (current_step > 0); 徽章按完成数 1/3/10/30 分档 (存档 achievements 表已解锁或达到阈值即点亮, 未点亮带一句话达成条件, 不下发进度百分比 §7.1), 存档中额外成就以通用徽章补列; "用时 23 分钟"/"解锁于 8月20日" 等措辞与桌面一致; 徽章 emoji 由 Kotlin 侧按 id 映射 (增补平面字符不过 `NewStringUTF`); 存档不可用时 `store_ready=false`, 列表为空、徽章全未点亮, 页面照常可看 |
 
 筛选在 Kotlin 侧完成 (`MainActivity.applyFilters`), 口径与桌面
 GL/Qt 模型库一致: 难度星级精确匹配、规范主题 (目录 `theme` 字段)、
@@ -222,9 +223,9 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 
 `.github/workflows/android.yml` (仓库根) 包含两个任务:
 
-- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 11 个 JNI
-  符号齐全 (模型库 4 个 + 进度存档/库存/年龄段 7 个) —— 持续保证
-  `magtile_core` 无平台依赖。
+- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 12 个 JNI
+  符号齐全 (模型库 4 个 + 进度存档/库存/年龄段/进度页 8 个) —— 持续
+  保证 `magtile_core` 无平台依赖。
 - `assemble-debug`: Gradle 全量打包 debug APK, 校验 APK 内容
   (原生库 / 数据资产 / 缩略图已打包; 缩略图数量落后于模型数量时
   只告警 —— 内容制作期新模型缩略图可能滞后生成, 缺图卡片显示占位)
@@ -238,8 +239,10 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
   卡片详情的「教程即将上线」占位替换为分步教程页。
 - 模型库增强: 搜索框、「只看收藏」筛选 (「我能搭的」与库存录入
   已落地, 对齐桌面 GL 模型库全量筛选器还差收藏/完成状态维度)。
-- 进度存档: `progress_store` (SQLite) 已开箱接入 (库存 + 年龄段
-  链路), 待接完成状态 / 收藏 / 「继续上次」到列表 UI。
+- 进度存档: `progress_store` (SQLite) 已开箱接入 (库存 + 年龄段 +
+  进度页/成就墙链路); 模型卡片上的完成/进行中徽标、收藏切换与
+  「继续上次」大卡片待接入模型库列表 UI, 进度页作品行直达教程随
+  分步教程页一并落地。
 - 家长门: 年龄段切换入口 (标题栏) 暂未上锁; 对齐桌面 UI_UX_SPEC.md
   §9 需把入口挪进家长区 (`core/parent_gate.hpp` 已具备共享校验逻辑)。
 

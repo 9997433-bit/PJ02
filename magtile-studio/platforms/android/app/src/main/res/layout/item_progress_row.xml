@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 进度页列表行 (进行中/已完成/收藏三处共用): 状态图形 + 模型名 +
+     可选元信息行 + 可选进度条 (图形 + "第 x/y 步" 文字双编码 §4.7) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/bg_progress_card"
+    android:gravity="center_vertical"
+    android:minHeight="56dp"
+    android:orientation="horizontal"
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <!-- 状态图形: ▶ 进行中 (主色) / ✓ 已完成 (完成绿) / ⭐ 收藏 (琥珀) -->
+    <TextView
+        android:id="@+id/row_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/row_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/magtile_text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <!-- 进度条: 进行中行显示 (max = 总步数, progress = 当前步) -->
+        <ProgressBar
+            android:id="@+id/row_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:progressTint="@color/magtile_primary"
+            android:visibility="gone" />
+
+        <!-- 元信息: "第 3/12 步 · 用时 23 分钟" / "8月20日 完成 · 75 片" -->
+        <TextView
+            android:id="@+id/row_meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/magtile_text_secondary"
+            android:textSize="13sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

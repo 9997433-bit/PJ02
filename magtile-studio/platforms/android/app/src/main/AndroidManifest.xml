@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- MagTile Studio Android 清单: 模型库 + 库存录入两个 Activity,
-     无任何权限申请 (数据资产随 APK assets 分发, 首启解包到应用私有
-     目录; 进度存档 SQLite 亦在应用私有目录)。 -->
+<!-- MagTile Studio Android 清单: 模型库 + 库存录入 + 进度页 + 成就墙
+     四个 Activity, 无任何权限申请 (数据资产随 APK assets 分发, 首启
+     解包到应用私有目录; 进度存档 SQLite 亦在应用私有目录)。 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
@@ -25,6 +25,16 @@
             android:name=".InventoryActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- 进度页「我的作品」(从模型库标题栏进入; 纯只读看板) -->
+        <activity
+            android:name=".ProgressActivity"
+            android:exported="false" />
+
+        <!-- 成就墙全览 (从进度页成就条带进入) -->
+        <activity
+            android:name=".AchievementsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

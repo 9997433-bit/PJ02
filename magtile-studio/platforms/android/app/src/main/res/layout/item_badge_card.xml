@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 成就墙徽章卡 (§7.1): 徽章图形 + 名称 + 副文案。
+     已点亮 = 完成绿卡 + ✓ + 解锁日期; 未点亮 = 灰色剪影 (图形低透明度)
+     + 一句话达成条件 (不显示进度百分比, 防焦虑); 背景与文字色由代码
+     按点亮状态切换 (图形+文字双编码, 不单靠颜色 §4.7)。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/badge_emoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/badge_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/badge_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textSize="12sp" />
+
+</LinearLayout>
