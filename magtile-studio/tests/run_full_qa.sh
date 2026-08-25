@@ -45,6 +45,11 @@
 #       content_meta.series (13 主题词值) 或 matrix_bucket (矩阵外桶),
 #       词值对照 data/content_series_map.json 词表, 输出主题 × 难度
 #       矩阵计数; CONTENT_GAP_AUDIT.md §7.3 机检化, 回填底稿见其附录 A)
+#   21. 难度配额守卫            (可选: MAGTILE_DIFFICULTY_QUOTA=1 时执行,
+#       tools/check_difficulty_quota.py --strict —— D1~D5 分布报告 +
+#       D3 冻结判定 (D1 < 20 或 D5 < 6 即冻结生效, 两项同时达标方可
+#       解冻, CONTENT_GAP_AUDIT.md §7.3 机制建议第 2 条), strict 档
+#       冻结生效即红灯; 新模型批次级 D3 拦截另见该工具 --batch 模式)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -55,6 +60,7 @@
 #   MAGTILE_TUTORIAL_BENCH=1  启用可选关卡 17 (教程步进性能基准)
 #   MAGTILE_L2_JITTER=1  启用可选关卡 19 (L2 抗扰动巡检, D4+ jitter)
 #   MAGTILE_SERIES_CHECK=1  启用可选关卡 20 (内容系列归类机检)
+#   MAGTILE_DIFFICULTY_QUOTA=1  启用可选关卡 21 (难度配额守卫, strict)
 #   FORCE_COLOR=1        非终端环境 (CI) 强制彩色输出
 #   NO_COLOR=1           禁用彩色输出
 #
@@ -325,6 +331,24 @@ if [ -n "${MAGTILE_SERIES_CHECK:-}" ]; then
 else
     skip_stage "内容系列归类机检 (series)" \
         "可选关卡, 置 MAGTILE_SERIES_CHECK=1 开启 (tools/check_content_series.py --strict)"
+fi
+
+# ---- 21: 难度配额守卫 (可选关卡) ----------------------------------
+# CONTENT_GAP_AUDIT.md §7.3 机制建议第 2 条的门禁挂钩: D1~D5 难度
+# 分布报告 + D3 冻结判定 (D1 < 20 或 D5 < 6 即冻结生效, 两项同时
+# 达标方可解冻)。--strict 使冻结生效即失败 —— CI 对主库分布状态的
+# 告警闸, D1/D5 补齐入库前本关卡开启即红灯 (与 L2 抗扰动档同一
+# "不许占位交差"口径); 新增 D3 模型的批次级拦截由同工具 --batch
+# 模式在内容批次评审时执行, 本关卡只管主库分布。日常合入难度分布
+# 变化缓慢, 故默认跳过; 内容批次合入后 / 发布打包前置
+# MAGTILE_DIFFICULTY_QUOTA=1 开启。
+if [ -n "${MAGTILE_DIFFICULTY_QUOTA:-}" ]; then
+    run_stage "难度配额守卫 (D3 冻结, strict)" \
+        "$PYTHON" "$ROOT/tools/check_difficulty_quota.py" "$DATA_DIR/models" \
+        --strict
+else
+    skip_stage "难度配额守卫 (D3 冻结, strict)" \
+        "可选关卡, 置 MAGTILE_DIFFICULTY_QUOTA=1 开启 (tools/check_difficulty_quota.py --strict)"
 fi
 
 # ---- 总结报告 ---------------------------------------------------

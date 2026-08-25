@@ -36,8 +36,9 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 18 | 儿童友好文案守卫 | 用户可见中文文案红线: 恐吓词/催促话术零容忍 (Qt QML / Android strings.xml / Kotlin / 展示层 C++ / 模型步骤文案, [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.3 §4.5) |
 | 19 | L2 抗扰动巡检 | 可选 (`MAGTILE_L2_JITTER=1`): D4+ 模型逐个 `validate --profile strict --jitter 50` (验证金字塔 L2 门禁挂钩; CLI 未实装 `--jitter` 前为占位通过, 见 3.17 节) |
 | 20 | 内容系列归类机检 | 可选 (`MAGTILE_SERIES_CHECK=1`): 每模型 `content_meta.series` (13 主题词值) 或 `matrix_bucket` (矩阵外桶) 恰好其一, 词值受控于 `data/content_series_map.json` (见 3.19 节) |
+| 21 | 难度配额守卫 | 可选 (`MAGTILE_DIFFICULTY_QUOTA=1`): D1~D5 分布报告 + D3 冻结判定, strict 档冻结生效 (D1 < 20 或 D5 < 6) 即红 (见 3.19 节; D1/D5 补齐前开启即红灯, 属预期告警) |
 
-环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `MAGTILE_TUTORIAL_BENCH=1` 开启可选关卡 17; `MAGTILE_L2_JITTER=1` 开启可选关卡 19; `MAGTILE_SERIES_CHECK=1` 开启可选关卡 20; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
+环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `MAGTILE_TUTORIAL_BENCH=1` 开启可选关卡 17; `MAGTILE_L2_JITTER=1` 开启可选关卡 19; `MAGTILE_SERIES_CHECK=1` 开启可选关卡 20; `MAGTILE_DIFFICULTY_QUOTA=1` 开启可选关卡 21; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
 
 CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑绿。
 
@@ -435,16 +436,18 @@ python3 tools/backfill_content_series.py --dry-run           # 词表登记后�
 
 全量 QA 中默认跳过 (归类只在内容批次合入时变化, 日常代码合入不受它约束); **内容批次评审与发布打包置 `MAGTILE_SERIES_CHECK=1` 作硬闸门**。
 
-**D3 冻结硬闸门** —— 脚本 `tools/check_difficulty_quota.py`。全库 D3 (熟练档) 已超 520 终态目标而 D1/D5 两端空转, 审计把"D3 冻结"从纸面建议升级为批次评审机检:
+**D3 冻结硬闸门 (可选关卡 21, 难度配额守卫)** —— 脚本 `tools/check_difficulty_quota.py`。全库 D3 (熟练档) 已超 520 终态目标而 D1/D5 两端空转, 审计把"D3 冻结"从纸面建议升级为批次评审机检:
 
 - 默认报告模式: 输出全库 D1–D5 分布与冻结判定 (**D1 < 20 或 D5 < 6 即冻结生效**; 解冻须 D1 ≥ 20 且 D5 ≥ 6 同时达标), 恒退出 0;
 - `--batch <目录或id清单>`: 批次硬闸门, 接受新模型 JSON 目录 (入库前审查) 或每行一个模型 id 的清单文件 (入库后复核) —— 冻结生效期间新增 `difficulty=3` 模型**直接 FAIL (退出码 1)**, 例外须策展人以 `--whitelist-file` 白名单签发 (每行一个 id);
-- `--strict`: 冻结生效时退出 1 (CI 对主库状态的告警闸)。
+- `--strict`: 冻结生效时退出 1 (CI 对主库状态的告警闸) —— QA 可选关卡 21 (`MAGTILE_DIFFICULTY_QUOTA=1`) 即以此档运行, 发布门禁 `--full` 强制开启 (第 5 节)。**D1/D5 补齐入库前该关卡开启即红灯**, 与 L2 抗扰动档同一"不许占位交差"口径: 红灯本身就是"入门/大师两端空转未收口"的信号, 不允许为跑绿而摘闸。
 
 闸门行为由回归测试 `tests/test_difficulty_quota.py` 锁定 (合成微模型于临时目录, 不进库)。
 
 ```bash
 python3 tools/check_difficulty_quota.py                       # 分布报告 + 冻结判定 (恒退出 0)
+python3 tools/check_difficulty_quota.py --strict              # 告警闸: 冻结生效即退出 1 (关卡 21 同款)
+MAGTILE_DIFFICULTY_QUOTA=1 tests/run_full_qa.sh               # 随全量 QA (可选关卡 21)
 python3 tools/check_difficulty_quota.py --batch <目录或id清单> \
     --whitelist-file <白名单>                                 # 批次评审硬闸门 (白名单可选)
 python3 tests/test_difficulty_quota.py .                      # 闸门自身的回归测试
@@ -478,12 +481,14 @@ python3 tools/update_model_catalog.py --matrix-report   # 目录重建 + 矩阵�
 
 ## 5. 发布门禁 (Release Gate)
 
-日常 push CI 为控制流水线时长默认跳过两道发布专项关卡 (可选关卡 10 免费层清单对齐、15 strict 全库巡检)。**内容批量合入后与发布打包前**必须用发布门禁把它们补齐, 一键入口:
+日常 push CI 为控制流水线时长默认跳过四道发布专项关卡 (可选关卡 10 免费层清单对齐、15 strict 全库巡检、20 内容系列归类机检、21 难度配额守卫)。**内容批量合入后与发布打包前**必须用发布门禁把它们补齐, 一键入口:
 
 ```bash
 tools/run_release_gate.sh              # 快检档: 三道发布专项 (默认构建目录 build)
-tools/run_release_gate.sh --full       # 发布档: 19 关全量 QA + 发布专项一次跑全
-                                       #   = MAGTILE_FREE_TIER_CHECK=1 MAGTILE_STRICT_AUDIT=1 tests/run_full_qa.sh
+tools/run_release_gate.sh --full       # 发布档: 21 关全量 QA + 发布专项一次跑全
+                                       #   = MAGTILE_FREE_TIER_CHECK=1 MAGTILE_STRICT_AUDIT=1
+                                       #     MAGTILE_SERIES_CHECK=1 MAGTILE_DIFFICULTY_QUOTA=1 tests/run_full_qa.sh
+                                       #   (难度配额 strict 档在 D3 冻结生效期间保持红灯, 见 3.19 节)
 tools/run_release_gate.sh --full --l2  # 发布档 + 可选 L2 抗扰动档: 追加 D4+ jitter 全绿硬闸门
                                        #   (3.17 节; CLI 未实装 --jitter 前该关卡保持红灯)
 tools/run_release_gate.sh --fail-on-pending   # 终防线: D4+ 实物待复核非空即红灯
@@ -499,6 +504,8 @@ tools/run_release_gate.sh --help       # 完整用法
 | 免费层清单对齐核验 | `tools/verify_free_tier.py` (3.14 节) | 阻断 | 免费标签恰 30 + 全 core-9 + 与 starter 打包清单一致, 决议见 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) |
 | 弱磁严格档全库巡检 | `tools/run_strict_audit.sh` | 阻断 | strict 零警告审计 + 逐步装配质检 + D4+ 抗扰动巡检 auto 档 (缺 `magtile_app` 时自动构建), 政策见 [STRICT_PHYSICS_AUDIT.md](STRICT_PHYSICS_AUDIT.md) 与 3.17 节 |
 | L2 抗扰动档 (可选, 仅 `--full --l2`) | `tools/run_strict_audit.sh --jitter-only --jitter require` (3.17 节) | 阻断 | D4+ 模型 `validate --profile strict --jitter 50` 实跑全绿; CLI 未实装 `--jitter` 前按失败处理 (占位不判绿) |
+| 内容系列归类机检 (仅 `--full`) | `tools/check_content_series.py --strict` (3.19 节, run_full_qa.sh 关卡 20) | 阻断 | 每模型 `content_meta.series` (13 主题词值) 或 `matrix_bucket` (矩阵外桶) 恰好其一, 词值受控于 `data/content_series_map.json`, 依据 [reports/CONTENT_GAP_AUDIT.md](reports/CONTENT_GAP_AUDIT.md) §7.3 |
+| 难度配额守卫 (仅 `--full`) | `tools/check_difficulty_quota.py --strict` (3.19 节, run_full_qa.sh 关卡 21) | 阻断 | D3 冻结判定: D1 < 20 或 D5 < 6 即冻结生效, strict 档红灯; D1/D5 补齐入库前保持红灯属预期告警, 不允许摘闸交差 |
 | L3 实物复核缺口报告 | `tools/list_physical_pending.py` (3.13 节) | 报告型, 与 run_full_qa.sh 关卡 16 同一口径; `--fail-on-pending` 时升级为硬闸门 | 规程见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) |
 
 退出码与 run_full_qa.sh 同一约定: 0 = 全部阻断关卡通过, 1 = 存在失败关卡, 2 = 环境/参数不满足; 结尾输出 PASS/FAIL 分项摘要, 失败时保留分项日志目录。
