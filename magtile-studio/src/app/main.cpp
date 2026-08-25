@@ -2,11 +2,14 @@
 // MagTile Studio - 应用入口
 //
 // 同一个可执行文件提供两种形态:
-//   - CLI: 内容制作与质检 (catalog / validate / tutorial);
-//   - GUI: tutorial --gui 在 3D 窗口中交互式跟随教程
-//     (需要构建时开启 MAGTILE_BUILD_GL_RENDERER)。
+//   - CLI: 内容制作与质检 (catalog / validate / tutorial / library);
+//   - GUI: 商业版应用 —— library --gui 打开模型库主界面,
+//     点击卡片进入 3D 交互教程, 进度自动写入存档;
+//     tutorial --gui 直接打开单个模型的教程窗口
+//     (均需构建时开启 MAGTILE_BUILD_GL_RENDERER)。
 //
 // 用法:
+//   magtile_app library  [--gui] [--data-dir DIR] [--db FILE]    模型库 (商业版主入口)
 //   magtile_app catalog  [--data-dir DIR]                查看磁力片形状目录
 //   magtile_app validate <model.json> [--data-dir DIR]   物理与教程质检
 //   magtile_app tutorial <model.json> [--gui] [--data-dir DIR]  分步教程
@@ -23,13 +26,16 @@
 #include <vector>
 
 #include "magtile/core/json_io.hpp"
+#include "magtile/core/model_catalog.hpp"
 #include "magtile/physics/physics_validator.hpp"
 #include "magtile/progress/progress_store.hpp"
 #include "magtile/tutorial/tutorial_engine.hpp"
 
 #if defined(MAGTILE_HAS_GL_RENDERER)
 #include <algorithm>
+#include <chrono>
 #include <unordered_set>
+#include <utility>
 
 #include "magtile/physics/geometry.hpp"
 #include "magtile/render/gl_renderer.hpp"
@@ -47,9 +53,10 @@ struct CliArgs {
     bool gui = false;
     int start_step = 1;          ///< 图形模式的起始步骤
     long max_frames = 0;         ///< >0 时渲染指定帧数后自动退出 (冒烟测试)
-    std::string screenshot_file; ///< 非空时在最后一帧保存 PPM 截图 (冒烟测试)
+    std::string screenshot_file; ///< 非空时在最后一帧保存 PPM 图片 (冒烟测试)
     std::string progress_action; ///< progress 子命令: list / show / reset
     std::string model_id;        ///< progress show/reset 的目标模型 id
+    std::string open_model;      ///< library --gui: 启动后直接打开的模型 id
     fs::path db_file;            ///< 进度存档路径; 为空时用平台默认路径
 };
 
@@ -58,6 +65,9 @@ void printUsage() {
         "MagTile Studio - 磁力片搭建教程\n"
         "\n"
         "用法:\n"
+        "  magtile_app library  [--gui] [--data-dir DIR] [--db FILE]\n"
+        "                       模型库 (商业版主入口): --gui 打开图形界面, 浏览/搜索/\n"
+        "                       筛选模型卡片并进入教程; 默认在终端列出模型与进度\n"
         "  magtile_app catalog  [--data-dir DIR]              查看磁力片形状目录\n"
         "  magtile_app validate <model.json> [--data-dir DIR] 校验模型物理规则与教程步骤\n"
         "  magtile_app tutorial <model.json> [--gui] [--data-dir DIR]\n"
@@ -67,7 +77,8 @@ void printUsage() {
         "  magtile_app progress reset <model_id>              重置单个模型的进度\n"
         "\n"
         "图形模式选项:\n"
-        "  --step N            从第 N 步开始 (默认 1)\n"
+        "  --step N            (tutorial) 从第 N 步开始 (默认 1)\n"
+        "  --open MODEL_ID     (library) 启动后直接进入指定模型的教程\n"
         "  --frames N          渲染 N 帧后自动退出 (供 CI 冒烟测试)\n"
         "  --screenshot FILE   退出前把画面保存为 PPM 图片 (供 CI 冒烟测试)\n"
         "\n"
@@ -96,6 +107,9 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
         } else if (arg == "--screenshot") {
             if (i + 1 >= argc) return false;
             args.screenshot_file = argv[++i];
+        } else if (arg == "--open") {
+            if (i + 1 >= argc) return false;
+            args.open_model = argv[++i];
         } else if (arg == "--db") {
             if (i + 1 >= argc) return false;
             args.db_file = argv[++i];
@@ -103,7 +117,7 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
             positional.push_back(arg);
         }
     }
-    if (args.command == "catalog") return positional.empty();
+    if (args.command == "catalog" || args.command == "library") return positional.empty();
     if (args.command == "validate" || args.command == "tutorial") {
         if (positional.size() != 1) return false;
         args.model_file = positional[0];
@@ -316,7 +330,132 @@ int runProgress(const CliArgs& args) {
 
 #if defined(MAGTILE_HAS_GL_RENDERER)
 
-/// 图形模式: 在 3D 窗口中交互式跟随分步教程。
+/// 初始取景: 最终成品的包围盒。
+void frameModelBounds(render::IWindowRenderer& renderer, const core::TileCatalog& catalog,
+                      const core::ModelDefinition& model) {
+    core::Vec3 bb_min{1e9, 1e9, 1e9}, bb_max{-1e9, -1e9, -1e9};
+    for (const auto& tile : model.final_assembly) {
+        const auto world = physics::transformTile(tile, catalog.get(tile.type));
+        for (const auto& v : world.vertices) {
+            bb_min = {std::min(bb_min.x, v.x), std::min(bb_min.y, v.y), std::min(bb_min.z, v.z)};
+            bb_max = {std::max(bb_max.x, v.x), std::max(bb_max.y, v.y), std::max(bb_max.z, v.z)};
+        }
+    }
+    renderer.orbitCamera().frameBounds(bb_min, bb_max);
+}
+
+/// 教程会话的结束原因。
+enum class TutorialExit {
+    WindowClosed,   ///< 用户关闭窗口 / Esc
+    BackToLibrary,  ///< 点击 "返回模型库" (仅库内会话)
+    FrameBudget,    ///< --frames 帧预算耗尽 (冒烟测试)
+};
+
+/// 在已初始化的窗口中运行一次交互式教程会话。
+///
+/// store 非空时把进度写入存档: 每次步骤变化落盘当前步骤与游玩时长
+/// 增量, 走到最后一步即记完成 (并解锁首个模型完成成就)。
+/// frame_index 与调用方共享 --frames 帧预算 (模型库 + 教程连续计数)。
+TutorialExit runTutorialSession(render::IWindowRenderer& renderer,
+                                const core::TileCatalog& catalog,
+                                tutorial::TutorialEngine& engine,
+                                progress::ProgressStore* store, bool from_library,
+                                const CliArgs& args, long& frame_index) {
+    using Clock = std::chrono::steady_clock;
+    Clock::time_point last_flush_time = Clock::now();
+    int last_saved_step = engine.currentStepNumber();
+
+    // 进度落盘: 写入当前步骤与自上次落盘以来的游玩秒数
+    const auto flushProgress = [&](int step) {
+        if (store == nullptr) return;
+        const Clock::time_point now = Clock::now();
+        const auto seconds =
+            std::chrono::duration_cast<std::chrono::seconds>(now - last_flush_time).count();
+        store->saveProgress(engine.model().id, step, seconds);
+        last_flush_time = now;
+        last_saved_step = step;
+    };
+    // 会话开始即建档, 模型库立刻能显示 "进行中"
+    flushProgress(last_saved_step);
+
+    while (!renderer.shouldClose()) {
+        renderer.pollEvents();
+        render::TutorialActions actions = renderer.consumeActions();
+
+        // 本帧场景状态 (模型规模为数百片, 每帧重建集合开销可忽略)
+        std::unordered_set<const core::TileInstance*> placed, added, referenced;
+        for (const auto* tile : engine.visibleTiles()) placed.insert(tile);
+        for (const auto* tile : engine.tilesAddedThisStep()) added.insert(tile);
+        for (const auto* tile : engine.highlightTiles()) referenced.insert(tile);
+
+        renderer.beginFrame(renderer.orbitCamera().toCamera());
+        for (const auto& tile : engine.model().final_assembly) {
+            render::RenderTile rt;
+            rt.instance = &tile;
+            rt.just_placed = added.count(&tile) > 0;
+            rt.ghost = !rt.just_placed && placed.count(&tile) == 0;
+            rt.highlighted = referenced.count(&tile) > 0;
+            renderer.submitTile(rt, catalog.get(tile.type));
+        }
+
+        render::TutorialHudState hud;
+        hud.model_name = engine.model().name;
+        hud.step_number = engine.currentStepNumber();
+        hud.step_count = engine.stepCount();
+        hud.progress = engine.progress();
+        hud.tiles_placed = static_cast<int>(placed.size());
+        hud.tiles_total = static_cast<int>(engine.model().final_assembly.size());
+        hud.show_back_button = from_library;
+        if (const core::BuildStep* step = engine.currentStep(); step != nullptr) {
+            hud.description = step->description;
+            hud.tip = step->tip;
+        } else {
+            hud.description = "转动视角熟悉最终成品, 点击 [下一步] 开始搭建。";
+        }
+        actions |= renderer.submitHud(hud);
+
+        const bool last_frame = args.max_frames > 0 && frame_index + 1 >= args.max_frames;
+        if (last_frame && !args.screenshot_file.empty()) {
+            renderer.requestScreenshot(args.screenshot_file);
+        }
+        renderer.endFrame();
+
+        // 帧末统一应用导航操作, 下一帧生效
+        if (actions.reset) {
+            engine.reset();
+        } else if (actions.next_step) {
+            engine.nextStep();
+        } else if (actions.previous_step) {
+            engine.previousStep();
+        }
+
+        // 步骤变化 -> 进度落盘; 走到最后一步 -> 记完成 + 首次完成成就
+        if (store != nullptr && engine.currentStepNumber() != last_saved_step) {
+            flushProgress(engine.currentStepNumber());
+            if (engine.stepCount() > 0 && engine.currentStepNumber() >= engine.stepCount()) {
+                store->markCompleted(engine.model().id);
+                if (!store->isAchievementUnlocked("first_model_completed")) {
+                    store->unlockAchievement("first_model_completed");
+                }
+            }
+        }
+
+        ++frame_index;
+        if (actions.back_to_library && from_library) {
+            flushProgress(engine.currentStepNumber());
+            return TutorialExit::BackToLibrary;
+        }
+        if (last_frame) {
+            flushProgress(engine.currentStepNumber());
+            return TutorialExit::FrameBudget;
+        }
+    }
+
+    flushProgress(engine.currentStepNumber());
+    return TutorialExit::WindowClosed;
+}
+
+/// 图形模式: 在 3D 窗口中交互式跟随分步教程 (单模型直开, 内容工具用)。
 int runTutorialGui(const CliArgs& args) {
     const auto catalog = core::loadTileCatalog(args.data_dir / "tile_catalog.json");
     auto model = core::loadModelDefinition(args.model_file);
@@ -340,74 +479,120 @@ int runTutorialGui(const CliArgs& args) {
         std::fprintf(stderr, "错误: 无法创建图形窗口 (需要支持 OpenGL 4.1 的显示环境)\n");
         return 1;
     }
+    frameModelBounds(*renderer, catalog, engine.model());
 
-    // 初始取景: 最终成品的包围盒
-    {
-        core::Vec3 bb_min{1e9, 1e9, 1e9}, bb_max{-1e9, -1e9, -1e9};
-        for (const auto& tile : engine.model().final_assembly) {
-            const auto world = physics::transformTile(tile, catalog.get(tile.type));
-            for (const auto& v : world.vertices) {
-                bb_min = {std::min(bb_min.x, v.x), std::min(bb_min.y, v.y),
-                          std::min(bb_min.z, v.z)};
-                bb_max = {std::max(bb_max.x, v.x), std::max(bb_max.y, v.y),
-                          std::max(bb_max.z, v.z)};
-            }
-        }
-        renderer->orbitCamera().frameBounds(bb_min, bb_max);
+    long frame_index = 0;
+    runTutorialSession(*renderer, catalog, engine, /*store=*/nullptr, /*from_library=*/false,
+                       args, frame_index);
+    renderer->shutdown();
+    return 0;
+}
+
+/// 商业版主界面: 模型库 (卡片网格 / 搜索筛选 / 继续搭建), 点击卡片
+/// 在同一窗口进入 3D 教程, 返回后回到模型库; 进度实时写入存档。
+int runLibraryGui(const CliArgs& args) {
+    const auto catalog = core::loadTileCatalog(args.data_dir / "tile_catalog.json");
+    const auto entries = core::loadModelCatalog(args.data_dir);
+    if (entries.empty()) {
+        std::fprintf(stderr, "错误: 模型库为空 (data/model_catalog.json 与 data/models/ 均无模型)\n");
+        return 1;
     }
+    const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
+    progress::ProgressStore store(db_file);
+
+    auto renderer = render::createOpenGLRenderer();
+    if (!renderer->initialize(1440, 900, "MagTile Studio - 模型库")) {
+        std::fprintf(stderr, "错误: 无法创建图形窗口 (需要支持 OpenGL 4.1 的显示环境)\n");
+        return 1;
+    }
+
+    // --open <model_id>: 启动即进入指定模型 (深链 / 冒烟测试)
+    std::string pending_open = args.open_model;
 
     long frame_index = 0;
     while (!renderer->shouldClose()) {
+        // ---- 教程会话: 有待打开的模型则切换到教程界面 -----------------
+        if (!pending_open.empty()) {
+            const std::string open_id = std::exchange(pending_open, std::string{});
+            const auto entry_it = std::find_if(
+                entries.begin(), entries.end(),
+                [&](const core::ModelCatalogEntry& e) { return e.id == open_id; });
+            if (entry_it == entries.end()) {
+                std::fprintf(stderr, "[library] 未找到模型: %s\n", open_id.c_str());
+                continue;
+            }
+            try {
+                auto model = core::loadModelDefinition(entry_it->file);
+                const auto problems = tutorial::TutorialEngine::checkConsistency(model);
+                if (!problems.empty()) {
+                    for (const auto& problem : problems) {
+                        std::fprintf(stderr, "[错误] 步骤一致性: %s\n", problem.c_str());
+                    }
+                    continue;
+                }
+                tutorial::TutorialEngine engine(std::move(model));
+                // 断点续搭: 从存档步骤继续; 已完成或无进度则从第 1 步开始
+                int resume_step = 1;
+                if (const auto record = store.loadProgress(open_id);
+                    record.has_value() && !record->isCompleted()) {
+                    resume_step = std::max(record->current_step, 1);
+                }
+                if (!engine.goToStep(resume_step)) engine.nextStep();
+                frameModelBounds(*renderer, catalog, engine.model());
+
+                const TutorialExit exit_reason = runTutorialSession(
+                    *renderer, catalog, engine, &store, /*from_library=*/true, args,
+                    frame_index);
+                if (exit_reason == TutorialExit::FrameBudget) break;
+                // WindowClosed 由外层循环条件收尾; BackToLibrary 继续渲染库界面
+            } catch (const std::exception& e) {
+                std::fprintf(stderr, "[library] 打开模型失败: %s\n", e.what());
+            }
+            continue;
+        }
+
+        // ---- 模型库界面帧 --------------------------------------------
         renderer->pollEvents();
-        render::TutorialActions actions = renderer->consumeActions();
+        (void)renderer->consumeActions();  // 库界面不使用教程键盘导航
 
-        // 本帧场景状态 (模型规模为数百片, 每帧重建集合开销可忽略)
-        std::unordered_set<const core::TileInstance*> placed, added, referenced;
-        for (const auto* tile : engine.visibleTiles()) placed.insert(tile);
-        for (const auto* tile : engine.tilesAddedThisStep()) added.insert(tile);
-        for (const auto* tile : engine.highlightTiles()) referenced.insert(tile);
-
-        renderer->beginFrame(renderer->orbitCamera().toCamera());
-        for (const auto& tile : engine.model().final_assembly) {
-            render::RenderTile rt;
-            rt.instance = &tile;
-            rt.just_placed = added.count(&tile) > 0;
-            rt.ghost = !rt.just_placed && placed.count(&tile) == 0;
-            rt.highlighted = referenced.count(&tile) > 0;
-            renderer->submitTile(rt, catalog.get(tile.type));
+        std::vector<render::LibraryCard> cards;
+        cards.reserve(entries.size());
+        for (const auto& entry : entries) {
+            render::LibraryCard card;
+            card.model_id = entry.id;
+            card.name = entry.name;
+            card.name_en = entry.name_en;
+            card.description = entry.description;
+            card.difficulty = entry.difficulty;
+            card.total_pieces = entry.total_pieces;
+            card.step_count = entry.step_count;
+            card.theme = entry.theme();
+            card.tags = entry.tags;
+            if (const auto record = store.loadProgress(entry.id); record.has_value()) {
+                card.completed = record->isCompleted();
+                // 收藏也会建档, "进行中" 只认真正搭过的 (步骤 > 0)
+                card.started = !card.completed && record->current_step > 0;
+                card.favorited = record->favorited;
+                card.current_step = record->current_step;
+            }
+            cards.push_back(std::move(card));
         }
 
-        render::TutorialHudState hud;
-        hud.model_name = engine.model().name;
-        hud.step_number = engine.currentStepNumber();
-        hud.step_count = engine.stepCount();
-        hud.progress = engine.progress();
-        hud.tiles_placed = static_cast<int>(placed.size());
-        hud.tiles_total = static_cast<int>(engine.model().final_assembly.size());
-        if (const core::BuildStep* step = engine.currentStep(); step != nullptr) {
-            hud.description = step->description;
-            hud.tip = step->tip;
-        } else {
-            hud.description = "转动视角熟悉最终成品, 点击 [下一步] 开始搭建。";
-        }
-        actions |= renderer->submitHud(hud);
-
+        renderer->beginFrame(render::Camera{});  // 默认视角的空场景网格作背景
+        const render::LibraryActions library_actions = renderer->submitLibrary(cards);
         const bool last_frame = args.max_frames > 0 && frame_index + 1 >= args.max_frames;
         if (last_frame && !args.screenshot_file.empty()) {
             renderer->requestScreenshot(args.screenshot_file);
         }
         renderer->endFrame();
-
-        // 帧末统一应用导航操作, 下一帧生效
-        if (actions.reset) {
-            engine.reset();
-        } else if (actions.next_step) {
-            engine.nextStep();
-        } else if (actions.previous_step) {
-            engine.previousStep();
-        }
-
         ++frame_index;
+
+        if (!library_actions.toggle_favorite_id.empty()) {
+            store.toggleFavorite(library_actions.toggle_favorite_id);
+        }
+        if (!library_actions.open_model_id.empty()) {
+            pending_open = library_actions.open_model_id;
+        }
         if (last_frame) break;
     }
 
@@ -421,6 +606,14 @@ int runTutorialGui(const CliArgs& /*args*/) {
     std::fprintf(stderr,
                  "错误: 本构建未包含图形渲染后端。\n"
                  "请以 -DMAGTILE_BUILD_GL_RENDERER=ON 重新构建 (默认开启)。\n");
+    return 2;
+}
+
+int runLibraryGui(const CliArgs& /*args*/) {
+    std::fprintf(stderr,
+                 "错误: 本构建未包含图形渲染后端, 无法打开模型库界面。\n"
+                 "请以 -DMAGTILE_BUILD_GL_RENDERER=ON 重新构建 (默认开启), "
+                 "或不带 --gui 在终端查看模型库。\n");
     return 2;
 }
 
@@ -453,6 +646,67 @@ int runTutorial(const CliArgs& args) {
     return 0;
 }
 
+/// library (无 --gui): 终端列出模型库与进度, 并对账目录元数据与模型
+/// 文件 (名称/难度/片数/步数), 不一致即非零退出 —— 兼作 CI 质量关卡,
+/// 防止模型卡片信息与实际内容漂移。
+int runLibrary(const CliArgs& args) {
+    if (args.gui) return runLibraryGui(args);
+
+    const auto entries = core::loadModelCatalog(args.data_dir);
+    const fs::path db_file = args.db_file.empty() ? defaultProgressDbPath() : args.db_file;
+    progress::ProgressStore store(db_file);
+
+    std::printf("MagTile Studio 模型库 (%zu 个模型):\n\n", entries.size());
+    int failures = 0;
+    for (const auto& entry : entries) {
+        try {
+            const auto model = core::loadModelDefinition(entry.file);
+            if (model.name != entry.name || model.difficulty != entry.difficulty ||
+                model.total_pieces != entry.total_pieces ||
+                static_cast<int>(model.steps.size()) != entry.step_count) {
+                std::printf(
+                    "[错误] %s: 目录元数据与模型文件不一致\n"
+                    "       目录: %s / 难度 %d / %d 片 / %d 步\n"
+                    "       文件: %s / 难度 %d / %d 片 / %zu 步\n",
+                    entry.id.c_str(), entry.name.c_str(), entry.difficulty, entry.total_pieces,
+                    entry.step_count, model.name.c_str(), model.difficulty, model.total_pieces,
+                    model.steps.size());
+                ++failures;
+                continue;
+            }
+        } catch (const std::exception& e) {
+            std::printf("[错误] %s: 模型文件加载失败: %s\n", entry.id.c_str(), e.what());
+            ++failures;
+            continue;
+        }
+
+        std::string stars;
+        for (int i = 1; i <= entry.difficulty; ++i) stars += "★";
+        std::string status = "未开始";
+        std::string favorite_mark = " ";
+        if (const auto record = store.loadProgress(entry.id); record.has_value()) {
+            if (record->favorited) favorite_mark = "★";
+            if (record->isCompleted()) {
+                status = "已完成 ✓";
+            } else if (record->current_step > 0) {
+                status = "进行中 (第 " + std::to_string(record->current_step) + "/" +
+                         std::to_string(entry.step_count) + " 步)";
+            }
+        }
+        std::printf("  %s %-24s %s  难度 %s  %d 片 / %d 步  主题: %s  [%s]\n",
+                    favorite_mark.c_str(), entry.id.c_str(), entry.name.c_str(), stars.c_str(),
+                    entry.total_pieces, entry.step_count, entry.theme().c_str(), status.c_str());
+    }
+
+    if (failures > 0) {
+        std::printf("\n结论: 模型库目录有 %d 个条目未通过对账\n", failures);
+        return 1;
+    }
+    std::printf("\n结论: 模型库目录与模型文件一致 (%zu 个模型)\n", entries.size());
+    std::printf("提示: magtile_app library --gui 打开图形模型库\n");
+    return 0;
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -467,6 +721,7 @@ int main(int argc, char** argv) {
         if (args.command == "validate") return runValidate(args);
         if (args.command == "tutorial") return runTutorial(args);
         if (args.command == "progress") return runProgress(args);
+        if (args.command == "library") return runLibrary(args);
     } catch (const std::exception& e) {
         std::fprintf(stderr, "错误: %s\n", e.what());
         return 1;

@@ -62,6 +62,7 @@ add_library(magtile_core STATIC
     src/core/model_definition.cpp
     src/core/tile_catalog.cpp
     src/core/json_io.cpp
+    src/core/model_catalog.cpp
     src/physics/geometry.cpp
     src/physics/physics_validator.cpp
     src/progress/progress_store.cpp
@@ -175,6 +176,12 @@ if(MAGTILE_BUILD_TESTS)
     add_test(NAME progress_cli_smoke
         COMMAND magtile_app progress list --db ${CMAKE_CURRENT_BINARY_DIR}/progress_cli_smoke.db)
 
+    # 模型库目录对账: model_catalog.json 卡片元数据 (名称/难度/片数/步数)
+    # 必须与模型文件一致, 防止商业版模型库界面展示信息漂移
+    add_test(NAME library_catalog_check
+        COMMAND magtile_app library --data-dir ${MAGTILE_DATA_DIR}
+            --db ${CMAKE_CURRENT_BINARY_DIR}/library_cli_smoke.db)
+
     # 每个模型单独注册 validate / tutorial 用例, 便于精确定位失败模型。
     # CONFIGURE_DEPENDS: 新增模型 JSON 时自动重新 glob, 无需手工改 CMake。
     file(GLOB MAGTILE_MODEL_FILES CONFIGURE_DEPENDS ${MAGTILE_DATA_DIR}/models/*.json)
@@ -242,6 +249,15 @@ if(MAGTILE_BUILD_TESTS)
                     COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_positive.sh
                         $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR} ${fixture_file})
             endforeach()
+        endif()
+
+        # 模型库 GUI 冒烟: 无头渲染模型库界面截图 + --open 深链教程会话
+        # 并校验进度存档写入; 无显示环境自动降级为链接检查。
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_library_smoke.sh AND MAGTILE_BUILD_GL_RENDERER)
+            add_test(NAME library_gui_smoke
+                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_library_smoke.sh
+                    $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
+            set_tests_properties(library_gui_smoke PROPERTIES TIMEOUT 300)
         endif()
     else()
         message(WARNING "MagTile: 未找到 bash, 跳过脚本类测试注册")
