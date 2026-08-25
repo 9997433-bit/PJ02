@@ -31,8 +31,9 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 14 | GL 渲染冒烟 | 无头渲染 + 截图校验 (无显示环境自动降级) |
 | 15 | 弱磁严格档全库巡检 | 可选 (`MAGTILE_STRICT_AUDIT=1`): strict 零警告审计 + 逐步装配质检 |
 | 16 | L3 实物复核缺口报告 | 报告型: 输出 D4+ 未实物复核模型数量, 仅报告不阻断 (见 3.13 节) |
+| 17 | 教程步进性能基准 | 可选 (`MAGTILE_TUTORIAL_BENCH=1`): 小/中/大代表模型逐步计时 nextStep/goToStep, 每步 ms 与 P95, 超预算退出 1 (见 3.16 节; CTest 关卡已含同口径回归) |
 
-环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
+环境变量: `MAGTILE_CMAKE_ARGS` 追加配置参数 (如 `-DMAGTILE_BUILD_GL_RENDERER=OFF`); `MAGTILE_FREE_TIER_CHECK=1` 开启可选关卡 10; `MAGTILE_STRICT_AUDIT=1` 开启可选关卡 15; `MAGTILE_TUTORIAL_BENCH=1` 开启可选关卡 17; `FORCE_COLOR=1` 在 CI 中强制彩色; `NO_COLOR=1` 禁用颜色。
 
 CI 中每次 push 自动运行同一脚本 (见第 4 节), 本地跑绿 = CI 跑绿。
 
@@ -247,13 +248,13 @@ tests/test_gl_smoke.sh          # 默认使用 build/ 下的可执行文件
 tests/test_gl_smoke.sh mybuild  # 或指定构建目录
 ```
 
-脚本自动选择运行方式: 优先 `xvfb-run` (需 `apt install xvfb`), 其次现有 `DISPLAY`; 渲染 5 帧并保存 PPM 截图, 校验截图尺寸与内容非纯色。两者都不可用时退化为链接检查 (确认 `--gui` 代码路径已编译进二进制)。
+脚本自动选择运行方式: 优先 `xvfb-run` (需 `apt install xvfb`), 其次现有 `DISPLAY`; 渲染 5 帧并保存 PPM 截图, 校验截图尺寸与内容非纯色。两者都不可用时退化为链接检查 (确认 `--dev-gui` 代码路径已编译进二进制)。GL/ImGui 图形壳已退役为内部开发工具 (入口 `--dev-gui`, 旧拼写 `--gui` 一期保留为别名并打温和提示, 冒烟含别名回归检查), 用户面向的图形界面见 Qt 版 `magtile_studio_qt`。
 
 手动等价命令:
 
 ```bash
 xvfb-run -a ./build/magtile_app tutorial data/models/castle_foundation_01.json \
-    --gui --frames 30 --screenshot /tmp/magtile.ppm
+    --dev-gui --frames 30 --screenshot /tmp/magtile.ppm
 ```
 
 `--frames N` 渲染 N 帧后自动退出, `--screenshot FILE` 在最后一帧保存画面, 两者专为 CI 冒烟测试设计。
@@ -262,7 +263,7 @@ xvfb-run -a ./build/magtile_app tutorial data/models/castle_foundation_01.json \
 
 ```bash
 ./build/magtile_app settings set-age 4 --db /tmp/t.db     # 启蒙模式自动朗读
-./build/magtile_app tutorial data/models/castle_foundation_01.json --gui --db /tmp/t.db
+./build/magtile_app tutorial data/models/castle_foundation_01.json --dev-gui --db /tmp/t.db
 ./build/magtile_app settings set-tts off --db /tmp/t.db   # 总开关关闭 -> 全端静音
 ```
 
@@ -347,6 +348,22 @@ MAGTILE_FREE_TIER_CHECK=1 tests/run_full_qa.sh   # 随全量 QA (可选关卡 10
 cmake -S . -B build-qt -DMAGTILE_BUILD_QT=ON
 cmake --build build-qt -j
 ctest --test-dir build-qt -R "qt_backend_bridges|qt_gui_smoke" --output-on-failure
+```
+
+### 3.16 教程步进性能基准 (`bench_tutorial_step`)
+
+商用承诺: 大模型 (100+ 片) 的教程步进不能卡死。`tests/bench_tutorial_step.cpp` 编译出的 `magtile_bench_tutorial` 对**小/中/大三个代表模型** (beach_hut_01 44 片/12 步、castle_foundation_01 72 片/16 步、skyscraper_01 122 片/26 步, 覆盖全库 44~122 片的完整规模区间) 逐步计时 `TutorialEngine` 的完整"每步工作量" —— `nextStep` / `goToStep` 导航加上渲染层每步都要调用的场景查询 (`currentStep` / `visibleTiles` / `tilesAddedThisStep` / `highlightTiles` / `progress`), 与 Qt `TutorialViewport::rebuildSceneTiles` 及 Android JNI 每步实际执行的引擎调用一致 (进度落盘 SQLite 与 GPU 上传不在本基准范围, 分别由 `progress_roundtrip` 与 GL 冒烟覆盖)。**顺序走查**与**钟摆远跳** (goToStep 在 0 与最后一步间来回, 对应进度页"继续搭建"/拖动步骤条的最坏情况, 每次都重建完整可见集) 两种导航模式都测, 输出每步中位 ms 与全样本 P95。
+
+判定: 任一步中位数或 P95 超出预算即**退出码 1** (性能回归)。预算默认 **500 ms/步** —— 刻意温和的上限, 目的是抓"卡死/量级劣化"而不是抓噪声 (参考基线为微秒级, 见下)。基准纯 CPU, 不依赖 GPU/显示环境, 无 GPU 的 CI 正常执行; 负载极不稳定的共享 runner 可用 `MAGTILE_BENCH_BUDGET_MS` 放宽预算, 或 `MAGTILE_BENCH_SKIP=1` 跳过 (退出码 77, ctest 记 SKIP 而非 FAIL)。
+
+参考基线 (2026-08, Release, Linux x86_64 CI 容器): skyscraper_01 (122 片) 最慢步中位 **0.0034 ms** / P95 0.0033 ms; castle_foundation_01 (72 片) 0.0023 / 0.0023 ms; beach_hut_01 (44 片) 0.0013 / 0.0013 ms —— 距预算约 5 个数量级。引擎每步查询复杂度为 O(已放置片数), `tilesUpToStep` 已按成品片数预留容量避免逐步扩容。
+
+```bash
+ctest --test-dir build -R bench_tutorial_step --output-on-failure  # 随 CTest 全量回归
+python3 tools/bench_tutorial_step.py --build-dir build             # 独立入口 (完整每步耗时表)
+python3 tools/bench_tutorial_step.py --budget-ms 50 \
+    --models data/models/skyscraper_01.json                        # 自定义模型/预算
+MAGTILE_TUTORIAL_BENCH=1 tests/run_full_qa.sh                      # 随全量 QA (可选关卡 17)
 ```
 
 ## 4. 持续集成 (CI)

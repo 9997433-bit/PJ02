@@ -20,6 +20,9 @@ const TileInstance* ModelDefinition::findTile(const std::string& tile_id) const 
 
 std::vector<const TileInstance*> ModelDefinition::tilesUpToStep(int step_count) const {
     std::vector<const TileInstance*> result;
+    // 上界预留: 全部步骤累计恰好覆盖 final_assembly (加载时已校验),
+    // 免去每步渲染查询路径上的多次扩容拷贝 (基准 bench_tutorial_step)。
+    result.reserve(final_assembly.size());
     const int limit = std::clamp<int>(step_count, 0, static_cast<int>(steps.size()));
     for (int i = 0; i < limit; ++i) {
         for (const auto& tile_id : steps[static_cast<std::size_t>(i)].tiles_to_add) {

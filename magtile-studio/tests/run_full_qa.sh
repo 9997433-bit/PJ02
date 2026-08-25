@@ -28,6 +28,11 @@
 #   16. L3 实物复核缺口报告   (报告型: 输出 D4+ 未实物复核模型数量,
 #       tools/list_physical_pending.py —— 仅报告不阻断, 实物复核是
 #       线下人工流程, 规程见 docs/PHYSICAL_REBUILD_CHECKLIST.md)
+#   17. 教程步进性能基准       (可选: MAGTILE_TUTORIAL_BENCH=1 时执行,
+#       tools/bench_tutorial_step.py —— 小/中/大代表模型逐步计时
+#       nextStep/goToStep + 渲染层每步查询, 输出每步 ms 与 P95,
+#       超预算退出 1; CTest 关卡已含 bench_tutorial_step 同口径回归,
+#       此处为输出完整耗时表的显式巡检, 见 docs/TESTING.md 3.16 节)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -35,6 +40,7 @@
 #   MAGTILE_CMAKE_ARGS   附加 CMake 配置参数 (如 "-DMAGTILE_BUILD_GL_RENDERER=OFF")
 #   MAGTILE_FREE_TIER_CHECK=1  启用可选关卡 10 (免费层清单对齐核验)
 #   MAGTILE_STRICT_AUDIT=1  启用可选关卡 15 (弱磁严格档全库巡检)
+#   MAGTILE_TUTORIAL_BENCH=1  启用可选关卡 17 (教程步进性能基准)
 #   FORCE_COLOR=1        非终端环境 (CI) 强制彩色输出
 #   NO_COLOR=1           禁用彩色输出
 #
@@ -235,6 +241,19 @@ fi
 # 发布打包前可单独执行 --fail-on-pending 作为终防线。
 run_stage "L3 实物复核缺口报告" \
     "$PYTHON" "$ROOT/tools/list_physical_pending.py" "$DATA_DIR/models"
+
+# ---- 17: 教程步进性能基准 (可选关卡) ------------------------------
+# 大模型 (100+ 片) 教程步进不能卡死: 小/中/大代表模型逐步计时
+# nextStep/goToStep + 渲染层每步查询, 每步 ms 与 P95, 超预算退出 1。
+# CTest 关卡已含 bench_tutorial_step 同口径回归, 此处为输出完整
+# 每步耗时表的显式巡检, 默认跳过避免重复计时 (docs/TESTING.md 3.16)。
+if [ -n "${MAGTILE_TUTORIAL_BENCH:-}" ]; then
+    run_stage "教程步进性能基准" \
+        "$PYTHON" "$ROOT/tools/bench_tutorial_step.py" --build-dir "$BUILD_DIR"
+else
+    skip_stage "教程步进性能基准" \
+        "可选关卡, 置 MAGTILE_TUTORIAL_BENCH=1 开启 (tools/bench_tutorial_step.py)"
+fi
 
 # ---- 总结报告 ---------------------------------------------------
 pass_count=0; fail_count=0; skip_count=0

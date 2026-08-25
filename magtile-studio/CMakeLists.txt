@@ -168,7 +168,7 @@ if(MAGTILE_BUILD_GL_RENDERER)
         PUBLIC magtile_core magtile_render_scene
         PRIVATE magtile_imgui glfw magtile_warnings
     )
-    # 链接方可据此宏启用 --gui 代码路径
+    # 链接方可据此宏启用 --dev-gui 代码路径 (GL/ImGui 内部开发工具)
     target_compile_definitions(magtile_render_gl PUBLIC MAGTILE_HAS_GL_RENDERER=1)
 endif()
 
@@ -240,6 +240,18 @@ if(MAGTILE_BUILD_TESTS)
             COMMAND magtile_achievements_test ${CMAKE_CURRENT_BINARY_DIR}/achievements_unlock_test.db)
     endif()
 
+    # 跨端进度存档互通回归测试 (C++, E2E-17 自动化载体): Qt/GL/CLI/
+    # Android 共用 SQLite 存档的 settings 键契约 (age_mode /
+    # onboarding_age_done / subscription_active / subscription_product_id
+    # 编译期 static_assert + 落盘键值对账) + 完成记录/成就解锁经第二条
+    # 连接按 Qt 读取口径回读, 详见 tests/test_cross_platform_progress.cpp
+    if(EXISTS ${MAGTILE_TESTS_DIR}/test_cross_platform_progress.cpp)
+        add_executable(magtile_cross_platform_test tests/test_cross_platform_progress.cpp)
+        target_link_libraries(magtile_cross_platform_test PRIVATE magtile_core magtile_warnings)
+        add_test(NAME cross_platform_progress
+            COMMAND magtile_cross_platform_test ${CMAKE_CURRENT_BINARY_DIR}/cross_platform_progress_test.db)
+    endif()
+
     # 进度存档 CLI 冒烟: 空库 list 必须正常退出 (同时覆盖建库建表路径)
     add_test(NAME progress_cli_smoke
         COMMAND magtile_app progress list --db ${CMAKE_CURRENT_BINARY_DIR}/progress_cli_smoke.db)
@@ -272,6 +284,23 @@ if(MAGTILE_BUILD_TESTS)
         target_link_libraries(magtile_age_tts_test PRIVATE magtile_core magtile_warnings)
         add_test(NAME age_tts
             COMMAND magtile_age_tts_test ${CMAKE_CURRENT_BINARY_DIR}/age_tts_test.db)
+    endif()
+
+    # 教程步进性能基准 (C++ microbench): 对小/中/大三个代表模型逐步
+    # 计时 nextStep / goToStep + 渲染层每步查询, 输出每步 ms 与 P95;
+    # 任一步中位数或 P95 超出预算 (默认 500ms/步) 即退出码 1。
+    # 无 GPU 的 CI 不受影响 (纯 CPU); 负载不稳的环境可用
+    # MAGTILE_BENCH_BUDGET_MS 放宽或 MAGTILE_BENCH_SKIP=1 跳过 (退出码
+    # 77 = SKIP)。详见 docs/TESTING.md 3.16 节。
+    if(EXISTS ${MAGTILE_TESTS_DIR}/bench_tutorial_step.cpp)
+        add_executable(magtile_bench_tutorial tests/bench_tutorial_step.cpp)
+        target_link_libraries(magtile_bench_tutorial PRIVATE magtile_core magtile_warnings)
+        add_test(NAME bench_tutorial_step
+            COMMAND magtile_bench_tutorial
+                ${MAGTILE_DATA_DIR}/models/beach_hut_01.json
+                ${MAGTILE_DATA_DIR}/models/castle_foundation_01.json
+                ${MAGTILE_DATA_DIR}/models/skyscraper_01.json)
+        set_tests_properties(bench_tutorial_step PROPERTIES SKIP_RETURN_CODE 77)
     endif()
 
     # 模型库目录对账: model_catalog.json 卡片元数据 (名称/难度/片数/步数)
@@ -385,6 +414,17 @@ if(MAGTILE_BUILD_TESTS)
         add_test(NAME settings_cli_smoke
             COMMAND ${MAGTILE_BASH} -c
                 "$<TARGET_FILE:magtile_app> settings set-age 4 --db ${CMAKE_CURRENT_BINARY_DIR}/settings_cli_smoke.db && $<TARGET_FILE:magtile_app> settings show --db ${CMAKE_CURRENT_BINARY_DIR}/settings_cli_smoke.db | grep -q 启蒙模式")
+
+        # 跨端存档 CLI 读取对账 (E2E-17 自动化载体, 与 cross_platform_progress
+        # 同一写入端): C++ 写入端构造样例存档 (年龄段/订阅/引导/完成/成就)
+        # 后, 真实 CLI 二进制从同一 SQLite 读出完成记录、成就 id 与年龄段
+        # 展示名 —— 验证 "一端写 → CLI 读" 的互通链路 (独立 db 文件,
+        # 与 C++ 用例并行跑不互踩)
+        if(TARGET magtile_cross_platform_test)
+            add_test(NAME cross_platform_progress_cli
+                COMMAND ${MAGTILE_BASH} -c
+                    "$<TARGET_FILE:magtile_cross_platform_test> ${CMAKE_CURRENT_BINARY_DIR}/cross_platform_cli.db >/dev/null && $<TARGET_FILE:magtile_app> progress list --db ${CMAKE_CURRENT_BINARY_DIR}/cross_platform_cli.db | grep -q rainbow_bridge_01 && $<TARGET_FILE:magtile_app> progress list --db ${CMAKE_CURRENT_BINARY_DIR}/cross_platform_cli.db | grep -q three_models_completed && $<TARGET_FILE:magtile_app> settings show --db ${CMAKE_CURRENT_BINARY_DIR}/cross_platform_cli.db | grep -q 启蒙模式")
+        endif()
 
         # 步骤朗读开关 CLI: set-tts on/off/1/0 与 show 对 "tts_enabled"
         # 键的读写 (默认开 / 跨进程持久化 / 非法值退出码 2 / 终端教程
