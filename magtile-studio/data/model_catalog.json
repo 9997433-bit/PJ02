@@ -17,7 +17,8 @@
         "沙滩",
         "小屋",
         "度假"
-      ]
+      ],
+      "thumbnail": "thumbnails/beach_hut_01.png"
     },
     {
       "id": "city_bus_stop_01",
@@ -424,7 +425,8 @@
         "小屋",
         "雪原",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/ski_lodge_01.png"
     },
     {
       "id": "tractor_01",
@@ -539,7 +541,8 @@
         "列车",
         "城市",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/monorail_01.png"
     },
     {
       "id": "roller_coaster_loop_01",
@@ -1003,6 +1006,25 @@
       "thumbnail": "thumbnails/greenhouse_dome_01.png"
     },
     {
+      "id": "igloo_01",
+      "file": "models/igloo_01.json",
+      "name": "极地冰屋",
+      "name_en": "Igloo 01",
+      "description": "全库第一座冰屋: 3x3 透明/青色相间冰砖环墙四角互吸闭环, 穹顶九宫格每片同时吸墙顶与板缝、中央嵌窗格方冰天窗, 再叠 1x1 二层冰环戴等边四坡冰帽 (穹顶 2.71); 南面入口隧道侧墙吸环墙、门框方拱门封口自成小环; 屋旁黄色四坡雪灯与冻湖沿冰砖点景 —— 极夜里, 冰屋暖光融融。",
+      "difficulty": 3,
+      "total_pieces": 66,
+      "step_count": 14,
+      "theme": "极地",
+      "tags": [
+        "极地",
+        "冰屋",
+        "雪原",
+        "穹顶建筑",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/igloo_01.png"
+    },
+    {
       "id": "clock_tower_01",
       "file": "models/clock_tower_01.json",
       "name": "中央大钟楼",
@@ -1382,7 +1404,8 @@
         "仙人掌",
         "造景",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/cactus_desert_01.png"
     },
     {
       "id": "castle_foundation_01",
@@ -1440,6 +1463,25 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/great_wall_01.png"
+    },
+    {
+      "id": "oasis_01",
+      "file": "models/oasis_01.json",
+      "name": "绿洲营地",
+      "name_en": "Oasis Camp 01",
+      "description": "全库第一片沙漠绿洲营地: 金沙营地中央 2x2 青色泉眼, 两株棕榈守在泉边 —— 双节树干踩拼缝、直角三角树根前后抱脚, 绿棕叶从干顶外垂 30 度 (受拉悬挂 13g / 力矩 3.25 双双远离预算); 两顶瘦高等腰四坡帐篷直接扎沙面四棱自锁, 石砌水井戴红色四坡井亭, 橙色四坡火塘, 营旗与双水瓮点缀; 全营压在 2.5 高度线以下 —— 沙暴也吹不倒!",
+      "difficulty": 3,
+      "total_pieces": 72,
+      "step_count": 14,
+      "theme": "自然世界",
+      "tags": [
+        "自然",
+        "绿洲",
+        "沙漠",
+        "营地",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/oasis_01.png"
     },
     {
       "id": "fountain_plaza_01",
@@ -1976,6 +2018,25 @@
       "thumbnail": "thumbnails/ice_rink_01.png"
     },
     {
+      "id": "rainforest_canopy_01",
+      "file": "models/rainforest_canopy_01.json",
+      "name": "雨林树冠天桥",
+      "name_en": "Rainforest Canopy Walk 01",
+      "description": "全库第一座雨林树冠天桥: 两株三层箱式巨树隔空相望, 树腰 (z=2) 各探三片树冠平台 (单片平挑力矩 15, 互不串联), 四板天桥两端整边吸树身 —— 树-桥-树连成大环, 剪断任一端桥仍不塌; 树身拔高至第三层双双戴瘦高四坡绿冠 (树尖 4.94), 桥面黄色护栏对角守望; 青色小河畔四朵花冠立拼缝, 两株蕨苗外倾伸展 —— 走上天桥, 雨林在脚下沙沙作响!",
+      "difficulty": 4,
+      "total_pieces": 84,
+      "step_count": 18,
+      "theme": "自然世界",
+      "tags": [
+        "自然",
+        "雨林",
+        "树屋",
+        "天桥",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/rainforest_canopy_01.png"
+    },
+    {
       "id": "hanging_garden_01",
       "file": "models/hanging_garden_01.json",
       "name": "空中花园",
@@ -2394,7 +2455,8 @@
         "码头",
         "交通",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/ferry_terminal_01.png"
     },
     {
       "id": "rescue_hq_01",
