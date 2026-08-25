@@ -3,9 +3,9 @@
   "id": "windmill_01",
   "name": "风车磨坊",
   "name_en": "Windmill 01",
-  "description": "田园风车磨坊: 2x2 塔身用长方形圈层砌法起两层 (一层南面整面留作负空间大门, 二层门楣圈两端竖边传力), 塔顶梯形裙檐收分出 1x1 洞口再戴等腰锥帽; 南面沿口立起两格高毂柱, 4 片透明菱形叶片吸在毂柱上下两段的左右竖边上, 借菱形 60 度天然斜置拼出正在旋转的 X 形风车 —— 全库第一次把菱形当叶片用。场边配栅栏、锥顶水井、六边形树冠大树与花丛。",
+  "description": "田园风车磨坊: 2x2 塔身用长方形圈层砌法起两层 (一层南面整面留作负空间大门, 二层门楣圈两端竖边传力), 塔顶梯形裙檐收分出 1x1 洞口再戴等腰锥帽; 南面沿口立起两格高毂柱, 4 片透明菱形叶片吸在毂柱上下两段的左右竖边上, 借菱形 60 度天然斜置拼出正在旋转的 X 形风车, 两片等边三角锁片嵌进上下叶片的 60 度夹角锁住毂心 —— 全库第一次把菱形当叶片用。场边配栅栏、锥顶水井、六边形树冠大树与花丛。",
   "difficulty": 3,
-  "total_pieces": 53,
+  "total_pieces": 55,
   "tags": [
     "田园",
     "风车",
@@ -18,9 +18,9 @@
     "structural_signature": {
       "tile_histogram": {
         "square": 17,
+        "equilateral_triangle": 10,
         "rectangle": 10,
         "isosceles_triangle": 9,
-        "equilateral_triangle": 8,
         "rhombus": 4,
         "trapezoid": 4,
         "hexagon": 1
@@ -539,6 +539,36 @@
       "color": "clear"
     },
     {
+      "id": "hub_tri_l",
+      "type": "equilateral_triangle",
+      "position": [
+        0.92265,
+        1.5,
+        3.707107
+      ],
+      "rotation": [
+        90.0,
+        29.999983,
+        180.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hub_tri_r",
+      "type": "equilateral_triangle",
+      "position": [
+        3.07735,
+        1.5,
+        3.707107
+      ],
+      "rotation": [
+        90.0,
+        29.999983,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
       "id": "hub_cap",
       "type": "isosceles_triangle",
       "position": [
@@ -954,11 +984,13 @@
     },
     {
       "step_number": 10,
-      "description": "挂上段叶片并戴毂顶尖饰: 2 片透明菱形吸在毂柱上段左右竖边向斜上方甩出, 1 片蓝色等腰三角形立在毂柱顶边收尾 —— 风车 X 成形!",
-      "tip": "上下叶片沿竖边错层布置, 同一平面内互不相碰。",
+      "description": "挂上段叶片并锁毂心: 2 片透明菱形吸在毂柱上段左右竖边向斜上方甩出; 上下叶片的内斜边张开的夹角恰好 60 度, 左右各嵌 1 片蓝色等边三角形与叶片双边互吸锁住毂心; 最后 1 片蓝色等腰三角形立在毂柱顶边收尾 —— 风车 X 成形!",
+      "tip": "锁片给毂柱接缝加了第二条传力路径 —— 碰一下, 风车也不散。",
       "tiles_to_add": [
         "blade_ul",
         "blade_ur",
+        "hub_tri_l",
+        "hub_tri_r",
         "hub_cap"
       ],
       "highlight_tiles": [

@@ -3,6 +3,24 @@
   "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 与 thumbnail 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。theme 为卡片主题 (由标签推导), thumbnail 由 tools/generate_thumbnails.py 生成。本文件由 tools/update_model_catalog.py 自动生成, 请勿手工编辑。",
   "models": [
     {
+      "id": "forklift_01",
+      "file": "models/forklift_01.json",
+      "name": "叉车",
+      "name_en": "Forklift 01",
+      "description": "全库第一台叉车: 两片车轮底座咬住货场拼缝组成底盘, 甲板长板整边压顶锁成箱形环; 车尾三面司机棚顶着红色警示灯, 车头门架升起、货叉平伸插进托盘垛 —— 叉尖搭上托盘墙顶双端受力, 绿色四坡货箱已离地 1 格; 一旁蓝色集装箱码着橙色货堆, 四枚雪糕筒围出作业区 —— 起升, 转运, 落位!",
+      "difficulty": 2,
+      "total_pieces": 46,
+      "step_count": 10,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "叉车",
+        "车轮底座",
+        "物流",
+        "职业体验"
+      ]
+    },
+    {
       "id": "robot_arm_01",
       "file": "models/robot_arm_01.json",
       "name": "机械臂工位",
@@ -582,6 +600,24 @@
       "thumbnail": "thumbnails/bamboo_house_01.png"
     },
     {
+      "id": "bike_rack_park_01",
+      "file": "models/bike_rack_park_01.json",
+      "name": "自行车亭公园",
+      "name_en": "Bike Rack Park 01",
+      "description": "全库第一座慢行交通街角公园: 开敞式自行车亭由蓝色后墙与两根黄色前柱托起 3 片透明顶棚 —— 每片北边整边压后墙顶、南边落前柱顶或与邻板互吸, 前后双铰链线互为保险; 亭檐三片橙色三角点睛, 亭前一排灰色停车架, 四辆彩色单车垂直插进架位 (直角三角竖边吸格线、横边吸地坪, 双边吸合像真车支脚); 东侧绿色修车小站四墙自锁、等腰四坡尖顶 2.94 格制高, 东西步道穿园, 入口发光园牌, 双树成荫、清池映花 —— 骑车来, 走路走, 绿色出行最风景。",
+      "difficulty": 3,
+      "total_pieces": 62,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "公园",
+        "自行车",
+        "绿色出行",
+        "进阶"
+      ]
+    },
+    {
       "id": "hydro_dam_01",
       "file": "models/hydro_dam_01.json",
       "name": "水电站大坝",
@@ -693,7 +729,8 @@
         "城市",
         "公园",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/sandbox_park_01.png"
     },
     {
       "id": "cable_car_01",
@@ -730,7 +767,8 @@
         "交通",
         "车辆",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/gas_station_01.png"
     },
     {
       "id": "pyramid_giza_01",
@@ -839,7 +877,8 @@
         "游乐园",
         "运动",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/slide_playground_01.png"
     },
     {
       "id": "supermarket_01",
@@ -857,6 +896,24 @@
         "商业街",
         "负空间",
         "进阶"
+      ]
+    },
+    {
+      "id": "trailer_home_01",
+      "file": "models/trailer_home_01.json",
+      "name": "营地房车",
+      "name_en": "Trailer Home 01",
+      "description": "全库第一辆宿营拖挂房车: 两片车轮底座组成居中单轴, 底盘端墙与车底板锁成箱形底架 (长板长边整边压轮组顶), 黄色车厢开透明门窗, 门口平挑一片橙色遮阳棚 (力矩 15 <= 严格档 17.5); 车尾直角三角牵引架既是拖车钩又是驻车斜撑, 营地里篝火四坡自锁、绿树成荫 —— 今晚就住这儿!",
+      "difficulty": 3,
+      "total_pieces": 67,
+      "step_count": 16,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "房车",
+        "露营",
+        "车轮底座",
+        "载具"
       ]
     },
     {
@@ -954,6 +1011,24 @@
         "接地斜撑"
       ],
       "thumbnail": "thumbnails/dinosaur_stego_01.png"
+    },
+    {
+      "id": "farm_silo_01",
+      "file": "models/farm_silo_01.json",
+      "name": "农场筒仓",
+      "name_en": "Farm Silo 01",
+      "description": "农场的粮食摩天楼: 两座 1x1 方形圈层粮塔并肩叠起三层, 蓝色压顶封口, 红色等腰四坡锥顶自锁冲天 (锥尖 4.94 格全场最高); 塔间天桥方板双端搭墙顶如桥, 把双塔锁成一个大环, 桥沿等边护栏守住高空通道; 塔脚橙色溜槽斜贴塔壁, 晒谷场上粮堆四坡自锁, 栅栏围场 —— 圈层塔身、双端天桥、四坡锥顶三大技法一次学会。",
+      "difficulty": 3,
+      "total_pieces": 69,
+      "step_count": 16,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "农场",
+        "筒仓",
+        "双塔",
+        "进阶"
+      ]
     },
     {
       "id": "fire_truck_01",
@@ -1086,7 +1161,8 @@
         "商店",
         "职业体验",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/bakery_shop_01.png"
     },
     {
       "id": "castle_foundation_01",
@@ -1275,7 +1351,8 @@
         "游乐园",
         "建筑",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/merry_go_round_01.png"
     },
     {
       "id": "police_station_01",
@@ -1322,7 +1399,7 @@
       "description": "全库第一条车厢挂在轨道下面的悬挂式单轨: 四座 T 形薄墙立柱带直角三角柱脚斜撑, 托起三层高的连续轨道梁 (跨间长板双端受力零悬挑, 两端站台由柱身膝撑托住); 玻璃头尾的吊舱用两片吊架挂在中跨下方, 吊架-舱底-端窗围成闭合吊箱, 剪断任一条铰链线都兜得住; 北侧月台与舱底零高差, 东端两段 30 度坡道折返下地 —— 头顶列车驶过, 地面警示带亮起。",
       "difficulty": 3,
       "total_pieces": 75,
-      "step_count": 17,
+      "step_count": 16,
       "theme": "城市生活",
       "tags": [
         "交通",
@@ -1563,24 +1640,6 @@
       "thumbnail": "thumbnails/basketball_arena_01.png"
     },
     {
-      "id": "ice_rink_01",
-      "file": "models/ice_rink_01.json",
-      "name": "滑冰场",
-      "name_en": "Ice Rink",
-      "description": "晶莹滑冰场: 6 片大正方形拼出 6x4 透明冰面, 青色长方形回廊压边, 外沿立起整圈长方形挡板 (南留入口), 四角柱升红旗; 西侧看台背墙托一排悬挑坐板面朝冰面, 东南角保暖小屋门框方朝北开门、头戴红色等腰尖顶, 入口外车轮底座磨冰车正要进场 —— 冰刀与冰面的沙沙声, 是冬天最好听的音乐。",
-      "difficulty": 4,
-      "total_pieces": 83,
-      "step_count": 19,
-      "theme": "城市生活",
-      "tags": [
-        "城市",
-        "运动",
-        "冬季",
-        "车辆",
-        "进阶"
-      ]
-    },
-    {
       "id": "volcano_base_01",
       "file": "models/volcano_base_01.json",
       "name": "火山科考站",
@@ -1617,6 +1676,25 @@
         "机库"
       ],
       "thumbnail": "thumbnails/aircraft_carrier_01.png"
+    },
+    {
+      "id": "ice_rink_01",
+      "file": "models/ice_rink_01.json",
+      "name": "滑冰场",
+      "name_en": "Ice Rink",
+      "description": "晶莹滑冰场: 6 片大正方形拼出 6x4 透明冰面, 青色长方形回廊压边, 外沿立起整圈长方形挡板 (南留入口), 四角柱升红旗; 西侧看台背墙托一排悬挑坐板面朝冰面, 东南角保暖小屋门框方朝北开门、头戴红色等腰尖顶, 入口外车轮底座磨冰车正要进场 —— 冰刀与冰面的沙沙声, 是冬天最好听的音乐。",
+      "difficulty": 4,
+      "total_pieces": 84,
+      "step_count": 19,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "运动",
+        "冬季",
+        "车辆",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/ice_rink_01.png"
     },
     {
       "id": "hanging_garden_01",
@@ -1862,7 +1940,8 @@
         "职业体验",
         "建筑",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/pet_clinic_01.png"
     },
     {
       "id": "post_office_01",
@@ -1880,7 +1959,8 @@
         "建筑",
         "车辆",
         "进阶"
-      ]
+      ],
+      "thumbnail": "thumbnails/post_office_01.png"
     },
     {
       "id": "hospital_01",
@@ -1978,6 +2058,24 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/steam_locomotive_01.png"
+    },
+    {
+      "id": "ferry_terminal_01",
+      "file": "models/ferry_terminal_01.json",
+      "name": "轮渡码头",
+      "name_en": "Ferry Terminal 01",
+      "description": "全库第一座轮渡码头: 黄墙候船厅嵌双门框方检票口与整圈透明高侧窗带, 屋顶立信号桅; 六根桩柱托起栈桥伸进海面, 双坡道登桥、东舷护栏、桥头灯桅; 红色渡轮靠泊栈桥西侧 —— 船壳闭环甲板锁箱, 甲板与桥面齐平直接跨步登船, 船头两片等边三角劈浪, 驾驶室戴四坡尖顶。近岸浅滩-航道-深水大正方形三层海色 —— 呜 —— 开船咯!",
+      "difficulty": 4,
+      "total_pieces": 100,
+      "step_count": 19,
+      "theme": "海洋航行",
+      "tags": [
+        "港口",
+        "轮渡",
+        "码头",
+        "交通",
+        "进阶"
+      ]
     },
     {
       "id": "rescue_hq_01",

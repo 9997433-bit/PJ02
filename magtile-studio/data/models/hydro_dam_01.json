@@ -988,33 +988,6 @@
     },
     {
       "step_number": 3,
-      "description": "铺水库西半: 上游 y[3,5] 竖铺 4 片蓝色长板。",
-      "tip": "上游是一整片深水库 —— 大坝就横锁在河床与水库之间。",
-      "tiles_to_add": [
-        "rs_0",
-        "rs_1",
-        "rs_2",
-        "rs_3"
-      ],
-      "highlight_tiles": [
-        "yd_0_1"
-      ]
-    },
-    {
-      "step_number": 4,
-      "description": "铺水库东半: 再铺 3 片, 水库贯通 7 格。",
-      "tip": "下一步开始筑坝 —— 从下游面开始。",
-      "tiles_to_add": [
-        "rs_4",
-        "rs_5",
-        "rs_6"
-      ],
-      "highlight_tiles": [
-        "rs_3"
-      ]
-    },
-    {
-      "step_number": 5,
       "description": "立下游墙西段: y=2 线上立 4 片灰色立墙。",
       "tip": "底边吸河床板边 —— 这是大坝的下游脸面。",
       "tiles_to_add": [
@@ -1029,7 +1002,7 @@
       ]
     },
     {
-      "step_number": 6,
+      "step_number": 4,
       "description": "立下游墙东段: 再立 3 片, 下游面贯通。",
       "tip": "一字排开不留缝 —— 重力坝靠身板挡水。",
       "tiles_to_add": [
@@ -1042,27 +1015,9 @@
       ]
     },
     {
-      "step_number": 7,
-      "description": "立上游墙: y=3 线上立 7 片, 与下游墙夹出 1 格厚的坝芯。",
-      "tip": "底边同时吸水库板边 —— 上游面直接泡在水里。",
-      "tiles_to_add": [
-        "dw_n_0",
-        "dw_n_1",
-        "dw_n_2",
-        "dw_n_3",
-        "dw_n_4",
-        "dw_n_5",
-        "dw_n_6"
-      ],
-      "highlight_tiles": [
-        "dw_s_0",
-        "rs_0"
-      ]
-    },
-    {
-      "step_number": 8,
-      "description": "盖坝顶压顶: 7 片灰色压顶板逐格盖上, 每片同时压住上下游两面墙。",
-      "tip": "双铰链互为保险 —— 下级坝体锁成连续箱形环。",
+      "step_number": 5,
+      "description": "盖坝顶压顶: 7 片灰色压顶板逐格盖上, 南长边先整边吸住下游墙顶沿。",
+      "tip": "压顶暂时单边悬挑半格 (在力矩预算内) —— 上游墙一立就变双保险。",
       "tiles_to_add": [
         "cap_0",
         "cap_1",
@@ -1074,7 +1029,53 @@
       ],
       "highlight_tiles": [
         "dw_s_0",
+        "dw_s_6"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立上游墙: y=3 线上立 7 片, 墙顶吸住压顶北沿, 与下游墙夹出 1 格厚的坝芯。",
+      "tip": "每片压顶从此同时压住上下游两面墙 —— 双铰链互为保险, 下级坝体锁成连续箱形环。",
+      "tiles_to_add": [
+        "dw_n_0",
+        "dw_n_1",
+        "dw_n_2",
+        "dw_n_3",
+        "dw_n_4",
+        "dw_n_5",
         "dw_n_6"
+      ],
+      "highlight_tiles": [
+        "cap_0",
+        "cap_6"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "铺水库西半: 上游 y[3,5] 竖铺 4 片蓝色长板, 南边先吸上游墙底边。",
+      "tip": "上游是一整片深水库 —— 大坝就横锁在河床与水库之间。",
+      "tiles_to_add": [
+        "rs_0",
+        "rs_1",
+        "rs_2",
+        "rs_3"
+      ],
+      "highlight_tiles": [
+        "dw_n_0",
+        "yd_0_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "铺水库东半: 再铺 3 片, 水库贯通 7 格。",
+      "tip": "上游面直接泡在水里 —— 这正是重力坝的日常。",
+      "tiles_to_add": [
+        "rs_4",
+        "rs_5",
+        "rs_6"
+      ],
+      "highlight_tiles": [
+        "rs_3"
       ]
     },
     {
