@@ -1,0 +1,980 @@
+{
+  "schema_version": 1,
+  "id": "octopus_01",
+  "name": "八爪章鱼",
+  "name_en": "Octopus 01",
+  "description": "只用核心九片型的全库第一只章鱼: 与回收站的三条并排滑道不同, 本作的招牌是'八爪辐射' —— 八条 30 度长板触手从头箱顶沿向四面八方辐射落地, 东西南北每面两条, 顶边整边吸头顶板沿, 坡尾压住海床, 重量走两条路; 两层头箱四角互咬一通到顶, 南脸两扇透亮窗格方是圆溜溜的大眼睛, 一层还藏着门框方小嘴 (章鱼的嘴本来就长在腿中间); 头顶梯形四坡圆顶自锁成环, 粉色压顶上骑着两颗透明泡泡, 海床四角点缀海草/珊瑚/海星 —— 咕噜咕噜, 海底最聪明的小家伙来了!",
+  "difficulty": 3,
+  "total_pieces": 53,
+  "tags": [
+    "海洋",
+    "章鱼",
+    "动物世界",
+    "海底",
+    "进阶",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 28,
+        "rectangle": 11,
+        "equilateral_triangle": 6,
+        "trapezoid": 4,
+        "window_square": 2,
+        "door_frame": 1,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "sea_s_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sea_s_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_s_e",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sea_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_n_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sea_n_e",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sea_w_s",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sea_w_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_e_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_e_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "floor_sw",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "floor_se",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "floor_nw",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "floor_ne",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "w1_s_w",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "mouth",
+      "type": "door_frame",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "w1_n_w",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "w1_n_e",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "w1_w_s",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "w1_w_n",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "w1_e_s",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "w1_e_n",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "top_sw",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "top_se",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "top_nw",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "top_ne",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "eye_w",
+      "type": "window_square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "eye_e",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "w2_w_s",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "w2_w_n",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "w2_e_s",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "w2_e_n",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "w2_n",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "dome_s",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        2.222222,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "dome_e",
+      "type": "trapezoid",
+      "position": [
+        3.777778,
+        3.0,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "dome_n",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        3.777778,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "dome_w",
+      "type": "trapezoid",
+      "position": [
+        2.222222,
+        3.0,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "dome_cap",
+      "type": "square",
+      "position": [
+        3.0,
+        3.0,
+        2.707107
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "arm_e_s",
+      "type": "rectangle",
+      "position": [
+        4.866025,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "arm_e_n",
+      "type": "rectangle",
+      "position": [
+        4.866025,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "arm_w_s",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "arm_w_n",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "arm_n_w",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        4.866025,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "arm_n_e",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        4.866025,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "arm_s_w",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "arm_s_e",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "weed_a",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        1.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "weed_b",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "coral_a",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        5.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "coral_b",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        4.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "star",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bub_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        3.5,
+        2.995782
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bub_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        2.995782
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺海床环带: 沙地浅水一圈十片, 板板等边互吸围出头箱位。",
+      "tip": "潜到海底啦 —— 先把章鱼家的院子围出来。",
+      "tiles_to_add": [
+        "sea_s_w",
+        "sea_s_m",
+        "sea_s_e",
+        "sea_n_w",
+        "sea_n_m",
+        "sea_n_e",
+        "sea_w_s",
+        "sea_w_n",
+        "sea_e_s",
+        "sea_e_n"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺头箱地板: 四片沙地方板补齐中央, 头箱墙脚全踩它的整边。",
+      "tip": "",
+      "tiles_to_add": [
+        "floor_sw",
+        "floor_se",
+        "floor_nw",
+        "floor_ne"
+      ],
+      "highlight_tiles": [
+        "sea_s_m"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立头箱一层南墙与西墙: 南脸东格嵌粉色门框方, 是章鱼的小嘴。",
+      "tip": "章鱼的嘴本来就长在八条腿中间 —— 待会儿会被触手挡住哟。",
+      "tiles_to_add": [
+        "w1_s_w",
+        "mouth",
+        "w1_w_s",
+        "w1_w_n"
+      ],
+      "highlight_tiles": [
+        "floor_sw"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "合头箱一层北墙与东墙: 八片墙环四角竖边互咬闭环。",
+      "tip": "",
+      "tiles_to_add": [
+        "w1_n_w",
+        "w1_n_e",
+        "w1_e_s",
+        "w1_e_n"
+      ],
+      "highlight_tiles": [
+        "w1_s_w"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖头顶板: 四片紫色方板四边入扣墙顶 —— 板外沿就是触手挂点。",
+      "tip": "这一圈板沿要拼整齐, 八条触手全靠它整边吸合。",
+      "tiles_to_add": [
+        "top_sw",
+        "top_se",
+        "top_nw",
+        "top_ne"
+      ],
+      "highlight_tiles": [
+        "w1_e_s"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "起头箱二层: 南脸两扇透亮窗格方当大眼睛, 北脸一条整横楣合环。",
+      "tip": "两只圆眼睛朝南看 —— 谁来和章鱼打招呼呀?",
+      "tiles_to_add": [
+        "eye_w",
+        "eye_e",
+        "w2_w_s",
+        "w2_w_n",
+        "w2_e_s",
+        "w2_e_n",
+        "w2_n"
+      ],
+      "highlight_tiles": [
+        "top_sw"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "扣梯形四坡圆顶: 四片梯形腰边两两互吸自锁, 粉色方板压顶锁环。",
+      "tip": "四坡自锁成环 —— 圆滚滚的章鱼脑袋成形啦。",
+      "tiles_to_add": [
+        "dome_n",
+        "dome_e",
+        "dome_w",
+        "dome_s",
+        "dome_cap"
+      ],
+      "highlight_tiles": [
+        "w2_n"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "挂东西四条触手: 30 度长板顶边整边吸板沿, 坡尾稳稳压住海床。",
+      "tip": "顶铰链 + 接地坡尾, 重量走两条路 —— 触手又稳又神气。",
+      "tiles_to_add": [
+        "arm_e_s",
+        "arm_e_n",
+        "arm_w_s",
+        "arm_w_n"
+      ],
+      "highlight_tiles": [
+        "top_se"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "挂南北四条触手: 八爪辐射就位, 每面两条对称受力。",
+      "tip": "数一数 —— 一二三四五六七八, 一条都不少!",
+      "tiles_to_add": [
+        "arm_n_w",
+        "arm_n_e",
+        "arm_s_w",
+        "arm_s_e"
+      ],
+      "highlight_tiles": [
+        "top_nw"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "点缀海底: 海草/珊瑚/海星骑上海床沿口, 两颗泡泡骑压顶板沿。",
+      "tip": "咕噜咕噜 —— 泡泡升起来, 海底最聪明的小家伙来了!",
+      "tiles_to_add": [
+        "weed_a",
+        "weed_b",
+        "coral_a",
+        "coral_b",
+        "star",
+        "bub_n",
+        "bub_e"
+      ],
+      "highlight_tiles": [
+        "dome_cap"
+      ]
+    }
+  ]
+}
