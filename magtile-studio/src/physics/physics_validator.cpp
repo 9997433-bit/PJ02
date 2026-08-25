@@ -18,14 +18,43 @@ std::string withContext(const std::string& context, const std::string& message) 
     return context.empty() ? message : context + ": " + message;
 }
 
-/// 两条磁力边是否贴合: 端点两两重合 (允许正反两种对应)。
+/// 点到线段的最短距离。
+double pointToSegmentDistance(const Vec3& p, const Vec3& a, const Vec3& b) {
+    const Vec3 ab = b - a;
+    const double len_sq = ab.dot(ab);
+    if (len_sq < 1e-12) return core::distance(p, a);
+    const double t = std::clamp((p - a).dot(ab) / len_sq, 0.0, 1.0);
+    return core::distance(p, a + ab * t);
+}
+
+/// 两条磁力边是否贴合 (R2 判定, docs/PHYSICS_RULES.md):
+///   - 等长整边: 端点两两重合 (正反两种对应均可) —— 传统判定;
+///   - 长短边搭配 (如大正方形边长 2 对小正方形边长 1, 或长方形长边对
+///     小方边): 短边两个端点都落在长边线段上 (容差内) 即贴合 —— 短边
+///     全程磁条对磁条接触, 与整边贴合同样稳固。由此一条长 2 的磁力边
+///     可以同时吸住两片共线的边长 1 磁力片 (记为两条独立连接)。
+///   - 错位半搭 (短边任一端点悬出长边之外) 仍判为未连接: 悬出部分
+///     没有磁条对齐, 实物上是不稳定的。
+/// 数学上以 "短边被长边线段完整包含" 统一表达: 等长时即退化为端点
+/// 两两重合, 与旧判定完全一致。
 bool edgesSnap(const std::pair<Vec3, Vec3>& ea, const std::pair<Vec3, Vec3>& eb,
                double tolerance) {
-    const bool forward = core::distance(ea.first, eb.first) <= tolerance &&
-                         core::distance(ea.second, eb.second) <= tolerance;
-    const bool reverse = core::distance(ea.first, eb.second) <= tolerance &&
-                         core::distance(ea.second, eb.first) <= tolerance;
-    return forward || reverse;
+    const double len_a = core::distance(ea.first, ea.second);
+    const double len_b = core::distance(eb.first, eb.second);
+    const auto& shorter = len_a <= len_b ? ea : eb;
+    const auto& longer = len_a <= len_b ? eb : ea;
+    return pointToSegmentDistance(shorter.first, longer.first, longer.second) <= tolerance &&
+           pointToSegmentDistance(shorter.second, longer.first, longer.second) <= tolerance;
+}
+
+/// 一条磁力连接的实际接触段: 两边中较短的那条 (containment 判定下
+/// 短边即完整的磁条接触区间)。R5/R6 的铰链承重/力矩预算按接触段
+/// 长度计算, 长短边搭配时不能按长边长度虚增预算。
+std::pair<Vec3, Vec3> contactSegment(const std::pair<Vec3, Vec3>& ea,
+                                     const std::pair<Vec3, Vec3>& eb) {
+    const double len_a = core::distance(ea.first, ea.second);
+    const double len_b = core::distance(eb.first, eb.second);
+    return len_a <= len_b ? ea : eb;
 }
 
 /// 两片磁力片之间是否存在任意一对贴合的磁力边。
@@ -354,15 +383,22 @@ ValidationReport PhysicsValidator::validateAssembly(
     // 前置条件: R1 通过且存在接地片 (悬空结构做静力分析没有意义)。
     // ================================================================
     if (!has_floating && has_ground_contact && !connections.empty()) {
-        // 每条连接的铰链线与磁力边长度 (取 A 侧边, B 侧在容差内与其重合)
+        // 每条连接的铰链线与磁力边长度: 取两侧边中较短者 (= 实际磁条
+        // 接触段)。等长整边贴合时两侧在容差内重合, 与取 A 侧边等价;
+        // 长短边搭配 (大正方形边吸小方边等) 时按接触段计, 承重/力矩
+        // 预算不因长边名义长度而虚增。
         std::vector<HingeLine> lines;
         std::vector<double> edge_lengths;
+        std::vector<std::pair<Vec3, Vec3>> contact_edges;
         lines.reserve(connections.size());
         edge_lengths.reserve(connections.size());
+        contact_edges.reserve(connections.size());
         for (const MagnetConnection& c : connections) {
-            const auto edge = transformed[c.tile_a].edge(c.edge_a);
+            const auto edge = contactSegment(transformed[c.tile_a].edge(c.edge_a),
+                                             transformed[c.tile_b].edge(c.edge_b));
             lines.push_back(makeHingeLine(edge));
             edge_lengths.push_back((edge.second - edge.first).length());
+            contact_edges.push_back(edge);
         }
 
         std::set<std::vector<std::size_t>> analyzed_cuts;  // 共线组去重
@@ -416,7 +452,7 @@ ValidationReport PhysicsValidator::validateAssembly(
                     if (in_component[c.tile_a] == in_component[c.tile_b]) continue;
                     ++crossing_count;
                     hinge_length += edge_lengths[j];
-                    const auto edge = transformed[c.tile_a].edge(c.edge_a);
+                    const auto& edge = contact_edges[j];
                     hinge_z_sum += (edge.first.z + edge.second.z) * 0.5;
                 }
                 if (crossing_count == 0) continue;  // 与本铰链线无直接联系

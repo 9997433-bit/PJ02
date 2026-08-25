@@ -9,7 +9,10 @@
 #   - 世界坐标: world = R * (x, y, 0) + position;
 #   - 面法向: 本地 +Z 经旋转后的方向 (即 R 的第三列);
 #   - 磁力边: 形状目录 magnet_edges 列出的边索引, 边 i 连接顶点 i 与 i+1;
-#   - 吸合判定: 两条磁力边端点两两重合 (正序或反序), 容差 connect_tolerance;
+#   - 吸合判定: 短边被长边线段完整包含 (容差 connect_tolerance);
+#     等长整边即退化为端点两两重合 (正序或反序), 长短边搭配 (大正方形
+#     边长 2 吸小方边长 1 等) 时短边两端点都须落在长边上, 错位半搭
+#     (短边端点悬出长边) 仍判为未连接 —— 与 C++ R2 完全一致;
 #   - 接地判定: 存在顶点 z <= ground_tolerance。
 #
 # 本模块只依赖标准库, 内容作者无需 C++ 工具链即可在本地运行数据层质检。
@@ -99,12 +102,31 @@ def points_close(a, b, tolerance=CONNECT_TOLERANCE):
     return (math.dist(a, b) <= tolerance)
 
 
+def _point_to_segment(p, a, b):
+    """点到线段的最短距离。"""
+    ab = (b[0] - a[0], b[1] - a[1], b[2] - a[2])
+    len_sq = ab[0] * ab[0] + ab[1] * ab[1] + ab[2] * ab[2]
+    if len_sq < 1e-12:
+        return math.dist(p, a)
+    t = ((p[0] - a[0]) * ab[0] + (p[1] - a[1]) * ab[1] + (p[2] - a[2]) * ab[2]) / len_sq
+    t = max(0.0, min(1.0, t))
+    return math.dist(p, (a[0] + ab[0] * t, a[1] + ab[1] * t, a[2] + ab[2] * t))
+
+
 def edges_connect(edge_a, edge_b, tolerance=CONNECT_TOLERANCE):
-    """磁力吸合判定: 端点两两重合 (正序或反序), 与 R2 完全一致。"""
+    """磁力吸合判定: 短边被长边线段完整包含, 与 C++ R2 完全一致。
+
+    等长整边贴合退化为端点两两重合 (正序或反序); 长短边搭配 (大正方形
+    边长 2 吸小方边长 1, 长方形长边吸小方边等) 时短边两端点都落在长边
+    上即吸合; 错位半搭 (短边端点悬出长边) 判为未连接。
+    """
     (a1, b1), (a2, b2) = edge_a, edge_b
-    if points_close(a1, a2, tolerance) and points_close(b1, b2, tolerance):
-        return True
-    return points_close(a1, b2, tolerance) and points_close(b1, a2, tolerance)
+    if math.dist(a1, b1) <= math.dist(a2, b2):
+        shorter, longer = (a1, b1), (a2, b2)
+    else:
+        shorter, longer = (a2, b2), (a1, b1)
+    return (_point_to_segment(shorter[0], longer[0], longer[1]) <= tolerance
+            and _point_to_segment(shorter[1], longer[0], longer[1]) <= tolerance)
 
 
 def pose_class(normal_a, normal_b):
@@ -121,12 +143,15 @@ def pose_class(normal_a, normal_b):
 class EdgeIndex:
     """磁力边空间索引: 按边中点所在网格单元分桶, 查询时扫相邻 27 单元。
 
-    两条吸合边的中点距离 <= connect_tolerance (0.02), 远小于单元尺寸,
-    因此相邻单元扫描不会漏检。用于把逐片连通性检查从 O(已放边数)
-    降为 O(1) 邻域查询, 支撑 500 模型规模的批量执行。
+    等长整边吸合时两条边的中点距离 <= connect_tolerance (0.02); 长短边
+    搭配 (短边完整贴合在长边上) 时中点距离最大为 (长边-短边)/2, 目前
+    最长磁力边为 2 (大正方形/长方形长边/梯形下底)、最短为 1, 即至多
+    0.5 + 容差。单元尺寸取 0.6 覆盖该距离, 相邻 27 单元扫描不会漏检。
+    用于把逐片连通性检查从 O(已放边数) 降为 O(1) 邻域查询, 支撑 500
+    模型规模的批量执行。
     """
 
-    CELL = 0.25
+    CELL = 0.6
 
     def __init__(self):
         self._buckets = {}

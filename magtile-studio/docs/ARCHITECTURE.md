@@ -98,7 +98,7 @@ BuildStep    = { step_number, description(中文), tip, tiles_to_add[], highligh
   "tiles": [
     {
       "type": "square",            // 与 TileType 的稳定标识一致
-      "tier": "core",              // 套装分层: core / extended (docs/TILE_SET.md)
+      "tier": "core",              // 套装分层: core / expansion (docs/TILE_CATALOG.md)
       "name_zh": "正方形",
       "vertices": [[-0.5,-0.5], [0.5,-0.5], [0.5,0.5], [-0.5,0.5]],
       "magnet_edges": [0, 1, 2, 3] // 带磁条的边索引
