@@ -7,15 +7,10 @@ LGPL 合规清单。通用打包基座 (NSIS/ZIP/WiX、版本号管理、CI 流�
 见 `scripts/package_windows.md`, 两文共用同一套 CPack 配置
 (`platforms/windows/packaging/CPackWindows.cmake`)。
 
-> 状态: **IN_PROGRESS (脚手架 + 冒烟脚本)**。安装规则、并存/Qt-only
-> 两种包形态、starter 子集与许可文件均已就位; Linux 侧验证已脚本化
-> 为一键 `scripts/smoke_qt_linux_pack.sh` 并全绿 (三档 TGZ 清单断言 +
-> **NSIS 安装器脚本生成/makensis 编译冒烟** + 解包实测 + 动态链接
-> 核验, 见第九节); Windows 实机冒烟已脚本化为
-> `scripts/smoke_qt_windows.ps1` (构建→测试→CPack→windeployqt→清单
-> 断言→无头启动一条龙, 含 -DryRun 自检, 已在 pwsh 下自检通过)。
-> **windeployqt / macdeployqt 尚未在 Windows / macOS 实机跑过**:
-> Windows 构建机上跑第五节脚本 + 第十一节验收清单, 结果回填第十节。
+> 状态: **IN_PROGRESS (脚手架)**。安装规则、并存/Qt-only 两种包形态、
+> starter 子集与许可文件均已就位, 并在 Linux 环境冒烟通过 (TGZ 文件
+> 清单 + 动态链接核验, 见第九节); **windeployqt / macdeployqt 尚未在
+> Windows / macOS 实机跑过**, 实机步骤按第五节执行并回填第十节清单。
 
 ## 一、包形态总览
 
@@ -97,9 +92,7 @@ Qt 运行库是否已在包内, 取决于构建所用 Qt 版本:
 
 ## 五、Qt 运行库部署 (windeployqt / macdeployqt)
 
-> 本节命令尚未在实机验证 (见文首状态)。Windows 侧不必手敲: 一键脚本
-> `scripts/smoke_qt_windows.ps1` 已把本节 + 第三/四节 + 清单断言 +
-> 无头启动冒烟串成一条命令 (见第十一节); 首跑后逐条回填第十节清单。
+> 本节命令尚未在实机验证 (见文首状态), 首跑时逐条核对第十节清单。
 
 ### Windows — windeployqt (Qt 6.4 必需; ≥ 6.5 仅核对)
 
@@ -225,24 +218,7 @@ Qt 以 **LGPLv3 动态链接** 使用 (`docs/QT_UI_PLAN.md` §2 既定决策)。
 
 ## 九、Linux 冒烟验证 (无 Windows/macOS 机器时)
 
-安装规则与文件清单在任何桌面平台可验 (产物 TGZ 仅冒烟, 不分发)。
-**一键脚本** (推荐, 自动跑完下面全部手动步骤并逐项断言):
-
-```bash
-bash scripts/smoke_qt_linux_pack.sh          # 构建目录默认 build-pack
-```
-
-覆盖: 1) 并存包 TGZ 清单 (双主程序/data/licenses/README/无多余 qml/);
-2) **NSIS 冒烟**: `cpack -G NSIS` 走完 CPackWindows.cmake 生成
-`project.nsi` 并经 makensis 编译出安装器 (装的是 Linux 二进制, 仅验
-安装器脚本能过编译, 不可分发), 另断言并存包快捷方式两条 (主快捷方式
-`library --gui` + "MagTile Studio (Qt)") 已进脚本 —— 需
-`apt install nsis`, 未装时该档跳过; 3) Qt-only 包 (无 magtile_app,
--qt 后缀); 4) starter 子集 (模型恰 30 个 + 目录同步过滤 + 解包后
-目录登记一致性复核); 5) offscreen 启动实测吃包内 data/;
-6) ldd 动态链接核验 (第八节第一项)。任一断言失败退出码非零。
-
-等价手动步骤 (脚本内部即此流程):
+安装规则与文件清单在任何桌面平台可验 (产物 TGZ 仅冒烟, 不分发):
 
 ```bash
 # 1) 并存包: 两个主程序 + data 全库 + licenses
@@ -271,18 +247,13 @@ QT_QPA_PLATFORM=offscreen /tmp/MagTileStudio-*-qt/magtile_studio_qt \
 ldd build-pack/apps/desktop_qt/magtile_studio_qt | grep -i qt   # 应全为 .so
 ```
 
-本仓库当前状态已按 `smoke_qt_linux_pack.sh` 在 Ubuntu (Qt 6.4.2 /
-CMake 3.28 / NSIS 3.10) 全绿: 三档 TGZ 清单断言、NSIS 脚本生成 +
-makensis 编译 + 快捷方式断言、starter 解包目录一致性、offscreen
-启动、ldd 动态链接核验全部通过; Windows/macOS 实机项见下节。
+本仓库当前状态已按上述流程在 Ubuntu (Qt 6.4.2 / CMake 3.28) 冒烟
+通过; Windows/macOS 实机项见下节。
 
 ## 十、QT-6 待办清单 (实机阶段)
 
-- [ ] Windows 实机: 在构建机上跑 `scripts/smoke_qt_windows.ps1`
-      (Qt ≥ 6.5 验证自动部署产物完整 / Qt 6.4 路径自动跑 windeployqt
-      并重压 *-deployed.zip, 脚本内清单断言 + 无头启动已自动化);
-      再按第十一节人工清单在干净机器双击验收。NSIS 重打 (把部署产物
-      纳入安装器) 仍为手动步骤。
+- [ ] Windows 实机: Qt ≥ 6.5 构建验证自动部署产物完整; Qt 6.4 路径
+      跑通 windeployqt 后重打 ZIP/NSIS; 干净机器双击验收。
 - [ ] windeployqt 产物纳入安装规则自动化 (或全面转 Qt ≥ 6.5 部署 API),
       消除"打完再手补"的两段式流程。
 - [ ] macOS: MACOSX_BUNDLE 切换 + Info.plist/图标资产 + macdeployqt
@@ -296,61 +267,3 @@ makensis 编译 + 快捷方式断言、starter 解包目录一致性、offscreen
       共用)。
 - [ ] 达成 `docs/QT_UI_PLAN.md` §4 退役条件后, 商店渠道只发 Qt 版
       (ImGui 版退役为内部工具)。
-
-## 十一、Windows 实机验收清单
-
-分两段: 自动化冒烟 (脚本代跑, 构建机上) + 人工验收 (干净机器上)。
-两段都过才算 QT-6 Windows 档收口; 结果回填第十节第一项。
-
-### 11.1 自动化冒烟 (构建机)
-
-```powershell
-# 仓库根目录; PowerShell 5.1 与 pwsh 7 均可
-powershell -ExecutionPolicy Bypass -File scripts\smoke_qt_windows.ps1 `
-    -QtDir C:\Qt\6.7.2\msvc2022_64            # 并存包 + full
-# 变体: -QtOnly (Qt-only 包) / -ModelSet starter (30 模型子集)
-# 先看环境报告与执行计划不实跑: 追加 -DryRun
-```
-
-脚本流程: 环境检测 (CMake/Qt/windeployqt/NSIS/VS/Python) → 配置构建
-→ ctest (自动排除需显示环境的 GL 双 GUI 冒烟) → `cpack -G NSIS;ZIP`
-→ 解压 ZIP → Qt 6.4 时对解包目录跑 windeployqt (≥ 6.5 走自动部署仅
-核对) → 包内清单断言 (Qt6 DLL 六件套 / `platforms/qwindows.dll` /
-`qml/QtQuick` 模块树 / `vcruntime140*.dll` / data 与目录登记一致性 /
-licenses) → offscreen 无头启动冒烟 → (6.4) 重压 `*-deployed.zip`。
-任一环节失败退出码非零并给出 `FAILED:` 定位行。
-
-### 11.2 人工验收 (干净 Windows 10/11, 未装 Qt/VS 的物理机或虚拟机)
-
-- [ ] **安装**: 双击 NSIS 安装器 → 许可页显示中文 EULA → 默认装入
-      `%ProgramFiles%\MagTile Studio\`; 便携档改为解压
-      `*-deployed.zip` (Qt 6.4 产物) 或 `*-win64.zip` (≥ 6.5)。
-- [ ] **启动**: 开始菜单 "MagTile Studio (Qt)" (Qt-only 包为
-      "MagTile Studio") 或双击 `magtile_studio_qt.exe`; 数秒内出
-      首页, 无缺 DLL 弹窗、无黑/白屏 (首次启动会先出现年龄段引导
-      三卡片, 属预期, 选任一档进首页)。
-- [ ] **打开模型库**: 首页「开始搭建」→ 模型卡片网格出现且缩略图
-      正常 (starter 档恰 30 张、全部无 🔒 角标); 筛选条可点、
-      「🎁 免费模型」筛选生效。
-- [ ] **进教程**: 点任意卡片 → 详情页 3D 预览在转 → 「开始搭建」→
-      教程页 3D 视口可鼠标拖拽旋转/滚轮缩放, 「下一步」步进有星星
-      反馈, 步骤朗读按钮 🔊 不报错 (无 TTS 引擎时静默)。
-- [ ] **退出**: 直接关窗 (无确认框, 预期行为) → 再次启动 → 详情页
-      显示「继续搭建 第 N 步」(进度存档写在用户目录, 与安装目录
-      分离)。
-- [ ] **卸载** (NSIS 档): 设置/控制面板卸载 → `%ProgramFiles%\
-      MagTile Studio\` 无残留; 用户存档 (进度库) 保留属预期。
-
-### 11.3 常见失败排查
-
-| 症状 | 原因 | 处置 |
-| --- | --- | --- |
-| 启动弹窗 "找不到 VCRUNTIME140.dll / MSVCP140.dll" | 干净机器无 VC++ 运行库, 且包内 CRT DLL 缺失 | 核对安装目录有 `vcruntime140*.dll` (CPack 经 InstallRequiredSystemLibraries 收入, MSVC /MD 构建必带); 应急可装官方 [VC++ Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe), 但正式包必须自带 |
-| 启动弹窗 "no Qt platform plugin could be initialized" | `platforms\qwindows.dll` 未拷贝 —— windeployqt 没跑、对错误的 exe 跑、或打包时漏掉 platforms/ 子目录 | 对安装目录重跑 windeployqt (第五节); 核对 `platforms\qwindows.dll` 与 exe 同级的 `platforms\` 子目录里 |
-| 窗口出现但黑/白屏, 控制台版报 `module "QtQuick" is not installed` | QML 运行时模块未拷贝 —— windeployqt **忘带 `--qmldir`** (静态扫描不到 import) | 带 `--qmldir apps\desktop_qt\qml` 重跑; 核对 `qml\QtQuick\...` 模块树在安装目录; 这是第五节标注的头号事故 |
-| 启动弹窗 "找不到 Qt6Core.dll" (或 Qt6Qml/Quick) | Qt 共享库六件套未拷贝 (windeployqt 未跑), 或构建机 PATH 里的 Qt 掩盖了问题、到干净机才暴露 | 重跑 windeployqt; 用 `scripts/smoke_qt_windows.ps1` 的清单断言在构建机上提前拦截 |
-| 启动即闪退、无任何弹窗 | 包内 `data/` 缺失或目录登记与模型文件不一致 (加载器对"登记但缺文件"直接报错) | 核对安装目录 `data\model_catalog.json` 与 `data\models\`; 子集包必须由 make_data_subset.py 装配 (第七节), 严禁手删模型 |
-| 教程页 3D 视口空白/花屏 | 远程桌面 / 无 GPU 虚拟机的 OpenGL 能力不足 (视口需 OpenGL 场景图, main.cpp 已固定 `QSG_RHI_BACKEND=opengl`) | 换物理机或开虚拟机 3D 加速; 排查时可设 `QSG_INFO=1` 看场景图后端日志 |
-| 朗读按钮无声 | 干净机器缺 TTS 引擎, 或包内缺 `Qt6TextToSpeech.dll` + `texttospeech\` 插件 | 预期为静默降级不报错; 要启用则核对上述两件随包且系统装有中文语音包 |
-| 安装器被 SmartScreen 拦截 | 未签名 | 内测阶段"更多信息 → 仍要运行"; 发布前按 `scripts/package_windows.md` 第十一节签名 |
-| `smoke_qt_windows.ps1` 中文输出乱码 | 控制台代码页非 UTF-8 | `chcp 65001` 后重跑; 脚本文件本身已带 UTF-8 BOM, PowerShell 5.1 可直接解析 |
