@@ -5,13 +5,17 @@
 //
 // 只负责把磁力片 3D 场景 (地面网格 + 半透明彩色薄板 + 高亮描边)
 // 画进 "当前已绑定" 的 framebuffer, 不创建窗口、不处理输入、不含
-// ImGui —— 因此可同时服务两个外壳:
+// ImGui —— 因此可同时服务三个外壳:
 //   - GLFW + ImGui 版 (gl_renderer.cpp): 画进默认 framebuffer;
 //   - Qt/QML 版 (QQuickFramebufferObject): 画进 Qt 场景图分配的
-//     FBO (QT-3 教程视口, 见 docs/QT_UI_PLAN.md)。
+//     FBO (QT-3 教程视口, 见 docs/QT_UI_PLAN.md);
+//   - Android 版 (GLSurfaceView + GLES3): 画进 EGL 窗口表面
+//     (platforms/android/jni/magtile_scene_jni.cpp 教程视口)。
 // GL 入口经调用方提供的解析器在运行时加载 (GLFW 用
-// glfwGetProcAddress, Qt 用 QOpenGLContext::getProcAddress),
-// 本头文件不暴露任何 GLFW / Qt / 系统 GL 类型。
+// glfwGetProcAddress, Qt 用 QOpenGLContext::getProcAddress,
+// Android 用 dlsym 解析已链接的 libGLESv3), 本头文件不暴露任何
+// GLFW / Qt / 系统 GL 类型。GLSL 版本头在运行时按上下文类型选择
+// (桌面 410 core / GLES 300 es), 绘制实现三端同一份。
 //
 // 注意: GL 函数指针表是进程级全局的 (gl_api.hpp), 一个进程内只
 // 应存在一种 GL 上下文提供方 (两个外壳是不同的可执行文件)。

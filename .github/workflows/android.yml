@@ -50,9 +50,11 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release
           cmake --build build-android
 
-      # 十八个 JNI 入口一个都不能少 (Kotlin 侧 external fun 与之一一对应:
+      # 二十六个 JNI 入口一个都不能少 (Kotlin 侧 external fun 与之一一对应:
       # MainActivity = 模型库链路, MagTileNative = 进度存档/磁力片库存/
-      # 年龄段设置/进度页与成就墙/分步教程/家长门链路)
+      # 年龄段设置/进度页与成就墙/分步教程/家长门链路,
+      # TutorialSceneNative = 3D 教程视口链路: 场景加载/设步/相机手势/
+      # GLES3 渲染循环, 复用与桌面 GL/Qt 同一份 GlSceneRenderer)
       - name: 断言 JNI 符号齐全
         run: |
           NM="$ANDROID_HOME/ndk/$NDK_VERSION/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-nm"
@@ -68,7 +70,12 @@ jobs:
             MagTileNative_getTutorialSteps MagTileNative_savedTutorialStep \
             MagTileNative_saveTutorialStep \
             MagTileNative_parentGateOpenJson MagTileNative_parentGateSubmitJson \
-            MagTileNative_parentGateSessionActive; do
+            MagTileNative_parentGateSessionActive \
+            TutorialSceneNative_loadScene TutorialSceneNative_setStep \
+            TutorialSceneNative_releaseScene \
+            TutorialSceneNative_dragRotate TutorialSceneNative_pinchZoom \
+            TutorialSceneNative_pan \
+            TutorialSceneNative_surfaceCreated TutorialSceneNative_drawFrame; do
             "$NM" -D --defined-only "$SO" | grep -q "Java_com_magtile_studio_$symbol" \
               || { echo "缺少 JNI 符号: $symbol"; exit 1; }
           done

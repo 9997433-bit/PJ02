@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 分步教程页 (3D 渲染接入前的文字分步浏览):
+<!-- 分步教程页:
      标题栏 (返回 + 模型名) + 进度头 (第 x/y 步 · 已放 n/m 片 + 进度条)
-     + 温和占位条 (3D 搭建即将上线) / 完成庆祝条 + 步骤列表 (当前步
-     高亮 + 自动滚动定位) + 底部「上一步 / 下一步」大按钮 (>= 52dp)。 -->
+     + 完成庆祝条 + 3D 教程视口 (GLES3, 单指旋转 / 双指捏合缩放 /
+     双指平移, 当前步新增片橙色描边呼吸 + 未放片 ghost 轮廓, 与桌面
+     GL/Qt 同一份场景渲染器) + 步骤列表 (当前步高亮 + 自动滚动定位)
+     + 底部「上一步 / 下一步」大按钮 (>= 52dp)。 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -94,21 +96,6 @@
                 android:layout_marginTop="4dp"
                 android:progressTint="@color/magtile_primary" />
 
-            <!-- 温和占位: 3D 搭建视图即将上线 (提示琥珀浅底, 不锁功能) -->
-            <TextView
-                android:id="@+id/tutorial_placeholder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_banner_placeholder"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="@string/tutorial_placeholder_3d"
-                android:textColor="@color/magtile_badge_expansion_text"
-                android:textSize="13sp" />
-
             <!-- 完成庆祝条 (走完全部步骤时显示, §4.3 只报喜) -->
             <TextView
                 android:id="@+id/tutorial_finished"
@@ -126,6 +113,29 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
         </LinearLayout>
+
+        <!-- 3D 教程视口 (GLES3 渲染循环 + 触屏轨道相机; 场景加载前
+             温和显示清屏色 + 地面网格, 渲染初始化失败只降级不报错) -->
+        <com.magtile.studio.TutorialSceneView
+            android:id="@+id/tutorial_scene"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.15"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp" />
+
+        <!-- 手势提示 (一句话, 图形+文字双编码 §4.7) -->
+        <TextView
+            android:id="@+id/tutorial_scene_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="@string/tutorial_scene_hint"
+            android:textColor="@color/magtile_text_secondary"
+            android:textSize="12sp" />
 
         <!-- 步骤列表 (当前步高亮 + smoothScroll 定位) -->
         <androidx.recyclerview.widget.RecyclerView

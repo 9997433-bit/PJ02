@@ -15,11 +15,13 @@ import java.io.File
 import java.util.concurrent.Executors
 
 /**
- * 分步教程页 (3D 渲染接入前的文字分步浏览; 从模型库详情弹窗的
- * 「开始搭建」进入): 进度头 ("第 x/y 步 · 已放 n/m 片" + 进度条) +
- * 温和占位条 (3D 搭建视图即将上线, 不锁功能 §4.3) + 步骤列表
- * (序号圆徽 + 中文说明 + 小提示 + 片数增量, 当前步高亮并自动滚动
- * 定位) + 底部「上一步 / 下一步」大按钮 (末步时变「完成 🎉」)。
+ * 分步教程页 (从模型库详情弹窗的「开始搭建」进入): 进度头
+ * ("第 x/y 步 · 已放 n/m 片" + 进度条) + 3D 教程视口 (GLES3,
+ * 单指旋转 / 双指捏合缩放 / 双指平移; 当前步新增片橙色描边呼吸 +
+ * 未放片 ghost 轮廓, 复用与桌面 GL/Qt 同一份场景渲染器
+ * GlSceneRenderer, 见 TutorialSceneView/TutorialSceneNative) +
+ * 步骤列表 (序号圆徽 + 中文说明 + 小提示 + 片数增量, 当前步高亮并
+ * 自动滚动定位) + 底部「上一步 / 下一步」大按钮 (末步时变「完成 🎉」)。
  *
  * 步骤数据经 MagTileNative.getTutorialSteps (JNI) 读核心库
  * ModelDefinition.steps (与桌面 TutorialEngine 同一份步骤数据);
@@ -29,6 +31,7 @@ import java.util.concurrent.Executors
  * 每次步骤导航落盘当前步并按增量累计游玩时长, 走到最后一步记完成
  * + 解锁首搭成就; 存档写入失败只降级不打断搭建 (P3 零挫败)。
  * 断点续搭: 进入时经 savedTutorialStep 读回上次的当前步。
+ * 3D 场景加载失败只降级为文字分步 (视口显示地面网格), 不报错。
  */
 class TutorialActivity : Activity() {
 
@@ -40,6 +43,7 @@ class TutorialActivity : Activity() {
     private lateinit var nextButton: Button
     private lateinit var stepList: RecyclerView
     private lateinit var adapter: TutorialStepAdapter
+    private lateinit var sceneView: TutorialSceneView
 
     private var modelId = ""
     private var steps: List<TutorialStep> = emptyList()
@@ -78,18 +82,27 @@ class TutorialActivity : Activity() {
             layoutManager = LinearLayoutManager(this@TutorialActivity)
             adapter = this@TutorialActivity.adapter
         }
+        sceneView = findViewById(R.id.tutorial_scene)
 
         loadStepsAsync()
+    }
+
+    /** GLSurfaceView 生命周期转发 (回前台恢复渲染循环)。 */
+    override fun onResume() {
+        super.onResume()
+        sceneView.onResume()
     }
 
     /** 离屏 (返回 / Home / 熄屏) 时落盘一次, 把最后一段游玩时长记上。 */
     override fun onPause() {
         super.onPause()
+        sceneView.onPause()  // 停渲染循环, 不在后台空转
         if (loaded) saveProgressAsync()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        TutorialSceneNative.releaseScene()  // 场景会话 (引擎/相机) 释放
         backgroundExecutor.shutdown()  // 已入队的收尾落盘照常执行完
     }
 
@@ -107,6 +120,16 @@ class TutorialActivity : Activity() {
                 check(!root.has("error")) { root.getString("error") }
                 // 断点续搭: 上次搭到第几步 (无记录 0; 已完成 = 总步数)
                 val savedStep = MagTileNative.savedTutorialStep(modelId)
+                // 3D 场景与文字分步同一断点 ("当前展示步" = 已完成步 + 1,
+                // 夹到末步); 加载失败只降级为文字分步 (视口画地面网格),
+                // 不打断教程 (P3 零挫败)
+                val stepCount = root.optInt("step_count")
+                val sceneStep =
+                    (savedStep.coerceIn(0, stepCount) + 1).coerceAtMost(maxOf(stepCount, 1))
+                if (TutorialSceneNative.loadScene(
+                        dataDir.absolutePath, modelId, sceneStep) < 0) {
+                    Log.w(TAG, "3D 场景暂不可用, 保持文字分步: $modelId")
+                }
                 runOnUiThread {
                     if (isFinishing || isDestroyed) return@runOnUiThread
                     render(root, savedStep)
@@ -152,6 +175,9 @@ class TutorialActivity : Activity() {
         if (next < 0 || next > steps.size) return
         doneCount = next
         adapter.updateDoneCount(doneCount)
+        // 3D 场景同步到当前展示步 (完成态停在末步全貌; 原生锁内
+        // 重建片快照, 亚毫秒级, 可在主线程直接调)
+        TutorialSceneNative.setStep((doneCount + 1).coerceAtMost(steps.size))
         updateStepUi()
         saveProgressAsync()
     }

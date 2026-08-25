@@ -39,6 +39,7 @@ set_target_properties(magtile_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 add_library(magtile_android SHARED
     jni/magtile_jni.cpp
+    jni/magtile_scene_jni.cpp
 )
 # Kotlin 侧以 System.loadLibrary("magtile_core") 加载, 故产物命名为
 # libmagtile_core.so (与桌面静态库 libmagtile_core.a 互不冲突)。
@@ -50,6 +51,10 @@ target_include_directories(magtile_android
 target_link_libraries(magtile_android
     PRIVATE
         magtile_core
+        # 3D 教程视口: 与桌面 GLFW/ImGui、Qt FBO 视口同一份场景渲染器
+        # (根 CMakeLists 在 ANDROID 下也构建该目标, 着色器切 300 es)
+        magtile_render_scene
         magtile_warnings
+        GLESv3  # GLES3 核心入口 (magtile_scene_jni 经 dlsym 解析)
         log     # __android_log_print
 )

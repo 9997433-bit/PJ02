@@ -90,9 +90,10 @@ target_link_libraries(magtile_core PRIVATE magtile_warnings magtile_sqlite3)
 
 # ---- 无窗口 GL 磁力片场景渲染器 ----------------------------------
 # 只画场景不建窗口 (gl_scene_renderer.cpp + 自研 GL 加载器), 零外部
-# 依赖; 供 GLFW/ImGui 外壳与 Qt 教程视口 (QQuickFramebufferObject,
-# QT-3) 共用同一份 3D 绘制实现。
-if(MAGTILE_BUILD_GL_RENDERER OR MAGTILE_BUILD_QT)
+# 依赖; 供 GLFW/ImGui 外壳、Qt 教程视口 (QQuickFramebufferObject,
+# QT-3) 与 Android 教程视口 (GLSurfaceView + GLES3, 着色器版本头
+# 运行时选择) 共用同一份 3D 绘制实现。
+if(MAGTILE_BUILD_GL_RENDERER OR MAGTILE_BUILD_QT OR ANDROID)
     add_library(magtile_render_scene STATIC
         src/render/gl/gl_api.cpp
         src/render/gl/gl_scene_renderer.cpp

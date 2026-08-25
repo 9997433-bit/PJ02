@@ -97,13 +97,13 @@
     <string name="progress_step_of">第 %1$d/%2$d 步</string>
     <!-- %1$d = 片数 -->
     <string name="progress_pieces">%1$d 片</string>
-    <!-- 分步教程页 (TutorialActivity; 3D 渲染接入前为文字分步浏览,
+    <!-- 分步教程页 (TutorialActivity; 3D 教程视口 + 文字分步,
          措辞对齐桌面 GL/Qt 教程 HUD 的 "第 x/y 步 · 已放 n/m 片") -->
     <string name="tutorial_title_fallback">分步搭建</string>
     <string name="tutorial_loading">正在准备分步教程…</string>
     <string name="tutorial_load_failed">分步教程加载失败:\n%1$s</string>
-    <!-- 温和占位 (§4.3: 不锁功能, 先给出当下能用的玩法) -->
-    <string name="tutorial_placeholder_3d">🧊 3D 搭建视图即将上线 — 先照着下面的分步说明, 拿出磁力片跟着搭吧</string>
+    <!-- 3D 视口手势提示 (单指旋转 / 双指捏合缩放, 与桌面 Qt 同口径) -->
+    <string name="tutorial_scene_hint">👆 单指转一转 · 双指捏一捏放大缩小</string>
     <!-- %1$d = 当前步, %2$d = 总步数, %3$d = 已放片数, %4$d = 总片数 -->
     <string name="tutorial_step_of">第 %1$d/%2$d 步 · 已放 %3$d/%4$d 片</string>
     <!-- %1$d = 总步数, %2$d = 总片数 (完成态的进度头) -->

@@ -12,7 +12,7 @@
 > 链路 (目录加载 / 模型库列表含 core-9 与「我能搭的」判定 / 物理校验 /
 > 教程步骤数 / 进度存档打开 / 库存读写 / 缺片清单 / 年龄段设置读写 /
 > 进度页与成就墙数据源 / 教程步骤数据与进度读写 / 家长门
-> 出题·校验·会话)、
+> 出题·校验·会话 / 3D 场景加载·设步·相机手势·渲染循环)、
 > RecyclerView 模型卡片列表 (缩略图 / 中文名 / 主题 / 难度星 /
 > 片数·步数 / 「需要扩展装」角标)、筛选栏 (难度星级 / 主题 /
 > 「只看免费」 / 「只用核心 9 片」 / 「我能搭的」, 口径与桌面
@@ -21,15 +21,18 @@
 > 年龄段与桌面 settings 同键)、磁力片库存录入屏 (片型 +
 > 数量步进器, 对齐桌面 InventoryPage)、进度页「我的作品」与成就墙
 > (统计 + 进行中/已完成/收藏列表 + 徽章墙, 对齐桌面 Qt
-> ProgressPage/AchievementsPage 口径)、分步教程页 (文字分步浏览:
-> 步骤列表 + 上一步/下一步 + 断点续搭 + 当前步写进度存档, 3D 搭建
-> 视图为温和占位)、家长门 (年龄段切换与库存录入入口上锁,
+> ProgressPage/AchievementsPage 口径)、分步教程页 (**3D 教程视口**
+> GLES3 渲染循环, 复用与桌面 GL/Qt 同一份 `GlSceneRenderer`: 单指
+> 旋转 / 双指捏合缩放 / 双指平移, 当前步新增片橙色描边呼吸 + 未放
+> 片 ghost 轮廓; 下方步骤列表 + 上一步/下一步 + 断点续搭 + 当前步
+> 写进度存档)、家长门 (年龄段切换与库存录入入口上锁,
 > UI_UX_SPEC.md §9: 算术题 + 中文大写数字软键盘 + 冷却 +
 > 15 分钟内存会话, 复用 `core::ParentGate` 共享状态机)、
 > 数据资产打包与首启解包。
-> 尚未落地: 渲染循环 (GLES3 / Vulkan) 与 3D 教程视口 (教程页当前为
-> 文字分步 + 「3D 搭建即将上线」占位, 进度页作品行暂不直达教程),
-> 计划见下文与 `docs/ROADMAP.md`。
+> 尚未落地 (3D 视口剩余缺口见第六节): 视口 MSAA 抗锯齿与按需渲染
+> 节电 (当前连续重绘驱动呼吸动画)、「转一转视角」引导态 (第 0 步)
+> 与视角重置按钮、进度页作品行直达教程, 计划见下文与
+> `docs/ROADMAP.md`。
 
 ## 目录结构
 
@@ -38,7 +41,8 @@ platforms/android/
 ├── README.md                 本文档
 ├── CMakeLists.txt            JNI 共享库构建脚本 (双入口: 仓库根 / Gradle)
 ├── jni/
-│   └── magtile_jni.cpp       JNI 包装层 (18 个入口, 见下表)
+│   ├── magtile_jni.cpp       JNI 包装层 (模型库/存档/教程/家长门 18 个入口, 见下表)
+│   └── magtile_scene_jni.cpp 3D 教程视口 JNI 桥 (场景/相机/渲染循环 8 个入口, 见下表)
 ├── settings.gradle.kts       Gradle 工程入口 (工程根 = 本目录)
 ├── build.gradle.kts          插件版本 (AGP 8.7.3 / Kotlin 2.0.21)
 ├── gradle.properties         AndroidX / 配置缓存
@@ -54,7 +58,9 @@ platforms/android/
         │   ├── InventoryActivity.kt   磁力片库存录入屏 (片型 + 数量步进器)
         │   ├── ProgressActivity.kt    进度页「我的作品」(统计 + 作品列表)
         │   ├── AchievementsActivity.kt 成就墙全览 (徽章两列网格)
-        │   ├── TutorialActivity.kt    分步教程页 (步骤列表 + 上一步/下一步 + 进度落盘)
+        │   ├── TutorialActivity.kt    分步教程页 (3D 视口 + 步骤列表 + 上一步/下一步 + 进度落盘)
+        │   ├── TutorialSceneView.kt   3D 教程视口 (GLSurfaceView/GLES3 + 触屏轨道相机手势)
+        │   ├── TutorialSceneNative.kt 3D 视口 JNI 桥 (场景加载/设步/手势/渲染循环)
         │   ├── TutorialStepAdapter.kt 教程步骤行适配器 (已完成/当前/待搭三态)
         │   ├── MagTileNative.kt       进度存档/库存/年龄段/进度页/教程 JNI 桥 (进程级单例)
         │   ├── ModelCard.kt           卡片元数据 (listModels JSON 解析)
@@ -100,17 +106,25 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 直达分步教程页 (非免费为温和订阅提示), 「物理校验」按钮按需加载
 模型并展示 R1~R8 中文校验摘要与教程步骤数。
 
-分步教程页 (3D 渲染接入前的文字分步浏览, 措辞对齐桌面 GL/Qt 教程
-HUD): 进度头「第 x/y 步 · 已放 n/m 片」+ 进度条, 步骤列表逐行显示
-序号圆徽 + 中文说明 + 小提示 (💡) + 片数增量 (+N 片), 当前步主色
-高亮并自动滚动定位, 已完成步换 ✓ 绿徽; 底部「◀ 上一步 / 下一步 ▶」
-大按钮 (末步变「完成 🎉」), 页顶为「3D 搭建视图即将上线」温和占位
-条 (不锁功能 §4.3)。进度写档口径对齐桌面 Qt TutorialViewport:
-会话开始即建档 (模型库/进度页立刻显示进行中), 每次步骤导航把当前
-步与增量游玩时长写进 `model_progress` 表 (与桌面同一份 SQLite
-schema, 断点续搭跨端互通), 走完最后一步记完成 + 解锁首搭成就
-first_model_completed (进度页/成就墙即时可见); 存档写入失败只降级
-不打断搭建 (P3 零挫败)。
+分步教程页 (3D 教程视口 + 文字分步, 措辞对齐桌面 GL/Qt 教程 HUD):
+进度头「第 x/y 步 · 已放 n/m 片」+ 进度条, 页顶为**可交互 3D 教程
+视口** (GLSurfaceView + GLES3, 复用与桌面 GLFW/ImGui、Qt FBO 视口
+完全同一份场景渲染器 `render::GlSceneRenderer` —— 着色器版本头按
+上下文自动切 300 es, 绘制实现三端同一份): 当前步新增片橙色描边 +
+呼吸动画引导放置, 未放片为淡化 ghost 轮廓提示最终形态, 参照片琥珀
+描边, 地面网格 + 半透明彩色薄板与桌面完全同观感; 触屏手势与 Qt
+教程视口同一口径 —— 单指拖动旋转 (0.32°/dp)、双指捏合缩放 (指距
+比经对数换算, 12%/格, 与桌面滚轮同缩放曲线)、双指同向滑动平移,
+断点续搭时视口直接停在上次的当前步。下方步骤列表逐行显示序号圆徽
++ 中文说明 + 小提示 (💡) + 片数增量 (+N 片), 当前步主色高亮并自动
+滚动定位, 已完成步换 ✓ 绿徽; 底部「◀ 上一步 / 下一步 ▶」大按钮
+(末步变「完成 🎉」), 步骤导航同步驱动 3D 场景设步。进度写档口径
+对齐桌面 Qt TutorialViewport: 会话开始即建档 (模型库/进度页立刻
+显示进行中), 每次步骤导航把当前步与增量游玩时长写进
+`model_progress` 表 (与桌面同一份 SQLite schema, 断点续搭跨端互通),
+走完最后一步记完成 + 解锁首搭成就 first_model_completed (进度页/
+成就墙即时可见); 存档写入失败只降级不打断搭建, 3D 场景加载失败也
+只温和降级为文字分步 (视口画地面网格, 不报错不锁功能, P3 零挫败)。
 
 标题栏右侧是年龄段模式入口 (三档单选, UI_UX_SPEC.md §2): 年龄段
 切换是家长操作 (§9), 点击先过**家长门** —— 中文数字乘法题 (如
@@ -175,8 +189,13 @@ cmake --build build-android
 ## 三、JNI 接口与链接方式
 
 `platforms/android/CMakeLists.txt` 将仓库根的 **静态库** `magtile_core`
-与 `jni/magtile_jni.cpp` 一起链接为 **一个** 共享库, 产物命名为
-`libmagtile_core.so` (Kotlin 侧 `System.loadLibrary("magtile_core")`)。
+与 `magtile_render_scene` (无窗口 GL 场景渲染器, 与桌面 GLFW/ImGui、
+Qt FBO 教程视口同一份 3D 绘制实现, 根 CMakeLists 在 Android 下也
+构建该目标)、`jni/magtile_jni.cpp`、`jni/magtile_scene_jni.cpp` 一起
+链接为 **一个** 共享库并挂上系统 `libGLESv3` (GLES3 核心入口经
+`dlsym` 运行时解析, 与 GLFW `glfwGetProcAddress` / Qt
+`getProcAddress` 同一角色), 产物命名为 `libmagtile_core.so`
+(Kotlin 侧 `System.loadLibrary("magtile_core")`)。
 单 .so 方案下 STL 使用默认的 `c++_static` 即可; 若日后拆分多个原生库,
 需统一切换 `-DANDROID_STL=c++_shared`。
 
@@ -223,6 +242,25 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 家长门入口 (`ParentGateDialog.requireParent`): 标题栏年龄段切换与
 筛选栏库存录入都先过门, 会话内免重复; 「我的进度」保持儿童可达
 无门 (§5.3)。
+
+3D 教程视口链路绑定 `com.magtile.studio.TutorialSceneNative`
+(实现在 `jni/magtile_scene_jni.cpp`; 场景绘制复用
+`render::GlSceneRenderer`, 步骤语义复用 `tutorial::TutorialEngine`,
+相机为共享 `render::OrbitCamera` —— 手势常量单一来源在原生层,
+与桌面完全同口径)。线程约定: `surfaceCreated` / `drawFrame` 只在
+GLSurfaceView 渲染线程调用 (GL 资源属于该线程的 EGL 上下文), 其余
+入口主线程 / 工作线程均可 (会话状态由原生互斥锁保护):
+
+| Kotlin 声明 | 说明 |
+| --- | --- |
+| `loadScene(dataDir: String, modelId: String, resumeStep: Int): Int` | 加载教程场景 (modelId 经模型库目录解析, 与 `getTutorialSteps` 同口径): 片型目录 + 模型 + 教程引擎 + 按最终成品包围盒取景 + 跳到断点步 (0 = 从头 -> 第 1 步, 越界夹取); 返回步骤数, 失败 -1 (步骤一致性问题与桌面同策略不进 3D 教程, 视口温和降级为只画地面网格, 文字分步照常) |
+| `setStep(step: Int)` | 跳到指定步 (1..stepCount, "当前展示步" 语义: 该步新增片描边 + 呼吸, 之后的片 ghost); 越界夹取, 未加载空操作 |
+| `releaseScene()` | 释放场景会话 (引擎/相机/片快照); GL 资源随 EGL 上下文由系统回收 |
+| `dragRotate(dxDp: Double, dyDp: Double)` | 单指拖动 = 轨道旋转: dp 位移, 原生按 0.32°/px 换算 (与桌面鼠标左键 / Qt 触屏单指同一手感) |
+| `pinchZoom(spreadRatio: Double)` | 双指捏合 = 缩放: 指距比经对数换算成等效滚轮格数 (`OrbitCamera::kZoomStepFactor` 12%/格, 与桌面滚轮 / Qt 捏合同一缩放口径) |
+| `pan(dxPx: Double, dyPx: Double, viewportHeightPx: Int)` | 双指同向滑动 = 平移 (物理像素对视口高换算世界距离, 与桌面右键拖动 / Qt 双指平移同口径) |
+| `surfaceCreated()` | 表面创建 / EGL 上下文重建 (仅 GL 线程): 重建 `GlSceneRenderer` GL 资源; 初始化失败只写 logcat 温和降级 |
+| `drawFrame(width: Int, height: Int, timeSeconds: Double)` | 绘制一帧 (仅 GL 线程): timeSeconds 驱动本步新增片呼吸动画; 场景未加载时画清屏 + 地面网格 |
 
 筛选在 Kotlin 侧完成 (`MainActivity.applyFilters`), 口径与桌面
 GL/Qt 模型库一致: 难度星级精确匹配、规范主题 (目录 `theme` 字段)、
@@ -273,9 +311,10 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 
 `.github/workflows/android.yml` (仓库根) 包含两个任务:
 
-- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 18 个 JNI
+- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 26 个 JNI
   符号齐全 (模型库 4 个 + 进度存档/库存/年龄段/进度页 8 个 +
-  分步教程 3 个 + 家长门 3 个) —— 持续保证 `magtile_core` 无平台依赖。
+  分步教程 3 个 + 家长门 3 个 + 3D 教程视口 8 个) —— 持续保证
+  `magtile_core` 无平台依赖。
 - `assemble-debug`: Gradle 全量打包 debug APK, 校验 APK 内容
   (原生库 / 数据资产 / 缩略图已打包; 缩略图数量落后于模型数量时
   只告警 —— 内容制作期新模型缩略图可能滞后生成, 缺图卡片显示占位)
@@ -283,16 +322,25 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 
 ## 六、后续计划
 
-- 渲染: 复用 `include/magtile/render/renderer.hpp` 抽象接口, Android 端
-  实现 GLES3 / Vulkan 后端 (桌面 GLFW+GL4.1 后端不上移动端);
-  接入后教程页的「3D 搭建即将上线」占位条替换为 3D 教程视口
-  (步骤数据与进度写档链路已就位, 视口只增不改)。
+- 3D 教程视口 (骨架已落地, 剩余缺口):
+  - **已落地**: GLES3 渲染循环 (GLSurfaceView) + 与桌面 GL/Qt 完全
+    同一份场景渲染器 (`magtile_render_scene`, 地面网格 / 半透明彩色
+    薄板 / 当前步橙色描边呼吸 / ghost 轮廓 / 参照片琥珀描边) +
+    触屏轨道相机 (单指旋转 / 双指捏合缩放 / 双指平移, 与 Qt 触屏
+    同口径) + 断点续搭设步 + 上下文丢失恢复;
+  - **缺口**: 视口 MSAA 抗锯齿 (桌面 4x, Android 当前用默认
+    EGLConfig, 边缘有锯齿; 需自定义 EGLConfigChooser + 降级链);
+    按需渲染节电 (当前 RENDERMODE_CONTINUOUSLY 连续重绘驱动呼吸
+    动画, 后续可改脏帧模式 + 呼吸期定频重绘); 「转一转视角」
+    引导态 (第 0 步空场景) 与视角重置按钮; 「减少动态效果」开关
+    联动 (桌面 §4.7 已有, Android 待 ui_settings 链路接通)。
 - 模型库增强: 搜索框、「只看收藏」筛选 (「我能搭的」与库存录入
   已落地, 对齐桌面 GL 模型库全量筛选器还差收藏/完成状态维度)。
 - 进度存档: `progress_store` (SQLite) 已开箱接入 (库存 + 年龄段 +
   进度页/成就墙 + 教程进度链路); 模型卡片上的完成/进行中徽标、
   收藏切换与「继续上次」大卡片待接入模型库列表 UI, 进度页作品行
-  「继续搭建 / 再搭一次」直达教程页待接入。
+  「继续搭建 / 再搭一次」直达教程页待接入 (教程页已可从任意入口
+  带 modelId 进入并断点续搭)。
 - 家长门: 年龄段切换与库存录入入口已上锁 (对齐 UI_UX_SPEC.md §9,
   复用 `core::ParentGate` 共享状态机, 15 分钟会话守卫); 后续随
   桌面 M3 推进可选 4 位 PIN 与家长中心完整功能 (订阅/数据管理)。

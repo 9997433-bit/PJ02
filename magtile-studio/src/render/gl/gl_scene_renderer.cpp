@@ -21,6 +21,7 @@
 #include <array>
 #include <cmath>
 #include <cstdio>
+#include <cstring>
 #include <vector>
 
 #include "gl_api.hpp"
@@ -107,8 +108,18 @@ Rgba mix(const Rgba& a, const Rgba& b, float t) {
 }
 
 // ---- 着色器 ------------------------------------------------------
+// GLSL 主体在桌面 GL 4.1 Core 与 GLES 3.0 之间完全共享, 仅版本头
+// 不同 (Android 教程视口经 EGL/GLES3 复用本渲染器, 与 Qt/ImGui
+// 同一份绘制实现): 运行时按 GL_VERSION 是否为 "OpenGL ES" 选择。
+// ES 侧补默认精度限定 (GLES 片元着色器无默认 float 精度)。
+const char* const kShaderHeaderDesktop = "#version 410 core\n";
+const char* const kShaderHeaderEs =
+    "#version 300 es\n"
+    "precision highp float;\n"
+    "precision highp int;\n";
+
 // 顶点已在 CPU 侧变换到世界坐标, 只需一个视图投影矩阵。
-const char* const kVertexShaderSrc = R"GLSL(#version 410 core
+const char* const kVertexShaderSrc = R"GLSL(
 layout(location = 0) in vec3 a_position;
 layout(location = 1) in vec3 a_normal;
 layout(location = 2) in vec4 a_color;
@@ -125,7 +136,7 @@ void main() {
 )GLSL";
 
 // 双面受光 + 边缘增亮, 模拟半透明彩色塑料的通透感。
-const char* const kFragmentShaderSrc = R"GLSL(#version 410 core
+const char* const kFragmentShaderSrc = R"GLSL(
 in vec3 v_normal;
 in vec3 v_world_pos;
 in vec4 v_color;
@@ -157,9 +168,10 @@ void appendVertex(std::vector<float>& out, const Vec3& p, const Vec3& n, const R
                            static_cast<float>(n.y), static_cast<float>(n.z), c.r, c.g, c.b, c.a});
 }
 
-GLuint compileShader(GLenum type, const char* source) {
+GLuint compileShader(GLenum type, const char* header, const char* body) {
     const GLuint shader = glCreateShader(type);
-    glShaderSource(shader, 1, &source, nullptr);
+    const char* sources[2] = {header, body};
+    glShaderSource(shader, 2, sources, nullptr);
     glCompileShader(shader);
     GLint ok = 0;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &ok);
@@ -185,6 +197,7 @@ struct GlSceneRenderer::GlObjects {
     };
 
     // GL 资源
+    bool es_context = false;  ///< GLES 3.0 上下文 (Android); false = 桌面 GL 4.1
     GLuint program = 0;
     GLint u_view_proj = -1;
     GLint u_camera_pos = -1;
@@ -214,8 +227,9 @@ struct GlSceneRenderer::GlObjects {
 };
 
 bool GlSceneRenderer::GlObjects::createShaderProgram() {
-    const GLuint vs = compileShader(GL_VERTEX_SHADER, kVertexShaderSrc);
-    const GLuint fs = compileShader(GL_FRAGMENT_SHADER, kFragmentShaderSrc);
+    const char* header = es_context ? kShaderHeaderEs : kShaderHeaderDesktop;
+    const GLuint vs = compileShader(GL_VERTEX_SHADER, header, kVertexShaderSrc);
+    const GLuint fs = compileShader(GL_FRAGMENT_SHADER, header, kFragmentShaderSrc);
     if (vs == 0 || fs == 0) return false;
 
     program = glCreateProgram();
@@ -409,6 +423,10 @@ bool GlSceneRenderer::initialize(ProcResolver resolver) {
     if (!glapi::loadFunctions(resolver)) return false;
 
     gl_ = new GlObjects();
+    // 上下文类型探测: GLES 的版本串以 "OpenGL ES" 开头 (调用时上下文
+    // 已 current, glGetString 可安全调用); 桌面 GL 走原有 410 core 路径。
+    const char* version = reinterpret_cast<const char*>(glGetString(GL_VERSION));
+    gl_->es_context = (version != nullptr && std::strstr(version, "OpenGL ES") != nullptr);
     if (!gl_->createShaderProgram()) {
         shutdown();
         return false;
@@ -488,7 +506,9 @@ void GlSceneRenderer::end(double time_seconds) {
     glUniformMatrix4fv(gl_->u_view_proj, 1, GL_FALSE, view_proj.m.data());
     glUniform3fv(gl_->u_camera_pos, 1, camera_pos);
 
-    glEnable(GL_MULTISAMPLE);
+    // GL_MULTISAMPLE 是桌面 GL 开关; GLES 无此枚举 (多重采样随
+    // EGLConfig 自动生效), 跳过以免产生 GL_INVALID_ENUM
+    if (!gl_->es_context) glEnable(GL_MULTISAMPLE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // 锁住 alpha 通道: 清屏已写 1 (不透明), 绘制期间不再改写 —— 画进 Qt

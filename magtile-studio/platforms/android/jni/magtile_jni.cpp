@@ -24,7 +24,7 @@
 //                                    口径与桌面 Qt StudioBackend 一致)
 //
 // 分步教程链路 (绑定 com.magtile.studio.MagTileNative, 供
-// TutorialActivity 步骤浏览使用; 3D 渲染接入前为纯文字分步):
+// TutorialActivity 步骤浏览使用; 3D 视口链路见 magtile_scene_jni.cpp):
 //   getTutorialSteps(dataDir, modelId) -> 教程步骤 JSON (步序 + 中文
 //                                    说明/提示 + 片数增量/累计)
 //   savedTutorialStep(modelId)    -> 存档中的当前步 (断点续搭; 无记录 0)
@@ -40,7 +40,8 @@
 //   parentGateSubmitJson(answer)  -> 提交答案, 返回结果 + 剩余次数/冷却
 //   parentGateSessionActive()     -> 家长会话是否仍有效 (免重复验证)
 //
-// 说明: 渲染循环 (GLSurfaceView / Vulkan) 与 3D 教程视口后续在此扩展。
+// 说明: 3D 教程视口链路 (场景加载 / 设步 / 相机手势 / GLES3 渲染循环,
+// 绑定 com.magtile.studio.TutorialSceneNative) 在 magtile_scene_jni.cpp。
 // =============================================================
 
 #include <jni.h>
@@ -772,7 +773,7 @@ JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_progressOverview
 }
 
 // =============================================================
-// 分步教程 (TutorialActivity 步骤浏览; 3D 渲染接入前为纯文字分步)
+// 分步教程 (TutorialActivity 步骤浏览; 3D 视口见 magtile_scene_jni.cpp)
 // =============================================================
 
 /// 教程步骤数据源 (data_dir 为解包后的数据目录, model_id 为模型标识;
