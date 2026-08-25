@@ -1,7 +1,104 @@
 {
   "schema_version": 1,
-  "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。",
+  "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。本文件由 tools/update_model_catalog.py 自动生成, 请勿手工编辑。",
   "models": [
+    {
+      "id": "geodesic_dome_01",
+      "file": "models/geodesic_dome_01.json",
+      "name": "测地穹顶",
+      "name_en": "Geodesic Dome 01",
+      "description": "模型库第一座非直角网格建筑: 正六边形地基上立起两层筒壁 (留门洞与透明门楣), 中段 12 片等边三角形组成上下错开 30 度的反棱柱测地三角带, 顶部六边形压盖再冠以 6 片等腰浅锥王冠 —— 所有斜棱两两精确互吸, 一圈装完自锁成环, 越按越紧。",
+      "difficulty": 3,
+      "total_pieces": 49,
+      "step_count": 15,
+      "tags": [
+        "未来建筑",
+        "穹顶",
+        "测地网格",
+        "进阶"
+      ]
+    },
+    {
+      "id": "butterfly_01",
+      "file": "models/butterfly_01.json",
+      "name": "花园大蝴蝶",
+      "name_en": "Butterfly 01",
+      "description": "模型库第一个对称拼花生物: 四扇马赛克翅膀平展在花园地面 (前翅红粉棋盘、后翅蓝青棋盘、紫色三角翅尖收边), 中间隆起橙黄条纹的箱形身体, 头顶两根紫色触角, 前翅上沿还各挂一枚六边形眼斑 —— 左右完全镜像, 拼完从头顶俯视最美。",
+      "difficulty": 3,
+      "total_pieces": 55,
+      "step_count": 15,
+      "tags": [
+        "自然",
+        "昆虫",
+        "对称拼花",
+        "进阶"
+      ]
+    },
+    {
+      "id": "ferris_wheel_frame_01",
+      "file": "models/ferris_wheel_frame_01.json",
+      "name": "游乐园摩天轮",
+      "name_en": "Ferris Wheel Frame 01",
+      "description": "游乐园主题: 六边形轮毂、5 片等边三角轮辐与 4 片菱形辐间板在竖直平面内拼成一面六角星大轮, 由 3 根双层立墙塔架三点托举 (轮毂吸中柱, 两片下轮辐吸侧柱), 剪断任一条铰链线星轮都不塌; 场边配登轮台与下客坡道、锥顶售票亭和挂着门旗的入园拱门 —— 全库第一个把菱形用作结构件的模型。",
+      "difficulty": 3,
+      "total_pieces": 56,
+      "step_count": 16,
+      "tags": [
+        "游乐园",
+        "摩天轮",
+        "星形",
+        "进阶"
+      ]
+    },
+    {
+      "id": "lunar_lander_01",
+      "file": "models/lunar_lander_01.json",
+      "name": "月面着陆器",
+      "name_en": "Lunar Lander 01",
+      "description": "复刻真实航天器级间结构的分体对接教程: 先在 5x5 月面上组装下降级 —— 金橙隔热舱体加四条风车状直角三角起落架 (每条腿双边吸合), 再铺 3x3 级间甲板对接上升级 —— 中空指令舱与四坡锥形返回舱盖自锁成环; 最后挂载六边形散热板、舷梯、天线与任务旗。搭完从舷梯走下第一步, 就是你的一大步。",
+      "difficulty": 3,
+      "total_pieces": 63,
+      "step_count": 16,
+      "tags": [
+        "航天",
+        "着陆器",
+        "分体对接",
+        "航天器",
+        "进阶"
+      ]
+    },
+    {
+      "id": "pyramid_giza_01",
+      "file": "models/pyramid_giza_01.json",
+      "name": "吉萨金字塔",
+      "name_en": "Pyramid of Giza 01",
+      "description": "逐层居中收分的三级阶梯金字塔: 5x5 沙漠地台上, 3x3 塔身与退台平台、1x1 第二级层层收分, 顶上四片等边三角形合拢成金色压顶石; 四角红色护坡斜撑双边吸合抗侧力, 四座方尖碑守望四角, 一条神道从东侧直通塔底。层叠退台的收分节奏与锥顶合拢的自锁环, 一课双技法。",
+      "difficulty": 3,
+      "total_pieces": 64,
+      "step_count": 17,
+      "tags": [
+        "金字塔",
+        "建筑地标",
+        "层叠退台",
+        "进阶"
+      ]
+    },
+    {
+      "id": "sailboat_01",
+      "file": "models/sailboat_01.json",
+      "name": "双体帆船",
+      "name_en": "Catamaran Sailboat 01",
+      "description": "海洋主题: 蓝青波纹海面上, 两条 4 格长的刚性浮筒由 2x2 中央甲板桥接成双体船, 双层主桅两侧挂 6 面透明三角帆 (下层帆双边吸合成三角刚性节点), 艉部立紫色六边形舵轮台, 船艏一对破浪尖直指前方 —— 全库第一艘下水的船。",
+      "difficulty": 3,
+      "total_pieces": 68,
+      "step_count": 15,
+      "tags": [
+        "帆船",
+        "海洋",
+        "交通工具",
+        "进阶"
+      ]
+    },
     {
       "id": "castle_foundation_01",
       "file": "models/castle_foundation_01.json",
@@ -11,7 +108,228 @@
       "difficulty": 3,
       "total_pieces": 72,
       "step_count": 16,
-      "tags": ["城堡", "建筑基础", "进阶"]
+      "tags": [
+        "城堡",
+        "建筑基础",
+        "进阶"
+      ]
+    },
+    {
+      "id": "pagoda_01",
+      "file": "models/pagoda_01.json",
+      "name": "五重塔",
+      "name_en": "Five-Story Pagoda 01",
+      "description": "旋位挑檐的五重塔: 塔身方正逐层上叠, 每层楼板却向两个相邻方向挑出宽檐, 檐角连同翘起的脊饰绕塔心逐层旋位 (东南->西南->西北->东北), 屋檐像风车一样绕塔盘旋而上; 第一层南檐落在山门门楣上, 门洞-塔门负空间一线贯通; 顶阁沿旋位退台成 2x1 阁楼, 双坡屋面对脊自锁收顶。塔身收、屋檐放 —— 东亚木塔的轮廓由此而来。",
+      "difficulty": 3,
+      "total_pieces": 73,
+      "step_count": 16,
+      "tags": [
+        "五重塔",
+        "建筑地标",
+        "宝塔",
+        "旋位",
+        "挑檐"
+      ]
+    },
+    {
+      "id": "trex_skeleton_01",
+      "file": "models/trex_skeleton_01.json",
+      "name": "霸王龙化石骨架",
+      "name_en": "T-Rex Fossil Skeleton 01",
+      "description": "博物馆立姿霸王龙: 脊柱是'左右壁 + 背板'的箱形梁, 从后腿顶向头尾双向悬挑贯穿全身; 肋骨、小短手与下颌全部倒挂在脊柱下缘, 胸腔与大嘴都是负空间。头尾互为配重, 尾椎补齐前重心始终不越出展台 —— 全模型没有一面墙, 形体完全由骨骼定义, 搭完就是一件博物馆展品。",
+      "difficulty": 3,
+      "total_pieces": 73,
+      "step_count": 16,
+      "tags": [
+        "恐龙",
+        "骨架",
+        "动物世界",
+        "博物馆",
+        "悬挑"
+      ]
+    },
+    {
+      "id": "suspension_bridge_01",
+      "file": "models/suspension_bridge_01.json",
+      "name": "海湾悬索桥",
+      "name_en": "Bay Suspension Bridge 01",
+      "description": "双塔门式悬索桥: 桥面以'单格悬挑 -> 斜拉索锁定'的节奏从东西两岸对称推进, 每片直角三角拉索的竖边吸塔腿、水平边吸桥面, 与塔身构成三角刚性节点; 主跨正中合龙后, 8 片菱形主缆沿桥面沿口拼出下垂-上扬的悬索曲线, 观景平台在主跨两侧悬挑收尾。搭的过程就是一堂桥梁工程课。",
+      "difficulty": 3,
+      "total_pieces": 74,
+      "step_count": 16,
+      "tags": [
+        "桥梁",
+        "悬索桥",
+        "对称",
+        "工程",
+        "合龙"
+      ]
+    },
+    {
+      "id": "train_station_01",
+      "file": "models/train_station_01.json",
+      "name": "中央火车站",
+      "name_en": "Train Station 01",
+      "description": "交通枢纽全景: 6 格长轨道上停着蓝色车头与绿色货厢, 1 格高的箱形站台两端接无障碍坡道, 站台上 3 柱透明雨棚; 候车大厅开 2 格宽大门, 顶上是4 片 60 度斜置长方形合脊的人字坡屋顶, 两端等边三角山花严丝合缝 —— 红旗停、绿旗行, 小站长快来值班。",
+      "difficulty": 4,
+      "total_pieces": 75,
+      "step_count": 18,
+      "tags": [
+        "交通",
+        "火车",
+        "建筑",
+        "进阶"
+      ]
+    },
+    {
+      "id": "marble_run_spiral_01",
+      "file": "models/marble_run_spiral_01.json",
+      "name": "弹珠螺旋滑道",
+      "name_en": "Marble Spiral Slide 01",
+      "description": "单珠盘旋弹珠机: 一条连续轨道绕四层高塔顺时针盘旋 3/4 圈, 每段 30 度坡道顶边整边吸平台沿口、坡尾由阶梯桥墩接住, 弹珠从 z=4 的发球台出发, 转过三个直角弯后沿冲线坡道射进接珠池撞响六边形靶标。塔基四角的直角三角斜撑双边吸合, 让全库最高的发球塔抗得住反复开赛的碰撞。",
+      "difficulty": 4,
+      "total_pieces": 77,
+      "step_count": 18,
+      "tags": [
+        "滚珠",
+        "轨道",
+        "螺旋",
+        "滚珠乐园",
+        "挑战"
+      ]
+    },
+    {
+      "id": "eiffel_tower_01",
+      "file": "models/eiffel_tower_01.json",
+      "name": "埃菲尔铁塔",
+      "name_en": "Eiffel Tower 01",
+      "description": "世界地标系列: 3x3 广场上四条 L 形塔脚围出四面大拱门, 八根斜撑张开拱脚、八根斜撑收出肩线, 第一观景台红色护栏环绕, 1x1 箱形塔身经第二观景台直上塔顶, 四坡红色塔尖在 5.87 格高处自锁会合 —— 从侧面看就是那个经典的 A 字剪影。",
+      "difficulty": 4,
+      "total_pieces": 79,
+      "step_count": 19,
+      "tags": [
+        "世界地标",
+        "高塔",
+        "工程",
+        "进阶"
+      ]
+    },
+    {
+      "id": "roman_aqueduct_01",
+      "file": "models/roman_aqueduct_01.json",
+      "name": "罗马水道桥",
+      "name_en": "Roman Aqueduct 01",
+      "description": "仿加尔水道桥的双层石砌拱廊: 下层 4 座双壁石墩跨出 3 个大拱洞, 上层矮墩与横楣组成小拱层, 顶上是一条能通水的 U 形水槽, 两端封头、垛口点缀 —— 每座石墩都是地梁、双壁、桥面锁成的箱形环, 结实得像真石头。",
+      "difficulty": 4,
+      "total_pieces": 79,
+      "step_count": 18,
+      "tags": [
+        "古代工程",
+        "桥梁",
+        "双层结构",
+        "进阶"
+      ]
+    },
+    {
+      "id": "fire_station_01",
+      "file": "models/fire_station_01.json",
+      "name": "一号消防站",
+      "name_en": "Fire Station 01",
+      "description": "城市守护者基地: 5 格宽双车库开着两个 2 格宽的出警大门, 黄色门楣三边受力横跨门洞; 东侧 4 层瞭望塔与车库共用山墙, 顶戴橙色四坡自锁尖顶; 门前停车坪上一辆红色消防车整装待发, 车顶蓝色警灯朝前 —— 全场连成一个整体, 随时准备出警。",
+      "difficulty": 4,
+      "total_pieces": 81,
+      "step_count": 19,
+      "tags": [
+        "城市",
+        "职业体验",
+        "建筑",
+        "进阶"
+      ]
+    },
+    {
+      "id": "rocket_launchpad_01",
+      "file": "models/rocket_launchpad_01.json",
+      "name": "火箭发射台",
+      "name_en": "Rocket Launchpad 01",
+      "description": "分体对接的垂直总装现场: 3x3 盒式发射架托起双级火箭, 一级、二级、整流罩逐级对接, 四片直角三角尾翼风车形双边吸合锁住箭体根部; 勤务塔与发射架共享一片墙拔地四层, 塔顶平台伸出摆渡桥与二级箭体整边对接, 把塔-桥-箭-架锁成大环; 东西导流坡道落地, 罐区双燃料罐等边穹顶收尾 —— 教程完整复刻真实火箭的发射准备流程。",
+      "difficulty": 4,
+      "total_pieces": 82,
+      "step_count": 18,
+      "tags": [
+        "火箭",
+        "航天",
+        "发射台",
+        "模块对接",
+        "盒式框架"
+      ]
+    },
+    {
+      "id": "ball_run_tower_01",
+      "file": "models/ball_run_tower_01.json",
+      "name": "螺旋滚珠塔",
+      "name_en": "Spiral Ball Run Tower 01",
+      "description": "双轨竞速弹珠机: 三层发球塔向东西两侧甩出严格镜像的双螺旋轨道, 每段 30 度坡道的顶边整边吸在平台沿口、坡尾由栈桥墩接住, 弹珠沿 东坡道-转角-南坡道-转角-冲线坡道 盘旋而下冲进接珠港。两颗弹珠同时出发, 听哪边先撞响旗门 —— 这不是看的模型, 是每天都会拿出来玩的玩具。",
+      "difficulty": 4,
+      "total_pieces": 90,
+      "step_count": 19,
+      "tags": [
+        "滚珠",
+        "轨道",
+        "竞速",
+        "滚珠乐园",
+        "旗舰"
+      ]
+    },
+    {
+      "id": "castle_drawbridge_01",
+      "file": "models/castle_drawbridge_01.json",
+      "name": "吊桥城堡",
+      "name_en": "Drawbridge Castle 01",
+      "description": "城堡系列第二课, 主角是进出城的动线: 双塔门楼夹着 2 格宽的城门洞, 两根长方形门楣横跨洞口层层叠高 (两端竖边传力, 洞口全程贯通); 橙色吊桥跨过护城河通向三面围墙的桥头堡; 庭院深处的主楼用长方形圈层砌法四角咬合升起三层, 顶上梯形四坡大屋顶加金色压顶。负空间门洞、横楣传力、圈层砌法 —— 三个新技法一课学会。",
+      "difficulty": 4,
+      "total_pieces": 99,
+      "step_count": 21,
+      "tags": [
+        "城堡",
+        "吊桥",
+        "门楼",
+        "负空间",
+        "挑战"
+      ]
+    },
+    {
+      "id": "rescue_hq_01",
+      "file": "models/rescue_hq_01.json",
+      "name": "救援行动总部",
+      "name_en": "Rescue Operations HQ 01",
+      "description": "旗舰救援基地: 左翼是敞开式双车位车库, 屋顶就是出动甲板, 长方形斜坡从甲板直插地面让救援车冲出总部; 右翼三层指挥塔层层起楼, 塔顶整层直升机停机坪。门洞、瞭望窗、桁架护角、信号塔一应俱全 —— 搭完就能开始救援行动。",
+      "difficulty": 4,
+      "total_pieces": 101,
+      "step_count": 18,
+      "tags": [
+        "救援",
+        "总部",
+        "建筑地标",
+        "旗舰",
+        "挑战"
+      ]
+    },
+    {
+      "id": "skyscraper_01",
+      "file": "models/skyscraper_01.json",
+      "name": "城市摩天大楼",
+      "name_en": "City Skyscraper 01",
+      "description": "全库最高剪影: 4x4 裙楼之上, 塔身以 3x3 -> 2x2 -> 1x1 逐级退台, 且每级绕塔心旋位 (西北 -> 东北 -> 东南), 退出的环形露台绕大楼盘旋而上; 大堂门洞配长方形门楣, 每级塔身根部由直角三角形斜撑锁定, 顶层观景阁以四片等腰三角形合拢成锥形金顶。搭完立在桌上近半米高 —— 这是放进展示柜的作品。",
+      "difficulty": 5,
+      "total_pieces": 122,
+      "step_count": 26,
+      "tags": [
+        "摩天大楼",
+        "建筑地标",
+        "退台",
+        "旗舰",
+        "大师"
+      ]
     }
   ]
 }
