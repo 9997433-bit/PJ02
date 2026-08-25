@@ -1112,40 +1112,31 @@
     },
     {
       "step_number": 9,
-      "description": "架索道第一段: 红色 30 度坡道顶边整边吸平台东沿 (y 1..2 车道), 坡尾悬在半空等支架来接。",
-      "tip": "先把顶边完整贴上平台沿口再松手, 坡尾暂时悬空是正常的。",
+      "description": "架索道第一段: 先在山地东侧空地立 1 片灰色支架塔 (x=4.73 处), 再把红色 30 度坡道顶边整边吸上平台东沿 (y 1..2 车道), 坡尾恰好落在支架塔顶边上。",
+      "tip": "顶边贴平台沿口、坡尾吸支架顶边 —— 两端受力才是合格的索道。",
       "tiles_to_add": [
+        "pier",
         "rope_1"
       ],
       "highlight_tiles": [
-        "tw_d_1_0",
-        "wheel"
+        "wheel",
+        "tw_d_1_0"
       ]
     },
     {
       "step_number": 10,
-      "description": "立中途支架塔: 1 片灰色正方形立在坡尾正下方, 顶边恰好接住坡尾。",
-      "tip": "支架顶边与坡尾整边吸合 —— 索道每一段都要有依托。",
-      "tiles_to_add": [
-        "pier"
-      ],
-      "highlight_tiles": [
-        "rope_1"
-      ]
-    },
-    {
-      "step_number": 11,
       "description": "架索道第二段: 从支架塔顶继续向东下滑, 坡尾自然落地。",
       "tip": "两段坡道在支架顶上排成一条直线, 这就是下山的缆绳。",
       "tiles_to_add": [
         "rope_2"
       ],
       "highlight_tiles": [
-        "pier"
+        "pier",
+        "rope_1"
       ]
     },
     {
-      "step_number": 12,
+      "step_number": 11,
       "description": "铺联络步道: 2 片灰色方板把山地东沿与山脚站台连起来。",
       "tip": "步道从山地一直铺到站台门口, 全场连成一个整体。",
       "tiles_to_add": [
@@ -1157,7 +1148,7 @@
       ]
     },
     {
-      "step_number": 13,
+      "step_number": 12,
       "description": "铺山脚站台西列与中列: 6 片橙灰相间的方板 (x 6..8)。",
       "tip": "站台紧贴步道东端, 橙灰棋盘就是候车区地坪。",
       "tiles_to_add": [
@@ -1173,7 +1164,7 @@
       ]
     },
     {
-      "step_number": 14,
+      "step_number": 13,
       "description": "补齐站台东列 3 片 —— 3x3 山脚站台就绪。",
       "tip": "索道坡尾正好滑进站台西北角 —— 到站下车!",
       "tiles_to_add": [
@@ -1186,7 +1177,7 @@
       ]
     },
     {
-      "step_number": 15,
+      "step_number": 14,
       "description": "拼缆车吊舱: 站台中央立 1x1 舱体四壁, 西面用透明片当观景舷窗。",
       "tip": "四角竖边两两互吸, 红色舱体立稳在站台上。",
       "tiles_to_add": [
@@ -1200,7 +1191,7 @@
       ]
     },
     {
-      "step_number": 16,
+      "step_number": 15,
       "description": "盖吊舱尖顶: 4 片红色等腰三角形底边吸舱顶四边, 斜棱互吸合拢成锥。",
       "tip": "先立两片相对的, 再补另外两片 —— 四条斜棱自锁成环。",
       "tiles_to_add": [
@@ -1215,7 +1206,7 @@
       ]
     },
     {
-      "step_number": 17,
+      "step_number": 16,
       "description": "装站台围栏: 南沿与东沿共 3 片橙色等边三角形, 缆车站正式运营!",
       "tip": "围栏中间留出检票通道 —— 排好队, 上山看云海喽。",
       "tiles_to_add": [

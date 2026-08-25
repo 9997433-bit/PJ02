@@ -112,6 +112,25 @@
       "thumbnail": "thumbnails/ferris_wheel_frame_01.png"
     },
     {
+      "id": "roller_coaster_loop_01",
+      "file": "models/roller_coaster_loop_01.json",
+      "name": "过山车大环圈",
+      "name_en": "Roller Coaster Loop 01",
+      "description": "游乐园主题: 全库第一个闭合环圈 —— 6 片梯形在竖直平面内腰腰互吸, 拼成外边长 2、内边长 1 的空心六边大环, 中间的洞就是过山车穿越的圈心; 环是拓扑环, 剪断任何一条铰链线都还有第二条路径, 越按越紧。环圈西侧箱形桥墩甩出上行/俯冲双坡道, 再往西是带雨棚与扇形招牌的车站和出站坡道, 东侧停着两节连挂的列车。",
+      "difficulty": 3,
+      "total_pieces": 57,
+      "step_count": 16,
+      "theme": "游乐园",
+      "tags": [
+        "游乐园",
+        "过山车",
+        "环圈",
+        "闭合环",
+        "挑战"
+      ],
+      "thumbnail": "thumbnails/roller_coaster_loop_01.png"
+    },
+    {
       "id": "sydney_opera_01",
       "file": "models/sydney_opera_01.json",
       "name": "悉尼歌剧院造型",
@@ -129,6 +148,25 @@
         "海湾"
       ],
       "thumbnail": "thumbnails/sydney_opera_01.png"
+    },
+    {
+      "id": "roller_coaster_hill_01",
+      "file": "models/roller_coaster_hill_01.json",
+      "name": "过山车爬升段",
+      "name_en": "Roller Coaster Lift Hill 01",
+      "description": "过山车的链式爬升丘剖面 (不是回环): 三层峰顶塔居中, 东侧提升链与西侧俯冲链各由 3 段 30 度坡道沿桥墩逐级降到地面 —— 每段坡道两端都落在墩顶或塔沿上, 剪断任何一处节点铰链, 坡道仍经由另一端传力; 桥墩根部直角护撑锁成三角。东端是带四坡顶候车亭的站台, 西端冲出段以缓冲挡板收尾 —— 一条完整的爬升-越顶-俯冲动线。",
+      "difficulty": 3,
+      "total_pieces": 60,
+      "step_count": 16,
+      "theme": "游乐园",
+      "tags": [
+        "过山车",
+        "游乐园",
+        "爬升段",
+        "坡道链",
+        "桥墩"
+      ],
+      "thumbnail": "thumbnails/roller_coaster_hill_01.png"
     },
     {
       "id": "whale_01",
@@ -205,6 +243,25 @@
       "thumbnail": "thumbnails/lunar_lander_01.png"
     },
     {
+      "id": "cable_car_01",
+      "file": "models/cable_car_01.json",
+      "name": "缆车站",
+      "name_en": "Cable Car Station 01",
+      "description": "高山交通主题: 4x4 山地上立起 2x2 两层山顶站塔, 塔顶平台东沿挂着红色六边形驱动轮, 一条 30 度索道分两段滑向山脚 —— 第一段坡尾由中途支架塔整边接住, 第二段自然落地滑进 3x3 山脚站台; 站台上停着戴等腰四坡尖顶的红色缆车吊舱 (透明观景舷窗), 联络步道把全场连成一个磁力整体 —— 检票上车, 上山看云海。",
+      "difficulty": 3,
+      "total_pieces": 64,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "高山",
+        "缆车",
+        "交通",
+        "索道",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/cable_car_01.png"
+    },
+    {
       "id": "pyramid_giza_01",
       "file": "models/pyramid_giza_01.json",
       "name": "吉萨金字塔",
@@ -221,6 +278,24 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/pyramid_giza_01.png"
+    },
+    {
+      "id": "clock_tower_01",
+      "file": "models/clock_tower_01.json",
+      "name": "中央大钟楼",
+      "name_en": "Central Clock Tower 01",
+      "description": "全库第一个用上扇形磁力片的模型: 南北两面各由 2 片透明扇形在檐口上合成弧顶朝天的半圆大钟, 只靠两条直磁边自锁; 四层红砖塔身底层开 2 格大门 (黄色门楣三边受力), 檐口与亭顶两级长方形转换层, 中间夹着东西向开敞钟亭, 最上层梯形攒尖 + 金色等腰尖顶收分到 6.57 格 —— 一座层层收分的城市地标。",
+      "difficulty": 3,
+      "total_pieces": 67,
+      "step_count": 16,
+      "theme": "城市地标",
+      "tags": [
+        "城市地标",
+        "建筑",
+        "钟楼",
+        "扇形首秀"
+      ],
+      "thumbnail": "thumbnails/clock_tower_01.png"
     },
     {
       "id": "sailboat_01",
@@ -351,25 +426,6 @@
         "合龙"
       ],
       "thumbnail": "thumbnails/suspension_bridge_01.png"
-    },
-    {
-      "id": "roller_coaster_loop_01",
-      "file": "models/roller_coaster_loop_01.json",
-      "name": "过山车大环圈",
-      "name_en": "Roller Coaster Loop 01",
-      "description": "游乐园主题: 全库第一个闭合环圈 —— 6 片梯形在竖直平面内腰腰互吸, 拼成外边长 2、内边长 1 的空心六边大环, 中间的洞就是过山车穿越的圈心; 环是拓扑环, 剪断任何一条铰链线都还有第二条路径, 越按越紧。环圈西侧箱形桥墩甩出上行/俯冲双坡道, 再往西是带雨棚与扇形招牌的车站和出站坡道, 东侧停着两节连挂的列车。",
-      "difficulty": 4,
-      "total_pieces": 57,
-      "step_count": 16,
-      "theme": "游乐园",
-      "tags": [
-        "游乐园",
-        "过山车",
-        "环圈",
-        "闭合环",
-        "挑战"
-      ],
-      "thumbnail": "thumbnails/roller_coaster_loop_01.png"
     },
     {
       "id": "train_station_01",
