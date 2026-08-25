@@ -297,6 +297,10 @@ def content_crop_box(shot):
         grow = h * target - w
         x0 -= grow / 2
         x1 += grow / 2
+    bottom_limit = shot.height - 200   # 底部步骤面板上沿 (与上方 y1 初值同一约定)
+    if y1 > bottom_limit:              # 4:3 纵向扩展不许再侵入 HUD, 向上滑动补足
+        y0 -= y1 - bottom_limit
+        y1 = bottom_limit
     if x0 < 0:
         x1 -= x0
         x0 = 0
@@ -304,7 +308,7 @@ def content_crop_box(shot):
         y1 -= y0
         y0 = 0
     x1 = min(x1, shot.width)
-    y1 = min(y1, shot.height)
+    y1 = min(y1, bottom_limit)
     return int(x0), int(y0), int(x1), int(y1)
 
 
