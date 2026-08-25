@@ -3,6 +3,25 @@
   "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 与 thumbnail 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。theme 为卡片主题 (由标签推导), thumbnail 由 tools/generate_thumbnails.py 生成。本文件由 tools/update_model_catalog.py 自动生成, 请勿手工编辑。",
   "models": [
     {
+      "id": "rehab_park_01",
+      "file": "models/rehab_park_01.json",
+      "name": "康复操场",
+      "name_en": "Rehab Park 01",
+      "description": "全库第一座康复训练操场, 主角是'上-平-下'无障碍训练环线: 中央康复山丘箱形围筒 + 长板台面, 西边 30 度上坡、东边 30 度下坡, 两坡顶边都同吸台面短边与壁顶 (共线双连接) 坡尾自然落地零悬臂, 台顶南北沿四片黄色安全护栏扶着走不怕摔 —— 与 skate_park_01/slide_playground_01 '冲下来'的坡道不同, 这里的双坡是'走上去再走下来'的对称慢动线; 山丘南边平行双杠步道 四片青色扶杆分立地缝, 东头接橙黄相间的平衡步石踩格折返; 北草坪休息凳面朝山丘, 加油旗高扬 —— 一步一步来, 每天都进步!",
+      "difficulty": 2,
+      "total_pieces": 41,
+      "step_count": 9,
+      "theme": "城市生活",
+      "tags": [
+        "医院",
+        "城市",
+        "运动",
+        "康复",
+        "无障碍"
+      ],
+      "thumbnail": "thumbnails/rehab_park_01.png"
+    },
+    {
       "id": "beach_hut_01",
       "file": "models/beach_hut_01.json",
       "name": "海滩小屋",
@@ -803,6 +822,25 @@
       "thumbnail": "thumbnails/whale_01.png"
     },
     {
+      "id": "dental_clinic_01",
+      "file": "models/dental_clinic_01.json",
+      "name": "牙科诊所",
+      "name_en": "Dental Clinic 01",
+      "description": "全库第一座'长得像自己招牌'的建筑 —— 诊所本体就是一颗巨型磨牙: 两条空心牙根箱形筒分立两侧 (西根南面开蓝色门框方大门), 根间留一条能走人的穿堂; 中央桥板西吸西根东壁顶、东吸东根西壁顶, 双端受力跨过穿堂把双根连成一颗牙; 桥板上再起 3x1 牙冠箱体, 南面两扇窗格方大眼睛朝院子笑, 长板压顶后四角各立一片白等边 —— 磨牙的四个牙尖, 北檐红旗高扬。院里巨型牙刷平躺 (三格刷头+三根立毛+蓝长板刷柄), 粉色漱口杯四壁开口朝天, 候诊长凳面朝大门 —— 刷牙上下刷, 牙医笑哈哈。",
+      "difficulty": 3,
+      "total_pieces": 61,
+      "step_count": 12,
+      "theme": "城市生活",
+      "tags": [
+        "医院",
+        "城市",
+        "职业体验",
+        "牙医",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/dental_clinic_01.png"
+    },
+    {
       "id": "kindergarten_01",
       "file": "models/kindergarten_01.json",
       "name": "彩虹幼儿园",
@@ -1034,6 +1072,26 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/spider_bot_01.png"
+    },
+    {
+      "id": "er_entrance_01",
+      "file": "models/er_entrance_01.json",
+      "name": "急诊入口",
+      "name_en": "ER Entrance 01",
+      "description": "全库第一条'入院风雨连廊': 与 hospital_01 楼板外挑小雨棚、toll_station_01 亭子当桥墩、car_wash_01 两墙夹道的封闭隧道都不同 —— 四根独立方柱两两相对串成开敞门式框架雨廊, 两片透明廊顶长板短边各压一对柱顶 (双端受力零悬臂), 末节北长边还骑在急诊大厅的双红门框方顶上, 廊子一头接街边一头接大门; 5x2 一层白盒大厅南立面双红推拉门加三扇青色观察窗, 屋顶双红灯箱压门而立、白等腰旗杆北檐高扬; 廊口双轮担架车 (车轮底座 x2 + 床板双长边压双轮顶的滚动门式框架) 正要推进大厅, 黄色救护车位标线画在街边 —— 全天候开放, 担架车淋不着一滴雨。",
+      "difficulty": 3,
+      "total_pieces": 63,
+      "step_count": 13,
+      "theme": "城市生活",
+      "tags": [
+        "医院",
+        "城市",
+        "职业体验",
+        "急诊",
+        "街景",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/er_entrance_01.png"
     },
     {
       "id": "fishing_boat_01",
@@ -1939,6 +1997,25 @@
         "职业体验"
       ],
       "thumbnail": "thumbnails/conveyor_factory_01.png"
+    },
+    {
+      "id": "eye_clinic_01",
+      "file": "models/eye_clinic_01.json",
+      "name": "眼科诊所",
+      "name_en": "Eye Clinic 01",
+      "description": "全库第一座'把视力表搭成楼'的模型: 3x1 底 3 层高的双面视力表箱塔, 南北两面各用 8 片蓝方板拼出巨型 E 字 (留白格分居中层两侧 —— 南 E 开口朝东、北 E 开口朝西, 正是视力表上会转方向的 E), E 字本身就是承重墙, 塔高 3.0 靠层层箱形闭环通过高层检查; 塔前测距道透明格黄格相间笔直铺向南, 尽头红色站位格, 两侧橙色候诊长凳; 西侧 2x2 验光室平顶骑缝立一副巨型眼镜 —— 两扇青色窗格方镜片肩并肩竖边互吸, 镜框正对测距道; 塔顶红色检查灯压檐, 东北角院旗高扬 —— 站上红格伸手指方向, 眼睛越练越亮!",
+      "difficulty": 3,
+      "total_pieces": 71,
+      "step_count": 13,
+      "theme": "城市生活",
+      "tags": [
+        "医院",
+        "城市",
+        "职业体验",
+        "视力表",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/eye_clinic_01.png"
     },
     {
       "id": "helicopter_pad_01",
