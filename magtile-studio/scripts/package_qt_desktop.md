@@ -13,9 +13,14 @@ LGPL 合规清单。通用打包基座 (NSIS/ZIP/WiX、版本号管理、CI 流�
 > **NSIS 安装器脚本生成/makensis 编译冒烟** + 解包实测 + 动态链接
 > 核验, 见第九节); Windows 实机冒烟已脚本化为
 > `scripts/smoke_qt_windows.ps1` (构建→测试→CPack→windeployqt→清单
-> 断言→无头启动一条龙, 含 -DryRun 自检, 已在 pwsh 下自检通过)。
+> 断言→无头启动一条龙, 含 -DryRun 自检, 已在 pwsh 下自检通过);
+> macOS 实机冒烟已脚本化为 `scripts/smoke_qt_macos.sh` (构建→测试→
+> CPack→合成 .app→macdeployqt→签名→bundle 断言→自足启动→DMG 挂载
+> 断言一条龙, 非 macOS 上跑可移植子集并对 macOS 专属环节显式 SKIP,
+> Linux 实跑子集 + --dry-run 双失败注入自检已全绿)。
 > **windeployqt / macdeployqt 尚未在 Windows / macOS 实机跑过**:
-> Windows 构建机上跑第五节脚本 + 第十一节验收清单, 结果回填第十节。
+> Windows 构建机上跑第五节脚本 + 第十一节验收清单, macOS 构建机上跑
+> `smoke_qt_macos.sh` + 第十二节验收清单, 结果回填第十节。
 
 ## 一、包形态总览
 
@@ -124,6 +129,12 @@ C:\Qt\6.4.x\msvc2022_64\bin\windeployqt.exe ^
 
 ### macOS — macdeployqt + DMG
 
+> 冒烟不必手敲: 一键脚本 `scripts/smoke_qt_macos.sh` 已把本节 +
+> 第三/四节 + bundle 清单断言 + DMG 挂载断言串成一条命令 (见第十二
+> 节)。脚本**不改构建系统** —— 从 CPack 产物合成最小 .app (含
+> Info.plist 与 bundle 内 data/) 再跑 macdeployqt; 正式发布路径仍是
+> 下面的 MACOSX_BUNDLE 切换。
+
 当前 CMake 以 `MACOSX_BUNDLE FALSE` 出裸可执行文件 (便于 Linux/CI
 冒烟路径统一)。macOS 实机打包时:
 
@@ -138,11 +149,21 @@ C:\Qt\6.4.x\msvc2022_64\bin\windeployqt.exe ^
        -qmldir=apps/desktop_qt/qml -dmg
    ```
 
-   `-qmldir` 语义同 windeployqt; `-dmg` 直接产出磁盘映像。
-3. 发布前签名与公证 (Apple Developer ID):
+   `-qmldir` 语义同 windeployqt (静态扫描 QML import 决定收集哪些
+   QML 模块, **忘带即目标机黑屏**); `-dmg` 直接产出磁盘映像。
+   完成后核对 bundle 内新增: `Contents/Frameworks/Qt{Core,Gui,Qml,
+   Quick,QuickControls2,OpenGL}.framework`、`Contents/PlugIns/
+   platforms/libqcocoa.dylib`、`Contents/Resources/qml/QtQuick/...`
+   模块树 (与 Windows 侧 DLL 六件套/qwindows/qml 树逐项对应)。
+3. **data/ 必须在 bundle 内** (推荐 `Contents/MacOS/data`, 可执行
+   文件向上探测第一跳命中): 用户拖装只把 .app 拖进 /Applications,
+   放在 DMG 根部与 .app 并列的 data/ 会在拖装时丢失, 首启即闪退。
+4. macdeployqt 改写库路径后原签名即失效, **必须重签**: 冒烟用
+   ad-hoc (`codesign --force --deep --sign -`, arm64 无有效签名直接
+   拒载); 发布前签名与公证 (Apple Developer ID):
    `codesign --deep --options runtime` → `xcrun notarytool submit` →
    `xcrun stapler staple`; 未签名/未公证的 DMG 会被 Gatekeeper 拦截。
-4. 在未装 Qt 的干净 macOS 上拖装验收 (验收项同 Windows)。
+5. 在未装 Qt 的干净 macOS 上拖装验收 (第十二节清单)。
 
 ### Linux — 现状与路线
 
@@ -274,7 +295,9 @@ ldd build-pack/apps/desktop_qt/magtile_studio_qt | grep -i qt   # 应全为 .so
 本仓库当前状态已按 `smoke_qt_linux_pack.sh` 在 Ubuntu (Qt 6.4.2 /
 CMake 3.28 / NSIS 3.10) 全绿: 三档 TGZ 清单断言、NSIS 脚本生成 +
 makensis 编译 + 快捷方式断言、starter 解包目录一致性、offscreen
-启动、ldd 动态链接核验全部通过; Windows/macOS 实机项见下节。
+启动、ldd 动态链接核验全部通过; `smoke_qt_macos.sh` 的可移植子集
+(构建→ctest→CPack TGZ→清单断言→offscreen→ldd) 也可在 Linux 上跑,
+macOS 专属环节显式 SKIP (第十二节); Windows/macOS 实机项见下节。
 
 ## 十、QT-6 待办清单 (实机阶段)
 
@@ -285,8 +308,13 @@ makensis 编译 + 快捷方式断言、starter 解包目录一致性、offscreen
       纳入安装器) 仍为手动步骤。
 - [ ] windeployqt 产物纳入安装规则自动化 (或全面转 Qt ≥ 6.5 部署 API),
       消除"打完再手补"的两段式流程。
-- [ ] macOS: MACOSX_BUNDLE 切换 + Info.plist/图标资产 + macdeployqt
-      -dmg + 签名/公证全链路。
+- [ ] macOS 实机: 在 macOS 构建机上跑 `scripts/smoke_qt_macos.sh`
+      (合成 .app→macdeployqt→ad-hoc 签名→bundle 断言→自足启动→DMG
+      挂载断言已自动化, Linux 上仅可移植子集 + SKIP); 再按第十二节
+      人工清单在干净机器拖装验收。
+- [ ] macOS 正式路径: MACOSX_BUNDLE 切换 + Info.plist/图标资产进
+      构建系统 (替代冒烟脚本的合成 bundle) + Developer ID 签名/公证
+      全链路 (`--sign-identity` 已预留)。
 - [ ] Linux AppImage (linuxdeploy + Qt 插件), 面向用户分发。
 - [ ] MSIX (Windows 商店) / Mac App Store 渠道评估 (含 LGPL 可替换性
       法务结论, 见第八节)。
@@ -354,3 +382,110 @@ licenses) → offscreen 无头启动冒烟 → (6.4) 重压 `*-deployed.zip`。
 | 朗读按钮无声 | 干净机器缺 TTS 引擎, 或包内缺 `Qt6TextToSpeech.dll` + `texttospeech\` 插件 | 预期为静默降级不报错; 要启用则核对上述两件随包且系统装有中文语音包 |
 | 安装器被 SmartScreen 拦截 | 未签名 | 内测阶段"更多信息 → 仍要运行"; 发布前按 `scripts/package_windows.md` 第十一节签名 |
 | `smoke_qt_windows.ps1` 中文输出乱码 | 控制台代码页非 UTF-8 | `chcp 65001` 后重跑; 脚本文件本身已带 UTF-8 BOM, PowerShell 5.1 可直接解析 |
+
+## 十二、macOS 实机验收清单
+
+分两段: 自动化冒烟 (脚本代跑, 构建机上) + 人工验收 (干净机器上),
+与第十一节 Windows 清单同款结构、同一断言口径 (Qt DLL 六件套 <->
+Qt 六框架, qwindows.dll <-> libqcocoa.dylib, qml/QtQuick 树 <->
+Resources/qml/QtQuick 树)。两段都过才算 QT-6 macOS 档收口;
+结果回填第十节 macOS 实机项。
+
+### 12.1 自动化冒烟 (构建机)
+
+```bash
+# 仓库根目录; 需 Qt >= 6.4 (brew install qt 或官方安装器) + Xcode CLT
+bash scripts/smoke_qt_macos.sh                       # 并存包 + full
+# 变体: --qt-only (Qt-only 包) / --model-set starter (30 模型子集)
+#       --qt-dir ~/Qt/6.7.2/macos (显式指定 Qt 套件)
+#       --sign-identity "Developer ID Application: ..." (真实签名)
+# 先看环境报告与执行计划不实跑: 追加 --dry-run (任何平台可跑,
+# 含清单断言逻辑自检 + 双失败注入)
+```
+
+脚本流程: 环境检测 (CMake/Qt/macdeployqt/python3/hdiutil/codesign)
+→ 配置构建 → ctest (排除需显示环境的 GL 双 GUI 冒烟) → `cpack -G
+TGZ` → 解包 → 包内清单断言 (双主程序或 Qt-only / data 目录登记一致
+性 / licenses / 无多余 qml/) → offscreen 启动 → **合成最小 .app**
+(Contents/MacOS + Info.plist + PkgInfo + bundle 内 data/; 不改构建
+系统) → `macdeployqt -qmldir=apps/desktop_qt/qml` → 重签 (缺省
+ad-hoc, macdeployqt 改写库路径后原签名必失效) → bundle 清单断言
+(Qt 六框架 / libqcocoa.dylib / Resources/qml/QtQuick 树 / bundle 内
+data / otool 动态链接) → bundle 自足启动 (cd /tmp 无 --data-dir,
+模拟拖装后双击) → `hdiutil create` DMG (.app + Applications 软链)
+→ 挂载断言。任一环节失败退出码非零并给出 `FAILED:`/`[!!]` 定位行。
+
+**SKIP 语义**: 非 macOS (如 Linux CI) 上脚本照跑可移植子集 (构建→
+测试→CPack→清单断言→offscreen→ldd), macdeployqt/签名/bundle/DMG
+各环节逐条打印 `[--] SKIP: <原因>` 且**不算失败** (退出码 0), 末尾
+标记 `PARTIAL`; macOS 上装了 Qt 但缺 macdeployqt 同理。PARTIAL
+只证明打包机制与清单口径自洽, **不等于 macOS 档收口** —— 必须在
+macOS 实机跑到零 SKIP 全绿。
+
+### 12.2 DMG 结构与安装布局
+
+```text
+MagTileStudio-<版本>-macos[-qt].dmg   (UDZO 压缩映像)
+├── magtile_studio_qt.app/            拖进 Applications 即安装
+│   └── Contents/
+│       ├── Info.plist                CFBundleExecutable/Identifier/版本
+│       ├── PkgInfo
+│       ├── MacOS/
+│       │   ├── magtile_studio_qt     主程序
+│       │   └── data/                 磁力片目录 + 模型库 (bundle 内!)
+│       ├── Frameworks/               Qt{Core,Gui,Qml,Quick,
+│       │                             QuickControls2,OpenGL}.framework
+│       ├── PlugIns/
+│       │   └── platforms/libqcocoa.dylib   (+ imageformats/ 等)
+│       └── Resources/
+│           ├── qml/QtQuick/...       QML 运行时模块树 (-qmldir 产物)
+│           ├── licenses/             EULA + THIRD_PARTY_NOTICES
+│           └── README.md
+└── Applications -> /Applications     拖装引导软链
+```
+
+- **data/ 必须在 bundle 内** (Contents/MacOS/data): 拖装只带走
+  .app, 与 .app 并列放 DMG 根部的数据在拖装后即丢失。
+- 界面 QML (MagTile.Studio 模块) 已编进可执行体资源, 与
+  Resources/qml/ 下的 **Qt 运行时模块** (QtQuick/Controls 等) 是
+  两回事 —— 前者天然随包, 后者靠 macdeployqt `-qmldir` 收集。
+- 进度存档不在包内: 写在用户目录 (与 CLI/GL 版共用同一路径, 见
+  docs/PROGRESS.md), 重装/升级不丢档。
+
+### 12.3 人工验收 (干净 macOS 12+, 未装 Qt/Xcode 的物理机或虚拟机)
+
+- [ ] **挂载**: 双击 DMG → Finder 出现 `magtile_studio_qt.app` +
+      `Applications` 软链, 无"映像损坏"报错。
+- [ ] **安装**: 拖 .app 到 Applications → 复制完成; 弹出 DMG。
+- [ ] **Gatekeeper 放行**: 首次启动 —— 已签名+公证的包直接开;
+      内测 ad-hoc 包会被拦 ("无法打开/来自身份不明的开发者"),
+      右键 → 打开 → 再点"打开" (或 系统设置 → 隐私与安全性 →
+      "仍要打开"); arm64 机器上**完全无签名**的包连右键打开都不行
+      (脚本已确保至少 ad-hoc)。
+- [ ] **启动**: 数秒内出首页, 无缺库崩溃、无黑/白屏 (首次启动先出
+      年龄段引导三卡片属预期, 选任一档进首页)。
+- [ ] **打开模型库**: 首页「开始搭建」→ 模型卡片网格出现且缩略图
+      正常 (starter 档恰 30 张、全部无 🔒 角标); 筛选条可点、
+      「🎁 免费模型」筛选生效。
+- [ ] **进教程**: 点任意卡片 → 详情页 3D 预览在转 → 「开始搭建」→
+      教程页 3D 视口可拖拽旋转/滚轮缩放 (触控板双指手势同款),
+      「下一步」步进有星星反馈, 步骤朗读 🔊 不报错 (系统自带 TTS,
+      通常有声)。
+- [ ] **退出**: ⌘Q 或关窗 → 再次启动 → 详情页显示「继续搭建 第 N
+      步」(进度存档写在用户目录, 与 .app 分离)。
+- [ ] **卸载**: .app 拖入废纸篓 → 无残留服务/登录项; 用户存档
+      (进度库) 保留属预期。
+
+### 12.4 常见失败排查
+
+| 症状 | 原因 | 处置 |
+| --- | --- | --- |
+| 打开报 "已损坏, 应移到废纸篓" | 从网络下载带 quarantine 属性 + 无有效签名 (arm64 尤甚) | 正式包必须 Developer ID 签名 + 公证 + stapler; 内测应急 `xattr -dr com.apple.quarantine <app>` 后右键打开 (仅限自己人, 不得教给用户) |
+| 打开报 "无法打开, 来自身份不明的开发者" | 未公证 (ad-hoc 或仅签名未公证) | 内测: 右键 → 打开; 发布前走公证全链路 (第五节第 4 步) |
+| 启动即崩溃, 崩溃报告见 `Library not loaded: @rpath/QtCore...` | Qt 框架未随包 —— macdeployqt 没跑或对错误的 .app 跑 | 对 bundle 重跑 macdeployqt; 核对 `Contents/Frameworks/Qt*.framework` 齐全 (脚本 bundle 断言在构建机上提前拦截) |
+| 启动报 "no Qt platform plugin could be initialized" | `Contents/PlugIns/platforms/libqcocoa.dylib` 未拷贝 | 重跑 macdeployqt; 核对 PlugIns/platforms/ 在 bundle 内 |
+| 窗口出现但黑/白屏, 控制台报 `module "QtQuick" is not installed` | macdeployqt **忘带 `-qmldir`** (静态扫描不到 import) | 带 `-qmldir=apps/desktop_qt/qml` 重跑; 核对 `Contents/Resources/qml/QtQuick/...` 在 bundle 内; 与 Windows 侧同为头号事故 |
+| 启动即闪退、无窗口 | bundle 内 `Contents/MacOS/data/` 缺失 (数据被放在 DMG 根部, 拖装丢失) 或目录登记与模型文件不一致 | 数据必须打进 bundle (12.2); 子集包必须由 make_data_subset.py 装配 (第七节), 严禁手删模型 |
+| macdeployqt 后应用反而起不来 (arm64) | 库路径被改写导致原签名失效, 未重签 | `codesign --force --deep --sign - <app>` (脚本已内置); 发布用真实身份重签 |
+| 教程页 3D 视口空白 | 远程桌面/虚拟机 OpenGL 能力不足 (视口需 OpenGL 场景图) | 换物理机或开虚拟机 3D 加速; `QSG_INFO=1` 看场景图后端日志 |
+| 朗读按钮无声 | 系统语音包缺中文声音 | 系统设置 → 辅助功能 → 朗读内容 → 添加中文声音; 应用侧静默降级属预期 |
