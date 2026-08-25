@@ -104,8 +104,14 @@ QString BillingBackend::purchase(const QString& product_id) {
         case billing::PurchaseOutcome::Cancelled:
             return QStringLiteral("已取消, 随时可以再来");
         default:
-            // Unavailable (空实现档 / 未知商品): 温和占位, 永不说"失败"
+            // Unavailable: 温和占位, 永不说"失败"。Windows 商店档购买链路
+            // 已接线, Unavailable 只可能是商店暂时联系不上 (无网 / 商店
+            // 服务没回应), 不能再说「正在准备中」误导家长以为功能没上线
+#if defined(MAGTILE_BILLING_WINDOWS_STORE)
+            return QStringLiteral("商店暂时没有回应, 稍后再试一次就好 —— 免费模型现在就能玩");
+#else
             return QStringLiteral("订阅功能正在准备中, 上线后会在这里开放 —— 免费模型现在就能玩");
+#endif
     }
 }
 
@@ -114,11 +120,20 @@ QString BillingBackend::restore() {
     emit billingChanged();
     switch (outcome) {
         case billing::PurchaseOutcome::Restored:
-            return QStringLiteral("已恢复订阅 —— 全库重新解锁");
+            // 与购买成功同口径: 「开发模拟」只在假计费档标注, 商店档不标
+            return simulated_ ? QStringLiteral("已恢复订阅 (开发模拟) —— 全库重新解锁")
+                              : QStringLiteral("已恢复订阅 —— 全库重新解锁");
         case billing::PurchaseOutcome::NothingToRestore:
             return QStringLiteral("这个账户下暂时没有可恢复的订阅");
         default:
+            // Unavailable: Windows 商店档恢复链路已接线 (AddOnLicenses),
+            // 拿不到结果只可能是商店暂时联系不上; 其余档保持「随正式版
+            // 开放」占位。本地已有的宽限期凭证不受影响 (查询不可用不动)
+#if defined(MAGTILE_BILLING_WINDOWS_STORE)
+            return QStringLiteral("商店暂时没有回应, 稍后再试一次就好 —— 已有的订阅不会丢");
+#else
             return QStringLiteral("恢复购买将随正式商店版开放");
+#endif
     }
 }
 

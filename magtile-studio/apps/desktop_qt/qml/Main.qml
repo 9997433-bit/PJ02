@@ -321,11 +321,15 @@ ApplicationWindow {
                 stack.push(settingsComponent)                        // 设置页
             } else if (stage === 6) {
                 stack.pop()
-                stack.push(subscriptionComponent)                    // 订阅占位页
+                stack.push(subscriptionComponent)                    // 订阅页
             } else {
+                // 终态断言: 会话仍有效 + 落在门后页面 + 订阅页价格卡口径
+                // 自洽 (商店可用 <=> 价格卡真有价, B2 桌面侧收口断言;
+                // 口径定义见 SubscriptionPage.priceCardsConsistent)
                 window.smokeParentFlowOk = parentGate.sessionActive
                     && stack.currentItem !== null
                     && stack.currentItem.requiresParentSession === true
+                    && stack.currentItem.priceCardsConsistent === true
                 stop()
             }
         }

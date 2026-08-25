@@ -3,10 +3,12 @@
 // 仅在 MAGTILE_BUILD_QT=ON 时构建注册, 无需显示环境 (纯 QObject)。
 // 覆盖订阅/IAP 适配层的 Qt 侧 (COMMERCIAL_PLAN §2.2, 无真实 SDK):
 //   1. BillingBackend 默认态: 未订阅、商店可用 (桌面开发档 =
-//      FakeBillingClient)、三卡商品数据源齐全;
+//      FakeBillingClient)、simulatedBilling=true (「开发模拟」标注
+//      只出现在假计费档, 商店档真实扣费不标)、三卡商品数据源齐全;
 //   2. 订阅页主 CTA 契约: purchase 未知商品退「即将上线」占位
-//      文案且不改状态; 购买合法档位后 subscriptionActive 生效
-//      (免费层锁 DetailPage/LibraryPage 读同一属性);
+//      文案且不改状态; 购买合法档位后 subscriptionActive 生效且
+//      成功文案带「开发模拟」标注 (免费层锁 DetailPage/LibraryPage
+//      读同一属性);
 //   3. 跨实例持久化: 重开桥仍是已订阅 (settings 契约键), progress
 //      层直读同键 (与 core 层 / GL 版 / CLI 共库承诺);
 //   4. 开发开关门控: devControlsEnabled=false 时 devSetSubscribed
@@ -64,6 +66,7 @@ int main(int argc, char** argv) {
         BillingBackend billing(db_path, /*dev_controls=*/false);
         expect(!billing.subscriptionActive(), "初始未订阅 (付费模型上锁口径)");
         expect(billing.storeAvailable(), "桌面开发档商店可用 (FakeBillingClient)");
+        expect(billing.simulatedBilling(), "桌面开发档为假计费 (simulatedBilling 分流标注口径)");
         expect(!billing.devControlsEnabled(), "未开开发档时无模拟开关");
         expect(billing.activePlanName().isEmpty(), "未订阅时无生效档位名");
 
@@ -83,6 +86,8 @@ int main(int argc, char** argv) {
 
         const QString purchased = billing.purchase(QStringLiteral("sub_yearly"));
         expect(purchased.contains(QStringLiteral("已开通")), "假购买返回开通文案");
+        expect(purchased.contains(QStringLiteral("开发模拟")),
+               "假计费档购买成功文案标「开发模拟」(商店档真实扣费不标)");
         expect(billing.subscriptionActive(), "假购买后订阅生效 (付费模型解锁口径)");
         expect(billing.activePlanName() == QStringLiteral("年度订阅"), "生效档位中文名正确");
 
@@ -113,6 +118,8 @@ int main(int argc, char** argv) {
 
         const QString restored = billing.restore();
         expect(restored.contains(QStringLiteral("已恢复")), "restore 返回恢复文案");
+        expect(restored.contains(QStringLiteral("开发模拟")),
+               "假计费档恢复成功文案标「开发模拟」(与购买成功同口径)");
         expect(billing.subscriptionActive(), "恢复购买后订阅重新生效");
     }
     {

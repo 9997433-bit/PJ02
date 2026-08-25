@@ -14,9 +14,9 @@ import MagTile.Studio
 // FakeBillingClient (零真实扣费, 开发档另有「模拟已订阅」开关),
 // 商店不可用 (storeAvailable=false, 空实现档或商品表没查到) 自动
 // 退回「即将上线」占位; Windows 商店档 (MSIX, WinRT StoreContext)
-// 走同一 billing 桥零结构改动, 仅 CTA 的「开发模拟」标注按
-// simulatedBilling 分流 (接法见
-// include/magtile/billing/store_billing_client.hpp)。
+// 走同一 billing 桥零结构改动, 「开发模拟」标注 (CTA / 结果文案)
+// 与取消退款指引按 simulatedBilling 分流 —— 商店档真实扣费不得
+// 误标 (接法见 include/magtile/billing/store_billing_client.hpp)。
 // 红线 (§11 禁止事项): 无倒计时、无「即将涨价」、无预勾选加购、
 // 不索取任何个人信息; 全页不用红色与紧迫话术; 价格只出现在
 // 本页 (家长门后), 儿童侧界面零价格信息。
@@ -35,6 +35,20 @@ Page {
 
     /// 可购档位快照 (计费适配层, 档位表静态, 加载一次即可)
     readonly property var productList: billing.products()
+
+    /// 价格卡口径自检 (qt_gui_smoke --smoke-parent-flow 终态断言):
+    /// 商店可用 <=> 价格卡真有价 —— storeAvailable 时档位列表必须非空
+    /// 且每张卡价格文本非空 (商店档价格由后台 FormattedPrice 下发,
+    /// 空价格卡即接线断裂); 商店不可用时必须一张卡也不出 (退回
+    /// 「即将上线」占位, 绝不显示空价格卡)。
+    readonly property bool priceCardsConsistent: {
+        if (!billing.storeAvailable) return productList.length === 0
+        if (productList.length === 0) return false
+        for (var i = 0; i < productList.length; ++i) {
+            if (!productList[i].priceText) return false
+        }
+        return true
+    }
 
     /// 选中的档位 id; 默认落在主推档 (年度, COMMERCIAL_PLAN §3.2) ——
     /// 是"默认高亮"不是"预勾选加购" (§11): 不选也不买, 无任何默认扣费
@@ -252,8 +266,13 @@ Page {
                     }
                     Text {
                         Layout.fillWidth: true
+                        // 取消/退款入口按档分流: 商店档订阅由系统商店账户
+                        // 管理 (Windows 商店在「设置 -> 服务与订阅」),
+                        // 假计费档保持「随正式商店版提供」占位
                         text: "全库 " + studio.modelCount + " 个模型已解锁, 每周上新自动包含。"
-                              + "取消与退款入口将随正式商店版提供 (一步取消, 不设挽留关卡)。"
+                              + (billing.simulatedBilling
+                                 ? "取消与退款入口将随正式商店版提供 (一步取消, 不设挽留关卡)。"
+                                 : "取消或退款随时可在系统商店的订阅管理里办理 (一步取消, 不设挽留关卡)。")
                         font.pixelSize: Theme.fontSmall
                         color: Theme.textSecondary
                         wrapMode: Text.WordWrap
@@ -482,7 +501,7 @@ Page {
                             "儿童界面永远不显示价格与付费入口, 付费只由家长在这里决定",
                             "无倒计时、无「即将涨价」、无预勾选加购; 订阅前不索取任何个人信息",
                             "正式上线时条款透明: 自动续费规则、一步取消路径、年度档 7 天无理由退款",
-                            "会提供「恢复购买」按钮; 更喜欢买断的家庭也会有一次性内容包可选"
+                            "「恢复购买」按钮就在本页 —— 换机或重装后一键找回已有订阅; 更喜欢买断的家庭也会有一次性内容包可选"
                         ]
                         delegate: RowLayout {
                             required property string modelData
