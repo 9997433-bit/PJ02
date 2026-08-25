@@ -232,13 +232,17 @@ if(MAGTILE_BUILD_TESTS)
 
         # 物理正例: 处于承载预算之内的合法结构, validate 必须放行
         # (防止 R5/R6 静力规则矫枉过正, 误杀磁力片的常规玩法)。
-        file(GLOB MAGTILE_POSITIVE_FIXTURES CONFIGURE_DEPENDS
-            ${MAGTILE_TESTS_DIR}/test_physics_positive/*.json)
-        foreach(fixture_file IN LISTS MAGTILE_POSITIVE_FIXTURES)
-            get_filename_component(fixture_name ${fixture_file} NAME_WE)
-            add_test(NAME physics_positive_${fixture_name}
-                COMMAND magtile_app validate ${fixture_file} --data-dir ${MAGTILE_DATA_DIR})
-        endforeach()
+        # 执行器额外断言输出包含 "可发布" 结论, 确保走到完整校验流程的成功出口。
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_physics_positive.sh)
+            file(GLOB MAGTILE_POSITIVE_FIXTURES CONFIGURE_DEPENDS
+                ${MAGTILE_TESTS_DIR}/test_physics_positive/*.json)
+            foreach(fixture_file IN LISTS MAGTILE_POSITIVE_FIXTURES)
+                get_filename_component(fixture_name ${fixture_file} NAME_WE)
+                add_test(NAME physics_positive_${fixture_name}
+                    COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_positive.sh
+                        $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR} ${fixture_file})
+            endforeach()
+        endif()
     else()
         message(WARNING "MagTile: 未找到 bash, 跳过脚本类测试注册")
     endif()
@@ -248,6 +252,14 @@ if(MAGTILE_BUILD_TESTS)
     if(Python3_Interpreter_FOUND AND EXISTS ${MAGTILE_TESTS_DIR}/test_anti_trivial.py)
         add_test(NAME anti_trivial_models
             COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_anti_trivial.py
+                ${MAGTILE_DATA_DIR}/models)
+    endif()
+
+    # 模型逻辑质检 (Python): 步骤粒度 (1~12 片/步)、中文说明、教程与成品
+    # 对账、难度与片数区间匹配、BOM 备料清单一致性
+    if(Python3_Interpreter_FOUND AND EXISTS ${MAGTILE_TESTS_DIR}/test_model_logic.py)
+        add_test(NAME model_logic_gate
+            COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_model_logic.py
                 ${MAGTILE_DATA_DIR}/models)
     endif()
 endif()
