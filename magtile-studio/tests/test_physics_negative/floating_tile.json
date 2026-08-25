@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "fixture_floating_tile",
+  "name": "负例夹具: 悬空磁力片",
+  "name_en": "Negative Fixture: Floating Tile",
+  "description": "反面教材: 一片磁力片悬在半空, 与任何其他磁力片都没有磁力连接, 也不存在通往地面的支撑路径。校验器必须报 floating_tile 错误并拒绝该模型。",
+  "difficulty": 1,
+  "total_pieces": 2,
+  "tags": ["测试夹具", "负例"],
+  "final_assembly": [
+    {
+      "id": "base",
+      "type": "square",
+      "position": [0.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "floater",
+      "type": "square",
+      "position": [4.5, 0.5, 1.0],
+      "rotation": [0, 0, 0],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "在桌面平放一片正方形作为底座。",
+      "tip": "",
+      "tiles_to_add": ["base"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "错误示范: 在半空中凭空放置一片没有任何支撑的正方形。",
+      "tip": "现实中这片磁力片会直接掉到桌上。",
+      "tiles_to_add": ["floater"],
+      "highlight_tiles": []
+    }
+  ]
+}

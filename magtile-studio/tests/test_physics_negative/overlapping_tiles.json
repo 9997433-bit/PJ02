@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "fixture_overlapping_tiles",
+  "name": "负例夹具: 重叠磁力片",
+  "name_en": "Negative Fixture: Overlapping Tiles",
+  "description": "反面教材: 两片正方形在同一平面上完全重合 (第三片与第一片位置相同)。实物磁力片是有厚度的塑料片, 不可能互相穿插。校验器必须报 tile_overlap 错误并拒绝该模型。",
+  "difficulty": 1,
+  "total_pieces": 3,
+  "tags": ["测试夹具", "负例"],
+  "final_assembly": [
+    {
+      "id": "left",
+      "type": "square",
+      "position": [0.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "right",
+      "type": "square",
+      "position": [1.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "cyan"
+    },
+    {
+      "id": "intruder",
+      "type": "square",
+      "position": [0.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "在桌面平放两片相邻吸合的正方形。",
+      "tip": "",
+      "tiles_to_add": ["left", "right"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "错误示范: 把第三片正方形叠放在第一片的完全相同位置上。",
+      "tip": "实物磁力片有厚度, 两片不可能占据同一平面位置。",
+      "tiles_to_add": ["intruder"],
+      "highlight_tiles": ["left"]
+    }
+  ]
+}
