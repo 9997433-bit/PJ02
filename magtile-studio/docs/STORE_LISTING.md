@@ -121,6 +121,10 @@
 
 ### 4.1 共同资质前置 (任一商店缺一不可, 提前办理)
 
+> 逐项办理动作、负责方与 P0/P1 阻塞级别见
+> [CHINA_STORE_COMPLIANCE.md](CHINA_STORE_COMPLIANCE.md), 本表只列
+> 资质项与状态。
+
 | 资质 | 说明 | 状态 |
 | --- | --- | --- |
 | 软件著作权登记证书 (软著) | 全部国内商店必查; 名称须与应用名一致 | 【待定稿】法务办理 (COMMERCIAL_PLAN §6.3) |
@@ -319,5 +323,6 @@
 | Android 工程与打包 | [../platforms/android/README.md](../platforms/android/README.md) |
 | 桌面渠道打包 (Steam/Win 前置) | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) |
 | 素材尺寸与命名 | [../store_assets/README.md](../store_assets/README.md) |
+| 国内上架法务/行政办理清单 (软著/ICP/分级等) | [CHINA_STORE_COMPLIANCE.md](CHINA_STORE_COMPLIANCE.md) |
 | 章节完整性守卫 | `tools/validate_store_listing.py` |
 | V1 上架就绪对账单 | [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) |
