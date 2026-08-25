@@ -17,7 +17,7 @@
 | --- | --- | --- |
 | Visual Studio 2022 | 工作负载"使用 C++ 的桌面开发" | MSVC 19.3x, 支持 C++20 |
 | CMake | ≥ 3.20 | VS 自带的即可; `cpack` 随 CMake 一起安装 |
-| NSIS | ≥ 3.x | 产出 `.exe` 安装器; [nsis.sourceforge.io](https://nsis.sourceforge.io/) 或 `winget install NSIS.NSIS`; GitHub `windows-latest` CI 镜像已预装 |
+| NSIS | ≥ 3.x | 产出 `.exe` 安装器; [nsis.sourceforge.io](https://nsis.sourceforge.io/) 或 `winget install NSIS.NSIS`; GitHub `windows-latest` (Windows Server 2025 镜像) **已移除预装**, CI 流水线打包前经 Chocolatey 自装 |
 | Python | 3.8+ (仅子集打包需要) | `-DMAGTILE_PACKAGE_MODEL_SET=starter/清单` 时运行 `tools/make_data_subset.py`; VS 自带的 Python 或 python.org 均可 |
 | WiX Toolset | v4 (可选) | 仅走 MSI 路径时需要: `dotnet tool install --global wix` |
 | Qt | ≥ 6.4 (可选) | 仅 `-DMAGTILE_BUILD_QT=ON` 打包 Qt 商用界面时需要 (MSVC 2022 64-bit 套件); Qt ≥ 6.5 打包时可自动部署运行库 |
@@ -216,11 +216,14 @@ UpgradeCode (`6FE5F9D7-79A7-4829-B13A-8C3B1517CA61`), 因此互相可
 - 触发: 推送 `v*` 标签 (正式发布, 数据集固定 full) 或手动
   `workflow_dispatch` (试跑, 可选 `model_set=starter` 试打子集包)。
 - 步骤: MSVC 配置构建 → 从 CMakeCache 提取版本号并校验标签 →
-  `ctest` (跳过需显示环境的两个 GUI 冒烟) → `cpack -G "NSIS;ZIP"` →
-  上传构建产物; 标签触发时另建 GitHub Release **草稿** (人工核对
-  后再发布)。
-- 该工作流尚未在真实 runner 上跑通过; 首跑失败优先排查
-  FetchContent 网络与 NSIS 可用性 (见第十节)。
+  `ctest` (跳过需显示环境的两个 GUI 冒烟) → 安装 NSIS
+  (`windows-latest` 的 Windows Server 2025 镜像已移除预装, 经
+  Chocolatey 自装) → `cpack -G "NSIS;ZIP"` → 上传构建产物;
+  标签触发时另建 GitHub Release **草稿** (人工核对后再发布)。
+- 该工作流尚未在真实 runner 上跑通过; 已做静态与替身验证
+  (actionlint 零告警 + pwsh 步骤逻辑核验 + Linux 侧
+  `smoke_qt_linux_pack.sh` 打包链路全绿), 首跑失败优先排查
+  FetchContent 网络 (见第十节)。
 
 ## 九、Linux/macOS 冒烟验证 (无 Windows 机器时)
 
@@ -254,7 +257,7 @@ XML 良构检查。本仓库当前状态即按此流程冒烟通过 (结果登�
 | 配置期卡在/失败于 `FetchContent... glfw` | 网络不通 / 代理未配置 | 设置 `HTTPS_PROXY`; 或纯 CLI 验证加 `-DMAGTILE_BUILD_GL_RENDERER=OFF` 完全离线; CI 用 actions/cache 缓存 `build/_deps` |
 | `No CMAKE_CXX_COMPILER could be found` | 未装 VS2022 C++ 工作负载, 或不在 Native Tools 环境 | VS Installer 补装"使用 C++ 的桌面开发"; 用 "x64 Native Tools Command Prompt" |
 | MSB8020 / 平台工具集不匹配 | build 目录残留旧生成器缓存 | 删除 build 目录重新配置; 切换 `-G`/`-A` 必须换新目录 |
-| `cpack: Cannot find NSIS registry value` 或 `CPack Error: Cannot initialize generator NSIS` | 未装 NSIS 或 `makensis` 不在 PATH | `winget install NSIS.NSIS` 后重开终端; 只要 ZIP 时改 `cpack -G ZIP` |
+| `cpack: Cannot find NSIS registry value` 或 `CPack Error: Cannot initialize generator NSIS` | 未装 NSIS 或 `makensis` 不在 PATH (CI 的 `windows-latest` 2025 镜像已移除预装) | `winget install NSIS.NSIS` (CI: `choco install nsis -y`) 后重开终端; 只要 ZIP 时改 `cpack -G ZIP` |
 | `file INSTALL cannot find ".../Release/magtile_app.exe"` | 打包前没做 Release 构建 (只构建了 Debug, 或压根没构建) | 先 `cmake --build build-win --config Release`, 且 cpack 用同一 `-C Release` |
 | cpack 找不到 CPackConfig.cmake | 没在 build 目录里执行 cpack | `cd build-win` 后再 `cpack`, 或 `cpack --config build-win/CPackConfig.cmake` |
 | 配置期报 `打包清单 ... 引用了不存在的模型` | 子集清单模型 id 拼写错误, 或模型已改名/删除 | 按报错列出的 id 修正清单 (`starter_models.txt` 或自定义清单) |

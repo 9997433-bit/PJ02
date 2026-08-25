@@ -7,8 +7,9 @@
 # 引用, 不得另行硬编码。
 #
 # 生成器:
-#   Windows   → NSIS 安装器 + 便携 ZIP (NSIS 为当前首选, 免费且
-#               windows-latest CI 镜像自带 makensis);
+#   Windows   → NSIS 安装器 + 便携 ZIP (NSIS 为当前首选, 免费;
+#               windows-latest 的 Windows Server 2025 镜像已移除
+#               预装 NSIS, CI 流水线打包前经 Chocolatey 自装);
 #               WiX/MSI 走 packaging/Product.wxs 手工路径, 或
 #               `cpack -G WIX` (需安装 WiX Toolset, 配置已就位)。
 #   其它平台  → TGZ 归档, 用于在 Linux/macOS CI 上冒烟验证安装规则

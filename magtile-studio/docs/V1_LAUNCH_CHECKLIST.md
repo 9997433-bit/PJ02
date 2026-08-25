@@ -73,7 +73,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
 | D1 | 打包资产与手册完备 (CPack / WiX / starter 清单 / 第三方声明) | P0 | Auto (R9) | `platforms/windows/packaging/` + 两份打包手册 + CI `windows-release.yml` | ✅ 资产齐备 (探测存在性) |
-| D2 | Windows 安装包在真实 runner 出包 (流水线转正) | P0 | Manual | `.github/workflows/windows-release.yml` (**草案, 尚未在真实 runner 上验证**, 见该文件头注) | ⬜ 草案待首跑 |
+| D2 | Windows 安装包在真实 runner 出包 (流水线转正) | P0 | Manual | `.github/workflows/windows-release.yml` (**草案, 尚未在真实 runner 上验证**, 见该文件头注) | 🔶 首跑阻塞项已修 (windows-latest 的 Win Server 2025 镜像已移除预装 NSIS → 流水线打包前 Chocolatey 自装) + Linux 可验子集全绿 (actionlint 零告警 / 版本提取步 pwsh 实测 / `smoke_qt_windows.ps1 -DryRun` 自检过 / `smoke_qt_linux_pack.sh` 41 项全绿); 真实 runner 出包待触发 (推 `v*` 标签或 workflow_dispatch) |
 | D3 | Windows 实机验收 (干净 Win10/11, 未装 Qt/VS) | P0 | Manual | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §11 (自动冒烟 `smoke_qt_windows.ps1` + 人工验收单) | ⬜ 无 Windows 实机记录 |
 | D4 | macOS 打包 (macdeployqt + DMG) + 签名公证 (Developer ID / notarytool) | P0 | Manual | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §5 macOS 小节 (公证步骤已写明) | ⬜ 仅手册, 无 macOS 实机记录 |
 | D5 | 代码签名证书 (Windows Authenticode; 依赖运营主体 L5) | P0 | Manual | [../scripts/package_windows.md](../scripts/package_windows.md) 第十一节 (`signtool`, 未签名会被 SmartScreen 拦截) | ⬜ 证书未申请 |
