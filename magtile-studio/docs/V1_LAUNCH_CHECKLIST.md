@@ -62,7 +62,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | B2 | 真实商店计费接入 (Windows 商店 / Google Play `StoreBillingClient`) | P0 | Auto (R11 分平台: Google Play 接线 PASS / Windows 档 R11W SKIP) | Android: `platforms/android/app/.../PlayBillingManager.kt` (Play Billing 6.x 购买/恢复/回执确认 + 启动静默恢复 → 既有 `setSubscriptionActive` 契约键, 与 FakeBilling 同键; 接线说明 [../platforms/android/README.md](../platforms/android/README.md) 第三节); 桌面: `src/billing/store_billing_client.cpp` (跨商店接口缝) | 🔶 Google Play 侧已接线 (Release 走 Play Billing, Debug 保留模拟订阅; 商品 id 三端统一 `sub_monthly`/`sub_yearly`/`sub_family_yearly`); Windows 商店档未接 (MSIX 商店包前接入); Android 订阅页 UI (档位卡 + 恢复购买按钮) 随家长中心落地 |
 | B3 | 商店商品配置 + 沙箱付费验收 (真实账号购买 / 恢复 / 退款链路) | P0 | Manual | 商品 id 约定见 `store_billing_client.hpp` 注释; 价格表 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §3.1; Google Play 侧走 Play Console 内部测试轨 + 许可测试账号 ([../platforms/android/README.md](../platforms/android/README.md) 第三节沙盒验收要点) | ⬜ Google Play 代码侧已就绪 (B2 🔶), 仍依赖开发者账号 (L3) 与 Play Console 商品配置; Windows 依赖 B2 Windows 档 |
 | B4 | 首批 3 个一次性内容包上线 | P1 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §2.3/§8 V1 交付物 | ⬜ 未开始 (订阅先行) |
-| B5 | 儿童侧零价格红线复核 (订阅入口必过家长门, 无倒计时/催购) | P0 | Auto(部分) | `qt_gui_smoke --smoke-parent-flow` 自动; 文案红线人工按 [UI_UX_SPEC.md](UI_UX_SPEC.md) §11 | 🔶 自动侧随 E2E 常绿, 上架前文案人工终审 |
+| B5 | 儿童侧零价格红线复核 (订阅入口必过家长门, 无倒计时/催购) | P0 | Auto(部分) (R16 文案红线守卫 + E2E 家长门流; 视觉/语气终审仍人工) | `qt_gui_smoke --smoke-parent-flow` 自动; 文案红线 `tools/check_child_friendly_copy.py` 全库扫描 (恐吓词/催促稀缺话术, [UI_UX_SPEC.md](UI_UX_SPEC.md) §11 无倒计时/无「即将涨价」等) | 🔶 家长门流随 E2E 常绿 + 文案红线随 R16 常态守卫, 上架前视觉与语气人工终审 |
 
 ## 3. 桌面 Windows / macOS
 

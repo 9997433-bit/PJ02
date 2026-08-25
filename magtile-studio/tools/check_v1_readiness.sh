@@ -4,7 +4,7 @@
 #
 # docs/V1_LAUNCH_CHECKLIST.md 的自动侧执行器: 把清单中所有能自动
 # 探测的项串成一条命令跑一遍, 输出 PASS/FAIL/SKIP 摘要。每个检查
-# 号 (R1..R15) 与清单「探测」列一一对应; 纯人工项 (实机验收 /
+# 号 (R1..R16) 与清单「探测」列一一对应; 纯人工项 (实机验收 /
 # 法务定稿 / 软著备案等) 以 SKIP[Manual] 列出提醒, 不参与判定。
 #
 # 检查项 (P0 = 上架阻断, 任一 FAIL 退出码非零; P1 = 报告不阻断):
@@ -32,6 +32,10 @@
 #                            (STORE_LISTING + store_assets 必填章节与内链)
 #   R15 [P0] 国内合规清单守卫 tools/check_china_compliance_docs.py
 #                            (CHINA_STORE_COMPLIANCE 章节/条目格式/交叉引用)
+#   R16 [P0] 儿童友好文案守卫 tools/check_child_friendly_copy.py
+#                            (Qt QML / Android strings.xml / Kotlin / 展示层
+#                            C++ / 模型文案 全库秒级扫描: 无恐吓词与催促
+#                            话术, UI_UX_SPEC P3/§4.3/§4.5/§11/§14 红线)
 #
 # 用法:
 #   tools/check_v1_readiness.sh [选项]
@@ -421,6 +425,8 @@ run_check R14 P0 "商店上架文档守卫 (validate_store_listing)" \
     "$PYTHON" "$ROOT/tools/validate_store_listing.py"
 run_check R15 P0 "国内合规清单守卫 (check_china_compliance_docs)" \
     "$PYTHON" "$ROOT/tools/check_china_compliance_docs.py"
+run_check R16 P0 "儿童友好文案守卫 (check_child_friendly_copy)" \
+    "$PYTHON" "$ROOT/tools/check_child_friendly_copy.py"
 
 # ---- 纯人工项提醒 (不参与判定, 对应清单各节 Manual 行) -----------
 skip_check M1 P0 "Windows/macOS 实机打包验收 + 代码签名/公证" "Manual, 见清单 §3 D2~D6"
