@@ -49,7 +49,7 @@ MagTile Studio\
 
 | 取值 | 内容 |
 | --- | --- |
-| `full` (默认) | 完整模型库 (当前 131 模型 + 全部缩略图, 约 7 MiB) |
+| `full` (默认) | 完整模型库 (当前 209 模型 + 全部缩略图, 约 12 MiB) |
 | `starter` | 免费层 30 模型 (与模型 `免费` 标签集合一致, 全 core-9; 对齐决议见 `docs/FREE_TIER_MANIFEST.md`), 清单 `platforms/windows/packaging/starter_models.txt` |
 | 清单文件路径 | 自定义子集 (每行一个模型 id, 支持 `#` 注释) |
 
@@ -226,13 +226,23 @@ UpgradeCode (`6FE5F9D7-79A7-4829-B13A-8C3B1517CA61`), 因此互相可
   (`windows-latest` 的 Windows Server 2025 镜像已移除预装, 经
   Chocolatey 自装) → `cpack -G "NSIS;ZIP"` → 上传构建产物;
   标签触发时另建 GitHub Release **草稿** (人工核对后再发布)。
-- 验证状态: 首跑阻断项 (镜像移除预装 NSIS) 已修; 静态与替身验证
-  全绿 (actionlint 零告警 + pwsh 版本提取步对真实 CMakeCache 实测 +
-  Linux 侧 `smoke_qt_linux_pack.sh` 打包链路全绿), 但**尚未在真实
-  runner 上出过包** —— 按 §8.1 触发、§8.2 核对产物、§8.3 排查失败、
-  §8.4 登记签核, 两场试跑全绿后按 §8.5 一次性翻状态。
+- 验证状态: 首跑阻断项 (镜像移除预装 NSIS) 已修; 「校验标签」步已
+  加固为 env 间接注入 (标签名不再 `${{ }}` 内插进脚本体 —— git
+  标签名允许含单引号, 直接内插可被构造成 pwsh 脚本注入); 静态与
+  替身验证全绿 (actionlint 零告警 + pwsh 7.4 对真实 CMakeCache
+  实测版本提取与标签校验三用例 + Linux 侧 `smoke_qt_linux_pack.sh`
+  41 项全绿), 但**尚未在真实 runner 上出过包** —— 触发前先逐项过
+  预检清单
+  [`../docs/reports/WINDOWS_CI_PREFLIGHT.md`](../docs/reports/WINDOWS_CI_PREFLIGHT.md)
+  (平台前提 / 仓库状态 / 场次纪律), 再按 §8.1 触发、§8.2 核对产物、
+  §8.3 排查失败、§8.4 登记签核, 两场试跑全绿后按 §8.5 一次性翻状态。
 
 ### 8.1 如何触发
+
+> 触发前先过一遍
+> [`../docs/reports/WINDOWS_CI_PREFLIGHT.md`](../docs/reports/WINDOWS_CI_PREFLIGHT.md)
+> 预检清单: 平台前提 (默认分支 / Actions 额度 / 写权限 / 出网)、
+> 仓库状态 (版本号 / starter 守卫 / 本地冒烟)、场次纪律。
 
 **路径 A — `workflow_dispatch` 手动试跑 (首跑用这条, 可反复触发)**
 
