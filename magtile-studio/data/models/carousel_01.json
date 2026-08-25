@@ -3,7 +3,7 @@
   "id": "carousel_01",
   "name": "旋转木马",
   "name_en": "Carousel 01",
-  "description": "全库第一座环抱式转台游乐设施: 8 片长方形与方形拼成回字大转台 (长边给鼓身、短边给角台的长短分工), 环抱 2x2 圈层鼓身与梯形四坡大帐篷; 转台角台与拼缝上交替立起 8 只彩色三角木马, 重心全部正压沿口铰链; 南侧紫色双柱拱门横楣合龙, 东端售票亭戴四棱自锁尖顶, 菱形彩旗斜插门旁 —— 音乐响起, 糖果色的转台开动了。",
+  "description": "全库第一座环抱式转台游乐设施: 8 片长方形与方形拼成回字大转台 (长边给鼓身、短边给角台的长短分工), 环抱 2x2 圈层鼓身与梯形四坡大帐篷; 转台角台上 4 只菱形跃马 60 度斜身起跳、拼缝上 4 只等边木马正压沿口铰链; 南侧紫色双柱拱门横楣合龙, 东端售票亭戴四棱自锁尖顶, 菱形彩旗斜插门旁 —— 音乐响起, 糖果色的转台开动了。",
   "difficulty": 3,
   "total_pieces": 54,
   "tags": [
@@ -18,10 +18,9 @@
       "tile_histogram": {
         "rectangle": 16,
         "square": 16,
-        "equilateral_triangle": 8,
-        "isosceles_triangle": 8,
-        "trapezoid": 4,
-        "rhombus": 2
+        "equilateral_triangle": 12,
+        "rhombus": 6,
+        "trapezoid": 4
       }
     }
   },
@@ -493,56 +492,56 @@
     },
     {
       "id": "hs_sw",
-      "type": "isosceles_triangle",
+      "type": "rhombus",
       "position": [
-        1.5,
+        1.25,
         1.0,
-        0.333333
+        0.433013
       ],
       "rotation": [
         90.0,
         0.0,
-        0.0
+        180.0
       ],
       "color": "yellow"
     },
     {
       "id": "hs_se",
-      "type": "isosceles_triangle",
+      "type": "rhombus",
       "position": [
-        4.5,
+        4.25,
         1.0,
-        0.333333
+        0.433013
       ],
       "rotation": [
         90.0,
         0.0,
-        0.0
+        180.0
       ],
       "color": "purple"
     },
     {
       "id": "hs_nw",
-      "type": "isosceles_triangle",
+      "type": "rhombus",
       "position": [
-        1.5,
+        1.25,
         5.0,
-        0.333333
+        0.433013
       ],
       "rotation": [
         90.0,
         0.0,
-        0.0
+        180.0
       ],
       "color": "purple"
     },
     {
       "id": "hs_ne",
-      "type": "isosceles_triangle",
+      "type": "rhombus",
       "position": [
-        4.5,
+        4.75,
         5.0,
-        0.333333
+        0.433013
       ],
       "rotation": [
         90.0,
@@ -748,14 +747,14 @@
     },
     {
       "id": "ks_rf_s",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         5.5,
         0.166667,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         0.0
       ],
@@ -763,14 +762,14 @@
     },
     {
       "id": "ks_rf_e",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         5.833333,
         0.5,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         90.0
       ],
@@ -778,14 +777,14 @@
     },
     {
       "id": "ks_rf_n",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         5.5,
         0.833333,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         180.0
       ],
@@ -793,14 +792,14 @@
     },
     {
       "id": "ks_rf_w",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         5.166667,
         0.5,
-        1.288675
+        1.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         -90.0
       ],
@@ -975,8 +974,8 @@
     },
     {
       "step_number": 11,
-      "description": "立角台木马: 4 只等腰三角木马立上四只角台的外沿口。",
-      "tip": "木马底边整边吸角台沿口, 重心正压铰链、力臂为零。",
+      "description": "跃角台木马: 4 只菱形木马斜身立上四只角台的外沿口, 像正随转台起跳。",
+      "tip": "菱形底边整边吸角台沿口, 60 度斜身就是奔跑的姿态。",
       "tiles_to_add": [
         "hs_sw",
         "hs_se",
@@ -1045,7 +1044,7 @@
     },
     {
       "step_number": 16,
-      "description": "戴售票亭尖顶: 4 片红色等腰三角四棱互吸, 合拢成尖顶。",
+      "description": "戴售票亭尖顶: 4 片红色等边三角四棱互吸, 合拢成尖顶。",
       "tip": "四条斜棱两两精确互吸自锁成环 —— 越按越紧。",
       "tiles_to_add": [
         "ks_rf_s",

@@ -17,10 +17,9 @@
     "structural_signature": {
       "tile_histogram": {
         "square": 44,
-        "isosceles_triangle": 6,
+        "equilateral_triangle": 7,
         "rectangle": 2,
-        "rhombus": 2,
-        "equilateral_triangle": 1
+        "rhombus": 2
       }
     }
   },
@@ -732,14 +731,14 @@
     },
     {
       "id": "dirt_s",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         6.5,
         1.166667,
-        0.645498
+        0.235702
       ],
       "rotation": [
-        75.52249,
+        54.735619,
         0.0,
         0.0
       ],
@@ -747,14 +746,14 @@
     },
     {
       "id": "dirt_e",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         6.833333,
         1.5,
-        0.645498
+        0.235702
       ],
       "rotation": [
-        75.52249,
+        54.735619,
         0.0,
         90.0
       ],
@@ -762,14 +761,14 @@
     },
     {
       "id": "dirt_n",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         6.5,
         1.833333,
-        0.645498
+        0.235702
       ],
       "rotation": [
-        75.52249,
+        54.735619,
         0.0,
         180.0
       ],
@@ -777,14 +776,14 @@
     },
     {
       "id": "dirt_w",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         6.166667,
         1.5,
-        0.645498
+        0.235702
       ],
       "rotation": [
-        75.52249,
+        54.735619,
         0.0,
         -90.0
       ],
@@ -792,11 +791,11 @@
     },
     {
       "id": "cone_4",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         4.5,
         1.0,
-        0.666667
+        0.288675
       ],
       "rotation": [
         90.0,
@@ -807,11 +806,11 @@
     },
     {
       "id": "cone_5",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         5.5,
         1.0,
-        0.666667
+        0.288675
       ],
       "rotation": [
         90.0,
@@ -1058,7 +1057,7 @@
     },
     {
       "step_number": 16,
-      "description": "堆土堆: 4 片橙色等腰三角在作业带东端四棱互吸, 合拢成土堆。",
+      "description": "堆土堆: 4 片橙色等边三角在作业带东端四棱互吸, 合拢成土堆。",
       "tip": "四条斜棱两两精确互吸自锁成环 —— 一铲下去就冒尖。",
       "tiles_to_add": [
         "dirt_s",
@@ -1073,7 +1072,7 @@
     },
     {
       "step_number": 17,
-      "description": "摆安全锥: 大臂两侧作业带沿口立 2 只红色安全锥。",
+      "description": "立安全三角牌: 大臂两侧作业带沿口立 2 面红色三角警示牌。",
       "tip": "作业半径内禁止靠近 —— 安全第一。",
       "tiles_to_add": [
         "cone_4",

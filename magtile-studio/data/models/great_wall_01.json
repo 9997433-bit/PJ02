@@ -17,9 +17,8 @@
     "structural_signature": {
       "tile_histogram": {
         "square": 40,
+        "equilateral_triangle": 13,
         "rectangle": 11,
-        "equilateral_triangle": 9,
-        "isosceles_triangle": 4,
         "trapezoid": 4,
         "hexagon": 2,
         "rhombus": 2
@@ -959,14 +958,14 @@
     },
     {
       "id": "fire_s",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         8.5,
         0.166667,
-        2.288675
+        2.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         0.0
       ],
@@ -974,14 +973,14 @@
     },
     {
       "id": "fire_e",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         8.833333,
         0.5,
-        2.288675
+        2.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         90.0
       ],
@@ -989,14 +988,14 @@
     },
     {
       "id": "fire_n",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         8.5,
         0.833333,
-        2.288675
+        2.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         180.0
       ],
@@ -1004,14 +1003,14 @@
     },
     {
       "id": "fire_w",
-      "type": "isosceles_triangle",
+      "type": "equilateral_triangle",
       "position": [
         8.166667,
         0.5,
-        2.288675
+        2.235702
       ],
       "rotation": [
-        59.999988,
+        54.735619,
         0.0,
         -90.0
       ],
@@ -1322,7 +1321,7 @@
     },
     {
       "step_number": 15,
-      "description": "点烽火: 4 片橙色等腰三角在台面上四棱互吸, 合拢成一座烽火锥。",
+      "description": "点烽火: 4 片橙色等边三角在台面上四棱互吸, 合拢成一座烽火锥。",
       "tip": "四条斜棱两两精确互吸自锁成环 —— 烽烟一起, 全线皆知。",
       "tiles_to_add": [
         "fire_s",
