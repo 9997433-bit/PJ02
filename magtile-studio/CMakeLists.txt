@@ -137,7 +137,9 @@ if(MAGTILE_BUILD_GL_RENDERER)
     add_library(magtile_render_gl STATIC
         src/render/gl/gl_api.cpp
         src/render/gl/gl_renderer.cpp
+        src/render/gl/stb_image_impl.cpp   # stb_image 实现单元 (缩略图 PNG 解码)
     )
+    target_include_directories(magtile_render_gl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/third_party)
     target_link_libraries(magtile_render_gl
         PUBLIC magtile_core
         PRIVATE magtile_imgui glfw magtile_warnings

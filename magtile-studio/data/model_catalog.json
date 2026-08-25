@@ -21,6 +21,61 @@
       "thumbnail": "thumbnails/geodesic_dome_01.png"
     },
     {
+      "id": "giraffe_01",
+      "file": "models/giraffe_01.json",
+      "name": "长颈鹿",
+      "name_en": "Giraffe 01",
+      "description": "草原立姿长颈鹿: 四条双层腿柱撑起箱形躯干, 躯干前端拔起四层'左右颈壁 + 中部横档'的梯架脖颈, 顶端戴 1x1 头颅小箱 —— 吻部水平收尖、双耳双角点睛, 尾巴挂在躯干末端竖边上。全库第一只纵向生长的动物: 脖颈纯竖向传力, 横档锁架抗晃, 站得又高又稳。",
+      "difficulty": 3,
+      "total_pieces": 52,
+      "step_count": 16,
+      "theme": "自然世界",
+      "tags": [
+        "动物世界",
+        "草原",
+        "生物",
+        "高塔"
+      ],
+      "thumbnail": "thumbnails/giraffe_01.png"
+    },
+    {
+      "id": "observatory_01",
+      "file": "models/observatory_01.json",
+      "name": "山顶天文台",
+      "name_en": "Mountain Observatory 01",
+      "description": "全库第一座叠环建筑: 鼓身由三层长方形横砌自锁环叠成 (拐角竖边互吸、上环整边压下环), 底层留 2 格拱门、门楣三边受力; 环顶直接生长两级棱面穹顶 —— 梯形收口、等边三角锁尖, 东经线整体透明就是望远镜的观测缝。塔内先装 L 形基墩与镜筒, 东侧控制室附楼与塔身由室内通道相连。",
+      "difficulty": 3,
+      "total_pieces": 53,
+      "step_count": 16,
+      "theme": "航天探索",
+      "tags": [
+        "科学探索",
+        "建筑",
+        "天文",
+        "穹顶"
+      ],
+      "thumbnail": "thumbnails/observatory_01.png"
+    },
+    {
+      "id": "windmill_01",
+      "file": "models/windmill_01.json",
+      "name": "风车磨坊",
+      "name_en": "Windmill 01",
+      "description": "田园风车磨坊: 2x2 塔身用长方形圈层砌法起两层 (一层南面整面留作负空间大门, 二层门楣圈两端竖边传力), 塔顶梯形裙檐收分出 1x1 洞口再戴等腰锥帽; 南面沿口立起两格高毂柱, 4 片透明菱形叶片吸在毂柱上下两段的左右竖边上, 借菱形 60 度天然斜置拼出正在旋转的 X 形风车 —— 全库第一次把菱形当叶片用。场边配栅栏、锥顶水井、六边形树冠大树与花丛。",
+      "difficulty": 3,
+      "total_pieces": 53,
+      "step_count": 16,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "风车",
+        "菱形叶片",
+        "圈层砌法",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/windmill_01.png"
+    },
+    {
       "id": "butterfly_01",
       "file": "models/butterfly_01.json",
       "name": "花园大蝴蝶",
@@ -57,22 +112,23 @@
       "thumbnail": "thumbnails/ferris_wheel_frame_01.png"
     },
     {
-      "id": "windmill_01",
-      "file": "models/windmill_01.json",
-      "name": "风车磨坊",
-      "name_en": "Windmill 01",
-      "description": "田园风车磨坊: 2x2 塔身留 2 格宽负空间大门, 门楣横跨传力; 塔顶梯形裙檐收分出 1x1 洞口再戴等腰锥帽; 南面沿口立起两格高毂柱, 4 片透明菱形叶片吸在毂柱上下两段的左右竖边上, 借菱形 60 度天然斜置拼出正在旋转的 X 形风车 —— 全库第一次把菱形当叶片用。场边配石板路、栅栏、锥顶水井与花丛。",
+      "id": "sydney_opera_01",
+      "file": "models/sydney_opera_01.json",
+      "name": "悉尼歌剧院造型",
+      "name_en": "Sydney Opera House 01",
+      "description": "海湾畔的帆壳地标: 砂岩高台四面围合, 纪念大台阶以 30 度坡道斜倚南墙; 台面上三组白帆逐级降低 —— 两组梯形大帆对倾合脊自锁 (下底整边吸长方形台面板, 上底在脊线互吸), 等腰与等边小帆对尖收拢; 前庭再斜倚两组青色遮阳帆。长边给大帆、短边给墙顶的长短分工, 让整片帆群剪断任一条铰链线都不散架。",
       "difficulty": 3,
       "total_pieces": 57,
       "step_count": 16,
-      "theme": "田园",
+      "theme": "建筑地标",
       "tags": [
-        "田园",
-        "风车",
-        "菱形叶片",
-        "进阶"
+        "歌剧院",
+        "世界地标",
+        "帆壳",
+        "对倾合脊",
+        "海湾"
       ],
-      "thumbnail": "thumbnails/windmill_01.png"
+      "thumbnail": "thumbnails/sydney_opera_01.png"
     },
     {
       "id": "lunar_lander_01",
@@ -128,6 +184,44 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/sailboat_01.png"
+    },
+    {
+      "id": "dinosaur_stego_01",
+      "file": "models/dinosaur_stego_01.json",
+      "name": "低头觅食的剑龙",
+      "name_en": "Stegosaurus 01",
+      "description": "动物世界主题: 与霸王龙化石骨架完全不同的活体恐龙搭法 —— 四条腿柱托起悬空箱形躯干 (底板/侧壁/封板/背板锁成刚性环), 背缝上交替立起 矮-高-高-矮 的背脊板; 尾巴与脖子各用一条 30 度坡道自然垂到地面, 坡道尾端落地成为接地斜撑, 尾尖翘着骨钉、龙头正低头啃食蕨丛 —— 大型动物模型的收尾新技法。",
+      "difficulty": 3,
+      "total_pieces": 69,
+      "step_count": 17,
+      "theme": "自然世界",
+      "tags": [
+        "恐龙",
+        "剑龙",
+        "动物世界",
+        "腿柱箱体",
+        "接地斜撑"
+      ],
+      "thumbnail": "thumbnails/dinosaur_stego_01.png"
+    },
+    {
+      "id": "space_station_01",
+      "file": "models/space_station_01.json",
+      "name": "轨道空间站",
+      "name_en": "Space Station 01",
+      "description": "航天主题第三课 (着陆器搞分体对接、发射台搞垂直总装, 本课搞水平舱段): 三格长核心舱躺在双托架上, 底板/侧壁/端壁/顶板锁成箱形环, 舱顶鼓起透明等边穹顶舷窗, 两端各竖一片大六边形对接环 (重心正压铰链线, 零力矩); 南北 3x2 太阳翼板阵独立接地站立, 菱形散热板斜倚 60 度, 角落配扇形雷达碟与通讯桅杆。",
+      "difficulty": 3,
+      "total_pieces": 69,
+      "step_count": 16,
+      "theme": "航天探索",
+      "tags": [
+        "航天",
+        "空间站",
+        "太阳翼",
+        "对接环",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/space_station_01.png"
     },
     {
       "id": "castle_foundation_01",
@@ -222,6 +316,25 @@
       "thumbnail": "thumbnails/train_station_01.png"
     },
     {
+      "id": "lighthouse_01",
+      "file": "models/lighthouse_01.json",
+      "name": "海岬灯塔",
+      "name_en": "Lighthouse 01",
+      "description": "海岸主题: 礁石小岛上立起四层红灰条纹的六边形灯塔, 一层门洞正对两跨栈桥; 塔顶廊台板向外悬挑一圈瞭望环廊 (环廊与灯室墙共用铰链线, 抗弯预算翻倍), 透明灯室之上等腰锥冠自锁封顶; 岸边守塔人小屋用长方形圈层加梯形四坡顶, 3 片扇形浪花贴着礁石打旋 —— 全库第一次用上扇形磁力片。",
+      "difficulty": 4,
+      "total_pieces": 77,
+      "step_count": 16,
+      "theme": "海洋航行",
+      "tags": [
+        "海岸",
+        "灯塔",
+        "悬挑环廊",
+        "扇形",
+        "挑战"
+      ],
+      "thumbnail": "thumbnails/lighthouse_01.png"
+    },
+    {
       "id": "marble_run_spiral_01",
       "file": "models/marble_run_spiral_01.json",
       "name": "弹珠螺旋滑道",
@@ -294,6 +407,44 @@
         "盒式框架"
       ],
       "thumbnail": "thumbnails/rocket_launchpad_01.png"
+    },
+    {
+      "id": "basketball_arena_01",
+      "file": "models/basketball_arena_01.json",
+      "name": "篮球馆",
+      "name_en": "Basketball Arena 01",
+      "description": "运动场馆首作: 6x4 球场铺出橙地板、黄禁区与青色中圈, 东西两端各立一座门式篮架 —— 双柱夹透明篮板横楣 (两端竖边传力), 红色篮筐平台整条长边吸篮板顶边悬挑入场; 北侧两层阶梯看台逐层退台升高, 每层都是前挡墙 + 后挡墙 + 座席板锁成的箱形梁, 看台顶上六边形大记分牌俯瞰全场 —— 红队蓝队各执一旗, 开球!",
+      "difficulty": 4,
+      "total_pieces": 83,
+      "step_count": 18,
+      "theme": "运动",
+      "tags": [
+        "运动",
+        "篮球",
+        "场馆",
+        "看台",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/basketball_arena_01.png"
+    },
+    {
+      "id": "harbor_crane_01",
+      "file": "models/harbor_crane_01.json",
+      "name": "港口门吊",
+      "name_en": "Harbor Gantry Crane 01",
+      "description": "跨轨道作业的门式起重机: 四条三层门腿分立装卸警示带两沿, 腿根直角三角护撑锁成闭环; 12 片方板在腿顶架出整层作业平台 (中排先压腿顶、南北排再合拢), 平台上机房与玻璃司机室并肩, 机房顶立 A 字架、南缘配重脊板压舱; 臂架长板从平台北缘挑向海面, 远端稳稳落在航道系缆墩上 —— 一根臂架两条支撑路径。码头东端还叠着两层集装箱等待装船。",
+      "difficulty": 4,
+      "total_pieces": 86,
+      "step_count": 19,
+      "theme": "海洋航行",
+      "tags": [
+        "港口",
+        "起重机",
+        "工业",
+        "门式结构",
+        "跨线"
+      ],
+      "thumbnail": "thumbnails/harbor_crane_01.png"
     },
     {
       "id": "ball_run_tower_01",
