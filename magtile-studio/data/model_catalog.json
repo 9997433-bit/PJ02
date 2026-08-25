@@ -175,6 +175,25 @@
       "thumbnail": "thumbnails/police_car_01.png"
     },
     {
+      "id": "taxi_01",
+      "file": "models/taxi_01.json",
+      "name": "城市出租车",
+      "name_en": "Taxi 01",
+      "description": "与高箱救护车完全相反的低矮轿车: 4 片车轮底座双侧轮组整边吸马路拼缝, 2 片黄色底盘长板长边压轮顶锁成两跨门式框架; 玻璃座舱只占中段 —— 透明端壁踩底盘短边与拼缝, 侧窗竖边吸进拐角, 黄色车顶压成箱形环; 前后挡都是 45 度斜披的透明方板 (底边同吸车顶沿与端壁顶, 力矩 10.6 <= 20), 溜背轿跑剪影一气呵成, 车顶中缝 TAXI 顶灯亮起、车头大灯正对透明斑马线礼让行人; 街边发光站牌、路灯红绿灯、绿篱花丛点满路口 —— 招手即停, 请上车!",
+      "difficulty": 3,
+      "total_pieces": 53,
+      "step_count": 16,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "出租车",
+        "载具",
+        "车轮底座",
+        "进阶"
+      ]
+    },
+    {
       "id": "wind_turbine_01",
       "file": "models/wind_turbine_01.json",
       "name": "风力发电机",
@@ -193,26 +212,6 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/wind_turbine_01.png"
-    },
-    {
-      "id": "windmill_01",
-      "file": "models/windmill_01.json",
-      "name": "风车磨坊",
-      "name_en": "Windmill 01",
-      "description": "田园风车磨坊: 2x2 塔身用长方形圈层砌法起两层 (一层南面整面留作负空间大门, 二层门楣圈两端竖边传力), 塔顶梯形裙檐收分出 1x1 洞口再戴等腰锥帽; 南面沿口立起两格高毂柱, 4 片透明菱形叶片吸在毂柱上下两段的左右竖边上, 借菱形 60 度天然斜置拼出正在旋转的 X 形风车 —— 全库第一次把菱形当叶片用。场边配栅栏、锥顶水井、六边形树冠大树与花丛。",
-      "difficulty": 3,
-      "total_pieces": 53,
-      "step_count": 16,
-      "theme": "田园",
-      "tags": [
-        "田园",
-        "风车",
-        "菱形叶片",
-        "圈层砌法",
-        "进阶",
-        "需要扩展装"
-      ],
-      "thumbnail": "thumbnails/windmill_01.png"
     },
     {
       "id": "carousel_01",
@@ -331,6 +330,44 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/excavator_01.png"
+    },
+    {
+      "id": "tractor_01",
+      "file": "models/tractor_01.json",
+      "name": "农用拖拉机",
+      "name_en": "Farm Tractor 01",
+      "description": "全库第一台农用拖拉机: 大后轮用车轮底座、小前轮用方板, 底盘长板压轮成桥; 驾驶室透明圈层与红色圈层叠出高驾驶楼, 引擎舱低一头在前, 两舱共墙锁成双环, 舱顶东沿竖起等腰排气管; 车尾三片直角犁刀斜插进土, 橙色垄沟与金黄麦浪铺满耕地 —— 突突突, 开耕啦!",
+      "difficulty": 3,
+      "total_pieces": 55,
+      "step_count": 16,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "农场",
+        "拖拉机",
+        "车轮底座",
+        "进阶"
+      ]
+    },
+    {
+      "id": "windmill_01",
+      "file": "models/windmill_01.json",
+      "name": "风车磨坊",
+      "name_en": "Windmill 01",
+      "description": "田园风车磨坊: 2x2 塔身用长方形圈层砌法起两层 (一层南面整面留作负空间大门, 二层门楣圈两端竖边传力), 塔顶梯形裙檐收分出 1x1 洞口再戴等腰锥帽; 南面沿口立起两格高毂柱, 4 片透明菱形叶片吸在毂柱上下两段的左右竖边上, 借菱形 60 度天然斜置拼出正在旋转的 X 形风车, 两片等边三角锁片嵌进上下叶片的 60 度夹角锁住毂心 —— 全库第一次把菱形当叶片用。场边配栅栏、锥顶水井、六边形树冠大树与花丛。",
+      "difficulty": 3,
+      "total_pieces": 55,
+      "step_count": 16,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "风车",
+        "菱形叶片",
+        "圈层砌法",
+        "进阶",
+        "需要扩展装"
+      ],
+      "thumbnail": "thumbnails/windmill_01.png"
     },
     {
       "id": "ferris_wheel_frame_01",
@@ -998,6 +1035,24 @@
       "thumbnail": "thumbnails/amphitheater_01.png"
     },
     {
+      "id": "conveyor_factory_01",
+      "file": "models/conveyor_factory_01.json",
+      "name": "传送带车间",
+      "name_en": "Conveyor Factory 01",
+      "description": "全库第一条工厂流水线: 蓝色厂房两面锯齿天窗墙之间, 四座托架墙把绿色带面逐段顶到 1 格高 (每段双端受力零悬挑), 西端 30 度上料坡道顶铰链接地起跑, 带面上两枚三角包裹行进、带尾四坡礼盒封箱, 东端落进与托架合围的红色卸料仓; 控制室警示灯与 3 格高烟囱塔尖收束全景 —— 开机, 整条流水线跑起来!",
+      "difficulty": 3,
+      "total_pieces": 71,
+      "step_count": 15,
+      "theme": "工程结构",
+      "tags": [
+        "工程",
+        "工厂",
+        "流水线",
+        "传送带",
+        "职业体验"
+      ]
+    },
+    {
       "id": "helicopter_pad_01",
       "file": "models/helicopter_pad_01.json",
       "name": "楼顶停机坪",
@@ -1413,6 +1468,25 @@
       "thumbnail": "thumbnails/fire_station_01.png"
     },
     {
+      "id": "soccer_goal_01",
+      "file": "models/soccer_goal_01.json",
+      "name": "足球门与球场",
+      "name_en": "Soccer Goal 01",
+      "description": "全库第一座足球场: 8x6 绿茵场两端白色禁区列上各立一座带顶网的球门 —— 侧网后网竖边互吸、顶网长板短边整边压侧网顶, 五片锁成门形环; 西点球点上 4 片等边三角四坡自锁成一颗足球; 北看台 6 条 30 度彩色坐席坡道顶边吸背墙顶、坡尾落地双端受力, 背墙顶 3 名彩色球迷探头助威; 两角红色角旗与西南角计分牌就位 —— 哔! 点球开踢!",
+      "difficulty": 4,
+      "total_pieces": 81,
+      "step_count": 18,
+      "theme": "足球",
+      "tags": [
+        "足球",
+        "运动",
+        "球场",
+        "看台",
+        "场景"
+      ],
+      "thumbnail": "thumbnails/soccer_goal_01.png"
+    },
+    {
       "id": "parking_garage_01",
       "file": "models/parking_garage_01.json",
       "name": "立体停车场",
@@ -1487,6 +1561,24 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/basketball_arena_01.png"
+    },
+    {
+      "id": "ice_rink_01",
+      "file": "models/ice_rink_01.json",
+      "name": "滑冰场",
+      "name_en": "Ice Rink",
+      "description": "晶莹滑冰场: 6 片大正方形拼出 6x4 透明冰面, 青色长方形回廊压边, 外沿立起整圈长方形挡板 (南留入口), 四角柱升红旗; 西侧看台背墙托一排悬挑坐板面朝冰面, 东南角保暖小屋门框方朝北开门、头戴红色等腰尖顶, 入口外车轮底座磨冰车正要进场 —— 冰刀与冰面的沙沙声, 是冬天最好听的音乐。",
+      "difficulty": 4,
+      "total_pieces": 83,
+      "step_count": 19,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "运动",
+        "冬季",
+        "车辆",
+        "进阶"
+      ]
     },
     {
       "id": "volcano_base_01",
@@ -1905,6 +1997,25 @@
         "挑战"
       ],
       "thumbnail": "thumbnails/rescue_hq_01.png"
+    },
+    {
+      "id": "stadium_gate_01",
+      "file": "models/stadium_gate_01.json",
+      "name": "体育场大门",
+      "name_en": "Stadium Gate 01",
+      "description": "全库第一座体育场入口: 两座双层票务塔夹着六格宽观众通道, 塔间三片长方形门楣横带凌空锁定 (双端竖边吸进塔身墙角, 重力纯剪传入塔身), 横带顶上三片梯形檐冠像掀起的人浪; 通道里双转闸分流, 大门身后两阶看台逐级退台, 座面与墙顶层层锁环, 台上观众旗迎风招展 —— 检票入场, 比赛马上开始!",
+      "difficulty": 4,
+      "total_pieces": 103,
+      "step_count": 18,
+      "theme": "城市生活",
+      "tags": [
+        "城市生活",
+        "体育场",
+        "大门",
+        "看台",
+        "进阶",
+        "需要扩展装"
+      ]
     },
     {
       "id": "skyscraper_01",
