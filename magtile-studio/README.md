@@ -80,6 +80,7 @@ magtile-studio/
 | [docs/ROADMAP.md](docs/ROADMAP.md) | 面向 500+ 模型内容库的分阶段商业化路线 |
 | [docs/CONTENT_STRATEGY.md](docs/CONTENT_STRATEGY.md) | 内容策略: 技法分类学、主题矩阵、反批量生成规则、生产管线 |
 | [docs/PHYSICS_RULES.md](docs/PHYSICS_RULES.md) | 物理校验规则的精确定义与判定算法 |
+| [docs/BUILD_VERIFICATION.md](docs/BUILD_VERIFICATION.md) | 实物搭建验证工作流: 三层验证金字塔、实物测试规程与内容 CI/CD 门禁 |
 
 ## 许可
 
