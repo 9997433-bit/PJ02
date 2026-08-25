@@ -46,8 +46,8 @@ class ProgressActivity : Activity() {
     /** 首次 onResume 跳过重拉 (onCreate 已加载)。 */
     private var firstResume = true
 
-    /** 减少动效 (§4.7, 系统动画设置联动): 作品行点按反馈由水波纹
-     *  退为静态按压色 (见 MotionPrefs)。 */
+    /** 减少动效 (§4.7, 共享 reduce_motion 设置键 + 系统动画设置
+     *  双通道): 作品行点按反馈由水波纹退为静态按压色 (见 MotionPrefs)。 */
     private var reduceMotion = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

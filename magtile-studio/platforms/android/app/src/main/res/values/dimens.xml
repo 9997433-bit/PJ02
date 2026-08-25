@@ -5,9 +5,10 @@
      字号无障碍缩放)。 -->
 <resources>
     <!-- 触控目标 (§4.1 硬性规范: 儿童可点元素最小边 48dp; = Qt
-         touchTarget) 与主操作按钮高 -->
+         touchTarget) 与主操作按钮高 (§4.1「主操作按钮 >= 64dp」,
+         = Qt bigButtonHeight, 手机档不再折算) -->
     <dimen name="touch_target">48dp</dimen>
-    <dimen name="button_height">52dp</dimen>
+    <dimen name="button_height">64dp</dimen>
 
     <!-- 间距三档 (= Qt spacingSmall / spacing / spacingLarge) -->
     <dimen name="spacing_small">8dp</dimen>

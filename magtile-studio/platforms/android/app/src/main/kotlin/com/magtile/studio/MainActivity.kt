@@ -118,8 +118,10 @@ class MainActivity : Activity() {
     /** 进度页收藏行带回的待弹详情模型 id (列表加载完成后补弹)。 */
     private var pendingDetailModelId: String? = null
 
-    /** 减少动效 (§4.7, 系统动画设置联动): 列表点按反馈退为静态
-     *  按压色、列表切换不做条目动画 (见 MotionPrefs)。 */
+    /** 减少动效 (§4.7, 共享 reduce_motion 设置键 + 系统动画设置
+     *  双通道): 列表点按反馈退为静态按压色、列表切换不做条目动画
+     *  (见 MotionPrefs)。冷启动 onCreate 时进度存档尚未打开, 共享键
+     *  读不到 —— loadLibraryAsync 开档后复读一次补上。 */
     private var reduceMotion = false
 
     // ---- 年龄段模式 (UI_UX_SPEC.md §2, 与桌面 settings 同键) ----------
@@ -220,6 +222,10 @@ class MainActivity : Activity() {
                         File(filesDir, PROGRESS_DB_NAME).absolutePath)) {
                     Log.w(TAG, "进度存档打开失败, 库存功能降级 (详见 logcat)")
                 }
+                // 减少动效复读 (settings 表 reduce_motion 键, 与桌面
+                // 同键): onCreate 时存档尚未打开只联动了系统动画设置,
+                // 开档后共享键才可读 —— 工作线程读, 不卡主线程
+                val storedReduceMotion = MotionPrefs.reduceMotion(this)
                 // 年龄段 (settings 表 age_mode 键, 与桌面同键):
                 // 存档打开失败 / 从未设置时原生层兜底返回默认档 7-9
                 val storedAgeMode = MagTileNative.ageModeId()
@@ -230,6 +236,13 @@ class MainActivity : Activity() {
                     listModels(dataDir.absolutePath))
 
                 runOnUiThread {
+                    // 复读只会加强降级 (false→true, 取或语义): 首批卡片
+                    // 尚未创建, 在渲染前套用静态按压色与无条目动画即可
+                    if (storedReduceMotion && !reduceMotion) {
+                        reduceMotion = true
+                        adapter.reduceMotion = true
+                        findViewById<RecyclerView>(R.id.model_list).itemAnimator = null
+                    }
                     shapeCount = loadedShapes
                     allCards = library.cards
                     inventoryConfigured = library.inventoryConfigured

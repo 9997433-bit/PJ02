@@ -62,8 +62,9 @@ class TutorialActivity : Activity() {
     /** 上次落盘后的计时起点 (elapsedRealtime 毫秒), 时长按增量累计。 */
     private var playClockStartMs = 0L
 
-    /** 减少动效 (§4.7, 系统动画设置联动): 步骤列表定位改瞬时、
-     *  3D 视口呼吸描边定格最亮帧 (见 MotionPrefs / TutorialSceneView)。 */
+    /** 减少动效 (§4.7, 共享 reduce_motion 设置键 + 系统动画设置
+     *  双通道): 步骤列表定位改瞬时、3D 视口呼吸描边定格最亮帧
+     *  (见 MotionPrefs / TutorialSceneView)。 */
     private var reduceMotion = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

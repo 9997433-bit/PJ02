@@ -473,10 +473,10 @@ sequenceDiagram
 
 | 外部检查点 | 来源 | 本规范落点 | Qt 桌面现状 | Android 现状 |
 |---|---|---|---|---|
-| 触控目标 ≥ 44px | ui-design-brain | §4.1 收紧为 48dp, 主按钮 ≥ 64dp | `Theme.touchTarget=48` / `bigButtonHeight=64`; 唯一例外 32dp 家长区入口 (§5.3 有意为之) | `touch_target=48dp` 全布局令牌化; 主按钮 `button_height=52dp` 为手机屏折算档, 低于桌面 64 (见下方 P1) |
+| 触控目标 ≥ 44px | ui-design-brain | §4.1 收紧为 48dp, 主按钮 ≥ 64dp | `Theme.touchTarget=48` / `bigButtonHeight=64`; 唯一例外 32dp 家长区入口 (§5.3 有意为之) | `touch_target=48dp` 全布局令牌化; 主按钮 `button_height=64dp` 与桌面 `bigButtonHeight` 同档 (P2 升档, 原 52dp 手机折算档) |
 | 空态三件套 (图形 + 说明 + CTA) | ui-design-brain | §5.2 筛选/目录空态、§7.1 进度空态 | 模型库筛选空态 (推荐 3 可搭 + 看全部模型)、目录空态 (再试一次)、进度空态 (去模型库挑一个) 均三件齐全 | 目录空态「再试一次」、进度空态「去模型库挑一个」齐全; 筛选空态原只有一行灰字, 本次审计补齐 🔍 + 温和说明 + 「看全部模型」 |
 | 按钮层级 (主/次分明, 主 CTA 唯一) | ui-design-brain | §1.2 胶囊主按钮、§5.4 主 CTA 占宽 80% | BigButton 实心主色 = 主操作; 白底描边 = 次操作 (上一步/从头再来/复位视角), 每屏主 CTA 唯一 | 主按钮 `backgroundTint` 主色 + 白字, 次按钮默认灰;「下一步」权重 1.4 更宽 |
-| 减少动效 (respect reduced motion) | ui-design-brain + a11y | §4.7 全部动效尊重「减少动态效果」 | 设置页开关 → `Theme.animMs=0`; 庆祝彩带不实例化、呼吸高亮定格最亮帧、星星反馈降级静态 | `MotionPrefs` 联动系统动画缩放: 水波纹退静态按压、滚动瞬时、呼吸描边定格; 应用内共享 `reduce_motion` 键 JNI 链路待接 (P1) |
+| 减少动效 (respect reduced motion) | ui-design-brain + a11y | §4.7 全部动效尊重「减少动态效果」 | 设置页开关 → `Theme.animMs=0`; 庆祝彩带不实例化、呼吸高亮定格最亮帧、星星反馈降级静态 | `MotionPrefs` 双通道 (P2 接通): 应用内共享 `reduce_motion` 键 (经 JNI 读 ui_settings, 与桌面设置页同键) 或 系统动画缩放为 0, 任一命中即水波纹退静态按压、滚动瞬时、呼吸描边定格 |
 | 儿童友好文案 (不吓人、零术语、无惩罚) | ui-design-brain | P1「铁律」P3 零挫败、§4.2 文案规范、§4.3 | 界面无「失败/错误/红叉」; 技术细节只进 stderr 与家长区诊断小字 | 同口径 (soft_fail 系列文案); 本次修复两处直出: 物理校验异常原文、缺片清单原生 error → 温和文案, 细节只进 logcat |
 | 状态不单靠颜色 | web-a11y-agent-skills | §4.7 三重编码 (图形+文字+颜色) | ✓/▶/🔒/★ 图形 + 文字徽标; 难度星靠图形计数; 开关带「开/关」字 | colors.xml 与 Theme.qml 逐项对齐, 同一套图形编码 |
 | 文字可缩放不破版 | web-a11y-agent-skills | §4.7 字号三档 100/125/150% | 全部字号经 `Theme.fontScale`; 本次修复订阅页主推徽标硬编码 12px | 全 sp 单位随系统字号缩放; 应用内三档覆盖 PLANNED |
@@ -493,9 +493,9 @@ sequenceDiagram
 
 ### 16.2 遗留缺口 (P1, 已定位到文件)
 
-- Android 主按钮 `button_height=52dp` 低于 §4.1「主操作按钮 ≥ 64dp」:手机屏刻意折算档, 平板布局落地时应升回 64dp(`platforms/android/.../values/dimens.xml`)。
+- 已落实(P2):Android 主按钮 `button_height` 52→64dp(`platforms/android/.../values/dimens.xml` 单点令牌改动, 手机档即达 §4.1「主操作按钮 ≥ 64dp」, 引用该令牌的全部主按钮随之生效)。
 - Android 仍有无令牌对应的中间字号(14sp/12sp/18sp/26sp:`activity_main.xml` 筛选行、`item_model_card*.xml`、`item_tutorial_step.xml`、`dialog_parent_gate.xml` 题面/答案框):需补字号令牌或归一到现有五级, 属批量视觉调整不在本次最小修复内。
 - Qt QML 约 20 处主色底上的 `color: "white"` 未令牌化:建议 `Theme.qml` 增 `onPrimary` 令牌后批量替换(对应 Android 已有 `magtile_on_primary`)。
 - Android 4–6 启蒙档主题筛选仍是 48dp Spinner 下拉, 未达 §2「超大主题入口」形态(`MainActivity.applyAgeMode`)。
-- Android 应用内 `reduce_motion` 共享设置键 JNI 链路待接(`MotionPrefs.kt`, 平台 README 已登记), 目前仅联动系统动画设置。
+- 已落实(P2):Android 应用内 `reduce_motion` 共享设置键经 JNI 接通(`MagTileNative.reduceMotion()` 读 ui_settings 同键, `MotionPrefs` 与系统动画设置取或任一命中即降级, 冷启动开档后 `MainActivity` 复读一次), 对齐 Qt/GL 同一份 SQLite 存档。
 - 双端 §6.2 旋转提示 👋、Qt 🔊 波形动画、Android TTS 原生后端:维持既有 PLANNED 条目, 不重复登记。

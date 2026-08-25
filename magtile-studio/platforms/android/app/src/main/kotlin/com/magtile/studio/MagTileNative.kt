@@ -59,6 +59,14 @@ object MagTileNative {
     external fun setAgeModeId(modeId: String): Boolean
 
     /**
+     * 「减少动效」开关 (settings 表 reduce_motion 键 —— 与桌面 GL/Qt
+     * 设置页开关同键, 同一份 SQLite 存档语义, UI_UX_SPEC.md §4.7)。
+     * 存档未打开 / 从未设置 / 脏值一律返回 false (动效开启兜底);
+     * 调用方走 MotionPrefs (与系统动画设置取或), 不直接调本函数。
+     */
+    external fun reduceMotion(): Boolean
+
+    /**
      * 进度页「我的作品」/ 成就墙数据源 JSON (dataDir = 解包后的数据
      * 目录, 与 listModels 同一入参; 口径与桌面 Qt StudioBackend 一致):
      * {"store_ready","completed_count","in_progress_count",

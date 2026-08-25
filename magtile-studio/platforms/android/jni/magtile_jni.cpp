@@ -22,6 +22,9 @@
 //   ageModeId()                   -> 年龄段模式标识 (settings 表 age_mode 键,
 //                                    与桌面同键; 未设置/脏值回默认档 age_7_9)
 //   setAgeModeId(modeId)          -> 保存年龄段模式 (未知标识忽略并返回 false)
+//   reduceMotion()                -> 「减少动效」开关 (settings 表 reduce_motion
+//                                    键, 与桌面 GL/Qt 设置页同键; 未设置/脏值/
+//                                    存档不可用回 false = 动效开启)
 //   progressOverviewJson(dataDir) -> 进度页/成就墙数据源 JSON (三格统计 +
 //                                    进行中/已完成/收藏列表 + 徽章墙,
 //                                    口径与桌面 Qt StudioBackend 一致)
@@ -107,6 +110,7 @@
 #include "magtile/progress/data_privacy.hpp"
 #include "magtile/progress/progress_store.hpp"
 #include "magtile/progress/subscription_settings.hpp"
+#include "magtile/progress/ui_settings.hpp"
 #include "magtile/tutorial/tutorial_engine.hpp"
 
 namespace {
@@ -649,6 +653,26 @@ JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_setAgeModeId(
         }
     }
     return JNI_TRUE;
+}
+
+/// 「减少动效」开关 (UI_UX_SPEC.md §4.7): 经 progress::getReduceMotion
+/// 读 settings 表 reduce_motion 键 —— 与桌面 GL/Qt 设置页开关同键
+/// 同一份 SQLite 存档 (ui_settings 持久化契约)。存档未打开 / 从未
+/// 设置 / 脏值一律返回 false (动效开启兜底); Kotlin 侧 MotionPrefs
+/// 另与系统动画设置取或, 本键只会加强降级, 不会削弱。
+JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_reduceMotion(
+    JNIEnv* /*env*/, jobject /*thiz*/) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    if (!ctx.store.has_value()) {
+        return JNI_FALSE;
+    }
+    try {
+        return magtile::progress::getReduceMotion(*ctx.store) ? JNI_TRUE : JNI_FALSE;
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("reduceMotion 读取失败: %s", e.what());
+        return JNI_FALSE;  // 读取失败按动效开启兜底 (系统动画设置仍生效)
+    }
 }
 
 /// 进度页「我的作品」/ 成就墙数据源 (data_dir 为解包后的数据目录,
