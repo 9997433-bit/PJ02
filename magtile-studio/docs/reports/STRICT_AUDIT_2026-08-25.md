@@ -1,7 +1,7 @@
 # 全库 strict 物理巡检报告
 
-- 生成时间: 2026-08-25 20:42
-- 基线提交: `2b2c4ff` (`cursor/magtile-studio-foundation-a95b` 250 模型终态, 难度分布 D2 x23 / D3 x181 / D4 x45 / D5 x1)
+- 生成时间: 2026-08-25 21:50
+- 基线提交: `b369bad` (`cursor/magtile-studio-foundation-a95b` 治理波次收官, 250 模型, 难度分布 D2 x23 / D3 x181 / D4 x45 / D5 x1)
 - 生成工具: `tools/run_strict_audit.sh` (`magtile_app validate --profile strict` 零警告审计 + `tests/test_step_assembly.py` 逐步装配质检 + D4+ 抗扰动巡检 jitter 挂钩, 见 `docs/TESTING.md` 3.17)
 - 校验档位: `strict_consumer` (悬挂额定 120g/单位边长, 抗碰撞安全系数 0.7 → 有效悬挂预算 84g/边长, 有效抗弯预算 17.5 g·单位; 参数依据见 `docs/PHYSICS_RULES.md` 1.4 节)
 - 零警告政策与豁免白名单: `tools/audit_strict_physics.sh` / `docs/STRICT_PHYSICS_AUDIT.md`
@@ -101,32 +101,36 @@
 | `volcano_base_01` | D4 | 83 | 通过 |
 | `warehouse_01` | D4 | 97 | 通过 |
 
-## 6. 本次巡检记录 (2026-08-25 内容库扩容至 250 模型后刷新, 人工执行部分)
+## 6. 本次巡检记录 (2026-08-25 治理波次合入后刷新, 人工执行部分)
 
-第 1~5 节由 `tools/run_strict_audit.sh --report ... --jitter require` 自动生成 (基线提交 `2b2c4ff`, 独立工作树 CMake Release 干净构建, `--jitter require` 档 —— 占位不判绿, D4+ 抗扰动必须实跑)。本节记录本轮刷新的背景与人工核查结论, 取代 234 模型版报告 (基线 `3d24d74`, 第 6 节由 `3767088` 登记) 的第 6 节。
+第 1~5 节由 `tools/run_strict_audit.sh --report ... --jitter require` 自动生成 (基线提交 `b369bad`, CMake Release 干净构建, `--jitter require` 档 —— 占位不判绿, D4+ 抗扰动必须实跑)。本节记录本轮刷新的背景与人工核查结论, 取代 250 模型首版报告 (基线 `2b2c4ff`, 第 6 节由 `d1e97e5` 登记) 的第 6 节。
 
 ### 6.1 本轮刷新背景
 
-1. **内容库扩容**: 234 模型版报告以来, 内容批 F~I 共 16 个新模型分批合入 foundation (234 → 250), 终态构成:
-   - 批 F (`e346ecf` 合入): `pipe_organ_01` / `peacock_01` / `stonehenge_01` / `mushroom_grove_01`;
-   - 批 G (`67485eb` 合入): `kangaroo_01` / `pirate_ship_01` / `truss_bridge_01` / `yurt_01`;
-   - 批 H (`4636148` 合入): `pumpkin_lantern_01` / `hedgehog_01` / `circus_tent_01` / `fireboat_01`;
-   - 批 I (`94bf13c` 合并后收官): `recycling_center_01` / `santa_sleigh_01` / `octopus_01` / `swing_set_01`;
-2. **撞车处置不影响审计口径**: 批 I 曾独立产出同名 `kangaroo_01` / `pumpkin_lantern_01` / `stonehenge_01`, 与批 G/H/F 撞车, 合并 (`94bf13c`) 时取批 G/H/F 版本 (现库内 kangaroo D3 70 片 / pumpkin_lantern D3 62 片 / stonehenge D4 91 片), 批 I 净新增即上列 4 席; 处置均在入库前完成, 本轮审计对象即 foundation 终态 250 模型;
-3. **新增 16 模型难度构成 D2 x3 / D3 x12 / D4 x1**: 唯一新增 D4 为批 F 旗舰 `stonehenge_01` (四门环阵巨石阵), 第 5 节 L3 实物复核清单由 45 个扩至 **46 个** (45 × D4 + 1 × D5), 系抖动修复版以来该清单首次扩容。
+1. **内容库无增减**: 基线自 `2b2c4ff` (批 I 收官) 前移至 `b369bad`, 其间合入的是内容治理波次 (系列归类机检 / D3 冻结难度配额守卫 / 治理守卫接入 QA 与发布门禁, 及配套文档), 不含任何模型增删改 —— 模型总数与难度分布与 250 首版一致 (D2 x23 / D3 x181 / D4 x45 / D5 x1), 第 5 节 L3 实物复核清单维持 46 个 (45 × D4 + 1 × D5) 不变;
+2. **CTest 计数 554 → 556**: 治理波次把两道治理守卫注册为 CTest 常开关卡 (`content_series_gate` #555 + `difficulty_quota_gate` #556, 语义见 6.2), 全量回归计数自批 I 收官登记的 554 刷新至 **556**; 本轮在同一干净构建实跑 `ctest -j 4`: **556/556 全过, 0 失败** (含两道新闸门);
+3. **刷新动机**: strict 巡检报告与 CTest/治理闸门共用同一基线口径, 治理波次落地后按惯例全库复跑一轮, 确认治理侧改动 (纯脚本/CMake/文档) 未触碰物理校验与内容数据。
 
-### 6.2 本轮结果
+### 6.2 治理闸门登记 (本轮新挂, 随 CTest 全量回归常开)
 
-1. **全库 strict 审计**: 250 个模型逐一 `validate --profile strict` 零警告政策, 249 通过 + 1 白名单豁免 + 0 拦截警告 + 0 失败 —— 16 个新模型全部零警告零豁免;
+1. **`content_series_gate` (硬闸门)**: `tools/check_content_series.py --strict` —— 每个模型必须带 `content_meta.series` (13 主题词值) 或 `matrix_bucket` (矩阵外桶) 恰好其一, 词值对照权威词表 `data/content_series_map.json`; 新增模型漏归类 / 词值走样即失败。本轮实跑全绿 (矩阵内 176 + 矩阵外 74, 缺失/非法 0)。QA 可选关卡 20 (`MAGTILE_SERIES_CHECK=1`) 为同口径的独立分项入口;
+2. **`difficulty_quota_gate` (报告型)**: `tools/check_difficulty_quota.py` 常开报告 D1–D5 分布与 D3 冻结状态, 冻结与否只报告不拦截 (存量 181 个 D3 不追责), 难度值非法 / 模型不可读仍按结构错误硬失败; strict 守卫档另经 QA 可选关卡 21 (`MAGTILE_DIFFICULTY_QUOTA=1`) 与发布门禁 `--full` 档开启 —— 冻结生效 (当前 D1 0/20, D5 1/6) 即红灯, 属预期告警 (见 6.5);
+3. **门禁接线口径**: `run_release_gate.sh --full` = 四道发布专项环境变量全开 (`FREE_TIER_CHECK` / `STRICT_AUDIT` / `SERIES_CHECK` / `DIFFICULTY_QUOTA`, 即全量 QA 关卡 10/15/20/21); 内容批 PR 评审侧由一键机检 `tools/review_content_batch.sh` 把 series 归类与 D3 冻结 (`--batch`) 两道闸串进五道阻断关卡 (用法见 `docs/CONTENT_STRATEGY.md` §4.3)。
+
+### 6.3 本轮结果
+
+1. **全库 strict 审计**: 250 个模型逐一 `validate --profile strict` 零警告政策, 249 通过 + 1 白名单豁免 + 0 拦截警告 + 0 失败 —— 与 250 首版逐项一致;
 2. **逐步装配质检**: `tests/test_step_assembly.py` 250/250 通过;
-3. **D4+ 抗扰动巡检**: 46/46 个 D4+ 模型 `--profile strict --jitter 50` 全绿 (含新入清单的 `stonehenge_01`), 本轮以 `--jitter require` 档执行 —— CLI 未实装时按失败处理, 实跑判绿非占位;
-4. **巡检结论: 全绿** —— 与批 I 收官提交 (`2b2c4ff`) 登记的全库 38 关卡 QA 结论一致, 未发现任何回归。
+3. **D4+ 抗扰动巡检**: 46/46 个 D4+ 模型 `--profile strict --jitter 50` 全绿, 本轮以 `--jitter require` 档执行 —— CLI 未实装时按失败处理, 实跑判绿非占位;
+4. **CTest 全量回归**: 同基线干净构建 556/556 全过 (计数 554 → 556, 新增即 6.2 两道治理闸门, 其余关卡零回归);
+5. **巡检结论: 全绿** —— 治理波次为纯脚本/CMake/文档改动, 物理校验与内容数据零回归, 与 `2b2c4ff` 收官登记的巡检结论一致。
 
-### 6.3 豁免复核
+### 6.4 豁免复核
 
-豁免清单与 234 模型版一致, 无增减: 唯一豁免 `suspension_bridge_01:disconnected_assembly` × 5 为既有白名单条目 (悬索桥双岸合龙教学叙事, 论证见 `docs/STRICT_PHYSICS_AUDIT.md`), 本轮复核维持豁免结论; 16 个新模型未申请任何豁免。
+豁免清单与 250 首版一致, 无增减: 唯一豁免 `suspension_bridge_01:disconnected_assembly` × 5 为既有白名单条目 (悬索桥双岸合龙教学叙事, 论证见 `docs/STRICT_PHYSICS_AUDIT.md`), 本轮复核维持豁免结论; 治理波次未申请任何新豁免。
 
-### 6.4 遗留事项
+### 6.5 遗留事项
 
 - **D4+ 实物复核 (L3)**: 第 5 节 46 个模型 (45 × D4 + 1 × D5 `skyscraper_01`) 按 `docs/BUILD_VERIFICATION.md` 逐个走实物复核, 软件全绿 (含 jitter) 不豁免此步 —— `check_v1_readiness.sh` 的 R6/R7 两项 P0 (实物复核回填 `physical_verified`) 仍为 FAIL, 发布门禁 `run_release_gate.sh --full --l2 --fail-on-pending` 的 L3 硬闸门在复核清零前保持红灯; 本轮刷新不标记任何发布目标完成;
-- 多铰链连锁剥离与共面环出平面刚度细化仍跟踪于 `docs/PHYSICS_VERIFICATION_DEEP_DIVE.md` 第 5 节 (与 234 模型版一致, 本轮无新增)。
+- **难度配额 strict 守卫预期红**: QA 关卡 21 / 发布门禁 `--full` 档的 strict 守卫在内容侧补齐 D1 ≥ 20 且 D5 ≥ 6 (随即 D3 解冻) 前保持预期红灯 —— 属内容缺口治理告警, 不影响本报告 strict 物理巡检全绿结论 (常开的 CTest `difficulty_quota_gate` 为报告型, 556/556 中判绿);
+- 多铰链连锁剥离与共面环出平面刚度细化仍跟踪于 `docs/PHYSICS_VERIFICATION_DEEP_DIVE.md` 第 5 节 (与 250 首版一致, 本轮无新增)。
