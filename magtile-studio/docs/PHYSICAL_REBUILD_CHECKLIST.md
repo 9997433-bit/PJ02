@@ -126,6 +126,16 @@ python3 tools/list_physical_pending.py data/models --fail-on-pending
 
 工具判定口径: `content_meta.physical_verified == true`, **或**存在旁车文件 `data/verification/<model_id>.json` 且 `status == "physical_passed"` 且内容哈希与当前模型一致。`tests/run_full_qa.sh` 的"L3 实物复核缺口报告"关卡每次全量 QA 都会输出未复核数量 (仅报告, 不阻断 CI)。
 
+**排产顺序: V1 上架优先抽样包先行。** 全集清零前, 先按 [reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md) 的确定性抽样包 (免费层 D4+ 全数 + D5 全数 + 付费 D4 高片数按主题补足, 约 10 个) 逐个实搭签核 —— 该文档带逐模型勾选表, 由 `tools/physical_sample_pack.py` 生成, 判定口径与 `list_physical_pending.py` 同源:
+
+```bash
+python3 tools/physical_sample_pack.py                          # 抽样清单 + 逐模型备料 BOM 与逐步片型摘要 (桌边核对用)
+python3 tools/physical_sample_pack.py --fail-on-missing-sample # 抽样包有缺口即退出码 1 (门禁挂接用, 默认仅报告)
+python3 tools/physical_sample_pack.py --markdown docs/reports/PHYSICAL_SAMPLE_V1.md  # 重新生成签核文档
+```
+
+抽样包全绿**不豁免**全集清零 —— `--fail-on-pending` 终防线仍以 D4+ 全集为准。
+
 ## 9. 与其他文档的关系
 
 | 文档 | 关系 |

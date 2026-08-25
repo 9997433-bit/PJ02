@@ -318,6 +318,13 @@ python3 tools/list_physical_pending.py data/models --fail-on-pending  # 发布�
 
 全量 QA 中该关卡**只报告未复核数量, 不阻断 CI** (实物复核是线下人工流程, 进度不应卡住代码/内容合入); 发布打包前可用 `--fail-on-pending` 作为终防线 (一键入口: `tools/run_release_gate.sh --fail-on-pending`, 见第 5 节)。
 
+复核排产按 **V1 上架优先抽样包**先行: `tools/physical_sample_pack.py` 用确定性规则 (免费层 D4+ 全数 + D5 全数 + 付费 D4 高片数按主题补足, 约 10 个) 生成可签核抽样清单 [reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md), 并为真人桌边核对打印每个模型的备料 BOM 与逐步片型摘要; `--fail-on-missing-sample` 在抽样包存在未复核模型时退出码 1 (默认仅报告), 判定口径与 `list_physical_pending.py` 同源。
+
+```bash
+python3 tools/physical_sample_pack.py                          # 抽样清单 + 逐模型 BOM 摘要
+python3 tools/physical_sample_pack.py --fail-on-missing-sample # 门禁挂接模式
+```
+
 ### 3.14 免费层清单对齐核验 (`tools/verify_free_tier.py`)
 
 免费层在三条分发链路上各有一份"清单": 模型 `tags` 的 `免费` 标签 (运行时事实来源)、Windows starter 打包清单 `platforms/windows/packaging/starter_models.txt` (打包投影)、Android APK (全量打包, 靠标签生效)。本工具固化 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) 的对齐决议: **免费标签数恰好 30 + 免费层全部只用核心 9 片型 + starter 清单与标签集合相等**, 任一失败退出码 1, 不一致时逐条列出两侧差异。
@@ -376,6 +383,8 @@ tools/run_release_gate.sh --help       # 完整用法
 | L3 实物复核缺口报告 | `tools/list_physical_pending.py` (3.13 节) | 报告型, 与 run_full_qa.sh 关卡 16 同一口径; `--fail-on-pending` 时升级为硬闸门 | 规程见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) |
 
 退出码与 run_full_qa.sh 同一约定: 0 = 全部阻断关卡通过, 1 = 存在失败关卡, 2 = 环境/参数不满足; 结尾输出 PASS/FAIL 分项摘要, 失败时保留分项日志目录。
+
+可选挂钩: 在 `--fail-on-pending` 全集终防线之前, 可先挂 `tools/physical_sample_pack.py --fail-on-missing-sample` 作为「V1 抽样包先行」中间闸门 (抽样包定义与签核表见 [reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md), 3.13 节) —— V1 上架签核至少要求抽样包全绿, 当前默认不阻断。
 
 ### 5.2 何时跑哪一档
 
