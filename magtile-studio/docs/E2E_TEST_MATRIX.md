@@ -53,7 +53,9 @@
 
 ## 2. 自动子集一键跑 (`tools/run_e2e_smoke.sh`)
 
-把矩阵中已自动化的关键路径串成一条命令, 供上架前快速回归与 CI 消费:
+把矩阵中已自动化的关键路径串成一条命令, 供上架前快速回归与 CI 消费
+(CI 载体: `.github/workflows/qa.yml` 的 `e2e-strict` job 在**每次 push**
+以 `--strict` 档执行, 见第 3 节):
 
 ```bash
 tools/run_e2e_smoke.sh                 # 默认: CLI + 免费层 + Qt 无头五连跑 + Android 符号 (环境允许时)
@@ -85,6 +87,12 @@ tools/run_e2e_smoke.sh --help          # 完整用法
 1. **自动侧**: `tools/run_e2e_smoke.sh --strict` 全绿 (Qt 与 Android
    项不允许 SKIP) **且** `tools/run_release_gate.sh --full
    --fail-on-pending` 全绿 (软件/内容/实物三层门禁, 见 TESTING.md 第 5 节);
+   其中 strict 档由 CI 常态兑现 —— `.github/workflows/qa.yml` 的
+   `e2e-strict` job 在**每次 push** 于装齐 Qt6 + 固定版本 NDK 的 runner
+   上执行 `tools/run_e2e_smoke.sh --strict`, 9 个冒烟项全部真实执行,
+   任何 FAIL 或 SKIP 都红灯**阻断 PR 合入**; 签核时只需确认目标提交的
+   `e2e-strict` 绿灯 (环境缺失导致的 SKIP 不可能混入), 发布门禁
+   (release-gate.yml) 仍按 TESTING.md 第 5 节手动触发补齐;
 2. **人工侧**: 本矩阵全部 P0 的 Manual / Auto(部分) 人工要点逐条打钩,
    记录到发布检查单 (含执行人 / 日期 / 设备型号); Android 真机至少覆盖
    一台 arm64 中端机 (API 26+);

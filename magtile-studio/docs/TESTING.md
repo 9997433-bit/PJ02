@@ -369,12 +369,21 @@ MAGTILE_TUTORIAL_BENCH=1 tests/run_full_qa.sh                      # 随全量 Q
 
 ## 4. 持续集成 (CI)
 
-`.github/workflows/qa.yml` 在**每次 push** 时于 Ubuntu runner 上执行 `tests/run_full_qa.sh` 全流程:
+`.github/workflows/qa.yml` 在**每次 push** 时于 Ubuntu runner 上并行跑两个 job, 任一红灯都阻断 PR 合入:
+
+**full-qa** —— 执行 `tests/run_full_qa.sh` 全流程:
 
 - 安装 X11 开发库 (FetchContent 源码构建 GLFW) 与 xvfb + Mesa (llvmpipe 软件渲染), 因此 CI 中 GL 冒烟跑的是**真渲染 + 截图校验**, 不是降级检查;
 - GLFW/ImGui 源码按 CMakeLists 哈希缓存, 不重复克隆;
 - 失败时自动上传各关卡分项日志 (`qa-stage-logs` 工件);
 - 本地与 CI 跑的是同一个脚本: 提交前先 `tests/run_full_qa.sh` 跑绿, CI 不会有意外。
+
+**e2e-strict** —— 执行 `tools/run_e2e_smoke.sh --strict` 核心用户路径 E2E 冒烟, 验收档 (第 8 节):
+
+- runner 装齐 Qt6 (ubuntu-24.04 的 Qt 6.4.2, 满足工程 >= 6.4 要求) 与固定版本 NDK (与 `android.yml` 同一 `NDK_VERSION`), 9 个冒烟项**全部真实执行**, Qt 无头冒烟与 Android JNI 符号项不会因环境缺失记 SKIP;
+- `--strict` 档下任何 FAIL 或 SKIP 都是红灯 —— 上架签核的自动侧口径 ([E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) 第 3 节) 每次 push 持续兑现, 而不是发布日才验一次;
+- 失败时自动上传分项日志与 Qt 自动构建日志 (`e2e-strict-logs` 工件);
+- 本地同一命令 `tools/run_e2e_smoke.sh --strict` 跑绿 = CI 跑绿 (本地缺 Qt6/NDK 时可先用默认档回归, strict 由 CI 兜底把关)。
 
 发布专项关卡 (可选关卡 10/15) 不在每次 push 的 qa.yml 内, 由手动触发的 `.github/workflows/release-gate.yml` 补齐, 见第 5 节。
 
@@ -466,7 +475,8 @@ tools/run_e2e_smoke.sh --help          # 完整用法
   一票否决;
 - **E2E-14a** Android JNI 符号断言: NDK 交叉编译 `libmagtile_core.so` 并
   断言 JNI 符号齐全 —— 符号清单**运行时解析自 CI `android.yml`**, 与
-  流水线口径自动同步; 无 NDK 环境自动 SKIP (CI 由 `android.yml` 兜底)。
+  流水线口径自动同步; 无 NDK 环境自动 SKIP (CI 侧 `qa.yml` 的
+  `e2e-strict` job 装有固定版本 NDK 真实执行, 另有 `android.yml` 兜底)。
 
 退出码: 0 = 全部执行项通过 (默认档 SKIP 不算失败, `--strict` 下算);
 1 = 存在失败项; 2 = 环境/参数不满足。缺 `magtile_app` 时自动构建;

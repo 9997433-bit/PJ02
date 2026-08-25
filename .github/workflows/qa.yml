@@ -1,9 +1,16 @@
 # =============================================================
 # MagTile Studio - 全量 QA 流水线 (CI)
 #
-# 每次 push 都完整运行 tests/run_full_qa.sh:
-#   构建 -> CTest 全量回归 -> 模型库质检 -> 反平凡检查 ->
-#   模型逻辑质检 -> 教程完整性 -> 物理负例/正例 -> GL 渲染冒烟。
+# 每次 push 并行跑两个 job, 任一红灯都阻断 PR 合入:
+#
+#   full-qa:    tests/run_full_qa.sh 全量质量关卡 ——
+#               构建 -> CTest 全量回归 -> 模型库质检 -> 反平凡检查 ->
+#               模型逻辑质检 -> 教程完整性 -> 物理负例/正例 -> GL 渲染冒烟。
+#   e2e-strict: tools/run_e2e_smoke.sh --strict 核心用户路径 E2E 冒烟
+#               (验收档: 任何 SKIP 也按失败处理)。runner 装齐 Qt6 与
+#               固定版本 NDK, 让 Qt 无头冒烟与 Android JNI 符号项
+#               真实执行而不是 SKIP —— 上架签核的自动侧口径
+#               (docs/E2E_TEST_MATRIX.md 第 3 节) 每次 push 持续兑现。
 #
 # 质量关卡的对象不只是代码, 更是内容: 任何一个模型 JSON 的物理
 # 合理性/教程逻辑/内容体量不达标, CI 即红灯, 不允许合入。
@@ -62,4 +69,72 @@ jobs:
         with:
           name: qa-stage-logs
           path: /tmp/magtile_qa_*
+          if-no-files-found: ignore
+
+  # 核心用户路径 E2E 冒烟, 验收档 (--strict): 与本地上架签核完全同一
+  # 脚本同一档位 (docs/E2E_TEST_MATRIX.md 第 2/3 节)。装齐 Qt6 + NDK
+  # 后 9 个冒烟项全部真实执行 —— 任何 FAIL 或 SKIP 都红灯阻断合入,
+  # 保证"strict 全绿"不是发布日才验一次的口径, 而是每次 push 的常态。
+  e2e-strict:
+    name: e2e-strict (Qt6 + NDK, run_e2e_smoke --strict)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      # 与 android.yml 的 NDK_VERSION / app/build.gradle.kts ndkVersion
+      # 保持一致 (r27c); E2E-14a 的 JNI 符号清单运行时解析自 android.yml
+      NDK_VERSION: 27.2.12479018
+    defaults:
+      run:
+        working-directory: magtile-studio
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Qt6 (base + declarative 开发包与 QML 运行时模块 + 可选 TTS):
+      # magtile_studio_qt 自动构建与 offscreen 无头冒烟所需 (ubuntu-24.04
+      # 的 Qt 6.4.2 满足工程 >= 6.4 要求); X11 开发库: CLI 构建目录
+      # FetchContent 源码构建 GLFW 所需; Mesa (llvmpipe/EGL): offscreen
+      # 平台的软件 GL 上下文; ninja: Android 交叉编译与 android.yml 同生成器
+      - name: 安装系统依赖 (含 Qt6)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake g++ make ninja-build python3 \
+            libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev \
+            libgl1 libegl1 libglx-mesa0 libgl1-mesa-dri fonts-noto-cjk \
+            qt6-base-dev qt6-declarative-dev qt6-declarative-dev-tools \
+            qt6-speech-dev \
+            qml6-module-qtquick qml6-module-qtquick-controls \
+            qml6-module-qtquick-layouts qml6-module-qtquick-templates \
+            qml6-module-qtquick-window qml6-module-qtqml-workerscript
+
+      # E2E-14a 不允许 SKIP: 按固定版本补装 NDK (runner 预装 Android SDK,
+      # ANDROID_HOME 已设置), 脚本 detect_ndk 优先选用同一钉住版本
+      - name: 安装固定版本 NDK
+        run: |
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;$NDK_VERSION"
+
+      # CLI 构建目录与 full-qa 同一份 FetchContent 缓存键 (GLFW/ImGui)
+      - name: 缓存 FetchContent 依赖
+        uses: actions/cache@v4
+        with:
+          path: magtile-studio/build/_deps
+          key: fetchcontent-${{ runner.os }}-${{ hashFiles('magtile-studio/CMakeLists.txt') }}
+
+      - name: 运行 E2E 冒烟 (--strict 验收档)
+        env:
+          FORCE_COLOR: "1"   # GitHub Actions 日志支持 ANSI 颜色
+          # 显式指定 GCC: 与 qa.yml full-qa 同理 (Android 交叉编译不受
+          # 影响, NDK 工具链文件自带编译器设定)
+          CC: gcc
+          CXX: g++
+        run: bash tools/run_e2e_smoke.sh --strict
+
+      # 失败时把分项日志留档 (含 Qt 自动构建日志), 便于直接定位失败冒烟项
+      - name: 上传失败日志
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-strict-logs
+          path: /tmp/magtile_e2e_smoke_*
           if-no-files-found: ignore
