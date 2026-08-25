@@ -1,0 +1,984 @@
+{
+  "schema_version": 1,
+  "id": "owl_01",
+  "name": "月夜猫头鹰",
+  "name_en": "Night Owl 01",
+  "description": "只用核心九片型的夜行动物: 与圆胖企鹅和四柱大象都不同, 猫头鹰是一根'树桩基座 + 双层鸟身'的图腾柱 —— 2x2 橙色树桩墙环托起黄色锯木平台, 紫色身体与头部两层墙环竖叠, 一对青色窗格方就是它的招牌大圆眼 (窗洞当瞳孔); 双耳羽骑头顶盖板, 灰色瘦高翅膀收在身后, 橙色尾羽指北; 林地红蘑菇圈与绿树苗点缀月夜 —— 咕, 咕, 森林守夜人上岗了!",
+  "difficulty": 3,
+  "total_pieces": 52,
+  "tags": [
+    "自然",
+    "动物世界",
+    "猫头鹰",
+    "森林",
+    "夜晚",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 36,
+        "equilateral_triangle": 7,
+        "isosceles_triangle": 4,
+        "window_square": 3,
+        "rectangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ground_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ground_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "moss_w",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ground_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ground_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ground_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "moss_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "stump_s_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stump_s_e",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stump_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stump_n_e",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stump_w_s",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stump_w_n",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stump_e_s",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stump_e_n",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "platform_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "platform_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "platform_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "platform_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body_s_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_s_e",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "body_n_e",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "body_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "body_e",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "eye_w",
+      "type": "window_square",
+      "position": [
+        1.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "eye_e",
+      "type": "window_square",
+      "position": [
+        2.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "head_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "head_n_e",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "head_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "head_e",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "cap_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_e",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ear_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "ear_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "wing_w",
+      "type": "isosceles_triangle",
+      "position": [
+        1.0,
+        2.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wing_e",
+      "type": "isosceles_triangle",
+      "position": [
+        3.0,
+        2.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tail_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tail_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mushroom_a",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mushroom_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mushroom_c",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        2.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sapling_a",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        4.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sapling_b",
+      "type": "isosceles_triangle",
+      "position": [
+        4.0,
+        0.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sign",
+      "type": "window_square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺林地南行: 深浅绿棋盘格四片, 边边互吸。",
+      "tip": "夜色刚落下, 森林安静下来 —— 先铺出这片林间空地。",
+      "tiles_to_add": [
+        "ground_0_0",
+        "ground_1_0",
+        "ground_2_0",
+        "ground_3_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺林地第二、三行: 西缘竖嵌一条长板苔径, 其余方板补齐。",
+      "tip": "行行等边互吸, 林地连成一整张网 —— 树桩的墙脚要踩这些拼缝。",
+      "tiles_to_add": [
+        "moss_w",
+        "ground_1_1",
+        "ground_2_1",
+        "ground_3_1",
+        "ground_1_2",
+        "ground_2_2",
+        "ground_3_2"
+      ],
+      "highlight_tiles": [
+        "ground_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺林地北行: 中段再嵌一条长板苔径, 空地铺满。",
+      "tip": "正中四格就是老树桩的家。",
+      "tiles_to_add": [
+        "ground_0_3",
+        "moss_n",
+        "ground_3_3"
+      ],
+      "highlight_tiles": [
+        "ground_1_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立树桩南墙与西墙: 四片橙色树皮墙踩住拼缝。",
+      "tip": "树桩是猫头鹰的瞭望台 —— 墙脚咬牢, 上面还要站鸟呢。",
+      "tiles_to_add": [
+        "stump_s_w",
+        "stump_s_e",
+        "stump_w_s",
+        "stump_w_n"
+      ],
+      "highlight_tiles": [
+        "ground_1_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "合树桩北墙与东墙: 八片墙环四角竖边互咬闭环。",
+      "tip": "2x2 的墙环围好了 —— 这是整只猫头鹰的地基。",
+      "tiles_to_add": [
+        "stump_n_w",
+        "stump_n_e",
+        "stump_e_s",
+        "stump_e_n"
+      ],
+      "highlight_tiles": [
+        "stump_s_w"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "铺锯木平台: 四片黄色方板边边入扣墙顶, 板板互吸。",
+      "tip": "像刚锯开的树桩年轮 —— 每片至少一条边咬住墙顶。",
+      "tiles_to_add": [
+        "platform_1_1",
+        "platform_2_1",
+        "platform_1_2",
+        "platform_2_2"
+      ],
+      "highlight_tiles": [
+        "stump_s_w"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "起鸟身墙环: 南面两片清色是胸腹, 墙脚压平台拼缝。",
+      "tip": "猫头鹰蹲坐的身体是 2x1 的墙环 —— 荷载沿墙面一路传到地面。",
+      "tiles_to_add": [
+        "body_s_w",
+        "body_s_e",
+        "body_n_w",
+        "body_n_e",
+        "body_w",
+        "body_e"
+      ],
+      "highlight_tiles": [
+        "platform_1_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "叠头部墙环: 南面装一对窗格方 —— 那是它的大圆眼!",
+      "tip": "窗格的洞就是瞳孔 —— 猫头鹰的眼睛在夜里最亮。",
+      "tiles_to_add": [
+        "eye_w",
+        "eye_e",
+        "head_n_w",
+        "head_n_e",
+        "head_w",
+        "head_e"
+      ],
+      "highlight_tiles": [
+        "body_s_w"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖头顶盖板, 竖起双耳羽: 等边三角骑住盖板东西侧沿。",
+      "tip": "两撮耳羽尖尖的 —— 其实那不是耳朵, 是它的羽毛角。",
+      "tiles_to_add": [
+        "cap_w",
+        "cap_e",
+        "ear_w",
+        "ear_e"
+      ],
+      "highlight_tiles": [
+        "eye_w"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "贴收拢的翅膀, 插上尾羽: 猫头鹰全身完工。",
+      "tip": "瘦高翅膀骑平台侧沿贴在身后, 尾羽朝北 —— 起飞前的姿势。",
+      "tiles_to_add": [
+        "wing_w",
+        "wing_e",
+        "tail_w",
+        "tail_e"
+      ],
+      "highlight_tiles": [
+        "body_w",
+        "platform_1_2"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "林地长出红蘑菇: 三片小红三角骑在拼缝上。",
+      "tip": "夜里的蘑菇圈 —— 传说绕着它走三圈会有好运气。",
+      "tiles_to_add": [
+        "mushroom_a",
+        "mushroom_b",
+        "mushroom_c"
+      ],
+      "highlight_tiles": [
+        "ground_0_0"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "种树苗、立观察牌: 月夜森林开园!",
+      "tip": "牌上写着: 保持安静 —— 猫头鹰工作到天亮, 白天请让它睡觉。",
+      "tiles_to_add": [
+        "sapling_a",
+        "sapling_b",
+        "sign"
+      ],
+      "highlight_tiles": [
+        "mushroom_a",
+        "eye_w"
+      ]
+    }
+  ]
+}
