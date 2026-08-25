@@ -2343,6 +2343,26 @@
       "thumbnail": "thumbnails/trex_skeleton_01.png"
     },
     {
+      "id": "combine_harvester_01",
+      "file": "models/combine_harvester_01.json",
+      "name": "联合收割机",
+      "name_en": "Combine Harvester 01",
+      "description": "只用核心九片型的双车联动收割场景: 收割机大轮在前小轮在后 (与拖拉机正相反), 车头是比车身还宽的 4 格箱形割台 —— 自己落地生根不吃车身一克悬挑, 三片直角割刀'田板格边+割台竖棱'双吸如锯齿入麦; 车身是敞口粮仓 (圈层合环 + 黄粮压顶 + 粮尖骑沿), 透明驾驶室横跨前桥, 排气等腰直上 4.0; 招牌是那条卸粮桥 —— 方板从粮仓北沿平伸到并行运粮车南沿, 两短边各吸一箱双端受力, 一条桥把两台车锁成一个大环; 运粮车下环两片车轮底座当轮、上环加高黄粮冒尖 —— 东面麦浪未割, 西面麦茬满地, 边收边卸, 丰收进行时!",
+      "difficulty": 3,
+      "total_pieces": 74,
+      "step_count": 14,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "农场",
+        "农业",
+        "收割机",
+        "车轮底座",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/combine_harvester_01.png"
+    },
+    {
       "id": "dump_truck_01",
       "file": "models/dump_truck_01.json",
       "name": "自卸卡车",
@@ -2419,6 +2439,25 @@
       "thumbnail": "thumbnails/planetarium_02.png"
     },
     {
+      "id": "rice_terrace_01",
+      "file": "models/rice_terrace_01.json",
+      "name": "梯田稻香",
+      "name_en": "Rice Terrace 01",
+      "description": "只用核心九片型的梯田景观: 整个模型就是一面被田坎雕出来的山坡 —— 三级水田沿山坡逐级抬升, 每一级都是'土坎墙四面合环 + 田面压顶'的箱形梯级, 上一级的田面就是下一级的屋顶, 上下两圈坎在山背面叠成 2 格高的整面崖; 30 度田埂坡道顶边吸坎顶、坡尾落地生根 (顶铰链 + 接地斜撑), 登田石阶盒与三级田坎共墙成环, 阶顶两边双吸; 青色水面上三排绿秧苗骑缝而立 (一缝双吸零力矩), 田头红墙黄顶农舍守着全场最高点 (顶尖 3.71) —— 春耕水满, 山坡一层层绿上去。",
+      "difficulty": 3,
+      "total_pieces": 74,
+      "step_count": 15,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "农场",
+        "农业",
+        "梯田",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/rice_terrace_01.png"
+    },
+    {
       "id": "robot_01",
       "file": "models/robot_01.json",
       "name": "机器人卫士",
@@ -2435,6 +2474,26 @@
         "环路结构"
       ],
       "thumbnail": "thumbnails/robot_01.png"
+    },
+    {
+      "id": "sheep_farm_01",
+      "file": "models/sheep_farm_01.json",
+      "name": "剪毛牧场",
+      "name_en": "Sheep Farm 01",
+      "description": "只用核心九片型的畜牧牧场, 讲完'剪羊毛'一整个流程: 石砌羊圈里一只没剪的大绵羊蓬松雪白 (透明片=羊毛, 身躯处处成环), 方头不借脖子直接骑羊背东沿 ('背板短边+体墙顶边'一线双吸), 双耳从头顶拼缝向两侧 45 度张开 (单耳力矩 2.7 远小于预算); 剪毛台上一只剪完的羊通体粉红 —— 四面体墙每片'台顶沿+台墙顶'一线双吸, 动物第一次摞上家具, 头顶 2.87 全场最高; 台边两座剪下的羊毛四坡自锁堆成小山, 栏外小羊羔 1x1 迷你体环排队等着轮到自己 —— 今年的毛真厚!",
+      "difficulty": 3,
+      "total_pieces": 74,
+      "step_count": 15,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "农场",
+        "农业",
+        "牧场",
+        "动物世界",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/sheep_farm_01.png"
     },
     {
       "id": "suspension_bridge_01",
@@ -2493,6 +2552,25 @@
         "高塔"
       ],
       "thumbnail": "thumbnails/water_tower_01.png"
+    },
+    {
+      "id": "corn_maze_01",
+      "file": "models/corn_maze_01.json",
+      "name": "玉米迷宫",
+      "name_en": "Corn Maze 01",
+      "description": "只用核心九片型的负空间迷宫: 主角不是墙围出的房间, 而是墙留出的路 —— 6x5 玉米田上 21 片绿色玉米墙骑田垄拼缝立成迷宫阵 (一缝双吸重心正压铰链零力矩, 拐角丁字竖边互咬), 橙色土路蜿蜒出唯一通路, 三条死胡同两处玉米荡守株待兔; 南门楼双柱托楣纯剪互锁, 迷宫中心 1x1 两层瞭望塔一层门框方开向终点、二层四面窗格方 360 度找路, 塔旗一线双吸; 四株等腰玉米高杆骑墙顶直上 3.0 —— 走错了别急, 上塔看一眼再来!",
+      "difficulty": 3,
+      "total_pieces": 75,
+      "step_count": 13,
+      "theme": "田园",
+      "tags": [
+        "田园",
+        "农场",
+        "农业",
+        "迷宫",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/corn_maze_01.png"
     },
     {
       "id": "crane_tower_02",
