@@ -87,7 +87,8 @@ bad()  { echo "  [!!] $*"; FAIL=$((FAIL+1)); }
 skip() { echo "  [--] SKIP: $*"; SKIP=$((SKIP+1)); }
 info() { echo "  $*"; }
 step() { echo; echo "==> $*"; }
-fail_hard() { echo; echo "FAILED: $*"; exit 1; }
+# 输出到 stderr: 在命令替换 (如 期望模型数 计算) 内触发时消息不被吞掉
+fail_hard() { echo >&2; echo "FAILED: $*" >&2; exit 1; }
 
 # 外部命令封装: 回显命令行, 非零退出码即整体失败 (对齐 ps1 Invoke-Checked)
 run_checked() {
