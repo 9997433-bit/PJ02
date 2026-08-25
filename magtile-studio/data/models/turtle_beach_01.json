@@ -1,0 +1,879 @@
+{
+  "schema_version": 1,
+  "id": "turtle_beach_01",
+  "name": "海龟孵化保护站",
+  "name_en": "Turtle Beach Station 01",
+  "description": "只用核心九片型的野生动物保护场景: 与救生站的高脚瞭望椅和海底实验室的舱体廊道都不同, 主角是三窝正在孵化的海龟卵 —— 三座开顶孵化围栏排成一列 (只围不盖, 四角竖边互咬照样闭环, 清色卵床铺在栏心), 三只绿色小海龟骑着岸线拼缝排队爬向大海; 北侧红白警示护栏竖边成链拦住游客, 青色科普牌窗格方插在沙缝上, 值班小屋门框朝栏、瘦高四坡尖顶斜棱互咬自锁 —— 嘘, 第一窝马上就要破壳了!",
+  "difficulty": 2,
+  "total_pieces": 48,
+  "tags": [
+    "海洋",
+    "探险",
+    "海龟",
+    "自然",
+    "保护站"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 36,
+        "isosceles_triangle": 4,
+        "equilateral_triangle": 3,
+        "rectangle": 3,
+        "door_frame": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "sea_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_4",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sand_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sand_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sand_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sand_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sand_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "turtle_a",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "turtle_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "turtle_c",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen1_s",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen1_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen1_w",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen1_e",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen2_s",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen2_n",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen2_w",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen2_e",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen3_s",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen3_n",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen3_w",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pen3_e",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hut_s",
+      "type": "door_frame",
+      "position": [
+        0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hut_n",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hut_w",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hut_e",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hut_roof_s",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        3.166667,
+        1.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hut_roof_e",
+      "type": "isosceles_triangle",
+      "position": [
+        0.833333,
+        3.5,
+        1.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hut_roof_n",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        3.833333,
+        1.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hut_roof_w",
+      "type": "isosceles_triangle",
+      "position": [
+        0.166667,
+        3.5,
+        1.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fence_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fence_5",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sign",
+      "type": "window_square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺海面: 三条蓝色长板短边互吸, 海在南边等着小海龟。",
+      "tip": "孵化季的夜晚, 小海龟破壳后会朝着大海的方向爬。",
+      "tiles_to_add": [
+        "sea_0",
+        "sea_2",
+        "sea_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺岸线行沙板, 三只小海龟骑上拼缝: 排队下海!",
+      "tip": "海龟底边整边吸住岸线拼缝 —— 一二三, 冲向大海!",
+      "tiles_to_add": [
+        "sand_0_1",
+        "sand_1_1",
+        "sand_2_1",
+        "sand_3_1",
+        "sand_4_1",
+        "sand_5_1",
+        "turtle_a",
+        "turtle_b",
+        "turtle_c"
+      ],
+      "highlight_tiles": [
+        "sea_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺围栏行: 栏心三格用清色卵床, 其余黄色沙板。",
+      "tip": "清色方板就是卵床 —— 每窝一百多枚卵埋在温暖的沙里。",
+      "tiles_to_add": [
+        "sand_0_2",
+        "sand_1_2",
+        "sand_2_2",
+        "sand_3_2",
+        "sand_4_2",
+        "sand_5_2"
+      ],
+      "highlight_tiles": [
+        "sand_1_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺护栏行沙板: 再来六片, 行行等边互吸。",
+      "tip": "沙滩连成一整张网 —— 围栏、小屋、护栏都要踩它的拼缝。",
+      "tiles_to_add": [
+        "sand_0_3",
+        "sand_1_3",
+        "sand_2_3",
+        "sand_3_3",
+        "sand_4_3",
+        "sand_5_3"
+      ],
+      "highlight_tiles": [
+        "sand_0_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "围前两窝孵化栏: 每座四墙合环, 开顶不盖 —— 卵要晒太阳。",
+      "tip": "开顶墙环四角竖边互咬照样闭合 —— 是保护罩, 不是盖子。",
+      "tiles_to_add": [
+        "pen1_s",
+        "pen1_n",
+        "pen1_w",
+        "pen1_e",
+        "pen2_s",
+        "pen2_n",
+        "pen2_w",
+        "pen2_e"
+      ],
+      "highlight_tiles": [
+        "sand_1_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "围第三窝孵化栏, 立科普牌: 窗格方插在沙缝上面向游客。",
+      "tip": "牌上写着: 请勿靠近卵床, 夜间请关灯 —— 灯光会带偏小海龟。",
+      "tiles_to_add": [
+        "pen3_s",
+        "pen3_n",
+        "pen3_w",
+        "pen3_e",
+        "sign"
+      ],
+      "highlight_tiles": [
+        "pen1_s"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "搭值班小屋: 四墙合环门朝围栏, 瘦高四坡尖顶骑墙顶自锁。",
+      "tip": "尖顶四条斜棱两两互咬 —— 顶尖 2.94, 巡护员在这里值夜班。",
+      "tiles_to_add": [
+        "hut_s",
+        "hut_n",
+        "hut_w",
+        "hut_e",
+        "hut_roof_s",
+        "hut_roof_e",
+        "hut_roof_n",
+        "hut_roof_w"
+      ],
+      "highlight_tiles": [
+        "sand_0_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "装警示护栏收尾: 红白相间三片, 竖边成链拦住游客。",
+      "tip": "护栏挡住人, 挡不住海风 —— 保护站开站, 等第一窝破壳!",
+      "tiles_to_add": [
+        "fence_3",
+        "fence_4",
+        "fence_5"
+      ],
+      "highlight_tiles": [
+        "sign",
+        "turtle_a"
+      ]
+    }
+  ]
+}
