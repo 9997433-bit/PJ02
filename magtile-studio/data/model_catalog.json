@@ -689,6 +689,25 @@
       "thumbnail": "thumbnails/sydney_opera_01.png"
     },
     {
+      "id": "car_wash_01",
+      "file": "models/car_wash_01.json",
+      "name": "自动洗车馆",
+      "name_en": "Auto Car Wash 01",
+      "description": "只用核心九片型的贯通式洗车隧道: 两端全开、车从楼里穿过去 —— 南北两面 2 层高墙 (二层透明观察窗) 被 8 片屋顶板以砖缝错拼锁成四榀门式刚架, 相邻列接缝错开半跨, 不存在贯通全宽的空中铰链线; 隧道里立刷/吊刷交替: 两对立刷底边整边吸湿地坪拼缝夹住车道, 一对粉色吊刷顶边整边吸屋顶板沿倒挂半空 (单刷 30g 远低于 strict 档 84g 悬挂预算), 正好擦到车顶; 小黄车赶在封顶之前开进刷位 (装配可达的秩序), 车轮紧贴立刷; 屋顶三颗透明泡泡骑板缝, 檐口黄色警示条, 入口红色招牌塔直上 4.0 —— 唰唰唰, 三分钟洗出一辆亮晶晶。",
+      "difficulty": 3,
+      "total_pieces": 58,
+      "step_count": 12,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "洗车",
+        "街景",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/car_wash_01.png"
+    },
+    {
       "id": "magic_tree_01",
       "file": "models/magic_tree_01.json",
       "name": "魔法垂枝树",
@@ -1286,6 +1305,25 @@
       "thumbnail": "thumbnails/farm_barn_01.png"
     },
     {
+      "id": "pedestrian_overpass_01",
+      "file": "models/pedestrian_overpass_01.json",
+      "name": "人行过街天桥",
+      "name_en": "Pedestrian Overpass 01",
+      "description": "只用核心九片型的过街天桥: 与跨河的悬索桥/廊桥/木桥不同, 它跨的是正在通车的马路 —— 桥下留足 2 格净空, 桥面被顶到 z=2, 于是结构逻辑变成'先把人送上两层楼': 南北两座 2x1 两层梯塔墙环环环相扣, 二层嵌透明窗格方候梯厅窗, 压顶长板即登桥平台; 塔旁梯箱作半程踏步, 30 度无障碍坡道坡尾自己落地 —— 地面->坡道->梯箱->梯塔->桥面一条完整动线; 桥面单跨长板两短边同吸两塔墙顶 (双端受力, 跨中零铰链缝), 透明防风屏整长边压桥沿, 蓝色标志牌直上 4.0; 一辆小红车正从桥下东行 —— 人车分流, 谁也不用等谁。",
+      "difficulty": 3,
+      "total_pieces": 65,
+      "step_count": 13,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "天桥",
+        "街景",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/pedestrian_overpass_01.png"
+    },
+    {
       "id": "water_slide_park_01",
       "file": "models/water_slide_park_01.json",
       "name": "水上滑梯乐园",
@@ -1845,6 +1883,25 @@
       "thumbnail": "thumbnails/tokyo_tower_01.png"
     },
     {
+      "id": "toll_station_01",
+      "file": "models/toll_station_01.json",
+      "name": "高速收费站",
+      "name_en": "Toll Station 01",
+      "description": "只用核心九片型的岛式收费站: 与独立门架托雨棚的加油站不同, 收费站没有一根专职立柱 —— 两片雨棚长板的短边直接压在三座收费亭的墙顶上, 亭子本身就是桥墩, 亭-棚-亭锁成两个门式闭环; 三座 1x1 两层收费亭分立两条车道之间, 一层收费窗正对司机、背门朝北, 二层信号窗人工道亮红/ETC 道亮绿; 人工道红色落杆三边受力横锁车道 (底边吸路面 + 两竖边咬亭墙棱), 蓝色小车车头正顶着落杆, ETC 道绿色小车已过亭线扬长而去; 雨棚前沿三片招牌墙托红色徽记直上 3.87 —— 一停一过, 两条车道讲完两种通行方式。",
+      "difficulty": 3,
+      "total_pieces": 69,
+      "step_count": 12,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "收费站",
+        "街景",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/toll_station_01.png"
+    },
+    {
       "id": "amphitheater_01",
       "file": "models/amphitheater_01.json",
       "name": "圆形剧场",
@@ -2398,6 +2455,25 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/suspension_bridge_01.png"
+    },
+    {
+      "id": "traffic_light_junction_01",
+      "file": "models/traffic_light_junction_01.json",
+      "name": "红绿灯路口",
+      "name_en": "Traffic Light Junction 01",
+      "description": "只用核心九片型的信号灯路口: 与靠'杆'拦车的铁路道口不同, 路口靠'灯'指挥 —— 招牌是两座四层墙环信号灯塔: 每层 4 片墙合环环环相扣 (塔高 4.0 靠闭环拓扑通过高层检查, 每层接口 4 条连接互为冗余), 第 2/3/4 层朝路口两面嵌绿/黄/红窗格方信号窗, 红黄绿自上而下纵列即教科书排布; 两塔对角布置四个方向各看各的灯; 四向透明斑马线铺满路口, 西北角交警岗亭了望窗正对路口、侧门朝斑马线、顶戴红色四坡尖顶; 一辆紫色小车停在南引道停止线前 —— 红灯亮了, 车头压线不越线, 安静等绿灯。",
+      "difficulty": 3,
+      "total_pieces": 74,
+      "step_count": 13,
+      "theme": "城市生活",
+      "tags": [
+        "城市",
+        "交通",
+        "红绿灯",
+        "街景",
+        "进阶"
+      ],
+      "thumbnail": "thumbnails/traffic_light_junction_01.png"
     },
     {
       "id": "water_tower_01",
