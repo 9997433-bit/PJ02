@@ -247,6 +247,14 @@ AI (含程序化生成器) 是加速器, 不是设计师。边界一次说清:
 - **组合配额**: 同一 (主技法, 主题) 组合全库上限 **6 个**, 且这 6 个至少覆盖 3 种不同 `build_paradigm`。
 - **全库占比**: 任一主技法占比 ≤ 12% (520 × 12% ≈ 62 个封顶); 任一范式占比 ≤ 30%。
 - **批次评审**: 内容按批发布, 每批 10 个。批内主技法重复 ≤ 2 次、主题重复 ≤ 3 次; 每批评审时策展人更新"多样性账本" (各技法/主题/范式的消耗进度)。
+- **批次评审一键机检**: 内容批 PR 的机器侧评审用 `tools/review_content_batch.sh <本批模型.json ...>` 一条命令跑完, 五道关卡全部阻断 (任一 FAIL 即退出非零):
+  1. `magtile_app validate --profile strict` 逐文件零警告 (豁免白名单与 `tools/audit_strict_physics.sh` 共用同一来源);
+  2. `tools/check_difficulty_quota.py --batch` 难度配额 D3 冻结硬闸门 (策展人豁免白名单经 `--whitelist-file` 透传);
+  3. `tools/check_content_series.py --strict` 系列归类机检 (`content_meta.series` 13 主题词值 / `matrix_bucket` 矩阵外桶恰好其一, 词值受控于 `data/content_series_map.json`);
+  4. `tools/check_core5_usage.py --strict` 片型分层 (core-9 打标一致性 + 免费层 80% 红线, 全库口径);
+  5. `tests/test_library_uniqueness.py` 唯一性抽查 (全库两两结构签名比对, sim > 0.85 克隆即 FAIL; `--skip-uniqueness` 可跳过快速迭代, 入库前必须补跑)。
+
+  机检通过只是入库的必要条件: 批内技法/主题节奏 (上一条) 在全库技法标注落地前仍由策展人按多样性账本人工核对, 策展终审 (3.4 节 10 项清单) 与 D4+ 实物复核照旧执行。
 - **实物复核率**: D5 与 D4 100%; D3 抽检 30%; D1–D2 抽检 10%。执行规程见 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) (敲击/提起/记录模板/元数据落盘); D4+ 待复核清单用 `tools/list_physical_pending.py` 跟踪, 复核通过后在 `content_meta` 写入 `physical_verified` 三字段 (5.1 节)。
 
 ### 4.4 策展人职责 (Curator)
