@@ -1,33 +1,31 @@
 #!/usr/bin/env python3
-"""生成模型 data/models/apiary_01.json (蜜语蜂场)。
+"""生成模型 data/models/apiary_01.json (蜜蜂养蜂场)。
 
-田园主题的第一座授粉农场: 主角是三座"双层箱塔 + 四坡箱盖"的
-可堆叠蜂箱 —— 与鸡舍 (架高台座 + 人字坡屋) 和羊场 (石圈 + 绵羊)
-的结构语言完全不同: 蜂箱是标准化的封闭箱塔, 一层繁殖箱、一层
-蜜脾箱, 顶上等边四坡箱盖斜棱互咬自锁; 南侧一整行花田开满粉黄
-两色, 三只黄色小蜜蜂骑在花田拼缝上排队回巢; 北侧摇蜜坊门框
-朝着蜂箱, 屋脊上一面瘦高蜂场旗 —— 全库唯一的"蜂箱阵 + 采蜜动线"。
+田园主题新作, 全库第一座昆虫养殖场 —— 与鸡舍 (单层棚屋)、
+羊圈 (围栏场) 的结构词汇完全错开: 本作的主角是两座"叠箱式"
+蜂箱塔 —— 真实养蜂场的继箱蜂箱就是一层层叠上去的, 模型用
+两层四墙合环的箱体逐层叠高, 底层门框方是蜜蜂的出入口 (巢门),
+顶上等边四坡锥顶当箱盖; 花田里四色蜜源花沿拼缝排开, 青色
+蜂蜜售卖牌立在场边 —— 全库唯一的"双塔叠箱 + 巢门朝南"剪影。
 
-结构总览 (世界单位: 1.0 = 正方形磁力片边长, 花田在南, 摇蜜坊在北):
-  - 草场 (x [0,6], y [0,4]): 花田/蜂箱/坊舍三行单位方板 x18 +
-    中央过道行长板 x3                                            21 片
-  - 蜂箱 x3 (1x1, z 0..2 + 箱盖): 每座两层墙环 8 + 等边四坡盖 4  36 片
-  - 小蜜蜂 x3: 黄色等边三角骑花田拼缝                             3 片
-  - 摇蜜坊 (x [0,2], y [3,4], z 0..1): 六墙 (含门框方) + 长板
-    平顶 (短边入扣东西墙顶) + 门楣蜂场旗 (瘦高等腰, 顶尖 3.0)     8 片
-  - 围栏 x2 (y=4) + 科普牌窗格方 x1 (y=0)                         3 片
-  合计 71 片, 15 个教程步骤, 7 种磁力片形状 (全部 CORE-9 之内)。
+结构总览 (世界单位: 1.0 = 正方形磁力片边长, 巢门朝南):
+  - 花田草地 (x [0,6], y [0,3]): 三行单位方板 x18            18 片
+  - 蜂箱塔 x2 (1x1 足印, x [1,2] 与 [4,5], y [1,2]):
+    底箱四墙 (含南面巢门门框) x4 + 继箱四墙 x4
+    + 等边四坡箱盖 x4, 每塔 12 片                            24 片
+  - 蜜源花 x4: 四色等边三角骑草地拼缝                          4 片
+  - 蜂蜜售卖牌: 青色窗格方立在场边                             1 片
+  合计 47 片, 10 个教程步骤, 4 种磁力片形状 (全部 CORE-9 之内)。
 
 物理规则要点 (validate 常规 + strict 双档零警告):
-  - 蜂箱两层墙环四角竖边互咬闭环, 上层墙脚整边压下层墙顶;
-    箱盖四片等边三角斜棱两两互吸自锁成环, 底边各吸一道墙顶;
-    蜂箱北墙脚吸蜂箱行方板的北沿 (过道行为长板, 拼缝取南侧);
-  - 摇蜜坊六墙合环, 长板平顶两条短边整边入扣东西墙顶; 蜂场旗
-    底边整边吸南墙墙顶 (门楣沿口);
-  - 蜜蜂/围栏/科普牌底边整边吸草场拼缝, 剪断任何一条装饰连接
-    最多失联 1 片 (< 3), R8 单点失效通过;
-  - 拼缝纪律: 立墙墙脚线处处有等长拼缝可吸 (单位方板行供缝),
-    行行等边互吸全场连通。
+  - 蜂箱塔是标准叠箱: 底箱四墙脚踩草地拼缝整边吸合、四角竖边
+    互咬闭环; 继箱四墙底边整边压底箱墙顶, 竖直连续无侧向力矩;
+  - 等边四坡箱盖直接骑继箱墙顶: 四条斜棱两两互吸自锁成环,
+    底边各吸一道墙顶 (锥尖 2.71) —— 值班小屋同款自锁封顶;
+  - 蜜源花/售卖牌底边整边吸草地拼缝, 各自独立吸附, 剪断任何
+    一条装饰连接最多失联 1 片 (< 3), R8 单点失效通过;
+  - 草地拼缝纪律: 全部草地为单位方板, 蜂箱墙脚线处处有等长
+    拼缝可吸, 行行等边互吸全场连通。
 
 用法: python3 tools/generate_apiary_01.py  (在 magtile-studio 目录下运行)
 """
@@ -40,19 +38,19 @@ from magtile_gen import ModelBuilder  # noqa: E402
 
 b = ModelBuilder()
 
-FLOWER_A = "pink"     # 花田
-FLOWER_B = "yellow"
-GRASS = "green"       # 草场
-BEE = "yellow"        # 小蜜蜂
-HIVE_LOW = "orange"   # 蜂箱下层 (繁殖箱)
-HIVE_UP = "yellow"    # 蜂箱上层 (蜜脾箱)
-HIVE_CAP = "clear"    # 箱盖
-HOUSE = "clear"       # 摇蜜坊墙
-DOOR = "orange"       # 摇蜜坊门
-ROOF = "red"          # 摇蜜坊平顶
-FLAG = "red"          # 屋脊蜂场旗
-FENCE = "clear"       # 围栏
-SIGN = "cyan"         # 科普牌
+GRASS = "green"     # 花田草地
+PATH = "yellow"     # 场内小径
+BOX_A1 = "yellow"   # A 塔底箱
+BOX_A2 = "orange"   # A 塔继箱
+LID_A = "red"       # A 塔箱盖
+BOX_B1 = "cyan"     # B 塔底箱
+BOX_B2 = "blue"     # B 塔继箱
+LID_B = "purple"    # B 塔箱盖
+GATE_A = "orange"   # A 塔巢门
+GATE_B = "blue"     # B 塔巢门
+SIGN = "cyan"       # 蜂蜜售卖牌
+FLOWERS = [("flower_pink", 0, "pink"), ("flower_red", 2, "red"),
+           ("flower_purple", 3, "purple"), ("flower_orange", 5, "orange")]
 
 
 def wall_ns_t(tid, tile_type, x0, y, z0, color):
@@ -60,170 +58,128 @@ def wall_ns_t(tid, tile_type, x0, y, z0, color):
 
 
 # =================================================================
-# 1. 草场四行 (y [0,4]): 花田/蜂箱/坊舍行为单位方板 (供墙脚拼缝),
-#    中央过道行为三条长板
+# 1. 花田草地三行 (y [0,3]): 全单位方板, 中行留出黄色小径
 # =================================================================
 for x0 in range(6):
-    color = FLOWER_A if x0 % 2 == 0 else FLOWER_B
-    b.flat(f"field_{x0}_0", x0, 0, 0.0, color)            # 花田行
+    b.flat(f"grass_{x0}_0", x0, 0, 0.0, GRASS)        # 南行 (花行)
 for x0 in range(6):
-    b.flat(f"field_{x0}_1", x0, 1, 0.0, GRASS)            # 蜂箱行
-b.flat_rect("aisle_0", 0, 2, 0.0, GRASS)                  # 过道行 (长板)
-b.flat_rect("aisle_2", 2, 2, 0.0, GRASS)
-b.flat_rect("aisle_4", 4, 2, 0.0, GRASS)
+    color = PATH if x0 in (0, 3) else GRASS           # 小径通向两塔
+    b.flat(f"grass_{x0}_1", x0, 1, 0.0, color)        # 蜂箱行
 for x0 in range(6):
-    b.flat(f"field_{x0}_3", x0, 3, 0.0, GRASS)            # 坊舍行
+    b.flat(f"grass_{x0}_2", x0, 2, 0.0, GRASS)        # 北行
 
 # =================================================================
-# 2. 蜂箱 x3 (x [1,2] / [3,4] / [5,6], y [1,2]):
-#    两层墙环 + 等边四坡箱盖
+# 2. 蜂箱塔 A (x [1,2], y [1,2]): 底箱 + 继箱 + 等边四坡箱盖
 # =================================================================
-HIVE_CAPS = {}
-for i, x0 in enumerate((1, 3, 5), start=1):
-    for z0, color, tag in ((0, HIVE_LOW, "low"), (1, HIVE_UP, "up")):
-        b.wall_ns(f"hive{i}_{tag}_s", x0, 1.0, z0, color)
-        b.wall_ns(f"hive{i}_{tag}_n", x0, 2.0, z0, color)
-        b.wall_ew(f"hive{i}_{tag}_w", float(x0), 1, z0, color)
-        b.wall_ew(f"hive{i}_{tag}_e", float(x0 + 1), 1, z0, color)
-    HIVE_CAPS[i] = b.hat4(f"hive{i}_cap", x0, 1, 2.0, HIVE_CAP,
-                          shape="equilateral_triangle")   # 盖尖 2.71
+wall_ns_t("boxa1_s", "door_frame", 1, 1.0, 0, GATE_A)  # 巢门朝南
+b.wall_ns("boxa1_n", 1, 2.0, 0, BOX_A1)
+b.wall_ew("boxa1_w", 1.0, 1, 0, BOX_A1)
+b.wall_ew("boxa1_e", 2.0, 1, 0, BOX_A1)
+b.wall_ns("boxa2_s", 1, 1.0, 1, BOX_A2)                # 继箱整层
+b.wall_ns("boxa2_n", 1, 2.0, 1, BOX_A2)
+b.wall_ew("boxa2_w", 1.0, 1, 1, BOX_A2)
+b.wall_ew("boxa2_e", 2.0, 1, 1, BOX_A2)
+LID_A_IDS = b.hat4("lida", 1, 1, 2.0, LID_A,
+                   shape="equilateral_triangle")       # 锥尖 2.71
 
 # =================================================================
-# 3. 小蜜蜂 x3: 骑在花田与草场之间的拼缝上 (y=1)
+# 3. 蜂箱塔 B (x [4,5], y [1,2]): 同构叠箱, 换青蓝配色
 # =================================================================
-b.crest_ns("bee_a", 0, 1.0, 0.0, BEE)
-b.crest_ns("bee_b", 2, 1.0, 0.0, BEE)
-b.crest_ns("bee_c", 4, 1.0, 0.0, BEE)
+wall_ns_t("boxb1_s", "door_frame", 4, 1.0, 0, GATE_B)  # 巢门朝南
+b.wall_ns("boxb1_n", 4, 2.0, 0, BOX_B1)
+b.wall_ew("boxb1_w", 4.0, 1, 0, BOX_B1)
+b.wall_ew("boxb1_e", 5.0, 1, 0, BOX_B1)
+b.wall_ns("boxb2_s", 4, 1.0, 1, BOX_B2)
+b.wall_ns("boxb2_n", 4, 2.0, 1, BOX_B2)
+b.wall_ew("boxb2_w", 4.0, 1, 1, BOX_B2)
+b.wall_ew("boxb2_e", 5.0, 1, 1, BOX_B2)
+LID_B_IDS = b.hat4("lidb", 4, 1, 2.0, LID_B,
+                   shape="equilateral_triangle")
 
 # =================================================================
-# 4. 摇蜜坊 (x [0,2], y [3,4], z 0..1): 六墙 + 双板平顶 + 屋脊旗
+# 4. 蜜源花 x4 (南行花田拼缝) + 蜂蜜售卖牌
 # =================================================================
-b.wall_ns("house_s_w", 0, 3.0, 0, HOUSE)
-wall_ns_t("house_door", "door_frame", 1, 3.0, 0, DOOR)    # 门朝蜂箱
-b.wall_ns("house_n_w", 0, 4.0, 0, HOUSE)
-b.wall_ns("house_n_e", 1, 4.0, 0, HOUSE)
-b.wall_ew("house_w", 0.0, 3, 0, HOUSE)
-b.wall_ew("house_e", 2.0, 3, 0, HOUSE)
-b.flat_rect("house_roof", 0, 3, 1.0, ROOF)                # 短边入扣东西墙顶
-b.spire_ns("house_flag", 0, 3.0, 1.0, FLAG)               # 门楣旗, 顶尖 3.0
+for tid, x0, color in FLOWERS:
+    b.crest_ns(tid, x0, 1.0, 0.0, color)               # 骑 y=1 拼缝朝南
+wall_ns_t("honey_sign", "window_square", 3, 3.0, 0, SIGN)  # 场边售卖牌
 
 # =================================================================
-# 5. 围栏 x2 (y=4) + 科普牌 (y=0 花田南沿)
-# =================================================================
-b.wall_ns("fence_3", 3, 4.0, 0, FENCE)
-b.wall_ns("fence_5", 5, 4.0, 0, FENCE)
-wall_ns_t("sign", "window_square", 4, 0.0, 0, SIGN)       # 科普牌
-
-# =================================================================
-# 教程步骤 (15 步)
+# 教程步骤 (10 步)
 # =================================================================
 b.step(
-    "铺南侧花田: 粉黄相间六片方板, 边边互吸连成一行。",
-    [f"field_{x0}_0" for x0 in range(6)],
-    tip="蜜蜂的一天从花田开始 —— 花越多, 蜂蜜越香。",
+    "铺南行花田: 六片绿色草地方板边边互吸连成一排。",
+    [f"grass_{x0}_0" for x0 in range(6)],
+    tip="蜜源花田在蜂箱南边 —— 蜜蜂出巢门就能上班采蜜。",
 )
 b.step(
-    "铺蜂箱行草场: 绿色方板六片, 与花田行行互吸。",
-    [f"field_{x0}_1" for x0 in range(6)],
-    highlight=["field_0_0"],
-    tip="草场连成一整张网, 后面的蜂箱都要踩它的拼缝。",
+    "铺蜂箱行: 两格黄色小径正对两座蜂箱的位置。",
+    [f"grass_{x0}_1" for x0 in range(6)],
+    highlight=["grass_0_0"],
+    tip="行行等边互吸 —— 蜂箱墙脚要踩的拼缝就在这行上。",
 )
 b.step(
-    "铺中央过道: 三条绿色长板首尾互吸, 留给养蜂人巡场。",
-    ["aisle_0", "aisle_2", "aisle_4"],
-    highlight=["field_0_1"],
-    tip="养蜂人每天沿着长板过道巡视, 看看哪箱蜜先满。",
+    "铺北行草地: 再来六片, 花田连成一整张网。",
+    [f"grass_{x0}_2" for x0 in range(6)],
+    highlight=["grass_0_1"],
+    tip="草地是全场的地基, 每条拼缝都是磁力吸合线。",
 )
 b.step(
-    "铺北侧坊舍行草场: 摇蜜坊和围栏都盖在这一行上。",
-    [f"field_{x0}_3" for x0 in range(6)],
-    highlight=["aisle_0"],
-    tip="四行方板铺完, 蜂场的地盘就圈好了。",
+    "立 A 塔底箱: 四墙合环, 南面用门框方当巢门。",
+    ["boxa1_s", "boxa1_n", "boxa1_w", "boxa1_e"],
+    highlight=["grass_1_1"],
+    tip="墙脚踩拼缝整边吸合, 四角竖边互咬 —— 巢门朝南晒太阳。",
 )
 b.step(
-    "立第一座蜂箱的繁殖箱: 四面橙色墙合环, 四角竖边互咬。",
-    ["hive1_low_s", "hive1_low_n", "hive1_low_w", "hive1_low_e"],
-    highlight=["field_1_1"],
-    tip="墙脚要踩住草场拼缝 —— 繁殖箱里住着蜂后和小幼虫。",
+    "叠 A 塔继箱: 四片橙色墙整层压上底箱墙顶。",
+    ["boxa2_s", "boxa2_n", "boxa2_w", "boxa2_e"],
+    highlight=["boxa1_s"],
+    tip="上环整边压下环 —— 蜂群壮大了, 养蜂人就再叠一层继箱。",
 )
 b.step(
-    "叠上第一座蜂箱的蜜脾箱: 黄色墙环整边压住下层墙顶。",
-    ["hive1_up_s", "hive1_up_n", "hive1_up_w", "hive1_up_e"],
-    highlight=["hive1_low_s"],
-    tip="上箱装蜜, 下箱育儿 —— 真蜂场就是这样一层层叠起来的。",
+    "盖 A 塔箱盖: 四片红色等边三角合成锥顶, 斜棱互咬自锁。",
+    LID_A_IDS,
+    highlight=["boxa2_s"],
+    tip="锥尖 2.71 —— 四条斜棱两两吸住, 不用盖板照样封顶。",
 )
 b.step(
-    "盖第一座蜂箱的箱盖: 四片等边三角斜棱互咬, 收成小尖顶。",
-    HIVE_CAPS[1],
-    highlight=["hive1_up_s"],
-    tip="四条斜棱两两互吸自锁成环 —— 盖尖 2.71, 雨水顺坡流走。",
+    "立 B 塔底箱: 蓝色巢门朝南, 四墙合环踩稳拼缝。",
+    ["boxb1_s", "boxb1_n", "boxb1_w", "boxb1_e"],
+    highlight=["grass_4_1"],
+    tip="两座蜂箱隔两格排开 —— 蜂群各回各家不迷路。",
 )
 b.step(
-    "立第二座蜂箱的两层箱塔: 先橙色繁殖箱, 再黄色蜜脾箱。",
-    ["hive2_low_s", "hive2_low_n", "hive2_low_w", "hive2_low_e",
-     "hive2_up_s", "hive2_up_n", "hive2_up_w", "hive2_up_e"],
-    highlight=["hive1_cap_s"],
-    tip="这次一口气叠两层 —— 记得每层四角都要咬紧再往上叠。",
+    "叠 B 塔继箱: 四片蓝色墙整层压顶, 双塔一样高。",
+    ["boxb2_s", "boxb2_n", "boxb2_w", "boxb2_e"],
+    highlight=["boxb1_s"],
+    tip="叠箱是养蜂场的招牌 —— 箱子越高, 蜂蜜越多。",
 )
 b.step(
-    "盖第二座蜂箱的箱盖: 手法和第一座一样。",
-    HIVE_CAPS[2],
-    highlight=["hive2_up_s"],
-    tip="三座蜂箱排成一列, 间隔一格 —— 蜜蜂认得自家门口。",
+    "盖 B 塔箱盖: 紫色锥顶合拢, 两座蜂箱塔完工。",
+    LID_B_IDS,
+    highlight=["boxb2_s"],
+    tip="对角顺序放四片斜棱, 最后一片同时吸住两条棱。",
 )
 b.step(
-    "立第三座蜂箱的两层箱塔: 蜂场东端最后一座。",
-    ["hive3_low_s", "hive3_low_n", "hive3_low_w", "hive3_low_e",
-     "hive3_up_s", "hive3_up_n", "hive3_up_w", "hive3_up_e"],
-    highlight=["hive2_cap_s"],
-    tip="东端的墙脚踩在草场最外沿的拼缝上, 一样咬得牢。",
-)
-b.step(
-    "盖第三座蜂箱的箱盖: 蜂箱阵完工!",
-    HIVE_CAPS[3],
-    highlight=["hive3_up_s"],
-    tip="三顶小尖盖一字排开 —— 远看像三座小金字塔。",
-)
-b.step(
-    "三只小蜜蜂骑上花田拼缝: 排队飞回自家蜂箱。",
-    ["bee_a", "bee_b", "bee_c"],
-    highlight=["field_0_0", "hive1_low_s"],
-    tip="蜜蜂底边整边吸住拼缝 —— 嗡嗡嗡, 满载花蜜回巢喽!",
-)
-b.step(
-    "搭摇蜜坊: 六面墙合环, 门框方正对蜂箱阵。",
-    ["house_s_w", "house_door", "house_n_w", "house_n_e",
-     "house_w", "house_e"],
-    highlight=["field_0_3"],
-    tip="养蜂人抱着蜜脾从这扇门进坊, 摇蜜机就在屋里。",
-)
-b.step(
-    "盖摇蜜坊长板平顶, 门楣上立起蜂场旗: 瘦高三角直指天空。",
-    ["house_roof", "house_flag"],
-    highlight=["house_s_w"],
-    tip="长板两条短边整边入扣东西墙顶, 旗子底边吸住门楣沿口 —— 顶尖 3.0!",
-)
-b.step(
-    "装北侧围栏和花田科普牌: 蜂场开张!",
-    ["fence_3", "fence_5", "sign"],
-    highlight=["house_flag", "bee_a"],
-    tip="牌上写着: 轻轻走慢慢看, 别挡住蜜蜂的回家路。",
+    "种蜜源花并立售卖牌: 四色花朵骑上花田拼缝, 青色窗格方朝路。",
+    [tid for tid, _, _ in FLOWERS] + ["honey_sign"],
+    highlight=["grass_0_0", "grass_5_0"],
+    tip="花底边整边吸拼缝 —— 开张啦, 新鲜蜂蜜等你来尝!",
 )
 
 b.finalize(
     model_id="apiary_01",
-    name="蜜语蜂场",
+    name="蜜蜂养蜂场",
     name_en="Honeybee Apiary 01",
     description=(
-        "只用核心九片型的授粉农场: 与鸡舍的架高台座和羊场的石圈"
-        "都不同, 主角是三座标准化蜂箱 —— 每座都是'双层箱塔 + "
-        "四坡箱盖'的可堆叠单元: 橙色繁殖箱住蜂后, 黄色蜜脾箱装"
-        "蜂蜜, 等边四坡箱盖斜棱互咬自锁; 南侧粉黄花田开成一行, "
-        "三只黄色小蜜蜂骑着拼缝排队回巢; 北侧摇蜜坊门框朝箱、"
-        "门楣蜂场旗直指天空 —— 嘘, 听, 整座蜂场都在嗡嗡唱歌!"
+        "只用核心九片型的昆虫养殖场景: 主角是两座叠箱式蜂箱塔 —— "
+        "真实养蜂场的继箱蜂箱一层层叠高, 模型用两层四墙合环的箱体"
+        "整层互压 (底层门框方是蜜蜂进出的巢门, 巢门一律朝南), 等边"
+        "四坡箱盖四条斜棱两两互咬自锁封顶 (锥尖 2.71); 黄橙红与"
+        "青蓝紫的双塔配色一暖一冷, 花田里粉红紫橙四色蜜源花骑拼缝"
+        "排开, 青色蜂蜜售卖牌立在场边 —— 嗡嗡嗡, 采蜜小队出发!"
     ),
-    difficulty=3,
-    tags=["田园", "农场", "蜜蜂", "蜂箱", "自然", "进阶"],
-    min_pieces=71,
-    min_steps=15,
+    difficulty=2,
+    tags=["田园", "昆虫", "蜜蜂", "农场", "自然"],
+    min_pieces=47,
+    min_steps=10,
 )

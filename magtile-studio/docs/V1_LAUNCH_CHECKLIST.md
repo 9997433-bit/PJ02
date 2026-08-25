@@ -38,7 +38,9 @@ tools/check_v1_readiness.sh --help     # 完整用法
 退出码: **0** = 无 P0 失败; **1** = 存在 P0 失败 (2026-08-25 17:20 UTC
 `--quick` 实跑为 1: 合计 24 项 13 PASS / 2 FAIL / 9 SKIP —— 自动侧
 P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项全 PASS);
-**2** = 环境/参数不满足。
+**2** = 环境/参数不满足。全量档 (QA + L2 + L3 硬闸门) 最新实跑留痕:
+[reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md)
+(2026-08-25 17:38 UTC, `5b915a0` 基线)。
 
 ## 1. 内容 (目标 200~250 模型)
 
@@ -49,7 +51,7 @@ P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项全 PASS);
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
 | C1 | 模型库体量达 200~250 | P0 | Auto (R1) | `data/models/*.json` 计数; [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 产能与主题池 | ✅ 209 个 JSON (最近登记批 `856fab0` 205→209; R1 实跑 PASS: 门槛 200 已过, 处于 200~250 目标区间) |
-| C2 | 全库质量门禁全绿 (16 关 QA + strict 零未豁免警告) | P0 | Auto (R5) | `tests/run_full_qa.sh` / `tools/run_strict_audit.sh`; 最近报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) | ✅ 全库 strict 双档零未豁免警告 (唯一豁免 `suspension_bridge_01` 已文档化) |
+| C2 | 全库质量门禁全绿 (16 关 QA + strict 零未豁免警告) | P0 | Auto (R5) | `tests/run_full_qa.sh` / `tools/run_strict_audit.sh`; 巡检深报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) (10:48 快照, 131 模型时点); 最新全库实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) (`5b915a0` 基线, 209 模型) | ✅ 全库 209 模型 strict 双档零未豁免警告 (最新实跑随发布门禁全量档: 全量 QA 39 子关卡 PASS + D4+ jitter 45/45 全绿; 唯一豁免 `suspension_bridge_01` 已文档化) |
 | C3 | 模型库目录全量登记 + 缩略图全覆盖 | P0 | Auto (R2) | `tools/update_model_catalog.py` / `tools/generate_thumbnails.py` | ✅ JSON 209 / 目录登记 209 / 缩略图就绪 209 三方对账一致 (R2 实跑 PASS) |
 | C4 | 免费层 30 对齐 (标签 = starter 清单, 全 core-9) | P0 | Auto (R3) | `tools/verify_free_tier.py`; 决议 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md) | ✅ 三条断言常绿 (随发布门禁复跑) |
 | C5 | 主题覆盖与难度分布终审 (D1~D4 全覆盖, 系列不断档) | P1 | Manual | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2; `magtile_app library` 分布输出 | 🔶 主题池持续补批中, 上架前人工终审一次 |
@@ -76,7 +78,7 @@ P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项全 PASS);
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
 | D1 | 打包资产与手册完备 (CPack / WiX / starter 清单 / 第三方声明) | P0 | Auto (R9) | `platforms/windows/packaging/` + 两份打包手册 + CI `windows-release.yml` | ✅ 资产齐备 (探测存在性) |
-| D2 | Windows 安装包在真实 runner 出包 (流水线转正) | P0 | Manual | `.github/workflows/windows-release.yml` (**草案, 尚未在真实 runner 上验证**, 见该文件头注) + 触发与首跑签核指南 [../scripts/package_windows.md](../scripts/package_windows.md) §8 (触发命令 / 预期产物 / CI 排查表 / 签核登记表) | 🔶 首跑阻塞项已修 (windows-latest 的 Win Server 2025 镜像已移除预装 NSIS → 流水线打包前 Chocolatey 自装) + Linux 可验子集全绿 (actionlint 零告警 / 版本提取步 pwsh 实测 / `smoke_qt_windows.ps1 -DryRun` 自检过 / `smoke_qt_linux_pack.sh` 41 项全绿); 触发与验收路径已落档 §8 —— workflow 已带 `workflow_dispatch` + `model_set` (full/starter) 输入, 验收口径为 full/starter 两场 dispatch 试跑全绿并按 §8.4 登记签核 (注意 dispatch 需 workflow 已在默认分支, 未合入前替代路径见 §8.1); 真实 runner 出包仍待触发, 全绿后按 §8.5 翻 ✅ |
+| D2 | Windows 安装包在真实 runner 出包 (流水线转正) | P0 | Manual | `.github/workflows/windows-release.yml` (**草案, 尚未在真实 runner 上验证**, 见该文件头注) + 触发与首跑签核指南 [../scripts/package_windows.md](../scripts/package_windows.md) §8 (触发命令 / 预期产物 / CI 排查表 / 签核登记表) + 触发前预检清单 [reports/WINDOWS_CI_PREFLIGHT.md](reports/WINDOWS_CI_PREFLIGHT.md) (平台前提 / 仓库状态 / 场次纪律, 本地可验部分已全绿登记) | 🔶 首跑阻塞项已修 (windows-latest 的 Win Server 2025 镜像已移除预装 NSIS → 流水线打包前 Chocolatey 自装) + Linux 可验子集全绿 (actionlint 零告警 / 版本提取步 pwsh 实测 / `smoke_qt_windows.ps1 -DryRun` 自检过 / `smoke_qt_linux_pack.sh` 41 项全绿); 触发与验收路径已落档 §8 —— workflow 已带 `workflow_dispatch` + `model_set` (full/starter) 输入, 验收口径为 full/starter 两场 dispatch 试跑全绿并按 §8.4 登记签核 (注意 dispatch 需 workflow 已在默认分支, 未合入前替代路径见 §8.1); 真实 runner 出包仍待触发, 全绿后按 §8.5 翻 ✅ |
 | D3 | Windows 实机验收 (干净 Win10/11, 未装 Qt/VS) | P0 | Manual | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §11 (自动冒烟 `smoke_qt_windows.ps1` + 人工验收单) | ⬜ 无 Windows 实机记录 |
 | D4 | macOS 打包 (macdeployqt + DMG) + 签名公证 (Developer ID / notarytool) | P0 | Manual | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §5 macOS 小节 (公证步骤已写明) + §12 验收清单; 人工验收单 (可打印) [reports/MACOS_ACCEPTANCE_CHECKLIST.md](reports/MACOS_ACCEPTANCE_CHECKLIST.md) | ⬜ 无 macOS 实机记录; 人工验收单已备 (36 项勾选表: 安装/启动/教程/家长门/订阅/签名公证, D4 收口须正式档 P0 32 项全过并按其 §9 签核回填) |
 | D5 | 代码签名证书 (Windows Authenticode; 依赖运营主体 L4) | P0 | Manual | [../scripts/package_windows.md](../scripts/package_windows.md) 第十一节 (`signtool`, 未签名会被 SmartScreen 拦截) | ⬜ 证书未申请 |
@@ -131,8 +133,8 @@ P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项全 PASS);
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| G1 | 快检档常绿 (免费层对齐 + strict 全库巡检 + 待复核报告) | P0 | Auto (R5) | `tools/run_release_gate.sh` | ✅ 探测通过 (报告型 L3 项不阻断) |
-| G2 | 出包终防线全绿: `tools/run_release_gate.sh --full --fail-on-pending` | P0 | Auto + 线下 | 同上; D4+ 实物复核清零是前置 (见 §8) | ⬜ 被 §8 实物复核卡住 (45 个待复核即红灯) |
+| G1 | 快检档常绿 (免费层对齐 + strict 全库巡检 + 待复核报告) | P0 | Auto (R5) | `tools/run_release_gate.sh`; 最新全量实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) | ✅ 探测通过 (报告型 L3 项不阻断); 全量档 QA 39 子关卡 + L2 抗扰动档亦全绿 (`5b915a0` 基线) |
+| G2 | 出包终防线全绿: `tools/run_release_gate.sh --full --fail-on-pending` | P0 | Auto + 线下 | 同上; D4+ 实物复核清零是前置 (见 §8) | ⬜ 被 §8 实物复核卡住 —— 软件侧已达上限: 最新实跑 `--full --l2 --fail-on-pending` 退出码 1, QA + L2 全绿仅 L3 实物硬闸门红 (D4+ 45 个待复核 0/45, 见 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md)); 实搭清零前保持红灯 |
 
 ## 8. 实物复核 (L2 三层缩减流程)
 
@@ -181,8 +183,8 @@ D4+ `--jitter 50` 45/45 全绿, `run_release_gate --full --l2` QA+L2
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| S0 | 第二层虚拟物理验证全绿 (D4+ 默认 `--jitter 50` + 风险报告 + 自动标记) | P0 | Auto (R17) | `magtile_app validate --jitter N` (蒙特卡洛 ±1.5mm/±2° 逐步扰动, 失败记 F08 类) + `tools/physical_risk_report.py` + [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件代码化; 门禁接入 `tools/run_strict_audit.sh` / `tools/run_release_gate.sh`; jitter 夹具与 risk report 单测随 ctest; 就绪探测载体 `tools/check_v1_readiness.sh` R17 (P1 报告档): D4+ 确定性抽检 —— D5 全数优先 + 大体量 D4 按总片数降序补足 (默认 10 个, `--jitter-sample` 可调; 与 `physical_sample_pack.py` 同一风险代理口径), 逐个 `validate --jitter 50`; 慢项 `--quick` 记 SKIP 而**全量签核必跑**: 二进制缺失 / `--jitter` 特性不可用 / 抽样为空一律显式 FAIL 不静默跳过; `physical_risk_report.py` 落地后抽样源可切换其高风险 Top 子集 | ✅ 工具链 + 4 边缘模型加固全部入库; D4+ jitter 45/45 全绿 (`5b915a0` 基线); `run_release_gate --full --l2` QA+L2 全绿 |
-| S1 | 缩减人手集实搭签核: **risk Top 15 + 结构族代表** (并集去重, 清单以两份报告实跑输出钉死) | P0 | Auto 报告 (R6 + R17) + Manual 实搭 | `tools/physical_risk_report.py` Top 15 人手建议 + `tools/physical_family_pack.py` 结构族代表; 规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) + 上手指南 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + 工作单 [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md); 原 V1 抽样包 10 个 ([reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md), `tools/physical_sample_pack.py --fail-on-missing-sample`) 预计与 Top 15 高度重合, 作首批排产兼第二层校准数据 | ⬜ 0 已复核 —— 人手范围由报告钉死, **不必 209 全搭** |
+| S0 | 第二层虚拟物理验证全绿 (D4+ 默认 `--jitter 50` + 风险报告 + 自动标记) | P0 | Auto (R17) | `magtile_app validate --jitter N` (蒙特卡洛 ±1.5mm/±2° 逐步扰动, 失败记 F08 类) + `tools/physical_risk_report.py` + [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) §2 触发条件代码化; 门禁接入 `tools/run_strict_audit.sh` / `tools/run_release_gate.sh`; jitter 夹具与 risk report 单测随 ctest; 就绪探测载体 `tools/check_v1_readiness.sh` R17 (P1 报告档): D4+ 确定性抽检 —— D5 全数优先 + 大体量 D4 按总片数降序补足 (默认 10 个, `--jitter-sample` 可调; 与 `physical_sample_pack.py` 同一风险代理口径), 逐个 `validate --jitter 50`; 慢项 `--quick` 记 SKIP 而**全量签核必跑**: 二进制缺失 / `--jitter` 特性不可用 / 抽样为空一律显式 FAIL 不静默跳过; `physical_risk_report.py` 落地后抽样源可切换其高风险 Top 子集 | ✅ 工具链 + 4 边缘模型加固全部入库; D4+ jitter 45/45 全绿 (`5b915a0` 基线); `run_release_gate --full --l2` QA+L2 全绿 (实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md)) |
+| S1 | 缩减人手集实搭签核: **risk Top 15 + 结构族代表** (并集去重, 清单以两份报告实跑输出钉死) | P0 | Auto 报告 (R6 + R17) + Manual 实搭 | `tools/physical_risk_report.py` Top 15 人手建议 (实跑报告 [reports/PHYSICAL_RISK_REPORT.md](reports/PHYSICAL_RISK_REPORT.md)) + `tools/physical_family_pack.py` 结构族代表 (实跑报告 [reports/PHYSICAL_FAMILY_PACK.md](reports/PHYSICAL_FAMILY_PACK.md)); 规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) + 上手指南 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + 工作单 [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md); 原 V1 抽样包 10 个 ([reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md), `tools/physical_sample_pack.py --fail-on-missing-sample`) 预计与 Top 15 高度重合, 作首批排产兼第二层校准数据 | ⬜ 0 已复核 —— 人手范围由报告钉死, **不必 209 全搭** |
 | S2 | D4+ 实物风险全覆盖清零 (缩减集实搭 + 同族代表结论 + 第二层全绿合围) | P0 | Auto 报告 (R7, 覆盖口径随 L2 门禁接入升级) + Manual 实搭 | `tools/list_physical_pending.py --fail-on-pending` + `tools/physical_family_pack.py` 族谱; 落盘口径见 [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) 5.2 | ⬜ 三层覆盖口径已定 (原「45 个逐个实搭」改为缩减集 + 族代表覆盖); 实搭失败经 `tools/physical_failure_registry.py` 登记整改, 整改后同族复验 |
 | S3 | 免费层 D3 抽检 30% (免费层无 D4+, 实物风险由抽检政策覆盖) | P1 | Manual | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §4.3; [reports/PHYSICAL_SAMPLE_V1.md](reports/PHYSICAL_SAMPLE_V1.md) §2 免费层说明 | 🔶 已有 3 个 D3 实物复核落盘 (`content_meta.physical_verified`, R6 报告一致性核对可见) |
 | S4 | 实搭结果回灌校准 (实物失败 → 登记账本 → 负例夹具 → 第二层参数校准) | P1 | Auto(部分) (账本完整性 `check` 可门禁) | `tools/physical_failure_registry.py` (失效账本 `data/physical_failures.json`: add 登记 / mark-sunk 关账 / check 完整性门禁) + 四步闭环手册 [PHYSICAL_CALIBRATION_WORKFLOW.md](PHYSICAL_CALIBRATION_WORKFLOW.md) | ⬜ 载体已入库 (账本工具 + 手册, `08d3018`), 执行随缩减集实搭同步 (首批 10 个实搭结果即首轮校准输入) |

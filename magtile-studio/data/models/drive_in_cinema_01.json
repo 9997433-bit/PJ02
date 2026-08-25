@@ -1,47 +1,60 @@
 {
   "schema_version": 1,
   "id": "drive_in_cinema_01",
-  "name": "星光露天汽车影院",
+  "name": "露天汽车影院",
   "name_en": "Drive-in Cinema 01",
-  "description": "只用核心九片型的夜场娱乐场景: 与立体车库的柱-板框架和出租车的单车特写都不同 —— 这里是'一面巨幕 + 一排观影车位'的组合: 四格宽两层高的银幕墙靠三条黄色直角斜撑站稳 (幕-撑-地锁成三角刚性节点), 蓝色放映室两层箱塔顶着双窗格放映窗正对银幕; 红绿橙三辆轮座小车错落停进星光车位, 每辆都是'轮座车板 + 单间驾驶舱'的最小车辆单元, 车头一律朝幕 —— 灯牌亮了, 音响响了, 电影开场!",
+  "description": "只用核心九片型的夜场影院: 主角是 4 格宽 2 层高的巨型银幕箱塔 —— 清色银幕面朝观众, 红色幕布收在两端, 层层箱形闭环站得笔直; 幕前两辆小车头朝银幕停进车位, 双轮立上车位长板的两条长边, 车顶板压双轮顶锁成滚动门式框架, 清色挡风玻璃骑车顶北沿; 车旁青色喇叭桩插在地缝上, 西南角放映亭二层窗格方放映窗正对银幕、紫色放映机骑顶, 入场口双柱托横板挂红旗 —— 关掉车灯, 今晚放的是什么片?",
   "difficulty": 3,
-  "total_pieces": 68,
+  "total_pieces": 70,
   "tags": [
     "城市",
-    "汽车影院",
-    "夜晚",
-    "车轮底座",
-    "娱乐",
-    "进阶"
+    "电影",
+    "职业体验",
+    "汽车",
+    "夜晚"
   ],
   "content_meta": {
     "structural_signature": {
       "tile_histogram": {
-        "square": 47,
-        "equilateral_triangle": 7,
+        "square": 53,
+        "equilateral_triangle": 6,
         "rectangle": 5,
-        "right_triangle": 3,
-        "wheel_base": 3,
-        "window_square": 2,
-        "isosceles_triangle": 1
+        "wheel_base": 4,
+        "door_frame": 1,
+        "window_square": 1
       }
     }
   },
   "final_assembly": [
     {
-      "id": "lot_0_0",
-      "type": "square",
+      "id": "bay_a",
+      "type": "rectangle",
       "position": [
         0.5,
-        0.5,
+        1.0,
         0.0
       ],
       "rotation": [
         0.0,
         0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bay_b",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        1.0,
         0.0
       ],
-      "color": "gray"
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
     },
     {
       "id": "lot_1_0",
@@ -56,7 +69,7 @@
         0.0,
         0.0
       ],
-      "color": "purple"
+      "color": "gray"
     },
     {
       "id": "lot_2_0",
@@ -71,7 +84,7 @@
         0.0,
         0.0
       ],
-      "color": "gray"
+      "color": "purple"
     },
     {
       "id": "lot_3_0",
@@ -89,21 +102,6 @@
       "color": "purple"
     },
     {
-      "id": "lot_4_0",
-      "type": "square",
-      "position": [
-        4.5,
-        0.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
       "id": "lot_5_0",
       "type": "square",
       "position": [
@@ -116,13 +114,28 @@
         0.0,
         0.0
       ],
-      "color": "purple"
+      "color": "gray"
     },
     {
-      "id": "lot_0_1",
+      "id": "lot_1_1",
       "type": "square",
       "position": [
-        0.5,
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lot_2_1",
+      "type": "square",
+      "position": [
+        2.5,
         1.5,
         0.0
       ],
@@ -146,13 +159,13 @@
         0.0,
         0.0
       ],
-      "color": "gray"
+      "color": "purple"
     },
     {
-      "id": "lot_e_1",
-      "type": "rectangle",
+      "id": "lot_5_1",
+      "type": "square",
       "position": [
-        5.0,
+        5.5,
         1.5,
         0.0
       ],
@@ -161,13 +174,73 @@
         0.0,
         0.0
       ],
-      "color": "purple"
+      "color": "gray"
+    },
+    {
+      "id": "lot_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lot_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
     },
     {
       "id": "lot_2_2",
       "type": "square",
       "position": [
         2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lot_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lot_4_2",
+      "type": "square",
+      "position": [
+        4.5,
         2.5,
         0.0
       ],
@@ -191,330 +264,540 @@
         0.0,
         0.0
       ],
-      "color": "purple"
+      "color": "gray"
     },
     {
-      "id": "lot_w_3",
-      "type": "rectangle",
+      "id": "lot_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lot_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lot_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lot_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lot_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lot_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr0_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "scr0_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "scr0_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "scr0_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "scr0_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr0_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr0_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr0_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr0_w",
+      "type": "square",
       "position": [
         1.0,
         3.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "lot_m_3",
-      "type": "rectangle",
-      "position": [
-        3.0,
-        3.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "purple"
-    },
-    {
-      "id": "lot_e_3",
-      "type": "rectangle",
-      "position": [
-        5.0,
-        3.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "back_1",
-      "type": "square",
-      "position": [
-        1.5,
-        4.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "back_2",
-      "type": "square",
-      "position": [
-        2.5,
-        4.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "back_3",
-      "type": "square",
-      "position": [
-        3.5,
-        4.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "back_4",
-      "type": "square",
-      "position": [
-        4.5,
-        4.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "screen_lo_1",
-      "type": "square",
-      "position": [
-        1.5,
-        4.0,
         0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "screen_lo_2",
-      "type": "square",
-      "position": [
-        2.5,
-        4.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "screen_lo_3",
-      "type": "square",
-      "position": [
-        3.5,
-        4.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "screen_lo_4",
-      "type": "square",
-      "position": [
-        4.5,
-        4.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "screen_hi_1",
-      "type": "square",
-      "position": [
-        1.5,
-        4.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "screen_hi_2",
-      "type": "square",
-      "position": [
-        2.5,
-        4.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "screen_hi_3",
-      "type": "square",
-      "position": [
-        3.5,
-        4.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "screen_hi_4",
-      "type": "square",
-      "position": [
-        4.5,
-        4.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "brace_2",
-      "type": "right_triangle",
-      "position": [
-        2.0,
-        4.333333,
-        0.333333
       ],
       "rotation": [
         90.0,
         0.0,
         90.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "brace_3",
-      "type": "right_triangle",
-      "position": [
-        3.0,
-        4.333333,
-        0.333333
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "brace_4",
-      "type": "right_triangle",
-      "position": [
-        4.0,
-        4.333333,
-        0.333333
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "bunting_1",
-      "type": "equilateral_triangle",
-      "position": [
-        1.5,
-        4.0,
-        2.288675
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
       ],
       "color": "red"
     },
     {
-      "id": "bunting_2",
-      "type": "equilateral_triangle",
+      "id": "scr0_e",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "scr1_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "scr1_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "scr1_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "scr1_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "scr1_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr1_n_2",
+      "type": "square",
       "position": [
         2.5,
         4.0,
-        2.288675
+        1.5
       ],
       "rotation": [
         90.0,
         0.0,
         0.0
       ],
-      "color": "yellow"
+      "color": "gray"
     },
     {
-      "id": "bunting_3",
-      "type": "equilateral_triangle",
+      "id": "scr1_n_3",
+      "type": "square",
       "position": [
         3.5,
         4.0,
-        2.288675
+        1.5
       ],
       "rotation": [
         90.0,
         0.0,
         0.0
       ],
-      "color": "pink"
+      "color": "gray"
     },
     {
-      "id": "bunting_4",
-      "type": "equilateral_triangle",
+      "id": "scr1_n_4",
+      "type": "square",
       "position": [
         4.5,
         4.0,
-        2.288675
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr1_w",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "scr1_e",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "scr_cap_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr_cap_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr_cap_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scr_cap_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bo0_s",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bo0_n",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bo0_w",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bo0_e",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bo1_s",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bo1_n",
+      "type": "window_square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
       ],
       "rotation": [
         90.0,
@@ -524,157 +807,7 @@
       "color": "cyan"
     },
     {
-      "id": "booth_lo_s_w",
-      "type": "square",
-      "position": [
-        2.5,
-        0.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "booth_lo_s_e",
-      "type": "square",
-      "position": [
-        3.5,
-        0.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "booth_lo_n_w",
-      "type": "square",
-      "position": [
-        2.5,
-        1.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "booth_lo_n_e",
-      "type": "square",
-      "position": [
-        3.5,
-        1.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "booth_lo_w",
-      "type": "square",
-      "position": [
-        2.0,
-        0.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "booth_lo_e",
-      "type": "square",
-      "position": [
-        4.0,
-        0.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "booth_hi_s_w",
-      "type": "square",
-      "position": [
-        2.5,
-        0.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "booth_hi_s_e",
-      "type": "square",
-      "position": [
-        3.5,
-        0.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "booth_win_w",
-      "type": "window_square",
-      "position": [
-        2.5,
-        1.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "booth_win_e",
-      "type": "window_square",
-      "position": [
-        3.5,
-        1.0,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "booth_hi_w",
+      "id": "bo1_w",
       "type": "square",
       "position": [
         2.0,
@@ -686,28 +819,28 @@
         0.0,
         90.0
       ],
-      "color": "blue"
+      "color": "gray"
     },
     {
-      "id": "booth_hi_e",
+      "id": "bo1_e",
       "type": "square",
-      "position": [
-        4.0,
-        0.5,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "booth_roof",
-      "type": "rectangle",
       "position": [
         3.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bo_cap",
+      "type": "square",
+      "position": [
+        2.5,
         0.5,
         2.0
       ],
@@ -719,71 +852,41 @@
       "color": "gray"
     },
     {
-      "id": "car1_base",
+      "id": "bo_proj",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "carA_wh_w",
+      "type": "wheel_base",
+      "position": [
+        0.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "carA_wh_e",
       "type": "wheel_base",
       "position": [
         1.0,
-        2.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "red"
-    },
-    {
-      "id": "car1_cab_s",
-      "type": "square",
-      "position": [
-        0.5,
-        2.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "red"
-    },
-    {
-      "id": "car1_cab_n",
-      "type": "square",
-      "position": [
-        0.5,
-        3.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "red"
-    },
-    {
-      "id": "car1_cab_w",
-      "type": "square",
-      "position": [
-        0.0,
-        2.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "red"
-    },
-    {
-      "id": "car1_cab_e",
-      "type": "square",
-      "position": [
         1.0,
-        2.5,
         0.5
       ],
       "rotation": [
@@ -791,471 +894,396 @@
         0.0,
         90.0
       ],
-      "color": "clear"
+      "color": "gray"
     },
     {
-      "id": "car1_cab_top",
-      "type": "square",
+      "id": "carA_top",
+      "type": "rectangle",
       "position": [
         0.5,
-        2.5,
+        1.0,
         1.0
       ],
       "rotation": [
         0.0,
         0.0,
-        0.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "car2_base",
-      "type": "wheel_base",
-      "position": [
-        4.0,
-        2.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "car2_cab_s",
-      "type": "square",
-      "position": [
-        3.5,
-        2.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "car2_cab_n",
-      "type": "square",
-      "position": [
-        3.5,
-        3.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "car2_cab_w",
-      "type": "square",
-      "position": [
-        3.0,
-        2.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
         90.0
       ],
-      "color": "green"
+      "color": "red"
     },
     {
-      "id": "car2_cab_e",
-      "type": "square",
-      "position": [
-        4.0,
-        2.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "car2_cab_top",
-      "type": "square",
-      "position": [
-        3.5,
-        2.5,
-        1.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "car3_base",
-      "type": "wheel_base",
-      "position": [
-        2.0,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "car3_cab_s",
-      "type": "square",
-      "position": [
-        1.5,
-        1.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "car3_cab_n",
-      "type": "square",
-      "position": [
-        1.5,
-        2.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "car3_cab_w",
-      "type": "square",
-      "position": [
-        1.0,
-        1.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "car3_cab_e",
-      "type": "square",
-      "position": [
-        2.0,
-        1.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "car3_cab_top",
-      "type": "square",
-      "position": [
-        1.5,
-        1.5,
-        1.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "gate_sign",
-      "type": "isosceles_triangle",
-      "position": [
-        5.5,
-        0.0,
-        0.666667
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "pink"
-    },
-    {
-      "id": "gate_flag",
+      "id": "carA_glass",
       "type": "equilateral_triangle",
       "position": [
         0.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
         0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "carB_wh_w",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "carB_wh_e",
+      "type": "wheel_base",
+      "position": [
+        5.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "carB_top",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "carB_glass",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "spk_a",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.0,
         0.288675
       ],
       "rotation": [
         90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "spk_b",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gate_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gate_e",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gate_beam",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
         0.0,
         0.0
       ],
       "color": "yellow"
     },
     {
-      "id": "speaker_e",
+      "id": "gate_flag",
       "type": "equilateral_triangle",
       "position": [
-        5.0,
+        2.0,
         2.5,
-        0.288675
+        1.288675
       ],
       "rotation": [
         90.0,
         0.0,
         90.0
       ],
-      "color": "cyan"
-    },
-    {
-      "id": "speaker_w",
-      "type": "equilateral_triangle",
-      "position": [
-        0.0,
-        1.5,
-        0.288675
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "cyan"
+      "color": "red"
     }
   ],
   "steps": [
     {
       "step_number": 1,
-      "description": "铺入场行场坪: 六片方板深浅相间, 边边互吸。",
-      "tip": "天一擦黑, 汽车影院就热闹起来 —— 先把场地铺平。",
+      "description": "铺场地南行: 两块清色车位长板打头, 紫色步道居中。",
+      "tip": "车位长板竖着放 —— 它的两条长边就是待会车轮要踩的缝。",
       "tiles_to_add": [
-        "lot_0_0",
+        "bay_a",
         "lot_1_0",
         "lot_2_0",
         "lot_3_0",
-        "lot_4_0",
+        "bay_b",
         "lot_5_0"
       ],
       "highlight_tiles": []
     },
     {
       "step_number": 2,
-      "description": "铺第二行场坪: 两片方板加一条长板, 中间两格留给 3 号车。",
-      "tip": "留空的格子先不管它, 车来了正好停进去。",
+      "description": "补场地第二行: 四片方板与车位长板拼齐。",
+      "tip": "车位长板一块顶两格, 这一行只需要补中间和东边。",
       "tiles_to_add": [
-        "lot_0_1",
+        "lot_1_1",
+        "lot_2_1",
         "lot_3_1",
-        "lot_e_1"
+        "lot_5_1"
       ],
       "highlight_tiles": [
-        "lot_0_0"
+        "bay_a"
       ]
     },
     {
       "step_number": 3,
-      "description": "铺第三行两片方板与前排三条长板: 再留出两个双格车位。",
-      "tip": "三个车位错开排, 前排长板连成一线 —— 银幕就立在它的北沿上。",
+      "description": "铺场地第三行: 六片灰色方板横贯全场。",
+      "tip": "这一行的北缝就是银幕的墙脚线, 对齐了再往下贴。",
       "tiles_to_add": [
+        "lot_0_2",
+        "lot_1_2",
         "lot_2_2",
-        "lot_5_2",
-        "lot_w_3",
-        "lot_m_3",
-        "lot_e_3"
+        "lot_3_2",
+        "lot_4_2",
+        "lot_5_2"
       ],
       "highlight_tiles": [
-        "lot_0_1"
+        "lot_1_1"
       ]
     },
     {
       "step_number": 4,
-      "description": "铺幕后检修带: 四片方板贴着场坪北沿再铺一行。",
-      "tip": "这行是给斜撑和检修工人留的 —— 观众看不到的后台。",
+      "description": "铺场地第四行: 银幕地基就位。",
+      "tip": "行行等边互吸, 整片停车场连成一张网。",
       "tiles_to_add": [
-        "back_1",
-        "back_2",
-        "back_3",
-        "back_4"
+        "lot_0_3",
+        "lot_1_3",
+        "lot_2_3",
+        "lot_3_3",
+        "lot_4_3",
+        "lot_5_3"
       ],
       "highlight_tiles": [
-        "lot_w_3"
+        "lot_0_2"
       ]
     },
     {
       "step_number": 5,
-      "description": "立银幕基座层: 四片蓝色立墙踩住拼缝, 侧边互吸连成整面。",
-      "tip": "墙脚前后都有方板拼缝咬住 —— 巨幕的地基要打牢。",
+      "description": "立银幕第一层: 四片清色银幕面朝南踩住地缝。",
+      "tip": "银幕面要一片挨一片, 竖边互咬连成整面墙。",
       "tiles_to_add": [
-        "screen_lo_1",
-        "screen_lo_2",
-        "screen_lo_3",
-        "screen_lo_4"
+        "scr0_s_1",
+        "scr0_s_2",
+        "scr0_s_3",
+        "scr0_s_4"
       ],
       "highlight_tiles": [
-        "back_1"
+        "lot_1_3"
       ]
     },
     {
       "step_number": 6,
-      "description": "叠银幕放映层: 四片白幕整边压住基座墙顶。",
-      "tip": "白色的一层才是银幕 —— 放映机的光会打在这上面。",
+      "description": "补第一层背墙与两端幕布, 箱环闭合。",
+      "tip": "银幕不是一面薄墙, 是一座箱塔 —— 四角竖边互咬才站得住。",
       "tiles_to_add": [
-        "screen_hi_1",
-        "screen_hi_2",
-        "screen_hi_3",
-        "screen_hi_4"
+        "scr0_n_1",
+        "scr0_n_2",
+        "scr0_n_3",
+        "scr0_n_4",
+        "scr0_w",
+        "scr0_e"
       ],
       "highlight_tiles": [
-        "screen_lo_1"
+        "scr0_s_1"
       ]
     },
     {
       "step_number": 7,
-      "description": "幕后贴三条黄色斜撑, 幕顶插四面彩旗: 巨幕落成。",
-      "tip": "幕-撑-地锁成三角, 彩旗骑住幕顶 —— 晚风再大, 巨幕也稳稳站住。",
+      "description": "银幕第二层: 银幕面整边骑上第一层墙顶。",
+      "tip": "上层每片底边与下层墙顶整边对齐, 银幕越升越高。",
       "tiles_to_add": [
-        "brace_2",
-        "brace_3",
-        "brace_4",
-        "bunting_1",
-        "bunting_2",
-        "bunting_3",
-        "bunting_4"
+        "scr1_s_1",
+        "scr1_s_2",
+        "scr1_s_3",
+        "scr1_s_4"
       ],
       "highlight_tiles": [
-        "screen_lo_2",
-        "back_2"
+        "scr0_s_1"
       ]
     },
     {
       "step_number": 8,
-      "description": "起放映室底层: 六面蓝墙合环, 墙脚踩住场坪拼缝。",
-      "tip": "放映室在场地正南, 和银幕面对面 —— 底层放着电影胶片。",
+      "description": "补第二层背墙与幕布端, 上层箱环闭合。",
+      "tip": "红色幕布收在银幕两端, 开场前才拉开。",
       "tiles_to_add": [
-        "booth_lo_s_w",
-        "booth_lo_s_e",
-        "booth_lo_n_w",
-        "booth_lo_n_e",
-        "booth_lo_w",
-        "booth_lo_e"
+        "scr1_n_1",
+        "scr1_n_2",
+        "scr1_n_3",
+        "scr1_n_4",
+        "scr1_w",
+        "scr1_e"
+      ],
+      "highlight_tiles": [
+        "scr1_s_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖银幕顶: 四片压板南北两边各压一道墙顶。",
+      "tip": "每片压板双边受力, 把两层箱塔锁成一个整体。",
+      "tiles_to_add": [
+        "scr_cap_1",
+        "scr_cap_2",
+        "scr_cap_3",
+        "scr_cap_4"
+      ],
+      "highlight_tiles": [
+        "scr1_n_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "起放映亭一层: 橙色门朝南, 四墙合环。",
+      "tip": "放映亭站在场地正南, 和银幕正对着。",
+      "tiles_to_add": [
+        "bo0_s",
+        "bo0_n",
+        "bo0_w",
+        "bo0_e"
       ],
       "highlight_tiles": [
         "lot_2_0"
       ]
     },
     {
-      "step_number": 9,
-      "description": "叠放映室二层: 北面装两扇窗格放映窗, 正对银幕。",
-      "tip": "放映机的镜头就从这两扇窗里探出来 —— 高度刚好越过车顶。",
-      "tiles_to_add": [
-        "booth_hi_s_w",
-        "booth_hi_s_e",
-        "booth_win_w",
-        "booth_win_e",
-        "booth_hi_w",
-        "booth_hi_e"
-      ],
-      "highlight_tiles": [
-        "booth_lo_n_w"
-      ]
-    },
-    {
-      "step_number": 10,
-      "description": "盖放映室长板平顶: 两条短边整边入扣东西墙顶。",
-      "tip": "盖上顶, 放映室就是一座结实的两层小塔。",
-      "tiles_to_add": [
-        "booth_roof"
-      ],
-      "highlight_tiles": [
-        "booth_win_w"
-      ]
-    },
-    {
       "step_number": 11,
-      "description": "开进 1 号红车: 轮座车板吸进车位, 驾驶舱盖在车尾。",
-      "tip": "车板短边就是墙脚线 —— 驾驶舱墙咬住它, 车头甲板朝着银幕。",
+      "description": "放映亭二层: 窗格方放映窗正对银幕, 压顶后放映机骑顶。",
+      "tip": "放映机底边同时吸压顶北沿和北墙顶 —— 光束正好越过车顶打在银幕上。",
       "tiles_to_add": [
-        "car1_base",
-        "car1_cab_s",
-        "car1_cab_n",
-        "car1_cab_w",
-        "car1_cab_e",
-        "car1_cab_top"
+        "bo1_s",
+        "bo1_n",
+        "bo1_w",
+        "bo1_e",
+        "bo_cap",
+        "bo_proj"
       ],
       "highlight_tiles": [
-        "lot_0_1"
+        "bo0_s"
       ]
     },
     {
       "step_number": 12,
-      "description": "开进 2 号绿车: 同样的手法, 停进东侧车位。",
-      "tip": "舱顶四边入扣墙顶 —— 每辆车都是一个结实的小盒子。",
+      "description": "西车入位: 双轮立上车位长边, 车顶板压双轮顶, 挡风朝银幕。",
+      "tip": "车轮底边整边吸住长板长边, 轮-顶-轮锁成门式框架; 青色喇叭桩就插在车旁地缝上。",
       "tiles_to_add": [
-        "car2_base",
-        "car2_cab_s",
-        "car2_cab_n",
-        "car2_cab_w",
-        "car2_cab_e",
-        "car2_cab_top"
+        "carA_wh_w",
+        "carA_wh_e",
+        "carA_top",
+        "carA_glass",
+        "spk_a"
       ],
       "highlight_tiles": [
-        "car1_cab_top"
+        "bay_a"
       ]
     },
     {
       "step_number": 13,
-      "description": "开进 3 号橙车: 前排正中的黄金车位。",
-      "tip": "三辆车错落排开, 谁也不挡谁 —— 就等电影开场了。",
+      "description": "东车入位: 同样的搭法, 黄色小车头朝银幕。",
+      "tip": "两辆车隔着步道并排看电影, 各有各的喇叭桩。",
       "tiles_to_add": [
-        "car3_base",
-        "car3_cab_s",
-        "car3_cab_n",
-        "car3_cab_w",
-        "car3_cab_e",
-        "car3_cab_top"
+        "carB_wh_w",
+        "carB_wh_e",
+        "carB_top",
+        "carB_glass",
+        "spk_b"
       ],
       "highlight_tiles": [
-        "car2_cab_top"
+        "bay_b"
       ]
     },
     {
       "step_number": 14,
-      "description": "立入口灯牌、插检票旗、摆场边音响: 今晚满场!",
-      "tip": "音响一响, 灯牌一亮 —— 嘘, 电影马上开始!",
+      "description": "搭入场门收尾: 双柱横跨中央车道托起横板, 红旗骑上西沿。",
+      "tip": "横板两短边各压一根柱顶, 双端受力零悬挑; 小车就是从这道门下开进车位的 —— 天黑了, 电影开演!",
       "tiles_to_add": [
-        "gate_sign",
-        "gate_flag",
-        "speaker_e",
-        "speaker_w"
+        "gate_w",
+        "gate_e",
+        "gate_beam",
+        "gate_flag"
       ],
       "highlight_tiles": [
-        "car3_cab_top",
-        "screen_hi_2"
+        "bo_proj"
       ]
     }
   ]

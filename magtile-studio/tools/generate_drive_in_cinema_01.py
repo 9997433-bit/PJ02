@@ -1,35 +1,36 @@
 #!/usr/bin/env python3
-"""生成模型 data/models/drive_in_cinema_01.json (星光露天汽车影院)。
+"""生成模型 data/models/drive_in_cinema_01.json (露天汽车影院)。
 
-城市生活主题的第一座夜场娱乐场景: 与立体车库 (柱-板框架) 和
-出租车 (单车特写) 的结构语言都不同 —— 本作是"一面巨幕 + 一排
-观影车位"的场景组合: 四格宽两层高的银幕墙靠三条直角斜撑站稳
-(斜撑双边吸合, 幕-撑-地锁成三角刚性节点); 放映室两层箱塔顶着
-双窗格放映窗正对银幕; 三辆轮座小车错落停进星光车位 —— 每辆
-都是"轮座车板 + 单间驾驶舱"的最小车辆单元, 车头一律朝幕。
+内容批 B 3/5: 全库第一座露天汽车影院 —— 与视力表箱塔 (双面 E 字
+墙) 和各类车库/加油站刻意错开: 主角是一面 4 格宽 2 层高的巨型
+银幕箱塔 —— 清色银幕面朝观众, 红色幕布收在两端, 层层箱形闭环
+通过 R8 高层检查; 幕前两辆小车头朝银幕停进车位 (双轮 + 车顶板
+锁成滚动门式框架, 清色挡风玻璃骑车顶北沿), 车旁青色喇叭桩插在
+地缝上; 西南角放映亭二层窗格方放映窗正对银幕, 紫色放映机骑顶;
+入场口双柱托横板挂红旗 —— 全库唯一的"银幕 + 车阵 + 放映亭"
+夜场场景。
 
-结构总览 (世界单位: 1.0 = 正方形磁力片边长, 银幕在北, 入口在南):
-  - 观影场坪 (x [0,6], y [0,4]): 单位方板 x11 + 长板 x4
-    (车位 6 格留空)                                              15 片
-  - 幕后检修带 (x [1,5], y [4,5]): 单位方板 x4                    4 片
-  - 银幕墙 (y=4, x [1,5], z 0..2): 两层立墙 4+4                   8 片
-  - 银幕斜撑 x3 (x=2/3/4, 幕后): 直角三角双边吸合                 3 片
-  - 幕顶彩旗 x4: 等边三角骑放映层墙顶                             4 片
-  - 放映室 (x [2,4], y [0,1], z 0..2): 两层墙环 6+6 (上层北面
-    双窗格放映窗) + 长板平顶                                     13 片
-  - 观影车 x3 (每辆 2x1): 轮座车板 + 驾驶舱四墙 + 舱顶            18 片
-  - 入口灯牌 (瘦高等腰) + 检票旗 + 场边音响 x2 (等边三角)          4 片
-  合计 68 片, 14 个教程步骤, 7 种磁力片形状 (全部 CORE-9 之内)。
+结构总览 (世界单位: 1.0 = 正方形磁力片边长, 银幕在北):
+  - 场地 (x [0,6], y [0,4]): 方板 x20 + 车位长板 x2            22 片
+  - 银幕箱塔 (x [1,5], y [3,4], z 0..2): 两层箱形墙环 x20 +
+    顶面压板 x4                                                 24 片
+  - 放映亭 (x [2,3], y [0,1]): 两层墙环 x8 + 压顶 + 放映机     10 片
+  - 小车 x2 (x [0,1] / [4,5], y [0,2]): 双轮 + 车顶板 + 挡风    8 片
+  - 喇叭桩 x2: 青色等边三角骑地缝                                2 片
+  - 入场门 (x [2,4], y [2,3], z=1): 双柱 + 横板 + 门旗          4 片
+  合计 70 片, 14 个教程步骤, 7 种磁力片形状 (全部 CORE-9 之内)。
 
 物理规则要点 (validate 常规 + strict 双档零警告):
-  - 银幕墙两层: 上层墙脚整边压下层墙顶, 墙墙侧边互吸连成整面;
-    三条斜撑竖直角边吸幕墙竖边、水平直角边吸检修带拼缝,
-    幕-撑-地成环, 剪断任一铰链仍有支撑路径;
-  - 观影车: 轮座车板平铺吸场坪拼缝, 驾驶舱墙脚吸车板短边与
-    邻近场坪拼缝, 舱顶四边入扣墙顶 —— 车头前甲板零悬挑;
-  - 放映室两层墙环四角竖边互咬, 平顶双板边边入扣墙顶;
-  - 灯牌/旗/音响底边整边吸拼缝, 剪断任何一条装饰连接最多失联
-    1 片 (< 3), R8 单点失效通过。
+  - 银幕不是单薄的高墙, 是 4x1 足印的箱塔: 每层南北墙 + 东西
+    端墙四角竖边互咬闭环, 上层墙整边骑下层墙顶, 顶面四片压板
+    南北两边各压一道墙顶 (双边受力), R8 无桁架高墙检查由层层
+    闭环拓扑天然通过;
+  - 小车: 双片车轮底座立在车位长板的两条长边上 (一缝双吸),
+    车顶板双长边压双轮顶, 轮-顶-轮-车位锁成滚动门式框架;
+    挡风玻璃骑车顶北沿短边, 重心正压铰链线力矩为零;
+  - 入场门横板两短边各压一根门柱顶 (双端受力零悬挑), 柱-板-
+    柱-地面锁成门式刚架, 门旗底边"横板西沿 + 柱顶"一线双吸;
+  - 放映亭层层墙环, 放映机骑"压顶北沿 + 塔北墙顶"一线双吸。
 
 用法: python3 tools/generate_drive_in_cinema_01.py  (在 magtile-studio 目录下运行)
 """
@@ -42,217 +43,199 @@ from magtile_gen import ModelBuilder  # noqa: E402
 
 b = ModelBuilder()
 
-LOT_A = "gray"       # 场坪 (深浅相间)
-LOT_B = "purple"
-BACK = "gray"        # 幕后检修带
-SCREEN = "clear"     # 银幕
-SCREEN_BASE = "blue" # 银幕基座层
-BRACE = "yellow"     # 银幕斜撑
-BOOTH = "blue"       # 放映室
-BOOTH_WIN = "clear"  # 放映窗
-BOOTH_ROOF = "gray"  # 放映室平顶
-CAR_1 = "red"        # 三辆观影车
-CAR_2 = "green"
-CAR_3 = "orange"
-CAR_TOP = "clear"    # 舱顶
-SIGN = "pink"        # 入口灯牌
-FLAG = "yellow"      # 检票旗
-SPEAKER = "cyan"     # 场边音响
+LOT = "gray"        # 场地
+WALK = "purple"     # 中央步道
+BAY = "clear"       # 车位长板
+SCREEN = "clear"    # 银幕面 (南)
+CURTAIN = "red"     # 幕布端墙
+BACK = "gray"       # 银幕背墙
+DECK = "gray"       # 银幕顶压板
+BOOTH = "gray"      # 放映亭
+PROJ_WIN = "cyan"   # 放映窗
+BOOTH_DOOR = "orange"
+PROJECTOR = "purple"
+CAR_A = "red"       # 西车
+CAR_B = "yellow"    # 东车
+WHEEL = "gray"      # 车轮底座
+GLASS = "clear"     # 挡风玻璃
+SPEAKER = "cyan"    # 喇叭桩
+GATE = "gray"       # 门柱
+BEAM = "yellow"     # 门横板
+FLAG = "red"        # 门旗
 
 
 def wall_ns_t(tid, tile_type, x0, y, z0, color):
     b.add(tid, tile_type, (x0 + 0.5, y, z0 + 0.5), (90, 0, 0), color)
 
 
-# 车位单元: 轮座车板 (x [x0,x0+2]) + 驾驶舱 (西端单间), 车头朝东/朝幕
-def car(prefix, x0, y0, body, roof_ids):
-    b.add(f"{prefix}_base", "wheel_base",
-          (x0 + 1.0, y0 + 0.5, 0.0), (0, 0, 0), body)
-    b.wall_ns(f"{prefix}_cab_s", x0, float(y0), 0, body)
-    b.wall_ns(f"{prefix}_cab_n", x0, float(y0 + 1), 0, body)
-    b.wall_ew(f"{prefix}_cab_w", float(x0), y0, 0, body)
-    b.wall_ew(f"{prefix}_cab_e", float(x0 + 1), y0, 0, CAR_TOP)
-    b.flat(f"{prefix}_cab_top", x0, y0, 1.0, CAR_TOP)
-    roof_ids.extend([
-        f"{prefix}_base", f"{prefix}_cab_s", f"{prefix}_cab_n",
-        f"{prefix}_cab_w", f"{prefix}_cab_e", f"{prefix}_cab_top",
-    ])
-
+# =================================================================
+# 1. 场地 (x [0,6], y [0,4]): 车位长板嵌进南两行
+# =================================================================
+b.flat_rect("bay_a", 0, 0, 0.0, BAY, axis="y")     # 西车位 y [0,2]
+b.flat_rect("bay_b", 4, 0, 0.0, BAY, axis="y")     # 东车位 y [0,2]
+for y0 in range(2):
+    for x0 in (1, 2, 3, 5):
+        color = WALK if x0 in (2, 3) else LOT
+        b.flat(f"lot_{x0}_{y0}", x0, y0, 0.0, color)
+for y0 in range(2, 4):
+    for x0 in range(6):
+        b.flat(f"lot_{x0}_{y0}", x0, y0, 0.0, LOT)
 
 # =================================================================
-# 1. 观影场坪 (y [0,4]): 入场行为单位方板 (供墙脚/灯牌拼缝),
-#    车位 6 格留空, 北两行嵌长板
-#    车位: 车 1 (0,2)+(1,2), 车 2 (3,2)+(4,2), 车 3 (1,1)+(2,1)
+# 2. 银幕箱塔 (x [1,5], y [3,4], z 0..2): 两层箱环 + 顶压板
 # =================================================================
-for x0 in range(6):
-    color = LOT_A if x0 % 2 == 0 else LOT_B
-    b.flat(f"lot_{x0}_0", x0, 0, 0.0, color)              # 入场行
-b.flat("lot_0_1", 0, 1, 0.0, LOT_B)
-b.flat("lot_3_1", 3, 1, 0.0, LOT_A)
-b.flat_rect("lot_e_1", 4, 1, 0.0, LOT_B)                  # x [4,6]
-b.flat("lot_2_2", 2, 2, 0.0, LOT_A)
-b.flat("lot_5_2", 5, 2, 0.0, LOT_B)
-b.flat_rect("lot_w_3", 0, 3, 0.0, LOT_A)                  # 前排行 x [0,2]
-b.flat_rect("lot_m_3", 2, 3, 0.0, LOT_B)                  # x [2,4]
-b.flat_rect("lot_e_3", 4, 3, 0.0, LOT_A)                  # x [4,6]
-
-# 幕后检修带 (y [4,5]): 斜撑的落脚拼缝
-for x0 in (1, 2, 3, 4):
-    b.flat(f"back_{x0}", x0, 4, 0.0, BACK)
+for lvl in range(2):
+    for x0 in range(1, 5):
+        b.wall_ns(f"scr{lvl}_s_{x0}", x0, 3.0, lvl, SCREEN)   # 银幕面
+    for x0 in range(1, 5):
+        b.wall_ns(f"scr{lvl}_n_{x0}", x0, 4.0, lvl, BACK)     # 背墙
+    b.wall_ew(f"scr{lvl}_w", 1.0, 3, lvl, CURTAIN)            # 幕布端
+    b.wall_ew(f"scr{lvl}_e", 5.0, 3, lvl, CURTAIN)
+for x0 in range(1, 5):
+    b.flat(f"scr_cap_{x0}", x0, 3, 2.0, DECK)
 
 # =================================================================
-# 2. 银幕墙 (y=4, x [1,5], z 0..2) + 三条幕后斜撑
+# 3. 放映亭 (x [2,3], y [0,1]): 两层墙环 + 压顶 + 放映机
 # =================================================================
-for x0 in (1, 2, 3, 4):
-    b.wall_ns(f"screen_lo_{x0}", x0, 4.0, 0, SCREEN_BASE)
-for x0 in (1, 2, 3, 4):
-    b.wall_ns(f"screen_hi_{x0}", x0, 4.0, 1, SCREEN)
-b.brace("brace_2", (2.0, 4.0, 0.0), "+y", BRACE)
-b.brace("brace_3", (3.0, 4.0, 0.0), "+y", BRACE)
-b.brace("brace_4", (4.0, 4.0, 0.0), "+y", BRACE)
-# 幕顶彩旗: 四面等边三角骑在放映层墙顶上
-FLAG_COLORS = ("red", "yellow", "pink", "cyan")
-for x0, color in zip((1, 2, 3, 4), FLAG_COLORS):
-    b.crest_ns(f"bunting_{x0}", x0, 4.0, 2.0, color)
+wall_ns_t("bo0_s", "door_frame", 2, 0.0, 0, BOOTH_DOOR)
+b.wall_ns("bo0_n", 2, 1.0, 0, BOOTH)
+b.wall_ew("bo0_w", 2.0, 0, 0, BOOTH)
+b.wall_ew("bo0_e", 3.0, 0, 0, BOOTH)
+b.wall_ns("bo1_s", 2, 0.0, 1, BOOTH)
+wall_ns_t("bo1_n", "window_square", 2, 1.0, 1, PROJ_WIN)      # 放映窗朝银幕
+b.wall_ew("bo1_w", 2.0, 0, 1, BOOTH)
+b.wall_ew("bo1_e", 3.0, 0, 1, BOOTH)
+b.flat("bo_cap", 2, 0, 2.0, BOOTH)
+b.crest_ns("bo_proj", 2, 1.0, 2.0, PROJECTOR)  # 放映机骑顶一线双吸
 
 # =================================================================
-# 3. 放映室 (x [2,4], y [0,1], z 0..2): 两层墙环 + 双窗格 + 平顶
+# 4. 小车 x2 (头朝银幕): 双轮立车位长边, 车顶板压双轮顶
 # =================================================================
-b.wall_ns("booth_lo_s_w", 2, 0.0, 0, BOOTH)
-b.wall_ns("booth_lo_s_e", 3, 0.0, 0, BOOTH)
-b.wall_ns("booth_lo_n_w", 2, 1.0, 0, BOOTH)
-b.wall_ns("booth_lo_n_e", 3, 1.0, 0, BOOTH)
-b.wall_ew("booth_lo_w", 2.0, 0, 0, BOOTH)
-b.wall_ew("booth_lo_e", 4.0, 0, 0, BOOTH)
-b.wall_ns("booth_hi_s_w", 2, 0.0, 1, BOOTH)
-b.wall_ns("booth_hi_s_e", 3, 0.0, 1, BOOTH)
-wall_ns_t("booth_win_w", "window_square", 2, 1.0, 1, BOOTH_WIN)
-wall_ns_t("booth_win_e", "window_square", 3, 1.0, 1, BOOTH_WIN)
-b.wall_ew("booth_hi_w", 2.0, 0, 1, BOOTH)
-b.wall_ew("booth_hi_e", 4.0, 0, 1, BOOTH)
-b.flat_rect("booth_roof", 2, 0, 2.0, BOOTH_ROOF)          # 短边入扣东西墙顶
+b.add("carA_wh_w", "wheel_base", (0.0, 1.0, 0.5), (90, 0, 90), WHEEL)
+b.add("carA_wh_e", "wheel_base", (1.0, 1.0, 0.5), (90, 0, 90), WHEEL)
+b.flat_rect("carA_top", 0, 0, 1.0, CAR_A, axis="y")
+b.crest_ns("carA_glass", 0, 2.0, 1.0, GLASS)   # 挡风玻璃朝银幕
+b.add("carB_wh_w", "wheel_base", (4.0, 1.0, 0.5), (90, 0, 90), WHEEL)
+b.add("carB_wh_e", "wheel_base", (5.0, 1.0, 0.5), (90, 0, 90), WHEEL)
+b.flat_rect("carB_top", 4, 0, 1.0, CAR_B, axis="y")
+b.crest_ns("carB_glass", 4, 2.0, 1.0, GLASS)
+b.crest_ns("spk_a", 1, 2.0, 0.0, SPEAKER)      # 喇叭桩骑地缝
+b.crest_ns("spk_b", 5, 2.0, 0.0, SPEAKER)
 
 # =================================================================
-# 4. 三辆观影车: 车头 (前甲板) 一律朝幕
+# 5. 入场门 (x [2,4], y [2,3], z=1): 双柱托横板 + 门旗
+#    横跨中央车道, 小车从横板下开进车位
 # =================================================================
-CAR1, CAR2, CAR3 = [], [], []
-car("car1", 0, 2, CAR_1, CAR1)
-car("car2", 3, 2, CAR_2, CAR2)
-car("car3", 1, 1, CAR_3, CAR3)
+b.wall_ew("gate_w", 2.0, 2, 0, GATE)
+b.wall_ew("gate_e", 4.0, 2, 0, GATE)
+b.flat_rect("gate_beam", 2, 2, 1.0, BEAM)      # 横板短边压双柱顶
+b.crest_ew("gate_flag", 2.0, 2, 1.0, FLAG)     # 门旗一线双吸
 
 # =================================================================
-# 5. 入口灯牌 + 检票旗 + 场边音响
-# =================================================================
-b.spire_ns("gate_sign", 5, 0.0, 0.0, SIGN)      # 入口灯牌 (顶尖 2.0)
-b.crest_ns("gate_flag", 0, 0.0, 0.0, FLAG)      # 检票旗
-b.crest_ew("speaker_e", 5.0, 2, 0.0, SPEAKER)   # 东侧音响
-b.crest_ew("speaker_w", 0.0, 1, 0.0, SPEAKER)   # 西侧音响
-
-# =================================================================
-# 教程步骤 (15 步)
+# 教程步骤 (14 步)
 # =================================================================
 b.step(
-    "铺入场行场坪: 六片方板深浅相间, 边边互吸。",
-    [f"lot_{x0}_0" for x0 in range(6)],
-    tip="天一擦黑, 汽车影院就热闹起来 —— 先把场地铺平。",
+    "铺场地南行: 两块清色车位长板打头, 紫色步道居中。",
+    ["bay_a", "lot_1_0", "lot_2_0", "lot_3_0", "bay_b", "lot_5_0"],
+    tip="车位长板竖着放 —— 它的两条长边就是待会车轮要踩的缝。",
 )
 b.step(
-    "铺第二行场坪: 两片方板加一条长板, 中间两格留给 3 号车。",
-    ["lot_0_1", "lot_3_1", "lot_e_1"],
-    highlight=["lot_0_0"],
-    tip="留空的格子先不管它, 车来了正好停进去。",
+    "补场地第二行: 四片方板与车位长板拼齐。",
+    ["lot_1_1", "lot_2_1", "lot_3_1", "lot_5_1"],
+    highlight=["bay_a"],
+    tip="车位长板一块顶两格, 这一行只需要补中间和东边。",
 )
 b.step(
-    "铺第三行两片方板与前排三条长板: 再留出两个双格车位。",
-    ["lot_2_2", "lot_5_2", "lot_w_3", "lot_m_3", "lot_e_3"],
-    highlight=["lot_0_1"],
-    tip="三个车位错开排, 前排长板连成一线 —— 银幕就立在它的北沿上。",
+    "铺场地第三行: 六片灰色方板横贯全场。",
+    [f"lot_{x0}_2" for x0 in range(6)],
+    highlight=["lot_1_1"],
+    tip="这一行的北缝就是银幕的墙脚线, 对齐了再往下贴。",
 )
 b.step(
-    "铺幕后检修带: 四片方板贴着场坪北沿再铺一行。",
-    ["back_1", "back_2", "back_3", "back_4"],
-    highlight=["lot_w_3"],
-    tip="这行是给斜撑和检修工人留的 —— 观众看不到的后台。",
+    "铺场地第四行: 银幕地基就位。",
+    [f"lot_{x0}_3" for x0 in range(6)],
+    highlight=["lot_0_2"],
+    tip="行行等边互吸, 整片停车场连成一张网。",
 )
 b.step(
-    "立银幕基座层: 四片蓝色立墙踩住拼缝, 侧边互吸连成整面。",
-    ["screen_lo_1", "screen_lo_2", "screen_lo_3", "screen_lo_4"],
-    highlight=["back_1"],
-    tip="墙脚前后都有方板拼缝咬住 —— 巨幕的地基要打牢。",
+    "立银幕第一层: 四片清色银幕面朝南踩住地缝。",
+    [f"scr0_s_{x0}" for x0 in range(1, 5)],
+    highlight=["lot_1_3"],
+    tip="银幕面要一片挨一片, 竖边互咬连成整面墙。",
 )
 b.step(
-    "叠银幕放映层: 四片白幕整边压住基座墙顶。",
-    ["screen_hi_1", "screen_hi_2", "screen_hi_3", "screen_hi_4"],
-    highlight=["screen_lo_1"],
-    tip="白色的一层才是银幕 —— 放映机的光会打在这上面。",
+    "补第一层背墙与两端幕布, 箱环闭合。",
+    [f"scr0_n_{x0}" for x0 in range(1, 5)] + ["scr0_w", "scr0_e"],
+    highlight=["scr0_s_1"],
+    tip="银幕不是一面薄墙, 是一座箱塔 —— 四角竖边互咬才站得住。",
 )
 b.step(
-    "幕后贴三条黄色斜撑, 幕顶插四面彩旗: 巨幕落成。",
-    ["brace_2", "brace_3", "brace_4",
-     "bunting_1", "bunting_2", "bunting_3", "bunting_4"],
-    highlight=["screen_lo_2", "back_2"],
-    tip="幕-撑-地锁成三角, 彩旗骑住幕顶 —— 晚风再大, 巨幕也稳稳站住。",
+    "银幕第二层: 银幕面整边骑上第一层墙顶。",
+    [f"scr1_s_{x0}" for x0 in range(1, 5)],
+    highlight=["scr0_s_1"],
+    tip="上层每片底边与下层墙顶整边对齐, 银幕越升越高。",
 )
 b.step(
-    "起放映室底层: 六面蓝墙合环, 墙脚踩住场坪拼缝。",
-    ["booth_lo_s_w", "booth_lo_s_e", "booth_lo_n_w",
-     "booth_lo_n_e", "booth_lo_w", "booth_lo_e"],
+    "补第二层背墙与幕布端, 上层箱环闭合。",
+    [f"scr1_n_{x0}" for x0 in range(1, 5)] + ["scr1_w", "scr1_e"],
+    highlight=["scr1_s_1"],
+    tip="红色幕布收在银幕两端, 开场前才拉开。",
+)
+b.step(
+    "盖银幕顶: 四片压板南北两边各压一道墙顶。",
+    [f"scr_cap_{x0}" for x0 in range(1, 5)],
+    highlight=["scr1_n_1"],
+    tip="每片压板双边受力, 把两层箱塔锁成一个整体。",
+)
+b.step(
+    "起放映亭一层: 橙色门朝南, 四墙合环。",
+    ["bo0_s", "bo0_n", "bo0_w", "bo0_e"],
     highlight=["lot_2_0"],
-    tip="放映室在场地正南, 和银幕面对面 —— 底层放着电影胶片。",
+    tip="放映亭站在场地正南, 和银幕正对着。",
 )
 b.step(
-    "叠放映室二层: 北面装两扇窗格放映窗, 正对银幕。",
-    ["booth_hi_s_w", "booth_hi_s_e", "booth_win_w",
-     "booth_win_e", "booth_hi_w", "booth_hi_e"],
-    highlight=["booth_lo_n_w"],
-    tip="放映机的镜头就从这两扇窗里探出来 —— 高度刚好越过车顶。",
+    "放映亭二层: 窗格方放映窗正对银幕, 压顶后放映机骑顶。",
+    ["bo1_s", "bo1_n", "bo1_w", "bo1_e", "bo_cap", "bo_proj"],
+    highlight=["bo0_s"],
+    tip="放映机底边同时吸压顶北沿和北墙顶 —— 光束正好越过车顶"
+        "打在银幕上。",
 )
 b.step(
-    "盖放映室长板平顶: 两条短边整边入扣东西墙顶。",
-    ["booth_roof"],
-    highlight=["booth_win_w"],
-    tip="盖上顶, 放映室就是一座结实的两层小塔。",
+    "西车入位: 双轮立上车位长边, 车顶板压双轮顶, 挡风朝银幕。",
+    ["carA_wh_w", "carA_wh_e", "carA_top", "carA_glass", "spk_a"],
+    highlight=["bay_a"],
+    tip="车轮底边整边吸住长板长边, 轮-顶-轮锁成门式框架; "
+        "青色喇叭桩就插在车旁地缝上。",
 )
 b.step(
-    "开进 1 号红车: 轮座车板吸进车位, 驾驶舱盖在车尾。",
-    CAR1,
-    highlight=["lot_0_1"],
-    tip="车板短边就是墙脚线 —— 驾驶舱墙咬住它, 车头甲板朝着银幕。",
+    "东车入位: 同样的搭法, 黄色小车头朝银幕。",
+    ["carB_wh_w", "carB_wh_e", "carB_top", "carB_glass", "spk_b"],
+    highlight=["bay_b"],
+    tip="两辆车隔着步道并排看电影, 各有各的喇叭桩。",
 )
 b.step(
-    "开进 2 号绿车: 同样的手法, 停进东侧车位。",
-    CAR2,
-    highlight=["car1_cab_top"],
-    tip="舱顶四边入扣墙顶 —— 每辆车都是一个结实的小盒子。",
-)
-b.step(
-    "开进 3 号橙车: 前排正中的黄金车位。",
-    CAR3,
-    highlight=["car2_cab_top"],
-    tip="三辆车错落排开, 谁也不挡谁 —— 就等电影开场了。",
-)
-b.step(
-    "立入口灯牌、插检票旗、摆场边音响: 今晚满场!",
-    ["gate_sign", "gate_flag", "speaker_e", "speaker_w"],
-    highlight=["car3_cab_top", "screen_hi_2"],
-    tip="音响一响, 灯牌一亮 —— 嘘, 电影马上开始!",
+    "搭入场门收尾: 双柱横跨中央车道托起横板, 红旗骑上西沿。",
+    ["gate_w", "gate_e", "gate_beam", "gate_flag"],
+    highlight=["bo_proj"],
+    tip="横板两短边各压一根柱顶, 双端受力零悬挑; 小车就是从这"
+        "道门下开进车位的 —— 天黑了, 电影开演!",
 )
 
 b.finalize(
     model_id="drive_in_cinema_01",
-    name="星光露天汽车影院",
+    name="露天汽车影院",
     name_en="Drive-in Cinema 01",
     description=(
-        "只用核心九片型的夜场娱乐场景: 与立体车库的柱-板框架和"
-        "出租车的单车特写都不同 —— 这里是'一面巨幕 + 一排观影"
-        "车位'的组合: 四格宽两层高的银幕墙靠三条黄色直角斜撑"
-        "站稳 (幕-撑-地锁成三角刚性节点), 蓝色放映室两层箱塔"
-        "顶着双窗格放映窗正对银幕; 红绿橙三辆轮座小车错落停进"
-        "星光车位, 每辆都是'轮座车板 + 单间驾驶舱'的最小车辆"
-        "单元, 车头一律朝幕 —— 灯牌亮了, 音响响了, 电影开场!"
+        "只用核心九片型的夜场影院: 主角是 4 格宽 2 层高的巨型银幕"
+        "箱塔 —— 清色银幕面朝观众, 红色幕布收在两端, 层层箱形闭环"
+        "站得笔直; 幕前两辆小车头朝银幕停进车位, 双轮立上车位长板"
+        "的两条长边, 车顶板压双轮顶锁成滚动门式框架, 清色挡风玻璃"
+        "骑车顶北沿; 车旁青色喇叭桩插在地缝上, 西南角放映亭二层"
+        "窗格方放映窗正对银幕、紫色放映机骑顶, 入场口双柱托横板"
+        "挂红旗 —— 关掉车灯, 今晚放的是什么片?"
     ),
     difficulty=3,
-    tags=["城市", "汽车影院", "夜晚", "车轮底座", "娱乐", "进阶"],
-    min_pieces=68,
+    tags=["城市", "电影", "职业体验", "汽车", "夜晚"],
+    min_pieces=70,
     min_steps=14,
 )
