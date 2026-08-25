@@ -21,6 +21,10 @@ data class ModelCard(
     val bomKnown: Boolean,
     /** 只用核心 9 片型即可搭建 (原生层 core::isCoreTile 共享口径判定)。 */
     val core9Only: Boolean,
+    /** 库存足够搭建 (库存已登记且 BOM 满足; 未登记时恒 false)。 */
+    val canBuild: Boolean,
+    /** 库存对照 BOM 共缺几片 (未登记 / BOM 未知时为 0)。 */
+    val missingTotal: Int,
 ) {
     /** 难度星显示: 实心 = 难度值, 补空心到 5 星, 如 ★★☆☆☆。 */
     val difficultyStars: String
@@ -47,15 +51,18 @@ data class ModelCard(
          * 解析 listModels() 的返回值。
          * @throws IllegalStateException 原生层报错 ({"error": "..."})。
          */
-        fun listFromJson(payload: String): List<ModelCard> {
+        fun libraryFromJson(payload: String): ModelLibrary {
             val root = JSONObject(payload)
             if (root.has("error")) {
                 throw IllegalStateException(root.getString("error"))
             }
             val models = root.getJSONArray("models")
-            return List(models.length()) { index ->
-                fromJson(models.getJSONObject(index))
-            }
+            return ModelLibrary(
+                inventoryConfigured = root.optBoolean("inventory_configured", false),
+                cards = List(models.length()) { index ->
+                    fromJson(models.getJSONObject(index))
+                },
+            )
         }
 
         private fun fromJson(obj: JSONObject) = ModelCard(
@@ -70,6 +77,17 @@ data class ModelCard(
             filePath = obj.getString("file"),
             bomKnown = obj.optBoolean("bom_known", false),
             core9Only = obj.optBoolean("core9_only", false),
+            canBuild = obj.optBoolean("can_build", false),
+            missingTotal = obj.optInt("missing_total", 0),
         )
     }
 }
+
+/**
+ * listModels() 的完整解析结果: 卡片列表 + 磁力片库存是否已登记
+ * (未登记时「我能搭的」筛选禁用并引导去录入, 与桌面 GL 同口径)。
+ */
+data class ModelLibrary(
+    val inventoryConfigured: Boolean,
+    val cards: List<ModelCard>,
+)

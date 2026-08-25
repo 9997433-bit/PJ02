@@ -7,7 +7,7 @@ import MagTile.Studio
 // 首页 -> 家长门|家长中心 -> 设置|订阅, 任意界面 <= 2 步回首页,
 // UI_UX_SPEC.md §3 导航铁律)。最小窗口 1024x640 (§13)。
 // 后端桥由 main.cpp 注入: studio (模型库) / inventory (库存) /
-// parentGate (家长门, §9) / appSettings (设置, §8)。
+// parentGate (家长门, §9) / appSettings (设置, §8) / tts (朗读, §4.2)。
 // 家长区路由: 无有效会话先进家长门 (过门后原位替换为家长中心),
 // 15 分钟会话内免重复验证; 会话到期或锁定由下方守卫统一退回首页。
 // 订阅入口 (首页儿童侧温和入口 / 家长中心 / 设置页) 统一经
@@ -177,17 +177,50 @@ ApplicationWindow {
         }
     }
 
+    Component {
+        id: celebrationComponent
+        CelebrationPage {
+            // 「再搭一次」走统一的 startBuild 路由 (下方 buildRequested
+            // 处理器会原位替换庆祝页, 导航深度不增长)
+            onBuildAgain: studio.startBuild(modelId)
+            // 「回模型库」落到 首页 -> 模型库 (<= 2 步回首页 §3)
+            onBackToLibrary: {
+                stack.pop(null)
+                stack.push(libraryComponent)
+            }
+        }
+    }
+
     // 「开始搭建」统一路由: 详情页 (或未来任何入口) 调 studio.startBuild,
-    // 这里接 buildRequested 进教程页 (QT-3 前为占位页)
+    // 这里接 buildRequested 进教程页; 教程完成后接 buildCompleted 把
+    // 教程页原位替换为完成庆祝页 (QT-4, 返回不会退回已完成的教程)
     Connections {
         target: studio
         function onBuildRequested(modelId, modelName, currentStep, stepCount) {
-            stack.push(tutorialComponent, {
+            var params = {
                 modelId: modelId,
                 modelName: modelName,
                 currentStep: currentStep,
                 stepCount: stepCount
-            })
+            }
+            if (stack.currentItem && stack.currentItem.isCelebrationPage === true) {
+                stack.replace(tutorialComponent, params)   // 庆祝页「再搭一次」
+            } else {
+                stack.push(tutorialComponent, params)
+            }
+        }
+        function onBuildCompleted(modelId, modelName, pieces, stepCount) {
+            var params = {
+                modelId: modelId,
+                modelName: modelName,
+                pieces: pieces,
+                steps: stepCount
+            }
+            if (stack.currentItem && stack.currentItem.isTutorialPage === true) {
+                stack.replace(celebrationComponent, params)
+            } else {
+                stack.push(celebrationComponent, params)   // 冒烟深链等非教程入口
+            }
         }
     }
 

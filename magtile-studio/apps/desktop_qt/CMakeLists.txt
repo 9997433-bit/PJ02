@@ -23,6 +23,16 @@ if(NOT Qt6_FOUND)
         "或保持默认 -DMAGTILE_BUILD_QT=OFF 跳过 Qt 界面, CLI/GL/测试目标完全不受影响。")
 endif()
 
+# QtTextToSpeech (步骤朗读 §4.2, QT-4): 可选组件 —— 未安装时应用
+# 照常构建, 朗读静默降级 (TtsBackend available=false, 界面温和提示)
+find_package(Qt6 6.4 QUIET COMPONENTS TextToSpeech)
+if(NOT TARGET Qt6::TextToSpeech)
+    message(STATUS
+        "MagTile: 未找到 Qt6TextToSpeech, Qt 界面朗读降级为静默。"
+        "安装后重新配置即可启用: sudo apt install qt6-speech-dev "
+        "qt6-speech-speechd-plugin (Ubuntu/Debian); macOS/Windows 随官方 Qt 附带。")
+endif()
+
 # AUTOMOC/AUTORCC/AUTOUIC 等 Qt 项目标准设置 (仅作用于本目录)
 qt_standard_project_setup()
 
@@ -34,6 +44,7 @@ qt_add_executable(magtile_studio_qt
     src/inventory_backend.cpp
     src/parent_gate_backend.cpp
     src/settings_backend.cpp
+    src/tts_backend.cpp
     src/tutorial_viewport.cpp
 )
 
@@ -56,6 +67,7 @@ qt_add_qml_module(magtile_studio_qt
         qml/LibraryPage.qml
         qml/DetailPage.qml
         qml/TutorialPage.qml
+        qml/CelebrationPage.qml
         qml/InventoryPage.qml
         qml/ParentGatePage.qml
         qml/ParentAreaPage.qml
@@ -77,6 +89,12 @@ target_link_libraries(magtile_studio_qt PRIVATE
     Qt6::QuickControls2
     Qt6::OpenGL
 )
+
+# 朗读引擎 (可选): 找到才链接并开启编译分支, 否则 TtsBackend 静默降级
+if(TARGET Qt6::TextToSpeech)
+    target_link_libraries(magtile_studio_qt PRIVATE Qt6::TextToSpeech)
+    target_compile_definitions(magtile_studio_qt PRIVATE MAGTILE_QT_TTS)
+endif()
 
 # 桌面应用外观: Windows 下不带控制台窗口; macOS 先不打 bundle
 # (打包交由 platforms/ 与 QT_UI_PLAN.md 的发布阶段处理)

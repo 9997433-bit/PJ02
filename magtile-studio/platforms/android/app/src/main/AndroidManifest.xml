@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- MagTile Studio Android 清单: 单 Activity, 无任何权限申请
-     (数据资产随 APK assets 分发, 首启解包到应用私有目录)。 -->
+<!-- MagTile Studio Android 清单: 模型库 + 库存录入两个 Activity,
+     无任何权限申请 (数据资产随 APK assets 分发, 首启解包到应用私有
+     目录; 进度存档 SQLite 亦在应用私有目录)。 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
@@ -18,6 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 磁力片库存录入 (从模型库筛选栏进入, 结果回传刷新「我能搭的」) -->
+        <activity
+            android:name=".InventoryActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

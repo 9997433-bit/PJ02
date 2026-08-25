@@ -11,6 +11,9 @@
     <string name="filter_all_difficulties">全部难度</string>
     <string name="filter_all_themes">全部主题</string>
     <string name="filter_core9">只用核心 9 片</string>
+    <string name="filter_buildable">我能搭的</string>
+    <string name="filter_go_inventory">去登记 ▶</string>
+    <string name="filter_edit_inventory">改库存</string>
     <string name="thumbnail_description">模型缩略图</string>
     <string name="card_needs_expansion">需要扩展装</string>
     <string name="dialog_core9_note">只用核心 9 片型即可搭建 (基础套装)</string>
@@ -25,4 +28,28 @@
     <string name="dialog_validate_title">物理校验 — %1$s</string>
     <!-- %1$d = 教程步骤数 -->
     <string name="dialog_step_count">教程步骤数: %1$d</string>
+    <!-- 详情弹窗的库存对照 (登记过库存才显示) -->
+    <string name="dialog_can_build">家里的磁力片足够搭这个模型 ✓</string>
+    <!-- %1$d = 共缺几片 -->
+    <string name="dialog_missing_summary">还差 %1$d 片就能搭</string>
+    <string name="dialog_whats_missing">缺什么片?</string>
+    <!-- %1$s = 模型中文名 -->
+    <string name="dialog_missing_title">缺片清单 — %1$s</string>
+    <string name="dialog_missing_failed">缺片清单暂时看不了, 稍后再试一次就好</string>
+    <!-- 库存录入屏 (对齐桌面 InventoryPage 字段与措辞) -->
+    <string name="inventory_title">🧲 家里有哪些磁力片?</string>
+    <string name="inventory_back">← 返回</string>
+    <string name="inventory_hint">照着盒子数一数, 用 − / + 或直接输入数量; 保存后模型库就能筛出「我能搭的」</string>
+    <string name="inventory_group_core">基础套装 · 最常见的 9 种片型</string>
+    <string name="inventory_group_expansion">扩展包 · 没有就保持 0, 不影响基础模型</string>
+    <string name="inventory_zero_note">数量为 0 的片型也会记住「明确没有」</string>
+    <string name="inventory_save">保存库存</string>
+    <string name="inventory_save_match">保存, 看看我能搭什么 ▶</string>
+    <!-- %1$d = 合计片数 -->
+    <string name="inventory_total_badge">合计 %1$d 片</string>
+    <!-- %1$d = 合计片数 -->
+    <string name="inventory_saved_toast">已记住家里的 %1$d 片磁力片</string>
+    <string name="inventory_save_soft_fail">库存暂时没保存上, 稍后再试一次就好</string>
+    <string name="inventory_minus">−</string>
+    <string name="inventory_plus">+</string>
 </resources>

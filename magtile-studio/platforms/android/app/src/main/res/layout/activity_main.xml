@@ -60,13 +60,47 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/filter_core9"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/filter_core9"
-            android:textColor="@color/magtile_text_primary"
-            android:textSize="14sp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/filter_core9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_core9"
+                android:textColor="@color/magtile_text_primary"
+                android:textSize="14sp" />
+
+            <!-- 「我能搭的」: 库存对照 BOM; 未登记库存时禁用并由右侧
+                 「去登记 ▶」引导录入 (与桌面 GL 筛选栏同策略) -->
+            <CheckBox
+                android:id="@+id/filter_buildable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:enabled="false"
+                android:text="@string/filter_buildable"
+                android:textColor="@color/magtile_text_primary"
+                android:textSize="14sp" />
+
+            <!-- 库存录入入口: 未登记 = 去登记 ▶ / 已登记 = 改库存
+                 (TextView 撑到 48dp 触控高度) -->
+            <TextView
+                android:id="@+id/filter_inventory"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="6dp"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/filter_go_inventory"
+                android:textColor="@color/magtile_primary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout

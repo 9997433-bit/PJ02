@@ -13,7 +13,8 @@
 //   - --parent-gate: 启动即显示家长门 (评审 / 冒烟, 同 GL 版深链);
 //   - --smoke-quit-ms: N 毫秒后自动退出 (无头 QML 加载冒烟专用);
 //   - --smoke-open-model: 启动后直接进入该模型的 3D 教程 (QT-3 冒烟);
-//   - --smoke-screenshot: 2.5s 后抓屏保存 PNG 并退出 (配合上一项)。
+//   - --smoke-screenshot: 2.5s 后抓屏保存 PNG 并退出 (配合上一项);
+//   - --smoke-complete-model: 启动后直接完成该模型进庆祝页 (QT-4 冒烟)。
 //
 // 场景图后端: 3D 教程视口 (QQuickFramebufferObject) 需要 OpenGL,
 // 未显式设置 QSG_RHI_BACKEND 时在此固定为 OpenGL (全平台桌面可用)。
@@ -36,6 +37,7 @@
 #include "parent_gate_backend.hpp"
 #include "settings_backend.hpp"
 #include "studio_backend.hpp"
+#include "tts_backend.hpp"
 
 namespace fs = std::filesystem;
 
@@ -117,6 +119,9 @@ int main(int argc, char* argv[]) {
     const QCommandLineOption smoke_shot_opt(
         QStringLiteral("smoke-screenshot"),
         QStringLiteral("2.5 秒后抓屏保存 PNG 并退出 (视口画面验证)"), QStringLiteral("FILE"));
+    const QCommandLineOption smoke_complete_opt(
+        QStringLiteral("smoke-complete-model"),
+        QStringLiteral("启动后直接完成该模型并进入庆祝页 (QT-4 冒烟)"), QStringLiteral("ID"));
     parser.addOption(data_dir_opt);
     parser.addOption(db_opt);
     parser.addOption(parent_gate_opt);
@@ -124,6 +129,7 @@ int main(int argc, char* argv[]) {
     parser.addOption(smoke_flow_opt);
     parser.addOption(smoke_model_opt);
     parser.addOption(smoke_shot_opt);
+    parser.addOption(smoke_complete_opt);
     parser.process(app);
 
     fs::path data_dir;
@@ -150,6 +156,8 @@ int main(int argc, char* argv[]) {
     magtile::qtui::ParentGateBackend parent_gate(parser.isSet(parent_gate_opt));
     // 设置后端桥 (§8): 字号三档/减少动效/年龄段, 与 GL 版/CLI 共库
     magtile::qtui::SettingsBackend settings(db_file);
+    // 步骤朗读后端桥 (§4.2, QT-4): 系统 TTS 封装, 开关与年龄段共库
+    magtile::qtui::TtsBackend tts(db_file);
 
     QQmlApplicationEngine engine;
     // Qt 6.4 的默认引擎导入路径不含 /qt/qml (6.5+ 才内置), 显式补上
@@ -158,6 +166,7 @@ int main(int argc, char* argv[]) {
     engine.rootContext()->setContextProperty(QStringLiteral("inventory"), &inventory);
     engine.rootContext()->setContextProperty(QStringLiteral("parentGate"), &parent_gate);
     engine.rootContext()->setContextProperty(QStringLiteral("appSettings"), &settings);
+    engine.rootContext()->setContextProperty(QStringLiteral("tts"), &tts);
     const bool smoke_flow = parser.isSet(smoke_flow_opt);
     engine.rootContext()->setContextProperty(QStringLiteral("smokeParentFlow"), smoke_flow);
 
@@ -172,6 +181,13 @@ int main(int argc, char* argv[]) {
         const QString model_id = parser.value(smoke_model_opt);
         QTimer::singleShot(0, &backend,
                            [&backend, model_id]() { backend.startBuild(model_id); });
+    }
+    // QT-4 庆祝页冒烟: 直接走完成链路 (completeBuild -> buildCompleted
+    // -> CelebrationPage), 与教程内真实完成同一条信号路径
+    if (parser.isSet(smoke_complete_opt)) {
+        const QString model_id = parser.value(smoke_complete_opt);
+        QTimer::singleShot(0, &backend,
+                           [&backend, model_id]() { backend.completeBuild(model_id); });
     }
     if (parser.isSet(smoke_shot_opt)) {
         const QString shot_file = parser.value(smoke_shot_opt);

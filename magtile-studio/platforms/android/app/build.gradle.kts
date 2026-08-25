@@ -74,6 +74,48 @@ android {
     }
 }
 
+// ---- 数据资产打包 (默认全库; -PmagtileAssets=starter 打入门子集) ------
+//
+// starter 模式 (可选, 面向轻量分发验证): 只打 30 个精选入门模型
+// (platforms/windows/packaging/starter_models.txt, 与免费层选品一致,
+// 详见 docs/FREE_TIER_MANIFEST.md) 及其缩略图, model_catalog.json 由
+// stageStarterCatalog 任务过滤到同一子集 (否则目录会列出 APK 里
+// 不存在的模型文件)。默认与 CI 均为全库, 行为不变。
+val magtileAssetsMode = (project.findProperty("magtileAssets") as String?) ?: "full"
+require(magtileAssetsMode == "full" || magtileAssetsMode == "starter") {
+    "magtileAssets 只支持 full / starter, 收到: $magtileAssetsMode"
+}
+val starterModelIds: Set<String> =
+    if (magtileAssetsMode == "starter") {
+        rootProject.file("../windows/packaging/starter_models.txt").readLines()
+            .map { it.trim() }
+            .filter { it.isNotEmpty() && !it.startsWith("#") }
+            .toSet()
+    } else {
+        emptySet()
+    }
+
+// starter 模式: 过滤 model_catalog.json 到入门子集 (保留 schema_version
+// 等根字段与条目顺序; 非 starter 模式无人依赖此任务, 不会执行)。
+val stageStarterCatalog = tasks.register("stageStarterCatalog") {
+    description = "过滤 model_catalog.json 到 starter 入门模型子集"
+    val source = rootProject.file("../../data/model_catalog.json")
+    val output = layout.buildDirectory.file("magtile-starter/model_catalog.json")
+    val ids = starterModelIds
+    inputs.file(source)
+    outputs.file(output)
+    doLast {
+        @Suppress("UNCHECKED_CAST")
+        val root = groovy.json.JsonSlurper().parse(source) as MutableMap<String, Any?>
+        @Suppress("UNCHECKED_CAST")
+        val models = root["models"] as List<Map<String, Any?>>
+        root["models"] = models.filter { (it["id"] as? String) in ids }
+        val outFile = output.get().asFile
+        outFile.parentFile.mkdirs()
+        outFile.writeText(groovy.json.JsonOutput.toJson(root))
+    }
+}
+
 // 把仓库根 data/ 的子集同步进 build 目录作为 APK assets。
 // 用 Sync (而非 Copy) 保证删除模型/缩略图后旧文件不会残留在 APK 里。
 // 缩略图刻意放到 assets/thumbnails/ (data/ 之外): DataAssetInstaller
@@ -82,12 +124,27 @@ val stageMagTileAssets = tasks.register<Sync>("stageMagTileAssets") {
     description = "同步仓库根 data/ 子集 (tile_catalog + model_catalog + models/ + thumbnails/) 到 APK assets"
     into(layout.buildDirectory.dir("magtile-assets"))
     from(rootProject.layout.projectDirectory.dir("../../data")) {
-        include("tile_catalog.json", "model_catalog.json", "models/**")
+        if (magtileAssetsMode == "starter") {
+            include("tile_catalog.json")
+            starterModelIds.forEach { include("models/$it.json") }
+        } else {
+            include("tile_catalog.json", "model_catalog.json", "models/**")
+        }
         into("data")
     }
     from(rootProject.layout.projectDirectory.dir("../../data/thumbnails")) {
-        include("*.png")
+        if (magtileAssetsMode == "starter") {
+            starterModelIds.forEach { include("$it.png") }
+        } else {
+            include("*.png")
+        }
         into("thumbnails")
+    }
+    if (magtileAssetsMode == "starter") {
+        dependsOn(stageStarterCatalog)
+        from(layout.buildDirectory.file("magtile-starter/model_catalog.json")) {
+            into("data")
+        }
     }
 }
 tasks.named("preBuild") { dependsOn(stageMagTileAssets) }
