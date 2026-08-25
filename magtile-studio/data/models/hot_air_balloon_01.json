@@ -1,0 +1,1266 @@
+{
+  "schema_version": 1,
+  "id": "hot_air_balloon_01",
+  "name": "热气球起飞场",
+  "name_en": "Hot Air Balloon Field 01",
+  "description": "只用核心九片型的全库第一只热气球: 清晨起飞场上, 球皮正在充气 —— 3x3 双层墙环拼出十二道上下同色的彩虹竖条纹瓜瓣, 顶上八片清色方板围成回字环肩口, 中央 1x1 洞口再收四片瘦高等腰球冠 (斜棱自锁, 尖高 3.94); 橙色藤条吊篮在球旁系留待挂, 门框方登篮口、红色火苗骑篮沿; 鼓风机窗格送风, 沙袋压绳, 风向袋看风 —— 三, 二, 一, 飞喽!",
+  "difficulty": 3,
+  "total_pieces": 69,
+  "tags": [
+    "热气球",
+    "嘉年华",
+    "飞行器",
+    "起飞场",
+    "清晨",
+    "进阶"
+  ],
+  "content_meta": {
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 47,
+        "rectangle": 10,
+        "equilateral_triangle": 5,
+        "isosceles_triangle": 5,
+        "door_frame": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "field_0_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "field_2_0",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "field_4_0",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_0_1",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pad_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pad_1_2",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_0_3",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pad_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "field_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "field_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "field_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "field_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "field_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "field_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "field_3_3",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "field_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "field_0_4",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "field_2_4",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "field_4_4",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bag_lo_s0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bag_lo_s1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bag_lo_s2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bag_lo_e1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bag_lo_e2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bag_lo_e3",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bag_lo_n2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "bag_lo_n1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bag_lo_n0",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bag_lo_w3",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bag_lo_w2",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bag_lo_w1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bag_hi_s0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bag_hi_s1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bag_hi_s2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bag_hi_e1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bag_hi_e2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bag_hi_e3",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bag_hi_n2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "bag_hi_n1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bag_hi_n0",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bag_hi_w3",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bag_hi_w2",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bag_hi_w1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "shoulder_sw",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shoulder_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shoulder_se",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shoulder_e",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shoulder_ne",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shoulder_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shoulder_nw",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shoulder_w",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "crown_s",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        2.166667,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_e",
+      "type": "isosceles_triangle",
+      "position": [
+        1.833333,
+        2.5,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_n",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        2.833333,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_w",
+      "type": "isosceles_triangle",
+      "position": [
+        1.166667,
+        2.5,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "basket_door",
+      "type": "door_frame",
+      "position": [
+        4.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "basket_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "basket_w_s",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "basket_w_n",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "basket_e_s",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "basket_e_n",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "burner",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fan",
+      "type": "window_square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sandbag_a",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sandbag_b",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "windsock",
+      "type": "isosceles_triangle",
+      "position": [
+        6.0,
+        0.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        4.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        4.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺起飞场南行: 三条长板边边互吸。",
+      "tip": "天刚蒙蒙亮, 起飞场的草还挂着露水 —— 嘉年华要开场了。",
+      "tiles_to_add": [
+        "field_0_0",
+        "field_2_0",
+        "field_4_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺球囊展开区: 灰色起飞坪和清色帆布垫布拼在西侧。",
+      "tip": "球皮就摊在这块垫布上 —— 墙脚要踩住这些拼缝。",
+      "tiles_to_add": [
+        "pad_0_1",
+        "pad_2_1",
+        "pad_0_2",
+        "pad_1_2",
+        "pad_0_3",
+        "pad_2_3",
+        "field_3_1",
+        "field_4_1",
+        "field_5_1"
+      ],
+      "highlight_tiles": [
+        "field_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺完起飞场: 吊篮位与北侧草地补齐。",
+      "tip": "东边留给吊篮, 球皮先立起来再挂篮。",
+      "tiles_to_add": [
+        "field_3_2",
+        "field_4_2",
+        "field_5_2",
+        "field_3_3",
+        "field_5_3",
+        "field_0_4",
+        "field_2_4",
+        "field_4_4"
+      ],
+      "highlight_tiles": [
+        "pad_1_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立球囊下环南墙与西墙: 六道彩虹竖条纹起步。",
+      "tip": "鼓风机一响, 球皮从这一角先鼓起来。",
+      "tiles_to_add": [
+        "bag_lo_s0",
+        "bag_lo_s1",
+        "bag_lo_s2",
+        "bag_lo_w1",
+        "bag_lo_w2",
+        "bag_lo_w3"
+      ],
+      "highlight_tiles": [
+        "pad_0_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "合球囊下环北墙与东墙: 十二片墙环四角竖边互咬闭环。",
+      "tip": "3x3 的大环合拢 —— 这是全场最大的球囊。",
+      "tiles_to_add": [
+        "bag_lo_n0",
+        "bag_lo_n1",
+        "bag_lo_n2",
+        "bag_lo_e1",
+        "bag_lo_e2",
+        "bag_lo_e3"
+      ],
+      "highlight_tiles": [
+        "bag_lo_s0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "叠球囊上环南墙与西墙: 条纹上下同色, 像真气球的瓜瓣。",
+      "tip": "墙脚整边压住下环墙顶, 荷载层层直下。",
+      "tiles_to_add": [
+        "bag_hi_s0",
+        "bag_hi_s1",
+        "bag_hi_s2",
+        "bag_hi_w1",
+        "bag_hi_w2",
+        "bag_hi_w3"
+      ],
+      "highlight_tiles": [
+        "bag_lo_s0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "合球囊上环: 双层彩虹条纹到顶。",
+      "tip": "十二道竖条纹一通到顶 —— 越往上球皮越收拢。",
+      "tiles_to_add": [
+        "bag_hi_n0",
+        "bag_hi_n1",
+        "bag_hi_n2",
+        "bag_hi_e1",
+        "bag_hi_e2",
+        "bag_hi_e3"
+      ],
+      "highlight_tiles": [
+        "bag_hi_s0"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "铺环形肩口: 八片清色方板围成回字环, 中央留 1x1 洞口。",
+      "tip": "每片方板边边入扣墙顶, 板板互吸围成回字 —— 球冠就骑洞口。",
+      "tiles_to_add": [
+        "shoulder_sw",
+        "shoulder_s",
+        "shoulder_se",
+        "shoulder_e",
+        "shoulder_ne",
+        "shoulder_n",
+        "shoulder_nw",
+        "shoulder_w"
+      ],
+      "highlight_tiles": [
+        "bag_hi_s0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "收球冠: 四片瘦高等腰吸住洞口沿边, 斜棱两两互吸自锁。",
+      "tip": "锥尖高 3.94 —— 摩天大楼金顶的同款自锁环。",
+      "tiles_to_add": [
+        "crown_s",
+        "crown_e",
+        "crown_n",
+        "crown_w"
+      ],
+      "highlight_tiles": [
+        "shoulder_s"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "编吊篮: 藤条墙环踩拼缝, 门框方是登篮口。",
+      "tip": "吊篮在球旁系留待挂 —— 起飞前它们才合体。",
+      "tiles_to_add": [
+        "basket_door",
+        "basket_n",
+        "basket_w_s",
+        "basket_w_n",
+        "basket_e_s",
+        "basket_e_n"
+      ],
+      "highlight_tiles": [
+        "field_4_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "点燃烧器, 架鼓风机: 火苗骑篮沿, 窗格方对着球皮送风。",
+      "tip": "呼 —— 热空气一进球皮, 彩虹条纹越鼓越圆。",
+      "tiles_to_add": [
+        "burner",
+        "fan"
+      ],
+      "highlight_tiles": [
+        "basket_door",
+        "bag_lo_s2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "压沙袋, 竖风向袋: 地勤就位。",
+      "tip": "沙袋压住系留绳, 风向袋说: 今天是个起飞的好天气!",
+      "tiles_to_add": [
+        "sandbag_a",
+        "sandbag_b",
+        "windsock"
+      ],
+      "highlight_tiles": [
+        "bag_lo_s2"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "挂彩旗: 热气球嘉年华开场!",
+      "tip": "数到三就松沙袋 —— 三, 二, 一, 飞喽!",
+      "tiles_to_add": [
+        "flag_e",
+        "flag_w"
+      ],
+      "highlight_tiles": [
+        "windsock"
+      ]
+    }
+  ]
+}
