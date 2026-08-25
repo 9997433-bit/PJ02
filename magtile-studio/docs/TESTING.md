@@ -422,7 +422,7 @@ ctest --test-dir build -R "physics_jitter|validate_jitter" --output-on-failure
 ./build/magtile_app validate <model.json> --data-dir data --jitter 200 --profile strict  # 加严: 更多轮数 + 弱磁档
 ```
 
-### 3.19 内容治理机检 (series 归类 / D3 冻结硬闸门 / 矩阵进度)
+### 3.19 内容治理机检 (series 归类 / D3 冻结硬闸门 / 矩阵进度 / 技法标注守卫)
 
 内容缺口审计 [reports/CONTENT_GAP_AUDIT.md](reports/CONTENT_GAP_AUDIT.md) §7.3 三条机制建议的机检落地; 批次纪律侧的约束见 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §4.3。内容批 PR 评审时, series 归类与 D3 冻结两道闸由一键机检脚本 `tools/review_content_batch.sh` 与 strict 校验/片型分层/唯一性抽查串成一条命令执行 (五道关卡全部阻断, 用法见 CONTENT_STRATEGY.md §4.3「批次评审一键机检」)。
 
@@ -457,6 +457,13 @@ python3 tests/test_difficulty_quota.py .                      # 闸门自身的�
 
 ```bash
 python3 tools/update_model_catalog.py --matrix-report   # 目录重建 + 矩阵进度快照刷新
+```
+
+**技法标注守卫脚手架** —— 脚本 `tools/check_technique_tags.py`。报告缺失 `content_meta.technique_tags.primary` 的模型 (主技法, [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §1.2 每模型恰好 1 个; 缺标注的模型不参与唯一性检查的主题/技法拥挤度统计)。默认 **warn-only** 恒退出 0 (当前全库 250 个均未标注, 回填另行推进 —— 本工具只查不填), `--strict` 有缺失即退出 1; 与 series 归类机检同一"先回填后 strict 闸门"次序, 回填落地前不接入 QA/发布门禁, T01–T18 词值受控机检届时一并挂闸。
+
+```bash
+python3 tools/check_technique_tags.py                # 缺失报告 (warn-only, 恒退出 0)
+python3 tools/check_technique_tags.py --strict       # 回填完成后的硬闸门档 (缺失即退出 1)
 ```
 
 ## 4. 持续集成 (CI)
