@@ -118,17 +118,65 @@ if(MAGTILE_BUILD_GL_RENDERER)
     target_link_libraries(magtile_app PRIVATE magtile_render_gl)
 endif()
 
-# ---- 测试: 用示例模型跑完整质检流程 -----------------------------
+# ---- 测试 (详见 docs/TESTING.md) --------------------------------
 if(MAGTILE_BUILD_TESTS)
     enable_testing()
-    add_test(NAME validate_castle_foundation_01
-        COMMAND magtile_app validate
-            ${CMAKE_CURRENT_SOURCE_DIR}/data/models/castle_foundation_01.json
-            --data-dir ${CMAKE_CURRENT_SOURCE_DIR}/data)
+
+    set(MAGTILE_DATA_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/data)
+    set(MAGTILE_TESTS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+
     add_test(NAME print_tile_catalog
-        COMMAND magtile_app catalog --data-dir ${CMAKE_CURRENT_SOURCE_DIR}/data)
-    add_test(NAME tutorial_walkthrough
-        COMMAND magtile_app tutorial
-            ${CMAKE_CURRENT_SOURCE_DIR}/data/models/castle_foundation_01.json
-            --data-dir ${CMAKE_CURRENT_SOURCE_DIR}/data)
+        COMMAND magtile_app catalog --data-dir ${MAGTILE_DATA_DIR})
+
+    # 每个模型单独注册 validate / tutorial 用例, 便于精确定位失败模型。
+    # CONFIGURE_DEPENDS: 新增模型 JSON 时自动重新 glob, 无需手工改 CMake。
+    file(GLOB MAGTILE_MODEL_FILES CONFIGURE_DEPENDS ${MAGTILE_DATA_DIR}/models/*.json)
+    foreach(model_file IN LISTS MAGTILE_MODEL_FILES)
+        get_filename_component(model_name ${model_file} NAME_WE)
+        add_test(NAME validate_${model_name}
+            COMMAND magtile_app validate ${model_file} --data-dir ${MAGTILE_DATA_DIR})
+        add_test(NAME tutorial_${model_name}
+            COMMAND magtile_app tutorial ${model_file} --data-dir ${MAGTILE_DATA_DIR})
+    endforeach()
+
+    # 脚本类测试 (bash): 模型库全量质检 / 教程完整性 / 物理负例
+    find_program(MAGTILE_BASH bash)
+    if(MAGTILE_BASH)
+        # 全量质检: 逐一 validate + 报告片数步数 + 拒绝 < 40 片的小模型
+        add_test(NAME all_models_quality_gate
+            COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_all_models.sh
+                $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR} 40)
+
+        # 教程完整性: 静态逐步累加走查 + CLI 教程引擎实际跑一遍
+        add_test(NAME tutorial_integrity
+            COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_tutorial_integrity.sh
+                $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
+
+        # 物理负例: 这些夹具物理上不成立, validate 必须以非零退出码拒绝,
+        # 且必须报出对应的错误码 (由 test_physics_negative.sh 断言)。
+        foreach(pair IN ITEMS
+                "floating_tile\;floating_tile"
+                "unstable_cantilever\;unstable_center_of_mass"
+                "overlapping_tiles\;tile_overlap")
+            list(GET pair 0 fixture_name)
+            list(GET pair 1 expected_code)
+            add_test(NAME physics_negative_${fixture_name}
+                COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physics_negative.sh
+                    $<TARGET_FILE:magtile_app> ${MAGTILE_DATA_DIR}
+                    ${MAGTILE_TESTS_DIR}/test_physics_negative/${fixture_name}.json
+                    ${expected_code})
+        endforeach()
+    else()
+        message(WARNING "MagTile: 未找到 bash, 跳过脚本类测试注册")
+    endif()
+
+    # 反平凡检查 (Python): 拒绝片数过少 / 形状单一 / 纯平面的敷衍模型
+    find_package(Python3 COMPONENTS Interpreter QUIET)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME anti_trivial_models
+            COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_anti_trivial.py
+                ${MAGTILE_DATA_DIR}/models)
+    else()
+        message(WARNING "MagTile: 未找到 Python3, 跳过反平凡模型检查注册")
+    endif()
 endif()
