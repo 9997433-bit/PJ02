@@ -12,6 +12,11 @@
 #            清单一致 + 抽样模型在列 + 目录元数据对账通过
 #   E2E-06a  免费模型教程步进    tutorial 全程步进, 放置片数与
 #            total_pieces 对账 (教程引擎真实跑完)
+#   E2E-17a  跨端存档键契约      CLI 写 age_mode -> python sqlite 直读
+#            settings 表键名/编码契约 + settings show 回读; 构建目录
+#            有 magtile_cross_platform_test 时另跑全量跨端互通断言
+#            (样例存档含年龄段/订阅/引导/完成/成就, 见
+#            tests/test_cross_platform_progress.cpp)
 #   E2E-QT   Qt 无头冒烟         tests/test_qt_smoke.sh 全部路径
 #            (首页/家长门/过门流含订阅页/完成庆祝+存档断言, offscreen)
 #   E2E-12a  Qt 进度页深链       --smoke-complete-model 造非空存档后
@@ -220,6 +225,40 @@ e2e_cli_free_tutorial() {
 }
 
 # =============================================================
+# E2E-17a 跨端存档键契约: CLI 写入端 -> 独立读取端 (python sqlite
+# 直读, 模拟另一端不经 C++ 存档层直接打开同一 SQLite 文件) 断言
+# settings 表键名/编码符合 progress 模块契约; 构建目录已有
+# magtile_cross_platform_test 时另跑全量跨端互通断言 (与 CTest
+# cross_platform_progress 同一载体, 缺二进制不阻断轻量档)
+# =============================================================
+e2e_cross_platform_keys() {
+    local db="$TMP_DIR/e2e_cross.db"
+    echo "  (a) CLI 写入端: settings set-age 4 (age_mode 键) ..."
+    "$APP" settings set-age 4 --db "$db" >/dev/null || {
+        echo "[断言失败] settings set-age 非零退出"; return 1; }
+    echo "  (b) 独立读取端: python sqlite 直读 settings 表键契约 ..."
+    "$PYTHON" - "$db" <<'PYEOF' || return 1
+import sqlite3, sys
+rows = dict(sqlite3.connect(sys.argv[1]).execute(
+    "SELECT key, value FROM settings").fetchall())
+if rows.get("age_mode") != "age_4_6":
+    sys.exit("[断言失败] age_mode 键/编码不符 progress 模块契约: %r" % rows)
+PYEOF
+    echo "  (c) CLI 回读端: settings show 读回启蒙模式 ..."
+    "$APP" settings show --db "$db" | grep -q "启蒙模式" || {
+        echo "[断言失败] settings show 未回读出启蒙模式"; return 1; }
+    local cross_bin="$BUILD_DIR/magtile_cross_platform_test"
+    if [ -x "$cross_bin" ]; then
+        echo "  (d) 全量跨端互通断言 (magtile_cross_platform_test) ..."
+        "$cross_bin" "$TMP_DIR/e2e_cross_full.db" || {
+            echo "[断言失败] 跨端进度存档互通测试非零退出"; return 1; }
+    else
+        echo "  (d) 构建目录无 magtile_cross_platform_test, 全量断言由 CTest cross_platform_progress 兜底"
+    fi
+    echo "[断言通过] 跨端存档 settings 键契约一致 (CLI 写 -> sqlite 直读 -> CLI 回读)"
+}
+
+# =============================================================
 # E2E-12a Qt 进度页深链: 完成存档非空后 --smoke-open-progress
 # 实例化进度页/成就墙数据源; QML 运行时错误一票否决
 # =============================================================
@@ -353,6 +392,7 @@ run_stage "E2E-11a 免费层清单对齐 (verify_free_tier)" \
     --catalog "$ROOT/data/tile_catalog.json"
 run_stage "E2E-11b CLI 免费筛选对账 (--free-only)"       e2e_cli_free_filter
 run_stage "E2E-06a CLI 免费模型教程步进 ($SAMPLE_MODEL)" e2e_cli_free_tutorial
+run_stage "E2E-17a 跨端存档键契约 (CLI 写 -> sqlite 直读)" e2e_cross_platform_keys
 
 # ---- Qt 冒烟 (缺二进制时尝试自动构建, 环境无 Qt6 则 SKIP) --------
 QT_APP="$QT_BUILD_DIR/apps/desktop_qt/magtile_studio_qt"

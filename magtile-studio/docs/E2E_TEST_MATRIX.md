@@ -18,7 +18,7 @@
 |  | **Auto(部分)** | 数据链路/状态机已自动化, 视觉与真机体验仍需人工补 |
 |  | **Manual** | 人工验收, 按「人工要点」列的步骤逐条打钩 |
 | 平台 | Qt 桌面 | `magtile_studio_qt` (Windows / macOS / Linux 商用桌面壳) |
-|  | GL 桌面 | `magtile_app library --gui` (GLFW+ImGui 壳, 内容工具兼评审) |
+|  | GL 桌面 | `magtile_app library --dev-gui` (GLFW+ImGui 壳, 已退役为内容工具/内部评审, 非用户入口) |
 |  | CLI | `magtile_app` 终端命令 (质检与无显示环境兜底) |
 |  | Android | `platforms/android` APK (真机验收) |
 |  | Win 包 | Windows 安装包 (打包产物, 见 `scripts/package_windows.md`) |
@@ -46,8 +46,8 @@
 | E2E-14 | **Android 列表 + 详情**: 分龄筛选栏 → 卡片详情弹窗 (简介/套装/库存对照/缺片清单) → 物理校验摘要 | Android | P0 | Auto(部分) | `run_e2e_smoke.sh` E2E-14a: NDK 交叉编译 + JNI 符号断言 (符号清单运行时解析自 CI `android.yml` ndk-so, 口径自动同步); assemble-debug APK 内容校验在 CI。真机按 `platforms/android/README.md` 第一节走查 |
 | E2E-15 | **Android 教程步进**: 免费模型「开始搭建」→ 分步教程 (步骤列表/上一步/下一步) → 断点续搭 → 完成 + 首搭成就 | Android | P0 | Manual | 真机走查; 进度写档与桌面同一 SQLite schema, 可顺带抽查跨端口径 (完成后进度页立即可见) |
 | E2E-16 | **TTS 朗读**: 4-6 岁启蒙自动朗读 / 🔊 手动朗读 / 总开关关闭全端静音降级 | Qt / GL | P1 | Auto(部分) | `age_tts` (映射与开关契约) + `settings_tts_cli`。真实发声与音色人工 (无声环境自动静音降级不算失败) |
-| E2E-17 | **跨端存档互通**: CLI 完成模型 → Qt 进度页显示已完成; Qt 录库存 → CLI `inventory match` 一致 | Qt / GL / CLI | P1 | Auto | `qt_backend_bridges` 共库契约 + `progress_roundtrip` / `inventory_cli` (同一 `progress.db` 多端读写) |
-| E2E-18 | **GL 桌面壳**: `magtile_app library --gui` 模型库 → 教程 → 返回模型库, 画面非纯色 | GL 桌面 | P1 | Auto(部分) | `tests/test_gl_smoke.sh` (xvfb 真渲染 + 截图校验, CI 常跑)。交互走查人工 |
+| E2E-17 | **跨端存档互通**: CLI 完成模型 → Qt 进度页显示已完成; Qt 录库存 → CLI `inventory match` 一致; 近期新增设置键 (`age_mode` / `subscription_active` / `onboarding_age_done` / 成就解锁) 四端同一 settings 键契约 | Qt / GL / CLI / Android | P1 | Auto(部分) | CTest `cross_platform_progress` (样例存档: 年龄段/订阅/引导标记/完成记录/成就解锁, settings 键名编译期 static_assert + 落盘键值双锁, 第二连接按 Qt 读取口径回读) + `cross_platform_progress_cli` (CLI 真实二进制从同一存档回读完成/成就/年龄段); `qt_backend_bridges` 共库契约 + `progress_roundtrip` / `inventory_cli`; `run_e2e_smoke.sh` E2E-17a 轻量键契约断言。Android 真机同库读写人工抽查 (随 E2E-15 走查) |
+| E2E-18 | **GL 桌面壳 (内部工具)**: `magtile_app library --dev-gui` 模型库 → 教程 → 返回模型库, 画面非纯色 | GL 桌面 | P1 | Auto(部分) | `tests/test_gl_smoke.sh` (xvfb 真渲染 + 截图校验 + `--gui` 别名回归, CI 常跑)。交互走查人工 |
 | E2E-19 | **触屏手势**: 教程视口与详情预览 单指旋转 / 双指捏合缩放 / 双指平移, 与鼠标并存 | Qt 触屏设备 | P1 | Manual | offscreen 平台不投递 TouchUpdate, 自动化不覆盖; 真机触屏或 xvfb+uinput 按 QT_UI_PLAN QT-3 验证方案走查 |
 | E2E-20 | **离线可用**: 断网环境下 E2E-01/03 主链路全功能可用 (零联网承诺) | 全平台 | P1 | Manual | 断网重走安装启动与教程主链路; 承诺依据 SECURITY_AND_PRIVACY.md |
 
@@ -70,6 +70,7 @@ tools/run_e2e_smoke.sh --help          # 完整用法
 | 免费层清单对齐 | E2E-11a | `tools/verify_free_tier.py`: 免费标签恰 30 + 全 core-9 + starter 清单一致 |
 | CLI 免费筛选对账 | E2E-11b | `library --free-only` 数量与 starter 清单一致, 目录元数据对账通过 |
 | CLI 免费模型教程步进 | E2E-06a | 免费模型教程全程步进, 放置片数与 `total_pieces` 对账 |
+| 跨端存档键契约 | E2E-17a | CLI 写 `age_mode` → python sqlite 直读键名/编码契约 + `settings show` 回读; 构建目录有 `magtile_cross_platform_test` 时另跑全量跨端互通断言 |
 | Qt 无头冒烟 | E2E-01/07/08/10 | `tests/test_qt_smoke.sh` 全部路径: 首页 / 家长门深链 / 过门流 (含订阅页) / 完成庆祝 + 存档断言等 (以该脚本为准), 外加 QML 运行时错误一票否决 |
 | Qt 进度页深链 | E2E-12a | 先 `--smoke-complete-model` 造非空存档, 再 `--smoke-open-progress` 实例化进度页/成就墙数据源 |
 | Android JNI 符号断言 | E2E-14a | NDK 交叉编译 `libmagtile_core.so` + JNI 符号齐全 (符号清单运行时解析自 CI `android.yml`, 与流水线口径自动同步); 无 NDK 环境自动 SKIP |
