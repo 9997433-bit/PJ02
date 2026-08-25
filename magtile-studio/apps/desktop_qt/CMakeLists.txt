@@ -27,6 +27,7 @@ qt_standard_project_setup()
 qt_add_executable(magtile_studio_qt
     src/main.cpp
     src/library_model.cpp
+    src/library_filter_model.cpp
     src/studio_backend.cpp
 )
 
@@ -43,7 +44,10 @@ qt_add_qml_module(magtile_studio_qt
         qml/Main.qml
         qml/HomePage.qml
         qml/LibraryPage.qml
+        qml/DetailPage.qml
+        qml/TutorialPage.qml
         qml/BigButton.qml
+        qml/FilterChip.qml
         qml/Theme.qml
 )
 

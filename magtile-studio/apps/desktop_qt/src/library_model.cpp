@@ -35,6 +35,10 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const {
         case StatusRole: return row.status;
         case CurrentStepRole: return row.current_step;
         case FavoritedRole: return row.favorited;
+        case Core9OnlyRole: return row.core9_only;
+        case CanBuildRole: return row.can_build;
+        case MissingTotalRole: return row.missing_total;
+        case BomKnownRole: return row.bom_known;
         default: return {};
     }
 }
@@ -52,6 +56,10 @@ QHash<int, QByteArray> LibraryModel::roleNames() const {
         {StatusRole, "status"},
         {CurrentStepRole, "currentStep"},
         {FavoritedRole, "favorited"},
+        {Core9OnlyRole, "core9Only"},
+        {CanBuildRole, "canBuild"},
+        {MissingTotalRole, "missingTotal"},
+        {BomKnownRole, "bomKnown"},
     };
 }
 
@@ -59,6 +67,24 @@ void LibraryModel::resetRows(std::vector<LibraryRow> rows) {
     beginResetModel();
     rows_ = std::move(rows);
     endResetModel();
+}
+
+const LibraryRow* LibraryModel::findRow(const std::string& model_id) const noexcept {
+    for (const LibraryRow& row : rows_) {
+        if (row.entry.id == model_id) return &row;
+    }
+    return nullptr;
+}
+
+void LibraryModel::setFavorited(const std::string& model_id, bool favorited) {
+    for (std::size_t i = 0; i < rows_.size(); ++i) {
+        if (rows_[i].entry.id != model_id) continue;
+        if (rows_[i].favorited == favorited) return;
+        rows_[i].favorited = favorited;
+        const QModelIndex idx = index(static_cast<int>(i));
+        emit dataChanged(idx, idx, {FavoritedRole});
+        return;
+    }
 }
 
 }  // namespace magtile::qtui

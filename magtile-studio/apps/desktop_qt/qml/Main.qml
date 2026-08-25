@@ -3,9 +3,11 @@ import QtQuick.Controls
 import MagTile.Studio
 
 // =============================================================
-// 主窗口: StackView 导航 (首页 -> 模型库, 任意界面 <= 2 步回首页,
-// UI_UX_SPEC.md §3 导航铁律)。最小窗口 1024x640 (§13)。
-// 后端桥 "studio" (StudioBackend) 由 main.cpp 注入。
+// 主窗口: StackView 导航 (首页 -> 模型库 -> 模型详情 -> 教程,
+// 任意界面 <= 2 步回首页, UI_UX_SPEC.md §3 导航铁律)。
+// 最小窗口 1024x640 (§13)。后端桥 "studio" (StudioBackend) 由
+// main.cpp 注入; 「开始搭建」统一走 studio.buildRequested 信号
+// 路由 —— QT-3 教程视口就绪后只换 TutorialPage 内容, 路由不变。
 // =============================================================
 ApplicationWindow {
     id: window
@@ -42,6 +44,7 @@ ApplicationWindow {
         id: homeComponent
         HomePage {
             onOpenLibrary: stack.push(libraryComponent)
+            onOpenModel: function(modelId) { stack.push(detailComponent, { modelId: modelId }) }
             onNotify: function(message) { window.showToast(message) }
         }
     }
@@ -50,7 +53,39 @@ ApplicationWindow {
         id: libraryComponent
         LibraryPage {
             onBack: stack.pop()
+            onOpenDetail: function(modelId) { stack.push(detailComponent, { modelId: modelId }) }
             onNotify: function(message) { window.showToast(message) }
+        }
+    }
+
+    Component {
+        id: detailComponent
+        DetailPage {
+            onBack: stack.pop()
+            onNotify: function(message) { window.showToast(message) }
+        }
+    }
+
+    Component {
+        id: tutorialComponent
+        TutorialPage {
+            onBack: stack.pop()
+            onHome: stack.pop(null)
+            onNotify: function(message) { window.showToast(message) }
+        }
+    }
+
+    // 「开始搭建」统一路由: 详情页 (或未来任何入口) 调 studio.startBuild,
+    // 这里接 buildRequested 进教程页 (QT-3 前为占位页)
+    Connections {
+        target: studio
+        function onBuildRequested(modelId, modelName, currentStep, stepCount) {
+            stack.push(tutorialComponent, {
+                modelId: modelId,
+                modelName: modelName,
+                currentStep: currentStep,
+                stepCount: stepCount
+            })
         }
     }
 

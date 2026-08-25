@@ -11,6 +11,7 @@ Page {
     id: page
 
     signal openLibrary()
+    signal openModel(string modelId)
     signal notify(string message)
 
     background: Rectangle { color: Theme.surfaceAlt }
@@ -77,13 +78,13 @@ Page {
             Layout.fillWidth: true
         }
 
-        // "继续上次"大卡片 (§5.2: 首页最顶部, 一键回到断点)
+        // "继续上次"大卡片 (§5.2: 首页最顶部, 一键回到断点的模型详情)
         AbstractButton {
             id: continueCard
             visible: studio.hasContinue
             Layout.fillWidth: true
             Layout.preferredHeight: 88
-            onClicked: page.notify("继续搭建即将接入 Qt 版; 现在可用 magtile_app library --gui 继续")
+            onClicked: page.openModel(studio.continueModelId)
             scale: pressed ? 0.98 : 1.0
             Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
 

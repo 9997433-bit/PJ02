@@ -7,14 +7,28 @@
 // 以 Q_PROPERTY 暴露给 QML (main.cpp 经 context property "studio"
 // 注入)。目录 / 存档读取失败不崩溃, 以 statusMessage 温和提示
 // (UI_UX_SPEC.md P3 零挫败: 界面上永不弹"失败")。
+//
+// QT-1 扩展: reload 时逐个加载模型 JSON 计算 BOM, 对照片型目录
+// (tile_catalog.json 的 tier) 得出「只用核心 9 片」, 对照磁力片
+// 库存 (ProgressStore::getInventory) 得出「我能搭的」与缺片清单;
+// 详情页经 modelDetail / bomForModel 读取, 「开始搭建」经
+// startBuild 发出 buildRequested 信号 —— QT-3 教程视口就绪后由
+// 同一信号路由进真教程, QML 侧路由无需再改。
 // =============================================================
 
 #include <QObject>
 #include <QString>
+#include <QStringList>
+#include <QVariantList>
+#include <QVariantMap>
 #include <filesystem>
+#include <map>
 #include <memory>
+#include <string>
 
+#include "library_filter_model.hpp"
 #include "library_model.hpp"
+#include "magtile/core/tile_catalog.hpp"
 #include "magtile/progress/progress_store.hpp"
 
 namespace magtile::qtui {
@@ -22,14 +36,20 @@ namespace magtile::qtui {
 class StudioBackend final : public QObject {
     Q_OBJECT
     Q_PROPERTY(magtile::qtui::LibraryModel* libraryModel READ libraryModel CONSTANT)
+    Q_PROPERTY(magtile::qtui::LibraryFilterModel* libraryFilter READ libraryFilter CONSTANT)
     Q_PROPERTY(int modelCount READ modelCount NOTIFY catalogChanged)
     Q_PROPERTY(int totalPieces READ totalPieces NOTIFY catalogChanged)
     Q_PROPERTY(int inProgressCount READ inProgressCount NOTIFY catalogChanged)
     Q_PROPERTY(int completedCount READ completedCount NOTIFY catalogChanged)
     Q_PROPERTY(bool hasContinue READ hasContinue NOTIFY catalogChanged)
     Q_PROPERTY(QString continueTitle READ continueTitle NOTIFY catalogChanged)
+    Q_PROPERTY(QString continueModelId READ continueModelId NOTIFY catalogChanged)
     Q_PROPERTY(QString statusMessage READ statusMessage NOTIFY catalogChanged)
     Q_PROPERTY(QString dataDirText READ dataDirText NOTIFY catalogChanged)
+    /// 家庭磁力片库存是否已登记 (未登记时「我能搭的」筛选由界面禁用并引导)。
+    Q_PROPERTY(bool inventoryConfigured READ inventoryConfigured NOTIFY catalogChanged)
+    /// 全部主题 (按目录出现顺序去重), 主题筛选器数据源。
+    Q_PROPERTY(QStringList themes READ themes NOTIFY catalogChanged)
 
 public:
     StudioBackend(std::filesystem::path data_dir, std::filesystem::path db_file,
@@ -37,32 +57,72 @@ public:
     ~StudioBackend() override;
 
     [[nodiscard]] LibraryModel* libraryModel() noexcept { return &library_model_; }
+    [[nodiscard]] LibraryFilterModel* libraryFilter() noexcept { return &library_filter_; }
     [[nodiscard]] int modelCount() const noexcept { return static_cast<int>(library_model_.rows().size()); }
     [[nodiscard]] int totalPieces() const noexcept { return total_pieces_; }
     [[nodiscard]] int inProgressCount() const noexcept { return in_progress_count_; }
     [[nodiscard]] int completedCount() const noexcept { return completed_count_; }
     [[nodiscard]] bool hasContinue() const noexcept { return !continue_title_.isEmpty(); }
     [[nodiscard]] QString continueTitle() const { return continue_title_; }
+    [[nodiscard]] QString continueModelId() const { return continue_model_id_; }
     [[nodiscard]] QString statusMessage() const { return status_message_; }
     [[nodiscard]] QString dataDirText() const { return QString::fromStdString(data_dir_.string()); }
+    [[nodiscard]] bool inventoryConfigured() const noexcept { return inventory_configured_; }
+    [[nodiscard]] QStringList themes() const { return themes_; }
 
     /// 重新加载模型库目录并合并进度存档 (构造时自动调用一次)。
     Q_INVOKABLE void reload();
 
+    /// 切换收藏状态并更新卡片; 返回切换后的状态 (存档不可用时状态不变)。
+    Q_INVOKABLE bool toggleFavorite(const QString& model_id);
+
+    /// 模型详情页数据快照 (键: found/modelId/name/nameEn/description/
+    /// difficulty/pieces/steps/theme/status/currentStep/favorited/
+    /// bomKnown/core9Only/canBuild/missingTotal/missingText)。
+    /// 模型不存在时只含 found=false。
+    Q_INVOKABLE QVariantMap modelDetail(const QString& model_id) const;
+
+    /// 模型 BOM 清单 (详情页 §5.4): 每项 {shapeName, needed, have,
+    /// missing, isCore}; have/missing 仅在库存已登记时有意义。
+    Q_INVOKABLE QVariantList bomForModel(const QString& model_id) const;
+
+    /// 「开始搭建」入口: 发出 buildRequested 供路由层跳转教程。
+    /// QT-3 之前由 Main.qml 路由到占位 TutorialPage; 视口就绪后同一
+    /// 信号改接真 3D 教程, 详情页与路由契约不变。
+    Q_INVOKABLE void startBuild(const QString& model_id);
+
 signals:
     void catalogChanged();
+    /// 「开始搭建」请求 (current_step: 0 = 从头开始, >0 = 从断点继续)。
+    void buildRequested(const QString& modelId, const QString& modelName, int currentStep,
+                        int stepCount);
 
 private:
+    /// 片型是否属于核心 9 片 (基础套装): 以 data/tile_catalog.json 的
+    /// tier 标注为准, 目录不可用时退回代码内白名单 (两处必须一致)。
+    [[nodiscard]] bool isCoreTile(core::TileType type) const;
+    /// 片型中文名: 片型目录的 name_zh 优先, 缺省退回 core::displayNameZh。
+    [[nodiscard]] QString shapeNameZh(core::TileType type) const;
+    /// 缺片提示文案, 如 "缺 4 片正方形、2 片长方形"; 不缺时为空串。
+    [[nodiscard]] QString missingText(const LibraryRow& row) const;
+
     std::filesystem::path data_dir_;
     std::filesystem::path db_file_;
     std::unique_ptr<progress::ProgressStore> store_;  ///< 打开失败时为空 (只降级不崩溃)
 
     LibraryModel library_model_;
+    LibraryFilterModel library_filter_;
+    core::TileCatalog tile_catalog_;
+    bool tile_catalog_loaded_ = false;
+    std::map<core::TileType, int> inventory_;  ///< 已登记库存快照 (按片型)
+    bool inventory_configured_ = false;
+    QStringList themes_;
     int total_pieces_ = 0;
     int in_progress_count_ = 0;
     int completed_count_ = 0;
-    QString continue_title_;   ///< "继续上次"卡片文案, 如 "彩虹桥 · 第 3/12 步"
-    QString status_message_;   ///< 页脚状态行 (加载结果或温和的降级提示)
+    QString continue_title_;      ///< "继续上次"卡片文案, 如 "彩虹桥 · 第 3/12 步"
+    QString continue_model_id_;   ///< "继续上次"对应的模型 id (直达详情/教程)
+    QString status_message_;      ///< 页脚状态行 (加载结果或温和的降级提示)
 };
 
 }  // namespace magtile::qtui

@@ -30,24 +30,34 @@
 - **3D 视口**（QT-3 阶段）：优先 `QQuickFramebufferObject` 复用现有 `magtile_render_gl` 的 GL 4.1 渲染器（改动最小）；若目标平台默认走 RHI/非 GL 后端，则以 `QRhi` 重写渲染器为长期方案。
 - **许可合规**：Qt 以 **LGPLv3 动态链接**使用（仅 Essentials 模块），商用闭源应用合规；不静态链接 Qt、不修改 Qt 源码；发布包内附 Qt 许可声明。若后续需要静态链接或商店特殊渠道，再评估 Qt 商业授权。
 
-## 3. 已落地（本次提交）— DONE
+## 3. 已落地 — DONE
 
 ```
 apps/desktop_qt/
 ├── CMakeLists.txt          # find_package(Qt6 6.4) + qt_add_qml_module; 未找到 Qt 时报错并给出各平台安装指引
 ├── src/
 │   ├── main.cpp            # 入口: --data-dir/--db 解析, 数据目录向上探测, 存档路径与 CLI 逐字节一致
-│   ├── studio_backend.*    # QML 后端桥: 模型库目录 + 进度存档 (magtile_core / ProgressStore)
-│   └── library_model.*     # QAbstractListModel: 模型卡片 (名称/难度/片数/步数/主题/进度徽标/收藏)
+│   ├── studio_backend.*    # QML 后端桥: 模型库目录 + 进度存档 + BOM/库存对照 (canBuild/缺片/core-9)
+│   │                       #   + modelDetail/bomForModel/toggleFavorite + startBuild -> buildRequested 信号
+│   ├── library_model.*     # QAbstractListModel: 模型卡片 (名称/难度/片数/步数/主题/进度徽标/收藏
+│   │                       #   /core9Only/canBuild/missingTotal)
+│   └── library_filter_model.*  # QSortFilterProxyModel: 难度/主题/只用核心9片/我能搭的 四维筛选
 └── qml/
     ├── Theme.qml           # 设计令牌单例 (UI_UX_SPEC §1.2: 磁力蓝 #2E7DD1 / 完成绿 #2C9F6B / 琥珀 #E8A13C, 圆角 16/24/20, 200ms ease-out)
     ├── BigButton.qml       # 胶囊大按钮 (高度 >= 64, 字号 22, 按下缩放动效)
-    ├── Main.qml            # 主窗口 + StackView 导航 + 底部温和提示 (最小窗口 1024x640, §13)
-    ├── HomePage.qml        # 首页: 超大主按钮 + "继续上次"卡片 + 32px 家长区入口 (§5.3)
-    └── LibraryPage.qml     # 模型库: 自适应卡片网格 + 难度星/片数/步数 + ✓/▶ 进度徽标 + 空态
+    ├── FilterChip.qml      # 筛选胶囊 (高度 48, 选中实心主色, 状态由外部绑定驱动)
+    ├── Main.qml            # 主窗口 + StackView 导航 (首页->库->详情->教程) + buildRequested 统一路由 + 底部温和提示
+    ├── HomePage.qml        # 首页: 超大主按钮 + "继续上次"卡片 (直达断点模型详情) + 32px 家长区入口 (§5.3)
+    ├── LibraryPage.qml     # 模型库: 筛选侧栏 (难度/主题/只用核心9片/我能搭的) + 卡片网格
+    │                       #   + ✓/▶ 进度徽标 + "还缺 N 片"琥珀徽标 + 筛选空态 ("换个条件试试")
+    ├── DetailPage.qml      # 模型详情 (§5.4): 预览占位 + 难度/片数/步数 + BOM 对照库存缺片提示
+    │                       #   + 套装分层标签 + 收藏 + "开始搭建"大按钮 (高 64, 占宽 80%)
+    └── TutorialPage.qml    # 教程占位页: QT-3 视口就绪前温和提示, 路由契约与真教程一致
 ```
 
-已兑现的规范点：主色板与圆角令牌、可点元素 ≥ 48（家长区入口 32px 为规范内唯一例外）、主按钮 ≥ 64 高、状态三重编码（图形+文字+颜色, §4.7 色盲安全）、任意界面 ≤ 2 步回首页、无失败文案（占位功能一律"即将上线"温和提示）。
+已兑现的规范点：主色板与圆角令牌、可点元素 ≥ 48（家长区入口 32px 为规范内唯一例外）、主按钮 ≥ 64 高、状态三重编码（图形+文字+颜色, §4.7 色盲安全）、任意界面 ≤ 2 步回首页、无失败文案（占位功能一律"即将上线"温和提示，缺片用琥珀提示 + 替代建议，不用红色表达"错误"）。
+
+QT-1 补充说明：BOM 与库存对照在 `StudioBackend::reload` 一次性算好（与 GL 版同策略，模型 JSON 仅启动/重载时加载），核心 9 片分层以 `data/tile_catalog.json` 的 `tier` 标注为单一数据源（目录不可用时退回代码内同口径白名单）；「我能搭的」在未登记库存时禁用并温和引导（不显示全空列表）。「开始搭建」统一走 `startBuild -> buildRequested` 信号，Main.qml 据此路由到占位 TutorialPage —— QT-3 视口就绪后只需替换教程页内容，详情页与路由契约不变。
 
 Qt 版与 GL 版**共用同一份进度存档**（默认平台路径与 `magtile_app` 一致，见 docs/PROGRESS.md），家庭用户在两个外壳间切换进度不丢。
 
@@ -76,8 +86,8 @@ cmake --build build-qt --target magtile_studio_qt -j
 
 | 阶段 | 内容 | 依赖 | 状态 |
 |------|------|------|------|
-| **QT-0 外壳落地** | CMake 可选子项目、Theme 令牌、Home + Library 占位、链接 magtile_core、进度徽标 | — | `DONE`（本次） |
-| **QT-1 模型库完整** | 筛选器（难度/主题/片数/我能搭）、分龄卡片密度（§2）、"继续上次"直达教程、模型详情页（BOM 缺片提示, §5.4） | QT-0 | `PLANNED` |
+| **QT-0 外壳落地** | CMake 可选子项目、Theme 令牌、Home + Library 占位、链接 magtile_core、进度徽标 | — | `DONE` |
+| **QT-1 模型库完整** | 筛选器（难度/主题/只用核心 9 片/我能搭）、分龄卡片密度（§2）、"继续上次"直达教程、模型详情页（BOM 缺片提示, §5.4） | QT-0 | `IN_PROGRESS`（筛选器 + 筛选空态 + 详情页 + 收藏 + "继续上次"直达详情 DONE；分龄卡片密度、筛选无结果时推荐 3 个可搭模型、详情页 3D 预览与预计用时 PLANNED） |
 | **QT-2 家长门与设置** | `core::ParentGate` 接 QML（算术题 + 中文大写软键盘复刻 GL 版）、家长中心、设置页（字号三档/减少动效/主题） | QT-0 | `PLANNED` |
 | **QT-3 3D 教程播放器** | `QQuickFramebufferObject` 集成 `magtile_render_gl`：步骤导航/高亮/ghost/轨道相机上屏；退出自动存档 | QT-1 | `PLANNED`（核心屏 ★，工作量最大） |
 | **QT-4 反馈与庆祝** | 每步星星反馈、完成庆祝页、成就墙 GUI、QtTextToSpeech 朗读（§4.2/4.3） | QT-3 | `PLANNED` |
@@ -90,9 +100,9 @@ cmake --build build-qt --target magtile_studio_qt -j
 
 | 屏幕（UI_UX_SPEC 章节） | GL/ImGui 版 | Qt 版 | 迁移阶段 |
 |------------------------|-------------|-------|----------|
-| 首页 / 模型库 §5 | 卡片网格 + 进度徽标 | 占位版 `DONE`（网格/徽标/继续上次卡片）；筛选器与分龄布局 `PLANNED` | QT-0 / QT-1 |
-| 模型详情 §5.4 | 无 | `PLANNED` | QT-1 |
-| 教程播放器 §6 ★ | 步骤导航/高亮/ghost/相机 已可用 | `PLANNED`（占位提示引导用户暂用 GL 版） | QT-3 |
+| 首页 / 模型库 §5 | 卡片网格 + 进度徽标 | 网格/徽标/继续上次卡片 `DONE`；筛选器（难度/主题/只用核心 9 片/我能搭的）+ 筛选空态 + 缺片徽标 `DONE`；分龄布局 `PLANNED` | QT-0 / QT-1 |
+| 模型详情 §5.4 | 无 | `DONE`（BOM 对照库存缺片琥珀提示/套装分层标签/收藏/开始搭建大按钮）；3D 可旋转预览与预计用时 `PLANNED`（QT-3 后接入） | QT-1 |
+| 教程播放器 §6 ★ | 步骤导航/高亮/ghost/相机 已可用 | `PLANNED`（占位页已接 buildRequested 路由并温和提示暂用 GL 版, 视口就绪后原位替换） | QT-3 |
 | 完成庆祝页 §6.2 | 无 | `PLANNED` | QT-4 |
 | 进度与成就 §7 | CLI 有数据 | 首页入口占位 `DONE`；成就墙 `PLANNED` | QT-4 |
 | 设置 §8 | 无 | `PLANNED` | QT-2 |
