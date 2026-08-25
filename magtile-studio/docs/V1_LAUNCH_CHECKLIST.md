@@ -78,7 +78,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | D2 | Windows 安装包在真实 runner 出包 (流水线转正) | P0 | Manual | `.github/workflows/windows-release.yml` (**草案, 尚未在真实 runner 上验证**, 见该文件头注) + 触发与首跑签核指南 [../scripts/package_windows.md](../scripts/package_windows.md) §8 (触发命令 / 预期产物 / CI 排查表 / 签核登记表) | 🔶 首跑阻塞项已修 (windows-latest 的 Win Server 2025 镜像已移除预装 NSIS → 流水线打包前 Chocolatey 自装) + Linux 可验子集全绿 (actionlint 零告警 / 版本提取步 pwsh 实测 / `smoke_qt_windows.ps1 -DryRun` 自检过 / `smoke_qt_linux_pack.sh` 41 项全绿); 触发与验收路径已落档 §8 —— workflow 已带 `workflow_dispatch` + `model_set` (full/starter) 输入, 验收口径为 full/starter 两场 dispatch 试跑全绿并按 §8.4 登记签核 (注意 dispatch 需 workflow 已在默认分支, 未合入前替代路径见 §8.1); 真实 runner 出包仍待触发, 全绿后按 §8.5 翻 ✅ |
 | D3 | Windows 实机验收 (干净 Win10/11, 未装 Qt/VS) | P0 | Manual | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §11 (自动冒烟 `smoke_qt_windows.ps1` + 人工验收单) | ⬜ 无 Windows 实机记录 |
 | D4 | macOS 打包 (macdeployqt + DMG) + 签名公证 (Developer ID / notarytool) | P0 | Manual | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §5 macOS 小节 (公证步骤已写明) | ⬜ 仅手册, 无 macOS 实机记录 |
-| D5 | 代码签名证书 (Windows Authenticode; 依赖运营主体 L5) | P0 | Manual | [../scripts/package_windows.md](../scripts/package_windows.md) 第十一节 (`signtool`, 未签名会被 SmartScreen 拦截) | ⬜ 证书未申请 |
+| D5 | 代码签名证书 (Windows Authenticode; 依赖运营主体 L4) | P0 | Manual | [../scripts/package_windows.md](../scripts/package_windows.md) 第十一节 (`signtool`, 未签名会被 SmartScreen 拦截) | ⬜ 证书未申请 |
 | D6 | LGPL 合规逐项核对 (Qt 随包分发) | P0 | Manual | [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §8 清单; `THIRD_PARTY_NOTICES.md` 已随包 | 🔶 清单与声明就绪, 出包时逐项打钩 |
 | D7 | Linux 打包冒烟 (无 Win/mac 机器时的链路自证) | P1 | Auto (单独跑) | `scripts/smoke_qt_linux_pack.sh`; [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §9 | ✅ 已实跑全绿 (Ubuntu, Qt 6.4.2 / NSIS 3.10: 三档 TGZ 清单断言 + NSIS 编译冒烟 + offscreen 启动 + ldd 核验, 落档 [../scripts/package_qt_desktop.md](../scripts/package_qt_desktop.md) §9); 未纳入常跑 CI, 出包前复跑一次 |
 | D8 | 自动更新 (COMMERCIAL_PLAN §8 列为 V1 交付物) | P1 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §8 V1; [ROADMAP.md](ROADMAP.md) 阶段 3 | ⬜ 未实现 —— 上架前须决策: 实现, 或降级 V1.1 并在签核记录留痕 |
@@ -107,7 +107,7 @@ tools/check_v1_readiness.sh --help     # 完整用法
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
 | V1 | 隐私政策草稿入库并随应用可查阅 | P0 | Auto (R8 存在性) | [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) | 🔶 草稿已起草 (家长一页纸 + 正文十节) |
-| V2 | 隐私政策法务定稿 (运营主体全称 / 注册地址 / 备案号 / 生效日期) | P0 | Manual | [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) 头部「状态: 草稿」标注; 依赖 L5 | ⬜ 未定稿 |
+| V2 | 隐私政策法务定稿 (运营主体全称 / 注册地址 / 备案号 / 生效日期) | P0 | Manual | [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) 头部「状态: 草稿」标注; 依赖 L4 (影响面见 [ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) §1.3) | ⬜ 未定稿 |
 | V3 | 应用内数据管理入口 (家长中心查阅 / 导出 / 删除) | P0 | Auto(部分) | 数据隐私后端 `progress/data_privacy` (三端同一导出契约) + Qt `privacy_backend` (家长中心「隐私与数据」区) + Android JNI `progressStoreAvailable`/`exportLocalDataJson`/`clearLocalData` (家长门后隐私面板, 与 Qt 同口径: 温和禁用 / 防覆盖原子导出 / 清除后锁家长会话) | 🔶 Qt + Android 双端在位 (同一核心实现同一导出格式); 真机走查随 V4 自查单 |
 | V4 | 上架前跑一遍安全与隐私自查单 (三平台逐项) | P0 | Manual | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) 合规检查清单 (§3/§4/§5.2/§6/§8/§11) 的可执行签核载体: [reports/PRIVACY_SECURITY_SIGNOFF.md](reports/PRIVACY_SECURITY_SIGNOFF.md) (数据收集 / 家长门 / 导出删除 / 离线 / 第三方 SDK / 计费回执 六组 × Windows/macOS/Android 逐项勾选 + 平台签核栏与总放行判定, 逐组与 [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) 对外承诺互证; Android 计费组复用 [PLAY_BILLING_SANDBOX_QA.md](PLAY_BILLING_SANDBOX_QA.md) 勾选清单只记结论) | 🔶 三平台逐项签核单已入库 (空白模板, 含 allowBackup 备份规则等已知缺口预登记); 实际执行须对候选出包产物进行 (随 D2/D4/A4 出包与真机验收、V5 断网复核同批), 归档签核后转 ✅ |
 | V5 | 离线承诺断网复核 (断网走安装启动与教程主链路) | P1 | Manual | [E2E_TEST_MATRIX.md](E2E_TEST_MATRIX.md) E2E-20 | ⬜ 随真机验收一并做 |
@@ -152,18 +152,21 @@ tools/check_v1_readiness.sh --help     # 完整用法
 国内商店上架前置项见 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.2 与
 §6.3 末条; 逐项**办理动作**、负责方与串行关键路径见
 [CHINA_STORE_COMPLIANCE.md](CHINA_STORE_COMPLIANCE.md) (本节是其
-状态快照, 两处互为回链)。办理本身为线下法务/行政流程无自动化载体,
-建议**最早启动** (周期不受工程进度控制); 该办理清单的章节/条目/
-交叉引用完整性由 `tools/check_china_compliance_docs.py` 守卫
-(探测 R15, 已接入 `tools/check_v1_readiness.sh`)。
+状态快照, 两处互为回链); 面向执行人的**分步操作手册** (去哪个网站、
+带什么材料、按什么顺序、等多久) 见
+[ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) (L1~L5 逐行
+挂链见下表)。办理本身为线下法务/行政流程无自动化载体 (就绪探测记
+SKIP M6), 建议**最早启动** (周期不受工程进度控制); 该办理清单的
+章节/条目/交叉引用完整性由 `tools/check_china_compliance_docs.py`
+守卫 (探测 R15, 已接入 `tools/check_v1_readiness.sh`)。
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-25) |
 | --- | --- | --- | --- | --- | --- |
-| L1 | 软件著作权登记 (国内安卓商店硬前置) | P0 (国内) | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.2/§6.3 | ⬜ 未启动 |
-| L2 | App 备案 (工信部 ICP; 隐私政策 §5 承诺境内合规云) | P0 (国内) | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §6.3; [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) §5 | ⬜ 未启动 |
-| L3 | 开发者账号开通 (华为 / 应用宝 / Google Play / Microsoft Store; macOS 走 Developer ID 直分发亦需 Apple 开发者账号) | P0 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.2 商店策略 | ⬜ 未启动 |
-| L4 | 运营主体信息定稿 (名称 / 地址 / 联系邮箱 → 隐私政策 V2 / 商店资料 A5 / 签名证书 D5 的共同前置) | P0 | Manual | [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) §1/§10 占位符 | ⬜ 未定 |
-| L5 | 商标注册与 IP 红线终审 (不用品牌词, 无侵权外观) | P1 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §6.1 (红线已文档化) | 🔶 红线自查已内建于内容管线, 注册未启动 |
+| L1 | 软件著作权登记 (国内安卓商店硬前置) | P0 (国内) | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.2/§6.3; 办理步骤与材料清单 [ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) §2 | ⬜ 未启动 (可执行步骤已细化) |
+| L2 | App 备案 (工信部 ICP; 隐私政策 §5 承诺境内合规云) | P0 (国内) | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §6.3; [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) §5; 备案流程与前置 [ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) §3 | ⬜ 未启动 (可执行步骤已细化) |
+| L3 | 开发者账号开通 (华为 / 应用宝 / Google Play / Microsoft Store; macOS 走 Developer ID 直分发亦需 Apple 开发者账号) | P0 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §5.2 商店策略; 逐平台开通步骤 [ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) §4 | ⬜ 未启动 (可执行步骤已细化) |
+| L4 | 运营主体信息定稿 (名称 / 地址 / 联系邮箱 → 隐私政策 V2 / 商店资料 A5 / 签名证书 D5 的共同前置) | P0 | Manual | [PRIVACY_POLICY_DRAFT.md](PRIVACY_POLICY_DRAFT.md) §1/§10 占位符; 定稿字段与对隐私政策的影响 [ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) §1 | ⬜ 未定 (定稿字段清单已细化) |
+| L5 | 商标注册与 IP 红线终审 (不用品牌词, 无侵权外观) | P1 | Manual | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §6.1 (红线已文档化); 启动动作 [ADMIN_LAUNCH_CHECKLIST.md](ADMIN_LAUNCH_CHECKLIST.md) §5 | 🔶 红线自查已内建于内容管线, 注册未启动 |
 
 ## 10. 放行规则
 
