@@ -22,7 +22,7 @@ Page {
 
     // ---- 页眉 ------------------------------------------------------
     header: Item {
-        height: 72
+        height: Theme.headerHeight
 
         Text {
             anchors.left: parent.left
@@ -253,12 +253,13 @@ Page {
         }
     }
 
-    // ---- 页脚状态行 --------------------------------------------------
+    // ---- 页脚状态行 (儿童首页只留温和状态, 数据目录等诊断信息
+    //      移到家长中心「隐私与数据」卡, 商用界面不露工程路径) ----------
     footer: Item {
         height: 48
         Text {
             anchors.centerIn: parent
-            text: studio.statusMessage + "  ·  数据目录: " + studio.dataDirText
+            text: studio.statusMessage
             font.pixelSize: Theme.fontSmall
             color: Theme.textSecondary
             elide: Text.ElideMiddle

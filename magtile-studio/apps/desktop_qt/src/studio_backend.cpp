@@ -246,9 +246,17 @@ void StudioBackend::reload() {
     }
 
     if (status_message_.isEmpty()) {
-        status_message_ = QStringLiteral("模型库已就绪: %1 个模型 · 共 %2 片")
-                              .arg(rows.size())
-                              .arg(total_pieces_);
+        // 目录缺失/为空不抛异常 (loadModelCatalog 返回空表), 此处按
+        // 0 模型给温和的"准备中"文案, 不说"已就绪 0 个"这种自相矛盾话
+        // (模型库空态界面配套提供「再试一次」重试入口)
+        if (rows.empty()) {
+            status_message_ = QStringLiteral("模型库正在准备中 (目录 %1 里暂时没有模型)")
+                                  .arg(QString::fromStdString(data_dir_.string()));
+        } else {
+            status_message_ = QStringLiteral("模型库已就绪: %1 个模型 · 共 %2 片")
+                                  .arg(rows.size())
+                                  .arg(total_pieces_);
+        }
         if (!store_) {
             status_message_ += QStringLiteral(" (进度存档暂不可用)");
         }

@@ -144,7 +144,7 @@ Page {
 
     // ---- 页眉: 返回 + 标题 + 回首页 (导航铁律: <= 2 步回首页 §3) ---------
     header: Item {
-        height: 72
+        height: Theme.headerHeight
 
         AbstractButton {
             id: backButton
@@ -255,7 +255,7 @@ Page {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 radius: Theme.radiusCard
-                color: "#E6ECF2"   // 与场景清屏色同族, 圆角边不突兀
+                color: Theme.viewportBg   // 与场景清屏色同族, 圆角边不突兀
                 border.color: Theme.cardBorder
                 border.width: 1
 
@@ -267,6 +267,9 @@ Page {
                     dataDir: studio.dataDirText
                     dbFile: studio.dbFileText
                     resumeStep: page.currentStep
+                    // §4.7 减少动效: 本步新片呼吸高亮降级为恒亮描边
+                    // (设置页切换即时生效, 定格在最亮相位不闪不动)
+                    reduceMotion: Theme.reduceMotion
                 }
 
                 // 操作提示 (左下角浮层, 常驻但视觉很轻)
@@ -275,7 +278,7 @@ Page {
                     anchors.bottom: parent.bottom
                     anchors.margins: Theme.spacing
                     radius: Theme.radiusButton
-                    color: "#CCFFFFFF"
+                    color: Theme.overlayLight
                     width: hintLabel.implicitWidth + 2 * Theme.spacing
                     height: 40
                     visible: viewport.sessionReady
@@ -665,7 +668,7 @@ Page {
                         x: Math.round((parent.width - width) * (index + 1) / 10)
                         anchors.verticalCenter: parent.verticalCenter
                         text: lit ? "★" : "☆"
-                        color: lit ? Theme.warning : "#B9C6D6"
+                        color: lit ? Theme.warning : Theme.textDim
                         font.pixelSize: page.bandJunior ? 24 : (page.bandSenior ? 15 : 18)
                         font.bold: true
                         onLitChanged: if (lit && !Theme.reduceMotion) litPop.restart()

@@ -19,7 +19,10 @@ QtObject {
     readonly property color surfaceDark: "#1C2230"    // 暗主题面 (预留)
     readonly property color textPrimary: "#243244"
     readonly property color textSecondary: "#5B6B7F"
+    readonly property color textDim: "#B9C6D6"         // 未点亮元素 (里程碑星等)
     readonly property color cardBorder: "#E1E8F2"
+    readonly property color viewportBg: "#E6ECF2"      // 3D 视口底 (与场景清屏色同族)
+    readonly property color overlayLight: "#CCFFFFFF"  // 视口浮层提示底 (半透明白)
 
     // 磁力片实物常见 8 色 (渲染层为半透明材质, UI 侧用作主题条带)
     readonly property var tileColors: [
@@ -31,8 +34,10 @@ QtObject {
     readonly property int radiusCard: 16
     readonly property int radiusButton: 24            // 胶囊按钮
     readonly property int radiusSheet: 20
+    readonly property int spacingSmall: 8
     readonly property int spacing: 16
     readonly property int spacingLarge: 24
+    readonly property int headerHeight: 72            // 全页统一页眉高
 
     // ---- 触控目标 (§4.1 硬性规范) ----------------------------------
     readonly property int touchTarget: 48             // 儿童可点元素最小边

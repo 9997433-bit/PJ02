@@ -49,6 +49,7 @@ enum class IssueSeverity {
 /// 单条校验结果。code 为稳定的机器可读标识, message 为中文描述。
 ///
 /// 现有 code 一览:
+///   below_ground_tile (穿入地面, R1 前置)
 ///   floating_tile / isolated_tile / disconnected_assembly / tile_overlap
 ///   unstable_center_of_mass / no_ground_contact            (R1~R4)
 ///   hanging_chain_overload / hanging_chain_long            (R5)

@@ -51,12 +51,12 @@ Page {
     }
     Component.onDestruction: tts.stop()
 
-    // ---- 彩带 (轻量粒子: 一次性飘落, 减少动效时整层隐藏 §4.7) --------
+    // ---- 彩带 (轻量粒子: 一次性飘落; 减少动效时不实例化 —— 不止
+    //      隐藏, 28 条彩带的位移/旋转/淡出动画根本不创建, §4.7) --------
     Item {
         anchors.fill: parent
-        visible: !Theme.reduceMotion
         Repeater {
-            model: 28
+            model: Theme.reduceMotion ? 0 : 28
             delegate: Rectangle {
                 // 每条彩带的随机参数在创建时定格 (位置/颜色/节奏各不相同)
                 property real rx: Math.random()

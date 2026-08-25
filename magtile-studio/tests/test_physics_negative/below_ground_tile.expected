@@ -1,0 +1,6 @@
+# below_ground_tile.expected — 物理负例期望声明 (sidecar, 由 test_physics_negative.sh 读取)
+# expected_fail_rule: validate 输出必须匹配的错误/警告码 (grep 正则)
+# severity: error = 必须以非零退出码拒绝; warning = 必须零退出且输出 [警告] 行
+# R1 前置: 片穿入桌面 (最低顶点 z < -0.02), 实物摆不出来 (2026-08 修复的校验器漏洞)
+expected_fail_rule=below_ground_tile
+severity=error

@@ -53,6 +53,9 @@ class TutorialViewport : public QQuickFramebufferObject {
     Q_PROPERTY(int resumeStep READ resumeStep WRITE setResumeStep NOTIFY sourceChanged)
     /// 只读预览 (详情页): 加载最终态, 无 ghost/高亮, 不写进度存档。
     Q_PROPERTY(bool previewMode READ previewMode WRITE setPreviewMode NOTIFY sourceChanged)
+    /// 减少动效 (§4.7, QML 侧绑 Theme.reduceMotion): 本步新片的呼吸
+    /// 高亮降级为恒亮描边 (定格在最亮相位), 且不再自驱逐帧重绘。
+    Q_PROPERTY(bool reduceMotion READ reduceMotion WRITE setReduceMotion NOTIFY sourceChanged)
 
     // ---- 会话状态 (只读, 步骤面板数据源) -----------------------------
     Q_PROPERTY(bool sessionReady READ sessionReady NOTIFY stateChanged)
@@ -84,6 +87,8 @@ public:
     void setResumeStep(int step);
     [[nodiscard]] bool previewMode() const noexcept { return preview_mode_; }
     void setPreviewMode(bool preview);
+    [[nodiscard]] bool reduceMotion() const noexcept { return reduce_motion_; }
+    void setReduceMotion(bool reduce);
 
     [[nodiscard]] bool sessionReady() const noexcept { return engine_ != nullptr; }
     [[nodiscard]] QString statusText() const { return status_text_; }
@@ -148,6 +153,7 @@ private:
     QString db_file_;
     int resume_step_ = 0;
     bool preview_mode_ = false;
+    bool reduce_motion_ = false;
 
     // 会话状态 (GUI 线程)
     std::shared_ptr<core::TileCatalog> tile_catalog_;

@@ -223,6 +223,22 @@ ValidationReport PhysicsValidator::validateAssembly(
         }
     }
 
+    // ---- R1 前置: 禁止穿入地面 (below_ground_tile) -----------------
+    // 桌面是刚体: 任何顶点低于地面 (z < -ground_tolerance) 的磁力片
+    // 实物上根本摆不出来。历史版本把 z <= ground_tolerance 一律视为
+    // "接地", 穿地片反而被当作稳定接地片放行 (2026-08 负例回归加强时
+    // 发现该漏洞, 由负例夹具 below_ground_tile.json 锁定回归)。
+    for (std::size_t i = 0; i < transformed.size(); ++i) {
+        if (transformed[i].min_z < -config_.ground_tolerance) {
+            std::ostringstream oss;
+            oss << "磁力片 " << tiles[i]->id << " 穿入地面: 最低顶点 z = "
+                << transformed[i].min_z << ", 桌面是刚体, 实物无法这样放置";
+            report.issues.push_back({IssueSeverity::Error, "below_ground_tile",
+                                     withContext(context, oss.str()),
+                                     {tiles[i]->id}});
+        }
+    }
+
     // ---- R3 无重叠: 共面片做分离轴检测 ----------------------------
     for (std::size_t i = 0; i < transformed.size(); ++i) {
         for (std::size_t j = i + 1; j < transformed.size(); ++j) {

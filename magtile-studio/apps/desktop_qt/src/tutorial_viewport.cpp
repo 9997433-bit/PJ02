@@ -32,6 +32,11 @@ constexpr double kRotateSpeedDegPerPx = 0.32;
 /// 被放大成猛烈缩放), 低于该值的帧只重定基准不缩放。
 constexpr double kMinPinchSpreadPx = 8.0;
 
+/// 减少动效 (§4.7) 下呼吸高亮的定格时刻: 1.2Hz 正弦在该时刻取峰值
+/// (sin(2π·1.2·t) = 1), 本步新片以最亮描边恒定标示 —— 不闪不动,
+/// 但指示信息一点不少 (图形/颜色编码保留)。
+constexpr double kFrozenPulseSeconds = 1.0 / (4.0 * 1.2);
+
 /// GL 入口解析: Qt 场景图上下文 (render 线程调用, 上下文已 current)。
 render::GlSceneRenderer::GlProc resolveGlProc(const char* name) {
     QOpenGLContext* context = QOpenGLContext::currentContext();
@@ -64,6 +69,7 @@ public:
     void synchronize(QQuickFramebufferObject* item) override {
         auto* viewport = static_cast<TutorialViewport*>(item);
         camera_ = viewport->camera_.toCamera();
+        reduce_motion_ = viewport->reduce_motion_;
         if (tiles_version_ != viewport->scene_version_) {
             tiles_version_ = viewport->scene_version_;
             tiles_ = viewport->scene_tiles_;                // 实例按值拷贝
@@ -93,12 +99,15 @@ public:
                 rt.just_placed = tile.just_placed;
                 scene_.submitTile(rt, *tile.shape);
             }
-            scene_.end(static_cast<double>(animation_clock_.elapsed()) / 1000.0);
+            // 减少动效 (§4.7): 呼吸相位定格在峰值 -> 新片恒亮描边不闪动
+            scene_.end(reduce_motion_ ? kFrozenPulseSeconds
+                                      : static_cast<double>(animation_clock_.elapsed()) / 1000.0);
         }
         // 归还 GL 状态, 避免污染 Qt Quick 场景图后续绘制
         QQuickOpenGLUtils::resetOpenGLState();
-        // 呼吸高亮动画: 有 "本步新增" 片时持续重绘 (随显示器刷新率节流)
-        if (animate_ && !scene_failed_) update();
+        // 呼吸高亮动画: 有 "本步新增" 片时持续重绘 (随显示器刷新率节流);
+        // 减少动效下画面静止, 不自驱重绘 (交互/步骤变化仍正常触发重绘)
+        if (animate_ && !reduce_motion_ && !scene_failed_) update();
     }
 
 private:
@@ -109,6 +118,7 @@ private:
     std::shared_ptr<core::TileCatalog> tile_catalog_keepalive_;
     quint64 tiles_version_ = ~quint64{0};
     bool animate_ = false;
+    bool reduce_motion_ = false;
     QElapsedTimer animation_clock_;
 };
 
@@ -160,6 +170,13 @@ void TutorialViewport::setPreviewMode(bool preview) {
     preview_mode_ = preview;
     emit sourceChanged();
     if (isComponentComplete()) startSession();
+}
+
+void TutorialViewport::setReduceMotion(bool reduce) {
+    if (reduce_motion_ == reduce) return;
+    reduce_motion_ = reduce;
+    emit sourceChanged();
+    update();  // 立即以新相位重绘一帧 (开: 定格最亮; 关: 恢复呼吸)
 }
 
 void TutorialViewport::componentComplete() {

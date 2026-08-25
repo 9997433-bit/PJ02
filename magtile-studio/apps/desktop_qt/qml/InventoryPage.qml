@@ -68,7 +68,7 @@ Page {
 
     // ---- 页眉: 大返回键 (>= 48) + 标题 ------------------------------
     header: Item {
-        height: 72
+        height: Theme.headerHeight
 
         AbstractButton {
             id: backButton

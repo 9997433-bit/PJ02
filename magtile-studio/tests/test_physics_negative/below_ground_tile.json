@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "fixture_below_ground_tile",
+  "name": "负例夹具: 磁力片穿入桌面",
+  "name_en": "fixture_below_ground_tile",
+  "description": "反面教材 (2026-08 负例回归加强时发现的校验器漏洞回填): 一片立墙的位置写低了 0.2 单位, 底边穿到桌面以下 (最低顶点 z = -0.2)。实物中桌面是刚体, 这一片根本摆不出来; 修复前的校验器却把 z <= 0.02 的顶点一律当作接地, 对穿地片照常放行。校验器必须报 below_ground_tile 错误并拒绝该模型。",
+  "difficulty": 1,
+  "total_pieces": 1,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "w1",
+      "type": "square",
+      "position": [0.5, 0.5, 0.3],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "错误示范: 立起一片墙, 但位置写低了 0.2 单位, 底边穿入桌面。",
+      "tip": "桌面是刚体, 穿地的片实物摆不出来 —— 校验器必须报 below_ground_tile 拒绝。",
+      "tiles_to_add": ["w1"],
+      "highlight_tiles": []
+    }
+  ]
+}
