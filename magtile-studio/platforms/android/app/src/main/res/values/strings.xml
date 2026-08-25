@@ -122,4 +122,19 @@
     <!-- %1$d = 已点亮徽章数 (页脚只报喜不催促 §4.3) -->
     <string name="achievements_footer_some">🏅 已点亮 %1$d 枚徽章, 继续加油!</string>
     <string name="achievements_footer_none">完成第一个模型, 就能点亮第一枚徽章</string>
+    <!-- 家长门 (UI_UX_SPEC.md §9): 年龄段切换与库存录入入口上锁;
+         措辞与桌面 GL/Qt 门界面一致 —— 答错/冷却只有温和提示,
+         儿童侧不出现「验证失败」类苛责语 (P3 零挫败, 不用红色) -->
+    <string name="gate_title">请家长来完成</string>
+    <string name="gate_subtitle">年龄段与磁力片库存由家长管理, 请作答后继续</string>
+    <string name="gate_answer_format_hint">请用中文大写数字作答 (例: 贰拾壹)</string>
+    <string name="gate_input_placeholder">点击下方数字键输入</string>
+    <!-- %1$d = 本轮剩余可尝试次数 -->
+    <string name="gate_wrong_hint">还差一点, 再试一次吧 (还可尝试 %1$d 次)</string>
+    <string name="gate_cooldown_title">休息一下</string>
+    <!-- %1$d = 冷却剩余秒数 (温和提示稍后再试, 无惩罚文案) -->
+    <string name="gate_cooldown_text">%1$d 秒后可以再试一次</string>
+    <string name="gate_submit">确认</string>
+    <string name="gate_cancel">返回</string>
+    <string name="gate_key_backspace">退格</string>
 </resources>

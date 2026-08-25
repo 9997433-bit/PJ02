@@ -11,7 +11,8 @@
 > 状态: **可安装最小体验**。已落地: Gradle 工程 (含 wrapper)、JNI
 > 链路 (目录加载 / 模型库列表含 core-9 与「我能搭的」判定 / 物理校验 /
 > 教程步骤数 / 进度存档打开 / 库存读写 / 缺片清单 / 年龄段设置读写 /
-> 进度页与成就墙数据源 / 教程步骤数据与进度读写)、
+> 进度页与成就墙数据源 / 教程步骤数据与进度读写 / 家长门
+> 出题·校验·会话)、
 > RecyclerView 模型卡片列表 (缩略图 / 中文名 / 主题 / 难度星 /
 > 片数·步数 / 「需要扩展装」角标)、筛选栏 (难度星级 / 主题 /
 > 「只看免费」 / 「只用核心 9 片」 / 「我能搭的」, 口径与桌面
@@ -22,10 +23,13 @@
 > (统计 + 进行中/已完成/收藏列表 + 徽章墙, 对齐桌面 Qt
 > ProgressPage/AchievementsPage 口径)、分步教程页 (文字分步浏览:
 > 步骤列表 + 上一步/下一步 + 断点续搭 + 当前步写进度存档, 3D 搭建
-> 视图为温和占位)、数据资产打包与首启解包。
+> 视图为温和占位)、家长门 (年龄段切换与库存录入入口上锁,
+> UI_UX_SPEC.md §9: 算术题 + 中文大写数字软键盘 + 冷却 +
+> 15 分钟内存会话, 复用 `core::ParentGate` 共享状态机)、
+> 数据资产打包与首启解包。
 > 尚未落地: 渲染循环 (GLES3 / Vulkan) 与 3D 教程视口 (教程页当前为
-> 文字分步 + 「3D 搭建即将上线」占位, 进度页作品行暂不直达教程)、
-> 家长门 (年龄段切换入口暂未上锁), 计划见下文与 `docs/ROADMAP.md`。
+> 文字分步 + 「3D 搭建即将上线」占位, 进度页作品行暂不直达教程),
+> 计划见下文与 `docs/ROADMAP.md`。
 
 ## 目录结构
 
@@ -34,7 +38,7 @@ platforms/android/
 ├── README.md                 本文档
 ├── CMakeLists.txt            JNI 共享库构建脚本 (双入口: 仓库根 / Gradle)
 ├── jni/
-│   └── magtile_jni.cpp       JNI 包装层 (15 个入口, 见下表)
+│   └── magtile_jni.cpp       JNI 包装层 (18 个入口, 见下表)
 ├── settings.gradle.kts       Gradle 工程入口 (工程根 = 本目录)
 ├── build.gradle.kts          插件版本 (AGP 8.7.3 / Kotlin 2.0.21)
 ├── gradle.properties         AndroidX / 配置缓存
@@ -46,6 +50,7 @@ platforms/android/
         ├── AndroidManifest.xml
         ├── kotlin/com/magtile/studio/
         │   ├── MainActivity.kt        模型库列表 + 分龄筛选栏 + 详情弹窗 + 按需校验
+        │   ├── ParentGateDialog.kt    家长门对话框 (算术题 + 中文大写数字软键盘)
         │   ├── InventoryActivity.kt   磁力片库存录入屏 (片型 + 数量步进器)
         │   ├── ProgressActivity.kt    进度页「我的作品」(统计 + 作品列表)
         │   ├── AchievementsActivity.kt 成就墙全览 (徽章两列网格)
@@ -107,15 +112,24 @@ schema, 断点续搭跨端互通), 走完最后一步记完成 + 解锁首搭成
 first_model_completed (进度页/成就墙即时可见); 存档写入失败只降级
 不打断搭建 (P3 零挫败)。
 
-标题栏右侧是年龄段模式入口 (三档单选, UI_UX_SPEC.md §2), 切换立即
-生效并落盘 (settings 表 `age_mode` 键, 与桌面 GL/Qt/CLI 同键):
+标题栏右侧是年龄段模式入口 (三档单选, UI_UX_SPEC.md §2): 年龄段
+切换是家长操作 (§9), 点击先过**家长门** —— 中文数字乘法题 (如
+「叁 × 柒 = ?」) + 中文大写数字软键盘 (56dp 键帽, 不依赖输入法),
+答对开启 15 分钟家长会话 (只存内存, 重启即失效), 会话内再点免重复
+验证; 连续 3 次答错温和提示「休息一下」并 60 秒冷却 (题目/校验/
+冷却/会话与桌面 GL/Qt 同一 `core::ParentGate` 状态机)。过门后弹
+三档单选, 切换立即生效并落盘 (settings 表 `age_mode` 键, 与桌面
+GL/Qt/CLI 同键):
 
 - **4-6 岁 · 启蒙**: 超大卡片 (大缩略图竖排 + 大字号, 副标题只留
   主题, 不显示英文名与「需要扩展装」角标), 筛选只留主题;
 - **7-9 岁 · 标准** (默认档): 标准卡片, 难度 + 主题 + 只看免费
-  (库存录入入口保留 —— 录库存不设门槛);
+  (库存录入入口保留, 点击过家长门);
 - **10-12 岁 · 进阶**: 全量筛选 (难度 / 主题 / 只看免费 /
   只用核心 9 片 / 我能搭的)。
+
+筛选栏的库存录入入口 (「去登记 ▶」/「改库存」) 同为家长操作,
+过同一扇家长门 (同一会话守卫, 15 分钟内免重复验证)。
 
 被收起的筛选维度切档时同步清零 —— 看不见的筛选绝不悄悄过滤列表
 (与桌面 Qt LibraryPage `collapseHiddenFilters` 同一策略)。
@@ -195,6 +209,21 @@ JNI 接口一览 —— 模型库链路绑定 `com.magtile.studio.MainActivity`:
 | `savedTutorialStep(modelId: String): Int` | 存档中该模型的当前步 (断点续搭): 无记录 / 存档不可用一律 0 (从头开始, 温和降级); 已完成模型返回总步数 (完成链路推到最后一步), 调用方据此进入完成态 |
 | `saveTutorialStep(modelId: String, step: Int, stepCount: Int, playSeconds: Long): Boolean` | 写教程进度 (口径与桌面 Qt TutorialViewport 的 `flushProgress`/`applyStepChange` 一致, 同一份 `model_progress` 表): step = 已完成到第几步, playSeconds = 本次新增游玩秒数 (存储层累加只增不减); step >= stepCount 时记完成 (首次完成时刻不覆盖) + 解锁首搭成就 `first_model_completed`; 存档未打开 / 写入失败返回 false (调用方不打断搭建, P3 零挫败) |
 
+家长门链路同样绑定 `com.magtile.studio.MagTileNative` (直接复用
+`core::ParentGate` —— 与桌面 GL/Qt 完全同一状态机: 乘法题生成 /
+中文大写数字验证 / 3 次答错 60 秒冷却 / 15 分钟内存会话; 会话与
+冷却只存内存永不落盘, 防重启绕过, 与 ProgressStore 无关):
+
+| Kotlin 声明 | 说明 |
+| --- | --- |
+| `parentGateOpenJson(): String` | 进门出新题 (每次进门新题防背题, 与桌面 ParentGateBackend::openGate 同口径): `{"question":"叁 × 柒 = ?","attempts_remaining":N,"cooldown_seconds":N,"session_active":bool}`; 仍在上一轮冷却期时 `cooldown_seconds > 0`, 界面据此直接进温和的「休息一下」倒计时 |
+| `parentGateSubmitJson(answer: String): String` | 提交答案 (中文大写数字如 `贰拾壹`, 接受 `壹拾贰`/`拾贰` 变体): `{"result":"passed"/"wrong"/"cooling","attempts_remaining":N,"cooldown_seconds":N,"session_active":bool}`; passed = 15 分钟家长会话已开启, wrong/cooling 由界面给温和提示 (「再试一次吧」/「休息一下」) |
+| `parentGateSessionActive(): Boolean` | 家长会话是否仍有效: true = 守卫期内免重复验证 (时长读 `core::ParentGate::kDefaultSessionDuration`, 与桌面 Qt 会话守卫同策略) |
+
+家长门入口 (`ParentGateDialog.requireParent`): 标题栏年龄段切换与
+筛选栏库存录入都先过门, 会话内免重复; 「我的进度」保持儿童可达
+无门 (§5.3)。
+
 筛选在 Kotlin 侧完成 (`MainActivity.applyFilters`), 口径与桌面
 GL/Qt 模型库一致: 难度星级精确匹配、规范主题 (目录 `theme` 字段)、
 「只看免费」要求 `free` (非免费照常可浏览, 详情弹窗以温和订阅提示
@@ -206,7 +235,8 @@ GL/Qt 模型库一致: 难度星级精确匹配、规范主题 (目录 `theme` �
 筛选控件按年龄段收放 (`MainActivity.applyAgeMode`, 三档口径与桌面
 Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 我能搭的 / 库存入口收起), 换用超大卡片布局 `item_model_card_junior`;
-7-9 难度 + 主题 + 只看免费 (库存入口保留); 10+ 全量。被收起的维度
+7-9 难度 + 主题 + 只看免费 (库存入口保留, 点击过家长门); 10+ 全量。
+被收起的维度
 切档时同步清零, 库存录入屏「保存, 看看我能搭什么 ▶」也只在 10+ 档
 自动勾上「我能搭的」(其他档位该筛选不可见, 不悄悄开启)。
 
@@ -243,9 +273,9 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
 
 `.github/workflows/android.yml` (仓库根) 包含两个任务:
 
-- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 15 个 JNI
+- `ndk-so`: 纯 NDK 交叉编译 `libmagtile_core.so` 并断言 18 个 JNI
   符号齐全 (模型库 4 个 + 进度存档/库存/年龄段/进度页 8 个 +
-  分步教程 3 个) —— 持续保证 `magtile_core` 无平台依赖。
+  分步教程 3 个 + 家长门 3 个) —— 持续保证 `magtile_core` 无平台依赖。
 - `assemble-debug`: Gradle 全量打包 debug APK, 校验 APK 内容
   (原生库 / 数据资产 / 缩略图已打包; 缩略图数量落后于模型数量时
   只告警 —— 内容制作期新模型缩略图可能滞后生成, 缺图卡片显示占位)
@@ -263,8 +293,9 @@ Qt LibraryPage 一致): 4-6 只留主题 (难度 / 免费 / 核心 9 片 /
   进度页/成就墙 + 教程进度链路); 模型卡片上的完成/进行中徽标、
   收藏切换与「继续上次」大卡片待接入模型库列表 UI, 进度页作品行
   「继续搭建 / 再搭一次」直达教程页待接入。
-- 家长门: 年龄段切换入口 (标题栏) 暂未上锁; 对齐桌面 UI_UX_SPEC.md
-  §9 需把入口挪进家长区 (`core/parent_gate.hpp` 已具备共享校验逻辑)。
+- 家长门: 年龄段切换与库存录入入口已上锁 (对齐 UI_UX_SPEC.md §9,
+  复用 `core::ParentGate` 共享状态机, 15 分钟会话守卫); 后续随
+  桌面 M3 推进可选 4 位 PIN 与家长中心完整功能 (订阅/数据管理)。
 
 ## 相关文档
 

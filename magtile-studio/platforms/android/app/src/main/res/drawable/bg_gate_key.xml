@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 家长门软键盘键帽 / 次要按钮底 (按压态用主色浅底反馈) -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/magtile_primary_soft" />
+            <corners android:radius="10dp" />
+            <stroke android:width="1dp" android:color="@color/magtile_card_border" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/magtile_card" />
+            <corners android:radius="10dp" />
+            <stroke android:width="1dp" android:color="@color/magtile_card_border" />
+        </shape>
+    </item>
+</selector>

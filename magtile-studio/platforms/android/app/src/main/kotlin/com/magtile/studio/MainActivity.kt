@@ -51,6 +51,11 @@ import java.util.concurrent.Executors
  * 悄悄过滤列表 (与 Qt collapseHiddenFilters 同一策略)。标题栏入口
  * 可切换档位, 立即生效并经 setAgeModeId 落盘。
  *
+ * 家长门 (UI_UX_SPEC.md §9): 年龄段切换与库存录入都是家长操作,
+ * 入口先过 ParentGateDialog (算术题 + 冷却, 复用 core::ParentGate
+ * 共享状态机), 15 分钟会话守卫期内免重复验证; 「我的进度」保持
+ * 儿童可达无门 (§5.3)。
+ *
  * 点击卡片弹出详情: 简介 + 套装说明 + 库存对照 (够搭 / 还差几片,
  * 「缺什么片?」按需展开清单) + 免费模型「开始搭建」直达
  * TutorialActivity 分步教程 (非免费为温和订阅提示); 「物理校验」
@@ -126,7 +131,12 @@ class MainActivity : Activity() {
         buildableCheckBox = findViewById(R.id.filter_buildable)
         inventoryButton = findViewById(R.id.filter_inventory)
         ageModeButton = findViewById(R.id.age_mode_button)
-        ageModeButton.setOnClickListener { showAgeModeDialog() }
+        // 年龄段切换是家长操作 (UI_UX_SPEC.md §9): 先过家长门 (算术题 +
+        // 冷却, core::ParentGate 共享状态机), 通过后才弹三档选择;
+        // 15 分钟会话守卫期内免重复验证 (与桌面 Qt 会话守卫同策略)
+        ageModeButton.setOnClickListener {
+            ParentGateDialog.requireParent(this) { showAgeModeDialog() }
+        }
 
         // 进度页「我的作品」入口 (统计 + 作品列表 + 成就墙; 纯只读看板,
         // 返回后无需刷新模型库)
@@ -258,9 +268,13 @@ class MainActivity : Activity() {
             buildableFilter = checked
             applyFilters()
         }
+        // 库存录入同为家长操作 (登记家里的磁力片属数据维护, §9):
+        // 入口过同一扇家长门, 会话守卫期内免重复验证
         inventoryButton.setOnClickListener {
-            startActivityForResult(
-                Intent(this, InventoryActivity::class.java), REQUEST_INVENTORY)
+            ParentGateDialog.requireParent(this) {
+                startActivityForResult(
+                    Intent(this, InventoryActivity::class.java), REQUEST_INVENTORY)
+            }
         }
     }
 
@@ -270,8 +284,8 @@ class MainActivity : Activity() {
      * 按当前年龄段收放筛选控件并切换卡片密度:
      *   4-6 启蒙  只留主题筛选 (难度/免费/核心 9 片/我能搭的/库存
      *             入口收起), 超大卡片;
-     *   7-9 标准  难度 + 主题 + 只看免费 (库存录入入口保留 ——
-     *             录库存不设门槛, 与 Qt 同取舍), 标准卡片;
+     *   7-9 标准  难度 + 主题 + 只看免费 (库存录入入口保留,
+     *             点击过家长门 §9), 标准卡片;
      *   10+ 进阶  全量筛选。
      * 被收起的筛选维度同步清零: 看不见的筛选绝不能悄悄过滤列表
      * (否则孩子面对被过滤的列表却没有任何入口能解除筛选,
@@ -308,7 +322,8 @@ class MainActivity : Activity() {
         adapter.junior = bandJunior
     }
 
-    /** 标题栏入口: 三档单选对话框 (展示名对齐 core::displayNameZh)。 */
+    /** 三档单选对话框 (展示名对齐 core::displayNameZh); 家长门通过
+     *  后由标题栏入口调起 (ParentGateDialog.requireParent)。 */
     private fun showAgeModeDialog() {
         val ids = listOf(AGE_4_6, AGE_7_9, AGE_10_12)
         val labels = arrayOf(

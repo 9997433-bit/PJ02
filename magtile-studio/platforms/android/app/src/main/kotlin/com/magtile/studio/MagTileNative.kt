@@ -101,6 +101,35 @@ object MagTileNative {
     external fun saveTutorialStep(
         modelId: String, step: Int, stepCount: Int, playSeconds: Long): Boolean
 
+    // ---- 家长门 (UI_UX_SPEC.md §9, 复用 core::ParentGate 共享状态机:
+    //      乘法题 + 中文大写数字答案 + 3 次答错 60 秒冷却 + 15 分钟
+    //      内存会话; 会话/冷却只存内存永不落盘, 防重启绕过) ----------
+
+    /**
+     * 进门出新题 (每次进门新题防背题, 与桌面 ParentGateBackend 同口径):
+     * {"question":"叁 × 柒 = ?","attempts_remaining":N,
+     *  "cooldown_seconds":N,"session_active":bool}。
+     * 仍在上一轮冷却期时 cooldown_seconds > 0, 界面据此直接进温和的
+     * 「休息一下」倒计时, 不显示题面。
+     */
+    external fun parentGateOpenJson(): String
+
+    /**
+     * 提交答案 (中文大写数字, 如 "贰拾壹"; 接受 "壹拾贰"/"拾贰" 变体):
+     * {"result":"passed"|"wrong"|"cooling","attempts_remaining":N,
+     *  "cooldown_seconds":N,"session_active":bool}。
+     * passed = 15 分钟家长会话已开启; wrong = 答错温和提示再试;
+     * cooling = 冷却期内 (含触发冷却那次), 温和提示稍后再试。
+     */
+    external fun parentGateSubmitJson(answer: String): String
+
+    /**
+     * 家长会话是否仍有效: true = 15 分钟守卫期内免重复验证 (与桌面
+     * Qt 会话守卫同策略, 时长读 core::ParentGate 现有常量; 会话只存
+     * 内存, 重启即失效)。
+     */
+    external fun parentGateSessionActive(): Boolean
+
     init {
         // 与 MainActivity 共用同一 libmagtile_core.so (loadLibrary 幂等)
         System.loadLibrary("magtile_core")

@@ -44,8 +44,9 @@
             android:textStyle="bold" />
 
         <!-- 年龄段模式入口 (UI_UX_SPEC.md §2 三档分层): 显示当前档位,
-             点击弹三档单选; 与桌面 settings 表同键 age_mode, 切换即时
-             生效并落盘 (48dp 触控高度) -->
+             点击先过家长门 (§9, ParentGateDialog), 通过后弹三档单选;
+             与桌面 settings 表同键 age_mode, 切换即时生效并落盘
+             (48dp 触控高度) -->
         <TextView
             android:id="@+id/age_mode_button"
             android:layout_width="wrap_content"
@@ -145,7 +146,8 @@
                     android:textSize="14sp" />
 
                 <!-- 库存录入入口: 未登记 = 去登记 ▶ / 已登记 = 改库存
-                     (TextView 撑到 48dp 触控高度) -->
+                     (TextView 撑到 48dp 触控高度; 库存登记是家长操作,
+                     点击先过家长门 §9) -->
                 <TextView
                     android:id="@+id/filter_inventory"
                     android:layout_width="wrap_content"

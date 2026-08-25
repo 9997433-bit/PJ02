@@ -32,6 +32,14 @@
 //                                 -> 写当前步到进度存档 (与桌面共库
 //                                    schema; 走到最后一步记完成 + 首搭成就)
 //
+// 家长门链路 (绑定 com.magtile.studio.MagTileNative, 直接复用
+// core::ParentGate —— 与桌面 GL/Qt 同一状态机: 乘法题 + 中文大写数字
+// 答案 + 3 次答错 60 秒冷却 + 15 分钟内存会话, UI_UX_SPEC.md §9;
+// 会话/冷却只存内存, 永不落盘, 防重启绕过):
+//   parentGateOpenJson()          -> 进门出新题, 返回门状态 JSON
+//   parentGateSubmitJson(answer)  -> 提交答案, 返回结果 + 剩余次数/冷却
+//   parentGateSessionActive()     -> 家长会话是否仍有效 (免重复验证)
+//
 // 说明: 渲染循环 (GLSurfaceView / Vulkan) 与 3D 教程视口后续在此扩展。
 // =============================================================
 
@@ -62,6 +70,7 @@
 
 #include "magtile/core/json_io.hpp"
 #include "magtile/core/model_catalog.hpp"
+#include "magtile/core/parent_gate.hpp"
 #include "magtile/core/model_definition.hpp"
 #include "magtile/core/tile_catalog.hpp"
 #include "magtile/core/types.hpp"
@@ -87,6 +96,32 @@ struct NativeContext {
 NativeContext& context() {
     static NativeContext ctx;
     return ctx;
+}
+
+/// 家长门状态 (UI_UX_SPEC.md §9): 题目/冷却/会话全部由共享状态机
+/// core::ParentGate 负责, 只存内存永不落盘 ("已通过" 标记不持久化,
+/// 防重启绕过 —— 与桌面 GL/Qt 同策略)。默认构造即 15 分钟会话
+/// (kDefaultSessionDuration)。独立于 NativeContext 加自己的锁:
+/// 门交互发生在主线程, 不能被工作线程的重 IO (listModels 等) 卡住。
+struct ParentGateContext {
+    std::mutex mutex;
+    magtile::core::ParentGate gate;
+};
+
+ParentGateContext& gateContext() {
+    static ParentGateContext ctx;
+    return ctx;
+}
+
+/// 门状态 JSON (调用方需已持有 gate mutex): 题面为中文数字 (BMP,
+/// 可安全过 NewStringUTF), 冷却/尝试次数供 Kotlin 侧渲染温和提示。
+nlohmann::json gateStateJson(const magtile::core::ParentGate& gate) {
+    return {
+        {"question", gate.question()},
+        {"attempts_remaining", gate.attemptsRemaining()},
+        {"cooldown_seconds", gate.cooldownRemainingSeconds()},
+        {"session_active", gate.sessionActive()},
+    };
 }
 
 std::string toUtf8(JNIEnv* env, jstring value) {
@@ -854,6 +889,65 @@ JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_saveTutorialSte
         MAGTILE_LOGE("saveTutorialStep 失败: %s", e.what());
         return JNI_FALSE;
     }
+}
+
+// =============================================================
+// 家长门 (UI_UX_SPEC.md §9, 绑定 com.magtile.studio.MagTileNative)
+// 直接复用 core::ParentGate —— 与桌面 GL/Qt 完全同一状态机 (乘法题
+// 生成 / 中文大写数字验证 / 3 次答错 60 秒冷却 / 15 分钟内存会话)。
+// 会话与冷却只存内存, 永不落盘, 与 ProgressStore 无关。
+// =============================================================
+
+/// 进门 (无有效会话时调用): 出一道新的乘法题 (每次进门新题防背题,
+/// 与桌面 ParentGateBackend::openGate 同口径), 返回门状态 JSON:
+///   {"question":"叁 × 柒 = ?","attempts_remaining":N,
+///    "cooldown_seconds":N,"session_active":bool}
+/// 仍处于上一轮冷却期时 cooldown_seconds > 0, Kotlin 侧据此直接
+/// 渲染温和的 "休息一下" 界面 (倒计时结束后再显示题面)。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_parentGateOpenJson(
+    JNIEnv* env, jobject /*thiz*/) {
+    auto& ctx = gateContext();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    ctx.gate.newChallenge();
+    return toJString(env, gateStateJson(ctx.gate).dump());
+}
+
+/// 提交答案 (中文大写数字, 如 "贰拾壹"; 核心状态机接受 "壹拾贰" /
+/// 口语省略形 "拾贰" 变体并忽略前后空白), 返回结果 JSON:
+///   {"result":"passed"|"wrong"|"cooling",
+///    "attempts_remaining":N,"cooldown_seconds":N,"session_active":bool}
+///   - passed:  答对, 15 分钟家长会话已开启 (kDefaultSessionDuration);
+///   - wrong:   答错 (尚未触发冷却), Kotlin 侧温和提示 "再试一次吧";
+///   - cooling: 冷却期内 (含触发冷却的那次答错), 温和提示稍后再试。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_parentGateSubmitJson(
+    JNIEnv* env, jobject /*thiz*/, jstring answer) {
+    auto& ctx = gateContext();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    const char* result = "wrong";
+    switch (ctx.gate.submitAnswer(toUtf8(env, answer))) {
+        case magtile::core::ParentGateResult::Passed:
+            result = "passed";
+            break;
+        case magtile::core::ParentGateResult::WrongAnswer:
+            result = "wrong";
+            break;
+        case magtile::core::ParentGateResult::CoolingDown:
+            result = "cooling";
+            break;
+    }
+    nlohmann::json root = gateStateJson(ctx.gate);
+    root["result"] = result;
+    return toJString(env, root.dump());
+}
+
+/// 家长会话是否仍有效: true = 15 分钟守卫期内, 免重复验证直接进
+/// 家长操作 (与桌面 Qt 会话守卫同策略; 时长读 core::ParentGate::
+/// kDefaultSessionDuration, 会话只存内存, 重启即失效)。
+JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_parentGateSessionActive(
+    JNIEnv* /*env*/, jobject /*thiz*/) {
+    auto& ctx = gateContext();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    return ctx.gate.sessionActive() ? JNI_TRUE : JNI_FALSE;
 }
 
 }  // extern "C"
