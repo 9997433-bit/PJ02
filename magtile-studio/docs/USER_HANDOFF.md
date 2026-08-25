@@ -8,7 +8,7 @@
 > [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md), 本单不另立口径,
 > 只做「工程 vs 你」的分工切面。
 >
-> **状态快照**: 2026-08-25 20:55 UTC 文档同步 —— 内容库扩容收官至
+> **状态快照**: 2026-08-25 21:50 UTC 文档同步 —— 内容库扩容收官至
 > **250 模型** (`2b2c4ff` 基线, 内容批 F~I 合计 234→250, **200~250
 > 上限目标达成**; 收官批全量 QA 38 关卡全过: strict 巡检 + L2 jitter +
 > 免费层对齐全开, 唯一性 31125 对 0 警告); D4+ 全集 45 → 46 (新增批
@@ -19,6 +19,26 @@
 > 报告 (`2b2c4ff` 基线全量档实跑: 16 PASS / 2 FAIL 仅 R6/R7 / 6 SKIP)
 > **全部已刷新至 250 基线** —— 结论不受扩容影响, R6/R7 实物复核仍为
 > 唯二 P0 FAIL。
+>
+> **治理波次已合入** (`b369bad` 基线): ① **series 归类回填收官
+> 250/250** (矩阵内 176 + 矩阵外聚桶 74, 缺失/非法 0; 词表
+> `data/content_series_map.json` 权威化), 机检
+> `tools/check_content_series.py --strict` 落地为就绪探测 **R18** +
+> CTest 硬闸门 `content_series_gate` (随全量回归常开, 每次 push 即
+> 拦截漏归类/词值走样) + QA 可选关卡 20; ② **D3 冻结硬闸门**
+> `tools/check_difficulty_quota.py` (D1<20 或 D5<6 即冻结生效,
+> `--batch` 批次拦截 D3 新模型 + 策展人白名单豁免, `--strict` CI
+> 告警闸) 与内容批 PR 一键机检 `tools/review_content_batch.sh`
+> (五道阻断关卡, 用法 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md)
+> §4.3) 入库; ③ 矩阵进度**机器快照**
+> [reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md)
+> 自动生成 (`update_model_catalog.py --matrix-report`, 13 主题 ×
+> D1~D5 对照终态 520, 现状 176/520 = 34%)。**注意**:
+> `run_release_gate.sh --full` 档现为四道发布专项环境变量全开
+> (免费层 / strict 巡检 / 系列归类 / 难度配额), 其中**难度配额
+> strict 守卫按预期红灯** (D3 冻结生效 —— D1 0/20, D5 1/6): D1≥20
+> 且 D5≥6 补齐前 `--full` 保持红属预期告警, **不改变 R6/R7 唯二 P0
+> 阻断口径**。
 > 工作区多代理并行推进, 状态以 `tools/check_v1_readiness.sh` 实跑与
 > 清单最新快照为准; 本单引用的 commit 均已推送 origin (并行工作区
 > 偶有变基, 哈希漂移时按提交信息检索)。
@@ -29,19 +49,20 @@
 > 实搭量大幅缩减 (§4.3); **L2 批次 10 槽 + 接力批 4 模型加固均已交付** (§2)。
 
 **快照时自动探测实跑** (`tools/check_v1_readiness.sh --quick`,
-17:20 UTC / 209 模型时点; **250 基线全量档复跑已完成** —— `2b2c4ff`
-基线实跑 16 PASS / 2 FAIL 仅 R6/R7 / 6 SKIP, 结论不变, 见
+21:28 UTC / 250 模型 + 治理波次时点; **250 基线全量档复跑已完成** ——
+`2b2c4ff` 基线实跑 16 PASS / 2 FAIL 仅 R6/R7 / 6 SKIP, 结论不变, 见
 [reports/READINESS_FULL_2026-08-25.md](reports/READINESS_FULL_2026-08-25.md)):
 
 ```
-合计 24 项: 13 PASS / 2 FAIL / 9 SKIP (其中 P0 失败 2 项)
+合计 25 项: 13 PASS / 2 FAIL / 10 SKIP (其中 P0 失败 2 项)
 ```
 
-仅有的 2 项 FAIL 是 **R6/R7 实物复核** —— 唯一无法**完全**由软件代劳
-的自动侧 P0 缺口, 但 L2 三层流程已把其中的人手量大幅缩减 (见 §4.3);
-9 项 SKIP = 快检刻意跳过的 R4/R5/R17 三个长跑项 (全量档会实跑) +
-M1~M6 六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)。合计项
-23 → 24 系 L2 批次新增 R17 扰动仿真抽检探测所致。
+仅有的 2 项 FAIL 仍是 **R6/R7 实物复核** —— 唯一无法**完全**由软件
+代劳的自动侧 P0 缺口, 但 L2 三层流程已把其中的人手量大幅缩减 (见
+§4.3); 10 项 SKIP = 快检刻意跳过的 R4/R5/R17 三个长跑项 (全量档会
+实跑) + M1~M6 六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定) +
+该次实跑环境无构建目录 R10 记 SKIP。合计项 24 → 25 系治理波次新增
+**R18 系列归类机检**所致 (首跑即绿; 此前 23 → 24 为 L2 批次 R17)。
 
 ---
 
@@ -58,7 +79,7 @@ M1~M6 六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)�
 | C2 全库质量门禁 | ✅ | 全库 250 模型 strict 双档零未豁免警告 (收官批全量 QA 38 关卡全过: strict 巡检 + L2 jitter + 免费层对齐全开, 唯一性 31125 对 0 警告; D4+ 全集 45 → 46 —— 新增批旗舰 `stonehenge_01` D4; 唯一豁免 `suspension_bridge_01` 已文档化) | 收官批 `2b2c4ff`; 巡检深报告 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md) (**已刷新至 250 基线**: 249 通过 + 1 白名单豁免, D4+ 46x50 全绿) + 最新全库实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) (**已刷新至 250 基线** `9955aaa`: QA + L2 全绿仅 L3 红); R5 实跑 |
 | C3 目录 + 缩略图 | ✅ | JSON / 目录登记 / 缩略图 250 三方对账一致 (难度分布 D2 x23 / D3 x181 / D4 x45 / D5 x1) | `2b2c4ff` 收官重登记 |
 | C4 免费层 30 对齐 | ✅ | 标签 = starter 清单, 全 core-9, 三条断言常绿 | [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md); R3 实跑 PASS |
-| C5 主题/难度终审 | 🔶 | 分布数据可一键输出 (`magtile_app library`), 人工终审留待上架前 | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2 |
+| C5 主题/难度终审 | 🔶 | **series 归类回填收官 250/250** + R18 归类机检全绿 (`check_content_series.py --strict`: 矩阵内 176 + 矩阵外聚桶 74, 缺失/非法 0; 词表 `data/content_series_map.json`; CTest 硬闸门 `content_series_gate` 常开 + QA 可选关卡 20); 矩阵进度机器快照自动生成 (176/520 = 34%, 断档格/超编格以快照为准); 分布数据可一键输出 (`magtile_app library`); **矩阵判读与人工终审留待上架前 (归你)** | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) §2; 快照 [reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md) (`update_model_catalog.py --matrix-report`); 回填 `81cf682` + 机检 `fe05bab` + R18 探测 `f0947b5` |
 
 ### 1.2 §2 付费闭环 (B1 ✅, B2/B5 🔶)
 
@@ -99,7 +120,7 @@ M1~M6 六个纯人工提醒项 (即 §4 的你的清单, 不参与自动判定)�
 | 项 | 状态 | 交付物 | commit / 依据 |
 | --- | --- | --- | --- |
 | E1 自动子集 strict 全绿 | ✅ | `run_e2e_smoke.sh --strict` 9 项 0 SKIP + **每次 push CI 常态复跑** (`qa.yml` e2e-strict job) | CI 固化 `15f4e03`; 按钮级路径冒烟 `26032b0` |
-| G1 门禁快检常绿 | ✅ | `run_release_gate.sh` 快检档 PASS + 全量档 QA+L2 全绿 (仅 L3 实物硬闸门红 —— G2 被实物复核卡住, 见 §4.3) | R5 实跑; 留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) |
+| G1 门禁快检常绿 | ✅ | `run_release_gate.sh` 快检档 PASS + 全量档 QA+L2 全绿 (仅 L3 实物硬闸门红 —— G2 被实物复核卡住, 见 §4.3)。**治理波次后 `--full` 档 = 四道发布专项全开** (免费层/strict 巡检/系列归类/难度配额 = 全量 QA 关卡 10/15/20/21): 系列归类 strict 全绿; **难度配额 strict 守卫按预期红** (D3 冻结生效 —— D1 0/20, D5 1/6; D1≥20 且 D5≥6 补齐前 `--full` 保持红灯属预期告警, 内容侧清零路径见 §3) | R5 实跑; 留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md); 治理守卫接线 `30be9e3`/`324e1b9` |
 | 整机 QA 报告 | ✅ | Qt 桌面儿童视角全路径实玩 (`86e0b5f`, P1-1 已修 `b16e85e`) + Android 全量静态审查 (`b3c1685`) | [reports/QA_QT_CHILD_PLAYTHROUGH.md](reports/QA_QT_CHILD_PLAYTHROUGH.md) / [reports/QA_ANDROID_CHILD_PLAYTHROUGH.md](reports/QA_ANDROID_CHILD_PLAYTHROUGH.md) |
 
 ### 1.7 §8/§9 给你铺路的执行文档 (全部新增)
@@ -169,7 +190,7 @@ D4+ 全集 46 —— 新增批旗舰 `stonehenge_01` D4, 其余 15 个全部 D2/
 
 1. **B2 收尾**: 双端订阅页回归复跑 + 清单 B2 状态收敛 (Android 订阅页 UI 已入库 `1333f8e`);
 2. **D6 收尾**: 把 LGPL 自动核对脚本 (`2605e34`) 纳入出包流程与手册勾选项;
-3. **内容 234 → 250 已收官** (`2b2c4ff`, 内容批 F~I; L2 风险/结构族/strict 巡检/发布门禁/全量就绪五报告已刷新至 250 基线): 剩余输出主题/难度分布报表给 C5 人工终审当底稿 (缺口审计 250 复跑已入库 `a5ed585`);
+3. **内容 234 → 250 已收官** (`2b2c4ff`, 内容批 F~I; L2 风险/结构族/strict 巡检/发布门禁/全量就绪五报告已刷新至 250 基线), **C5 治理机制三件套亦已随治理波次落地** (缺口审计 `a5ed585` §7.3 三条建议全部机检化): series 回填 250/250 + R18 机检 / D3 冻结硬闸门 (`check_difficulty_quota.py` + 回归测试 `test_difficulty_quota.py`) / 矩阵进度机器快照 ([reports/CONTENT_MATRIX_PROGRESS.md](reports/CONTENT_MATRIX_PROGRESS.md), 176/520 = 34%); 内容批 PR 评审一键机检 `tools/review_content_batch.sh` 五道阻断关卡 (逐文件 strict 零警告 / D3 冻结 `--batch` / 系列归类 strict / core5 片型分层 / 唯一性抽查) 串成一条命令。**下一波内容侧重点 = 按矩阵缺口补 D1 (0/20) 与 D5 (1/6)** —— 两项达标即解冻 D3 且 `--full` 档难度配额 strict 红灯自动转绿; C5 人工终审以快照为底稿 (归你, 上架前一次);
 4. **D8 自动更新决策文档**: COMMERCIAL_PLAN §8 列为 V1 交付物但未实现 —— 工程可先出「实现 vs 降级 V1.1」决策文档与最小方案, 决策本身留你签字;
 5. **B4 首批一次性内容包**: 内容与打包侧可先做 (P1, 商店后台配置属你);
 6. **A7 体验缺口**: Android 视口 MSAA、按需渲染节电等 (P1, 已留痕);
@@ -301,7 +322,9 @@ python3 tools/list_physical_pending.py data/models --fail-on-pending
 tools/check_v1_readiness.sh --quick
 # 预期: R6/R7 与 L2 探测 R17 全部 PASS, 摘要零 FAIL, 退出码 0
 tools/run_release_gate.sh --full --fail-on-pending
-# 预期: 全绿 —— G2 出包终防线解锁
+# 预期: 实物侧全绿 —— G2 出包终防线解锁。注意: 治理波次后 --full 档
+# 含难度配额 strict 守卫 (关卡 21), 内容侧补齐 D1>=20 且 D5>=6 前该
+# 关保持预期红灯 (与实物复核无关, 由工程内容侧清零, 见 §3 第 3 条)
 ```
 
 实搭中任何失败: 按失效编码经 `tools/physical_failure_registry.py`
@@ -364,12 +387,13 @@ false, 「宁可锁」口径)。
 
 ```bash
 tools/check_v1_readiness.sh --strict
-# 预期: 退出码 0 —— R1~R16 (含 R11W) 全 PASS;
+# 预期: 退出码 0 —— R1~R18 (含 R11W) 全 PASS;
 # M1~M6 恒 SKIP (人工提醒项, 以你的签核记录为准, 不参与自动判定)
 tools/run_e2e_smoke.sh --strict
 # 预期: 9 项全 PASS, 0 SKIP
 tools/run_release_gate.sh --full --fail-on-pending
-# 预期: 全绿
+# 预期: 全绿 (含关卡 21 难度配额 strict —— 前提是内容侧已补齐
+# D1>=20 且 D5>=6, D3 解冻; 见 §3 第 3 条)
 ```
 
 人工侧同时满足 [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §10
@@ -382,7 +406,7 @@ tools/run_release_gate.sh --full --fail-on-pending
 
 | 谁 | 负责什么 |
 | --- | --- |
-| **工程 (Agent)** | 代码、内容、测试、CI、打包脚本、全部执行文档脚手架、L2 虚拟物理验证工具链 (jitter / 风险报告 / 结构族 / 失败登记); 自动探测除 R6/R7 外全绿并保持 |
+| **工程 (Agent)** | 代码、内容、测试、CI、打包脚本、全部执行文档脚手架、L2 虚拟物理验证工具链 (jitter / 风险报告 / 结构族 / 失败登记)、内容治理机检链 (系列归类 R18 / D3 冻结配额 / 矩阵进度快照 / 批次评审一键机检) 及 D1/D5 缺口补齐 (清零 `--full` 档配额 strict 预期红); 自动探测除 R6/R7 外全绿并保持 |
 | **你** | 磁力片实搭**缩减集** (risk Top 15 + 结构族代表, R6/R7 —— 不必 250 全搭)、运营主体与行政五件 (L1~L5)、证书 (D5)、实机真机验收 (M1/M2/M4)、法务定稿 (M3)、真钱付费验收 (B3)、商店素材终稿与提审 |
 
 工程侧收口后, 你手上是**一套按步骤可执行、可验收的清单**, 每一项都有
