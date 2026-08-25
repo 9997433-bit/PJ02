@@ -223,6 +223,14 @@ Completed comprehensive E2E QA playthrough of MagTile Studio Qt desktop applicat
   - Examples: "还缺 43 片", "还缺 44 片", "还缺 45 片"
 - ✅ Library count updated: "挑出 26 / 200 个模型"
 
+> **复核更正 (2026-08-25 P1 修复, commit 见文末)**: 本节当时看到的
+> 「挑出 26 / 200 个模型」**并非**「我能搭的」库存筛选生效 —— 测试
+> 会话处于 7-9 标准档, 「我能搭的」筛选按分龄设计被收起并清零
+> (LibraryPage `collapseHiddenFilters`, 与 Android 端「不悄悄开启被
+> 收起的筛选」同策略, 该行为本身符合设计); 实际生效的是 §2 测试时
+> 遗留的「🎁 免费模型」筛选 (恰为 26 个), 冒充了库存筛选结果。
+> 该「遗留筛选冒充落地结果」问题已修复, 见下方 Issues P1-1。
+
 **Screenshots**:
 - Inventory page - /tmp/computer-use/4f579.webp
 - Inventory with 9 pieces - /tmp/computer-use/226c2.webp
@@ -367,12 +375,14 @@ Completed comprehensive E2E QA playthrough of MagTile Studio Qt desktop applicat
 ### No Blocking Issues
 No critical bugs or blocking issues were encountered during this QA session.
 
-### Minor Observations
-1. **Model count discrepancy**: Library showed different counts (196→199→200 models) across different filter states. This appears to be correct behavior as inventory filter adds models.
+### Minor Observations — P0/P1 复核与修复状态 (2026-08-25 逐条收口)
 
-2. **Cooldown precision**: Parent gate cooldown showed "14 分 58 秒" but actual timing not verified over full 15-minute period.
-
-3. **Subscription page**: "订阅管理" button shows "即将上线" (Coming soon) - this is expected for current release.
+| 编号 | 观察项 | 复核结论 | 状态 |
+|------|--------|----------|------|
+| P1-1 | §6「保存, 看看我能搭什么 ▶」落库后显示「挑出 26 / 200 个模型」, 当时被当作库存筛选生效 | **代码缺陷 (P1)**: 4-6/7-9 档「我能搭的」按分龄设计收起清零 (与 Android 同策略, 本身符合设计), 但 `Main.qml` 的 `onLookWhatICanBuild` 路径未清遗留筛选, 先前开着的「🎁 免费模型」(恰 26 个) 冒充库存筛选结果, 误导性强 | ✅ **已修**: `onLookWhatICanBuild` 先 `clearFilters()` 再开「我能搭的」, 落地状态只由按钮承诺决定 —— 10+ 档落到纯「我能搭的」筛选, 4-6/7-9 档落到干净全量库; `qt_gui_smoke` / `qt_ui_paths_smoke` 全绿 |
+| OBS-1 | Model count discrepancy: 库内计数跨筛选态漂移 (196→199→200) | **环境因素, 非代码缺陷**: QA 会话期间并行内容代理向同一工作区目录连续登记模型 (14:14 后 191 条 → 14:35 195 条 → 14:38 199 条), 应用 reload 读到的是变化中的目录; 原文「inventory filter adds models」的解释不成立, 任一时刻页眉「挑出 X / Y」两数取自同一次目录加载, 口径一致 | ☑️ 无需代码修复 (报告解释已更正) |
+| OBS-2 | Cooldown precision: 家长会话显示「14 分 58 秒」 | 截图时刻距过门已流逝 2 秒的正常显示; 15 分钟会话常量复核无误 (`parent_gate.hpp` `kDefaultSessionDuration{15}`, 只存内存) | ☑️ 无需修复 |
+| OBS-3 | 「订阅管理」按钮显示「即将上线」 | 按设计的温和占位, 正式商店版随计费后端提供 | ☑️ 无需修复 (预期行为) |
 
 All observations are within acceptable design parameters for current development stage.
 

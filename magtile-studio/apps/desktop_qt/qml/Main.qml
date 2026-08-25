@@ -198,9 +198,15 @@ ApplicationWindow {
         InventoryPage {
             onBack: stack.pop()
             onNotify: function(message) { window.showToast(message) }
-            // 「保存, 看看我能搭什么」: 开启筛选后落到模型库
+            // 「保存, 看看我能搭什么」: 先清掉上次逛库遗留的筛选, 再开
+            // 「我能搭的」—— 落地状态只由这颗按钮的承诺决定。不清的话,
+            // 在「我能搭的」被分龄收起的 4-6/7-9 档 (collapseHiddenFilters,
+            // 与 Android 同策略: 不悄悄开启被收起的筛选), 遗留的「免费
+            // 模型」等旧筛选会冒充库存筛选结果 (QA_QT_CHILD_PLAYTHROUGH
+            // 曾把遗留免费筛选的「挑出 26」误读成库存筛选生效)。
             // (导航深度保持 首页 -> 模型库, 任意界面 <= 2 步回首页)
             onLookWhatICanBuild: {
+                studio.libraryFilter.clearFilters()
                 studio.libraryFilter.buildableOnly = true
                 stack.pop(null)
                 stack.push(libraryComponent)
