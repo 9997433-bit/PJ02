@@ -1,18 +1,18 @@
 # V1 上架就绪全量探测报告 (Full Readiness Run)
 
-- 生成时间: 2026-08-25 20:41 UTC (250 模型库复跑; 前次 234 模型基线 `3d24d74` 的结果已由本次覆盖)
-- 基线提交: `2b2c4ff` (`2b2c4ff3781436adeec2ebe3dd0f34718a64c2e4`, 内容批 F~I 全部并入后的 250 模型库 —— 200~250 上限目标达成)
-- 构建配置: CMake Release x2 (CLI `build` Make + Qt `build-qt`, Qt 6.4.2); 本次为增量构建复用 —— 自 `8b424be` (validate --jitter 特性) 后无源码改动, 增量重建确认全部目标最新, 二进制含 `--jitter` 特性 (R17 前置探测通过)
-- 执行命令: `tools/check_v1_readiness.sh` (**全量档**, 非 `--quick` —— R4 E2E / R5 发布门禁 / R17 扰动抽检全部实跑; 总耗时约 109s)
+- 生成时间: 2026-08-25 21:50 UTC (治理批后刷新; 前次 250 模型基线 `2b2c4ff` 的结果已由本次覆盖)
+- 基线提交: `b369bad` (`b369bad39161fff2839d07b8cc1f3b2f396f4127`, 治理批全部并入后的 foundation —— series 词表权威化 + 归类机检 R18 + D3 冻结守卫 + 治理守卫接入 QA/发布门禁; 模型库保持 250 不变)
+- 构建配置: CMake Release x2 (CLI `build` Make + Qt `build-qt`, Qt 6.4.2); 本次为增量构建复用 —— 治理批 (`2b2c4ff..b369bad`) 仅文档/工具/门禁脚本改动, 无 C++ 源码变化, 增量重建确认全部目标最新, 二进制含 `--jitter` 特性 (R17 前置探测通过)
+- 执行命令: `tools/check_v1_readiness.sh` (**全量档**, 非 `--quick` —— R4 E2E / R5 发布门禁 / R17 扰动抽检全部实跑; 总耗时约 88s)
 - 退出码: **1** (仅 R6/R7 两项 L3 实物复核 P0 失败, 属预期硬闸门, 非软件缺陷)
 
 ## 1. 结论速览
 
-**合计 24 项: 16 PASS / 2 FAIL / 6 SKIP (P0 失败 2 项, 全部为实物复核硬闸门)。**
+**合计 25 项: 17 PASS / 2 FAIL / 6 SKIP (P0 失败 2 项, 全部为实物复核硬闸门)。**
 
-工程侧判定: 软件门禁保持全绿, 与 234 基线 (`3d24d74`) 及更早 209 基线 (`95c26cd`) 结论一致 —— 内容批 F~I 扩容 (234 -> 250, 内容库收官) 后不变。全部自动可探测项 (含三个长跑项 R4/R5/R17) 全绿; 唯二失败 R6/R7 为 D4+ 实物复核缺口, 按设计须用户实搭清零 (`docs/PHYSICAL_REBUILD_CHECKLIST.md`), 不属工程可修复范围。本次运行无任何工程可修复的失败项。
+工程侧判定: 软件门禁保持全绿, 与前次 250 基线 (`2b2c4ff`) 及更早 234 基线 (`3d24d74`) / 209 基线 (`95c26cd`) 结论一致 —— 治理批 (series 归类机检 / D3 冻结守卫 / 矩阵进度机检化 / 发布门禁接线) 并入后不变。全部自动可探测项 (含三个长跑项 R4/R5/R17) 全绿; 唯二失败 R6/R7 为 D4+ 实物复核缺口 (46 个, 与前次逐一相同), 按设计须用户实搭清零 (`docs/PHYSICAL_REBUILD_CHECKLIST.md`), 不属工程可修复范围。本次运行无任何工程可修复的失败项。
 
-与 234 基线的唯一口径变化: 内容批 F 新增 D4 模型 stonehenge_01 (巨石阵, 91 片/19 步, `4522fd7`), D4+ 待复核全集从 45 增至 **46** (R5 门禁阶段 3 与 R6/R7 计数随之 +1, 见 §4/§6)。
+与前次 250 基线运行的唯一口径变化: 治理批为就绪探测新增 **R18 内容系列归类机检** (`check_content_series.py --strict`, `f0947b5` 落地, 与 R14~R16 同模式秒级常跑且 `--quick` 不跳过), 探测项合计 24 → **25**。本次为 R18 首次随**全量档**实跑 (此前仅 21:28 UTC `--quick` 档首跑), 首跑即绿: 250 模型归类齐全、词值零非法 (见 §6)。
 
 ## 2. 逐项结果
 
@@ -21,10 +21,10 @@
 | R1 内容体量 | P0 | **PASS** | 0s | 模型 JSON 250 个 >= 门槛 200 (目标区间 200~250 上限达成) |
 | R2 目录/缩略图对账 | P1 | **PASS** | 0s | 模型 250 / 目录登记 250 / 缩略图就绪 250, 三方一致 |
 | R3 免费层清单对齐 | P0 | **PASS** | 0s | 免费标签 30 x starter 清单 x core-9 三条断言全过 |
-| R4 E2E 冒烟 (全量) | P0 | **PASS** | 38s | 8 项通过 / 1 项 SKIP (详见 §3) |
-| R5 发布门禁快检 (全量) | P0 | **PASS** | 60s | 3 个门禁关卡全过 (详见 §4) |
-| R6 实物抽样包缺口 | P0 | **FAIL** | 0s | 预期失败: 抽样包缺口 10/10 (详见 §6) |
-| R7 D4+ 实物复核清零 | P0 | **FAIL** | 0s | 预期失败: D4+ 46 个待复核 0/46 (详见 §6) |
+| R4 E2E 冒烟 (全量) | P0 | **PASS** | 36s | 8 项通过 / 1 项 SKIP (详见 §3) |
+| R5 发布门禁快检 (全量) | P0 | **PASS** | 41s | 3 个门禁关卡全过 (详见 §4) |
+| R6 实物抽样包缺口 | P0 | **FAIL** | 0s | 预期失败: 抽样包缺口 10/10 (详见 §7) |
+| R7 D4+ 实物复核清零 | P0 | **FAIL** | 0s | 预期失败: D4+ 46 个待复核 0/46 (详见 §7) |
 | R8 隐私合规文档 | P0 | **PASS** | 0s | SECURITY_AND_PRIVACY + PRIVACY_POLICY_DRAFT 在位 |
 | R9 桌面打包资产 | P0 | **PASS** | 0s | 打包手册/CPack/WiX/starter 清单/第三方声明/CI 齐备 |
 | R10 计费适配层单测 | P1 | **PASS** | 0s | `magtile_billing_test` 实跑通过 (41 断言全绿) |
@@ -36,6 +36,7 @@
 | R15 国内合规清单守卫 | P0 | **PASS** | 0s | 51 条 (P0 30 / P1 21) 全带级别与负责方, 交叉引用 5 项就位 |
 | R16 儿童友好文案守卫 | P0 | **PASS** | 0s | 301 文件 / 8874 段用户可见中文文案, 零红线 |
 | R17 D4+ 扰动仿真抽检 (全量) | P1 | **PASS** | 11s | 10/10 全绿, 每模型 --jitter 50 (详见 §5) |
+| R18 内容系列归类机检 (新增) | P1 | **PASS** | 0s | 250 归类齐全: 矩阵内 176 + 矩阵外 74, 缺失/非法 0 (详见 §6) |
 | M1~M6 人工项 | P0 | SKIP x6 | - | 实机打包/真机验收/法务定稿/矩阵签核/实搭签核/备案 |
 
 ## 3. R4 E2E 冒烟明细 (全量实跑)
@@ -62,11 +63,11 @@ E2E-14a SKIP 原因: 本环境无 Android NDK (默认档不阻断, CI 由 `andro
 | 2. 弱磁严格档全库巡检 (strict) | PASS | 250 模型 strict 零警告审计 + 逐步装配质检 250/250 + D4+ 抗扰动巡检 46/46 (strict --jitter 50) 三阶段全绿 |
 | 3. L3 实物复核缺口报告 (报告型) | PASS | 报告型关卡, 缺口列报不阻断 (硬闸门见 R6/R7) |
 
-结论: 全部 3 个门禁关卡通过, 可进入打包流程。
+结论: 全部 3 个门禁关卡通过, 可进入打包流程。注: 本检查跑默认档 (三道发布专项); 治理批新落地的 `--full` 档 (四环境变量全开, 含系列归类与难度配额 strict 守卫) 属发布签核用扩展档, 不在 R5 口径内。
 
 ## 5. R17 D4+ 扰动仿真抽检明细 (全量实跑)
 
-抽样规则: D5 全数优先 + 大体量 D4 按总片数降序补足, 目标 10 个; 每模型 `validate --jitter 50`。抽样名单与 234 库时完全一致 —— 新入池的 stonehenge_01 (91 片) 未达大体量补足线 (第 10 名 school_bus_01 为 98 片), 不改变抽样。
+抽样规则: D5 全数优先 + 大体量 D4 按总片数降序补足, 目标 10 个; 每模型 `validate --jitter 50`。抽样名单与前次 250 基线运行完全一致 (治理批未增删模型)。
 
 | # | 模型 | 难度 | 片数 | 结果 |
 | --- | --- | --- | --- | --- |
@@ -83,22 +84,36 @@ E2E-14a SKIP 原因: 本环境无 Android NDK (默认档不阻断, CI 由 `andro
 
 10/10 全绿, 软件侧不豁免 S1/S2 实搭。另: R5 门禁关卡 2 的阶段 3 已对全部 46 个 D4+ 模型 (含 stonehenge_01) 做 strict --jitter 50 全量巡检 (46/46 全绿), 覆盖面超出本抽检。
 
-## 6. R6/R7 失败详情 (预期硬闸门, 非工程可修复)
+## 6. R18 内容系列归类机检明细 (本次新增探测项)
+
+R18 由治理批落地 (`f0947b5`, 清单 §1 C5 探测 Manual → Auto(部分)): 每模型 `content_meta.series` (13 主题词值) 或 `matrix_bucket` (矩阵外桶) **恰好其一**, 词值对照权威词表 `data/content_series_map.json` (13 个矩阵主题 + 11 个矩阵外桶)。本次为该项首次随全量档实跑, `--strict` 全绿:
+
+| 口径 | 数值 |
+| --- | --- |
+| 模型总数 | 250 |
+| 矩阵内 (series) | 176 (D2 15 / D3 128 / D4 32 / D5 1) |
+| 矩阵外 (bucket) | 74 (city_life 24 / sports 11 / farm 8 / engineering_misc 6 / music 5 / nature_misc 4 / campus 4 / amusement 3 / maritime_misc 3 / museum 2 / other 4) |
+| 缺失归类 | **0** |
+| 词值非法 | **0** |
+
+结论: 归类齐全且词值全部合法, 无警告 —— 与 CTest 硬闸门 `content_series_gate` (`--strict`, 随全量回归关卡 3 常开) 同口径。主题 × 难度矩阵进度快照另见 `docs/reports/CONTENT_MATRIX_PROGRESS.md` (矩阵内 176/520 = 34%, `update_model_catalog.py --matrix-report` 生成), 终审判读仍人工 (清单 §1 C5)。
+
+## 7. R6/R7 失败详情 (预期硬闸门, 非工程可修复)
 
 - **R6**: 实物抽样包缺口 10/10 —— D4+ 46 个全部待复核, 抽样命中 S1=0 / S2=1 / S3=9 (skyscraper_01 / stadium_gate_01 / ferry_terminal_01 / castle_drawbridge_01 / treehouse_02 / elephant_01 / ball_run_tower_01 / stonehenge_01 / subway_station_01 / tennis_court_01), 预计实搭总耗时约 750 分钟 (约 12.5 小时)。已标注 `physical_verified` 的 3 个 D3 模型 (castle_foundation_01 / great_wall_01 / tokyo_tower_01) 一致性核对通过。
 - **R7**: 扫描 250 模型, D4+ 共 46 个: 已复核 0, 待复核 46 (`--fail-on-pending` 生效)。
 
-两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (缩减流程见 `docs/USER_HANDOFF.md` §4.3)。内容批 F~I 扩容 (234 -> 250) 新增 1 个 D4 模型 stonehenge_01, 待复核集合从 45 增至 46; 其余 45 个与前次运行完全一致。本次运行无任何非预期 / 工程可修复的失败项。
+两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (缩减流程见 `docs/USER_HANDOFF.md` §4.3)。待复核集合 46 个 (45 D4 + 1 D5) 与前次 250 基线运行逐一相同 —— 治理批未增删模型。本次运行无任何非预期 / 工程可修复的失败项。
 
-## 7. 下一步
+## 8. 下一步
 
 1. 用户侧: 按 `docs/USER_HANDOFF.md` §4 完成实物 (R6/R7 清零)、行政、实机、沙盒验收
 2. 签核档补充: 配 Android NDK 后以 `--strict` 复跑 E2E, 消除 E2E-14a SKIP
 
-## 附录: 全量运行完整输出 (/tmp/readiness_full.log)
+## 附录: 全量运行完整输出 (/tmp/readiness_full_gov.log)
 
 <details>
-<summary>点开查看完整日志 (1396 行, NO_COLOR=1)</summary>
+<summary>点开查看完整日志 (1446 行, NO_COLOR=1)</summary>
 
 ```text
 ==============================================================
@@ -276,9 +291,9 @@ Qt 界面按钮级路径冒烟通过
   PASS   E2E-11b CLI 免费筛选对账 (--free-only)         0s
   PASS   E2E-06a CLI 免费模型教程步进 (beach_hut_01)  0s
   PASS   E2E-17a 跨端存档键契约 (CLI 写 -> sqlite 直读) 0s
-  PASS   E2E-QT Qt 无头冒烟 (test_qt_smoke.sh)            16s
+  PASS   E2E-QT Qt 无头冒烟 (test_qt_smoke.sh)            17s
   PASS   E2E-12a Qt 进度页深链 (--smoke-open-progress)   5s
-  PASS   E2E-04a/09a/11c/12b Qt 按钮级路径冒烟         17s
+  PASS   E2E-04a/09a/11c/12b Qt 按钮级路径冒烟         14s
   SKIP   E2E-14a Android JNI 符号断言                     -
 --------------------------------------------------------------
  提醒: 1 项 SKIP (默认档不阻断); 上架签核请用 --strict 并补齐环境
@@ -1208,8 +1223,8 @@ warehouse_01                 D4     97   18
 ==============================================================
  发布门禁报告
 ==============================================================
-  PASS   免费层清单对齐核验                  1s
-  PASS   弱磁严格档全库巡检 (strict)         59s
+  PASS   免费层清单对齐核验                  0s
+  PASS   弱磁严格档全库巡检 (strict)         40s
   PASS   L3 实物复核缺口报告 (报告型)      0s
 --------------------------------------------------------------
  提醒: L3 实物复核为报告型不阻断; 正式出包前追加 --fail-on-pending 作为终防线
@@ -1243,7 +1258,7 @@ D4+ 共 46 个 (待复核 46); 免费层 D4+ 0 个; 抽样目标 10 个, 命中 
   [OK ] tokyo_tower_01           D3 2026-08-25 via content_meta (2026-08-25)
 
 抽样包缺口: 10 / 10 (存在缺口, --fail-on-missing-sample 生效)
-[失败] R6 实物抽样包 V1 复核缺口 (physical_sample_pack) (退出码 1, 日志: /tmp/magtile_v1_readiness_YJWS1V/06_R6.log)
+[失败] R6 实物抽样包 V1 复核缺口 (physical_sample_pack) (退出码 1, 日志: /tmp/magtile_v1_readiness_PQtmjd/06_R6.log)
 
 ==============================================================
  R7 [P0] D4+ 实物复核全集清零 (list_physical_pending)
@@ -1301,7 +1316,7 @@ volcano_base_01              D4     83   18
 warehouse_01                 D4     97   18
 
 待复核数量: 46 (存在待复核, --fail-on-pending 生效)
-[失败] R7 D4+ 实物复核全集清零 (list_physical_pending) (退出码 1, 日志: /tmp/magtile_v1_readiness_YJWS1V/07_R7.log)
+[失败] R7 D4+ 实物复核全集清零 (list_physical_pending) (退出码 1, 日志: /tmp/magtile_v1_readiness_PQtmjd/07_R7.log)
 
 ==============================================================
  R8 [P0] 隐私合规文档存在性
@@ -1454,6 +1469,55 @@ warehouse_01                 D4     97   18
 [断言通过] D4+ 扰动仿真抽检全绿 (10/10, 每个 50 次扰动; 不豁免 S1/S2 实搭)
 [通过] R17 D4+ 扰动仿真抽检 (validate --jitter 50)
 
+==============================================================
+ R18 [P1] 内容系列归类机检 (check_content_series --strict)
+==============================================================
+==============================================================
+ 内容系列归类机检 (content_meta.series / matrix_bucket)
+==============================================================
+词表:              /workspace/magtile-studio/data/content_series_map.json
+                   (13 个矩阵主题 + 11 个矩阵外桶)
+模型总数:          250
+矩阵内 (series):   176
+矩阵外 (bucket):   74
+缺失归类:          0
+词值非法:          0
+
+主题 × 难度矩阵计数 (现状; 520 目标对照见 CONTENT_GAP_AUDIT.md 第 3 节):
+  主题                             D1   D2   D3   D4   D5  合计
+  城堡与要塞 castle_fortress        0    0    6    1    0     7
+  陆地交通 land_transport           0    5   26    7    0    38
+  海空交通 sea_air_transport        0    0   15    8    0    23
+  航天器 spacecraft                 0    2   15    1    0    18
+  动物世界 animal_world             0    2   24    2    0    28
+  建筑地标 landmark_architecture    0    0    9    7    1    17
+  桥梁工程 bridge_engineering       0    0    4    1    0     5
+  几何艺术 geometric_art            0    1    1    0    0     2
+  滚珠乐园 marble_run               0    0    1    2    0     3
+  植物花园 plant_garden             0    1    4    3    0     8
+  节日限定 holiday_seasonal         0    1    9    0    0    10
+  实用功能 practical_utility        0    1    0    0    0     1
+  幻想与机械 fantasy_machinery      0    2   14    0    0    16
+  矩阵内小计                        0   15  128   32    1   176
+
+矩阵外桶计数:
+  城市生活 city_life               24
+  运动 sports                      11
+  田园 farm                         8
+  工程结构 engineering_misc         6
+  音乐 music                        5
+  自然世界 nature_misc              4
+  校园 campus                       4
+  游乐园 amusement                  3
+  海洋航行 maritime_misc            3
+  博物馆 museum                     2
+  其他 other                        4
+  矩阵外小计                       74
+
+归类齐全且词值全部合法, 无警告
+==============================================================
+[通过] R18 内容系列归类机检 (check_content_series --strict)
+
 [跳过] M1 [P0] Windows/macOS 实机打包验收 + 代码签名/公证 —— Manual, 见清单 §3 D2~D6
 
 [跳过] M2 [P0] Android 真机验收 + 商店上架资料 —— Manual, 见清单 §4 A4/A5
@@ -1472,8 +1536,8 @@ warehouse_01                 D4     97   18
   PASS   R1   [P0] 内容体量 (模型 JSON >= 200)              0s
   PASS   R2   [P1] 目录登记 / 缩略图对账                 0s
   PASS   R3   [P0] 免费层清单对齐 (verify_free_tier)       0s
-  PASS   R4   [P0] E2E 冒烟 (run_e2e_smoke.sh)                  38s
-  PASS   R5   [P0] 发布门禁快检 (run_release_gate.sh)       60s
+  PASS   R4   [P0] E2E 冒烟 (run_e2e_smoke.sh)                  36s
+  PASS   R5   [P0] 发布门禁快检 (run_release_gate.sh)       41s
   FAIL   R6   [P0] 实物抽样包 V1 复核缺口 (physical_sample_pack) 0s
   FAIL   R7   [P0] D4+ 实物复核全集清零 (list_physical_pending) 0s
   PASS   R8   [P0] 隐私合规文档存在性                    0s
@@ -1487,6 +1551,7 @@ warehouse_01                 D4     97   18
   PASS   R15  [P0] 国内合规清单守卫 (check_china_compliance_docs) 0s
   PASS   R16  [P0] 儿童友好文案守卫 (check_child_friendly_copy) 0s
   PASS   R17  [P1] D4+ 扰动仿真抽检 (validate --jitter 50)  11s
+  PASS   R18  [P1] 内容系列归类机检 (check_content_series --strict) 0s
   SKIP   M1   [P0] Windows/macOS 实机打包验收 + 代码签名/公证 -
   SKIP   M2   [P0] Android 真机验收 + 商店上架资料      -
   SKIP   M3   [P0] 隐私政策法务定稿 + 合规自查单     -
@@ -1494,9 +1559,9 @@ warehouse_01                 D4     97   18
   SKIP   M5   [P0] 实物抽样实搭签核 (R6/R7 只报告缺口) -
   SKIP   M6   [P0] 软著 / ICP 备案 / 开发者账号 / 运营主体 -
 --------------------------------------------------------------
- 合计 24 项: 16 PASS / 2 FAIL / 6 SKIP (其中 P0 失败 2 项)
+ 合计 25 项: 17 PASS / 2 FAIL / 6 SKIP (其中 P0 失败 2 项)
  结论: 存在 2 项 P0 失败 —— 未达上架就绪, 逐项对照清单补齐
- 分项日志: /tmp/magtile_v1_readiness_YJWS1V
+ 分项日志: /tmp/magtile_v1_readiness_PQtmjd
 ```
 
 </details>
