@@ -1,42 +1,41 @@
 # 商用上架阻塞项决策单 (Launch Blockers, 2026-08-26 刷新)
 
-- 生成时间: 2026-08-26 04:00 UTC
-- 基线提交: `9aa146d` (`cursor/magtile-studio-foundation-a95b`, 内容库 250 模型)
+- 生成时间: 2026-08-26 05:05 UTC
+- 基线提交: `ad6d35c` (`cursor/magtile-studio-foundation-a95b`, 内容库 250 模型; 批 P `53615ea` + 治理刷新)
 - 取代版本: [LAUNCH_BLOCKERS_2026-08-25.md](LAUNCH_BLOCKERS_2026-08-25.md) (双红灯口径, 已过时)
 - 对账单: [V1_LAUNCH_CHECKLIST.md](../V1_LAUNCH_CHECKLIST.md) (34 个 P0)
 - 工程天花板: [ENGINEERING_CEILING_2026-08-25.md](ENGINEERING_CEILING_2026-08-25.md) 结论**在本基线重新确认成立** —— 软件工程侧无可自主推进项 (见 §5)
 - 本单用途: 登记 2026-08-25 决策单发出后的推进结果 (**路径 B 配额解冻已完成**), 并把剩余阻塞收敛为**两条路径**: 路径 A 实物签核 (唯一软件侧相邻阻塞) 与路径 C Manual P0
 
-## 0. 当前门禁快照 (基线 `9aa146d` 实跑)
+## 0. 当前门禁快照 (基线 `ad6d35c` 实跑)
 
 ```bash
-python3 tools/check_difficulty_quota.py --strict     # 退出码 0 —— D1 20/20, D5 6/6, D3 冻结解除
+python3 tools/check_difficulty_quota.py --strict     # 退出码 0 —— D1 21/20, D5 6/6, D3 冻结解除
 tools/check_v1_readiness.sh --quick                  # 14 PASS / 2 FAIL / 9 SKIP —— 唯二 P0 FAIL: R6/R7
-tools/run_release_gate.sh --full --fail-on-pending   # 退出码 1, 唯一红灯 = L3 实物 0/51 (见下)
+tools/run_release_gate.sh --full --fail-on-pending   # 退出码 1, 唯一红灯 = L3 实物 0/52 (见下)
 ```
 
 | 红灯 | 探测/关卡 | 现状 | 谁能解 |
 | --- | --- | --- | --- |
-| 实物复核 | R6/R7 + G2 L3 | D4+ **0/51** 已复核 (45 D4 + 6 D5) | **你** (实搭 + 落盘 `physical_verified`) |
-| ~~难度配额~~ | ~~G2 QA 关卡 41 strict~~ | **已解冻 (绿灯)** —— D1 20/20, D5 6/6 | 已解, 维持解冻线即可 (§2) |
+| 实物复核 | R6/R7 + G2 L3 | D4+ **0/52** 已复核 (46 D4 + 6 D5) | **你** (实搭 + 落盘 `physical_verified`) |
+| ~~难度配额~~ | ~~G2 QA 关卡 41 strict~~ | **已解冻 (绿灯)** —— D1 21/20, D5 6/6 | 已解, 维持解冻线即可 (§2) |
 | Manual P0 | 清单 23 项 🔶/⬜ (M1~M6) | 载体已备, 动作未做 | **你** (账号/实机/法务/沙盒) |
 
-软件侧**已全部常绿**: 全量 QA 42 子关卡 0 失败 (CTest **556/556**, strict 静态档 249 过 + 1 白名单豁免零警告, 唯一性 0 警告, 免费层 30/30, 系列归类矩阵内 201 + 矩阵外 49 缺失/非法 0, **D4+ 抗扰动 51/51 × 50 轮全绿**); 实跑留痕
+软件侧**已全部常绿**: 全量 QA 42 子关卡 0 失败 (CTest **557/557**, strict 静态档 249 过 + 1 白名单豁免零警告, 唯一性 0 警告, 免费层 30/30, 系列归类矩阵内 211 + 矩阵外 39 缺失/非法 0, **D4+ 抗扰动 52/52 × 50 轮全绿**); 实跑留痕
 [RELEASE_GATE_STATUS.md](RELEASE_GATE_STATUS.md)。**软件工程天花板已达 —— `--full --fail-on-pending` 距全绿只差 L3 实物一道硬闸门。**
 
 ## 1. 路径 A —— 实物签核 (唯一软件侧相邻阻塞, 解锁 R6/R7 / S1/S2 / G2)
 
 **不依赖行政账号**, 可与路径 C 并行; 配额红灯已灭 (§2), 实搭清零后 G2 出包终防线即全绿。
 
-### 排产单 (已刷新至 51 口径)
+### 排产单 (已刷新至 52 口径)
 
-[PHYSICAL_REVIEW_QUEUE.md](PHYSICAL_REVIEW_QUEUE.md) (`e387d31` 导出, 快照一致零告警):
-**待复核 51 个 = 必搭 40 个 ≈ 51.7h + 可缓建 11 个 ≈ 12.8h** (族去重口径, 全集 51 个 ≈ 64.5h);
-风险 Top3: `skyscraper_01` 63.9 / `stellar_launch_gantry_01` 61.8 / `strait_rainbow_bridge_01` 56.8
-([PHYSICAL_RISK_REPORT.md](PHYSICAL_RISK_REPORT.md), Top15 ≈ 22.0h)。较 08-25 版新增 5 个 D5
-(配额批入库), 其中 3 个 (`marble_grand_cascade_01` / `giant_ferris_wheel_01` /
-`strait_rainbow_bridge_01`) 在队列导出后又经内容返工加固 (`531860e` / `d78f419` / `acdc834`) ——
-预算按难度带不受影响, 片数列略滞后, 首批落盘刷新时按 §验收 命令一并重导出。
+[PHYSICAL_REVIEW_QUEUE.md](PHYSICAL_REVIEW_QUEUE.md) (`8974b4b` 导出, 快照一致零告警):
+**待复核 52 个 = 必搭 41 个 ≈ 52.8h + 可缓建 11 个 ≈ 12.8h** (族去重口径, 全集 52 个 ≈ 65.7h);
+风险 Top3: `skyscraper_01` 63.9 / `stellar_launch_gantry_01` 61.8 / `marble_grand_cascade_01` 57.6
+([PHYSICAL_RISK_REPORT.md](PHYSICAL_RISK_REPORT.md), Top15 ≈ 22.0h)。较配额批前净增 1 个 D4
+(`expansion_orb_01`, 批 P `53615ea`); 此前 5 个 D5 与 3 个返工加固项 (`531860e` / `d78f419` / `acdc834`)
+均已通过 strict --jitter 50, 可直接排实搭。
 
 ### 第一步
 
@@ -62,7 +61,7 @@ tools/check_v1_readiness.sh --quick                  # R6/R7 计数下降
 tools/list_physical_pending.py                       # 待复核清单缩短
 ```
 
-全部必搭 40 个落盘且 D4+ 覆盖口径满足 S2 后:
+全部必搭 41 个落盘且 D4+ 覆盖口径满足 S2 后:
 
 ```bash
 tools/run_release_gate.sh --full --fail-on-pending   # 预期全绿 —— 配额红灯已不存在, L3 是最后一道
@@ -127,7 +126,7 @@ tools/check_v1_readiness.sh --strict   # 签核档: SKIP 算失败
 2. `check_v1_readiness.sh` **零 P0 FAIL**
 3. `run_release_gate.sh --full --fail-on-pending` **退出码 0**
 
-当前距放行: **路径 A 实搭清零** (必搭 40 个 ≈ 51.7h) + **路径 C** Manual P0 清零。
+当前距放行: **路径 A 实搭清零** (必搭 41 个 ≈ 52.8h) + **路径 C** Manual P0 清零。
 路径 B 已不在阻塞清单上。
 
 ## 5. 工程侧不再自主推进的事项

@@ -23,7 +23,8 @@
 - **探测**: **Auto** = 有自动化载体可重复探测; **Auto(部分)** =
   数据链路自动化、真机/视觉/法务侧仍需人工; **Manual** = 纯人工;
 - **状态**: ✅ 已就绪 / 🔶 部分就绪 (进行中) / ⬜ 未开始。状态列为
-  **2026-08-26 仓库快照** (基线 `9aa146d`); 标注「探测 Rn」的行以
+  **2026-08-26 仓库快照** (基线 `53615ea` 批 P 置换, 治理留痕刷新至
+  `ad6d35c`); 标注「探测 Rn」的行以
   `tools/check_v1_readiness.sh` 的实时输出为准 (本清单不替代实跑)。
 
 自动探测一键跑 (Auto 项全部串起来, 输出 PASS/FAIL/SKIP 摘要):
@@ -35,10 +36,10 @@ tools/check_v1_readiness.sh --strict   # 签核档: E2E 冒烟用 --strict (SKIP
 tools/check_v1_readiness.sh --help     # 完整用法
 ```
 
-退出码: **0** = 无 P0 失败; **1** = 存在 P0 失败 (2026-08-26 03:55 UTC
-`--quick` 实跑为 1 @ `9aa146d`: 合计 25 项 **14 PASS / 2 FAIL / 9 SKIP**
+退出码: **0** = 无 P0 失败; **1** = 存在 P0 失败 (2026-08-26 04:53 UTC
+`--quick` 实跑为 1 @ `53615ea`: 合计 25 项 **14 PASS / 2 FAIL / 9 SKIP**
 —— 自动侧 P0 FAIL 仅剩 §8 实物复核缺口 R6/R7 两项, 其余自动项全 PASS;
-**配额批后基线 D4+ 待复核 51 个 0/51** —— 45 D4 + 6 D5);
+**批 P 后基线 D4+ 待复核 52 个 0/52** —— 46 D4 + 6 D5);
 **2** = 环境/参数不满足。**内容库保持 250 模型, 难度配额已解冻**
 (路径 B 收官: D1 入门批 ×5 共 20 个 + D5 大师批 +5 个, 按 B1 置换退役
 25 个 D3, +25/−25 总量不变; 随批引入的 5 个软件侧红项已全部清零 ——
@@ -46,21 +47,21 @@ QA 关卡 4/5 片数下限转难度感知 `b925eba` + 2 个 D5 扩规模
 `531860e`/`d78f419` + `strait_rainbow_bridge_01` R9 放置重排 `acdc834`)。
 全量档 (QA + L3 硬闸门) 最新实跑留痕:
 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md)
-(**已刷新至配额批后基线**: 2026-08-26, 基线 `9aa146d`; 软件侧全绿 ——
-全量 QA 42 子关卡 0 失败, CTest **556/556**, strict 静态档 249 过 +
-1 豁免零警告, 系列归类 201+49 全合法, D4+ 抗扰动 51/51 x 50 轮全绿;
-`--full --fail-on-pending` 总退出码 1 **唯一红灯 = L3 实物 0/51**,
+(**已刷新至批 P 后基线**: 2026-08-26, 基线 `53615ea`; 软件侧全绿 ——
+全量 QA 42 子关卡 0 失败, CTest **557/557**, strict 静态档 249 过 +
+1 豁免零警告, 系列归类 211+39 全合法, D4+ 抗扰动 52/52 x 50 轮全绿;
+`--full --fail-on-pending` 总退出码 1 **唯一红灯 = L3 实物 0/52**,
 难度配额 strict 守卫**已转绿** —— D1 20/20 / D5 6/6, 口径见 §7 G2);
 全量就绪探测留痕:
 [reports/READINESS_FULL_2026-08-26.md](reports/READINESS_FULL_2026-08-26.md)
 (基线 `8ee2fc7` 配额批前全量档; 结论 14 PASS / 2 FAIL 仅 R6/R7 / 9 SKIP
-与本基线 `--quick` 实跑一致, 待复核计数以 51 口径为准)。
+与本基线 `--quick` 实跑一致, 待复核计数以 52 口径为准)。
 **阻塞项决策单** (路径 B 已完成, 剩路径 A 实物 + 路径 C Manual P0):
 [reports/LAUNCH_BLOCKERS_2026-08-26.md](reports/LAUNCH_BLOCKERS_2026-08-26.md)。
-实物排产三件套 (风险报告 / 结构族包 / 排产队列) **已刷新至 51 口径**
-(`e387d31`, 见 §8); strict 巡检深报告见
+实物排产三件套 (风险报告 / 结构族包 / 排产队列) **已刷新至 52 口径**
+(`8974b4b`, 见 §8); strict 巡检深报告见
 [reports/STRICT_AUDIT_2026-08-25.md](reports/STRICT_AUDIT_2026-08-25.md)
-(250 基线; D4+ 抗扰动最新口径以 RELEASE_GATE_STATUS 的 51/51 为准)。
+(250 基线; D4+ 抗扰动最新口径以 RELEASE_GATE_STATUS 的 52/52 为准)。
 
 ## 1. 内容 (目标 200~250 模型 —— 上限 250 已达成)
 
@@ -155,8 +156,8 @@ QA 关卡 4/5 片数下限转难度感知 `b925eba` + 2 个 D5 扩规模
 
 | # | 待办 | 优先级 | 探测 | 载体 / 依据 | 状态 (2026-08-26) |
 | --- | --- | --- | --- | --- | --- |
-| G1 | 快检档常绿 (免费层对齐 + strict 全库巡检 + 待复核报告) | P0 | Auto (R5) | `tools/run_release_gate.sh`; 最新全量实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) | ✅ 探测通过 (报告型 L3 项不阻断); 全量档 QA 42 子关卡 0 失败 (**配额批后基线实跑** `9aa146d`: CTest 556/556, 模型库 250/250, D4+ jitter 51/51, 难度配额 strict 转绿) |
-| G2 | 出包终防线全绿: `tools/run_release_gate.sh --full --fail-on-pending` | P0 | Auto + 线下 | 同上; `--full` 档四道发布专项全开 (免费层对齐 / strict 巡检 / 系列归类机检 `tools/check_content_series.py --strict` / 难度配额守卫 `tools/check_difficulty_quota.py --strict` = 全量 QA 关卡 10/15/20/21, 口径 [TESTING.md](TESTING.md) 3.19 与第 5 节); D4+ 实物复核清零 (见 §8) 是**唯一剩余前置** (D3 解冻前置 D1 >= 20 且 D5 >= 6 已于 2026-08-26 达成) | 🔶 **单红灯口径 (配额批后 `9aa146d`)**: `--full --fail-on-pending` 仅剩一道硬闸红 —— L3 实物硬闸门: **D4+ 待复核 51 个 0/51** (45 D4 + 6 D5, 见 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md)), §8 实搭清零前红灯; 难度配额 strict 守卫 (QA 关卡 41, `tools/check_difficulty_quota.py --strict`) **已转绿** —— D1 20/20 且 D5 6/6 达标, D3 冻结解除 (B1 置换 +25/−25 总量 250 保持, 随批 5 个软件侧红项已按正式路径清零, 见 C2; 解冻线由 CTest 常开闸门 `difficulty_quota_gate` 与批次评审机检持续守卫); 红灯之外软件侧全绿 —— `9aa146d` 基线实跑全量 QA 42 子关卡 0 失败, CTest 556/556, 总退出码 1 仅来自 L3; 解除路径 = §8 缩减集实搭清零 (必搭 40 个 ≈ 51.7h) |
+| G1 | 快检档常绿 (免费层对齐 + strict 全库巡检 + 待复核报告) | P0 | Auto (R5) | `tools/run_release_gate.sh`; 最新全量实跑留痕 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md) | ✅ 探测通过 (报告型 L3 项不阻断); 全量档 QA 42 子关卡 0 失败 (**批 P 后基线实跑** `53615ea`: CTest 557/557, 模型库 250/250, D4+ jitter 52/52, 难度配额 strict 转绿) |
+| G2 | 出包终防线全绿: `tools/run_release_gate.sh --full --fail-on-pending` | P0 | Auto + 线下 | 同上; `--full` 档四道发布专项全开 (免费层对齐 / strict 巡检 / 系列归类机检 `tools/check_content_series.py --strict` / 难度配额守卫 `tools/check_difficulty_quota.py --strict` = 全量 QA 关卡 10/15/20/21, 口径 [TESTING.md](TESTING.md) 3.19 与第 5 节); D4+ 实物复核清零 (见 §8) 是**唯一剩余前置** (D3 解冻前置 D1 >= 20 且 D5 >= 6 已于 2026-08-26 达成) | 🔶 **单红灯口径 (批 P 后 `53615ea`)**: `--full --fail-on-pending` 仅剩一道硬闸红 —— L3 实物硬闸门: **D4+ 待复核 52 个 0/52** (46 D4 + 6 D5, 见 [reports/RELEASE_GATE_STATUS.md](reports/RELEASE_GATE_STATUS.md)), §8 实搭清零前红灯; 难度配额 strict 守卫 (QA 关卡 41, `tools/check_difficulty_quota.py --strict`) **已转绿** —— D1 20/20 且 D5 6/6 达标, D3 冻结解除 (B1 置换 +25/−25 总量 250 保持, 随批 5 个软件侧红项已按正式路径清零, 见 C2; 解冻线由 CTest 常开闸门 `difficulty_quota_gate` 与批次评审机检持续守卫); 红灯之外软件侧全绿 —— `53615ea` 基线实跑全量 QA 42 子关卡 0 失败, CTest 557/557, 总退出码 1 仅来自 L3; 解除路径 = §8 缩减集实搭清零 (必搭 41 个 ≈ 52.8h) |
 
 ## 8. 实物复核 (L2 三层缩减流程)
 
