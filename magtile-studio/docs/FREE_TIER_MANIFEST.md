@@ -40,7 +40,7 @@
 | `penguin_01` 帝企鹅一家 | D3 | hexagon, rhombus | 扩展片 |
 | `robot_01` 机器人卫士 | D3 | — | (本身合规, 选品落选) |
 | `sailboat_01` 双体帆船 | D3 | hexagon | 扩展片 |
-| `skyscraper_01` 城市摩天大楼 | D5 | — | 难度超界 (全库唯一 D5) |
+| `skyscraper_01` 城市摩天大楼 | D5 | — | 难度超界 (免费层不含 D5) |
 | `tokyo_tower_01` 东京塔 | D3 | trapezoid | 扩展片 |
 | `whale_01` 蓝鲸 | D3 | rhombus | 扩展片 |
 | `windmill_01` 风车磨坊 | D3 | hexagon, rhombus, trapezoid | 扩展片 |

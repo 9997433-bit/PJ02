@@ -1,15 +1,15 @@
 # 实物复核用户指南 (Physical Review User Guide)
 
 - 面向读者: **准备动手实搭的用户 / QA 复核人** —— 不需要读代码, 照本指南把磁力片、时间、打印件准备好, 就能开工。
-- 定位: V1 上架清单 [§8 实物复核 (L2 三层缩减流程)](../V1_LAUNCH_CHECKLIST.md) 两项 P0 缺口 (S1 缩减集实搭 / S2 D4+ 全覆盖清零, 探测 R6 抽样包 0/10、R7 全集 0/46) 是**唯一无法由软件代劳的人手缺口**, 本指南把「需要人做什么」一页说清。判定标准以 [PHYSICAL_REBUILD_CHECKLIST.md](../PHYSICAL_REBUILD_CHECKLIST.md) 规程为准; 桌边逐步记录用 [PHYSICAL_SIGNOFF_WORKSHEET.md](PHYSICAL_SIGNOFF_WORKSHEET.md) 工作单; 模型级签核摘要与落盘操作见 [PHYSICAL_SAMPLE_V1.md](PHYSICAL_SAMPLE_V1.md); 排产优先队列 (CSV / Markdown 单表, 必搭/可缓建标注) 的导出方法见本文 3.1 节, 最新导出件见 [PHYSICAL_REVIEW_QUEUE.md](PHYSICAL_REVIEW_QUEUE.md)。
-- 数据快照: 2026-08-25, 250 模型库基线 (模型库 / 复核状态变化后, 本文第 2、3 节的备料与工时数字以重新生成的工作单为准)。
+- 定位: V1 上架清单 [§8 实物复核 (L2 三层缩减流程)](../V1_LAUNCH_CHECKLIST.md) 两项 P0 缺口 (S1 缩减集实搭 / S2 D4+ 全覆盖清零, 探测 R6 抽样包 0/10、R7 全集 0/52) 是**唯一无法由软件代劳的人手缺口**, 本指南把「需要人做什么」一页说清。判定标准以 [PHYSICAL_REBUILD_CHECKLIST.md](../PHYSICAL_REBUILD_CHECKLIST.md) 规程为准; 桌边逐步记录用 [PHYSICAL_SIGNOFF_WORKSHEET.md](PHYSICAL_SIGNOFF_WORKSHEET.md) 工作单; 模型级签核摘要与落盘操作见 [PHYSICAL_SAMPLE_V1.md](PHYSICAL_SAMPLE_V1.md); 排产优先队列 (CSV / Markdown 单表, 必搭/可缓建标注) 的导出方法见本文 3.1 节, 最新导出件见 [PHYSICAL_REVIEW_QUEUE.md](PHYSICAL_REVIEW_QUEUE.md)。
+- 数据快照: 2026-08-26, 250 模型库基线 (批 P 后 D4+ 52 个; 模型库 / 复核状态变化后, 本文第 2、3 节的备料与工时数字以重新生成的工作单为准)。
 
 ## 1. 现状与目标
 
-- **现状**: 全库 250 个模型中 D4+ 共 46 个 (45 个 D4 + 1 个 D5), 全部待实物复核。`tools/check_v1_readiness.sh --quick` 退出码 1, 自动侧 P0 FAIL **仅剩** R6 (抽样包缺口 10/10) 与 R7 (全集缺口 46/46) 两项 —— 软件侧已全绿, 上架卡在实搭人手。
+- **现状**: 全库 250 个模型中 D4+ 共 **52 个** (46 个 D4 + 6 个 D5), 全部待实物复核。`tools/check_v1_readiness.sh --quick` 退出码 1, 自动侧 P0 FAIL **仅剩** R6 (抽样包缺口 10/10) 与 R7 (全集缺口 52/52) 两项 —— 软件侧已全绿, 上架卡在实搭人手。
 - **目标 (分两步走)**:
-  1. **先清抽样包 (S1 首批 / R6)**: 按确定性抽样规则选出的 10 个高风险模型 (1 个 D5 旗舰 + 9 个大体量 D4), 逐个实搭签核, 预算约 **750 分钟 ≈ 12.5 小时** (单人);
-  2. **再清缩减集 (S1/S2 / R7)**: 全集 46 个**不再逐个实搭** —— 按 L2 三层流程只实搭 **risk Top 15 + 结构族代表** (清单以 [PHYSICAL_RISK_REPORT.md](PHYSICAL_RISK_REPORT.md) 与 [PHYSICAL_FAMILY_PACK.md](PHYSICAL_FAMILY_PACK.md) 250 基线实跑输出为准, 合并后的单表排产队列按 3.1 节一键导出): 族去重后必搭 36 个 (含本抽样包 10 个) 合计约 2570 分钟 ≈ 42.8 小时, 可缓建 10 个约 700 分钟 (省 21%, 须策展签核; 原全集口径 46 个 ≈ 3270 分钟 ≈ 54.5 小时), 未实搭成员由「同族代表实搭通过 + 第二层 jitter 全绿」覆盖 —— 抽样包全绿**不豁免**缩减集清零, 但能先解除最大结构风险并支撑上架风险评估。
+  1. **先清抽样包 (S1 首批 / R6)**: 按确定性抽样规则选出的 10 个高风险模型 (**6 个 D5 全部纳入** + 4 个大体量 D4), 逐个实搭签核, 预算约 **1000 分钟 ≈ 16.7 小时** (单人);
+  2. **再清缩减集 (S1/S2 / R7)**: 全集 52 个**不再逐个实搭** —— 按 L2 三层流程只实搭 **risk Top 15 + 结构族代表** (清单以 [PHYSICAL_RISK_REPORT.md](PHYSICAL_RISK_REPORT.md) 与 [PHYSICAL_FAMILY_PACK.md](PHYSICAL_FAMILY_PACK.md) 250 基线实跑输出为准, 合并后的单表排产队列按 3.1 节一键导出): 族去重后必搭 **41 个** (含本抽样包 10 个) 合计约 **3170 分钟 ≈ 52.8 小时**, 可缓建 11 个约 **770 分钟 ≈ 12.8 小时** (省 20%, 须策展签核; 原全集口径 52 个 ≈ **3940 分钟 ≈ 65.7 小时**), 未实搭成员由「同族代表实搭通过 + 第二层 jitter 全绿」覆盖 —— 抽样包全绿**不豁免**缩减集清零, 但能先解除最大结构风险并支撑上架风险评估。
 - **红线**: 软件 strict 全绿是入库必要条件不是充分条件; **未实际搭过的模型严禁标记通过** —— 伪造复核结论比不复核更危险。
 
 ## 2. 需要准备的磁力片
@@ -37,14 +37,14 @@
 
 ## 3. 预估工时
 
-抽样包 10 个, 单人含敲击/提起/拆解重搭与记录, 合计 **750 分钟 ≈ 12.5 小时**:
+抽样包 10 个, 单人含敲击/提起/拆解重搭与记录, 合计 **1000 分钟 ≈ 16.7 小时**:
 
 | 排产 | 模型 | 预算 |
 | --- | --- | ---: |
-| 旗舰 D5 (单独安排一场) | `skyscraper_01` (122 片, 26 步) | 120 分钟 |
-| 大体量 D4 × 9 (每场建议 ≤ 2 个防疲劳) | `stadium_gate_01` / `ferry_terminal_01` / `castle_drawbridge_01` / `treehouse_02` / `elephant_01` / `ball_run_tower_01` / `stonehenge_01` / `subway_station_01` / `tennis_court_01` | 各 70 分钟 |
+| D5 × 6 (各单独安排一场) | `royal_citadel_01` / `marble_grand_cascade_01` / `giant_ferris_wheel_01` / `skyscraper_01` / `stellar_launch_gantry_01` / `strait_rainbow_bridge_01` | 各 120 分钟 |
+| 大体量 D4 × 4 (每场建议 ≤ 2 个防疲劳) | `stadium_gate_01` / `ferry_terminal_01` / `treehouse_02` / `elephant_01` | 各 70 分钟 |
 
-预算是规程第 2 节的难度预算 (D4: 70 / D5: 120 分钟), **超时本身要记 Warning 反馈步骤拆分**, 所以别赶工。多人分摊时按模型切分即可 (每个模型由一人完整走完全程, 不要中途换手)。缩减集清零 (S2) 抽样包之外的必搭 26 个 D4 每个同样按 70 分钟预算排产 (名单见 [PHYSICAL_FAMILY_PACK.md](PHYSICAL_FAMILY_PACK.md) 代表清单与建议排产顺序)。
+预算是规程第 2 节的难度预算 (D4: 70 / D5: 120 分钟), **超时本身要记 Warning 反馈步骤拆分**, 所以别赶工。多人分摊时按模型切分即可 (每个模型由一人完整走完全程, 不要中途换手)。缩减集清零 (S2) 抽样包之外的必搭 **31 个** 每个同样按难度带预算排产 (名单见 [PHYSICAL_FAMILY_PACK.md](PHYSICAL_FAMILY_PACK.md) 代表清单与建议排产顺序; 首场建议从 [PATH_A_SESSION_01_SKYSCRAPER.md](PATH_A_SESSION_01_SKYSCRAPER.md) 起步)。
 
 ### 3.1 排产队列一键导出 (CSV / Markdown)
 
