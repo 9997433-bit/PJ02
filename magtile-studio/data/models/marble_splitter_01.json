@@ -3,9 +3,9 @@
   "id": "marble_splitter_01",
   "name": "双轨分流滚珠台",
   "name_en": "Marble Splitter 01",
-  "description": "滚珠乐园 D2 扩展片型示范: 与三级退台瀑布完全不同的双轨分流 —— 两层发射台甩出首段坡道, 四座橙色门框方在枢纽立成两道门洞 (T17 负空间), 弹珠滑入南北两轨各经 30 度坡道落进分色接珠池 (T08 滚珠轨道); 全部 CORE-9, 门框方≥4, 实物跑珠验证分流。",
+  "description": "滚珠乐园 D2 门框方主打示范: 首层门框拱廊塔从 z=2 发球, 弹珠沿首段 30 度坡道落上四柱门亭分流枢纽, 撞响粉色窗格铃板后从南/北两道门框门洞 (T17 负空间) 二选一穿出, 各沿坡道落地、穿过终点门框滚进分色接珠池; 门框方 x11 全程既是结构柱又是弹珠通道, 全部 CORE-9, 实物跑珠即可验证分流。",
   "difficulty": 2,
-  "total_pieces": 39,
+  "total_pieces": 41,
   "tags": [
     "滚珠",
     "轨道",
@@ -17,13 +17,23 @@
     "series": "marble_run",
     "structural_signature": {
       "tile_histogram": {
-        "square": 26,
-        "door_frame": 4,
-        "equilateral_triangle": 4,
+        "square": 18,
+        "door_frame": 11,
+        "equilateral_triangle": 8,
         "rectangle": 3,
-        "window_square": 2
-      }
-    }
+        "window_square": 1
+      },
+      "silhouette_class": "gate_pavilion_splitter",
+      "height_layers": 3
+    },
+    "technique_tags": {
+      "primary": "T08_marble_run",
+      "secondary": [
+        "T17_negative_space",
+        "T11_mirror_symmetry"
+      ]
+    },
+    "signature_statement": "门框方既当结构柱又当弹珠通道: 四柱门亭托起分流枢纽, 弹珠撞铃板后从南北门洞二选一穿出, 镜像双轨由同一座拱廊塔发球。"
   },
   "final_assembly": [
     {
@@ -42,23 +52,8 @@
       "color": "gray"
     },
     {
-      "id": "base_1",
-      "type": "square",
-      "position": [
-        0.5,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "tw0_s",
-      "type": "square",
+      "id": "arc_s",
+      "type": "door_frame",
       "position": [
         0.5,
         0.0,
@@ -69,14 +64,14 @@
         0.0,
         0.0
       ],
-      "color": "blue"
+      "color": "orange"
     },
     {
-      "id": "tw0_n",
-      "type": "square",
+      "id": "arc_n",
+      "type": "door_frame",
       "position": [
         0.5,
-        2.0,
+        1.0,
         0.5
       ],
       "rotation": [
@@ -84,11 +79,11 @@
         0.0,
         0.0
       ],
-      "color": "blue"
+      "color": "orange"
     },
     {
-      "id": "tw0_w_0",
-      "type": "square",
+      "id": "arc_w",
+      "type": "door_frame",
       "position": [
         0.0,
         0.5,
@@ -99,26 +94,11 @@
         0.0,
         90.0
       ],
-      "color": "blue"
+      "color": "orange"
     },
     {
-      "id": "tw0_w_1",
-      "type": "square",
-      "position": [
-        0.0,
-        1.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "tw0_e_0",
-      "type": "square",
+      "id": "arc_e",
+      "type": "door_frame",
       "position": [
         1.0,
         0.5,
@@ -129,25 +109,10 @@
         0.0,
         90.0
       ],
-      "color": "blue"
+      "color": "orange"
     },
     {
-      "id": "tw0_e_1",
-      "type": "square",
-      "position": [
-        1.0,
-        1.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "tw1_s",
+      "id": "tw_s",
       "type": "square",
       "position": [
         0.5,
@@ -162,11 +127,11 @@
       "color": "blue"
     },
     {
-      "id": "tw1_n",
+      "id": "tw_n",
       "type": "square",
       "position": [
         0.5,
-        2.0,
+        1.0,
         1.5
       ],
       "rotation": [
@@ -177,7 +142,7 @@
       "color": "blue"
     },
     {
-      "id": "tw1_w_0",
+      "id": "tw_w",
       "type": "square",
       "position": [
         0.0,
@@ -192,41 +157,11 @@
       "color": "blue"
     },
     {
-      "id": "tw1_w_1",
-      "type": "square",
-      "position": [
-        0.0,
-        1.5,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "tw1_e_0",
+      "id": "tw_e",
       "type": "square",
       "position": [
         1.0,
         0.5,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "blue"
-    },
-    {
-      "id": "tw1_e_1",
-      "type": "square",
-      "position": [
-        1.0,
-        1.5,
         1.5
       ],
       "rotation": [
@@ -252,21 +187,6 @@
       "color": "yellow"
     },
     {
-      "id": "deck_1",
-      "type": "square",
-      "position": [
-        0.5,
-        1.5,
-        2.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
       "id": "drail_w",
       "type": "equilateral_triangle",
       "position": [
@@ -278,21 +198,6 @@
         90.0,
         0.0,
         90.0
-      ],
-      "color": "red"
-    },
-    {
-      "id": "drail_n",
-      "type": "equilateral_triangle",
-      "position": [
-        0.5,
-        2.0,
-        2.288675
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
       ],
       "color": "red"
     },
@@ -312,7 +217,22 @@
       "color": "red"
     },
     {
-      "id": "p1a",
+      "id": "drail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pier_w",
       "type": "square",
       "position": [
         2.732051,
@@ -327,7 +247,22 @@
       "color": "gray"
     },
     {
-      "id": "gate_e0",
+      "id": "pil_s",
+      "type": "door_frame",
+      "position": [
+        3.232051,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pil_e",
       "type": "door_frame",
       "position": [
         3.732051,
@@ -342,7 +277,37 @@
       "color": "orange"
     },
     {
-      "id": "ramp_1",
+      "id": "pil_n",
+      "type": "door_frame",
+      "position": [
+        3.232051,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hub",
+      "type": "square",
+      "position": [
+        3.232051,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ramp_e",
       "type": "rectangle",
       "position": [
         1.866025,
@@ -357,131 +322,86 @@
       "color": "orange"
     },
     {
-      "id": "plat_s",
-      "type": "square",
+      "id": "gate_s",
+      "type": "door_frame",
       "position": [
         3.232051,
-        0.5,
-        1.0
+        0.0,
+        1.5
       ],
       "rotation": [
-        0.0,
+        90.0,
         0.0,
         0.0
       ],
-      "color": "yellow"
+      "color": "orange"
     },
     {
-      "id": "rail1_s",
+      "id": "gate_n",
+      "type": "door_frame",
+      "position": [
+        3.232051,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bell_e",
+      "type": "window_square",
+      "position": [
+        3.732051,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "crown_e",
       "type": "equilateral_triangle",
       "position": [
-        3.232051,
-        0.0,
-        1.288675
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "red"
-    },
-    {
-      "id": "plat_n",
-      "type": "square",
-      "position": [
-        3.232051,
-        1.5,
-        1.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "gate_n0",
-      "type": "door_frame",
-      "position": [
-        3.732051,
-        1.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "gate_n1",
-      "type": "door_frame",
-      "position": [
-        3.732051,
-        1.5,
-        1.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "gate_s1",
-      "type": "door_frame",
-      "position": [
         3.732051,
         0.5,
-        1.5
+        2.288675
       ],
       "rotation": [
         90.0,
         0.0,
         90.0
       ],
-      "color": "orange"
-    },
-    {
-      "id": "p2n",
-      "type": "square",
-      "position": [
-        5.464102,
-        1.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "gray"
+      "color": "red"
     },
     {
       "id": "ramp_n",
       "type": "rectangle",
       "position": [
-        4.598076,
-        1.5,
+        3.232051,
+        1.866025,
         0.5
       ],
       "rotation": [
         0.0,
         30.0,
-        0.0
+        90.0
       ],
       "color": "orange"
     },
     {
-      "id": "lane_n",
+      "id": "land_n",
       "type": "square",
       "position": [
-        5.964102,
-        1.5,
+        3.232051,
+        3.232051,
         0.0
       ],
       "rotation": [
@@ -492,56 +412,56 @@
       "color": "yellow"
     },
     {
-      "id": "p2s",
-      "type": "square",
+      "id": "lrail_nw",
+      "type": "equilateral_triangle",
       "position": [
-        5.464102,
-        0.5,
-        0.5
+        2.732051,
+        3.232051,
+        0.288675
       ],
       "rotation": [
         90.0,
         0.0,
         90.0
       ],
-      "color": "gray"
+      "color": "red"
     },
     {
-      "id": "ramp_s",
-      "type": "rectangle",
+      "id": "lrail_ne",
+      "type": "equilateral_triangle",
       "position": [
-        4.598076,
-        0.5,
+        3.732051,
+        3.232051,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fin_n",
+      "type": "door_frame",
+      "position": [
+        3.232051,
+        3.732051,
         0.5
       ],
       "rotation": [
+        90.0,
         0.0,
-        30.0,
         0.0
       ],
       "color": "orange"
     },
     {
-      "id": "lane_s",
-      "type": "square",
-      "position": [
-        5.964102,
-        0.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
       "id": "pool_n",
       "type": "square",
       "position": [
-        6.964102,
-        1.5,
+        3.232051,
+        4.232051,
         0.0
       ],
       "rotation": [
@@ -552,11 +472,131 @@
       "color": "cyan"
     },
     {
+      "id": "pw_n_w",
+      "type": "square",
+      "position": [
+        2.732051,
+        4.232051,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pw_n_e",
+      "type": "square",
+      "position": [
+        3.732051,
+        4.232051,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pw_n_n",
+      "type": "square",
+      "position": [
+        3.232051,
+        4.732051,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ramp_s",
+      "type": "rectangle",
+      "position": [
+        3.232051,
+        -0.866025,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "land_s",
+      "type": "square",
+      "position": [
+        3.232051,
+        -2.232051,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lrail_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        2.732051,
+        -2.232051,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "lrail_se",
+      "type": "equilateral_triangle",
+      "position": [
+        3.732051,
+        -2.232051,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fin_s",
+      "type": "door_frame",
+      "position": [
+        3.232051,
+        -2.732051,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
       "id": "pool_s",
       "type": "square",
       "position": [
-        6.964102,
-        0.5,
+        3.232051,
+        -3.232051,
         0.0
       ],
       "rotation": [
@@ -567,11 +607,41 @@
       "color": "green"
     },
     {
-      "id": "pool_s_s",
+      "id": "pw_s_w",
       "type": "square",
       "position": [
-        6.964102,
+        2.732051,
+        -3.232051,
+        0.5
+      ],
+      "rotation": [
+        90.0,
         0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pw_s_e",
+      "type": "square",
+      "position": [
+        3.732051,
+        -3.232051,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pw_s_s",
+      "type": "square",
+      "position": [
+        3.232051,
+        -3.732051,
         0.5
       ],
       "rotation": [
@@ -580,161 +650,142 @@
         0.0
       ],
       "color": "green"
-    },
-    {
-      "id": "bell_n",
-      "type": "window_square",
-      "position": [
-        7.464102,
-        1.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "pink"
-    },
-    {
-      "id": "bell_s",
-      "type": "window_square",
-      "position": [
-        7.464102,
-        0.5,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        90.0
-      ],
-      "color": "pink"
     }
   ],
   "steps": [
     {
       "step_number": 1,
-      "description": "铺发射塔地台: 两片灰色方板沿西端打底, 六片蓝色方板合围第一层墙环。",
-      "tip": "塔基东边要留出一条直线跑道 —— 弹珠将从这里分流进双轨。",
+      "description": "铺塔基并立门框拱廊: 一片灰色方板打底, 四片橙色门框方合围首层 —— 四面门洞就是本作的招牌。",
+      "tip": "门框方外框与正方形完全一样, 四片下边整边吸住地台即可站稳。",
       "tiles_to_add": [
         "base_0",
-        "base_1",
-        "tw0_s",
-        "tw0_w_0",
-        "tw0_w_1",
-        "tw0_n",
-        "tw0_e_0",
-        "tw0_e_1"
+        "arc_s",
+        "arc_w",
+        "arc_n",
+        "arc_e"
       ],
       "highlight_tiles": []
     },
     {
       "step_number": 2,
-      "description": "发射塔第二层: 六片蓝色方板骑上第一层墙顶, 上下边完整贴合。",
-      "tip": "两层墙环已经够高 —— D2 不需要三层塔, 弹珠从 z=2 出发。",
+      "description": "方板二层: 四片蓝色方板骑上拱廊墙顶, 上下边完整贴合。",
+      "tip": "两层塔身够高 —— D2 弹珠从 z=2 出发, 不必再往上叠。",
       "tiles_to_add": [
-        "tw1_s",
-        "tw1_w_0",
-        "tw1_w_1",
-        "tw1_n",
-        "tw1_e_0",
-        "tw1_e_1"
+        "tw_s",
+        "tw_w",
+        "tw_n",
+        "tw_e"
       ],
       "highlight_tiles": [
-        "tw0_s",
-        "tw0_e_0"
+        "arc_s",
+        "arc_e"
       ]
     },
     {
       "step_number": 3,
-      "description": "盖发球台: 两片黄色方板压住第二层墙顶, 三片挡珠三角围住台沿 (东缘留口)。",
-      "tip": "东缘南半格空着 —— 那是弹珠滑向首段坡道的出珠口。",
+      "description": "盖发球台: 一片黄色方板压住二层墙顶, 三片红色挡珠三角围住台沿 (东缘留口)。",
+      "tip": "东缘空着 —— 那是弹珠冲向分流枢纽的唯一出珠口。",
       "tiles_to_add": [
         "deck_0",
-        "deck_1",
         "drail_w",
-        "drail_n",
-        "drail_s"
+        "drail_s",
+        "drail_n"
       ],
       "highlight_tiles": [
-        "tw1_s",
-        "tw1_e_0"
+        "tw_s",
+        "tw_e"
       ]
     },
     {
       "step_number": 4,
-      "description": "首段坡道 (整段成组): 塔东侧立桥墩与橙色门框立柱, 坡道顶边吸出珠口, 南轨转接台压住墩顶与坡尾。",
-      "tip": "门框立柱就是第一道分流门 —— 桥墩-坡道-转接台三件互吸应纹丝不动。",
+      "description": "四柱门亭与首段坡道 (整段成组): 塔东侧一片灰色桥墩居西, 三片橙色门框柱站南/东/北, 枢纽台面压住四根柱顶, 橙色坡道顶边吸出珠口、坡尾搭上桥墩顶。",
+      "tip": "台面四边都有柱顶整边接住, 坡道把塔与门亭连成一体 —— 分流枢纽是全场受撞最多的地方。",
       "tiles_to_add": [
-        "p1a",
-        "gate_e0",
-        "ramp_1",
-        "plat_s",
-        "rail1_s"
+        "pier_w",
+        "pil_s",
+        "pil_e",
+        "pil_n",
+        "hub",
+        "ramp_e"
       ],
       "highlight_tiles": [
         "deck_0",
-        "tw1_e_0"
+        "arc_e"
       ]
     },
     {
       "step_number": 5,
-      "description": "分流枢纽: 北轨转接台与三座橙色门框方 —— 与首段立柱合计四道门洞, 弹珠选轨!",
-      "tip": "门框门洞是 T17 负空间 —— 北轨走 y=1, 南轨走 y=0, 实物跑珠看哪轨更顺!",
+      "description": "布置分流室: 南北各立一道橙色分流门框, 东端粉色窗格铃板封口, 顶饰三角压住铃板上沿。",
+      "tip": "弹珠撞铃板弹回后从南/北门洞 (T17 负空间) 二选一穿出 —— 分流全靠它!",
       "tiles_to_add": [
-        "plat_n",
-        "gate_n0",
-        "gate_n1",
-        "gate_s1"
+        "gate_s",
+        "gate_n",
+        "bell_e",
+        "crown_e"
       ],
       "highlight_tiles": [
-        "plat_s",
-        "gate_e0"
+        "hub",
+        "ramp_e"
       ]
     },
     {
       "step_number": 6,
-      "description": "北轨下坡: 立桥墩, 橙色坡道从北轨转接台东沿下探, 铺转接台与北接珠池。",
-      "tip": "池底西缘紧吸轨末转接台东沿 —— 北轨一路贯通!",
+      "description": "北轨下坡: 橙色坡道从北分流门下探到地面, 落地跑道接住坡尾, 东西道沿各立一片红色挡珠三角。",
+      "tip": "坡尾与跑道南缘整边互吸 —— 弹珠穿过门洞就一路贴地向北。",
       "tiles_to_add": [
-        "p2n",
         "ramp_n",
-        "lane_n",
-        "pool_n"
+        "land_n",
+        "lrail_nw",
+        "lrail_ne"
       ],
       "highlight_tiles": [
-        "plat_n",
-        "gate_n0"
+        "gate_n",
+        "hub"
       ]
     },
     {
       "step_number": 7,
-      "description": "南轨下坡: 对称安装南轨桥墩、坡道、转接台与南接珠池及矮墙。",
-      "tip": "两池分色 —— 一眼看出弹珠进了哪条轨!",
+      "description": "北轨终点: 橙色终点门框立在跑道尽头, 青色池底与三面池壁围住接珠池。",
+      "tip": "弹珠穿过终点门洞落池 —— 青色代表北轨得分!",
       "tiles_to_add": [
-        "p2s",
-        "ramp_s",
-        "lane_s",
-        "pool_s",
-        "pool_s_s"
+        "fin_n",
+        "pool_n",
+        "pw_n_w",
+        "pw_n_e",
+        "pw_n_n"
       ],
       "highlight_tiles": [
-        "plat_s",
-        "gate_e0"
+        "land_n"
       ]
     },
     {
       "step_number": 8,
-      "description": "立双铃靶: 南北池端各立一片粉色窗格方 —— 双轨分流滚珠台完工, 放珠开跑!",
-      "tip": "轮流放珠, 看弹珠会选哪道门洞 —— 实物跑珠才算真正验收!",
+      "description": "南轨下坡 (镜像): 坡道从南分流门下探, 落地跑道与两片道沿挡珠对称安装。",
+      "tip": "与北轨完全镜像 —— 对照着装, 一次就位。",
       "tiles_to_add": [
-        "bell_n",
-        "bell_s"
+        "ramp_s",
+        "land_s",
+        "lrail_sw",
+        "lrail_se"
       ],
       "highlight_tiles": [
-        "pool_n",
-        "pool_s"
+        "gate_s",
+        "hub"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "南轨终点收尾: 终点门框 + 绿色池底与三面池壁 —— 双轨分流滚珠台完工, 放珠开跑!",
+      "tip": "轮流放珠数进池次数 —— 铃板响一声、落池哪一边, 实物跑珠才算验收!",
+      "tiles_to_add": [
+        "fin_s",
+        "pool_s",
+        "pw_s_w",
+        "pw_s_e",
+        "pw_s_s"
+      ],
+      "highlight_tiles": [
+        "land_s"
       ]
     }
   ]
