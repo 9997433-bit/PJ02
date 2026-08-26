@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "comment": "实物磁力片套装目录: 用户勾选家里拥有的盒装套装 → 按片型求和得到 tile_inventory → 现有 canBuild / inventory match 直接可用。片型标识与 data/tile_catalog.json 的 type 字段一一对应; tier 分层 (core / expansion) 以片型目录为准。盒装片数为常见市场口径的近似值, 不同品牌/批次会有偏差, 见 docs/PHYSICAL_SET_CATALOG.md。",
+  "sets": [
+    {
+      "id": "standard_102",
+      "brand": "generic",
+      "name_zh": "标准102片套装",
+      "name_en": "Standard 102-Piece Set",
+      "piece_count_label": 102,
+      "tier_scope": "core",
+      "ui_preset_label_zh": "标准102片套装",
+      "description_zh": "常见基础盒装: 仅含核心 9 片型 (正方形/三角形/长方形及大正方形、窗格方、门框方、车轮底座变体), 不含扩展包片型。对应 UI_UX_SPEC §10.2 快捷预填「标准102片套装」。",
+      "pieces": {
+        "square": 36,
+        "equilateral_triangle": 24,
+        "right_triangle": 12,
+        "isosceles_triangle": 8,
+        "rectangle": 6,
+        "large_square": 4,
+        "window_square": 4,
+        "door_frame": 4,
+        "wheel_base": 4
+      }
+    },
+    {
+      "id": "deluxe_198",
+      "brand": "generic",
+      "name_zh": "豪华198片套装",
+      "name_en": "Deluxe 198-Piece Set",
+      "piece_count_label": 198,
+      "tier_scope": "core+expansion",
+      "ui_preset_label_zh": "豪华198片",
+      "description_zh": "常见大盒装: 在标准核心片型基础上增加菱形/梯形/六边形/扇形等扩展片型, 适合进阶模型。对应 UI_UX_SPEC §10.2 快捷预填「豪华198片」。",
+      "pieces": {
+        "square": 50,
+        "equilateral_triangle": 36,
+        "right_triangle": 20,
+        "isosceles_triangle": 12,
+        "rectangle": 12,
+        "large_square": 8,
+        "window_square": 8,
+        "door_frame": 6,
+        "wheel_base": 6,
+        "rhombus": 12,
+        "trapezoid": 8,
+        "hexagon": 8,
+        "sector": 12
+      }
+    }
+  ]
+}

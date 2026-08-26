@@ -383,6 +383,16 @@ if(MAGTILE_BUILD_TESTS)
                     $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
         endif()
 
+        # 实物套装目录: physical_set_catalog.json 与 tile_catalog 对齐
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_physical_set_catalog.sh)
+            find_program(MAGTILE_PYTHON3 python3)
+            if(MAGTILE_PYTHON3)
+                add_test(NAME physical_set_catalog
+                    COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physical_set_catalog.sh
+                        ${CMAKE_CURRENT_SOURCE_DIR})
+            endif()
+        endif()
+
         # 物理负例: 这些夹具物理上不成立 (或数据非法), validate 必须
         # 按各夹具旁 .expected sidecar 声明的级别报告 —— error 级以
         # 非零退出码拒绝, warning 级零退出但必须输出 [警告] 行 (断言
