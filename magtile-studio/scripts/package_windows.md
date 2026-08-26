@@ -223,10 +223,14 @@ UpgradeCode (`6FE5F9D7-79A7-4829-B13A-8C3B1517CA61`), 因此互相可
 
 - 步骤: MSVC 配置构建 → 从 CMakeCache 提取版本号并校验标签 →
   `ctest` (跳过需显示环境的两个 GUI 冒烟) → 安装 NSIS
-  (`windows-latest` 的 Windows Server 2025 镜像已移除预装, 经
-  Chocolatey 自装) → `cpack -G "NSIS;ZIP"` → 上传构建产物;
+  (runner 钉 `windows-2022`; `windows-latest` 自 2026-06 起为
+  VS 2026 且不再预装 NSIS, 见 actions/runner-images#14017 /
+  #12677; 流水线仍经 Chocolatey 自装以防镜像变化) →
+  `cpack -G "NSIS;ZIP"` → 上传构建产物;
   标签触发时另建 GitHub Release **草稿** (人工核对后再发布)。
-- 验证状态: 首跑阻断项 (镜像移除预装 NSIS) 已修; 「校验标签」步已
+- 验证状态: 首跑阻断项 (镜像移除预装 NSIS) 已修; 2026-08-26
+  `v0.1.0` 在 `windows-latest` 上因 VS 2022 生成器找不到而失败,
+  已改钉 `windows-2022`; 「校验标签」步已
   加固为 env 间接注入 (标签名不再 `${{ }}` 内插进脚本体 —— git
   标签名允许含单引号, 直接内插可被构造成 pwsh 脚本注入); 静态与
   替身验证全绿 (actionlint 零告警 + pwsh 7.4 对真实 CMakeCache
