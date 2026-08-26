@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "id": "space_probe_01",
+  "name": "深空小探测器",
+  "name_en": "Space Probe 01",
+  "description": "入门档航天器: 落在外星平原上的深空小探测器, 结构签名是'十字着陆架 + 方舱 + 风车斜撑' —— 九片方板铺成十字着陆架, 正中 1x1 仪器舱南面开橙色舱门、三面透明舷窗, 舱顶方板四边整边锁墙顶; 四片红色直角三角斜撑按风车方向一角一片, 竖直角边吸住舱角竖棱、水平直角边压住臂上板边, 一片三角同时被三处抓住; 臂端四片青色信标三角平贴板边, 舱顶北沿立一面蓝色通讯天线。23 片全程接地受压零悬挑, 天线尖 1.87 不触发高层判定, 搭完就能向桌面深空发回第一条信号。",
+  "difficulty": 1,
+  "total_pieces": 23,
+  "tags": [
+    "航天器",
+    "探测器",
+    "着陆架",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "spacecraft",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 10,
+        "equilateral_triangle": 5,
+        "right_triangle": 4,
+        "window_square": 3,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "pad_c",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_w1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_w2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "arm_e1",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_e2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "arm_s1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_s2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "arm_n1",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_n2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hatch_s",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "port_n",
+      "type": "window_square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "port_w",
+      "type": "window_square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "port_e",
+      "type": "window_square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cap",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "antenna",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_sw",
+      "type": "right_triangle",
+      "position": [
+        1.666667,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "leg_se",
+      "type": "right_triangle",
+      "position": [
+        3.0,
+        1.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "leg_ne",
+      "type": "right_triangle",
+      "position": [
+        3.333333,
+        3.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "leg_nw",
+      "type": "right_triangle",
+      "position": [
+        2.0,
+        3.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "beacon_w",
+      "type": "equilateral_triangle",
+      "position": [
+        -0.288675,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beacon_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.288675,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beacon_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        -0.288675,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beacon_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        5.288675,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        180.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺十字着陆架内圈: 灰色方板放正中当舱底, 东南西北各贴一片, 拼成小十字。",
+      "tip": "板与板整边完整贴合 —— 探测器落地要四平八稳。",
+      "tiles_to_add": [
+        "pad_c",
+        "arm_w1",
+        "arm_e1",
+        "arm_s1",
+        "arm_n1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "接长四条臂: 四片黄色警示板接在臂端, 十字着陆架伸展完成。",
+      "tip": "",
+      "tiles_to_add": [
+        "arm_w2",
+        "arm_e2",
+        "arm_s2",
+        "arm_n2"
+      ],
+      "highlight_tiles": [
+        "arm_w1",
+        "arm_e1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立仪器舱: 橙色门框方是舱门朝南, 三面透明窗格方是舷窗, 墙脚整边骑住中心板边围成一圈。",
+      "tip": "相邻舱墙竖棱手拉手 —— 拉成一圈方舱就推不倒了。",
+      "tiles_to_add": [
+        "hatch_s",
+        "port_w",
+        "port_n",
+        "port_e"
+      ],
+      "highlight_tiles": [
+        "pad_c"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "封舱顶立天线: 灰色方板四边整边锁住墙顶, 蓝色天线小旗骑上舱顶北沿。",
+      "tip": "先合围再封顶 —— 装配顺序也是设计的一部分。",
+      "tiles_to_add": [
+        "cap",
+        "antenna"
+      ],
+      "highlight_tiles": [
+        "port_n"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装风车斜撑: 四片红色直角三角一角一片, 竖边吸住舱角竖棱, 横边压住臂上板边。",
+      "tip": "斜撑像四条着陆腿 —— 一片三角同时被三处抓住, 方舱就锁死了。",
+      "tiles_to_add": [
+        "leg_sw",
+        "leg_se",
+        "leg_ne",
+        "leg_nw"
+      ],
+      "highlight_tiles": [
+        "hatch_s",
+        "arm_w1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "点亮信标: 四片青色小三角平贴在臂端外沿, 深空小探测器开始工作!",
+      "tip": "",
+      "tiles_to_add": [
+        "beacon_w",
+        "beacon_e",
+        "beacon_s",
+        "beacon_n"
+      ],
+      "highlight_tiles": [
+        "arm_w2",
+        "arm_e2"
+      ]
+    }
+  ]
+}
