@@ -66,11 +66,29 @@ def parse_review_date(raw: str):
     return day
 
 
+def resolve_app(app: Path) -> Path:
+    """定位校验器: Windows 上默认路径无后缀时补 .exe。"""
+    if app.is_file():
+        return app
+    exe = app.with_suffix(".exe")
+    if exe.is_file():
+        return exe
+    return app
+
+
+def validator_argv(app: Path):
+    """组装校验器命令。Windows 不能 CreateProcess 一个 .py, 须经解释器。"""
+    if app.suffix.lower() == ".py":
+        return [sys.executable, str(app)]
+    return [str(app)]
+
+
 def run_strict_validate(app: Path, model_path: Path, data_dir: Path):
     """跑 strict 档校验, 返回 (退出码, 合并输出)。"""
     proc = subprocess.run(
-        [str(app), "validate", str(model_path),
-         "--data-dir", str(data_dir), "--profile", "strict"],
+        validator_argv(app) + [
+            "validate", str(model_path),
+            "--data-dir", str(data_dir), "--profile", "strict"],
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     return proc.returncode, proc.stdout
 
@@ -152,7 +170,7 @@ def main() -> int:
         return 1
 
     # -- strict 预检复验: 与复核人开工前跑的同一道安全检查 --
-    app = Path(args.app)
+    app = resolve_app(Path(args.app))
     if not app.is_file():
         return fail(f"校验器不存在: {app}\n"
                     "  先构建: cmake -S . -B build && cmake --build build "
