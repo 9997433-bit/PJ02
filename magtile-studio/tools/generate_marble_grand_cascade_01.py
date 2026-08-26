@@ -6,6 +6,9 @@
 三段 30 度坡道直落地面接珠池; 全程黄三角中央分道堤隔开双珠,
 池尾六边形靶标 + 竖长方形冲线旗门。与 D4 螺旋滚珠塔 (绕塔盘旋)
 的动线拓扑完全不同: 不转向, 比直线加速。
+赛场配套 (D5 规模): 塔西带屋顶的 2x2 弹珠补给站 (存珠备赛),
+接珠池南北两翼回珠槽 (捡珠归位) —— 全部落在整数网格, 地台接地 +
+围墙合圈 + 压顶四边坐满墙顶, 复用发球塔/接珠池同款自锁结构。
 用法: python3 tools/generate_marble_grand_cascade_01.py
 """
 
@@ -110,7 +113,48 @@ b.place_edge("flag_0", "rectangle", 1,
 b.place_edge("flag_1", "rectangle", 1,
              (BX + 2, 1.0, 1.0), (BX + 2, 2.0, 1.0), (0, 0, 1), FLAG)
 
-# ---- 教程步骤 (25 步) ----------------------------------------------
+# ---- 5. 塔西弹珠补给站 (2x2 带屋顶, 存珠备赛) ----------------------
+# 地台接地 + 三面围墙 (东面借塔身一层西墙合圈) + 屋顶四边坐满墙顶,
+# 与发球塔同款环圈自锁; 屋顶沿口红三角与发球台围栏呼应。
+for j in range(2):
+    for i in range(2):
+        b.flat(f"dp_f_{i}_{j}", i - 2, j, 0.0,
+               PAD if (i + j) % 2 == 0 else "cyan")
+for j in range(2):
+    b.wall_ew(f"dp_w_{j}", -2.0, j, 0, PIER)      # 西墙
+for i in range(2):
+    b.wall_ns(f"dp_s_{i}", i - 2, 0.0, 0, PIER)   # 南墙
+    b.wall_ns(f"dp_n_{i}", i - 2, 2.0, 0, PIER)   # 北墙
+for j in range(2):
+    for i in range(2):
+        b.flat(f"dp_r_{i}_{j}", i - 2, j, 1.0, DECK)  # 屋顶压顶
+b.crest_ew("dp_cr_w0", -2.0, 0, 1.0, RAIL)
+b.crest_ew("dp_cr_w1", -2.0, 1, 1.0, RAIL)
+b.crest_ns("dp_cr_s0", -2, 0.0, 1.0, RAIL)
+b.crest_ns("dp_cr_s1", -1, 0.0, 1.0, RAIL)
+b.crest_ns("dp_cr_n0", -2, 2.0, 1.0, RAIL)
+b.crest_ns("dp_cr_n1", -1, 2.0, 1.0, RAIL)
+
+# ---- 6. 接珠池南北翼回珠槽 (捡珠归位) ------------------------------
+# 翼槽地台北/南缘整边吸接珠池地台, 外墙 + 端墙围成开放槽,
+# 外墙顶黄三角与中央分道堤同色呼应。
+for k in range(2):
+    b.flat(f"wg_s_f{k}", BX + k, -1.0, 0.0, BASIN if k == 0 else "cyan")
+    b.flat(f"wg_n_f{k}", BX + k, 2.0, 0.0, BASIN if k == 1 else "cyan")
+b.wall_ns("wg_s_o0", BX, -1.0, 0, BASIN)          # 南翼外墙
+b.wall_ns("wg_s_o1", BX + 1, -1.0, 0, BASIN)
+b.wall_ew("wg_s_w", BX, -1.0, 0, BASIN)           # 南翼西端墙
+b.wall_ew("wg_s_e", BX + 2, -1.0, 0, BASIN)       # 南翼东端墙
+b.wall_ns("wg_n_o0", BX, 3.0, 0, BASIN)           # 北翼外墙
+b.wall_ns("wg_n_o1", BX + 1, 3.0, 0, BASIN)
+b.wall_ew("wg_n_w", BX, 2.0, 0, BASIN)            # 北翼西端墙
+b.wall_ew("wg_n_e", BX + 2, 2.0, 0, BASIN)        # 北翼东端墙
+b.crest_ns("wg_s_cr0", BX, -1.0, 1.0, DIV)
+b.crest_ns("wg_s_cr1", BX + 1, -1.0, 1.0, DIV)
+b.crest_ns("wg_n_cr0", BX, 3.0, 1.0, DIV)
+b.crest_ns("wg_n_cr1", BX + 1, 3.0, 1.0, DIV)
+
+# ---- 教程步骤 (32 步) ----------------------------------------------
 b.step("铺发球塔塔基: 2x2 共 4 片方板整边互吸。",
        [f"pad_{i}_{j}" for j in range(2) for i in range(2)],
        tip="赛道向东直落约 12 格 —— 塔基靠桌面西端摆放。")
@@ -181,6 +225,33 @@ b.step("接珠池东墙 2 片 —— 三面围合, 迎珠面敞开。",
        ["bw_e0", "bw_e1"], highlight=["bs_e_0"])
 b.step("双六边形靶标: 南北墙顶各立一面, 隔池相对。",
        ["hex_0", "hex_1"], highlight=["bw_s0", "bw_n0"])
+b.step("塔西弹珠补给站地台: 2x2 共 4 片方板, 东缘整边吸塔基西沿。",
+       [f"dp_f_{i}_{j}" for j in range(2) for i in range(2)],
+       highlight=["pad_0_0"],
+       tip="补给站是备赛存珠区 —— 双珠竞速前先在这里点兵点将。")
+b.step("补给站三面围墙 6 片 (西 2 + 南 2 + 北 2), "
+       "东面借塔身一层西墙合圈自锁。",
+       ["dp_w_0", "dp_w_1", "dp_s_0", "dp_s_1", "dp_n_0", "dp_n_1"],
+       highlight=["dp_f_0_0", "tw0_w_0"])
+b.step("补给站屋顶: 4 片黄方板压顶 (z=1), 四边坐满墙顶。",
+       [f"dp_r_{i}_{j}" for j in range(2) for i in range(2)],
+       highlight=["dp_w_0"],
+       tip="与发球台同款压顶手法 —— 四边全坐实, 屋顶才敢托装饰。")
+b.step("补给站屋顶沿口 6 片红三角装饰 (西 2 + 南 2 + 北 2)。",
+       ["dp_cr_w0", "dp_cr_w1", "dp_cr_s0", "dp_cr_s1",
+        "dp_cr_n0", "dp_cr_n1"],
+       highlight=["dp_r_0_0"])
+b.step("南翼回珠槽: 地台 2 片北缘整边吸接珠池地台, "
+       "外墙 2 片 + 东西端墙 2 片围成开放槽。",
+       ["wg_s_f0", "wg_s_f1", "wg_s_o0", "wg_s_o1", "wg_s_w", "wg_s_e"],
+       highlight=["bs_w_0", "bw_s0"],
+       tip="回珠槽紧贴池壁 —— 冲出池沿的弹珠顺槽滚回, 不满地乱跑。")
+b.step("北翼回珠槽: 与南翼镜像同法安装 (6 片)。",
+       ["wg_n_f0", "wg_n_f1", "wg_n_o0", "wg_n_o1", "wg_n_w", "wg_n_e"],
+       highlight=["bs_w_1", "bw_n0"])
+b.step("两翼外墙顶各立 2 片黄三角 (与中央分道堤同色呼应)。",
+       ["wg_s_cr0", "wg_s_cr1", "wg_n_cr0", "wg_n_cr1"],
+       highlight=["wg_s_o0", "wg_n_o0"])
 b.step("东墙顶并肩立 2 面粉色冲线旗门 (中缝竖边互吸) —— "
        "瀑布双道滚珠梯台完工!",
        ["flag_0", "flag_1"], highlight=["bw_e0", "bw_e1"],
@@ -196,14 +267,15 @@ if __name__ == "__main__":
             "三层发球塔向东甩出两条并排赛道, 每级落差由 30 度坡道 + "
             "栈桥墩 + 门柱 + 台板三件互吸构成门式梯台 (2x2 与 1x2 两级"
             "递减), 全程黄三角分道堤隔开双珠直线竞速, 冲线坡道落地滚入"
-            "三面围合接珠池, 池尾六边形靶标与竖长方形旗门计分; 与 D4 "
-            "螺旋滚珠塔 (绕塔盘旋转向) 的动线拓扑完全不同 —— 不转向, "
-            "拼直线加速。"
+            "三面围合接珠池, 池尾六边形靶标与竖长方形旗门计分; 塔西带"
+            "屋顶的弹珠补给站存珠备赛, 池畔南北两翼回珠槽捡珠归位 —— "
+            "赛场配套齐全; 与 D4 螺旋滚珠塔 (绕塔盘旋转向) 的动线拓扑"
+            "完全不同 —— 不转向, 拼直线加速。"
         ),
         difficulty=5,
         tags=["滚珠", "滚珠乐园", "竞速", "梯台", "大师", "旗舰"],
-        min_pieces=85,
-        min_steps=25,
+        min_pieces=110,
+        min_steps=30,
         series="marble_run",
     )
 
