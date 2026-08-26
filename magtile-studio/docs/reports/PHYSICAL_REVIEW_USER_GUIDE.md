@@ -87,7 +87,22 @@ python3 tools/physical_sample_pack.py --print-checklist docs/reports/PHYSICAL_SI
 
 **前提: 该模型全部适用项实搭 Pass。** 完整操作见 [PHYSICAL_SAMPLE_V1.md](PHYSICAL_SAMPLE_V1.md) 第 5 节, 摘要:
 
-1. 编辑 `data/models/<model_id>.json`, 在 `content_meta` 下追加三字段:
+1. **用签核工具一键落盘 (推荐)** —— `tools/mark_physical_verified.py` 把三字段写进 `data/models/<model_id>.json` 的 `content_meta`, 不需要手工编辑 JSON:
+
+```bash
+# 先 --dry-run 预演: 跑全部检查并预览将写入的内容, 不落盘
+python3 tools/mark_physical_verified.py skyscraper_01 --date 2026-08-26 \
+    --notes "官方基准品牌新片 118 分钟完成 26 步; 敲击/提起/拆解重搭全 Pass" --dry-run
+
+# 确认无误后去掉 --dry-run 正式落盘
+python3 tools/mark_physical_verified.py skyscraper_01 --date 2026-08-26 \
+    --notes "官方基准品牌新片 118 分钟完成 26 步; 敲击/提起/拆解重搭全 Pass"
+```
+
+   - `--date` 填**实际复核日期** (ISO 8601, 不得晚于今天); `--notes` 按「品牌/新旧片 + 耗时 + 敲击/提起/拆解重搭结论」一句话填写 (可省略, 但强烈建议填; 已标记模型再次运行时省略 `--notes` 会保留旧笔记, 只改日期)。
+   - **内置防线**: 模型必须存在且 `difficulty >= 4` (路径 A 只覆盖 D4+); 落盘前自动重跑 `magtile_app validate --profile strict` (即第 5 节「开工前」那道软件预检), **strict 不过一律拒绝落盘** —— 防止实搭之后模型又被改过、旧实物结论落在新结构上。校验器默认取 `build/magtile_app`, 未构建时先 `cmake -S . -B build && cmake --build build --target magtile_app` (或用 `--app` 指定路径)。
+   - 退出码: `0` 落盘成功 (或 dry-run 全过) / `1` 被防线拒绝 / `2` 用法或环境错误。
+   - 手工编辑 JSON 仍然可行 (字段写法如下, 位置必须在 `content_meta` 下, 勿写顶层), 但工具路径能避免写错位置、漏日期、给没过 strict 的模型误标:
 
 ```jsonc
 "content_meta": {

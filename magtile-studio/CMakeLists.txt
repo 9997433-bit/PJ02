@@ -571,6 +571,20 @@ if(MAGTILE_BUILD_TESTS)
                 ${CMAKE_CURRENT_SOURCE_DIR})
     endif()
 
+    # 实物签核落盘工具回归 (Python): tools/mark_physical_verified.py 的
+    # 行为锁 (路径 A 用户签核入口, PHYSICAL_REVIEW_USER_GUIDE.md 第 6 节)
+    # —— 合成微模型 + 桩校验器验证三字段落盘保真 (位置/排版/其余字段
+    # 不破坏)、防线退出码 (模型缺失/日期非法 2, 难度 <4 / strict 失败 1)、
+    # --dry-run 零写入、幂等覆盖与笔记保留。桩校验器替代 magtile_app,
+    # 不依赖 C++ 构建产物; 工具未入库的检出下自动跳过注册。
+    if(Python3_Interpreter_FOUND
+            AND EXISTS ${MAGTILE_TESTS_DIR}/test_mark_physical_verified.py
+            AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tools/mark_physical_verified.py)
+        add_test(NAME mark_physical_verified_gate
+            COMMAND ${Python3_EXECUTABLE} ${MAGTILE_TESTS_DIR}/test_mark_physical_verified.py
+                ${CMAKE_CURRENT_SOURCE_DIR})
+    endif()
+
     # 治理守卫: 内容系列归类机检 (Python): 每个模型必须带
     # content_meta.series (13 主题词值) 或 matrix_bucket (矩阵外桶)
     # 恰好其一, 词值对照 data/content_series_map.json 权威词表
