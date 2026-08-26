@@ -32,6 +32,30 @@ object MagTileNative {
     external fun saveInventory(countsJson: String): Boolean
 
     /**
+     * 实物套装目录 JSON (dataDir = 解包后的数据目录, 读
+     * physical_set_catalog.json; 口径与桌面 Qt InventoryBackend 一致):
+     * {"sets":[{"id","brand","name_zh","piece_count_label","tier_scope",
+     *           "ui_preset_label_zh"}, ...]}
+     * 或 {"error":"..."}。
+     */
+    external fun physicalSetRows(dataDir: String): String
+
+    /**
+     * 勾选套装一键预填: idsJson 为套装 id 数组 JSON (如
+     * ["standard_102","deluxe_198"])。合并 BOM 按片型求和, 落盘
+     * owned_physical_sets 设置键, 返回 {"counts":{"square":N,...}}
+     * 供界面填入步进器 (不自动 saveInventory —— 家长仍可微调后保存)。
+     * 失败 {"error":"..."}。
+     */
+    external fun applyPhysicalSets(dataDir: String, idsJson: String): String
+
+    /**
+     * 用户拥有的实物套装 id 列表 JSON:
+     * {"ids":["standard_102",...]}; 存档未打开时 ids 为空数组。
+     */
+    external fun ownedPhysicalSetsJson(): String
+
+    /**
      * 库存是否足够搭建模型 (jsonPath = listModels 返回的 file 字段):
      * 1 = 够搭, 0 = 缺片, -1 = 无法判定 (未登记库存 / 模型文件有问题)。
      */

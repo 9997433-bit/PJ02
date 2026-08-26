@@ -17,7 +17,7 @@
 //   magtile_app validate <model.json> [--data-dir DIR]   物理与教程质检
 //   magtile_app tutorial <model.json> [--dev-gui] [--data-dir DIR]  分步教程
 //   magtile_app progress list|show|reset [...] [--db FILE]      进度存档
-//   magtile_app inventory set|show|match [...] [--db FILE]      磁力片库存
+//   magtile_app inventory set|show|match|apply-set [...] [--db FILE]  磁力片库存
 //   magtile_app settings set-age|set-tts|show [...] [--db FILE]  年龄段/朗读等设置
 // =============================================================
 
@@ -35,10 +35,12 @@
 #include "magtile/core/age_mode.hpp"
 #include "magtile/core/json_io.hpp"
 #include "magtile/core/model_catalog.hpp"
+#include "magtile/core/physical_set_catalog.hpp"
 #include "magtile/core/tile_catalog.hpp"
 #include "magtile/physics/physics_validator.hpp"
 #include "magtile/progress/achievements.hpp"
 #include "magtile/progress/age_settings.hpp"
+#include "magtile/progress/physical_set_settings.hpp"
 #include "magtile/progress/progress_store.hpp"
 #include "magtile/progress/ui_settings.hpp"
 #include "magtile/tts/tts_engine.hpp"
@@ -73,8 +75,9 @@ struct CliArgs {
     std::string screenshot_file; ///< 非空时在最后一帧保存 PPM 图片 (冒烟测试)
     std::string progress_action; ///< progress 子命令: list / show / reset
     std::string model_id;        ///< progress show/reset 的目标模型 id
-    std::string inventory_action;  ///< inventory 子命令: set / show / match
+    std::string inventory_action;  ///< inventory 子命令: set / show / match / apply-set
     std::vector<std::string> inventory_pairs;  ///< inventory set 的 <形状 数量> 对
+    std::vector<std::string> inventory_set_ids;  ///< inventory apply-set 的套装 id 列表
     std::string settings_action;  ///< settings 子命令: set-age / set-tts / show
     std::string settings_value;   ///< settings set-age 的年龄 (周岁) / set-tts 的 on|off
     std::string profile;          ///< validate 的物理校验档位 (default / strict)
@@ -125,6 +128,9 @@ void printUsage() {
         "                        形状标识见 magtile_app catalog)\n"
         "  magtile_app inventory show                         查看已登记的磁力片库存\n"
         "  magtile_app inventory match [--data-dir DIR]       对照库存列出能搭建的模型\n"
+        "  magtile_app inventory apply-set <套装id>...        按实物套装目录预填库存\n"
+        "                       (示例: inventory apply-set standard_102;\n"
+        "                        多套装 BOM 按片型求和, 见 data/physical_set_catalog.json)\n"
         "  magtile_app settings set-age <周岁>                 设置孩子年龄段模式\n"
         "                       (4~6 启蒙 / 7~9 标准 / 10~12 进阶, 示例: set-age 4)\n"
         "  magtile_app settings set-tts <on|off>              开关教程步骤朗读\n"
@@ -242,6 +248,11 @@ bool parseArgs(int argc, char** argv, CliArgs& args) {
             // set 之后是 <形状 数量> 对: 至少一对且必须成对出现
             if (positional.size() < 3 || (positional.size() - 1) % 2 != 0) return false;
             args.inventory_pairs.assign(positional.begin() + 1, positional.end());
+            return true;
+        }
+        if (args.inventory_action == "apply-set") {
+            if (positional.size() < 2) return false;
+            args.inventory_set_ids.assign(positional.begin() + 1, positional.end());
             return true;
         }
         return false;
@@ -619,6 +630,36 @@ int runInventory(const CliArgs& args) {
     progress::ProgressStore store(db_file);
 
     if (args.inventory_action == "match") return runInventoryMatch(args, store);
+
+    if (args.inventory_action == "apply-set") {
+        core::PhysicalSetCatalog catalog;
+        try {
+            catalog = core::loadPhysicalSetCatalog(args.data_dir / "physical_set_catalog.json");
+        } catch (const std::exception& e) {
+            std::fprintf(stderr, "错误: 无法加载实物套装目录: %s\n", e.what());
+            return 1;
+        }
+        const auto merged = core::mergePhysicalSetBom(catalog, args.inventory_set_ids);
+        if (merged.empty()) {
+            std::fprintf(stderr, "错误: 未找到有效套装 id (请检查 physical_set_catalog.json)\n");
+            return 1;
+        }
+        for (const auto& id : args.inventory_set_ids) {
+            if (catalog.find(id) == nullptr) {
+                std::fprintf(stderr, "警告: 未知套装 id \"%s\", 已跳过\n", id.c_str());
+            }
+        }
+        try {
+            progress::setOwnedPhysicalSets(store, args.inventory_set_ids);
+        } catch (const progress::ProgressError& e) {
+            std::fprintf(stderr, "警告: 无法保存拥有套装清单: %s\n", e.what());
+        }
+        for (const auto& [shape_id, count] : merged) {
+            store.setInventory(shape_id, count);
+        }
+        std::printf("已应用 %zu 个实物套装, 合并登记 %zu 种片型\n\n",
+                    args.inventory_set_ids.size(), merged.size());
+    }
 
     if (args.inventory_action == "set") {
         for (std::size_t i = 0; i + 1 < args.inventory_pairs.size(); i += 2) {

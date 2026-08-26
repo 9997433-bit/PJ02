@@ -17,6 +17,9 @@
 //   openProgressStore(dbPath)     -> 打开 (不存在则创建) 进度存档数据库
 //   inventoryRows()               -> 库存录入界面数据源 JSON (全部片型 + 已存数量)
 //   saveInventory(countsJson)     -> 保存库存快照 ({"square":3,...} upsert)
+//   physicalSetRows(dataDir)      -> 实物套装目录 JSON (录入页数据源)
+//   applyPhysicalSets(dataDir, idsJson) -> 合并套装 BOM 预填 + 落盘拥有清单
+//   ownedPhysicalSetsJson()       -> 用户拥有的实物套装 id 列表 JSON
 //   canBuildModel(jsonPath)       -> 库存是否足够搭建 (1/0; 未登记/失败 -1)
 //   missingPiecesJson(jsonPath)   -> 缺片清单 JSON (片型 + 缺几片 + 中文摘要)
 //   ageModeId()                   -> 年龄段模式标识 (settings 表 age_mode 键,
@@ -101,6 +104,7 @@
 #define MAGTILE_LOGE(...) ((void)0)
 #endif
 
+#include "magtile/core/physical_set_catalog.hpp"
 #include "magtile/core/json_io.hpp"
 #include "magtile/core/model_catalog.hpp"
 #include "magtile/core/parent_gate.hpp"
@@ -113,6 +117,7 @@
 #include "magtile/progress/achievements.hpp"
 #include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/data_privacy.hpp"
+#include "magtile/progress/physical_set_settings.hpp"
 #include "magtile/progress/progress_store.hpp"
 #include "magtile/progress/subscription_settings.hpp"
 #include "magtile/progress/ui_settings.hpp"
@@ -548,6 +553,100 @@ JNIEXPORT jboolean JNICALL Java_com_magtile_studio_MagTileNative_saveInventory(
         MAGTILE_LOGE("saveInventory 失败: %s", e.what());
         return JNI_FALSE;
     }
+}
+
+/// 实物套装目录 (data_dir 为解包后的数据目录, 读
+/// physical_set_catalog.json; 与 Qt InventoryBackend::physicalSetRows
+/// 同一构造口径):
+///   成功: {"sets":[{"id","brand","name_zh","piece_count_label",
+///                   "tier_scope","ui_preset_label_zh"}, ...]}
+///   失败: {"error":"中文错误信息"}
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_physicalSetRows(
+    JNIEnv* env, jobject /*thiz*/, jstring data_dir) {
+    try {
+        const magtile::core::PhysicalSetCatalog catalog =
+            magtile::core::loadPhysicalSetCatalog(
+                std::filesystem::path(toUtf8(env, data_dir)) / "physical_set_catalog.json");
+        nlohmann::json sets = nlohmann::json::array();
+        for (const magtile::core::PhysicalSet& set : catalog.sets()) {
+            sets.push_back({
+                {"id", set.id},
+                {"brand", set.brand},
+                {"name_zh", set.name},
+                {"piece_count_label", set.total_pieces},
+                {"tier_scope", set.tier_scope},
+                {"ui_preset_label_zh", set.ui_preset_label},
+            });
+        }
+        return toJString(env, nlohmann::json{{"sets", std::move(sets)}}.dump());
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("physicalSetRows 失败: %s", e.what());
+        return toJString(env, nlohmann::json{{"error", e.what()}}.dump());
+    }
+}
+
+/// 勾选套装合并 BOM 预填 (ids_json 为套装 id 数组, 如
+/// ["standard_102"]): 按片型求和, 落盘 owned_physical_sets 设置键,
+/// 返回 {"counts":{"square":N,...}} 供界面填入步进器 (不写入
+/// tile_inventory —— 家长仍可微调后 saveInventory)。
+/// 失败 {"error":"..."}。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_applyPhysicalSets(
+    JNIEnv* env, jobject /*thiz*/, jstring data_dir, jstring ids_json) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    try {
+        const magtile::core::PhysicalSetCatalog catalog =
+            magtile::core::loadPhysicalSetCatalog(
+                std::filesystem::path(toUtf8(env, data_dir)) / "physical_set_catalog.json");
+        const nlohmann::json ids = nlohmann::json::parse(toUtf8(env, ids_json));
+        if (!ids.is_array()) {
+            return toJString(env,
+                             nlohmann::json{{"error", "套装 id 列表必须是 JSON 数组"}}.dump());
+        }
+        std::vector<std::string> set_ids;
+        for (const auto& item : ids) {
+            if (item.is_string()) {
+                set_ids.push_back(item.get<std::string>());
+            }
+        }
+        const std::map<std::string, int> merged =
+            magtile::core::mergePhysicalSetBom(catalog, set_ids);
+        if (ctx.store.has_value()) {
+            try {
+                magtile::progress::setOwnedPhysicalSets(*ctx.store, set_ids);
+            } catch (const magtile::progress::ProgressError& e) {
+                MAGTILE_LOGE("applyPhysicalSets 落盘拥有清单失败: %s", e.what());
+            }
+        }
+        nlohmann::json counts = nlohmann::json::object();
+        for (const auto& [shape_id, count] : merged) {
+            counts[shape_id] = count;
+        }
+        return toJString(env, nlohmann::json{{"counts", std::move(counts)}}.dump());
+    } catch (const std::exception& e) {
+        MAGTILE_LOGE("applyPhysicalSets 失败: %s", e.what());
+        return toJString(env, nlohmann::json{{"error", e.what()}}.dump());
+    }
+}
+
+/// 用户拥有的实物套装 id 列表 (settings 表 owned_physical_sets 键):
+///   {"ids":["standard_102",...]}
+/// 存档未打开 / 从未设置时 ids 为空数组。
+JNIEXPORT jstring JNICALL Java_com_magtile_studio_MagTileNative_ownedPhysicalSetsJson(
+    JNIEnv* env, jobject /*thiz*/) {
+    auto& ctx = context();
+    std::lock_guard<std::mutex> lock(ctx.mutex);
+    nlohmann::json ids = nlohmann::json::array();
+    if (ctx.store.has_value()) {
+        try {
+            for (const std::string& id : magtile::progress::getOwnedPhysicalSets(*ctx.store)) {
+                ids.push_back(id);
+            }
+        } catch (const magtile::progress::ProgressError& e) {
+            MAGTILE_LOGE("ownedPhysicalSetsJson 读取失败: %s", e.what());
+        }
+    }
+    return toJString(env, nlohmann::json{{"ids", std::move(ids)}}.dump());
 }
 
 /// 库存是否足够搭建模型 (json_path 为模型 JSON 绝对路径, 即

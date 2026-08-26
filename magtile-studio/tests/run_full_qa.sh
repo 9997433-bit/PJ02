@@ -56,6 +56,9 @@
 #       tools/update_model_catalog.py --matrix-report —— 重建目录后
 #       顺手刷新 docs/reports/CONTENT_MATRIX_PROGRESS.md 主题 × 难度
 #       矩阵快照; 产物为仓库内文件, 刷新后随内容批一起提交, TESTING.md 3.19)
+#   23. 实物套装目录校验         (tools/verify_physical_set_catalog.py ——
+#       片型存在 / 计数合法 / 套装 id 唯一 / tier_scope 一致,
+#       docs/PHYSICAL_SET_CATALOG.md)
 #
 # 用法:
 #   tests/run_full_qa.sh [构建目录]          # 默认 build
@@ -196,6 +199,9 @@ run_stage "模型库唯一性 (克隆检测)" \
 run_stage "片型分层检查 (core-9, strict)" \
     "$PYTHON" "$ROOT/tools/check_core5_usage.py" "$DATA_DIR/models" \
     --catalog "$DATA_DIR/tile_catalog.json" --strict
+
+run_stage "实物套装目录校验" \
+    bash "$TESTS_DIR/test_physical_set_catalog.sh" "$ROOT"
 
 # 免费层三端清单对齐 (可选): 免费标签数=30 + 全 core-9 + 与 Windows
 # starter 打包清单集合相等 (对齐决议见 docs/FREE_TIER_MANIFEST.md)。

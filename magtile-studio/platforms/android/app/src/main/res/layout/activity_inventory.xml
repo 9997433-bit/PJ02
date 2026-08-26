@@ -75,6 +75,47 @@
             android:paddingEnd="16dp"
             android:paddingBottom="12dp">
 
+            <!-- 我的套装 (实物盒装快捷预填) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/inventory_group_sets"
+                android:textColor="@color/magtile_text_primary"
+                android:textSize="@dimen/text_section"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/inventory_sets_hint"
+                android:textColor="@color/magtile_text_secondary"
+                android:textSize="@dimen/text_caption" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/inventory_set_chips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <Button
+                android:id="@+id/inventory_apply_sets"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/touch_target"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/magtile_primary_soft"
+                android:text="@string/inventory_apply_sets"
+                android:textColor="@color/magtile_primary"
+                android:textSize="@dimen/text_body" />
+
             <!-- 基础套装 (核心 9 片型) -->
             <TextView
                 android:layout_width="wrap_content"
