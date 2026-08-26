@@ -252,20 +252,22 @@ b.step("西半跨南吊索: 9 段菱形 (x2-6 区)。",
        highlight=["tw_s_1", "d_5_1"],
        tip="沿口 span 链只用桥面 x 位 —— 零 tile_overlap。")
 b.step("西半跨北吊索: 9 段, 与南幅镜像。",
-       ["hgw_n_a", "hgw_n_c0", "hgw_n_c1", "hgw_n_c2", "hgw_n_c3",
+       ["hgw_n_c0", "hgw_n_c1", "hgw_n_c2", "hgw_n_c3", "hgw_n_a",
         "hgw_n_s0", "hgw_n_s1", "hgw_n_s2", "hgw_n_s3"],
        highlight=["tw_n_1"],
-       tip="四路吊索锁牢双塔 —— 竖向彩虹。")
+       tip="先挂桥面十字链再挂塔端斜链 —— 塔端片悬在十字链正上方, "
+           "这个顺序保证每片都伸手可达。")
 b.step("东半跨南吊索: 9 段 (x7-11 区)。",
        ["hge_s_a", "hge_s_c0", "hge_s_c1", "hge_s_c2", "hge_s_c3",
         "hge_s_s0", "hge_s_s1", "hge_s_s2", "hge_s_s3"],
        highlight=["te_s_1", "d_9_1"],
        tip="东半跨吊索向西吸桥面 —— 与西塔镜像。")
 b.step("东半跨北吊索: 9 段 —— 海峡之虹悬索桥合龙通车!",
-       ["hge_n_a", "hge_n_c0", "hge_n_c1", "hge_n_c2", "hge_n_c3",
+       ["hge_n_c0", "hge_n_c1", "hge_n_c2", "hge_n_c3", "hge_n_a",
         "hge_n_s0", "hge_n_s1", "hge_n_s2", "hge_n_s3"],
        highlight=["hge_s_a", "mc_n_8"],
-       tip="通桥仪式: 双塔、双幅主缆、四路吊索 —— 彩虹悬索桥落成!")
+       tip="与西幅同序: 十字链在前、塔端斜链在后 —— "
+           "通桥仪式: 双塔、双幅主缆、四路吊索, 彩虹悬索桥落成!")
 
 model = b.finalize(
     model_id="strait_rainbow_bridge_01",
