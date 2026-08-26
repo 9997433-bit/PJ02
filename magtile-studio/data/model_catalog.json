@@ -117,6 +117,24 @@
       "thumbnail": "thumbnails/watchtower_01.png"
     },
     {
+      "id": "plaza_canopy_01",
+      "file": "models/plaza_canopy_01.json",
+      "name": "广场遮阳亭",
+      "name_en": "Plaza Canopy 01",
+      "description": "扩展主打片型 large_square 引流 D1: 六片大正方形拼出门式刚架遮阳亭 —— 两片平拼地台、两片整片立起当东西山墙、两片在 z=2合拢成顶棚, 全程 2.0 整边等长互吸; 棚下地台拼缝上骑一条双面靠背长椅, 顶棚拼缝再立一块红色招牌, 南步道、北花圃、东西花箱点缀四色三角花 —— 一片大正方形顶四片小方板, 体量感立现。",
+      "difficulty": 1,
+      "total_pieces": 25,
+      "step_count": 7,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "遮阳亭",
+        "长椅",
+        "大正方形",
+        "入门"
+      ]
+    },
+    {
       "id": "mini_bus_01",
       "file": "models/mini_bus_01.json",
       "name": "迷你小巴",
@@ -134,25 +152,6 @@
         "入门"
       ],
       "thumbnail": "thumbnails/mini_bus_01.png"
-    },
-    {
-      "id": "plaza_canopy_01",
-      "file": "models/plaza_canopy_01.json",
-      "name": "广场遮阳售卖亭",
-      "name_en": "Plaza Canopy 01",
-      "description": "主打片型 large_square 引流 D1: 两片大正方形平拼 4x2 广场地台, 下层四角方墙加两侧栏板围出亭身, 南面嵌一座带黄色台面的售卖柜台; 上层四根角柱托两根整跨檐口横梁, 顶上两片大正方形平拼 4x2 绿色遮阳顶棚, 四角再插红黄三角旗 ——一座能摆摊的两层小凉亭。",
-      "difficulty": 1,
-      "total_pieces": 26,
-      "step_count": 7,
-      "theme": "实用功能",
-      "tags": [
-        "实用功能",
-        "遮阳棚",
-        "售卖亭",
-        "柜台",
-        "大正方形",
-        "入门"
-      ]
     },
     {
       "id": "tulip_bed_01",
@@ -174,6 +173,24 @@
       "thumbnail": "thumbnails/tulip_bed_01.png"
     },
     {
+      "id": "marble_splitter_01",
+      "file": "models/marble_splitter_01.json",
+      "name": "拱廊分流滚珠道",
+      "name_en": "Marble Splitter 01",
+      "description": "滚珠乐园 D2 门框方主打示范: 四片门框方横立成拱廊桥墩, 墩顶三片方板连成 z=1 高架跑道, 西端门框发球拱出珠; 弹珠沿跑道东行、顺 30 度坡道落地, 冲进 T 形分流口撞上绿色挡板, 从南北两道贴地门框门洞 (T17 负空间) 二选一穿出, 滚进带透明得分窗的接珠湾。门框方一片三用 (桥墩/发球拱/分流门), 分流发生在地面 —— 与高塔类滚珠模型的立体动线完全不同, 全部 CORE-9。",
+      "difficulty": 2,
+      "total_pieces": 30,
+      "step_count": 8,
+      "theme": "滚珠乐园",
+      "tags": [
+        "滚珠",
+        "拱廊",
+        "分流",
+        "滚珠乐园",
+        "门框"
+      ]
+    },
+    {
       "id": "star_octahedron_01",
       "file": "models/star_octahedron_01.json",
       "name": "星形八面体摆件",
@@ -191,6 +208,25 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/star_octahedron_01.png"
+    },
+    {
+      "id": "trapezoid_awning_01",
+      "file": "models/trapezoid_awning_01.json",
+      "name": "梯形雨檐花架墙",
+      "name_en": "Trapezoid Awning Wall 01",
+      "description": "植物花园 D2 梯形主打示范: 长方形横砌的 4 格花架墙上, 同一种梯形摆出四种姿态 —— 墙顶两片 30 度下斜雨檐、同一条沿口两片直立女儿墙 (下宽上窄的收分轮廓)、墙腰横缝平挑两片盆花展台、步道南沿再平铺两片扇贝形包边; 花圃带五株骑缝三角花, 檐前两丛花收边。梯形下底 (长 2) 与长方形横边恰好等长, 是整面墙整边吸合的几何前提 —— 与旧版连廊密铺条带的动线完全不同。",
+      "difficulty": 2,
+      "total_pieces": 31,
+      "step_count": 8,
+      "theme": "植物花园",
+      "tags": [
+        "植物花园",
+        "花架",
+        "雨檐",
+        "梯形",
+        "进阶",
+        "需要扩展装"
+      ]
     },
     {
       "id": "hex_honeycomb_01",
@@ -250,43 +286,6 @@
       "thumbnail": "thumbnails/sunflower_pot_01.png"
     },
     {
-      "id": "trapezoid_awning_01",
-      "file": "models/trapezoid_awning_01.json",
-      "name": "梯形条纹雨棚连廊",
-      "name_en": "Trapezoid Awning Walk 01",
-      "description": "植物花园 D2: 8 格长的连拱步道两侧各立三段 2 格拱墙, 留出取景窗洞 (T17 负空间); 墙顶两条「梯形密铺雨棚带」向内斜披54.7 度 —— 正放梯形吸墙顶、倒放梯形跨窗洞, 腰边互锁成上下沿笔直的条带 (T18 密铺变奏), 绿透交替天然是遮阳棚条纹,棚顶中央留 1 格天光缝; 窗外四座泥土花台, 红紫粉黄四色盆花骑沿而立。全库首条用梯形上下互锁密铺出的斜面雨棚 —— 梯形不再只当四坡屋顶的配角, 而是整个屋面本身。",
-      "difficulty": 2,
-      "total_pieces": 34,
-      "step_count": 8,
-      "theme": "植物花园",
-      "tags": [
-        "植物花园",
-        "雨棚",
-        "连廊",
-        "梯形",
-        "花台",
-        "需要扩展装"
-      ]
-    },
-    {
-      "id": "streetcar_01",
-      "file": "models/streetcar_01.json",
-      "name": "有轨电车",
-      "name_en": "Streetcar 01",
-      "description": "陆地交通 D2 有轨载具: 前后双转向架四片 wheel_base 立在埋轨床拼缝上,三片红色裙边长板长边压轮顶锁成 T09 低重心门式底盘; 5 格绿色长箱北整排透明窗格、南嵌乘客门, 车顶五片方板合龙后立灰色受电弓取电,前后三角灯与绿色线路牌点睛 —— 低扁长箱剪影, 与小巴短箱完全不同!",
-      "difficulty": 2,
-      "total_pieces": 36,
-      "step_count": 9,
-      "theme": "陆地交通",
-      "tags": [
-        "陆地交通",
-        "有轨",
-        "载具",
-        "wheel_base",
-        "进阶"
-      ]
-    },
-    {
       "id": "swan_01",
       "file": "models/swan_01.json",
       "name": "白天鹅",
@@ -343,21 +342,22 @@
       ]
     },
     {
-      "id": "marble_splitter_01",
-      "file": "models/marble_splitter_01.json",
-      "name": "双轨分流滚珠台",
-      "name_en": "Marble Splitter 01",
-      "description": "滚珠乐园 D2 门框方主打示范: 首层门框拱廊塔从 z=2 发球, 弹珠沿首段 30 度坡道落上四柱门亭分流枢纽, 撞响粉色窗格铃板后从南/北两道门框门洞 (T17 负空间) 二选一穿出, 各沿坡道落地、穿过终点门框滚进分色接珠池; 门框方 x11 全程既是结构柱又是弹珠通道, 全部 CORE-9, 实物跑珠即可验证分流。",
+      "id": "conservatory_01",
+      "file": "models/conservatory_01.json",
+      "name": "天窗玻璃花房",
+      "name_en": "Conservatory 01",
+      "description": "植物花园 D2 窗格方主打示范: 4x3 单层花房南立面与东墙整排窗格方玻璃, 北墙留 T17 门洞; 盖满 12 片透明玻璃平顶后, 顶面正中再升起一圈 2x1 窗格方天窗塔 (roof lantern), 塔顶长方形压顶、两端黄色尖饰 —— 维多利亚花房的经典屋顶轮廓; 室内 L 形泥土花池沿窗摆着红紫粉三株盆栽。窗格方 x16 全在 CORE-9 内,与 A 字斜顶 greenhouse_01、穹顶 greenhouse_dome_01 剖面完全不同。",
       "difficulty": 2,
       "total_pieces": 41,
       "step_count": 9,
-      "theme": "滚珠乐园",
+      "theme": "植物花园",
       "tags": [
-        "滚珠",
-        "轨道",
-        "分流",
-        "滚珠乐园",
-        "门框"
+        "植物花园",
+        "温室",
+        "花房",
+        "天窗",
+        "窗格",
+        "进阶"
       ]
     },
     {
@@ -492,25 +492,6 @@
         "免费"
       ],
       "thumbnail": "thumbnails/beach_hut_01.png"
-    },
-    {
-      "id": "conservatory_01",
-      "file": "models/conservatory_01.json",
-      "name": "玻璃花房",
-      "name_en": "Conservatory 01",
-      "description": "植物花园 D2: 维多利亚天窗花房 —— 单层通体玻璃环 (11 片窗格方, 南立面整排 4 片是招牌) 托起绿漆框架平台, 平台中央长方形楣带再升一圈, 顶沿四片透明梯形合围玻璃天窗锥 (中央采光亭); 东端门框方入户, 东翼再挑一片梯形门廊雨檐, 共 5 片梯形屋檐; 西翼三角尖饰, 南侧四格花坛开着粉/黄/紫三色花。与 A 字斜顶 greenhouse_01、穹顶 greenhouse_dome_01 刻意区分 —— 这次的剖面是'玻璃环 + 中央天窗亭'。",
-      "difficulty": 2,
-      "total_pieces": 44,
-      "step_count": 9,
-      "theme": "植物花园",
-      "tags": [
-        "植物花园",
-        "温室",
-        "花房",
-        "窗格",
-        "天窗",
-        "需要扩展装"
-      ]
     },
     {
       "id": "snowplow_01",
@@ -799,6 +780,24 @@
         "海岸"
       ],
       "thumbnail": "thumbnails/lifeguard_tower_01.png"
+    },
+    {
+      "id": "streetcar_01",
+      "file": "models/streetcar_01.json",
+      "name": "双层观光电车",
+      "name_en": "Streetcar 01",
+      "description": "陆地交通 D2 wheel_base 主打示范: 四片车轮底座在轨床两侧首尾相接, 站成贯穿车长的连排轮罩裙板; 裙板顶纵铺四片长方形架出2 格宽底盘, 下层客舱透明端壁 + 南侧窗门带 + 北侧整排窗格,上层不封顶 —— 八片方板铺成敞篷观光台, 一圈红黄相间的三角栏杆围拢。轨床-裙板-底盘-墙环-台面层层整边等长互吸, 与窄箱平顶的老版有轨电车剪影完全不同。",
+      "difficulty": 2,
+      "total_pieces": 48,
+      "step_count": 9,
+      "theme": "陆地交通",
+      "tags": [
+        "陆地交通",
+        "有轨电车",
+        "双层巴士",
+        "载具",
+        "进阶"
+      ]
     },
     {
       "id": "turtle_beach_01",
