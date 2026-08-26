@@ -1,0 +1,2198 @@
+{
+  "schema_version": 1,
+  "id": "stellar_launch_gantry_01",
+  "name": "星港发射塔组合体",
+  "name_en": "Stellar Launch Gantry 01",
+  "description": "航天器 D5 旗舰: 结构签名是'三模块对接的发射场组合体' —— 2x2 三级重型火箭 (方墙环圈自锁 x3 + 2x1 长板过渡环 + 梯形整流罩合尖, 四片直角尾翼双边吸合), 1x2 五段勤务塔 (四层环圈 + 观测甲板 + 等腰避雷尖塔至 z≈6), 两者以 z=3 脐带桥刚性对接 (T16); 东侧双联燃料罐共用中隔墙, 各顶等边穹顶。与 D4 火箭发射台 (单塔) 和 D3 航天飞机 (机身叙事) 的模块化程度完全不同。",
+  "difficulty": 5,
+  "total_pieces": 116,
+  "tags": [
+    "航天",
+    "火箭",
+    "发射台",
+    "对接",
+    "大师",
+    "旗舰",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "spacecraft",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 84,
+        "equilateral_triangle": 15,
+        "rectangle": 6,
+        "right_triangle": 6,
+        "trapezoid": 4,
+        "isosceles_triangle": 1
+      },
+      "silhouette_class": "launch_complex",
+      "height_layers": 7
+    },
+    "build_paradigm": "module_dock",
+    "technique_tags": {
+      "primary": "T16_modular_docking",
+      "secondary": [
+        "T01_box_frame",
+        "T14_diagonal_bracing"
+      ]
+    },
+    "signature_statement": "火箭、勤务塔、燃料罐三模块分立生长, 脐带桥在 z=3 一步刚性对接。",
+    "physical_risk_notes": [
+      {
+        "step": 15,
+        "risk": "整流罩四坡合尖前, 前三片梯形腰边为半开环",
+        "mitigation": "tip 提示压顶前先对齐四条棱, 一次合尖"
+      },
+      {
+        "step": 20,
+        "risk": "脐带桥板若只吸单端, 另一端悬空易坠",
+        "mitigation": "教程要求西缘先对准箭体环顶, 东缘同步压塔身顶边"
+      },
+      {
+        "step": 23,
+        "risk": "避雷尖塔为全场最高点, 单边吸合易被袖口带倒",
+        "mitigation": "该步 tip 提示轻拿轻放, 底边整边吸合后再松手"
+      }
+    ]
+  },
+  "final_assembly": [
+    {
+      "id": "cl_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cl_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cl_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cl_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cl_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cl_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cl_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cl_7",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ap_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ap_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_s_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ap_s_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_s_7",
+      "type": "square",
+      "position": [
+        7.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ap_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ap_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ap_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ap_n_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_n_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ap_n_7",
+      "type": "square",
+      "position": [
+        7.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk0_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk0_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk0_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk0_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk0_w_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk0_e_2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk0_w_3",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk0_e_3",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk1_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk1_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk1_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk1_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk1_w_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk1_e_2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk1_w_3",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk1_e_3",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk2_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk2_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk2_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk2_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk2_w_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk2_e_2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk2_w_3",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk2_e_3",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rk_deck_s",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk_deck_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk3_s",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk3_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk3_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rk3_e",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "nose_s",
+      "type": "trapezoid",
+      "position": [
+        2.0,
+        2.222222,
+        4.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nose_e",
+      "type": "trapezoid",
+      "position": [
+        2.777778,
+        3.0,
+        4.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nose_n",
+      "type": "trapezoid",
+      "position": [
+        2.0,
+        3.777778,
+        4.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nose_w",
+      "type": "trapezoid",
+      "position": [
+        1.222222,
+        3.0,
+        4.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nose_cap",
+      "type": "square",
+      "position": [
+        2.0,
+        3.0,
+        4.707107
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fin_sw",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fin_nw",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        4.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fin_se",
+      "type": "right_triangle",
+      "position": [
+        3.333333,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fin_ne",
+      "type": "right_triangle",
+      "position": [
+        3.333333,
+        4.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "gt0_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt0_n",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt0_w_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt0_e_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt0_w_3",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt0_e_3",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt1_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt1_n",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt1_w_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt1_e_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt1_w_3",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt1_e_3",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt2_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt2_n",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt2_w_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt2_e_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt2_w_3",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt2_e_3",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt3_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt3_n",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt3_w_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt3_e_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt3_w_3",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt3_e_3",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gt_br_s",
+      "type": "right_triangle",
+      "position": [
+        5.333333,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "gt_br_n",
+      "type": "right_triangle",
+      "position": [
+        5.333333,
+        4.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "bridge_s",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bridge_n",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "dk_rail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        4.0,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_rail_e0",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        2.5,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_rail_e1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        3.5,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dk_mast",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        2.0,
+        4.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "tk_s",
+      "type": "square",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_m",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_n",
+      "type": "square",
+      "position": [
+        6.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_w_2",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_e_2",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_w_3",
+      "type": "square",
+      "position": [
+        6.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_e_3",
+      "type": "square",
+      "position": [
+        7.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_dome_a_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_dome_a_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_dome_a_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_dome_a_w",
+      "type": "equilateral_triangle",
+      "position": [
+        6.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_dome_b_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        3.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_dome_b_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.833333,
+        3.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_dome_b_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        3.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tk_dome_b_w",
+      "type": "equilateral_triangle",
+      "position": [
+        6.166667,
+        3.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "warn_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "warn_1",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "warn_2",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "warn_3",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺履带运输道西段: 4 片黄灰相间方板。",
+      "tip": "发射场占地 8x3 —— 桌面横向留足场地再开工。",
+      "tiles_to_add": [
+        "cl_0",
+        "cl_1",
+        "cl_2",
+        "cl_3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "履带道东段合龙 (4 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "cl_4",
+        "cl_5",
+        "cl_6",
+        "cl_7"
+      ],
+      "highlight_tiles": [
+        "cl_3"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "发射坪南排西段 (4 片, 吸住履带道北沿)。",
+      "tip": "",
+      "tiles_to_add": [
+        "ap_s_0",
+        "ap_s_1",
+        "ap_s_2",
+        "ap_s_3"
+      ],
+      "highlight_tiles": [
+        "cl_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "发射坪南排东段 (4 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "ap_s_4",
+        "ap_s_5",
+        "ap_s_6",
+        "ap_s_7"
+      ],
+      "highlight_tiles": [
+        "ap_s_3"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "发射坪北排西段 (4 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "ap_n_0",
+        "ap_n_1",
+        "ap_n_2",
+        "ap_n_3"
+      ],
+      "highlight_tiles": [
+        "ap_s_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "发射坪北排东段合龙 —— 场坪成刚性大底盘。",
+      "tip": "",
+      "tiles_to_add": [
+        "ap_n_4",
+        "ap_n_5",
+        "ap_n_6",
+        "ap_n_7"
+      ],
+      "highlight_tiles": [
+        "ap_n_3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "火箭一级·南墙与西墙 (4 片): 墙底整边吸场坪。",
+      "tip": "2x2 箭体四角竖缝两两互吸 —— 环圈自锁是火箭站稳的关键。",
+      "tiles_to_add": [
+        "rk0_s_1",
+        "rk0_s_2",
+        "rk0_w_2",
+        "rk0_w_3"
+      ],
+      "highlight_tiles": [
+        "ap_s_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "火箭一级·北墙与东墙合圈 (4 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "rk0_n_1",
+        "rk0_n_2",
+        "rk0_e_2",
+        "rk0_e_3"
+      ],
+      "highlight_tiles": [
+        "rk0_w_2"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "四片直角尾翼: 直角边分别吸场坪边与箭体竖棱。",
+      "tip": "尾翼是结构件 —— 双边吸合后一级箭体成三角刚性节点。",
+      "tiles_to_add": [
+        "fin_sw",
+        "fin_nw",
+        "fin_se",
+        "fin_ne"
+      ],
+      "highlight_tiles": [
+        "rk0_s_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "火箭二级·南墙与西墙 (4 片, 红色级间环)。",
+      "tip": "",
+      "tiles_to_add": [
+        "rk1_s_1",
+        "rk1_s_2",
+        "rk1_w_2",
+        "rk1_w_3"
+      ],
+      "highlight_tiles": [
+        "rk0_s_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "火箭二级·北墙与东墙合圈 (4 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "rk1_n_1",
+        "rk1_n_2",
+        "rk1_e_2",
+        "rk1_e_3"
+      ],
+      "highlight_tiles": [
+        "rk1_w_2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "火箭三级·南墙与西墙 (4 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "rk2_s_1",
+        "rk2_s_2",
+        "rk2_w_2",
+        "rk2_w_3"
+      ],
+      "highlight_tiles": [
+        "rk1_s_1"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "火箭三级·北墙与东墙合圈 (4 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "rk2_n_1",
+        "rk2_n_2",
+        "rk2_e_2",
+        "rk2_e_3"
+      ],
+      "highlight_tiles": [
+        "rk2_w_2"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "肩部甲板: 2 片 2x1 长板压顶, 短边整边吸三级环东西墙顶。",
+      "tip": "甲板长边朝南北 —— 过渡环长板要整边吸在甲板长边上。",
+      "tiles_to_add": [
+        "rk_deck_s",
+        "rk_deck_n"
+      ],
+      "highlight_tiles": [
+        "rk2_w_2"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "过渡环: 4 片 2x1 长板立墙 (先南北后东西), 四角短竖边互吸。",
+      "tip": "长板环是整流罩的基座 —— 梯形下底要整边吸在长板顶边上。",
+      "tiles_to_add": [
+        "rk3_s",
+        "rk3_n",
+        "rk3_w",
+        "rk3_e"
+      ],
+      "highlight_tiles": [
+        "rk_deck_s"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "整流罩四坡合尖 + 黄压顶 (顶 z≈4.7)。",
+      "tip": "四片梯形腰边两两互吸自锁 —— 最后压顶前先对齐四条棱。",
+      "tiles_to_add": [
+        "nose_s",
+        "nose_e",
+        "nose_n",
+        "nose_w",
+        "nose_cap"
+      ],
+      "highlight_tiles": [
+        "rk3_s"
+      ]
+    },
+    {
+      "step_number": 17,
+      "description": "勤务塔一层环圈 (6 片): 1x2 占地, 六段墙合圈。",
+      "tip": "",
+      "tiles_to_add": [
+        "gt0_s",
+        "gt0_n",
+        "gt0_w_2",
+        "gt0_w_3",
+        "gt0_e_2",
+        "gt0_e_3"
+      ],
+      "highlight_tiles": [
+        "ap_s_4"
+      ]
+    },
+    {
+      "step_number": 18,
+      "description": "塔脚斜撑 2 根 (东侧)。",
+      "tip": "",
+      "tiles_to_add": [
+        "gt_br_s",
+        "gt_br_n"
+      ],
+      "highlight_tiles": [
+        "gt0_e_2"
+      ]
+    },
+    {
+      "step_number": 19,
+      "description": "勤务塔二层环圈 (6 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "gt1_s",
+        "gt1_n",
+        "gt1_w_2",
+        "gt1_w_3",
+        "gt1_e_2",
+        "gt1_e_3"
+      ],
+      "highlight_tiles": [
+        "gt0_s"
+      ]
+    },
+    {
+      "step_number": 20,
+      "description": "勤务塔三层环圈 (6 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "gt2_s",
+        "gt2_n",
+        "gt2_w_2",
+        "gt2_w_3",
+        "gt2_e_2",
+        "gt2_e_3"
+      ],
+      "highlight_tiles": [
+        "gt1_s"
+      ]
+    },
+    {
+      "step_number": 21,
+      "description": "脐带桥对接: 2 片方板西缘吸箭体三级环顶, 东缘吸塔身三层顶。",
+      "tip": "桥板两端同时受力 —— 火箭与勤务塔从此连成一体 (T16 对接)。",
+      "tiles_to_add": [
+        "bridge_s",
+        "bridge_n"
+      ],
+      "highlight_tiles": [
+        "rk2_e_2",
+        "gt2_w_2"
+      ]
+    },
+    {
+      "step_number": 22,
+      "description": "勤务塔四层环圈 (6 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "gt3_s",
+        "gt3_n",
+        "gt3_w_2",
+        "gt3_w_3",
+        "gt3_e_2",
+        "gt3_e_3"
+      ],
+      "highlight_tiles": [
+        "gt2_s"
+      ]
+    },
+    {
+      "step_number": 23,
+      "description": "观测甲板 (z=4): 2 片方板压顶合圈。",
+      "tip": "",
+      "tiles_to_add": [
+        "deck_s",
+        "deck_n"
+      ],
+      "highlight_tiles": [
+        "gt3_s"
+      ]
+    },
+    {
+      "step_number": 24,
+      "description": "甲板围栏 3 片 + 粉色等腰避雷尖塔 (塔尖 z≈6)。",
+      "tip": "尖塔底边整边吸甲板南沿 —— 全场最高点, 轻拿轻放。",
+      "tiles_to_add": [
+        "dk_rail_n",
+        "dk_rail_e0",
+        "dk_rail_e1",
+        "dk_mast"
+      ],
+      "highlight_tiles": [
+        "deck_s"
+      ]
+    },
+    {
+      "step_number": 25,
+      "description": "燃料罐区罐体: 7 段墙围出双联罐 (共用中隔墙)。",
+      "tip": "",
+      "tiles_to_add": [
+        "tk_s",
+        "tk_m",
+        "tk_n",
+        "tk_w_2",
+        "tk_w_3",
+        "tk_e_2",
+        "tk_e_3"
+      ],
+      "highlight_tiles": [
+        "ap_s_6"
+      ]
+    },
+    {
+      "step_number": 26,
+      "description": "南罐等边穹顶 (4 片合尖)。",
+      "tip": "",
+      "tiles_to_add": [
+        "tk_dome_a_s",
+        "tk_dome_a_e",
+        "tk_dome_a_n",
+        "tk_dome_a_w"
+      ],
+      "highlight_tiles": [
+        "tk_s"
+      ]
+    },
+    {
+      "step_number": 27,
+      "description": "北罐等边穹顶 (4 片) —— 罐区完工。",
+      "tip": "",
+      "tiles_to_add": [
+        "tk_dome_b_s",
+        "tk_dome_b_e",
+        "tk_dome_b_n",
+        "tk_dome_b_w"
+      ],
+      "highlight_tiles": [
+        "tk_m"
+      ]
+    },
+    {
+      "step_number": 28,
+      "description": "履带道南沿 4 片橙色警戒标 —— 星港发射塔组合体落成!",
+      "tip": "点火倒计时: 检查脐带桥两端吸合, 就可以想象发射了。",
+      "tiles_to_add": [
+        "warn_0",
+        "warn_1",
+        "warn_2",
+        "warn_3"
+      ],
+      "highlight_tiles": [
+        "cl_0"
+      ]
+    }
+  ]
+}
