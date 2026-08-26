@@ -3711,25 +3711,6 @@
       "thumbnail": "thumbnails/castle_tower_01.png"
     },
     {
-      "id": "corn_maze_01",
-      "file": "models/corn_maze_01.json",
-      "name": "玉米迷宫",
-      "name_en": "Corn Maze 01",
-      "description": "只用核心九片型的负空间迷宫: 主角不是墙围出的房间, 而是墙留出的路 —— 6x5 玉米田上 21 片绿色玉米墙骑田垄拼缝立成迷宫阵 (一缝双吸重心正压铰链零力矩, 拐角丁字竖边互咬), 橙色土路蜿蜒出唯一通路, 三条死胡同两处玉米荡守株待兔; 南门楼双柱托楣纯剪互锁, 迷宫中心 1x1 两层瞭望塔一层门框方开向终点、二层四面窗格方 360 度找路, 塔旗一线双吸; 四株等腰玉米高杆骑墙顶直上 3.0 —— 走错了别急, 上塔看一眼再来!",
-      "difficulty": 3,
-      "total_pieces": 75,
-      "step_count": 13,
-      "theme": "田园",
-      "tags": [
-        "田园",
-        "农场",
-        "农业",
-        "迷宫",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/corn_maze_01.png"
-    },
-    {
       "id": "crane_tower_02",
       "file": "models/crane_tower_02.json",
       "name": "双塔井架提升机",
@@ -3841,25 +3822,6 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/merry_go_round_01.png"
-    },
-    {
-      "id": "police_station_01",
-      "file": "models/police_station_01.json",
-      "name": "社区派出所",
-      "name_en": "Police Station 01",
-      "description": "城市守护者系列的政务小楼: 7x4 警务大院里, 4x2 两层派出所圈层砌法起楼 —— 一层户籍窗口与蓝色值班大门, 二层整排透明办案窗, 屋顶长板南北双边压墙顶锁成多环箱体; 门头两片发光窗格招牌顶着红蓝警灯 (重心正压铰链零力矩), 北沿通讯天线直指 4 格高; 大院南门双柱横楣岗门 (两端竖边传力) 也戴红蓝门灯, 东侧治安岗亭四墙自锁加等边四坡尖顶, 西侧绿篱收边 —— 有事找警察, 24 小时不打烊。",
-      "difficulty": 3,
-      "total_pieces": 75,
-      "step_count": 17,
-      "theme": "城市生活",
-      "tags": [
-        "城市",
-        "职业体验",
-        "派出所",
-        "建筑",
-        "进阶"
-      ],
-      "thumbnail": "thumbnails/police_station_01.png"
     },
     {
       "id": "schoolyard_stand_01",
@@ -4798,6 +4760,46 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/stadium_gate_01.png"
+    },
+    {
+      "id": "giant_ferris_wheel_01",
+      "file": "models/giant_ferris_wheel_01.json",
+      "name": "巨型摩天轮骨架",
+      "name_en": "Giant Ferris Wheel Frame 01",
+      "description": "幻想与机械 D5 旗舰: 镜像双 A 形华伦三角桁架同步长高 (各 6 段弦杆, 合计 12 段闭合), 水平轮轴桥贯穿其间; y=4 竖轮面以六边形轮毂 + 五外辐 + 四辐间桁弦拼成星轮, 下外辐落 A 架顶与桥面三点托举; 场边 24 片直角斜撑加固; 静态展示, 全 CORE-9。",
+      "difficulty": 5,
+      "total_pieces": 102,
+      "step_count": 25,
+      "theme": "游乐园",
+      "tags": [
+        "幻想",
+        "机械",
+        "摩天轮",
+        "桁架",
+        "旗舰",
+        "大师",
+        "镜像",
+        "需要扩展装"
+      ]
+    },
+    {
+      "id": "strait_rainbow_bridge_01",
+      "file": "models/strait_rainbow_bridge_01.json",
+      "name": "海峡之虹悬索桥",
+      "name_en": "Strait Rainbow Suspension Bridge 01",
+      "description": "桥梁工程 D5 悬索旗舰: 结构签名是'十二段菱形链从双塔垂向桥面' —— 先立双塔桁架芯与斜撑 (T02+T14), 再铺桥面连续梁, 最后由跨中向两塔对称挂透明菱形主缆与吊索, 用受压链条再现悬索桥的受拉曲线; 与 D3 海湾悬索桥 (单格悬挑合龙) 和 D4 石拱桥 (拱洞负空间) 传力叙事均不同。",
+      "difficulty": 5,
+      "total_pieces": 110,
+      "step_count": 25,
+      "theme": "工程结构",
+      "tags": [
+        "桥梁",
+        "悬索桥",
+        "工程",
+        "桁架",
+        "大师",
+        "需要扩展装"
+      ]
     },
     {
       "id": "skyscraper_01",
