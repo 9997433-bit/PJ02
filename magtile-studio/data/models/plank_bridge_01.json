@@ -1,0 +1,513 @@
+{
+  "schema_version": 1,
+  "id": "plank_bridge_01",
+  "name": "三墩小板桥",
+  "name_en": "Plank Bridge 01",
+  "description": "入门档桥梁工程: 跨过小溪的三墩双跨小板桥, 结构签名是'墩-梁-板三件套' —— 三座空心桥墩四墙竖棱角缝互吸成环, 黄色墩帽四边整边锁住墙顶; 每跨两根红色边梁接地立在墩间、竖边吸住两侧墩墙竖棱, 橙色桥面短边吸墩帽、长边完整压住边梁顶 —— 一块板同时被四条边抓住, 两端简支加两侧连续支撑, 这就是桥梁'多传力路径'的入门课。27 片全程接地受压零悬挑, 搭完就能开小车过桥。",
+  "difficulty": 1,
+  "total_pieces": 27,
+  "tags": [
+    "桥梁工程",
+    "板桥",
+    "桥墩",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "bridge_engineering",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 15,
+        "equilateral_triangle": 6,
+        "rectangle": 6
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "pier_w_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_w_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_w_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_w_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_m_s",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_m_n",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_m_w",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_m_e",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_e_s",
+      "type": "square",
+      "position": [
+        6.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_e_n",
+      "type": "square",
+      "position": [
+        6.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_e_w",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_e_e",
+      "type": "square",
+      "position": [
+        7.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_w",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cap_m",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cap_e",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "beam_w_s",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "beam_w_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "beam_e_s",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "beam_e_n",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_w",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "deck_e",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rail_w_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rail_w_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rail_m_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rail_m_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rail_e_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rail_e_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "立西墩: 四片灰色方墙竖棱角缝互吸围成空心墩, 黄色墩帽四边整边锁住墙顶。",
+      "tip": "四片墙的竖棱像小手拉手 —— 拉成一圈桥墩就推不倒了。",
+      "tiles_to_add": [
+        "pier_w_s",
+        "pier_w_n",
+        "pier_w_w",
+        "pier_w_e",
+        "cap_w"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "架西跨边梁并立中墩: 两根红色边梁竖边先吸住西墩墙棱, 中墩四墙一圈再把边梁另一头咬住, 盖上墩帽。",
+      "tip": "边梁是桥面的第二条传力路径 —— 真正的桥都不止一条腿。",
+      "tiles_to_add": [
+        "beam_w_s",
+        "beam_w_n",
+        "pier_m_s",
+        "pier_m_n",
+        "pier_m_w",
+        "pier_m_e",
+        "cap_m"
+      ],
+      "highlight_tiles": [
+        "pier_w_s",
+        "cap_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "架东跨边梁并立东墩: 照西跨的样子再修一跨, 边梁两头都被墩墙竖棱咬住。",
+      "tip": "",
+      "tiles_to_add": [
+        "beam_e_s",
+        "beam_e_n",
+        "pier_e_s",
+        "pier_e_n",
+        "pier_e_w",
+        "pier_e_e",
+        "cap_e"
+      ],
+      "highlight_tiles": [
+        "pier_m_s",
+        "cap_m"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺桥面: 两块橙色长板短边吸墩帽、长边完整压住边梁顶, 一块板四边同时被抓住。",
+      "tip": "按一按桥面 —— 四边受力的板才配叫桥。",
+      "tiles_to_add": [
+        "deck_w",
+        "deck_e"
+      ],
+      "highlight_tiles": [
+        "beam_w_s",
+        "beam_e_s"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "插护栏小旗: 六面青色小旗骑上三座墩顶, 小板桥通车!",
+      "tip": "",
+      "tiles_to_add": [
+        "rail_w_s",
+        "rail_w_n",
+        "rail_m_s",
+        "rail_m_n",
+        "rail_e_s",
+        "rail_e_n"
+      ],
+      "highlight_tiles": [
+        "deck_w",
+        "deck_e"
+      ]
+    }
+  ]
+}

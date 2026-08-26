@@ -1,0 +1,508 @@
+{
+  "schema_version": 1,
+  "id": "garden_pavilion_01",
+  "name": "花园小凉亭",
+  "name_en": "Garden Pavilion 01",
+  "description": "入门档植物花园: 有篱笆院子的小凉亭, 结构签名是'围院中心亭' —— 一圈 12 段绿篱竖棱手拉手围出 3x3 小院, 院中央四面窗格墙整边骑住亭基, 顶上四片红色等边三角底边吸墙顶、斜棱两两互吸自锁成金字塔锥顶; 一条黄色石板路从紫色院门直通亭子, 把亭与院锁成一体, 篱笆四角还开着粉色小花。26 片全程接地受压零悬挑, 锥尖 1.71 不触发高层判定, 4 岁小手也能一次合围成功。",
+  "difficulty": 1,
+  "total_pieces": 26,
+  "tags": [
+    "植物花园",
+    "凉亭",
+    "篱笆",
+    "小院",
+    "入门"
+  ],
+  "content_meta": {
+    "series": "plant_garden",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 13,
+        "equilateral_triangle": 8,
+        "window_square": 4,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "base",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pav_s",
+      "type": "window_square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pav_n",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pav_w",
+      "type": "window_square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pav_e",
+      "type": "window_square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "roof_e",
+      "type": "equilateral_triangle",
+      "position": [
+        1.833333,
+        1.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "roof_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "roof_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.166667,
+        1.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fence_s_w",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gate",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "fence_s_e",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_w_2",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_e_0",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_e_1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fence_e_2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "flower_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flower_se",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flower_nw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flower_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺亭基和石板路: 灰色方板放院子正中当亭基, 黄色方板贴在南边当石板路。",
+      "tip": "两片方板整边吸合 —— 石板路以后就是进亭子的必经之路。",
+      "tiles_to_add": [
+        "base",
+        "path"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立凉亭四面窗格墙: 墙脚整边骑住亭基四边, 相邻墙竖棱手拉手围成一圈。",
+      "tip": "",
+      "tiles_to_add": [
+        "pav_s",
+        "pav_w",
+        "pav_n",
+        "pav_e"
+      ],
+      "highlight_tiles": [
+        "base"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "盖金字塔锥顶: 四片红色等边三角底边吸墙顶, 斜棱两两互吸, 最后一片一放就自锁成塔尖。",
+      "tip": "四条斜棱互吸成环 —— 这是摩天大楼金顶同款的自锁结构。",
+      "tiles_to_add": [
+        "roof_s",
+        "roof_e",
+        "roof_n",
+        "roof_w"
+      ],
+      "highlight_tiles": [
+        "pav_s",
+        "pav_e"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "围南墙篱笆与西墙篱笆: 紫色门框方站在南面正中当院门, 绿色篱笆逐段竖棱手拉手。",
+      "tip": "院门墙脚正好压住石板路南边 —— 路与门锁成一体。",
+      "tiles_to_add": [
+        "fence_s_w",
+        "gate",
+        "fence_s_e",
+        "fence_w_0",
+        "fence_w_1",
+        "fence_w_2"
+      ],
+      "highlight_tiles": [
+        "path"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "围北墙篱笆与东墙篱笆: 六段绿色篱笆合拢一圈, 小院就围好了。",
+      "tip": "",
+      "tiles_to_add": [
+        "fence_n_0",
+        "fence_n_1",
+        "fence_n_2",
+        "fence_e_0",
+        "fence_e_1",
+        "fence_e_2"
+      ],
+      "highlight_tiles": [
+        "fence_s_w",
+        "fence_w_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "开花: 四朵粉色小花骑上篱笆四角, 花园凉亭开门迎客!",
+      "tip": "",
+      "tiles_to_add": [
+        "flower_sw",
+        "flower_se",
+        "flower_nw",
+        "flower_ne"
+      ],
+      "highlight_tiles": [
+        "fence_s_w",
+        "fence_n_2"
+      ]
+    }
+  ]
+}
