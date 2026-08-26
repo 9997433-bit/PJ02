@@ -1,52 +1,53 @@
 rank,model_id,name,difficulty,risk_score,risk_band,l2_flags,build_class,build_reason,family_id,family_size,family_representative,in_sample_pack,sample_pack_layer,pieces,steps,est_minutes
-1,skyscraper_01,城市摩天大楼,5,63.9,高,tall_structure|tall_wall_chain,must_build,上架抽样包+单模型族,F161,1,skyscraper_01,true,S2,122,26,120
-2,stellar_launch_gantry_01,星港发射塔组合体,5,61.8,高,tall_wall_chain,must_build,上架抽样包+单模型族,F168,1,stellar_launch_gantry_01,true,S2,116,28,120
-3,strait_rainbow_bridge_01,海峡之虹悬索桥,5,56.8,中,,must_build,上架抽样包+单模型族,F170,1,strait_rainbow_bridge_01,true,S2,110,25,120
-4,marble_grand_cascade_01,瀑布双道滚珠梯台,5,54.6,中,tall_wall_chain,must_build,上架抽样包+族代表,F015,2,marble_grand_cascade_01,true,S2,87,25,120
-5,lighthouse_01,海岬灯塔,4,54.6,中,tall_structure|tall_wall_chain,must_build,单模型族,F112,1,lighthouse_01,false,,77,16,70
-6,giant_ferris_wheel_01,巨型摩天轮骨架,5,54.1,中,tall_wall_chain|weak_edge_load_bearing,must_build,上架抽样包+单模型族,F095,1,giant_ferris_wheel_01,true,S2,102,25,120
-7,royal_citadel_01,王城四塔要塞,5,52.6,中,tall_wall_chain,must_build,上架抽样包+单模型族,F151,1,royal_citadel_01,true,S2,124,28,120
-8,eiffel_tower_01,埃菲尔铁塔,4,51.5,中,tall_structure|tall_wall_chain,must_build,单模型族,F083,1,eiffel_tower_01,false,,95,21,70
-9,airport_terminal_01,国际机场航站楼,4,51.3,中,tall_wall_chain,must_build,族代表,F013,2,airport_terminal_01,false,,77,18,70
-10,steam_locomotive_01,蒸汽机车,4,51.2,中,tall_wall_chain,must_build,族代表,F010,3,steam_locomotive_01,false,,99,18,70
-11,triumphal_arch_01,凯旋门,4,50.6,中,tall_wall_chain,must_build,族代表,F046,2,triumphal_arch_01,false,,88,18,70
-12,castle_drawbridge_01,吊桥城堡,4,50.4,中,tall_wall_chain,must_build,单模型族,F064,1,castle_drawbridge_01,false,,99,21,70
-13,marble_run_spiral_01,弹珠螺旋滑道,4,50.4,中,tall_wall_chain,must_build,单模型族,F116,1,marble_run_spiral_01,false,,80,18,70
-14,submarine_dock_01,潜艇维修船坞,4,50.4,中,tall_wall_chain|critical_com_margin,must_build,族代表,F034,2,submarine_dock_01,false,,89,18,70
-15,fire_station_01,一号消防站,4,50.3,中,tall_wall_chain,must_build,族代表,F009,3,fire_station_01,false,,81,19,70
-16,rocket_launchpad_01,火箭发射台,4,50.2,中,tall_wall_chain,must_build,单模型族,F146,1,rocket_launchpad_01,false,,82,18,70
-17,subway_station_01,地铁一号线车站,4,49.8,中,tall_wall_chain,must_build,单模型族,F172,1,subway_station_01,false,,87,18,70
-18,covered_bridge_01,风雨廊桥,4,48.7,中,tall_wall_chain,must_build,单模型族,F073,1,covered_bridge_01,false,,94,18,70
-19,ball_run_tower_01,螺旋滚珠塔,4,48.5,中,tall_wall_chain,deferrable,同族代表 marble_grand_cascade_01 兜底,F015,2,marble_grand_cascade_01,false,,94,19,70
-20,rescue_hq_01,救援行动总部,4,48.2,中,tall_wall_chain,must_build,族代表,F044,2,rescue_hq_01,false,,101,18,70
-21,roman_aqueduct_01,罗马水道桥,4,48.2,中,tall_wall_chain,must_build,单模型族,F149,1,roman_aqueduct_01,false,,79,18,70
-22,treehouse_01,树屋,4,47.2,中,tall_wall_chain,must_build,族代表,F043,2,treehouse_01,false,,79,18,70
-23,rainforest_canopy_01,雨林树冠天桥,4,47.0,中,tall_wall_chain,deferrable,同族代表 treehouse_01 兜底,F043,2,treehouse_01,false,,90,18,70
-24,harbor_crane_01,港口门吊,4,46.8,中,tall_wall_chain,deferrable,同族代表 submarine_dock_01 兜底,F034,2,submarine_dock_01,false,,86,19,70
-25,aircraft_carrier_01,航母甲板段,4,46.4,中,tall_wall_chain,must_build,族代表,F012,2,aircraft_carrier_01,false,,84,18,70
-26,hospital_01,医院,4,46.2,中,tall_wall_chain,must_build,单模型族,F103,1,hospital_01,false,,98,18,70
-27,parking_garage_01,立体停车场,4,46.2,中,tall_wall_chain,deferrable,同族代表 airport_terminal_01 兜底,F013,2,airport_terminal_01,false,,82,18,70
-28,elephant_01,大象,4,46.1,中,tall_wall_chain,must_build,上架抽样包+单模型族,F084,1,elephant_01,true,S3,95,18,70
-29,helicopter_01,救援直升机,4,45.3,中,tall_wall_chain,must_build,族代表,F035,2,helicopter_01,false,,87,18,70
-30,cargo_ship_01,集装箱货轮,4,45.1,中,tall_wall_chain,must_build,单模型族,F062,1,cargo_ship_01,false,,87,18,70
-31,ferry_terminal_01,轮渡码头,4,44.5,中,tall_wall_chain,must_build,上架抽样包+单模型族,F089,1,ferry_terminal_01,true,S3,100,19,70
-32,hanging_garden_01,空中花园,4,43.9,中,tall_wall_chain,must_build,单模型族,F100,1,hanging_garden_01,false,,85,18,70
-33,train_station_01,中央火车站,4,43.9,中,tall_wall_chain,deferrable,同族代表 steam_locomotive_01 兜底,F010,3,steam_locomotive_01,false,,75,18,70
-34,pet_clinic_01,宠物医院,4,43.8,中,tall_wall_chain,deferrable,同族代表 fire_station_01 兜底,F009,3,fire_station_01,false,,96,18,70
-35,stadium_gate_01,体育场大门,4,43.8,中,tall_wall_chain,must_build,上架抽样包,F044,2,rescue_hq_01,true,S3,103,18,70
-36,temple_greek_01,希腊神庙,4,43.6,中,tall_wall_chain,deferrable,同族代表 triumphal_arch_01 兜底,F046,2,triumphal_arch_01,false,,95,18,70
-37,library_building_01,城市图书馆,4,42.8,中,tall_wall_chain,deferrable,同族代表 helicopter_01 兜底,F035,2,helicopter_01,false,,90,18,70
-38,apartment_block_01,居民楼,4,42.6,中,tall_wall_chain,must_build,单模型族,F048,1,apartment_block_01,false,,99,18,70
-39,basketball_arena_01,篮球馆,4,42.5,中,tall_wall_chain,must_build,单模型族,F055,1,basketball_arena_01,false,,83,18,70
-40,post_office_01,邮局,4,42.5,中,tall_wall_chain,deferrable,同族代表 fire_station_01 兜底,F009,3,fire_station_01,false,,97,19,70
-41,school_bus_01,校车,4,42.5,中,tall_wall_chain,must_build,单模型族,F154,1,school_bus_01,false,,98,18,70
-42,race_track_01,环形赛道,4,40.7,中,tall_wall_chain,deferrable,同族代表 aircraft_carrier_01 兜底,F012,2,aircraft_carrier_01,false,,82,18,70
-43,treehouse_02,双树树上小屋,4,40.0,中,,must_build,上架抽样包+单模型族,F180,1,treehouse_02,true,S3,99,18,70
-44,warehouse_01,物流仓库,4,40.0,中,,must_build,单模型族,F186,1,warehouse_01,false,,97,18,70
-45,freight_yard_01,驼峰货运编组场,4,39.5,低,,deferrable,同族代表 steam_locomotive_01 兜底,F010,3,steam_locomotive_01,false,,85,20,70
-46,volcano_base_01,火山科考站,4,39.0,低,,must_build,单模型族,F185,1,volcano_base_01,false,,83,18,70
-47,ice_rink_01,滑冰场,4,38.9,低,,must_build,单模型族,F106,1,ice_rink_01,false,,84,19,70
-48,dinosaur_hall_01,恐龙化石挖掘展厅,4,38.3,低,,must_build,单模型族,F078,1,dinosaur_hall_01,false,,84,18,70
-49,stonehenge_01,草原巨石阵,4,38.2,低,,must_build,单模型族,F169,1,stonehenge_01,false,,91,19,70
-50,tennis_court_01,网球场,4,38.1,低,,must_build,单模型族,F176,1,tennis_court_01,false,,86,20,70
-51,soccer_goal_01,足球门与球场,4,36.9,低,,must_build,单模型族,F164,1,soccer_goal_01,false,,81,18,70
+1,skyscraper_01,城市摩天大楼,5,63.9,高,tall_structure|tall_wall_chain,must_build,上架抽样包+单模型族,F160,1,skyscraper_01,true,S2,122,26,120
+2,stellar_launch_gantry_01,星港发射塔组合体,5,61.8,高,tall_wall_chain,must_build,上架抽样包+单模型族,F169,1,stellar_launch_gantry_01,true,S2,116,28,120
+3,marble_grand_cascade_01,瀑布双道滚珠梯台,5,57.6,中,tall_wall_chain,must_build,上架抽样包+族代表,F013,2,marble_grand_cascade_01,true,S2,123,32,120
+4,strait_rainbow_bridge_01,海峡之虹悬索桥,5,56.8,中,,must_build,上架抽样包+单模型族,F171,1,strait_rainbow_bridge_01,true,S2,110,25,120
+5,giant_ferris_wheel_01,巨型摩天轮骨架,5,55.9,中,tall_wall_chain|weak_edge_load_bearing,must_build,上架抽样包+单模型族,F091,1,giant_ferris_wheel_01,true,S2,122,30,120
+6,lighthouse_01,海岬灯塔,4,54.6,中,tall_structure|tall_wall_chain,must_build,单模型族,F109,1,lighthouse_01,false,,77,16,70
+7,expansion_orb_01,四型合璧灯球坛,4,54.1,中,tall_wall_chain,must_build,单模型族,F082,1,expansion_orb_01,false,,78,18,70
+8,royal_citadel_01,王城四塔要塞,5,52.6,中,tall_wall_chain,must_build,上架抽样包+单模型族,F150,1,royal_citadel_01,true,S2,124,28,120
+9,eiffel_tower_01,埃菲尔铁塔,4,51.5,中,tall_structure|tall_wall_chain,must_build,单模型族,F079,1,eiffel_tower_01,false,,95,21,70
+10,airport_terminal_01,国际机场航站楼,4,51.3,中,tall_wall_chain,must_build,族代表,F011,2,airport_terminal_01,false,,77,18,70
+11,steam_locomotive_01,蒸汽机车,4,51.2,中,tall_wall_chain,must_build,族代表,F009,3,steam_locomotive_01,false,,99,18,70
+12,triumphal_arch_01,凯旋门,4,50.6,中,tall_wall_chain,must_build,族代表,F043,2,triumphal_arch_01,false,,88,18,70
+13,castle_drawbridge_01,吊桥城堡,4,50.4,中,tall_wall_chain,must_build,单模型族,F060,1,castle_drawbridge_01,false,,99,21,70
+14,marble_run_spiral_01,弹珠螺旋滑道,4,50.4,中,tall_wall_chain,must_build,单模型族,F113,1,marble_run_spiral_01,false,,80,18,70
+15,submarine_dock_01,潜艇维修船坞,4,50.4,中,tall_wall_chain|critical_com_margin,must_build,族代表,F031,2,submarine_dock_01,false,,89,18,70
+16,fire_station_01,一号消防站,4,50.3,中,tall_wall_chain,must_build,族代表,F008,3,fire_station_01,false,,81,19,70
+17,rocket_launchpad_01,火箭发射台,4,50.2,中,tall_wall_chain,must_build,单模型族,F145,1,rocket_launchpad_01,false,,82,18,70
+18,subway_station_01,地铁一号线车站,4,49.8,中,tall_wall_chain,must_build,单模型族,F174,1,subway_station_01,false,,87,18,70
+19,covered_bridge_01,风雨廊桥,4,48.7,中,tall_wall_chain,must_build,单模型族,F069,1,covered_bridge_01,false,,94,18,70
+20,ball_run_tower_01,螺旋滚珠塔,4,48.5,中,tall_wall_chain,deferrable,同族代表 marble_grand_cascade_01 兜底,F013,2,marble_grand_cascade_01,false,,94,19,70
+21,rescue_hq_01,救援行动总部,4,48.2,中,tall_wall_chain,must_build,族代表,F041,2,rescue_hq_01,false,,101,18,70
+22,roman_aqueduct_01,罗马水道桥,4,48.2,中,tall_wall_chain,must_build,单模型族,F148,1,roman_aqueduct_01,false,,79,18,70
+23,treehouse_01,树屋,4,47.2,中,tall_wall_chain,must_build,族代表,F040,2,treehouse_01,false,,79,18,70
+24,rainforest_canopy_01,雨林树冠天桥,4,47.0,中,tall_wall_chain,deferrable,同族代表 treehouse_01 兜底,F040,2,treehouse_01,false,,90,18,70
+25,harbor_crane_01,港口门吊,4,46.8,中,tall_wall_chain,deferrable,同族代表 submarine_dock_01 兜底,F031,2,submarine_dock_01,false,,86,19,70
+26,aircraft_carrier_01,航母甲板段,4,46.4,中,tall_wall_chain,must_build,族代表,F010,2,aircraft_carrier_01,false,,84,18,70
+27,hospital_01,医院,4,46.2,中,tall_wall_chain,must_build,单模型族,F100,1,hospital_01,false,,98,18,70
+28,parking_garage_01,立体停车场,4,46.2,中,tall_wall_chain,deferrable,同族代表 airport_terminal_01 兜底,F011,2,airport_terminal_01,false,,82,18,70
+29,elephant_01,大象,4,46.1,中,tall_wall_chain,must_build,上架抽样包+单模型族,F080,1,elephant_01,true,S3,95,18,70
+30,helicopter_01,救援直升机,4,45.3,中,tall_wall_chain,must_build,族代表,F032,2,helicopter_01,false,,87,18,70
+31,cargo_ship_01,集装箱货轮,4,45.1,中,tall_wall_chain,must_build,单模型族,F058,1,cargo_ship_01,false,,87,18,70
+32,ferry_terminal_01,轮渡码头,4,44.5,中,tall_wall_chain,must_build,上架抽样包+单模型族,F086,1,ferry_terminal_01,true,S3,100,19,70
+33,hanging_garden_01,空中花园,4,43.9,中,tall_wall_chain,must_build,单模型族,F096,1,hanging_garden_01,false,,85,18,70
+34,train_station_01,中央火车站,4,43.9,中,tall_wall_chain,deferrable,同族代表 steam_locomotive_01 兜底,F009,3,steam_locomotive_01,false,,75,18,70
+35,pet_clinic_01,宠物医院,4,43.8,中,tall_wall_chain,deferrable,同族代表 fire_station_01 兜底,F008,3,fire_station_01,false,,96,18,70
+36,stadium_gate_01,体育场大门,4,43.8,中,tall_wall_chain,must_build,上架抽样包,F041,2,rescue_hq_01,true,S3,103,18,70
+37,temple_greek_01,希腊神庙,4,43.6,中,tall_wall_chain,deferrable,同族代表 triumphal_arch_01 兜底,F043,2,triumphal_arch_01,false,,95,18,70
+38,library_building_01,城市图书馆,4,42.8,中,tall_wall_chain,deferrable,同族代表 helicopter_01 兜底,F032,2,helicopter_01,false,,90,18,70
+39,apartment_block_01,居民楼,4,42.6,中,tall_wall_chain,must_build,单模型族,F045,1,apartment_block_01,false,,99,18,70
+40,basketball_arena_01,篮球馆,4,42.5,中,tall_wall_chain,must_build,单模型族,F051,1,basketball_arena_01,false,,83,18,70
+41,post_office_01,邮局,4,42.5,中,tall_wall_chain,deferrable,同族代表 fire_station_01 兜底,F008,3,fire_station_01,false,,97,19,70
+42,school_bus_01,校车,4,42.5,中,tall_wall_chain,must_build,单模型族,F153,1,school_bus_01,false,,98,18,70
+43,race_track_01,环形赛道,4,40.7,中,tall_wall_chain,deferrable,同族代表 aircraft_carrier_01 兜底,F010,2,aircraft_carrier_01,false,,82,18,70
+44,treehouse_02,双树树上小屋,4,40.0,中,,must_build,上架抽样包+单模型族,F184,1,treehouse_02,true,S3,99,18,70
+45,warehouse_01,物流仓库,4,40.0,中,,must_build,单模型族,F190,1,warehouse_01,false,,97,18,70
+46,freight_yard_01,驼峰货运编组场,4,39.5,低,,deferrable,同族代表 steam_locomotive_01 兜底,F009,3,steam_locomotive_01,false,,85,20,70
+47,volcano_base_01,火山科考站,4,39.0,低,,must_build,单模型族,F189,1,volcano_base_01,false,,83,18,70
+48,ice_rink_01,滑冰场,4,38.9,低,,must_build,单模型族,F103,1,ice_rink_01,false,,84,19,70
+49,dinosaur_hall_01,恐龙化石挖掘展厅,4,38.3,低,,must_build,单模型族,F074,1,dinosaur_hall_01,false,,84,18,70
+50,stonehenge_01,草原巨石阵,4,38.2,低,,must_build,单模型族,F170,1,stonehenge_01,false,,91,19,70
+51,tennis_court_01,网球场,4,38.1,低,,must_build,单模型族,F179,1,tennis_court_01,false,,86,20,70
+52,soccer_goal_01,足球门与球场,4,36.9,低,,must_build,单模型族,F164,1,soccer_goal_01,false,,81,18,70

@@ -9,65 +9,66 @@
 
 | 口径 | 模型数 | 实搭预算 |
 | --- | ---: | ---: |
-| 必搭 (先排产) | 40 | 3100 分钟 ≈ 51.7 小时 |
+| 必搭 (先排产) | 41 | 3170 分钟 ≈ 52.8 小时 |
 | 可缓建 (须策展签核) | 11 | 770 分钟 ≈ 12.8 小时 |
-| **合计 (D4+ 待复核全集)** | **51** | **3870 分钟 ≈ 64.5 小时** |
+| **合计 (D4+ 待复核全集)** | **52** | **3940 分钟 ≈ 65.7 小时** |
 
-## 2. 队列 (按风险分降序, 51 行)
+## 2. 队列 (按风险分降序, 52 行)
 
 | # | 模型 | 名称 | 难度 | 风险分 | 风险档 | L2 标记 | 排产 | 依据 | 族 | 预算 (分) |
 | ---: | --- | --- | --- | ---: | --- | --- | --- | --- | --- | ---: |
-| 1 | `skyscraper_01` | 城市摩天大楼 | D5 | 63.9 | 高 | `tall_structure`、`tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S2) | F161 | 120 |
-| 2 | `stellar_launch_gantry_01` | 星港发射塔组合体 | D5 | 61.8 | 高 | `tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S2) | F168 | 120 |
-| 3 | `strait_rainbow_bridge_01` | 海峡之虹悬索桥 | D5 | 56.8 | 中 | — | **必搭** | 上架抽样包+单模型族 (S2) | F170 | 120 |
-| 4 | `marble_grand_cascade_01` | 瀑布双道滚珠梯台 | D5 | 54.6 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包+族代表 (S2) | F015 | 120 |
-| 5 | `lighthouse_01` | 海岬灯塔 | D4 | 54.6 | 中 | `tall_structure`、`tall_wall_chain` | **必搭** | 单模型族 | F112 | 70 |
-| 6 | `giant_ferris_wheel_01` | 巨型摩天轮骨架 | D5 | 54.1 | 中 | `tall_wall_chain`、`weak_edge_load_bearing` | **必搭** | 上架抽样包+单模型族 (S2) | F095 | 120 |
-| 7 | `royal_citadel_01` | 王城四塔要塞 | D5 | 52.6 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S2) | F151 | 120 |
-| 8 | `eiffel_tower_01` | 埃菲尔铁塔 | D4 | 51.5 | 中 | `tall_structure`、`tall_wall_chain` | **必搭** | 单模型族 | F083 | 70 |
-| 9 | `airport_terminal_01` | 国际机场航站楼 | D4 | 51.3 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F013 | 70 |
-| 10 | `steam_locomotive_01` | 蒸汽机车 | D4 | 51.2 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F010 | 70 |
-| 11 | `triumphal_arch_01` | 凯旋门 | D4 | 50.6 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F046 | 70 |
-| 12 | `castle_drawbridge_01` | 吊桥城堡 | D4 | 50.4 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F064 | 70 |
-| 13 | `marble_run_spiral_01` | 弹珠螺旋滑道 | D4 | 50.4 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F116 | 70 |
-| 14 | `submarine_dock_01` | 潜艇维修船坞 | D4 | 50.4 | 中 | `tall_wall_chain`、`critical_com_margin` | **必搭** | 族代表 | F034 | 70 |
-| 15 | `fire_station_01` | 一号消防站 | D4 | 50.3 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F009 | 70 |
-| 16 | `rocket_launchpad_01` | 火箭发射台 | D4 | 50.2 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F146 | 70 |
-| 17 | `subway_station_01` | 地铁一号线车站 | D4 | 49.8 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F172 | 70 |
-| 18 | `covered_bridge_01` | 风雨廊桥 | D4 | 48.7 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F073 | 70 |
-| 19 | `ball_run_tower_01` | 螺旋滚珠塔 | D4 | 48.5 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `marble_grand_cascade_01` 兜底 | F015 | 70 |
-| 20 | `rescue_hq_01` | 救援行动总部 | D4 | 48.2 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F044 | 70 |
-| 21 | `roman_aqueduct_01` | 罗马水道桥 | D4 | 48.2 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F149 | 70 |
-| 22 | `treehouse_01` | 树屋 | D4 | 47.2 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F043 | 70 |
-| 23 | `rainforest_canopy_01` | 雨林树冠天桥 | D4 | 47.0 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `treehouse_01` 兜底 | F043 | 70 |
-| 24 | `harbor_crane_01` | 港口门吊 | D4 | 46.8 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `submarine_dock_01` 兜底 | F034 | 70 |
-| 25 | `aircraft_carrier_01` | 航母甲板段 | D4 | 46.4 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F012 | 70 |
-| 26 | `hospital_01` | 医院 | D4 | 46.2 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F103 | 70 |
-| 27 | `parking_garage_01` | 立体停车场 | D4 | 46.2 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `airport_terminal_01` 兜底 | F013 | 70 |
-| 28 | `elephant_01` | 大象 | D4 | 46.1 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S3) | F084 | 70 |
-| 29 | `helicopter_01` | 救援直升机 | D4 | 45.3 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F035 | 70 |
-| 30 | `cargo_ship_01` | 集装箱货轮 | D4 | 45.1 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F062 | 70 |
-| 31 | `ferry_terminal_01` | 轮渡码头 | D4 | 44.5 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S3) | F089 | 70 |
-| 32 | `hanging_garden_01` | 空中花园 | D4 | 43.9 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F100 | 70 |
-| 33 | `train_station_01` | 中央火车站 | D4 | 43.9 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `steam_locomotive_01` 兜底 | F010 | 70 |
-| 34 | `pet_clinic_01` | 宠物医院 | D4 | 43.8 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `fire_station_01` 兜底 | F009 | 70 |
-| 35 | `stadium_gate_01` | 体育场大门 | D4 | 43.8 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包 (S3) | F044 | 70 |
-| 36 | `temple_greek_01` | 希腊神庙 | D4 | 43.6 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `triumphal_arch_01` 兜底 | F046 | 70 |
-| 37 | `library_building_01` | 城市图书馆 | D4 | 42.8 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `helicopter_01` 兜底 | F035 | 70 |
-| 38 | `apartment_block_01` | 居民楼 | D4 | 42.6 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F048 | 70 |
-| 39 | `basketball_arena_01` | 篮球馆 | D4 | 42.5 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F055 | 70 |
-| 40 | `post_office_01` | 邮局 | D4 | 42.5 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `fire_station_01` 兜底 | F009 | 70 |
-| 41 | `school_bus_01` | 校车 | D4 | 42.5 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F154 | 70 |
-| 42 | `race_track_01` | 环形赛道 | D4 | 40.7 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `aircraft_carrier_01` 兜底 | F012 | 70 |
-| 43 | `treehouse_02` | 双树树上小屋 | D4 | 40.0 | 中 | — | **必搭** | 上架抽样包+单模型族 (S3) | F180 | 70 |
-| 44 | `warehouse_01` | 物流仓库 | D4 | 40.0 | 中 | — | **必搭** | 单模型族 | F186 | 70 |
-| 45 | `freight_yard_01` | 驼峰货运编组场 | D4 | 39.5 | 低 | — | 可缓建 | 同族代表 `steam_locomotive_01` 兜底 | F010 | 70 |
-| 46 | `volcano_base_01` | 火山科考站 | D4 | 39.0 | 低 | — | **必搭** | 单模型族 | F185 | 70 |
-| 47 | `ice_rink_01` | 滑冰场 | D4 | 38.9 | 低 | — | **必搭** | 单模型族 | F106 | 70 |
-| 48 | `dinosaur_hall_01` | 恐龙化石挖掘展厅 | D4 | 38.3 | 低 | — | **必搭** | 单模型族 | F078 | 70 |
-| 49 | `stonehenge_01` | 草原巨石阵 | D4 | 38.2 | 低 | — | **必搭** | 单模型族 | F169 | 70 |
-| 50 | `tennis_court_01` | 网球场 | D4 | 38.1 | 低 | — | **必搭** | 单模型族 | F176 | 70 |
-| 51 | `soccer_goal_01` | 足球门与球场 | D4 | 36.9 | 低 | — | **必搭** | 单模型族 | F164 | 70 |
+| 1 | `skyscraper_01` | 城市摩天大楼 | D5 | 63.9 | 高 | `tall_structure`、`tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S2) | F160 | 120 |
+| 2 | `stellar_launch_gantry_01` | 星港发射塔组合体 | D5 | 61.8 | 高 | `tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S2) | F169 | 120 |
+| 3 | `marble_grand_cascade_01` | 瀑布双道滚珠梯台 | D5 | 57.6 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包+族代表 (S2) | F013 | 120 |
+| 4 | `strait_rainbow_bridge_01` | 海峡之虹悬索桥 | D5 | 56.8 | 中 | — | **必搭** | 上架抽样包+单模型族 (S2) | F171 | 120 |
+| 5 | `giant_ferris_wheel_01` | 巨型摩天轮骨架 | D5 | 55.9 | 中 | `tall_wall_chain`、`weak_edge_load_bearing` | **必搭** | 上架抽样包+单模型族 (S2) | F091 | 120 |
+| 6 | `lighthouse_01` | 海岬灯塔 | D4 | 54.6 | 中 | `tall_structure`、`tall_wall_chain` | **必搭** | 单模型族 | F109 | 70 |
+| 7 | `expansion_orb_01` | 四型合璧灯球坛 | D4 | 54.1 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F082 | 70 |
+| 8 | `royal_citadel_01` | 王城四塔要塞 | D5 | 52.6 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S2) | F150 | 120 |
+| 9 | `eiffel_tower_01` | 埃菲尔铁塔 | D4 | 51.5 | 中 | `tall_structure`、`tall_wall_chain` | **必搭** | 单模型族 | F079 | 70 |
+| 10 | `airport_terminal_01` | 国际机场航站楼 | D4 | 51.3 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F011 | 70 |
+| 11 | `steam_locomotive_01` | 蒸汽机车 | D4 | 51.2 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F009 | 70 |
+| 12 | `triumphal_arch_01` | 凯旋门 | D4 | 50.6 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F043 | 70 |
+| 13 | `castle_drawbridge_01` | 吊桥城堡 | D4 | 50.4 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F060 | 70 |
+| 14 | `marble_run_spiral_01` | 弹珠螺旋滑道 | D4 | 50.4 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F113 | 70 |
+| 15 | `submarine_dock_01` | 潜艇维修船坞 | D4 | 50.4 | 中 | `tall_wall_chain`、`critical_com_margin` | **必搭** | 族代表 | F031 | 70 |
+| 16 | `fire_station_01` | 一号消防站 | D4 | 50.3 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F008 | 70 |
+| 17 | `rocket_launchpad_01` | 火箭发射台 | D4 | 50.2 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F145 | 70 |
+| 18 | `subway_station_01` | 地铁一号线车站 | D4 | 49.8 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F174 | 70 |
+| 19 | `covered_bridge_01` | 风雨廊桥 | D4 | 48.7 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F069 | 70 |
+| 20 | `ball_run_tower_01` | 螺旋滚珠塔 | D4 | 48.5 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `marble_grand_cascade_01` 兜底 | F013 | 70 |
+| 21 | `rescue_hq_01` | 救援行动总部 | D4 | 48.2 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F041 | 70 |
+| 22 | `roman_aqueduct_01` | 罗马水道桥 | D4 | 48.2 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F148 | 70 |
+| 23 | `treehouse_01` | 树屋 | D4 | 47.2 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F040 | 70 |
+| 24 | `rainforest_canopy_01` | 雨林树冠天桥 | D4 | 47.0 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `treehouse_01` 兜底 | F040 | 70 |
+| 25 | `harbor_crane_01` | 港口门吊 | D4 | 46.8 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `submarine_dock_01` 兜底 | F031 | 70 |
+| 26 | `aircraft_carrier_01` | 航母甲板段 | D4 | 46.4 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F010 | 70 |
+| 27 | `hospital_01` | 医院 | D4 | 46.2 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F100 | 70 |
+| 28 | `parking_garage_01` | 立体停车场 | D4 | 46.2 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `airport_terminal_01` 兜底 | F011 | 70 |
+| 29 | `elephant_01` | 大象 | D4 | 46.1 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S3) | F080 | 70 |
+| 30 | `helicopter_01` | 救援直升机 | D4 | 45.3 | 中 | `tall_wall_chain` | **必搭** | 族代表 | F032 | 70 |
+| 31 | `cargo_ship_01` | 集装箱货轮 | D4 | 45.1 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F058 | 70 |
+| 32 | `ferry_terminal_01` | 轮渡码头 | D4 | 44.5 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包+单模型族 (S3) | F086 | 70 |
+| 33 | `hanging_garden_01` | 空中花园 | D4 | 43.9 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F096 | 70 |
+| 34 | `train_station_01` | 中央火车站 | D4 | 43.9 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `steam_locomotive_01` 兜底 | F009 | 70 |
+| 35 | `pet_clinic_01` | 宠物医院 | D4 | 43.8 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `fire_station_01` 兜底 | F008 | 70 |
+| 36 | `stadium_gate_01` | 体育场大门 | D4 | 43.8 | 中 | `tall_wall_chain` | **必搭** | 上架抽样包 (S3) | F041 | 70 |
+| 37 | `temple_greek_01` | 希腊神庙 | D4 | 43.6 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `triumphal_arch_01` 兜底 | F043 | 70 |
+| 38 | `library_building_01` | 城市图书馆 | D4 | 42.8 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `helicopter_01` 兜底 | F032 | 70 |
+| 39 | `apartment_block_01` | 居民楼 | D4 | 42.6 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F045 | 70 |
+| 40 | `basketball_arena_01` | 篮球馆 | D4 | 42.5 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F051 | 70 |
+| 41 | `post_office_01` | 邮局 | D4 | 42.5 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `fire_station_01` 兜底 | F008 | 70 |
+| 42 | `school_bus_01` | 校车 | D4 | 42.5 | 中 | `tall_wall_chain` | **必搭** | 单模型族 | F153 | 70 |
+| 43 | `race_track_01` | 环形赛道 | D4 | 40.7 | 中 | `tall_wall_chain` | 可缓建 | 同族代表 `aircraft_carrier_01` 兜底 | F010 | 70 |
+| 44 | `treehouse_02` | 双树树上小屋 | D4 | 40.0 | 中 | — | **必搭** | 上架抽样包+单模型族 (S3) | F184 | 70 |
+| 45 | `warehouse_01` | 物流仓库 | D4 | 40.0 | 中 | — | **必搭** | 单模型族 | F190 | 70 |
+| 46 | `freight_yard_01` | 驼峰货运编组场 | D4 | 39.5 | 低 | — | 可缓建 | 同族代表 `steam_locomotive_01` 兜底 | F009 | 70 |
+| 47 | `volcano_base_01` | 火山科考站 | D4 | 39.0 | 低 | — | **必搭** | 单模型族 | F189 | 70 |
+| 48 | `ice_rink_01` | 滑冰场 | D4 | 38.9 | 低 | — | **必搭** | 单模型族 | F103 | 70 |
+| 49 | `dinosaur_hall_01` | 恐龙化石挖掘展厅 | D4 | 38.3 | 低 | — | **必搭** | 单模型族 | F074 | 70 |
+| 50 | `stonehenge_01` | 草原巨石阵 | D4 | 38.2 | 低 | — | **必搭** | 单模型族 | F170 | 70 |
+| 51 | `tennis_court_01` | 网球场 | D4 | 38.1 | 低 | — | **必搭** | 单模型族 | F179 | 70 |
+| 52 | `soccer_goal_01` | 足球门与球场 | D4 | 36.9 | 低 | — | **必搭** | 单模型族 | F164 | 70 |
 
 ## 3. 纪律 (缓建不是免检)
 
