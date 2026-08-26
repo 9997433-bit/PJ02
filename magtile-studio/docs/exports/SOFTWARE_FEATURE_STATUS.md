@@ -125,7 +125,7 @@
 
 ```bash
 cd magtile-studio
-ctest --test-dir build -j4                    # 556/556
+ctest --test-dir build -j4                    # 557/557
 tools/run_e2e_smoke.sh --strict               # E2E 9 项
 tools/run_release_gate.sh --full --l2       # QA+L2 全绿
 tools/check_v1_readiness.sh --quick         # 14 PASS / 2 FAIL (仅 R6/R7)
