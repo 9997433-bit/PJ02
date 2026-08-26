@@ -1,0 +1,608 @@
+{
+  "schema_version": 1,
+  "id": "trapezoid_awning_01",
+  "name": "梯形雨棚连廊",
+  "name_en": "Trapezoid Awning Walk 01",
+  "description": "植物花园 D2: 4x2 下沉式走道 (T12 层叠退台) 上立内框四片 2 格檐轨, 顶沿供上层四片梯形合围开放式雨棚; 走道两侧 2 格泥土基座外挑四片梯形檐篷盖住苗床, 沿口四色盆花点缀 —— 上下两层共八片梯形, 连廊能走通、花床有荫。与玫瑰长廊的门式横梁不同,这次主角就是扩展梯形片本身。",
+  "difficulty": 2,
+  "total_pieces": 32,
+  "tags": [
+    "植物花园",
+    "雨棚",
+    "连廊",
+    "梯形",
+    "花台",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "plant_garden",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 12,
+        "rectangle": 8,
+        "trapezoid": 8,
+        "equilateral_triangle": 4
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "path_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "path_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "path_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "path_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "post_sw",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "post_nw",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "post_se",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "post_ne",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rim_s",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rim_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rim_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rim_e",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "roof_s",
+      "type": "trapezoid",
+      "position": [
+        2.0,
+        0.222222,
+        1.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "roof_e",
+      "type": "trapezoid",
+      "position": [
+        2.777778,
+        1.0,
+        1.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_n",
+      "type": "trapezoid",
+      "position": [
+        2.0,
+        1.777778,
+        1.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "roof_w",
+      "type": "trapezoid",
+      "position": [
+        1.222222,
+        1.0,
+        1.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "foot_s0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "foot_s2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "foot_n0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "foot_n2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pot_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pot_nw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "pot_se",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pot_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "eave_sw",
+      "type": "trapezoid",
+      "position": [
+        1.0,
+        -0.222222,
+        0.31427
+      ],
+      "rotation": [
+        125.264381,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eave_se",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        -0.222222,
+        0.31427
+      ],
+      "rotation": [
+        125.264381,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "eave_nw",
+      "type": "trapezoid",
+      "position": [
+        1.0,
+        2.222222,
+        0.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "eave_ne",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        2.222222,
+        0.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺走道: 八片清灰相间的方板拼成 4x2, 中央 2x2 与外角同层 —— 下沉式走道。",
+      "tip": "走道铺平, 角柱和檐轨才有整边可吸 —— 这是 T12 的地基。",
+      "tiles_to_add": [
+        "path_0_0",
+        "path_1_0",
+        "path_2_0",
+        "path_3_0",
+        "path_0_1",
+        "path_1_1",
+        "path_2_1",
+        "path_3_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立角柱与内框檐轨: 四角绿色立墙 + 四片灰色横楣围成 2x2 抬升檐口。",
+      "tip": "檐轨顶沿 z=1 比走道高一层 —— T12 层叠退台, 也是雨棚铰链线。",
+      "tiles_to_add": [
+        "post_sw",
+        "post_nw",
+        "post_se",
+        "post_ne",
+        "rim_s",
+        "rim_n",
+        "rim_w",
+        "rim_e"
+      ],
+      "highlight_tiles": [
+        "path_0_0",
+        "path_3_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "合围上层雨棚: 四片梯形下底吸檐轨顶沿, 腰互锁成开放式顶 —— 南北绿、东西清。",
+      "tip": "梯形片是主角 —— 四片合围, 阳光还能从棚顶漏下来。",
+      "tiles_to_add": [
+        "roof_s",
+        "roof_e",
+        "roof_n",
+        "roof_w"
+      ],
+      "highlight_tiles": [
+        "rim_s",
+        "rim_n"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺南侧苗床: 两片 2 格泥土基座贴住走道南沿, 给下层檐篷整边铰链。",
+      "tip": "基座北沿与走道南沿共用一条缝 —— 花园和连廊连成一体。",
+      "tiles_to_add": [
+        "foot_s0",
+        "foot_s2"
+      ],
+      "highlight_tiles": [
+        "path_0_0",
+        "post_sw"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "铺北侧基座并摆盆花: 两片泥土基座, 四株三角盆花立在走道北/南沿。",
+      "tip": "盆花底边吸走道沿 —— 连廊里也能看到颜色。",
+      "tiles_to_add": [
+        "foot_n0",
+        "foot_n2",
+        "pot_sw",
+        "pot_nw",
+        "pot_se",
+        "pot_ne"
+      ],
+      "highlight_tiles": [
+        "path_0_0",
+        "path_3_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "合围下层檐篷: 四片梯形吸基座顶沿外挑 —— 梯形雨棚连廊落成!",
+      "tip": "上下两层共八片梯形 —— 沿下沉走道慢慢穿过去, 别踩到花。",
+      "tiles_to_add": [
+        "eave_sw",
+        "eave_se",
+        "eave_nw",
+        "eave_ne"
+      ],
+      "highlight_tiles": [
+        "foot_s0",
+        "path_1_0",
+        "roof_s"
+      ]
+    }
+  ]
+}
