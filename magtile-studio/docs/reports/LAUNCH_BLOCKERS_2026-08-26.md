@@ -4,7 +4,7 @@
 - 基线提交: `ad6d35c` (`cursor/magtile-studio-foundation-a95b`, 内容库 250 模型; 批 P `53615ea` + 治理刷新)
 - 取代版本: [LAUNCH_BLOCKERS_2026-08-25.md](LAUNCH_BLOCKERS_2026-08-25.md) (双红灯口径, 已过时)
 - 对账单: [V1_LAUNCH_CHECKLIST.md](../V1_LAUNCH_CHECKLIST.md) (34 个 P0)
-- 工程天花板: [ENGINEERING_CEILING_2026-08-25.md](ENGINEERING_CEILING_2026-08-25.md) 结论**在本基线重新确认成立** —— 软件工程侧无可自主推进项 (见 §5)
+- 工程天花板: [ENGINEERING_CEILING_2026-08-26.md](ENGINEERING_CEILING_2026-08-26.md) 结论**在本基线重新确认成立** —— 软件工程侧无可自主推进项 (见 §5)
 - 本单用途: 登记 2026-08-25 决策单发出后的推进结果 (**路径 B 配额解冻已完成**), 并把剩余阻塞收敛为**两条路径**: 路径 A 实物签核 (唯一软件侧相邻阻塞) 与路径 C Manual P0
 
 ## 0. 当前门禁快照 (基线 `ad6d35c` 实跑)
@@ -131,7 +131,7 @@ tools/check_v1_readiness.sh --strict   # 签核档: SKIP 算失败
 
 ## 5. 工程侧不再自主推进的事项
 
-[ENGINEERING_CEILING_2026-08-25.md](ENGINEERING_CEILING_2026-08-25.md) 的结论在
+[ENGINEERING_CEILING_2026-08-26.md](ENGINEERING_CEILING_2026-08-26.md) 的结论在
 `9aa146d` 基线重新确认: 路径 B 是 08-25 天花板报告中唯一的工程可执行决策项, 决策
 落地后工程侧已执行完毕并清零随批红项 —— **软件工程侧再次触顶, 无可自主推进项**:
 
