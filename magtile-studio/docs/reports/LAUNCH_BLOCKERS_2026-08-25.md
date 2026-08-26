@@ -1,5 +1,9 @@
 # 商用上架阻塞项决策单 (Launch Blockers)
 
+> **本单已被取代 (2026-08-26)**: 路径 B 难度配额已解冻 (D1 20/20, D5 6/6, strict 守卫转绿),
+> 双红灯口径失效 —— 最新决策单见 [LAUNCH_BLOCKERS_2026-08-26.md](LAUNCH_BLOCKERS_2026-08-26.md)
+> (唯一软件侧相邻阻塞 = 路径 A 实物复核 0/51 + 路径 C Manual P0)。本文仅作历史留痕。
+
 - 生成时间: 2026-08-25 22:06 UTC
 - 基线提交: `6e55c50` (`cursor/magtile-studio-foundation-a95b`)
 - 对账单: [V1_LAUNCH_CHECKLIST.md](../V1_LAUNCH_CHECKLIST.md) (34 个 P0)

@@ -8,6 +8,21 @@
 > [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md), 本单不另立口径,
 > 只做「工程 vs 你」的分工切面。
 >
+> **状态快照增补 (2026-08-26, 基线 `9aa146d`)**: **路径 B 难度配额解冻已完成**
+> —— B1 置换执行完毕 (D1 入门批 ×5 共 20 个 + D5 大师批 +5 个, 退役 25 个
+> D3, 总量保持 250), `check_difficulty_quota.py --strict` 退出码 0 (D1
+> 20/20, D5 6/6, D3 冻结解除); 随批引入的 5 个软件侧红项已按正式路径清零
+> (QA 关卡 4/5 片数下限转难度感知 `b925eba` + 2 个 D5 扩规模
+> `531860e`/`d78f419` + R9 放置重排 `acdc834`)。全量 QA 42 子关卡 **0 失败**
+> (CTest 556/556), D4+ 全集 46 → **51** (新增 5 个 D5), 抗扰动 **51/51 ×
+> 50 轮全绿**; `run_release_gate.sh --full --fail-on-pending` **唯一红灯 =
+> L3 实物 0/51**。实物排产三件套已刷新至 51 口径 (`e387d31`): **必搭 40 个
+> ≈ 51.7h + 可缓建 11 个 ≈ 12.8h** (§4.3 工时以此为准)。剩余阻塞只有两条:
+> **路径 A 实物复核 (你, §4.3)** 与**路径 C Manual P0 (你, §4 其余小节)**;
+> 决策单已换版 [reports/LAUNCH_BLOCKERS_2026-08-26.md](reports/LAUNCH_BLOCKERS_2026-08-26.md)。
+> 下方 2026-08-25 快照中「难度配额预期红 (D1 0/20 / D5 1/6)」等表述**已过时**,
+> 以本段与最新留痕报告为准。
+>
 > **状态快照**: 2026-08-25 22:03 UTC 文档同步 —— 内容库扩容收官至
 > **250 模型** (`2b2c4ff` 基线, 内容批 F~I 合计 234→250, **200~250
 > 上限目标达成**; 收官批全量 QA 38 关卡全过: strict 巡检 + L2 jitter +
@@ -191,12 +206,14 @@ D4+ 全集 46 —— 新增批旗舰 `stonehenge_01` D4, 其余 15 个全部 D2/
 
 ## 3. 工程侧下一波 (全部需用户决策后启动)
 
-依据 [reports/ENGINEERING_CEILING_2026-08-25.md](reports/ENGINEERING_CEILING_2026-08-25.md),
-**无可自主推进项**。下列仅为决策落地后工程可接手的范围 (详见
-[reports/LAUNCH_BLOCKERS_2026-08-25.md](reports/LAUNCH_BLOCKERS_2026-08-25.md)):
+依据 [reports/ENGINEERING_CEILING_2026-08-25.md](reports/ENGINEERING_CEILING_2026-08-25.md)
+(结论在配额批后基线 `9aa146d` 重新确认成立), **无可自主推进项**。下列仅为
+决策落地后工程可接手的范围 (详见
+[reports/LAUNCH_BLOCKERS_2026-08-26.md](reports/LAUNCH_BLOCKERS_2026-08-26.md)):
 
-1. **路径 B — 配额解冻 (你选 B1/B2/B3 后)**: 批 J–M 置换/扩库执行
-   (`review_content_batch.sh` 五关机检 + D3 冻结闸门);
+1. ~~**路径 B — 配额解冻**~~: **✅ 已完成 (2026-08-26)** —— B1 置换执行完毕,
+   D1 20/20 / D5 6/6 strict 守卫转绿, 随批 5 个红项已清零; 后续仅为维持项
+   (批次评审机检 + `difficulty_quota_gate` 常开闸门自动守卫解冻线);
 2. **路径 C — D8 自动更新**: 你签字「实现 vs 降级 V1.1」后工程可起草方案;
 3. **路径 C — D2 试跑**: 你授权或自行触发 `windows-release` dispatch;
 4. **P1 项**: B4 内容包 / A7 体验缺口 / 商店截图草稿 (不阻断 V1)。
@@ -234,8 +251,9 @@ D4+ 全集 46 —— 新增批旗舰 `stonehenge_01` D4, 其余 15 个全部 D2/
 
 ### 4.3 实物复核 (R6/R7, **随时可开工, 不依赖行政**; L2 三层流程已大幅缩减人手量)
 
-**新口径 (2026-08-25 L2 决议)**: 你**不必把全库 250 个模型全搭一遍,
-也不再逐个搭完 46 个 D4+ 全集**。实物验证升级为三层流程 (对账口径
+**新口径 (2026-08-25 L2 决议; 计数已随配额批更新至 51)**: 你**不必把全库
+250 个模型全搭一遍, 也不再逐个搭完 51 个 D4+ 全集** (45 D4 + 6 D5,
+配额批新增 5 个 D5)。实物验证升级为三层流程 (对账口径
 [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §8): 第一层软件全绿
 (strict 双档, 既有) 与第二层虚拟物理验证 (`magtile_app validate
 --jitter N` 蒙特卡洛抖动 + 全库风险评分 + 自动标记, 探测 R17) 全部由
@@ -251,14 +269,15 @@ python3 tools/export_physical_review_queue.py \
 ```
 
 排产队列最新导出: [PHYSICAL_REVIEW_QUEUE.md](reports/PHYSICAL_REVIEW_QUEUE.md)
-(250 基线: 必搭 36 ≈ 42.8h + 可缓建 10 ≈ 11.7h)。三工具与 `--jitter`
-均为 L2 批次交付物 (**已全部入库**, 逐槽哈希见 §2); 具体旗标以各自
-`--help` 为准。
+(配额批后 51 口径 `e387d31`: **待复核 51 = 必搭 40 ≈ 51.7h + 可缓建 11
+≈ 12.8h**; 其中 3 个 D5 在导出后又经内容返工加固, 预算按难度带不受影响,
+首批落盘刷新时重导出一次即可)。三工具与 `--jitter` 均为 L2 批次交付物
+(**已全部入库**, 逐槽哈希见 §2); 具体旗标以各自 `--help` 为准。
 
 | # | 做什么 | 准备什么 | 文档 | 预估工时 |
 | --- | --- | --- | --- | --- |
-| R6 首批: 抽样包 10 个实搭签核 (预计与 risk Top 15 高度重合, 结果兼作第二层首轮校准数据) | 逐模型: strict (+ `--jitter`) 预检 → 只看教程实搭 → 敲击/提起/拆解重搭 → 拍照 → 通过则落盘 `physical_verified` 三字段; 失败按失效编码经 `tools/physical_failure_registry.py` 登记 (回灌负例夹具) | 官方基准品牌磁力片按**单模型最大需求**备料 (最多 122 片; 颜色瓶颈: 灰方 65 / 蓝方 43 / 橙方 34); 平整硬桌面 + 秒表 + 录像 + 打印工作单 | [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md) + 规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) | **约 12.5 小时** (D5 旗舰 120 分钟单独一场 + 9×D4 各 70 分钟) |
-| R7 缩减集清零: risk Top 15 + 结构族代表 (扣除与抽样包重合部分) | 同上; **非代表模型不用搭** —— 由「同族代表实搭通过 + 第二层 jitter 全绿」覆盖; 可多人按模型切分 (每模型一人走完全程) | 同上 | 同上 §1/§6 | **以两份报告实跑清单为准 (已刷新至 250 基线 `ced770c`): 族去重后必搭 36 个 ≈ 2570 分钟 (约 42.8 小时), 可缓建 10 个 ≈ 700 分钟 (约 11.7 小时, 省 21%)** (原全集口径 46 个 ≈ 54.5 小时; 缓建采纳与否是策展/QA 政策决定, 见 [reports/PHYSICAL_FAMILY_PACK.md](reports/PHYSICAL_FAMILY_PACK.md)) |
+| R6 首批: 抽样包 10 个实搭签核 (预计与 risk Top 15 高度重合, 结果兼作第二层首轮校准数据) | 逐模型: strict (+ `--jitter`) 预检 → 只看教程实搭 → 敲击/提起/拆解重搭 → 拍照 → 通过则落盘 `physical_verified` 三字段; 失败按失效编码经 `tools/physical_failure_registry.py` 登记 (回灌负例夹具) | 官方基准品牌磁力片按**单模型最大需求**备料 (最多 123 片 —— `marble_grand_cascade_01` 扩规模后; 颜色瓶颈明细以 [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) 备料节为准); 平整硬桌面 + 秒表 + 录像 + 打印工作单 | [reports/PHYSICAL_REVIEW_USER_GUIDE.md](reports/PHYSICAL_REVIEW_USER_GUIDE.md) + [reports/PHYSICAL_SIGNOFF_WORKSHEET.md](reports/PHYSICAL_SIGNOFF_WORKSHEET.md) + 规程 [PHYSICAL_REBUILD_CHECKLIST.md](PHYSICAL_REBUILD_CHECKLIST.md) | **约 16.7 小时** (配额批后抽样包含全部 6 个 D5 各 120 分钟 + 4×D4 各 70 分钟 = 1000 分钟) |
+| R7 缩减集清零: risk Top 15 + 结构族代表 (扣除与抽样包重合部分) | 同上; **非代表模型不用搭** —— 由「同族代表实搭通过 + 第二层 jitter 全绿」覆盖; 可多人按模型切分 (每模型一人走完全程) | 同上 | 同上 §1/§6 | **以两份报告实跑清单为准 (已刷新至配额批后 51 口径 `e387d31`): 族去重后必搭 40 个 ≈ 3100 分钟 (约 51.7 小时), 可缓建 11 个 ≈ 770 分钟 (约 12.8 小时, 省 20%)** (全集口径 51 个 ≈ 3870 分钟 ≈ 64.5 小时; 缓建采纳与否是策展/QA 政策决定, 见 [reports/PHYSICAL_FAMILY_PACK.md](reports/PHYSICAL_FAMILY_PACK.md)) |
 
 红线: 缩减是「搭哪些」的缩减, 不是「怎么搭」的放松 —— 缩减集内
 **未实搭严禁标记通过**, 固定动作 (敲击/提起/拆解重搭) 与落盘纪律不变;
@@ -302,12 +321,12 @@ python3 tools/export_physical_review_queue.py \
 | 三平台隐私安全自查单对**候选出包产物**逐项签核 | [reports/PRIVACY_SECURITY_SIGNOFF.md](reports/PRIVACY_SECURITY_SIGNOFF.md) | 每平台 1~2 小时 |
 | V1 清单全部 Manual 行回填状态 + 签核记录 | [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §10 | 1 小时 |
 
-**工时汇总** (单人动手, 可多人并行压缩): 实物缩减集必搭 36 个
-≈ 42.8 小时 (250 基线族包实跑 `ced770c`; 可缓建 10 个再省约 11.7
-小时; 原全集口径 46 个 ≈ 54.5 小时) + 实机/真机/签核约 3~4 个工作日 +
+**工时汇总** (单人动手, 可多人并行压缩): 实物缩减集必搭 40 个
+≈ 51.7 小时 (配额批后 51 口径族包实跑 `e387d31`; 可缓建 11 个另计约
+12.8 小时; 全集口径 51 个 ≈ 64.5 小时) + 实机/真机/签核约 3~4 个工作日 +
 行政动手约 2~3 个工作日 + 付费验收约 1 个工作日 + 法务协调约 1 个
-工作日 ≈ **12~14 个工作日量级** (缓建全部采纳则 ≈ 11~13; 全集口径
-≈ 15); 外部等待关键路径 = 软著 30~40 个工作日, 与全部动手项并行。
+工作日 ≈ **13~15 个工作日量级** (全集 51 个全搭则 ≈ 15~17);
+外部等待关键路径 = 软著 30~40 个工作日, 与全部动手项并行。
 
 ---
 
@@ -332,9 +351,9 @@ python3 tools/list_physical_pending.py data/models --fail-on-pending
 tools/check_v1_readiness.sh --quick
 # 预期: R6/R7 与 L2 探测 R17 全部 PASS, 摘要零 FAIL, 退出码 0
 tools/run_release_gate.sh --full --fail-on-pending
-# 预期: 实物侧全绿 —— G2 出包终防线解锁。注意: 治理波次后 --full 档
-# 含难度配额 strict 守卫 (关卡 21), 内容侧补齐 D1>=20 且 D5>=6 前该
-# 关保持预期红灯 (与实物复核无关, 由工程内容侧清零, 见 §3 第 3 条)
+# 预期: 全绿 —— G2 出包终防线解锁。难度配额 strict 守卫已于 2026-08-26
+# 转绿 (D1 20/20 / D5 6/6, D3 解冻), L3 实物是最后一道红灯: 实搭清零
+# 即全绿, 不再有其他前置
 ```
 
 实搭中任何失败: 按失效编码经 `tools/physical_failure_registry.py`
@@ -402,8 +421,8 @@ tools/check_v1_readiness.sh --strict
 tools/run_e2e_smoke.sh --strict
 # 预期: 9 项全 PASS, 0 SKIP
 tools/run_release_gate.sh --full --fail-on-pending
-# 预期: 全绿 (含关卡 21 难度配额 strict —— 前提是内容侧已补齐
-# D1>=20 且 D5>=6, D3 解冻; 见 §3 第 3 条)
+# 预期: 全绿 (难度配额 strict 已于 2026-08-26 转绿 —— D1 20/20 /
+# D5 6/6, D3 解冻; 唯一硬前置 = §4.3 实物复核清零)
 ```
 
 人工侧同时满足 [V1_LAUNCH_CHECKLIST.md](V1_LAUNCH_CHECKLIST.md) §10
@@ -416,7 +435,7 @@ tools/run_release_gate.sh --full --fail-on-pending
 
 | 谁 | 负责什么 |
 | --- | --- |
-| **工程 (Agent)** | 代码、内容、测试、CI、打包脚本、全部执行文档脚手架、L2 虚拟物理验证工具链 (jitter / 风险报告 / 结构族 / 失败登记)、内容治理机检链 (系列归类 R18 / D3 冻结配额 / 矩阵进度快照 / 批次评审一键机检) 及 D1/D5 缺口补齐 (清零 `--full` 档配额 strict 预期红); 自动探测除 R6/R7 外全绿并保持 |
+| **工程 (Agent)** | 代码、内容、测试、CI、打包脚本、全部执行文档脚手架、L2 虚拟物理验证工具链 (jitter / 风险报告 / 结构族 / 失败登记)、内容治理机检链 (系列归类 R18 / D3 冻结配额 / 矩阵进度快照 / 批次评审一键机检) 及 D1/D5 缺口补齐 (**已完成** —— 配额 strict 守卫 2026-08-26 转绿, D1 20/20 / D5 6/6); 自动探测除 R6/R7 外全绿并保持 |
 | **你** | 磁力片实搭**缩减集** (risk Top 15 + 结构族代表, R6/R7 —— 不必 250 全搭)、运营主体与行政五件 (L1~L5)、证书 (D5)、实机真机验收 (M1/M2/M4)、法务定稿 (M3)、真钱付费验收 (B3)、商店素材终稿与提审 |
 
 工程侧收口后, 你手上是**一套按步骤可执行、可验收的清单**, 每一项都有
