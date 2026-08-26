@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
-"""生成模型 data/models/switchback_ramp_01.json (折返坡道滚珠塔)。
+"""生成模型 data/models/switchback_ramp_01.json (之字闸门滚珠廊)。
 
-内容批 P 模型 8/10 (P8): 滚珠乐园 D2 —— 招牌是 T08 滚珠轨道 + T14
-直角三角折返台: 两层发球塔向东甩出首段坡道, 弹珠在由两片直角三角拼成
-的折返台上 180° 掉头, 沿第二段坡道折返向西, 再经第二块折返台二次掉头
-冲进接珠池。≥10 片直角三角 (折返台台面 + 塔基斜撑 + 台下 T14 锁固),
-与 ball_run_tower_01 (双轨镜像) / marble_run_spiral_01 (顺时针螺旋)
-的动线拓扑均不同。
+内容批 P 模型 8/10 (P8) 全新重写: 滚珠乐园 D2 —— 招牌是「直角三角
+之字闸门」(T08 滚珠轨道 + T14 斜撑的闸门变奏): 弹珠从单层发球塔
+顺 30 度坡道冲进一条 2 格宽的地面长廊, 廊内四道竖立的直角三角闸门
+交替封住南半幅 / 北半幅 —— 弹珠被迫走出 S 形之字线, 最后冲进
+2x2 接珠池。与库内其他滚珠模型的动线拓扑均不同: 不绕塔 (ball_run
+_tower)、不螺旋 (marble_run_spiral)、不分流 (marble_splitter)、
+不做多级跌落 (marble_cascade) —— 之字横移是本模型独有的一笔。
 
-结构总览 (世界单位: 1.0 = 正方形磁力片边长, 弹珠自塔顶 z=2 出发):
-  - 塔基 + 两层墙 + 发球台                                          10 片
-  - 双段折返坡道 (T08) + 阶梯桥墩                                   2 片
-  - 两块折返台 (各 2 片直角三角拼 1x1 台面) + 台下双斜撑 (T14)       6 片
-  - 塔基四角斜撑 (T14)                                              4 片
-  - 发球台/折返台挡珠 + 接珠池                                       12 片
-  合计 36 片 (直角三角 x10 + 正方形 x17 + 长方形 x2 + 等边三角 x7)。
+结构总览 (世界单位: 1.0 = 正方形磁力片边长, 弹珠自 z=1 出发):
+  - 发球塔: 塔基 + 三面墙 + 发球台 + 三片挡珠 + 四角斜撑 (T14)  12 片
+  - 30 度坡道 (T08): 塔台东缘下探, 坡尾恰落在 x=3 网格线         1 片
+  - 之字长廊: 2x5 地板 + 四道直角三角闸门 + 六片三角边挡        20 片
+  - 接珠池: 2x2 池底 + 六面矮墙 + 两片直角三角池角斜撑           12 片
+  合计 45 片 (正方形 x25 + 直角三角 x10 + 等边三角 x9 + 长方形 x1)。
 
-物理规则要点 (validate strict 零警告):
-  - 每段坡道顶边整边吸平台沿口, 坡尾由桥墩顶边或折返台接住;
-  - 折返台由两片直角三角对角拼合, 台下 T14 斜撑锁桥墩侧竖边;
-  - 塔基四角直角三角双边吸合抗侧撞;
-  - 发球台最高点 z=2, 低于 R8 红线 4.0。
+物理规则要点 (validate 常规 + strict 双档零警告):
+  - 发球台东缘 x = 3 - sqrt(3), 坡道顶边整边吸台沿, 坡尾边恰与
+    长廊首块地板西缘共线整边互吸 (脚线落在网格线上);
+  - 每道闸门是一片竖立直角三角: 底直角边整边吸两块地板的拼缝,
+    竖直角边沿长廊边线升起 —— 自身接地, 不吃任何悬挑力矩;
+  - 塔基四角与池外角的直角三角斜撑双边吸合 (T14), 抗侧撞;
+  - 全程最高点 1.87 (发球台挡珠尖), 不触发 R8 高层结构条款。
 
 用法: python3 tools/generate_switchback_ramp_01.py  (在 magtile-studio 目录下运行)
 """
@@ -34,176 +36,186 @@ from magtile_gen import SQ3, ModelBuilder  # noqa: E402
 
 b = ModelBuilder()
 
-BASE = "gray"
-TOWER = "blue"
-DECK = "yellow"
-RAMP = "orange"
-PIER = "gray"
-LAND = "cyan"
-RAIL = "red"
-BRACE = "purple"
-POOL = "blue"
+BASE = "gray"      # 塔基
+TOWER = "green"    # 塔墙
+DECK = "yellow"    # 发球台
+RAIL = "red"       # 挡珠三角
+BRACE = "purple"   # 直角三角斜撑
+RAMP = "orange"    # 坡道
+LANE_A = "cyan"    # 长廊地板 (棋盘浅色)
+LANE_B = "blue"    # 长廊地板 (棋盘深色)
+GATE = "orange"    # 之字闸门
+POOL = "blue"      # 接珠池
 
-XA = 1 + SQ3       # 折返台 A 西缘 = 首段坡道坡尾 x
-XB = 2.0           # 折返台 B 西缘 = 第二段坡道坡尾 x
+XE = 3 - SQ3       # 发球台东缘 = 坡道顶边 x (坡尾恰落在 x=3)
+XW = XE - 1.0      # 塔基西缘
+
+
+def gate_south(tid, x):
+    """封南半幅的闸门: 底边压 y[0,1] 拼缝, 竖边沿南边线升起。"""
+    b.place_tri(tid, "right_triangle",
+                (x, 0.0, 0.0), (x, 1.0, 0.0), (x, 0.0, 1.0), GATE)
+
+
+def gate_north(tid, x):
+    """封北半幅的闸门: 底边压 y[1,2] 拼缝, 竖边沿北边线升起。"""
+    b.place_tri(tid, "right_triangle",
+                (x, 2.0, 0.0), (x, 1.0, 0.0), (x, 2.0, 1.0), GATE)
+
+
+# =================================================================
+# 1. 发球塔: 塔基 + 三面墙 (东缘留给坡道) + 四角斜撑
+# =================================================================
+b.flat("base", XW, 0, 0.0, BASE)
+b.wall_ew("tw_w", XW, 0, 0, TOWER)
+b.wall_ns("tw_s", XW, 0.0, 0, TOWER)
+b.wall_ns("tw_n", XW, 1.0, 0, TOWER)
 
 BRACES = [
-    ("br_sw", (0.0, 0.0, 0.0), "-x"),
-    ("br_se", (1.0, 0.0, 0.0), "-y"),
-    ("br_ne", (1.0, 1.0, 0.0), "+x"),
-    ("br_nw", (0.0, 1.0, 0.0), "+y"),
+    ("br_sw", (XW, 0.0, 0.0), "-x"),
+    ("br_nw", (XW, 1.0, 0.0), "-x"),
+    ("br_se", (XE, 0.0, 0.0), "-y"),
+    ("br_ne", (XE, 1.0, 0.0), "+y"),
 ]
-
-
-def rt_landing(prefix, x0, y0, z, color):
-    """两片直角三角拼 1x1 水平折返台 (对角互吸成整面)。"""
-    b.place_tri(
-        f"{prefix}_lo", "right_triangle",
-        (x0, y0, z), (x0 + 1, y0, z), (x0, y0 + 1, z), color,
-    )
-    b.place_tri(
-        f"{prefix}_hi", "right_triangle",
-        (x0 + 1, y0 + 1, z), (x0, y0 + 1, z), (x0 + 1, y0, z), color,
-    )
-
-
-# =================================================================
-# 1. 塔基 1x1 + 两层墙
-# =================================================================
-b.flat("base_0", 0, 0, 0.0, BASE)
-for lv in range(2):
-    c = TOWER
-    b.wall_ns(f"tw{lv}_s", 0, 0.0, lv, c)
-    b.wall_ns(f"tw{lv}_n", 0, 1.0, lv, c)
-    b.wall_ew(f"tw{lv}_w", 0.0, 0, lv, c)
-    b.wall_ew(f"tw{lv}_e", 1.0, 0, lv, c)
-
 for tid, corner, hdir in BRACES:
     b.brace(tid, corner, hdir, BRACE)
 
 # =================================================================
-# 2. 发球台 z=2 (东缘留出珠口)
+# 2. 发球台 z=1 + 三片挡珠 (东缘留出珠口)
 # =================================================================
-b.flat("deck_0", 0, 0, 2.0, DECK)
-b.crest_ew("drail_w", 0.0, 0, 2.0, RAIL)
-b.crest_ns("drail_n", 0, 1.0, 2.0, RAIL)
-b.crest_ns("drail_s", 0, 0.0, 2.0, RAIL)
+b.flat("deck", XW, 0, 1.0, DECK)
+b.crest_ew("drail_w", XW, 0, 1.0, RAIL)
+b.crest_ns("drail_s", XW, 0.0, 1.0, RAIL)
+b.crest_ns("drail_n", XW, 1.0, 1.0, RAIL)
 
 # =================================================================
-# 3. 首段坡道 z2->z1 + 折返台 A (180° 掉头)
+# 3. 30 度坡道: 顶边吸台沿, 坡尾边与长廊首板西缘共线
 # =================================================================
-b.wall_ew("pier_a", XA, 0, 0, PIER)
-b.ramp("ramp_e", "+x", 1.0, 0, 2.0, RAMP)
-rt_landing("land_a", XA, 0, 1.0, LAND)
-b.place_tri(
-    "brace_a_s", "right_triangle",
-    (XA, 0.0, 1.0), (XA + 1, 0.0, 1.0), (XA, 0.0, 0.0), BRACE,
-)
-b.place_tri(
-    "brace_a_n", "right_triangle",
-    (XA + 1, 1.0, 1.0), (XA + 1, 1.0, 0.0), (XA + 1, 0.0, 1.0), BRACE,
-)
-b.crest_ns("rail_a_n", XA, 1.0, 1.0, RAIL)
-b.crest_ew("rail_a_e", XA + 1, 0, 1.0, RAIL)
+b.ramp("ramp", "+x", XE, 0, 1.0, RAMP)
 
 # =================================================================
-# 4. 折返坡道 z1->z0 + 折返台 B (二次 180° 掉头, 东移避开塔身)
+# 4. 之字长廊: 2x5 棋盘地板 + 四道交替闸门 + 六片三角边挡
 # =================================================================
-b.ramp("ramp_w", "-x", XA + 1, 0, 1.0, RAMP)
-rt_landing("land_b", XB, 0, 0.0, LAND)
-b.crest_ns("rail_b_n", XB, 1.0, 0.0, RAIL)
-b.crest_ew("rail_b_e", XB + 1, 0, 0.0, RAIL)
+lane_s, lane_n = [], []
+for x in range(3, 8):
+    b.flat(f"lane_s{x}", x, 0, 0.0, LANE_A if x % 2 else LANE_B)
+    lane_s.append(f"lane_s{x}")
+for x in range(3, 8):
+    b.flat(f"lane_n{x}", x, 1, 0.0, LANE_B if x % 2 else LANE_A)
+    lane_n.append(f"lane_n{x}")
+
+gate_south("gate_4", 4.0)
+gate_north("gate_5", 5.0)
+gate_south("gate_6", 6.0)
+gate_north("gate_7", 7.0)
+
+SIDE_RAILS = [
+    ("srail_s3", 3, 0.0), ("srail_s5", 5, 0.0), ("srail_s7", 7, 0.0),
+    ("srail_n3", 3, 2.0), ("srail_n4", 4, 2.0), ("srail_n6", 6, 2.0),
+]
+for tid, x0, y in SIDE_RAILS:
+    b.crest_ns(tid, x0, y, 0.0, RAIL)
 
 # =================================================================
-# 5. 冲线短轨 + 接珠池 (东移, 与折返台 A 斜撑错开)
+# 5. 接珠池: 2x2 池底 + 六面矮墙 + 两片池角斜撑
 # =================================================================
-b.flat("track_0", 3, 0, 0.0, DECK)
-b.flat("pool_0", 4, 0, 0.0, POOL)
-b.flat("pool_1", 5, 0, 0.0, POOL)
-b.wall_ns("pool_s", 4, 0.0, 0, POOL)
-b.wall_ew("pool_w", 4.0, 0, 0, POOL)
-b.wall_ew("pool_e", 6.0, 0, 0, POOL)
+for x in (8, 9):
+    for y in (0, 1):
+        b.flat(f"pool_{x}{y}", x, y, 0.0, LANE_A)
+b.wall_ew("pw_e0", 10.0, 0, 0, POOL)
+b.wall_ew("pw_e1", 10.0, 1, 0, POOL)
+b.wall_ns("pw_s8", 8, 0.0, 0, POOL)
+b.wall_ns("pw_s9", 9, 0.0, 0, POOL)
+b.wall_ns("pw_n8", 8, 2.0, 0, POOL)
+b.wall_ns("pw_n9", 9, 2.0, 0, POOL)
+b.brace("pbr_se", (10.0, 0.0, 0.0), "+x", BRACE)
+b.brace("pbr_ne", (10.0, 2.0, 0.0), "+x", BRACE)
 
 # =================================================================
-# 教程步骤 (10 步)
+# 教程步骤 (11 步)
 # =================================================================
 b.step(
-    "铺塔基: 一片灰色方板打底, 四片蓝色方板合围第一层墙环。",
-    ["base_0", "tw0_s", "tw0_w", "tw0_n", "tw0_e"],
-    tip="塔基东边要留出直线跑道 —— 弹珠将从这里折返下坡。",
+    "铺塔基立墙: 一片灰色方板打底, 西/南/北三面绿墙围合, 东面空着。",
+    ["base", "tw_w", "tw_s", "tw_n"],
+    tip="东面不砌墙 —— 那是弹珠唯一的出口, 坡道就从这里下探。",
 )
 b.step(
-    "塔基四角斜撑 (T14): 四片紫色直角三角呈风车状, 竖直角边吸塔角、水平边贴地外伸。",
+    "塔基四角斜撑 (T14): 四片紫色直角三角, 竖直角边吸墙角竖缝、水平边贴地外伸。",
     [tid for tid, _, _ in BRACES],
-    highlight=["tw0_s", "tw0_e"],
-    tip="双边吸合的斜撑锁死塔身 —— 折返赛道反复开撞也推不倒。",
+    highlight=["tw_s", "tw_n"],
+    tip="双边吸合的斜撑锁死塔身 —— 之字赛道反复开球也撞不倒。",
 )
 b.step(
-    "第二层墙 + 发球台: 四片蓝色方板骑上墙顶, 一片黄色方板盖住 z=2。",
-    ["tw1_s", "tw1_w", "tw1_n", "tw1_e", "deck_0"],
-    highlight=["tw0_s", "tw0_e"],
-    tip="两层墙环够高 —— D2 弹珠从 z=2 出发, 不必再往上叠。",
+    "盖发球台加挡珠: 黄色方板压住三面墙顶, 三片红三角围住西/南/北台沿。",
+    ["deck", "drail_w", "drail_s", "drail_n"],
+    highlight=["tw_w"],
+    tip="发球台 z=1 —— D2 的弹珠只需一层楼的势能就够跑完全程。",
 )
 b.step(
-    "发球台挡珠: 三片红三角围住台沿 (东缘留口), 弹珠只能向东滑出。",
-    ["drail_w", "drail_n", "drail_s"],
-    highlight=["deck_0"],
-    tip="东缘空着 —— 那是首段折返坡道的唯一出珠口。",
+    "挂 30 度坡道 (T08): 橙色长板顶边整边吸发球台东缘, 坡尾直落地面网格线。",
+    ["ramp"],
+    highlight=["deck"],
+    tip="坡尾边恰好落在 x=3 的网格线上 —— 与长廊首块地板整边互吸。",
 )
 b.step(
-    "首段下坡 (整段成组): 立桥墩, 橙色坡道顶边吸发球台东缘, 两片青色直角三角"
-    "拼成折返台 A 压住墩顶与坡尾, 南/北各挂一片紫色斜撑锁墩身。",
-    ["pier_a", "ramp_e", "land_a_lo", "land_a_hi", "brace_a_s", "brace_a_n"],
-    highlight=["deck_0", "tw1_e"],
-    tip="坡道-桥墩-折返台三件互吸 —— 双斜撑给台面第二条支撑路径。",
+    "铺长廊南列: 五片蓝青棋盘方板沿东向排开, 首板西缘咬住坡尾。",
+    lane_s,
+    highlight=["ramp"],
+    tip="弹珠从南半幅入场 —— 记住这条线, 之字闸门马上要逼它变道。",
 )
 b.step(
-    "折返台 A 挡珠: 北缘与东缘各一片红三角, 逼弹珠折返向西。",
-    ["rail_a_n", "rail_a_e"],
-    highlight=["land_a_lo", "land_a_hi"],
-    tip="弹珠从西边上台、向东缘拐弯 —— 第一个 180° 折返就位。",
+    "铺长廊北列: 五片方板与南列拼缝逐段对齐互吸, 长廊变成 2 格宽。",
+    lane_n,
+    highlight=["lane_s5"],
+    tip="2 格宽才玩得起之字 —— 一半是路, 一半是闸。",
 )
 b.step(
-    "第二段折返坡道: 橙色坡道从折返台 A 东缘下探到 z=0, 两片青色直角三角"
-    "拼成折返台 B (东移一格避开塔身), 坡尾与台面整边互吸。",
-    ["ramp_w", "land_b_lo", "land_b_hi"],
-    highlight=["land_a_hi", "rail_a_e"],
-    tip="这一跳弹珠向西冲 —— 折返台 B 直接落地, 听落台声比首段更响。",
+    "立之字闸门: 四片橙色直角三角骑在地板拼缝上, 交替封南半幅和北半幅。",
+    ["gate_4", "gate_5", "gate_6", "gate_7"],
+    highlight=["lane_s3", "lane_n4"],
+    tip="底直角边整边吸拼缝, 斜边朝来珠方向 —— 弹珠贴着斜面滑向另一半幅。",
 )
 b.step(
-    "折返台 B 挡珠: 北缘与东缘各一片红三角, 逼弹珠二次掉头向东冲线。",
-    ["rail_b_n", "rail_b_e"],
-    highlight=["land_b_lo", "land_b_hi"],
-    tip="第二个 180° 折返 —— 弹珠现在朝接珠池狂奔。",
+    "装长廊边挡: 六片红三角站上长廊外沿, 与闸门错位互补, 把弹珠兜在场内。",
+    [tid for tid, _, _ in SIDE_RAILS],
+    highlight=["gate_4", "gate_5"],
+    tip="哪边闸门封路, 对面就要有边挡 —— 之字线的每个折点都被兜住。",
 )
 b.step(
-    "铺冲线短轨与池底: 一片黄色方板连折返台, 两片青色方板沿东向铺开接珠池。",
-    ["track_0", "pool_0", "pool_1"],
-    highlight=["land_b_hi", "ramp_w"],
-    tip="短轨与池底整边互吸 —— 弹珠落地不弹跳、直接滚进池子。",
+    "铺接珠池底: 四片青色方板拼成 2x2 池底, 西缘咬住长廊末端。",
+    ["pool_80", "pool_81", "pool_90", "pool_91"],
+    highlight=["lane_s7", "lane_n7"],
+    tip="池底与长廊整边互吸 —— 弹珠冲线后直接滚进池心。",
 )
 b.step(
-    "立池壁收尾: 南/西/东三面矮墙围合 —— 折返坡道滚珠塔完工, 放珠开滑!",
-    ["pool_s", "pool_w", "pool_e"],
-    highlight=["pool_0"],
-    tip="东出 → 西折 → 东冲 —— 实物跑珠听两声折返才算验收!",
+    "砌池壁: 东/南/北六面蓝色矮墙围合, 西面敞开当冲线口。",
+    ["pw_s8", "pw_s9", "pw_e0", "pw_e1", "pw_n9", "pw_n8"],
+    highlight=["pool_80"],
+    tip="墙脚整边吸池底 —— 三面合围, 弹珠再快也翻不出去。",
+)
+b.step(
+    "池角斜撑收尾: 两片紫色直角三角锁住东墙外角 —— 之字闸门滚珠廊完工, 放珠开滑!",
+    ["pbr_se", "pbr_ne"],
+    highlight=["pw_e0", "pw_e1"],
+    tip="实物验收听声音: 珠子过一道闸门响一声, 四声之后落池才算通关。",
 )
 
 model = b.finalize(
     model_id="switchback_ramp_01",
-    name="折返坡道滚珠塔",
+    name="之字闸门滚珠廊",
     name_en="Switchback Ramp 01",
     description=(
-        "滚珠乐园 D2 折返塔: 两层发球台向东甩出首段 30 度坡道, 弹珠在"
-        "两片直角三角拼成的折返台上 180° 掉头, 沿第二段坡道折返向西, "
-        "再经第二块折返台二次掉头冲进接珠池; 招牌是 T08 滚珠轨道 + T14 "
-        "直角三角折返台 (≥10 片), 与双轨绕塔/单塔螺旋动线拓扑均不同, "
-        "全部 CORE-9, 实物跑珠即可验证。"
+        "滚珠乐园 D2 之字长廊: 单层发球塔顺 30 度坡道把弹珠甩进 2 格宽"
+        "的地面长廊, 四道竖立的直角三角闸门交替封住南北半幅, 弹珠被迫"
+        "走出 S 形之字线, 最后冲进 2x2 接珠池; 招牌是直角三角的三种用法"
+        " (之字闸门 + 塔基斜撑 + 池角斜撑, 共 10 片, T08+T14), 与绕塔/"
+        "螺旋/分流/跌落的既有滚珠动线全部不同, 全部 CORE-9, 实物跑珠"
+        "即可验证。"
     ),
     difficulty=2,
-    tags=["滚珠", "轨道", "折返", "滚珠乐园", "直角三角"],
-    min_pieces=32,
-    min_steps=10,
+    tags=["滚珠", "轨道", "之字", "滚珠乐园", "直角三角"],
+    min_pieces=45,
+    min_steps=11,
     series="marble_run",
 )
 
@@ -213,10 +225,10 @@ meta["technique_tags"] = {
     "secondary": ["T14_diagonal_bracing"],
 }
 meta["signature_statement"] = (
-    "两片直角三角拼成的折返台让弹珠在塔旁连续两次 180° 掉头。"
+    "四道竖立直角三角闸门交替封半幅, 弹珠在地面长廊里走出 S 形之字线。"
 )
-meta["structural_signature"]["silhouette_class"] = "switchback_tower"
-meta["structural_signature"]["height_layers"] = 3
+meta["structural_signature"]["silhouette_class"] = "slalom_gallery"
+meta["structural_signature"]["height_layers"] = 2
 
 out = Path(__file__).resolve().parent.parent / "data" / "models" / "switchback_ramp_01.json"
 out.write_text(json.dumps(model, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

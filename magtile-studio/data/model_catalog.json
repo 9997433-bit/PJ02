@@ -305,24 +305,6 @@
       "thumbnail": "thumbnails/swan_01.png"
     },
     {
-      "id": "switchback_ramp_01",
-      "file": "models/switchback_ramp_01.json",
-      "name": "折返坡道滚珠塔",
-      "name_en": "Switchback Ramp 01",
-      "description": "滚珠乐园 D2 折返塔: 两层发球台向东甩出首段 30 度坡道, 弹珠在两片直角三角拼成的折返台上 180° 掉头, 沿第二段坡道折返向西, 再经第二块折返台二次掉头冲进接珠池; 招牌是 T08 滚珠轨道 + T14 直角三角折返台 (≥10 片), 与双轨绕塔/单塔螺旋动线拓扑均不同, 全部 CORE-9, 实物跑珠即可验证。",
-      "difficulty": 2,
-      "total_pieces": 36,
-      "step_count": 10,
-      "theme": "滚珠乐园",
-      "tags": [
-        "滚珠",
-        "轨道",
-        "折返",
-        "滚珠乐园",
-        "直角三角"
-      ]
-    },
-    {
       "id": "rhombus_patchwork_01",
       "file": "models/rhombus_patchwork_01.json",
       "name": "菱形拼布屏风",
@@ -570,6 +552,24 @@
         "入门"
       ],
       "thumbnail": "thumbnails/gingerbread_house_01.png"
+    },
+    {
+      "id": "switchback_ramp_01",
+      "file": "models/switchback_ramp_01.json",
+      "name": "之字闸门滚珠廊",
+      "name_en": "Switchback Ramp 01",
+      "description": "滚珠乐园 D2 之字长廊: 单层发球塔顺 30 度坡道把弹珠甩进 2 格宽的地面长廊, 四道竖立的直角三角闸门交替封住南北半幅, 弹珠被迫走出 S 形之字线, 最后冲进 2x2 接珠池; 招牌是直角三角的三种用法 (之字闸门 + 塔基斜撑 + 池角斜撑, 共 10 片, T08+T14), 与绕塔/螺旋/分流/跌落的既有滚珠动线全部不同, 全部 CORE-9, 实物跑珠即可验证。",
+      "difficulty": 2,
+      "total_pieces": 45,
+      "step_count": 11,
+      "theme": "滚珠乐园",
+      "tags": [
+        "滚珠",
+        "轨道",
+        "之字",
+        "滚珠乐园",
+        "直角三角"
+      ]
     },
     {
       "id": "boxing_ring_01",
@@ -1028,6 +1028,25 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/owl_01.png"
+    },
+    {
+      "id": "sector_rotunda_01",
+      "file": "models/sector_rotunda_01.json",
+      "name": "四象扇心圆殿",
+      "name_en": "Sector Rotunda 01",
+      "description": "建筑地标 D3 扇形示范: 四片扇形半径边两两互吸, 在地面合成正圆殿底; 十字风车墙骑缝升起, 顶上四片扇形再度合圆成殿顶, 拼缝四瓣金冠收顶; 四座切向门屋风车状展开, 外侧各贴一片竖立扇形扇面撑, 12 片广场砖合成回字环廊, 四角石柱与南入口甬道收束全局 —— 12 片扇形三种结构用法 (合圆底 / 合圆顶 / 竖撑), 扇形是圆殿的结构主角而非点缀。",
+      "difficulty": 3,
+      "total_pieces": 52,
+      "step_count": 13,
+      "theme": "建筑地标",
+      "tags": [
+        "建筑地标",
+        "圆殿",
+        "扇形",
+        "风车墙",
+        "环廊",
+        "需要扩展装"
+      ]
     },
     {
       "id": "ambulance_01",
@@ -1771,25 +1790,6 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/magic_tree_01.png"
-    },
-    {
-      "id": "sector_rotunda_01",
-      "file": "models/sector_rotunda_01.json",
-      "name": "扇形拱券半圆殿",
-      "name_en": "Sector Rotunda 01",
-      "description": "建筑地标 D3 扇形示范: 七座石柱沿半圆殿南廊排开, 六片扇形拱券 (T04) 逐跨合龙成真正的柱廊拱圈; 北墙三扇窗格高窗留采光负空间 (T17), 殿内地板与柱廊贯通一体; 蓝色檐板与檐饰收顶, 殿心雕像 点缀中轴 —— 扇形片型不是点缀, 而是半圆殿的结构主角.",
-      "difficulty": 3,
-      "total_pieces": 59,
-      "step_count": 14,
-      "theme": "建筑地标",
-      "tags": [
-        "建筑地标",
-        "半圆殿",
-        "扇形",
-        "柱廊",
-        "拱券",
-        "需要扩展装"
-      ]
     },
     {
       "id": "bullet_train_01",
@@ -4028,26 +4028,6 @@
       "thumbnail": "thumbnails/wizard_tower_01.png"
     },
     {
-      "id": "expansion_orb_01",
-      "file": "models/expansion_orb_01.json",
-      "name": "扩展合球摆件",
-      "name_en": "Expansion Orb Display 01",
-      "description": "几何艺术 D4: 六瓣广场围边上立空心测地球壳 —— 六边形底 + 菱形外饰 + 反棱柱测地带 (T07) + 赤道六棱环 + 顶盖梯形冠 + 四扇形极冠 (T13); 菱/梯/六/扇四扩展片型齐聚, 无内支撑, 是豪华 198 片套装 showcase。",
-      "difficulty": 4,
-      "total_pieces": 75,
-      "step_count": 20,
-      "theme": "几何艺术",
-      "tags": [
-        "几何艺术",
-        "多面体",
-        "测地网格",
-        "扩展片型",
-        "摆件",
-        "挑战",
-        "需要扩展装"
-      ]
-    },
-    {
       "id": "train_station_01",
       "file": "models/train_station_01.json",
       "name": "中央火车站",
@@ -4104,6 +4084,26 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/lighthouse_01.png"
+    },
+    {
+      "id": "expansion_orb_01",
+      "file": "models/expansion_orb_01.json",
+      "name": "四型合璧灯球坛",
+      "name_en": "Expansion Orb Display 01",
+      "description": "几何艺术 D4 扩展片型合璧: 四片梯形窄边朝下反扣成倒置斗拱下碗, 托起三层横板方鼓灯身 (中层透明透光带), 12 片菱形沿四条竖角缝逐层腰边互咬爬成角藤; 梯形四坡收顶后, 四片扇形风车状竖立合成极冠; 坛面四座六边形芯五瓣菱形花圃环绕, 四角灯柱收束广场 —— 菱 32 / 梯 8 / 六 4 / 扇 4 共 48 片扩展片型, 每种都在承重或签名位置, 是豪华套装的灯球陈列件。",
+      "difficulty": 4,
+      "total_pieces": 78,
+      "step_count": 18,
+      "theme": "几何艺术",
+      "tags": [
+        "几何艺术",
+        "灯球",
+        "扩展片型",
+        "透光带",
+        "摆件",
+        "挑战",
+        "需要扩展装"
+      ]
     },
     {
       "id": "roman_aqueduct_01",
