@@ -1,0 +1,899 @@
+{
+  "schema_version": 1,
+  "id": "astronaut_training_01",
+  "name": "宇航员训练中心",
+  "name_en": "Astronaut Training Center 01",
+  "description": "只用核心九片型的太空探索训练场: 主角是全库第一台横躺的离心机 —— 中央红色转轴塔四墙合环、灰色转盘压顶, 两条黄色旋臂长板从转盘两侧水平伸出, 臂端各接一座蓝色乘员吊舱 (舷窗窗格方朝外), 塔-臂-舱-地锁成东西两个门式大环, 剪断任何一端旋臂照样站得住; 旁边绿色蹦床四墙合环、清色弹面压顶练平衡, 橙色打卡旗与青色计时牌立在缓冲垫拼缝上 —— 抓稳了, 开转!",
+  "difficulty": 2,
+  "total_pieces": 48,
+  "tags": [
+    "航天",
+    "宇航员",
+    "训练",
+    "离心机"
+  ],
+  "content_meta": {
+    "series": "spacecraft",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 34,
+        "rectangle": 8,
+        "equilateral_triangle": 3,
+        "window_square": 3
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "gs_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gs_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gs_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gs_3",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "m_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_6_1",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_6_2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gn_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gn_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gn_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gn_3",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hub_s",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hub_n",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hub_w",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hub_e",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hub_disc",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gw_s",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gw_n",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gw_w",
+      "type": "window_square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gw_e",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gw_cap",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ge_s",
+      "type": "square",
+      "position": [
+        6.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ge_n",
+      "type": "square",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ge_w",
+      "type": "square",
+      "position": [
+        6.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ge_e",
+      "type": "window_square",
+      "position": [
+        7.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ge_cap",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "arm_w",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "arm_e",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hub_beacon",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tr_s",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_w",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_e",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_top",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "flag_a",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flag_b",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "timer",
+      "type": "window_square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南草坪: 三条绿色长板加一片方板, 短边互吸连成一排。",
+      "tip": "宇航员训练第一课: 先把场地铺平整。",
+      "tiles_to_add": [
+        "gs_0",
+        "gs_1",
+        "gs_2",
+        "gs_3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺缓冲垫南行: 七片青色方板贴着草坪北边排开。",
+      "tip": "离心机脚下全是软垫 —— 训练安全第一。",
+      "tiles_to_add": [
+        "m_0_1",
+        "m_1_1",
+        "m_2_1",
+        "m_3_1",
+        "m_4_1",
+        "m_5_1",
+        "m_6_1"
+      ],
+      "highlight_tiles": [
+        "gs_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺缓冲垫北行: 再来七片, 行行等边互吸。",
+      "tip": "转轴塔、吊舱、蹦床全要踩这张垫网的拼缝。",
+      "tiles_to_add": [
+        "m_0_2",
+        "m_1_2",
+        "m_2_2",
+        "m_3_2",
+        "m_4_2",
+        "m_5_2",
+        "m_6_2"
+      ],
+      "highlight_tiles": [
+        "m_0_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺北草坪: 场地合拢, 训练中心占地 7x4。",
+      "tip": "草坪长板与垫行整边互吸, 全场连成一张网。",
+      "tiles_to_add": [
+        "gn_0",
+        "gn_1",
+        "gn_2",
+        "gn_3"
+      ],
+      "highlight_tiles": [
+        "m_0_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立转轴塔: 红墙四片合环踩正中垫缝, 灰色转盘压顶四边全吸。",
+      "tip": "四角竖边互咬 + 转盘压顶 —— 离心机的心脏必须最结实。",
+      "tiles_to_add": [
+        "hub_s",
+        "hub_n",
+        "hub_w",
+        "hub_e",
+        "hub_disc"
+      ],
+      "highlight_tiles": [
+        "m_3_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "搭西吊舱: 三面蓝墙合上朝西的舷窗窗格方, 乘员位一号就绪。",
+      "tip": "舷窗朝外 —— 转起来的时候能看见整个训练场飞快掠过。",
+      "tiles_to_add": [
+        "gw_s",
+        "gw_n",
+        "gw_w",
+        "gw_e"
+      ],
+      "highlight_tiles": [
+        "hub_disc"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "搭东吊舱: 对称再来一座, 舷窗朝东。",
+      "tip": "两座吊舱对称配重, 离心机转起来才不偏心。",
+      "tiles_to_add": [
+        "ge_s",
+        "ge_n",
+        "ge_w",
+        "ge_e"
+      ],
+      "highlight_tiles": [
+        "gw_w"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "架旋臂盖舱盖: 黄色长板两端整边双吸, 塔-臂-舱-地锁成大环。",
+      "tip": "旋臂西端吸转盘边、东端吸舱盖边 —— 剪断一端另一端还撑着。",
+      "tiles_to_add": [
+        "arm_w",
+        "arm_e",
+        "gw_cap",
+        "ge_cap"
+      ],
+      "highlight_tiles": [
+        "hub_disc",
+        "gw_s",
+        "ge_s"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "插转轴信标, 围蹦床: 红色三角骑转盘北缘, 绿墙合环弹面压顶。",
+      "tip": "信标亮了就是开转警告; 蹦床练的是失重前的平衡感。",
+      "tiles_to_add": [
+        "hub_beacon",
+        "tr_s",
+        "tr_n",
+        "tr_w",
+        "tr_e",
+        "tr_top"
+      ],
+      "highlight_tiles": [
+        "arm_w"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立打卡旗与计时牌收尾: 今天的成绩 —— 8 个 G, 坚持 30 秒!",
+      "tip": "旗子底边整边吸垫缝 —— 通过考核的宇航员来这里插旗!",
+      "tiles_to_add": [
+        "flag_a",
+        "flag_b",
+        "timer"
+      ],
+      "highlight_tiles": [
+        "tr_top",
+        "hub_beacon"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1265 @@
+{
+  "schema_version": 1,
+  "id": "christmas_market_01",
+  "name": "圣诞集市",
+  "name_en": "Christmas Market 01",
+  "description": "只用核心九片型的节日露天集市: 雪白广场上两座三面围合的货亭南向敞开 —— 后墙嵌门框方储货门, 转角竖边互咬, 雪顶长板两短边分别压东西侧墙顶 (双端受力零悬挑), 侧墙顶骑招牌三角; 广场正中塔式圣诞树两层绿墙环四角互吸拔起, 戴等腰四坡树冠 (树尖 3.94 全场最高, 环环相扣); 街旁两只彩色礼盒方块四壁一盖箱式自锁, 入口一对糖果柱红柱白霜 —— 开口货亭、塔式墙环、礼盒方块, 三种箱式变体一场集市学会。",
+  "difficulty": 3,
+  "total_pieces": 68,
+  "tags": [
+    "节日",
+    "圣诞",
+    "集市",
+    "货亭",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "holiday_seasonal",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 44,
+        "rectangle": 14,
+        "equilateral_triangle": 4,
+        "isosceles_triangle": 4,
+        "door_frame": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ga_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ga_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ga_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ga_3",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ga_4",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ga_5",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ga_6",
+      "type": "square",
+      "position": [
+        8.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ga_7",
+      "type": "square",
+      "position": [
+        9.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gb_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gb_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gb_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gb_3",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gb_4",
+      "type": "rectangle",
+      "position": [
+        9.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gc_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gc_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gc_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gc_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gc_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gc_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gc_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gc_7",
+      "type": "square",
+      "position": [
+        7.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gc_8",
+      "type": "square",
+      "position": [
+        8.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gc_9",
+      "type": "square",
+      "position": [
+        9.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gd_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gd_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gd_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gd_3",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gd_4",
+      "type": "rectangle",
+      "position": [
+        9.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sw_bk_d",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "sw_bk",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sw_sw",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sw_se",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sw_roof",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sw_sign",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "se_bk_d",
+      "type": "door_frame",
+      "position": [
+        7.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "se_bk",
+      "type": "square",
+      "position": [
+        8.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "se_sw",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "se_se",
+      "type": "square",
+      "position": [
+        9.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "se_roof",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "se_sign",
+      "type": "equilateral_triangle",
+      "position": [
+        9.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tr1_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr1_w",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr1_e",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr1_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_cap1",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr2_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr2_w",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr2_e",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr2_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_cap2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_crown_s",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        2.166667,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_crown_e",
+      "type": "isosceles_triangle",
+      "position": [
+        4.833333,
+        2.5,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_crown_n",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        2.833333,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tr_crown_w",
+      "type": "isosceles_triangle",
+      "position": [
+        4.166667,
+        2.5,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gw_s",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "gw_w",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "gw_e",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "gw_n",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "gw_cap",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ge_s",
+      "type": "square",
+      "position": [
+        7.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ge_w",
+      "type": "square",
+      "position": [
+        7.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ge_e",
+      "type": "square",
+      "position": [
+        8.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ge_n",
+      "type": "square",
+      "position": [
+        7.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ge_cap",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "cn_w",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cn_w_top",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cn_e",
+      "type": "square",
+      "position": [
+        9.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cn_e_top",
+      "type": "equilateral_triangle",
+      "position": [
+        9.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺地面南行 (y [0,1]): 两端灰色柱础方板, 中段雪板, 礼盒底板落在 x [2,3] 与 x [7,8]。",
+      "tip": "两端柱础的南沿留给糖果柱 —— 方板的整边才吸得住柱脚。",
+      "tiles_to_add": [
+        "ga_0",
+        "ga_1",
+        "ga_2",
+        "ga_3",
+        "ga_4",
+        "ga_5",
+        "ga_6",
+        "ga_7"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺石板街 (y [1,2]): 5 片灰长板横贯集市。",
+      "tip": "逛集市的人从这条街上走 —— 两侧就是货亭与礼盒。",
+      "tiles_to_add": [
+        "gb_0",
+        "gb_1",
+        "gb_2",
+        "gb_3",
+        "gb_4"
+      ],
+      "highlight_tiles": [
+        "ga_0",
+        "ga_7"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺铺位行 (y [2,3]): 10 片方板一字排开, 木地板给货亭, 灰座给圣诞树。",
+      "tip": "这一行全用方板 —— 每面墙脚都要有一条整边可吸。",
+      "tiles_to_add": [
+        "gc_0",
+        "gc_1",
+        "gc_2",
+        "gc_3",
+        "gc_4",
+        "gc_5",
+        "gc_6",
+        "gc_7",
+        "gc_8",
+        "gc_9"
+      ],
+      "highlight_tiles": [
+        "gb_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺地面北行 (y [3,4]): 5 片雪长板, 广场合拢。",
+      "tip": "货亭后墙就立在这两行地板的拼缝上。",
+      "tiles_to_add": [
+        "gd_0",
+        "gd_1",
+        "gd_2",
+        "gd_3",
+        "gd_4"
+      ],
+      "highlight_tiles": [
+        "gc_1",
+        "gc_8"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立西货亭三面墙: 后墙橙色储货门 + 红墙, 东西侧墙围合, 南面敞开做柜台口。",
+      "tip": "转角竖边互咬 —— 三面墙也能锁成刚环, 全靠地板整边兜底。",
+      "tiles_to_add": [
+        "sw_bk_d",
+        "sw_bk",
+        "sw_sw",
+        "sw_se"
+      ],
+      "highlight_tiles": [
+        "gc_1",
+        "gc_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "盖西货亭雪顶并骑招牌: 雪顶长板两短边分别压东西侧墙顶, 黄色招牌骑上西侧墙顶。",
+      "tip": "雪顶双端受力零悬挑 —— 招牌重心正压铰链线, 力臂为零。",
+      "tiles_to_add": [
+        "sw_roof",
+        "sw_sign"
+      ],
+      "highlight_tiles": [
+        "sw_sw",
+        "sw_se"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立东货亭三面墙: 与西货亭对称, 绿墙配橙门。",
+      "tip": "红亭卖热红酒, 绿亭卖姜饼 —— 圣诞集市的老规矩。",
+      "tiles_to_add": [
+        "se_bk_d",
+        "se_bk",
+        "se_sw",
+        "se_se"
+      ],
+      "highlight_tiles": [
+        "gc_7",
+        "gc_8"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖东货亭雪顶并骑招牌: 红色招牌骑上东侧墙顶。",
+      "tip": "两座货亭隔街对望, 购物口都朝着石板街。",
+      "tiles_to_add": [
+        "se_roof",
+        "se_sign"
+      ],
+      "highlight_tiles": [
+        "se_sw",
+        "se_se"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立圣诞树第 1 层: 4 片绿墙环踩住灰座四条边。",
+      "tip": "每片底边吸树座板边、转角竖边互咬 —— 墙环闭合才稳。",
+      "tiles_to_add": [
+        "tr1_s",
+        "tr1_w",
+        "tr1_e",
+        "tr1_n"
+      ],
+      "highlight_tiles": [
+        "gc_4"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "盖第 1 层盖板, 再叠第 2 层绿墙环。",
+      "tip": "盖板四边压四墙顶; 第 2 层每片同时吸盖板沿与邻片竖边。",
+      "tiles_to_add": [
+        "tr_cap1",
+        "tr2_s",
+        "tr2_w",
+        "tr2_e",
+        "tr2_n"
+      ],
+      "highlight_tiles": [
+        "tr1_s"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "封树顶并戴等腰四坡树冠: 4 片瘦高三角斜棱两两互吸自锁。",
+      "tip": "树冠四棱互吸成环, 越推越紧 —— 树尖 3.94, 全场最高。",
+      "tiles_to_add": [
+        "tr_cap2",
+        "tr_crown_s",
+        "tr_crown_e",
+        "tr_crown_n",
+        "tr_crown_w"
+      ],
+      "highlight_tiles": [
+        "tr2_s"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "拼西礼盒: 4 片红壁互咬 + 黄色缎带盖压顶, 五片锁成整箱。",
+      "tip": "礼盒就是最小的箱式结构 —— 盖子一压, 四壁全锁死。",
+      "tiles_to_add": [
+        "gw_s",
+        "gw_w",
+        "gw_e",
+        "gw_n",
+        "gw_cap"
+      ],
+      "highlight_tiles": [
+        "ga_2"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "拼东礼盒: 蓝箱粉盖, 与西礼盒隔街相望。",
+      "tip": "拆礼物要等平安夜 —— 现在先摆在雪地上馋一馋。",
+      "tiles_to_add": [
+        "ge_s",
+        "ge_w",
+        "ge_e",
+        "ge_n",
+        "ge_cap"
+      ],
+      "highlight_tiles": [
+        "gw_cap"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "立糖果柱 x2 (南界 y=0): 红柱壁骑方板南沿, 柱顶各骑一片白糖霜三角 —— 圣诞集市开市!",
+      "tip": "红柱白霜就是大号拐杖糖 —— 圣诞快乐, 欢迎光临!",
+      "tiles_to_add": [
+        "cn_w",
+        "cn_w_top",
+        "cn_e",
+        "cn_e_top"
+      ],
+      "highlight_tiles": [
+        "ga_0",
+        "ga_7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1078 @@
+{
+  "schema_version": 1,
+  "id": "coral_reef_01",
+  "name": "珊瑚礁场景",
+  "name_en": "Coral Reef 01",
+  "description": "全库第一个海底造景, 也是扇形磁力片的首秀: 6x4 海床上, 双层礁岩塔顶着鹿角珊瑚, 紫色珊瑚拱门横跨中央、楣顶竖起梯形珊瑚冠; 两柄海扇在北缘对称展开, 东缘与礁间再各立一柄; 四株菱形海葵借 60 度天然斜置像正随水流摆动, 等边三角四坡合拢成脑珊瑚, 三丛海带竖立其间 —— 7 种磁力片形状同场, 为全库之最。",
+  "difficulty": 3,
+  "total_pieces": 55,
+  "tags": [
+    "海洋",
+    "珊瑚礁",
+    "造景",
+    "扇形首秀",
+    "自然",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "animal_world",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 35,
+        "equilateral_triangle": 6,
+        "rectangle": 4,
+        "rhombus": 4,
+        "sector": 4,
+        "isosceles_triangle": 1,
+        "trapezoid": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "sb0_r",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb0_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb0_1",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sb0_2",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb0_3",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sb1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sb1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb1_r",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb1_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sb2_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sb2_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sb2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb2_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sb2_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb3_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb3_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sb3_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sb3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sb3_r",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rk0_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk0_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk0_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk0_e",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk0_cap",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk1_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk1_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk1_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk1_e",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rk1_cap",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "stag_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stag_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stag_tip",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        2.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ar_w0",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "ar_w1",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "ar_e0",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "ar_e1",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "ar_lintel",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "ar_crown",
+      "type": "trapezoid",
+      "position": [
+        4.0,
+        2.0,
+        2.3849
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "fan_nw",
+      "type": "sector",
+      "position": [
+        1.0,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fan_ne",
+      "type": "sector",
+      "position": [
+        3.0,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fan_e",
+      "type": "sector",
+      "position": [
+        6.0,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fan_m",
+      "type": "sector",
+      "position": [
+        4.0,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "an_w",
+      "type": "rhombus",
+      "position": [
+        0.0,
+        2.75,
+        0.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "an_e",
+      "type": "rhombus",
+      "position": [
+        6.0,
+        3.75,
+        0.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "an_s0",
+      "type": "rhombus",
+      "position": [
+        2.25,
+        0.0,
+        0.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "an_s1",
+      "type": "rhombus",
+      "position": [
+        4.75,
+        0.0,
+        0.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "brain_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "brain_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.833333,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "brain_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "brain_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.166667,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "kelp_a",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "kelp_b",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "kelp_c",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "海床南排: 1 片长方形沙床领头, 再接 4 片沙板 —— 黄色细沙与青色潟湖沙相间。",
+      "tip": "",
+      "tiles_to_add": [
+        "sb0_r",
+        "sb0_0",
+        "sb0_1",
+        "sb0_2",
+        "sb0_3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "海床第二排: 中段用长方形沙床整片铺过, 两端方板补齐。",
+      "tip": "",
+      "tiles_to_add": [
+        "sb1_0",
+        "sb1_1",
+        "sb1_r",
+        "sb1_4",
+        "sb1_5"
+      ],
+      "highlight_tiles": [
+        "sb0_r"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "海床第三排: 6 片方板相间铺满。",
+      "tip": "",
+      "tiles_to_add": [
+        "sb2_0",
+        "sb2_1",
+        "sb2_2",
+        "sb2_3",
+        "sb2_4",
+        "sb2_5"
+      ],
+      "highlight_tiles": [
+        "sb1_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "海床北排: 4 片方板 + 东段 1 片长方形, 海床合拢成 6x4。",
+      "tip": "",
+      "tiles_to_add": [
+        "sb3_0",
+        "sb3_1",
+        "sb3_2",
+        "sb3_3",
+        "sb3_r"
+      ],
+      "highlight_tiles": [
+        "sb2_0",
+        "sb2_5"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "礁岩塔第一层: [1,2]x[1,2] 上围 4 面灰色礁岩墙, 盖压顶板。",
+      "tip": "墙底整边吸海床板边, 四角竖边两两互吸。",
+      "tiles_to_add": [
+        "rk0_s",
+        "rk0_n",
+        "rk0_w",
+        "rk0_e",
+        "rk0_cap"
+      ],
+      "highlight_tiles": [
+        "sb1_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "礁岩塔第二层: 同法再起一层, 礁岩塔到 z=2。",
+      "tip": "",
+      "tiles_to_add": [
+        "rk1_s",
+        "rk1_n",
+        "rk1_w",
+        "rk1_e",
+        "rk1_cap"
+      ],
+      "highlight_tiles": [
+        "rk0_cap"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "塔顶鹿角珊瑚: 压顶板南、西两缘各立 1 片橙色等边脊, 北缘再立 1 根红色等腰尖 —— 鹿角初成。",
+      "tip": "",
+      "tiles_to_add": [
+        "stag_s",
+        "stag_w",
+        "stag_tip"
+      ],
+      "highlight_tiles": [
+        "rk1_cap"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "拱门西柱: 平面 y=2 上叠 2 层紫色方柱。",
+      "tip": "",
+      "tiles_to_add": [
+        "ar_w0",
+        "ar_w1"
+      ],
+      "highlight_tiles": [
+        "sb1_r"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "拱门东柱: 相距 2 格再叠一柱, 门洞留在中间。",
+      "tip": "",
+      "tiles_to_add": [
+        "ar_e0",
+        "ar_e1"
+      ],
+      "highlight_tiles": [
+        "ar_w1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "门楣与珊瑚冠: 紫色长方形门楣横跨双柱 (竖直短边与柱身互吸), 楣顶再竖 1 片粉色梯形珊瑚冠。",
+      "tip": "门楣走竖直铰链传力, 不受重力弯矩; 珊瑚冠重心正压楣顶线。",
+      "tiles_to_add": [
+        "ar_lintel",
+        "ar_crown"
+      ],
+      "highlight_tiles": [
+        "ar_w1",
+        "ar_e1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "北缘对称海扇: 2 片红色扇形直径边吸北缘板边, 圆弧相背展开 —— 扇形磁力片首次登场。",
+      "tip": "",
+      "tiles_to_add": [
+        "fan_nw",
+        "fan_ne"
+      ],
+      "highlight_tiles": [
+        "sb3_1",
+        "sb3_2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "东缘与礁间海扇: 东缘竖 1 柄橙色海扇, 脑珊瑚北侧再立 1 柄。",
+      "tip": "",
+      "tiles_to_add": [
+        "fan_e",
+        "fan_m"
+      ],
+      "highlight_tiles": [
+        "sb2_5"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "西东海葵: 海床西缘与东北缘各斜倚 1 株粉色菱形海葵 —— 菱形天然 60 度斜置, 像正随水流摆动。",
+      "tip": "",
+      "tiles_to_add": [
+        "an_w",
+        "an_e"
+      ],
+      "highlight_tiles": [
+        "sb2_0"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "南缘海葵: 南缘再斜倚 2 株紫色海葵, 朝向相对。",
+      "tip": "",
+      "tiles_to_add": [
+        "an_s0",
+        "an_s1"
+      ],
+      "highlight_tiles": [
+        "sb0_0",
+        "sb0_2"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "脑珊瑚: [4,5]x[1,2] 上 4 片等边三角对锥合拢, 斜棱两两互吸 —— 圆润的脑珊瑚丘。",
+      "tip": "",
+      "tiles_to_add": [
+        "brain_s",
+        "brain_e",
+        "brain_n",
+        "brain_w"
+      ],
+      "highlight_tiles": [
+        "sb1_4"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "海带丛: 3 片绿色方板竖立在海床边线上 —— 珊瑚礁苏醒了。",
+      "tip": "",
+      "tiles_to_add": [
+        "kelp_a",
+        "kelp_b",
+        "kelp_c"
+      ],
+      "highlight_tiles": [
+        "sb1_0",
+        "sb3_3"
+      ]
+    }
+  ]
+}

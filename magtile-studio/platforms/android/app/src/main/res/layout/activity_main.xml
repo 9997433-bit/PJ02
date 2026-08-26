@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 主界面: 标题栏 (含年龄段模式入口) + 状态行 + 筛选栏 (难度 / 主题 /
+     免费 / 核心 9 片 / 我能搭的, 按年龄段收放: 4-6 只留主题 /
+     7-9 难度+主题 / 10+ 全量) + 模型卡片列表 + 温和空态
+     (加载失败/空目录带「再试一次」, 对齐桌面 Qt 模型库空态口径)。
+     颜色/字号/间距一律引用 colors.xml + dimens.xml 令牌
+     (与桌面 Qt Theme.qml 同一套口径)。 -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/magtile_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/magtile_primary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:text="@string/library_title"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold" />
+
+        <!-- 进度页「我的作品」入口: 统计 + 作品列表 + 成就墙
+             (儿童可达无家长门 §5.3; 触控目标 >= 48dp) -->
+        <TextView
+            android:id="@+id/progress_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/touch_target"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/main_progress_entry"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- 年龄段模式入口 (UI_UX_SPEC.md §2 三档分层): 显示当前档位,
+             点击先过家长门 (§9, ParentGateDialog), 通过后弹三档单选;
+             与桌面 settings 表同键 age_mode, 切换即时生效并落盘
+             (触控目标 >= 48dp) -->
+        <TextView
+            android:id="@+id/age_mode_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/touch_target"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="6dp"
+        android:text="@string/library_loading"
+        android:textColor="@color/magtile_text_secondary"
+        android:textSize="@dimen/text_secondary" />
+
+    <!-- 筛选栏: 与桌面 GL/Qt 模型库同一套口径 (难度精确匹配 / 规范主题 /
+         core::isCoreTile 判定); 数据加载完成前隐藏。控件按年龄段收放
+         (MainActivity.applyAgeMode, 与 Qt LibraryPage 一致): 4-6 只留
+         主题; 7-9 难度+主题 (库存入口保留); 10+ 全量。分组留白与桌面
+         Qt 筛选栏一致: 下拉组 / 内容组 (免费) / 磁力片组 (核心 9 片 +
+         我能搭的 + 库存入口) 之间加大间距 -->
+    <LinearLayout
+        android:id="@+id/filter_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/filter_difficulty"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/touch_target"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/filter_theme"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/touch_target"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <!-- 勾选筛选行: 窄屏下可横向滑动, 不折行不挤压 -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- 内容组 —「只看免费」: 免费层筛选 (目录「免费」标签,
+                     与桌面 GL/Qt 同口径); 非免费照常可浏览, 详情温和提示 -->
+                <CheckBox
+                    android:id="@+id/filter_free"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/touch_target"
+                    android:text="@string/filter_free"
+                    android:textColor="@color/magtile_text_primary"
+                    android:textSize="14sp" />
+
+                <!-- 磁力片组 (仅 10+ 进阶档): 组间留白加大 (与 Qt 筛选栏
+                     「磁力片」分组同一层级感) -->
+                <CheckBox
+                    android:id="@+id/filter_core9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/touch_target"
+                    android:layout_marginStart="@dimen/spacing"
+                    android:text="@string/filter_core9"
+                    android:textColor="@color/magtile_text_primary"
+                    android:textSize="14sp" />
+
+                <!-- 「我能搭的」: 库存对照 BOM; 未登记库存时禁用并由右侧
+                     「去登记 ▶」引导录入 (与桌面 GL 筛选栏同策略) -->
+                <CheckBox
+                    android:id="@+id/filter_buildable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/touch_target"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:enabled="false"
+                    android:text="@string/filter_buildable"
+                    android:textColor="@color/magtile_text_primary"
+                    android:textSize="14sp" />
+
+                <!-- 库存录入入口: 未登记 = 去登记 ▶ / 已登记 = 改库存
+                     (触控目标 >= 48dp; 库存登记是家长操作, 点击先过
+                     家长门 §9) -->
+                <TextView
+                    android:id="@+id/filter_inventory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/touch_target"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/filter_go_inventory"
+                    android:textColor="@color/magtile_primary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/model_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
+            android:scrollbars="vertical" />
+
+        <!-- 筛选空态三件套 (§5.2 / ui-design-brain: 图形 + 温和说明 +
+             一键 CTA, 对齐桌面 Qt「换个条件试试 + 看全部模型」空态):
+             不出现空白页, 「看全部模型」一键清掉全部筛选 -->
+        <LinearLayout
+            android:id="@+id/filter_empty_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔍"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/empty_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:gravity="center"
+                android:text="@string/library_filter_empty"
+                android:textColor="@color/magtile_text_secondary"
+                android:textSize="@dimen/text_body" />
+
+            <Button
+                android:id="@+id/filter_clear_button"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/spacing"
+                android:backgroundTint="@color/magtile_primary"
+                android:paddingStart="@dimen/spacing_large"
+                android:paddingEnd="@dimen/spacing_large"
+                android:text="@string/filter_clear_all"
+                android:textColor="@color/magtile_on_primary"
+                android:textSize="@dimen/text_body" />
+        </LinearLayout>
+
+        <!-- 加载失败 / 目录空的温和空态 (对齐桌面 Qt 模型库空态口径,
+             §4.3): 只有引导与「再试一次」大按钮, 不给儿童看技术路径
+             (诊断细节只写 logcat) -->
+        <LinearLayout
+            android:id="@+id/library_empty_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🧲"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@string/library_soft_fail_title"
+                android:textColor="@color/magtile_text_primary"
+                android:textSize="@dimen/text_title"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="@string/library_soft_fail_hint"
+                android:textColor="@color/magtile_text_secondary"
+                android:textSize="@dimen/text_body" />
+
+            <Button
+                android:id="@+id/library_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/spacing"
+                android:backgroundTint="@color/magtile_primary"
+                android:paddingStart="@dimen/spacing_large"
+                android:paddingEnd="@dimen/spacing_large"
+                android:text="@string/library_retry"
+                android:textColor="@color/magtile_on_primary"
+                android:textSize="@dimen/text_body" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

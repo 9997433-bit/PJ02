@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 启动图标前景: 一片方形磁力片叠一片直角三角磁力片 (品牌记忆点) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 方片 (白色描边风格) -->
+    <path
+        android:pathData="M34,40 L62,40 L62,68 L34,68 Z"
+        android:fillColor="#CCFFFFFF"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="3" />
+    <!-- 直角三角片, 斜靠在方片右上 -->
+    <path
+        android:pathData="M62,40 L82,60 L62,60 Z"
+        android:fillColor="#99FFFFFF"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="3" />
+</vector>

@@ -1,0 +1,843 @@
+{
+  "schema_version": 1,
+  "id": "gingerbread_house_01",
+  "name": "姜饼糖果屋",
+  "name_en": "Gingerbread Candy House 01",
+  "description": "只用核心九片型的童话入门作: 与高脚海滩小屋和双层别墅都不同, 这是一只'糖霜齿带姜饼盒' —— 3x2 姜饼色墙环单层落地, 红色门框方糖果大门正对门前糖果小径, 两面青色窗格糖窗对开; 清色糖霜屋面上, 屋檐南北两条等边三角糖霜齿带整圈骑沿 (底边同时咬住屋面沿边与墙顶边), 屋脊四朵粉色糖峰骑拼缝; 院里棒棒糖一粉一紫, 糖果栅栏围出小院 —— 森林深处, 甜甜的童话开门迎客!",
+  "difficulty": 2,
+  "total_pieces": 45,
+  "tags": [
+    "童话",
+    "奇幻",
+    "糖果屋",
+    "姜饼",
+    "雪院",
+    "入门"
+  ],
+  "content_meta": {
+    "series": "fantasy_machinery",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 21,
+        "equilateral_triangle": 13,
+        "rectangle": 6,
+        "isosceles_triangle": 2,
+        "window_square": 2,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "yard_0_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "path",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "yard_3_0",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "yard_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "floor_1_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "floor_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "yard_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "yard_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "floor_1_2",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "floor_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "yard_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "yard_0_3",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "yard_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "yard_3_3",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_s_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "door",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wall_s_e",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wall_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wall_n_m",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wall_n_e",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "window_w",
+      "type": "window_square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wall_w_n",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wall_e_s",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "window_e",
+      "type": "window_square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "roof_w_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_m_s",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_e_s",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_w_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_m_n",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_e_n",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "icing_s_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "icing_s_m",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "icing_s_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "icing_n_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "icing_n_m",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "icing_n_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "peak_w_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "peak_w_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "peak_e_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "peak_e_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "lolli_a",
+      "type": "isosceles_triangle",
+      "position": [
+        0.0,
+        3.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "lolli_b",
+      "type": "isosceles_triangle",
+      "position": [
+        5.0,
+        2.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "fence_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fence_se",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fence_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺雪院南行: 两条雪地长板夹一格红色糖果小径。",
+      "tip": "森林深处飘来甜甜的香味 —— 顺着糖果小径走过去看看!",
+      "tiles_to_add": [
+        "yard_0_0",
+        "path",
+        "yard_3_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺院心两行: 姜饼色的是屋内地板, 清色的是院里的雪。",
+      "tip": "行行等边互吸 —— 墙脚要踩住这些拼缝。",
+      "tiles_to_add": [
+        "yard_0_1",
+        "floor_1_1",
+        "floor_3_1",
+        "yard_4_1",
+        "yard_0_2",
+        "floor_1_2",
+        "floor_3_2",
+        "yard_4_2"
+      ],
+      "highlight_tiles": [
+        "path"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺雪院北行: 院子铺满。",
+      "tip": "雪把小院盖得松松软软 —— 正好衬糖果的颜色。",
+      "tiles_to_add": [
+        "yard_0_3",
+        "yard_2_3",
+        "yard_3_3"
+      ],
+      "highlight_tiles": [
+        "floor_1_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立南墙与西墙: 红色门框方是糖果大门, 青色窗格是糖窗。",
+      "tip": "大门正对糖果小径 —— 门楣上好像还挂着糖霜呢。",
+      "tiles_to_add": [
+        "wall_s_w",
+        "door",
+        "wall_s_e",
+        "window_w",
+        "wall_w_n"
+      ],
+      "highlight_tiles": [
+        "floor_1_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "合北墙与东墙: 十片墙环四角竖边互咬闭环。",
+      "tip": "姜饼墙合拢 —— 屋里已经暖烘烘的了。",
+      "tiles_to_add": [
+        "wall_n_w",
+        "wall_n_m",
+        "wall_n_e",
+        "wall_e_s",
+        "window_e"
+      ],
+      "highlight_tiles": [
+        "wall_s_w"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "盖糖霜屋面: 六片清色方板边边入扣墙顶, 板板互吸。",
+      "tip": "像刚淋上去的一层糖霜 —— 每片方板至少一条边咬住墙顶。",
+      "tiles_to_add": [
+        "roof_w_s",
+        "roof_m_s",
+        "roof_e_s",
+        "roof_w_n",
+        "roof_m_n",
+        "roof_e_n"
+      ],
+      "highlight_tiles": [
+        "wall_s_w"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "沿屋檐立糖霜齿带: 南北各三片等边三角, 底边双边受力。",
+      "tip": "齿带同时咬住屋面沿边和墙顶边 —— 好看又结实。",
+      "tiles_to_add": [
+        "icing_s_w",
+        "icing_s_m",
+        "icing_s_e",
+        "icing_n_w",
+        "icing_n_m",
+        "icing_n_e"
+      ],
+      "highlight_tiles": [
+        "roof_w_s"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "屋脊立糖峰: 四片粉色小三角骑住屋面拼缝。",
+      "tip": "像挤上去的四朵奶油花 —— 糖果屋的屋顶完工!",
+      "tiles_to_add": [
+        "peak_w_s",
+        "peak_w_n",
+        "peak_e_s",
+        "peak_e_n"
+      ],
+      "highlight_tiles": [
+        "icing_s_w"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "插棒棒糖, 围糖果栅栏: 糖果屋开门迎客!",
+      "tip": "院里的棒棒糖一粉一紫 —— 闻得到, 也搭得出的童话。",
+      "tiles_to_add": [
+        "lolli_a",
+        "lolli_b",
+        "fence_sw",
+        "fence_se",
+        "fence_w"
+      ],
+      "highlight_tiles": [
+        "door",
+        "path"
+      ]
+    }
+  ]
+}

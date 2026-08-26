@@ -1,0 +1,1158 @@
+{
+  "schema_version": 1,
+  "id": "whale_01",
+  "name": "蓝鲸",
+  "name_en": "Blue Whale 01",
+  "description": "海洋生物主题: 7x6 海面用长板涌浪与方片浪花相间铺成, 中央隆起 4x2 箱形鲸背 (体壁合围 + 甲板封顶), 额头两片 30 度斜坡俯冲入水, 尾部两片菱形尾鳍在竖直面内向外斜展成 V, 背脊喷起一柱青色喷泉, 两侧胸鳍以 45 度外倾拍出水花 —— 透明鲸眼正望着你, 一起下海巡游吧。",
+  "difficulty": 3,
+  "total_pieces": 60,
+  "tags": [
+    "海洋",
+    "鲸鱼",
+    "动物世界",
+    "进阶",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "animal_world",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 44,
+        "rectangle": 11,
+        "equilateral_triangle": 3,
+        "rhombus": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "sea_r_0_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_r_0_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_r_0_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_s_0",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_6_1",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_r_2_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_r_2_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_r_2_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_s_2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_6_3",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_r_4_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_r_4_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_r_4_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_s_4",
+      "type": "square",
+      "position": [
+        6.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_0_5",
+      "type": "square",
+      "position": [
+        0.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_1_5",
+      "type": "square",
+      "position": [
+        1.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_2_5",
+      "type": "square",
+      "position": [
+        2.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_3_5",
+      "type": "square",
+      "position": [
+        3.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_4_5",
+      "type": "square",
+      "position": [
+        4.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sea_5_5",
+      "type": "square",
+      "position": [
+        5.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sea_6_5",
+      "type": "square",
+      "position": [
+        6.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_s_0",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wh_s_1",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_s_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_s_3",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_n_0",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_n_1",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_n_2",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_n_3",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_w_0",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_e_0",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_w_1",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_e_1",
+      "type": "square",
+      "position": [
+        6.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_d_0_0",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_d_1_0",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_d_2_0",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_d_3_0",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_d_0_1",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_d_1_1",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_d_2_1",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wh_d_3_1",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "head_s",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "head_n",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "fluke_s",
+      "type": "rhombus",
+      "position": [
+        6.0,
+        2.25,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "fluke_n",
+      "type": "rhombus",
+      "position": [
+        6.0,
+        3.75,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "spout",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fin_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.795876,
+        0.204124
+      ],
+      "rotation": [
+        135.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fin_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        4.204124,
+        0.204124
+      ],
+      "rotation": [
+        135.0,
+        0.0,
+        180.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺海面第 1 行 (y 0..1): 3 片长板拼涌浪, 东端补 1 片青色方片。",
+      "tip": "长板的长边与两片方片等长 —— 涌浪行与浪花行可以无缝相咬。",
+      "tiles_to_add": [
+        "sea_r_0_0",
+        "sea_r_0_1",
+        "sea_r_0_2",
+        "sea_s_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺海面第 2 行: 7 片方片拼浪花, 与第 1 行整边吸合。",
+      "tip": "青色方片是浪花翻白的地方, 请按图错落分布。",
+      "tiles_to_add": [
+        "sea_0_1",
+        "sea_1_1",
+        "sea_2_1",
+        "sea_3_1",
+        "sea_4_1",
+        "sea_5_1",
+        "sea_6_1"
+      ],
+      "highlight_tiles": [
+        "sea_r_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺海面第 3 行: 又是一行长板涌浪。鲸鱼即将从这一带浮出。",
+      "tip": "每片长板两端都要与上一行对齐格线。",
+      "tiles_to_add": [
+        "sea_r_2_0",
+        "sea_r_2_1",
+        "sea_r_2_2",
+        "sea_s_2"
+      ],
+      "highlight_tiles": [
+        "sea_0_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺海面第 4 行: 7 片方片浪花行。",
+      "tip": "海面已过半 —— 中间两行就是鲸背破水的位置。",
+      "tiles_to_add": [
+        "sea_0_3",
+        "sea_1_3",
+        "sea_2_3",
+        "sea_3_3",
+        "sea_4_3",
+        "sea_5_3",
+        "sea_6_3"
+      ],
+      "highlight_tiles": [
+        "sea_r_2_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "铺海面第 5 行: 长板涌浪行。",
+      "tip": "保持整张海面平整, 不要留缝。",
+      "tiles_to_add": [
+        "sea_r_4_0",
+        "sea_r_4_1",
+        "sea_r_4_2",
+        "sea_s_4"
+      ],
+      "highlight_tiles": [
+        "sea_0_3"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "铺完海面第 6 行 —— 7x6 大海就绪, 请鲸鱼入场!",
+      "tip": "从上往下看, 涌浪行与浪花行应蓝青相间。",
+      "tiles_to_add": [
+        "sea_0_5",
+        "sea_1_5",
+        "sea_2_5",
+        "sea_3_5",
+        "sea_4_5",
+        "sea_5_5",
+        "sea_6_5"
+      ],
+      "highlight_tiles": [
+        "sea_r_4_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立鲸身南侧体壁: 沿 y=2 立 4 片, 最西一片用透明片当鲸眼。",
+      "tip": "底边吸海面格线, 竖边两两互吸 —— 鲸鱼的左舷成形。",
+      "tiles_to_add": [
+        "wh_s_0",
+        "wh_s_1",
+        "wh_s_2",
+        "wh_s_3"
+      ],
+      "highlight_tiles": [
+        "sea_2_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立鲸身北侧体壁: 沿 y=4 再立 4 片蓝色正方形。",
+      "tip": "与南侧体壁平行相距 2 格, 中间就是鲸鱼厚实的身体。",
+      "tiles_to_add": [
+        "wh_n_0",
+        "wh_n_1",
+        "wh_n_2",
+        "wh_n_3"
+      ],
+      "highlight_tiles": [
+        "wh_s_0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "封额头与尾柄端壁: 西端 (x=2) 与东端 (x=6) 各立 2 片, 鲸身合围。",
+      "tip": "四角竖边两两互吸后, 轻捏体壁上口应感觉整体联动。",
+      "tiles_to_add": [
+        "wh_w_0",
+        "wh_w_1",
+        "wh_e_0",
+        "wh_e_1"
+      ],
+      "highlight_tiles": [
+        "wh_s_0",
+        "wh_n_3"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "铺鲸背南半: 4 片蓝色方板压在体壁顶上 (y 2..3)。",
+      "tip": "甲板边要同时吸住墙顶边与相邻甲板片。",
+      "tiles_to_add": [
+        "wh_d_0_0",
+        "wh_d_1_0",
+        "wh_d_2_0",
+        "wh_d_3_0"
+      ],
+      "highlight_tiles": [
+        "wh_s_1",
+        "wh_w_0"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "铺鲸背北半: 再压 4 片, 鲸背完全封合 —— 一条箱形大鲸浮在海面。",
+      "tip": "轻压甲板四角检查: 鲸背应结实得能托住喷泉和尾鳍。",
+      "tiles_to_add": [
+        "wh_d_0_1",
+        "wh_d_1_1",
+        "wh_d_2_1",
+        "wh_d_3_1"
+      ],
+      "highlight_tiles": [
+        "wh_d_0_0",
+        "wh_d_1_0",
+        "wh_d_2_0",
+        "wh_d_3_0"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "装额头斜坡: 2 片 30 度长方形从鲸背西沿俯冲, 坡尾落在海面上。",
+      "tip": "顶边整边吸住甲板西沿再松手 —— 这就是蓝鲸圆润的大额头。",
+      "tiles_to_add": [
+        "head_s",
+        "head_n"
+      ],
+      "highlight_tiles": [
+        "wh_d_0_0",
+        "wh_d_0_1"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "立尾鳍: 2 片蓝色菱形立在鲸背尾沿 (x=6), 在竖直面内向外斜展成 V。",
+      "tip": "菱形底边同时吸住甲板尾沿与尾柄端壁顶边, V 形开口朝外。",
+      "tiles_to_add": [
+        "fluke_s",
+        "fluke_n"
+      ],
+      "highlight_tiles": [
+        "wh_d_3_0",
+        "wh_d_3_1"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "喷泉登场: 1 片青色等边三角形立在鲸背前段正中 —— 鲸鱼换气啦!",
+      "tip": "底边吸住鲸背中缝, 三角尖直指天空。",
+      "tiles_to_add": [
+        "spout"
+      ],
+      "highlight_tiles": [
+        "wh_d_0_0",
+        "wh_d_0_1"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "装南侧胸鳍: 1 片青色等边三角形以 45 度外倾, 底边同时吸住海面格线与鲸身墙底。",
+      "tip": "鳍尖斜指水面, 像正在拍出一朵水花。",
+      "tiles_to_add": [
+        "fin_s"
+      ],
+      "highlight_tiles": [
+        "wh_s_1"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "装北侧胸鳍, 与南侧镜像 —— 蓝鲸巡游开始!",
+      "tip": "两侧胸鳍对称外倾, 从正前方看是一个大大的 V。",
+      "tiles_to_add": [
+        "fin_n"
+      ],
+      "highlight_tiles": [
+        "fin_s",
+        "wh_n_2"
+      ]
+    }
+  ]
+}

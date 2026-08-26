@@ -1,0 +1,1085 @@
+{
+  "schema_version": 1,
+  "id": "windmill_01",
+  "name": "风车磨坊",
+  "name_en": "Windmill 01",
+  "description": "田园风车磨坊: 2x2 塔身用长方形圈层砌法起两层 (一层南面整面留作负空间大门, 二层门楣圈两端竖边传力), 塔顶梯形裙檐收分出 1x1 洞口再戴等腰锥帽; 南面沿口立起两格高毂柱, 4 片透明菱形叶片吸在毂柱上下两段的左右竖边上, 借菱形 60 度天然斜置拼出正在旋转的 X 形风车, 两片等边三角锁片嵌进上下叶片的 60 度夹角锁住毂心 —— 全库第一次把菱形当叶片用。场边配栅栏、锥顶水井、六边形树冠大树与花丛。",
+  "difficulty": 3,
+  "total_pieces": 55,
+  "tags": [
+    "田园",
+    "风车",
+    "菱形叶片",
+    "圈层砌法",
+    "进阶",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "fantasy_machinery",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 17,
+        "equilateral_triangle": 10,
+        "rectangle": 10,
+        "isosceles_triangle": 9,
+        "rhombus": 4,
+        "trapezoid": 4,
+        "hexagon": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "path_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "well_base",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lawn_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_ne",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_w",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "lawn_e",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "floor_00",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "floor_10",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "floor_01",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "floor_11",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ring1_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ring1_e",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ring1_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ring2_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ring2_e",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ring2_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ring2_s",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "skirt_s",
+      "type": "trapezoid",
+      "position": [
+        2.0,
+        1.222222,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "skirt_e",
+      "type": "trapezoid",
+      "position": [
+        2.777778,
+        2.0,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "skirt_n",
+      "type": "trapezoid",
+      "position": [
+        2.0,
+        2.777778,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "skirt_w",
+      "type": "trapezoid",
+      "position": [
+        1.222222,
+        2.0,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hat_s",
+      "type": "isosceles_triangle",
+      "position": [
+        2.0,
+        1.666667,
+        3.352605
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hat_e",
+      "type": "isosceles_triangle",
+      "position": [
+        2.333333,
+        2.0,
+        3.352605
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hat_n",
+      "type": "isosceles_triangle",
+      "position": [
+        2.0,
+        2.333333,
+        3.352605
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hat_w",
+      "type": "isosceles_triangle",
+      "position": [
+        1.666667,
+        2.0,
+        3.352605
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hub_lo",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        3.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hub_hi",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        4.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "blade_dl",
+      "type": "rhombus",
+      "position": [
+        1.066987,
+        1.5,
+        2.957107
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "blade_dr",
+      "type": "rhombus",
+      "position": [
+        2.933013,
+        1.5,
+        2.957107
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "blade_ul",
+      "type": "rhombus",
+      "position": [
+        1.066987,
+        1.5,
+        4.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "blade_ur",
+      "type": "rhombus",
+      "position": [
+        2.933013,
+        1.5,
+        4.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hub_tri_l",
+      "type": "equilateral_triangle",
+      "position": [
+        0.92265,
+        1.5,
+        3.707107
+      ],
+      "rotation": [
+        90.0,
+        29.999983,
+        180.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hub_tri_r",
+      "type": "equilateral_triangle",
+      "position": [
+        3.07735,
+        1.5,
+        3.707107
+      ],
+      "rotation": [
+        90.0,
+        29.999983,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hub_cap",
+      "type": "isosceles_triangle",
+      "position": [
+        2.0,
+        1.5,
+        5.373774
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "fence_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fence_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fence_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fence_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "well_s",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "well_n",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "well_w",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "well_e",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "well_hat_s",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        3.166667,
+        1.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "well_hat_e",
+      "type": "isosceles_triangle",
+      "position": [
+        0.833333,
+        3.5,
+        1.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "well_hat_n",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        3.833333,
+        1.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "well_hat_w",
+      "type": "isosceles_triangle",
+      "position": [
+        0.166667,
+        3.5,
+        1.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tree_trunk",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tree_crown",
+      "type": "hexagon",
+      "position": [
+        3.5,
+        4.0,
+        1.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bush_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "flower_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flower_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺设田园地台外圈: 南排 4 片灰色石板路平铺在最前, 西北角放 1 片灰色水井地基, 北排与东西两列铺绿色草地长方形与方板。",
+      "tip": "先摆南排再逆时针合拢, 每片至少一条边与邻片整边吸合。",
+      "tiles_to_add": [
+        "path_0",
+        "path_1",
+        "path_2",
+        "path_3",
+        "well_base",
+        "lawn_n",
+        "lawn_ne",
+        "lawn_w",
+        "lawn_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺设磨坊室内地板: 4 片黄色正方形填满中央 2x2, 这是塔身的地基。",
+      "tip": "地板与南排石板路整边吸合, 磨坊大门正对石板路。",
+      "tiles_to_add": [
+        "floor_00",
+        "floor_10",
+        "floor_01",
+        "floor_11"
+      ],
+      "highlight_tiles": [
+        "lawn_w",
+        "lawn_e"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "砌一层圈梁: 3 根橙色长方形横放立起, 底边整条吸住草地长方形的内沿长边, 南面整面留空 —— 那是磨坊大门。",
+      "tip": "长方形立墙的竖边在西北/东北角两两咬合 —— 这就是圈层砌法。",
+      "tiles_to_add": [
+        "ring1_w",
+        "ring1_e",
+        "ring1_n"
+      ],
+      "highlight_tiles": [
+        "lawn_w",
+        "lawn_n"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "叠二层窗带: 2 根透明长方形叠上西墙与东墙顶沿。",
+      "tip": "上下两根长方形的长边完全对齐, 透明窗带让阳光进磨坊。",
+      "tiles_to_add": [
+        "ring2_w",
+        "ring2_e"
+      ],
+      "highlight_tiles": [
+        "ring1_w",
+        "ring1_e"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "合拢二层圈梁: 北面叠 1 根橙色长方形, 南面 1 根黄色长方形横跨大门上方 —— 两端竖边吸住西/东窗带, 它就是门楣。",
+      "tip": "门楣下方是 2 格宽的负空间大门, 全靠两端竖边传力。",
+      "tiles_to_add": [
+        "ring2_n",
+        "ring2_s"
+      ],
+      "highlight_tiles": [
+        "ring2_w",
+        "ring2_e"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "安装裙檐: 4 片红色梯形下底整条吸住二层圈梁顶沿, 腰两两互吸, 向内收分出 1x1 的顶部洞口。",
+      "tip": "梯形下底长 2, 正好与长方形圈梁的长边等长 —— 先南片再顺时针。",
+      "tiles_to_add": [
+        "skirt_s",
+        "skirt_e",
+        "skirt_n",
+        "skirt_w"
+      ],
+      "highlight_tiles": [
+        "ring2_n",
+        "ring2_s"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "扣上锥帽: 4 片红色等腰三角形在裙檐洞口上方合拢成尖顶。",
+      "tip": "四条斜棱两两互吸, 锥尖在洞口正上方 0.87 格处会合。",
+      "tiles_to_add": [
+        "hat_s",
+        "hat_e",
+        "hat_n",
+        "hat_w"
+      ],
+      "highlight_tiles": [
+        "skirt_s",
+        "skirt_n"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "竖立风车毂柱: 2 片蓝色正方形在南面裙檐沿口上下叠成两格高的毂柱。",
+      "tip": "毂柱底边与裙檐顶沿、锥帽底边共线互吸 —— 一条线三重受力。",
+      "tiles_to_add": [
+        "hub_lo",
+        "hub_hi"
+      ],
+      "highlight_tiles": [
+        "skirt_s",
+        "hat_s"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "挂下段叶片: 2 片透明菱形分别吸在毂柱下段的左右竖边上, 顺着菱形的斜度向斜下方甩出。",
+      "tip": "菱形整条边贴住毂柱竖边, 斜置 60 度是它的天然角度。",
+      "tiles_to_add": [
+        "blade_dl",
+        "blade_dr"
+      ],
+      "highlight_tiles": [
+        "hub_lo"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "挂上段叶片并锁毂心: 2 片透明菱形吸在毂柱上段左右竖边向斜上方甩出; 上下叶片的内斜边张开的夹角恰好 60 度, 左右各嵌 1 片蓝色等边三角形与叶片双边互吸锁住毂心; 最后 1 片蓝色等腰三角形立在毂柱顶边收尾 —— 风车 X 成形!",
+      "tip": "锁片给毂柱接缝加了第二条传力路径 —— 碰一下, 风车也不散。",
+      "tiles_to_add": [
+        "blade_ul",
+        "blade_ur",
+        "hub_tri_l",
+        "hub_tri_r",
+        "hub_cap"
+      ],
+      "highlight_tiles": [
+        "blade_dl",
+        "blade_dr"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "竖起南侧栅栏: 4 片黄色等边三角形立在石板路前沿。",
+      "tip": "底边与石板路外沿整边吸合, 像一排小小的木栅栏。",
+      "tiles_to_add": [
+        "fence_0",
+        "fence_1",
+        "fence_2",
+        "fence_3"
+      ],
+      "highlight_tiles": [
+        "path_0",
+        "path_3"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "砌水井四壁: 4 片灰色正方形沿西北角地基边缘立起围成井筒。",
+      "tip": "四片墙的竖边在四角两两互吸, 围成一个结实的方筒。",
+      "tiles_to_add": [
+        "well_s",
+        "well_n",
+        "well_w",
+        "well_e"
+      ],
+      "highlight_tiles": [
+        "well_base"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "盖水井锥顶: 4 片蓝色等腰三角形在井筒上方合拢成小尖顶。",
+      "tip": "和磨坊锥帽同款技法 —— 四条斜棱互吸自锁。",
+      "tiles_to_add": [
+        "well_hat_s",
+        "well_hat_e",
+        "well_hat_n",
+        "well_hat_w"
+      ],
+      "highlight_tiles": [
+        "well_s",
+        "well_n"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "种一棵大树: 橙色正方形树干立在东北角草地外沿, 绿色六边形树冠整边吸在树干顶边上。",
+      "tip": "六边形的每条边都与正方形边等长, 树冠稳稳骑在树干上。",
+      "tiles_to_add": [
+        "tree_trunk",
+        "tree_crown"
+      ],
+      "highlight_tiles": [
+        "lawn_ne"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "种两丛灌木: 2 片绿色等边三角形立在草地与石板路的拼缝上。",
+      "tip": "底边正好吸在两片地板共享的拼缝边上。",
+      "tiles_to_add": [
+        "bush_w",
+        "bush_e"
+      ],
+      "highlight_tiles": [
+        "lawn_w",
+        "lawn_e"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "种两株门前花: 2 片粉色等边三角形立在大门两侧 —— 风车磨坊落成!",
+      "tip": "从南面看: 大门、门楣、裙檐、锥帽与风车 X 排成一条中轴线。",
+      "tiles_to_add": [
+        "flower_w",
+        "flower_e"
+      ],
+      "highlight_tiles": [
+        "fence_1",
+        "fence_2"
+      ]
+    }
+  ]
+}

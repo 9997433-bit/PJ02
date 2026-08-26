@@ -1,0 +1,1042 @@
+{
+  "schema_version": 1,
+  "id": "chinese_garden_01",
+  "name": "中式园林水榭",
+  "name_en": "Chinese Garden Pavilion 01",
+  "description": "水平铺陈的一进中式园林: 敞口大水榭南面整面开门 (上层南梁两端竖边互吸悬跨 2 格门洞), 头戴梯形四坡青瓦顶; 四墩石桥横跨莲池, 每跨桥面长板两端同时压住相邻桥墩顶边 (双端受力零悬挑), 桥栏三角对立; 对岸假山锥峰、山石迎客松与透明观景面的攒尖小亭收景 —— 一桥一榭一亭, 隔水相望。",
+  "difficulty": 3,
+  "total_pieces": 52,
+  "tags": [
+    "田园",
+    "园林",
+    "亭台",
+    "石桥",
+    "四坡顶",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "landmark_architecture",
+    "structural_signature": {
+      "tile_histogram": {
+        "rectangle": 21,
+        "equilateral_triangle": 11,
+        "square": 9,
+        "isosceles_triangle": 7,
+        "trapezoid": 4
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "pav_fl_w",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pav_fl_e",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pw0_w",
+      "type": "rectangle",
+      "position": [
+        0.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pw0_e",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pw0_n",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pw1_w",
+      "type": "rectangle",
+      "position": [
+        0.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pw1_e",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pw1_n",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pw1_s",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pav_rf_s",
+      "type": "trapezoid",
+      "position": [
+        1.0,
+        0.222222,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pav_rf_e",
+      "type": "trapezoid",
+      "position": [
+        1.777778,
+        1.0,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pav_rf_n",
+      "type": "trapezoid",
+      "position": [
+        1.0,
+        1.777778,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pav_rf_w",
+      "type": "trapezoid",
+      "position": [
+        0.222222,
+        1.0,
+        2.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pav_rf_cap",
+      "type": "square",
+      "position": [
+        1.0,
+        1.0,
+        2.707107
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "path",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lant_s",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        0.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "lant_n",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        2.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pond_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pond_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pond_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pier_3",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_4",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_5",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_6",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_s_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_n_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_s_4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_n_4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_s_5",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_n_5",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shore",
+      "type": "rectangle",
+      "position": [
+        6.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gdn_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gdn_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gdn_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gdn_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rock_s",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        2.166667,
+        0.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rock_e",
+      "type": "isosceles_triangle",
+      "position": [
+        4.833333,
+        2.5,
+        0.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rock_n",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        2.833333,
+        0.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rock_w",
+      "type": "isosceles_triangle",
+      "position": [
+        4.166667,
+        2.5,
+        0.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "stone",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pine",
+      "type": "isosceles_triangle",
+      "position": [
+        5.5,
+        3.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "kio_s",
+      "type": "square",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "kio_n",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "kio_w",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "kio_e",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "kio_hat_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "kio_hat_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "kio_hat_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "kio_hat_w",
+      "type": "equilateral_triangle",
+      "position": [
+        6.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺水榭地板与石径: 2 片黄色长板纵铺成榭底, 东侧再接 1 片灰色石径长板。",
+      "tip": "三片长板的长边都落在 x 整数线上 —— 之后墙和桥墩全靠这些边。",
+      "tiles_to_add": [
+        "pav_fl_w",
+        "pav_fl_e",
+        "path"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立水榭下层环墙: 西、东、北三面各立 1 片整幅长板墙, 南面整面敞开。",
+      "tip": "墙底边 (长 2) 与地板长边逐段等长整边贴合; 敞开的南面就是水榭的看台。",
+      "tiles_to_add": [
+        "pw0_w",
+        "pw0_e",
+        "pw0_n"
+      ],
+      "highlight_tiles": [
+        "pav_fl_w",
+        "pav_fl_e"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "架上层环梁圈: 西、东、北三面先叠, 南梁最后悬跨门洞, 两端竖边吸东西梁竖边 —— 四片合成自锁环。",
+      "tip": "南梁下面没有墙, 全靠两端竖边受力 —— 这就是敞口水榭的门脸。",
+      "tiles_to_add": [
+        "pw1_w",
+        "pw1_e",
+        "pw1_n",
+        "pw1_s"
+      ],
+      "highlight_tiles": [
+        "pw0_w",
+        "pw0_e"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "收梯形四坡顶: 4 片青瓦梯形下底整边吸环梁顶边, 四腰两两互吸。",
+      "tip": "梯形下底长 2, 恰与环梁顶边等长 —— 一片压一面。",
+      "tiles_to_add": [
+        "pav_rf_s",
+        "pav_rf_e",
+        "pav_rf_n",
+        "pav_rf_w"
+      ],
+      "highlight_tiles": [
+        "pw1_s",
+        "pw1_n"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖攒尖压顶: 1 片黄色方片盖住四坡顶围出的天窗口, 大水榭落成。",
+      "tip": "压顶四边同时吸四片梯形上底 —— 咔哒一声整顶锁死。",
+      "tiles_to_add": [
+        "pav_rf_cap"
+      ],
+      "highlight_tiles": [
+        "pav_rf_s",
+        "pav_rf_e"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立石灯笼: 石径南北两端各立 1 座橙色等腰石灯笼。",
+      "tip": "灯笼底边吸石径短边, 是入园的第一重仪式感。",
+      "tiles_to_add": [
+        "lant_s",
+        "lant_n"
+      ],
+      "highlight_tiles": [
+        "path"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "铺莲池: 3 片蓝色长板纵铺 ([3,6]x[0,2]), 与石径长边相吸。",
+      "tip": "池水的每条 x 整数线马上都要站上一座桥墩。",
+      "tiles_to_add": [
+        "pond_3",
+        "pond_4",
+        "pond_5"
+      ],
+      "highlight_tiles": [
+        "path"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立四座桥墩: 4 片灰色长板立在 x = 3/4/5/6 四条边线上, 底边与池板长边整边贴合。",
+      "tip": "桥墩是立式长板 —— 一片顶两根柱子, 稳而通透。",
+      "tiles_to_add": [
+        "pier_3",
+        "pier_4",
+        "pier_5",
+        "pier_6"
+      ],
+      "highlight_tiles": [
+        "pond_3",
+        "pond_5"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "铺桥面: 3 片灰色长板依次压上, 每片两端同时吸左右桥墩顶边。",
+      "tip": "双端受力零悬挑 —— 罗马水道桥同款的过跨手法。",
+      "tiles_to_add": [
+        "deck_3",
+        "deck_4",
+        "deck_5"
+      ],
+      "highlight_tiles": [
+        "pier_3",
+        "pier_6"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "装南侧桥栏: 3 片朱红三角立在桥面南沿。",
+      "tip": "桥栏立在桥面短边正上方, 力臂为零纯压不弯。",
+      "tiles_to_add": [
+        "rail_s_3",
+        "rail_s_4",
+        "rail_s_5"
+      ],
+      "highlight_tiles": [
+        "deck_4"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "装北侧桥栏: 再立 3 片, 石桥合栏。",
+      "tip": "过桥赏莲, 两侧都要有栏 —— 安全第一。",
+      "tiles_to_add": [
+        "rail_n_3",
+        "rail_n_4",
+        "rail_n_5"
+      ],
+      "highlight_tiles": [
+        "rail_s_4"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "铺东岸与岸边园地东段: 东岸长板吸池板东沿, 上方园地方板接岸铺开。",
+      "tip": "东岸是绿色草坡, 小亭马上要立在它的园地上。",
+      "tiles_to_add": [
+        "shore",
+        "gdn_6"
+      ],
+      "highlight_tiles": [
+        "pond_5",
+        "pier_6"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "铺岸边园地西段: 沿莲池北沿再铺 3 片绿色方板。",
+      "tip": "园地方板南边吸池板短边 —— 池与园无缝相接。",
+      "tiles_to_add": [
+        "gdn_3",
+        "gdn_4",
+        "gdn_5"
+      ],
+      "highlight_tiles": [
+        "gdn_6",
+        "pond_3"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "堆假山锥峰: 4 片灰色等腰三角在园地上收成一座锥峰, 斜棱互吸自锁。",
+      "tip": "假山就是一顶落地的四坡尖 —— 中式园林的骨。",
+      "tiles_to_add": [
+        "rock_s",
+        "rock_e",
+        "rock_n",
+        "rock_w"
+      ],
+      "highlight_tiles": [
+        "gdn_4"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "点山石与迎客松: 峰旁立 1 片山石, 松立峰东。",
+      "tip": "一峰一石一松 —— 三笔点出园林的画意。",
+      "tiles_to_add": [
+        "stone",
+        "pine"
+      ],
+      "highlight_tiles": [
+        "rock_s"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "立攒尖小亭四壁: 园地东端立 4 片亭壁, 朝桥的西面用透明片。",
+      "tip": "透明观景面正对石桥 —— 坐在亭里看桥上人。",
+      "tiles_to_add": [
+        "kio_s",
+        "kio_n",
+        "kio_e",
+        "kio_w"
+      ],
+      "highlight_tiles": [
+        "gdn_6"
+      ]
+    },
+    {
+      "step_number": 17,
+      "description": "收攒尖锥顶: 4 片青瓦等边三角锁成攒尖顶, 水榭石桥一进园林完工!",
+      "tip": "隔水相望: 大水榭四坡顶与小亭攒尖顶一大一小遥相呼应。",
+      "tiles_to_add": [
+        "kio_hat_s",
+        "kio_hat_e",
+        "kio_hat_n",
+        "kio_hat_w"
+      ],
+      "highlight_tiles": [
+        "kio_s",
+        "kio_n"
+      ]
+    }
+  ]
+}

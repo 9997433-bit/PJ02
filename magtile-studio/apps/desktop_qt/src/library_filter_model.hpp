@@ -1,0 +1,109 @@
+#pragma once
+
+// =============================================================
+// MagTile Studio (Qt) - 模型库筛选代理 (QT-1)
+//
+// 包在 LibraryModel 外面的 QSortFilterProxyModel: 难度 / 主题 /
+// 「免费模型」(免费层标签) /「只用核心 9 片」/「我能搭的」(对照
+// 磁力片库存的 canBuild) 五个筛选维度, 对应 UI_UX_SPEC.md §5.1
+// 侧栏。筛选条件由 QML 侧直接读写属性; 数据角色 (isFree /
+// core9Only / canBuild) 由 StudioBackend 在 reload 时算好, 本类
+// 只做行过滤, 不碰磁盘。
+// =============================================================
+
+#include <QSortFilterProxyModel>
+#include <QString>
+#include <QVariantList>
+
+namespace magtile::qtui {
+
+class LibraryFilterModel final : public QSortFilterProxyModel {
+    Q_OBJECT
+    /// 难度筛选: 0 = 全部, 1~5 = 只看对应星级。
+    Q_PROPERTY(int difficulty READ difficulty WRITE setDifficulty NOTIFY filtersChanged)
+    /// 主题筛选: 空串 = 全部, 否则精确匹配卡片主题。
+    Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY filtersChanged)
+    /// 「免费模型」: 只看免费层 (目录 tags 含「免费」, COMMERCIAL_PLAN §2.1)。
+    Q_PROPERTY(bool freeOnly READ freeOnly WRITE setFreeOnly NOTIFY filtersChanged)
+    /// 只看基础套装 (核心 9 片型) 就能搭的模型。
+    Q_PROPERTY(bool core9Only READ core9Only WRITE setCore9Only NOTIFY filtersChanged)
+    /// 「我能搭的」: 只看磁力片库存足够的模型 (未登记库存时由界面禁用)。
+    Q_PROPERTY(bool buildableOnly READ buildableOnly WRITE setBuildableOnly NOTIFY filtersChanged)
+    /// 是否有任一筛选条件生效 (空态文案与「清除筛选」按钮用)。
+    Q_PROPERTY(bool hasActiveFilters READ hasActiveFilters NOTIFY filtersChanged)
+    /// 筛选后的卡片数 (QML 空态判定用)。
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
+    /// 订阅是否有效 (main.cpp 接线 BillingBackend, 计费适配层): 生效时
+    /// 庆祝页推荐不再排除订阅内容 —— 解锁后与免费层同权可直接开搭。
+    /// 「免费模型」筛选不受影响 (那是内容标签, 不是锁状态)。
+    Q_PROPERTY(bool subscriptionActive READ subscriptionActive WRITE setSubscriptionActive
+                   NOTIFY subscriptionActiveChanged)
+
+public:
+    explicit LibraryFilterModel(QObject* parent = nullptr);
+
+    [[nodiscard]] int difficulty() const noexcept { return difficulty_; }
+    void setDifficulty(int difficulty);
+
+    [[nodiscard]] QString theme() const { return theme_; }
+    void setTheme(const QString& theme);
+
+    [[nodiscard]] bool freeOnly() const noexcept { return free_only_; }
+    void setFreeOnly(bool on);
+
+    [[nodiscard]] bool core9Only() const noexcept { return core9_only_; }
+    void setCore9Only(bool on);
+
+    [[nodiscard]] bool buildableOnly() const noexcept { return buildable_only_; }
+    void setBuildableOnly(bool on);
+
+    [[nodiscard]] bool hasActiveFilters() const noexcept {
+        return difficulty_ != 0 || !theme_.isEmpty() || free_only_ || core9_only_ ||
+               buildable_only_;
+    }
+
+    [[nodiscard]] int count() const { return rowCount(); }
+
+    [[nodiscard]] bool subscriptionActive() const noexcept { return subscription_active_; }
+    void setSubscriptionActive(bool active);
+
+    /// 一键回到「全部」(空态页「换个条件试试」按钮)。
+    Q_INVOKABLE void clearFilters();
+
+    /// 「我能搭的」筛选空态推荐 (UI_UX_SPEC.md §5.2): 无视其他筛选
+    /// 条件, 从全部卡片中挑库存足够搭建 (canBuild) 的模型, 按难度
+    /// 升序 (同难度片数少者优先) 取前 max_count 个。每项含
+    /// {modelId, name, difficulty, pieces, theme}; 未登记库存或
+    /// 没有可搭模型时返回空列表 (界面退回普通空态文案)。
+    Q_INVOKABLE QVariantList recommendBuildable(int max_count) const;
+
+    /// 庆祝页「再搭一个」推荐 (UI_UX_SPEC.md §6.2, QT-4): 排除刚完成
+    /// 的 model_id 本身, 从目录中挑库存足够 (canBuild) 且属免费层的
+    /// 模型 —— 庆祝页点卡直接走 startBuild 开搭, 订阅内容进推荐会
+    /// 绕过「订阅教程只在解锁后可开」(§11), 故在此拦下。排序: 与刚
+    /// 完成模型的难度差升序 (同难度最先、±1 次之、不足时放宽),
+    /// 同距离难度低者优先、再按片数少者优先, 取前 max_count 个。
+    /// model_id 不在目录中 (极端: 目录热更后被下架) 时退回
+    /// recommendBuildable 的难度升序口径。每项键同 recommendBuildable;
+    /// 无可推荐时返回空列表 (界面整块隐藏, 不显示空态文案)。
+    Q_INVOKABLE QVariantList recommendSimilar(const QString& model_id, int max_count) const;
+
+signals:
+    void filtersChanged();
+    void countChanged();
+    void subscriptionActiveChanged();
+
+protected:
+    [[nodiscard]] bool filterAcceptsRow(int source_row,
+                                        const QModelIndex& source_parent) const override;
+
+private:
+    int difficulty_ = 0;
+    QString theme_;
+    bool free_only_ = false;
+    bool core9_only_ = false;
+    bool buildable_only_ = false;
+    bool subscription_active_ = false;  ///< 缺接线时按未订阅兜底 (宁可锁)
+};
+
+}  // namespace magtile::qtui

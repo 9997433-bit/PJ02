@@ -1,0 +1,812 @@
+{
+  "schema_version": 1,
+  "id": "rose_pergola_01",
+  "name": "玫瑰花藤长廊",
+  "name_en": "Rose Pergola Walk 01",
+  "description": "植物花园新作: 两排绿篱格栅墙夹出一条真正能走通的花园走道, 三根灰色横梁隔一空一桥在墙顶, 锁成三个门式框架; 每个梁端节点上攀着一朵玫瑰 —— 南粉北红, 一片花同时吸住梁短边与墙顶边, 花就是锁紧节点的销钉。走道两侧绿色花坛里还种着红黄紫橙四株郁金香; 午后阳光从梁间空档漏下来, 在棋盘走道上画出一条条光带。",
+  "difficulty": 2,
+  "total_pieces": 43,
+  "tags": [
+    "植物花园",
+    "玫瑰",
+    "长廊",
+    "花架",
+    "庭院"
+  ],
+  "content_meta": {
+    "series": "plant_garden",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 26,
+        "equilateral_triangle": 10,
+        "window_square": 4,
+        "rectangle": 3
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "path_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "path_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "path_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "path_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "path_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "path_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "path_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hedge_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hedge_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hedge_s_1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hedge_n_1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hedge_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hedge_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hedge_s_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hedge_n_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hedge_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hedge_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "beam_0",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "beam_1",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "beam_2",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rose_s_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "rose_n_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rose_s_1",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "rose_n_1",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rose_s_2",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "rose_n_2",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bed_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tulip_s_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        -1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tulip_s_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        -1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tulip_n_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "tulip_n_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺走道南排: 五片清灰相间的方板从西到东一字排开。",
+      "tip": "这是能真正走通的花园长廊 —— 走道铺直, 墙和梁才不歪。",
+      "tiles_to_add": [
+        "path_0_0",
+        "path_1_0",
+        "path_2_0",
+        "path_3_0",
+        "path_4_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺走道北排: 再来五片, 两排整边互吸, 棋盘格颜色错开。",
+      "tip": "两排走道拼成 5x2 的大地毯, 长廊的地基就位。",
+      "tiles_to_add": [
+        "path_0_1",
+        "path_1_1",
+        "path_2_1",
+        "path_3_1",
+        "path_4_1"
+      ],
+      "highlight_tiles": [
+        "path_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立南排绿篱墙: 绿色方板与清色窗格方相间, 墙脚踩住走道南沿。",
+      "tip": "窗格方是格栅 —— 风和阳光穿得过, 玫瑰藤也顺着它往上爬。",
+      "tiles_to_add": [
+        "hedge_s_0",
+        "hedge_s_1",
+        "hedge_s_2",
+        "hedge_s_3",
+        "hedge_s_4"
+      ],
+      "highlight_tiles": [
+        "path_0_0",
+        "path_4_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立北排绿篱墙: 与南排一一相对, 相邻墙片竖边互吸。",
+      "tip": "两排墙像仪仗队一样面对面站好 —— 它们马上要合力扛横梁。",
+      "tiles_to_add": [
+        "hedge_n_0",
+        "hedge_n_1",
+        "hedge_n_2",
+        "hedge_n_3",
+        "hedge_n_4"
+      ],
+      "highlight_tiles": [
+        "path_0_1",
+        "path_4_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "架花架横梁: 三片灰色长板隔一空一横跨走道, 两端短边整边压在南北墙顶。",
+      "tip": "墙-梁-墙锁成门式框架 —— 隔出的空档就是阳光漏下来的地方。",
+      "tiles_to_add": [
+        "beam_0",
+        "beam_1",
+        "beam_2"
+      ],
+      "highlight_tiles": [
+        "hedge_s_0",
+        "hedge_n_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "南侧攀玫瑰: 三朵粉玫瑰立在梁端节点, 底边同时吸住梁短边与墙顶边。",
+      "tip": "一片花锁两件 —— 玫瑰不只是好看, 它把梁和墙钉在了一起。",
+      "tiles_to_add": [
+        "rose_s_0",
+        "rose_s_1",
+        "rose_s_2"
+      ],
+      "highlight_tiles": [
+        "beam_0",
+        "beam_1",
+        "beam_2"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "北侧攀玫瑰: 三朵红玫瑰照样锁住北端节点, 花架完工。",
+      "tip": "南粉北红 —— 从长廊里抬头看, 花在梁上排成两条线。",
+      "tiles_to_add": [
+        "rose_n_0",
+        "rose_n_1",
+        "rose_n_2"
+      ],
+      "highlight_tiles": [
+        "rose_s_0"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "铺南花坛并种郁金香: 五片绿色苗床贴住走道南墙脚, 红黄两株郁金香立在外沿。",
+      "tip": "苗床北沿与墙脚共用一条缝 —— 一条缝两面吃, 花园和长廊连成一体。",
+      "tiles_to_add": [
+        "bed_s_0",
+        "bed_s_1",
+        "bed_s_2",
+        "bed_s_3",
+        "bed_s_4",
+        "tulip_s_1",
+        "tulip_s_3"
+      ],
+      "highlight_tiles": [
+        "hedge_s_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "铺北花坛种上紫橙郁金香 —— 长廊落成, 从西门走到东门吧!",
+      "tip": "午后阳光穿过梁间空档, 在走道上画出一条条光带 —— 慢慢走, 别踩到花。",
+      "tiles_to_add": [
+        "bed_n_0",
+        "bed_n_1",
+        "bed_n_2",
+        "bed_n_3",
+        "bed_n_4",
+        "tulip_n_1",
+        "tulip_n_3"
+      ],
+      "highlight_tiles": [
+        "hedge_n_1"
+      ]
+    }
+  ]
+}

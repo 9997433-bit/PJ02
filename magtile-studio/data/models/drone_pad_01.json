@@ -1,0 +1,1367 @@
+{
+  "schema_version": 1,
+  "id": "drone_pad_01",
+  "name": "无人机停机坪",
+  "name_en": "Drone Pad 01",
+  "description": "全库第一座低空物流起降场: 12 片蓝色墩墙四角竖边互吸围成闭合环, 顶起 3x3 起降平台 (周圈 8 片整边压墙顶, 中心板最后合拢), 绿色 H 标线正中停着红色四坡快递无人机; 南侧 30 度检修坡道顶铰链接地, 西北角两层塔台戴透明雷达锥顶 (2.71 高, R8 零警告), 东北角风向旗竖边吸杆棱绕竖轴零力矩 —— 航线已批, 准备起飞!",
+  "difficulty": 3,
+  "total_pieces": 75,
+  "tags": [
+    "城市",
+    "无人机",
+    "停机坪",
+    "低空物流",
+    "科技"
+  ],
+  "content_meta": {
+    "series": "sea_air_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 50,
+        "rectangle": 16,
+        "equilateral_triangle": 8,
+        "right_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ap_s0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_s1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_s2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_s3",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_w_1",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_e_1",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_w_2",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_e_2",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_w_3",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_e_3",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_w_4",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_2_4",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_3_4",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_4_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_e_4",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_w_5",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_2_5",
+      "type": "square",
+      "position": [
+        2.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_3_5",
+      "type": "square",
+      "position": [
+        3.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_4_5",
+      "type": "square",
+      "position": [
+        4.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_e_5",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_n0",
+      "type": "square",
+      "position": [
+        0.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_n1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_n2",
+      "type": "square",
+      "position": [
+        3.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_n3",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ap_n4",
+      "type": "square",
+      "position": [
+        6.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pr_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_w_2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_e_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_w_3",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_e_3",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_w_4",
+      "type": "square",
+      "position": [
+        2.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pr_e_4",
+      "type": "square",
+      "position": [
+        5.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pd_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pd_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pd_2_4",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pd_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pd_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pd_4_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pd_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pd_3_4",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pd_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "svc_ramp",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drone_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drone_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.833333,
+        3.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drone_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drone_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.166667,
+        3.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        6.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        7.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        6.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_e_0",
+      "type": "square",
+      "position": [
+        1.0,
+        6.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_s_1",
+      "type": "square",
+      "position": [
+        0.5,
+        6.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_n_1",
+      "type": "square",
+      "position": [
+        0.5,
+        7.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        6.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_e_1",
+      "type": "square",
+      "position": [
+        1.0,
+        6.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_top",
+      "type": "square",
+      "position": [
+        0.5,
+        6.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "radar_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        6.166667,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "radar_e",
+      "type": "equilateral_triangle",
+      "position": [
+        0.833333,
+        6.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "radar_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        6.833333,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "radar_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.166667,
+        6.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ws_pole",
+      "type": "square",
+      "position": [
+        6.5,
+        7.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ws_flag",
+      "type": "right_triangle",
+      "position": [
+        7.333333,
+        7.0,
+        0.666667
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        -90.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺广场南沿与第二行: 长板收边 + 中三格方板, 共 9 片。",
+      "tip": "中三格方板的拼缝就是起降台墩墙的落脚线。",
+      "tiles_to_add": [
+        "ap_s0",
+        "ap_s1",
+        "ap_s2",
+        "ap_s3",
+        "ap_w_1",
+        "ap_2_1",
+        "ap_3_1",
+        "ap_4_1",
+        "ap_e_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺广场中段: 2 行 长板+方板x3+长板, 共 10 片。",
+      "tip": "起降台就坐在这 3x3 的方板区正上方。",
+      "tiles_to_add": [
+        "ap_w_2",
+        "ap_2_2",
+        "ap_3_2",
+        "ap_4_2",
+        "ap_e_2",
+        "ap_w_3",
+        "ap_2_3",
+        "ap_3_3",
+        "ap_4_3",
+        "ap_e_3"
+      ],
+      "highlight_tiles": [
+        "ap_2_1",
+        "ap_4_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺广场次北段: 再铺 2 行 10 片。",
+      "tip": "西北角要留给塔台 —— 广场马上合拢。",
+      "tiles_to_add": [
+        "ap_w_4",
+        "ap_2_4",
+        "ap_3_4",
+        "ap_4_4",
+        "ap_e_4",
+        "ap_w_5",
+        "ap_2_5",
+        "ap_3_5",
+        "ap_4_5",
+        "ap_e_5"
+      ],
+      "highlight_tiles": [
+        "ap_2_3",
+        "ap_4_3"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺广场北沿: 5 片收边, 广场合拢成 7x7。",
+      "tip": "西北角方板与东北角方板都各有用处 —— 塔台与风向杆。",
+      "tiles_to_add": [
+        "ap_n0",
+        "ap_n1",
+        "ap_n2",
+        "ap_n3",
+        "ap_n4"
+      ],
+      "highlight_tiles": [
+        "ap_w_5",
+        "ap_e_5"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "砌南北墩墙: 沿方板拼缝各立 3 片蓝色墩墙。",
+      "tip": "墩墙底边整边吸方板格边 —— 起降台的桩基。",
+      "tiles_to_add": [
+        "pr_s_2",
+        "pr_s_3",
+        "pr_s_4",
+        "pr_n_2",
+        "pr_n_3",
+        "pr_n_4"
+      ],
+      "highlight_tiles": [
+        "ap_2_1",
+        "ap_4_5"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "砌东西墩墙: 各立 3 片, 四角竖边互吸 —— 台体闭环。",
+      "tip": "闭合环是最强的结构 —— 无人机降落的冲击全靠它。",
+      "tiles_to_add": [
+        "pr_w_2",
+        "pr_w_3",
+        "pr_w_4",
+        "pr_e_2",
+        "pr_e_3",
+        "pr_e_4"
+      ],
+      "highlight_tiles": [
+        "pr_s_2",
+        "pr_n_4"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "铺平台周圈: 8 片方板绕圈压上墩墙顶, 绿色片摆出 H 的两竖。",
+      "tip": "每片至少一条整边压墙顶 —— 周圈先锁边。",
+      "tiles_to_add": [
+        "pd_2_2",
+        "pd_3_2",
+        "pd_4_2",
+        "pd_2_3",
+        "pd_4_3",
+        "pd_2_4",
+        "pd_3_4",
+        "pd_4_4"
+      ],
+      "highlight_tiles": [
+        "pr_s_3",
+        "pr_w_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "合拢中心板、放检修坡道: 绿色中心板补上 H 横杠, 30 度坡道顶边吸南墩墙顶。",
+      "tip": "顶铰链 + 接地斜撑 —— 检修员顺坡直上平台。",
+      "tiles_to_add": [
+        "pd_3_3",
+        "svc_ramp"
+      ],
+      "highlight_tiles": [
+        "pd_3_2",
+        "pr_s_3"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "停无人机: 4 片红色三角在 H 正中四棱互吸, 合拢成机身。",
+      "tip": "四坡自锁 —— 快递舱就藏在机身里。",
+      "tiles_to_add": [
+        "drone_s",
+        "drone_e",
+        "drone_n",
+        "drone_w"
+      ],
+      "highlight_tiles": [
+        "pd_3_3"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "砌塔台下环: 西北角 4 片橙色立墙四角竖边互吸。",
+      "tip": "塔台要看全场 —— 地基先落西北角方板。",
+      "tiles_to_add": [
+        "tw_s_0",
+        "tw_n_0",
+        "tw_w_0",
+        "tw_e_0"
+      ],
+      "highlight_tiles": [
+        "ap_n0"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "砌塔台上环: 再叠 4 片, 底边整边吸下环顶边。",
+      "tip": "两层环精确对位 —— 塔台升到 2 格高。",
+      "tiles_to_add": [
+        "tw_s_1",
+        "tw_n_1",
+        "tw_w_1",
+        "tw_e_1"
+      ],
+      "highlight_tiles": [
+        "tw_s_0",
+        "tw_e_0"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "封塔顶、装雷达: 方板四边压环顶, 4 片透明三角合拢成锥。",
+      "tip": "雷达锥尖 2.71 高 —— 全场航迹尽收眼底。",
+      "tiles_to_add": [
+        "tw_top",
+        "radar_s",
+        "radar_e",
+        "radar_n",
+        "radar_w"
+      ],
+      "highlight_tiles": [
+        "tw_s_1"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "竖风向杆: 东北角立方墙旗杆, 橙色直角旗竖边吸杆棱。",
+      "tip": "旗绕竖轴转是真实物理 —— 风向一目了然, 准备起飞!",
+      "tiles_to_add": [
+        "ws_pole",
+        "ws_flag"
+      ],
+      "highlight_tiles": [
+        "ap_n4"
+      ]
+    }
+  ]
+}

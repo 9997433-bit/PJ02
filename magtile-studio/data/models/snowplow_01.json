@@ -1,0 +1,841 @@
+{
+  "schema_version": 1,
+  "id": "snowplow_01",
+  "name": "铲雪车",
+  "name_en": "Snowplow Truck 01",
+  "description": "只用核心九片型的除雪作业车: 招牌是一片 30 度倾斜的红色铲雪板 —— 顶边整边吸在底盘甲板前缘、坡尾平贴雪面零悬挑 (滚珠塔坡道的同款几何); 双车轮底座整边吸车道拼缝, 甲板长边压双轮顶锁成门式框架, 车身箱环前半是青窗驾驶室、后半是敞口融雪剂料斗, 黄警灯立在车顶前沿; 车后车道已铲净露出灰色路面, 车前还盖着厚雪, 雪堤上四堆积雪排队等着被推走 —— 雪人和雪松在人行道上围观, 轰隆隆, 铲雪车开工!",
+  "difficulty": 2,
+  "total_pieces": 44,
+  "tags": [
+    "城市",
+    "交通",
+    "冬季",
+    "工程车",
+    "载具",
+    "车轮底座"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 21,
+        "rectangle": 11,
+        "equilateral_triangle": 6,
+        "isosceles_triangle": 2,
+        "wheel_base": 2,
+        "window_square": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "bank_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bank_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bank_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bank_c",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bank_7",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lane_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lane_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lane_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lane_b",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lane_c",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "edge_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "edge_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "edge_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "edge_b",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "edge_c",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "walk_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_7",
+      "type": "square",
+      "position": [
+        7.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wheel_s",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wheel_n",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plow_deck",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hopper_rear",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cab_wind",
+      "type": "window_square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "side_s1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "side_s2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "side_n1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "side_n2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cab_roof",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "beacon",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "blade",
+      "type": "rectangle",
+      "position": [
+        3.866025,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pile_lane",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pile_a",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pile_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pile_c",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "snowman_body",
+      "type": "square",
+      "position": [
+        7.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "snowman_head",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        4.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pine_a",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        4.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pine_b",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        4.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "slow_sign",
+      "type": "window_square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺雪堤行: 长板拼缝对齐 y=1 线 —— 那是南轮的落脚缝。",
+      "tip": "昨夜一场大雪, 路边的雪堤已经堆了半人高。",
+      "tiles_to_add": [
+        "bank_0",
+        "bank_a",
+        "bank_b",
+        "bank_c",
+        "bank_7"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺车道行: 车后的灰色路面已铲净, 车前还盖着厚雪。",
+      "tip": "车底长板两条长边就是南北轮的双保险吸合线。",
+      "tiles_to_add": [
+        "lane_0",
+        "lane_a",
+        "lane_3",
+        "lane_b",
+        "lane_c"
+      ],
+      "highlight_tiles": [
+        "bank_a"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺北沿行: 五片合拢车道, 轮缝板对齐 y=2 线。",
+      "tip": "灰色与雪色的分界线, 就是铲雪车干活的进度条。",
+      "tiles_to_add": [
+        "edge_0",
+        "edge_a",
+        "edge_3",
+        "edge_b",
+        "edge_c"
+      ],
+      "highlight_tiles": [
+        "lane_a"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺人行道: 八片青色方板沿街排开。",
+      "tip": "雪人、雪松和慢行牌都要站在人行道的拼缝上。",
+      "tiles_to_add": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4",
+        "walk_5",
+        "walk_6",
+        "walk_7"
+      ],
+      "highlight_tiles": [
+        "edge_0",
+        "edge_3"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装车轮架甲板: 两片车轮底座沿拼缝立起, 甲板长边压双轮顶。",
+      "tip": "轮组+甲板锁成门式框架 —— 铲雪车的底盘要扛得住推雪。",
+      "tiles_to_add": [
+        "wheel_s",
+        "wheel_n",
+        "plow_deck"
+      ],
+      "highlight_tiles": [
+        "lane_a",
+        "edge_a"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立箱环两端: 西端料斗尾壁, 东端车窗挡风正对前方。",
+      "tip": "端壁底边整边吸甲板短边 —— 车身骨架先立两端。",
+      "tiles_to_add": [
+        "hopper_rear",
+        "cab_wind"
+      ],
+      "highlight_tiles": [
+        "plow_deck"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "合箱环侧壁: 四片橙色侧壁竖边吸进前后壁拐角。",
+      "tip": "圈层砌法合龙 —— 前半是驾驶室, 后半是融雪剂料斗。",
+      "tiles_to_add": [
+        "side_s1",
+        "side_s2",
+        "side_n1",
+        "side_n2"
+      ],
+      "highlight_tiles": [
+        "hopper_rear",
+        "cab_wind"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖驾驶室顶、装警灯、挂铲雪板: 斜坡顶边整边吸甲板东缘, 坡尾平稳落地。",
+      "tip": "料斗保持敞口好装融雪剂; 铲雪板坡尾贴住雪面 —— 零悬挑。",
+      "tiles_to_add": [
+        "cab_roof",
+        "beacon",
+        "blade"
+      ],
+      "highlight_tiles": [
+        "side_s2",
+        "cab_wind"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "堆积雪: 车道上一堆待铲雪, 雪堤上三堆排队等着。",
+      "tip": "积雪底边整边吸拼缝 —— 铲雪板正对着它们一路推过去。",
+      "tiles_to_add": [
+        "pile_lane",
+        "pile_a",
+        "pile_b",
+        "pile_c"
+      ],
+      "highlight_tiles": [
+        "blade"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "雪人雪松慢行牌收尾: 人行道上的观众就位, 开工!",
+      "tip": "雪人方身顶三角头, 雪松站上拼缝 —— 轰隆隆, 铲雪车出发!",
+      "tiles_to_add": [
+        "snowman_body",
+        "snowman_head",
+        "pine_a",
+        "pine_b",
+        "slow_sign"
+      ],
+      "highlight_tiles": [
+        "walk_7",
+        "walk_0"
+      ]
+    }
+  ]
+}

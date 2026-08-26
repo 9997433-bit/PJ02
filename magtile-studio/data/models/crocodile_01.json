@@ -1,0 +1,1050 @@
+{
+  "schema_version": 1,
+  "id": "crocodile_01",
+  "name": "大嘴鳄鱼",
+  "name_en": "Crocodile 01",
+  "description": "贴地爬行的低姿猛兽: 箱形躯干直接坐在河滩上, 血盆大口由两片 30 度坡道当上颚斜挑张开 (坡尾落地 = 接地斜撑, 零悬臂), 吻端立着透明獠牙; 尾巴用 长方形-梯形-三角 三段逐级收窄, 背脊一排橙色背棘, 四肢带爪向两侧撑开 —— 与腿柱式恐龙完全不同的动物搭法。",
+  "difficulty": 3,
+  "total_pieces": 53,
+  "tags": [
+    "动物世界",
+    "鳄鱼",
+    "自然",
+    "河滩",
+    "接地斜撑",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "animal_world",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 30,
+        "equilateral_triangle": 15,
+        "rectangle": 7,
+        "trapezoid": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "bel_2",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bel_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bel_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bel_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bs_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bn_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bs_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bn_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bs_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bn_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bs_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bn_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "chest_0",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rump_0",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "chest_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rump_1",
+      "type": "square",
+      "position": [
+        6.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dk_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dk_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dk_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dk_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dk_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dk_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dk_5_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "dk_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ridge_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ridge_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ridge_4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ridge_5",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "eye_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "eye_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "jaw_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "jaw_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "jaw_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "jaw_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ujaw_0",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ujaw_1",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fang_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fang_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tail_a",
+      "type": "rectangle",
+      "position": [
+        6.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tail_b",
+      "type": "trapezoid",
+      "position": [
+        7.3849,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tail_c",
+      "type": "equilateral_triangle",
+      "position": [
+        8.1547,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "spk_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "spk_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "leg_fs",
+      "type": "square",
+      "position": [
+        2.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "claw_fs",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        -1.288675,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "leg_rs",
+      "type": "square",
+      "position": [
+        5.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "claw_rs",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        -1.288675,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "leg_fn",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "claw_fn",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.288675,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "leg_rn",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "claw_rn",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        3.288675,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wat_0",
+      "type": "square",
+      "position": [
+        3.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wat_1",
+      "type": "square",
+      "position": [
+        4.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺设腹底: 4 片黄色长方形纵向平铺 ([2,6]x[0,2]), 长边逐片互吸成一整块。",
+      "tip": "鳄鱼是贴地爬行的动物 —— 腹底就是它贴住河滩的肚皮。",
+      "tiles_to_add": [
+        "bel_2",
+        "bel_3",
+        "bel_4",
+        "bel_5"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "竖立南侧壁: 4 片绿色正方形沿腹底南沿一字立起, 底边吸腹底短边。",
+      "tip": "相邻侧壁的竖边也要两两吸牢, 躯干才结实。",
+      "tiles_to_add": [
+        "bs_2",
+        "bs_3",
+        "bs_4",
+        "bs_5"
+      ],
+      "highlight_tiles": [
+        "bel_2",
+        "bel_5"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "竖立北侧壁: 4 片绿色正方形沿北沿立起, 与南侧壁隔腹相望。",
+      "tip": "南北侧壁完全对称, 中间就是鳄鱼厚实的身体。",
+      "tiles_to_add": [
+        "bn_2",
+        "bn_3",
+        "bn_4",
+        "bn_5"
+      ],
+      "highlight_tiles": [
+        "bs_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "封前胸与后臀: 头尾两端各立 2 片绿色正方形, 竖边与侧壁拐角互吸。",
+      "tip": "前胸墙顶马上要吸住张开的上颚 —— 位置务必摆正。",
+      "tiles_to_add": [
+        "chest_0",
+        "chest_1",
+        "rump_0",
+        "rump_1"
+      ],
+      "highlight_tiles": [
+        "bs_2",
+        "bs_5",
+        "bn_2",
+        "bn_5"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖背甲南排: 4 片绿色方板压住南侧壁与前后墙顶边。",
+      "tip": "背甲每片都要同时吸住墙顶边与相邻背甲边。",
+      "tiles_to_add": [
+        "dk_2_0",
+        "dk_3_0",
+        "dk_4_0",
+        "dk_5_0"
+      ],
+      "highlight_tiles": [
+        "bs_2",
+        "chest_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "盖背甲北排: 再压 4 片, 躯干合拢成结实的箱形。",
+      "tip": "箱形躯干剪断任何一条缝都塌不了 —— 这就是鳄鱼的铠甲。",
+      "tiles_to_add": [
+        "dk_2_1",
+        "dk_3_1",
+        "dk_4_1",
+        "dk_5_1"
+      ],
+      "highlight_tiles": [
+        "dk_2_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立起背棘: 4 片橙色等边三角沿背脊拼缝一字立起, 底边吸背甲缝。",
+      "tip": "背棘立在拼缝正上方, 一条缝同时咬住左右两片背甲。",
+      "tiles_to_add": [
+        "ridge_2",
+        "ridge_3",
+        "ridge_4",
+        "ridge_5"
+      ],
+      "highlight_tiles": [
+        "dk_2_0",
+        "dk_5_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "铺下颚: 头前平铺 4 片绿色方板, 东沿吸前胸墙底边。",
+      "tip": "下颚贴地摊开 —— 鳄鱼正准备张开血盆大口。",
+      "tiles_to_add": [
+        "jaw_0_0",
+        "jaw_1_0",
+        "jaw_0_1",
+        "jaw_1_1"
+      ],
+      "highlight_tiles": [
+        "chest_0",
+        "chest_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "斜挑上颚: 2 片绿色坡道顶边整边吸前胸墙顶, 坡尾自然落地。",
+      "tip": "坡尾落地就是支撑 —— 张开的大嘴一点也不吃悬臂预算。",
+      "tiles_to_add": [
+        "ujaw_0",
+        "ujaw_1"
+      ],
+      "highlight_tiles": [
+        "chest_0",
+        "jaw_0_0"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "装獠牙与眼睛: 吻端立 2 片透明獠牙, 背甲前沿立 2 片黄色眼睛。",
+      "tip": "獠牙立在下颚最前端, 从侧面看大嘴咬合线正好错开。",
+      "tiles_to_add": [
+        "fang_s",
+        "fang_n",
+        "eye_s",
+        "eye_n"
+      ],
+      "highlight_tiles": [
+        "jaw_0_0",
+        "dk_2_0"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "接尾根: 1 片绿色长方形纵铺在躯干后方, 长边吸腹底长边。",
+      "tip": "尾根与腹底同宽 —— 鳄鱼的尾巴根部和身体一样粗壮。",
+      "tiles_to_add": [
+        "tail_a"
+      ],
+      "highlight_tiles": [
+        "bel_5",
+        "rump_0"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "立尾棘: 尾根两侧立 2 片橙色等边三角。",
+      "tip": "尾棘立在尾根短边上, 和背棘遥相呼应。",
+      "tiles_to_add": [
+        "spk_s",
+        "spk_n"
+      ],
+      "highlight_tiles": [
+        "tail_a"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "接尾节: 1 片绿色梯形下底整边吸尾根东沿, 尾巴开始收窄。",
+      "tip": "梯形下底长 2、上底长 1 —— 一片就把尾巴收窄一半。",
+      "tiles_to_add": [
+        "tail_b"
+      ],
+      "highlight_tiles": [
+        "tail_a"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "装尾尖: 1 片绿色等边三角底边吸梯形上底, 尾巴完美收尖。",
+      "tip": "长方形-梯形-三角形三段收窄, 这是收尾巴的标准手法。",
+      "tiles_to_add": [
+        "tail_c"
+      ],
+      "highlight_tiles": [
+        "tail_b"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "装四肢: 躯干两侧各伸出 2 片方板脚掌, 掌沿吸侧壁底边。",
+      "tip": "四条短腿贴地撑开 —— 鳄鱼的招牌爬行姿态。",
+      "tiles_to_add": [
+        "leg_fs",
+        "leg_rs",
+        "leg_fn",
+        "leg_rn"
+      ],
+      "highlight_tiles": [
+        "bs_2",
+        "bn_5"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "装爪子与河水: 每只脚掌外沿吸 1 片黄色三角爪, 南侧腿间再铺 2 片青色河水, 大嘴鳄鱼上岸完工!",
+      "tip": "爪尖朝外摆平, 河水贴着腿间 —— 它刚从河里爬上来。",
+      "tiles_to_add": [
+        "claw_fs",
+        "claw_rs",
+        "claw_fn",
+        "claw_rn",
+        "wat_0",
+        "wat_1"
+      ],
+      "highlight_tiles": [
+        "leg_fs",
+        "leg_rn"
+      ]
+    }
+  ]
+}

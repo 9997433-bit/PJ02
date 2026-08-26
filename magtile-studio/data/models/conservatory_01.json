@@ -1,0 +1,784 @@
+{
+  "schema_version": 1,
+  "id": "conservatory_01",
+  "name": "天窗玻璃花房",
+  "name_en": "Conservatory 01",
+  "description": "植物花园 D2 窗格方主打示范: 4x3 单层花房南立面与东墙整排窗格方玻璃, 北墙留 T17 门洞; 盖满 12 片透明玻璃平顶后, 顶面正中再升起一圈 2x1 窗格方天窗塔 (roof lantern), 塔顶长方形压顶、两端黄色尖饰 —— 维多利亚花房的经典屋顶轮廓; 室内 L 形泥土花池沿窗摆着红紫粉三株盆栽。窗格方 x16 全在 CORE-9 内,与 A 字斜顶 greenhouse_01、穹顶 greenhouse_dome_01 剖面完全不同。",
+  "difficulty": 2,
+  "total_pieces": 41,
+  "tags": [
+    "植物花园",
+    "温室",
+    "花房",
+    "天窗",
+    "窗格",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "plant_garden",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 19,
+        "window_square": 16,
+        "equilateral_triangle": 5,
+        "rectangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ws_s0",
+      "type": "window_square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ws_s1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ws_s2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ws_s3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_n0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ws_n2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ws_n3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_w0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ws_w1",
+      "type": "window_square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_w2",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ws_e0",
+      "type": "window_square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ws_e1",
+      "type": "window_square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ws_e2",
+      "type": "window_square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bed_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bed_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bed_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bed_4",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "plant_a",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "plant_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "plant_c",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "roof_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lt_s1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lt_s2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lt_n1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lt_n2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lt_w",
+      "type": "window_square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lt_e",
+      "type": "window_square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lt_cap",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "finial_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "finial_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "砌南立面: 四片透明窗格方整排朝南 —— 花房的玻璃招牌墙, 竖直边逐片互咬。",
+      "tip": "窗格方物理上和实心墙一样稳 —— 从南边看进去是一整面玻璃。",
+      "tiles_to_add": [
+        "ws_s0",
+        "ws_s1",
+        "ws_s2",
+        "ws_s3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺 L 形花池: 四片泥土方板沿南墙脚与东侧拐弯, 底边与墙脚共线互吸。",
+      "tip": "花池贴墙种 —— 阳光从南窗照进来, 正好晒在土格上。",
+      "tiles_to_add": [
+        "bed_1",
+        "bed_2",
+        "bed_3",
+        "bed_4"
+      ],
+      "highlight_tiles": [
+        "ws_s1",
+        "ws_s3"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "种盆栽: 红/紫/粉三株三角花骑上花池拼缝。",
+      "tip": "先种花再合围 —— 墙环合拢前手还伸得进花房。",
+      "tiles_to_add": [
+        "plant_a",
+        "plant_b",
+        "plant_c"
+      ],
+      "highlight_tiles": [
+        "bed_2",
+        "bed_4"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "合围西墙与东墙: 西侧实心-窗-实心三片, 东侧整排三片窗格, 四角竖直边互咬。",
+      "tip": "东墙三片全是窗 —— 晨光先照进花房的东脸。",
+      "tiles_to_add": [
+        "wall_w0",
+        "ws_w1",
+        "wall_w2",
+        "ws_e0",
+        "ws_e1",
+        "ws_e2"
+      ],
+      "highlight_tiles": [
+        "ws_s0",
+        "ws_s3"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "封北墙留门洞: 西段实心墙 + 东段两片窗格, x [1,2] 空出入户门洞(T17 负空间)。",
+      "tip": "少砌一片墙就是门 —— 门洞上方一会儿由平顶补齐。",
+      "tiles_to_add": [
+        "wall_n0",
+        "ws_n2",
+        "ws_n3"
+      ],
+      "highlight_tiles": [
+        "wall_w2",
+        "ws_e2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "铺南半平顶: 六片透明方板盖住南两行, 边与墙顶等长互吸、彼此拼缝。",
+      "tip": "从南墙顶开始铺 —— 每片至少吸住一条墙顶边或邻板拼缝。",
+      "tiles_to_add": [
+        "roof_0_0",
+        "roof_1_0",
+        "roof_2_0",
+        "roof_3_0",
+        "roof_0_1",
+        "roof_1_1"
+      ],
+      "highlight_tiles": [
+        "ws_s1",
+        "ws_e0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "铺北半平顶: 再六片补齐 4x3 玻璃平顶, 门洞上方由顶板连桥。",
+      "tip": "平顶拼缝连成网 —— 正中的十字缝就是天窗塔的地基线。",
+      "tiles_to_add": [
+        "roof_2_1",
+        "roof_3_1",
+        "roof_0_2",
+        "roof_1_2",
+        "roof_2_2",
+        "roof_3_2"
+      ],
+      "highlight_tiles": [
+        "wall_n0",
+        "ws_n2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "升天窗塔: 六片窗格方骑住平顶正中拼缝, 围出 2x1 采光天窗环。",
+      "tip": "塔墙脚两侧各吸一片顶板 —— 天窗塔是屋顶上的小玻璃房。",
+      "tiles_to_add": [
+        "lt_s1",
+        "lt_s2",
+        "lt_w",
+        "lt_n1",
+        "lt_n2",
+        "lt_e"
+      ],
+      "highlight_tiles": [
+        "roof_1_1",
+        "roof_2_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "封塔顶: 绿色长方形压顶两端与塔墙顶等长互吸, 黄色尖饰立上两端—— 天窗玻璃花房落成!",
+      "tip": "尖饰底边同时吸住塔端墙顶与压顶短边 —— 阳光顺着天窗洒满花房。",
+      "tiles_to_add": [
+        "lt_cap",
+        "finial_w",
+        "finial_e"
+      ],
+      "highlight_tiles": [
+        "lt_w",
+        "lt_e"
+      ]
+    }
+  ]
+}

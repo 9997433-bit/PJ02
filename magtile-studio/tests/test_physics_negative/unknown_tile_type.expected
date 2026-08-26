@@ -1,0 +1,6 @@
+# unknown_tile_type.expected — 物理负例期望声明 (sidecar, 由 test_physics_negative.sh 读取)
+# expected_fail_rule: validate 输出必须匹配的错误/警告码 (grep 正则)
+# severity: error = 必须以非零退出码拒绝; warning = 必须零退出且输出 [警告] 行
+# 数据层: 非法片型必须在 JSON 加载层被拒绝, 不允许静默降级
+expected_fail_rule=未知的磁力片形状
+severity=error

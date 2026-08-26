@@ -1,0 +1,886 @@
+{
+  "schema_version": 1,
+  "id": "swing_set_01",
+  "name": "秋千乐园",
+  "name_en": "Swing Set 01",
+  "description": "只用核心九片型的全库第一架秋千: 与洗车房的单片吊刷不同, 本作的招牌是'吊环秋千' —— 每架秋千由两片吊链方与一片坐板围成闭环, 吊链顶边整边吸顶板南北沿, 坐板两边整边吸住两条吊链底边, 剪断任何一条吸边它都还有另一条路兜底, 环状冗余才是敢让小朋友坐上去的秋千; 门式框架红色墙柱两层到顶, 柱脚直角三角斜撑咬棱压缝东西向抗侧, 顶面蓝色横板铺满, 南沿三面彩旗迎风一排, 旁边黄沙方鑲四面橙色三角围边就是跳沙坑 —— 预备, 荡起来!",
+  "difficulty": 2,
+  "total_pieces": 47,
+  "tags": [
+    "游乐园",
+    "秋千",
+    "操场",
+    "运动",
+    "亲子"
+  ],
+  "content_meta": {
+    "series": null,
+    "matrix_bucket": "amusement",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 28,
+        "rectangle": 8,
+        "equilateral_triangle": 7,
+        "right_triangle": 4
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g0_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_sand",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "g0_e",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_w",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_m",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_e",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_w",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_m",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_e",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g3_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_e",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_m",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sb_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "sb_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "sb_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "sb_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "post_w_s0",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "post_w_n0",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "post_w_s1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "post_w_n1",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "post_e_s0",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "post_e_n0",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "post_e_s1",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "post_e_n1",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "br_w_s",
+      "type": "right_triangle",
+      "position": [
+        0.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "br_w_n",
+      "type": "right_triangle",
+      "position": [
+        0.333333,
+        3.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "br_e_s",
+      "type": "right_triangle",
+      "position": [
+        4.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "br_e_n",
+      "type": "right_triangle",
+      "position": [
+        4.666667,
+        3.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "roof_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_s_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "chain_a_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "chain_a_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "chain_b_s",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "chain_b_n",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "seat_a",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "seat_b",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "flag_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flag_m",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flag_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺场地南半场: 草坪夹着一格黄沙, 那是跳沙坑的位置。",
+      "tip": "游乐场开工啦 —— 板边等长吸合才抓得牢。",
+      "tiles_to_add": [
+        "g0_w",
+        "g0_sand",
+        "g0_e",
+        "g1_w",
+        "g1_m",
+        "g1_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺场地北半场: 胶地行行互吸, 两端方板给柱脚留整边。",
+      "tip": "",
+      "tiles_to_add": [
+        "g2_w",
+        "g2_m",
+        "g2_e",
+        "g3_w",
+        "g3_m",
+        "g3_e"
+      ],
+      "highlight_tiles": [
+        "g1_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "围跳沙坑: 四面橙色三角骑住黄沙整边, 落地不硌脚。",
+      "tip": "三角围边重心正压板沿 —— 又稳又软和。",
+      "tiles_to_add": [
+        "sb_s",
+        "sb_n",
+        "sb_w",
+        "sb_e"
+      ],
+      "highlight_tiles": [
+        "g0_sand"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立西墙柱: 四片红墙两层竖叠, 柱脚两片斜撑咬棱压缝。",
+      "tip": "斜撑竖边咬柱竖棱、横边压地缝 —— 东西向推不倒。",
+      "tiles_to_add": [
+        "post_w_s0",
+        "post_w_n0",
+        "post_w_s1",
+        "post_w_n1",
+        "br_w_s",
+        "br_w_n"
+      ],
+      "highlight_tiles": [
+        "g1_w"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立东墙柱: 与西柱对称, 门式框架的两条腿就位。",
+      "tip": "",
+      "tiles_to_add": [
+        "post_e_s0",
+        "post_e_n0",
+        "post_e_s1",
+        "post_e_n1",
+        "br_e_s",
+        "br_e_n"
+      ],
+      "highlight_tiles": [
+        "post_w_s0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "铺框架顶板: 十片蓝色方板两行铺满, 两端整边压住柱顶。",
+      "tip": "板板互吸连成整面 —— 秋千的天梁就是它。",
+      "tiles_to_add": [
+        "roof_s_0",
+        "roof_s_1",
+        "roof_s_2",
+        "roof_s_3",
+        "roof_s_4",
+        "roof_n_0",
+        "roof_n_1",
+        "roof_n_2",
+        "roof_n_3",
+        "roof_n_4"
+      ],
+      "highlight_tiles": [
+        "post_w_s1",
+        "post_e_s1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "挂南侧吊链: 两片灰色吊链方顶边整边吸顶板南沿, 先稳稳垂下来。",
+      "tip": "单链 30g 远低于悬挂预算 —— 但好戏还在后头。",
+      "tiles_to_add": [
+        "chain_a_s",
+        "chain_b_s"
+      ],
+      "highlight_tiles": [
+        "roof_s_1",
+        "roof_s_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "挂坐板: 紫色坐板南边整边吸住吊链底边, 像小手先拉住一条链。",
+      "tip": "从北边敞口伸手放板 —— 装配顺序也是设计的一部分。",
+      "tiles_to_add": [
+        "seat_a",
+        "seat_b"
+      ],
+      "highlight_tiles": [
+        "chain_a_s",
+        "chain_b_s"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "合北侧吊链锁环: 顶边吸顶板北沿、底边吸坐板北边, 秋千闭环!",
+      "tip": "剪断任何一条吸边, 坐板都还悬在另一条链上 —— 环状冗余才敢坐。",
+      "tiles_to_add": [
+        "chain_a_n",
+        "chain_b_n"
+      ],
+      "highlight_tiles": [
+        "seat_a",
+        "seat_b"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "升彩旗: 三面粉旗骑上顶板南沿, 游乐场正式开园!",
+      "tip": "预备 —— 荡起来! 荡得高, 笑得响。",
+      "tiles_to_add": [
+        "flag_w",
+        "flag_m",
+        "flag_e"
+      ],
+      "highlight_tiles": [
+        "roof_s_0"
+      ]
+    }
+  ]
+}

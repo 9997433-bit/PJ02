@@ -1,0 +1,1061 @@
+{
+  "schema_version": 1,
+  "id": "ski_jump_01",
+  "name": "跳台滑雪场",
+  "name_en": "Ski Jump 01",
+  "description": "全库第一条直线下山的雪道动线: 三层出发塔甩出 助滑坡-中继台-加速坡-起跳台 三段 30 度雪道, 每段坡道顶边吸台沿、坡尾由栈桥墩接住 (三角刚性节点); 着陆坡直落雪面滑进减速区, 撞上橙色终点挡墙; 南侧紫色裁判塔戴四坡尖顶, 透明观察窗正对着陆点 —— 3, 2, 1, 出发!",
+  "difficulty": 3,
+  "total_pieces": 54,
+  "tags": [
+    "运动",
+    "滑雪",
+    "跳台",
+    "坡道",
+    "进阶",
+    "免费"
+  ],
+  "content_meta": {
+    "series": null,
+    "matrix_bucket": "sports",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 34,
+        "equilateral_triangle": 12,
+        "isosceles_triangle": 4,
+        "rectangle": 4
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "tw_base",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_e_0",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_s_1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_n_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_e_1",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_s_2",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_n_2",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_w_2",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_e_2",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_top",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_rail_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw_rail_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw_rail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "climb",
+      "type": "rectangle",
+      "position": [
+        -0.866025,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "p1_a",
+      "type": "square",
+      "position": [
+        2.732051,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "p1_b",
+      "type": "square",
+      "position": [
+        2.732051,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "run1",
+      "type": "rectangle",
+      "position": [
+        1.866025,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mid",
+      "type": "square",
+      "position": [
+        3.232051,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mid_rail_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.232051,
+        0.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "mid_rail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.232051,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "p2",
+      "type": "square",
+      "position": [
+        5.464102,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "run2",
+      "type": "rectangle",
+      "position": [
+        4.598076,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "table",
+      "type": "square",
+      "position": [
+        5.964102,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tab_rail_s",
+      "type": "equilateral_triangle",
+      "position": [
+        5.964102,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tab_rail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        5.964102,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "land",
+      "type": "rectangle",
+      "position": [
+        7.330127,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "out_0",
+      "type": "square",
+      "position": [
+        8.696153,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "out_1",
+      "type": "square",
+      "position": [
+        9.696153,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "out_rail_s0",
+      "type": "equilateral_triangle",
+      "position": [
+        8.696153,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "out_rail_n0",
+      "type": "equilateral_triangle",
+      "position": [
+        8.696153,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "out_rail_s1",
+      "type": "equilateral_triangle",
+      "position": [
+        9.696153,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "out_rail_n1",
+      "type": "equilateral_triangle",
+      "position": [
+        9.696153,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "stop",
+      "type": "square",
+      "position": [
+        10.196153,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stop_flag",
+      "type": "equilateral_triangle",
+      "position": [
+        10.196153,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pz_0",
+      "type": "square",
+      "position": [
+        8.696153,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_1",
+      "type": "square",
+      "position": [
+        9.696153,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "jt_base",
+      "type": "square",
+      "position": [
+        8.696153,
+        -1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "jt_s_0",
+      "type": "square",
+      "position": [
+        8.696153,
+        -2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_w_0",
+      "type": "square",
+      "position": [
+        8.196153,
+        -1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_e_0",
+      "type": "square",
+      "position": [
+        9.196153,
+        -1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_s_1",
+      "type": "square",
+      "position": [
+        8.696153,
+        -2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_w_1",
+      "type": "square",
+      "position": [
+        8.196153,
+        -1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_e_1",
+      "type": "square",
+      "position": [
+        9.196153,
+        -1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_n_0",
+      "type": "square",
+      "position": [
+        8.696153,
+        -1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_n_1",
+      "type": "square",
+      "position": [
+        8.696153,
+        -1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "jt_top",
+      "type": "square",
+      "position": [
+        8.696153,
+        -1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "jt_hat_s",
+      "type": "isosceles_triangle",
+      "position": [
+        8.696153,
+        -1.833333,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_hat_e",
+      "type": "isosceles_triangle",
+      "position": [
+        9.029486,
+        -1.5,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_hat_n",
+      "type": "isosceles_triangle",
+      "position": [
+        8.696153,
+        -1.166667,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "jt_hat_w",
+      "type": "isosceles_triangle",
+      "position": [
+        8.36282,
+        -1.5,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "purple"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "出发塔第 1 层: 平放 1 片灰色底板, 四周立 4 片红色塔壁, 拐角竖边互吸。",
+      "tip": "出发塔要长到三层高, 第一层的四角一定要吸方正。",
+      "tiles_to_add": [
+        "tw_base",
+        "tw_s_0",
+        "tw_n_0",
+        "tw_w_0",
+        "tw_e_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "出发塔第 2 层: 再立 4 片红色塔壁, 上下边完整贴合。",
+      "tip": "对缝叠墙吸力最强 —— 塔身是整条雪道的靠山。",
+      "tiles_to_add": [
+        "tw_s_1",
+        "tw_n_1",
+        "tw_w_1",
+        "tw_e_1"
+      ],
+      "highlight_tiles": [
+        "tw_s_0",
+        "tw_e_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "出发塔第 3 层: 塔身升到三层, 一手扶塔一手放片。",
+      "tip": "越高越要轻放, 别让下层塔壁被带歪。",
+      "tiles_to_add": [
+        "tw_s_2",
+        "tw_n_2",
+        "tw_w_2",
+        "tw_e_2"
+      ],
+      "highlight_tiles": [
+        "tw_s_1",
+        "tw_e_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "盖出发台: 1 片灰色方板压住塔口, 四边同时吸四面塔壁顶边。",
+      "tip": "出发台就是运动员蓄势待发的地方。",
+      "tiles_to_add": [
+        "tw_top"
+      ],
+      "highlight_tiles": [
+        "tw_s_2",
+        "tw_e_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装出发台护栏: 西、南、北三面各立 1 片蓝色三角护栏, 东面留作出发口。",
+      "tip": "护栏立在台沿正上方, 出发口朝向雪道正东。",
+      "tiles_to_add": [
+        "tw_rail_w",
+        "tw_rail_s",
+        "tw_rail_n"
+      ],
+      "highlight_tiles": [
+        "tw_top"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "装登塔坡道: 1 片灰色坡道顶边吸塔西壁顶边 (一层高), 坡尾自然落地。",
+      "tip": "这是运动员背着雪板登塔的楼梯 —— 坡尾落地就是支撑。",
+      "tiles_to_add": [
+        "climb"
+      ],
+      "highlight_tiles": [
+        "tw_w_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "助滑段整段成组安装: 塔东侧先叠双层红色栈桥墩, 助滑坡顶边整边吸出发台东沿、坡尾搭上墩顶, 再铺 1 片中继台压住墩顶与坡尾。",
+      "tip": "坡道-桥墩-平台三件互吸成三角刚性节点, 装完轻摇应纹丝不动。",
+      "tiles_to_add": [
+        "p1_a",
+        "p1_b",
+        "run1",
+        "mid"
+      ],
+      "highlight_tiles": [
+        "tw_top",
+        "tw_e_0"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "装中继台护栏: 南北各立 1 片蓝色三角, 逼住雪板笔直向东。",
+      "tip": "跳台滑雪的助滑道是笔直的 —— 护栏就是它的边界线。",
+      "tiles_to_add": [
+        "mid_rail_s",
+        "mid_rail_n"
+      ],
+      "highlight_tiles": [
+        "mid"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "加速段: 立单层桥墩, 加速坡从中继台东沿下探, 铺起跳台压住墩顶与坡尾。",
+      "tip": "与助滑段同样的三角刚性节点, 只是矮了一层。",
+      "tiles_to_add": [
+        "p2",
+        "run2",
+        "table"
+      ],
+      "highlight_tiles": [
+        "mid",
+        "mid_rail_s"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "装起跳台护栏: 南北各 1 片蓝色三角 —— 这里就是腾空点!",
+      "tip": "起跳台只有一格长, 运动员在这里全力起跳。",
+      "tiles_to_add": [
+        "tab_rail_s",
+        "tab_rail_n"
+      ],
+      "highlight_tiles": [
+        "table"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "装着陆坡: 1 片坡道顶边吸起跳台东沿, 坡尾直落雪面。",
+      "tip": "着陆坡不需要桥墩 —— 坡尾落地自然就是支撑。",
+      "tiles_to_add": [
+        "land"
+      ],
+      "highlight_tiles": [
+        "table"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "铺减速区: 着陆坡坡尾向东平铺 2 片雪面方板。",
+      "tip": "第一片方板的西沿正好吸住坡尾边 —— 磁力片不挑格子。",
+      "tiles_to_add": [
+        "out_0",
+        "out_1"
+      ],
+      "highlight_tiles": [
+        "land"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "装减速区护栏与终点: 南北各 2 片蓝色三角, 东端立橙色挡墙, 墙顶插黄色终点旗。",
+      "tip": "挡墙底边吸雪面东沿, 终点旗立在墙顶正上方。",
+      "tiles_to_add": [
+        "out_rail_s0",
+        "out_rail_n0",
+        "out_rail_s1",
+        "out_rail_n1",
+        "stop",
+        "stop_flag"
+      ],
+      "highlight_tiles": [
+        "out_0",
+        "out_1"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "铺看台广场与裁判塔第 1 层: 减速区南侧铺 2 片广场, 再放塔底板, 立第一层塔壁。",
+      "tip": "裁判塔紧挨减速区 —— 裁判要看清每一次着陆。",
+      "tiles_to_add": [
+        "pz_0",
+        "pz_1",
+        "jt_base",
+        "jt_s_0",
+        "jt_w_0",
+        "jt_e_0",
+        "jt_n_0"
+      ],
+      "highlight_tiles": [
+        "out_0"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "裁判塔第 2 层: 叠第二层塔壁 (北面是透明观察窗), 盖上灰色顶板。",
+      "tip": "透明观察窗正对着陆坡 —— 裁判的视线一格不挡。",
+      "tiles_to_add": [
+        "jt_s_1",
+        "jt_w_1",
+        "jt_e_1",
+        "jt_n_1",
+        "jt_top"
+      ],
+      "highlight_tiles": [
+        "jt_n_0"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "装裁判塔尖顶: 4 片紫色等腰三角底边吸顶板四边, 斜棱两两互吸锁尖, 跳台滑雪场完工!",
+      "tip": "最后一片卡进去的瞬间, 尖顶会咔哒一声自锁成一体。",
+      "tiles_to_add": [
+        "jt_hat_s",
+        "jt_hat_e",
+        "jt_hat_n",
+        "jt_hat_w"
+      ],
+      "highlight_tiles": [
+        "jt_top"
+      ]
+    }
+  ]
+}

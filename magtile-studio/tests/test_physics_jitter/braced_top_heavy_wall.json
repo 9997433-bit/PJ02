@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "fixture_braced_top_heavy_wall",
+  "name": "抖动夹具: 翼墙加固重心塔",
+  "name_en": "Jitter Fixture: Braced Top-Heavy Wall",
+  "description": "marginal_top_heavy_wall 的加固对照组: 同样的两层竖墙 + 29° 外倾顶板, 在墙端加一片垂直翼墙 —— 接地区域从一条线扩成三角形, 重心裕量从贴线 0.004 提升到 0.23 单位。静态与蒙特卡洛抖动 (--jitter) 都必须放行, 防止抖动关卡矫枉过正误杀已加固的常规设计。",
+  "difficulty": 1,
+  "total_pieces": 4,
+  "tags": ["测试夹具", "抖动正例"],
+  "final_assembly": [
+    {
+      "id": "wall_low",
+      "type": "square",
+      "position": [0.5, 0.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "wing",
+      "type": "square",
+      "position": [0.0, 0.5, 0.5],
+      "rotation": [90, 0, 90],
+      "color": "green"
+    },
+    {
+      "id": "wall_high",
+      "type": "square",
+      "position": [0.5, 0.0, 1.5],
+      "rotation": [90, 0, 0],
+      "color": "cyan"
+    },
+    {
+      "id": "canopy",
+      "type": "square",
+      "position": [0.5, 0.4373098536, 2.2424048101],
+      "rotation": [29, 0, 0],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "在桌面上竖起一片正方形墙片, 底边贴地。",
+      "tip": "",
+      "tiles_to_add": ["wall_low"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "在墙的左端垂直接一片翼墙, 两片竖边吸合, 底边同样贴地。",
+      "tip": "翼墙把接地区域从一条线撑成一个面, 是防倾倒最省片的加固。",
+      "tiles_to_add": ["wing"],
+      "highlight_tiles": ["wall_low"]
+    },
+    {
+      "step_number": 3,
+      "description": "在第一片墙的顶边上再立一片墙, 叠成两层。",
+      "tip": "",
+      "tiles_to_add": ["wall_high"],
+      "highlight_tiles": ["wall_low"]
+    },
+    {
+      "step_number": 4,
+      "description": "在墙顶接一片向外倾斜 29° 的顶板 —— 有了翼墙加固, 即使每片放歪 1~2 毫米重心也稳稳落在接地区域内。",
+      "tip": "对照 marginal_top_heavy_wall: 同样的顶板, 没有翼墙就是贴线的危险设计。",
+      "tiles_to_add": ["canopy"],
+      "highlight_tiles": ["wall_high"]
+    }
+  ]
+}

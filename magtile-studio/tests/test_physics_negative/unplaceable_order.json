@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "id": "fixture_unplaceable_order",
+  "name": "负例夹具: 步骤顺序写反",
+  "name_en": "fixture_unplaceable_order",
+  "description": "反面教材: 步骤内 tiles_to_add 顺序颠倒, 上层片先于下层片放置, 放置瞬间既不接地也吸不到任何已放置磁力片, 松手即掉。校验器必须报 unplaceable_tile 错误并拒绝该教程。",
+  "difficulty": 1,
+  "total_pieces": 3,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "g1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "w1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "w2",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平放一片地板。",
+      "tip": "",
+      "tiles_to_add": [
+        "g1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "错误示范: 教程把第二层墙片写在第一层前面。",
+      "tip": "w2 放下的那一刻 w1 还不存在, 半空中无处吸附 —— 调换 tiles_to_add 顺序即可通过。",
+      "tiles_to_add": [
+        "w2",
+        "w1"
+      ],
+      "highlight_tiles": []
+    }
+  ]
+}

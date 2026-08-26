@@ -1,0 +1,835 @@
+{
+  "schema_version": 1,
+  "id": "tow_truck_01",
+  "name": "道路救援拖车",
+  "name_en": "Tow Truck 01",
+  "description": "只用核心九片型的平板道路救援拖车, 结构签名是'平板拖床 + 30 度登车坡道 + 待救小车': 驾驶室箱体 (挡风窗格方 + 双侧门框方) 压顶与拖床同在一个平面, 压顶东边与拖床西短边整边互吸; 拖床双长边压住两排车轮底座轮顶锁成门式框架, 车尾 30 度登车坡道顶边整边吸拖床东短边、坡尾自然落地零悬挑; 故障小车停在坡道尽头, 两座橙色安全锥四坡锥与黄色警示牌围出作业区 —— 绞盘一收, 小车就上平板!",
+  "difficulty": 2,
+  "total_pieces": 44,
+  "tags": [
+    "城市",
+    "交通",
+    "救援车",
+    "职业体验",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 15,
+        "equilateral_triangle": 12,
+        "rectangle": 10,
+        "wheel_base": 4,
+        "door_frame": 2,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_t",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_c",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_9",
+      "type": "square",
+      "position": [
+        9.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "g1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_t",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_m",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_c",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_9",
+      "type": "square",
+      "position": [
+        9.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "g2_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_t",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_c",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_9",
+      "type": "square",
+      "position": [
+        9.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cab_front",
+      "type": "window_square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "cab_door_s",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cab_door_n",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cab_rear",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cab_top",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cab_beacon",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tow_wh_s",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tow_wh_n",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tow_bed",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tow_ramp",
+      "type": "rectangle",
+      "position": [
+        5.866025,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "car_wh_s",
+      "type": "wheel_base",
+      "position": [
+        8.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "car_wh_n",
+      "type": "wheel_base",
+      "position": [
+        8.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "car_bed",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "car_fin",
+      "type": "equilateral_triangle",
+      "position": [
+        9.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "cone_s_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone_s_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone_s_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone_s_w",
+      "type": "equilateral_triangle",
+      "position": [
+        6.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone_n_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone_n_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.833333,
+        2.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone_n_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone_n_w",
+      "type": "equilateral_triangle",
+      "position": [
+        6.166667,
+        2.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "sign_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sign_e",
+      "type": "equilateral_triangle",
+      "position": [
+        9.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺街面南行: 驾驶室墙脚与安全锥脚下用单位方板, 车轮位用长板。",
+      "tip": "车轮底座底边长 2 —— 轮位两侧必须是长板长边, 等长才吸得住。",
+      "tiles_to_add": [
+        "g0_1",
+        "g0_2",
+        "g0_t",
+        "g0_5",
+        "g0_6",
+        "g0_c",
+        "g0_9"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺车道中行: 两块黄色分道砖收在东西两端, 中段全灰色路面。",
+      "tip": "中行与南行的长板一一对缝 —— y=1 车轮缝要全线贯通。",
+      "tiles_to_add": [
+        "g1_1",
+        "g1_2",
+        "g1_t",
+        "g1_m",
+        "g1_c",
+        "g1_9"
+      ],
+      "highlight_tiles": [
+        "g0_t"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺街面北行: 与南行镜像对缝, y=2 车轮缝同样贯通。",
+      "tip": "三行铺完, 救援作业区就位 —— 拖车马上进场。",
+      "tiles_to_add": [
+        "g2_1",
+        "g2_2",
+        "g2_t",
+        "g2_5",
+        "g2_6",
+        "g2_c",
+        "g2_9"
+      ],
+      "highlight_tiles": [
+        "g1_t"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立驾驶室箱体: 挡风窗格方朝西, 两扇门框方作侧门, 尾隔墙收东。",
+      "tip": "四面墙四角竖边互咬成环 —— 驾驶室是拖床的第二条支撑路径。",
+      "tiles_to_add": [
+        "cab_front",
+        "cab_door_s",
+        "cab_door_n",
+        "cab_rear"
+      ],
+      "highlight_tiles": [
+        "g1_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖驾驶室压顶并装警灯: 压顶四边吸墙顶, 红色警灯骑压顶西沿。",
+      "tip": "警灯'压顶西沿+挡风窗顶'一线双吸 —— 出勤路上一闪一闪。",
+      "tiles_to_add": [
+        "cab_top",
+        "cab_beacon"
+      ],
+      "highlight_tiles": [
+        "cab_front"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立双轮并铺拖床: 车轮底座平行立上地缝, 拖床双长边压双轮顶、西短边吸驾驶室压顶东边。",
+      "tip": "床板压双轮 + 共缝驾驶室 —— 剪断任一条铰链线力都绕行。",
+      "tiles_to_add": [
+        "tow_wh_s",
+        "tow_wh_n",
+        "tow_bed"
+      ],
+      "highlight_tiles": [
+        "cab_top"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "架登车坡道: 30 度坡顶边整边吸拖床东短边, 坡尾自然落地。",
+      "tip": "顶铰链 + 接地斜撑两条路径, 零悬挑 —— 绞盘就位!",
+      "tiles_to_add": [
+        "tow_ramp"
+      ],
+      "highlight_tiles": [
+        "tow_bed"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "拼故障小车: 双轮立上地缝, 蓝色车板双长边压轮顶。",
+      "tip": "小车车头正对坡道尽头 —— 就差把它拉上平板了。",
+      "tiles_to_add": [
+        "car_wh_s",
+        "car_wh_n",
+        "car_bed"
+      ],
+      "highlight_tiles": [
+        "tow_ramp"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "装小车尾翼并摆西侧安全锥: 尾翼骑车板东短边, 锥底四边吸方板边。",
+      "tip": "四条斜棱两两互吸自锁 —— 安全锥摆好, 后方来车请绕行。",
+      "tiles_to_add": [
+        "car_fin",
+        "cone_s_s",
+        "cone_s_e",
+        "cone_s_n",
+        "cone_s_w"
+      ],
+      "highlight_tiles": [
+        "car_bed"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "摆北侧安全锥与两块警示牌: 三角牌骑地缝立稳, 救援作业开始!",
+      "tip": "警示牌底边骑住地缝 —— 重心正压铰链线, 风吹不倒。",
+      "tiles_to_add": [
+        "cone_n_s",
+        "cone_n_e",
+        "cone_n_n",
+        "cone_n_w",
+        "sign_w",
+        "sign_e"
+      ],
+      "highlight_tiles": [
+        "cone_s_s"
+      ]
+    }
+  ]
+}

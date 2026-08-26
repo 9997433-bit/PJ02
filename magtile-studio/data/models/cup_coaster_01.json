@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "id": "cup_coaster_01",
+  "name": "双杯位杯垫台",
+  "name_en": "Cup Coaster Station 01",
+  "description": "入门档实用功能: 茶几上的双杯位杯垫台, 结构签名是'大方地台封顶盒' —— 两片大正方形地台四边各同吸两片共线围墙墙脚 (R2 长短边完整贴合), 中央双隔墙骑住公共拼缝把盒腔分成两格, 顶上四片长板短边吸墙沿、长边压共线墙顶拼成整层台面, 台面放杯子、盒腔收杯垫一物两用; 四角粉色热气小旗提醒: 热饮请放杯垫上。24 片全程受压零悬挑, 4 岁小手也能一次合围成功。",
+  "difficulty": 1,
+  "total_pieces": 24,
+  "tags": [
+    "实用功能",
+    "杯垫",
+    "茶几",
+    "收纳",
+    "入门"
+  ],
+  "content_meta": {
+    "series": "practical_utility",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 14,
+        "equilateral_triangle": 4,
+        "rectangle": 4,
+        "large_square": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "base_w",
+      "type": "large_square",
+      "position": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "base_e",
+      "type": "large_square",
+      "position": [
+        3.0,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rim_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_e_0",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rim_e_1",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "div_s",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "div_n",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "top_sw",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "top_nw",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "top_se",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "top_ne",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "steam_nw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "steam_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "steam_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "steam_se",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺地台: 两片黄色大正方形并排吸合, 一片顶四片小方, 地基一步到位。",
+      "tip": "大正方形边长 2, 一条边能同时吸住两片小方 —— 记住这招。",
+      "tiles_to_add": [
+        "base_w",
+        "base_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "围南墙与西墙: 六片橙色方板墙脚整边骑住大方板边, 逐片手拉手。",
+      "tip": "",
+      "tiles_to_add": [
+        "rim_s_0",
+        "rim_s_1",
+        "rim_s_2",
+        "rim_s_3",
+        "rim_w_0",
+        "rim_w_1"
+      ],
+      "highlight_tiles": [
+        "base_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "围北墙、东墙并立中央隔墙: 八片墙合拢一圈, 隔墙骑住两片大方的公共拼缝, 盒腔分成两格。",
+      "tip": "先合围再封顶 —— 装配顺序也是设计的一部分。",
+      "tiles_to_add": [
+        "rim_n_0",
+        "rim_n_1",
+        "rim_n_2",
+        "rim_n_3",
+        "rim_e_0",
+        "rim_e_1",
+        "div_s",
+        "div_n"
+      ],
+      "highlight_tiles": [
+        "rim_s_0",
+        "rim_w_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "拼台面: 四片黄色长板盖上墙顶, 短边吸墙沿、长边压住两片共线墙顶, 板板互吸成整面。",
+      "tip": "台面放杯子, 盒腔收杯垫 —— 一物两用的秘密在这一步。",
+      "tiles_to_add": [
+        "top_sw",
+        "top_nw",
+        "top_se",
+        "top_ne"
+      ],
+      "highlight_tiles": [
+        "rim_w_0",
+        "div_s"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "升热气小旗: 四片粉色三角骑上台面四角, 双杯位茶歇开张!",
+      "tip": "",
+      "tiles_to_add": [
+        "steam_nw",
+        "steam_ne",
+        "steam_sw",
+        "steam_se"
+      ],
+      "highlight_tiles": [
+        "top_nw",
+        "top_se"
+      ]
+    }
+  ]
+}

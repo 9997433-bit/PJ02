@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "id": "snack_tray_01",
+  "name": "双格点心托盘",
+  "name_en": "Snack Tray 01",
+  "description": "D1 入门实用件: 端得上桌的双格点心托盘 —— 4x3 橙黄长方板托底, 青色横楣围出长边, 蓝色中隔墙分出咸甜两格; 两端透明窗格方一物两用, 镂空既是提手孔又是透气窗, 窗顶还立着两面红色招牌小旗。六步搭完, 第一件事就是端着它去装真点心。",
+  "difficulty": 1,
+  "total_pieces": 21,
+  "tags": [
+    "实用功能",
+    "托盘",
+    "收纳",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "practical_utility",
+    "build_paradigm": "bottom_up",
+    "technique_tags": {
+      "primary": "T17_negative_space",
+      "secondary": [
+        "T01_box_frame"
+      ]
+    },
+    "signature_statement": "两端窗格方一物两用: 镂空既是提手孔又是透气窗, 负空间直接当功能件。",
+    "structural_signature": {
+      "tile_histogram": {
+        "rectangle": 10,
+        "square": 7,
+        "equilateral_triangle": 2,
+        "window_square": 2
+      }
+    },
+    "physical_risk_notes": [
+      {
+        "step": 3,
+        "risk": "长边横楣刚立起、未与端墙咬角前, 侧碰易向内倒",
+        "mitigation": "该步 tip 提示扶住两端再松手; 下一步立即用端墙锁角"
+      }
+    ]
+  },
+  "final_assembly": [
+    {
+      "id": "board_0_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "board_2_0",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "board_0_1",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "board_2_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "board_0_2",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "board_2_2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rim_s_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rim_n_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rim_s_2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rim_n_2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "end_w_a",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "handle_w",
+      "type": "window_square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "end_w_b",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "end_e_a",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "handle_e",
+      "type": "window_square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "end_e_b",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "divider_0",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "divider_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "divider_2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "flag_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺托底第一排 (靠自己这排): 两片长方板头对头吸成一条长边。",
+      "tip": "长方板短边对短边吸住, 托盘的地基就有了。",
+      "tiles_to_add": [
+        "board_0_0",
+        "board_2_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺完托底: 再来四片长方板, 颜色橙黄错开, 拼成 4x3 大托底。",
+      "tip": "每片长边都要与上一排整边贴合 —— 托底平整, 点心才放得稳。",
+      "tiles_to_add": [
+        "board_0_1",
+        "board_2_1",
+        "board_0_2",
+        "board_2_2"
+      ],
+      "highlight_tiles": [
+        "board_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立两条长边围沿: 四片青色横楣踩住托底长边, 底边一次吸满两格。",
+      "tip": "横楣是长片, 立的时候扶住两端再松手。",
+      "tiles_to_add": [
+        "rim_s_0",
+        "rim_s_2",
+        "rim_n_0",
+        "rim_n_2"
+      ],
+      "highlight_tiles": [
+        "board_0_0",
+        "board_0_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "装两端提手墙: 绿方夹住透明窗格, 窗孔就是提手孔, 竖边与围沿咬角。",
+      "tip": "窗格放中间高度正好 —— 大人的手指能穿过窗孔把托盘端起来。",
+      "tiles_to_add": [
+        "end_w_a",
+        "handle_w",
+        "end_w_b",
+        "end_e_a",
+        "handle_e",
+        "end_e_b"
+      ],
+      "highlight_tiles": [
+        "rim_s_0",
+        "rim_n_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立中隔墙: 三片蓝色方板沿正中拼缝排开, 托盘分成咸甜两格。",
+      "tip": "隔墙两端与围沿竖边互咬, 像'日'字一样锁成整体。",
+      "tiles_to_add": [
+        "divider_0",
+        "divider_1",
+        "divider_2"
+      ],
+      "highlight_tiles": [
+        "rim_s_0",
+        "rim_s_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "插招牌小旗: 两面红色三角旗立上提手窗顶 —— 点心托盘开张!",
+      "tip": "左格放咸的、右格放甜的, 小旗写上今日招牌。",
+      "tiles_to_add": [
+        "flag_w",
+        "flag_e"
+      ],
+      "highlight_tiles": [
+        "handle_w",
+        "handle_e"
+      ]
+    }
+  ]
+}

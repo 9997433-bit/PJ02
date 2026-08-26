@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 4-6 启蒙模式超大卡片 (UI_UX_SPEC.md §2, 口径与桌面 Qt LibraryPage
+     bandJunior 一致): 大缩略图竖排 + 大字号 + 最少文字 (中文名 / 主题 /
+     难度星 / 片数·步数), 不显示英文名与「需要扩展装」角标 (减文字量)。
+     视图 id 与标准卡片 item_model_card 一一对应, 共用同一个 ViewHolder。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:background="@drawable/bg_model_card"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 320x240 缩略图铺满卡宽 (图形占比更大, §2), 缺图显示占位底色 -->
+    <ImageView
+        android:id="@+id/model_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_thumbnail_placeholder"
+        android:contentDescription="@string/thumbnail_description"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/model_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/magtile_text_primary"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <!-- 启蒙模式副标题只留主题 (绑定时填充; 认字过渡期文字量最少) -->
+    <TextView
+        android:id="@+id/model_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/magtile_text_secondary"
+        android:textSize="18sp" />
+
+    <!-- 启蒙模式不显示「需要扩展装」角标 (§2 减文字量);
+         保留 id 以便与标准卡片共用 ViewHolder -->
+    <TextView
+        android:id="@+id/model_expansion_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/model_difficulty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/magtile_star"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/model_pieces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/magtile_text_secondary"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

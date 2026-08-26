@@ -1,0 +1,1069 @@
+{
+  "schema_version": 1,
+  "id": "lantern_festival_01",
+  "name": "元宵灯会",
+  "name_en": "Lantern Festival 01",
+  "description": "只用核心九片型的节日灯会长街: 12 格红毯灯会街横贯全场, 两座门式灯架跨街而立 —— 双柱各叠 2 节, 拱心方两侧竖边纯剪锁进柱顶, 拱底整边倒挂受拉大宫灯 (13g << strict 悬挂预算 84g), 灯尖垂到离地 0.13 的街心; 街北 2 层玻璃大花灯塔两层窗格方灯壁透出暖光, 四角竖边互咬成环, 戴等边四坡灯冠 (灯尖 2.71); 街边石灯柱骑顶黄灯与灯架脚下红灯笼列夹道相迎 —— 正月十五, 灯照长街。",
+  "difficulty": 3,
+  "total_pieces": 57,
+  "tags": [
+    "节日",
+    "元宵",
+    "灯会",
+    "花灯",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "holiday_seasonal",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 26,
+        "rectangle": 13,
+        "equilateral_triangle": 12,
+        "window_square": 5,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "gs_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gs_p1",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gs_p2",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gs_1",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gs_2",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gs_p3",
+      "type": "square",
+      "position": [
+        8.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gs_p4",
+      "type": "square",
+      "position": [
+        9.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gs_3",
+      "type": "rectangle",
+      "position": [
+        11.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "st_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "st_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "st_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "st_3",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "st_4",
+      "type": "rectangle",
+      "position": [
+        9.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "st_5",
+      "type": "rectangle",
+      "position": [
+        11.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "gn_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gn_p1",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gn_p2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gn_1",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gn_gold",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "gn_2",
+      "type": "square",
+      "position": [
+        7.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gn_p3",
+      "type": "square",
+      "position": [
+        8.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gn_p4",
+      "type": "square",
+      "position": [
+        9.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gn_3",
+      "type": "rectangle",
+      "position": [
+        11.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tw1_s",
+      "type": "door_frame",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw1_w",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw1_e",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw1_n",
+      "type": "window_square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_cap1",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw2_s",
+      "type": "window_square",
+      "position": [
+        6.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw2_w",
+      "type": "window_square",
+      "position": [
+        6.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw2_e",
+      "type": "window_square",
+      "position": [
+        7.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw2_n",
+      "type": "window_square",
+      "position": [
+        6.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_cap2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_crown_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.166667,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_crown_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.833333,
+        2.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_crown_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.833333,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tw_crown_w",
+      "type": "equilateral_triangle",
+      "position": [
+        6.166667,
+        2.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ar_w_s0",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ar_w_s1",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ar_w_n0",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ar_w_n1",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ar_w_key",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ar_w_lamp",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        0.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ar_e_s0",
+      "type": "square",
+      "position": [
+        9.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ar_e_s1",
+      "type": "square",
+      "position": [
+        9.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ar_e_n0",
+      "type": "square",
+      "position": [
+        9.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ar_e_n1",
+      "type": "square",
+      "position": [
+        9.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ar_e_key",
+      "type": "square",
+      "position": [
+        9.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ar_e_lamp",
+      "type": "equilateral_triangle",
+      "position": [
+        9.0,
+        1.5,
+        0.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "po_w",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "po_w_lamp",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "po_e",
+      "type": "square",
+      "position": [
+        9.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "po_e_lamp",
+      "type": "equilateral_triangle",
+      "position": [
+        9.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lt_a",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "lt_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "lt_c",
+      "type": "equilateral_triangle",
+      "position": [
+        8.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "lt_d",
+      "type": "equilateral_triangle",
+      "position": [
+        9.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺地面南行 (y [0,1]): 4 片绿长板草带, 两座灯架脚下各垫 2 片灰色柱础方板 (x [2,4] 与 x [8,10])。",
+      "tip": "柱础方板的拼缝 (x=3 与 x=9) 就是灯架立柱的落脚线。",
+      "tiles_to_add": [
+        "gs_0",
+        "gs_p1",
+        "gs_p2",
+        "gs_1",
+        "gs_2",
+        "gs_p3",
+        "gs_p4",
+        "gs_3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺红毯灯会街 (y [1,2]): 6 片红长板横贯 12 格。",
+      "tip": "元宵灯会最热闹的一条街 —— 灯架就跨在这条红毯上。",
+      "tiles_to_add": [
+        "st_0",
+        "st_1",
+        "st_2",
+        "st_3",
+        "st_4",
+        "st_5"
+      ],
+      "highlight_tiles": [
+        "gs_p1",
+        "gs_p4"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺地面北行 (y [2,3]): 柱础与南行对齐, 黄色金座 (x [6,7]) 留给大花灯塔。",
+      "tip": "金座四条边一会儿要被灯塔的四面灯壁踩住 —— 先对准网格。",
+      "tiles_to_add": [
+        "gn_0",
+        "gn_p1",
+        "gn_p2",
+        "gn_1",
+        "gn_gold",
+        "gn_2",
+        "gn_p3",
+        "gn_p4",
+        "gn_3"
+      ],
+      "highlight_tiles": [
+        "st_2",
+        "st_3"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立灯塔第 1 层: 南面橙色门框方灯门, 其余三面窗格方灯壁围合。",
+      "tip": "每片底边吸金座板边、转角竖边互咬 —— 灯壁成环才立得住。",
+      "tiles_to_add": [
+        "tw1_s",
+        "tw1_w",
+        "tw1_e",
+        "tw1_n"
+      ],
+      "highlight_tiles": [
+        "gn_gold"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖第 1 层盖板, 再叠第 2 层灯壁: 四面全用窗格方, 灯光更透。",
+      "tip": "盖板四边压四墙顶; 第 2 层每片同时吸盖板沿与邻片竖边。",
+      "tiles_to_add": [
+        "tw_cap1",
+        "tw2_s",
+        "tw2_w",
+        "tw2_e",
+        "tw2_n"
+      ],
+      "highlight_tiles": [
+        "tw1_s"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "封灯塔顶并戴灯冠: 盖板压顶, 4 片等边三角斜棱两两互吸自锁。",
+      "tip": "灯冠四棱互吸成环, 越推越紧 —— 灯尖亮到 2.71 高。",
+      "tiles_to_add": [
+        "tw_cap2",
+        "tw_crown_s",
+        "tw_crown_e",
+        "tw_crown_n",
+        "tw_crown_w"
+      ],
+      "highlight_tiles": [
+        "tw2_s"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立西灯架双柱 (x=3): 南北柱各叠 2 节, 柱脚吸柱础拼缝。",
+      "tip": "柱脚整边吸进两片柱础方板的拼缝 —— 一条边吃两片的磁力。",
+      "tiles_to_add": [
+        "ar_w_s0",
+        "ar_w_s1",
+        "ar_w_n0",
+        "ar_w_n1"
+      ],
+      "highlight_tiles": [
+        "gs_p1",
+        "gn_p1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "锁西拱心方并挂大宫灯: 拱心方两侧竖边纯剪锁进柱顶, 宫灯底边整边倒挂在拱底。",
+      "tip": "宫灯重心正下受拉 (13g << 84g 预算), 灯尖垂到离地 0.13。",
+      "tiles_to_add": [
+        "ar_w_key",
+        "ar_w_lamp"
+      ],
+      "highlight_tiles": [
+        "ar_w_s1",
+        "ar_w_n1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立东灯架双柱 (x=9): 与西灯架对称。",
+      "tip": "柱-拱-柱-地面是一个门式闭环 —— 剪断一处也塌不了。",
+      "tiles_to_add": [
+        "ar_e_s0",
+        "ar_e_s1",
+        "ar_e_n0",
+        "ar_e_n1"
+      ],
+      "highlight_tiles": [
+        "ar_w_key"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "锁东拱心方并挂大宫灯: 灯会街两端双灯对望。",
+      "tip": "两盏宫灯正对街心 —— 走马灯就该垂在人来人往的地方。",
+      "tiles_to_add": [
+        "ar_e_key",
+        "ar_e_lamp"
+      ],
+      "highlight_tiles": [
+        "ar_e_s1",
+        "ar_e_n1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "立石灯柱 x2 (北界 y=3): 立方壁骑方板北沿, 柱顶各骑一盏黄灯。",
+      "tip": "黄灯重心正压柱顶铰链线, 力臂为零 —— 夜风吹不倒。",
+      "tiles_to_add": [
+        "po_w",
+        "po_w_lamp",
+        "po_e",
+        "po_e_lamp"
+      ],
+      "highlight_tiles": [
+        "gn_p1",
+        "gn_p4"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "挂红灯笼列: 4 只红灯笼骑上北行柱础南沿, 元宵灯会开街!",
+      "tip": "灯架脚下红灯成列 —— 正月十五, 灯照长街。",
+      "tiles_to_add": [
+        "lt_a",
+        "lt_b",
+        "lt_c",
+        "lt_d"
+      ],
+      "highlight_tiles": [
+        "po_w",
+        "po_e"
+      ]
+    }
+  ]
+}

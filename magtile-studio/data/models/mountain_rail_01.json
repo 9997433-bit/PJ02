@@ -1,0 +1,1147 @@
+{
+  "schema_version": 1,
+  "id": "mountain_rail_01",
+  "name": "登山齿轨小火车",
+  "name_en": "Mountain Rack Railway 01",
+  "description": "只用核心九片型的登山齿轨铁路: 两级箱形台地叠成梯级山体, 山脚南壁嵌门框方隧道洞门接引道, 山顶台地停着红色齿轨小火车 (窗格方了望车窗朝谷底, 烟囱顶 3.87 全场最高); 招牌是两段 30 度齿轨坡道的折返下山线 —— 第一段坡尾恰好被落在半格网外 (x = 2 + sqrt3) 的山腰会让站台面西沿整边接住 (双端受力), 第二段再从台面东沿滑向谷底自然落地; 山体、会让站、谷底三个接地体由两段坡道连成一个磁力连通整体, 站旗青松护齿一路点景 —— 咔哒咔哒, 齿轮咬着齿条爬山去。",
+  "difficulty": 3,
+  "total_pieces": 61,
+  "tags": [
+    "交通",
+    "火车",
+    "登山铁路",
+    "自然",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 47,
+        "equilateral_triangle": 6,
+        "isosceles_triangle": 3,
+        "door_frame": 2,
+        "rectangle": 2,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "pt_0",
+      "type": "square",
+      "position": [
+        1.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pt_1",
+      "type": "square",
+      "position": [
+        1.5,
+        -1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_tun",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_e_0",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_e_1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bs_d_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bs_d_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bs_d_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bs_d_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bs_d_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bs_d_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "up_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_e_0",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_e_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_d_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_d_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_d_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_d_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tr_w",
+      "type": "window_square",
+      "position": [
+        0.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tr_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tr_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tr_e",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tr_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tr_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tr_rf_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tr_rf_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tr_funnel",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mt_flag",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mt_tree",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        2.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "mt_fence",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mp_door",
+      "type": "door_frame",
+      "position": [
+        4.232051,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mp_s_1",
+      "type": "square",
+      "position": [
+        5.232051,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mp_w",
+      "type": "square",
+      "position": [
+        3.732051,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mp_e",
+      "type": "square",
+      "position": [
+        5.732051,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mp_n_0",
+      "type": "square",
+      "position": [
+        4.232051,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mp_n_1",
+      "type": "square",
+      "position": [
+        5.232051,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mp_d_0",
+      "type": "square",
+      "position": [
+        4.232051,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mp_d_1",
+      "type": "square",
+      "position": [
+        5.232051,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rk_up",
+      "type": "rectangle",
+      "position": [
+        2.866025,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rk_dn",
+      "type": "rectangle",
+      "position": [
+        6.598076,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mp_fence_0",
+      "type": "equilateral_triangle",
+      "position": [
+        4.232051,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mp_fence_1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.232051,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "vl_0",
+      "type": "square",
+      "position": [
+        7.964102,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "vl_1",
+      "type": "square",
+      "position": [
+        8.964102,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "vl_2",
+      "type": "square",
+      "position": [
+        7.964102,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "vl_3",
+      "type": "square",
+      "position": [
+        8.964102,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "vl_flag",
+      "type": "isosceles_triangle",
+      "position": [
+        8.964102,
+        2.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "vl_tree",
+      "type": "equilateral_triangle",
+      "position": [
+        7.964102,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pt_tree",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        -2.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺隧道引道并立山脚南壁: 引道 2 片钻山而出, 南壁 3 片 —— 正中嵌门框方隧道洞门。",
+      "tip": "山还没堆起来, 先给火车留好山洞 —— 洞门正对引道。",
+      "tiles_to_add": [
+        "bs_s_0",
+        "bs_tun",
+        "bs_s_2",
+        "pt_0",
+        "pt_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "合山脚台地墙环: 西墙 2 + 北墙 3 + 东墙 2, 10 片墙锁成 3x2 箱形。",
+      "tip": "箱形墙环就是山体的第一级台地 —— 处处成环, 剪一条不塌。",
+      "tiles_to_add": [
+        "bs_w_0",
+        "bs_w_1",
+        "bs_n_0",
+        "bs_n_1",
+        "bs_n_2",
+        "bs_e_0",
+        "bs_e_1"
+      ],
+      "highlight_tiles": [
+        "bs_s_0",
+        "bs_tun"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺山脚草甸台面: 6 片绿色方板压墙顶, 第一级台地封顶。",
+      "tip": "每片台面同时吸墙顶与邻板拼缝 —— 山腰草甸长出来了。",
+      "tiles_to_add": [
+        "bs_d_0_0",
+        "bs_d_0_1",
+        "bs_d_1_0",
+        "bs_d_1_1",
+        "bs_d_2_0",
+        "bs_d_2_1"
+      ],
+      "highlight_tiles": [
+        "bs_s_0",
+        "bs_n_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "起山顶台地南墙与西墙: 4 片踩草甸台面沿边 (x [0,2])。",
+      "tip": "第二级台地直接叠在第一级上 —— 梯级山体的搭法。",
+      "tiles_to_add": [
+        "up_s_0",
+        "up_s_1",
+        "up_w_0",
+        "up_w_1"
+      ],
+      "highlight_tiles": [
+        "bs_d_0_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "合山顶台地墙环: 北墙 2 + 东墙 2。",
+      "tip": "上层墙脚整边吸台面沿边与下层墙顶 —— 一条缝两道吸。",
+      "tiles_to_add": [
+        "up_n_0",
+        "up_n_1",
+        "up_e_0",
+        "up_e_1"
+      ],
+      "highlight_tiles": [
+        "up_s_0",
+        "up_w_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "铺山顶台面: 4 片灰色方板压墙顶, 山顶站台就绪。",
+      "tip": "海拔 2.0 —— 齿轨小火车的终点站到了。",
+      "tiles_to_add": [
+        "up_d_0_0",
+        "up_d_1_0",
+        "up_d_0_1",
+        "up_d_1_1"
+      ],
+      "highlight_tiles": [
+        "up_s_0",
+        "up_n_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "拼齿轨小火车: 西端窗格方了望车窗打头, 红色墙环合拢 (x [0,2], y [0,1])。",
+      "tip": "车窗朝西看谷底 —— 墙脚踩台面拼缝, 竖边两两互咬。",
+      "tiles_to_add": [
+        "tr_w",
+        "tr_s_0",
+        "tr_s_1",
+        "tr_e",
+        "tr_n_0",
+        "tr_n_1"
+      ],
+      "highlight_tiles": [
+        "up_d_0_0",
+        "up_d_1_0"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "封车顶装烟囱: 2 片车顶双边压墙顶, 三角烟囱骑上车顶南沿。",
+      "tip": "烟囱顶 3.87 全场最高 —— 墙-顶锁成箱形闭环, 高也不怕。",
+      "tiles_to_add": [
+        "tr_rf_0",
+        "tr_rf_1",
+        "tr_funnel"
+      ],
+      "highlight_tiles": [
+        "tr_w",
+        "tr_e"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "山顶插站旗、山坡种青松、台沿列护齿。",
+      "tip": "三片三角都骑整边沿口, 重心正压铰链 —— 力矩为零。",
+      "tiles_to_add": [
+        "mt_flag",
+        "mt_tree",
+        "mt_fence"
+      ],
+      "highlight_tiles": [
+        "up_d_1_1",
+        "bs_d_2_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "落山腰会让站并架第一段齿轨: 站房墙环 6 片 (南墙嵌红色站门) 落在半格网外 (x = 2 + sqrt3), 台面 2 片压顶; 30 度齿轨坡道从山顶台面滑下 —— 顶短边吸山顶沿, 坡尾恰好整边吸会让站台面西沿。",
+      "tip": "会让站特意落在半格网外 —— 正好接住 30 度坡的落点, 双端受力。",
+      "tiles_to_add": [
+        "mp_door",
+        "mp_s_1",
+        "mp_w",
+        "mp_e",
+        "mp_n_0",
+        "mp_n_1",
+        "mp_d_0",
+        "mp_d_1",
+        "rk_up"
+      ],
+      "highlight_tiles": [
+        "up_d_1_0",
+        "up_e_0"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "架第二段齿轨并列护齿: 坡道从会让站台面东沿继续下滑, 坡尾自然落地; 台面北沿列 2 片护齿。",
+      "tip": "折返下山线成形 —— 齿轮咬着齿条, 陡坡也稳稳当当。",
+      "tiles_to_add": [
+        "rk_dn",
+        "mp_fence_0",
+        "mp_fence_1"
+      ],
+      "highlight_tiles": [
+        "mp_d_1",
+        "mp_e"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "铺谷底站坪: 4 片方板从第二段坡尾向东铺开, 西边整边吸坡尾。",
+      "tip": "山体、会让站、谷底 —— 三个接地体被两段坡道连成一体。",
+      "tiles_to_add": [
+        "vl_0",
+        "vl_1",
+        "vl_2",
+        "vl_3"
+      ],
+      "highlight_tiles": [
+        "rk_dn"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "谷底插站旗种松树, 洞前再种一棵站牌松 —— 齿轨铁路通车!",
+      "tip": "咔哒咔哒 —— 小火车从山顶下来, 钻隧道、过会让站, 到站!",
+      "tiles_to_add": [
+        "vl_flag",
+        "vl_tree",
+        "pt_tree"
+      ],
+      "highlight_tiles": [
+        "vl_2",
+        "pt_1"
+      ]
+    }
+  ]
+}

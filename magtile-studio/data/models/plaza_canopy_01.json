@@ -1,0 +1,505 @@
+{
+  "schema_version": 1,
+  "id": "plaza_canopy_01",
+  "name": "广场遮阳亭",
+  "name_en": "Plaza Canopy 01",
+  "description": "扩展主打片型 large_square 引流 D1: 六片大正方形拼出门式刚架遮阳亭 —— 两片平拼地台、两片整片立起当东西山墙、两片在 z=2合拢成顶棚, 全程 2.0 整边等长互吸; 棚下地台拼缝上骑一条双面靠背长椅, 顶棚拼缝再立一块红色招牌, 南步道、北花圃、东西花箱点缀四色三角花 —— 一片大正方形顶四片小方板, 体量感立现。",
+  "difficulty": 1,
+  "total_pieces": 25,
+  "tags": [
+    "实用功能",
+    "遮阳亭",
+    "长椅",
+    "大正方形",
+    "入门"
+  ],
+  "content_meta": {
+    "series": "practical_utility",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 14,
+        "large_square": 6,
+        "equilateral_triangle": 4,
+        "rectangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "plaza_w",
+      "type": "large_square",
+      "position": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plaza_e",
+      "type": "large_square",
+      "position": [
+        3.0,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "walk_0",
+      "type": "square",
+      "position": [
+        0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "walk_1",
+      "type": "square",
+      "position": [
+        1.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_2",
+      "type": "square",
+      "position": [
+        2.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "walk_3",
+      "type": "square",
+      "position": [
+        3.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bench_back_s",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bench_back_n",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "seat_sw",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "seat_nw",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "seat_se",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "seat_ne",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "gable_w",
+      "type": "large_square",
+      "position": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "gable_e",
+      "type": "large_square",
+      "position": [
+        4.0,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "canopy_w",
+      "type": "large_square",
+      "position": [
+        1.0,
+        1.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "canopy_e",
+      "type": "large_square",
+      "position": [
+        3.0,
+        1.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bed_nw",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bed_ne",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flower_nw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flower_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "box_w",
+      "type": "square",
+      "position": [
+        -0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "box_e",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flower_w",
+      "type": "equilateral_triangle",
+      "position": [
+        -1.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flower_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sign",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺广场地台: 两片灰色大正方形整边互吸, 平拼出 4x2 的小广场。",
+      "tip": "大正方形边长 2.0, 一片顶四片小方板 —— 拼缝落在 x=2, 长椅就骑在这条缝上。",
+      "tiles_to_add": [
+        "plaza_w",
+        "plaza_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺南侧步道: 四片方板灰黄相间贴住地台南沿。",
+      "tip": "步道彼此整边互吸连成一排 —— 灰黄相间就是亭子的迎宾地毯。",
+      "tiles_to_add": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "highlight_tiles": [
+        "plaza_w",
+        "plaza_e"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立双面长椅: 两片蓝色方墙骑上地台拼缝当靠背, 四片黄色座面短边吸住靠背顶沿, 两侧对称摊开。",
+      "tip": "先立靠背再放座面 —— 座面左右两两互吸, 东西两边都能坐。",
+      "tiles_to_add": [
+        "bench_back_s",
+        "bench_back_n",
+        "seat_sw",
+        "seat_nw",
+        "seat_se",
+        "seat_ne"
+      ],
+      "highlight_tiles": [
+        "plaza_w",
+        "plaza_e"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立东西山墙: 两片蓝色大正方形整片立起, 底边与地台外沿 2.0 整边一次吸合。",
+      "tip": "大正方形立墙不用一片片砌 —— 一片就是一整面山墙, 稳稳站住。",
+      "tiles_to_add": [
+        "gable_w",
+        "gable_e"
+      ],
+      "highlight_tiles": [
+        "plaza_w",
+        "plaza_e"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖遮阳顶棚: 两片绿色大正方形平放到 z=2, 边与两侧山墙顶沿等长互吸, 中缝合拢成门式刚架。",
+      "tip": "先盖西半再盖东半 —— 地台、山墙、顶棚连成闭环, 亭子从此不怕碰。",
+      "tiles_to_add": [
+        "canopy_w",
+        "canopy_e"
+      ],
+      "highlight_tiles": [
+        "gable_w",
+        "gable_e"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "布置花箱花圃: 北侧两片花圃、东西各一片花箱, 四株彩色三角花骑上外沿口。",
+      "tip": "花箱贴着地台与山墙脚, 三角花底边与花箱沿口等长互吸。",
+      "tiles_to_add": [
+        "bed_nw",
+        "bed_ne",
+        "flower_nw",
+        "flower_ne",
+        "box_w",
+        "box_e",
+        "flower_w",
+        "flower_e"
+      ],
+      "highlight_tiles": [
+        "plaza_w",
+        "plaza_e"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "挂顶棚招牌: 一片红色长方形立在顶棚拼缝上 —— 广场遮阳亭开张啦!",
+      "tip": "招牌底边同时吸住两片顶棚的拼缝边 —— 远远就能看见亭子在哪。",
+      "tiles_to_add": [
+        "sign"
+      ],
+      "highlight_tiles": [
+        "canopy_w",
+        "canopy_e"
+      ]
+    }
+  ]
+}

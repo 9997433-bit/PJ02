@@ -1,0 +1,852 @@
+{
+  "schema_version": 1,
+  "id": "car_repair_shop_01",
+  "name": "汽车修理站",
+  "name_en": "Car Repair Shop 01",
+  "description": "只用核心九片型的修理站: 主角是举升机 —— 双片门柱托起黄色举升台 (双端受力零悬挑), 红色小车整车骑在台上, 双轮立台面两条长边、车顶板压双轮顶, 在二楼上锁成滚动门式框架, 台下正好钻得进检修工; 东侧工坊南面整个敞开 (剖面视角), 北墙窗格方就是挂满扳手的工具墙, 墙脚红色直角三角斜撑双边受力, 红色招牌杆一线双吸直上 3.0; 青色待修车在场外排队, 轮胎堆平放在角落, 橙色零件箱开顶待取 —— 你的车, 举到头顶上修!",
+  "difficulty": 2,
+  "total_pieces": 45,
+  "tags": [
+    "城市",
+    "修理站",
+    "职业体验",
+    "汽车",
+    "工程"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 28,
+        "wheel_base": 5,
+        "rectangle": 4,
+        "equilateral_triangle": 3,
+        "right_triangle": 2,
+        "window_square": 2,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "tire_stack",
+      "type": "wheel_base",
+      "position": [
+        0.5,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wait_bay",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "fl_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lift_pier_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lift_pier_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lift_deck",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "up_wh_w",
+      "type": "wheel_base",
+      "position": [
+        1.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_wh_e",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "up_top",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        2.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "up_glass",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        3.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shop_n_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "shop_n_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "shop_w_2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "shop_w_3",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "shop_e_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "shop_e_3",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "roof_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "brace_w",
+      "type": "right_triangle",
+      "position": [
+        3.0,
+        1.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "brace_e",
+      "type": "right_triangle",
+      "position": [
+        5.0,
+        1.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sign_pole",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        4.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wt_wh_s",
+      "type": "wheel_base",
+      "position": [
+        3.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wt_wh_n",
+      "type": "wheel_base",
+      "position": [
+        3.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wt_top",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wt_glass",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bin_s",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bin_n",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bin_w",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bin_e",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺场地南行: 轮胎堆平放在西角, 清色待修车位长板横在南沿。",
+      "tip": "轮胎堆就是平放的车轮底座 —— 修理站的备件都码在地上。",
+      "tiles_to_add": [
+        "tire_stack",
+        "fl_1_0",
+        "wait_bay",
+        "fl_4_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "补第二行四片方板, 南半场铺齐。",
+      "tip": "轮胎堆一块顶两格; 车位长板的两条长边就是待修车的轮缝。",
+      "tiles_to_add": [
+        "fl_1_1",
+        "fl_2_1",
+        "fl_3_1",
+        "fl_4_1"
+      ],
+      "highlight_tiles": [
+        "tire_stack"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺第三行: 五片方板横贯, 清色检修通道格对准举升机。",
+      "tip": "检修通道从南门一直通到举升机底下。",
+      "tiles_to_add": [
+        "fl_0_2",
+        "fl_1_2",
+        "fl_2_2",
+        "fl_3_2",
+        "fl_4_2"
+      ],
+      "highlight_tiles": [
+        "fl_1_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺第四行: 场地铺满, 工坊地基就位。",
+      "tip": "行行等边互吸, 每道拼缝都是一条磁力吸边。",
+      "tiles_to_add": [
+        "fl_0_3",
+        "fl_1_3",
+        "fl_2_3",
+        "fl_3_3",
+        "fl_4_3"
+      ],
+      "highlight_tiles": [
+        "fl_0_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立举升机: 南北双门柱踩住地缝, 黄色举升台短边压双柱顶。",
+      "tip": "柱-台-柱-地面锁成门式刚架, 双端受力零悬挑 —— 台下正好钻得进检修工。",
+      "tiles_to_add": [
+        "lift_pier_s",
+        "lift_pier_n",
+        "lift_deck"
+      ],
+      "highlight_tiles": [
+        "fl_1_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "红色小车开上举升台: 双轮立台面长边, 车顶板压双轮顶。",
+      "tip": "车轮底边整边吸住台面长边 (一缝双吸), 整车在二楼上再锁一个门式框架。",
+      "tiles_to_add": [
+        "up_wh_w",
+        "up_wh_e",
+        "up_top",
+        "up_glass"
+      ],
+      "highlight_tiles": [
+        "lift_deck"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "起敞面工坊: 南面不砌墙, 北墙两片窗格方就是工具墙。",
+      "tip": "窗格方的格子挂满扳手螺丝刀 —— 工具墙一眼看得清。",
+      "tiles_to_add": [
+        "shop_n_3",
+        "shop_n_4",
+        "shop_w_2",
+        "shop_w_3",
+        "shop_e_2",
+        "shop_e_3"
+      ],
+      "highlight_tiles": [
+        "fl_3_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖北半跨屋顶, 侧墙南棱装斜撑, 招牌杆骑北墙顶。",
+      "tip": "斜撑竖边吸侧墙竖棱、横边吸地缝, 双边受力; 招牌杆一线双吸直上 3.0。",
+      "tiles_to_add": [
+        "roof_3",
+        "roof_4",
+        "brace_w",
+        "brace_e",
+        "sign_pole"
+      ],
+      "highlight_tiles": [
+        "shop_n_3"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "青色待修车停进南沿车位, 车头朝着检修通道排队。",
+      "tip": "同款双轮 + 车顶板 + 挡风玻璃; 警示锥骑在通道缝上 —— 排队检修, 请勿越线。",
+      "tiles_to_add": [
+        "wt_wh_s",
+        "wt_wh_n",
+        "wt_top",
+        "wt_glass",
+        "cone"
+      ],
+      "highlight_tiles": [
+        "wait_bay"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "围零件箱收尾: 四片橙色墙开顶合环。",
+      "tip": "开顶不盖, 伸手就能拿零件 —— 修理站开工!",
+      "tiles_to_add": [
+        "bin_s",
+        "bin_n",
+        "bin_w",
+        "bin_e"
+      ],
+      "highlight_tiles": [
+        "cone"
+      ]
+    }
+  ]
+}

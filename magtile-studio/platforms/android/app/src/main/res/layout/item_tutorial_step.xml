@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 教程步骤行: 序号圆徽 (已完成换 ✓ 绿徽) + 中文说明 + 可选小提示
+     + 片数增量; 当前步整行换主色浅底高亮 (背景由适配器按状态切换,
+     shape 背景不带 padding, 切换不影响本布局的内边距)。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/bg_progress_card"
+    android:gravity="center_vertical"
+    android:minHeight="56dp"
+    android:orientation="horizontal"
+    android:paddingStart="12dp"
+    android:paddingEnd="14dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/step_badge"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_step_badge"
+        android:gravity="center"
+        android:textColor="@color/magtile_text_primary"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/step_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/magtile_text_primary"
+            android:textSize="@dimen/text_body" />
+
+        <!-- 可选小提示 ("💡 …"; 无提示的步骤整行隐藏) -->
+        <TextView
+            android:id="@+id/step_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/magtile_text_secondary"
+            android:textSize="@dimen/text_secondary"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- 片数增量 "+6 片" -->
+    <TextView
+        android:id="@+id/step_pieces"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/magtile_text_secondary"
+        android:textSize="@dimen/text_secondary" />
+
+</LinearLayout>

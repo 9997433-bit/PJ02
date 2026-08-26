@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "id": "fixture_cantilever_overload",
+  "name": "负例夹具: 双片悬臂折落",
+  "name_en": "fixture_cantilever_overload",
+  "description": "反面教材: 2 高墙顶水平外挑 2 片。整体重心仍在接地凸包内, 旧版 4 条规则全部通过, 但悬臂绕墙顶铰链的重力力矩 (60g·单位) 远超单条磁力边的抗弯预算 (20g·单位), 实物中悬臂会绕墙顶边向下翻折脱落。校验器必须报 cantilever_overload 错误并拒绝该模型。",
+  "difficulty": 1,
+  "total_pieces": 6,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "g0",
+      "type": "square",
+      "position": [
+        0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "g1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "w1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "w2",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "c1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "c2",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "purple"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平放两片地板, 前后并排吸合。",
+      "tip": "",
+      "tiles_to_add": [
+        "g0",
+        "g1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "在两片地板的公共边上立起第一层墙片。",
+      "tip": "",
+      "tiles_to_add": [
+        "w1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "在墙顶叠加第二层墙片。",
+      "tip": "",
+      "tiles_to_add": [
+        "w2"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 4,
+      "description": "错误示范: 从墙顶向水平方向连续外挑 2 片平板。",
+      "tip": "重心没有出接地范围, 旧规则全绿; 但墙顶单边铰链撑不住 60g·单位的力矩, 实物必翻落。",
+      "tiles_to_add": [
+        "c1",
+        "c2"
+      ],
+      "highlight_tiles": []
+    }
+  ]
+}

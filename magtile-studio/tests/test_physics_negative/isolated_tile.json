@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "fixture_isolated_tile",
+  "name": "负例夹具: 错位半搭孤立片",
+  "name_en": "fixture_isolated_tile",
+  "description": "反面教材 (失效分类 F01 错位半搭): 地台第 3 片沿 y 方向错开半格, 与邻片只共享半条边 —— 实物磁条无法对齐, 这一片吸不上、稍碰即离位。磁力吸合要求短边被长边完整包含 (等长边即完全对齐), 错位半搭时端点悬出、不算连接, 校验器必须报 isolated_tile 错误并拒绝该模型。",
+  "difficulty": 1,
+  "total_pieces": 3,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "f1",
+      "type": "square",
+      "position": [0.0, 0.0, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "green"
+    },
+    {
+      "id": "f2",
+      "type": "square",
+      "position": [1.0, 0.0, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "green"
+    },
+    {
+      "id": "f3",
+      "type": "square",
+      "position": [2.0, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平铺 2 片绿色方片, 整边吸合成地台。",
+      "tip": "",
+      "tiles_to_add": ["f1", "f2"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "错误示范: 第 3 片沿 y 方向错开半格拼上, 只共享半条边。",
+      "tip": "半搭时磁条对不齐, 实物吸不住 —— 校验器必须报 isolated_tile 拒绝。",
+      "tiles_to_add": ["f3"],
+      "highlight_tiles": []
+    }
+  ]
+}

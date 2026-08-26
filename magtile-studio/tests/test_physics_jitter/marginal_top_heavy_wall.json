@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "fixture_marginal_top_heavy_wall",
+  "name": "抖动夹具: 贴线重心塔",
+  "name_en": "Jitter Fixture: Marginal Top-Heavy Wall",
+  "description": "R9 专用边缘设计: 两片竖墙顶上外倾 29° 搭一片顶板, 整体重心水平投影距接地线 0.1458 单位 —— 恰好贴着 stability_margin (0.15) 的内侧, 静态 R1~R8 全绿。但只要每片放置有毫米级误差 (F08 错位累积), 重心就会在相当一部分抖动轮次中越线倾倒。普通 validate 必须放行, validate --jitter 必须以 placement_jitter_failure 拒绝 —— 锁定蒙特卡洛抖动关卡本身的检出能力。",
+  "difficulty": 1,
+  "total_pieces": 3,
+  "tags": ["测试夹具", "抖动负例"],
+  "final_assembly": [
+    {
+      "id": "wall_low",
+      "type": "square",
+      "position": [0.5, 0.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "wall_high",
+      "type": "square",
+      "position": [0.5, 0.0, 1.5],
+      "rotation": [90, 0, 0],
+      "color": "cyan"
+    },
+    {
+      "id": "canopy",
+      "type": "square",
+      "position": [0.5, 0.4373098536, 2.2424048101],
+      "rotation": [29, 0, 0],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "在桌面上竖起一片正方形墙片, 底边贴地。",
+      "tip": "",
+      "tiles_to_add": ["wall_low"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "在第一片墙的顶边上再立一片墙, 叠成两层。",
+      "tip": "",
+      "tiles_to_add": ["wall_high"],
+      "highlight_tiles": ["wall_low"]
+    },
+    {
+      "step_number": 3,
+      "description": "边缘示范: 在墙顶接一片向外倾斜 29° 的顶板, 重心恰好贴着稳定裕量的内侧。",
+      "tip": "理想几何下静态校验全绿, 但每片放歪 1~2 毫米后重心就可能越线 —— 这是抖动仿真要抓的临界设计。",
+      "tiles_to_add": ["canopy"],
+      "highlight_tiles": ["wall_high"]
+    }
+  ]
+}

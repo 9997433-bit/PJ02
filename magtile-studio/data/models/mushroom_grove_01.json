@@ -1,0 +1,970 @@
+{
+  "schema_version": 1,
+  "id": "mushroom_grove_01",
+  "name": "蘑菇精灵谷",
+  "name_en": "Mushroom Grove 01",
+  "description": "只用核心九片型的林间一景, 全库第一丛蘑菇, 给植物花园补上'帽子当主角'的造型: 结构签名是'高矮错落的三顶锥帽菇群' —— 三朵蘑菇的菌盖都是四坡等边三角锥自锁帽, 但戴法各不相同: 大蘑菇两层奶白菌柄开橙色精灵门 (门框方), 红锥帽戴在两层高; 中蘑菇一层菌柄嵌青色圆窗 (窗格方), 金锥帽戴在一层高; 小蘑菇贴地矮墩顶粉锥帽 —— 三顶帽子在三个高度错开, 剪影像一串从地里冒出来的音符; 旁边躺一根橙色圆木长凳 (双楣墙长边整边吸脚下长板 + 长板压顶的躺倒箱楼), 绿篱骑西缘, 紫蜗牛慢慢爬, 蓝蝴蝶翩翩飞 —— 蘑菇精灵谷开村!",
+  "difficulty": 3,
+  "total_pieces": 51,
+  "tags": [
+    "植物花园",
+    "蘑菇",
+    "森林",
+    "精灵",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "plant_garden",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 23,
+        "equilateral_triangle": 17,
+        "rectangle": 9,
+        "door_frame": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g2_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g2_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g3_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g1_e",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "g0_log",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "big_door",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "big_w0",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "big_e0",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "big_n0",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "big_s1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "big_w1",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "big_e1",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "big_n1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "big_cap_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.166667,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "big_cap_e",
+      "type": "equilateral_triangle",
+      "position": [
+        1.833333,
+        2.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "big_cap_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.833333,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "big_cap_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.166667,
+        2.5,
+        2.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mid_win",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "mid_w",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mid_e",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mid_n",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mid_cap_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mid_cap_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mid_cap_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mid_cap_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sml_s",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sml_n",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sml_w",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sml_e",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sml_cap_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sml_cap_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.833333,
+        0.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sml_cap_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sml_cap_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.166667,
+        0.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "log_s",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "log_n",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "log_e",
+      "type": "square",
+      "position": [
+        5.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "log_cap",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hedge_1",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hedge_2",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        2.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hedge_3",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        3.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "snail",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "fly",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺蘑菇行: 五片方板一字排开, 苔藓和小径交替。",
+      "tip": "精灵谷开垦啦! 菌柄脚下必须是单位方板。",
+      "tiles_to_add": [
+        "g2_0",
+        "g2_1",
+        "g2_2",
+        "g2_3",
+        "g2_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺后行与小径行: 长板与方板整边互吸, 谷地向两边展开。",
+      "tip": "长板短边对方板整边 —— 苔藓地毯越铺越大。",
+      "tiles_to_add": [
+        "g3_w",
+        "g3_m",
+        "g3_4",
+        "g1_w",
+        "g1_2",
+        "g1_e"
+      ],
+      "highlight_tiles": [
+        "g2_0",
+        "g2_2"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺前行收口: 长板 + 方板 + 圆木脚下的整块长板。",
+      "tip": "右下角这块长板是给圆木长凳留的床位。",
+      "tiles_to_add": [
+        "g0_w",
+        "g0_2",
+        "g0_log"
+      ],
+      "highlight_tiles": [
+        "g1_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立大蘑菇一层菌柄: 橙色精灵门朝南, 三片奶白墙围合闭环。",
+      "tip": "门框方和普通方片一样结实 —— 精灵从这里进出。",
+      "tiles_to_add": [
+        "big_door",
+        "big_w0",
+        "big_e0",
+        "big_n0"
+      ],
+      "highlight_tiles": [
+        "g2_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "大蘑菇菌柄长到二层: 四片奶白墙整边共线摞上去。",
+      "tip": "四角竖边互咬 —— 菌柄是结实的小圆筒。",
+      "tiles_to_add": [
+        "big_s1",
+        "big_w1",
+        "big_e1",
+        "big_n1"
+      ],
+      "highlight_tiles": [
+        "big_door"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "给大蘑菇戴红锥帽: 四片等边三角斜棱两两互吸自锁。",
+      "tip": "帽子底边整边吸住墙顶, 四条斜棱自己锁自己!",
+      "tiles_to_add": [
+        "big_cap_s",
+        "big_cap_e",
+        "big_cap_n",
+        "big_cap_w"
+      ],
+      "highlight_tiles": [
+        "big_s1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立中蘑菇菌柄: 青色圆窗朝南, 三片奶白墙围合。",
+      "tip": "窗格方是中蘑菇的小圆窗 —— 里面住着谁呢?",
+      "tiles_to_add": [
+        "mid_win",
+        "mid_w",
+        "mid_e",
+        "mid_n"
+      ],
+      "highlight_tiles": [
+        "g2_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "给中蘑菇戴金锥帽。",
+      "tip": "第二顶帽子在半山腰 —— 高矮错落才像一家人。",
+      "tiles_to_add": [
+        "mid_cap_s",
+        "mid_cap_e",
+        "mid_cap_n",
+        "mid_cap_w"
+      ],
+      "highlight_tiles": [
+        "mid_win"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "立小蘑菇矮墩: 四片奶白墙贴地围合。",
+      "tip": "小蘑菇刚从土里冒头, 个子最小胆子最大。",
+      "tiles_to_add": [
+        "sml_s",
+        "sml_n",
+        "sml_w",
+        "sml_e"
+      ],
+      "highlight_tiles": [
+        "g0_2",
+        "g1_2"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "给小蘑菇戴粉锥帽: 三顶锥帽在三个高度排成一串音符。",
+      "tip": "红金粉三顶帽子高矮错落 —— 菇群合影完成!",
+      "tiles_to_add": [
+        "sml_cap_s",
+        "sml_cap_e",
+        "sml_cap_n",
+        "sml_cap_w"
+      ],
+      "highlight_tiles": [
+        "sml_s"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "放圆木长凳: 两面橙色楣墙长边吸住脚下长板, 西端顶住小蘑菇, 东端墙收口, 长板压顶。",
+      "tip": "圆木一头靠着小蘑菇 —— 躺倒的箱楼同样围成闭环。",
+      "tiles_to_add": [
+        "log_s",
+        "log_n",
+        "log_e",
+        "log_cap"
+      ],
+      "highlight_tiles": [
+        "g0_log",
+        "sml_e"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "种花篱请小客人: 三片绿篱骑西缘, 紫蜗牛骑小径缝, 蓝蝴蝶落后排。",
+      "tip": "蜗牛慢慢爬, 蝴蝶翩翩飞 —— 蘑菇精灵谷开村!",
+      "tiles_to_add": [
+        "hedge_1",
+        "hedge_2",
+        "hedge_3",
+        "snail",
+        "fly"
+      ],
+      "highlight_tiles": [
+        "g2_0",
+        "g3_4"
+      ]
+    }
+  ]
+}

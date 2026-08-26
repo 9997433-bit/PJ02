@@ -1,0 +1,6 @@
+# unstable_cantilever.expected — 物理负例期望声明 (sidecar, 由 test_physics_negative.sh 读取)
+# expected_fail_rule: validate 输出必须匹配的错误/警告码 (grep 正则)
+# severity: error = 必须以非零退出码拒绝; warning = 必须零退出且输出 [警告] 行
+# R4: 重心水平投影远超接地区域, 必然倾倒
+expected_fail_rule=unstable_center_of_mass
+severity=error

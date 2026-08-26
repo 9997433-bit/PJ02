@@ -1,0 +1,1378 @@
+{
+  "schema_version": 1,
+  "id": "robot_01",
+  "name": "机器人卫士",
+  "name_en": "Robot Guardian 01",
+  "description": "机器人主题: 全库第一台人形机器人 —— 两条箱式塔腿踩充电底座, 髋板横跨双腿合体, 3 格宽箱式躯干藏着黄色能量核心; 双臂不是悬挑: 臂柱立在髋板外端、臂顶托住肩板外端, 髋-臂-肩-躯干围成闭合力学环路, 剪断任何一条铰链线力都能绕行; 摊开的手掌是单片平挑的力矩极限案例, 玻璃面罩方头戴双天线, 直角三角脚趾抵住双腿 —— 卫士上线, 全天执勤。",
+  "difficulty": 3,
+  "total_pieces": 74,
+  "tags": [
+    "机器人",
+    "科技",
+    "人形",
+    "环路结构"
+  ],
+  "content_meta": {
+    "series": "fantasy_machinery",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 68,
+        "right_triangle": 4,
+        "equilateral_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "base_0_0",
+      "type": "square",
+      "position": [
+        -0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_0_2",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_0_3",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_0_4",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_1_0",
+      "type": "square",
+      "position": [
+        -0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_1_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_1_3",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_1_4",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_2_0",
+      "type": "square",
+      "position": [
+        -0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_2_1",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_2_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "base_2_4",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_l_s_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_l_n_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_l_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_l_e_0",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_l_s_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_l_n_1",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_l_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_l_e_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_r_s_0",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_r_n_0",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_r_w_0",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_r_e_0",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_r_s_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_r_n_1",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_r_w_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "leg_r_e_1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "toe_lw",
+      "type": "right_triangle",
+      "position": [
+        0.0,
+        0.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "toe_le",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        0.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "toe_rw",
+      "type": "right_triangle",
+      "position": [
+        2.0,
+        0.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "toe_re",
+      "type": "right_triangle",
+      "position": [
+        3.0,
+        0.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hip_l",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hip_r",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hip_mid",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hip_tip_w",
+      "type": "square",
+      "position": [
+        -0.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hip_tip_e",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "to_s_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_s_0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "to_s_0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_n_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_n_0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_n_0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_w_0",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_e_0",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_s_1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_s_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_s_1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_n_1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_n_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_n_1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "to_e_1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "arm_w_2",
+      "type": "square",
+      "position": [
+        -1.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "arm_w_3",
+      "type": "square",
+      "position": [
+        -1.0,
+        1.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "arm_e_2",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "arm_e_3",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sh_l",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sh_m",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sh_r",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sh_tip_w",
+      "type": "square",
+      "position": [
+        -0.5,
+        1.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sh_tip_e",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "palm_w",
+      "type": "square",
+      "position": [
+        -1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "palm_e",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hd_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hd_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hd_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hd_e",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "hd_top",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        5.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ant_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        5.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ant_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        5.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺充电底座前排: 5 片灰色正方形沿东西向排开。",
+      "tip": "从西向东接龙, 机器人将踩在这块底座的中排上。",
+      "tiles_to_add": [
+        "base_0_0",
+        "base_0_1",
+        "base_0_2",
+        "base_0_3",
+        "base_0_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺充电底座中排: 再 5 片贴着前排合拢。",
+      "tip": "中排就是双腿的立足线, 长边整条互吸。",
+      "tiles_to_add": [
+        "base_1_0",
+        "base_1_1",
+        "base_1_2",
+        "base_1_3",
+        "base_1_4"
+      ],
+      "highlight_tiles": [
+        "base_0_0",
+        "base_0_4"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺充电底座后排: 最后 5 片, 3x5 底座完工。",
+      "tip": "底座越宽, 高个子机器人越站得稳。",
+      "tiles_to_add": [
+        "base_2_0",
+        "base_2_1",
+        "base_2_2",
+        "base_2_3",
+        "base_2_4"
+      ],
+      "highlight_tiles": [
+        "base_1_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立左腿第 1 层: 4 片蓝色正方形围成 1x1 墙环, 踩在底座拼缝上。",
+      "tip": "墙底整边吸底座, 转角竖边互吸 —— 箱式塔腿自锁。",
+      "tiles_to_add": [
+        "leg_l_s_0",
+        "leg_l_n_0",
+        "leg_l_w_0",
+        "leg_l_e_0"
+      ],
+      "highlight_tiles": [
+        "base_1_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立右腿第 1 层: 镜像再围一环, 双腿间留 1 格裆部。",
+      "tip": "两腿内壁相距 1 格, 髋板将从这里横跨合体。",
+      "tiles_to_add": [
+        "leg_r_s_0",
+        "leg_r_n_0",
+        "leg_r_w_0",
+        "leg_r_e_0"
+      ],
+      "highlight_tiles": [
+        "leg_l_s_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "装脚趾: 4 片黄色直角三角形斜撑抵住双腿前脚, 竖边吸腿角竖边、平边吸底座拼缝。",
+      "tip": "脚趾是最小的三角桁架, 卫士从此推不倒。",
+      "tiles_to_add": [
+        "toe_lw",
+        "toe_le",
+        "toe_rw",
+        "toe_re"
+      ],
+      "highlight_tiles": [
+        "leg_l_s_0",
+        "leg_r_s_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "左腿加第 2 层: 4 片墙环整层叠上。",
+      "tip": "每层都是独立自锁环, 叠环成腿。",
+      "tiles_to_add": [
+        "leg_l_s_1",
+        "leg_l_n_1",
+        "leg_l_w_1",
+        "leg_l_e_1"
+      ],
+      "highlight_tiles": [
+        "leg_l_s_0"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "右腿加第 2 层: 再 4 片, 双腿齐平。",
+      "tip": "两腿同高, 髋板才放得平。",
+      "tiles_to_add": [
+        "leg_r_s_1",
+        "leg_r_n_1",
+        "leg_r_w_1",
+        "leg_r_e_1"
+      ],
+      "highlight_tiles": [
+        "leg_r_s_0",
+        "leg_l_s_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "架髋板: 左右 2 片踩腿顶环, 中间 1 片桥接裆部, 两外端各再伸 1 片。",
+      "tip": "髋板把双腿合成一体; 外端两片是臂柱的地基。",
+      "tiles_to_add": [
+        "hip_l",
+        "hip_r",
+        "hip_mid",
+        "hip_tip_w",
+        "hip_tip_e"
+      ],
+      "highlight_tiles": [
+        "leg_l_s_1",
+        "leg_r_s_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立躯干第 1 层: 8 片墙环立在髋板上, 胸口正中是黄色能量核心。",
+      "tip": "3 格宽的箱式躯干, 前后墙各 3 片, 东西侧壁封口。",
+      "tiles_to_add": [
+        "to_s_0_0",
+        "to_s_0_1",
+        "to_s_0_2",
+        "to_n_0_0",
+        "to_n_0_1",
+        "to_n_0_2",
+        "to_w_0",
+        "to_e_0"
+      ],
+      "highlight_tiles": [
+        "hip_l",
+        "hip_r"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "立躯干第 2 层: 再 8 片墙环, 躯干到达肩高。",
+      "tip": "墙底整边吸下层墙顶, 箱体逐层长高。",
+      "tiles_to_add": [
+        "to_s_1_0",
+        "to_s_1_1",
+        "to_s_1_2",
+        "to_n_1_0",
+        "to_n_1_1",
+        "to_n_1_2",
+        "to_w_1",
+        "to_e_1"
+      ],
+      "highlight_tiles": [
+        "to_s_0_1"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "装双臂并合肩: 每侧 2 片红色臂柱踩髋板外端, 随即用 5 片肩板把臂顶与躯干墙顶锁成一体。",
+      "tip": "臂柱与肩板必须同步合拢: 髋-臂-肩-躯干闭合成环, 剪断任何一条缝力都能绕行。",
+      "tiles_to_add": [
+        "arm_w_2",
+        "arm_w_3",
+        "arm_e_2",
+        "arm_e_3",
+        "sh_l",
+        "sh_m",
+        "sh_r",
+        "sh_tip_w",
+        "sh_tip_e"
+      ],
+      "highlight_tiles": [
+        "hip_tip_w",
+        "to_s_1_1"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "摊开手掌: 2 片黄色正方形平挑在髋板外端旁。",
+      "tip": "单片平挑是磁力片的力矩极限案例 —— 再多一片就会塌。",
+      "tiles_to_add": [
+        "palm_w",
+        "palm_e"
+      ],
+      "highlight_tiles": [
+        "hip_tip_w",
+        "hip_tip_e"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "围方头墙环: 玻璃面罩朝南, 4 片立在肩板正中。",
+      "tip": "面罩用透明片 —— 卫士的眼睛要看得见前方。",
+      "tiles_to_add": [
+        "hd_s",
+        "hd_n",
+        "hd_w",
+        "hd_e"
+      ],
+      "highlight_tiles": [
+        "sh_m"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "盖头顶板: 1 片灰色正方形压住头部墙环。",
+      "tip": "顶板四边都吸墙顶, 方头自成一个刚性小箱。",
+      "tiles_to_add": [
+        "hd_top"
+      ],
+      "highlight_tiles": [
+        "hd_s"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "插双天线: 2 片红色三角形立在头顶东西沿边 —— 机器人卫士上线执勤!",
+      "tip": "天线立在头顶板的侧边上, 信号满格。",
+      "tiles_to_add": [
+        "ant_w",
+        "ant_e"
+      ],
+      "highlight_tiles": [
+        "hd_top"
+      ]
+    }
+  ]
+}

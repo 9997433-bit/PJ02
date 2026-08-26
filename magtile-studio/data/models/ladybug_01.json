@@ -1,0 +1,416 @@
+{
+  "schema_version": 1,
+  "id": "ladybug_01",
+  "name": "花园瓢虫",
+  "name_en": "Garden Ladybug 01",
+  "description": "D1 入门动物: 趴在花园地砖上的大瓢虫 —— 八片方板围成回字环形背甲, 正中洞口由四片等边三角 hat4 四坡锥互锁封顶, 鞘翅真的会隆起来; 灰色斑点长在甲环与锥壳上, 头前两根小触角, 南北各三条直角三角腿斜边外撇成爬行姿态。全平铺接地零悬挑, 唯一的小挑战是锥壳合拢那一下 —— 四条斜棱同时吸住的手感, 一次就上瘾。",
+  "difficulty": 1,
+  "total_pieces": 21,
+  "tags": [
+    "动物世界",
+    "昆虫",
+    "瓢虫",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "animal_world",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 9,
+        "equilateral_triangle": 6,
+        "right_triangle": 6
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "shell_sw",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shell_s",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "shell_se",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shell_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shell_e",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shell_nw",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shell_n",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "shell_ne",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "dome_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "dome_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.833333,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "dome_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "dome_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.166667,
+        1.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "head",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "antenna_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.288675,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "antenna_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.711325,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_s_rear",
+      "type": "right_triangle",
+      "position": [
+        1.333333,
+        -0.333333,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_s_mid",
+      "type": "right_triangle",
+      "position": [
+        2.666667,
+        -0.333333,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_s_front",
+      "type": "right_triangle",
+      "position": [
+        3.666667,
+        -0.333333,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_n_rear",
+      "type": "right_triangle",
+      "position": [
+        1.333333,
+        3.333333,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_n_mid",
+      "type": "right_triangle",
+      "position": [
+        2.666667,
+        3.333333,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_n_front",
+      "type": "right_triangle",
+      "position": [
+        3.666667,
+        3.333333,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺环形背甲: 八片方板在桌面围成 3x3 的回字环, 正中留一个洞。",
+      "tip": "红灰颜色照图排 —— 灰色就是瓢虫的点斑, 别排错位置。",
+      "tiles_to_add": [
+        "shell_sw",
+        "shell_s",
+        "shell_se",
+        "shell_w",
+        "shell_e",
+        "shell_nw",
+        "shell_n",
+        "shell_ne"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "合鞘翅锥壳: 四片等边三角底边吸住洞口四条边, 斜棱互相一贴, 背甲就隆起来了。",
+      "tip": "最后一片放上去时四条斜棱同时吸住 —— 锥顶自己锁紧, 这是磁力片的魔法。",
+      "tiles_to_add": [
+        "dome_s",
+        "dome_e",
+        "dome_n",
+        "dome_w"
+      ],
+      "highlight_tiles": [
+        "shell_s",
+        "shell_e"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "装头和触角: 灰色方板接在背甲东沿, 两片小三角朝斜前方张开。",
+      "tip": "",
+      "tiles_to_add": [
+        "head",
+        "antenna_n",
+        "antenna_s"
+      ],
+      "highlight_tiles": [
+        "shell_e"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "装南侧三条腿: 直角三角形直角边整边吸背甲南沿, 斜边向外撇。",
+      "tip": "后腿往后撇、前腿往前撇, 爬行的样子就出来了。",
+      "tiles_to_add": [
+        "leg_s_rear",
+        "leg_s_mid",
+        "leg_s_front"
+      ],
+      "highlight_tiles": [
+        "shell_sw",
+        "shell_se"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装北侧三条腿: 与南侧镜像, 六足落地, 花园瓢虫出发!",
+      "tip": "",
+      "tiles_to_add": [
+        "leg_n_rear",
+        "leg_n_mid",
+        "leg_n_front"
+      ],
+      "highlight_tiles": [
+        "leg_s_rear",
+        "leg_s_front"
+      ]
+    }
+  ]
+}

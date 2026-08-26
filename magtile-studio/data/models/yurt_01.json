@@ -1,0 +1,778 @@
+{
+  "schema_version": 1,
+  "id": "yurt_01",
+  "name": "草原蒙古包",
+  "name_en": "Grassland Yurt 01",
+  "description": "只用核心九片型的民俗主题第一座民居, 全库第一顶蒙古包, 也是全库第一个非正交墙环: 八片毡墙竖边以 135 度钝角逐对互咬, 闭环自锁成蒙古包鼓鼓的圆筒毡壁, 只有正南的红漆门框方踩着土路门阶拼缝, 其余七片墙脚潇洒落地; 筒顶八片瘦高等腰三角沿八条斜棱互吸收拢成伞状毡顶, 青黄相间正是节日的顶饰; 门前羊圈三面矮墙留西口, 一只小羊在圈里一只出门吃草, 干草垛四棱自锁堆成小金字塔, 牧羊犬守着路口 —— 草原的早晨, 奶茶香从毡房里飘出来!",
+  "difficulty": 2,
+  "total_pieces": 41,
+  "tags": [
+    "民俗",
+    "草原",
+    "蒙古包",
+    "毡房",
+    "田园"
+  ],
+  "content_meta": {
+    "series": null,
+    "matrix_bucket": "farm",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 22,
+        "equilateral_triangle": 8,
+        "isosceles_triangle": 8,
+        "rectangle": 2,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g1_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "g1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g1_e",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "g0_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "g0_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "w_0",
+      "type": "door_frame",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "w_1",
+      "type": "square",
+      "position": [
+        4.353553,
+        2.353553,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        45.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "w_2",
+      "type": "square",
+      "position": [
+        4.707107,
+        3.207107,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "w_3",
+      "type": "square",
+      "position": [
+        4.353553,
+        4.06066,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        135.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "w_4",
+      "type": "square",
+      "position": [
+        3.5,
+        4.414214,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "w_5",
+      "type": "square",
+      "position": [
+        2.646447,
+        4.06066,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -135.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "w_6",
+      "type": "square",
+      "position": [
+        2.292893,
+        3.207107,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "w_7",
+      "type": "square",
+      "position": [
+        2.646447,
+        2.353553,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -45.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_0",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        2.402369,
+        1.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "roof_1",
+      "type": "isosceles_triangle",
+      "position": [
+        4.069035,
+        2.638071,
+        1.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        45.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_2",
+      "type": "isosceles_triangle",
+      "position": [
+        4.304738,
+        3.207107,
+        1.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "roof_3",
+      "type": "isosceles_triangle",
+      "position": [
+        4.069035,
+        3.776142,
+        1.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        135.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_4",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        4.011844,
+        1.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        180.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "roof_5",
+      "type": "isosceles_triangle",
+      "position": [
+        2.930965,
+        3.776142,
+        1.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        -135.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_6",
+      "type": "isosceles_triangle",
+      "position": [
+        2.695262,
+        3.207107,
+        1.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "roof_7",
+      "type": "isosceles_triangle",
+      "position": [
+        2.930965,
+        2.638071,
+        1.531549
+      ],
+      "rotation": [
+        52.875183,
+        0.0,
+        -45.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pen_s_w",
+      "type": "square",
+      "position": [
+        5.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_s_e",
+      "type": "square",
+      "position": [
+        6.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_n_w",
+      "type": "square",
+      "position": [
+        5.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_n_e",
+      "type": "square",
+      "position": [
+        6.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pen_e",
+      "type": "square",
+      "position": [
+        7.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hay_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hay_e",
+      "type": "equilateral_triangle",
+      "position": [
+        1.833333,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hay_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hay_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.166667,
+        0.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sheep_in",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sheep_out",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "dog",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "flower",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺门前行: 两条草地长板夹三片方板, 中间黄色的是土路门阶。",
+      "tip": "草原的早晨! 门阶北沿待会儿要咬住蒙古包的大门墙脚。",
+      "tiles_to_add": [
+        "g1_w",
+        "g1_2",
+        "g1_3",
+        "g1_4",
+        "g1_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺南行草原: 七片方板等边互吸, 黄色方板续上土路。",
+      "tip": "干草垛要堆在单位方板上 —— 四条底边都得有整边可吸。",
+      "tiles_to_add": [
+        "g0_0",
+        "g0_1",
+        "g0_2",
+        "g0_3",
+        "g0_4",
+        "g0_5",
+        "g0_6"
+      ],
+      "highlight_tiles": [
+        "g1_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "起毡墙环南半: 红漆门框方踩上门阶北沿, 左右各接一片白毡墙。",
+      "tip": "相邻墙片的竖边以 135 度互咬 —— 蒙古包的圆肚皮就是这么鼓起来的。",
+      "tiles_to_add": [
+        "w_0",
+        "w_1",
+        "w_7"
+      ],
+      "highlight_tiles": [
+        "g1_3"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "合毡墙环北半: 余下五片白毡墙逐片咬进环里, 首尾合拢。",
+      "tip": "八片墙合成闭环就自己站稳了 —— 除了大门, 其他墙脚直接踩草地。",
+      "tiles_to_add": [
+        "w_2",
+        "w_3",
+        "w_4",
+        "w_5",
+        "w_6"
+      ],
+      "highlight_tiles": [
+        "w_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "搭毡顶南半: 四片瘦高等腰底边吸住墙顶, 斜棱互吸, 青黄相间。",
+      "tip": "毡顶片一片挨一片, 斜棱两两咬住 —— 顶尖会在正中央碰头。",
+      "tiles_to_add": [
+        "roof_0",
+        "roof_1",
+        "roof_7",
+        "roof_6"
+      ],
+      "highlight_tiles": [
+        "w_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "合毡顶北半: 余下四片收拢, 八条棱在顶尖自锁成环。",
+      "tip": "最后一片同时咬住两条斜棱 —— 伞状毡顶一锁, 草原大风也不怕。",
+      "tiles_to_add": [
+        "roof_2",
+        "roof_3",
+        "roof_4",
+        "roof_5"
+      ],
+      "highlight_tiles": [
+        "roof_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "围羊圈: 五片灰色矮墙转角互咬, 西边留出进出口。",
+      "tip": "围栏墙脚踩住草地拼缝 —— 小羊晚上就睡在这里。",
+      "tiles_to_add": [
+        "pen_s_w",
+        "pen_s_e",
+        "pen_n_w",
+        "pen_n_e",
+        "pen_e"
+      ],
+      "highlight_tiles": [
+        "g0_5"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "堆干草垛: 四片黄色等边斜棱互吸自锁成锥。",
+      "tip": "过冬的草料堆成小金字塔 —— 四条底边都整边吸住脚下方板。",
+      "tiles_to_add": [
+        "hay_s",
+        "hay_e",
+        "hay_n",
+        "hay_w"
+      ],
+      "highlight_tiles": [
+        "g0_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "请小羊、牧羊犬和野花就位: 草原的一天开始啦!",
+      "tip": "一只小羊在圈里, 一只出门吃草, 牧羊犬守着路口 —— 奶茶香飘出毡房!",
+      "tiles_to_add": [
+        "sheep_in",
+        "sheep_out",
+        "dog",
+        "flower"
+      ],
+      "highlight_tiles": [
+        "pen_s_e",
+        "g1_3"
+      ]
+    }
+  ]
+}

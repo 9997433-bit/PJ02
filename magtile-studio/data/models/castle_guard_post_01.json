@@ -1,0 +1,440 @@
+{
+  "schema_version": 1,
+  "id": "castle_guard_post_01",
+  "name": "城门小岗楼",
+  "name_en": "Castle Guard Post 01",
+  "description": "D1 入门城防件: 最小可驻守单元 —— 2x2 石砌岗房收一层蓝色平顶甲板, 四枚红色雉堞沿甲板边对角错位转圈站岗; 南面紫色门框方开出士兵进出的门洞, 旁边黄色窗格方是射箭孔, 两翼短墙从楼角探出、墙顶各站一枚城齿。搭完从门洞塞一颗玻璃珠进去 —— 那是今晚的哨兵。",
+  "difficulty": 1,
+  "total_pieces": 20,
+  "tags": [
+    "城堡",
+    "岗楼",
+    "雉堞",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "castle_fortress",
+    "build_paradigm": "bottom_up",
+    "technique_tags": {
+      "primary": "T01_box_frame",
+      "secondary": [
+        "T12_layered_platform",
+        "T17_negative_space"
+      ]
+    },
+    "signature_statement": "雉堞不站墙顶而站甲板沿, 四面对角错位转圈; 两翼短墙靠楼角竖边互咬延伸城防。",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 8,
+        "equilateral_triangle": 6,
+        "rectangle": 4,
+        "door_frame": 1,
+        "window_square": 1
+      }
+    },
+    "physical_risk_notes": [
+      {
+        "step": 5,
+        "risk": "甲板长板若只压住一面墙顶就松手, 会把墙带倒",
+        "mitigation": "该步 tip 强调同时压住三面墙顶再松手, 两片中缝互吸"
+      }
+    ]
+  },
+  "final_assembly": [
+    {
+      "id": "floor_s",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "floor_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gate",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "arrow_slit",
+      "type": "window_square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wall_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wall_n_e",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wall_w_s",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wall_w_n",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wall_e_s",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wall_e_n",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_s",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "merlon_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "merlon_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "merlon_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "merlon_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wing_w",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wing_e",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wing_w_top",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wing_e_top",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺岗房地台: 两片灰色长方板并排吸成 2x2 的石地面。",
+      "tip": "长边贴长边 —— 地台是岗楼的根, 拼缝要严丝合缝。",
+      "tiles_to_add": [
+        "floor_s",
+        "floor_n"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立南面城门墙: 紫色门框方的门洞给士兵进出, 黄色窗格方是射箭孔。",
+      "tip": "两片竖边互咬、墙脚踩住地台南缘 —— 门洞要正对来路。",
+      "tiles_to_add": [
+        "gate",
+        "arrow_slit"
+      ],
+      "highlight_tiles": [
+        "floor_s"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立东西两面石墙: 每面两片灰方, 墙脚踩地台拼缝、与南墙咬角。",
+      "tip": "角上竖边咬住了, 墙才推不倒 —— 每放一片都捏捏角。",
+      "tiles_to_add": [
+        "wall_w_s",
+        "wall_w_n",
+        "wall_e_s",
+        "wall_e_n"
+      ],
+      "highlight_tiles": [
+        "gate",
+        "arrow_slit"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立北墙合围: 两片灰方补上最后一面, 岗房锁成一圈。",
+      "tip": "从门洞往里看一眼 —— 一间能站岗的小石屋成形了。",
+      "tiles_to_add": [
+        "wall_n_w",
+        "wall_n_e"
+      ],
+      "highlight_tiles": [
+        "wall_w_n",
+        "wall_e_n"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "收平顶甲板: 两片蓝色长板压满四面墙顶, 岗楼有了第二层。",
+      "tip": "每片长板要同时压住三面墙顶再松手, 两片中缝互吸。",
+      "tiles_to_add": [
+        "deck_s",
+        "deck_n"
+      ],
+      "highlight_tiles": [
+        "wall_n_w",
+        "gate"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "摆雉堞: 四枚红色三角沿甲板边转着圈站, 一面一枚对角错开。",
+      "tip": "底边整条吸住甲板沿 —— 错位站的垛口从哪边看都威风。",
+      "tiles_to_add": [
+        "merlon_s",
+        "merlon_e",
+        "merlon_n",
+        "merlon_w"
+      ],
+      "highlight_tiles": [
+        "deck_s",
+        "deck_n"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "接两翼城墙: 两侧短墙咬住楼角接地立稳, 墙顶各站一枚城齿 —— 换岗!",
+      "tip": "翼墙竖边与楼角互咬、墙脚落地 —— 以后城墙就从这里往两边长。",
+      "tiles_to_add": [
+        "wing_w",
+        "wing_e",
+        "wing_w_top",
+        "wing_e_top"
+      ],
+      "highlight_tiles": [
+        "wall_w_s",
+        "wall_e_s"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+# MagTile Studio · 商业软件总规划
+
+> 本文是产品、技术、内容、界面、平台的**唯一总纲**。子文档各司其职，本文负责串联成可商用的完整软件图景。
+
+## 1. 产品定义
+
+| 维度 | 定义 |
+|------|------|
+| **名称** | MagTile Studio（中文：磁力片工坊） |
+| **定位** | 面向 4–12 岁儿童家庭的磁力片 **3D 交互搭建教程** 软件 |
+| **核心价值** | 「照着搭，一定搭得起来」— 逐步物理校验 + 丰富高难度模型 |
+| **差异化** | 真 3D 旋转查看 + 物理规则逐步质检 + 500+ 非批量感模型库 |
+| **内容只是 1/3** | 另外 2/3 = 跨平台体验 + 订阅商业化 + 家长信任体系 |
+
+## 2. 目标平台矩阵
+
+| 平台 | 优先级 | 首发阶段 | 交互形态 |
+|------|--------|----------|----------|
+| **Windows 10/11** | P0 | M1 桌面 MVP | 鼠标轨道相机 + 键盘步进 + 全屏 |
+| **Android 平板** (10"+) | P0 | M2 公测 | 触控旋转/捏合 + 横屏主布局 |
+| **macOS** | P1 | M3 正式版 | 同 Windows |
+| **iOS iPad** | P2 | M5 扩展 | 同 Android |
+| **Linux** | 开发用 | M0 已有 | CLI + 可选 GL 窗口 |
+
+**不做手机竖屏**：磁力片教程需要大视野 3D，最小支持宽度 1024dp。
+
+## 3. 软件分层架构
+
+```mermaid
+flowchart TB
+    subgraph content [内容层]
+        Models[500+ 模型 JSON]
+        Catalog[片型目录]
+        CDN[CDN 增量更新]
+    end
+
+    subgraph core [共享 C++ 核心 80%]
+        Physics[物理校验 R1-R8]
+        Tutorial[分步教程引擎]
+        Data[模型/进度数据]
+    end
+
+    subgraph render [渲染层]
+        GL[OpenGL / GLES]
+        IRenderer[IRenderer 抽象]
+    end
+
+    subgraph ui [界面壳层 20%]
+        Win[Windows Qt/原生]
+        Android[Android Kotlin + JNI]
+        iOS[iOS Swift 未来]
+    end
+
+    content --> core
+    core --> render
+    render --> ui
+```
+
+**技术选型（MVP 推荐）**：
+
+- **核心引擎**：C++20 `magtile_core`（已实现）— 物理、教程、JSON，全平台共享
+- **桌面 UI**：**Qt 6** — 一套代码覆盖 Windows/macOS，QML 做儿童友好 UI，商业授权可接受
+- **Android**：**Kotlin + NDK** 链入 `libmagtile_core.so`，UI 用 Jetpack Compose，渲染 GLES 3.0
+- **备选路线**：Flutter + FFI（Android 成熟度高，桌面略弱）— 若团队前端背景强可选
+
+## 4. 界面与体验规划
+
+> 本节为概览；**权威规范**见 [UI_UX_SPEC.md](UI_UX_SPEC.md)（分龄 UX、全界面规范、验收清单），安全侧要求见 [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md)。
+
+### 4.1 设计原则
+
+- **给孩子**：大按钮、明亮但不幼稚、3D 可玩、每步有成就感动画
+- **给家长**：专业可信、进度可见、付费透明、无广告、儿童隐私合规
+- **商业感**：半透明磁力片材质、流畅转场、暗色/亮色主题，对标 LEGO Builder  polish
+
+### 4.2 核心界面清单
+
+| 界面 | 功能 | 平台差异 |
+|------|------|----------|
+| **启动/首页** | 继续上次、推荐模型、系列入口 | 平板横屏双栏 |
+| **模型库** | 网格/列表、难度/主题/片数筛选、「我能搭」筛选 | 平板左侧筛选栏 |
+| **模型详情** | 预览图、片数、难度、所需片型 BOM、开始搭建 | — |
+| **教程播放器** ★ | 3D 视口 70% + 步骤面板 30% | 平板可全屏 3D |
+| **步骤面板** | 中文说明、本步新增片列表、进度条、上/下一步 | 支持 TTS 朗读 |
+| **自由旋转提示** | 首次引导：双指旋转、滚轮缩放 | 触控 vs 鼠标 |
+| **我的收藏** | 已完成、进行中、成就徽章 | 云同步可选 |
+| **片数设置** | 录入家庭拥有的磁力片数量 |  onboarding 必做 |
+| **家长门** | 订阅/设置需成人验证（乘法题） | 合规必备 |
+| **订阅页** | 免费 30 模型 vs 全库订阅 | 各平台 IAP |
+
+### 4.3 教程播放器（核心屏）线框
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ← 返回          救援行动总部 · 第 8/22 步          ☆ 收藏   │
+├───────────────────────────────────────┬─────────────────────┤
+│                                       │  搭建车库入口围墙    │
+│                                       │  ─────────────────  │
+│         [ 3D 磁力片场景 ]              │  本步新增 (4片):     │
+│         轨道相机 / 触控旋转             │  ■ ■ ■ △           │
+│         高亮本步新片 + 描边             │                     │
+│         未放置片半透明 ghost            │  💡 把三角片放在     │
+│                                       │     墙角做斜撑       │
+│                                       │                     │
+│                                       │  ◀ 上一步  8/22  下一步 ▶ │
+├───────────────────────────────────────┴─────────────────────┤
+│  ████████░░░░░░░░░░░░  进度 36%                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## 5. 内容 + 软件协同里程碑
+
+| 阶段 | 软件交付 | 内容交付 | 商业交付 |
+|------|----------|----------|----------|
+| **M0** ✅ | C++ 核心 + CLI + 物理校验 | 1 示例城堡 72 片 | — |
+| **M1** | Windows 3D 教程播放器 + Qt UI | 20 模型（含总部/摩天楼/球道） | 内测包 |
+| **M2** | Android 平板 APK + 触控 | 50 模型 | 封闭测试 |
+| **M3** | 订阅/IAP + 家长门 + 进度存档 | 100 模型 | **正式商用** |
+| **M4** | 云同步 + CDN 内容更新 | 250 模型 | 增长运营 |
+| **M5** | iOS + UGC 编辑器 | 500+ 模型 | 生态期 |
+
+## 6. 商业模式
+
+| 收入来源 | 说明 |
+|----------|------|
+| **免费层** | 30 个精选模型（带 `免费` 标签, 全 core-9; 选品已落地, 见 [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §2.1 与 [FREE_TIER_MANIFEST.md](FREE_TIER_MANIFEST.md); 旗舰球道等橱窗位留待付费墙上线后补选） |
+| **订阅** | 月付 ¥28 / 年付 ¥198（全库 + 每月新模型） |
+| **内容包** | 单系列买断（如「滚珠乐园 20 款」¥48） |
+| **B2B** | 幼儿园/培训机构站点授权 |
+| **硬件联名** | 与磁力片品牌预装 APK / 扫码激活（未来） |
+
+## 7. 商用功能清单（发布必备全集）
+
+> 本清单是「商用完整产品」的**功能全集与状态总账**——不是 Demo 清单。每项标注状态与规范出处；状态变更须同步更新此表。M3 正式商用要求：下表中标注 **[M3 门槛]** 的项目全部 DONE。
+>
+> 状态图例：`DONE` 已实现并有测试 ｜ `IN_PROGRESS` 部分实现 ｜ `PLANNED` 已规划未实现
+
+### 7.1 核心引擎与内容
+
+| 功能 | 说明 | 状态 | 规范出处 |
+|------|------|------|----------|
+| C++ 共享核心（模型/片型/JSON） | 强类型数据层, 全平台共享 | `DONE` | [ARCHITECTURE.md](ARCHITECTURE.md) |
+| 物理校验 R1–R8 | 悬空/重叠/悬臂等规则 + 负例测试 | `DONE` | [PHYSICS_RULES.md](PHYSICS_RULES.md) |
+| 分步教程引擎 | 步进/跳步/高亮/ghost 数据/进度/一致性质检 | `DONE` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §6 |
+| 模型自动质检管线 | validate + 反幼稚规则 + 教程完整性 | `DONE` | [TESTING.md](TESTING.md) |
+| 内容库 20 模型（M1） | 含总部/摩天楼/球道 | `IN_PROGRESS`（当前 4 个） | [ROADMAP.md](ROADMAP.md) |
+| 内容库 100 模型 **[M3 门槛]** | 商用起步内容量 | `PLANNED` | [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) |
+| 每步 ≤3 片自动细分（4–6 岁） | 引擎按年龄段细分展示 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §2 |
+
+### 7.2 渲染与教程播放器
+
+| 功能 | 说明 | 状态 | 规范出处 |
+|------|------|------|----------|
+| OpenGL 渲染 + 轨道相机 | 桌面 GL 窗口, 拖旋/缩放/阻尼 | `DONE` | [PLATFORM_ARCHITECTURE.md](PLATFORM_ARCHITECTURE.md) |
+| 教程 GUI（步骤导航/高亮/ghost/进度条/退出即存档） | GL 版 `tutorial --dev-gui`（内部工具）与 Qt 版教程播放器均可运行 | `DONE` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §6 |
+| 呼吸高亮动画 / 相机姿态恢复 | 播放器打磨 | `IN_PROGRESS` | 同上 |
+| TTS 步骤朗读（系统 TTS） **[M3 门槛]** | 分龄自动/手动朗读, 无第三方语音 SDK | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.2 |
+| 旋转引导（动画手势） | 首次进入 3D 的👋提示 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §6.2 |
+| 步骤/完成庆祝动画 **[M3 门槛]** | 正向反馈体系, 无惩罚 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.3 |
+| 半透明磁力片材质打磨 | 商业质感 | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §1 |
+
+### 7.3 儿童界面（分龄 UX）
+
+| 功能 | 说明 | 状态 | 规范出处 |
+|------|------|------|----------|
+| 模型库 GUI（卡片网格 + 进度徽标） | 用户入口为 Qt 版 `magtile_studio_qt`（[QT_UI_PLAN.md](QT_UI_PLAN.md)）；GL 版 `library --dev-gui` 退役为内部工具 | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §5 |
+| 模型详情页（BOM 对照库存/缺片提示） | 开搭前确认页 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §5.4 |
+| 年龄分层三模式（4–6/7–9/10–12） **[M3 门槛]** | 布局/文字量/相机/反馈分龄 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §2 |
+| 触控目标 ≥48dp / 无微型按钮 **[M3 门槛]** | 儿童侧验收红线 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.1 |
+| 「我能搭」筛选 + 难度/主题/片数筛选 | 依库存过滤 | `IN_PROGRESS`（GL 库「我能搭的」勾选框 + `inventory match` CLI 已依 BOM 对照过滤；步骤级缺片提示待做） | [UI_UX_SPEC.md](UI_UX_SPEC.md) §5.2 |
+| 进度与成就 GUI（成就墙/作品列表） | 数据层已 DONE, 界面待做 | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §7 |
+| Onboarding（年龄段 + 库存录入 ≤90s） **[M3 门槛]** | 结构化库存 API + CLI 录入 + 首启提示弹窗 stub 已 DONE, 图形录入界面待做 | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §10 |
+| 色盲安全 + 阅读友好（字号三档/AA 对比度） **[M3 门槛]** | 无障碍验收 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.7 |
+| 无暗黑模式（无广告/无倒计时/儿童侧无价格） **[M3 门槛]** | 设计红线, 持续生效 | `PLANNED`（验收流程） | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.5 |
+
+### 7.4 数据与进度
+
+| 功能 | 说明 | 状态 | 规范出处 |
+|------|------|------|----------|
+| 本地进度存档（SQLite 单文件） | 进度/成就/收藏/时长/设置/库存 | `DONE` | [PROGRESS.md](PROGRESS.md) |
+| 断点续搭（退出自动存档） | GUI 已接入 | `DONE` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §4.4 |
+| 成就定义表与解锁触发 | 存储幂等已 DONE | `IN_PROGRESS` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §7 |
+| 云同步（家长账号, 可选） | 只增合并语义已预留 | `PLANNED`（M4） | [PLATFORM_ARCHITECTURE.md](PLATFORM_ARCHITECTURE.md) §5.2 |
+
+### 7.5 商业化
+
+| 功能 | 说明 | 状态 | 规范出处 |
+|------|------|------|----------|
+| 免费 30 模型分层 | 内容解锁状态管理 | `PLANNED` | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §2 |
+| 订阅（月/年/家庭年）+ 平台 IAP **[M3 门槛]** | ¥28/¥198/¥268 | `PLANNED` | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §3 |
+| 内容包买断 | 单系列 ¥48 起 | `PLANNED` | 同上 |
+| 订阅页（透明条款/恢复购买/无套路） **[M3 门槛]** | 家长门之后 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §11 |
+| 离线宽限凭证（7 天） | 断网不锁内容 | `PLANNED` | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §8 |
+| 兑换码（B 端硬件捆绑） | 渠道采购激活 | `PLANNED`（M4+） | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §2.4 |
+
+### 7.6 家长信任与合规
+
+| 功能 | 说明 | 状态 | 规范出处 |
+|------|------|------|----------|
+| 家长门（算术题/PIN, 会话不落盘） **[M3 门槛]** | 付费/设置/外链/账号/数据操作前置 | `IN_PROGRESS`（算术题门 stub `DONE`: 桌面模型库家长区入口已拦截, 15 分钟内存会话; PIN 待做） | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §6 |
+| 家长中心（订阅/模式/库存/数据面板） **[M3 门槛]** | 门后聚合页 | `PLANNED` | [UI_UX_SPEC.md](UI_UX_SPEC.md) §9.2 |
+| 隐私政策 + 儿童个人信息保护声明 **[M3 门槛]** | 离线可读, 家长一页纸摘要 | `PLANNED` | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §4 |
+| COPPA + 中国《规定》合规清单落地 **[M3 门槛]** | 专员任命/数据查删/单独同意 | `PLANNED` | 同上 §4 |
+| 数据导出/一键清除（家长区） | 合规硬要求 | `PLANNED` | 同上 §4 |
+| 商店表单三方一致（标签/政策/行为） **[M3 门槛]** | Apple 隐私标签 / Play 数据安全 | `PLANNED` | 同上 §12 |
+
+### 7.7 安全
+
+| 功能 | 说明 | 状态 | 规范出处 |
+|------|------|------|----------|
+| 儿童零 PII / 零采集架构 | 现状即零网络零采集 | `DONE`（现状） | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §3 |
+| 儿童构建零第三方分析 SDK **[M3 门槛]** | 依赖黑名单 CI 检查 | `IN_PROGRESS`（现状零依赖; CI 检查待建） | 同上 §5.2 |
+| 模型 JSON 结构+语义+物理校验 | 内容注入防线 | `DONE` | 同上 §7 |
+| 解析资源硬上限 + fuzz | 防畸形内容 DoS | `PLANNED` | 同上 §7 |
+| 家长门 PIN 加盐哈希（PBKDF2） | 永不明文 | `PLANNED` | 同上 §5.3 |
+| 静态加密升级路径（SQLCipher 条件触发） | 决策已记录 | `PLANNED`（条件触发） | 同上 §5.3 |
+| 仅 TLS + API 证书锁定 | 网络功能引入时强制 | `PLANNED` | 同上 §8 |
+| 更新只接受签名包（双层签名/防降级） **[M3 门槛]**（直销版） | Ed25519 + 平台代码签名 | `PLANNED` | 同上 §9 |
+| 内容包签名（CDN） | 传输劫持也无法伪造内容 | `PLANNED`（M4） | 同上 §7 |
+| 事件响应计划 **[M3 门槛]** | 分级/流程/通报义务 | `PLANNED` | 同上 §10 |
+| 发布安全测试清单 **[M3 门槛]** | 流量审计/权限审计/门实测 | `PLANNED`（清单已定义） | 同上 §11 |
+
+### 7.8 平台与分发
+
+| 功能 | 说明 | 状态 | 规范出处 |
+|------|------|------|----------|
+| Linux 开发版（CLI + GL 窗口） | 开发与质检主力 | `DONE` | [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) |
+| Windows 桌面版 + 安装包 **[M3 门槛]** | Qt 6 壳 + Authenticode 签名 | `IN_PROGRESS`（打包骨架） | [PLATFORM_ARCHITECTURE.md](PLATFORM_ARCHITECTURE.md) |
+| Android 平板 APK（NDK + Compose） | JNI 骨架已建 | `IN_PROGRESS` | 同上 |
+| macOS 版 + notarization | M3 | `PLANNED` | 同上 |
+| iOS iPad 版 | M5 | `PLANNED` | 同上 |
+| CDN 内容增量更新 | 签名清单 | `PLANNED`（M4） | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §9 |
+| 桌面自动更新（验签） | M4 | `PLANNED` | 同上 |
+| 年龄分级 4+/家庭政策上架 **[M3 门槛]** | 各商店儿童类目要求 | `PLANNED` | 同上 §12 |
+
+### 7.9 质量与运营
+
+| 功能 | 说明 | 状态 | 规范出处 |
+|------|------|------|----------|
+| 单元测试 + 物理负例 + 教程完整性 CI | ctest 全套 | `DONE` | [TESTING.md](TESTING.md) |
+| UI 冒烟（各平台启动 + 播放一关） | GL/库冒烟已有 | `IN_PROGRESS` | 同上 |
+| UI 验收清单（48dp/色盲/无暗黑模式逐条打钩） | 评审流程 | `PLANNED`（清单已定义） | [UI_UX_SPEC.md](UI_UX_SPEC.md) §14 |
+| 真人儿童实测协议（难度 4+） | 实物搭建验证 | `IN_PROGRESS` | [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) |
+| 崩溃诊断（自托管、家长明示开启） | 默认关闭 | `PLANNED` | [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) §5.2 |
+| KPI 体系（转化/留存/上新消费率） | 无画像规则统计 | `PLANNED` | [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) §9 |
+
+## 8. 质量与测试体系（软件 + 内容）
+
+```
+每层交付物
+  ├─ 单元测试 (C++ core, ctest)
+  ├─ 模型自动质检 (validate + 反幼稚规则 ≥40片)
+  ├─ 物理负例测试 (悬空/重叠必须失败)
+  ├─ 教程完整性 (逐步累计片数)
+  ├─ UI 冒烟 (各平台启动 + 播放一关)
+  ├─ 物理仿真抽检 (难度 4+)
+  └─ 真人实物搭建 (难度 4+, 含轻敲/提起/儿童试搭)
+```
+
+**原则**：模型生成子代理完成 → **测试子代理立即接手**，不通过不合并。
+
+## 9. 合规与品牌
+
+- 内容命名通用化（「救援行动总部」而非商标角色名）
+- 儿童隐私：中国《儿童个人信息网络保护规定》+ COPPA 原则
+- 应用商店：年龄分级 4+、无第三方广告、家长门
+- 著作权：模型为原创结构设计，参考公开造型但不拷贝付费 PDF
+
+## 10. 子代理并行工作流（工程组织）
+
+| 子代理队列 | 职责 |
+|------------|------|
+| **内容组** | 模型生成、内容策略、反幼稚规则 |
+| **引擎组** | 物理 R5-R8、教程引擎、JSON schema |
+| **渲染组** | OpenGL/GLES、材质、动画 |
+| **平台组** | Windows 安装包、Android NDK、JNI |
+| **UI 组** | Qt/QML 或 Compose 界面实现 |
+| **测试组** | 每批交付物立即跑全量测试 |
+| **商业组** | 订阅、文档、合规、运营 KPI |
+
+全部使用 `claude-fable-5-thinking-xhigh`，**完成即测、测试通过才推送**。
+
+## 11. 文档索引
+
+| 文档 | 内容 |
+|------|------|
+| [ARCHITECTURE.md](ARCHITECTURE.md) | 模块架构 |
+| [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) | 500+ 模型多样性 |
+| [PHYSICS_RULES.md](PHYSICS_RULES.md) | 物理规则 R1–R8 |
+| [COMPETITOR_ANALYSIS.md](COMPETITOR_ANALYSIS.md) | 竞品深度分析与市场空白 |
+| [ROADMAP.md](ROADMAP.md) | 内容阶段路线 |
+| [COMMERCIAL_PLAN.md](COMMERCIAL_PLAN.md) | 商业化策略（定价/合规/GTM/KPI） |
+| [UI_UX_SPEC.md](UI_UX_SPEC.md) | 儿童友好商用界面规范（分龄 UX / 全界面 / 验收清单） |
+| [SECURITY_AND_PRIVACY.md](SECURITY_AND_PRIVACY.md) | 商用安全与隐私（威胁模型 / COPPA+中国合规 / 发布安全清单） |
+| [PLATFORM_ARCHITECTURE.md](PLATFORM_ARCHITECTURE.md) | 跨平台架构（Qt 6 + NDK + SQLite） |
+| [TECH_ROADMAP.md](TECH_ROADMAP.md) | 工程总路线（子代理生成中） |
+| [TESTING.md](TESTING.md) | 测试手册 |
+| [BUILD_VERIFICATION.md](BUILD_VERIFICATION.md) | 三层验证金字塔 + 儿童实测协议 |
+| [PROGRESS.md](PROGRESS.md) | 本地进度存档（SQLite） |
+
+---
+
+*本文随子代理交付持续更新。当前工程状态：M0 完成，M1 进行中。*

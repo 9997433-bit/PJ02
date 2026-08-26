@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "id": "farm_wagon_01",
+  "name": "农场运货马车",
+  "name_en": "Farm Wagon 01",
+  "description": "D1 入门交通件: 能推着跑的八轮农场运货马车 —— 四片车轮底座拼成整车平板车架, 红色横楣围出货斗, 车尾黄色门框方是卸货门洞; 蓝色驾驶台与橙色货舱盖板分出前中后三个区, 中间敞口正好往里丢苹果, 车头两片直角三角合成拖挂箭头, 台角两盏黄色车灯一点就发车。",
+  "difficulty": 1,
+  "total_pieces": 20,
+  "tags": [
+    "陆地交通",
+    "马车",
+    "农场",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "build_paradigm": "bottom_up",
+    "technique_tags": {
+      "primary": "T09_vehicle_chassis",
+      "secondary": [
+        "T01_box_frame",
+        "T17_negative_space"
+      ]
+    },
+    "signature_statement": "四片车轮底座拼成整车受力平板, 两片平铺直角三角共边合成拖挂箭头。",
+    "structural_signature": {
+      "tile_histogram": {
+        "rectangle": 6,
+        "square": 4,
+        "wheel_base": 4,
+        "equilateral_triangle": 2,
+        "right_triangle": 2,
+        "door_frame": 1,
+        "window_square": 1
+      }
+    },
+    "physical_risk_notes": [
+      {
+        "step": 5,
+        "risk": "驾驶台方板放置时若只搭到一面墙顶就松手, 会翘边脱落",
+        "mitigation": "该步 tip 强调西边吸挡板顶、外侧边压侧板顶, 三面吸住再松手"
+      }
+    ]
+  },
+  "final_assembly": [
+    {
+      "id": "chassis_sw",
+      "type": "wheel_base",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "chassis_se",
+      "type": "wheel_base",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "chassis_nw",
+      "type": "wheel_base",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "chassis_ne",
+      "type": "wheel_base",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_s_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_n_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_s_2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_n_2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "front_s",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "front_n",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tail_door",
+      "type": "door_frame",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tail_window",
+      "type": "window_square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hitch_s",
+      "type": "right_triangle",
+      "position": [
+        -0.333333,
+        0.666667,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hitch_n",
+      "type": "right_triangle",
+      "position": [
+        -0.333333,
+        1.333333,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "seat_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "seat_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_s",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "deck_n",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "lamp_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lamp_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "拼车架: 四片车轮底座在桌面上拼成 4x2 平板, 八只轮子全部着地。",
+      "tip": "长边贴长边、短边贴短边 —— 拼好轻轻一推, 整个车架会往前跑。",
+      "tiles_to_add": [
+        "chassis_sw",
+        "chassis_se",
+        "chassis_nw",
+        "chassis_ne"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立货斗侧板: 四片红色横楣踩住车架长边, 围出货斗的两条长边。",
+      "tip": "横楣底边一次吸满一片底座的长边, 立稳一片再立下一片。",
+      "tiles_to_add": [
+        "rail_s_0",
+        "rail_s_2",
+        "rail_n_0",
+        "rail_n_2"
+      ],
+      "highlight_tiles": [
+        "chassis_sw",
+        "chassis_ne"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "装车头挡板和尾门: 车头两片红方, 车尾黄色门框方开卸货门洞、上面窗格透气。",
+      "tip": "四角竖边互相咬住, 货斗就锁成了一圈 —— 门洞留在车尾正中。",
+      "tiles_to_add": [
+        "front_s",
+        "front_n",
+        "tail_door",
+        "tail_window"
+      ],
+      "highlight_tiles": [
+        "rail_s_0",
+        "rail_n_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "合拖挂箭头: 两片灰色直角三角平铺在车头前, 直角边吸车架、斜边拼成箭头。",
+      "tip": "两片三角中缝互咬 —— 箭头指向哪, 马车就往哪走。",
+      "tiles_to_add": [
+        "hitch_s",
+        "hitch_n"
+      ],
+      "highlight_tiles": [
+        "front_s",
+        "front_n"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "搭驾驶台: 两片蓝色方板平搭车头墙顶, 中缝互吸拼成车夫的座位。",
+      "tip": "每片方板西边吸挡板顶、外侧边压侧板顶 —— 三面都吸住才算搭好。",
+      "tiles_to_add": [
+        "seat_s",
+        "seat_n"
+      ],
+      "highlight_tiles": [
+        "front_s",
+        "front_n"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "盖货舱盖板: 两片橙色长板盖住尾半段, 中间留出敞口投货位。",
+      "tip": "盖板长边与侧板顶沿等长贴合, 东头短边吸住尾门顶 —— 苹果从中间敞口丢进去, 尾门滚出来。",
+      "tiles_to_add": [
+        "deck_s",
+        "deck_n"
+      ],
+      "highlight_tiles": [
+        "rail_s_2",
+        "rail_n_2"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "点车灯收尾: 两盏黄色三角灯立上驾驶台两角 —— 马车发车!",
+      "tip": "车灯底边整条吸住驾驶台边沿; 推一圈试试, 八个轮子都要贴着桌面。",
+      "tiles_to_add": [
+        "lamp_s",
+        "lamp_n"
+      ],
+      "highlight_tiles": [
+        "seat_s",
+        "seat_n"
+      ]
+    }
+  ]
+}

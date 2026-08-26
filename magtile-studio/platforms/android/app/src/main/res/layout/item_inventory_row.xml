@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 片型计数行: 中文名 + − / 数量直接输入 / + 步进器
+     (触控目标 48dp, 长按连减/连加; 对齐桌面 InventoryPage 计数卡片) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/bg_model_card"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="14dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <TextView
+        android:id="@+id/shape_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/magtile_text_primary"
+        android:textSize="@dimen/text_section"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/count_minus"
+        android:layout_width="@dimen/touch_target"
+        android:layout_height="@dimen/touch_target"
+        android:minWidth="@dimen/touch_target"
+        android:text="@string/inventory_minus"
+        android:textSize="20sp" />
+
+    <!-- 数量直接输入 (数字键盘, 失焦时夹到 0..999) -->
+    <EditText
+        android:id="@+id/count_input"
+        android:layout_width="64dp"
+        android:layout_height="@dimen/touch_target"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="3"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/magtile_text_primary"
+        android:textSize="@dimen/text_section"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/count_plus"
+        android:layout_width="@dimen/touch_target"
+        android:layout_height="@dimen/touch_target"
+        android:minWidth="@dimen/touch_target"
+        android:text="@string/inventory_plus"
+        android:textSize="20sp" />
+
+</LinearLayout>

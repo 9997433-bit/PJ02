@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MagTile Studio</string>
+    <string name="library_title">模型库</string>
+    <!-- 首启解包数据资产期间的状态文案: 儿童可见, 不用「解包/资产」
+         类术语 (§4.2 零术语), 与桌面 Qt「模型库正在准备中」同口径 -->
+    <string name="library_loading">正在准备模型库…</string>
+    <!-- %1$d = 筛选后模型数, %2$d = 模型总数, %3$d = 磁力片形状数 -->
+    <string name="library_summary">%1$d / %2$d 个模型 · %3$d 种磁力片形状</string>
+    <!-- 加载失败的温和文案 (§4.3 / P3 零挫败, 对齐桌面 Qt 模型库空态
+         口径): 不出现「失败」字样, 不给儿童看技术路径 —— 诊断细节
+         只写 logcat 给家长/开发者 -->
+    <string name="library_soft_fail_status">模型库这次没打开, 点下面的按钮再试一次就好</string>
+    <string name="library_soft_fail_title">模型库休息了一小会儿</string>
+    <string name="library_soft_fail_hint">别着急, 点一下按钮把模型们叫回来</string>
+    <string name="library_retry">🧲 再试一次</string>
+    <!-- 目录成功打开但一个模型都没有 (数据资产异常): 0 个模型不自称
+         「已就绪」(与桌面 Qt 空态同口径), 同样给温和重试 -->
+    <string name="library_empty_catalog">模型们还在路上</string>
+    <!-- 筛选空态三件套 (图形 + 温和说明 + 一键 CTA, 对齐桌面 Qt
+         模型库「换个条件试试 + 看全部模型」空态口径): 不出现空白页,
+         孩子一键就能回到全部模型 -->
+    <string name="library_filter_empty">这个组合暂时没有模型, 换个条件试试</string>
+    <string name="filter_clear_all">↺ 看全部模型</string>
+    <!-- 筛选栏 (口径与桌面 GL/Qt 模型库一致) -->
+    <string name="filter_all_difficulties">全部难度</string>
+    <string name="filter_all_themes">全部主题</string>
+    <string name="filter_free">只看免费</string>
+    <string name="filter_core9">只用核心 9 片</string>
+    <string name="filter_buildable">我能搭的</string>
+    <string name="filter_go_inventory">去登记 ▶</string>
+    <string name="filter_edit_inventory">改库存</string>
+    <!-- 年龄段模式三档 (UI_UX_SPEC.md §2; 标识与桌面 settings 表同键
+         age_mode, 展示名对齐 core::displayNameZh) -->
+    <string name="age_mode_dialog_title">孩子的年龄段</string>
+    <string name="age_mode_4_6">4-6 岁 · 启蒙模式</string>
+    <string name="age_mode_7_9">7-9 岁 · 标准模式</string>
+    <string name="age_mode_10_12">10-12 岁 · 进阶模式</string>
+    <!-- 标题栏入口的短标签 -->
+    <string name="age_mode_badge_4_6">4-6 岁 ▾</string>
+    <string name="age_mode_badge_7_9">7-9 岁 ▾</string>
+    <string name="age_mode_badge_10_12">10-12 岁 ▾</string>
+    <string name="thumbnail_description">模型缩略图</string>
+    <string name="card_needs_expansion">需要扩展装</string>
+    <string name="dialog_core9_note">只用核心 9 片型即可搭建 (基础套装)</string>
+    <string name="dialog_expansion_note">需要扩展装 (用到核心 9 片之外的片型)</string>
+    <!-- %1$d = 片数, %2$d = 步数 -->
+    <string name="card_pieces_steps">%1$d 片 · %2$d 步</string>
+    <!-- 预计用时 (UI_UX_SPEC §5.4): %1$d = 档位分钟数 (5/10/15/20/30/45
+         六档, 原生层 core::estimateBuildMinutes 与桌面 Qt 详情页同一
+         纯函数); 只说「大约」不假精确, 步数未知时详情弹窗整行隐藏 -->
+    <string name="dialog_estimated_minutes">🕒 大约 %1$d 分钟</string>
+    <string name="dialog_tutorial_coming">分步教程即将上线, 敬请期待!</string>
+    <!-- 免费模型详情弹窗的搭建入口 (进 TutorialActivity 分步浏览) -->
+    <string name="dialog_start_build">🧲 开始搭建</string>
+    <!-- 未订阅时非免费模型详情的温和「订阅解锁」提示 (只锁「开始
+         搭建」入口, 不锁浏览/校验; 无价格无催促 §12.2, 措辞对齐
+         桌面 Qt DetailPage 订阅横幅; 订阅生效后本提示退场, 直达教程) -->
+    <string name="dialog_subscription_note">🔒 这个模型属于订阅内容: 简介和物理校验随时可以看, 完整分步教程订阅后解锁; 免费区的模型永久免费, 用「只看免费」随时开搭。</string>
+    <!-- Debug 构建的「模拟已订阅」QA 开关提示 (订阅页内的开发档
+         开关行, 与桌面订阅页 devControlsEnabled 开发开关同角色
+         同位置; Release 档 BuildConfig.DEBUG 恒 false 不可见。写
+         progress/subscription_settings 契约键, 零真实扣费) -->
+    <string name="dev_billing_on_toast">模拟订阅已开启 (仅测试构建, 未产生任何扣费) —— 全库已解锁</string>
+    <string name="dev_billing_off_toast">模拟订阅已关闭 —— 回到免费层</string>
+    <string name="dev_billing_soft_fail">这次没切换成功, 稍后再试一次就好</string>
+    <string name="dialog_validate">物理校验</string>
+    <string name="dialog_close">关闭</string>
+    <string name="dialog_validating">正在执行物理校验 (R1~R8)…</string>
+    <!-- 校验没跑完的温和兜底 (P3 零挫败: 弹窗不出现「失败」字样,
+         异常细节只写 logcat 给家长/开发者) -->
+    <string name="dialog_validate_soft_fail">校验这次没跑完, 稍后再试一次就好</string>
+    <!-- %1$s = 模型中文名 -->
+    <string name="dialog_validate_title">物理校验 — %1$s</string>
+    <!-- %1$d = 教程步骤数 -->
+    <string name="dialog_step_count">教程步骤数: %1$d</string>
+    <!-- 详情弹窗的库存对照 (登记过库存才显示) -->
+    <string name="dialog_can_build">家里的磁力片足够搭这个模型 ✓</string>
+    <!-- %1$d = 共缺几片 -->
+    <string name="dialog_missing_summary">还差 %1$d 片就能搭</string>
+    <string name="dialog_whats_missing">缺什么片?</string>
+    <!-- %1$s = 模型中文名 -->
+    <string name="dialog_missing_title">缺片清单 — %1$s</string>
+    <string name="dialog_missing_failed">缺片清单暂时看不了, 稍后再试一次就好</string>
+    <!-- 库存录入屏 (对齐桌面 InventoryPage 字段与措辞) -->
+    <string name="inventory_title">🧲 家里有哪些磁力片?</string>
+    <string name="inventory_back">← 返回</string>
+    <string name="inventory_hint">照着盒子数一数, 用 − / + 或直接输入数量; 保存后模型库就能筛出「我能搭的」</string>
+    <string name="inventory_group_core">基础套装 · 最常见的 9 种片型</string>
+    <string name="inventory_group_expansion">扩展包 · 没有就保持 0, 不影响基础模型</string>
+    <string name="inventory_zero_note">数量为 0 的片型也会记住「明确没有」</string>
+    <string name="inventory_save">保存库存</string>
+    <string name="inventory_save_match">保存, 看看我能搭什么 ▶</string>
+    <!-- %1$d = 合计片数 -->
+    <string name="inventory_total_badge">合计 %1$d 片</string>
+    <!-- %1$d = 合计片数 -->
+    <string name="inventory_saved_toast">已记住家里的 %1$d 片磁力片</string>
+    <string name="inventory_save_soft_fail">库存暂时没保存上, 稍后再试一次就好</string>
+    <string name="inventory_minus">−</string>
+    <string name="inventory_plus">+</string>
+    <!-- 进度页「我的作品」/ 成就墙 (对齐桌面 Qt ProgressPage /
+         AchievementsPage 的字段与措辞) -->
+    <string name="back_button">← 返回</string>
+    <string name="main_progress_entry">🏆 我的进度</string>
+    <string name="progress_title">🏆 我的作品</string>
+    <string name="progress_loading">正在翻看进度存档…</string>
+    <!-- 温和降级 (不出现「失败」字样, 技术细节只写 logcat) -->
+    <string name="progress_load_failed">进度看板这次没打开, 退出再进来看看就好</string>
+    <string name="progress_store_unavailable">进度存档暂不可用, 作品清单先歇一会儿</string>
+    <!-- 三格温和统计 (%1$d = 数量; 图形+数字+文字三重编码 §4.7) -->
+    <string name="progress_stat_completed">✓ %1$d\n已完成</string>
+    <string name="progress_stat_in_progress">▶ %1$d\n进行中</string>
+    <string name="progress_stat_favorites">⭐ %1$d\n收藏</string>
+    <!-- 成就墙条带 (进度页内入口) -->
+    <string name="progress_badge_strip_title">🏅 成就墙</string>
+    <!-- %1$d = 已点亮徽章数 -->
+    <string name="progress_badge_strip_some">已点亮 %1$d 枚徽章</string>
+    <string name="progress_badge_strip_none">完成第一个模型, 就能点亮第一枚徽章</string>
+    <string name="progress_open_achievements">看看全部徽章 ▶</string>
+    <!-- 温和空态 (§4.3: 只有引导, 没有"空空如也"的挫败感) -->
+    <string name="progress_empty_title">第一个作品在等你</string>
+    <string name="progress_empty_hint">从模型库挑一个喜欢的模型, 搭完它就会出现在这里啦</string>
+    <string name="progress_empty_go">🏰 去模型库挑一个</string>
+    <!-- 分区标题 (%1$d = 条数) -->
+    <string name="progress_section_in_progress">▶ 进行中 (%1$d)</string>
+    <string name="progress_section_completed">✓ 已完成 (%1$d)</string>
+    <string name="progress_section_favorites">⭐ 我的收藏 (%1$d)</string>
+    <!-- %1$d = 当前步, %2$d = 总步数 -->
+    <string name="progress_step_of">第 %1$d/%2$d 步</string>
+    <!-- %1$d = 片数 -->
+    <string name="progress_pieces">%1$d 片</string>
+    <!-- 作品行直达教程的行尾动作 (对齐桌面 Qt ProgressPage 行尾:
+         进行中断点续搭 / 已完成从头再搭, startBuild 同口径) -->
+    <string name="progress_row_continue">继续搭建 ▶</string>
+    <string name="progress_row_rebuild">再搭一次 ▶</string>
+    <!-- 收藏行直达详情时模型已不在库中的温和提示 (模型库侧弹出) -->
+    <string name="progress_model_unavailable">这个模型暂时不在模型库里, 先去挑别的试试吧</string>
+    <!-- 分步教程页 (TutorialActivity; 3D 教程视口 + 文字分步,
+         措辞对齐桌面 GL/Qt 教程 HUD 的 "第 x/y 步 · 已放 n/m 片") -->
+    <string name="tutorial_title_fallback">分步搭建</string>
+    <string name="tutorial_loading">正在准备分步教程…</string>
+    <!-- 温和降级 (不出现「失败」字样, 技术细节只写 logcat) -->
+    <string name="tutorial_load_failed">教程这次没打开, 回上一页再进来一次就好</string>
+    <!-- 模型已下架 (不在模型库目录中) 的温和降级, 不出现「失败」字样 -->
+    <string name="tutorial_model_unavailable">这个模型暂时不在模型库里, 先去挑别的试试吧</string>
+    <!-- 3D 视口手势提示 (单指旋转 / 双指捏合缩放, 与桌面 Qt 同口径) -->
+    <string name="tutorial_scene_hint">👆 单指转一转 · 双指捏一捏放大缩小</string>
+    <!-- %1$d = 当前步, %2$d = 总步数, %3$d = 已放片数, %4$d = 总片数 -->
+    <string name="tutorial_step_of">第 %1$d/%2$d 步 · 已放 %3$d/%4$d 片</string>
+    <!-- %1$d = 总步数, %2$d = 总片数 (完成态的进度头) -->
+    <string name="tutorial_finished_label">全部 %1$d 步搭完 · 共 %2$d 片</string>
+    <string name="tutorial_finished_banner">🎉 搭好啦! 这个作品已经记进「我的进度」</string>
+    <string name="tutorial_prev">◀ 上一步</string>
+    <string name="tutorial_next">下一步 ▶</string>
+    <string name="tutorial_next_finish">完成 🎉</string>
+    <!-- %1$d = 本步骤新增片数 -->
+    <string name="tutorial_step_pieces">+%1$d 片</string>
+    <!-- %1$s = 步骤小提示 -->
+    <string name="tutorial_step_tip">💡 %1$s</string>
+    <!-- 成就墙全览屏 -->
+    <string name="achievements_title">🏅 成就墙</string>
+    <string name="achievements_hint">每完成一个新模型, 就会点亮新的徽章</string>
+    <!-- %1$d = 已点亮徽章数 (页脚只报喜不催促 §4.3) -->
+    <string name="achievements_footer_some">🏅 已点亮 %1$d 枚徽章, 继续加油!</string>
+    <string name="achievements_footer_none">完成第一个模型, 就能点亮第一枚徽章</string>
+    <!-- 家长门 (UI_UX_SPEC.md §9): 年龄段切换与库存录入入口上锁;
+         措辞与桌面 GL/Qt 门界面一致 —— 答错/冷却只有温和提示,
+         儿童侧不出现「验证失败」类苛责语 (P3 零挫败, 不用红色) -->
+    <string name="gate_title">请家长来完成</string>
+    <string name="gate_subtitle">年龄段与磁力片库存由家长管理, 请作答后继续</string>
+    <string name="gate_answer_format_hint">请用中文大写数字作答 (例: 贰拾壹)</string>
+    <string name="gate_input_placeholder">点击下方数字键输入</string>
+    <!-- %1$d = 本轮剩余可尝试次数 -->
+    <string name="gate_wrong_hint">还差一点, 再试一次吧 (还可尝试 %1$d 次)</string>
+    <string name="gate_cooldown_title">休息一下</string>
+    <!-- %1$d = 冷却剩余秒数 (温和提示稍后再试, 无惩罚文案) -->
+    <string name="gate_cooldown_text">%1$d 秒后可以再试一次</string>
+    <string name="gate_submit">确认</string>
+    <string name="gate_cancel">返回</string>
+    <string name="gate_key_backspace">退格</string>
+    <!-- 隐私与数据 (SECURITY_AND_PRIVACY.md §3/§4 C4/Z8, 家长门后;
+         文案口径与桌面 Qt 家长中心「隐私与数据」区一致: 我们收集什么 /
+         数据存在哪 / 导出 JSON / 清除带二次确认) -->
+    <string name="privacy_entry">隐私与数据</string>
+    <string name="privacy_dialog_title">隐私与数据</string>
+    <!-- %1$s = 本机存档文件完整路径; %2$s = 模型库目录 (内置内容,
+         诊断展示, 与 Qt 家长中心「模型库目录」行同角色) -->
+    <string name="privacy_summary">我们收集什么: 只在这台设备上记录搭建进度与成就、收藏、磁力片库存和设置 (年龄段等)。默认无账号、无广告、无第三方分析, 不联网, 也不采集孩子的姓名、照片、位置等任何个人信息。\n\n数据存在哪: 本机存档文件\n%1$s\n\n模型库目录 (内置模型内容, 不含孩子的数据):\n%2$s\n\n完整隐私政策草稿随应用文档提供: docs/PRIVACY_POLICY_DRAFT.md (离线可读, 上架前经法务定稿)。</string>
+    <!-- 存档不可用: 导出/清除按钮温和禁用时的提示 (与 Qt 同文案) -->
+    <string name="privacy_store_unavailable">存档暂时不可用, 导出与清除先歇一会儿</string>
+    <!-- %1$s = 最近一次导出文件完整路径 (面板内回显, 家长好找到文件) -->
+    <string name="privacy_last_export">最近一次导出: %1$s</string>
+    <string name="privacy_export">导出进度 (JSON)</string>
+    <!-- %1$s = 导出文件完整路径 -->
+    <string name="privacy_export_done">进度已导出: %1$s</string>
+    <string name="privacy_export_soft_fail">这次没导出成功, 稍后再试一次就好</string>
+    <string name="privacy_clear">清除本地数据…</string>
+    <string name="privacy_clear_confirm_title">确定要清除本机数据吗?</string>
+    <string name="privacy_clear_confirm_text">将删除这台设备上的全部搭建进度、成就、收藏、磁力片库存和设置, 删除后无法恢复。需要留档的话, 可以先用「导出进度」保存一份 JSON。</string>
+    <string name="privacy_clear_confirm_yes">确认清除</string>
+    <string name="privacy_clear_confirm_no">先不清除</string>
+    <string name="privacy_clear_done">本机数据已清除, 一切回到最初的样子</string>
+    <string name="privacy_clear_soft_fail">这次没清除成功, 稍后再试一次就好</string>
+    <!-- 订阅页 (家长门后, UI_UX_SPEC.md §11; 对齐桌面 Qt
+         SubscriptionPage 的结构与措辞): 价格只出现在本页 —— 儿童侧
+         界面零价格信息; 无倒计时/无催促话术/不索取任何个人信息。
+         入口在家长门后的年龄段对话框 (与「隐私与数据」同位)。 -->
+    <string name="subscription_entry">订阅</string>
+    <string name="subscription_title">订阅</string>
+    <string name="subscription_back">← 返回</string>
+    <!-- 页首免费额度明示 (§11 反套路即信任; %1$d = 免费层模型数,
+         模型库尚未加载完时退回不带数字的版本) -->
+    <string name="subscription_free_notice">✓ 无需付费, 现在就能玩 %1$d 个精选模型 —— 永久免费, 功能不打折</string>
+    <string name="subscription_free_notice_no_count">✓ 无需付费也可以玩精选模型 —— 永久免费, 功能不打折</string>
+    <string name="subscription_intro_title">订阅能解锁什么</string>
+    <string name="subscription_intro_body">一份订阅解锁模型库里的全部模型, 以及之后每周的新模型。免费的精选模型永远免费; 订阅只增加内容, 不锁任何功能 —— 3D 教程、物理校验、进度存档对所有家庭完全一样。</string>
+    <!-- 订阅生效状态卡 (完成绿「已拥有」; %1$s = 生效档位中文名) -->
+    <string name="subscription_active_title">✓ 订阅生效中</string>
+    <string name="subscription_active_title_plan">✓ 订阅生效中 · %1$s</string>
+    <string name="subscription_active_body">全库模型已解锁, 每周上新自动包含。取消入口在 Google Play「付款与订阅」, 一步直达, 不设挽留关卡。</string>
+    <!-- 档位卡数据: 三端统一商品 id 的中文名与说明 (与桌面
+         FakeBillingClient / store_billing_client 档位表同文案,
+         COMMERCIAL_PLAN §3.1); 价格不在本地写死 —— 实时经
+         PlayBillingManager.queryProducts 读 Play 后台本地化价格 -->
+    <string name="plan_monthly_name">月度订阅</string>
+    <string name="plan_monthly_blurb">先试试水, 随时取消</string>
+    <string name="plan_yearly_name">年度订阅</string>
+    <string name="plan_yearly_blurb">一次开通一整年, 7 天无理由退款</string>
+    <string name="plan_family_name">家庭年度</string>
+    <string name="plan_family_blurb">最多 4 个儿童档案 + 6 台设备</string>
+    <!-- %1$s = Play 后台下发的本地化价格 (如 ¥198.00) -->
+    <string name="plan_price_per_month">%1$s / 月</string>
+    <string name="plan_price_per_year">%1$s / 年</string>
+    <!-- 主推徽标 (中性推荐, 非稀缺/催促话术, 与桌面同文案) -->
+    <string name="subscription_recommended_badge">多数家庭的选择</string>
+    <!-- 商品查询中 / 查询不可用 (无网/商店没连上/Debug 档温和短路)
+         的温和占位: 不显示空价格卡, 与桌面「即将上线」同语义 -->
+    <string name="subscription_loading_products">正在向商店查询订阅档位与价格…</string>
+    <string name="subscription_placeholder">订阅功能正在准备中, 上线后会在这里开放 —— 免费模型现在就能玩</string>
+    <!-- 主 CTA (点卡只是选择, 购买必须再按这里 —— 无预勾选加购语义) -->
+    <string name="subscription_cta">🌱 开通订阅</string>
+    <string name="subscription_cta_coming">🌱 订阅即将上线</string>
+    <string name="subscription_restore">↺ 恢复购买</string>
+    <!-- 购买/恢复结果 (与桌面 BillingBackend 同措辞: 中性/正向两档,
+         儿童友好红线同样适用 —— 家长页也不用「失败」恐吓) -->
+    <string name="subscription_purchase_done">订阅已开通 —— 全库已解锁</string>
+    <string name="subscription_purchase_cancelled">已取消, 随时可以再来</string>
+    <string name="subscription_purchase_unavailable">这次没开通成功, 稍后再试一次就好 —— 免费模型现在就能玩</string>
+    <string name="subscription_restore_done">已恢复订阅 —— 全库重新解锁</string>
+    <string name="subscription_restore_nothing">这个账户下暂时没有可恢复的订阅</string>
+    <string name="subscription_restore_unavailable">商店这次没连上, 稍后再试一次就好</string>
+    <string name="subscription_restore_coming">恢复购买将随正式商店版开放</string>
+    <!-- 我们的承诺 (透明条款, §11 / COMMERCIAL_PLAN §2-3) -->
+    <string name="subscription_promises_title">我们的承诺</string>
+    <string name="subscription_promise_1">✓ 儿童界面永远不显示价格与付费入口, 付费只由家长在这里决定</string>
+    <string name="subscription_promise_2">✓ 无倒计时、无「即将涨价」、无预勾选加购; 订阅前不索取任何个人信息</string>
+    <string name="subscription_promise_3">✓ 条款透明: 自动续费规则以商店页为准, 取消一步直达 Google Play「付款与订阅」, 年度档 7 天无理由退款</string>
+    <string name="subscription_promise_4">✓ 换机或重装后, 用本页的「恢复购买」一键找回订阅</string>
+    <string name="subscription_footer">本页只在家长验证之后可见; 这里的一切都不会出现在孩子的界面里。</string>
+    <!-- 开发档「模拟已订阅」开关行 (仅 Debug 构建可见, 与桌面订阅页
+         devControlsEnabled 开发开关同角色同位置; 开关结果沿用上方
+         dev_billing_* 提示串) -->
+    <string name="subscription_dev_title">开发档: 模拟已订阅</string>
+    <string name="subscription_dev_body">仅测试构建可见 (与桌面订阅页开发开关同角色): 不接商店、不产生扣费, 用于演练免费层锁的解锁与回锁。</string>
+</resources>

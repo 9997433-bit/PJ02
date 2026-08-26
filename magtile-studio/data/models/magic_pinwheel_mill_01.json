@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "id": "magic_pinwheel_mill_01",
+  "name": "魔法风车坊",
+  "name_en": "Magic Pinwheel Mill 01",
+  "description": "入门档幻想与机械: 研磨星尘的魔法风车坊, 结构签名是'塔楼十字翼 + 借墙工坊' —— 紫色磨坊塔楼墙脚整边吸晒场板边、竖棱角缝互吸成环, 灰色塔帽四边锁墙顶后, 四面青色等边三角风车翼骑上塔帽四条沿边, 每片翼底边同时吸住塔帽沿与墙顶, 顶视正是一朵十字风车; 东侧工坊借塔楼东墙当第四面墙, 透明天窗上方立一枚粉色魔法水晶; 门前三片星尘晒场、西端矮篱笆与星光花、南沿两片水晶碎料。21 片全程接地受压零悬挑, 翼尖 1.87 不触发高层判定, 搭完就能给魔法师磨第一袋星尘粉。",
+  "difficulty": 1,
+  "total_pieces": 21,
+  "tags": [
+    "幻想与机械",
+    "风车",
+    "魔法",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "fantasy_machinery",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 11,
+        "equilateral_triangle": 8,
+        "door_frame": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "yard_w",
+      "type": "square",
+      "position": [
+        -0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "yard_c",
+      "type": "square",
+      "position": [
+        0.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "yard_e",
+      "type": "square",
+      "position": [
+        1.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mill_s",
+      "type": "door_frame",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mill_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "mill_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "mill_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "shed_s",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "shed_n",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "shed_e",
+      "type": "window_square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "shed_cap",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "hub",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sail_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sail_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "sail_e",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "crystal_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "fence_w",
+      "type": "square",
+      "position": [
+        -0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "flower",
+      "type": "equilateral_triangle",
+      "position": [
+        -0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "shard_w",
+      "type": "equilateral_triangle",
+      "position": [
+        -0.5,
+        -1.288675,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "shard_e",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        -1.288675,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺星尘晒场: 三片黄色方板整边相吸一字排开 —— 磨好的星尘粉就晾在这里。",
+      "tip": "",
+      "tiles_to_add": [
+        "yard_w",
+        "yard_c",
+        "yard_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立磨坊塔楼: 橙色门框方是坊门, 墙脚整边吸住晒场板边, 三面紫墙竖棱角缝互吸围成一圈。",
+      "tip": "四片墙的竖棱像小手拉手 —— 拉成一圈塔楼就推不倒了。",
+      "tiles_to_add": [
+        "mill_s",
+        "mill_w",
+        "mill_n",
+        "mill_e"
+      ],
+      "highlight_tiles": [
+        "yard_c"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "搭借墙工坊: 工坊西面直接借塔楼东墙, 南北两片紫墙加透明天窗围好, 盖上工坊帽。",
+      "tip": "借一面墙省一片料 —— 这是老木匠的智慧。",
+      "tiles_to_add": [
+        "shed_s",
+        "shed_n",
+        "shed_e",
+        "shed_cap"
+      ],
+      "highlight_tiles": [
+        "mill_e"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "盖塔帽装风车翼: 灰色塔帽四边整边锁住墙顶, 四面青色三角翼骑上塔帽四条沿边 —— 从天上看正好是一朵十字风车。",
+      "tip": "每片翼的底边同时吸住塔帽沿和墙顶 —— 一条沿口两处受抓。",
+      "tiles_to_add": [
+        "hub",
+        "sail_s",
+        "sail_n",
+        "sail_w",
+        "sail_e"
+      ],
+      "highlight_tiles": [
+        "mill_n"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "点水晶围篱笆: 粉色魔法水晶骑上工坊帽东沿, 绿色矮篱笆墙脚吸晒场板边、竖棱咬住塔角, 篱笆顶开一朵星光花。",
+      "tip": "",
+      "tiles_to_add": [
+        "crystal_e",
+        "fence_w",
+        "flower"
+      ],
+      "highlight_tiles": [
+        "shed_cap",
+        "yard_w"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "晾水晶碎料: 两片粉色小三角平贴晒场南沿, 魔法风车坊开工啦!",
+      "tip": "",
+      "tiles_to_add": [
+        "shard_w",
+        "shard_e"
+      ],
+      "highlight_tiles": [
+        "yard_w",
+        "yard_e"
+      ]
+    }
+  ]
+}

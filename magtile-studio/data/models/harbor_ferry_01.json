@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "id": "harbor_ferry_01",
+  "name": "港湾小渡轮",
+  "name_en": "Harbor Ferry 01",
+  "description": "D1 入门海空交通: 桌面上开航的小渡轮 —— 四片长板拼成通长甲板, 船头两片直角三角共边合尖破浪, 红色长楣舷墙底边与甲板长边等长贴合, 船尾半段用门框方登舱门加三面窗格围成驾驶舱, 黄色舱顶四面有靠, 双烟囱立上正脊。前半段甲板特意留空 —— 那是自行车上船的车位。20 片全程受压零悬挑, 搭完就能载着积木过河。",
+  "difficulty": 1,
+  "total_pieces": 20,
+  "tags": [
+    "海洋",
+    "渡轮",
+    "港口",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "sea_air_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "rectangle": 8,
+        "square": 4,
+        "window_square": 3,
+        "equilateral_triangle": 2,
+        "right_triangle": 2,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "deck_fw_s",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_fw_n",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_aft_s",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_aft_n",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bow_s",
+      "type": "right_triangle",
+      "position": [
+        -0.333333,
+        0.666667,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bow_n",
+      "type": "right_triangle",
+      "position": [
+        -0.333333,
+        1.333333,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bulwark_s_fw",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bulwark_s_aft",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bulwark_n_fw",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bulwark_n_aft",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cabin_door",
+      "type": "door_frame",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "cabin_window",
+      "type": "window_square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "stern_window_s",
+      "type": "window_square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "stern_window_n",
+      "type": "window_square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_sw",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_nw",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_se",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_ne",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "funnel_fw",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "funnel_aft",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "拼甲板: 四片灰色长板在桌面拼成 4x2 通长平板, 这就是渡轮的船底。",
+      "tip": "长边贴长边、短边贴短边, 拼缝对齐甲板才平整。",
+      "tiles_to_add": [
+        "deck_fw_s",
+        "deck_fw_n",
+        "deck_aft_s",
+        "deck_aft_n"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "合船头: 两片直角三角在西端共边一咬, 破浪尖就冲在最前面。",
+      "tip": "",
+      "tiles_to_add": [
+        "bow_s",
+        "bow_n"
+      ],
+      "highlight_tiles": [
+        "deck_fw_s",
+        "deck_fw_n"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立舷墙: 四片红色长楣踩住甲板两条长边, 一片底边正好吸满两格。",
+      "tip": "长楣立起后扶一下两端, 下一步就有横墙来锁角。",
+      "tiles_to_add": [
+        "bulwark_s_fw",
+        "bulwark_s_aft",
+        "bulwark_n_fw",
+        "bulwark_n_aft"
+      ],
+      "highlight_tiles": [
+        "deck_fw_s",
+        "deck_aft_n"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "围驾驶舱: 门框方是登舱门, 三片窗格方是舷窗 —— 墙脚骑拼缝, 竖边咬舷墙。",
+      "tip": "前半段甲板故意空着 —— 那是自行车和行李上船的车位。",
+      "tiles_to_add": [
+        "cabin_door",
+        "cabin_window",
+        "stern_window_s",
+        "stern_window_n"
+      ],
+      "highlight_tiles": [
+        "bulwark_s_aft",
+        "bulwark_n_aft"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖舱顶: 四片黄色方板短边吸墙顶、彼此长边互吸, 驾驶舱封顶。",
+      "tip": "",
+      "tiles_to_add": [
+        "roof_sw",
+        "roof_nw",
+        "roof_se",
+        "roof_ne"
+      ],
+      "highlight_tiles": [
+        "cabin_door",
+        "stern_window_s"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立烟囱: 两片红色三角站上舱顶正脊, 鸣笛一声 —— 渡轮开航!",
+      "tip": "",
+      "tiles_to_add": [
+        "funnel_fw",
+        "funnel_aft"
+      ],
+      "highlight_tiles": [
+        "roof_sw",
+        "roof_ne"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1006 @@
+{
+  "schema_version": 1,
+  "id": "canal_lock_01",
+  "name": "运河船闸",
+  "name_en": "Canal Lock 01",
+  "description": "只用核心九片型的通航水工建筑: 招牌是\"两级水面的楼梯\" —— 下游蓝色水面贴地, 上游高位水道是一只封顶长箱 (侧墙踩拼缝互咬, 三片蓝色水板四边搭墙顶全支承), 水面硬是比下游高出一整层; 两道橙色闸门竖边咬进闸墙拐角把闸室夹在踏步上, 红色信号塔骑在闸墙顶指挥行船; 红驳船立着帆桅在下游候闸, 值班房与闸室共用一面窗格方墙 (共墙技法) 直接盯着闸室、绿锥顶斜棱自锁 —— 信号塔换绿灯, 船要坐水的电梯上楼啦!",
+  "difficulty": 3,
+  "total_pieces": 53,
+  "tags": [
+    "工程",
+    "运河",
+    "船闸",
+    "水利",
+    "海洋"
+  ],
+  "content_meta": {
+    "series": null,
+    "matrix_bucket": "engineering_misc",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 29,
+        "equilateral_triangle": 9,
+        "rectangle": 9,
+        "isosceles_triangle": 4,
+        "door_frame": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "bank_s_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_s_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_s_2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_s_3",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_s_4",
+      "type": "rectangle",
+      "position": [
+        9.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_n_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_n_1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_n_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_n_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_n_2",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bank_n_3",
+      "type": "rectangle",
+      "position": [
+        9.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "canal_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "canal_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "canal_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "canal_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "canal_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "canal_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "canal_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "canal_7",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "canal_8",
+      "type": "square",
+      "position": [
+        8.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "canal_9",
+      "type": "square",
+      "position": [
+        9.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lock_s1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lock_s2",
+      "type": "square",
+      "position": [
+        6.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lock_n1",
+      "type": "window_square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "lock_n2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "signal_tower",
+      "type": "isosceles_triangle",
+      "position": [
+        5.5,
+        1.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "gate_low",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gate_high",
+      "type": "square",
+      "position": [
+        7.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "high_s_7",
+      "type": "square",
+      "position": [
+        7.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "high_n_7",
+      "type": "square",
+      "position": [
+        7.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "high_s_8",
+      "type": "square",
+      "position": [
+        8.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "high_n_8",
+      "type": "square",
+      "position": [
+        8.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "high_s_9",
+      "type": "square",
+      "position": [
+        9.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "high_n_9",
+      "type": "square",
+      "position": [
+        9.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "high_end",
+      "type": "square",
+      "position": [
+        10.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "high_water_7",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "high_water_8",
+      "type": "square",
+      "position": [
+        8.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "high_water_9",
+      "type": "square",
+      "position": [
+        9.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "keeper_n",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "keeper_w",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "keeper_e",
+      "type": "door_frame",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "keeper_roof_s",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        2.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "keeper_roof_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.833333,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "keeper_roof_n",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        2.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "keeper_roof_w",
+      "type": "equilateral_triangle",
+      "position": [
+        5.166667,
+        2.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "boat_bow",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "boat_sail",
+      "type": "isosceles_triangle",
+      "position": [
+        3.0,
+        1.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bollard_a",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bollard_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bollard_c",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "high_buoy",
+      "type": "equilateral_triangle",
+      "position": [
+        8.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tree_w",
+      "type": "isosceles_triangle",
+      "position": [
+        2.0,
+        0.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tree_e",
+      "type": "isosceles_triangle",
+      "position": [
+        8.0,
+        0.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南岸: 五片绿色长板短边互吸连成河岸。",
+      "tip": "运河从西向东流 —— 上游在东边, 比下游高整整一层。",
+      "tiles_to_add": [
+        "bank_s_0",
+        "bank_s_1",
+        "bank_s_2",
+        "bank_s_3",
+        "bank_s_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺水道行: 下游蓝水、红驳船、闸室青水、高位箱底一字排开。",
+      "tip": "灰色的三格是高位水道的箱底 —— 待会儿要被封进箱子里。",
+      "tiles_to_add": [
+        "canal_0",
+        "canal_1",
+        "canal_2",
+        "canal_3",
+        "canal_4",
+        "canal_5",
+        "canal_6",
+        "canal_7",
+        "canal_8",
+        "canal_9"
+      ],
+      "highlight_tiles": [
+        "bank_s_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺北岸: 值班房的地基用两片单位方板留好拼缝。",
+      "tip": "方板四条边都是墙脚的吸合缝 —— 值班房就盖在这里。",
+      "tiles_to_add": [
+        "bank_n_0",
+        "bank_n_1",
+        "bank_n_4",
+        "bank_n_5",
+        "bank_n_2",
+        "bank_n_3"
+      ],
+      "highlight_tiles": [
+        "canal_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立闸室侧墙并竖信号塔: 北墙用窗格方 —— 它就是值班房的观察窗。",
+      "tip": "共墙技法: 一片墙同时属于闸室和值班房; 红灯亮请在闸外等候。",
+      "tiles_to_add": [
+        "lock_s1",
+        "lock_s2",
+        "lock_n1",
+        "lock_n2",
+        "signal_tower"
+      ],
+      "highlight_tiles": [
+        "canal_5",
+        "canal_6"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装两道闸门: 橙色立板竖边咬进闸墙拐角, 底边整边吸拼缝。",
+      "tip": "下游门放船进闸, 上游门挡住高位水 —— 一次只开一道。",
+      "tiles_to_add": [
+        "gate_low",
+        "gate_high"
+      ],
+      "highlight_tiles": [
+        "lock_s1",
+        "lock_n2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立高位水道侧墙: 六片灰墙沿水道两侧排到东头。",
+      "tip": "墙脚踩拼缝竖边互咬 —— 高位水道的箱壁越砌越长。",
+      "tiles_to_add": [
+        "high_s_7",
+        "high_n_7",
+        "high_s_8",
+        "high_n_8",
+        "high_s_9",
+        "high_n_9"
+      ],
+      "highlight_tiles": [
+        "gate_high"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "封东端墙、铺高位水面: 三片蓝水板搭墙顶互吸, 水在一层楼高!",
+      "tip": "水板四边搭两侧墙顶/端墙顶/闸门顶 —— 全支承零悬挑。",
+      "tiles_to_add": [
+        "high_end",
+        "high_water_7",
+        "high_water_8",
+        "high_water_9"
+      ],
+      "highlight_tiles": [
+        "high_s_9",
+        "high_n_9"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "合值班房墙环: 北墙与东西墙咬进观察窗拐角, 门框方朝东。",
+      "tip": "闸门什么时候开, 值班员说了算。",
+      "tiles_to_add": [
+        "keeper_n",
+        "keeper_w",
+        "keeper_e"
+      ],
+      "highlight_tiles": [
+        "bank_n_4",
+        "bank_n_5"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖值班房锥顶: 四片绿色等边三角斜棱互咬自锁。",
+      "tip": "锥尖 1.71 —— 对角顺序合拢, 最后一片同时吸双棱。",
+      "tiles_to_add": [
+        "keeper_roof_s",
+        "keeper_roof_e",
+        "keeper_roof_n",
+        "keeper_roof_w"
+      ],
+      "highlight_tiles": [
+        "keeper_n"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "装红驳船的船头与帆桅: 两片立在船身两条拼缝上。",
+      "tip": "小驳船在下游候闸 —— 它马上要坐一次水的电梯。",
+      "tiles_to_add": [
+        "boat_bow",
+        "boat_sail"
+      ],
+      "highlight_tiles": [
+        "canal_2"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "钉系船柱、放浮标: 三根黄柱骑岸缝, 红浮标漂在高位水面。",
+      "tip": "过闸的船先系缆再等门 —— 浮标标出高位航道的中线。",
+      "tiles_to_add": [
+        "bollard_a",
+        "bollard_b",
+        "bollard_c",
+        "high_buoy"
+      ],
+      "highlight_tiles": [
+        "canal_0",
+        "high_water_8"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "种岸边绿树收尾: 两棵瘦高绿树骑上南岸拼缝, 通航!",
+      "tip": "信号塔换绿灯 —— 下游门缓缓打开, 请驳船进闸!",
+      "tiles_to_add": [
+        "tree_w",
+        "tree_e"
+      ],
+      "highlight_tiles": [
+        "bank_s_1",
+        "bank_s_4"
+      ]
+    }
+  ]
+}

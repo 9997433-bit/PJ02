@@ -1,0 +1,1367 @@
+{
+  "schema_version": 1,
+  "id": "trex_skeleton_01",
+  "name": "霸王龙化石骨架",
+  "name_en": "T-Rex Fossil Skeleton 01",
+  "description": "博物馆立姿霸王龙: 脊柱是'左右壁 + 背板'的箱形梁, 从后腿顶向头尾双向悬挑贯穿全身; 肋骨、小短手与下颌全部倒挂在脊柱下缘, 胸腔与大嘴都是负空间。头尾互为配重, 尾椎补齐前重心始终不越出展台 —— 全模型没有一面墙, 形体完全由骨骼定义, 搭完就是一件博物馆展品。",
+  "difficulty": 3,
+  "total_pieces": 73,
+  "tags": [
+    "恐龙",
+    "骨架",
+    "动物世界",
+    "博物馆",
+    "悬挑"
+  ],
+  "content_meta": {
+    "series": "animal_world",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 56,
+        "isosceles_triangle": 8,
+        "equilateral_triangle": 5,
+        "right_triangle": 4
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ped_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ped_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ped_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ped_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ped_7",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ped_8",
+      "type": "square",
+      "position": [
+        8.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "plaque",
+      "type": "square",
+      "position": [
+        8.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "plaque_sign",
+      "type": "equilateral_triangle",
+      "position": [
+        8.5,
+        -1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "leg_l_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_r_0",
+      "type": "square",
+      "position": [
+        5.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_l_1",
+      "type": "square",
+      "position": [
+        5.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "leg_r_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "toe_l",
+      "type": "right_triangle",
+      "position": [
+        6.333333,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "toe_r",
+      "type": "right_triangle",
+      "position": [
+        6.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_l_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sp_l_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sp_l_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sp_l_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sp_l_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sp_l_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sp_l_7",
+      "type": "square",
+      "position": [
+        7.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_7",
+      "type": "square",
+      "position": [
+        7.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_7",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sp_l_8",
+      "type": "square",
+      "position": [
+        8.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_8",
+      "type": "square",
+      "position": [
+        8.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_8",
+      "type": "square",
+      "position": [
+        8.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sp_l_9",
+      "type": "square",
+      "position": [
+        9.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_9",
+      "type": "square",
+      "position": [
+        9.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_9",
+      "type": "square",
+      "position": [
+        9.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sp_l_10",
+      "type": "square",
+      "position": [
+        10.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sp_r_10",
+      "type": "square",
+      "position": [
+        10.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_10",
+      "type": "square",
+      "position": [
+        10.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "tail_l",
+      "type": "isosceles_triangle",
+      "position": [
+        0.333333,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tail_r",
+      "type": "isosceles_triangle",
+      "position": [
+        0.333333,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rib_l_6",
+      "type": "isosceles_triangle",
+      "position": [
+        6.5,
+        -0.333333,
+        1.422649
+      ],
+      "rotation": [
+        -119.999997,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rib_r_6",
+      "type": "isosceles_triangle",
+      "position": [
+        6.5,
+        1.333333,
+        1.422649
+      ],
+      "rotation": [
+        -60.000003,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rib_l_7",
+      "type": "isosceles_triangle",
+      "position": [
+        7.5,
+        -0.333333,
+        1.422649
+      ],
+      "rotation": [
+        -119.999997,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rib_r_7",
+      "type": "isosceles_triangle",
+      "position": [
+        7.5,
+        1.333333,
+        1.422649
+      ],
+      "rotation": [
+        -60.000003,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rib_l_8",
+      "type": "isosceles_triangle",
+      "position": [
+        8.5,
+        -0.333333,
+        1.422649
+      ],
+      "rotation": [
+        -119.999997,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rib_r_8",
+      "type": "isosceles_triangle",
+      "position": [
+        8.5,
+        1.333333,
+        1.422649
+      ],
+      "rotation": [
+        -60.000003,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_l",
+      "type": "equilateral_triangle",
+      "position": [
+        9.5,
+        0.0,
+        1.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "arm_r",
+      "type": "equilateral_triangle",
+      "position": [
+        9.5,
+        1.0,
+        1.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "nk_l_9",
+      "type": "square",
+      "position": [
+        9.5,
+        0.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "nk_r_9",
+      "type": "square",
+      "position": [
+        9.5,
+        1.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ncap_9",
+      "type": "square",
+      "position": [
+        9.5,
+        0.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "nk_l_10",
+      "type": "square",
+      "position": [
+        10.5,
+        0.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "nk_r_10",
+      "type": "square",
+      "position": [
+        10.5,
+        1.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ncap_10",
+      "type": "square",
+      "position": [
+        10.5,
+        0.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sk_l_10",
+      "type": "square",
+      "position": [
+        10.5,
+        0.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sk_r_10",
+      "type": "square",
+      "position": [
+        10.5,
+        1.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scap_10",
+      "type": "square",
+      "position": [
+        10.5,
+        0.5,
+        5.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sk_l_11",
+      "type": "square",
+      "position": [
+        11.5,
+        0.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sk_r_11",
+      "type": "square",
+      "position": [
+        11.5,
+        1.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scap_11",
+      "type": "square",
+      "position": [
+        11.5,
+        0.5,
+        5.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sk_l_12",
+      "type": "square",
+      "position": [
+        12.5,
+        0.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sk_r_12",
+      "type": "square",
+      "position": [
+        12.5,
+        1.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "scap_12",
+      "type": "square",
+      "position": [
+        12.5,
+        0.5,
+        5.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "snout_l",
+      "type": "right_triangle",
+      "position": [
+        13.333333,
+        0.0,
+        4.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "snout_r",
+      "type": "right_triangle",
+      "position": [
+        13.333333,
+        1.0,
+        4.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "jaw_l",
+      "type": "equilateral_triangle",
+      "position": [
+        12.5,
+        0.0,
+        3.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "jaw_r",
+      "type": "equilateral_triangle",
+      "position": [
+        12.5,
+        1.0,
+        3.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "博物馆展台: 桌面上一字铺开 6 片基座 (x 3..9), 相邻边互吸。",
+      "tip": "骨架全长 14 格, 展台居中偏后 —— 头尾都要留出悬挑空间。",
+      "tiles_to_add": [
+        "ped_3",
+        "ped_4",
+        "ped_5",
+        "ped_6",
+        "ped_7",
+        "ped_8"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "后腿与脚爪: 左右腿各 2 片立在展台南北沿上 (x 5..6), 前方各加 1 片直角三角脚爪 —— 竖边吸腿骨、横边落地, 是全身的斜撑地锚。",
+      "tip": "两条腿分立展台两侧沿口, 中间空出的就是骨盆下方的镂空。",
+      "tiles_to_add": [
+        "leg_l_0",
+        "leg_l_1",
+        "leg_r_0",
+        "leg_r_1",
+        "toe_l",
+        "toe_r"
+      ],
+      "highlight_tiles": [
+        "ped_5",
+        "ped_6"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "骨盆节: 脊柱第一节 —— 左右壁各 1 片压上腿顶, 1 片背板把两壁锁成箱形。之后的每一节都重复这个'两壁一盖'的手法。",
+      "tip": "背板同时吸住左右壁顶边 —— 箱形闭环是整条脊柱的力学核心。",
+      "tiles_to_add": [
+        "sp_l_5",
+        "sp_r_5",
+        "cap_5"
+      ],
+      "highlight_tiles": [
+        "leg_l_1",
+        "leg_r_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "胸椎两节: 脊柱向头侧悬挑 x 6..8, 每节仍是两壁一盖。",
+      "tip": "悬挑节先吸竖边再压背板, 箱形梁会把悬挑力矩化成面内力。",
+      "tiles_to_add": [
+        "sp_l_6",
+        "sp_r_6",
+        "cap_6",
+        "sp_l_7",
+        "sp_r_7",
+        "cap_7"
+      ],
+      "highlight_tiles": [
+        "cap_5"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "肩椎一节: 继续向头侧推进 x 8..9。",
+      "tip": "脊柱每节都与上一节竖边整边互吸, 别留半格错位。",
+      "tiles_to_add": [
+        "sp_l_8",
+        "sp_r_8",
+        "cap_8"
+      ],
+      "highlight_tiles": [
+        "cap_7"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "颈根两节: 脊柱前段到位 (x 9..11), 霸王龙的上半身骨架成形。",
+      "tip": "此时头侧悬挑已 5 节 —— 下一步开始补尾段配重。",
+      "tiles_to_add": [
+        "sp_l_9",
+        "sp_r_9",
+        "cap_9",
+        "sp_l_10",
+        "sp_r_10",
+        "cap_10"
+      ],
+      "highlight_tiles": [
+        "cap_8"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "尾椎两节: 回到骨盆向尾侧悬挑 x 3..5。",
+      "tip": "尾巴是天然配重, 把重心拉回展台正中。",
+      "tiles_to_add": [
+        "sp_l_4",
+        "sp_r_4",
+        "cap_4",
+        "sp_l_3",
+        "sp_r_3",
+        "cap_3"
+      ],
+      "highlight_tiles": [
+        "cap_5"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "尾梢两节: 尾段延伸到 x 1..3, 脊柱箱形梁全线贯通。",
+      "tip": "尾尖离桌面始终两格高 —— 霸王龙尾巴是平举的, 不拖地。",
+      "tiles_to_add": [
+        "sp_l_2",
+        "sp_r_2",
+        "cap_2",
+        "sp_l_1",
+        "sp_r_1",
+        "cap_1"
+      ],
+      "highlight_tiles": [
+        "cap_3"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "尾尖收形: 2 片瘦高等腰三角形底边吸在尾端竖边上, 水平向西收出两格长的鞭状尖尾。",
+      "tip": "挂在竖直磁边上的水平尖件不产生重力力矩, 放心悬挑。",
+      "tiles_to_add": [
+        "tail_l",
+        "tail_r"
+      ],
+      "highlight_tiles": [
+        "sp_l_1",
+        "sp_r_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "肋骨笼: 3 对瘦高等腰三角形从胸腔段脊柱下缘倒挂 (x 6..9), 肋尖向体侧外撇 30 度、离桌面约小半格, 肋间留空 —— 化石骨架的镂空胸腔。",
+      "tip": "倒挂件靠磁条受拉, 单片远在悬挂预算内; 左右成对交替安装。",
+      "tiles_to_add": [
+        "rib_l_6",
+        "rib_r_6",
+        "rib_l_7",
+        "rib_r_7",
+        "rib_l_8",
+        "rib_r_8"
+      ],
+      "highlight_tiles": [
+        "cap_6",
+        "cap_7",
+        "cap_8"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "小短手: 1 对等边三角形倒挂在颈根下缘 (x 9..10) —— 霸王龙标志性的小前肢。",
+      "tip": "是的, 它真的就这么短。",
+      "tiles_to_add": [
+        "arm_l",
+        "arm_r"
+      ],
+      "highlight_tiles": [
+        "sp_l_9",
+        "sp_r_9"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "颈箱: 颈部两节双壁 + 双背板叠在脊柱前段之上 (x 9..11, z 3..4), 脖颈开始抬升。",
+      "tip": "颈箱直接踩在脊柱背板与壁顶上, 上下两层箱梁错半格更稳。",
+      "tiles_to_add": [
+        "nk_l_9",
+        "nk_r_9",
+        "nk_l_10",
+        "nk_r_10",
+        "ncap_9",
+        "ncap_10"
+      ],
+      "highlight_tiles": [
+        "cap_9",
+        "cap_10"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "头骨箱: 3 节双壁再上一层 (x 10..13, z 4..5), 向前悬挑出下颚以上的整个头颅侧影。",
+      "tip": "头骨箱第 1 节踩在颈箱顶上, 后 2 节靠竖边互吸向前悬挑。",
+      "tiles_to_add": [
+        "sk_l_10",
+        "sk_r_10",
+        "sk_l_11",
+        "sk_r_11",
+        "sk_l_12",
+        "sk_r_12"
+      ],
+      "highlight_tiles": [
+        "ncap_9",
+        "ncap_10"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "颅顶与吻尖: 3 片背板锁住头骨箱, 2 片直角三角形竖边吸箱前缘, 斜边向前下方收出吻部。",
+      "tip": "背板先锁箱再装吻尖, 头骨箱合环后前端才有足够刚度。",
+      "tiles_to_add": [
+        "scap_10",
+        "scap_11",
+        "scap_12",
+        "snout_l",
+        "snout_r"
+      ],
+      "highlight_tiles": [
+        "sk_l_12",
+        "sk_r_12"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "血盆大口: 2 片红色等边三角形从头骨下缘倒挂成下颌, 尖端朝下 —— 与肋骨同款倒挂手法。",
+      "tip": "下颌与颈箱之间留出的负空间就是张开的大嘴。",
+      "tiles_to_add": [
+        "jaw_l",
+        "jaw_r"
+      ],
+      "highlight_tiles": [
+        "sk_l_12",
+        "sk_r_12"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "博物馆铭牌: 展台前侧接 1 片黄色铭牌台, 立 1 片红色三角铭牌 —— '霸王龙 Tyrannosaurus rex', 布展完成!",
+      "tip": "绕着展台走一圈: 从任何角度都只看到骨骼, 没有一面墙。",
+      "tiles_to_add": [
+        "plaque",
+        "plaque_sign"
+      ],
+      "highlight_tiles": [
+        "ped_8"
+      ]
+    }
+  ]
+}

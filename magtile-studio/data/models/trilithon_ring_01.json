@@ -1,0 +1,447 @@
+{
+  "schema_version": 1,
+  "id": "trilithon_ring_01",
+  "name": "巨石门环",
+  "name_en": "Trilithon Ring 01",
+  "description": "入门档建筑地标: 环绕青草祭坛的四座巨石门, 结构签名是'三石塔环列' —— 每座石门两块竖立长石板托一块平放门楣, 门楣两条长边分别整边压住内外石板顶, 两端简支互为备份; 内圈石板脚整边吸住 2x2 大方祭坛四边、相邻石板竖棱 90 度角缝互吸锁成门环, 一条两节黄色参道从南门直通场外, 参道两侧四面红色祭旗、南北门楣上四枚橙色日晷石。23 片全程接地受压零悬挑, 日晷尖 1.87 不触发高层判定, 搭完就是桌面上的史前天文台。",
+  "difficulty": 1,
+  "total_pieces": 23,
+  "tags": [
+    "建筑地标",
+    "巨石阵",
+    "三石塔",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "landmark_architecture",
+    "structural_signature": {
+      "tile_histogram": {
+        "rectangle": 14,
+        "equilateral_triangle": 8,
+        "large_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "altar",
+      "type": "large_square",
+      "position": [
+        2.0,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ave_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ave_2",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        -1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "s_in",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "s_out",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "s_cap",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "n_in",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "n_out",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "n_cap",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "w_in",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "w_out",
+      "type": "rectangle",
+      "position": [
+        0.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "w_cap",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "e_in",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "e_out",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "e_cap",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "sun_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "sun_se",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "sun_nw",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        3.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "sun_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        3.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flag_w1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        -0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_e1",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        -0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_w2",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        -1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_e2",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        -1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺祭坛: 绿色大方板放正中当青草祭坛 —— 大方板一片顶四片, 祭坛要又大又平。",
+      "tip": "",
+      "tiles_to_add": [
+        "altar"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立南门铺参道: 内石板脚整边吸祭坛南边, 门楣两条长边同时压住两块石板顶, 两节黄色参道从外石板脚下一字铺出去。",
+      "tip": "门楣两端都有石板托着 —— 剪掉一边还有另一边, 这就是三石塔站了五千年的秘密。",
+      "tiles_to_add": [
+        "s_in",
+        "s_out",
+        "s_cap",
+        "ave_1",
+        "ave_2"
+      ],
+      "highlight_tiles": [
+        "altar"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立西门和东门: 照南门的样子各立两块竖石板再盖门楣, 内圈石板竖棱和南门内石板角缝互吸。",
+      "tip": "内圈四块石板竖棱手拉手 —— 门环锁成一圈就推不倒了。",
+      "tiles_to_add": [
+        "w_in",
+        "w_out",
+        "w_cap",
+        "e_in",
+        "e_out",
+        "e_cap"
+      ],
+      "highlight_tiles": [
+        "s_in"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立北门点日晷: 北门内外石板加门楣合拢门环, 四枚橙色日晷石骑上南北门楣两端。",
+      "tip": "",
+      "tiles_to_add": [
+        "n_in",
+        "n_out",
+        "n_cap",
+        "sun_sw",
+        "sun_se",
+        "sun_nw",
+        "sun_ne"
+      ],
+      "highlight_tiles": [
+        "w_in",
+        "e_in"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "插祭旗: 四面红色祭旗骑上参道两侧短边, 巨石门环迎来第一缕晨光!",
+      "tip": "",
+      "tiles_to_add": [
+        "flag_w1",
+        "flag_e1",
+        "flag_w2",
+        "flag_e2"
+      ],
+      "highlight_tiles": [
+        "ave_1",
+        "ave_2"
+      ]
+    }
+  ]
+}

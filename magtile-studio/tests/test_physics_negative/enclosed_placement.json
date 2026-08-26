@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "id": "fixture_enclosed_placement",
+  "name": "负例夹具: 封闭腔体内补片",
+  "name_en": "fixture_enclosed_placement",
+  "description": "反面教材: 全封闭盒子完成后才放内部隔断, 放置点从任何外部方向都不可达, 实搭时手无法伸入。成品本身合法, 把隔断挪到封顶之前即可通过 —— 校验器必须报 enclosed_placement 错误并拒绝当前步骤顺序。",
+  "difficulty": 1,
+  "total_pieces": 11,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "g1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "g2",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "f1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "f2",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "b1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "b2",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "l1",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "green"
+    },
+    {
+      "id": "r1",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "green"
+    },
+    {
+      "id": "t1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "t2",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "dv",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90,
+        0,
+        90
+      ],
+      "color": "purple"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平铺 2 片地板。",
+      "tip": "",
+      "tiles_to_add": [
+        "g1",
+        "g2"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "沿地板四周立起 6 片围墙, 组成 2x1 的盒身。",
+      "tip": "",
+      "tiles_to_add": [
+        "f1",
+        "f2",
+        "b1",
+        "b2",
+        "l1",
+        "r1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "盖上 2 片顶盖, 盒子完全封闭。",
+      "tip": "",
+      "tiles_to_add": [
+        "t1",
+        "t2"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 4,
+      "description": "错误示范: 在已封闭的盒子内部插入紫色隔断。",
+      "tip": "隔断的吸附位全部在盒子内部, 封顶之后手已经伸不进去 —— 应把本步挪到封顶之前。",
+      "tiles_to_add": [
+        "dv"
+      ],
+      "highlight_tiles": []
+    }
+  ]
+}

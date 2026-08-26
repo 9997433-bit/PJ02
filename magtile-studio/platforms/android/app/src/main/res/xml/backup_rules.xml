@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 自动备份白名单 (API 30 及以下走 android:fullBackupContent):
+     仅备份应用私有目录的进度存档 progress.db —— 有 include 规则时
+     其余文件 (filesDir/data 解包数据资产、外部专属目录的导出 JSON)
+     一律隐式排除, 不进云备份 (SECURITY_AND_PRIVACY.md §5.1;
+     签核单 DC7)。API 31+ 的同口径规则见 data_extraction_rules.xml,
+     两份文件必须保持同一白名单。M4 起若引入令牌/凭证文件, 须在
+     两份规则中显式核对排除 (§5.1 令牌条款)。 -->
+<full-backup-content>
+    <include domain="file" path="progress.db" />
+</full-backup-content>

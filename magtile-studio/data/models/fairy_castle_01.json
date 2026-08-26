@@ -1,0 +1,1223 @@
+{
+  "schema_version": 1,
+  "id": "fairy_castle_01",
+  "name": "仙子天桥城堡",
+  "name_en": "Fairy Sky-bridge Castle 01",
+  "description": "全库第一座天桥双塔城堡: 两座纤细的 1x1 三层仙子塔各自拔地而起, 塔顶两片方形桥板双端一线双吸架成天桥 —— 塔-桥-塔-地面锁成全场最大的门式刚架环; 半空彩虹拱楣双端竖边纯剪锁进塔身, 楣底倒挂一对受拉魔法吊灯; 双塔各戴等腰四坡童话锥顶 (塔尖 4.94), 桥沿粉旗迎风。高处相连、纯剪锁楣、倒挂受拉 —— 三种连接方式一座城堡学会。",
+  "difficulty": 3,
+  "total_pieces": 66,
+  "tags": [
+    "童话",
+    "奇幻",
+    "仙子城堡",
+    "天桥",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "fantasy_machinery",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 36,
+        "rectangle": 10,
+        "equilateral_triangle": 8,
+        "isosceles_triangle": 8,
+        "door_frame": 2,
+        "window_square": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "fg0_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg0_b",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fg0_c",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg1_a",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg1_b",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg1_c",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fg1_d",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg1_e",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg2_a",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg2_b",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg2_c",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fg2_d",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg2_e",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg3_a",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg3_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg3_c",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg3_d",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg4_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg4_b",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "fg4_c",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wt1_s",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wt1_w",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "wt1_e",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "wt1_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "wt2_s",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wt2_w",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "wt2_e",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "wt2_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "wt3_s",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "wt3_w",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "wt3_e",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "wt3_n",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "et1_s",
+      "type": "door_frame",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "et1_w",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "et1_e",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "et1_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "et2_s",
+      "type": "window_square",
+      "position": [
+        4.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "et2_w",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "et2_e",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "et2_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "et3_s",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "et3_w",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "et3_e",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "et3_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "arch_w",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "arch_e",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "lamp_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        0.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lamp_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        0.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wt_cap",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "et_cap",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "bridge_w",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bridge_e",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "br_flag_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "br_flag_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "wt_cone_s",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        2.166667,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wt_cone_e",
+      "type": "isosceles_triangle",
+      "position": [
+        1.833333,
+        2.5,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wt_cone_n",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        2.833333,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wt_cone_w",
+      "type": "isosceles_triangle",
+      "position": [
+        1.166667,
+        2.5,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "et_cone_s",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        2.166667,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "et_cone_e",
+      "type": "isosceles_triangle",
+      "position": [
+        4.833333,
+        2.5,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "et_cone_n",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        2.833333,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "et_cone_w",
+      "type": "isosceles_triangle",
+      "position": [
+        4.166667,
+        2.5,
+        3.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fl_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fl_se",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fl_nw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fl_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺前院一行 (y [0,1]): 3 片长板, 石板道居中正对两塔之间。",
+      "tip": "石板道 (x [2,4]) 正上方将架起彩虹拱楣与天桥。",
+      "tiles_to_add": [
+        "fg0_a",
+        "fg0_b",
+        "fg0_c"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺草坪第二行 (y [1,2]): 5 片, 塔脚拼缝就位。",
+      "tip": "x=1/2 与 x=4/5 的拼缝是两座仙子塔的墙脚。",
+      "tiles_to_add": [
+        "fg1_a",
+        "fg1_b",
+        "fg1_c",
+        "fg1_d",
+        "fg1_e"
+      ],
+      "highlight_tiles": [
+        "fg0_b"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺塔基行 (y [2,3]): 5 片, 两塔就踩这一行的格线。",
+      "tip": "中间的石板道穿过两塔之间 —— 那是城堡的仙径。",
+      "tiles_to_add": [
+        "fg2_a",
+        "fg2_b",
+        "fg2_c",
+        "fg2_d",
+        "fg2_e"
+      ],
+      "highlight_tiles": [
+        "fg1_b"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺后院两行 (y [3,5]): 7 片, 草坪合拢。",
+      "tip": "6x5 草坪铺满 —— 仙子的城堡从一片花园开始。",
+      "tiles_to_add": [
+        "fg3_a",
+        "fg3_b",
+        "fg3_c",
+        "fg3_d",
+        "fg4_a",
+        "fg4_b",
+        "fg4_c"
+      ],
+      "highlight_tiles": [
+        "fg2_c"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立西塔第 1 层: 4 片墙环, 南面是橙色门框方塔门。",
+      "tip": "每片底边吸草坪拼缝、转角竖边互咬 —— 墙环闭合才稳。",
+      "tiles_to_add": [
+        "wt1_s",
+        "wt1_w",
+        "wt1_e",
+        "wt1_n"
+      ],
+      "highlight_tiles": [
+        "fg1_b",
+        "fg2_b"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立东塔第 1 层: 镜像 4 片墙环, 塔门同样朝南。",
+      "tip": "两扇塔门一左一右, 中间留出 2 格宽的仙径门洞。",
+      "tiles_to_add": [
+        "et1_s",
+        "et1_w",
+        "et1_e",
+        "et1_n"
+      ],
+      "highlight_tiles": [
+        "wt1_s"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "叠两塔第 2 层: 各 4 片, 南面嵌窗格方精灵窗。",
+      "tip": "每片同时吸下层墙顶与邻片竖边 —— 连接处处成环。",
+      "tiles_to_add": [
+        "wt2_s",
+        "wt2_w",
+        "wt2_e",
+        "wt2_n",
+        "et2_s",
+        "et2_w",
+        "et2_e",
+        "et2_n"
+      ],
+      "highlight_tiles": [
+        "wt1_s",
+        "et1_s"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "架彩虹拱楣并倒挂双魔法吊灯: 两片楣板外端竖边纯剪锁进塔身。",
+      "tip": "吊灯底边整边吸楣底沿, 重心正下受拉 —— 磁力最擅长的方向。",
+      "tiles_to_add": [
+        "arch_w",
+        "arch_e",
+        "lamp_w",
+        "lamp_e"
+      ],
+      "highlight_tiles": [
+        "wt2_e",
+        "et2_w"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "叠两塔第 3 层: 各 4 片紫色墙环, 塔身升到 3 格高。",
+      "tip": "第 3 层墙顶就是天桥的桥墩 —— 越往上越要对齐。",
+      "tiles_to_add": [
+        "wt3_s",
+        "wt3_w",
+        "wt3_e",
+        "wt3_n",
+        "et3_s",
+        "et3_w",
+        "et3_e",
+        "et3_n"
+      ],
+      "highlight_tiles": [
+        "arch_w"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "盖塔顶盖板并架天桥: 两片桥板外端各一线双吸两塔塔顶, 桥中缝互吸。",
+      "tip": "塔-桥-塔-地面锁成全场最大的环 —— 剪断一端也塌不了。",
+      "tiles_to_add": [
+        "wt_cap",
+        "et_cap",
+        "bridge_w",
+        "bridge_e"
+      ],
+      "highlight_tiles": [
+        "wt3_e",
+        "et3_w"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "戴西塔锥顶: 4 片等腰三角斜棱两两互吸自锁。",
+      "tip": "童话城堡的标志就是这顶红色尖帽 (塔尖 4.94)。",
+      "tiles_to_add": [
+        "wt_cone_s",
+        "wt_cone_e",
+        "wt_cone_n",
+        "wt_cone_w"
+      ],
+      "highlight_tiles": [
+        "wt_cap",
+        "bridge_w"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "戴东塔锥顶: 再 4 片, 双塔尖帽遥遥相对。",
+      "tip": "四条斜棱互吸成环, 越推越紧。",
+      "tiles_to_add": [
+        "et_cone_s",
+        "et_cone_e",
+        "et_cone_n",
+        "et_cone_w"
+      ],
+      "highlight_tiles": [
+        "wt_cone_s"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "插天桥小旗 + 栽花丛 —— 仙子天桥城堡落成!",
+      "tip": "小旗重心正压桥沿铰链; 让小仙子从天桥上飞过去吧!",
+      "tiles_to_add": [
+        "br_flag_w",
+        "br_flag_e",
+        "fl_sw",
+        "fl_se",
+        "fl_nw",
+        "fl_ne"
+      ],
+      "highlight_tiles": [
+        "bridge_e",
+        "fg0_a"
+      ]
+    }
+  ]
+}

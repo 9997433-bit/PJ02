@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "fixture_unstable_cantilever",
+  "name": "负例夹具: 失稳悬臂",
+  "name_en": "Negative Fixture: Unstable Cantilever",
+  "description": "反面教材: 一面竖立的墙片顶上挂着三片水平悬挑的平板。所有片都有合法的磁力连接与支撑路径, 但整体重心的水平投影远超接地区域, 现实中必然向前倾倒。校验器必须报 unstable_center_of_mass 错误并拒绝该模型。",
+  "difficulty": 1,
+  "total_pieces": 4,
+  "tags": ["测试夹具", "负例"],
+  "final_assembly": [
+    {
+      "id": "wall",
+      "type": "square",
+      "position": [0.5, 0.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "red"
+    },
+    {
+      "id": "deck_1",
+      "type": "square",
+      "position": [0.5, 0.5, 1.0],
+      "rotation": [0, 0, 0],
+      "color": "orange"
+    },
+    {
+      "id": "deck_2",
+      "type": "square",
+      "position": [0.5, 1.5, 1.0],
+      "rotation": [0, 0, 0],
+      "color": "orange"
+    },
+    {
+      "id": "deck_3",
+      "type": "square",
+      "position": [0.5, 2.5, 1.0],
+      "rotation": [0, 0, 0],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "在桌面上竖起一片正方形墙片, 底边贴地。",
+      "tip": "",
+      "tiles_to_add": ["wall"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "错误示范: 在墙顶向外接出三片水平平板, 形成越伸越远的悬臂。",
+      "tip": "现实中重心一出底座, 整个结构就会向前倾倒。",
+      "tiles_to_add": ["deck_1", "deck_2", "deck_3"],
+      "highlight_tiles": ["wall"]
+    }
+  ]
+}

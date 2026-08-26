@@ -1,0 +1,399 @@
+{
+  "schema_version": 1,
+  "id": "duckling_pond_01",
+  "name": "池塘小黄鸭",
+  "name_en": "Duckling Pond 01",
+  "description": "入门档动物世界: 浮在池塘上的小黄鸭, 结构签名是'叠层动物' —— 身体是 2x1 封顶箱体, 六片方墙竖棱角缝互吸、身顶方板四边锁墙顶; 头部是骑在身顶前格上的 1x1 二层小塔, 墙脚整边压住身顶方板边与拼缝, 橙色面墙当嘴、透明窗格方当眼睛; 两片蓝色长板长边完整贴住鸭肚当池塘水面, 东角一片绿色荷叶, 尾巴和双翅是三面立起的橙色小旗。20 片全程受压零悬挑, 头顶 2.0 不触发高层判定, 搭完就能让小黄鸭在桌面池塘里巡游。",
+  "difficulty": 1,
+  "total_pieces": 20,
+  "tags": [
+    "动物世界",
+    "小鸭",
+    "池塘",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "animal_world",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 13,
+        "equilateral_triangle": 3,
+        "rectangle": 3,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "pond_s",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pond_n",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lily",
+      "type": "square",
+      "position": [
+        2.5,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "belly",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body_s0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body_s1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body_n0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body_n1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body_e",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "back_w",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "back_e",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "head_s",
+      "type": "window_square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "head_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "head_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "head_top",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wing_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wing_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tail",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺池塘和鸭肚: 两片蓝色长板当水面, 黄色长板夹在中间当鸭肚, 东角吸上绿色荷叶。",
+      "tip": "长板长边完整贴合 —— 小黄鸭要浮在水面正中央。",
+      "tiles_to_add": [
+        "pond_s",
+        "pond_n",
+        "belly",
+        "lily"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "围鸭身: 六片黄色方墙墙脚骑住鸭肚板边, 竖棱角缝互吸围成一圈。",
+      "tip": "",
+      "tiles_to_add": [
+        "body_s0",
+        "body_s1",
+        "body_n0",
+        "body_n1",
+        "body_w",
+        "body_e"
+      ],
+      "highlight_tiles": [
+        "belly"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "盖鸭背: 两片黄色方板四边整边锁住墙顶, 圆滚滚的身体封好了。",
+      "tip": "先合围再封顶 —— 装配顺序也是设计的一部分。",
+      "tiles_to_add": [
+        "back_w",
+        "back_e"
+      ],
+      "highlight_tiles": [
+        "body_s0",
+        "body_e"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "搭鸭头: 四片小墙骑上身顶前格, 橙色面墙是嘴、窗格方是眼睛, 最后盖上头顶。",
+      "tip": "头部墙脚正好压住身顶方板的边和拼缝 —— 二层小塔稳稳当当。",
+      "tiles_to_add": [
+        "head_s",
+        "head_n",
+        "head_w",
+        "head_e",
+        "head_top"
+      ],
+      "highlight_tiles": [
+        "back_w"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "翘尾巴张翅膀: 三面橙色小旗骑上身后墙顶, 小黄鸭下水啦!",
+      "tip": "",
+      "tiles_to_add": [
+        "wing_s",
+        "wing_n",
+        "tail"
+      ],
+      "highlight_tiles": [
+        "back_e"
+      ]
+    }
+  ]
+}

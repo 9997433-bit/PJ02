@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "id": "phone_cradle_01",
+  "name": "追剧手机摇篮",
+  "name_en": "Phone Cradle 01",
+  "description": "入门档实用功能: 只做一件事并把它做透的手机躺靠架 —— 四片紫色靠背墙踩住底板拼缝一字排开, 两端直角三角斜撑咬棱压缝, 橙色长板顶边整边吸住靠背顶沿搭出 30 度躺靠坡道, 坡尾恰好落回底板零悬挑; 右前角四面绿墙围出开顶耳机小盒, 靠背顶沿三面红旗迎风。20 片, 搭完的第一件事: 把手机躺上去, 按下播放键。",
+  "difficulty": 1,
+  "total_pieces": 20,
+  "tags": [
+    "实用功能",
+    "手机架",
+    "书桌",
+    "亲子",
+    "入门"
+  ],
+  "content_meta": {
+    "series": "practical_utility",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 8,
+        "rectangle": 7,
+        "equilateral_triangle": 3,
+        "right_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "deck_0_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_0_e",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_1_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_1_e",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_2_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_2_e",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "back_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "back_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "back_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "back_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "brace_w",
+      "type": "right_triangle",
+      "position": [
+        0.0,
+        1.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "brace_e",
+      "type": "right_triangle",
+      "position": [
+        4.0,
+        1.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cradle_ramp",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flag_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_m",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "box_s",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "box_n",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "box_w",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "box_e",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺桌垫前两行: 四片蓝青相间的长板行行整边互吸, 从左到右排齐。",
+      "tip": "长板一片顶两格, 底板铺得又快又稳。",
+      "tiles_to_add": [
+        "deck_0_w",
+        "deck_0_e",
+        "deck_1_w",
+        "deck_1_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "补上桌垫第三行: 再来两片长板, 摇篮的地基就位。",
+      "tip": "",
+      "tiles_to_add": [
+        "deck_2_w",
+        "deck_2_e"
+      ],
+      "highlight_tiles": [
+        "deck_1_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立靠背墙: 四片紫色方板踩住 y=2 拼缝一字排开, 墙脚整边吸牢。",
+      "tip": "靠背是手机的枕头, 四片墙互相拉手才站得直。",
+      "tiles_to_add": [
+        "back_0",
+        "back_1",
+        "back_2",
+        "back_3"
+      ],
+      "highlight_tiles": [
+        "deck_1_w",
+        "deck_1_e"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "锁斜撑、搭坡道: 两片灰色直角三角咬住墙端竖棱压住板缝, 橙色长板顶边吸靠背顶沿, 坡尾自然落到底板上。",
+      "tip": "30 度斜躺角正好看动画 —— 坡尾贴地, 手机再重也不怕。",
+      "tiles_to_add": [
+        "brace_w",
+        "brace_e",
+        "cradle_ramp"
+      ],
+      "highlight_tiles": [
+        "back_0",
+        "back_3"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "围耳机小盒: 右前角四面绿墙合围开顶小盒, 耳机、橡皮筋都住这里。",
+      "tip": "",
+      "tiles_to_add": [
+        "box_s",
+        "box_e",
+        "box_n",
+        "box_w"
+      ],
+      "highlight_tiles": [
+        "deck_0_e"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "升三面小旗: 红色三角骑上靠背顶沿, 手机摇篮开演!",
+      "tip": "小旗重心正压沿口 —— 装饰也要站得稳。",
+      "tiles_to_add": [
+        "flag_w",
+        "flag_m",
+        "flag_e"
+      ],
+      "highlight_tiles": [
+        "back_0",
+        "back_2"
+      ]
+    }
+  ]
+}

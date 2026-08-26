@@ -1,0 +1,882 @@
+{
+  "schema_version": 1,
+  "id": "santa_sleigh_01",
+  "name": "圣诞雪橇",
+  "name_en": "Santa Sleigh 01",
+  "description": "只用核心九片型的全库第一架圣诞雪橇: 与校车/回收小车的车轮底座不同, 本作的招牌是'双滑轨 + 前滑坡' —— 两排立墙滑轨托起整张红色橇板, 橇头两条 30 度长板从板沿直落雪面 (顶边整边吸橇板西沿, 坡尾压雪, 重量走两条路), 正是雪橇破雪前行的那道弧线; 橇尾高背座椅顶着两面金色椅冠, 橇板上大小两只礼物箱盖得严严实实, 雪地上还有一只紫色大礼物等着装车, 三棵雪杉在北边排队送行 —— 铃儿响叮当, 圣诞老人马上出发!",
+  "difficulty": 2,
+  "total_pieces": 47,
+  "tags": [
+    "节日",
+    "圣诞",
+    "雪橇",
+    "礼物",
+    "冬季"
+  ],
+  "content_meta": {
+    "series": "holiday_seasonal",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 27,
+        "rectangle": 16,
+        "equilateral_triangle": 3,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "g0_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g0_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g0_e",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g1_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g1_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g1_e0",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g1_e1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g2_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g2_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g2_e0",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g2_e1",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g3_w0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g3_w1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "g3_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "g3_e",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "rail_s_0",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_s_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_s_2",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_n_0",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_n_1",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_n_2",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_sw",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_nw",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_se",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_ne",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "prow_s",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "prow_n",
+      "type": "rectangle",
+      "position": [
+        1.133975,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "back_s",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "back_n",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_s",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "crown_n",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        2.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "box1_s",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "box1_n",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "box1_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "box1_e",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "box1_lid",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "box2_s",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "box2_n",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "box2_w",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "box2_lid",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "box3_s",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "box3_n",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "box3_w",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "box3_e",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "box3_lid",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tree_a",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        4.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tree_b",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺雪地南半场: 白雪长板行行等边互吸, 中间一条冰面亮晶晶。",
+      "tip": "圣诞夜出发前先铺好雪原 —— 板边等长吸合才抓得牢。",
+      "tiles_to_add": [
+        "g0_w",
+        "g0_m",
+        "g0_e",
+        "g1_w",
+        "g1_m",
+        "g1_e0",
+        "g1_e1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺雪地北半场: 东端两片方板是装车位, 拼缝留给礼物墙脚。",
+      "tip": "",
+      "tiles_to_add": [
+        "g2_w",
+        "g2_m",
+        "g2_e0",
+        "g2_e1",
+        "g3_w0",
+        "g3_w1",
+        "g3_m",
+        "g3_e"
+      ],
+      "highlight_tiles": [
+        "g1_m"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立双滑轨: 六片灰色立墙排成南北两条轨, 墙脚咬住雪面拼缝。",
+      "tip": "雪橇不用轮子 —— 两条滑轨就是它的雪上飞毯。",
+      "tiles_to_add": [
+        "rail_s_0",
+        "rail_s_1",
+        "rail_s_2",
+        "rail_n_0",
+        "rail_n_1",
+        "rail_n_2"
+      ],
+      "highlight_tiles": [
+        "g1_m"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "盖橇板: 先落东端两片方板咬住轨顶, 再拼西侧两条长板。",
+      "tip": "长边对轨顶, 力臂为零 —— 橇板稳得能开茶话会。",
+      "tiles_to_add": [
+        "deck_se",
+        "deck_ne",
+        "deck_sw",
+        "deck_nw"
+      ],
+      "highlight_tiles": [
+        "rail_s_0",
+        "rail_n_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装橇头前滑坡: 两条 30 度长板顶边整边吸橇板西沿, 坡尾稳稳压雪。",
+      "tip": "顶铰链 + 接地坡尾, 重量走两条路 —— 破雪的弧线就位。",
+      "tiles_to_add": [
+        "prow_s",
+        "prow_n"
+      ],
+      "highlight_tiles": [
+        "deck_sw"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立高背座椅: 两片红墙骑橇板东沿, 顶上再压两面金色椅冠。",
+      "tip": "椅冠骑整边沿口, 重心正压铰链线 —— 圣诞老人的专座。",
+      "tiles_to_add": [
+        "back_s",
+        "back_n",
+        "crown_s",
+        "crown_n"
+      ],
+      "highlight_tiles": [
+        "deck_se"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "装大礼物箱: 两条绿横楣加两片绿墙围环, 黄色长板盖四边入扣。",
+      "tip": "横楣脚压橇板拼缝, 四角竖边互咬 —— 大礼物跑不了。",
+      "tiles_to_add": [
+        "box1_s",
+        "box1_n",
+        "box1_w",
+        "box1_e",
+        "box1_lid"
+      ],
+      "highlight_tiles": [
+        "deck_nw"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "装小礼物箱: 三片蓝墙借椅背当东墙, 黄色方盖扣紧。",
+      "tip": "和座椅共用一面墙 —— 省片又互锁, 聪明的装法。",
+      "tiles_to_add": [
+        "box2_s",
+        "box2_n",
+        "box2_w",
+        "box2_lid"
+      ],
+      "highlight_tiles": [
+        "back_s"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "摆装车礼物: 紫色墙环立在雪面拼缝上, 方盖一扣就等装车。",
+      "tip": "",
+      "tiles_to_add": [
+        "box3_s",
+        "box3_n",
+        "box3_w",
+        "box3_e",
+        "box3_lid"
+      ],
+      "highlight_tiles": [
+        "g2_e1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "种雪杉: 瘦高塔尖加一顶绿树冠骑上北沿口, 雪原就有了小森林。",
+      "tip": "叮叮当, 叮叮当 —— 铃儿响叮当, 雪橇出发啦!",
+      "tiles_to_add": [
+        "tree_a",
+        "tree_b"
+      ],
+      "highlight_tiles": [
+        "g3_m"
+      ]
+    }
+  ]
+}

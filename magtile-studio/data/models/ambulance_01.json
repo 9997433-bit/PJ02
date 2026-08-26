@@ -1,0 +1,1051 @@
+{
+  "schema_version": 1,
+  "id": "ambulance_01",
+  "name": "120 急救车",
+  "name_en": "Ambulance 01",
+  "description": "城市守护者的高箱厢式车: 2 片车轮底座整边吸马路拼缝, 底盘甲板双长边压轮顶锁成门式框架; 甲板上圈层砌法立起两层高的白色方舱 (红色急救条纹绕舱一周), 舱顶长板四边全吸闭合箱形环、红警灯朝前; 驾驶室退低一级直接落地, 透明挡风正对车头, 车顶整条贴住方舱前壁共享受力 —— 高低错落的阶梯剪影就是救护车的标志。车后医院急诊楼门脸: 蓝色急诊门/透明大窗/二层红十字, 透明雨棚平挑 (力矩 15<=20 双片共担), 楼顶红旗高扬; 安全锥围出急救通道, 路灯长明 —— 呜哇呜哇, 请让出生命通道!",
+  "difficulty": 3,
+  "total_pieces": 53,
+  "tags": [
+    "城市",
+    "职业体验",
+    "救护车",
+    "载具",
+    "车轮底座",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 32,
+        "rectangle": 8,
+        "equilateral_triangle": 5,
+        "window_square": 4,
+        "wheel_base": 2,
+        "door_frame": 1,
+        "isosceles_triangle": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "r0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r0_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r0_b",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r0_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r0_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_b",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r2_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r2_a",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r2_b",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r2_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wk_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wk_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wk_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wk_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wk_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wk_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wk_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "h1_win_w",
+      "type": "window_square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "h1_door",
+      "type": "door_frame",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "h1_win_e",
+      "type": "window_square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "h1_sq",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "h2_win_w",
+      "type": "window_square",
+      "position": [
+        2.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "h2_cross",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "h2_win_e",
+      "type": "window_square",
+      "position": [
+        4.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "h2_sq",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cp_w",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cp_e",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "er_flag",
+      "type": "isosceles_triangle",
+      "position": [
+        5.5,
+        4.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wh_s",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_n",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "amb_deck",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bx_rear",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bx_front",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bx_s1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bx_s2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bx_n1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bx_n2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bx_roof",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "beacon_r",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cab_s",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cab_n",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cab_wind",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cab_roof",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "beacon_b",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "lamp_post",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lamp_top",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cone_1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone_2",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺马路南排: 长板拼缝落在 y=1 线上 —— 那是南轮的落脚缝。",
+      "tip": "车轮底座即将整边吸在这条拼缝上, 长板务必对齐。",
+      "tiles_to_add": [
+        "r0_0",
+        "r0_a",
+        "r0_b",
+        "r0_5",
+        "r0_6"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺急救车道: 中排再铺 5 片, 救护车就停在这条车道上。",
+      "tip": "车底长板两条长边就是南北轮的双保险吸合线。",
+      "tiles_to_add": [
+        "r1_0",
+        "r1_a",
+        "r1_3",
+        "r1_b",
+        "r1_6"
+      ],
+      "highlight_tiles": [
+        "r0_a"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺马路北排: 5 片合拢马路, 轮缝板对齐 y=2 线。",
+      "tip": "三排马路铺完, 急救通道全线贯通。",
+      "tiles_to_add": [
+        "r2_0",
+        "r2_a",
+        "r2_3",
+        "r2_b",
+        "r2_6"
+      ],
+      "highlight_tiles": [
+        "r1_a"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺人行道: 7 片青色方板沿医院门前排开。",
+      "tip": "医院门脸就立在人行道背后的格线上。",
+      "tiles_to_add": [
+        "wk_0",
+        "wk_1",
+        "wk_2",
+        "wk_3",
+        "wk_4",
+        "wk_5",
+        "wk_6"
+      ],
+      "highlight_tiles": [
+        "r2_0",
+        "r2_6"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立医院一层门脸: 蓝色急诊门居中, 两侧透明大窗。",
+      "tip": "底边整边吸人行道格线, 竖边逐片互吸成排。",
+      "tiles_to_add": [
+        "h1_win_w",
+        "h1_door",
+        "h1_win_e",
+        "h1_sq"
+      ],
+      "highlight_tiles": [
+        "wk_2",
+        "wk_3"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立医院二层与红十字: 红十字方板挂在急诊门正上方。",
+      "tip": "上环整边压下环 —— 红十字是全城最醒目的坐标。",
+      "tiles_to_add": [
+        "h2_win_w",
+        "h2_cross",
+        "h2_win_e",
+        "h2_sq"
+      ],
+      "highlight_tiles": [
+        "h1_door"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "挑急诊雨棚并升旗: 2 片透明方板从二层墙顶平挑, 楼顶红旗升起。",
+      "tip": "单片力矩 15 <= 预算 20, 两片再整边互吸共担。",
+      "tiles_to_add": [
+        "cp_w",
+        "cp_e",
+        "er_flag"
+      ],
+      "highlight_tiles": [
+        "h2_win_w",
+        "h2_cross"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "装车轮: 2 片车轮底座沿 y=1 与 y=2 拼缝立起, 底边整边吸合。",
+      "tip": "一片车轮底座顶两格 —— 厢式车的四轮一步到位。",
+      "tiles_to_add": [
+        "wh_s",
+        "wh_n"
+      ],
+      "highlight_tiles": [
+        "r0_a",
+        "r2_a"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "架底盘甲板: 长板两条长边同时整边压住南北轮顶。",
+      "tip": "轮组+甲板锁成门式框架 —— 底盘从此不晃。",
+      "tiles_to_add": [
+        "amb_deck"
+      ],
+      "highlight_tiles": [
+        "wh_s",
+        "wh_n"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立方舱前后壁: 甲板短边上立起 2 片白色端壁。",
+      "tip": "端壁底边整边吸甲板短边 —— 方舱的骨架先立两端。",
+      "tiles_to_add": [
+        "bx_rear",
+        "bx_front"
+      ],
+      "highlight_tiles": [
+        "amb_deck"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "合方舱侧壁: 4 片侧壁竖边吸进前后壁拐角, 红色条纹绕舱一周。",
+      "tip": "圈层砌法合龙 —— 急救舱要经得起一路飞驰。",
+      "tiles_to_add": [
+        "bx_s1",
+        "bx_s2",
+        "bx_n1",
+        "bx_n2"
+      ],
+      "highlight_tiles": [
+        "bx_rear",
+        "bx_front"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "盖舱顶并装警灯: 长板四边全吸封舱, 红色警灯立在舱顶前沿。",
+      "tip": "舱顶长板短边压端壁、长边压侧壁 —— 箱形环完整闭合。",
+      "tiles_to_add": [
+        "bx_roof",
+        "beacon_r"
+      ],
+      "highlight_tiles": [
+        "bx_s1",
+        "bx_n2"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "立驾驶室: 南北矮墙加透明挡风, 车头正对前方。",
+      "tip": "驾驶室退低一级 —— 高低错落是厢式救护车的剪影。",
+      "tiles_to_add": [
+        "cab_s",
+        "cab_n",
+        "cab_wind"
+      ],
+      "highlight_tiles": [
+        "bx_front",
+        "r1_3"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "盖驾驶室顶并装示宽灯: 方板四边压墙顶, 蓝灯立车头。",
+      "tip": "车顶西边整条贴住方舱前壁底线 —— 高低车身共享受力。",
+      "tiles_to_add": [
+        "cab_roof",
+        "beacon_b"
+      ],
+      "highlight_tiles": [
+        "cab_s",
+        "cab_wind"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "立路灯: 黄色灯柱站上人行道东端, 黄灯压顶。",
+      "tip": "灯下就是急救通道 —— 夜里也一路通明。",
+      "tiles_to_add": [
+        "lamp_post",
+        "lamp_top"
+      ],
+      "highlight_tiles": [
+        "wk_6"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "摆安全锥: 2 只橙色安全锥围出路口 —— 请让出生命通道!",
+      "tip": "底边整边吸马路南沿 —— 呜哇呜哇, 出发!",
+      "tiles_to_add": [
+        "cone_1",
+        "cone_2"
+      ],
+      "highlight_tiles": [
+        "r0_5",
+        "r0_6"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# Gradle / Android 构建产物
+.gradle/
+build/
+app/build/
+.cxx/
+app/.cxx/
+local.properties
+# Kotlin 工具链缓存
+.kotlin/
+# Release 签名密钥与口令 (绝不入库, 模板见 keystore.properties.example / SIGNING.md)
+keystore.properties
+*.keystore
+*.jks
+# IDE
+.idea/
+*.iml
+captures/

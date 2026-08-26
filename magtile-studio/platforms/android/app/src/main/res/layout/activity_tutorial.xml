@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 分步教程页:
+     标题栏 (返回 + 模型名) + 进度头 (第 x/y 步 · 已放 n/m 片 + 进度条)
+     + 完成庆祝条 + 3D 教程视口 (GLES3, 单指旋转 / 双指捏合缩放 /
+     双指平移, 当前步新增片橙色描边呼吸 + 未放片 ghost 轮廓, 与桌面
+     GL/Qt 同一份场景渲染器) + 步骤列表 (当前步高亮 + 自动滚动定位)
+     + 底部「上一步 / 下一步」大按钮 (>= 64dp)。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/magtile_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/magtile_primary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+        <!-- 大返回键 (触控目标 >= 48dp) -->
+        <TextView
+            android:id="@+id/tutorial_back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/touch_target"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/back_button"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="@dimen/text_section"
+            android:textStyle="bold" />
+
+        <!-- 模型中文名 (Intent 附带, 数据加载前即可显示) -->
+        <TextView
+            android:id="@+id/tutorial_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/tutorial_title_fallback"
+            android:textColor="@color/magtile_on_primary"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- 状态行: 加载中 / 加载失败的温和提示 (加载完成后隐藏) -->
+    <TextView
+        android:id="@+id/tutorial_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="4dp"
+        android:text="@string/tutorial_loading"
+        android:textColor="@color/magtile_text_secondary"
+        android:textSize="@dimen/text_secondary" />
+
+    <!-- 主体列 (数据加载完成前隐藏, 避免空壳闪烁) -->
+    <LinearLayout
+        android:id="@+id/tutorial_body"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!-- 进度头: "第 x/y 步 · 已放 n/m 片" 文字 + 进度条双编码 (§4.7) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/tutorial_step_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/magtile_text_primary"
+                android:textSize="@dimen/text_section"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/tutorial_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:progressTint="@color/magtile_primary" />
+
+            <!-- 完成庆祝条 (走完全部步骤时显示, §4.3 只报喜) -->
+            <TextView
+                android:id="@+id/tutorial_finished"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_banner_finished"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/tutorial_finished_banner"
+                android:textColor="@color/magtile_success"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- 3D 教程视口 (GLES3 渲染循环 + 触屏轨道相机; 场景加载前
+             温和显示清屏色 + 地面网格, 渲染初始化失败只降级不报错) -->
+        <com.magtile.studio.TutorialSceneView
+            android:id="@+id/tutorial_scene"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.15"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp" />
+
+        <!-- 手势提示 (一句话, 图形+文字双编码 §4.7) -->
+        <TextView
+            android:id="@+id/tutorial_scene_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="@string/tutorial_scene_hint"
+            android:textColor="@color/magtile_text_secondary"
+            android:textSize="@dimen/text_secondary" />
+
+        <!-- 步骤列表 (当前步高亮 + smoothScroll 定位) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tutorial_steps"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="10dp" />
+
+        <!-- 底部导航: 上一步 / 下一步 (末步时变「完成 🎉」) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/magtile_card"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="12dp">
+
+            <Button
+                android:id="@+id/tutorial_prev_button"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_weight="1"
+                android:text="@string/tutorial_prev"
+                android:textSize="@dimen/text_body" />
+
+            <Button
+                android:id="@+id/tutorial_next_button"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_weight="1.4"
+                android:backgroundTint="@color/magtile_primary"
+                android:text="@string/tutorial_next"
+                android:textColor="@color/magtile_on_primary"
+                android:textSize="@dimen/text_body" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

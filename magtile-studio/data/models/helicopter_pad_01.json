@@ -1,0 +1,1350 @@
+{
+  "schema_version": 1,
+  "id": "helicopter_pad_01",
+  "name": "楼顶停机坪",
+  "name_en": "Rooftop Helipad 01",
+  "description": "全库第一座楼顶停机坪: 三层玻璃门厅办公楼层层箱形互锁, 楼顶向东西两翼挑出停机坪甲板 (成对共铰力矩 30 <= 严格档 35, 四片直角三角膝撑再锁成刚性节点); 坪心停着小型直升机 —— 尾梁双端受力搭在尾撑柱顶, 六边形旋翼盘立在舱顶铰链正上; 透明安全网、风向袋与四坡通信设备房点齐高空作业细节 —— 塔台呼叫, 可以降落!",
+  "difficulty": 3,
+  "total_pieces": 71,
+  "tags": [
+    "城市生活",
+    "建筑",
+    "直升机",
+    "停机坪",
+    "进阶",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "sea_air_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 56,
+        "equilateral_triangle": 10,
+        "right_triangle": 4,
+        "hexagon": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "pz_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pz_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_s0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_n0_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_s0_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_n0_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_w0_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_e0_1",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw_w0_2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_e0_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tw_s1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_n1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_s1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_n1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_w1_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_e1_1",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_w1_2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_e1_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "tw_s2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_n2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_s2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_n2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_w2_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_e2_1",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_w2_2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_e2_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "awn_0",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "awn_1",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pad_c_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pad_c_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pad_c_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pad_c_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pad_w_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_e_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_w_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pad_e_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "kb_ws",
+      "type": "right_triangle",
+      "position": [
+        1.666667,
+        1.0,
+        2.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "kb_wn",
+      "type": "right_triangle",
+      "position": [
+        1.666667,
+        3.0,
+        2.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "kb_es",
+      "type": "right_triangle",
+      "position": [
+        4.333333,
+        1.0,
+        2.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "kb_en",
+      "type": "right_triangle",
+      "position": [
+        4.333333,
+        3.0,
+        2.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "hc_s",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hc_n",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hc_ws",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hc_top",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tail_post",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tail_boom",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tail_fin",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rotor",
+      "type": "hexagon",
+      "position": [
+        2.5,
+        2.0,
+        4.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "net_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "net_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "net_e1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        1.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "net_e2",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        2.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "windsock",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        2.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "beacon_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "beacon_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.833333,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "beacon_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "beacon_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.166667,
+        3.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺广场中带: 8 片灰色方板双列并进 (y 1..3), 这是塔楼的地基。",
+      "tip": "方板逐格拼缝互吸 —— 塔楼墙脚全踩在这些缝上。",
+      "tiles_to_add": [
+        "pz_1_1",
+        "pz_1_2",
+        "pz_2_1",
+        "pz_2_2",
+        "pz_3_1",
+        "pz_3_2",
+        "pz_4_1",
+        "pz_4_2"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "补广场南北带: 再铺 8 片, 5x4 广场合拢。",
+      "tip": "城市街角的一整块场坪 —— 直升机的家就盖在正中。",
+      "tiles_to_add": [
+        "pz_1_0",
+        "pz_1_3",
+        "pz_2_0",
+        "pz_2_3",
+        "pz_3_0",
+        "pz_3_3",
+        "pz_4_0",
+        "pz_4_3"
+      ],
+      "highlight_tiles": [
+        "pz_1_1",
+        "pz_4_2"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "塔楼一层·南北墙: 4 片灰色方墙立在广场拼缝上。",
+      "tip": "墙脚踩缝, 底边同时吸住两片广场板 —— 双铰链保险。",
+      "tiles_to_add": [
+        "tw_s0_2",
+        "tw_s0_3",
+        "tw_n0_2",
+        "tw_n0_3"
+      ],
+      "highlight_tiles": [
+        "pz_2_1",
+        "pz_3_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "塔楼一层·西墙与玻璃门厅: 西面 2 片方墙, 东面 2 片透明玻璃门。",
+      "tip": "拐角竖边互吸, 一层箱形合龙 —— 玻璃门厅朝东迎客。",
+      "tiles_to_add": [
+        "tw_w0_1",
+        "tw_w0_2",
+        "tw_e0_1",
+        "tw_e0_2"
+      ],
+      "highlight_tiles": [
+        "tw_s0_2",
+        "tw_n0_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "挑门厅雨棚: 2 片透明方板从玻璃门顶向东平挑。",
+      "tip": "单片力矩 15 <= 严格档预算 17.5, 双片拼缝互吸 —— 雨天不湿身。",
+      "tiles_to_add": [
+        "awn_0",
+        "awn_1"
+      ],
+      "highlight_tiles": [
+        "tw_e0_1",
+        "tw_e0_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "塔楼二层·南北墙: 黄色方墙对缝叠上一层墙顶。",
+      "tip": "上下层严格对缝 —— 荷载顺墙身直落地基。",
+      "tiles_to_add": [
+        "tw_s1_2",
+        "tw_s1_3",
+        "tw_n1_2",
+        "tw_n1_3"
+      ],
+      "highlight_tiles": [
+        "tw_s0_2",
+        "tw_n0_3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "塔楼二层·东西墙: 再立 4 片, 二层箱形合龙。",
+      "tip": "黄色办公层 —— 窗后是空管值班室。",
+      "tiles_to_add": [
+        "tw_w1_1",
+        "tw_w1_2",
+        "tw_e1_1",
+        "tw_e1_2"
+      ],
+      "highlight_tiles": [
+        "tw_s1_2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "塔楼三层·南北墙: 灰色方墙再叠一层。",
+      "tip": "第三层是设备层 —— 电梯机房与消防水箱都在这里。",
+      "tiles_to_add": [
+        "tw_s2_2",
+        "tw_s2_3",
+        "tw_n2_2",
+        "tw_n2_3"
+      ],
+      "highlight_tiles": [
+        "tw_s1_2",
+        "tw_n1_3"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "塔楼三层·东西墙: 4 片合龙, 塔楼封顶前的最后一圈。",
+      "tip": "三层箱形环层层互锁 —— 楼顶要扛住一整座停机坪。",
+      "tiles_to_add": [
+        "tw_w2_1",
+        "tw_w2_2",
+        "tw_e2_1",
+        "tw_e2_2"
+      ],
+      "highlight_tiles": [
+        "tw_s2_2"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "铺坪心: 4 片白色方板四边吸满三层墙顶 —— 这是触地区。",
+      "tip": "每片都要听到与墙顶的咔哒声再松手。",
+      "tiles_to_add": [
+        "pad_c_2_1",
+        "pad_c_2_2",
+        "pad_c_3_1",
+        "pad_c_3_2"
+      ],
+      "highlight_tiles": [
+        "tw_s2_2",
+        "tw_e2_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "挑东西坪板: 绿色挑板向两翼各挑 2 片, 停机坪扩成 4x2。",
+      "tip": "成对共铰: 铰链线长 2, 力矩 30 <= 严格档预算 35。",
+      "tiles_to_add": [
+        "pad_w_1",
+        "pad_w_2",
+        "pad_e_1",
+        "pad_e_2"
+      ],
+      "highlight_tiles": [
+        "pad_c_2_1",
+        "pad_c_3_1"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "锁四片膝撑: 直角三角形横边托挑板、竖边吸墙角, 悬挑变刚性节点。",
+      "tip": "膝撑是高空挑板的保险绳 —— 四角都要锁上。",
+      "tiles_to_add": [
+        "kb_ws",
+        "kb_wn",
+        "kb_es",
+        "kb_en"
+      ],
+      "highlight_tiles": [
+        "pad_w_1",
+        "pad_e_2"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "立坪边安全网: 4 片透明三角立在坪沿 —— 高空作业规矩第一条。",
+      "tip": "透明网不挡视线, 底边整边吸坪板沿边。",
+      "tiles_to_add": [
+        "net_s",
+        "net_n",
+        "net_e1",
+        "net_e2"
+      ],
+      "highlight_tiles": [
+        "pad_e_1",
+        "pad_c_3_1"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "落直升机舱体: 2 片红色舱壁踩坪缝立起, 透明风挡朝东。",
+      "tip": "舱壁就是滑橇 —— 稳稳踩在触地区正中。",
+      "tiles_to_add": [
+        "hc_s",
+        "hc_n",
+        "hc_ws"
+      ],
+      "highlight_tiles": [
+        "pad_c_2_1",
+        "pad_c_3_1"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "盖舱顶接尾梁: 舱顶压住舱壁, 尾撑柱立坪西沿, 尾梁西端吸舱顶板缝、东端落尾撑柱顶 —— 双端受力如桥。",
+      "tip": "尾梁不是悬挑 —— 两端都有依托才叫工程。",
+      "tiles_to_add": [
+        "hc_top",
+        "tail_post",
+        "tail_boom"
+      ],
+      "highlight_tiles": [
+        "hc_s",
+        "hc_ws"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "装尾鳍与旋翼盘: 尾鳍立尾梁末端, 六边形旋翼盘立上舱顶。",
+      "tip": "旋翼盘重心正压舱顶铰链, 力矩为零 —— 随时可以启动。",
+      "tiles_to_add": [
+        "tail_fin",
+        "rotor"
+      ],
+      "highlight_tiles": [
+        "tail_boom",
+        "hc_top"
+      ]
+    },
+    {
+      "step_number": 17,
+      "description": "风向袋与通信设备房: 坪西沿插橙色风向袋, 广场东北角扣 4 片四坡设备房 —— 楼顶停机坪正式启用!",
+      "tip": "风向袋告诉飞行员往哪边压杆 —— 塔台呼叫, 可以降落!",
+      "tiles_to_add": [
+        "windsock",
+        "beacon_s",
+        "beacon_e",
+        "beacon_n",
+        "beacon_w"
+      ],
+      "highlight_tiles": [
+        "pad_w_2",
+        "pz_4_3"
+      ]
+    }
+  ]
+}

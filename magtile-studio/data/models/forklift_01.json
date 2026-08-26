@@ -1,0 +1,872 @@
+{
+  "schema_version": 1,
+  "id": "forklift_01",
+  "name": "叉车",
+  "name_en": "Forklift 01",
+  "description": "全库第一台叉车: 两片车轮底座咬住货场拼缝组成底盘, 甲板长板整边压顶锁成箱形环; 车尾三面司机棚顶着红色警示灯, 车头门架升起、货叉平伸插进托盘垛 —— 叉尖搭上托盘墙顶双端受力, 绿色四坡货箱已离地 1 格; 一旁蓝色集装箱码着橙色货堆, 四枚雪糕筒围出作业区 —— 起升, 转运, 落位!",
+  "difficulty": 2,
+  "total_pieces": 46,
+  "tags": [
+    "城市",
+    "叉车",
+    "车轮底座",
+    "物流",
+    "职业体验",
+    "免费"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 20,
+        "equilateral_triangle": 13,
+        "rectangle": 11,
+        "wheel_base": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "yd_a0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_b0",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_c0",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_d0",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_a1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "yd_b1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "yd_c1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "yd_d1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "yd_e1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "yd_f1",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "yd_a2",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_b2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_c2",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_d2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_a3",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_b3",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_c3",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "yd_d3",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_s",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_n",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cab_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cab_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cab_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cab_roof",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "beacon",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mast",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fork",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pallet",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cargo_s",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "cargo_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.833333,
+        1.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "cargo_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "cargo_w",
+      "type": "equilateral_triangle",
+      "position": [
+        3.166667,
+        1.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bx_s",
+      "type": "square",
+      "position": [
+        5.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bx_n",
+      "type": "square",
+      "position": [
+        5.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bx_w",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bx_e",
+      "type": "square",
+      "position": [
+        6.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bx_top",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pile_s",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        1.166667,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.833333,
+        1.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_n",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        1.833333,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pile_w",
+      "type": "equilateral_triangle",
+      "position": [
+        5.166667,
+        1.5,
+        1.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cn_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cn_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cn_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cn_e",
+      "type": "equilateral_triangle",
+      "position": [
+        7.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺货场南半: 南沿行 4 片 + 黄色工作道 6 片。",
+      "tip": "黄色工作道的 x=4/5/6 拼缝就是托盘与集装箱的落点。",
+      "tiles_to_add": [
+        "yd_a0",
+        "yd_b0",
+        "yd_c0",
+        "yd_d0",
+        "yd_a1",
+        "yd_b1",
+        "yd_c1",
+        "yd_d1",
+        "yd_e1",
+        "yd_f1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺货场北半: 长板 8 片收边, 地坪合拢成 7x4。",
+      "tip": "轮距缝 y=1 与 y=2 已经铺好 —— 底盘马上就位。",
+      "tiles_to_add": [
+        "yd_a2",
+        "yd_b2",
+        "yd_c2",
+        "yd_d2",
+        "yd_a3",
+        "yd_b3",
+        "yd_c3",
+        "yd_d3"
+      ],
+      "highlight_tiles": [
+        "yd_b1",
+        "yd_f1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "装底盘: 2 片车轮底座沿轮距缝立起, 底边整边吸合。",
+      "tip": "车轮底座一片顶两格 —— 叉车的四个轮子稳稳咬住地缝。",
+      "tiles_to_add": [
+        "wh_s",
+        "wh_n"
+      ],
+      "highlight_tiles": [
+        "yd_b0",
+        "yd_b2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "压甲板、立司机棚: 长板两条长边整边压轮组顶, 车尾再立 尾墙与两面侧墙。",
+      "tip": "轮组+甲板锁成箱形环 —— 侧墙竖边与尾墙互吸。",
+      "tiles_to_add": [
+        "deck",
+        "cab_w",
+        "cab_s",
+        "cab_n"
+      ],
+      "highlight_tiles": [
+        "wh_s",
+        "wh_n"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖棚顶、点警示灯: 方板三边压墙顶, 西沿立红色三角。",
+      "tip": "警示灯重心正压棚顶铰链 —— 倒车请注意!",
+      "tiles_to_add": [
+        "cab_roof",
+        "beacon"
+      ],
+      "highlight_tiles": [
+        "cab_w",
+        "cab_s"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "升门架、伸货叉: 门架立甲板东短边, 货叉 z=1 向东平伸。",
+      "tip": "货叉此刻单边铰链: 力矩 15 <= strict 预算 17.5, 稳!",
+      "tiles_to_add": [
+        "mast",
+        "fork"
+      ],
+      "highlight_tiles": [
+        "deck"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立托盘垛: x=4 拼缝立起托盘墙, 叉尖稳稳搭上墙顶。",
+      "tip": "叉尖有了第二支点 —— 双端受力, 重货随便上。",
+      "tiles_to_add": [
+        "pallet"
+      ],
+      "highlight_tiles": [
+        "fork",
+        "yd_d1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "货箱上叉: 4 片绿色三角在货叉上四棱互吸, 合拢成货箱。",
+      "tip": "四坡自锁 —— 货箱已经离地 1 格, 起升成功!",
+      "tiles_to_add": [
+        "cargo_s",
+        "cargo_e",
+        "cargo_n",
+        "cargo_w"
+      ],
+      "highlight_tiles": [
+        "fork"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "砌集装箱: 4 片蓝色立墙闭环, 箱顶压平, 再码一垛橙色货堆。",
+      "tip": "四角竖边互吸锁死 —— 下一趟就往这儿卸货。",
+      "tiles_to_add": [
+        "bx_s",
+        "bx_n",
+        "bx_w",
+        "bx_e",
+        "bx_top",
+        "pile_s",
+        "pile_e",
+        "pile_n",
+        "pile_w"
+      ],
+      "highlight_tiles": [
+        "yd_e1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "摆雪糕筒: 4 枚红色三角立地坪格边, 围出叉车作业区。",
+      "tip": "行人止步 —— 叉车转运中, 作业区封闭!",
+      "tiles_to_add": [
+        "cn_sw",
+        "cn_w",
+        "cn_ne",
+        "cn_e"
+      ],
+      "highlight_tiles": [
+        "yd_a0",
+        "yd_d3"
+      ]
+    }
+  ]
+}

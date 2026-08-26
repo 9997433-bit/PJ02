@@ -1,0 +1,147 @@
+# =====================================================================
+# MagTile Studio — Windows 发布流水线 (草案, 尚未在真实 runner 上验证)
+#
+# 触发:
+#   - 推送 v* 标签 (如 v0.1.0): 构建 + 打包 + 创建 GitHub Release 草稿
+#     (数据集固定为 full 完整模型库)
+#   - workflow_dispatch: 手动试跑, 只产出构建产物, 不建 Release;
+#     可选 model_set 输入 (full/starter) 试打模型子集包
+#
+# 工程位于仓库的 magtile-studio/ 子目录 (workflow 必须放在仓库根
+# .github/workflows/ 才会被 GitHub 识别, 与 qa.yml 同理)。
+#
+# 版本号唯一来源是 magtile-studio/CMakeLists.txt 的
+# project(MagTileStudio VERSION), 本流水线在配置后从 CMakeCache
+# 提取版本号, 并校验与标签一致。
+#
+# 依赖说明:
+#   - Runner: 钉 windows-2022 (VS 2022 / 生成器 Visual Studio 17 2022)。
+#     2026-06 起 windows-latest / windows-2025 改为 VS 2026, 不再带
+#     VS 2022 (actions/runner-images#14017); 首跑 v0.1.0 因此在
+#     windows-latest 上 CMake 配置失败。迁 VS 2026 须同步改生成器名。
+#   - NSIS: windows-2022 仍预装; windows-latest (2025+) 已移除
+#     (actions/runner-images#12677), 本流水线打包前经 Chocolatey 自装
+#     (已在 PATH 则跳过)。
+#   - GLFW / Dear ImGui: 配置阶段经 FetchContent 联网拉取。
+#   - library_gui_smoke / inventory_gui_smoke 测试需要可建 OpenGL 窗口
+#     的显示环境, CI 上统一跳过。
+#
+# 详细打包手册: magtile-studio/scripts/package_windows.md
+# =====================================================================
+name: windows-release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      model_set:
+        description: 打包数据集 (full=完整模型库 / starter=精选 30 模型子集)
+        type: choice
+        options: [full, starter]
+        default: full
+
+permissions:
+  contents: write # 标签触发时创建 Release 草稿需要
+
+jobs:
+  package:
+    runs-on: windows-2022
+    timeout-minutes: 60
+    env:
+      # windows-2022 默认控制台为 cp1252; 多个 Python 门禁脚本 print 中文
+      # 会 UnicodeEncodeError。PEP 540 强制 UTF-8 模式, 不改脚本语义。
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: magtile-studio
+
+    steps:
+      - name: 检出源码
+        uses: actions/checkout@v4
+
+      # GLFW / ImGui 经 FetchContent 拉取, 按 CMakeLists 哈希缓存源码
+      - name: 缓存 FetchContent 依赖
+        uses: actions/cache@v4
+        with:
+          path: magtile-studio/build/_deps
+          key: fetchcontent-${{ runner.os }}-${{ hashFiles('magtile-studio/CMakeLists.txt') }}
+
+      # 标签发布固定打完整模型库; 手动试跑可经 model_set 输入切子集
+      - name: CMake 配置 (MSVC x64)
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DMAGTILE_PACKAGE_MODEL_SET=${{ inputs.model_set || 'full' }}
+
+      - name: 提取 CMake 工程版本号
+        id: version
+        run: |
+          $m = Select-String -Path build/CMakeCache.txt -Pattern '^CMAKE_PROJECT_VERSION:STATIC=(.+)$'
+          if (-not $m) { throw "CMakeCache.txt 中未找到 CMAKE_PROJECT_VERSION" }
+          $version = $m.Matches[0].Groups[1].Value.Trim()
+          Write-Host "project VERSION = $version"
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      # ref_name 经 env 间接注入而非 ${{ }} 内插进脚本体: git 标签名
+      # 允许含单引号等字符, 直接内插可被构造成 pwsh 脚本注入
+      # (GitHub 安全加固指南推荐做法; 版本号输出同样走 env 以保持一致)
+      - name: 校验标签与工程版本号一致
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+          PROJECT_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          $tag = $env:TAG_NAME
+          $expected = "v$($env:PROJECT_VERSION)"
+          if ($tag -ne $expected) {
+            throw "标签 $tag 与 CMake project VERSION 不一致 (应为 $expected); 请先在 magtile-studio/CMakeLists.txt 升版"
+          }
+
+      - name: 构建 (Release)
+        run: cmake --build build --config Release --parallel
+
+      - name: 测试 (跳过需显示环境的 GUI 冒烟)
+        run: |
+          chcp 65001 | Out-Null
+          ctest --test-dir build -C Release --output-on-failure -E "(library|inventory)_gui_smoke"
+
+      # windows-latest (Windows Server 2025 镜像) 已不再预装 NSIS
+      # (actions/runner-images#12677); 缺席时经 Chocolatey 安装,
+      # 装完后 makensis 位于 choco shim 目录 (镜像已内置于 PATH),
+      # CPack 的 NSIS 生成器另经注册表定位, 两条路径都能命中。
+      - name: 安装 NSIS (镜像不再预装)
+        run: |
+          $makensis = Get-Command makensis -ErrorAction SilentlyContinue
+          if ($makensis) {
+            Write-Host "makensis 已就位: $($makensis.Source)"
+          } else {
+            choco install nsis -y --no-progress
+            if ($LASTEXITCODE -ne 0) { throw "choco install nsis 失败 (退出码 $LASTEXITCODE)" }
+          }
+
+      - name: CPack 打包 (NSIS 安装器 + 便携 ZIP)
+        working-directory: magtile-studio/build
+        run: cpack -G "NSIS;ZIP" -C Release
+
+      # upload/release 的 path 相对仓库根 (actions 不受 run 工作目录影响)
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: MagTileStudio-${{ steps.version.outputs.version }}-win64
+          path: |
+            magtile-studio/build/MagTileStudio-*-win64.exe
+            magtile-studio/build/MagTileStudio-*-win64.zip
+          if-no-files-found: error
+
+      # 只建"草稿": 按 scripts/package_windows.md 第七节清单
+      # (实机安装冒烟、签名等) 人工核对后再正式发布
+      - name: 创建 GitHub Release 草稿
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          name: MagTile Studio ${{ github.ref_name }} (Windows)
+          files: |
+            magtile-studio/build/MagTileStudio-*-win64.exe
+            magtile-studio/build/MagTileStudio-*-win64.zip
+          fail_on_unmatched_files: true

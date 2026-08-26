@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 尺寸/字号令牌: 与桌面 Qt Theme.qml 同一套口径 (触控目标 §4.1 /
+     间距三档 / 字号层级), 布局一律引用不重复定值。字号按手机屏折算:
+     标题 20 > 小节 16 > 正文 15 > 辅助 13 > 角标 11 (sp, 随系统
+     字号无障碍缩放)。 -->
+<resources>
+    <!-- 触控目标 (§4.1 硬性规范: 儿童可点元素最小边 48dp; = Qt
+         touchTarget) 与主操作按钮高 (§4.1「主操作按钮 >= 64dp」,
+         = Qt bigButtonHeight, 手机档不再折算) -->
+    <dimen name="touch_target">48dp</dimen>
+    <dimen name="button_height">64dp</dimen>
+
+    <!-- 间距三档 (= Qt spacingSmall / spacing / spacingLarge) -->
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+
+    <!-- 卡片/缩略图圆角 (= Qt radiusCard 族, 手机屏收窄) -->
+    <dimen name="radius_card">12dp</dimen>
+    <dimen name="radius_thumbnail">8dp</dimen>
+
+    <!-- 字号层级 (页面标题 / 小节标题 / 正文与按钮 / 辅助信息 / 角标) -->
+    <dimen name="text_title">20sp</dimen>
+    <dimen name="text_section">16sp</dimen>
+    <dimen name="text_body">15sp</dimen>
+    <dimen name="text_secondary">13sp</dimen>
+    <dimen name="text_caption">11sp</dimen>
+</resources>

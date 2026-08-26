@@ -1,0 +1,1057 @@
+{
+  "schema_version": 1,
+  "id": "bowling_alley_01",
+  "name": "保龄球馆",
+  "name_en": "Bowling Alley 01",
+  "description": "只用核心九片型的保龄球馆: 与围栏式球场和立式攀岩塔都不同, 主角是一条冲向瓶阵的长球道 —— 橙色木纹长板从清色犯规线一路铺到北端, 两侧灰色沟墙踩等长拼缝竖边成链夹护直球; 加高瓶台是环墙合环加盖板压顶的闭环箱体, 六只白色等边三角球瓶以 3-2-1 三角阵骑在盖板拼缝上 (后排同吸墙顶, 中排两侧双吸, 重心正压铰链线力矩为零), 台侧绿色窗格方计分牌骑墙顶挑起红旗 —— 助跑, 出手, 全中!",
+  "difficulty": 3,
+  "total_pieces": 56,
+  "tags": [
+    "运动",
+    "健身",
+    "保龄球",
+    "球馆",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": null,
+    "matrix_bucket": "sports",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 44,
+        "equilateral_triangle": 7,
+        "rectangle": 4,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "lane_foul_w",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lane_foul_e",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lane_w_1",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "lane_w_3",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "lane_e_1",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "lane_e_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        4.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "walk_w_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_e_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_w_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_e_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_w_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_e_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_w_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_e_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_w_4",
+      "type": "square",
+      "position": [
+        1.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "walk_e_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "gut_w_0",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gut_e_0",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gut_w_1",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gut_e_1",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gut_w_2",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gut_e_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gut_w_3",
+      "type": "square",
+      "position": [
+        2.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gut_e_3",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gut_w_4",
+      "type": "square",
+      "position": [
+        2.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gut_e_4",
+      "type": "square",
+      "position": [
+        4.0,
+        4.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_f_1_5",
+      "type": "square",
+      "position": [
+        1.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_f_1_6",
+      "type": "square",
+      "position": [
+        1.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_f_2_5",
+      "type": "square",
+      "position": [
+        2.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_f_2_6",
+      "type": "square",
+      "position": [
+        2.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_f_3_5",
+      "type": "square",
+      "position": [
+        3.5,
+        5.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_f_3_6",
+      "type": "square",
+      "position": [
+        3.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_s_1",
+      "type": "square",
+      "position": [
+        1.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_n_1",
+      "type": "square",
+      "position": [
+        1.5,
+        7.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        7.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_s_3",
+      "type": "square",
+      "position": [
+        3.5,
+        5.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        7.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_w_5",
+      "type": "square",
+      "position": [
+        1.0,
+        5.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_w_6",
+      "type": "square",
+      "position": [
+        1.0,
+        6.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_e_5",
+      "type": "square",
+      "position": [
+        4.0,
+        5.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_e_6",
+      "type": "square",
+      "position": [
+        4.0,
+        6.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_c_1_5",
+      "type": "square",
+      "position": [
+        1.5,
+        5.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_c_1_6",
+      "type": "square",
+      "position": [
+        1.5,
+        6.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_c_2_5",
+      "type": "square",
+      "position": [
+        2.5,
+        5.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_c_2_6",
+      "type": "square",
+      "position": [
+        2.5,
+        6.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_c_3_5",
+      "type": "square",
+      "position": [
+        3.5,
+        5.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "deck_c_3_6",
+      "type": "square",
+      "position": [
+        3.5,
+        6.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pin_b_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        7.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pin_b_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        7.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pin_b_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        7.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pin_m_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        6.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pin_m_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        6.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "pin_f_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        5.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "board",
+      "type": "window_square",
+      "position": [
+        4.0,
+        5.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "board_flag",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        5.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺球道: 南端两片清色犯规线方板, 向北接四条橙色木纹长板。",
+      "tip": "脚不能越过犯规线 —— 球道从这里一直铺到瓶台脚下。",
+      "tiles_to_add": [
+        "lane_foul_w",
+        "lane_foul_e",
+        "lane_w_1",
+        "lane_w_3",
+        "lane_e_1",
+        "lane_e_3"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺西回球廊: 五片黄色单位方板贴着球道西沿排成一列。",
+      "tip": "必须用单位方板 —— 沟墙的每段墙脚都要有等长拼缝可吸。",
+      "tiles_to_add": [
+        "walk_w_0",
+        "walk_w_1",
+        "walk_w_2",
+        "walk_w_3",
+        "walk_w_4"
+      ],
+      "highlight_tiles": [
+        "lane_foul_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺东回球廊: 五片黄色单位方板贴着球道东沿排成一列。",
+      "tip": "打完的球从这两条廊道滚回来 —— 东西各一条。",
+      "tiles_to_add": [
+        "walk_e_0",
+        "walk_e_1",
+        "walk_e_2",
+        "walk_e_3",
+        "walk_e_4"
+      ],
+      "highlight_tiles": [
+        "walk_w_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立西沟墙: 五片灰墙踩 x=2 拼缝, 竖边逐片相咬成链。",
+      "tip": "沟墙挡住歪球 —— 掉沟的球就沿着墙根滚到底。",
+      "tiles_to_add": [
+        "gut_w_0",
+        "gut_w_1",
+        "gut_w_2",
+        "gut_w_3",
+        "gut_w_4"
+      ],
+      "highlight_tiles": [
+        "walk_w_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立东沟墙: 五片灰墙踩 x=4 拼缝, 与西沟墙隔道相望。",
+      "tip": "两道沟墙夹住球道 —— 直球才能冲到瓶阵。",
+      "tiles_to_add": [
+        "gut_e_0",
+        "gut_e_1",
+        "gut_e_2",
+        "gut_e_3",
+        "gut_e_4"
+      ],
+      "highlight_tiles": [
+        "gut_w_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "铺瓶台地板 (y [5,7]): 六片蓝色单位方板与球道北端等边互吸。",
+      "tip": "瓶台的十道墙脚全踩在这六片方板的拼缝上。",
+      "tiles_to_add": [
+        "deck_f_1_5",
+        "deck_f_1_6",
+        "deck_f_2_5",
+        "deck_f_2_6",
+        "deck_f_3_5",
+        "deck_f_3_6"
+      ],
+      "highlight_tiles": [
+        "lane_w_3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立瓶台南北墙: 南墙三片正对球道, 北墙三片压住底线。",
+      "tip": "南墙就是球道的终点挡板 —— 球瓶要站在它头顶上。",
+      "tiles_to_add": [
+        "deck_s_1",
+        "deck_s_2",
+        "deck_s_3",
+        "deck_n_1",
+        "deck_n_2",
+        "deck_n_3"
+      ],
+      "highlight_tiles": [
+        "deck_f_2_5"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立瓶台东西墙合环: 四片侧墙把瓶台锁成闭环箱体。",
+      "tip": "四角竖边互咬 —— 环墙合环, 瓶台稳如磐石。",
+      "tiles_to_add": [
+        "deck_w_5",
+        "deck_w_6",
+        "deck_e_5",
+        "deck_e_6"
+      ],
+      "highlight_tiles": [
+        "deck_s_1",
+        "deck_n_3"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖瓶台盖板: 六片青色方板压顶, 每片吸墙顶又互吸拼缝。",
+      "tip": "盖板锁箱 —— 台面上的每条拼缝都是球瓶的立足线。",
+      "tiles_to_add": [
+        "deck_c_1_5",
+        "deck_c_1_6",
+        "deck_c_2_5",
+        "deck_c_2_6",
+        "deck_c_3_5",
+        "deck_c_3_6"
+      ],
+      "highlight_tiles": [
+        "deck_w_5"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立后排球瓶: 三只白瓶骑台面北沿, 底边同吸盖板沿与北墙顶。",
+      "tip": "球瓶重心正压铰链线, 力矩为零 —— 站得直才倒得脆。",
+      "tiles_to_add": [
+        "pin_b_1",
+        "pin_b_2",
+        "pin_b_3"
+      ],
+      "highlight_tiles": [
+        "deck_c_2_6"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "立中排与前排球瓶: 中排两只骑中缝, 前排一只骑南沿 —— 3-2-1 三角阵成形。",
+      "tip": "中排骑缝的瓶两侧盖板双吸 —— 三角阵尖朝球道。",
+      "tiles_to_add": [
+        "pin_m_1",
+        "pin_m_3",
+        "pin_f_2"
+      ],
+      "highlight_tiles": [
+        "pin_b_2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "挂计分牌: 绿色窗格方骑瓶台东墙顶, 整边吸合。",
+      "tip": "窗格里贴比分 —— 谁打出全中, 名字就写在这里。",
+      "tiles_to_add": [
+        "board"
+      ],
+      "highlight_tiles": [
+        "deck_e_5"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "升顶旗收尾: 红旗骑计分牌顶沿 —— 保龄球馆开张!",
+      "tip": "旗尖 2.87 全场最高 —— 助跑, 出手, 全中!",
+      "tiles_to_add": [
+        "board_flag"
+      ],
+      "highlight_tiles": [
+        "board"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,418 @@
+{
+  "schema_version": 1,
+  "id": "pinwheel_mosaic_01",
+  "name": "旋风万花砖",
+  "name_en": "Pinwheel Mosaic 01",
+  "description": "D1 入门几何艺术: 四重旋转对称的桌面万花拼砖 —— 黄色大方居中, 红绿蓝橙四片长板十字环抱 (长短边完整贴合), 青色角板补角, 紫色直角三角叶片与粉色等边光芒按'每转 90 度换条边'的旋转规律绕圈排布, 最后四片彩色三角立上轴缝, 平面图案瞬间长出立体风叶。拼的过程就是一堂旋转对称启蒙课: 摆完一角, 转 90 度再来一遍。",
+  "difficulty": 1,
+  "total_pieces": 21,
+  "tags": [
+    "几何艺术",
+    "旋转对称",
+    "拼砖",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "geometric_art",
+    "structural_signature": {
+      "tile_histogram": {
+        "equilateral_triangle": 8,
+        "rectangle": 4,
+        "right_triangle": 4,
+        "square": 4,
+        "large_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "core",
+      "type": "large_square",
+      "position": [
+        3.0,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ring_s",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ring_e",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ring_n",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ring_w",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "corner_sw",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "corner_se",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "corner_ne",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "corner_nw",
+      "type": "square",
+      "position": [
+        1.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "blade_se",
+      "type": "right_triangle",
+      "position": [
+        4.666667,
+        0.666667,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "blade_ne",
+      "type": "right_triangle",
+      "position": [
+        5.333333,
+        4.666667,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "blade_nw",
+      "type": "right_triangle",
+      "position": [
+        1.333333,
+        5.333333,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "blade_sw",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        1.333333,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "ray_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.288675,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "ray_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        5.288675,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "ray_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.711325,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "ray_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.711325,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "crown_s",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "crown_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        4.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "crown_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺核心十字: 黄色大方居中, 四片彩色长板长边整边贴住大方四边。",
+      "tip": "大方一条边正好吸满一片长板的长边 —— 长短边完整贴合最稳。",
+      "tiles_to_add": [
+        "core",
+        "ring_s",
+        "ring_e",
+        "ring_n",
+        "ring_w"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "补四角: 四片青色方板卡进角落, 每片同时吸住两片长板的短边。",
+      "tip": "",
+      "tiles_to_add": [
+        "corner_sw",
+        "corner_se",
+        "corner_ne",
+        "corner_nw"
+      ],
+      "highlight_tiles": [
+        "ring_s",
+        "ring_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "摆旋转叶片: 四片紫色直角三角绕圈排 —— 每转 90 度就换一条边贴。",
+      "tip": "盯住斜边的朝向: 四片斜边追着圈跑, 风车就转起来了。",
+      "tiles_to_add": [
+        "blade_se",
+        "blade_ne",
+        "blade_nw",
+        "blade_sw"
+      ],
+      "highlight_tiles": [
+        "corner_se",
+        "corner_ne"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "加光芒: 四片粉色等边三角贴在角板的另一条外沿, 与叶片错开 90 度。",
+      "tip": "",
+      "tiles_to_add": [
+        "ray_e",
+        "ray_n",
+        "ray_w",
+        "ray_s"
+      ],
+      "highlight_tiles": [
+        "blade_se",
+        "blade_sw"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立起风叶: 四片彩色等边三角站上轴缝, 平面万花砖长出立体风车!",
+      "tip": "底边压住缝两侧的两条板边, 站得又正又稳。",
+      "tiles_to_add": [
+        "crown_s",
+        "crown_e",
+        "crown_n",
+        "crown_w"
+      ],
+      "highlight_tiles": [
+        "core"
+      ]
+    }
+  ]
+}

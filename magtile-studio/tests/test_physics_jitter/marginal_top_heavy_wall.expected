@@ -1,0 +1,4 @@
+# R9 抖动负例期望: 静态校验必须放行 (由执行器先行断言), 蒙特卡洛
+# 抖动仿真必须以 placement_jitter_failure 拒绝 (Error 级, 非零退出)。
+expected_fail_rule=placement_jitter_failure
+severity=error

@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "id": "fixture_hanging_chain_long",
+  "name": "负例夹具: 悬挂链过长",
+  "name_en": "fixture_hanging_chain_long",
+  "description": "反面教材 (R5 Warning 级): 两柱一梁的门架下方, 从桥面一条磁力边挂出 1 片方形吊板, 再向侧下方续挂 4 片直角三角形, 形成 5 片吊挂链。总重 90g 未超单边 120g 承重预算 (所以不是 hanging_chain_overload), 但 5 片 > 单边建议上限 4 片 —— 铰链节点逐级累积晃动, 轻碰易整串脱落。校验器必须报 hanging_chain_long 警告 (Warning 不阻断发布), 退出码保持 0。",
+  "difficulty": 1,
+  "total_pieces": 12,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "g1",
+      "type": "square",
+      "position": [0.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "green"
+    },
+    {
+      "id": "g2",
+      "type": "square",
+      "position": [0.5, 1.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "green"
+    },
+    {
+      "id": "c1a",
+      "type": "square",
+      "position": [0.5, 0.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "c1b",
+      "type": "square",
+      "position": [0.5, 0.0, 1.5],
+      "rotation": [90, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "c2a",
+      "type": "square",
+      "position": [0.5, 2.0, 0.5],
+      "rotation": [90, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "c2b",
+      "type": "square",
+      "position": [0.5, 2.0, 1.5],
+      "rotation": [90, 0, 0],
+      "color": "blue"
+    },
+    {
+      "id": "d1",
+      "type": "rectangle",
+      "position": [0.5, 1.0, 2.0],
+      "rotation": [0, 0, 90],
+      "color": "yellow"
+    },
+    {
+      "id": "v1",
+      "type": "square",
+      "position": [1.0, 1.0, 1.5],
+      "rotation": [90, 0, 90],
+      "color": "purple"
+    },
+    {
+      "id": "rt1",
+      "type": "right_triangle",
+      "position": [1.0, 0.166667, 1.333333],
+      "rotation": [90, 0, 270],
+      "color": "orange"
+    },
+    {
+      "id": "rt2",
+      "type": "right_triangle",
+      "position": [1.0, -0.166667, 1.666667],
+      "rotation": [270, 0, 90],
+      "color": "orange"
+    },
+    {
+      "id": "rt3",
+      "type": "right_triangle",
+      "position": [1.0, -0.833333, 1.333333],
+      "rotation": [90, 0, 270],
+      "color": "orange"
+    },
+    {
+      "id": "rt4",
+      "type": "right_triangle",
+      "position": [1.0, -1.166667, 1.666667],
+      "rotation": [270, 0, 90],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平铺 2 片绿色方片, 前后吸合成地台。",
+      "tip": "",
+      "tiles_to_add": ["g1", "g2"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "沿地台前后两条外缘各立起 1 片蓝色柱片。",
+      "tip": "",
+      "tiles_to_add": ["c1a", "c2a"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 3,
+      "description": "两根柱各叠加第二层柱片。",
+      "tip": "",
+      "tiles_to_add": ["c1b", "c2b"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 4,
+      "description": "把黄色长方形桥面架在两柱顶端, 两条短边分别吸合柱顶。",
+      "tip": "",
+      "tiles_to_add": ["d1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 5,
+      "description": "从桥面右侧长边向下挂 1 片紫色吊板。",
+      "tip": "",
+      "tiles_to_add": ["v1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 6,
+      "description": "错误示范: 从吊板侧边向外连续续挂 4 片橙色直角三角形。",
+      "tip": "5 片吊挂链 90g 虽未超 120g 承重预算, 但超过单边 4 片的建议上限, 轻碰易整串脱落 —— 校验器必须报 hanging_chain_long 警告。",
+      "tiles_to_add": ["rt1", "rt2", "rt3", "rt4"],
+      "highlight_tiles": []
+    }
+  ]
+}

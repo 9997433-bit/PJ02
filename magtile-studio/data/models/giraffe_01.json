@@ -1,0 +1,1029 @@
+{
+  "schema_version": 1,
+  "id": "giraffe_01",
+  "name": "长颈鹿",
+  "name_en": "Giraffe 01",
+  "description": "草原立姿长颈鹿: 四条双层腿柱撑起箱形躯干, 躯干前端拔起四层'左右颈壁 + 中部横档'的梯架脖颈, 顶端戴 1x1 头颅小箱 —— 吻部水平收尖、双耳双角点睛, 尾巴挂在躯干末端竖边上。全库第一只纵向生长的动物: 脖颈纯竖向传力, 横档锁架抗晃, 站得又高又稳。",
+  "difficulty": 3,
+  "total_pieces": 52,
+  "tags": [
+    "动物世界",
+    "草原",
+    "生物",
+    "高塔",
+    "免费"
+  ],
+  "content_meta": {
+    "series": "animal_world",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 41,
+        "equilateral_triangle": 7,
+        "isosceles_triangle": 2,
+        "right_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "gr_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gr_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gr_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gr_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gr_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "gr_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "fleg_l_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fleg_r_0",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hleg_l_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hleg_r_0",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fleg_l_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fleg_r_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hleg_l_1",
+      "type": "square",
+      "position": [
+        4.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hleg_r_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hoof_l",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hoof_r",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bd_l_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bd_r_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bk_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bd_l_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bd_r_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bk_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bd_l_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bd_r_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bk_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bd_l_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bd_r_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bk_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nk_l_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "nk_r_0",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "nk_l_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nk_r_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nk_l_2",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        5.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "nk_r_2",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        5.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "nk_l_3",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        6.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "nk_r_3",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        6.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "rung",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        5.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hd_base",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        7.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hd_s",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        7.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hd_n",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        7.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hd_w",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        7.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hd_e",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        7.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hd_top",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        8.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "muzzle",
+      "type": "equilateral_triangle",
+      "position": [
+        0.711325,
+        0.5,
+        7.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ear_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        0.5,
+        8.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ear_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        8.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "horn_s",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        0.0,
+        8.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "horn_n",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        1.0,
+        8.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tail",
+      "type": "equilateral_triangle",
+      "position": [
+        5.288675,
+        -0.0,
+        2.5
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "fence_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "fence_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "fence_5",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺草原基座: 6 片草地方板沿 x 一字铺开 (x 0..6), 相邻边互吸。",
+      "tip": "长颈鹿要站上来的地基 —— 绿色青色交替就是斑驳的草地。",
+      "tiles_to_add": [
+        "gr_0",
+        "gr_1",
+        "gr_2",
+        "gr_3",
+        "gr_4",
+        "gr_5"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立前腿下节: 左右前腿各 1 片黄色方片立在草地上 (x 1..2), 底边分别吸草地南北沿边。",
+      "tip": "左腿在 y=0 沿, 右腿在 y=1 沿 —— 两片平行相对, 中间留空。",
+      "tiles_to_add": [
+        "fleg_l_0",
+        "fleg_r_0"
+      ],
+      "highlight_tiles": [
+        "gr_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立后腿下节: 同样手法在 x 4..5 立起左右后腿。",
+      "tip": "前后腿间距 2 格, 正好是躯干的跨度。",
+      "tiles_to_add": [
+        "hleg_l_0",
+        "hleg_r_0"
+      ],
+      "highlight_tiles": [
+        "gr_4",
+        "fleg_l_0"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "前蹄斜撑: 2 片直角三角形竖边吸前腿骨, 横边贴地向西前伸 —— 这是长颈鹿俯身喝水的前蹄, 也是全身的抗侧地锚。",
+      "tip": "直角三角形两条直角边同时吸腿与贴地, 双边受力最稳。",
+      "tiles_to_add": [
+        "hoof_l",
+        "hoof_r"
+      ],
+      "highlight_tiles": [
+        "fleg_l_0",
+        "fleg_r_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "腿加高一节: 4 片橙色方片分别叠上四条腿, 竖边横边全部对齐。",
+      "tip": "四条腿都到 2 格高 —— 长颈鹿的腿比很多动物的全身还高。",
+      "tiles_to_add": [
+        "fleg_l_1",
+        "fleg_r_1",
+        "hleg_l_1",
+        "hleg_r_1"
+      ],
+      "highlight_tiles": [
+        "hoof_l"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "躯干左壁: 4 片方片横跨前后腿顶 (x 1..5), 黄橙相间。",
+      "tip": "左壁两端分别压在前后腿顶边上, 中段靠竖边互吸悬跨。",
+      "tiles_to_add": [
+        "bd_l_1",
+        "bd_l_2",
+        "bd_l_3",
+        "bd_l_4"
+      ],
+      "highlight_tiles": [
+        "fleg_l_1",
+        "hleg_l_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "躯干右壁: 同样 4 片补齐右侧, 躯干成双壁通道。",
+      "tip": "左右壁平行相对, 腹部留空 —— 从侧面看就是修长的肚线。",
+      "tiles_to_add": [
+        "bd_r_1",
+        "bd_r_2",
+        "bd_r_3",
+        "bd_r_4"
+      ],
+      "highlight_tiles": [
+        "fleg_r_1",
+        "hleg_r_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "背板压顶: 4 片背板盖住躯干 (z=3), 每片同时吸左右壁顶边, 躯干锁成箱形梁。",
+      "tip": "背板是躯干的力学锁扣 —— 盖完轻推躯干应纹丝不动。",
+      "tiles_to_add": [
+        "bk_1",
+        "bk_2",
+        "bk_3",
+        "bk_4"
+      ],
+      "highlight_tiles": [
+        "bd_l_2",
+        "bd_r_2"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "脖颈起步: 左右颈壁各 2 层叠在躯干前端背板上 (x 1..2, z 3..5)。",
+      "tip": "颈壁踩着背板与躯干壁顶边起跳, 每层都要对缝竖直向上。",
+      "tiles_to_add": [
+        "nk_l_0",
+        "nk_r_0",
+        "nk_l_1",
+        "nk_r_1"
+      ],
+      "highlight_tiles": [
+        "bk_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "中部横档: 1 片红色横档在 z=5 锁住左右颈壁 —— 脖颈从双壁变成梯架。",
+      "tip": "横档同时吸住两侧颈壁顶边, 是长脖子抗晃的关键一档。",
+      "tiles_to_add": [
+        "rung"
+      ],
+      "highlight_tiles": [
+        "nk_l_1",
+        "nk_r_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "脖颈到顶: 左右颈壁再各叠 2 层 (z 5..7), 长脖子拔到 7 格高。",
+      "tip": "上两层踩在横档与下层颈壁上 —— 全库最高的动物脖颈。",
+      "tiles_to_add": [
+        "nk_l_2",
+        "nk_r_2",
+        "nk_l_3",
+        "nk_r_3"
+      ],
+      "highlight_tiles": [
+        "rung"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "头底板: 1 片方板盖住颈顶 (z=7), 同时吸左右颈壁顶边。",
+      "tip": "这块板既是颈顶横档又是头颅的地板, 一片两用。",
+      "tiles_to_add": [
+        "hd_base"
+      ],
+      "highlight_tiles": [
+        "nk_l_3",
+        "nk_r_3"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "头颅四壁: 南北面颊 + 西脸 + 后脑围出 1x1 头颅小箱 (z 7..8)。",
+      "tip": "四壁底边吸头底板四边, 拐角竖边两两互吸围成闭箱。",
+      "tiles_to_add": [
+        "hd_s",
+        "hd_n",
+        "hd_w",
+        "hd_e"
+      ],
+      "highlight_tiles": [
+        "hd_base"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "颅顶与吻部: 颅顶板封箱, 1 片等边三角形底边吸头底板西沿竖边, 水平向西收出低头觅食的吻部。",
+      "tip": "吻部挂在竖直磁边上水平前伸, 小小一片不产生超预算力矩。",
+      "tiles_to_add": [
+        "hd_top",
+        "muzzle"
+      ],
+      "highlight_tiles": [
+        "hd_w"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "耳朵与鹿角: 颅顶东西沿立 2 片耳朵, 南北沿立 2 片红色等腰骨突 —— 长颈鹿标志性的一对小角。",
+      "tip": "四件头饰都是竖直立件, 底边吸颅顶四沿, 零力矩零负担。",
+      "tiles_to_add": [
+        "ear_w",
+        "ear_e",
+        "horn_s",
+        "horn_n"
+      ],
+      "highlight_tiles": [
+        "hd_top"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "尾巴与围栏: 等边尾巴底边吸躯干左壁东端竖边、水平向东收尖, 草地南沿立 3 面紫色围栏旗 —— 草原上的长颈鹿落成!",
+      "tip": "退后一步看: 四腿一躯一长颈, 昂首站在草原上。",
+      "tiles_to_add": [
+        "tail",
+        "fence_2",
+        "fence_3",
+        "fence_5"
+      ],
+      "highlight_tiles": [
+        "bd_l_4",
+        "bd_r_4"
+      ]
+    }
+  ]
+}

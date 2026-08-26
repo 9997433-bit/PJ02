@@ -1,0 +1,1201 @@
+{
+  "schema_version": 1,
+  "id": "panda_bamboo_01",
+  "name": "竹林大熊猫",
+  "name_en": "Bamboo Grove Panda 01",
+  "description": "只用核心九片型的国宝首秀: 与图腾柱猫头鹰和四柱大象都不同, 大熊猫是一只'矮宽坐姿箱体动物' —— 4x2 单层身体墙环上骑一颗 2x2 脑袋, 灰色四角就是四肢, 耳朵/眼罩/手臂/脚掌全部用等边三角骑沿口点出黑白配色; 身后两丛竹子用 L 形互咬双层墙站立, 直角折边就是薄墙的抗侧靠山, 竹梢挂叶、脚边冒笋 —— 山谷雨后, 圆滚滚的干饭熊上桌了!",
+  "difficulty": 3,
+  "total_pieces": 65,
+  "tags": [
+    "自然",
+    "动物世界",
+    "大熊猫",
+    "竹林",
+    "国宝",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "animal_world",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 34,
+        "rectangle": 15,
+        "equilateral_triangle": 14,
+        "isosceles_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ground_0_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_2_0",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_4_0",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_1_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_3_1",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_1_2",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_3_2",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_0_3",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_2_3",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ground_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ground_5_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "body_s_0",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "body_s_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_s_2",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_s_3",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "body_n_0",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "body_n_1",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_n_2",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "body_n_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "body_w_s",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "body_w_n",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "body_e_s",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "body_e_n",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "back_1",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "back_2",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "back_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "back_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_s_w",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_s_e",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_n_w",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_n_e",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_w_s",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_w_n",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_e_s",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_e_n",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_top_w",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        2.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "head_top_e",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        2.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ear_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        2.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ear_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        2.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eye_w",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "eye_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arm_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "paw_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "paw_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bamboo_a1",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bamboo_a2",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bamboo_a3",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bamboo_a4",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "leaf_a1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        4.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "leaf_a2",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        3.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bamboo_b1",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bamboo_b2",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bamboo_b3",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "bamboo_b4",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "leaf_b1",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        4.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "leaf_b2",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        3.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "shoot_a",
+      "type": "isosceles_triangle",
+      "position": [
+        0.5,
+        2.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "shoot_b",
+      "type": "isosceles_triangle",
+      "position": [
+        5.5,
+        2.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rock",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "flower",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺竹林南行: 三条长板边边互吸。",
+      "tip": "山谷里的竹林刚下过雨 —— 先铺出这片林下空地。",
+      "tiles_to_add": [
+        "ground_0_0",
+        "ground_2_0",
+        "ground_4_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺竹林中段两行: 方板与长板拼出斑驳的林下光影。",
+      "tip": "行行等边互吸 —— 熊猫的墙脚要踩这些拼缝。",
+      "tiles_to_add": [
+        "ground_0_1",
+        "ground_1_1",
+        "ground_3_1",
+        "ground_5_1",
+        "ground_0_2",
+        "ground_1_2",
+        "ground_3_2",
+        "ground_5_2"
+      ],
+      "highlight_tiles": [
+        "ground_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺竹林北行: 空地铺满, 留出身后的竹丛角。",
+      "tip": "东西两个角落待会儿要长出真正的竹子。",
+      "tiles_to_add": [
+        "ground_0_3",
+        "ground_2_3",
+        "ground_4_3",
+        "ground_5_3"
+      ],
+      "highlight_tiles": [
+        "ground_1_2"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立身体南墙与左肩: 灰色的是前肢, 清色的是白肚皮。",
+      "tip": "大熊猫坐着的身体是 4x2 的墙环 —— 墙脚踩住拼缝才稳。",
+      "tiles_to_add": [
+        "body_s_0",
+        "body_s_1",
+        "body_s_2",
+        "body_s_3",
+        "body_w_s",
+        "body_w_n"
+      ],
+      "highlight_tiles": [
+        "ground_1_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "合身体北墙与右肩: 十二片墙环四角竖边互咬闭环。",
+      "tip": "墙环合拢 —— 圆滚滚的身体有了。",
+      "tiles_to_add": [
+        "body_n_0",
+        "body_n_1",
+        "body_n_2",
+        "body_n_3",
+        "body_e_s",
+        "body_e_n"
+      ],
+      "highlight_tiles": [
+        "body_s_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "铺背脊: 四条白长板边边入扣墙顶, 板板互吸。",
+      "tip": "每条长板两端都咬住墙顶 —— 脑袋要骑在这些拼缝上。",
+      "tiles_to_add": [
+        "back_1",
+        "back_2",
+        "back_3",
+        "back_4"
+      ],
+      "highlight_tiles": [
+        "body_s_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "起头部墙环: 2x2 的脑袋骑在背脊正中。",
+      "tip": "墙脚压住背脊拼缝, 荷载沿墙面一路传到地面。",
+      "tiles_to_add": [
+        "head_s_w",
+        "head_s_e",
+        "head_n_w",
+        "head_n_e",
+        "head_w_s",
+        "head_w_n",
+        "head_e_s",
+        "head_e_n"
+      ],
+      "highlight_tiles": [
+        "back_2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖头顶, 竖起圆耳朵: 灰色等边三角骑住头顶东西沿。",
+      "tip": "两片头顶板互吸封口, 耳朵一左一右 —— 有熊猫样了!",
+      "tiles_to_add": [
+        "head_top_w",
+        "head_top_e",
+        "ear_w",
+        "ear_e"
+      ],
+      "highlight_tiles": [
+        "head_s_w"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "贴眼罩与手臂: 招牌黑眼圈立在脸正上方, 手臂扶着竹子。",
+      "tip": "大熊猫的眼圈其实是毛色 —— 灰色三角一挂, 表情就有了。",
+      "tiles_to_add": [
+        "eye_w",
+        "eye_e",
+        "arm_w",
+        "arm_e"
+      ],
+      "highlight_tiles": [
+        "head_top_w"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "放脚掌、岩石与山花: 坐姿熊猫完工。",
+      "tip": "两只大脚掌摊在身前 —— 这是熊猫最舒服的坐姿。",
+      "tiles_to_add": [
+        "paw_w",
+        "paw_e",
+        "rock",
+        "flower"
+      ],
+      "highlight_tiles": [
+        "body_s_0"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "种右侧竹丛: 两片绿墙竖边直角互咬, 再同位叠高一层。",
+      "tip": "L 形折边就是竹竿的靠山 —— 薄墙互咬直角, 天生抗侧。",
+      "tiles_to_add": [
+        "bamboo_a1",
+        "bamboo_a2",
+        "bamboo_a3",
+        "bamboo_a4",
+        "leaf_a1",
+        "leaf_a2"
+      ],
+      "highlight_tiles": [
+        "ground_4_3"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "种左侧竹丛: 同样的 L 形互咬双层墙, 竹梢挂叶。",
+      "tip": "两丛竹子一东一西, 正好把熊猫围在中间。",
+      "tiles_to_add": [
+        "bamboo_b1",
+        "bamboo_b2",
+        "bamboo_b3",
+        "bamboo_b4",
+        "leaf_b1",
+        "leaf_b2"
+      ],
+      "highlight_tiles": [
+        "ground_0_3"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "冒出两根竹笋: 竹林早餐开饭!",
+      "tip": "瘦高尖是刚冒头的春笋 —— 大熊猫一天要吃几十斤竹子呢。",
+      "tiles_to_add": [
+        "shoot_a",
+        "shoot_b"
+      ],
+      "highlight_tiles": [
+        "paw_w",
+        "eye_w"
+      ]
+    }
+  ]
+}

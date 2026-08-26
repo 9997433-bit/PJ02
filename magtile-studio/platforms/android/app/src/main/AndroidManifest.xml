@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- MagTile Studio Android 清单: 模型库 + 库存录入 + 进度页 + 成就墙
+     + 分步教程 + 订阅页 六个 Activity, 无任何权限申请 (数据资产随 APK assets
+     分发, 首启解包到应用私有目录; 进度存档 SQLite 亦在应用私有目录;
+     Play Billing 的 com.android.vending.BILLING 权限由计费库清单
+     自动合入, 不属"申请系统权限"范畴)。 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 3D 教程视口要求 GLES 3.0 (minSdk 26 时代设备事实全覆盖);
+         商店侧过滤不支持的极老设备, 装上即可用不留黑视口 -->
+    <uses-feature
+        android:glEsVersion="0x00030000"
+        android:required="true" />
+
+    <!-- MagTileApplication: Release 档启动时经 PlayBillingManager 向
+         Play 账户静默恢复订阅权益 (Debug 档温和短路, QA 走模拟订阅)。
+         备份口径 (SECURITY_AND_PRIVACY.md §5.1, 签核单 DC7): 保留
+         allowBackup 但白名单只放行 progress.db (孩子的搭建进度换机
+         不丢) —— API 31+ 走 dataExtractionRules (云备份 + 设备迁移),
+         API 26~30 走 fullBackupContent, 两份规则同一白名单; 解包的
+         数据资产与导出 JSON 隐式排除, 不进云备份 -->
+    <application
+        android:name=".MagTileApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="false"
+        android:theme="@style/Theme.MagTile">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 磁力片库存录入 (从模型库筛选栏进入, 结果回传刷新「我能搭的」) -->
+        <activity
+            android:name=".InventoryActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 进度页「我的作品」(从模型库标题栏进入; 纯只读看板) -->
+        <activity
+            android:name=".ProgressActivity"
+            android:exported="false" />
+
+        <!-- 成就墙全览 (从进度页成就条带进入) -->
+        <activity
+            android:name=".AchievementsActivity"
+            android:exported="false" />
+
+        <!-- 分步教程 (从模型库详情弹窗「开始搭建」进入; 3D 教程视口 +
+             文字分步, 当前步写进度存档) -->
+        <activity
+            android:name=".TutorialActivity"
+            android:exported="false" />
+
+        <!-- 订阅页 (家长门后的年龄段对话框「订阅」键进入, UI_UX_SPEC
+             §11: 三档档位卡 + 恢复购买; 价格只出现在本页, 家长会话
+             到期自动退场 —— 儿童侧零价格红线) -->
+        <activity
+            android:name=".SubscriptionActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

@@ -1,0 +1,1100 @@
+{
+  "schema_version": 1,
+  "id": "mars_rover_01",
+  "name": "火星探测车",
+  "name_en": "Mars Rover 01",
+  "description": "全库第一台六轮行星车: 红色火星荒原上, 四片车轮底座组成双侧轮组, 车首车尾方墙与甲板长板锁成箱形车身 (结构冗余环), 两翼平挑 4 片透明太阳能板 (力矩 15 <= 预算 20), 设备舱退台升起、舱顶竖起桅杆与六边形全景相机云台; 荒原上岩钉、风蚀石与四坡岩丘点出蛮荒地貌 —— 火星, 你好!",
+  "difficulty": 3,
+  "total_pieces": 56,
+  "tags": [
+    "航天探索",
+    "火星",
+    "探测车",
+    "车轮底座",
+    "进阶",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "spacecraft",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 29,
+        "rectangle": 14,
+        "equilateral_triangle": 6,
+        "wheel_base": 4,
+        "right_triangle": 2,
+        "hexagon": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ml_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ma_0",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mb_0",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mc_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "md_0",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "me_0",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ml_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ma_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mb_1",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mc_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "md_1",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "me_1",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ml_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ma_2",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mb_2",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mc_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "md_2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "me_2",
+      "type": "square",
+      "position": [
+        7.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ml_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ma_3",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mb_3",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mc_3",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "md_3",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "me_3",
+      "type": "square",
+      "position": [
+        7.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "spike_s",
+      "type": "right_triangle",
+      "position": [
+        7.0,
+        0.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "spike_n",
+      "type": "right_triangle",
+      "position": [
+        7.0,
+        3.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wind_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wind_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        4.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mound_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.166667,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mound_e",
+      "type": "equilateral_triangle",
+      "position": [
+        6.833333,
+        2.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mound_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.833333,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "mound_w",
+      "type": "equilateral_triangle",
+      "position": [
+        6.166667,
+        2.5,
+        0.235702
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wh_s_1",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_n_1",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_s_3",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_n_3",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "bw_w_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bw_e_1",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bw_w_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bw_e_2",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "dk_s_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "dk_n_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "dk_s_3",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "dk_n_3",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sp_w_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sp_e_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sp_w_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sp_e_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cb_w_1",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cb_e_1",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cb_w_2",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cb_e_2",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cb_rf_s",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cb_rf_n",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        2.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mast",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cam",
+      "type": "hexagon",
+      "position": [
+        3.0,
+        1.5,
+        3.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺荒原南半: 2 行红色地坪, 每行 方板+长板+长板+方板 x3 (8x2)。",
+      "tip": "长板拼缝落在 y=1 线上 —— 轮组马上要整边吸在这条缝上。",
+      "tiles_to_add": [
+        "ml_0",
+        "ma_0",
+        "mb_0",
+        "mc_0",
+        "md_0",
+        "me_0",
+        "ml_1",
+        "ma_1",
+        "mb_1",
+        "mc_1",
+        "md_1",
+        "me_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺荒原北半: 再铺 2 行, 荒原合拢成 8x4 火星地表。",
+      "tip": "红色大地一望无际 —— 这里是探测车的着陆区。",
+      "tiles_to_add": [
+        "ml_2",
+        "ma_2",
+        "mb_2",
+        "mc_2",
+        "md_2",
+        "me_2",
+        "ml_3",
+        "ma_3",
+        "mb_3",
+        "mc_3",
+        "md_3",
+        "me_3"
+      ],
+      "highlight_tiles": [
+        "ml_1",
+        "me_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立地貌岩钉与风蚀石: 东端拼缝立 2 片直角三角岩钉, 对角再立 2 片橙色风蚀石。",
+      "tip": "直角边整边吸地坪拼缝 —— 火星的风把石头削成了刀片。",
+      "tiles_to_add": [
+        "spike_s",
+        "spike_n",
+        "wind_w",
+        "wind_n"
+      ],
+      "highlight_tiles": [
+        "me_0",
+        "me_3"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "堆岩丘: 4 片橙色等边三角在东侧格子上四棱互吸, 合拢成一座岩丘。",
+      "tip": "四坡自锁 —— 亿万年的陨石堆积就是这个形状。",
+      "tiles_to_add": [
+        "mound_s",
+        "mound_e",
+        "mound_n",
+        "mound_w"
+      ],
+      "highlight_tiles": [
+        "md_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装南侧轮组: 2 片车轮底座沿 y=1 拼缝立起, 底边整边吸合。",
+      "tip": "车轮底座是探测车的脚 —— 一片顶两格, 稳稳咬住地缝。",
+      "tiles_to_add": [
+        "wh_s_1",
+        "wh_s_3"
+      ],
+      "highlight_tiles": [
+        "ma_0",
+        "mb_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "装北侧轮组: y=3 拼缝再立 2 片, 六轮底盘左右就位。",
+      "tip": "两侧轮组严格对位 —— 甲板要同时压住它们。",
+      "tiles_to_add": [
+        "wh_n_1",
+        "wh_n_3"
+      ],
+      "highlight_tiles": [
+        "wh_s_1",
+        "wh_s_3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立车尾墙: x=1 线上 2 片黄色方墙, 底边整边吸地坪格边。",
+      "tip": "车尾墙与轮组同高 —— 它们共同托起甲板。",
+      "tiles_to_add": [
+        "bw_w_1",
+        "bw_w_2"
+      ],
+      "highlight_tiles": [
+        "ml_1",
+        "ml_2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立车首墙: x=5 线上再立 2 片, 车身四面有了骨架。",
+      "tip": "车首朝东 —— 全景相机将从这一侧眺望日出。",
+      "tiles_to_add": [
+        "bw_e_1",
+        "bw_e_2"
+      ],
+      "highlight_tiles": [
+        "mc_1",
+        "mc_2"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖甲板南半: 2 片长板长边整边压南轮组顶、短边压车墙顶。",
+      "tip": "轮组+车墙+甲板锁成箱形环 —— 这就是车身的底盘刚度。",
+      "tiles_to_add": [
+        "dk_s_1",
+        "dk_s_3"
+      ],
+      "highlight_tiles": [
+        "wh_s_1",
+        "bw_w_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "盖甲板北半: 再盖 2 片, 车身箱形合龙。",
+      "tip": "四片甲板互吸成整块 —— 探测车有了平整的背。",
+      "tiles_to_add": [
+        "dk_n_1",
+        "dk_n_3"
+      ],
+      "highlight_tiles": [
+        "wh_n_1",
+        "dk_s_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "展西翼太阳能板: 车尾墙顶向外平挑 2 片透明方板。",
+      "tip": "方板质量 1 x 力臂 0.5, 力矩 15 <= 预算 20 —— 稳稳展开。",
+      "tiles_to_add": [
+        "sp_w_1",
+        "sp_w_2"
+      ],
+      "highlight_tiles": [
+        "bw_w_1",
+        "bw_w_2"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "展东翼太阳能板: 车首墙顶同样平挑 2 片, 双翼展开迎着太阳。",
+      "tip": "火星阳光只有地球一半 —— 双翼一片都不能少。",
+      "tiles_to_add": [
+        "sp_e_1",
+        "sp_e_2"
+      ],
+      "highlight_tiles": [
+        "bw_e_1",
+        "bw_e_2"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "起设备舱墙: 甲板短边拼缝上立 4 片灰色方墙 (x=1 与 x=3 线)。",
+      "tip": "墙脚踩的拼缝正是车墙延长线 —— 荷载顺墙身直落轮组。",
+      "tiles_to_add": [
+        "cb_w_1",
+        "cb_w_2",
+        "cb_e_1",
+        "cb_e_2"
+      ],
+      "highlight_tiles": [
+        "dk_s_1",
+        "dk_n_1"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "盖舱顶: 2 片长板短边双端压住舱墙顶, 设备舱合龙。",
+      "tip": "双端简支 —— 舱里装着核电池与样本箱。",
+      "tiles_to_add": [
+        "cb_rf_s",
+        "cb_rf_n"
+      ],
+      "highlight_tiles": [
+        "cb_w_1",
+        "cb_e_2"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "竖桅杆: 舱顶东缘立起 1 片黄色方板桅杆。",
+      "tip": "桅杆底边整边吸舱顶短边 —— 站得直才看得远。",
+      "tiles_to_add": [
+        "mast"
+      ],
+      "highlight_tiles": [
+        "cb_rf_s"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "装全景相机: 桅杆顶竖起六边形云台 —— 火星, 你好!",
+      "tip": "六边形重心正压桅杆顶铰链, 力臂为零 —— 开始环拍 360 度。",
+      "tiles_to_add": [
+        "cam"
+      ],
+      "highlight_tiles": [
+        "mast"
+      ]
+    }
+  ]
+}

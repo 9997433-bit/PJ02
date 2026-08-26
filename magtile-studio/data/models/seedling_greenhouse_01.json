@@ -1,0 +1,461 @@
+{
+  "schema_version": 1,
+  "id": "seedling_greenhouse_01",
+  "name": "育苗小暖棚",
+  "name_en": "Seedling Greenhouse 01",
+  "description": "D1 入门园艺件: 朝南的单坡育苗暖棚 —— 4x2 橙黄棋盘苗床上立一排透明窗格后墙, 四道 30 度透明长板从墙顶一直斜铺到床前当玻璃顶, 两端灰色直角三角山墙一咬锁死整个棚架; 苗床前缘探出四株新芽, 其中一株已经开出粉色的花。搭完记得把它摆到窗台最晒的位置。",
+  "difficulty": 1,
+  "total_pieces": 22,
+  "tags": [
+    "植物花园",
+    "暖棚",
+    "育苗",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "plant_garden",
+    "build_paradigm": "bottom_up",
+    "technique_tags": {
+      "primary": "T14_diagonal_bracing",
+      "secondary": [
+        "T01_box_frame",
+        "T17_negative_space"
+      ]
+    },
+    "signature_statement": "30 度斜板翻身当暖棚玻璃顶: 顶边吸墙沿坡尾自落地, 直角三角山墙双边锁角。",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 8,
+        "equilateral_triangle": 4,
+        "rectangle": 4,
+        "window_square": 4,
+        "right_triangle": 2
+      }
+    },
+    "physical_risk_notes": [
+      {
+        "step": 3,
+        "risk": "后墙一排窗格在山墙锁角前只靠墙脚与竖边互咬, 前推易倒",
+        "mitigation": "下一步立即用直角三角双边咬合锁角; 该步 tip 提示竖边互咬"
+      }
+    ]
+  },
+  "final_assembly": [
+    {
+      "id": "bed_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bed_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bed_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bed_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bed_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bed_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bed_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bed_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "glass_0",
+      "type": "window_square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "glass_1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "glass_2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "glass_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "gable_w",
+      "type": "right_triangle",
+      "position": [
+        0.0,
+        1.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gable_e",
+      "type": "right_triangle",
+      "position": [
+        4.0,
+        1.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "roof_0",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_1",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_2",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        1.133975,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sprout_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sprout_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "sprout_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "sprout_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺苗床第一排 (靠自己这排): 四片橙黄相间的方板从左到右吸成一条。",
+      "tip": "橙黄棋盘格就是培养土 —— 拼缝对齐, 后面的墙和坡才有得吸。",
+      "tiles_to_add": [
+        "bed_0_0",
+        "bed_1_0",
+        "bed_2_0",
+        "bed_3_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺苗床第二排: 再来四片, 与第一排整边互吸, 4x2 苗床完工。",
+      "tip": "轻推苗床应整体滑动 —— 说明八片吸成了一块。",
+      "tiles_to_add": [
+        "bed_0_1",
+        "bed_1_1",
+        "bed_2_1",
+        "bed_3_1"
+      ],
+      "highlight_tiles": [
+        "bed_0_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立后墙: 四片透明窗格方踩住苗床北缘拼缝排成一排, 相邻竖边互咬。",
+      "tip": "窗格朝南, 太阳一出来整面墙都是亮的。",
+      "tiles_to_add": [
+        "glass_0",
+        "glass_1",
+        "glass_2",
+        "glass_3"
+      ],
+      "highlight_tiles": [
+        "bed_0_1",
+        "bed_3_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "锁两端山墙: 灰色直角三角竖边吸后墙端缝、横边吸苗床拼缝。",
+      "tip": "三角一咬上, 后墙就推不倒了 —— 这就是斜撑的本事。",
+      "tiles_to_add": [
+        "gable_w",
+        "gable_e"
+      ],
+      "highlight_tiles": [
+        "glass_0",
+        "glass_3"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖玻璃斜顶: 四道透明长板顶边整边吸住后墙顶沿, 坡尾自然落地。",
+      "tip": "一道一道盖, 相邻坡板长边互吸 —— 30 度斜坡正好接住阳光。",
+      "tiles_to_add": [
+        "roof_0",
+        "roof_1",
+        "roof_2",
+        "roof_3"
+      ],
+      "highlight_tiles": [
+        "glass_0",
+        "glass_3"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "种上新芽: 四株小苗立上苗床前缘 —— 有一株已经开花了!",
+      "tip": "底边要整条吸住前缘拼缝; 明天浇水的任务就交给你了。",
+      "tiles_to_add": [
+        "sprout_0",
+        "sprout_1",
+        "sprout_2",
+        "sprout_3"
+      ],
+      "highlight_tiles": [
+        "bed_0_0",
+        "bed_3_0"
+      ]
+    }
+  ]
+}

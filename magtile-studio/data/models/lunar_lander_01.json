@@ -1,0 +1,1223 @@
+{
+  "schema_version": 1,
+  "id": "lunar_lander_01",
+  "name": "月面着陆器",
+  "name_en": "Lunar Lander 01",
+  "description": "复刻真实航天器级间结构的分体对接教程: 先在 5x5 月面上组装下降级 —— 金橙隔热舱体加四条风车状直角三角起落架 (每条腿双边吸合), 再铺 3x3 级间甲板对接上升级 —— 中空指令舱与四坡锥形返回舱盖自锁成环; 最后挂载六边形散热板、舷梯、天线与任务旗。搭完从舷梯走下第一步, 就是你的一大步。",
+  "difficulty": 3,
+  "total_pieces": 63,
+  "tags": [
+    "航天",
+    "着陆器",
+    "分体对接",
+    "航天器",
+    "进阶",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "spacecraft",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 50,
+        "isosceles_triangle": 5,
+        "right_triangle": 4,
+        "hexagon": 2,
+        "rectangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "m_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_0_2",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_1_2",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_0_3",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_1_3",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "m_2_3",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_3_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_4_3",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_0_4",
+      "type": "square",
+      "position": [
+        0.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_1_4",
+      "type": "square",
+      "position": [
+        1.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_2_4",
+      "type": "square",
+      "position": [
+        2.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_3_4",
+      "type": "square",
+      "position": [
+        3.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "m_4_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ds_s_0",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ds_s_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ds_s_2",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ds_e_0",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ds_e_1",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ds_e_2",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ds_n_0",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ds_n_1",
+      "type": "square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ds_n_2",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ds_w_0",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ds_w_1",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ds_w_2",
+      "type": "square",
+      "position": [
+        1.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "leg_sw",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "leg_se",
+      "type": "right_triangle",
+      "position": [
+        4.0,
+        0.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "leg_ne",
+      "type": "right_triangle",
+      "position": [
+        4.333333,
+        4.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "leg_nw",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        4.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_0_0",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_1_0",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_2_0",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_0_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_1_1",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "deck_2_1",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_0_2",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_2_2",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ladder",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        4.866025,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "as_s",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "as_w",
+      "type": "square",
+      "position": [
+        2.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "as_n",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "as_e",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "cap_s",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        2.166667,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cap_e",
+      "type": "isosceles_triangle",
+      "position": [
+        2.833333,
+        2.5,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cap_n",
+      "type": "isosceles_triangle",
+      "position": [
+        2.5,
+        2.833333,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cap_w",
+      "type": "isosceles_triangle",
+      "position": [
+        2.166667,
+        2.5,
+        2.645498
+      ],
+      "rotation": [
+        75.52249,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rad_w",
+      "type": "hexagon",
+      "position": [
+        1.0,
+        2.5,
+        1.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rad_e",
+      "type": "hexagon",
+      "position": [
+        4.0,
+        2.5,
+        1.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "antenna",
+      "type": "isosceles_triangle",
+      "position": [
+        3.5,
+        1.0,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "flag",
+      "type": "rectangle",
+      "position": [
+        0.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺设月面着陆场南半部: 平放 2 排共 10 片正方形, 相邻边互相吸合; 青色片是环形山。",
+      "tip": "着陆场要铺在桌面中央: 舷梯还要从北缘伸出一大截。",
+      "tiles_to_add": [
+        "m_0_0",
+        "m_1_0",
+        "m_2_0",
+        "m_3_0",
+        "m_4_0",
+        "m_0_1",
+        "m_1_1",
+        "m_2_1",
+        "m_3_1",
+        "m_4_1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "着陆场中部再铺 2 排共 10 片, 与南半部整边贴合。",
+      "tip": "每片先对准一条边再松手, 整块月面中间不能留缝。",
+      "tiles_to_add": [
+        "m_0_2",
+        "m_1_2",
+        "m_2_2",
+        "m_3_2",
+        "m_4_2",
+        "m_0_3",
+        "m_1_3",
+        "m_2_3",
+        "m_3_3",
+        "m_4_3"
+      ],
+      "highlight_tiles": [
+        "m_0_1",
+        "m_1_1",
+        "m_2_1",
+        "m_3_1",
+        "m_4_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "补齐着陆场最北一排 5 片 —— 5x5 月面就绪, 着陆器可以进场了。",
+      "tip": "从上往下看, 四个青色环形山应错落分布在灰色月面上。",
+      "tiles_to_add": [
+        "m_0_4",
+        "m_1_4",
+        "m_2_4",
+        "m_3_4",
+        "m_4_4"
+      ],
+      "highlight_tiles": [
+        "m_0_3",
+        "m_1_3",
+        "m_2_3",
+        "m_3_3",
+        "m_4_3"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "下降级起舱: 沿着陆场中央 3x3 区域立起南墙 3 片橙色、西墙 3 片金色正方形, 底边吸月面网格线, 转角竖边互吸。",
+      "tip": "橙金相间就是真实着陆器的多层隔热毯配色。",
+      "tiles_to_add": [
+        "ds_s_0",
+        "ds_s_1",
+        "ds_s_2",
+        "ds_w_0",
+        "ds_w_1",
+        "ds_w_2"
+      ],
+      "highlight_tiles": [
+        "m_1_1",
+        "m_1_3"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "补齐下降级北墙与东墙各 3 片, 舱体四面合围。",
+      "tip": "最后一片放入前检查四角: 每个转角的两片都应互相吸牢。",
+      "tiles_to_add": [
+        "ds_n_0",
+        "ds_n_1",
+        "ds_n_2",
+        "ds_e_0",
+        "ds_e_1",
+        "ds_e_2"
+      ],
+      "highlight_tiles": [
+        "ds_w_2",
+        "ds_s_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "安装四条起落架: 红色直角三角形竖直角边吸舱体墙角竖边, 水平直角边贴住月面网格线, 四条腿呈风车状伸向四方。",
+      "tip": "起落架必须两条直角边同时吸合 —— 它们是着陆缓冲结构, 不是装饰。",
+      "tiles_to_add": [
+        "leg_sw",
+        "leg_se",
+        "leg_ne",
+        "leg_nw"
+      ],
+      "highlight_tiles": [
+        "ds_s_0",
+        "ds_e_0",
+        "ds_n_2",
+        "ds_w_2"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "铺设级间甲板第 1 排: 3 片正方形坐上下降级南墙顶, 这一层就是两级的对接面。",
+      "tip": "甲板边缘要同时吸住墙顶边与相邻甲板片。",
+      "tiles_to_add": [
+        "deck_0_0",
+        "deck_1_0",
+        "deck_2_0"
+      ],
+      "highlight_tiles": [
+        "ds_s_0",
+        "ds_s_1",
+        "ds_s_2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "铺设甲板第 2 排: 中央那片换成蓝色 —— 它是上升级的对接标记。",
+      "tip": "蓝色片四边都要吸住相邻片, 对接面才能整体受力。",
+      "tiles_to_add": [
+        "deck_0_1",
+        "deck_1_1",
+        "deck_2_1"
+      ],
+      "highlight_tiles": [
+        "deck_0_0",
+        "deck_1_0",
+        "deck_2_0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "补齐甲板第 3 排 3 片, 下降级封顶完成 —— 第一级组装完毕!",
+      "tip": "轻压甲板四角检查: 应结实得能托住整个上升级。",
+      "tiles_to_add": [
+        "deck_0_2",
+        "deck_1_2",
+        "deck_2_2"
+      ],
+      "highlight_tiles": [
+        "deck_0_1",
+        "deck_1_1",
+        "deck_2_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "安装舷梯: 青色长方形斜靠在甲板北缘, 顶边整边吸合, 坡尾越过月面自然落地 —— 宇航员将从这里走下着陆器。",
+      "tip": "先把顶边完整贴上甲板边缘再松手, 坡尾要平稳落在桌面上。",
+      "tiles_to_add": [
+        "ladder"
+      ],
+      "highlight_tiles": [
+        "deck_1_2"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "上升级进场: 在甲板正中的蓝色标记上立起指令舱南墙与西墙各 1 片。",
+      "tip": "从这一步开始组装第二级 —— 对接面就是甲板网格线。",
+      "tiles_to_add": [
+        "as_s",
+        "as_w"
+      ],
+      "highlight_tiles": [
+        "deck_1_1"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "补齐指令舱北墙与东墙, 1x1 中空舱体合围 —— 舱内不需要任何支撑, 全靠四面薄壳磁吸自持。",
+      "tip": "四角竖边两两互吸后, 轻捏舱体上口应感觉整体联动。",
+      "tiles_to_add": [
+        "as_n",
+        "as_e"
+      ],
+      "highlight_tiles": [
+        "as_s",
+        "as_w"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "盖上返回舱盖: 4 片红色等腰三角形底边分别吸住舱顶四边, 斜棱两两互吸, 合拢成尖顶锥形 —— 这就是宇航员回家的座舱。",
+      "tip": "先立两片相对的, 再补另外两片, 四条斜棱吸合成环后极其稳固。",
+      "tiles_to_add": [
+        "cap_s",
+        "cap_e",
+        "cap_n",
+        "cap_w"
+      ],
+      "highlight_tiles": [
+        "as_s",
+        "as_n",
+        "as_w",
+        "as_e"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "挂载散热板: 两片黄色六边形分别立在甲板东西两缘, 底边同时吸住甲板边与墙顶边。",
+      "tip": "六边形立稳后像着陆器展开的太阳翼, 左右对称。",
+      "tiles_to_add": [
+        "rad_w",
+        "rad_e"
+      ],
+      "highlight_tiles": [
+        "deck_0_1",
+        "deck_2_1"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "竖起天线: 紫色等腰三角塔尖立在甲板南缘, 尖端指向地球方向。",
+      "tip": "捏住尖角轻轻放下, 底边吸合即可站稳。",
+      "tiles_to_add": [
+        "antenna"
+      ],
+      "highlight_tiles": [
+        "deck_2_0"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "插上任务旗: 红色长方形竖立在着陆场西南角 —— 月面着陆器全系统就位, 任务成功!",
+      "tip": "旗面竖直朝上, 底边吸住月面边缘; 完成后合影留念。",
+      "tiles_to_add": [
+        "flag"
+      ],
+      "highlight_tiles": [
+        "m_0_0"
+      ]
+    }
+  ]
+}

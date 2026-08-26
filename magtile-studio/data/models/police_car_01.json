@@ -1,0 +1,1055 @@
+{
+  "schema_version": 1,
+  "id": "police_car_01",
+  "name": "警车",
+  "name_en": "Police Car 01",
+  "description": "全库第一辆轿车轮廓的载具: 前后两对车轮底座托起三段式车身 (发动机盖长板 / 座舱 / 后备箱方板), 南北两条蓝色警条整片竖放 —— 底边整边同时吸轮组顶与底盘长边, 车顶长板再把它们锁成箱形环; 前挡风、后窗与车鼻三片 45 度斜披勾出轿车流线, 车顶前沿立红色警灯。人行道上门框方岗门、窗格方值班窗的临检岗亭, 配红白拦截桩与雪糕筒围出临检通道 —— 前方临检, 请减速慢行!",
+  "difficulty": 3,
+  "total_pieces": 53,
+  "tags": [
+    "警车",
+    "城市",
+    "载具",
+    "职业体验",
+    "车轮底座",
+    "免费"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 25,
+        "rectangle": 14,
+        "equilateral_triangle": 7,
+        "wheel_base": 4,
+        "door_frame": 1,
+        "isosceles_triangle": 1,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "r0_a",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r0_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r0_c",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r0_d",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r0_e",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r0_f",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_a",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_b",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_c",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_d",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_e",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r1_f",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r2_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r2_b",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "r2_c",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "r2_d",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "r2_e",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wk_a",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wk_b",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wk_c",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wk_d",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wk_e",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wk_f",
+      "type": "square",
+      "position": [
+        7.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "wb_fs",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wb_fn",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wb_rs",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wb_rn",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "hood",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cabin_floor",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "trunk",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "stripe_s",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "stripe_n",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "windshield",
+      "type": "square",
+      "position": [
+        2.646447,
+        1.5,
+        1.646447
+      ],
+      "rotation": [
+        -45.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rear_glass",
+      "type": "square",
+      "position": [
+        5.353553,
+        1.5,
+        1.646447
+      ],
+      "rotation": [
+        -135.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "nose",
+      "type": "square",
+      "position": [
+        0.646447,
+        1.5,
+        0.646447
+      ],
+      "rotation": [
+        -45.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "beacon",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bo_door",
+      "type": "door_frame",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bo_win",
+      "type": "window_square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bo_w",
+      "type": "square",
+      "position": [
+        5.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bo_e",
+      "type": "square",
+      "position": [
+        7.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bo_n0",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bo_n1",
+      "type": "square",
+      "position": [
+        6.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "bo_r0",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bo_r1",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "bo_crest",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        3.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bar_a",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bar_b",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cone_a",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cone_b",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "lamp",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        4.0,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "sign",
+      "type": "square",
+      "position": [
+        7.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sign_top",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        4.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "南车道: 方板+长板+长板+方板 x3 铺出第一排路面, 长板拼缝正好落在 x=1~3 与 3~5 —— 车轮底座马上要吸在这两条缝上。",
+      "tip": "长板放准了, 后面的轮子才有整边可吸。",
+      "tiles_to_add": [
+        "r0_a",
+        "r0_b",
+        "r0_c",
+        "r0_d",
+        "r0_e",
+        "r0_f"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "临检车道: 同样的板序再铺一排 —— 警车就停这排接受检查。",
+      "tip": "",
+      "tiles_to_add": [
+        "r1_a",
+        "r1_b",
+        "r1_c",
+        "r1_d",
+        "r1_e",
+        "r1_f"
+      ],
+      "highlight_tiles": [
+        "r0_b",
+        "r0_c"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "北车道: 两块白色导流格镶在 x=2~4, 其余用灰色长板补齐。",
+      "tip": "白色导流格的北边是拦截桩的落脚点。",
+      "tiles_to_add": [
+        "r2_a",
+        "r2_b",
+        "r2_c",
+        "r2_d",
+        "r2_e"
+      ],
+      "highlight_tiles": [
+        "r1_a",
+        "r1_f"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "人行道: 西段两块橙色长砖, 东段 x=4~8 改用四块方砖 —— 岗亭与告示牌都要立在方砖的格边上。",
+      "tip": "",
+      "tiles_to_add": [
+        "wk_a",
+        "wk_b",
+        "wk_c",
+        "wk_d",
+        "wk_e",
+        "wk_f"
+      ],
+      "highlight_tiles": [
+        "r2_b",
+        "r2_e"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "四只车轮: 前对吸 x=1~3 拼缝, 后对吸 x=3~5 拼缝, 分别立在 y=1 与 y=2 线上 —— 车轮底座一片顶两格, 底边整边咬住路缝。",
+      "tip": "轮顶 (z=1) 稍后要托起整个车身。",
+      "tiles_to_add": [
+        "wb_fs",
+        "wb_fn",
+        "wb_rs",
+        "wb_rn"
+      ],
+      "highlight_tiles": [
+        "r0_b",
+        "r1_c"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "车身三段: 发动机盖长板压前轮顶, 座舱底板长板压后轮顶, 后备箱方板短边吸座舱底板东端。",
+      "tip": "长板长边与轮顶整边等长贴合 —— 力全部直落车轮。",
+      "tiles_to_add": [
+        "hood",
+        "cabin_floor",
+        "trunk"
+      ],
+      "highlight_tiles": [
+        "wb_fs",
+        "wb_rn"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "蓝色警条: 两条整片长方形竖立在座舱两侧, 底边同时吸住轮组顶边与座舱底板长边。",
+      "tip": "警条就是座舱墙 —— 白车身蓝警条, 一眼认出警车。",
+      "tiles_to_add": [
+        "stripe_s",
+        "stripe_n"
+      ],
+      "highlight_tiles": [
+        "cabin_floor",
+        "wb_rs"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "车顶: 白色长板盖上 z=2, 两条长边整边压住南北警条顶。",
+      "tip": "轮组+警条+车顶锁成箱形环, 这就是车身的刚度。",
+      "tiles_to_add": [
+        "roof"
+      ],
+      "highlight_tiles": [
+        "stripe_s",
+        "stripe_n"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "玻璃: 前挡风从车顶西沿 45 度斜披向发动机盖, 后窗从东沿斜披向后备箱, 车鼻再从机盖前缘斜披一片 —— 轿车轮廓出来了。",
+      "tip": "每片玻璃 30g, 远低于悬挂预算 —— 稳稳挂住。",
+      "tiles_to_add": [
+        "windshield",
+        "rear_glass",
+        "nose"
+      ],
+      "highlight_tiles": [
+        "roof",
+        "hood"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "车顶警灯: 红色等边三角立上车顶前沿短边 —— 嘀嘟嘀嘟!",
+      "tip": "三角重心正压铰链线, 力臂为零。",
+      "tiles_to_add": [
+        "beacon"
+      ],
+      "highlight_tiles": [
+        "roof"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "岗亭正面: 门框方岗门 + 窗格方值班窗立在人行道 y=3 格边上。",
+      "tip": "",
+      "tiles_to_add": [
+        "bo_door",
+        "bo_win"
+      ],
+      "highlight_tiles": [
+        "wk_d",
+        "wk_e"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "岗亭两侧: 东西两片蓝色方墙立起, 竖边与正面墙互吸。",
+      "tip": "",
+      "tiles_to_add": [
+        "bo_w",
+        "bo_e"
+      ],
+      "highlight_tiles": [
+        "bo_door",
+        "bo_win"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "岗亭背面: 北墙两片立在人行道北缘, 四面墙锁成方环。",
+      "tip": "",
+      "tiles_to_add": [
+        "bo_n0",
+        "bo_n1"
+      ],
+      "highlight_tiles": [
+        "bo_w",
+        "bo_e"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "岗亭顶: 两片白色方板盖上 z=1, 四边压住墙顶; 屋脊中缝再立一片红色警徽三角。",
+      "tip": "",
+      "tiles_to_add": [
+        "bo_r0",
+        "bo_r1",
+        "bo_crest"
+      ],
+      "highlight_tiles": [
+        "bo_n0",
+        "bo_n1"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "临检通道: 红白拦截桩立在导流格北边, 两只橙色雪糕筒在车尾后方收窄车道。",
+      "tip": "三角底边整边吸方板格边 —— 摆得正才立得稳。",
+      "tiles_to_add": [
+        "bar_a",
+        "bar_b",
+        "cone_a",
+        "cone_b"
+      ],
+      "highlight_tiles": [
+        "r2_b",
+        "r1_e"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "街景收尾: 黄色路灯立在人行道北缘, 告示牌方板戴红顶 —— 前方临检, 请减速慢行!",
+      "tip": "",
+      "tiles_to_add": [
+        "lamp",
+        "sign",
+        "sign_top"
+      ],
+      "highlight_tiles": [
+        "wk_c",
+        "wk_f"
+      ]
+    }
+  ]
+}

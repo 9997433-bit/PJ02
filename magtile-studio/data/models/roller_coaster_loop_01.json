@@ -1,0 +1,1113 @@
+{
+  "schema_version": 1,
+  "id": "roller_coaster_loop_01",
+  "name": "过山车大环圈",
+  "name_en": "Roller Coaster Loop 01",
+  "description": "游乐园主题: 全库第一个闭合环圈 —— 6 片梯形在竖直平面内腰腰互吸, 拼成外边长 2、内边长 1 的空心六边大环, 中间的洞就是过山车穿越的圈心; 环是拓扑环, 剪断任何一条铰链线都还有第二条路径, 越按越紧。环圈西侧箱形桥墩甩出上行/俯冲双坡道, 再往西是带雨棚与扇形招牌的车站和出站坡道, 东侧停着两节连挂的列车。",
+  "difficulty": 3,
+  "total_pieces": 57,
+  "tags": [
+    "游乐园",
+    "过山车",
+    "环圈",
+    "闭合环",
+    "挑战",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "fantasy_machinery",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 27,
+        "rectangle": 17,
+        "equilateral_triangle": 6,
+        "trapezoid": 6,
+        "sector": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "apron_s0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_s1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_s2",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_s3",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_s4",
+      "type": "rectangle",
+      "position": [
+        8.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_s5",
+      "type": "square",
+      "position": [
+        9.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "track_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "track_p0",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "track_p1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "track_p2",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "track_loop",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "track_c0",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "track_c1",
+      "type": "square",
+      "position": [
+        8.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "track_end",
+      "type": "square",
+      "position": [
+        9.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "apron_n0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_n1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_n2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_n3",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_n4",
+      "type": "rectangle",
+      "position": [
+        7.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "apron_n5",
+      "type": "rectangle",
+      "position": [
+        9.0,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "st_s",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "st_n",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "st_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "st_e",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "st_deck",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "st_post_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "st_post_e",
+      "type": "square",
+      "position": [
+        2.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "st_roof",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "st_sign",
+      "type": "sector",
+      "position": [
+        0.0,
+        1.0,
+        2.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "st_exit",
+      "type": "rectangle",
+      "position": [
+        -0.866025,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "queue",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "pier_s",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_n",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_w",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_e",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pier_top",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hill_up",
+      "type": "rectangle",
+      "position": [
+        2.133975,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hill_dn",
+      "type": "rectangle",
+      "position": [
+        4.866025,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "loop_0",
+      "type": "trapezoid",
+      "position": [
+        6.0,
+        1.0,
+        0.3849
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "loop_1",
+      "type": "trapezoid",
+      "position": [
+        7.166667,
+        1.0,
+        1.058475
+      ],
+      "rotation": [
+        90.0,
+        -60.000003,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "loop_2",
+      "type": "trapezoid",
+      "position": [
+        7.166667,
+        1.0,
+        2.405626
+      ],
+      "rotation": [
+        -90.0,
+        -60.000003,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "loop_3",
+      "type": "trapezoid",
+      "position": [
+        6.0,
+        1.0,
+        3.079202
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "loop_4",
+      "type": "trapezoid",
+      "position": [
+        4.833333,
+        1.0,
+        2.405627
+      ],
+      "rotation": [
+        -90.0,
+        60.000003,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "loop_5",
+      "type": "trapezoid",
+      "position": [
+        4.833333,
+        1.0,
+        1.058476
+      ],
+      "rotation": [
+        90.0,
+        60.000003,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "car1_nose",
+      "type": "equilateral_triangle",
+      "position": [
+        8.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "car1_s",
+      "type": "square",
+      "position": [
+        8.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "car1_n",
+      "type": "square",
+      "position": [
+        8.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "car1_tail",
+      "type": "square",
+      "position": [
+        9.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "car2_s",
+      "type": "square",
+      "position": [
+        9.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "car2_n",
+      "type": "square",
+      "position": [
+        9.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "car2_tail",
+      "type": "square",
+      "position": [
+        10.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "finish_flag",
+      "type": "equilateral_triangle",
+      "position": [
+        9.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "start_gate",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "flag_w_post",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "flag_w",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flag_e_post",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "flag_e",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺南侧游园带: 沿 x 轴铺 6 片绿色地砖 (长-长-方-长-长-方), 排队栏落点处必须是单格方板。",
+      "tip": "环圈南锚那根长方形的位置最关键 —— 它的长边即将吸住环圈。",
+      "tiles_to_add": [
+        "apron_s0",
+        "apron_s1",
+        "apron_s2",
+        "apron_s3",
+        "apron_s4",
+        "apron_s5"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺轨道带: 8 片灰色地砖铺出过山车的行车线。",
+      "tip": "桥墩基座与车厢停靠区用单格方板, 立墙只吸等长整边。",
+      "tiles_to_add": [
+        "track_w",
+        "track_p0",
+        "track_p1",
+        "track_p2",
+        "track_loop",
+        "track_c0",
+        "track_c1",
+        "track_end"
+      ],
+      "highlight_tiles": [
+        "apron_s0",
+        "apron_s3"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺北侧游园带: 6 片绿色地砖合拢, 三条带连成 10x3 大地台。",
+      "tip": "旗杆落点 (x=4,5) 两片必须是单格方板。",
+      "tiles_to_add": [
+        "apron_n0",
+        "apron_n1",
+        "apron_n2",
+        "apron_n3",
+        "apron_n4",
+        "apron_n5"
+      ],
+      "highlight_tiles": [
+        "track_w"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "砌站台箱体: 2 根蓝色长方形横放立起做前后墙, 2 片蓝色正方形封住东西两端, 围成箱形站台。",
+      "tip": "长方形底边吸地砖长边, 端墙竖边与长墙竖边咬合。",
+      "tiles_to_add": [
+        "st_w",
+        "st_e",
+        "st_s",
+        "st_n"
+      ],
+      "highlight_tiles": [
+        "apron_s0",
+        "track_w"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "盖站台台面并立雨棚柱: 1 根黄色长方形盖住箱口, 2 片透明正方形立在台面两端做雨棚柱。",
+      "tip": "台面四边同时吸住四面站台墙 —— 箱体从此自锁。",
+      "tiles_to_add": [
+        "st_deck",
+        "st_post_w",
+        "st_post_e"
+      ],
+      "highlight_tiles": [
+        "st_s",
+        "st_n"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "盖雨棚与挂招牌: 1 根蓝色长方形架上双柱做雨棚顶, 1 片紫色扇形立在棚顶西沿当招牌。",
+      "tip": "扇形直边吸棚顶边, 弧边朝天 —— 最拉风的过山车招牌。",
+      "tiles_to_add": [
+        "st_roof",
+        "st_sign"
+      ],
+      "highlight_tiles": [
+        "st_post_w",
+        "st_post_e"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "装出站坡道与排队栏: 30 度坡道从台面西沿滑到地面, 1 片紫色等边三角形立在南带拼缝上当排队栏。",
+      "tip": "坡道顶边整边吸台面沿口, 坡尾稳稳落地。",
+      "tiles_to_add": [
+        "st_exit",
+        "queue"
+      ],
+      "highlight_tiles": [
+        "st_deck"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "砌登顶桥墩: 4 片灰色正方形在轨道带上围成箱形桥墩。",
+      "tip": "四片墙的竖边两两咬合, 箱形墩比单片墙结实得多。",
+      "tiles_to_add": [
+        "pier_s",
+        "pier_n",
+        "pier_w",
+        "pier_e"
+      ],
+      "highlight_tiles": [
+        "track_p1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖墩顶并架双坡道: 红色顶板盖住桥墩, 上行坡道向西落地、俯冲坡道向东贴着环圈将要立起的位置俯冲。",
+      "tip": "两条坡道的顶边分别吸住墩顶的东西沿口。",
+      "tiles_to_add": [
+        "pier_top",
+        "hill_up",
+        "hill_dn"
+      ],
+      "highlight_tiles": [
+        "pier_s",
+        "pier_n"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "环圈起步: 底片梯形下底 (长 2) 立在南锚与轨道带的公共拼缝上, 左右两片贴着它的腰向上生长, 外角落地。",
+      "tip": "底片同时吸住两侧长方形地砖的长边 —— 环圈的地基。",
+      "tiles_to_add": [
+        "loop_0",
+        "loop_1",
+        "loop_5"
+      ],
+      "highlight_tiles": [
+        "apron_s3",
+        "track_loop"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "环圈过肩: 左右再各接一片, 腰腰相吸, 环圈长到 3.5 格高。",
+      "tip": "竖直平面内的梯形正压在下方腰缝上, 天生零力矩。",
+      "tiles_to_add": [
+        "loop_2",
+        "loop_4"
+      ],
+      "highlight_tiles": [
+        "loop_1",
+        "loop_5"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "环圈合龙: 最后一片梯形倒扣在最高点, 两条腰同时卡进左右肩缝 —— 空心大环圈自锁成环!",
+      "tip": "合龙后轻按整圈: 6 片像一个整体一样纹丝不动。",
+      "tiles_to_add": [
+        "loop_3"
+      ],
+      "highlight_tiles": [
+        "loop_2",
+        "loop_4"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "拼第一节车厢: 挡风尖 + 两侧板 + 尾板, 红色涂装停在环圈东侧。",
+      "tip": "挡风尖立在停靠区前缝上, 侧板夹住轨道带。",
+      "tiles_to_add": [
+        "car1_nose",
+        "car1_s",
+        "car1_n",
+        "car1_tail"
+      ],
+      "highlight_tiles": [
+        "track_c1"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "拼第二节车厢: 橙色涂装接在一节车尾后面, 共用一片隔板。",
+      "tip": "第一节的尾板就是第二节的车头 —— 两节列车连挂完成。",
+      "tiles_to_add": [
+        "car2_s",
+        "car2_n",
+        "car2_tail"
+      ],
+      "highlight_tiles": [
+        "car1_tail"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "立北侧旗杆塔: 2 座 (灰墙 + 粉旗) 正对环圈两肩。",
+      "tip": "旗子底边吸在旗杆顶边上, 迎风招展。",
+      "tiles_to_add": [
+        "flag_w_post",
+        "flag_w",
+        "flag_e_post",
+        "flag_e"
+      ],
+      "highlight_tiles": [
+        "apron_n2",
+        "apron_n3"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "装起点闸门与终点冲线旗: 起点立闸门, 停靠区旁插冲线旗 —— 过山车环圈段正式营业!",
+      "tip": "从侧面看: 站台-小丘-大环圈-列车连成一条完整赛道。",
+      "tiles_to_add": [
+        "start_gate",
+        "finish_flag"
+      ],
+      "highlight_tiles": [
+        "track_w",
+        "apron_s5"
+      ]
+    }
+  ]
+}

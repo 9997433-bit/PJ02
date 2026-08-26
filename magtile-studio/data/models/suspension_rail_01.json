@@ -1,0 +1,1403 @@
+{
+  "schema_version": 1,
+  "id": "suspension_rail_01",
+  "name": "空中悬挂轨道车",
+  "name_en": "Suspension Monorail 01",
+  "description": "全库第一条车厢挂在轨道下面的悬挂式单轨: 四座 T 形薄墙立柱带直角三角柱脚斜撑, 托起三层高的连续轨道梁 (跨间长板双端受力零悬挑, 两端站台由柱身膝撑托住); 玻璃头尾的吊舱用两片吊架挂在中跨下方, 吊架-舱底-端窗围成闭合吊箱, 剪断任一条铰链线都兜得住; 北侧月台与舱底零高差, 东端两段 30 度坡道折返下地 —— 头顶列车驶过, 地面警示带亮起。",
+  "difficulty": 3,
+  "total_pieces": 75,
+  "tags": [
+    "交通",
+    "轨道",
+    "悬挂列车",
+    "城市",
+    "工程"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 40,
+        "equilateral_triangle": 14,
+        "right_triangle": 12,
+        "rectangle": 9
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "ln_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ln_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ln_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ln_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ln_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ln_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ln_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ln_7",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ln_8",
+      "type": "square",
+      "position": [
+        8.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ln_9",
+      "type": "square",
+      "position": [
+        9.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ln_10",
+      "type": "square",
+      "position": [
+        10.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "ln_11",
+      "type": "square",
+      "position": [
+        11.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "fc_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fc_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "col_1_0",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_1_1",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_1_2",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_4_0",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_4_1",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_4_2",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_8_0",
+      "type": "square",
+      "position": [
+        8.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_8_1",
+      "type": "square",
+      "position": [
+        8.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_8_2",
+      "type": "square",
+      "position": [
+        8.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_11_0",
+      "type": "square",
+      "position": [
+        11.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_11_1",
+      "type": "square",
+      "position": [
+        11.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "col_11_2",
+      "type": "square",
+      "position": [
+        11.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ft_1_w",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ft_1_e",
+      "type": "right_triangle",
+      "position": [
+        1.333333,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ft_4_w",
+      "type": "right_triangle",
+      "position": [
+        3.666667,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ft_4_e",
+      "type": "right_triangle",
+      "position": [
+        4.333333,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ft_8_w",
+      "type": "right_triangle",
+      "position": [
+        7.666667,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ft_8_e",
+      "type": "right_triangle",
+      "position": [
+        8.333333,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ft_11_w",
+      "type": "right_triangle",
+      "position": [
+        10.666667,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ft_11_e",
+      "type": "right_triangle",
+      "position": [
+        11.333333,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cap_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_7",
+      "type": "square",
+      "position": [
+        7.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cap_10",
+      "type": "square",
+      "position": [
+        10.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "span_2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "span_5",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "span_8",
+      "type": "rectangle",
+      "position": [
+        9.0,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "end_w",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "end_e",
+      "type": "square",
+      "position": [
+        11.5,
+        0.5,
+        3.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "kb_w_s",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        0.0,
+        2.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "kb_w_n",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        1.0,
+        2.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "kb_e_s",
+      "type": "right_triangle",
+      "position": [
+        11.333333,
+        0.0,
+        2.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "kb_e_n",
+      "type": "right_triangle",
+      "position": [
+        11.333333,
+        1.0,
+        2.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "stop_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "stop_e",
+      "type": "equilateral_triangle",
+      "position": [
+        12.0,
+        0.5,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_s_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_n_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_s_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_n_1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_s_4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_n_4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_s_7",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        0.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_n_7",
+      "type": "equilateral_triangle",
+      "position": [
+        7.5,
+        1.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_s_10",
+      "type": "equilateral_triangle",
+      "position": [
+        10.5,
+        0.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_n_10",
+      "type": "equilateral_triangle",
+      "position": [
+        10.5,
+        1.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_s_11",
+      "type": "equilateral_triangle",
+      "position": [
+        11.5,
+        0.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gd_n_11",
+      "type": "equilateral_triangle",
+      "position": [
+        11.5,
+        1.0,
+        3.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hg_s",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "hg_n",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cab_fl",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cab_w",
+      "type": "square",
+      "position": [
+        5.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cab_e",
+      "type": "square",
+      "position": [
+        7.0,
+        0.5,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "st_w_0",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "st_e_0",
+      "type": "square",
+      "position": [
+        7.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "st_w_1",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "st_e_1",
+      "type": "square",
+      "position": [
+        7.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "plat",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "st_r1",
+      "type": "rectangle",
+      "position": [
+        7.866025,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "st_p",
+      "type": "square",
+      "position": [
+        8.732051,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "st_mid",
+      "type": "square",
+      "position": [
+        9.232051,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "st_r2",
+      "type": "rectangle",
+      "position": [
+        10.598076,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "gray"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺警示带西半段: 轨道正下方铺 6 片青蓝相间方板 ([0,6]x[0,1])。",
+      "tip": "悬挂轨道的正下方永远画警示带 —— 这也是全线的地面基准。",
+      "tiles_to_add": [
+        "ln_0",
+        "ln_1",
+        "ln_2",
+        "ln_3",
+        "ln_4",
+        "ln_5"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺警示带东半段: 再铺 6 片, 警示带贯通 12 格。",
+      "tip": "四座立柱将立在 x = 1/4/8/11 四条格线上。",
+      "tiles_to_add": [
+        "ln_6",
+        "ln_7",
+        "ln_8",
+        "ln_9",
+        "ln_10",
+        "ln_11"
+      ],
+      "highlight_tiles": [
+        "ln_5"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺车站前庭: 警示带北侧 [5,7] 段接 2 片灰色前庭方板。",
+      "tip": "前庭是月台柱的地基, 也是乘客进站的地面入口。",
+      "tiles_to_add": [
+        "fc_5",
+        "fc_6"
+      ],
+      "highlight_tiles": [
+        "ln_5",
+        "ln_6"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立四座立柱第 1 层: 4 片红色薄墙分别立上四条格线, 底边吸警示带边。",
+      "tip": "T 形柱是单片薄墙 —— 省料通透, 下一步马上加斜撑。",
+      "tiles_to_add": [
+        "col_1_0",
+        "col_4_0",
+        "col_8_0",
+        "col_11_0"
+      ],
+      "highlight_tiles": [
+        "ln_0",
+        "ln_11"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "装柱脚斜撑: 每柱东西两侧各 1 片直角三角, 竖直角边吸柱身竖边、水平直角边吸警示带边。",
+      "tip": "斜撑装完, 薄墙立柱立刻抗侧倾 —— 轻推柱顶试试。",
+      "tiles_to_add": [
+        "ft_1_w",
+        "ft_1_e",
+        "ft_4_w",
+        "ft_4_e",
+        "ft_8_w",
+        "ft_8_e",
+        "ft_11_w",
+        "ft_11_e"
+      ],
+      "highlight_tiles": [
+        "col_1_0",
+        "col_4_0",
+        "col_8_0",
+        "col_11_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立柱加高到第 2 层: 每柱再叠 1 片, 上下边完整贴合。",
+      "tip": "对缝直叠, 别错位 —— 柱身是全线唯一的竖向传力路径。",
+      "tiles_to_add": [
+        "col_1_1",
+        "col_4_1",
+        "col_8_1",
+        "col_11_1"
+      ],
+      "highlight_tiles": [
+        "ft_1_w",
+        "col_1_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立柱加高到第 3 层: 四柱齐平三层高, 高架轨道的标高就位。",
+      "tip": "越高越要轻放, 一手扶柱一手放片。",
+      "tiles_to_add": [
+        "col_1_2",
+        "col_4_2",
+        "col_8_2",
+        "col_11_2"
+      ],
+      "highlight_tiles": [
+        "col_1_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖承台并架跨板: 4 片灰色承台方板一边吸柱顶边 (中间两台朝跨内伸, 给吊舱湾让出柱位), 紧接着 3 片灰色长板落进跨间, 每片两端同时吸左右承台边/柱顶边 —— 高架轨道梁一次成型。",
+      "tip": "承台悬挑半格 (力矩 15 <= 预算 20); 跨板双端受力零悬挑, 一落下整条轨道就是横跨四柱的连续梁 —— 柱身接缝不再是唯一支撑路径。",
+      "tiles_to_add": [
+        "cap_1",
+        "cap_4",
+        "cap_7",
+        "cap_10",
+        "span_2",
+        "span_5",
+        "span_8"
+      ],
+      "highlight_tiles": [
+        "col_1_2",
+        "col_4_2",
+        "col_8_2",
+        "col_11_2"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "接两端站台并装膝撑: 轨道两端各外挑 1 片站台, 每片下方装 2 片直角三角膝撑 (竖边吸柱顶层竖边, 横边吸站台底沿)。",
+      "tip": "膝撑给外挑站台第二条支撑路径 —— 端头才敢再立挡板。",
+      "tiles_to_add": [
+        "end_w",
+        "kb_w_s",
+        "kb_w_n",
+        "end_e",
+        "kb_e_s",
+        "kb_e_n"
+      ],
+      "highlight_tiles": [
+        "cap_1",
+        "cap_10"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "装端头挡板与南侧护栏: 两端立三角挡板, 承台/端台南沿立 6 片护栏 (跨间沿口留空 = 吊架滑槽)。",
+      "tip": "护栏只立在承台上 —— 跨间要留给吊舱的吊架通过。",
+      "tiles_to_add": [
+        "stop_w",
+        "stop_e",
+        "gd_s_0",
+        "gd_s_1",
+        "gd_s_4",
+        "gd_s_7",
+        "gd_s_10",
+        "gd_s_11"
+      ],
+      "highlight_tiles": [
+        "end_w",
+        "end_e"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "装北侧护栏: 再立 6 片, 高架轨道全线合栏。",
+      "tip": "从侧面看: 一条镂空的高架轨道梁已经悬在半空。",
+      "tiles_to_add": [
+        "gd_n_0",
+        "gd_n_1",
+        "gd_n_4",
+        "gd_n_7",
+        "gd_n_10",
+        "gd_n_11"
+      ],
+      "highlight_tiles": [
+        "gd_s_0"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "挂吊架封舱底: 南吊架顶边整边吸梁南底沿, 舱底长板长边先吸南吊架底边, 北吊架再压住舱底北长边并吸梁北底沿。",
+      "tip": "吊舱是'挂'上去的 —— 顶边贴合越严, 吊舱越稳。",
+      "tiles_to_add": [
+        "hg_s",
+        "cab_fl",
+        "hg_n"
+      ],
+      "highlight_tiles": [
+        "span_5"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "锁玻璃端窗: 头尾 2 片透明端窗, 竖边吸吊架端边、底边吸舱底短边。",
+      "tip": "吊架-舱底-端窗围成闭合吊箱: 剪断任何一条缝都掉不下来。",
+      "tiles_to_add": [
+        "cab_w",
+        "cab_e"
+      ],
+      "highlight_tiles": [
+        "hg_s",
+        "hg_n"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "立月台柱: 吊舱北侧前庭上立 2x2 片紫色月台柱。",
+      "tip": "柱底边吸前庭方板边, 柱高两层 = 吊舱舱底标高。",
+      "tiles_to_add": [
+        "st_w_0",
+        "st_w_1",
+        "st_e_0",
+        "st_e_1"
+      ],
+      "highlight_tiles": [
+        "fc_5",
+        "fc_6"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "铺月台: 1 片紫色长板两端压柱顶, 南沿恰与舱底北沿同高相吸。",
+      "tip": "月台与舱底零高差 —— 乘客跨半步就登车。",
+      "tiles_to_add": [
+        "plat"
+      ],
+      "highlight_tiles": [
+        "st_w_1",
+        "cab_fl"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "修下行坡道: 上段坡道从月台东沿下探, 桥墩接坡尾并铺转折平台, 下段坡道再落到地面 —— 空中悬挂轨道车通车!",
+      "tip": "坡道-桥墩-平台三件互吸 (滚珠塔同款), 末段坡尾自然落地。",
+      "tiles_to_add": [
+        "st_r1",
+        "st_p",
+        "st_mid",
+        "st_r2"
+      ],
+      "highlight_tiles": [
+        "plat"
+      ]
+    }
+  ]
+}

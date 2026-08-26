@@ -1,0 +1,999 @@
+{
+  "schema_version": 1,
+  "id": "mission_control_01",
+  "name": "任务控制中心",
+  "name_en": "Mission Control 01",
+  "description": "只用核心九片型的太空探索指挥现场: 与机场塔台的独立高塔不同, 主角是一面点亮的巨幕墙 —— 六片青色窗格方拼成整排任务大屏, 上层素墙正中嵌两格红色任务计时屏; 大厅南面整个敞开, 双排控制台面朝巨幕, 清色台面悬挑在台身墙顶 (单边力矩 15 <= strict 预算 17.5); 屋顶北跨两端搭侧墙顶、北长边压巨幕墙顶, 两支红白测控天线骑墙顶拼缝直插 4.0 高空 —— 各号注意, 一分钟准备!",
+  "difficulty": 3,
+  "total_pieces": 52,
+  "tags": [
+    "航天",
+    "指挥中心",
+    "巨幕",
+    "倒计时",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "spacecraft",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 33,
+        "window_square": 8,
+        "large_square": 3,
+        "rectangle": 3,
+        "isosceles_triangle": 2,
+        "right_triangle": 2,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "lg_0",
+      "type": "large_square",
+      "position": [
+        1.0,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lg_1",
+      "type": "large_square",
+      "position": [
+        3.0,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lg_2",
+      "type": "large_square",
+      "position": [
+        5.0,
+        3.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "f_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "f_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "f_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "f_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "f_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "f_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "f_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "f_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "f_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "f_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "f_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "f_5_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "scr_0",
+      "type": "window_square",
+      "position": [
+        0.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "scr_1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "scr_2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "scr_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "scr_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "scr_5",
+      "type": "window_square",
+      "position": [
+        5.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "top_0",
+      "type": "square",
+      "position": [
+        0.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "top_1",
+      "type": "square",
+      "position": [
+        1.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "top_4",
+      "type": "square",
+      "position": [
+        4.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "top_5",
+      "type": "square",
+      "position": [
+        5.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "clk_a",
+      "type": "window_square",
+      "position": [
+        2.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "clk_b",
+      "type": "window_square",
+      "position": [
+        3.5,
+        4.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "sw_2_0",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sw_3_0",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "sw_2_1",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "sw_3_1",
+      "type": "square",
+      "position": [
+        0.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "se_door",
+      "type": "door_frame",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "se_3_0",
+      "type": "square",
+      "position": [
+        6.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "se_2_1",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "se_3_1",
+      "type": "square",
+      "position": [
+        6.0,
+        3.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "brace_w",
+      "type": "right_triangle",
+      "position": [
+        0.0,
+        1.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "brace_e",
+      "type": "right_triangle",
+      "position": [
+        6.0,
+        1.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "roof_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_e",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_c",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        3.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ant_a",
+      "type": "isosceles_triangle",
+      "position": [
+        1.5,
+        4.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ant_b",
+      "type": "isosceles_triangle",
+      "position": [
+        4.5,
+        4.0,
+        2.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ca1_wall",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ca1_top",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ca2_wall",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ca2_top",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "ca3_wall",
+      "type": "square",
+      "position": [
+        4.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ca3_top",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cb1_wall",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cb1_top",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cb2_wall",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "cb2_top",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺大厅后场: 三片灰色大正方形整边互吸, 一片顶四片省时省力。",
+      "tip": "大方片是地台主力 —— 巨幕墙和侧墙都要踩它的边线。",
+      "tiles_to_add": [
+        "lg_0",
+        "lg_1",
+        "lg_2"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺控制台排行: 六片灰色方板贴着大方片南边排开。",
+      "tip": "小方片北边整边吸进大方片南边 —— 长短边贴合一样牢。",
+      "tiles_to_add": [
+        "f_0_1",
+        "f_1_1",
+        "f_2_1",
+        "f_3_1",
+        "f_4_1",
+        "f_5_1"
+      ],
+      "highlight_tiles": [
+        "lg_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺前厅蓝毯行: 再来六片蓝色方板, 大厅地台完工。",
+      "tip": "蓝毯是给参观的小朋友站的 —— 发射直播马上开始!",
+      "tiles_to_add": [
+        "f_0_0",
+        "f_1_0",
+        "f_2_0",
+        "f_3_0",
+        "f_4_0",
+        "f_5_0"
+      ],
+      "highlight_tiles": [
+        "f_0_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立巨幕下层: 六片青色窗格方沿北边线并肩竖起, 竖边互咬成排。",
+      "tip": "这排窗格方就是任务大屏 —— 火箭的一举一动都在上面。",
+      "tiles_to_add": [
+        "scr_0",
+        "scr_1",
+        "scr_2",
+        "scr_3",
+        "scr_4",
+        "scr_5"
+      ],
+      "highlight_tiles": [
+        "lg_0",
+        "lg_2"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "叠巨幕上层: 素墙四片夹住正中两格红色任务计时屏。",
+      "tip": "上下横边加左右竖边互吸, 墙格网环路密布, 撞一下也不怕。",
+      "tiles_to_add": [
+        "top_0",
+        "top_1",
+        "clk_a",
+        "clk_b",
+        "top_4",
+        "top_5"
+      ],
+      "highlight_tiles": [
+        "scr_0",
+        "scr_5"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "起西侧墙: 下素上透两层, 前端直角三角斜撑双边吸合抵住墙角。",
+      "tip": "斜撑竖边吸墙角竖边、横边吸地台缝 —— 大厅开口处最需要它。",
+      "tiles_to_add": [
+        "sw_2_0",
+        "sw_3_0",
+        "sw_2_1",
+        "sw_3_1",
+        "brace_w"
+      ],
+      "highlight_tiles": [
+        "scr_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "起东侧墙: 下层嵌蓝色值班门, 同样配透明高窗与斜撑。",
+      "tip": "控制中心昼夜值班, 值班门开在东侧不挡巨幕。",
+      "tiles_to_add": [
+        "se_door",
+        "se_3_0",
+        "se_2_1",
+        "se_3_1",
+        "brace_e"
+      ],
+      "highlight_tiles": [
+        "scr_5"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖屋顶北跨: 两端长板先各吸一侧墙顶, 中板最后短边合拢。",
+      "tip": "北长边压巨幕墙顶、短边互吸 —— 剪掉任何一条边它都不掉。",
+      "tiles_to_add": [
+        "roof_w",
+        "roof_e",
+        "roof_c"
+      ],
+      "highlight_tiles": [
+        "sw_3_1",
+        "se_3_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "插测控天线: 两支等腰三角骑上巨幕墙顶拼缝, 尖端直插 4.0。",
+      "tip": "天线底边一线双吸墙顶与屋顶边, 正上方零力矩稳稳站住。",
+      "tiles_to_add": [
+        "ant_a",
+        "ant_b"
+      ],
+      "highlight_tiles": [
+        "roof_w",
+        "roof_e"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立前排控制台台身: 三片蓝色方墙面朝巨幕踩住地缝。",
+      "tip": "台身墙脚同时吸住前后两块地板的拼缝, 双保险。",
+      "tiles_to_add": [
+        "ca1_wall",
+        "ca2_wall",
+        "ca3_wall"
+      ],
+      "highlight_tiles": [
+        "scr_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "搭前排台面: 清色方板北边吸台身墙顶, 朝南悬挑当桌面。",
+      "tip": "单边悬挑力矩 15, 低于弱磁严格档预算 17.5 —— 安心办公。",
+      "tiles_to_add": [
+        "ca1_top",
+        "ca2_top",
+        "ca3_top"
+      ],
+      "highlight_tiles": [
+        "ca1_wall"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "立后排控制台台身: 两片橙色方墙与前排错位站好。",
+      "tip": "错位排布让每个座位都能看见完整的巨幕。",
+      "tiles_to_add": [
+        "cb1_wall",
+        "cb2_wall"
+      ],
+      "highlight_tiles": [
+        "ca1_top"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "搭后排台面收尾: 全体就位 —— 十, 九, 八…… 点火!",
+      "tip": "倒计时钟跳红, 巨幕上火箭尾焰腾起 —— 任务控制中心开工!",
+      "tiles_to_add": [
+        "cb1_top",
+        "cb2_top"
+      ],
+      "highlight_tiles": [
+        "clk_a",
+        "clk_b"
+      ]
+    }
+  ]
+}

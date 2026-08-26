@@ -1,0 +1,1373 @@
+{
+  "schema_version": 1,
+  "id": "lion_dance_01",
+  "name": "新春舞狮",
+  "name_en": "New Year Lion Dance 01",
+  "description": "只用核心九片型的民俗大戏: 长街红毯上, 一只三段式狮子正在游行 —— 2x2 双层狮头昂在队首, 底层两片门框方并排就是张开讨彩头的大嘴 (负空间当嘴巴), 金鬃骑顶盖沿口, 青色眼睫立在额前; 狮身是两顶'舞狮人拱顶轿', 1x2 墙环驮红披风, 橙色鳞浪错列翻滚, 队尾瘦高尾羽上翘; 北侧红鼓金面配窗格大锣, 灯笼杆鞭炮串彩旗满街 —— 咚咚锵, 恭喜发财, 新年大吉!",
+  "difficulty": 3,
+  "total_pieces": 75,
+  "tags": [
+    "节日",
+    "民俗",
+    "舞狮",
+    "新春",
+    "锣鼓",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "holiday_seasonal",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 36,
+        "rectangle": 19,
+        "equilateral_triangle": 14,
+        "isosceles_triangle": 3,
+        "door_frame": 2,
+        "window_square": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "carpet_0",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_1",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_2",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_3",
+      "type": "rectangle",
+      "position": [
+        3.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_4",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_5",
+      "type": "rectangle",
+      "position": [
+        5.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_6",
+      "type": "rectangle",
+      "position": [
+        6.5,
+        2.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "street_s_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "street_s_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "street_s_3",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "street_s_5",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "street_n_0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "street_n_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "street_n_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "street_n_4",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "street_n_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "street_n2_0",
+      "type": "square",
+      "position": [
+        0.5,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "street_n2_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "street_n2_3",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "street_n2_5",
+      "type": "rectangle",
+      "position": [
+        6.0,
+        4.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mouth_s",
+      "type": "door_frame",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "mouth_n",
+      "type": "door_frame",
+      "position": [
+        1.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head_e_s",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "head_e_n",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "head_s_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head_s_e",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "head_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "head_n_e",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "brow_w_s",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "brow_w_n",
+      "type": "square",
+      "position": [
+        1.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "head2_e_s",
+      "type": "square",
+      "position": [
+        3.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head2_e_n",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head2_s_w",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head2_s_e",
+      "type": "square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head2_n_w",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head2_n_e",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head_cap_w",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        2.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "head_cap_e",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        2.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "eye_s",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "eye_n",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        2.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "mane_s_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mane_s_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mane_n_w",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        3.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "mane_n_e",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body1_s",
+      "type": "square",
+      "position": [
+        4.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body1_n",
+      "type": "square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body1_w_s",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "body1_w_n",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "body1_e_s",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "body1_e_n",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cloak1",
+      "type": "rectangle",
+      "position": [
+        4.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "scale1_s",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "scale1_n",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "fin1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "body2_s",
+      "type": "square",
+      "position": [
+        6.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body2_n",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "body2_w_s",
+      "type": "square",
+      "position": [
+        6.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "body2_w_n",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "body2_e_s",
+      "type": "square",
+      "position": [
+        7.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "body2_e_n",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cloak2",
+      "type": "rectangle",
+      "position": [
+        6.5,
+        2.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "scale2_s",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "scale2_n",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tail",
+      "type": "isosceles_triangle",
+      "position": [
+        7.0,
+        1.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "drum_s",
+      "type": "square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum_n",
+      "type": "square",
+      "position": [
+        3.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum_w",
+      "type": "square",
+      "position": [
+        3.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum_e",
+      "type": "square",
+      "position": [
+        4.0,
+        3.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum_top",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "drumstick",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        4.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gong",
+      "type": "window_square",
+      "position": [
+        6.5,
+        4.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "lantern_a",
+      "type": "isosceles_triangle",
+      "position": [
+        0.0,
+        0.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "lantern_b",
+      "type": "isosceles_triangle",
+      "position": [
+        5.0,
+        0.5,
+        0.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "firecracker",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        4.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flag",
+      "type": "equilateral_triangle",
+      "position": [
+        7.0,
+        4.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺中央红毯: 七条红长板边边互吸, 一路铺到街尾。",
+      "tip": "咚咚锵! 新春的长街上, 舞狮队要从红毯上走过。",
+      "tiles_to_add": [
+        "carpet_0",
+        "carpet_1",
+        "carpet_2",
+        "carpet_3",
+        "carpet_4",
+        "carpet_5",
+        "carpet_6"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺南侧街面: 青石板夹一格街边草饰。",
+      "tip": "石板与红毯行行互吸 —— 狮头的墙脚要踩这些拼缝。",
+      "tiles_to_add": [
+        "street_s_0",
+        "street_s_2",
+        "street_s_3",
+        "street_s_5"
+      ],
+      "highlight_tiles": [
+        "carpet_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺北侧街面: 两行石板补齐, 鼓位留在红毯边。",
+      "tip": "长街铺满 —— 观众都在街边等着看狮子呢。",
+      "tiles_to_add": [
+        "street_n_0",
+        "street_n_2",
+        "street_n_3",
+        "street_n_4",
+        "street_n_6",
+        "street_n2_0",
+        "street_n2_1",
+        "street_n2_3",
+        "street_n2_5"
+      ],
+      "highlight_tiles": [
+        "carpet_3"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立狮头首层: 队首两片门框方并排, 就是张开的大嘴!",
+      "tip": "门洞就是嘴巴 —— 舞狮讨彩头, 大嘴要张得大大的。",
+      "tiles_to_add": [
+        "mouth_s",
+        "mouth_n",
+        "head_s_w",
+        "head_s_e",
+        "head_n_w",
+        "head_n_e",
+        "head_e_s",
+        "head_e_n"
+      ],
+      "highlight_tiles": [
+        "carpet_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "叠狮头二层: 金色额头压在嘴巴正上方, 墙脚整边压墙顶。",
+      "tip": "双层狮头昂起来 —— 荷载沿墙面层层传到街面。",
+      "tiles_to_add": [
+        "brow_w_s",
+        "brow_w_n",
+        "head2_s_w",
+        "head2_s_e",
+        "head2_n_w",
+        "head2_n_e",
+        "head2_e_s",
+        "head2_e_n"
+      ],
+      "highlight_tiles": [
+        "mouth_s"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "盖狮头顶盖: 两条红长板边边入扣墙顶。",
+      "tip": "顶盖锁住整圈墙 —— 鬃毛和眼睫都要骑在它的沿口上。",
+      "tiles_to_add": [
+        "head_cap_w",
+        "head_cap_e"
+      ],
+      "highlight_tiles": [
+        "brow_w_s"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "立眼睫与鬃毛: 青色眼睫立在额前, 金鬃分列南北沿。",
+      "tip": "眨眨眼 —— 狮子有了精气神, 鬃毛随步子一颤一颤。",
+      "tiles_to_add": [
+        "eye_s",
+        "eye_n",
+        "mane_s_w",
+        "mane_s_e",
+        "mane_n_w",
+        "mane_n_e"
+      ],
+      "highlight_tiles": [
+        "head_cap_w"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立狮身前段墙环: 这是第一位舞狮人的拱顶轿。",
+      "tip": "狮身分段才能舞得起伏 —— 每段各有一位舞狮人在里面。",
+      "tiles_to_add": [
+        "body1_s",
+        "body1_n",
+        "body1_w_s",
+        "body1_w_n",
+        "body1_e_s",
+        "body1_e_n"
+      ],
+      "highlight_tiles": [
+        "carpet_4"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "披狮身前段披风: 长板四边入扣墙顶, 鳞浪与脊鳍骑沿。",
+      "tip": "披风一抖, 橙色鳞浪就跟着翻起来。",
+      "tiles_to_add": [
+        "cloak1",
+        "scale1_s",
+        "scale1_n",
+        "fin1"
+      ],
+      "highlight_tiles": [
+        "body1_s"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立狮身后段墙环: 第二位舞狮人跟上步子。",
+      "tip": "前后两段隔一步, 狮身舞起来才有波浪的起伏。",
+      "tiles_to_add": [
+        "body2_s",
+        "body2_n",
+        "body2_w_s",
+        "body2_w_n",
+        "body2_e_s",
+        "body2_e_n"
+      ],
+      "highlight_tiles": [
+        "carpet_6"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "披狮身后段披风, 翘起尾羽: 狮子全身完工。",
+      "tip": "瘦高尾羽向上一甩 —— 好一个精神的狮子摆尾!",
+      "tiles_to_add": [
+        "cloak2",
+        "scale2_s",
+        "scale2_n",
+        "tail"
+      ],
+      "highlight_tiles": [
+        "body2_s"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "架红鼓: 1x1 墙环鼓身踩拼缝, 金色鼓面压顶。",
+      "tip": "鼓是舞狮的心跳 —— 鼓点快, 狮子跳; 鼓点慢, 狮子摇。",
+      "tiles_to_add": [
+        "drum_s",
+        "drum_n",
+        "drum_w",
+        "drum_e",
+        "drum_top"
+      ],
+      "highlight_tiles": [
+        "street_n_3"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "搭鼓槌与大锣: 锣鼓班子就位。",
+      "tip": "窗格方是大锣 —— 咚咚锵, 咚咚锵, 锣鼓一响年味就来了。",
+      "tiles_to_add": [
+        "drumstick",
+        "gong"
+      ],
+      "highlight_tiles": [
+        "drum_top"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "竖灯笼杆, 挂鞭炮串与彩旗: 新春长街开舞!",
+      "tip": "狮子眨眨眼, 朝你一点头 —— 恭喜发财, 新年大吉!",
+      "tiles_to_add": [
+        "lantern_a",
+        "lantern_b",
+        "firecracker",
+        "flag"
+      ],
+      "highlight_tiles": [
+        "mouth_s",
+        "tail"
+      ]
+    }
+  ]
+}

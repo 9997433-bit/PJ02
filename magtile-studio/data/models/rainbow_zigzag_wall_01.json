@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "id": "rainbow_zigzag_wall_01",
+  "name": "彩虹之字折墙",
+  "name_en": "Rainbow Zigzag Wall 01",
+  "description": "入门档几何艺术: 桌面上的彩虹之字折墙, 结构签名是'开放折线屏风' —— 六片蓝色立墙沿对角线一横一纵交替行进, 相邻墙竖棱 90 度角缝互吸, 每道折角就是一根天然角柱, 出平面方向互为斜撑; 墙脚整边骑住深浅相间的台阶地板, 两端直角三角书挡封住开口, 墙顶红橙黄绿青紫六面小旗依次排开。20 片全程接地受压, 不用合围也站得稳 —— 这就是'折纸为什么站得住'的几何启蒙。",
+  "difficulty": 1,
+  "total_pieces": 20,
+  "tags": [
+    "几何艺术",
+    "折墙",
+    "屏风",
+    "对称",
+    "入门"
+  ],
+  "content_meta": {
+    "series": "geometric_art",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 12,
+        "equilateral_triangle": 6,
+        "right_triangle": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "floor_a",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "floor_b",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "floor_c",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "floor_d",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "floor_e",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "floor_f",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wall_2",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wall_3",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wall_4",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wall_5",
+      "type": "square",
+      "position": [
+        2.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "wall_6",
+      "type": "square",
+      "position": [
+        3.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "brace_w",
+      "type": "right_triangle",
+      "position": [
+        -0.333333,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "brace_e",
+      "type": "right_triangle",
+      "position": [
+        3.0,
+        3.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "flag_1",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_2",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "flag_3",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_4",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "flag_5",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "flag_6",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        2.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺台阶地板: 六片方板深浅相间, 沿对角线一格一格错着往上铺。",
+      "tip": "地板本身就是台阶图案 —— 之字墙待会儿正好踩在格线上。",
+      "tiles_to_add": [
+        "floor_a",
+        "floor_b",
+        "floor_c",
+        "floor_d",
+        "floor_e",
+        "floor_f"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立前三段折墙: 蓝色立墙一横一纵交替, 相邻两片竖棱 90 度角缝互吸。",
+      "tip": "试着推一推 —— 折过角的墙比直墙难推倒, 折角就是柱子。",
+      "tiles_to_add": [
+        "wall_1",
+        "wall_2",
+        "wall_3"
+      ],
+      "highlight_tiles": [
+        "floor_a",
+        "floor_b"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立后三段折墙: 再折两个角, 之字形一路走到东北端。",
+      "tip": "",
+      "tiles_to_add": [
+        "wall_4",
+        "wall_5",
+        "wall_6"
+      ],
+      "highlight_tiles": [
+        "wall_3",
+        "floor_d"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "装两端书挡: 两片灰色直角三角竖直角边完整吸住端墙竖棱, 封住折线开口。",
+      "tip": "",
+      "tiles_to_add": [
+        "brace_w",
+        "brace_e"
+      ],
+      "highlight_tiles": [
+        "wall_1",
+        "wall_6"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "升彩虹小旗: 红橙黄绿青紫六面小旗依次骑上墙顶, 彩虹折墙完工!",
+      "tip": "",
+      "tiles_to_add": [
+        "flag_1",
+        "flag_2",
+        "flag_3",
+        "flag_4",
+        "flag_5",
+        "flag_6"
+      ],
+      "highlight_tiles": [
+        "wall_1",
+        "wall_6"
+      ]
+    }
+  ]
+}

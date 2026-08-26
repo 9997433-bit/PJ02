@@ -1,0 +1,52 @@
+# =============================================================
+# MagTile Studio — 随包分发的精选入门模型清单 (starter 子集)
+#
+# 口径: 与 docs/COMMERCIAL_PLAN.md §2.1 已落地的免费层选品完全一致 ——
+# 本清单就是当前 30 个带「免费」标签的模型 (D2 全部 4 个 + D3 26 个,
+# 全部只用核心 9 片型, core-9 占比 100%), 选品原则与日常换血流程见
+# docs/CONTENT_STRATEGY.md §2.5.1, 三端对齐决议见
+# docs/FREE_TIER_MANIFEST.md。
+#
+# 一致性守卫: tools/verify_free_tier.py 断言本清单与模型「免费」标签
+# 集合完全一致 (数量 30 / 全 core-9 / 集合相等), 可随
+# tests/run_full_qa.sh 以 MAGTILE_FREE_TIER_CHECK=1 运行。
+# 加/换免费模型时必须同步改模型 tags 与本清单, 否则该守卫失败。
+#
+# 格式: 每行一个模型 id (不带 .json), 空行与 # 注释忽略。
+# 用法: 由 tools/make_data_subset.py 读取 (CPack 子集模式自动调用,
+#       见 scripts/package_windows.md 第三节)。
+# =============================================================
+
+# ---- D2 入门 (全库仅有的 4 个) ----
+beach_hut_01
+city_bus_stop_01
+forklift_01
+robot_arm_01
+
+# ---- D3 主力 (26 个, 多主题覆盖, 系列只给第一个) ----
+bakery_shop_01
+bridge_wood_01
+cabin_lake_01
+cactus_desert_01
+campfire_site_01
+canoe_01
+castle_foundation_01
+crane_tower_01
+dinosaur_stego_01
+farm_barn_01
+fishing_boat_01
+gas_station_01
+giraffe_01
+greenhouse_01
+igloo_01
+kindergarten_01
+oasis_01
+police_car_01
+pyramid_giza_01
+roller_coaster_hill_01
+sandbox_park_01
+ski_jump_01
+slide_playground_01
+solar_farm_01
+taxi_01
+tractor_01

@@ -1,0 +1,1431 @@
+{
+  "schema_version": 1,
+  "id": "lighthouse_01",
+  "name": "海岬灯塔",
+  "name_en": "Lighthouse 01",
+  "description": "海岸主题: 礁石小岛上立起四层红灰条纹的六边形灯塔, 一层门洞正对两跨栈桥; 塔顶廊台板向外悬挑一圈瞭望环廊 (环廊与灯室墙共用铰链线, 抗弯预算翻倍), 透明灯室之上等腰锥冠自锁封顶; 岸边守塔人小屋用长方形圈层加梯形四坡顶, 3 片扇形浪花贴着礁石打旋 —— 全库第一次用上扇形磁力片。",
+  "difficulty": 4,
+  "total_pieces": 77,
+  "tags": [
+    "海岸",
+    "灯塔",
+    "悬挑环廊",
+    "扇形",
+    "挑战",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "sea_air_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 42,
+        "equilateral_triangle": 11,
+        "isosceles_triangle": 7,
+        "rectangle": 7,
+        "trapezoid": 4,
+        "hexagon": 3,
+        "sector": 3
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "island",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rock_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.57735,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        150.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rock_1",
+      "type": "equilateral_triangle",
+      "position": [
+        -0.57735,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -150.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rock_3",
+      "type": "equilateral_triangle",
+      "position": [
+        -0.57735,
+        -1.0,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rock_4",
+      "type": "equilateral_triangle",
+      "position": [
+        0.57735,
+        -1.0,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wave_ne",
+      "type": "sector",
+      "position": [
+        0.866025,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wave_se",
+      "type": "sector",
+      "position": [
+        0.866025,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "wave_w",
+      "type": "sector",
+      "position": [
+        -0.866025,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "pier_0",
+      "type": "square",
+      "position": [
+        1.366025,
+        -0.0,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pier_1",
+      "type": "square",
+      "position": [
+        2.366025,
+        -0.0,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bollard",
+      "type": "equilateral_triangle",
+      "position": [
+        1.866025,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "shore_sw",
+      "type": "square",
+      "position": [
+        3.366025,
+        -1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "shore_w",
+      "type": "square",
+      "position": [
+        3.366025,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "shore_nw",
+      "type": "square",
+      "position": [
+        3.366025,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "house_floor_w",
+      "type": "rectangle",
+      "position": [
+        4.366025,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "house_floor_e",
+      "type": "rectangle",
+      "position": [
+        5.366025,
+        -0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "house_path",
+      "type": "rectangle",
+      "position": [
+        4.866025,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "drum0_0",
+      "type": "square",
+      "position": [
+        0.433013,
+        0.75,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        150.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum0_1",
+      "type": "square",
+      "position": [
+        -0.433013,
+        0.75,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -150.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum0_2",
+      "type": "square",
+      "position": [
+        -0.866025,
+        -0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum0_3",
+      "type": "square",
+      "position": [
+        -0.433013,
+        -0.75,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum0_4",
+      "type": "square",
+      "position": [
+        0.433013,
+        -0.75,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum1_0",
+      "type": "square",
+      "position": [
+        0.433013,
+        0.75,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        150.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum1_1",
+      "type": "square",
+      "position": [
+        -0.433013,
+        0.75,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -150.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum1_2",
+      "type": "square",
+      "position": [
+        -0.866025,
+        -0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum1_3",
+      "type": "square",
+      "position": [
+        -0.433013,
+        -0.75,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum1_4",
+      "type": "square",
+      "position": [
+        0.433013,
+        -0.75,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum1_5",
+      "type": "square",
+      "position": [
+        0.866025,
+        -0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum2_0",
+      "type": "square",
+      "position": [
+        0.433013,
+        0.75,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        150.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum2_1",
+      "type": "square",
+      "position": [
+        -0.433013,
+        0.75,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -150.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum2_2",
+      "type": "square",
+      "position": [
+        -0.866025,
+        -0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum2_3",
+      "type": "square",
+      "position": [
+        -0.433013,
+        -0.75,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum2_4",
+      "type": "square",
+      "position": [
+        0.433013,
+        -0.75,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum2_5",
+      "type": "square",
+      "position": [
+        0.866025,
+        -0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drum3_0",
+      "type": "square",
+      "position": [
+        0.433013,
+        0.75,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        150.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum3_1",
+      "type": "square",
+      "position": [
+        -0.433013,
+        0.75,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -150.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum3_2",
+      "type": "square",
+      "position": [
+        -0.866025,
+        -0.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum3_3",
+      "type": "square",
+      "position": [
+        -0.433013,
+        -0.75,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum3_4",
+      "type": "square",
+      "position": [
+        0.433013,
+        -0.75,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "drum3_5",
+      "type": "square",
+      "position": [
+        0.866025,
+        -0.0,
+        3.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gallery_plate",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        0.0,
+        4.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        30.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "deck_0",
+      "type": "square",
+      "position": [
+        0.683013,
+        1.183013,
+        4.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        150.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "deck_1",
+      "type": "square",
+      "position": [
+        -0.683013,
+        1.183013,
+        4.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -150.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "deck_2",
+      "type": "square",
+      "position": [
+        -1.366025,
+        -0.0,
+        4.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "deck_3",
+      "type": "square",
+      "position": [
+        -0.683013,
+        -1.183013,
+        4.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -30.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "deck_4",
+      "type": "square",
+      "position": [
+        0.683013,
+        -1.183013,
+        4.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        30.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "deck_5",
+      "type": "square",
+      "position": [
+        1.366025,
+        -0.0,
+        4.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.933013,
+        1.616025,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        150.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_1",
+      "type": "equilateral_triangle",
+      "position": [
+        -0.933013,
+        1.616025,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -150.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_2",
+      "type": "equilateral_triangle",
+      "position": [
+        -1.866025,
+        0.0,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_3",
+      "type": "equilateral_triangle",
+      "position": [
+        -0.933013,
+        -1.616025,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_4",
+      "type": "equilateral_triangle",
+      "position": [
+        0.933013,
+        -1.616025,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rail_5",
+      "type": "equilateral_triangle",
+      "position": [
+        1.866025,
+        -0.0,
+        4.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lamp_0",
+      "type": "square",
+      "position": [
+        0.433013,
+        0.75,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        150.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamp_1",
+      "type": "square",
+      "position": [
+        -0.433013,
+        0.75,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -150.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamp_2",
+      "type": "square",
+      "position": [
+        -0.866025,
+        -0.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamp_3",
+      "type": "square",
+      "position": [
+        -0.433013,
+        -0.75,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamp_4",
+      "type": "square",
+      "position": [
+        0.433013,
+        -0.75,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamp_5",
+      "type": "square",
+      "position": [
+        0.866025,
+        -0.0,
+        4.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "lamp_cap",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        0.0,
+        5.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        30.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "crown_0",
+      "type": "isosceles_triangle",
+      "position": [
+        0.288675,
+        0.5,
+        5.600926
+      ],
+      "rotation": [
+        64.341098,
+        0.0,
+        150.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_1",
+      "type": "isosceles_triangle",
+      "position": [
+        -0.288675,
+        0.5,
+        5.600926
+      ],
+      "rotation": [
+        64.341098,
+        0.0,
+        -150.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_2",
+      "type": "isosceles_triangle",
+      "position": [
+        -0.57735,
+        -0.0,
+        5.600926
+      ],
+      "rotation": [
+        64.341098,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_3",
+      "type": "isosceles_triangle",
+      "position": [
+        -0.288675,
+        -0.5,
+        5.600926
+      ],
+      "rotation": [
+        64.341098,
+        0.0,
+        -30.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_4",
+      "type": "isosceles_triangle",
+      "position": [
+        0.288675,
+        -0.5,
+        5.600926
+      ],
+      "rotation": [
+        64.341098,
+        0.0,
+        30.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "crown_5",
+      "type": "isosceles_triangle",
+      "position": [
+        0.57735,
+        -0.0,
+        5.600926
+      ],
+      "rotation": [
+        64.341098,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "house_w",
+      "type": "rectangle",
+      "position": [
+        3.866025,
+        -0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "house_e",
+      "type": "rectangle",
+      "position": [
+        5.866025,
+        -0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "house_s",
+      "type": "rectangle",
+      "position": [
+        4.866025,
+        -1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "house_n",
+      "type": "rectangle",
+      "position": [
+        4.866025,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "hroof_s",
+      "type": "trapezoid",
+      "position": [
+        4.866025,
+        -1.277778,
+        1.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hroof_e",
+      "type": "trapezoid",
+      "position": [
+        5.643803,
+        -0.5,
+        1.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hroof_n",
+      "type": "trapezoid",
+      "position": [
+        4.866025,
+        0.277778,
+        1.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hroof_w",
+      "type": "trapezoid",
+      "position": [
+        4.088247,
+        -0.5,
+        1.31427
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "hroof_cap",
+      "type": "square",
+      "position": [
+        4.866025,
+        -0.5,
+        1.707107
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "post",
+      "type": "square",
+      "position": [
+        3.366025,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "post_lamp",
+      "type": "isosceles_triangle",
+      "position": [
+        3.366025,
+        1.5,
+        1.666667
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "搭小岛: 1 片灰色六边形转 30 度平放做岛心 (让两条边正对东西), 4 片灰色等边三角形沿四条斜边向外铺成礁石。",
+      "tip": "转 30 度是本模型的钥匙: 东西两边的外法向正对坐标轴。",
+      "tiles_to_add": [
+        "island",
+        "rock_0",
+        "rock_1",
+        "rock_3",
+        "rock_4"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "搭栈桥: 2 片橙色正方形从岛心正东边一跨一跨伸向岸边, 桥缝上立 1 片红色等边三角形做系缆桩。",
+      "tip": "第一跨整边吸住岛心东边, 第二跨接力向东。",
+      "tiles_to_add": [
+        "pier_0",
+        "pier_1",
+        "bollard"
+      ],
+      "highlight_tiles": [
+        "island"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "铺岸滩: 西列 3 片绿色方板接住栈桥, 中间 2 根黄色长方形做小屋地板, 北面再铺 1 根绿色长方形小路。",
+      "tip": "岸滩中格的西边正好整边吸住栈桥第二跨。",
+      "tiles_to_add": [
+        "shore_sw",
+        "shore_w",
+        "shore_nw",
+        "house_floor_w",
+        "house_floor_e",
+        "house_path"
+      ],
+      "highlight_tiles": [
+        "pier_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "贴浪花: 3 片青色扇形平贴海面, 直边吸住礁石斜边, 弧边向外打旋。",
+      "tip": "扇形只有两条直边有磁力, 弧边是纯装饰的浪线。",
+      "tiles_to_add": [
+        "wave_ne",
+        "wave_se",
+        "wave_w"
+      ],
+      "highlight_tiles": [
+        "rock_0",
+        "rock_4"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "竖鼓身第一层: 5 片红色正方形沿岛心边缘立起, 正东留出门洞。",
+      "tip": "每面墙底边吸岛心边、竖边吸邻墙, 门洞正对栈桥。",
+      "tiles_to_add": [
+        "drum0_0",
+        "drum0_1",
+        "drum0_2",
+        "drum0_3",
+        "drum0_4"
+      ],
+      "highlight_tiles": [
+        "island",
+        "pier_0"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "叠鼓身第二层: 6 片灰色正方形叠上第一层墙顶, 补上门楣。",
+      "tip": "门楣那片没有下层墙托底, 全靠两侧竖边吸牢。",
+      "tiles_to_add": [
+        "drum1_0",
+        "drum1_1",
+        "drum1_2",
+        "drum1_3",
+        "drum1_4",
+        "drum1_5"
+      ],
+      "highlight_tiles": [
+        "drum0_0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "叠鼓身第三层: 6 片红色正方形 —— 红灰条纹是灯塔的经典涂装。",
+      "tip": "上下层墙的竖缝对齐, 筒壁才挺拔。",
+      "tiles_to_add": [
+        "drum2_0",
+        "drum2_1",
+        "drum2_2",
+        "drum2_3",
+        "drum2_4",
+        "drum2_5"
+      ],
+      "highlight_tiles": [
+        "drum1_0"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "叠鼓身第四层: 6 片灰色正方形, 塔身到达 4 格高。",
+      "tip": "立高墙时用手指从内侧轻扶, 放稳再松手。",
+      "tiles_to_add": [
+        "drum3_0",
+        "drum3_1",
+        "drum3_2",
+        "drum3_3",
+        "drum3_4",
+        "drum3_5"
+      ],
+      "highlight_tiles": [
+        "drum2_0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "盖廊台板并悬挑环廊: 1 片黄色六边形盖住筒口, 6 片黄色方板沿板边向外悬挑成瞭望环廊。",
+      "tip": "悬挑板一条边吸廊台板, 像给灯塔戴上一圈帽檐。",
+      "tiles_to_add": [
+        "gallery_plate",
+        "deck_0",
+        "deck_1",
+        "deck_2",
+        "deck_3",
+        "deck_4",
+        "deck_5"
+      ],
+      "highlight_tiles": [
+        "drum3_0"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立环廊护栏: 6 片灰色等边三角形立在悬挑板外沿。",
+      "tip": "护栏底边吸悬挑板外沿 —— 瞭望员再也不怕海风了。",
+      "tiles_to_add": [
+        "rail_0",
+        "rail_1",
+        "rail_2",
+        "rail_3",
+        "rail_4",
+        "rail_5"
+      ],
+      "highlight_tiles": [
+        "deck_0"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "起透明灯室: 6 片透明正方形沿廊台板边立起一圈。",
+      "tip": "灯室墙与悬挑板共用同一条沿边 —— 一条铰链线双重受力。",
+      "tiles_to_add": [
+        "lamp_0",
+        "lamp_1",
+        "lamp_2",
+        "lamp_3",
+        "lamp_4",
+        "lamp_5"
+      ],
+      "highlight_tiles": [
+        "gallery_plate",
+        "deck_0"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "盖灯室压盖: 1 片灰色六边形转 30 度盖住灯室筒口, 6 条边同时吸合。",
+      "tip": "从正上方对准再放下, 六边一次吸到位。",
+      "tiles_to_add": [
+        "lamp_cap"
+      ],
+      "highlight_tiles": [
+        "lamp_0"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "合拢灯冠: 6 片红色等腰三角形底边吸压盖边, 斜棱两两互吸, 锥尖在压盖上方 0.5 格处自锁会合。",
+      "tip": "最后一片轻轻卡进去, 灯冠合拢 —— 灯塔封顶!",
+      "tiles_to_add": [
+        "crown_0",
+        "crown_1",
+        "crown_2",
+        "crown_3",
+        "crown_4",
+        "crown_5"
+      ],
+      "highlight_tiles": [
+        "lamp_cap"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "砌守塔人小屋: 4 根长方形横放立起围成圈层, 朝灯塔的西面用透明窗带, 先立西/东两根, 再用南/北两根咬合四角。",
+      "tip": "西/东两根的底边吸地板长边, 南/北两根靠竖边咬合传力。",
+      "tiles_to_add": [
+        "house_w",
+        "house_e",
+        "house_s",
+        "house_n"
+      ],
+      "highlight_tiles": [
+        "house_floor_w",
+        "house_floor_e"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "盖小屋四坡顶: 4 片红色梯形下底吸圈层顶沿, 腰两两互吸, 1 片灰色正方形压顶收口。",
+      "tip": "梯形下底长 2, 正好与长方形圈层的长边等长贴合。",
+      "tiles_to_add": [
+        "hroof_s",
+        "hroof_e",
+        "hroof_n",
+        "hroof_w",
+        "hroof_cap"
+      ],
+      "highlight_tiles": [
+        "house_w",
+        "house_e"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "立岸边路灯: 1 片灰色正方形灯柱立在小路北沿, 1 片黄色等腰三角形灯尖收顶 —— 灯塔与守塔人小屋整晚相望!",
+      "tip": "从塔顶环廊俯瞰: 岛、桥、岸、屋连成一条东西轴线。",
+      "tiles_to_add": [
+        "post",
+        "post_lamp"
+      ],
+      "highlight_tiles": [
+        "shore_nw",
+        "house_path"
+      ]
+    }
+  ]
+}

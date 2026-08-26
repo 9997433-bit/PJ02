@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "fixture_unknown_tile_type",
+  "name": "负例夹具: 非法片型",
+  "name_en": "fixture_unknown_tile_type",
+  "description": "反面教材 (数据层负例): 第 2 片的 type 写成了形状目录中不存在的 \"mega_pentagon\"。非法片型没有几何定义, 物理校验无从谈起, 必须在 JSON 加载层就被拒绝 (json_io parseTileType 报 \"未知的磁力片形状\"), 绝不允许静默降级为某个默认形状混入发布库。",
+  "difficulty": 1,
+  "total_pieces": 2,
+  "tags": [
+    "测试夹具"
+  ],
+  "final_assembly": [
+    {
+      "id": "f1",
+      "type": "square",
+      "position": [0.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "green"
+    },
+    {
+      "id": "f2",
+      "type": "mega_pentagon",
+      "position": [1.5, 0.5, 0.0],
+      "rotation": [0, 0, 0],
+      "color": "purple"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "平放 1 片绿色方片作地台。",
+      "tip": "",
+      "tiles_to_add": ["f1"],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "错误示范: 拼上一片形状目录里不存在的 \"mega_pentagon\"。",
+      "tip": "非法片型必须在加载层被拒绝, 不允许静默降级为默认形状。",
+      "tiles_to_add": ["f2"],
+      "highlight_tiles": []
+    }
+  ]
+}

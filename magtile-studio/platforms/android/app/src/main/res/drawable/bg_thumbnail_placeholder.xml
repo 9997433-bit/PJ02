@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 缩略图占位 + 圆角轮廓: 无缩略图时直接可见; 有缩略图时作为
+     clipToOutline 的圆角来源 (adapter 里开启), 位图按此轮廓裁剪 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/magtile_thumb_placeholder" />
+    <corners android:radius="@dimen/radius_thumbnail" />
+</shape>
