@@ -1,0 +1,897 @@
+{
+  "schema_version": 1,
+  "id": "streetcar_01",
+  "name": "双层观光电车",
+  "name_en": "Streetcar 01",
+  "description": "陆地交通 D2 wheel_base 主打示范: 四片车轮底座在轨床两侧首尾相接, 站成贯穿车长的连排轮罩裙板; 裙板顶纵铺四片长方形架出2 格宽底盘, 下层客舱透明端壁 + 南侧窗门带 + 北侧整排窗格,上层不封顶 —— 八片方板铺成敞篷观光台, 一圈红黄相间的三角栏杆围拢。轨床-裙板-底盘-墙环-台面层层整边等长互吸, 与窄箱平顶的老版有轨电车剪影完全不同。",
+  "difficulty": 2,
+  "total_pieces": 48,
+  "tags": [
+    "陆地交通",
+    "有轨电车",
+    "双层巴士",
+    "载具",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 16,
+        "equilateral_triangle": 12,
+        "rectangle": 8,
+        "window_square": 7,
+        "wheel_base": 4,
+        "door_frame": 1
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "rd_sw",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rd_se",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rd_nw",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rd_ne",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rd_w0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rd_w1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rd_e0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rd_e1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "skirt_fs",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "skirt_rs",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "skirt_fn",
+      "type": "wheel_base",
+      "position": [
+        2.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "skirt_rn",
+      "type": "wheel_base",
+      "position": [
+        4.0,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_sw",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_se",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_nw",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_ne",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "end_sw",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "end_nw",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "end_se",
+      "type": "square",
+      "position": [
+        5.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "end_ne",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_s1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "door_s",
+      "type": "door_frame",
+      "position": [
+        2.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "win_s3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_s4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_n1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_n2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_n3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_n4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "top_1_0",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "top_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "top_2_0",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "top_2_1",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "top_3_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "top_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "top_4_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "top_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_s1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        0.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail_n1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_s2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_n2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail_s3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail_n3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_s4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_n4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail_w0",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        0.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rail_w1",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_e0",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        0.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_e1",
+      "type": "equilateral_triangle",
+      "position": [
+        5.0,
+        1.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺轨床: 四片灰色长石板铺在车身正下方, 两端各补两片黄色站台缘。",
+      "tip": "长石板的 2 格横边正对裙板 —— 黄色方板是乘客上下车的站台缘。",
+      "tiles_to_add": [
+        "rd_sw",
+        "rd_se",
+        "rd_nw",
+        "rd_ne",
+        "rd_w0",
+        "rd_w1",
+        "rd_e0",
+        "rd_e1"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立车轮裙板: 四片 wheel_base 在南北两侧首尾相接, 底边与长石板横边等长互吸。",
+      "tip": "裙板竖直短边首尾互咬 —— 车轮从头连到尾, 老电车的经典侧脸。",
+      "tiles_to_add": [
+        "skirt_fs",
+        "skirt_rs",
+        "skirt_fn",
+        "skirt_rn"
+      ],
+      "highlight_tiles": [
+        "rd_sw",
+        "rd_ne"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "架车厢底盘: 四片红色长方形纵铺 z=1, 长边压住裙板顶边。",
+      "tip": "底盘长边与裙板顶边等长一次吸合 —— 2 格宽的车底稳稳架好。",
+      "tiles_to_add": [
+        "deck_sw",
+        "deck_se",
+        "deck_nw",
+        "deck_ne"
+      ],
+      "highlight_tiles": [
+        "skirt_fs",
+        "skirt_rn"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立四角端壁: 四片透明方板站上底盘短边, 围出车头车尾风挡。",
+      "tip": "端壁底边与底盘短边等长互吸, 同侧两片竖直边互咬。",
+      "tiles_to_add": [
+        "end_sw",
+        "end_nw",
+        "end_se",
+        "end_ne"
+      ],
+      "highlight_tiles": [
+        "deck_sw",
+        "deck_ne"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "砌南墙: 窗-门-窗-窗, 红色门框方是乘客门, 竖直边咬进端壁拐角。",
+      "tip": "乘客门在第二格 —— 正对着站台缘的方向。",
+      "tiles_to_add": [
+        "win_s1",
+        "door_s",
+        "win_s3",
+        "win_s4"
+      ],
+      "highlight_tiles": [
+        "end_sw",
+        "end_se"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "砌北墙: 四片窗格方连成整排观景窗。",
+      "tip": "北侧一整排玻璃 —— 下层乘客也能看街景。",
+      "tiles_to_add": [
+        "win_n1",
+        "win_n2",
+        "win_n3",
+        "win_n4"
+      ],
+      "highlight_tiles": [
+        "end_nw",
+        "end_ne"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "铺上层观光台: 八片红色方板压住墙顶, 拼缝连成网。",
+      "tip": "从西南角开始铺 —— 每片至少吸一条墙顶边或邻板拼缝。",
+      "tiles_to_add": [
+        "top_1_0",
+        "top_1_1",
+        "top_2_0",
+        "top_2_1",
+        "top_3_0",
+        "top_3_1",
+        "top_4_0",
+        "top_4_1"
+      ],
+      "highlight_tiles": [
+        "win_s1",
+        "win_n4"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立南北栏杆: 八片红黄相间的三角沿观光台长边站一排。",
+      "tip": "栏杆底边与台面板边等长互吸 —— 敞篷上层要先装护栏再载客。",
+      "tiles_to_add": [
+        "rail_s1",
+        "rail_n1",
+        "rail_s2",
+        "rail_n2",
+        "rail_s3",
+        "rail_n3",
+        "rail_s4",
+        "rail_n4"
+      ],
+      "highlight_tiles": [
+        "top_1_0",
+        "top_4_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "封两端栏杆: 四片三角围拢车头车尾 —— 双层观光电车发车!",
+      "tip": "一圈 12 片栏杆合拢 —— 叮叮, 上层看风景的电车来了!",
+      "tiles_to_add": [
+        "rail_w0",
+        "rail_w1",
+        "rail_e0",
+        "rail_e1"
+      ],
+      "highlight_tiles": [
+        "rail_s1",
+        "rail_n4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,830 @@
+{
+  "schema_version": 1,
+  "id": "hex_honeycomb_01",
+  "name": "蜂窝六角亭",
+  "name_en": "Hex Honeycomb Pavilion 01",
+  "description": "几何艺术 D2: 20 片六边形的蜂窝专场 —— 七片六边形平铺成蜂窝花地 (T18 密铺), 六片六边形立在花地最外沿围成六边环带蜂窝墙(相邻墙面 120 度, 每面质心正压底边铰链), 顶上再盖一朵同构的七片蜂窝花作平顶 (T13 薄壳合围); 地面十二片等边三角形两两合尖成菱, 把花瓣之间六个 120 度凹口铺成石板广场, 外圈再沿菱格外沿铺十二片方板 —— 六边形 + 三角形 + 正方形恰是 3.4.6.4 半正密铺的组合。花地-环带-平顶三层全部整边互吸, 无一处悬挑, 是扩展装六边形的招牌玩法。",
+  "difficulty": 2,
+  "total_pieces": 44,
+  "tags": [
+    "几何艺术",
+    "蜂窝",
+    "六边形",
+    "密铺",
+    "亭子",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "geometric_art",
+    "structural_signature": {
+      "tile_histogram": {
+        "hexagon": 20,
+        "equilateral_triangle": 12,
+        "square": 12
+      }
+    },
+    "technique_tags": {
+      "primary": "T18_tessellation_art",
+      "secondary": [
+        "T13_hollow_shell"
+      ]
+    },
+    "signature_statement": "20 片六边形拼出蜂窝花地 + 六边环带墙 + 蜂窝平顶三层同构。"
+  },
+  "final_assembly": [
+    {
+      "id": "floor_c",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "floor_0",
+      "type": "hexagon",
+      "position": [
+        1.5,
+        0.866025,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "floor_1",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        1.73205,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "floor_2",
+      "type": "hexagon",
+      "position": [
+        -1.5,
+        0.866025,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "floor_3",
+      "type": "hexagon",
+      "position": [
+        -1.5,
+        -0.866025,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "floor_4",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        -1.73205,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "floor_5",
+      "type": "hexagon",
+      "position": [
+        1.5,
+        -0.866025,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "pave_0a",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        -0.288675,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -59.999988
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_0b",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.288675,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        59.999988
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_1a",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        2.020725,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_1b",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        2.3094,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        120.000012
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_2a",
+      "type": "equilateral_triangle",
+      "position": [
+        -1.0,
+        2.3094,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        59.999988
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_2b",
+      "type": "equilateral_triangle",
+      "position": [
+        -1.5,
+        2.020725,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_3a",
+      "type": "equilateral_triangle",
+      "position": [
+        -2.5,
+        0.288675,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        120.000012
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_3b",
+      "type": "equilateral_triangle",
+      "position": [
+        -2.5,
+        -0.288675,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -120.000012
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_4a",
+      "type": "equilateral_triangle",
+      "position": [
+        -1.5,
+        -2.020725,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_4b",
+      "type": "equilateral_triangle",
+      "position": [
+        -1.0,
+        -2.3094,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -59.999988
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_5a",
+      "type": "equilateral_triangle",
+      "position": [
+        1.0,
+        -2.3094,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -120.000012
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pave_5b",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        -2.020725,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plaza_0a",
+      "type": "square",
+      "position": [
+        3.183013,
+        -0.683012,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        59.999988
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plaza_0b",
+      "type": "square",
+      "position": [
+        3.183013,
+        0.683012,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -59.999988
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "plaza_1a",
+      "type": "square",
+      "position": [
+        2.183013,
+        2.415063,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        120.000012
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plaza_1b",
+      "type": "square",
+      "position": [
+        1.0,
+        3.098075,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "plaza_2a",
+      "type": "square",
+      "position": [
+        -1.0,
+        3.098075,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plaza_2b",
+      "type": "square",
+      "position": [
+        -2.183013,
+        2.415063,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        59.999988
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "plaza_3a",
+      "type": "square",
+      "position": [
+        -3.183013,
+        0.683012,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -120.000012
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plaza_3b",
+      "type": "square",
+      "position": [
+        -3.183013,
+        -0.683012,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        120.000012
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "plaza_4a",
+      "type": "square",
+      "position": [
+        -2.183013,
+        -2.415063,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -59.999988
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plaza_4b",
+      "type": "square",
+      "position": [
+        -1.0,
+        -3.098075,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "plaza_5a",
+      "type": "square",
+      "position": [
+        1.0,
+        -3.098075,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plaza_5b",
+      "type": "square",
+      "position": [
+        2.183013,
+        -2.415063,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -120.000012
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_0",
+      "type": "hexagon",
+      "position": [
+        2.25,
+        1.299038,
+        0.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        120.000012
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_1",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        2.598075,
+        0.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wall_2",
+      "type": "hexagon",
+      "position": [
+        -2.25,
+        1.299037,
+        0.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -120.000012
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_3",
+      "type": "hexagon",
+      "position": [
+        -2.25,
+        -1.299038,
+        0.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -59.999988
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "wall_4",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        -2.598075,
+        0.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_5",
+      "type": "hexagon",
+      "position": [
+        2.25,
+        -1.299037,
+        0.866025
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        59.999988
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_0",
+      "type": "hexagon",
+      "position": [
+        1.5,
+        0.866025,
+        1.73205
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_1",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        1.73205,
+        1.73205
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_2",
+      "type": "hexagon",
+      "position": [
+        -1.5,
+        0.866025,
+        1.73205
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_3",
+      "type": "hexagon",
+      "position": [
+        -1.5,
+        -0.866025,
+        1.73205
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_4",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        -1.73205,
+        1.73205
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_5",
+      "type": "hexagon",
+      "position": [
+        1.5,
+        -0.866025,
+        1.73205
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "roof_c",
+      "type": "hexagon",
+      "position": [
+        0.0,
+        0.0,
+        1.73205
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺蜂窝花地: 中心一片六边形, 六片橙色六边形环绕整边互吸 —— 蜂窝密铺的第一朵花。",
+      "tip": "每片六边形和邻居共享整条磁力边 —— 蜂窝是自然界最省料的密铺。",
+      "tiles_to_add": [
+        "floor_c",
+        "floor_0",
+        "floor_1",
+        "floor_2",
+        "floor_3",
+        "floor_4",
+        "floor_5"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "嵌石板菱格 (前半): 六片灰色等边三角形两两合尖成菱, 铺进花地东北侧三个凹口。",
+      "tip": "两片三角形共边拼成菱形石板, 恰好填满花瓣之间 120 度的凹口。",
+      "tiles_to_add": [
+        "pave_0a",
+        "pave_0b",
+        "pave_1a",
+        "pave_1b",
+        "pave_2a",
+        "pave_2b"
+      ],
+      "highlight_tiles": [
+        "floor_0",
+        "floor_1",
+        "floor_2"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "嵌石板菱格 (后半): 再用六片三角形补齐西南侧三个凹口, 石板广场合围。",
+      "tip": "十二片三角形 = 六块菱形石板 —— 广场越大, 亭子越稳。",
+      "tiles_to_add": [
+        "pave_3a",
+        "pave_3b",
+        "pave_4a",
+        "pave_4b",
+        "pave_5a",
+        "pave_5b"
+      ],
+      "highlight_tiles": [
+        "pave_0a",
+        "floor_4"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺广场外圈 (东北半): 六片方板沿菱格外沿边整边吸上, 灰清相间。",
+      "tip": "六边形 + 三角形 + 正方形 —— 这正是 3.4.6.4 半正密铺的搭配。",
+      "tiles_to_add": [
+        "plaza_0a",
+        "plaza_0b",
+        "plaza_1a",
+        "plaza_1b",
+        "plaza_2a",
+        "plaza_2b"
+      ],
+      "highlight_tiles": [
+        "pave_0a",
+        "pave_1a",
+        "pave_2a"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "铺广场外圈 (西南半): 再六片方板补齐外圈, 广场环带合拢。",
+      "tip": "每片方板整边吸住一条石板外沿 —— 相邻方板在合尖点恰好留出 60 度豁口。",
+      "tiles_to_add": [
+        "plaza_3a",
+        "plaza_3b",
+        "plaza_4a",
+        "plaza_4b",
+        "plaza_5a",
+        "plaza_5b"
+      ],
+      "highlight_tiles": [
+        "plaza_0a",
+        "pave_4a"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立环带墙 (隔一面): 三片清色六边形立在花地最外沿, 底边整边吸住花瓣外边。",
+      "tip": "六边形立起来重心正压底边 —— 先隔面立三片, 手好伸进去。",
+      "tiles_to_add": [
+        "wall_0",
+        "wall_2",
+        "wall_4"
+      ],
+      "highlight_tiles": [
+        "floor_0",
+        "floor_2",
+        "floor_4"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "补环带墙 (剩三面): 三片黄色六边形补齐六边环带 —— 蜂窝墙每面独立站稳, 侧沿在角线恰好相触。",
+      "tip": "六面墙围成六边环带, 相邻墙面成 120 度 —— 从任何缝隙都能望进亭子。",
+      "tiles_to_add": [
+        "wall_1",
+        "wall_3",
+        "wall_5"
+      ],
+      "highlight_tiles": [
+        "wall_0",
+        "wall_2"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖蜂窝平顶: 六片黄色六边形外沿边逐一吸上墙顶, 中心橙色一片合拢 —— 蜂窝六角亭落成!",
+      "tip": "平顶与花地是同一朵蜂窝花 —— 六面墙同时托住外圈, 环带封顶最稳。",
+      "tiles_to_add": [
+        "roof_0",
+        "roof_1",
+        "roof_2",
+        "roof_3",
+        "roof_4",
+        "roof_5",
+        "roof_c"
+      ],
+      "highlight_tiles": [
+        "wall_0",
+        "wall_1"
+      ]
+    }
+  ]
+}

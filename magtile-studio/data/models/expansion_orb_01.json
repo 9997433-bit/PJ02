@@ -1,0 +1,1475 @@
+{
+  "schema_version": 1,
+  "id": "expansion_orb_01",
+  "name": "四型合璧灯球坛",
+  "name_en": "Expansion Orb Display 01",
+  "description": "几何艺术 D4 扩展片型合璧: 四片梯形窄边朝下反扣成倒置斗拱下碗, 托起三层横板方鼓灯身 (中层透明透光带), 12 片菱形沿四条竖角缝逐层腰边互咬爬成角藤; 梯形四坡收顶后, 四片扇形风车状竖立合成极冠; 坛面四座六边形芯五瓣菱形花圃环绕, 四角灯柱收束广场 —— 菱 32 / 梯 8 / 六 4 / 扇 4 共 48 片扩展片型, 每种都在承重或签名位置, 是豪华套装的灯球陈列件。",
+  "difficulty": 4,
+  "total_pieces": 78,
+  "tags": [
+    "几何艺术",
+    "灯球",
+    "扩展片型",
+    "透光带",
+    "摆件",
+    "挑战",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "geometric_art",
+    "structural_signature": {
+      "tile_histogram": {
+        "rhombus": 32,
+        "square": 14,
+        "rectangle": 12,
+        "trapezoid": 8,
+        "equilateral_triangle": 4,
+        "hexagon": 4,
+        "sector": 4
+      },
+      "silhouette_class": "lantern_orb",
+      "height_layers": 6
+    },
+    "technique_tags": {
+      "primary": "T13_hollow_shell",
+      "secondary": [
+        "T18_tessellation_art",
+        "T17_negative_space"
+      ]
+    },
+    "signature_statement": "倒扣梯形斗拱托起三层透光灯身, 菱形角藤与扇形极冠合璧成灯球。"
+  },
+  "final_assembly": [
+    {
+      "id": "plinth_00",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "plinth_10",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plinth_20",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "plinth_01",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plinth_11",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "plinth_21",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plinth_02",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "plinth_12",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "plinth_22",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "bowl_s",
+      "type": "trapezoid",
+      "position": [
+        1.5,
+        0.722222,
+        0.392837
+      ],
+      "rotation": [
+        -54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bowl_e",
+      "type": "trapezoid",
+      "position": [
+        2.277778,
+        1.5,
+        0.392837
+      ],
+      "rotation": [
+        -54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bowl_n",
+      "type": "trapezoid",
+      "position": [
+        1.5,
+        2.277778,
+        0.392837
+      ],
+      "rotation": [
+        -54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bowl_w",
+      "type": "trapezoid",
+      "position": [
+        0.722222,
+        1.5,
+        0.392837
+      ],
+      "rotation": [
+        -54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "drum1_s",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        0.5,
+        1.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "drum1_e",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        1.5,
+        1.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "drum1_n",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        2.5,
+        1.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "drum1_w",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        1.5,
+        1.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "drum2_s",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        0.5,
+        2.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "drum2_e",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        1.5,
+        2.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "drum2_n",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        2.5,
+        2.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "drum2_w",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        1.5,
+        2.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "drum3_s",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        0.5,
+        3.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "drum3_e",
+      "type": "rectangle",
+      "position": [
+        2.5,
+        1.5,
+        3.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "drum3_n",
+      "type": "rectangle",
+      "position": [
+        1.5,
+        2.5,
+        3.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "drum3_w",
+      "type": "rectangle",
+      "position": [
+        0.5,
+        1.5,
+        3.207107
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "vine1_se",
+      "type": "rhombus",
+      "position": [
+        2.806186,
+        0.193814,
+        1.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        -135.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "vine2_se",
+      "type": "rhombus",
+      "position": [
+        2.806186,
+        0.193814,
+        2.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        -135.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "vine3_se",
+      "type": "rhombus",
+      "position": [
+        2.806186,
+        0.193814,
+        3.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        -135.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "vine1_ne",
+      "type": "rhombus",
+      "position": [
+        2.806186,
+        2.806186,
+        1.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        -45.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "vine2_ne",
+      "type": "rhombus",
+      "position": [
+        2.806186,
+        2.806186,
+        2.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        -45.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "vine3_ne",
+      "type": "rhombus",
+      "position": [
+        2.806186,
+        2.806186,
+        3.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        -45.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "vine1_nw",
+      "type": "rhombus",
+      "position": [
+        0.193814,
+        2.806186,
+        1.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        45.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "vine2_nw",
+      "type": "rhombus",
+      "position": [
+        0.193814,
+        2.806186,
+        2.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        45.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "vine3_nw",
+      "type": "rhombus",
+      "position": [
+        0.193814,
+        2.806186,
+        3.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        45.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "vine1_sw",
+      "type": "rhombus",
+      "position": [
+        0.193814,
+        0.193814,
+        1.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        135.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "vine2_sw",
+      "type": "rhombus",
+      "position": [
+        0.193814,
+        0.193814,
+        2.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        135.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "vine3_sw",
+      "type": "rhombus",
+      "position": [
+        0.193814,
+        0.193814,
+        3.457107
+      ],
+      "rotation": [
+        0.0,
+        -90.0,
+        135.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "roof_s",
+      "type": "trapezoid",
+      "position": [
+        1.5,
+        0.722222,
+        4.021377
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "roof_e",
+      "type": "trapezoid",
+      "position": [
+        2.277778,
+        1.5,
+        4.021377
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "roof_n",
+      "type": "trapezoid",
+      "position": [
+        1.5,
+        2.277778,
+        4.021377
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "roof_w",
+      "type": "trapezoid",
+      "position": [
+        0.722222,
+        1.5,
+        4.021377
+      ],
+      "rotation": [
+        54.735619,
+        0.0,
+        -90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "roof_cap",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        4.414214
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "polar_s",
+      "type": "sector",
+      "position": [
+        1.0,
+        1.0,
+        4.414214
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "polar_e",
+      "type": "sector",
+      "position": [
+        2.0,
+        1.0,
+        4.414214
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "polar_n",
+      "type": "sector",
+      "position": [
+        2.0,
+        2.0,
+        4.414214
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "polar_w",
+      "type": "sector",
+      "position": [
+        1.0,
+        2.0,
+        4.414214
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "bed_e",
+      "type": "hexagon",
+      "position": [
+        3.866025,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -149.999988
+      ],
+      "color": "green"
+    },
+    {
+      "id": "petal_e0",
+      "type": "rhombus",
+      "position": [
+        5.165063,
+        1.750001,
+        -0.0
+      ],
+      "rotation": [
+        -180.0,
+        -0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "petal_e1",
+      "type": "rhombus",
+      "position": [
+        4.732051,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -29.999976
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "petal_e2",
+      "type": "rhombus",
+      "position": [
+        4.732051,
+        0.5,
+        -0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        30.000012
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "petal_e3",
+      "type": "rhombus",
+      "position": [
+        3.433013,
+        0.25,
+        -0.0
+      ],
+      "rotation": [
+        -180.0,
+        0.0,
+        -29.999976
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "petal_e4",
+      "type": "rhombus",
+      "position": [
+        3.433012,
+        2.75,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        30.000012
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bed_n",
+      "type": "hexagon",
+      "position": [
+        1.5,
+        3.866025,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -59.999988
+      ],
+      "color": "green"
+    },
+    {
+      "id": "petal_n0",
+      "type": "rhombus",
+      "position": [
+        1.249999,
+        5.165063,
+        -0.0
+      ],
+      "rotation": [
+        -180.0,
+        -0.0,
+        -180.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "petal_n1",
+      "type": "rhombus",
+      "position": [
+        0.5,
+        4.732051,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        60.000024
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "petal_n2",
+      "type": "rhombus",
+      "position": [
+        2.5,
+        4.732051,
+        -0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        120.000012
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "petal_n3",
+      "type": "rhombus",
+      "position": [
+        2.75,
+        3.433013,
+        -0.0
+      ],
+      "rotation": [
+        -180.0,
+        0.0,
+        60.000024
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "petal_n4",
+      "type": "rhombus",
+      "position": [
+        0.25,
+        3.433012,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        120.000012
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bed_w",
+      "type": "hexagon",
+      "position": [
+        -0.866025,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        30.000012
+      ],
+      "color": "green"
+    },
+    {
+      "id": "petal_w0",
+      "type": "rhombus",
+      "position": [
+        -2.165063,
+        1.249999,
+        -0.0
+      ],
+      "rotation": [
+        -180.0,
+        -0.0,
+        -90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "petal_w1",
+      "type": "rhombus",
+      "position": [
+        -1.732051,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        150.000024
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "petal_w2",
+      "type": "rhombus",
+      "position": [
+        -1.732051,
+        2.5,
+        -0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -149.999988
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "petal_w3",
+      "type": "rhombus",
+      "position": [
+        -0.433013,
+        2.75,
+        -0.0
+      ],
+      "rotation": [
+        -180.0,
+        0.0,
+        150.000024
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "petal_w4",
+      "type": "rhombus",
+      "position": [
+        -0.433012,
+        0.25,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -149.999988
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bed_s",
+      "type": "hexagon",
+      "position": [
+        1.5,
+        -0.866025,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        120.000012
+      ],
+      "color": "green"
+    },
+    {
+      "id": "petal_s0",
+      "type": "rhombus",
+      "position": [
+        1.750001,
+        -2.165063,
+        -0.0
+      ],
+      "rotation": [
+        -180.0,
+        -0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "petal_s1",
+      "type": "rhombus",
+      "position": [
+        2.5,
+        -1.732051,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -119.999976
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "petal_s2",
+      "type": "rhombus",
+      "position": [
+        0.5,
+        -1.732051,
+        -0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        -59.999988
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "petal_s3",
+      "type": "rhombus",
+      "position": [
+        0.25,
+        -0.433013,
+        -0.0
+      ],
+      "rotation": [
+        -180.0,
+        0.0,
+        -119.999976
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "petal_s4",
+      "type": "rhombus",
+      "position": [
+        2.75,
+        -0.433012,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        -59.999988
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "post_sw",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "post_sw_cap",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "post_se",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "post_se_cap",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        0.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "post_nw",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "post_nw_cap",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "post_ne",
+      "type": "square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "post_ne_cap",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺展坛南六片: 灰青棋盘方板逐行互吸, 坛心 (中排中间) 就是灯球的底板。",
+      "tip": "从西南角逐行铺 —— 每片至少咬住一位邻居。",
+      "tiles_to_add": [
+        "plinth_00",
+        "plinth_10",
+        "plinth_20",
+        "plinth_01",
+        "plinth_11",
+        "plinth_21"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "补展坛北三片: 3x3 展坛合拢。",
+      "tip": "九片平铺互咬成一整块受力底盘。",
+      "tiles_to_add": [
+        "plinth_02",
+        "plinth_12",
+        "plinth_22"
+      ],
+      "highlight_tiles": [
+        "plinth_11"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "倒扣梯形下碗: 四片橙色梯形窄边朝下吸坛心四边, 腰边两两互咬外翻成环。",
+      "tip": "梯形当承重斗拱 —— 剪断任何一条缝, 力都能沿环绕行。",
+      "tiles_to_add": [
+        "bowl_s",
+        "bowl_e",
+        "bowl_n",
+        "bowl_w"
+      ],
+      "highlight_tiles": [
+        "plinth_11"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立方鼓第一层: 四片蓝色横板站上腰环, 下边与梯形宽边等长贴合、转角短边互咬。",
+      "tip": "2 比 2 的整边贴合 —— 灯身的每一层都这样咬转角。",
+      "tiles_to_add": [
+        "drum1_s",
+        "drum1_e",
+        "drum1_n",
+        "drum1_w"
+      ],
+      "highlight_tiles": [
+        "bowl_s"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "挂第一层菱形角藤: 四片紫色菱形一条边整边吸鼓身竖角缝, 斜着向上展开。",
+      "tip": "竖直铰链不吃重力力矩 —— 菱形角旗怎么挂都稳。",
+      "tiles_to_add": [
+        "vine1_se",
+        "vine1_ne",
+        "vine1_nw",
+        "vine1_sw"
+      ],
+      "highlight_tiles": [
+        "drum1_s",
+        "drum1_e"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "立透明透光带: 四片透明横板骑上第一层, 灯球的光将从这一圈漏出来。",
+      "tip": "转角短边照旧互咬 —— 透光不减一分结构。",
+      "tiles_to_add": [
+        "drum2_s",
+        "drum2_e",
+        "drum2_n",
+        "drum2_w"
+      ],
+      "highlight_tiles": [
+        "drum1_s"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "挂第二层菱形角藤: 四片粉色菱形吸中层角缝, 腰边咬住下层藤蔓。",
+      "tip": "上下两片菱形腰边正好共线互吸 —— 藤蔓自己锁自己。",
+      "tiles_to_add": [
+        "vine2_se",
+        "vine2_ne",
+        "vine2_nw",
+        "vine2_sw"
+      ],
+      "highlight_tiles": [
+        "vine1_se"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立方鼓第三层: 四片青色横板收口, 鼓身到顶。",
+      "tip": "鼓顶四条边线就是上盖的坡脚 —— 务必对平。",
+      "tiles_to_add": [
+        "drum3_s",
+        "drum3_e",
+        "drum3_n",
+        "drum3_w"
+      ],
+      "highlight_tiles": [
+        "drum2_s"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "挂第三层菱形角藤: 四片紫色菱形收尾, 四条角藤爬满三层。",
+      "tip": "十二片菱形四条藤 —— 灯球的竖向签名。",
+      "tiles_to_add": [
+        "vine3_se",
+        "vine3_ne",
+        "vine3_nw",
+        "vine3_sw"
+      ],
+      "highlight_tiles": [
+        "vine2_se"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "盖梯形四坡上盖: 四片橙色梯形宽边吸鼓顶, 腰边互咬向内收分。",
+      "tip": "D4 关键一步: 四片坡面要一次围拢, 半拢状态不要撒手。",
+      "tiles_to_add": [
+        "roof_s",
+        "roof_e",
+        "roof_n",
+        "roof_w"
+      ],
+      "highlight_tiles": [
+        "drum3_s",
+        "drum3_n"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "压顶: 一片金色方板盖住坡顶 1x1 洞口。",
+      "tip": "压顶方四边同时吸四片坡面上边 —— 上盖从此成为整体。",
+      "tiles_to_add": [
+        "roof_cap"
+      ],
+      "highlight_tiles": [
+        "roof_s"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "竖扇形极冠 (南/东): 两片红色扇形半径边吸压顶边线, 弧线甩向天空。",
+      "tip": "扇形底边同时吸压顶方与坡面梯形上边 —— 一片两吸。",
+      "tiles_to_add": [
+        "polar_s",
+        "polar_e"
+      ],
+      "highlight_tiles": [
+        "roof_cap"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "竖扇形极冠 (北/西): 再两片风车状合拢 —— 灯球封顶。",
+      "tip": "四片极冠风车旋向一致, 从头顶看是一朵四瓣风车花。",
+      "tiles_to_add": [
+        "polar_n",
+        "polar_w"
+      ],
+      "highlight_tiles": [
+        "polar_s"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "砌东花圃: 六边形芯整边吸坛缘, 五片菱形花瓣沿自由边展开、相邻互咬。",
+      "tip": "六边形和菱形是平面密铺搭档 —— 花瓣贴边即吸。",
+      "tiles_to_add": [
+        "bed_e",
+        "petal_e0",
+        "petal_e1",
+        "petal_e2",
+        "petal_e3",
+        "petal_e4"
+      ],
+      "highlight_tiles": [
+        "plinth_21"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "砌北花圃: 第二座八角花圃向北展开。",
+      "tip": "花瓣沿远离坛心的方向倾摆 —— 谁也不压坛面一角。",
+      "tiles_to_add": [
+        "bed_n",
+        "petal_n0",
+        "petal_n1",
+        "petal_n2",
+        "petal_n3",
+        "petal_n4"
+      ],
+      "highlight_tiles": [
+        "bed_e"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "砌西花圃: 第三座花圃落位, 三面见花。",
+      "tip": "每座花圃 1 芯 5 瓣 —— 四座正好用满 24 片密铺件。",
+      "tiles_to_add": [
+        "bed_w",
+        "petal_w0",
+        "petal_w1",
+        "petal_w2",
+        "petal_w3",
+        "petal_w4"
+      ],
+      "highlight_tiles": [
+        "bed_n"
+      ]
+    },
+    {
+      "step_number": 17,
+      "description": "砌南花圃: 最后一座花圃合拢, 花瓣顺手咬住坛缘拼缝。",
+      "tip": "南花圃两侧的花瓣与坛角砖脚线共线 —— 灯柱马上踩上来。",
+      "tiles_to_add": [
+        "bed_s",
+        "petal_s0",
+        "petal_s1",
+        "petal_s2",
+        "petal_s3",
+        "petal_s4"
+      ],
+      "highlight_tiles": [
+        "bed_w"
+      ]
+    },
+    {
+      "step_number": 18,
+      "description": "立四角灯柱戴冠: 四片透明方墙站上坛角外缘, 金色三角冠收尾 —— 四型合璧灯球坛落成!",
+      "tip": "D4 入库前须实物复核: 抖一抖透光带、提一提上盖, 全都纹丝不动才算数。",
+      "tiles_to_add": [
+        "post_sw",
+        "post_sw_cap",
+        "post_se",
+        "post_se_cap",
+        "post_nw",
+        "post_nw_cap",
+        "post_ne",
+        "post_ne_cap"
+      ],
+      "highlight_tiles": [
+        "plinth_00",
+        "plinth_20"
+      ]
+    }
+  ]
+}
