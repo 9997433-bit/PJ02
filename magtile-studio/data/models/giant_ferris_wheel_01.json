@@ -3,9 +3,9 @@
   "id": "giant_ferris_wheel_01",
   "name": "巨型摩天轮骨架",
   "name_en": "Giant Ferris Wheel Frame 01",
-  "description": "幻想与机械 D5 旗舰: 镜像双 A 形华伦三角桁架同步长高 (各 6 段弦杆, 合计 12 段闭合), 水平轮轴桥贯穿其间; y=4 竖轮面以六边形轮毂 + 五外辐 + 四辐间桁弦拼成星轮, 下外辐落 A 架顶与桥面三点托举; 场边 24 片直角斜撑加固; 静态展示, 全 CORE-9。",
+  "description": "幻想与机械 D5 旗舰: 镜像双 A 形华伦三角桁架同步长高 (各 6 段弦杆, 合计 12 段闭合), 顶盖板铺满双跨承住水平轮轴桥; y=4 竖轮面以六边形轮毂 + 五外辐 + 四辐间桁弦拼成星轮, 桥下反射一节登舱吊舱, 下外辐落 A 架顶与桥面多点托举; 南侧十格登舱步道立四面三角旗门, 北侧观景回廊整行合龙, 场边 24 片直角斜撑加固; 静态展示, 全 CORE-9。",
   "difficulty": 5,
-  "total_pieces": 102,
+  "total_pieces": 122,
   "tags": [
     "幻想",
     "机械",
@@ -20,9 +20,9 @@
     "series": "fantasy_machinery",
     "structural_signature": {
       "tile_histogram": {
-        "square": 61,
+        "square": 76,
         "right_triangle": 23,
-        "equilateral_triangle": 17,
+        "equilateral_triangle": 22,
         "hexagon": 1
       }
     }
@@ -554,6 +554,291 @@
       "color": "gray"
     },
     {
+      "id": "gal_2",
+      "type": "square",
+      "position": [
+        2.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gal_3",
+      "type": "square",
+      "position": [
+        3.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gal_5",
+      "type": "square",
+      "position": [
+        5.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "gal_6",
+      "type": "square",
+      "position": [
+        6.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "gal_7",
+      "type": "square",
+      "position": [
+        7.5,
+        6.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "walk_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "walk_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "walk_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "walk_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "walk_7",
+      "type": "square",
+      "position": [
+        7.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "walk_8",
+      "type": "square",
+      "position": [
+        8.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "walk_9",
+      "type": "square",
+      "position": [
+        9.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "flag_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "flag_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_6",
+      "type": "equilateral_triangle",
+      "position": [
+        6.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_9",
+      "type": "equilateral_triangle",
+      "position": [
+        9.5,
+        2.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
       "id": "la_leg_s_0",
       "type": "square",
       "position": [
@@ -768,7 +1053,7 @@
       "type": "square",
       "position": [
         2.5,
-        5.5,
+        4.5,
         3.0
       ],
       "rotation": [
@@ -993,7 +1278,7 @@
       "type": "square",
       "position": [
         7.5,
-        5.5,
+        4.5,
         3.0
       ],
       "rotation": [
@@ -1424,6 +1709,21 @@
       "color": "yellow"
     },
     {
+      "id": "gondola",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        4.0,
+        2.711325
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
       "id": "spoke_0",
       "type": "equilateral_triangle",
       "position": [
@@ -1645,6 +1945,66 @@
     },
     {
       "step_number": 7,
+      "description": "北观景回廊合龙 (5 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "gal_2",
+        "gal_3",
+        "gal_5",
+        "gal_6",
+        "gal_7"
+      ],
+      "highlight_tiles": [
+        "deck_n"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "南登舱步道西段 (5 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4"
+      ],
+      "highlight_tiles": [
+        "base_L_0_0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "南登舱步道东段合龙 (5 片)。",
+      "tip": "",
+      "tiles_to_add": [
+        "walk_5",
+        "walk_6",
+        "walk_7",
+        "walk_8",
+        "walk_9"
+      ],
+      "highlight_tiles": [
+        "walk_4"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "步道南沿立入口旗门 (4 面三角旗)。",
+      "tip": "",
+      "tiles_to_add": [
+        "flag_0",
+        "flag_3",
+        "flag_6",
+        "flag_9"
+      ],
+      "highlight_tiles": [
+        "walk_0",
+        "walk_9"
+      ]
+    },
+    {
+      "step_number": 11,
       "description": "竖左 A 南/北腿 + 第一层横系 (z=0)。",
       "tip": "",
       "tiles_to_add": [
@@ -1655,7 +2015,7 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 8,
+      "step_number": 12,
       "description": "竖右 A 南/北腿 + 第一层横系 (z=0)。",
       "tip": "",
       "tiles_to_add": [
@@ -1668,7 +2028,7 @@
       ]
     },
     {
-      "step_number": 9,
+      "step_number": 13,
       "description": "左 A 二层墙 + 桁 z=0。",
       "tip": "",
       "tiles_to_add": [
@@ -1680,7 +2040,7 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 10,
+      "step_number": 14,
       "description": "右 A 二层墙 + 桁 z=0。",
       "tip": "",
       "tiles_to_add": [
@@ -1692,7 +2052,7 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 11,
+      "step_number": 15,
       "description": "左 A 三层墙 + 桁 z=1。",
       "tip": "",
       "tiles_to_add": [
@@ -1705,7 +2065,7 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 12,
+      "step_number": 16,
       "description": "右 A 三层墙 + 桁 z=1。",
       "tip": "",
       "tiles_to_add": [
@@ -1718,7 +2078,7 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 13,
+      "step_number": 17,
       "description": "双 A 顶横系 (z=2)。",
       "tip": "",
       "tiles_to_add": [
@@ -1728,8 +2088,8 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 14,
-      "description": "顶盖板 + 轮轴桥 (8 片)。",
+      "step_number": 18,
+      "description": "顶盖板铺满双跨 + 轮轴桥 (8 片)。",
       "tip": "",
       "tiles_to_add": [
         "la_cap_s",
@@ -1746,7 +2106,7 @@
       ]
     },
     {
-      "step_number": 15,
+      "step_number": 19,
       "description": "左柱脚斜撑 + 外场撑。",
       "tip": "",
       "tiles_to_add": [
@@ -1760,7 +2120,7 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 16,
+      "step_number": 20,
       "description": "右柱脚斜撑 + 外场撑。",
       "tip": "",
       "tiles_to_add": [
@@ -1771,7 +2131,7 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 17,
+      "step_number": 21,
       "description": "内足与中廊斜撑 (10 片)。",
       "tip": "",
       "tiles_to_add": [
@@ -1789,7 +2149,7 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 18,
+      "step_number": 22,
       "description": "桥墩斜撑 (4 片)。",
       "tip": "",
       "tiles_to_add": [
@@ -1801,7 +2161,7 @@
       "highlight_tiles": []
     },
     {
-      "step_number": 19,
+      "step_number": 23,
       "description": "安装六边形轮毂。",
       "tip": "",
       "tiles_to_add": [
@@ -1812,7 +2172,19 @@
       ]
     },
     {
-      "step_number": 20,
+      "step_number": 24,
+      "description": "桥下挂登舱吊舱。",
+      "tip": "",
+      "tiles_to_add": [
+        "gondola"
+      ],
+      "highlight_tiles": [
+        "whub",
+        "axle_4"
+      ]
+    },
+    {
+      "step_number": 25,
       "description": "下外辐 e3。",
       "tip": "",
       "tiles_to_add": [
@@ -1825,7 +2197,7 @@
       ]
     },
     {
-      "step_number": 21,
+      "step_number": 26,
       "description": "下外辐 e5。",
       "tip": "",
       "tiles_to_add": [
@@ -1838,7 +2210,7 @@
       ]
     },
     {
-      "step_number": 22,
+      "step_number": 27,
       "description": "上外辐 e0/e1。",
       "tip": "",
       "tiles_to_add": [
@@ -1850,7 +2222,7 @@
       ]
     },
     {
-      "step_number": 23,
+      "step_number": 28,
       "description": "上外辐 e2。",
       "tip": "",
       "tiles_to_add": [
@@ -1861,7 +2233,7 @@
       ]
     },
     {
-      "step_number": 24,
+      "step_number": 29,
       "description": "辐间桁架弦杆 (2 段)。",
       "tip": "",
       "tiles_to_add": [
@@ -1873,7 +2245,7 @@
       ]
     },
     {
-      "step_number": 25,
+      "step_number": 30,
       "description": "辐间桁架弦杆合龙 (2 段)。",
       "tip": "",
       "tiles_to_add": [
