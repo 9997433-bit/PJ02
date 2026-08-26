@@ -103,12 +103,14 @@ store.setInventory(inventory)
 
 ## 6. 内置预设 (schema_version 1)
 
+当前目录含 **40 个套装** (11 品牌): `generic` (2)、`connetix` (10)、`magna_tiles` (10)、`playmags` / `picassotiles` / `magformers` (各 3)、国内品牌 `baibian` / `kub` / `mloong` / `mideer` / `beiens` 等。完整列表见 `data/physical_set_catalog.json`; 校验: `python3 tools/verify_physical_set_catalog.py`。
+
 | `id` | 展示名 | `tier_scope` | 片型数 | 合计 |
 | --- | --- | --- | --- | --- |
 | `standard_102` | 标准102片套装 | `core` | 9 | 102 |
 | `deluxe_198` | 豪华198片套装 | `core+expansion` | 13 | 198 |
 
-`standard_102` 仅含核心 9 片型, 对齐免费模型库默认片型集。`deluxe_198` 额外含菱形/梯形/六边形/扇形, 可搭带「需要扩展装」标签的模型。
+`standard_102` 仅含核心 9 片型, 对齐免费模型库默认片型集。`deluxe_198` 额外含菱形/梯形/六边形/扇形, 可搭带「需要扩展装」标签的模型。套装 → 模型可搭建率: `python3 tools/report_buildable_by_set.py <套装id>`; 集成冒烟: `tests/test_buildable_by_set.sh`。
 
 ## 7. 校验与 QA
 

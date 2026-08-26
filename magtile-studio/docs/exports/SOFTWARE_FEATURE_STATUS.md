@@ -72,6 +72,15 @@
 | Google Play + Windows 商店代码接线 | ✅ |
 | 统一解锁口径 (`subscription_active`) | ✅ |
 
+### 库存与实物套装库
+| 功能 | 状态 |
+| --- | --- |
+| 磁力片库存 CLI (`inventory set/show/match`) + 图形录入共库 | ✅ |
+| 实物套装目录 40 款 (11 品牌: generic/Connetix/Magna-Tiles/Playmags 等) | ✅ |
+| 套装快捷预填 (`inventory apply-set` / Qt 库存页) | ✅ |
+| 套装 → 模型可搭建率报告 (`tools/report_buildable_by_set.py`) | ✅ |
+| 集成冒烟 (`tests/test_buildable_by_set.sh`) | ✅ |
+
 ### 质量与合规（自动化）
 | 功能 | 状态 |
 | --- | --- |

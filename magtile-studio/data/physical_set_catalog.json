@@ -3,37 +3,39 @@
   "comment": "实物磁力片套装目录: 用户勾选家里拥有的盒装套装 → 按片型求和得到 tile_inventory → 现有 canBuild / inventory match 直接可用。片型标识与 data/tile_catalog.json 的 type 字段一一对应; tier 分层 (core / expansion) 以片型目录为准。盒装片数为常见市场口径的近似值, 不同品牌/批次/区域 SKU 会有偏差, 见 docs/PHYSICAL_SET_CATALOG.md 与各套装 approximation_notes_zh。",
   "sets": [
     {
-      "id": "standard_102",
-      "brand": "generic",
-      "name_zh": "标准102片套装",
-      "name_en": "Standard 102-Piece Set",
-      "piece_count_label": 102,
+      "id": "baibian_100",
+      "brand": "baibian",
+      "region": "CN",
+      "name_zh": "百变磁力片 100 片入门盒",
+      "name_en": "Baibian Magnetic Tiles 100 pc Starter",
+      "piece_count_label": 100,
       "tier_scope": "core",
-      "ui_preset_label_zh": "标准102片套装",
-      "description_zh": "常见基础盒装: 仅含核心 9 片型 (正方形/三角形/长方形及大正方形、窗格方、门框方、车轮底座变体), 不含扩展包片型。对应 UI_UX_SPEC §10.2 快捷预填「标准102片套装」。",
+      "description_zh": "国内电商通销「百变磁力片」100 片入门大桶/盒装: 无单一注册品牌, 多厂 OEM, 7.5 cm 彩窗片为主。",
+      "approximation_notes_zh": "「百变磁力片」为品类通称 (淘宝/拼多多/i-Smart 等), 非独家品牌; 100 片 histogram 对齐弥鹿/标准 100 片档 market 口径。不同店铺片型配比差异大, 强烈建议录入后对照实物微调。",
       "pieces": {
-        "square": 36,
-        "equilateral_triangle": 24,
+        "square": 34,
+        "equilateral_triangle": 22,
         "right_triangle": 12,
         "isosceles_triangle": 8,
         "rectangle": 6,
         "large_square": 4,
-        "window_square": 4,
+        "window_square": 6,
         "door_frame": 4,
         "wheel_base": 4
       }
     },
     {
-      "id": "deluxe_198",
-      "brand": "generic",
-      "name_zh": "豪华198片套装",
-      "name_en": "Deluxe 198-Piece Set",
-      "piece_count_label": 198,
+      "id": "baibian_200",
+      "brand": "baibian",
+      "region": "CN",
+      "name_zh": "百变磁力片 200 片大盒",
+      "name_en": "Baibian Magnetic Tiles 200 pc Value Pack",
+      "piece_count_label": 200,
       "tier_scope": "core+expansion",
-      "ui_preset_label_zh": "豪华198片",
-      "description_zh": "常见大盒装: 在标准核心片型基础上增加菱形/梯形/六边形/扇形等扩展片型, 适合进阶模型。对应 UI_UX_SPEC §10.2 快捷预填「豪华198片」。",
+      "description_zh": "百变磁力片 200 片超值大盒 (常附收纳桶): 核心片型 + 扩展几何片, CP 值款, 片数标称常含收纳桶/贴纸。",
+      "approximation_notes_zh": "200 片档为电商热销规格 (冰雪/ i-Smart 222 件等相近); histogram 按 deluxe_198×(200/198) 取整。OEM 批次扩展片 (六边形/扇形) 有无不一, 缺片型则手动置 0。",
       "pieces": {
-        "square": 50,
+        "square": 51,
         "equilateral_triangle": 36,
         "right_triangle": 20,
         "isosceles_triangle": 12,
@@ -45,7 +47,93 @@
         "rhombus": 12,
         "trapezoid": 8,
         "hexagon": 8,
-        "sector": 12
+        "sector": 13
+      }
+    },
+    {
+      "id": "beiens_110",
+      "brand": "beiens",
+      "region": "CN",
+      "name_zh": "贝恩施智慧磁力片 110 片",
+      "name_en": "Beiens Smart Magnetic Tiles 110 pc (B803)",
+      "piece_count_label": 110,
+      "tier_scope": "core",
+      "description_zh": "贝恩施 (beiens) B803 110 片装: 智慧磁力片系列, 天猫旗舰店 mid-tier 盒装, 高透光钻面。",
+      "approximation_notes_zh": "什么值得买 B803 SKU; 官方未公布完整 BOM。110 片 histogram 由 standard_102 等比放大并补足窗格/车底; 同系列另有 52/90/160 等规格。",
+      "pieces": {
+        "square": 39,
+        "equilateral_triangle": 26,
+        "right_triangle": 13,
+        "isosceles_triangle": 9,
+        "rectangle": 6,
+        "large_square": 4,
+        "window_square": 4,
+        "door_frame": 5,
+        "wheel_base": 4
+      }
+    },
+    {
+      "id": "connetix_92_ball_run",
+      "brand": "connetix",
+      "region": "AU",
+      "name_zh": "Connetix 彩虹滚珠轨道 92 片",
+      "name_en": "Connetix Rainbow Ball Run Pack 92 pc",
+      "piece_count_label": 36,
+      "tier_scope": "core",
+      "description_zh": "Connetix 彩虹滚珠轨道套装: 盒面 92 片含透明管/木球/碗等专用件, 本条目仅统计可映射磁力连接方片。",
+      "approximation_notes_zh": "官方 BOM (SKU CNTR00092BR): 36× connecting squares + 6 木球 + Y 形分流管/楼梯管/S 弯/U 弯/滑管/直角管/直管/碗等专用件 (非 tile_catalog)。36 连接方片映射为 square; 管路与球不计入 piece_count_label (故 id 后缀 92 指盒面标称, label=36 为可映射片数)。需搭配标准片型盒 (如 102/120) 搭建完整滚珠塔。",
+      "pieces": {
+        "square": 36
+      }
+    },
+    {
+      "id": "connetix_42_square",
+      "brand": "connetix",
+      "region": "AU",
+      "name_zh": "Connetix 彩虹方片扩充 42 片",
+      "name_en": "Connetix Rainbow Square Pack 42 pc",
+      "piece_count_label": 42,
+      "tier_scope": "core",
+      "description_zh": "Connetix 彩虹方片扩充包 (2024 升级版 42 片, 取代旧 40 片 SKU)。",
+      "approximation_notes_zh": "官方 BOM (SKU CNTR00042SQ): 6 大正+36 小正 = 42 (+ inspiration book 不计)。仅方片, 适合叠加到入门/创意盒做高塔/大面积地台。",
+      "pieces": {
+        "large_square": 6,
+        "square": 36
+      }
+    },
+    {
+      "id": "connetix_106_ball_run_pastel",
+      "brand": "connetix",
+      "region": "AU",
+      "name_zh": "Connetix 粉彩滚珠轨道 106 片",
+      "name_en": "Connetix Pastel Ball Run Pack 106 pc",
+      "piece_count_label": 48,
+      "tier_scope": "core",
+      "description_zh": "Connetix 粉彩滚珠轨道套装: 盒面 106 片, 本条目仅统计 48 片粉彩连接方片。",
+      "approximation_notes_zh": "官方 BOM (connetixtiles.com / Toypark AU): 48× pastel connector squares + 8 木球 + 全套透明管/楼梯/S 弯/分流/碗 (非 tile_catalog)。48 连接方片 → square; 管路与球不计入 piece_count_label。",
+      "pieces": {
+        "square": 48
+      }
+    },
+    {
+      "id": "connetix_50_transport",
+      "brand": "connetix",
+      "region": "AU",
+      "name_zh": "Connetix 交通主题 50 片",
+      "name_en": "Connetix Transport Pack 50 pc",
+      "piece_count_label": 50,
+      "tier_scope": "core",
+      "description_zh": "Connetix 彩虹/粉彩交通盒 (两色 SKU 片型相同): 车底、长方形与大量门框片。",
+      "approximation_notes_zh": "官方 BOM (momstore.co.nz transport): 1× train/truck base + 2× car base → 3× wheel_base; 15× door → door_frame; 18× rectangle; 其余方/三角/窗格按官方计数。Train/truck 复合底盘无独立片型, 近似为 wheel_base。",
+      "pieces": {
+        "wheel_base": 3,
+        "equilateral_triangle": 3,
+        "right_triangle": 3,
+        "isosceles_triangle": 2,
+        "door_frame": 15,
+        "square": 4,
+        "window_square": 2,
+        "rectangle": 18
       }
     },
     {
@@ -66,6 +154,24 @@
         "isosceles_triangle": 6,
         "window_square": 6,
         "door_frame": 6
+      }
+    },
+    {
+      "id": "connetix_64_pastel",
+      "brand": "connetix",
+      "region": "AU",
+      "name_zh": "Connetix 粉彩入门 64 片",
+      "name_en": "Connetix Pastel Starter Pack 64 pc",
+      "piece_count_label": 64,
+      "tier_scope": "core",
+      "description_zh": "Connetix 粉彩入门盒: 仅方片与三种三角形, 无窗格/门框/长方形。",
+      "approximation_notes_zh": "官方 BOM (connetixtiles.com pastel-starter-pack-64-pc): 8 大正+32 小正+8 等边+8 直角+8 等腰 = 64 (+ inspiration book 不计入 piece_count_label)。",
+      "pieces": {
+        "large_square": 8,
+        "square": 32,
+        "equilateral_triangle": 8,
+        "right_triangle": 8,
+        "isosceles_triangle": 8
       }
     },
     {
@@ -110,49 +216,26 @@
       }
     },
     {
-      "id": "connetix_64_pastel",
+      "id": "connetix_202_pastel_mega",
       "brand": "connetix",
       "region": "AU",
-      "name_zh": "Connetix 粉彩入门 64 片",
-      "name_en": "Connetix Pastel Starter Pack 64 pc",
-      "piece_count_label": 64,
-      "tier_scope": "core",
-      "description_zh": "Connetix 粉彩入门盒: 仅方片与三种三角形, 无窗格/门框/长方形。",
-      "approximation_notes_zh": "官方 BOM (connetixtiles.com pastel-starter-pack-64-pc): 8 大正+32 小正+8 等边+8 直角+8 等腰 = 64 (+ inspiration book 不计入 piece_count_label)。",
+      "name_zh": "Connetix 粉彩超大 202 片",
+      "name_en": "Connetix Pastel Mega Pack 202 pc",
+      "piece_count_label": 202,
+      "tier_scope": "core+expansion",
+      "description_zh": "Connetix 粉彩旗舰大盒: 8 色粉彩全片型 + 六边形 + 车底。",
+      "approximation_notes_zh": "官方 BOM (momstore.co.nz / connetixtiles.com pastel mega): 16 大正+48 小正+32 等边+32 直角+32 等腰+8 大六边形+8 窗格+8 门框+8 长方形+8 围栏+2 车。围栏 8 片近似映射为 8× rectangle (合计 16 rectangle); car base → wheel_base。",
       "pieces": {
-        "large_square": 8,
-        "square": 32,
-        "equilateral_triangle": 8,
-        "right_triangle": 8,
-        "isosceles_triangle": 8
-      }
-    },
-    {
-      "id": "connetix_92_ball_run",
-      "brand": "connetix",
-      "region": "AU",
-      "name_zh": "Connetix 彩虹滚珠轨道 92 片",
-      "name_en": "Connetix Rainbow Ball Run Pack 92 pc",
-      "piece_count_label": 36,
-      "tier_scope": "core",
-      "description_zh": "Connetix 彩虹滚珠轨道套装: 盒面 92 片含透明管/木球/碗等专用件, 本条目仅统计可映射磁力连接方片。",
-      "approximation_notes_zh": "官方 BOM (SKU CNTR00092BR): 36× connecting squares + 6 木球 + Y 形分流管/楼梯管/S 弯/U 弯/滑管/直角管/直管/碗等专用件 (非 tile_catalog)。36 连接方片映射为 square; 管路与球不计入 piece_count_label (故 id 后缀 92 指盒面标称, label=36 为可映射片数)。需搭配标准片型盒 (如 102/120) 搭建完整滚珠塔。",
-      "pieces": {
-        "square": 36
-      }
-    },
-    {
-      "id": "connetix_106_ball_run_pastel",
-      "brand": "connetix",
-      "region": "AU",
-      "name_zh": "Connetix 粉彩滚珠轨道 106 片",
-      "name_en": "Connetix Pastel Ball Run Pack 106 pc",
-      "piece_count_label": 48,
-      "tier_scope": "core",
-      "description_zh": "Connetix 粉彩滚珠轨道套装: 盒面 106 片, 本条目仅统计 48 片粉彩连接方片。",
-      "approximation_notes_zh": "官方 BOM (connetixtiles.com / Toypark AU): 48× pastel connector squares + 8 木球 + 全套透明管/楼梯/S 弯/分流/碗 (非 tile_catalog)。48 连接方片 → square; 管路与球不计入 piece_count_label。",
-      "pieces": {
-        "square": 48
+        "large_square": 16,
+        "square": 48,
+        "equilateral_triangle": 32,
+        "right_triangle": 32,
+        "isosceles_triangle": 32,
+        "hexagon": 8,
+        "window_square": 8,
+        "door_frame": 8,
+        "rectangle": 16,
+        "wheel_base": 2
       }
     },
     {
@@ -179,84 +262,49 @@
       }
     },
     {
-      "id": "connetix_202_pastel_mega",
-      "brand": "connetix",
-      "region": "AU",
-      "name_zh": "Connetix 粉彩超大 202 片",
-      "name_en": "Connetix Pastel Mega Pack 202 pc",
-      "piece_count_label": 202,
-      "tier_scope": "core+expansion",
-      "description_zh": "Connetix 粉彩旗舰大盒: 8 色粉彩全片型 + 六边形 + 车底。",
-      "approximation_notes_zh": "官方 BOM (momstore.co.nz / connetixtiles.com pastel mega): 16 大正+48 小正+32 等边+32 直角+32 等腰+8 大六边形+8 窗格+8 门框+8 长方形+8 围栏+2 车。围栏 8 片近似映射为 8× rectangle (合计 16 rectangle); car base → wheel_base。",
-      "pieces": {
-        "large_square": 16,
-        "square": 48,
-        "equilateral_triangle": 32,
-        "right_triangle": 32,
-        "isosceles_triangle": 32,
-        "hexagon": 8,
-        "window_square": 8,
-        "door_frame": 8,
-        "rectangle": 16,
-        "wheel_base": 2
-      }
-    },
-    {
-      "id": "connetix_50_transport",
-      "brand": "connetix",
-      "region": "AU",
-      "name_zh": "Connetix 交通主题 50 片",
-      "name_en": "Connetix Transport Pack 50 pc",
-      "piece_count_label": 50,
+      "id": "standard_102",
+      "brand": "generic",
+      "name_zh": "标准102片套装",
+      "name_en": "Standard 102-Piece Set",
+      "piece_count_label": 102,
       "tier_scope": "core",
-      "description_zh": "Connetix 彩虹/粉彩交通盒 (两色 SKU 片型相同): 车底、长方形与大量门框片。",
-      "approximation_notes_zh": "官方 BOM (momstore.co.nz transport): 1× train/truck base + 2× car base → 3× wheel_base; 15× door → door_frame; 18× rectangle; 其余方/三角/窗格按官方计数。Train/truck 复合底盘无独立片型, 近似为 wheel_base。",
+      "ui_preset_label_zh": "标准102片套装",
+      "description_zh": "常见基础盒装: 仅含核心 9 片型 (正方形/三角形/长方形及大正方形、窗格方、门框方、车轮底座变体), 不含扩展包片型。对应 UI_UX_SPEC §10.2 快捷预填「标准102片套装」。",
       "pieces": {
-        "wheel_base": 3,
-        "equilateral_triangle": 3,
-        "right_triangle": 3,
-        "isosceles_triangle": 2,
-        "door_frame": 15,
-        "square": 4,
-        "window_square": 2,
-        "rectangle": 18
-      }
-    },
-    {
-      "id": "connetix_42_square",
-      "brand": "connetix",
-      "region": "AU",
-      "name_zh": "Connetix 彩虹方片扩充 42 片",
-      "name_en": "Connetix Rainbow Square Pack 42 pc",
-      "piece_count_label": 42,
-      "tier_scope": "core",
-      "description_zh": "Connetix 彩虹方片扩充包 (2024 升级版 42 片, 取代旧 40 片 SKU)。",
-      "approximation_notes_zh": "官方 BOM (SKU CNTR00042SQ): 6 大正+36 小正 = 42 (+ inspiration book 不计)。仅方片, 适合叠加到入门/创意盒做高塔/大面积地台。",
-      "pieces": {
-        "large_square": 6,
-        "square": 36
-      }
-    },
-    {
-      "id": "mideer_100",
-      "brand": "mideer",
-      "region": "CN",
-      "name_zh": "弥鹿多彩透光磁力片 100 片",
-      "name_en": "Mideer Color Window Magnetic Tiles 100 pc",
-      "piece_count_label": 100,
-      "tier_scope": "core",
-      "description_zh": "弥鹿 (mideer) 天猫/京东主销 100 片彩窗盒: 9 种核心片型, 钻面透光, 常附 2 辆磁力小车与收纳袋 (小车不计入 pieces)。",
-      "approximation_notes_zh": "盒面「100片·9种片型+2车」口径: 仅统计 100 片磁力连接片, 2 辆小车近似映射为 wheel_base (若盒内无独立车底则录入后减 2)。片型配比依据弥鹿 MD1141 / MDCT-1211 等 SKU 常见拆盒与 standard_102 比例缩放, 不同批次会有 ±2 片波动。",
-      "pieces": {
-        "square": 34,
-        "equilateral_triangle": 22,
+        "square": 36,
+        "equilateral_triangle": 24,
         "right_triangle": 12,
         "isosceles_triangle": 8,
         "rectangle": 6,
         "large_square": 4,
-        "window_square": 6,
+        "window_square": 4,
         "door_frame": 4,
         "wheel_base": 4
+      }
+    },
+    {
+      "id": "deluxe_198",
+      "brand": "generic",
+      "name_zh": "豪华198片套装",
+      "name_en": "Deluxe 198-Piece Set",
+      "piece_count_label": 198,
+      "tier_scope": "core+expansion",
+      "ui_preset_label_zh": "豪华198片",
+      "description_zh": "常见大盒装: 在标准核心片型基础上增加菱形/梯形/六边形/扇形等扩展片型, 适合进阶模型。对应 UI_UX_SPEC §10.2 快捷预填「豪华198片」。",
+      "pieces": {
+        "square": 50,
+        "equilateral_triangle": 36,
+        "right_triangle": 20,
+        "isosceles_triangle": 12,
+        "rectangle": 12,
+        "large_square": 8,
+        "window_square": 8,
+        "door_frame": 6,
+        "wheel_base": 6,
+        "rhombus": 12,
+        "trapezoid": 8,
+        "hexagon": 8,
+        "sector": 12
       }
     },
     {
@@ -330,6 +378,252 @@
       }
     },
     {
+      "id": "magformers_30",
+      "brand": "magformers",
+      "name_zh": "Magformers 30片彩虹/灵感装",
+      "name_en": "Magformers Rainbow / Inspire 30-Piece Set",
+      "piece_count_label": 30,
+      "tier_scope": "core",
+      "description_zh": "Magformers 经典 30 片 (Rainbow / Inspire 等): 18 正方 + 12 等边三角。仅含两类片型, 无直角/瘦高三角/长方/变体。",
+      "compatibility": "Magformers hollow-frame equilateral triangles: edge length matches MagTile equilateral_triangle but open-center geometry affects hinge/cantilever strength vs flat tiles. No right/isosceles/rectangle pieces in set.",
+      "pieces": {
+        "square": 18,
+        "equilateral_triangle": 12
+      }
+    },
+    {
+      "id": "magformers_62_designer",
+      "brand": "magformers",
+      "name_zh": "Magformers Designer 62片",
+      "name_en": "Magformers Designer 62-Piece Set",
+      "piece_count_label": 48,
+      "tier_scope": "core+expansion",
+      "description_zh": "Magformers Designer 62 片: 22 正方 + 20 等边三角 + 4 菱形 + 2 梯形。14 片 Magformers 等腰三角 (30-60-90 开框几何) 与 MagTile 瘦高等腰三角不兼容, 已从 histogram 省略。",
+      "compatibility": "14 Magformers isosceles triangles omitted — 30-60-90 open-frame geometry incompatible with MagTile isosceles_triangle (tall narrow, base 1 height 2). 48 of 62 retail pieces mapped. Diamonds → rhombus, trapezoids → trapezoid.",
+      "pieces": {
+        "square": 22,
+        "equilateral_triangle": 20,
+        "rhombus": 4,
+        "trapezoid": 2
+      }
+    },
+    {
+      "id": "magformers_62_rainbow",
+      "brand": "magformers",
+      "name_zh": "Magformers Rainbow 62片",
+      "name_en": "Magformers Rainbow 62-Piece Set",
+      "piece_count_label": 50,
+      "tier_scope": "core",
+      "description_zh": "Magformers Rainbow 62 片: 30 正方 + 20 等边三角。12 片五边形无对应 MagTile 片型, 已从 histogram 省略。",
+      "compatibility": "12 pentagons omitted (no MagTile equivalent). Magformers hollow-frame equilateral triangles: edge-compatible but weaker hinge behavior vs flat tiles. 50 of 62 retail pieces mapped.",
+      "pieces": {
+        "square": 30,
+        "equilateral_triangle": 20
+      }
+    },
+    {
+      "id": "magna_tiles_8_rectangles",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES Rectangles 8片扩展",
+      "name_en": "MAGNA-TILES Rectangles 8-Piece Expansion Set",
+      "piece_count_label": 8,
+      "tier_scope": "core",
+      "description_zh": "长方形扩展包: 4 大方 (6×6 inch) + 4 长方形 (6×3 inch), 可与任意 MAGNA-TILES 套装兼容。",
+      "pieces": {
+        "large_square": 4,
+        "rectangle": 4
+      },
+      "source_url": "https://www.mightyrabbit.com/products/magna-tiles-tiles-rectangles-8-piece-expansion-set-play-toy-magt-15816",
+      "notes": "approximate BOM; official retail breakdown (SKU 15816)"
+    },
+    {
+      "id": "magna_tiles_15_stardust",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES Stardust 15片",
+      "name_en": "MAGNA-TILES Stardust 15-Piece Set",
+      "piece_count_label": 15,
+      "tier_scope": "core",
+      "description_zh": "闪粉/镜面特效补充包: 7 闪粉方 + 4 镜面方 + 4 等边三角 (外观变体, 物理按 square 计)。",
+      "pieces": {
+        "square": 11,
+        "equilateral_triangle": 4
+      },
+      "source_url": "https://www.mindware.orientaltrading.com/magna-tiles-sup-----sup-stardust-15-piece-magnetic-construction-set-the-original-magnetic-building-brand-a2-13968680.fltr",
+      "notes": "approximate BOM; glitter/mirror squares mapped to square (SKU 18715)"
+    },
+    {
+      "id": "magna_tiles_16_glow",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES Glow 16片",
+      "name_en": "MAGNA-TILES Glow 16-Piece Set",
+      "piece_count_label": 16,
+      "tier_scope": "core",
+      "description_zh": "夜光补充包: 4 小方 + 4 等边三角 + 4 直角三角 + 4 等腰三角 (不含 LED 钥匙扣配件)。",
+      "pieces": {
+        "square": 4,
+        "equilateral_triangle": 4,
+        "right_triangle": 4,
+        "isosceles_triangle": 4
+      },
+      "source_url": "https://www.walmart.com/ip/MAGNA-TILES-Glow-16-Piece-Magnetic-Construction-Set-The-ORIGINAL-Magnetic-Building-Brand/678551301",
+      "notes": "approximate BOM; LED keychain excluded from tile count (SKU 18816)"
+    },
+    {
+      "id": "magna_tiles_16_ice",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES ICE 16片",
+      "name_en": "MAGNA-TILES ICE 16-Piece Set",
+      "piece_count_label": 16,
+      "tier_scope": "core",
+      "description_zh": "全透明无色补充包: 4 小方 + 4 等边三角 + 4 直角三角 + 4 等腰三角, 各片型数量均等。",
+      "pieces": {
+        "square": 4,
+        "equilateral_triangle": 4,
+        "right_triangle": 4,
+        "isosceles_triangle": 4
+      },
+      "source_url": "https://magnatiles.com/products/magna-tiles-ice-16-piece-set",
+      "notes": "approximate BOM; official retail breakdown (SKU 18716)"
+    },
+    {
+      "id": "magna_tiles_32_builder",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES Builder 32片",
+      "name_en": "MAGNA-TILES Builder 32-Piece Set",
+      "piece_count_label": 32,
+      "tier_scope": "core+expansion",
+      "description_zh": "建筑/道路主题盒: 含道路方/扇形/砖块长方形/起重机/车轮; 无 catalog 片型的 crane/spinner 近似映射。",
+      "pieces": {
+        "square": 17,
+        "rectangle": 10,
+        "wheel_base": 1,
+        "sector": 4
+      },
+      "source_url": "https://magnatiles.com/products/magna-tiles-builder-32-piece-set",
+      "notes": "approximate BOM; 6 road squares+10 squares+spinner→square, 2 cranes→rectangle, 4 road quarters→sector (SKU 21632)"
+    },
+    {
+      "id": "magna_tiles_32_classic",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES Classic 32片",
+      "name_en": "MAGNA-TILES Classic 32-Piece Set",
+      "piece_count_label": 32,
+      "tier_scope": "core",
+      "description_zh": "经典入门盒: 14 小方 + 2 大方 + 8 等边三角 + 4 直角三角 + 4 等腰三角, 半透明原色。",
+      "pieces": {
+        "square": 14,
+        "large_square": 2,
+        "equilateral_triangle": 8,
+        "right_triangle": 4,
+        "isosceles_triangle": 4
+      },
+      "source_url": "https://magnatiles.com/products/magna-tiles-classic-32-piece-set",
+      "notes": "approximate BOM; official retail breakdown (SKU 2132)"
+    },
+    {
+      "id": "magna_tiles_37_classic",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES Classic 37片",
+      "name_en": "MAGNA-TILES Classic 37-Piece Set",
+      "piece_count_label": 37,
+      "tier_scope": "core",
+      "description_zh": "略大于 32 片的经典入门盒: 18 小方 + 2 大方 + 17 片三角形 (7 等边 / 6 直角 / 4 等腰)。",
+      "pieces": {
+        "square": 18,
+        "large_square": 2,
+        "equilateral_triangle": 7,
+        "right_triangle": 6,
+        "isosceles_triangle": 4
+      },
+      "source_url": "https://magnatiles.com/products/magna-tiles-classic-37-piece-set",
+      "notes": "approximate BOM; official retail breakdown (SKU 14837)"
+    },
+    {
+      "id": "magna_tiles_48_dx",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES Clear Colors DX 48片",
+      "name_en": "MAGNA-TILES Clear Colors DX 48-Piece Set",
+      "piece_count_label": 48,
+      "tier_scope": "core+expansion",
+      "description_zh": "豪华中盒: 含拱形/门框/铰链门/车轮等特殊片; 无 catalog 片型的 imagination/arch 片分别近似为小方与扇形。",
+      "pieces": {
+        "square": 14,
+        "large_square": 3,
+        "equilateral_triangle": 11,
+        "right_triangle": 10,
+        "isosceles_triangle": 6,
+        "wheel_base": 1,
+        "door_frame": 2,
+        "sector": 1
+      },
+      "source_url": "https://www.amazon.com/Magna-Tiles-48-Piece-Clear-Colors-DELUXE/dp/B0093LSWIE",
+      "notes": "approximate BOM; 2 imagination pieces→square, arch→sector, hinged door→door_frame (SKU 12148)"
+    },
+    {
+      "id": "magna_tiles_100_clear",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES Clear Colors 100片",
+      "name_en": "MAGNA-TILES Clear Colors 100-Piece Set",
+      "piece_count_label": 100,
+      "tier_scope": "core",
+      "description_zh": "畅销大盒: 50 小方 + 4 大方 + 20 等边三角 + 11 直角三角 + 15 等腰三角, 半透明彩色。",
+      "pieces": {
+        "square": 50,
+        "large_square": 4,
+        "equilateral_triangle": 20,
+        "right_triangle": 11,
+        "isosceles_triangle": 15
+      },
+      "source_url": "https://www.amazon.com/dp/B013CO8NEU",
+      "notes": "approximate BOM; Classic/Clear Colors 100 share same shape mix (SKU 4300)"
+    },
+    {
+      "id": "magna_tiles_110_metropolis",
+      "brand": "magna_tiles",
+      "name_zh": "MAGNA-TILES Metropolis 110片",
+      "name_en": "MAGNA-TILES Metropolis 110-Piece Set",
+      "piece_count_label": 110,
+      "tier_scope": "core+expansion",
+      "description_zh": "旗舰城市主题大盒: 含窗格/扇形/车轮/门框等特殊片; spinner/stair/arch 等无 catalog 片型近似映射。",
+      "pieces": {
+        "square": 57,
+        "large_square": 2,
+        "equilateral_triangle": 12,
+        "right_triangle": 12,
+        "isosceles_triangle": 10,
+        "rectangle": 1,
+        "window_square": 6,
+        "door_frame": 1,
+        "wheel_base": 2,
+        "trapezoid": 2,
+        "sector": 5
+      },
+      "source_url": "https://www.amazon.com/Magna-Tiles-Metropolis-Award-Winning-Educational/dp/B07WDDB59W",
+      "notes": "approximate BOM; spinner→square, 2 stairs→trapezoid, arch→sector (SKU 20110)"
+    },
+    {
+      "id": "mideer_100",
+      "brand": "mideer",
+      "region": "CN",
+      "name_zh": "弥鹿多彩透光磁力片 100 片",
+      "name_en": "Mideer Color Window Magnetic Tiles 100 pc",
+      "piece_count_label": 100,
+      "tier_scope": "core",
+      "description_zh": "弥鹿 (mideer) 天猫/京东主销 100 片彩窗盒: 9 种核心片型, 钻面透光, 常附 2 辆磁力小车与收纳袋 (小车不计入 pieces)。",
+      "approximation_notes_zh": "盒面「100片·9种片型+2车」口径: 仅统计 100 片磁力连接片, 2 辆小车近似映射为 wheel_base (若盒内无独立车底则录入后减 2)。片型配比依据弥鹿 MD1141 / MDCT-1211 等 SKU 常见拆盒与 standard_102 比例缩放, 不同批次会有 ±2 片波动。",
+      "pieces": {
+        "square": 34,
+        "equilateral_triangle": 22,
+        "right_triangle": 12,
+        "isosceles_triangle": 8,
+        "rectangle": 6,
+        "large_square": 4,
+        "window_square": 6,
+        "door_frame": 4,
+        "wheel_base": 4
+      }
+    },
+    {
       "id": "mloong_80",
       "brand": "mloong",
       "region": "CN",
@@ -378,73 +672,114 @@
       }
     },
     {
-      "id": "baibian_100",
-      "brand": "baibian",
-      "region": "CN",
-      "name_zh": "百变磁力片 100 片入门盒",
-      "name_en": "Baibian Magnetic Tiles 100 pc Starter",
+      "id": "picassotiles_60",
+      "brand": "picassotiles",
+      "name_zh": "PicassoTiles PT60 经典60片",
+      "name_en": "PicassoTiles PT60 Classic 60-Piece Set",
+      "piece_count_label": 60,
+      "tier_scope": "core",
+      "description_zh": "PicassoTiles PT60 经典盒: 4 大正方 + 24 小正方 + 18 小等边三角 + 8 中直角三角 + 6 瘦高三角。",
+      "compatibility": "Fully compatible with MagTile core edge geometry.",
+      "pieces": {
+        "large_square": 4,
+        "square": 24,
+        "equilateral_triangle": 18,
+        "right_triangle": 8,
+        "isosceles_triangle": 6
+      }
+    },
+    {
+      "id": "picassotiles_100",
+      "brand": "picassotiles",
+      "name_zh": "PicassoTiles PT100 经典100片",
+      "name_en": "PicassoTiles PT100 Classic 100-Piece Set",
       "piece_count_label": 100,
       "tier_scope": "core",
-      "description_zh": "国内电商通销「百变磁力片」100 片入门大桶/盒装: 无单一注册品牌, 多厂 OEM, 7.5 cm 彩窗片为主。",
-      "approximation_notes_zh": "「百变磁力片」为品类通称 (淘宝/拼多多/i-Smart 等), 非独家品牌; 100 片 histogram 对齐弥鹿/标准 100 片档 market 口径。不同店铺片型配比差异大, 强烈建议录入后对照实物微调。",
+      "description_zh": "PicassoTiles PT100 经典入门盒: 8 大正方 + 46 小正方 + 20 小等边三角 + 12 中直角三角 + 14 瘦高三角。五类几何片, 无窗格/门框/扩展片型。",
+      "compatibility": "Fully compatible with MagTile core edge geometry; no window/door/wheel variants in this set.",
       "pieces": {
-        "square": 34,
-        "equilateral_triangle": 22,
-        "right_triangle": 12,
-        "isosceles_triangle": 8,
-        "rectangle": 6,
-        "large_square": 4,
-        "window_square": 6,
-        "door_frame": 4,
-        "wheel_base": 4
-      }
-    },
-    {
-      "id": "baibian_200",
-      "brand": "baibian",
-      "region": "CN",
-      "name_zh": "百变磁力片 200 片大盒",
-      "name_en": "Baibian Magnetic Tiles 200 pc Value Pack",
-      "piece_count_label": 200,
-      "tier_scope": "core+expansion",
-      "description_zh": "百变磁力片 200 片超值大盒 (常附收纳桶): 核心片型 + 扩展几何片, CP 值款, 片数标称常含收纳桶/贴纸。",
-      "approximation_notes_zh": "200 片档为电商热销规格 (冰雪/ i-Smart 222 件等相近); histogram 按 deluxe_198×(200/198) 取整。OEM 批次扩展片 (六边形/扇形) 有无不一, 缺片型则手动置 0。",
-      "pieces": {
-        "square": 51,
-        "equilateral_triangle": 36,
-        "right_triangle": 20,
-        "isosceles_triangle": 12,
-        "rectangle": 12,
         "large_square": 8,
-        "window_square": 8,
-        "door_frame": 6,
-        "wheel_base": 6,
-        "rhombus": 12,
-        "trapezoid": 8,
-        "hexagon": 8,
-        "sector": 13
+        "square": 46,
+        "equilateral_triangle": 20,
+        "right_triangle": 12,
+        "isosceles_triangle": 14
       }
     },
     {
-      "id": "beiens_110",
-      "brand": "beiens",
-      "region": "CN",
-      "name_zh": "贝恩施智慧磁力片 110 片",
-      "name_en": "Beiens Smart Magnetic Tiles 110 pc (B803)",
-      "piece_count_label": 110,
+      "id": "picassotiles_101",
+      "brand": "picassotiles",
+      "name_zh": "PicassoTiles 101片城堡车底座装",
+      "name_en": "PicassoTiles 101-Piece Castle & Car Base Set",
+      "piece_count_label": 101,
       "tier_scope": "core",
-      "description_zh": "贝恩施 (beiens) B803 110 片装: 智慧磁力片系列, 天猫旗舰店 mid-tier 盒装, 高透光钻面。",
-      "approximation_notes_zh": "什么值得买 B803 SKU; 官方未公布完整 BOM。110 片 histogram 由 standard_102 等比放大并补足窗格/车底; 同系列另有 52/90/160 等规格。",
+      "description_zh": "PicassoTiles 100 片城堡 STEM 盒 (含滚动车底座): 在 PT100 五类片型基础上增加车轮底座与可开合门/窗建筑件 (按窗格方/门框方映射)。常见批次片数分配会有小幅波动。",
+      "compatibility": "Castle variant adds wheeled chassis and architectural window/door pieces; door/window counts are approximate across retail batches.",
       "pieces": {
-        "square": 39,
-        "equilateral_triangle": 26,
-        "right_triangle": 13,
-        "isosceles_triangle": 9,
-        "rectangle": 6,
-        "large_square": 4,
+        "large_square": 8,
+        "square": 40,
+        "equilateral_triangle": 18,
+        "right_triangle": 12,
+        "isosceles_triangle": 12,
         "window_square": 4,
-        "door_frame": 5,
-        "wheel_base": 4
+        "door_frame": 4,
+        "wheel_base": 3
+      }
+    },
+    {
+      "id": "playmags_60",
+      "brand": "playmags",
+      "name_zh": "Playmags 60片入门装",
+      "name_en": "Playmags 60-Piece Starter Set",
+      "piece_count_label": 54,
+      "tier_scope": "core",
+      "description_zh": "Playmags 60 片入门盒: 22 正方 + 14 窗格 (12 窗 + 2 四格窗) + 4 直角三角 + 7 锐角瘦高三角 + 7 等边三角。盒面标称 60 件含 6 枚 Click-in 插片 (非磁力片, 不计入 pieces)。",
+      "compatibility": "Flat open-frame tiles; compatible with standard MagTile edge geometry. Click-in inserts omitted.",
+      "pieces": {
+        "square": 22,
+        "window_square": 14,
+        "right_triangle": 4,
+        "isosceles_triangle": 7,
+        "equilateral_triangle": 7
+      }
+    },
+    {
+      "id": "playmags_100",
+      "brand": "playmags",
+      "name_zh": "Playmags 100片超值装",
+      "name_en": "Playmags 100-Piece Value Set",
+      "piece_count_label": 84,
+      "tier_scope": "core",
+      "description_zh": "Playmags 经典 100 片盒装 (TP100): 26 正方 + 18 窗格 (14 窗 + 4 四格窗) + 10 直角三角 + 8 锐角瘦高三角 + 12 等边三角 + 8 长方 + 2 大正方。盒面标称 100 件含 16 枚 Click-in 字母/窗插片 (非磁力片, 不计入 pieces)。",
+      "compatibility": "Flat open-frame tiles; compatible with standard MagTile edge geometry. Click-in inserts omitted.",
+      "pieces": {
+        "square": 26,
+        "window_square": 18,
+        "right_triangle": 10,
+        "isosceles_triangle": 8,
+        "equilateral_triangle": 12,
+        "rectangle": 8,
+        "large_square": 2
+      }
+    },
+    {
+      "id": "playmags_150",
+      "brand": "playmags",
+      "name_zh": "Playmags 150片豪华装",
+      "name_en": "Playmags 150-Piece Mega Set",
+      "piece_count_label": 132,
+      "tier_scope": "core",
+      "description_zh": "Playmags 150 片大盒: 32 正方 + 34 窗格 (26 窗 + 8 四格窗) + 14 门框 (Gate) + 10 直角三角 + 8 锐角瘦高三角 + 18 等边三角 + 12 长方 + 3 大正方 + 1 车轮底座。盒面标称 150 件含 18 枚 Click-in 插片 (非磁力片, 不计入 pieces)。",
+      "compatibility": "Flat open-frame tiles; Gate pieces mapped to door_frame. Click-in inserts omitted.",
+      "pieces": {
+        "square": 32,
+        "window_square": 34,
+        "door_frame": 14,
+        "right_triangle": 10,
+        "isosceles_triangle": 8,
+        "equilateral_triangle": 18,
+        "rectangle": 12,
+        "large_square": 3,
+        "wheel_base": 1
       }
     }
   ]
