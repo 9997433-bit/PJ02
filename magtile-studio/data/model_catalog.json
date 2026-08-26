@@ -136,6 +136,25 @@
       "thumbnail": "thumbnails/mini_bus_01.png"
     },
     {
+      "id": "plaza_canopy_01",
+      "file": "models/plaza_canopy_01.json",
+      "name": "广场遮阳售卖亭",
+      "name_en": "Plaza Canopy 01",
+      "description": "主打片型 large_square 引流 D1: 两片大正方形平拼 4x2 广场地台, 下层四角方墙加两侧栏板围出亭身, 南面嵌一座带黄色台面的售卖柜台; 上层四根角柱托两根整跨檐口横梁, 顶上两片大正方形平拼 4x2 绿色遮阳顶棚, 四角再插红黄三角旗 ——一座能摆摊的两层小凉亭。",
+      "difficulty": 1,
+      "total_pieces": 26,
+      "step_count": 7,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "遮阳棚",
+        "售卖亭",
+        "柜台",
+        "大正方形",
+        "入门"
+      ]
+    },
+    {
       "id": "tulip_bed_01",
       "file": "models/tulip_bed_01.json",
       "name": "郁金香花坛",
@@ -155,25 +174,6 @@
       "thumbnail": "thumbnails/tulip_bed_01.png"
     },
     {
-      "id": "plaza_canopy_01",
-      "file": "models/plaza_canopy_01.json",
-      "name": "广场遮阳展台",
-      "name_en": "Plaza Canopy 01",
-      "description": "扩展片型 large_square 引流 D1: 两片大正方形拼 4x2 台面, 中央 1x1 橙色盒式展框 (T01) 摆展品; 四角方墙柱 + 双层檐轨锁门式框架, 四片直角斜撑 (T14) 柱脚外移一格双边吸合; 顶面两片大正方形平拼 4x2 青色遮阳顶棚 —— 四柱遮阳展台, 与手机架、相框画架剪影均不同。",
-      "difficulty": 1,
-      "total_pieces": 36,
-      "step_count": 8,
-      "theme": "实用功能",
-      "tags": [
-        "实用功能",
-        "遮阳棚",
-        "展台",
-        "广场",
-        "入门",
-        "大正方形"
-      ]
-    },
-    {
       "id": "star_octahedron_01",
       "file": "models/star_octahedron_01.json",
       "name": "星形八面体摆件",
@@ -191,25 +191,6 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/star_octahedron_01.png"
-    },
-    {
-      "id": "trapezoid_awning_01",
-      "file": "models/trapezoid_awning_01.json",
-      "name": "梯形雨棚连廊",
-      "name_en": "Trapezoid Awning Walk 01",
-      "description": "植物花园 D2: 4x2 下沉式走道 (T12 层叠退台) 上立内框四片 2 格檐轨, 顶沿供上层四片梯形合围开放式雨棚; 走道两侧 2 格泥土基座外挑四片梯形檐篷盖住苗床, 沿口四色盆花点缀 —— 上下两层共八片梯形, 连廊能走通、花床有荫。与玫瑰长廊的门式横梁不同,这次主角就是扩展梯形片本身。",
-      "difficulty": 2,
-      "total_pieces": 32,
-      "step_count": 6,
-      "theme": "植物花园",
-      "tags": [
-        "植物花园",
-        "雨棚",
-        "连廊",
-        "梯形",
-        "花台",
-        "需要扩展装"
-      ]
     },
     {
       "id": "marble_cascade_01",
@@ -248,6 +229,25 @@
         "镜像"
       ],
       "thumbnail": "thumbnails/sunflower_pot_01.png"
+    },
+    {
+      "id": "trapezoid_awning_01",
+      "file": "models/trapezoid_awning_01.json",
+      "name": "梯形条纹雨棚连廊",
+      "name_en": "Trapezoid Awning Walk 01",
+      "description": "植物花园 D2: 8 格长的连拱步道两侧各立三段 2 格拱墙, 留出取景窗洞 (T17 负空间); 墙顶两条「梯形密铺雨棚带」向内斜披54.7 度 —— 正放梯形吸墙顶、倒放梯形跨窗洞, 腰边互锁成上下沿笔直的条带 (T18 密铺变奏), 绿透交替天然是遮阳棚条纹,棚顶中央留 1 格天光缝; 窗外四座泥土花台, 红紫粉黄四色盆花骑沿而立。全库首条用梯形上下互锁密铺出的斜面雨棚 —— 梯形不再只当四坡屋顶的配角, 而是整个屋面本身。",
+      "difficulty": 2,
+      "total_pieces": 34,
+      "step_count": 8,
+      "theme": "植物花园",
+      "tags": [
+        "植物花园",
+        "雨棚",
+        "连廊",
+        "梯形",
+        "花台",
+        "需要扩展装"
+      ]
     },
     {
       "id": "streetcar_01",
@@ -302,6 +302,25 @@
         "折返",
         "滚珠乐园",
         "直角三角"
+      ]
+    },
+    {
+      "id": "rhombus_patchwork_01",
+      "file": "models/rhombus_patchwork_01.json",
+      "name": "菱形拼布屏风",
+      "name_en": "Rhombus Patchwork Screen 01",
+      "description": "几何艺术菱形篇: 28 片 60 度菱形以人字纹密铺竖砌成 U 形三扇屏 —— 每排菱形整排同向倾斜, 上下排倾向一排一换, 排间上底下底整边互吸, 排内斜边两两互咬; 中屏红橙、西翼蓝青、东翼绿黄, 三套双色拼布像三块花毯拼成的隔断, 屏缘锯齿如织毯毛边, 两角紫色门旗相向而倾。两翼与中屏成直角站位, 密铺花毯自己站成了屏风。",
+      "difficulty": 2,
+      "total_pieces": 39,
+      "step_count": 10,
+      "theme": "几何艺术",
+      "tags": [
+        "几何艺术",
+        "密铺",
+        "拼布",
+        "屏风",
+        "对称",
+        "需要扩展装"
       ]
     },
     {
@@ -3934,25 +3953,6 @@
       "thumbnail": "thumbnails/merry_go_round_01.png"
     },
     {
-      "id": "schoolyard_stand_01",
-      "file": "models/schoolyard_stand_01.json",
-      "name": "操场看台",
-      "name_en": "Schoolyard Grandstand 01",
-      "description": "只用核心九片型的校园运动会看台: 与放射环带的圆形剧场和门楼式体育场大门都不同, 这是'直线两级退台'的校园看台 —— 前后两级墙环合环 + 座板压顶的闭环箱体背靠背, 后排二层墙环整边骑上一层墙顶, 两片红色直角三角斜撑竖边吸二层墙棱、横边吸前排座板沿 (双边受力零悬挑), 红黄彩旗骑顶沿力矩为零; 台前红色跑道冲向白色终点线, 1-2-3 三连领奖台四道隔墙共墙成环, 金色冠军台二层墙环再压金色台面全场最高 —— 三、二、一, 冲线!",
-      "difficulty": 3,
-      "total_pieces": 75,
-      "step_count": 15,
-      "theme": "校园",
-      "tags": [
-        "校园",
-        "操场",
-        "看台",
-        "运动会",
-        "领奖台",
-        "进阶"
-      ]
-    },
-    {
       "id": "submarine_01",
       "file": "models/submarine_01.json",
       "name": "黄色潜水艇",
@@ -4909,25 +4909,6 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/stadium_gate_01.png"
-    },
-    {
-      "id": "strait_rainbow_bridge_01",
-      "file": "models/strait_rainbow_bridge_01.json",
-      "name": "海峡之虹悬索桥",
-      "name_en": "Strait Rainbow Suspension Bridge 01",
-      "description": "桥梁工程 D5 悬索旗舰: 结构签名是'十二段菱形链从双塔垂向桥面' —— 先立双塔桁架芯与斜撑 (T02+T14), 再铺桥面连续梁, 最后由跨中向两塔对称挂透明菱形主缆与吊索, 用受压链条再现悬索桥的受拉曲线; 与 D3 海湾悬索桥 (单格悬挑合龙) 和 D4 石拱桥 (拱洞负空间) 传力叙事均不同。",
-      "difficulty": 5,
-      "total_pieces": 110,
-      "step_count": 25,
-      "theme": "工程结构",
-      "tags": [
-        "桥梁",
-        "悬索桥",
-        "工程",
-        "桁架",
-        "大师",
-        "需要扩展装"
-      ]
     },
     {
       "id": "skyscraper_01",
