@@ -1,33 +1,33 @@
 {
   "schema_version": 1,
   "id": "trapezoid_awning_01",
-  "name": "梯形条纹雨棚连廊",
-  "name_en": "Trapezoid Awning Walk 01",
-  "description": "植物花园 D2: 8 格长的连拱步道两侧各立三段 2 格拱墙, 留出取景窗洞 (T17 负空间); 墙顶两条「梯形密铺雨棚带」向内斜披54.7 度 —— 正放梯形吸墙顶、倒放梯形跨窗洞, 腰边互锁成上下沿笔直的条带 (T18 密铺变奏), 绿透交替天然是遮阳棚条纹,棚顶中央留 1 格天光缝; 窗外四座泥土花台, 红紫粉黄四色盆花骑沿而立。全库首条用梯形上下互锁密铺出的斜面雨棚 —— 梯形不再只当四坡屋顶的配角, 而是整个屋面本身。",
+  "name": "梯形雨檐花架墙",
+  "name_en": "Trapezoid Awning Wall 01",
+  "description": "植物花园 D2 梯形主打示范: 长方形横砌的 4 格花架墙上, 同一种梯形摆出四种姿态 —— 墙顶两片 30 度下斜雨檐、同一条沿口两片直立女儿墙 (下宽上窄的收分轮廓)、墙腰横缝平挑两片盆花展台、步道南沿再平铺两片扇贝形包边; 花圃带五株骑缝三角花, 檐前两丛花收边。梯形下底 (长 2) 与长方形横边恰好等长, 是整面墙整边吸合的几何前提 —— 与旧版连廊密铺条带的动线完全不同。",
   "difficulty": 2,
-  "total_pieces": 34,
+  "total_pieces": 31,
   "tags": [
     "植物花园",
-    "雨棚",
-    "连廊",
+    "花架",
+    "雨檐",
     "梯形",
-    "花台",
+    "进阶",
     "需要扩展装"
   ],
   "content_meta": {
     "series": "plant_garden",
     "structural_signature": {
       "tile_histogram": {
-        "rectangle": 12,
-        "trapezoid": 10,
+        "equilateral_triangle": 9,
         "square": 8,
-        "equilateral_triangle": 4
+        "trapezoid": 8,
+        "rectangle": 6
       }
     }
   },
   "final_assembly": [
     {
-      "id": "floor_s_0",
+      "id": "walk_w",
       "type": "rectangle",
       "position": [
         1.0,
@@ -42,25 +42,10 @@
       "color": "gray"
     },
     {
-      "id": "floor_s_2",
-      "type": "square",
-      "position": [
-        2.5,
-        0.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "floor_s_3",
+      "id": "walk_e",
       "type": "rectangle",
       "position": [
-        4.0,
+        3.0,
         0.5,
         0.0
       ],
@@ -72,356 +57,11 @@
       "color": "gray"
     },
     {
-      "id": "floor_s_5",
+      "id": "bed_0",
       "type": "square",
       "position": [
-        5.5,
         0.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "floor_s_6",
-      "type": "rectangle",
-      "position": [
-        7.0,
-        0.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "floor_n_0",
-      "type": "rectangle",
-      "position": [
-        1.0,
         1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "floor_n_2",
-      "type": "square",
-      "position": [
-        2.5,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "floor_n_3",
-      "type": "rectangle",
-      "position": [
-        4.0,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "floor_n_5",
-      "type": "square",
-      "position": [
-        5.5,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "yellow"
-    },
-    {
-      "id": "floor_n_6",
-      "type": "rectangle",
-      "position": [
-        7.0,
-        1.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "gray"
-    },
-    {
-      "id": "arc_s_0",
-      "type": "rectangle",
-      "position": [
-        1.0,
-        0.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "arc_s_3",
-      "type": "rectangle",
-      "position": [
-        4.0,
-        0.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "arc_s_6",
-      "type": "rectangle",
-      "position": [
-        7.0,
-        0.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "arc_n_0",
-      "type": "rectangle",
-      "position": [
-        1.0,
-        2.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "arc_n_3",
-      "type": "rectangle",
-      "position": [
-        4.0,
-        2.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "arc_n_6",
-      "type": "rectangle",
-      "position": [
-        7.0,
-        2.0,
-        0.5
-      ],
-      "rotation": [
-        90.0,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "awn_s_up0",
-      "type": "trapezoid",
-      "position": [
-        1.0,
-        0.222222,
-        1.31427
-      ],
-      "rotation": [
-        54.735619,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "awn_s_dn2",
-      "type": "trapezoid",
-      "position": [
-        2.5,
-        0.277778,
-        1.392837
-      ],
-      "rotation": [
-        -54.735619,
-        0.0,
-        180.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "awn_s_up3",
-      "type": "trapezoid",
-      "position": [
-        4.0,
-        0.222222,
-        1.31427
-      ],
-      "rotation": [
-        54.735619,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "awn_s_dn5",
-      "type": "trapezoid",
-      "position": [
-        5.5,
-        0.277778,
-        1.392837
-      ],
-      "rotation": [
-        -54.735619,
-        0.0,
-        180.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "awn_s_up6",
-      "type": "trapezoid",
-      "position": [
-        7.0,
-        0.222222,
-        1.31427
-      ],
-      "rotation": [
-        54.735619,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "awn_n_up0",
-      "type": "trapezoid",
-      "position": [
-        1.0,
-        1.777778,
-        1.31427
-      ],
-      "rotation": [
-        125.264381,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "awn_n_dn2",
-      "type": "trapezoid",
-      "position": [
-        2.5,
-        1.722222,
-        1.392837
-      ],
-      "rotation": [
-        -125.264381,
-        0.0,
-        180.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "awn_n_up3",
-      "type": "trapezoid",
-      "position": [
-        4.0,
-        1.777778,
-        1.31427
-      ],
-      "rotation": [
-        125.264381,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "awn_n_dn5",
-      "type": "trapezoid",
-      "position": [
-        5.5,
-        1.722222,
-        1.392837
-      ],
-      "rotation": [
-        -125.264381,
-        0.0,
-        180.0
-      ],
-      "color": "clear"
-    },
-    {
-      "id": "awn_n_up6",
-      "type": "trapezoid",
-      "position": [
-        7.0,
-        1.777778,
-        1.31427
-      ],
-      "rotation": [
-        125.264381,
-        0.0,
-        0.0
-      ],
-      "color": "green"
-    },
-    {
-      "id": "bed_sw",
-      "type": "square",
-      "position": [
-        2.5,
-        -0.5,
         0.0
       ],
       "rotation": [
@@ -432,72 +72,282 @@
       "color": "orange"
     },
     {
-      "id": "flower_sw",
-      "type": "equilateral_triangle",
+      "id": "bed_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bed_2",
+      "type": "square",
       "position": [
         2.5,
-        -1.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "bed_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "gravel_w",
+      "type": "square",
+      "position": [
+        -0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "gravel_e",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flower_0",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        1.5,
         0.288675
       ],
       "rotation": [
         90.0,
         0.0,
-        0.0
+        90.0
       ],
       "color": "red"
     },
     {
-      "id": "bed_se",
-      "type": "square",
-      "position": [
-        5.5,
-        -0.5,
-        0.0
-      ],
-      "rotation": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "color": "orange"
-    },
-    {
-      "id": "flower_se",
+      "id": "flower_1",
       "type": "equilateral_triangle",
       "position": [
-        5.5,
-        -1.0,
+        1.0,
+        1.5,
         0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "flower_2",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "flower_3",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "flower_4",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        1.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "wall_w0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        0.5
       ],
       "rotation": [
         90.0,
         0.0,
         0.0
       ],
-      "color": "purple"
+      "color": "green"
     },
     {
-      "id": "bed_nw",
-      "type": "square",
+      "id": "wall_e0",
+      "type": "rectangle",
       "position": [
-        2.5,
-        2.5,
-        0.0
+        3.0,
+        2.0,
+        0.5
       ],
       "rotation": [
-        0.0,
+        90.0,
         0.0,
         0.0
       ],
-      "color": "orange"
+      "color": "green"
     },
     {
-      "id": "flower_nw",
+      "id": "wall_w1",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wall_e1",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wing_w",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wing_e",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "shelf_w",
+      "type": "trapezoid",
+      "position": [
+        1.0,
+        1.6151,
+        1.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "shelf_e",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        1.6151,
+        1.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pot_w",
       "type": "equilateral_triangle",
       "position": [
-        2.5,
-        3.0,
-        0.288675
+        1.0,
+        1.133975,
+        1.288675
       ],
       "rotation": [
         90.0,
@@ -507,26 +357,116 @@
       "color": "pink"
     },
     {
-      "id": "bed_ne",
-      "type": "square",
+      "id": "pot_e",
+      "type": "equilateral_triangle",
       "position": [
-        5.5,
-        2.5,
+        3.0,
+        1.133975,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "awning_w",
+      "type": "trapezoid",
+      "position": [
+        1.0,
+        1.666667,
+        1.80755
+      ],
+      "rotation": [
+        -150.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "awning_e",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        1.666667,
+        1.80755
+      ],
+      "rotation": [
+        -150.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "parapet_w",
+      "type": "trapezoid",
+      "position": [
+        1.0,
+        2.0,
+        2.3849
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "parapet_e",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        2.0,
+        2.3849
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "apron_w",
+      "type": "trapezoid",
+      "position": [
+        1.0,
+        -0.3849,
         0.0
       ],
       "rotation": [
-        0.0,
+        180.0,
         0.0,
         0.0
       ],
-      "color": "orange"
+      "color": "green"
     },
     {
-      "id": "flower_ne",
+      "id": "apron_e",
+      "type": "trapezoid",
+      "position": [
+        3.0,
+        -0.3849,
+        0.0
+      ],
+      "rotation": [
+        180.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "tuft_w",
       "type": "equilateral_triangle",
       "position": [
-        5.5,
-        3.0,
+        1.0,
+        -0.866025,
         0.288675
       ],
       "rotation": [
@@ -535,126 +475,138 @@
         0.0
       ],
       "color": "yellow"
+    },
+    {
+      "id": "tuft_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        -0.866025,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
     }
   ],
   "steps": [
     {
       "step_number": 1,
-      "description": "铺南列走道: 灰色长石板与黄色踏步石按 长-方-长-方-长 交替铺满 8 格。",
-      "tip": "长板给墙段留 2 格整边, 方板给窗洞留 1 格整边 —— 交替节奏就是吸合蓝图。",
+      "description": "铺步道: 两片灰色长石板整边互吸, 连成 4 格长的赏花步道。",
+      "tip": "长石板的 2 格横边一会儿正好给梯形包边当吸合线。",
       "tiles_to_add": [
-        "floor_s_0",
-        "floor_s_2",
-        "floor_s_3",
-        "floor_s_5",
-        "floor_s_6"
+        "walk_w",
+        "walk_e"
       ],
       "highlight_tiles": []
     },
     {
       "step_number": 2,
-      "description": "铺北列走道: 与南列同款交替铺法, 两列拼缝逐段对齐互吸。",
-      "tip": "黄踏步石上下两列对齐 —— 走到这格, 抬头就是将来的天光缝。",
+      "description": "铺花圃带: 四片泥土方板贴住步道北沿, 两端各补一片黄色碎石板。",
+      "tip": "花圃拼缝落在每条整数线上 —— 那是花苗的位置。",
       "tiles_to_add": [
-        "floor_n_0",
-        "floor_n_2",
-        "floor_n_3",
-        "floor_n_5",
-        "floor_n_6"
+        "bed_0",
+        "bed_1",
+        "bed_2",
+        "bed_3",
+        "gravel_w",
+        "gravel_e"
       ],
       "highlight_tiles": [
-        "floor_s_0"
+        "walk_w",
+        "walk_e"
       ]
     },
     {
       "step_number": 3,
-      "description": "立南侧连拱墙: 三段绿色 2 格立墙踩住长石板南沿, 空出两个取景窗洞。",
-      "tip": "墙段只踩长板整边, 窗洞正对黄踏步石 —— 负空间留给窗外的花。",
+      "description": "种花圃: 五株三角花骑上花圃拼缝, 红紫粉相间排成一行。",
+      "tip": "花底边与拼缝等长互吸, 重心正压缝上 —— 一排花墙脚。",
       "tiles_to_add": [
-        "arc_s_0",
-        "arc_s_3",
-        "arc_s_6"
+        "flower_0",
+        "flower_1",
+        "flower_2",
+        "flower_3",
+        "flower_4"
       ],
       "highlight_tiles": [
-        "floor_s_0",
-        "floor_s_3",
-        "floor_s_6"
+        "bed_1",
+        "bed_2"
       ]
     },
     {
       "step_number": 4,
-      "description": "立北侧连拱墙: 镜像三段立墙, 南北两排窗洞正对成穿堂景。",
-      "tip": "两排墙合出连廊骨架 —— 顶沿 z=1 就是雨棚带的铰链线。",
+      "description": "横砌墙第一层: 两片绿色长方形踩住花圃北沿, 两端立侧翼护墙。",
+      "tip": "长方形横着当砖砌 —— 2 格长的顶边就是梯形的专用吸合位。",
       "tiles_to_add": [
-        "arc_n_0",
-        "arc_n_3",
-        "arc_n_6"
+        "wall_w0",
+        "wall_e0",
+        "wing_w",
+        "wing_e"
       ],
       "highlight_tiles": [
-        "arc_s_0"
+        "bed_0",
+        "bed_3"
       ]
     },
     {
       "step_number": 5,
-      "description": "挂南侧雨棚带: 三片正放梯形下底吸墙顶, 两片透明倒放梯形跨窗洞, 腰边互锁。",
-      "tip": "正放先吸墙顶, 倒放再挂进两腰 —— 一上一下咬成整条条纹斜披。",
+      "description": "横砌墙第二层: 再两片长方形叠上去, 层间整边互吸砌成花架墙。",
+      "tip": "上下两层对缝叠放, 墙腰 z=1 的横缝留给展台。",
       "tiles_to_add": [
-        "awn_s_up0",
-        "awn_s_dn2",
-        "awn_s_up3",
-        "awn_s_dn5",
-        "awn_s_up6"
+        "wall_w1",
+        "wall_e1"
       ],
       "highlight_tiles": [
-        "arc_s_0",
-        "arc_s_3",
-        "arc_s_6"
+        "wall_w0",
+        "wall_e0"
       ]
     },
     {
       "step_number": 6,
-      "description": "挂北侧雨棚带: 镜像五片向南斜披, 棚顶中央留出 1 格宽天光缝。",
-      "tip": "两条带的上沿隔缝相望 —— 绿一段透一段, 阳光顺着条纹漏进连廊。",
+      "description": "平挑展台: 两片黄色梯形下底吸进墙腰横缝, 台前各摆一株盆花。",
+      "tip": "梯形下底同时吸住缝上下两层长方形 —— 平挑出来也稳。",
       "tiles_to_add": [
-        "awn_n_up0",
-        "awn_n_dn2",
-        "awn_n_up3",
-        "awn_n_dn5",
-        "awn_n_up6"
+        "shelf_w",
+        "shelf_e",
+        "pot_w",
+        "pot_e"
       ],
       "highlight_tiles": [
-        "awn_s_up0",
-        "awn_s_up3",
-        "awn_s_up6"
+        "wall_w0",
+        "wall_w1"
       ]
     },
     {
       "step_number": 7,
-      "description": "砌南侧花台: 两片泥土方板贴住窗洞外沿, 红花紫花骑上外沿口。",
-      "tip": "花台北沿与走道拼缝共线整边互吸 —— 透过窗洞正好看到花。",
+      "description": "装檐口: 两片绿色梯形沿墙顶下斜 30 度当雨檐, 两片透明梯形直立在同一条沿口当女儿墙。",
+      "tip": "雨檐与女儿墙下底共线, 彼此也互吸 —— 一条沿口双份保险。",
       "tiles_to_add": [
-        "bed_sw",
-        "flower_sw",
-        "bed_se",
-        "flower_se"
+        "awning_w",
+        "awning_e",
+        "parapet_w",
+        "parapet_e"
       ],
       "highlight_tiles": [
-        "floor_s_2",
-        "floor_s_5"
+        "wall_w1",
+        "wall_e1"
       ]
     },
     {
       "step_number": 8,
-      "description": "砌北侧花台: 镜像两片泥土方板, 粉花黄花补齐四色 —— 条纹雨棚连廊落成!",
-      "tip": "沿着黄踏步石走一趟: 头顶条纹漏光, 两侧窗窗有花。",
+      "description": "铺步道包边: 两片绿色梯形平铺在步道南沿当扇贝形包边, 檐前再种两丛三角花 —— 梯形雨檐花架墙落成!",
+      "tip": "斜披、直立、平挑、平铺 —— 同一种梯形摆出四种姿态。",
       "tiles_to_add": [
-        "bed_nw",
-        "flower_nw",
-        "bed_ne",
-        "flower_ne"
+        "apron_w",
+        "apron_e",
+        "tuft_w",
+        "tuft_e"
       ],
       "highlight_tiles": [
-        "bed_sw"
+        "walk_w",
+        "walk_e"
       ]
     }
   ]

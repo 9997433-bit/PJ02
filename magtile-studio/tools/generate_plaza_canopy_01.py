@@ -1,23 +1,37 @@
 #!/usr/bin/env python3
-"""生成模型 data/models/plaza_canopy_01.json (广场遮阳售卖亭)。
+"""生成模型 data/models/plaza_canopy_01.json (广场遮阳亭)。
 
-内容批 P 模型 1/10: 主打片型 large_square 引流 D1 —— 两片大正方形
-平拼 4x2 广场地台, 两片大正方形在 z=2 平拼 4x2 遮阳顶棚 (招牌);
-下层四角方墙 + 两侧栏板墙围出亭身, 南面嵌一座带台面的售卖柜台,
-上层四根角柱托两根整跨檐口横梁, 顶棚四角再立红黄三角旗收尾。
+内容批 P 模型 1/10 (P1): 扩展主打片型 large_square 引流 D1 —— 重写版。
+招牌是"六片大正方形门式刚架": 两片大正方形平拼 4x2 广场地台, 两片
+大正方形整片立起当东西山墙, 两片大正方形在 z=2 平拼成顶棚 —— 地台边、
+山墙顶、顶棚边全部是 2.0 长的整边等长互吸, 一片顶四片小方板的体量感
+就是 large_square 的卖点。棚下沿地台拼缝立一条双面靠背长椅, 棚顶再立
+一块长方形招牌; 南侧铺售卖步道, 北侧与东西侧点缀花箱盆栽。
 
-结构要点 (梁柱式, 与旧版横楣叠柱 + 盒式展框 + 直角斜撑方案不同):
-  - 下层墙体: 四角前后墙与两侧栏板墙在角点竖直边互吸, 底边整边
-    踩在大正方形地台沿边上 (短边含于长边即吸合), 落地自稳;
-  - 檐口横梁 (2 长) 两端竖直边吸住角柱, 底边压两侧栏板墙顶沿,
-    梁顶整边与大正方形顶棚 2 长的沿边等长贴合 —— 顶棚每片同时
-    吸住同侧横梁、前后两根角柱与另一片顶棚, 任意剪断一条铰链线
-    仍有多条独立支撑路径;
-  - 柜台台面三条边同时吸柜台立面顶沿与两侧方墙顶沿;
-  - 四角三角旗底边与角柱顶沿等长互吸 (最高点 2.87 触发 R8),
-    连接图多环冗余, 单点失效损失均 < 3 片, 满足 strict 零警告。
+与旧版 (方板 L 形抱角柱 x16 + 柜台 + 三角彩旗) 完全不同的结构逻辑:
+柱子消失了 —— 大正方形山墙本身就是承重构件, 连接图是
+地台-山墙-顶棚-顶棚-山墙-地台 的门式闭环。
 
-用法: python3 tools/generate_plaza_canopy_01.py
+结构总览 (世界单位: 1.0 = 正方形磁力片边长, 亭子朝南):
+  - 广场地台: 大正方形 x2 平拼 4x2                              2 片
+  - 南侧步道: 方板 x4 (灰黄相间)                                4 片
+  - 双面长椅: 靠背方墙 x2 (骑地台拼缝) + 座面方板 x4            6 片
+  - 东西山墙: 大正方形 x2 整片立起                              2 片
+  - 遮阳顶棚: 大正方形 x2 平拼 4x2 (z=2)                        2 片
+  - 顶棚招牌: 长方形 x1 立在顶棚拼缝上 (z 2..3)                 1 片
+  - 花箱盆栽: 北侧花圃方板 x2 + 东西花箱方板 x2 + 三角花 x4     8 片
+  合计 25 片, 7 个教程步骤, 4 种磁力片形状 (含 large_square x6)。
+
+物理规则要点 (validate 常规 + strict 双档零警告):
+  - 门式闭环: 山墙底边与地台外沿边、顶棚边与山墙顶边、两片顶棚
+    拼缝均为 2.0 整边等长互吸; 剪断任一条铰链线, 顶棚仍有经由
+    另一侧山墙的独立接地路径 (R6/R8 冗余);
+  - 座面方板短边与靠背墙顶边等长互吸, 剪断靠背顶铰链后单侧两片
+    座面力矩 30g·单位 < 预算 35g·单位 (strict 0.7 系数);
+  - 招牌底边与顶棚拼缝两侧各成一条整边连接, 最高点 3.0 触发 R8,
+    门式闭环提供环状加固, 无单点失效损失 >= 3 片。
+
+用法: python3 tools/generate_plaza_canopy_01.py  (在 magtile-studio 目录下运行)
 """
 
 import sys
@@ -28,118 +42,117 @@ from magtile_gen import ModelBuilder  # noqa: E402
 
 b = ModelBuilder()
 
-PLAZA = "gray"          # 广场地台
-FRAME = "blue"          # 亭身墙体 / 角柱 / 檐口横梁
-COUNTER = "orange"      # 柜台立面与侧墙
-COUNTER_TOP = "yellow"  # 柜台台面
-CANOPY = "green"        # 遮阳顶棚
-FLAG_A = "red"          # 三角旗 (红黄相间)
-FLAG_B = "yellow"
+PLAZA = "gray"       # 广场地台 (大正方形)
+WALK_A = "gray"      # 南侧步道 (灰黄相间)
+WALK_B = "yellow"
+BENCH_BACK = "blue"  # 长椅靠背
+BENCH_SEAT = "yellow"  # 长椅座面
+GABLE = "blue"       # 东西山墙 (大正方形)
+CANOPY = "green"     # 遮阳顶棚 (大正方形)
+SIGN = "red"         # 顶棚招牌
+PLANTER = "orange"   # 花箱/花圃
+FLOWERS = {"nw": "red", "ne": "purple", "w": "pink", "e": "yellow"}
 
-# ---- 第 1 步: 广场地台 (两片大正方形平拼 4x2) ----------------------
-b.add("lg_base_w", "large_square", (1.0, 1.0, 0.0), (0, 0, 0), PLAZA)
-b.add("lg_base_e", "large_square", (3.0, 1.0, 0.0), (0, 0, 0), PLAZA)
+# ---- 1. 广场地台: 两片大正方形平拼 4x2 -----------------------------
+b.add("plaza_w", "large_square", (1.0, 1.0, 0.0), (0, 0, 0), PLAZA)
+b.add("plaza_e", "large_square", (3.0, 1.0, 0.0), (0, 0, 0), PLAZA)
 
-# ---- 第 2 步: 下层亭身 (四角前后墙 + 两侧栏板墙, z 0..1) -----------
-b.wall_ns("col_sw_s", 0, 0.0, 0, FRAME)   # 前墙西角: x 0..1 @y=0
-b.wall_ns("col_se_s", 3, 0.0, 0, FRAME)   # 前墙东角: x 3..4 @y=0
-b.wall_ns("col_nw_n", 0, 2.0, 0, FRAME)   # 后墙西角: x 0..1 @y=2
-b.wall_ns("col_ne_n", 3, 2.0, 0, FRAME)   # 后墙东角: x 3..4 @y=2
-b.wall_ew("side_w_s", 0.0, 0, 0, FRAME)   # 西侧栏板: y 0..1 @x=0
-b.wall_ew("side_w_n", 0.0, 1, 0, FRAME)   # 西侧栏板: y 1..2 @x=0
-b.wall_ew("side_e_s", 4.0, 0, 0, FRAME)   # 东侧栏板: y 0..1 @x=4
-b.wall_ew("side_e_n", 4.0, 1, 0, FRAME)   # 东侧栏板: y 1..2 @x=4
+# ---- 2. 南侧步道: 四片方板灰黄相间 ---------------------------------
+for i in range(4):
+    b.flat(f"walk_{i}", i, -1, 0.0, WALK_A if i % 2 == 0 else WALK_B)
 
-# ---- 第 3 步: 南面售卖柜台 (立面 + 两侧墙 + 台面, 三线支撑) --------
-b.lintel_ns("ctr_front", 1, 0.0, 0, COUNTER)    # 柜台立面: x 1..3, z 0..1
-b.wall_ew("ctr_side_w", 1.0, 0, 0, COUNTER)     # 柜台西侧墙 @x=1
-b.wall_ew("ctr_side_e", 3.0, 0, 0, COUNTER)     # 柜台东侧墙 @x=3
-b.flat_rect("ctr_top", 1, 0, 1.0, COUNTER_TOP)  # 台面: [1,3]x[0,1] @z=1
+# ---- 3. 双面长椅: 靠背骑地台拼缝 (x=2), 座面两侧对称 ---------------
+b.wall_ew("bench_back_s", 2.0, 0, 0, BENCH_BACK)
+b.wall_ew("bench_back_n", 2.0, 1, 0, BENCH_BACK)
+b.flat("seat_sw", 1, 0, 1.0, BENCH_SEAT)
+b.flat("seat_nw", 1, 1, 1.0, BENCH_SEAT)
+b.flat("seat_se", 2, 0, 1.0, BENCH_SEAT)
+b.flat("seat_ne", 2, 1, 1.0, BENCH_SEAT)
 
-# ---- 第 4 步: 上层四根角柱 (z 1..2) --------------------------------
-b.wall_ns("post_sw", 0, 0.0, 1, FRAME)
-b.wall_ns("post_se", 3, 0.0, 1, FRAME)
-b.wall_ns("post_nw", 0, 2.0, 1, FRAME)
-b.wall_ns("post_ne", 3, 2.0, 1, FRAME)
+# ---- 4. 东西山墙: 大正方形整片立起 (平面 x=0 / x=4) ----------------
+b.add("gable_w", "large_square", (0.0, 1.0, 1.0), (90, 0, 90), GABLE)
+b.add("gable_e", "large_square", (4.0, 1.0, 1.0), (90, 0, 90), GABLE)
 
-# ---- 第 5 步: 两根檐口横梁 (整跨 2 长, 兜住同侧一对角柱) -----------
-b.lintel_ew("beam_w", 0.0, 0, 1, FRAME)   # x=0, y 0..2, z 1..2
-b.lintel_ew("beam_e", 4.0, 0, 1, FRAME)   # x=4, y 0..2, z 1..2
-
-# ---- 第 6 步: 遮阳顶棚 (两片大正方形平拼 4x2 @z=2) -----------------
+# ---- 5. 遮阳顶棚: 两片大正方形平拼 4x2 (z=2) -----------------------
 b.add("canopy_w", "large_square", (1.0, 1.0, 2.0), (0, 0, 0), CANOPY)
 b.add("canopy_e", "large_square", (3.0, 1.0, 2.0), (0, 0, 0), CANOPY)
 
-# ---- 第 7 步: 顶棚四角三角旗 (红黄相间) ----------------------------
-b.crest_ns("flag_sw", 0, 0.0, 2.0, FLAG_A)
-b.crest_ns("flag_se", 3, 0.0, 2.0, FLAG_B)
-b.crest_ns("flag_nw", 0, 2.0, 2.0, FLAG_B)
-b.crest_ns("flag_ne", 3, 2.0, 2.0, FLAG_A)
+# ---- 6. 花圃与花箱: 北侧两片 + 东西各一片, 沿口三角花 --------------
+b.flat("bed_nw", 0, 2, 0.0, PLANTER)
+b.flat("bed_ne", 3, 2, 0.0, PLANTER)
+b.crest_ns("flower_nw", 0, 3.0, 0.0, FLOWERS["nw"])
+b.crest_ns("flower_ne", 3, 3.0, 0.0, FLOWERS["ne"])
+b.flat("box_w", -1, 0, 0.0, PLANTER)
+b.flat("box_e", 4, 0, 0.0, PLANTER)
+b.crest_ew("flower_w", -1.0, 0, 0.0, FLOWERS["w"])
+b.crest_ew("flower_e", 5.0, 0, 0.0, FLOWERS["e"])
 
-# ---- 教程步骤 ------------------------------------------------------
+# ---- 7. 顶棚招牌: 长方形立在顶棚拼缝上 (z 2..3) --------------------
+b.lintel_ew("sign", 2.0, 0, 2, SIGN)
+
+# ---- 教程步骤 (7 步) ------------------------------------------------
 b.step(
     "铺广场地台: 两片灰色大正方形整边互吸, 平拼出 4x2 的小广场。",
-    ["lg_base_w", "lg_base_e"],
-    tip="大正方形边长 2.0, 一片顶四片小方板 —— 拼缝对齐才好立墙。",
+    ["plaza_w", "plaza_e"],
+    tip="大正方形边长 2.0, 一片顶四片小方板 —— 拼缝落在 x=2, 长椅就骑在这条缝上。",
 )
 b.step(
-    "立下层亭身: 前后各两片蓝色方墙踩住地台四角, 两侧各两片方墙"
-    "连成栏板 —— 角点竖直边互相吸住, 围出亭身。",
-    ["col_sw_s", "side_w_s", "side_w_n", "col_nw_n",
-     "col_se_s", "side_e_s", "side_e_n", "col_ne_n"],
-    highlight=["lg_base_w", "lg_base_e"],
-    tip="每片墙底边都要整边踩上地台沿边, 转角处竖边咔哒一声吸牢。",
+    "铺南侧步道: 四片方板灰黄相间贴住地台南沿。",
+    ["walk_0", "walk_1", "walk_2", "walk_3"],
+    highlight=["plaza_w", "plaza_e"],
+    tip="步道彼此整边互吸连成一排 —— 灰黄相间就是亭子的迎宾地毯。",
 )
 b.step(
-    "嵌售卖柜台: 橙色横楣立在前墙两角之间当柜台立面, 两片橙色方墙"
-    "关住左右, 黄色横楣平放上去当台面 —— 台面三条边一次吸住。",
-    ["ctr_front", "ctr_side_w", "ctr_side_e", "ctr_top"],
-    highlight=["col_sw_s", "col_se_s"],
-    tip="先立好三面再放台面, 前沿与左右顶沿同时吸合才算到位。",
+    "立双面长椅: 两片蓝色方墙骑上地台拼缝当靠背, 四片黄色座面"
+    "短边吸住靠背顶沿, 两侧对称摊开。",
+    ["bench_back_s", "bench_back_n",
+     "seat_sw", "seat_nw", "seat_se", "seat_ne"],
+    highlight=["plaza_w", "plaza_e"],
+    tip="先立靠背再放座面 —— 座面左右两两互吸, 东西两边都能坐。",
 )
 b.step(
-    "立上层角柱: 四片蓝色方墙对准四角, 底边吸住下层墙顶沿,"
-    "把亭子拔高到两层。",
-    ["post_sw", "post_se", "post_nw", "post_ne"],
-    highlight=["col_sw_s", "col_ne_n"],
-    tip="上下两层对齐叠放, 柱子才又高又直。",
+    "立东西山墙: 两片蓝色大正方形整片立起, 底边与地台外沿 2.0 整边"
+    "一次吸合。",
+    ["gable_w", "gable_e"],
+    highlight=["plaza_w", "plaza_e"],
+    tip="大正方形立墙不用一片片砌 —— 一片就是一整面山墙, 稳稳站住。",
 )
 b.step(
-    "架檐口横梁: 两根蓝色横楣横跨两侧, 两端竖直边吸住角柱,"
-    "底边压住栏板墙顶沿 —— 梁柱框架成型。",
-    ["beam_w", "beam_e"],
-    highlight=["post_sw", "post_nw"],
-    tip="横梁两头同时吸住前后角柱, 像门框一样兜住整个侧面。",
-)
-b.step(
-    "盖遮阳顶棚: 两片绿色大正方形依次平放到 z=2, 沿边吸住横梁顶沿"
-    "与角柱顶沿, 再整边互吸合拢成 4x2 顶棚。",
+    "盖遮阳顶棚: 两片绿色大正方形平放到 z=2, 边与两侧山墙顶沿等长"
+    "互吸, 中缝合拢成门式刚架。",
     ["canopy_w", "canopy_e"],
-    highlight=["beam_w", "beam_e"],
-    tip="先盖西半再盖东半, 每片都要先吸住同侧横梁再对拼缝。",
+    highlight=["gable_w", "gable_e"],
+    tip="先盖西半再盖东半 —— 地台、山墙、顶棚连成闭环, 亭子从此不怕碰。",
 )
 b.step(
-    "插角旗收尾: 四片红黄相间的三角旗立上顶棚四角 —— 广场遮阳"
-    "售卖亭开张啦!",
-    ["flag_sw", "flag_se", "flag_nw", "flag_ne"],
+    "布置花箱花圃: 北侧两片花圃、东西各一片花箱, 四株彩色三角花"
+    "骑上外沿口。",
+    ["bed_nw", "bed_ne", "flower_nw", "flower_ne",
+     "box_w", "box_e", "flower_w", "flower_e"],
+    highlight=["plaza_w", "plaza_e"],
+    tip="花箱贴着地台与山墙脚, 三角花底边与花箱沿口等长互吸。",
+)
+b.step(
+    "挂顶棚招牌: 一片红色长方形立在顶棚拼缝上 —— 广场遮阳亭开张啦!",
+    ["sign"],
     highlight=["canopy_w", "canopy_e"],
-    tip="三角旗底边与角柱顶沿等长, 对准顶棚角上一按就吸住。",
+    tip="招牌底边同时吸住两片顶棚的拼缝边 —— 远远就能看见亭子在哪。",
 )
 
 b.finalize(
     model_id="plaza_canopy_01",
-    name="广场遮阳售卖亭",
+    name="广场遮阳亭",
     name_en="Plaza Canopy 01",
     description=(
-        "主打片型 large_square 引流 D1: 两片大正方形平拼 4x2 广场"
-        "地台, 下层四角方墙加两侧栏板围出亭身, 南面嵌一座带黄色"
-        "台面的售卖柜台; 上层四根角柱托两根整跨檐口横梁, 顶上两片"
-        "大正方形平拼 4x2 绿色遮阳顶棚, 四角再插红黄三角旗 ——"
-        "一座能摆摊的两层小凉亭。"
+        "扩展主打片型 large_square 引流 D1: 六片大正方形拼出门式刚架"
+        "遮阳亭 —— 两片平拼地台、两片整片立起当东西山墙、两片在 z=2"
+        "合拢成顶棚, 全程 2.0 整边等长互吸; 棚下地台拼缝上骑一条双面"
+        "靠背长椅, 顶棚拼缝再立一块红色招牌, 南步道、北花圃、东西花箱"
+        "点缀四色三角花 —— 一片大正方形顶四片小方板, 体量感立现。"
     ),
     difficulty=1,
-    tags=["实用功能", "遮阳棚", "售卖亭", "柜台", "大正方形", "入门"],
-    min_pieces=26,
+    tags=["实用功能", "遮阳亭", "长椅", "大正方形", "入门"],
+    min_pieces=25,
     min_steps=7,
     series="practical_utility",
 )

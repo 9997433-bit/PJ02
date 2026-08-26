@@ -1,35 +1,35 @@
 #!/usr/bin/env python3
-"""生成模型 data/models/marble_splitter_01.json (双轨分流滚珠台)。
+"""生成模型 data/models/marble_splitter_01.json (拱廊分流滚珠道)。
 
 内容批 P 模型 6/10 (P6): 滚珠乐园 D2, 主打片型 door_frame —— 重写版。
-招牌是"门框拱廊塔 + 四柱门亭分流枢纽"的 Y 形分流动线: 发射塔首层由
-四片橙色门框方立成拱廊 (T17 负空间), 弹珠自 z=2 发球台向东滑下首段
-30 度坡道, 落上立在四柱门亭上的分流枢纽 (z=1), 撞上东端粉色窗格铃板
-后从南/北两道门框门洞二选一穿出, 各沿一段坡道落地、穿过终点门框,
-滚进分色接珠池。与 marble_cascade_01 (三级退台瀑布) / ball_run_tower_01
-(双轨绕塔) / switchback_ramp_01 (折返塔) 的动线拓扑均不同。
+招牌是"门框拱廊高架跑道 + 地面 T 形分流口": 四片门框方横向站成一列
+拱廊桥墩 (T17 负空间连成一条穿廊视线), 三片方板铺在墩顶连成 z=1
+高架跑道; 弹珠从跑道西端的门框发球拱出发, 沿跑道东行、顺 30 度坡道
+落地, 冲进 T 形分流口 —— 迎面撞上分流挡板后, 从南北两道贴地门框
+门洞二选一穿出, 各自滚进带"得分窗"的接珠湾。与旧版 (发射塔 + 高架
+门亭枢纽 + 南北下坡) 的立体 Y 形动线完全不同: 本作分流发生在地面,
+门框方先当桥墩、再当发球拱、最后当地面分流门, 一片三用。
 
 结构总览 (世界单位: 1.0 = 正方形磁力片边长, 弹珠先向东再分南北):
-  - 发射塔 (x [0,1], y [0,1]): 地台 + 门框拱廊首层 x4 + 方板二层 x4 +
-    发球台 + 台沿挡珠 x3                                             13 片
-  - 四柱门亭枢纽: 西桥墩 + 门框柱 x3 (东/南/北) + 枢纽台面             5 片
-  - 首段坡道 + 分流室: 坡道 + 南北分流门框 x2 + 窗格铃板 + 顶饰        5 片
-  - 北轨: 坡道 + 落地跑道 + 道沿挡珠 x2 + 终点门框 + 接珠池 + 池壁 x3  9 片
-  - 南轨 (镜像): 同北轨                                               9 片
-  合计 41 片, 9 个教程步骤; 门框方 x11, 全部片型在 CORE-9 之内。
+  - 拱廊桥墩: 门框方横立 x4 (x=0/1/2/3)                          4 片
+  - 高架跑道 (z=1): 方板 x3 + 发球拱门框 x1 + 道沿三角挡珠 x6   10 片
+  - 落地段: 30 度坡道 x1 + 落地方板 x1                            2 片
+  - T 形分流口: 横排方板 x3 + 分流挡板三角 x1 + 地面门框 x2       6 片
+  - 接珠湾 x2 (南北镜像): 湾底方板 + 窗格方得分窗 + 侧沿三角 x2   8 片
+  合计 30 片, 8 个教程步骤; 门框方 x7, 全部片型在 CORE-9 之内。
 
-物理规则要点 (validate strict 零警告):
-  - 每段坡道顶边整边吸上一级台面沿口, 坡尾由桥墩/门框柱顶边或落地
-    跑道沿边接住;
-  - 枢纽台面四边均有支撑: 西桥墩 + 东/南/北三根门框柱, 分流门与铃板
-    立在有柱的沿口正上方, 传力路径连续;
-  - 门框方按实心墙校验, 门洞负空间 (T17) 是弹珠实际穿行的通道;
-  - 全塔最高点为塔顶挡珠三角尖 z≈2.87, 低于 R8 红线 4.0。
+物理规则要点 (validate 常规 + strict 双档零警告):
+  - 桥墩顶边 (长 1) 与跑道方板边等长互吸, 相邻跑道板拼缝与墩顶
+    共线三片互咬 —— 桥墩-跑道连接图自带环, 剪断任一条铰链线,
+    每片跑道板仍有第二条经由邻板/邻墩的接地路径;
+  - 发球拱骑跑道西端边, 重心正压铰链线 (力矩为零);
+  - 坡道顶边吸跑道东端边与东墩顶 (共线双连接), 坡尾落地即接地;
+  - 全部分流构件贴地 (接地即支撑), 最高点发球拱 z=2.0 < 2.5,
+    不触发 R8 高层结构条款。
 
 用法: python3 tools/generate_marble_splitter_01.py  (在 magtile-studio 目录下运行)
 """
 
-import json
 import sys
 from pathlib import Path
 
@@ -38,188 +38,138 @@ from magtile_gen import SQ3, ModelBuilder  # noqa: E402
 
 b = ModelBuilder()
 
-BASE = "gray"
-GATE = "orange"     # 门框方 (拱廊 / 门亭柱 / 分流门 / 终点门, T17)
-TOWER = "blue"
-DECK = "yellow"
-RAIL = "red"
-RAMP = "orange"
-PIER = "gray"
-BELL = "pink"       # 窗格铃板 (弹珠分流前撞响)
-POOL_N = "cyan"
-POOL_S = "green"
+ARCH = "blue"        # 拱廊桥墩 / 发球拱 / 分流门 (door_frame, T17)
+TRACK = "yellow"     # 高架跑道 / 落地板 / 分流横排
+RAIL = "red"         # 道沿挡珠三角
+RAMP = "orange"      # 30 度坡道
+WEDGE = "green"      # 分流挡板三角
+POOL_N = "cyan"      # 北接珠湾
+POOL_S = "purple"    # 南接珠湾
+SCORE = "clear"      # 得分窗 (window_square)
 
-XH = 1 + SQ3        # 枢纽台面西缘 x = 首段坡道坡尾 2.732051
-XE = XH + 1         # 枢纽台面东缘 x
-YN = 1 + SQ3        # 北轨落地跑道南缘 y = 北坡道坡尾
-YS = -1 - SQ3       # 南轨落地跑道南缘 y (跑道北缘 -SQ3 = 南坡道坡尾)
+XP = 3.0 + SQ3       # 落地板西缘 = 坡道坡尾 4.732051
+XC = XP + 1.0        # 分流横排西缘 5.732051
+XE = XC + 1.0        # 分流横排东缘 6.732051
 
 
-def gate_ns(tid, x0, y, z0):
-    """南北朝向门框方立墙 (平面 y=y), 覆盖 x [x0,x0+1], z [z0,z0+1]。"""
-    b.add(tid, "door_frame", (x0 + 0.5, y, z0 + 0.5), (90, 0, 0), GATE)
-
-
-def gate_ew(tid, x, y0, z0):
-    """东西朝向门框方立墙 (平面 x=x), 覆盖 y [y0,y0+1], z [z0,z0+1]。"""
-    b.add(tid, "door_frame", (x, y0 + 0.5, z0 + 0.5), (90, 0, 90), GATE)
+def arch_ew(tid, x, z0, color=ARCH):
+    """东西朝向门框方 (平面 x=x), 覆盖 y [0,1], z [z0,z0+1]。"""
+    b.add(tid, "door_frame", (x, 0.5, z0 + 0.5), (90, 0, 90), color)
 
 
 # =================================================================
-# 1. 发射塔 (x [0,1], y [0,1]): 地台 + 门框拱廊首层 + 方板二层 + 发球台
+# 1. 拱廊桥墩 + 高架跑道: 门框方横立 x4, 方板 x3 铺墩顶
 # =================================================================
-b.flat("base_0", 0, 0, 0.0, BASE)
-gate_ns("arc_s", 0, 0.0, 0)
-gate_ns("arc_n", 0, 1.0, 0)
-gate_ew("arc_w", 0.0, 0, 0)
-gate_ew("arc_e", 1.0, 0, 0)
-b.wall_ns("tw_s", 0, 0.0, 1, TOWER)
-b.wall_ns("tw_n", 0, 1.0, 1, TOWER)
-b.wall_ew("tw_w", 0.0, 0, 1, TOWER)
-b.wall_ew("tw_e", 1.0, 0, 1, TOWER)
-b.flat("deck_0", 0, 0, 2.0, DECK)
-b.crest_ew("drail_w", 0.0, 0, 2.0, RAIL)
-b.crest_ns("drail_s", 0, 0.0, 2.0, RAIL)
-b.crest_ns("drail_n", 0, 1.0, 2.0, RAIL)
+for i in range(4):
+    arch_ew(f"pier_{i}", float(i), 0)
+for i in range(3):
+    b.flat(f"track_{i}", i, 0, 1.0, TRACK)
 
 # =================================================================
-# 2. 四柱门亭枢纽: 西桥墩 + 三根门框柱 (东/南/北) + 枢纽台面 (z=1)
+# 2. 发球拱 + 道沿挡珠: 门框骑跑道西端, 三角挡珠护住南北道沿
 # =================================================================
-b.wall_ew("pier_w", XH, 0, 0, PIER)
-gate_ns("pil_s", XH, 0.0, 0)
-gate_ew("pil_e", XE, 0, 0)
-gate_ns("pil_n", XH, 1.0, 0)
-b.flat("hub", XH, 0, 1.0, DECK)
+arch_ew("start_arch", 0.0, 1)
+for i in range(3):
+    b.crest_ns(f"rail_s{i}", i, 0.0, 1.0, RAIL)
+    b.crest_ns(f"rail_n{i}", i, 1.0, 1.0, RAIL)
 
 # =================================================================
-# 3. 首段坡道 (z2->z1) + 分流室: 南北分流门 + 窗格铃板 + 顶饰
+# 3. 落地段: 30 度坡道下探 + 落地方板接住坡尾
 # =================================================================
-b.ramp("ramp_e", "+x", 1.0, 0, 2.0, RAMP)
-gate_ns("gate_s", XH, 0.0, 1)
-gate_ns("gate_n", XH, 1.0, 1)
-b.add("bell_e", "window_square", (XE, 0.5, 1.5), (90, 0, 90), BELL)
-b.crest_ew("crown_e", XE, 0, 2.0, RAIL)
+b.ramp("ramp_dn", "+x", 3.0, 0, 1.0, RAMP)
+b.flat("pad", XP, 0, 0.0, TRACK)
 
 # =================================================================
-# 4. 北轨 (z1->z0): 坡道 + 落地跑道 + 道沿挡珠 + 终点门框 + 接珠池
+# 4. T 形分流口: 横排方板 x3 + 分流挡板 + 南北地面门框
 # =================================================================
-b.ramp("ramp_n", "+y", 1.0, XH, 1.0, RAMP)
-b.flat("land_n", XH, YN, 0.0, DECK)
-b.crest_ew("lrail_nw", XH, YN, 0.0, RAIL)
-b.crest_ew("lrail_ne", XE, YN, 0.0, RAIL)
-gate_ns("fin_n", XH, YN + 1, 0)
-b.flat("pool_n", XH, YN + 1, 0.0, POOL_N)
-b.wall_ew("pw_n_w", XH, YN + 1, 0, POOL_N)
-b.wall_ew("pw_n_e", XE, YN + 1, 0, POOL_N)
-b.wall_ns("pw_n_n", XH, YN + 2, 0, POOL_N)
+b.flat("cross_c", XC, 0, 0.0, TRACK)
+b.flat("cross_n", XC, 1, 0.0, TRACK)
+b.flat("cross_s", XC, -1, 0.0, TRACK)
+b.crest_ew("wedge", XE, 0, 0.0, WEDGE)
+b.add("gate_n", "door_frame", (XC + 0.5, 1.0, 0.5), (90, 0, 0), ARCH)
+b.add("gate_s", "door_frame", (XC + 0.5, 0.0, 0.5), (90, 0, 0), ARCH)
 
 # =================================================================
-# 5. 南轨 (镜像): 坡道 + 落地跑道 + 道沿挡珠 + 终点门框 + 接珠池
+# 5. 接珠湾 x2: 湾底方板 + 窗格方得分窗 + 两侧挡珠三角
 # =================================================================
-b.ramp("ramp_s", "-y", 0.0, XH, 1.0, RAMP)
-b.flat("land_s", XH, YS, 0.0, DECK)
-b.crest_ew("lrail_sw", XH, YS, 0.0, RAIL)
-b.crest_ew("lrail_se", XE, YS, 0.0, RAIL)
-gate_ns("fin_s", XH, YS, 0)
-b.flat("pool_s", XH, YS - 1, 0.0, POOL_S)
-b.wall_ew("pw_s_w", XH, YS - 1, 0, POOL_S)
-b.wall_ew("pw_s_e", XE, YS - 1, 0, POOL_S)
-b.wall_ns("pw_s_s", XH, YS - 1, 0, POOL_S)
+b.flat("bay_n", XC, 2, 0.0, POOL_N)
+b.add("score_n", "window_square", (XC + 0.5, 3.0, 0.5), (90, 0, 0), SCORE)
+b.crest_ew("bn_w", XC, 2, 0.0, POOL_N)
+b.crest_ew("bn_e", XE, 2, 0.0, POOL_N)
+b.flat("bay_s", XC, -2, 0.0, POOL_S)
+b.add("score_s", "window_square", (XC + 0.5, -2.0, 0.5), (90, 0, 0), SCORE)
+b.crest_ew("bs_w", XC, -2, 0.0, POOL_S)
+b.crest_ew("bs_e", XE, -2, 0.0, POOL_S)
 
 # =================================================================
-# 教程步骤 (9 步)
+# 教程步骤 (8 步)
 # =================================================================
 b.step(
-    "铺塔基并立门框拱廊: 一片灰色方板打底, 四片橙色门框方合围首层 —— "
-    "四面门洞就是本作的招牌。",
-    ["base_0", "arc_s", "arc_w", "arc_n", "arc_e"],
-    tip="门框方外框与正方形完全一样, 四片下边整边吸住地台即可站稳。",
+    "起拱廊西段: 两片蓝色门框方横向站好, 一片黄色跑道板压住两墩顶。",
+    ["pier_0", "pier_1", "track_0"],
+    tip="门框方的门洞连成一条穿廊视线 —— 跑道板边与墩顶边等长互吸。",
 )
 b.step(
-    "方板二层: 四片蓝色方板骑上拱廊墙顶, 上下边完整贴合。",
-    ["tw_s", "tw_w", "tw_n", "tw_e"],
-    highlight=["arc_s", "arc_e"],
-    tip="两层塔身够高 —— D2 弹珠从 z=2 出发, 不必再往上叠。",
+    "续拱廊东段: 再两墩两板, 三片跑道板在墩顶连成 z=1 高架跑道。",
+    ["pier_2", "track_1", "pier_3", "track_2"],
+    highlight=["pier_1", "track_0"],
+    tip="每片跑道板都骑住一墩一缝 —— 桥墩与跑道咬成一串环。",
 )
 b.step(
-    "盖发球台: 一片黄色方板压住二层墙顶, 三片红色挡珠三角围住台沿 "
-    "(东缘留口)。",
-    ["deck_0", "drail_w", "drail_s", "drail_n"],
-    highlight=["tw_s", "tw_e"],
-    tip="东缘空着 —— 那是弹珠冲向分流枢纽的唯一出珠口。",
+    "装发球拱与道沿: 门框骑上跑道西端当发球拱, 六片红色三角挡珠"
+    "护住南北道沿。",
+    ["start_arch", "rail_s0", "rail_n0", "rail_s1", "rail_n1",
+     "rail_s2", "rail_n2"],
+    highlight=["track_0", "track_2"],
+    tip="弹珠从发球拱门洞放进跑道 —— 东端不设挡珠, 那是出珠口。",
 )
 b.step(
-    "四柱门亭与首段坡道 (整段成组): 塔东侧一片灰色桥墩居西, 三片橙色"
-    "门框柱站南/东/北, 枢纽台面压住四根柱顶, 橙色坡道顶边吸出珠口、"
-    "坡尾搭上桥墩顶。",
-    ["pier_w", "pil_s", "pil_e", "pil_n", "hub", "ramp_e"],
-    highlight=["deck_0", "arc_e"],
-    tip="台面四边都有柱顶整边接住, 坡道把塔与门亭连成一体 —— "
-        "分流枢纽是全场受撞最多的地方。",
+    "接落地段: 橙色坡道顶边吸住跑道东端, 坡尾落地由黄色落地板接住。",
+    ["ramp_dn", "pad"],
+    highlight=["track_2", "pier_3"],
+    tip="坡道顶边同时吸跑道板边与东墩顶 —— 弹珠顺 30 度斜面冲下来。",
 )
 b.step(
-    "布置分流室: 南北各立一道橙色分流门框, 东端粉色窗格铃板封口, "
-    "顶饰三角压住铃板上沿。",
-    ["gate_s", "gate_n", "bell_e", "crown_e"],
-    highlight=["hub", "ramp_e"],
-    tip="弹珠撞铃板弹回后从南/北门洞 (T17 负空间) 二选一穿出 —— 分流全靠它!",
+    "铺 T 形分流口: 三片黄色方板横排, 绿色分流挡板立在正东迎珠。",
+    ["cross_c", "cross_n", "cross_s", "wedge"],
+    highlight=["pad"],
+    tip="弹珠冲过落地板撞上挡板 —— 向北还是向南, 每次都是悬念。",
 )
 b.step(
-    "北轨下坡: 橙色坡道从北分流门下探到地面, 落地跑道接住坡尾, "
-    "东西道沿各立一片红色挡珠三角。",
-    ["ramp_n", "land_n", "lrail_nw", "lrail_ne"],
-    highlight=["gate_n", "hub"],
-    tip="坡尾与跑道南缘整边互吸 —— 弹珠穿过门洞就一路贴地向北。",
+    "立地面分流门: 南北横缝上各立一道蓝色门框, 弹珠必从门洞穿出。",
+    ["gate_n", "gate_s"],
+    highlight=["cross_c", "wedge"],
+    tip="门框方第三种用法: 桥墩、发球拱之后, 这次当地面分流门。",
 )
 b.step(
-    "北轨终点: 橙色终点门框立在跑道尽头, 青色池底与三面池壁围住接珠池。",
-    ["fin_n", "pool_n", "pw_n_w", "pw_n_e", "pw_n_n"],
-    highlight=["land_n"],
-    tip="弹珠穿过终点门洞落池 —— 青色代表北轨得分!",
+    "砌北接珠湾: 青色湾底接住门洞, 得分窗封住北端, 两侧三角挡珠。",
+    ["bay_n", "score_n", "bn_w", "bn_e"],
+    highlight=["gate_n"],
+    tip="弹珠穿过北门洞撞上得分窗 —— 青色湾记一分!",
 )
 b.step(
-    "南轨下坡 (镜像): 坡道从南分流门下探, 落地跑道与两片道沿挡珠对称安装。",
-    ["ramp_s", "land_s", "lrail_sw", "lrail_se"],
-    highlight=["gate_s", "hub"],
-    tip="与北轨完全镜像 —— 对照着装, 一次就位。",
-)
-b.step(
-    "南轨终点收尾: 终点门框 + 绿色池底与三面池壁 —— 双轨分流滚珠台完工, "
-    "放珠开跑!",
-    ["fin_s", "pool_s", "pw_s_w", "pw_s_e", "pw_s_s"],
-    highlight=["land_s"],
-    tip="轮流放珠数进池次数 —— 铃板响一声、落池哪一边, 实物跑珠才算验收!",
+    "砌南接珠湾 (镜像): 紫色湾底 + 得分窗 + 侧沿三角 —— 拱廊分流"
+    "滚珠道完工, 放珠开跑!",
+    ["bay_s", "score_s", "bs_w", "bs_e"],
+    highlight=["gate_s"],
+    tip="轮流放珠数两湾进珠数 —— 实物跑珠才算验收合格!",
 )
 
-model = b.finalize(
+b.finalize(
     model_id="marble_splitter_01",
-    name="双轨分流滚珠台",
+    name="拱廊分流滚珠道",
     name_en="Marble Splitter 01",
     description=(
-        "滚珠乐园 D2 门框方主打示范: 首层门框拱廊塔从 z=2 发球, 弹珠沿"
-        "首段 30 度坡道落上四柱门亭分流枢纽, 撞响粉色窗格铃板后从南/北"
-        "两道门框门洞 (T17 负空间) 二选一穿出, 各沿坡道落地、穿过终点"
-        "门框滚进分色接珠池; 门框方 x11 全程既是结构柱又是弹珠通道, "
-        "全部 CORE-9, 实物跑珠即可验证分流。"
+        "滚珠乐园 D2 门框方主打示范: 四片门框方横立成拱廊桥墩, 墩顶"
+        "三片方板连成 z=1 高架跑道, 西端门框发球拱出珠; 弹珠沿跑道"
+        "东行、顺 30 度坡道落地, 冲进 T 形分流口撞上绿色挡板, 从南北"
+        "两道贴地门框门洞 (T17 负空间) 二选一穿出, 滚进带透明得分窗"
+        "的接珠湾。门框方一片三用 (桥墩/发球拱/分流门), 分流发生在"
+        "地面 —— 与高塔类滚珠模型的立体动线完全不同, 全部 CORE-9。"
     ),
     difficulty=2,
-    tags=["滚珠", "轨道", "分流", "滚珠乐园", "门框"],
-    min_pieces=32,
-    min_steps=9,
+    tags=["滚珠", "拱廊", "分流", "滚珠乐园", "门框"],
+    min_pieces=30,
+    min_steps=8,
     series="marble_run",
 )
-
-meta = model["content_meta"]
-meta["technique_tags"] = {
-    "primary": "T08_marble_run",
-    "secondary": ["T17_negative_space", "T11_mirror_symmetry"],
-}
-meta["signature_statement"] = (
-    "门框方既当结构柱又当弹珠通道: 四柱门亭托起分流枢纽, "
-    "弹珠撞铃板后从南北门洞二选一穿出, 镜像双轨由同一座拱廊塔发球。"
-)
-meta["structural_signature"]["silhouette_class"] = "gate_pavilion_splitter"
-meta["structural_signature"]["height_layers"] = 3
-
-out = Path(__file__).resolve().parent.parent / "data" / "models" / "marble_splitter_01.json"
-out.write_text(json.dumps(model, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
