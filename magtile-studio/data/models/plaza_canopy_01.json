@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "id": "plaza_canopy_01",
+  "name": "广场遮阳展台",
+  "name_en": "Plaza Canopy 01",
+  "description": "扩展片型 large_square 引流 D1: 两片大正方形拼 4x2 台面,北半 1x1 橙色盒式展框 (T01); 四角东西/南北双层檐轨正交叠合成四柱, 四片直角斜撑 (T14) 沿展框南沿外张双边吸合;顶面两片大正方形平拼 4x2 青色遮阳顶棚 —— 与手机架、相框画架剪影均不同。",
+  "difficulty": 1,
+  "total_pieces": 22,
+  "tags": [
+    "实用功能",
+    "遮阳棚",
+    "展台",
+    "广场",
+    "入门",
+    "大正方形"
+  ],
+  "content_meta": {
+    "series": "practical_utility",
+    "structural_signature": {
+      "tile_histogram": {
+        "rectangle": 10,
+        "large_square": 4,
+        "right_triangle": 4,
+        "square": 4
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "lg_fl_w",
+      "type": "large_square",
+      "position": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lg_fl_e",
+      "type": "large_square",
+      "position": [
+        3.0,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "booth_s",
+      "type": "square",
+      "position": [
+        1.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "booth_n",
+      "type": "square",
+      "position": [
+        1.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "booth_w",
+      "type": "square",
+      "position": [
+        1.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "booth_e",
+      "type": "square",
+      "position": [
+        2.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tie_w0",
+      "type": "rectangle",
+      "position": [
+        0.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tie_w1",
+      "type": "rectangle",
+      "position": [
+        0.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tie_e0",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tie_e1",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tie_s0",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tie_s2",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tie_s1",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tie_s3",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tie_n1",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tie_n3",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_ws",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        0.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_es",
+      "type": "right_triangle",
+      "position": [
+        2.0,
+        0.666667,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_ww",
+      "type": "right_triangle",
+      "position": [
+        0.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "br_ew",
+      "type": "right_triangle",
+      "position": [
+        2.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "cn_w",
+      "type": "large_square",
+      "position": [
+        1.0,
+        1.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "cn_e",
+      "type": "large_square",
+      "position": [
+        3.0,
+        1.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺台面: 两片灰色大正方形整边互吸, 拼成 4x2 广场地台。",
+      "tip": "大正方形边长 2.0 —— 两片拼缝对齐, 四角才有整边可叠檐轨。",
+      "tiles_to_add": [
+        "lg_fl_w",
+        "lg_fl_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "围展框: 四片橙色方墙在北半拼 1x1 盒式框架 (T01)。",
+      "tip": "",
+      "tiles_to_add": [
+        "booth_s",
+        "booth_n",
+        "booth_w",
+        "booth_e"
+      ],
+      "highlight_tiles": [
+        "lg_fl_w"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立东西柱脚: 四片横楣沿 x=0/4 叠成侧柱 (z=0..1)。",
+      "tip": "",
+      "tiles_to_add": [
+        "tie_w0",
+        "tie_e0",
+        "tie_w1",
+        "tie_e1"
+      ],
+      "highlight_tiles": [
+        "lg_fl_w"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "铺南向双层檐轨: 四片横楣沿 y=0 与东西柱正交叠合。",
+      "tip": "角点处南北/东西横楣正交 —— 四柱成型。",
+      "tiles_to_add": [
+        "tie_s0",
+        "tie_s2",
+        "tie_s1",
+        "tie_s3"
+      ],
+      "highlight_tiles": [
+        "tie_w0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "封北向顶层檐轨: 两片横楣在 y=2 接到 z=1 顶沿。",
+      "tip": "",
+      "tiles_to_add": [
+        "tie_n1",
+        "tie_n3"
+      ],
+      "highlight_tiles": [
+        "tie_w1",
+        "tie_s1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "装展框斜撑 (T14): 四片直角三角沿 booth 南沿外张, 双边吸合。",
+      "tip": "两向各一对 —— 竖边吸展框、横边吸台面, 不碰侧柱。",
+      "tiles_to_add": [
+        "br_ws",
+        "br_es",
+        "br_ww",
+        "br_ew"
+      ],
+      "highlight_tiles": [
+        "booth_s",
+        "tie_s0"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "盖西半遮阳顶: 一片青色大正方形平放到 z=2。",
+      "tip": "",
+      "tiles_to_add": [
+        "cn_w"
+      ],
+      "highlight_tiles": [
+        "tie_w1",
+        "tie_s1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖东半遮阳顶 —— 广场遮阳展台落成!",
+      "tip": "两片大正方形整边互吸 —— 4x2 青色顶棚遮阳完毕!",
+      "tiles_to_add": [
+        "cn_e"
+      ],
+      "highlight_tiles": [
+        "cn_w",
+        "tie_e1"
+      ]
+    }
+  ]
+}
