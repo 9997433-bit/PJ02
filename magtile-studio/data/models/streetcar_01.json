@@ -1,0 +1,707 @@
+{
+  "schema_version": 1,
+  "id": "streetcar_01",
+  "name": "有轨电车",
+  "name_en": "Streetcar 01",
+  "description": "陆地交通 D2 有轨载具: 前后双转向架四片 wheel_base 立在埋轨床拼缝上,三片红色裙边长板长边压轮顶锁成 T09 低重心门式底盘; 4 格绿色长箱北整排透明窗格、南嵌乘客门, 车顶四片方板合龙后立灰色受电弓取电,前后三角灯与绿色线路牌点睛 —— 低扁长箱剪影, 与小巴短箱完全不同!",
+  "difficulty": 2,
+  "total_pieces": 36,
+  "tags": [
+    "陆地交通",
+    "有轨",
+    "载具",
+    "wheel_base",
+    "进阶"
+  ],
+  "content_meta": {
+    "series": "land_transport",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 15,
+        "rectangle": 7,
+        "window_square": 6,
+        "wheel_base": 4,
+        "equilateral_triangle": 3,
+        "door_frame": 1
+      }
+    },
+    "technique_tags": {
+      "primary": "T09_vehicle_chassis"
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "rd_0_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rd_1_0",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rd_3_0",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rd_5_0",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rd_0_1",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rd_1_1",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "rd_3_1",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "rd_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_fs",
+      "type": "wheel_base",
+      "position": [
+        1.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_fn",
+      "type": "wheel_base",
+      "position": [
+        1.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_rs",
+      "type": "wheel_base",
+      "position": [
+        5.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "wh_rn",
+      "type": "wheel_base",
+      "position": [
+        5.0,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "deck_w",
+      "type": "rectangle",
+      "position": [
+        1.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_m",
+      "type": "rectangle",
+      "position": [
+        3.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "deck_e",
+      "type": "rectangle",
+      "position": [
+        5.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cab_rear",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "cab_front",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "wall_s0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "door_s",
+      "type": "door_frame",
+      "position": [
+        1.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wall_s2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "wall_s3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "win_n0",
+      "type": "window_square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_n1",
+      "type": "window_square",
+      "position": [
+        1.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_n2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_n3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "win_s4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "roof_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "roof_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "roof_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "roof_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "panto",
+      "type": "equilateral_triangle",
+      "position": [
+        2.0,
+        0.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "headlight",
+      "type": "equilateral_triangle",
+      "position": [
+        6.0,
+        0.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "taillight",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "route_sign",
+      "type": "window_square",
+      "position": [
+        3.5,
+        0.0,
+        2.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "rd_6_0",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺轨床南行: 长板拼缝在 x=2 与 x=4, 前后转向架都靠这行格线。",
+      "tip": "x=3 黄色长板是轨道标记 —— 有轨电车走在轨道上!",
+      "tiles_to_add": [
+        "rd_0_0",
+        "rd_1_0",
+        "rd_3_0",
+        "rd_5_0"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "铺轨床北行: 与南行对缝, y=1 转向架缝同样贯通。",
+      "tip": "双行轨床铺完 —— 转向架马上落位。",
+      "tiles_to_add": [
+        "rd_0_1",
+        "rd_1_1",
+        "rd_3_1",
+        "rd_5_1"
+      ],
+      "highlight_tiles": [
+        "rd_1_0"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "落双转向架: 前后各一对 wheel_base 立上拼缝, 底边整边吸长板。",
+      "tip": "四轮底边 (长 2) 与轨缝长板等长 —— 转向架一次吸牢。",
+      "tiles_to_add": [
+        "wh_fs",
+        "wh_fn",
+        "wh_rs",
+        "wh_rn"
+      ],
+      "highlight_tiles": [
+        "rd_1_0",
+        "rd_1_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "架三段底盘: 三片红色长板长边压四轮顶, 低重心门式框架锁死。",
+      "tip": "T09 车辆底盘 —— 裙边长板是车厢的承重地板。",
+      "tiles_to_add": [
+        "deck_w",
+        "deck_m",
+        "deck_e"
+      ],
+      "highlight_tiles": [
+        "wh_fs",
+        "wh_rn"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "立前后端壁: 透明端壁踩住底盘西短边与东短边。",
+      "tip": "端壁竖边咬进底盘拐角 —— 长箱轮廓比小巴多出一格。",
+      "tiles_to_add": [
+        "cab_rear",
+        "cab_front"
+      ],
+      "highlight_tiles": [
+        "deck_w",
+        "deck_e"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "砌南墙: 侧墙段 + 门框乘客门, 竖边咬进前后壁。",
+      "tip": "南墙逐段合龙 —— 乘客门在中段。",
+      "tiles_to_add": [
+        "wall_s0",
+        "door_s",
+        "wall_s2",
+        "wall_s3"
+      ],
+      "highlight_tiles": [
+        "cab_rear",
+        "cab_front"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "装北窗带与南窗: 四扇北窗格方 + 南窗, 竖边吸进端壁拐角。",
+      "tip": "北整排窗 + 南乘客门 —— 有轨电车的标志性侧脸。",
+      "tiles_to_add": [
+        "win_n0",
+        "win_n1",
+        "win_n2",
+        "win_n3",
+        "win_s4"
+      ],
+      "highlight_tiles": [
+        "wall_s2",
+        "wall_s3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "盖车顶并立受电弓: 五片绿色方板压墙顶, 灰色弓立中缝取电。",
+      "tip": "受电弓底边骑住车顶拼缝 —— 叮, 通电!",
+      "tiles_to_add": [
+        "roof_0",
+        "roof_1",
+        "roof_2",
+        "roof_3",
+        "roof_4",
+        "panto"
+      ],
+      "highlight_tiles": [
+        "win_n1",
+        "door_s"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "装前后灯、线路牌并延长轨端 —— 有轨电车出发!",
+      "tip": "绿色线路牌挂在车顶南沿 —— 下一站到市中心!",
+      "tiles_to_add": [
+        "headlight",
+        "taillight",
+        "route_sign",
+        "rd_6_0"
+      ],
+      "highlight_tiles": [
+        "roof_2",
+        "cab_front"
+      ]
+    }
+  ]
+}

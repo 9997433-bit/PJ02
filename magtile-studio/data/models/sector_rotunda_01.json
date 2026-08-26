@@ -1,0 +1,1114 @@
+{
+  "schema_version": 1,
+  "id": "sector_rotunda_01",
+  "name": "扇形拱券半圆殿",
+  "name_en": "Sector Rotunda 01",
+  "description": "建筑地标 D3 扇形示范: 七座石柱沿半圆殿南廊排开, 六片扇形拱券 (T04) 逐跨合龙成真正的柱廊拱圈; 北墙三扇窗格高窗留采光负空间 (T17), 殿内地板与柱廊贯通一体; 蓝色檐板与檐饰收顶, 殿心雕像 点缀中轴 —— 扇形片型不是点缀, 而是半圆殿的结构主角.",
+  "difficulty": 3,
+  "total_pieces": 59,
+  "tags": [
+    "建筑地标",
+    "半圆殿",
+    "扇形",
+    "柱廊",
+    "拱券",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "landmark_architecture",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 46,
+        "sector": 6,
+        "equilateral_triangle": 4,
+        "window_square": 3
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "porch_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "porch_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "porch_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "porch_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "porch_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "porch_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "porch_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "col_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "col_1",
+      "type": "square",
+      "position": [
+        1.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "col_2",
+      "type": "square",
+      "position": [
+        2.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "col_3",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "col_4",
+      "type": "square",
+      "position": [
+        4.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "col_5",
+      "type": "square",
+      "position": [
+        5.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "col_6",
+      "type": "square",
+      "position": [
+        6.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "arch_0",
+      "type": "sector",
+      "position": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arch_1",
+      "type": "sector",
+      "position": [
+        1.0,
+        0.0,
+        1.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "arch_2",
+      "type": "sector",
+      "position": [
+        2.0,
+        0.0,
+        1.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arch_3",
+      "type": "sector",
+      "position": [
+        3.0,
+        0.0,
+        1.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "arch_4",
+      "type": "sector",
+      "position": [
+        4.0,
+        0.0,
+        1.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "arch_5",
+      "type": "sector",
+      "position": [
+        5.0,
+        0.0,
+        1.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "fl_1_0",
+      "type": "square",
+      "position": [
+        0.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_1_1",
+      "type": "square",
+      "position": [
+        1.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_1_2",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_1_3",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_1_4",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_1_5",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_1_6",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_2_0",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_2_1",
+      "type": "square",
+      "position": [
+        1.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_2_2",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_2_3",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_2_4",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_2_5",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "fl_2_6",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "side_w_1",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "side_e_1",
+      "type": "square",
+      "position": [
+        7.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "side_w_2",
+      "type": "square",
+      "position": [
+        0.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "side_e_2",
+      "type": "square",
+      "position": [
+        7.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "back_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "back_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "back_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "back_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "back_win_2",
+      "type": "window_square",
+      "position": [
+        2.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "back_win_3",
+      "type": "window_square",
+      "position": [
+        3.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "back_win_4",
+      "type": "window_square",
+      "position": [
+        4.5,
+        3.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "roof_0",
+      "type": "square",
+      "position": [
+        0.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_1",
+      "type": "square",
+      "position": [
+        1.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_2",
+      "type": "square",
+      "position": [
+        2.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_3",
+      "type": "square",
+      "position": [
+        3.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_4",
+      "type": "square",
+      "position": [
+        4.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_5",
+      "type": "square",
+      "position": [
+        5.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "roof_6",
+      "type": "square",
+      "position": [
+        6.5,
+        3.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "cap_w",
+      "type": "square",
+      "position": [
+        0.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "cap_e",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ped_l",
+      "type": "equilateral_triangle",
+      "position": [
+        1.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ped_c",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "ped_r",
+      "type": "equilateral_triangle",
+      "position": [
+        5.5,
+        3.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "statue",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "statue_top",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺柱廊地板: 七片汉白玉石板沿东西向排开, 半圆殿由此向南敞开.",
+      "tip": "这是全殿的受力底盘 —— 柱脚与殿内地板都从这里接龙.",
+      "tiles_to_add": [
+        "porch_0",
+        "porch_1",
+        "porch_2",
+        "porch_3",
+        "porch_4",
+        "porch_5",
+        "porch_6"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立柱廊第一批: 西半四根方柱 (x=0..3), 柱脚整边踩地板北沿.",
+      "tip": "每根柱只有一片高 —— 柱顶高度就是扇形拱的落点.",
+      "tiles_to_add": [
+        "col_0",
+        "col_1",
+        "col_2",
+        "col_3"
+      ],
+      "highlight_tiles": [
+        "porch_3"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立柱廊第二批: 东半三根方柱, 七座石柱排齐.",
+      "tip": "七柱等距 —— 六跨拱券即将逐跨合龙.",
+      "tiles_to_add": [
+        "col_4",
+        "col_5",
+        "col_6"
+      ],
+      "highlight_tiles": [
+        "col_3"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "砌西三跨扇形拱: 三片扇形底边整边搁柱顶, 拱腹朝外 (T04 逐跨合龙).",
+      "tip": "扇形只有两条半径边可吸 —— 底边搁柱顶, 竖边吸柱侧缝.",
+      "tiles_to_add": [
+        "arch_0",
+        "arch_1",
+        "arch_2"
+      ],
+      "highlight_tiles": [
+        "col_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "砌东三跨扇形拱: 另三片镜像合龙, 柱廊拱圈闭合.",
+      "tip": "六片扇形围成半圆殿南廊 —— 全库扇形片型的招牌用法.",
+      "tiles_to_add": [
+        "arch_3",
+        "arch_4",
+        "arch_5"
+      ],
+      "highlight_tiles": [
+        "arch_2"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "铺殿内南排地板: 七片方板填满 y=1, 与柱廊地板缝缝相吸.",
+      "tip": "连续铺地 —— 从柱廊一步踏入殿心, 不再有断开的孤岛.",
+      "tiles_to_add": [
+        "fl_1_0",
+        "fl_1_1",
+        "fl_1_2",
+        "fl_1_3",
+        "fl_1_4",
+        "fl_1_5",
+        "fl_1_6"
+      ],
+      "highlight_tiles": [
+        "porch_3"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "铺殿内北排地板: 再铺七片, 殿心地面完工.",
+      "tip": "北排与侧墙脚线对齐 —— 鼓身即将在此升起.",
+      "tiles_to_add": [
+        "fl_2_0",
+        "fl_2_1",
+        "fl_2_2",
+        "fl_2_3",
+        "fl_2_4",
+        "fl_2_5",
+        "fl_2_6"
+      ],
+      "highlight_tiles": [
+        "fl_1_3"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "立西墙与东墙: 各两片立墙围出殿内侧界.",
+      "tip": "侧墙竖边吸地板拼缝, 与柱廊两端对齐.",
+      "tiles_to_add": [
+        "side_w_1",
+        "side_w_2",
+        "side_e_1",
+        "side_e_2"
+      ],
+      "highlight_tiles": [
+        "fl_2_0"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "砌北墙实墙段: 东西各两片实墙, 与侧墙转角互咬.",
+      "tip": "实墙段先立好 —— 中间三格留给高窗负空间.",
+      "tiles_to_add": [
+        "back_0",
+        "back_1",
+        "back_5",
+        "back_6"
+      ],
+      "highlight_tiles": [
+        "side_w_2"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "装北墙高窗: 三片窗格方留采光洞 (T17 负空间), 两侧实墙闭环传力.",
+      "tip": "少砌实墙、换上窗格 —— 殿内亮堂, 传力路径不断.",
+      "tiles_to_add": [
+        "back_win_2",
+        "back_win_3",
+        "back_win_4"
+      ],
+      "highlight_tiles": [
+        "back_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "盖鼓顶檐板: 七片蓝色方板压在北墙顶口.",
+      "tip": "檐板短边吸墙顶整边, 长边互吸成整带.",
+      "tiles_to_add": [
+        "roof_0",
+        "roof_1",
+        "roof_2",
+        "roof_3",
+        "roof_4",
+        "roof_5",
+        "roof_6"
+      ],
+      "highlight_tiles": [
+        "back_win_3"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "封侧顶: 两片檐板盖住东西侧墙顶, 与鼓顶齐平.",
+      "tip": "三面檐板合围, 殿顶轮廓完整.",
+      "tiles_to_add": [
+        "cap_w",
+        "cap_e"
+      ],
+      "highlight_tiles": [
+        "roof_0"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "装北檐三角饰: 三片金色三角点缀鼓顶北沿.",
+      "tip": "檐饰骑在檐板北沿 —— 古典半圆殿的收笔.",
+      "tiles_to_add": [
+        "ped_l",
+        "ped_c",
+        "ped_r"
+      ],
+      "highlight_tiles": [
+        "roof_3"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "立殿心雕像与金冠 —— 扇形拱券半圆殿落成!",
+      "tip": "六扇拱券围成的半圆殿 —— 入库前须逐一实物复核.",
+      "tiles_to_add": [
+        "statue",
+        "statue_top"
+      ],
+      "highlight_tiles": [
+        "fl_2_3"
+      ]
+    }
+  ]
+}

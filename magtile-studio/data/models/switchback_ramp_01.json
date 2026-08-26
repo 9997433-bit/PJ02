@@ -1,0 +1,721 @@
+{
+  "schema_version": 1,
+  "id": "switchback_ramp_01",
+  "name": "折返坡道滚珠塔",
+  "name_en": "Switchback Ramp 01",
+  "description": "滚珠乐园 D2 折返塔: 两层发球台向东甩出首段 30 度坡道, 弹珠在两片直角三角拼成的折返台上 180° 掉头, 沿第二段坡道折返向西, 再经第二块折返台二次掉头冲进接珠池; 招牌是 T08 滚珠轨道 + T14 直角三角折返台 (≥10 片), 与双轨绕塔/单塔螺旋动线拓扑均不同, 全部 CORE-9, 实物跑珠即可验证。",
+  "difficulty": 2,
+  "total_pieces": 36,
+  "tags": [
+    "滚珠",
+    "轨道",
+    "折返",
+    "滚珠乐园",
+    "直角三角"
+  ],
+  "content_meta": {
+    "series": "marble_run",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 17,
+        "right_triangle": 10,
+        "equilateral_triangle": 7,
+        "rectangle": 2
+      },
+      "silhouette_class": "switchback_tower",
+      "height_layers": 3
+    },
+    "technique_tags": {
+      "primary": "T08_marble_run",
+      "secondary": [
+        "T14_diagonal_bracing"
+      ]
+    },
+    "signature_statement": "两片直角三角拼成的折返台让弹珠在塔旁连续两次 180° 掉头。"
+  },
+  "final_assembly": [
+    {
+      "id": "base_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw0_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw0_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw0_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw0_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_w",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "tw1_e",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "br_sw",
+      "type": "right_triangle",
+      "position": [
+        -0.333333,
+        0.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "br_se",
+      "type": "right_triangle",
+      "position": [
+        1.0,
+        -0.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "br_ne",
+      "type": "right_triangle",
+      "position": [
+        1.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "br_nw",
+      "type": "right_triangle",
+      "position": [
+        0.0,
+        1.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "deck_0",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "drail_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drail_n",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        1.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "drail_s",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "pier_a",
+      "type": "square",
+      "position": [
+        2.732051,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_e",
+      "type": "rectangle",
+      "position": [
+        1.866025,
+        0.5,
+        1.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "land_a_lo",
+      "type": "right_triangle",
+      "position": [
+        3.065384,
+        0.333333,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "land_a_hi",
+      "type": "right_triangle",
+      "position": [
+        3.398718,
+        0.666667,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "brace_a_s",
+      "type": "right_triangle",
+      "position": [
+        3.065384,
+        0.0,
+        0.666667
+      ],
+      "rotation": [
+        -90.0,
+        0.0,
+        0.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "brace_a_n",
+      "type": "right_triangle",
+      "position": [
+        3.732051,
+        0.666667,
+        0.666667
+      ],
+      "rotation": [
+        0.0,
+        90.0,
+        -180.0
+      ],
+      "color": "purple"
+    },
+    {
+      "id": "rail_a_n",
+      "type": "equilateral_triangle",
+      "position": [
+        3.232051,
+        1.0,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_a_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.732051,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "ramp_w",
+      "type": "rectangle",
+      "position": [
+        2.866026,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "land_b_lo",
+      "type": "right_triangle",
+      "position": [
+        2.333333,
+        0.333333,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "land_b_hi",
+      "type": "right_triangle",
+      "position": [
+        2.666667,
+        0.666667,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        180.0
+      ],
+      "color": "cyan"
+    },
+    {
+      "id": "rail_b_n",
+      "type": "equilateral_triangle",
+      "position": [
+        2.5,
+        1.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "rail_b_e",
+      "type": "equilateral_triangle",
+      "position": [
+        3.0,
+        0.5,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "track_0",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "pool_0",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pool_1",
+      "type": "square",
+      "position": [
+        5.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pool_s",
+      "type": "square",
+      "position": [
+        4.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pool_w",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "pool_e",
+      "type": "square",
+      "position": [
+        6.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺塔基: 一片灰色方板打底, 四片蓝色方板合围第一层墙环。",
+      "tip": "塔基东边要留出直线跑道 —— 弹珠将从这里折返下坡。",
+      "tiles_to_add": [
+        "base_0",
+        "tw0_s",
+        "tw0_w",
+        "tw0_n",
+        "tw0_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "塔基四角斜撑 (T14): 四片紫色直角三角呈风车状, 竖直角边吸塔角、水平边贴地外伸。",
+      "tip": "双边吸合的斜撑锁死塔身 —— 折返赛道反复开撞也推不倒。",
+      "tiles_to_add": [
+        "br_sw",
+        "br_se",
+        "br_ne",
+        "br_nw"
+      ],
+      "highlight_tiles": [
+        "tw0_s",
+        "tw0_e"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "第二层墙 + 发球台: 四片蓝色方板骑上墙顶, 一片黄色方板盖住 z=2。",
+      "tip": "两层墙环够高 —— D2 弹珠从 z=2 出发, 不必再往上叠。",
+      "tiles_to_add": [
+        "tw1_s",
+        "tw1_w",
+        "tw1_n",
+        "tw1_e",
+        "deck_0"
+      ],
+      "highlight_tiles": [
+        "tw0_s",
+        "tw0_e"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "发球台挡珠: 三片红三角围住台沿 (东缘留口), 弹珠只能向东滑出。",
+      "tip": "东缘空着 —— 那是首段折返坡道的唯一出珠口。",
+      "tiles_to_add": [
+        "drail_w",
+        "drail_n",
+        "drail_s"
+      ],
+      "highlight_tiles": [
+        "deck_0"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "首段下坡 (整段成组): 立桥墩, 橙色坡道顶边吸发球台东缘, 两片青色直角三角拼成折返台 A 压住墩顶与坡尾, 南/北各挂一片紫色斜撑锁墩身。",
+      "tip": "坡道-桥墩-折返台三件互吸 —— 双斜撑给台面第二条支撑路径。",
+      "tiles_to_add": [
+        "pier_a",
+        "ramp_e",
+        "land_a_lo",
+        "land_a_hi",
+        "brace_a_s",
+        "brace_a_n"
+      ],
+      "highlight_tiles": [
+        "deck_0",
+        "tw1_e"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "折返台 A 挡珠: 北缘与东缘各一片红三角, 逼弹珠折返向西。",
+      "tip": "弹珠从西边上台、向东缘拐弯 —— 第一个 180° 折返就位。",
+      "tiles_to_add": [
+        "rail_a_n",
+        "rail_a_e"
+      ],
+      "highlight_tiles": [
+        "land_a_lo",
+        "land_a_hi"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "第二段折返坡道: 橙色坡道从折返台 A 东缘下探到 z=0, 两片青色直角三角拼成折返台 B (东移一格避开塔身), 坡尾与台面整边互吸。",
+      "tip": "这一跳弹珠向西冲 —— 折返台 B 直接落地, 听落台声比首段更响。",
+      "tiles_to_add": [
+        "ramp_w",
+        "land_b_lo",
+        "land_b_hi"
+      ],
+      "highlight_tiles": [
+        "land_a_hi",
+        "rail_a_e"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "折返台 B 挡珠: 北缘与东缘各一片红三角, 逼弹珠二次掉头向东冲线。",
+      "tip": "第二个 180° 折返 —— 弹珠现在朝接珠池狂奔。",
+      "tiles_to_add": [
+        "rail_b_n",
+        "rail_b_e"
+      ],
+      "highlight_tiles": [
+        "land_b_lo",
+        "land_b_hi"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "铺冲线短轨与池底: 一片黄色方板连折返台, 两片青色方板沿东向铺开接珠池。",
+      "tip": "短轨与池底整边互吸 —— 弹珠落地不弹跳、直接滚进池子。",
+      "tiles_to_add": [
+        "track_0",
+        "pool_0",
+        "pool_1"
+      ],
+      "highlight_tiles": [
+        "land_b_hi",
+        "ramp_w"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "立池壁收尾: 南/西/东三面矮墙围合 —— 折返坡道滚珠塔完工, 放珠开滑!",
+      "tip": "东出 → 西折 → 东冲 —— 实物跑珠听两声折返才算验收!",
+      "tiles_to_add": [
+        "pool_s",
+        "pool_w",
+        "pool_e"
+      ],
+      "highlight_tiles": [
+        "pool_0"
+      ]
+    }
+  ]
+}
