@@ -1,0 +1,433 @@
+{
+  "schema_version": 1,
+  "id": "festival_gate_01",
+  "name": "新春彩门",
+  "name_en": "Festival Gate 01",
+  "description": "D1 入门节日限定: 新春庙会入口的迷你彩门 —— 六片红毯铺底, 两座带灯窗的空心方塔踩毯而立, 黄色压顶封筒后一片长板横跨门洞当过梁 (两短边双端坐塔, 无悬臂), 红色横匾再立上梁沿面朝来客; 塔顶黄旗、毯端粉色迎宾彩旗一插, 庙会正式开门。匾在梁上、梁在塔上、塔在毯上 —— 三层受压一线到底, 是孩子第一课'架桥'启蒙。",
+  "difficulty": 1,
+  "total_pieces": 22,
+  "tags": [
+    "节日",
+    "新春",
+    "彩门",
+    "亲子入门"
+  ],
+  "content_meta": {
+    "series": "holiday_seasonal",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 14,
+        "equilateral_triangle": 4,
+        "rectangle": 2,
+        "window_square": 2
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "carpet_0",
+      "type": "square",
+      "position": [
+        -0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_1",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_2",
+      "type": "square",
+      "position": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_3",
+      "type": "square",
+      "position": [
+        2.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_4",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "carpet_5",
+      "type": "square",
+      "position": [
+        4.5,
+        0.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tower_w_s",
+      "type": "window_square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tower_w_n",
+      "type": "square",
+      "position": [
+        0.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tower_w_in",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tower_w_out",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tower_e_s",
+      "type": "window_square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "tower_e_n",
+      "type": "square",
+      "position": [
+        3.5,
+        1.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tower_e_in",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "tower_e_out",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "cap_w",
+      "type": "square",
+      "position": [
+        0.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "cap_e",
+      "type": "square",
+      "position": [
+        3.5,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "beam",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "banner",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_w",
+      "type": "equilateral_triangle",
+      "position": [
+        0.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.0,
+        0.5,
+        1.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "bunting_w",
+      "type": "equilateral_triangle",
+      "position": [
+        -0.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    },
+    {
+      "id": "bunting_e",
+      "type": "equilateral_triangle",
+      "position": [
+        4.5,
+        0.0,
+        0.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "pink"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺红毯: 六片红色方板一字排开, 庙会入口的地界画好了。",
+      "tip": "每片与上一片整边贴合, 红毯笔直, 彩门才立得正。",
+      "tiles_to_add": [
+        "carpet_0",
+        "carpet_1",
+        "carpet_2",
+        "carpet_3",
+        "carpet_4",
+        "carpet_5"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立西塔: 四面墙踩住红毯方板边合成方筒, 透明窗格朝南当灯窗。",
+      "tip": "相邻两面墙的竖边互相一咬, 塔就自己站住了。",
+      "tiles_to_add": [
+        "tower_w_s",
+        "tower_w_n",
+        "tower_w_in",
+        "tower_w_out"
+      ],
+      "highlight_tiles": [
+        "carpet_1"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "立东塔: 与西塔一模一样, 中间空出两格宽的门洞。",
+      "tip": "",
+      "tiles_to_add": [
+        "tower_e_s",
+        "tower_e_n",
+        "tower_e_in",
+        "tower_e_out"
+      ],
+      "highlight_tiles": [
+        "carpet_4",
+        "tower_w_in"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "压顶架梁: 两片黄色压顶封住塔筒, 长板两头坐上塔墙顶, 横跨门洞。",
+      "tip": "过梁两条短边各坐一座塔 —— 桥就是这样架起来的。",
+      "tiles_to_add": [
+        "cap_w",
+        "cap_e",
+        "beam"
+      ],
+      "highlight_tiles": [
+        "tower_w_in",
+        "tower_e_in"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "挂匾插旗: 横匾立上过梁南沿, 塔旗与迎宾彩旗就位 —— 庙会开门!",
+      "tip": "横匾底边整条压住过梁边, 写上'新春大吉'正合适。",
+      "tiles_to_add": [
+        "banner",
+        "flag_w",
+        "flag_e",
+        "bunting_w",
+        "bunting_e"
+      ],
+      "highlight_tiles": [
+        "beam",
+        "carpet_0"
+      ]
+    }
+  ]
+}
