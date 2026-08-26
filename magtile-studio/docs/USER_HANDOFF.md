@@ -201,7 +201,7 @@ D4+ 全集 46 —— 新增批旗舰 `stonehenge_01` D4, 其余 15 个全部 D2/
 全部入库 ✅; `run_release_gate.sh --full --l2` 软件侧 QA+L2 全绿 ✅
 (双预期红: L3 0/46 + 难度配额 strict); **内容扩至 250 已收官**
 (`2b2c4ff`, 内容批 F~I) ✅; 五份留痕报告已全部刷新至 250 基线 ✅;
-**工程天花板已确认** —— 见 [reports/ENGINEERING_CEILING_2026-08-25.md](reports/ENGINEERING_CEILING_2026-08-25.md)
+**工程天花板已确认** —— 见 [reports/ENGINEERING_CEILING_2026-08-26.md](reports/ENGINEERING_CEILING_2026-08-26.md)
 与 [reports/LAUNCH_BLOCKERS_2026-08-25.md](reports/LAUNCH_BLOCKERS_2026-08-25.md);
 剩余: 路径 A 实物 / 路径 B 配额决策 / 路径 C Manual P0 (用户侧)。
 
@@ -209,7 +209,7 @@ D4+ 全集 46 —— 新增批旗舰 `stonehenge_01` D4, 其余 15 个全部 D2/
 
 ## 3. 工程侧下一波 (全部需用户决策后启动)
 
-依据 [reports/ENGINEERING_CEILING_2026-08-25.md](reports/ENGINEERING_CEILING_2026-08-25.md)
+依据 [reports/ENGINEERING_CEILING_2026-08-26.md](reports/ENGINEERING_CEILING_2026-08-26.md)
 (结论在配额批后基线 `9aa146d` 重新确认成立), **无可自主推进项**。下列仅为
 决策落地后工程可接手的范围 (详见
 [reports/LAUNCH_BLOCKERS_2026-08-26.md](reports/LAUNCH_BLOCKERS_2026-08-26.md)):
