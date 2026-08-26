@@ -117,6 +117,24 @@
       "thumbnail": "thumbnails/watchtower_01.png"
     },
     {
+      "id": "plaza_canopy_01",
+      "file": "models/plaza_canopy_01.json",
+      "name": "广场遮阳亭",
+      "name_en": "Plaza Canopy 01",
+      "description": "扩展主打片型 large_square 引流 D1: 六片大正方形拼出门式刚架遮阳亭 —— 两片平拼地台、两片整片立起当东西山墙、两片在 z=2合拢成顶棚, 全程 2.0 整边等长互吸; 棚下地台拼缝上骑一条双面靠背长椅, 顶棚拼缝再立一块红色招牌, 南步道、北花圃、东西花箱点缀四色三角花 —— 一片大正方形顶四片小方板, 体量感立现。",
+      "difficulty": 1,
+      "total_pieces": 25,
+      "step_count": 7,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "遮阳亭",
+        "长椅",
+        "大正方形",
+        "入门"
+      ]
+    },
+    {
       "id": "mini_bus_01",
       "file": "models/mini_bus_01.json",
       "name": "迷你小巴",
@@ -155,6 +173,24 @@
       "thumbnail": "thumbnails/tulip_bed_01.png"
     },
     {
+      "id": "marble_splitter_01",
+      "file": "models/marble_splitter_01.json",
+      "name": "拱廊分流滚珠道",
+      "name_en": "Marble Splitter 01",
+      "description": "滚珠乐园 D2 门框方主打示范: 四片门框方横立成拱廊桥墩, 墩顶三片方板连成 z=1 高架跑道, 西端门框发球拱出珠; 弹珠沿跑道东行、顺 30 度坡道落地, 冲进 T 形分流口撞上绿色挡板, 从南北两道贴地门框门洞 (T17 负空间) 二选一穿出, 滚进带透明得分窗的接珠湾。门框方一片三用 (桥墩/发球拱/分流门), 分流发生在地面 —— 与高塔类滚珠模型的立体动线完全不同, 全部 CORE-9。",
+      "difficulty": 2,
+      "total_pieces": 30,
+      "step_count": 8,
+      "theme": "滚珠乐园",
+      "tags": [
+        "滚珠",
+        "拱廊",
+        "分流",
+        "滚珠乐园",
+        "门框"
+      ]
+    },
+    {
       "id": "star_octahedron_01",
       "file": "models/star_octahedron_01.json",
       "name": "星形八面体摆件",
@@ -172,6 +208,44 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/star_octahedron_01.png"
+    },
+    {
+      "id": "trapezoid_awning_01",
+      "file": "models/trapezoid_awning_01.json",
+      "name": "梯形雨檐花架墙",
+      "name_en": "Trapezoid Awning Wall 01",
+      "description": "植物花园 D2 梯形主打示范: 长方形横砌的 4 格花架墙上, 同一种梯形摆出四种姿态 —— 墙顶两片 30 度下斜雨檐、同一条沿口两片直立女儿墙 (下宽上窄的收分轮廓)、墙腰横缝平挑两片盆花展台、步道南沿再平铺两片扇贝形包边; 花圃带五株骑缝三角花, 檐前两丛花收边。梯形下底 (长 2) 与长方形横边恰好等长, 是整面墙整边吸合的几何前提 —— 与旧版连廊密铺条带的动线完全不同。",
+      "difficulty": 2,
+      "total_pieces": 31,
+      "step_count": 8,
+      "theme": "植物花园",
+      "tags": [
+        "植物花园",
+        "花架",
+        "雨檐",
+        "梯形",
+        "进阶",
+        "需要扩展装"
+      ]
+    },
+    {
+      "id": "hex_honeycomb_01",
+      "file": "models/hex_honeycomb_01.json",
+      "name": "蜂窝六角亭",
+      "name_en": "Hex Honeycomb Pavilion 01",
+      "description": "几何艺术 D2: 20 片六边形的蜂窝专场 —— 七片六边形平铺成蜂窝花地 (T18 密铺), 六片六边形立在花地最外沿围成六边环带蜂窝墙(相邻墙面 120 度, 每面质心正压底边铰链), 顶上再盖一朵同构的七片蜂窝花作平顶 (T13 薄壳合围); 地面十二片等边三角形两两合尖成菱, 把花瓣之间六个 120 度凹口铺成石板广场。花地-环带-平顶三层全部整边互吸, 无一处悬挑, 是扩展装六边形的招牌玩法。",
+      "difficulty": 2,
+      "total_pieces": 32,
+      "step_count": 6,
+      "theme": "几何艺术",
+      "tags": [
+        "几何艺术",
+        "蜂窝",
+        "六边形",
+        "密铺",
+        "亭子",
+        "需要扩展装"
+      ]
     },
     {
       "id": "marble_cascade_01",
@@ -229,6 +303,44 @@
         "池塘"
       ],
       "thumbnail": "thumbnails/swan_01.png"
+    },
+    {
+      "id": "rhombus_patchwork_01",
+      "file": "models/rhombus_patchwork_01.json",
+      "name": "菱形拼布屏风",
+      "name_en": "Rhombus Patchwork Screen 01",
+      "description": "几何艺术菱形篇: 28 片 60 度菱形以人字纹密铺竖砌成 U 形三扇屏 —— 每排菱形整排同向倾斜, 上下排倾向一排一换, 排间上底下底整边互吸, 排内斜边两两互咬; 中屏红橙、西翼蓝青、东翼绿黄, 三套双色拼布像三块花毯拼成的隔断, 屏缘锯齿如织毯毛边, 两角紫色门旗相向而倾。两翼与中屏成直角站位, 密铺花毯自己站成了屏风。",
+      "difficulty": 2,
+      "total_pieces": 39,
+      "step_count": 10,
+      "theme": "几何艺术",
+      "tags": [
+        "几何艺术",
+        "密铺",
+        "拼布",
+        "屏风",
+        "对称",
+        "需要扩展装"
+      ]
+    },
+    {
+      "id": "conservatory_01",
+      "file": "models/conservatory_01.json",
+      "name": "天窗玻璃花房",
+      "name_en": "Conservatory 01",
+      "description": "植物花园 D2 窗格方主打示范: 4x3 单层花房南立面与东墙整排窗格方玻璃, 北墙留 T17 门洞; 盖满 12 片透明玻璃平顶后, 顶面正中再升起一圈 2x1 窗格方天窗塔 (roof lantern), 塔顶长方形压顶、两端黄色尖饰 —— 维多利亚花房的经典屋顶轮廓; 室内 L 形泥土花池沿窗摆着红紫粉三株盆栽。窗格方 x16 全在 CORE-9 内,与 A 字斜顶 greenhouse_01、穹顶 greenhouse_dome_01 剖面完全不同。",
+      "difficulty": 2,
+      "total_pieces": 41,
+      "step_count": 9,
+      "theme": "植物花园",
+      "tags": [
+        "植物花园",
+        "温室",
+        "花房",
+        "天窗",
+        "窗格",
+        "进阶"
+      ]
     },
     {
       "id": "rehab_park_01",
@@ -442,6 +554,24 @@
       "thumbnail": "thumbnails/gingerbread_house_01.png"
     },
     {
+      "id": "switchback_ramp_01",
+      "file": "models/switchback_ramp_01.json",
+      "name": "之字闸门滚珠廊",
+      "name_en": "Switchback Ramp 01",
+      "description": "滚珠乐园 D2 之字长廊: 单层发球塔顺 30 度坡道把弹珠甩进 2 格宽的地面长廊, 四道竖立的直角三角闸门交替封住南北半幅, 弹珠被迫走出 S 形之字线, 最后冲进 2x2 接珠池; 招牌是直角三角的三种用法 (之字闸门 + 塔基斜撑 + 池角斜撑, 共 10 片, T08+T14), 与绕塔/螺旋/分流/跌落的既有滚珠动线全部不同, 全部 CORE-9, 实物跑珠即可验证。",
+      "difficulty": 2,
+      "total_pieces": 45,
+      "step_count": 11,
+      "theme": "滚珠乐园",
+      "tags": [
+        "滚珠",
+        "轨道",
+        "之字",
+        "滚珠乐园",
+        "直角三角"
+      ]
+    },
+    {
       "id": "boxing_ring_01",
       "file": "models/boxing_ring_01.json",
       "name": "拳击台",
@@ -650,6 +780,24 @@
         "海岸"
       ],
       "thumbnail": "thumbnails/lifeguard_tower_01.png"
+    },
+    {
+      "id": "streetcar_01",
+      "file": "models/streetcar_01.json",
+      "name": "双层观光电车",
+      "name_en": "Streetcar 01",
+      "description": "陆地交通 D2 wheel_base 主打示范: 四片车轮底座在轨床两侧首尾相接, 站成贯穿车长的连排轮罩裙板; 裙板顶纵铺四片长方形架出2 格宽底盘, 下层客舱透明端壁 + 南侧窗门带 + 北侧整排窗格,上层不封顶 —— 八片方板铺成敞篷观光台, 一圈红黄相间的三角栏杆围拢。轨床-裙板-底盘-墙环-台面层层整边等长互吸, 与窄箱平顶的老版有轨电车剪影完全不同。",
+      "difficulty": 2,
+      "total_pieces": 48,
+      "step_count": 9,
+      "theme": "陆地交通",
+      "tags": [
+        "陆地交通",
+        "有轨电车",
+        "双层巴士",
+        "载具",
+        "进阶"
+      ]
     },
     {
       "id": "turtle_beach_01",
@@ -880,6 +1028,25 @@
         "进阶"
       ],
       "thumbnail": "thumbnails/owl_01.png"
+    },
+    {
+      "id": "sector_rotunda_01",
+      "file": "models/sector_rotunda_01.json",
+      "name": "四象扇心圆殿",
+      "name_en": "Sector Rotunda 01",
+      "description": "建筑地标 D3 扇形示范: 四片扇形半径边两两互吸, 在地面合成正圆殿底; 十字风车墙骑缝升起, 顶上四片扇形再度合圆成殿顶, 拼缝四瓣金冠收顶; 四座切向门屋风车状展开, 外侧各贴一片竖立扇形扇面撑, 12 片广场砖合成回字环廊, 四角石柱与南入口甬道收束全局 —— 12 片扇形三种结构用法 (合圆底 / 合圆顶 / 竖撑), 扇形是圆殿的结构主角而非点缀。",
+      "difficulty": 3,
+      "total_pieces": 52,
+      "step_count": 13,
+      "theme": "建筑地标",
+      "tags": [
+        "建筑地标",
+        "圆殿",
+        "扇形",
+        "风车墙",
+        "环廊",
+        "需要扩展装"
+      ]
     },
     {
       "id": "ambulance_01",
@@ -3917,6 +4084,26 @@
         "需要扩展装"
       ],
       "thumbnail": "thumbnails/lighthouse_01.png"
+    },
+    {
+      "id": "expansion_orb_01",
+      "file": "models/expansion_orb_01.json",
+      "name": "四型合璧灯球坛",
+      "name_en": "Expansion Orb Display 01",
+      "description": "几何艺术 D4 扩展片型合璧: 四片梯形窄边朝下反扣成倒置斗拱下碗, 托起三层横板方鼓灯身 (中层透明透光带), 12 片菱形沿四条竖角缝逐层腰边互咬爬成角藤; 梯形四坡收顶后, 四片扇形风车状竖立合成极冠; 坛面四座六边形芯五瓣菱形花圃环绕, 四角灯柱收束广场 —— 菱 32 / 梯 8 / 六 4 / 扇 4 共 48 片扩展片型, 每种都在承重或签名位置, 是豪华套装的灯球陈列件。",
+      "difficulty": 4,
+      "total_pieces": 78,
+      "step_count": 18,
+      "theme": "几何艺术",
+      "tags": [
+        "几何艺术",
+        "灯球",
+        "扩展片型",
+        "透光带",
+        "摆件",
+        "挑战",
+        "需要扩展装"
+      ]
     },
     {
       "id": "roman_aqueduct_01",
