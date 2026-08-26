@@ -210,10 +210,15 @@ val stageMagTileAssets = tasks.register<Sync>("stageMagTileAssets") {
     into(layout.buildDirectory.dir("magtile-assets"))
     from(rootProject.layout.projectDirectory.dir("../../data")) {
         if (magtileAssetsMode == "starter") {
-            include("tile_catalog.json")
+            include("tile_catalog.json", "physical_set_catalog.json")
             starterModelIds.forEach { include("models/$it.json") }
         } else {
-            include("tile_catalog.json", "model_catalog.json", "models/**")
+            include(
+                "tile_catalog.json",
+                "model_catalog.json",
+                "physical_set_catalog.json",
+                "models/**"
+            )
         }
         into("data")
     }

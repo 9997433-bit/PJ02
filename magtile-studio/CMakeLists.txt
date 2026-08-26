@@ -79,6 +79,7 @@ add_library(magtile_core STATIC
     src/core/age_mode.cpp
     src/core/model_definition.cpp
     src/core/tile_catalog.cpp
+    src/core/physical_set_catalog.cpp
     src/core/json_io.cpp
     src/core/model_catalog.cpp
     src/core/parent_gate.cpp
@@ -89,6 +90,7 @@ add_library(magtile_core STATIC
     src/progress/data_privacy.cpp
     src/progress/age_settings.cpp
     src/progress/ui_settings.cpp
+    src/progress/physical_set_settings.cpp
     src/progress/subscription_settings.cpp
     src/billing/fake_billing_client.cpp
     src/billing/store_billing_client.cpp
@@ -390,6 +392,16 @@ if(MAGTILE_BUILD_TESTS)
                 add_test(NAME physical_set_catalog
                     COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_physical_set_catalog.sh
                         ${CMAKE_CURRENT_SOURCE_DIR})
+            endif()
+        endif()
+
+        # 套装 → 模型匹配: apply-set + inventory match + report 对账
+        if(EXISTS ${MAGTILE_TESTS_DIR}/test_buildable_by_set.sh)
+            find_program(MAGTILE_PYTHON3 python3)
+            if(MAGTILE_PYTHON3)
+                add_test(NAME buildable_by_set
+                    COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_buildable_by_set.sh
+                        $<TARGET_FILE:magtile_app> ${CMAKE_CURRENT_SOURCE_DIR})
             endif()
         endif()
 

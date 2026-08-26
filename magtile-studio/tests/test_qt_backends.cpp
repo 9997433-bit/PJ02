@@ -24,7 +24,9 @@
 //      JSON 文件 (格式标识/进度/成就/库存/设置齐全, 两次导出互不
 //      覆盖) / 一键清除四张表 / 清除后各桥回默认 (等价首次启动) /
 //      resetToDefaults 当场复位 (QML onDataCleared 同一条路径)。
-// 用法: magtile_qt_backend_test <临时数据库路径>
+//   8. InventoryBackend (§10.2): 实物套装列表 / 拥有清单持久化 /
+//      合并 BOM 预览与应用。
+// 用法: magtile_qt_backend_test <临时数据库路径> [data 目录]
 // =============================================================
 
 #include <QCoreApplication>
@@ -42,6 +44,7 @@
 
 #include "library_filter_model.hpp"
 #include "library_model.hpp"
+#include "inventory_backend.hpp"
 #include "magtile/core/age_mode.hpp"
 #include "magtile/progress/age_settings.hpp"
 #include "magtile/progress/progress_store.hpp"
@@ -70,10 +73,13 @@ int main(int argc, char** argv) {
     QCoreApplication app(argc, argv);
 
     if (argc < 2) {
-        std::fprintf(stderr, "用法: %s <临时数据库路径>\n", argv[0]);
+        std::fprintf(stderr, "用法: %s <临时数据库路径> [data 目录]\n", argv[0]);
         return 2;
     }
     const std::filesystem::path db_path = argv[1];
+    const std::filesystem::path data_dir =
+        argc >= 3 ? std::filesystem::path(argv[2])
+                  : std::filesystem::path(__FILE__).parent_path().parent_path() / "data";
     std::filesystem::remove(db_path);  // 每次全新建库, 测试可重复执行
 
     using magtile::core::AgeMode;
@@ -520,6 +526,25 @@ int main(int argc, char** argv) {
                    settings.ageModeId() == QStringLiteral("age_7_9"),
                "resetToDefaults 把设置内存快照拉回默认");
         expect(tts.enabled(), "resetToDefaults 把朗读开关拉回默认开");
+    }
+
+    // ---- 8. InventoryBackend: 实物套装快捷预填 (§10.2) ---------------
+    {
+        using magtile::qtui::InventoryBackend;
+        InventoryBackend inventory(data_dir, db_path);
+        const QVariantList sets = inventory.physicalSets();
+        expect(sets.size() >= 2, "实物套装目录非空");
+
+        QStringList selected{QStringLiteral("standard_102"), QStringLiteral("connetix_42_square")};
+        const QVariantMap preview = inventory.mergedPreview(selected);
+        expect(preview.value(QStringLiteral("square")).toInt() == 72,
+               "mergedPreview 合并两套装正方形数量 (36+36)");
+
+        const QVariantMap applied = inventory.applyPhysicalSets(selected);
+        expect(applied.value(QStringLiteral("square")).toInt() == 72,
+               "applyPhysicalSets 返回与 preview 一致的合并 BOM");
+        const QStringList owned = inventory.ownedPhysicalSets();
+        expect(owned.size() == 2, "applyPhysicalSets 持久化拥有套装清单");
     }
 
     if (g_failures == 0) {

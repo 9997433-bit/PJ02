@@ -124,6 +124,7 @@ if(MAGTILE_BUILD_TESTS)
             src/privacy_backend.cpp
             src/settings_backend.cpp
             src/tts_backend.cpp
+            src/inventory_backend.cpp
         )
         target_include_directories(magtile_qt_backend_test PRIVATE src)
         target_link_libraries(magtile_qt_backend_test PRIVATE
@@ -132,7 +133,8 @@ if(MAGTILE_BUILD_TESTS)
             Qt6::Core
         )
         add_test(NAME qt_backend_bridges
-            COMMAND magtile_qt_backend_test ${CMAKE_BINARY_DIR}/qt_backend_test.db)
+            COMMAND magtile_qt_backend_test ${CMAKE_BINARY_DIR}/qt_backend_test.db
+                ${CMAKE_SOURCE_DIR}/data)
     endif()
 
     # 计费桥单元测试 (C++, 无需显示环境): BillingBackend + 假计费适配层

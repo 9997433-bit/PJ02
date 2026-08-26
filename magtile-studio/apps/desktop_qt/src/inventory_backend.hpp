@@ -18,6 +18,7 @@
 #include <filesystem>
 #include <memory>
 
+#include "magtile/core/physical_set_catalog.hpp"
 #include "magtile/core/tile_catalog.hpp"
 #include "magtile/progress/progress_store.hpp"
 
@@ -49,13 +50,30 @@ public:
     /// 存档不可用或写入失败返回 false (界面温和提示, 不弹"失败")。
     Q_INVOKABLE bool save(const QVariantMap& counts);
 
+    /// 全部实物套装一行一项: {id, brand, name, totalPieces}。
+    /// 目录不可用时返回空表 (界面隐藏快捷区, 不崩溃)。
+    Q_INVOKABLE QVariantList physicalSets() const;
+
+    /// 用户已登记的拥有套装 id 列表 (进入页面时恢复多选态)。
+    Q_INVOKABLE QStringList ownedPhysicalSets() const;
+
+    /// 合并多个套装 BOM 预览 (shapeId -> count), 不落盘。
+    Q_INVOKABLE QVariantMap mergedPreview(const QStringList& setIds) const;
+
+    /// 保存拥有套装清单并返回合并 BOM (供界面填充步进器, 用户仍可
+    /// 微调后再点「保存库存」落盘片型数量)。
+    Q_INVOKABLE QVariantMap applyPhysicalSets(const QStringList& setIds);
+
 signals:
     void inventoryChanged();
 
 private:
+    std::filesystem::path data_dir_;
     std::unique_ptr<progress::ProgressStore> store_;  ///< 打开失败时为空 (只降级不崩溃)
     core::TileCatalog tile_catalog_;
+    core::PhysicalSetCatalog physical_set_catalog_;
     bool tile_catalog_loaded_ = false;
+    bool physical_set_catalog_loaded_ = false;
 };
 
 }  // namespace magtile::qtui

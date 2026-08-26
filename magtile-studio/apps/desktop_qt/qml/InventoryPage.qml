@@ -25,6 +25,8 @@ Page {
     property var counts: ({})
     property int totalCount: 0
     property var rowsData: []
+    property var physicalSetsData: []
+    property var selectedSetIds: []
 
     function reloadRows() {
         rowsData = inventory.rows()
@@ -36,6 +38,42 @@ Page {
         }
         counts = c
         totalCount = t
+    }
+
+    function reloadPhysicalSets() {
+        physicalSetsData = inventory.physicalSets()
+        selectedSetIds = inventory.ownedPhysicalSets()
+    }
+
+    function brandLabel(brand) {
+        if (brand === "generic") return "通用"
+        return brand
+    }
+
+    function toggleSet(setId) {
+        var next = selectedSetIds.slice()
+        var idx = next.indexOf(setId)
+        if (idx >= 0)
+            next.splice(idx, 1)
+        else
+            next.push(setId)
+        selectedSetIds = next
+    }
+
+    function applySelectedSets() {
+        if (selectedSetIds.length === 0) {
+            page.notify("先勾选家里有的套装")
+            return
+        }
+        var merged = inventory.applyPhysicalSets(selectedSetIds)
+        var t = 0
+        for (var key in merged) {
+            counts[key] = merged[key]
+            t += merged[key]
+        }
+        counts = counts   // 触发绑定刷新
+        totalCount = t
+        page.notify("已按选中套装填好数量, 数一数不对就改改再保存")
     }
 
     function updateCount(shapeId, value) {
@@ -62,7 +100,10 @@ Page {
         }
     }
 
-    Component.onCompleted: reloadRows()
+    Component.onCompleted: {
+        reloadRows()
+        reloadPhysicalSets()
+    }
 
     background: Rectangle { color: Theme.surfaceAlt }
 
@@ -142,6 +183,80 @@ Page {
                 wrapMode: Text.WordWrap
             }
 
+            // -- 我的套装 (§10.2 快捷预填) --------------------------------
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: Theme.spacingSmall
+                visible: page.physicalSetsData.length > 0
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: Theme.spacing
+                    Text {
+                        text: "我的套装"
+                        font.pixelSize: Theme.fontButton
+                        font.bold: true
+                        color: Theme.textPrimary
+                    }
+                    Text {
+                        text: "勾选家里有的盒子, 一键填数量 (还能再改)"
+                        font.pixelSize: Theme.fontSmall
+                        color: Theme.textSecondary
+                    }
+                }
+
+                ScrollView {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: setChipFlow.height + 8
+                    clip: true
+                    ScrollBar.horizontal.policy: ScrollBar.AsNeeded
+                    ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+                    contentWidth: setChipFlow.width
+                    contentHeight: setChipFlow.height
+
+                    Flow {
+                        id: setChipFlow
+                        width: Math.max(implicitWidth, parent.width)
+                        spacing: Theme.spacingSmall
+
+                        Repeater {
+                            model: page.physicalSetsData
+                            delegate: FilterChip {
+                                required property var modelData
+                                text: page.brandLabel(modelData.brand) + " · " + modelData.name + " (" + modelData.totalPieces + "片)"
+                                checked: page.selectedSetIds.indexOf(modelData.id) >= 0
+                                onClicked: page.toggleSet(modelData.id)
+                            }
+                        }
+                    }
+                }
+
+                AbstractButton {
+                    id: applySetsButton
+                    Layout.preferredWidth: 220
+                    Layout.preferredHeight: Theme.touchTarget
+                    enabled: page.selectedSetIds.length > 0
+                    onClicked: page.applySelectedSets()
+                    scale: pressed ? 0.97 : 1.0
+                    Behavior on scale { NumberAnimation { duration: Theme.animMs; easing.type: Easing.OutQuad } }
+                    background: Rectangle {
+                        radius: Theme.radiusButton
+                        color: applySetsButton.pressed ? Theme.primaryPressed
+                             : applySetsButton.enabled ? Theme.primary : Theme.surfaceAlt
+                        border.color: applySetsButton.enabled ? Theme.primary : Theme.cardBorder
+                        border.width: 1
+                    }
+                    contentItem: Text {
+                        text: "应用选中套装"
+                        color: applySetsButton.enabled ? "white" : Theme.textSecondary
+                        font.pixelSize: Theme.fontBody
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                }
+            }
+
             // -- 基础套装 (核心 9 片型) ----------------------------------
             RowLayout {
                 spacing: Theme.spacing
@@ -199,7 +314,7 @@ Page {
         Rectangle {
             id: card
             required property var modelData
-            property int count: modelData.count
+            property int count: page.counts[modelData.shapeId] || 0
 
             width: 250
             height: 118
