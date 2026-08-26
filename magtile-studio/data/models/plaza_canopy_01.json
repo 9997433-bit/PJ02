@@ -1,0 +1,522 @@
+{
+  "schema_version": 1,
+  "id": "plaza_canopy_01",
+  "name": "广场遮阳售卖亭",
+  "name_en": "Plaza Canopy 01",
+  "description": "主打片型 large_square 引流 D1: 两片大正方形平拼 4x2 广场地台, 下层四角方墙加两侧栏板围出亭身, 南面嵌一座带黄色台面的售卖柜台; 上层四根角柱托两根整跨檐口横梁, 顶上两片大正方形平拼 4x2 绿色遮阳顶棚, 四角再插红黄三角旗 ——一座能摆摊的两层小凉亭。",
+  "difficulty": 1,
+  "total_pieces": 26,
+  "tags": [
+    "实用功能",
+    "遮阳棚",
+    "售卖亭",
+    "柜台",
+    "大正方形",
+    "入门"
+  ],
+  "content_meta": {
+    "series": "practical_utility",
+    "structural_signature": {
+      "tile_histogram": {
+        "square": 14,
+        "equilateral_triangle": 4,
+        "large_square": 4,
+        "rectangle": 4
+      }
+    }
+  },
+  "final_assembly": [
+    {
+      "id": "lg_base_w",
+      "type": "large_square",
+      "position": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "lg_base_e",
+      "type": "large_square",
+      "position": [
+        3.0,
+        1.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "col_sw_s",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "col_se_s",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "col_nw_n",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "col_ne_n",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "side_w_s",
+      "type": "square",
+      "position": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "side_w_n",
+      "type": "square",
+      "position": [
+        0.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "side_e_s",
+      "type": "square",
+      "position": [
+        4.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "side_e_n",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "ctr_front",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.0,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ctr_side_w",
+      "type": "square",
+      "position": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ctr_side_e",
+      "type": "square",
+      "position": [
+        3.0,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "ctr_top",
+      "type": "rectangle",
+      "position": [
+        2.0,
+        0.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "post_sw",
+      "type": "square",
+      "position": [
+        0.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "post_se",
+      "type": "square",
+      "position": [
+        3.5,
+        0.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "post_nw",
+      "type": "square",
+      "position": [
+        0.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "post_ne",
+      "type": "square",
+      "position": [
+        3.5,
+        2.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "beam_w",
+      "type": "rectangle",
+      "position": [
+        0.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "beam_e",
+      "type": "rectangle",
+      "position": [
+        4.0,
+        1.0,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "blue"
+    },
+    {
+      "id": "canopy_w",
+      "type": "large_square",
+      "position": [
+        1.0,
+        1.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "canopy_e",
+      "type": "large_square",
+      "position": [
+        3.0,
+        1.0,
+        2.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "flag_sw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        0.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    },
+    {
+      "id": "flag_se",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        0.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_nw",
+      "type": "equilateral_triangle",
+      "position": [
+        0.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "yellow"
+    },
+    {
+      "id": "flag_ne",
+      "type": "equilateral_triangle",
+      "position": [
+        3.5,
+        2.0,
+        2.288675
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "red"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "铺广场地台: 两片灰色大正方形整边互吸, 平拼出 4x2 的小广场。",
+      "tip": "大正方形边长 2.0, 一片顶四片小方板 —— 拼缝对齐才好立墙。",
+      "tiles_to_add": [
+        "lg_base_w",
+        "lg_base_e"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "立下层亭身: 前后各两片蓝色方墙踩住地台四角, 两侧各两片方墙连成栏板 —— 角点竖直边互相吸住, 围出亭身。",
+      "tip": "每片墙底边都要整边踩上地台沿边, 转角处竖边咔哒一声吸牢。",
+      "tiles_to_add": [
+        "col_sw_s",
+        "side_w_s",
+        "side_w_n",
+        "col_nw_n",
+        "col_se_s",
+        "side_e_s",
+        "side_e_n",
+        "col_ne_n"
+      ],
+      "highlight_tiles": [
+        "lg_base_w",
+        "lg_base_e"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "嵌售卖柜台: 橙色横楣立在前墙两角之间当柜台立面, 两片橙色方墙关住左右, 黄色横楣平放上去当台面 —— 台面三条边一次吸住。",
+      "tip": "先立好三面再放台面, 前沿与左右顶沿同时吸合才算到位。",
+      "tiles_to_add": [
+        "ctr_front",
+        "ctr_side_w",
+        "ctr_side_e",
+        "ctr_top"
+      ],
+      "highlight_tiles": [
+        "col_sw_s",
+        "col_se_s"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "立上层角柱: 四片蓝色方墙对准四角, 底边吸住下层墙顶沿,把亭子拔高到两层。",
+      "tip": "上下两层对齐叠放, 柱子才又高又直。",
+      "tiles_to_add": [
+        "post_sw",
+        "post_se",
+        "post_nw",
+        "post_ne"
+      ],
+      "highlight_tiles": [
+        "col_sw_s",
+        "col_ne_n"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "架檐口横梁: 两根蓝色横楣横跨两侧, 两端竖直边吸住角柱,底边压住栏板墙顶沿 —— 梁柱框架成型。",
+      "tip": "横梁两头同时吸住前后角柱, 像门框一样兜住整个侧面。",
+      "tiles_to_add": [
+        "beam_w",
+        "beam_e"
+      ],
+      "highlight_tiles": [
+        "post_sw",
+        "post_nw"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "盖遮阳顶棚: 两片绿色大正方形依次平放到 z=2, 沿边吸住横梁顶沿与角柱顶沿, 再整边互吸合拢成 4x2 顶棚。",
+      "tip": "先盖西半再盖东半, 每片都要先吸住同侧横梁再对拼缝。",
+      "tiles_to_add": [
+        "canopy_w",
+        "canopy_e"
+      ],
+      "highlight_tiles": [
+        "beam_w",
+        "beam_e"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "插角旗收尾: 四片红黄相间的三角旗立上顶棚四角 —— 广场遮阳售卖亭开张啦!",
+      "tip": "三角旗底边与角柱顶沿等长, 对准顶棚角上一按就吸住。",
+      "tiles_to_add": [
+        "flag_sw",
+        "flag_se",
+        "flag_nw",
+        "flag_ne"
+      ],
+      "highlight_tiles": [
+        "canopy_w",
+        "canopy_e"
+      ]
+    }
+  ]
+}

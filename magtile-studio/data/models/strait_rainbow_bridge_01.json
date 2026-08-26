@@ -1,0 +1,2073 @@
+{
+  "schema_version": 1,
+  "id": "strait_rainbow_bridge_01",
+  "name": "海峡之虹悬索桥",
+  "name_en": "Strait Rainbow Suspension Bridge 01",
+  "description": "桥梁工程 D5 悬索旗舰: 结构签名是'十二段菱形链从双塔垂向桥面' —— 先立双塔桁架芯与斜撑 (T02+T14), 再铺桥面连续梁, 最后由跨中向两塔对称挂透明菱形主缆与吊索, 用受压链条再现悬索桥的受拉曲线; 与 D3 海湾悬索桥 (单格悬挑合龙) 和 D4 石拱桥 (拱洞负空间) 传力叙事均不同。",
+  "difficulty": 5,
+  "total_pieces": 110,
+  "tags": [
+    "桥梁",
+    "悬索桥",
+    "工程",
+    "桁架",
+    "大师",
+    "需要扩展装"
+  ],
+  "content_meta": {
+    "series": "bridge_engineering",
+    "structural_signature": {
+      "tile_histogram": {
+        "rhombus": 48,
+        "square": 34,
+        "right_triangle": 20,
+        "rectangle": 8
+      },
+      "silhouette_class": "twin_tower_span",
+      "height_layers": 7
+    },
+    "build_paradigm": "skeleton_first",
+    "technique_tags": {
+      "primary": "T15_suspension_sim",
+      "secondary": [
+        "T02_triangular_truss",
+        "T14_diagonal_bracing"
+      ]
+    },
+    "signature_statement": "十二段菱形链从双塔垂向桥面, 用受压链条再现悬索桥的受拉曲线。",
+    "physical_risk_notes": [
+      {
+        "step": 7,
+        "risk": "主塔封顶前为单柱悬臂, 桌面震动可致倾倒",
+        "mitigation": "该步 tip 提示: 一手扶塔身再放片"
+      },
+      {
+        "step": 20,
+        "risk": "首段菱形链仅单边吸合时最易脱落",
+        "mitigation": "教程要求先接桥面端再接塔端"
+      }
+    ]
+  },
+  "final_assembly": [
+    {
+      "id": "aw_1a",
+      "type": "square",
+      "position": [
+        2.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "aw_1b",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ae_1a",
+      "type": "square",
+      "position": [
+        10.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ae_1b",
+      "type": "square",
+      "position": [
+        11.5,
+        1.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pw_1",
+      "type": "square",
+      "position": [
+        4.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pe_1",
+      "type": "square",
+      "position": [
+        10.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "aw_2a",
+      "type": "square",
+      "position": [
+        2.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "ae_2a",
+      "type": "square",
+      "position": [
+        10.5,
+        2.5,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "green"
+    },
+    {
+      "id": "pw_2",
+      "type": "square",
+      "position": [
+        4.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pe_2",
+      "type": "square",
+      "position": [
+        10.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "tw_s_0",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_n_0",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_s_1",
+      "type": "square",
+      "position": [
+        5.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_n_1",
+      "type": "square",
+      "position": [
+        5.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "te_s_0",
+      "type": "square",
+      "position": [
+        9.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "te_n_0",
+      "type": "square",
+      "position": [
+        9.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "te_s_1",
+      "type": "square",
+      "position": [
+        9.0,
+        1.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "te_n_1",
+      "type": "square",
+      "position": [
+        9.0,
+        2.5,
+        1.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_g1_s",
+      "type": "right_triangle",
+      "position": [
+        5.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_g2_s",
+      "type": "right_triangle",
+      "position": [
+        4.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_g1_n",
+      "type": "right_triangle",
+      "position": [
+        5.333333,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_g2_n",
+      "type": "right_triangle",
+      "position": [
+        4.666667,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "te_g1_s",
+      "type": "right_triangle",
+      "position": [
+        9.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "te_g2_s",
+      "type": "right_triangle",
+      "position": [
+        8.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "te_g1_n",
+      "type": "right_triangle",
+      "position": [
+        9.333333,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "te_g2_n",
+      "type": "right_triangle",
+      "position": [
+        8.666667,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "awb_s",
+      "type": "right_triangle",
+      "position": [
+        3.666667,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "awb_n",
+      "type": "right_triangle",
+      "position": [
+        3.666667,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "aeb_s",
+      "type": "right_triangle",
+      "position": [
+        10.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "aeb_n",
+      "type": "right_triangle",
+      "position": [
+        10.333333,
+        2.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "anc_w",
+      "type": "right_triangle",
+      "position": [
+        2.0,
+        1.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "anc_n",
+      "type": "right_triangle",
+      "position": [
+        2.0,
+        2.333333,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dj4",
+      "type": "right_triangle",
+      "position": [
+        4.333333,
+        2.0,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dj6",
+      "type": "right_triangle",
+      "position": [
+        6.333333,
+        2.0,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "dj8",
+      "type": "right_triangle",
+      "position": [
+        7.666667,
+        2.0,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "tw_stay_n",
+      "type": "right_triangle",
+      "position": [
+        5.333333,
+        2.0,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "te_stay_n",
+      "type": "right_triangle",
+      "position": [
+        8.666667,
+        2.0,
+        1.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "eb_tie",
+      "type": "right_triangle",
+      "position": [
+        11.333333,
+        1.0,
+        0.333333
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "orange"
+    },
+    {
+      "id": "d_3_1",
+      "type": "square",
+      "position": [
+        3.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_3_2",
+      "type": "square",
+      "position": [
+        3.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_4_1",
+      "type": "square",
+      "position": [
+        4.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_4_2",
+      "type": "square",
+      "position": [
+        4.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_5_1",
+      "type": "square",
+      "position": [
+        5.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_5_2",
+      "type": "square",
+      "position": [
+        5.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_6_1",
+      "type": "square",
+      "position": [
+        6.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_6_2",
+      "type": "square",
+      "position": [
+        6.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_7_1",
+      "type": "square",
+      "position": [
+        7.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_7_2",
+      "type": "square",
+      "position": [
+        7.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_8_1",
+      "type": "square",
+      "position": [
+        8.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_8_2",
+      "type": "square",
+      "position": [
+        8.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_9_1",
+      "type": "square",
+      "position": [
+        9.5,
+        1.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "d_9_2",
+      "type": "square",
+      "position": [
+        9.5,
+        2.5,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pm_1",
+      "type": "square",
+      "position": [
+        6.0,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "pm_2",
+      "type": "square",
+      "position": [
+        6.0,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        90.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_w0_0",
+      "type": "rectangle",
+      "position": [
+        2.133975,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_w0_1",
+      "type": "rectangle",
+      "position": [
+        2.133975,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_w1_0",
+      "type": "rectangle",
+      "position": [
+        3.133975,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_w1_1",
+      "type": "rectangle",
+      "position": [
+        3.133975,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        -30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_e0_0",
+      "type": "rectangle",
+      "position": [
+        10.866025,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_e0_1",
+      "type": "rectangle",
+      "position": [
+        10.866025,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_e1_0",
+      "type": "rectangle",
+      "position": [
+        9.866025,
+        1.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "ramp_e1_1",
+      "type": "rectangle",
+      "position": [
+        9.866025,
+        2.5,
+        0.5
+      ],
+      "rotation": [
+        0.0,
+        30.0,
+        0.0
+      ],
+      "color": "gray"
+    },
+    {
+      "id": "mc_s_3",
+      "type": "rhombus",
+      "position": [
+        3.75,
+        1.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_n_3",
+      "type": "rhombus",
+      "position": [
+        3.75,
+        3.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_s_5",
+      "type": "rhombus",
+      "position": [
+        5.25,
+        1.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_n_5",
+      "type": "rhombus",
+      "position": [
+        5.25,
+        3.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_s_6",
+      "type": "rhombus",
+      "position": [
+        6.75,
+        1.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_n_6",
+      "type": "rhombus",
+      "position": [
+        6.75,
+        3.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_s_8",
+      "type": "rhombus",
+      "position": [
+        8.25,
+        1.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_n_8",
+      "type": "rhombus",
+      "position": [
+        8.25,
+        3.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_s_2",
+      "type": "rhombus",
+      "position": [
+        2.75,
+        1.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_n_2",
+      "type": "rhombus",
+      "position": [
+        2.75,
+        3.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_s_9",
+      "type": "rhombus",
+      "position": [
+        9.25,
+        1.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "mc_n_9",
+      "type": "rhombus",
+      "position": [
+        9.25,
+        3.0,
+        1.433013
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_s_a",
+      "type": "rhombus",
+      "position": [
+        5.75,
+        1.193649,
+        1.387299
+      ],
+      "rotation": [
+        63.434949,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_s_c0",
+      "type": "rhombus",
+      "position": [
+        3.404002,
+        1.75,
+        1.155829
+      ],
+      "rotation": [
+        158.90766,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_s_c1",
+      "type": "rhombus",
+      "position": [
+        4.414751,
+        1.75,
+        1.124425
+      ],
+      "rotation": [
+        163.300756,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_s_c2",
+      "type": "rhombus",
+      "position": [
+        5.42053,
+        1.75,
+        1.103221
+      ],
+      "rotation": [
+        166.209133,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_s_c3",
+      "type": "rhombus",
+      "position": [
+        6.423965,
+        1.75,
+        1.088054
+      ],
+      "rotation": [
+        168.266916,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_s_s0",
+      "type": "rhombus",
+      "position": [
+        2.75,
+        1.306186,
+        1.306186
+      ],
+      "rotation": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_s_s1",
+      "type": "rhombus",
+      "position": [
+        3.75,
+        1.306186,
+        1.306186
+      ],
+      "rotation": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_s_s2",
+      "type": "rhombus",
+      "position": [
+        4.75,
+        1.306186,
+        1.306186
+      ],
+      "rotation": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_s_s3",
+      "type": "rhombus",
+      "position": [
+        5.75,
+        1.306186,
+        1.306186
+      ],
+      "rotation": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_n_a",
+      "type": "rhombus",
+      "position": [
+        5.75,
+        2.360289,
+        1.240192
+      ],
+      "rotation": [
+        33.690068,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_n_c0",
+      "type": "rhombus",
+      "position": [
+        3.404002,
+        2.75,
+        1.155829
+      ],
+      "rotation": [
+        158.90766,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_n_c1",
+      "type": "rhombus",
+      "position": [
+        4.414751,
+        2.75,
+        1.124425
+      ],
+      "rotation": [
+        163.300756,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_n_c2",
+      "type": "rhombus",
+      "position": [
+        5.42053,
+        2.75,
+        1.103221
+      ],
+      "rotation": [
+        166.209133,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_n_c3",
+      "type": "rhombus",
+      "position": [
+        6.423965,
+        2.75,
+        1.088054
+      ],
+      "rotation": [
+        168.266916,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_n_s0",
+      "type": "rhombus",
+      "position": [
+        2.75,
+        3.401628,
+        1.16185
+      ],
+      "rotation": [
+        21.948699,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_n_s1",
+      "type": "rhombus",
+      "position": [
+        3.75,
+        3.401628,
+        1.16185
+      ],
+      "rotation": [
+        21.948699,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_n_s2",
+      "type": "rhombus",
+      "position": [
+        4.75,
+        3.401628,
+        1.16185
+      ],
+      "rotation": [
+        21.948699,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hgw_n_s3",
+      "type": "rhombus",
+      "position": [
+        5.75,
+        3.401628,
+        1.16185
+      ],
+      "rotation": [
+        21.948699,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_s_a",
+      "type": "rhombus",
+      "position": [
+        8.25,
+        1.193649,
+        1.387299
+      ],
+      "rotation": [
+        116.565051,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_s_c0",
+      "type": "rhombus",
+      "position": [
+        7.426164,
+        1.75,
+        1.07671
+      ],
+      "rotation": [
+        169.796026,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_s_c1",
+      "type": "rhombus",
+      "position": [
+        8.427653,
+        1.75,
+        1.067921
+      ],
+      "rotation": [
+        170.975459,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_s_c2",
+      "type": "rhombus",
+      "position": [
+        9.428706,
+        1.75,
+        1.060921
+      ],
+      "rotation": [
+        171.91212,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_s_c3",
+      "type": "rhombus",
+      "position": [
+        10.429478,
+        1.75,
+        1.055219
+      ],
+      "rotation": [
+        172.673593,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_s_s0",
+      "type": "rhombus",
+      "position": [
+        7.75,
+        1.306186,
+        1.306186
+      ],
+      "rotation": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_s_s1",
+      "type": "rhombus",
+      "position": [
+        8.75,
+        1.306186,
+        1.306186
+      ],
+      "rotation": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_s_s2",
+      "type": "rhombus",
+      "position": [
+        9.75,
+        1.306186,
+        1.306186
+      ],
+      "rotation": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_s_s3",
+      "type": "rhombus",
+      "position": [
+        10.75,
+        1.306186,
+        1.306186
+      ],
+      "rotation": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_n_a",
+      "type": "rhombus",
+      "position": [
+        8.25,
+        2.360289,
+        1.240192
+      ],
+      "rotation": [
+        146.309932,
+        0.0,
+        180.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_n_c0",
+      "type": "rhombus",
+      "position": [
+        7.426164,
+        2.75,
+        1.07671
+      ],
+      "rotation": [
+        169.796026,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_n_c1",
+      "type": "rhombus",
+      "position": [
+        8.427653,
+        2.75,
+        1.067921
+      ],
+      "rotation": [
+        170.975459,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_n_c2",
+      "type": "rhombus",
+      "position": [
+        9.428706,
+        2.75,
+        1.060921
+      ],
+      "rotation": [
+        171.91212,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_n_c3",
+      "type": "rhombus",
+      "position": [
+        10.429478,
+        2.75,
+        1.055219
+      ],
+      "rotation": [
+        172.673593,
+        0.0,
+        90.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_n_s0",
+      "type": "rhombus",
+      "position": [
+        7.75,
+        3.401628,
+        1.16185
+      ],
+      "rotation": [
+        21.948699,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_n_s1",
+      "type": "rhombus",
+      "position": [
+        8.75,
+        3.401628,
+        1.16185
+      ],
+      "rotation": [
+        21.948699,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_n_s2",
+      "type": "rhombus",
+      "position": [
+        9.75,
+        3.401628,
+        1.16185
+      ],
+      "rotation": [
+        21.948699,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    },
+    {
+      "id": "hge_n_s3",
+      "type": "rhombus",
+      "position": [
+        10.75,
+        3.401628,
+        1.16185
+      ],
+      "rotation": [
+        21.948699,
+        0.0,
+        0.0
+      ],
+      "color": "clear"
+    }
+  ],
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "西岸锚台: 铺 3 片绿色岸台, 整边互吸成锚碇子结构。",
+      "tip": "锚碇是悬索桥荷载最终入地点 —— 西岸子结构一次成形。",
+      "tiles_to_add": [
+        "aw_1a",
+        "aw_1b",
+        "aw_2a"
+      ],
+      "highlight_tiles": []
+    },
+    {
+      "step_number": 2,
+      "description": "西桥台墙: 2 片灰色桥台墙吸住岸台东缘。",
+      "tip": "桥台墙底接地、顶边将托住桥面 x=3。",
+      "tiles_to_add": [
+        "pw_1",
+        "pw_2"
+      ],
+      "highlight_tiles": [
+        "aw_1a"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "桥面西端: x=3 两排方板压上西桥台。",
+      "tip": "桥面先压稳桥台 —— 引桥坡道留待全桥合龙后再挂。",
+      "tiles_to_add": [
+        "d_3_1",
+        "d_3_2"
+      ],
+      "highlight_tiles": [
+        "pw_1"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "桥面西进: 悬挑 1 排 (x=4), 自桥台向东推进一格。",
+      "tip": "单格悬挑在磁吸力矩预算内 —— 先别急着再挑第二排!",
+      "tiles_to_add": [
+        "d_4_1",
+        "d_4_2"
+      ],
+      "highlight_tiles": [
+        "d_3_1"
+      ]
+    },
+    {
+      "step_number": 5,
+      "description": "西段锁缝撑: 1 根斜撑锁定 x=4 悬挑段。",
+      "tip": "悬挑下一格前必须先装斜撑 —— 真实悬索桥的架设节奏。",
+      "tiles_to_add": [
+        "dj4"
+      ],
+      "highlight_tiles": [
+        "d_4_1"
+      ]
+    },
+    {
+      "step_number": 6,
+      "description": "西主塔 L1 + 桥面 x=5: 塔腿、塔脚撑与北排 stay 合龙。",
+      "tip": "塔腿侧向整边贴桥面 —— tw_stay_n 水平边吸桥面北沿。",
+      "tiles_to_add": [
+        "d_5_1",
+        "d_5_2",
+        "tw_s_0",
+        "tw_n_0",
+        "tw_g1_s",
+        "tw_stay_n"
+      ],
+      "highlight_tiles": [
+        "d_4_1"
+      ]
+    },
+    {
+      "step_number": 7,
+      "description": "西塔 L2 + 主跨西段: 二层塔腿、中墩与 x=6 桥面及 dj6 合龙。",
+      "tip": "x=6 中墩与 dj6 同步 —— 悬挑力矩在预算内。",
+      "tiles_to_add": [
+        "tw_s_1",
+        "tw_n_1",
+        "tw_g2_s",
+        "d_6_1",
+        "d_6_2",
+        "dj6",
+        "pm_1",
+        "pm_2"
+      ],
+      "highlight_tiles": [
+        "tw_s_0",
+        "d_5_1"
+      ]
+    },
+    {
+      "step_number": 8,
+      "description": "主跨东段 + 东塔 L1: x=7-9 与 dj7、dj8、东塔一次合龙。",
+      "tip": "三排桥面与东塔同步 —— 无中间长悬臂步。",
+      "tiles_to_add": [
+        "d_7_1",
+        "d_7_2",
+        "d_8_1",
+        "d_8_2",
+        "d_9_1",
+        "d_9_2",
+        "dj8",
+        "te_s_0",
+        "te_n_0",
+        "te_g1_s",
+        "te_stay_n"
+      ],
+      "highlight_tiles": [
+        "d_6_1"
+      ]
+    },
+    {
+      "step_number": 9,
+      "description": "东桥台墙: 2 片灰色桥台墙吸住桥面东缘。",
+      "tip": "桥面 x=9 已压稳 —— 桥台墙底接地。",
+      "tiles_to_add": [
+        "pe_1",
+        "pe_2"
+      ],
+      "highlight_tiles": [
+        "d_9_1"
+      ]
+    },
+    {
+      "step_number": 10,
+      "description": "东塔 L2: 二层塔腿与塔脚斜撑封顶。",
+      "tip": "东塔封顶 —— 北腿整边吸桥面北排。",
+      "tiles_to_add": [
+        "te_s_1",
+        "te_n_1",
+        "te_g2_s"
+      ],
+      "highlight_tiles": [
+        "te_s_0",
+        "d_9_1"
+      ]
+    },
+    {
+      "step_number": 11,
+      "description": "东岸锚台 (南排): 2 片绿色岸台吸住东桥台南缘。",
+      "tip": "南岸台先合龙 —— 北岸随后整边互吸。",
+      "tiles_to_add": [
+        "ae_1a",
+        "ae_1b"
+      ],
+      "highlight_tiles": [
+        "pe_1",
+        "d_9_1"
+      ]
+    },
+    {
+      "step_number": 12,
+      "description": "东岸锚台 (北排): 1 片绿色岸台 —— 全桥单一连通组!",
+      "tip": "东岸锚台整边吸桥台 —— 无分组断连。",
+      "tiles_to_add": [
+        "ae_2a"
+      ],
+      "highlight_tiles": [
+        "ae_1a",
+        "pe_2"
+      ]
+    },
+    {
+      "step_number": 13,
+      "description": "主跨侧撑: 2 根斜撑锁牢双塔北侧塔脚。",
+      "tip": "合龙后立即锁塔脚 —— 主跨不再颤。",
+      "tiles_to_add": [
+        "tw_g2_n",
+        "te_g2_n"
+      ],
+      "highlight_tiles": [
+        "d_6_1"
+      ]
+    },
+    {
+      "step_number": 14,
+      "description": "塔脚与岸台侧撑: 4 根斜撑锁双塔脚与桥台 (T14)。",
+      "tip": "塔脚四向斜撑在 z=0 锁塔腿 —— 双路径传力入地。",
+      "tiles_to_add": [
+        "tw_g1_n",
+        "te_g1_n",
+        "awb_s",
+        "aeb_s"
+      ],
+      "highlight_tiles": [
+        "tw_s_1",
+        "te_s_1"
+      ]
+    },
+    {
+      "step_number": 15,
+      "description": "岸台互锁: 3 根斜撑完成双岸桥台互锁。",
+      "tip": "斜撑全部就位 —— 双岸锚台与桥台墙成一体。",
+      "tiles_to_add": [
+        "awb_n",
+        "aeb_n",
+        "eb_tie"
+      ],
+      "highlight_tiles": [
+        "awb_s",
+        "pe_1"
+      ]
+    },
+    {
+      "step_number": 16,
+      "description": "锚碇角撑: 2 根斜撑加固东西岸锚台外角。",
+      "tip": "锚碇外角加撑 —— 重车制动不松。",
+      "tiles_to_add": [
+        "anc_w",
+        "anc_n"
+      ],
+      "highlight_tiles": [
+        "awb_s"
+      ]
+    },
+    {
+      "step_number": 17,
+      "description": "西引桥: 4 条坡道落地, 顶边整边吸桥面西缘。",
+      "tip": "坡道顶边整边吸桥面西缘, 坡尾自然落地 —— 西引桥自成稳定三点支撑。",
+      "tiles_to_add": [
+        "ramp_w0_0",
+        "ramp_w0_1",
+        "ramp_w1_0",
+        "ramp_w1_1"
+      ],
+      "highlight_tiles": [
+        "d_3_1"
+      ]
+    },
+    {
+      "step_number": 18,
+      "description": "东引桥: 4 条坡道落地, 顶边整边吸桥面东缘。",
+      "tip": "东引桥 ae 侧坡道与锚台整边互吸 —— 全桥单一连通组。",
+      "tiles_to_add": [
+        "ramp_e0_0",
+        "ramp_e0_1",
+        "ramp_e1_0",
+        "ramp_e1_1"
+      ],
+      "highlight_tiles": [
+        "d_9_1",
+        "ae_1a"
+      ]
+    },
+    {
+      "step_number": 19,
+      "description": "东锚主缆: x=9 锚跨透明菱形落地。",
+      "tip": "锚跨主缆底边吸桥面东缘与锚台侧外缘。",
+      "tiles_to_add": [
+        "mc_s_9",
+        "mc_n_9"
+      ],
+      "highlight_tiles": [
+        "d_9_1"
+      ]
+    },
+    {
+      "step_number": 20,
+      "description": "主缆·南幅: 锚跨 + 4 段跨中透明菱形 (十二段之半幅)。",
+      "tip": "先接桥面端 x=3 再接锚跨 x=2 —— 底边整边吸桥面沿口。",
+      "tiles_to_add": [
+        "mc_s_3",
+        "mc_s_2",
+        "mc_s_5",
+        "mc_s_6",
+        "mc_s_8"
+      ],
+      "highlight_tiles": [
+        "d_3_1"
+      ]
+    },
+    {
+      "step_number": 21,
+      "description": "主缆·北幅: 锚跨 + 4 段跨中菱形 —— 十二段主缆就位。",
+      "tip": "十二段主缆 × 南北两幅 —— 海峡之虹的受压曲线。",
+      "tiles_to_add": [
+        "mc_n_3",
+        "mc_n_2",
+        "mc_n_5",
+        "mc_n_6",
+        "mc_n_8"
+      ],
+      "highlight_tiles": [
+        "mc_s_8"
+      ]
+    },
+    {
+      "step_number": 22,
+      "description": "西半跨南吊索: 9 段菱形 (x2-6 区)。",
+      "tip": "沿口 span 链只用桥面 x 位 —— 零 tile_overlap。",
+      "tiles_to_add": [
+        "hgw_s_a",
+        "hgw_s_c0",
+        "hgw_s_c1",
+        "hgw_s_c2",
+        "hgw_s_c3",
+        "hgw_s_s0",
+        "hgw_s_s1",
+        "hgw_s_s2",
+        "hgw_s_s3"
+      ],
+      "highlight_tiles": [
+        "tw_s_1",
+        "d_5_1"
+      ]
+    },
+    {
+      "step_number": 23,
+      "description": "西半跨北吊索: 9 段, 与南幅镜像。",
+      "tip": "四路吊索锁牢双塔 —— 竖向彩虹。",
+      "tiles_to_add": [
+        "hgw_n_a",
+        "hgw_n_c0",
+        "hgw_n_c1",
+        "hgw_n_c2",
+        "hgw_n_c3",
+        "hgw_n_s0",
+        "hgw_n_s1",
+        "hgw_n_s2",
+        "hgw_n_s3"
+      ],
+      "highlight_tiles": [
+        "tw_n_1"
+      ]
+    },
+    {
+      "step_number": 24,
+      "description": "东半跨南吊索: 9 段 (x7-11 区)。",
+      "tip": "东半跨吊索向西吸桥面 —— 与西塔镜像。",
+      "tiles_to_add": [
+        "hge_s_a",
+        "hge_s_c0",
+        "hge_s_c1",
+        "hge_s_c2",
+        "hge_s_c3",
+        "hge_s_s0",
+        "hge_s_s1",
+        "hge_s_s2",
+        "hge_s_s3"
+      ],
+      "highlight_tiles": [
+        "te_s_1",
+        "d_9_1"
+      ]
+    },
+    {
+      "step_number": 25,
+      "description": "东半跨北吊索: 9 段 —— 海峡之虹悬索桥合龙通车!",
+      "tip": "通桥仪式: 双塔、双幅主缆、四路吊索 —— 彩虹悬索桥落成!",
+      "tiles_to_add": [
+        "hge_n_a",
+        "hge_n_c0",
+        "hge_n_c1",
+        "hge_n_c2",
+        "hge_n_c3",
+        "hge_n_s0",
+        "hge_n_s1",
+        "hge_n_s2",
+        "hge_n_s3"
+      ],
+      "highlight_tiles": [
+        "hge_s_a",
+        "mc_n_8"
+      ]
+    }
+  ]
+}
