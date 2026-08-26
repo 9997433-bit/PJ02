@@ -1,26 +1,29 @@
 #!/usr/bin/env python3
-"""生成模型 data/models/trapezoid_awning_01.json (梯形雨棚连廊)。
+"""生成模型 data/models/trapezoid_awning_01.json (梯形条纹雨棚连廊)。
 
-内容批 P 模型 5/10: 植物花园主题 D2 —— 招牌是 T12 层叠退台 +
-梯形檐篷 (T04): 4x2 走道外角与中央同层铺地, 内框四片 2 格横楣
-抬升出檐口; 上层四片梯形合围开放式雨棚, 下层四片梯形自基座外挑
-盖住苗床 —— 梯形片数 ≥8, 全库首个「梯形雨棚连廊」。
+内容批 P 模型 5/10: 植物花园主题 D2 —— 招牌是「梯形密铺雨棚带」
+(T18 密铺变奏用在斜面上): 上下交替的梯形 (正放下底 2 / 倒放下底 1)
+腰边互锁, 拼成一条上下沿都笔直的斜披条带 —— 正放绿、倒放透明,
+天然形成遮阳棚的经典条纹。两条雨棚带从连廊两侧拱墙顶沿向内上方
+倾斜 54.7 度, 棚顶中央留一条 1 格宽天光缝; 拱墙上的取景窗洞
+(T17 负空间) 正对窗外花台, 倒放梯形恰好横跨洞顶充当"虚拟过梁"。
 
-结构总览 (世界单位: 1.0 = 正方形磁力片边长, 连廊沿东西向):
-  - 走道 (4x2): 清灰棋盘方板 z=0 (含中央 2x2 下沉走道)           8 片
-  - 角柱 (z 0..1): 走道四角绿色立墙 x4                               4 片
-  - 连廊内框檐轨 (z 0..1): 2x2 框四边灰色横楣 x4                     4 片
-  - 上层梯形雨棚 (z=1 沿口): 四片梯形合围开放式顶                   4 片
-  - 苗床基座 (y=-1/2): 2 格泥土长方 x4                               4 片
-  - 连廊盆花: 等边三角 x4 立在平台沿口                                 4 片
-  - 下层梯形檐篷: 四片梯形吸基座顶沿外挑                               4 片
-  合计 32 片, 6 个教程步骤, 5 种磁力片形状 (含扩展梯形)。
+结构总览 (世界单位: 1.0 = 正方形磁力片边长, 连廊沿东西向, 长 8):
+  - 走道 (8x2): 每列 长-方-长-方-长 (灰石板 + 黄踏步石) x2 列   10 片
+  - 连拱墙 (z 0..1): 两侧各三段 2 格立墙, 留两个 1 格取景窗洞     6 片
+  - 梯形雨棚带 x2: 每条 正放 x3 + 倒放 x2 腰边互锁 (条纹斜披)    10 片
+  - 花台 x4: 取景窗外泥土方板 + 沿口三角盆花                       8 片
+  合计 34 片, 8 个教程步骤, 4 种磁力片形状 (含扩展梯形 10 片)。
 
 物理规则要点 (validate 常规 + strict 双档零警告):
-  - 角柱与内框檐轨墙脚整边踩走道拼缝, 檐轨顶沿 z=1 供梯形整边吸合;
-  - 上层梯形四片腰互锁成开放式雨棚 (T04), 下层梯形吸 2 格基座铰链;
-  - 中央走道与外角同层 (z=0), 檐口抬升形成 T12 层叠退台视觉;
-  - 盆花底边吸走道沿口, 基座整边互吸。
+  - 走道列内 长(2 格边)-方(1 格边) 交替, 恰好给墙脚与棚带下沿
+    提供逐段等长的整边吸合 (R2 等长贴合是硬约束);
+  - 正放梯形下底 (长 2) 整边吸拱墙顶沿, 倒放梯形下底 (长 1)
+    悬跨窗洞, 只靠两条腰边挂在相邻正放梯形上 —— 全带共线下沿
+    合成一条铰链线, 强弱磁双档力矩预算均有 2 倍以上裕量 (R6);
+  - 棚带最高点 1.707 < 2.5, 不触发 R8 高层结构条款;
+  - 花台方板北/南沿与走道拼缝共线整边互吸, 盆花骑花台外沿,
+    重心正压铰链线 (力矩为零)。
 
 用法: python3 tools/generate_trapezoid_awning_01.py  (在 magtile-studio 目录下运行)
 """
@@ -33,148 +36,149 @@ from magtile_gen import EQ_APEX, ModelBuilder, _sub  # noqa: E402
 
 b = ModelBuilder()
 
-PATH_A = "clear"
-PATH_B = "gray"
-POST = "green"
-SOIL = "orange"
-AWNING = "green"
-LATTICE = "clear"
-RAIL = "gray"
-FLOWER = ["red", "yellow", "purple", "pink"]
+SLAB = "gray"          # 走道石板 (长方形)
+STEP_STONE = "yellow"  # 踏步石 (正方形, 正对取景窗)
+ARCADE = "green"       # 连拱墙 (2 格立墙)
+STRIPE_A = "green"     # 雨棚条纹: 正放梯形
+STRIPE_B = "clear"     # 雨棚条纹: 倒放梯形 (透光段)
+SOIL = "orange"        # 花台泥土
+FLOWERS = {"sw": "red", "se": "purple", "nw": "pink", "ne": "yellow"}
+
+# 雨棚带倾角: 下沿在墙顶 z=1, 上沿抬高 EQ_APEX 并向连廊内侧收 0.5
+# (与梯形面内高 0.866 勾股闭合, 即 54.7 度斜披)。
+RIDGE_Z = 1.0 + EQ_APEX
 
 
-def pergola_eaves(prefix, x0, y0, z, roof_color, lattice_color):
-    """2x2 洞口上的四片梯形开放式雨棚 (无压顶)。"""
-    zt = z + EQ_APEX
-    faces = {
-        "s": ((x0, y0, z), (x0 + 2, y0, z), (x0 + 1.0, y0 + 0.5, zt)),
-        "e": ((x0 + 2, y0, z), (x0 + 2, y0 + 2, z), (x0 + 1.5, y0 + 1.0, zt)),
-        "n": ((x0 + 2, y0 + 2, z), (x0, y0 + 2, z), (x0 + 1.0, y0 + 1.5, zt)),
-        "w": ((x0, y0 + 2, z), (x0, y0, z), (x0 + 0.5, y0 + 1.0, zt)),
-    }
-    colors = {"s": roof_color, "e": lattice_color, "n": roof_color, "w": lattice_color}
+def awning_band(prefix, y, inward, color_a, color_b):
+    """一条梯形密铺雨棚带: 下沿铰在 (y, z=1) 的墙顶线上, 向 inward
+    (+1 = 北, -1 = 南) 上方倾斜。
+
+    正放梯形 (下底 2) 吸墙顶沿, 倒放梯形 (下底 1) 跨窗洞, 腰边互锁;
+    整条带上沿 x [0.5, 7.5] 连成直线。返回按装配顺序排列的 id 列表
+    (每片倒放梯形都紧跟在它西侧的正放梯形之后, 保证 R7 放下即吸)。
+    """
+    hint = (0.0, inward * 0.5, EQ_APEX)
     ids = []
-    for side, (b0, b1, top_mid) in faces.items():
-        tid = f"{prefix}_{side}"
-        bottom_mid = tuple((b0[i] + b1[i]) / 2 for i in range(3))
-        b.place_edge(tid, "trapezoid", 0, b0, b1, _sub(top_mid, bottom_mid), colors[side])
+    for x0 in (0, 3, 6):
+        tid = f"{prefix}_up{x0}"
+        b.place_edge(tid, "trapezoid", 0,
+                     (float(x0), y, 1.0), (float(x0 + 2), y, 1.0), hint, color_a)
+        ids.append(tid)
+        if x0 == 6:
+            break
+        tid = f"{prefix}_dn{x0 + 2}"
+        # 本地边 2 是上底 (长 1); 倒放 = 让上底当下沿贴墙顶线
+        b.place_edge(tid, "trapezoid", 2,
+                     (float(x0 + 2), y, 1.0), (float(x0 + 3), y, 1.0), hint, color_b)
         ids.append(tid)
     return ids
 
 
-def south_eave(prefix, x0, color):
-    b0 = (x0, 0.0, 0.0)
-    b1 = (x0 + 2.0, 0.0, 0.0)
-    bottom_mid = (x0 + 1.0, 0.0, 0.0)
-    top_mid = (x0 + 1.0, -0.5, EQ_APEX)
-    b.place_edge(prefix, "trapezoid", 0, b0, b1, _sub(top_mid, bottom_mid), color)
-
-
-def north_eave(prefix, x0, color):
-    b0 = (x0, 2.0, 0.0)
-    b1 = (x0 + 2.0, 2.0, 0.0)
-    bottom_mid = (x0 + 1.0, 2.0, 0.0)
-    top_mid = (x0 + 1.0, 2.5, EQ_APEX)
-    b.place_edge(prefix, "trapezoid", 0, b0, b1, _sub(top_mid, bottom_mid), color)
-
+# =================================================================
+# 1. 走道 (8x2): 每列 长-方-长-方-长, 方板正对未来的取景窗洞
+# =================================================================
+floor_ids = {"s": [], "n": []}
+for row, y0 in (("s", 0), ("n", 1)):
+    for x0, kind in ((0, "r"), (2, "q"), (3, "r"), (5, "q"), (6, "r")):
+        tid = f"floor_{row}_{x0}"
+        if kind == "r":
+            b.flat_rect(tid, x0, y0, 0.0, SLAB)
+        else:
+            b.flat(tid, x0, y0, 0.0, STEP_STONE)
+        floor_ids[row].append(tid)
 
 # =================================================================
-# 1. 走道 (4x2 整层 z=0, 中央 2x2 与外角同层 —— T12 下沉走道)
+# 2. 连拱墙 (z 0..1): 两侧各三段 2 格立墙, x [2,3] / [5,6] 留窗洞
 # =================================================================
-for y in range(2):
-    for x in range(4):
-        b.flat(f"path_{x}_{y}", x, y, 0.0, PATH_A if (x + y) % 2 == 0 else PATH_B)
+for x0 in (0, 3, 6):
+    b.lintel_ns(f"arc_s_{x0}", x0, 0.0, 0, ARCADE)
+for x0 in (0, 3, 6):
+    b.lintel_ns(f"arc_n_{x0}", x0, 2.0, 0, ARCADE)
 
 # =================================================================
-# 2. 角柱 + 内框檐轨 (z 0..1)
+# 3. 梯形密铺雨棚带 x2 (T18): 南带朝北斜, 北带朝南斜, 中留天光缝
 # =================================================================
-b.wall_ns("post_sw", 0, 0.0, 0, POST)
-b.wall_ns("post_nw", 0, 2.0, 0, POST)
-b.wall_ns("post_se", 3, 0.0, 0, POST)
-b.wall_ns("post_ne", 3, 2.0, 0, POST)
-b.lintel_ns("rim_s", 1, 0.0, 0, RAIL)
-b.lintel_ns("rim_n", 1, 2.0, 0, RAIL)
-b.lintel_ew("rim_w", 1.0, 0, 0, RAIL)
-b.lintel_ew("rim_e", 3.0, 0, 0, RAIL)
+awn_s_ids = awning_band("awn_s", 0.0, +1, STRIPE_A, STRIPE_B)
+awn_n_ids = awning_band("awn_n", 2.0, -1, STRIPE_A, STRIPE_B)
 
 # =================================================================
-# 3. 上层梯形雨棚
+# 4. 花台: 取景窗外一片泥土方板 + 外沿一株三角盆花
 # =================================================================
-roof_ids = pergola_eaves("roof", 1, 0, 1.0, AWNING, LATTICE)
+BEDS = {
+    "sw": (2, -1, -1.0), "se": (5, -1, -1.0),   # 南侧: 花台在 y [-1,0], 花骑 y=-1 沿
+    "nw": (2, 2, 3.0), "ne": (5, 2, 3.0),       # 北侧: 花台在 y [2,3], 花骑 y=3 沿
+}
+for key, (x0, y0, rim_y) in BEDS.items():
+    b.flat(f"bed_{key}", x0, y0, 0.0, SOIL)
+    b.crest_ns(f"flower_{key}", x0, rim_y, 0.0, FLOWERS[key])
 
 # =================================================================
-# 4. 苗床基座 + 盆花
-# =================================================================
-b.flat_rect("foot_s0", 0, -1, 0.0, SOIL)
-b.flat_rect("foot_s2", 2, -1, 0.0, SOIL)
-b.flat_rect("foot_n0", 0, 2, 0.0, SOIL)
-b.flat_rect("foot_n2", 2, 2, 0.0, SOIL)
-b.crest_ew("pot_sw", 0.0, 0, 0.0, FLOWER[0])
-b.crest_ew("pot_nw", 0.0, 1, 0.0, FLOWER[2])
-b.crest_ew("pot_se", 4.0, 0, 0.0, FLOWER[1])
-b.crest_ew("pot_ne", 4.0, 1, 0.0, FLOWER[3])
-
-# =================================================================
-# 5. 下层梯形檐篷
-# =================================================================
-south_eave("eave_sw", 0, AWNING)
-south_eave("eave_se", 2, LATTICE)
-north_eave("eave_nw", 0, AWNING)
-north_eave("eave_ne", 2, LATTICE)
-
-# =================================================================
-# 教程步骤 (7 步)
+# 教程步骤 (8 步)
 # =================================================================
 b.step(
-    "铺走道: 八片清灰相间的方板拼成 4x2, 中央 2x2 与外角同层 —— 下沉式走道。",
-    [f"path_{x}_{y}" for y in range(2) for x in range(4)],
-    tip="走道铺平, 角柱和檐轨才有整边可吸 —— 这是 T12 的地基。",
+    "铺南列走道: 灰色长石板与黄色踏步石按 长-方-长-方-长 交替铺满 8 格。",
+    floor_ids["s"],
+    tip="长板给墙段留 2 格整边, 方板给窗洞留 1 格整边 —— 交替节奏就是吸合蓝图。",
 )
 b.step(
-    "立角柱与内框檐轨: 四角绿色立墙 + 四片灰色横楣围成 2x2 抬升檐口。",
-    ["post_sw", "post_nw", "post_se", "post_ne", "rim_s", "rim_n", "rim_w", "rim_e"],
-    highlight=["path_0_0", "path_3_1"],
-    tip="檐轨顶沿 z=1 比走道高一层 —— T12 层叠退台, 也是雨棚铰链线。",
+    "铺北列走道: 与南列同款交替铺法, 两列拼缝逐段对齐互吸。",
+    floor_ids["n"],
+    highlight=["floor_s_0"],
+    tip="黄踏步石上下两列对齐 —— 走到这格, 抬头就是将来的天光缝。",
 )
 b.step(
-    "合围上层雨棚: 四片梯形下底吸檐轨顶沿, 腰互锁成开放式顶 —— 南北绿、东西清。",
-    roof_ids,
-    highlight=["rim_s", "rim_n"],
-    tip="梯形片是主角 —— 四片合围, 阳光还能从棚顶漏下来。",
+    "立南侧连拱墙: 三段绿色 2 格立墙踩住长石板南沿, 空出两个取景窗洞。",
+    ["arc_s_0", "arc_s_3", "arc_s_6"],
+    highlight=["floor_s_0", "floor_s_3", "floor_s_6"],
+    tip="墙段只踩长板整边, 窗洞正对黄踏步石 —— 负空间留给窗外的花。",
 )
 b.step(
-    "铺南侧苗床: 两片 2 格泥土基座贴住走道南沿, 给下层檐篷整边铰链。",
-    ["foot_s0", "foot_s2"],
-    highlight=["path_0_0", "post_sw"],
-    tip="基座北沿与走道南沿共用一条缝 —— 花园和连廊连成一体。",
+    "立北侧连拱墙: 镜像三段立墙, 南北两排窗洞正对成穿堂景。",
+    ["arc_n_0", "arc_n_3", "arc_n_6"],
+    highlight=["arc_s_0"],
+    tip="两排墙合出连廊骨架 —— 顶沿 z=1 就是雨棚带的铰链线。",
 )
 b.step(
-    "铺北侧基座并摆盆花: 两片泥土基座, 四株三角盆花立在走道北/南沿。",
-    ["foot_n0", "foot_n2", "pot_sw", "pot_nw", "pot_se", "pot_ne"],
-    highlight=["path_0_0", "path_3_1"],
-    tip="盆花底边吸走道沿 —— 连廊里也能看到颜色。",
+    "挂南侧雨棚带: 三片正放梯形下底吸墙顶, 两片透明倒放梯形跨窗洞, 腰边互锁。",
+    awn_s_ids,
+    highlight=["arc_s_0", "arc_s_3", "arc_s_6"],
+    tip="正放先吸墙顶, 倒放再挂进两腰 —— 一上一下咬成整条条纹斜披。",
 )
 b.step(
-    "合围下层檐篷: 四片梯形吸基座顶沿外挑 —— 梯形雨棚连廊落成!",
-    ["eave_sw", "eave_se", "eave_nw", "eave_ne"],
-    highlight=["foot_s0", "path_1_0", "roof_s"],
-    tip="上下两层共八片梯形 —— 沿下沉走道慢慢穿过去, 别踩到花。",
+    "挂北侧雨棚带: 镜像五片向南斜披, 棚顶中央留出 1 格宽天光缝。",
+    awn_n_ids,
+    highlight=["awn_s_up0", "awn_s_up3", "awn_s_up6"],
+    tip="两条带的上沿隔缝相望 —— 绿一段透一段, 阳光顺着条纹漏进连廊。",
+)
+b.step(
+    "砌南侧花台: 两片泥土方板贴住窗洞外沿, 红花紫花骑上外沿口。",
+    ["bed_sw", "flower_sw", "bed_se", "flower_se"],
+    highlight=["floor_s_2", "floor_s_5"],
+    tip="花台北沿与走道拼缝共线整边互吸 —— 透过窗洞正好看到花。",
+)
+b.step(
+    "砌北侧花台: 镜像两片泥土方板, 粉花黄花补齐四色 —— 条纹雨棚连廊落成!",
+    ["bed_nw", "flower_nw", "bed_ne", "flower_ne"],
+    highlight=["bed_sw"],
+    tip="沿着黄踏步石走一趟: 头顶条纹漏光, 两侧窗窗有花。",
 )
 
 b.finalize(
     model_id="trapezoid_awning_01",
-    name="梯形雨棚连廊",
+    name="梯形条纹雨棚连廊",
     name_en="Trapezoid Awning Walk 01",
     description=(
-        "植物花园 D2: 4x2 下沉式走道 (T12 层叠退台) 上立内框四片 2 格"
-        "檐轨, 顶沿供上层四片梯形合围开放式雨棚; 走道两侧 2 格泥土"
-        "基座外挑四片梯形檐篷盖住苗床, 沿口四色盆花点缀 —— 上下两层"
-        "共八片梯形, 连廊能走通、花床有荫。与玫瑰长廊的门式横梁不同,"
-        "这次主角就是扩展梯形片本身。"
+        "植物花园 D2: 8 格长的连拱步道两侧各立三段 2 格拱墙, 留出"
+        "取景窗洞 (T17 负空间); 墙顶两条「梯形密铺雨棚带」向内斜披"
+        "54.7 度 —— 正放梯形吸墙顶、倒放梯形跨窗洞, 腰边互锁成上下"
+        "沿笔直的条带 (T18 密铺变奏), 绿透交替天然是遮阳棚条纹,"
+        "棚顶中央留 1 格天光缝; 窗外四座泥土花台, 红紫粉黄四色盆花"
+        "骑沿而立。全库首条用梯形上下互锁密铺出的斜面雨棚 —— 梯形"
+        "不再只当四坡屋顶的配角, 而是整个屋面本身。"
     ),
     difficulty=2,
     tags=["植物花园", "雨棚", "连廊", "梯形", "花台"],
-    min_pieces=30,
-    min_steps=6,
+    min_pieces=34,
+    min_steps=8,
     series="plant_garden",
 )
