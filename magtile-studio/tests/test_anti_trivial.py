@@ -5,7 +5,9 @@
 # 商业教程内容不能是"几片拼个平面"的敷衍货。本脚本对 data/models/
 # 下的每个模型执行结构复杂度检查, 不达标即拒绝入库:
 #
-#   [FAIL] 总片数 < 40                    -> 规模太小, 没有搭建价值
+#   [FAIL] 总片数 < 难度下限 (D1: 20, 其余: 40) -> 规模太小, 没有搭建价值
+#          (D1 下限取 CONTENT_STRATEGY.md 2.1 节片数带 [20,28] 的下沿;
+#           完整区间校验由 test_model_logic.py 负责)
 #   [FAIL] 使用的磁力片形状 < 3 种        -> 形状单一, 教学价值不足
 #   [FAIL] 结构 Z 层数 < 2                -> 纯平面模型, 不是立体建筑
 #   [FAIL] 所有磁力片都是平铺的           -> 没有立起来的片, 不构成结构
@@ -20,7 +22,8 @@ import math
 import sys
 from pathlib import Path
 
-MIN_PIECES = 40
+MIN_PIECES = 40             # 非 D1 模型的规模下限
+D1_MIN_PIECES = 20          # D1 入门档下限 (CONTENT_STRATEGY.md 2.1/2.4 节)
 MIN_TILE_TYPES = 3
 MIN_Z_LAYERS = 2
 Z_LAYER_TOLERANCE = 0.1     # 相距小于该值的 z 视为同一层
@@ -59,10 +62,14 @@ def check_model(path):
 
     tiles = model["final_assembly"]
     steps = model["steps"]
+    difficulty = model.get("difficulty")
 
-    # 规则 1: 总片数
-    if len(tiles) < MIN_PIECES:
-        fails.append(f"总片数 {len(tiles)} < {MIN_PIECES}, 规模太小")
+    # 规则 1: 总片数 (难度感知: D1 用内容策略片数带下沿, 其余用全局下限;
+    # 难度值合法性与 D1 片数带上限由 test_model_logic.py 把关)
+    min_pieces = D1_MIN_PIECES if difficulty == 1 else MIN_PIECES
+    if len(tiles) < min_pieces:
+        fails.append(
+            f"总片数 {len(tiles)} < {min_pieces} (难度 D{difficulty} 下限), 规模太小")
 
     # 规则 2: 形状多样性
     types_used = sorted({t["type"] for t in tiles})
@@ -88,8 +95,8 @@ def check_model(path):
             f"{small_steps}/{len(steps)} 个步骤只放 1~2 片, "
             f"超过 {SMALL_STEP_WARN_RATIO:.0%}, 建议合并零碎步骤")
 
-    stats = (f"{len(tiles)} 片, {len(types_used)} 种形状, {z_layers} 个 Z 层, "
-             f"{len(tiles) - flat_count} 片立置, {len(steps)} 步")
+    stats = (f"{len(tiles)} 片 (难度 D{difficulty}), {len(types_used)} 种形状, "
+             f"{z_layers} 个 Z 层, {len(tiles) - flat_count} 片立置, {len(steps)} 步")
     return fails, warns, stats
 
 

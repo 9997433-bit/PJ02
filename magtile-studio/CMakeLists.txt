@@ -361,7 +361,8 @@ if(MAGTILE_BUILD_TESTS)
     # 各脚本按存在性注册, 便于测试资产分批合入时仓库始终可配置。
     find_program(MAGTILE_BASH bash)
     if(MAGTILE_BASH)
-        # 全量质检: 逐一 validate + 报告片数步数 + 拒绝 < 40 片的小模型
+        # 全量质检: 逐一 validate + 报告片数步数 + 难度感知片数下限
+        # (D1 >= 20, CONTENT_STRATEGY 2.1 节片数带下沿; 其余按传入的 40)
         if(EXISTS ${MAGTILE_TESTS_DIR}/test_all_models.sh)
             add_test(NAME all_models_quality_gate
                 COMMAND ${MAGTILE_BASH} ${MAGTILE_TESTS_DIR}/test_all_models.sh

@@ -18,8 +18,8 @@ tests/run_full_qa.sh mybuild      # 或指定构建目录
 | 1 | CMake 配置 | 仓库任何状态下必须可配置 |
 | 2 | 增量构建 | 零警告要求 (`-Wall -Wextra -Wpedantic` / `/W4`) |
 | 3 | CTest 全量回归 | 下文全部注册用例 |
-| 4 | 模型库全量质检 | 逐模型 validate + 片数 ≥ 40 门槛 |
-| 5 | 反平凡模型检查 | ≥ 3 种片形、≥ 2 个 Z 层、有立置片 |
+| 4 | 模型库全量质检 | 逐模型 validate + 难度感知片数下限 (D1 ≥ 20, 其余 ≥ 40) |
+| 5 | 反平凡模型检查 | 难度感知片数下限、≥ 3 种片形、≥ 2 个 Z 层、有立置片 |
 | 6 | 模型逻辑质检 | 步骤粒度 / 中文说明 / 对账 / 难度区间 / BOM |
 | 7 | 逐步装配质检 | 逐片零差错 P1~P8 (见 [MODEL_QUALITY.md](MODEL_QUALITY.md)) |
 | 8 | 模型库唯一性 | 结构签名两两比对, 拒绝换皮克隆 |
@@ -120,12 +120,13 @@ CMake 配置时自动扫描 `data/models/*.json` (`CONFIGURE_DEPENDS`, 新增模
 
 脚本: `tests/test_all_models.sh <magtile_app> <项目根目录> [最低片数]`
 
-逐一校验 `data/models/` 下的**全部**模型 (运行时扫描, 不依赖 CMake 重新配置), 报告每个模型的磁力片数与步骤数, 并执行规模门槛:
+逐一校验 `data/models/` 下的**全部**模型 (运行时扫描, 不依赖 CMake 重新配置), 报告每个模型的磁力片数与步骤数, 并执行**难度感知**的规模门槛:
 
-- 任何模型磁力片总数 **< 40 片即失败** —— 太小的模型对用户没有搭建价值, 不允许入库。
+- **D1 入门档 (difficulty=1)**: 磁力片总数 **< 20 片即失败** —— 下限取 [CONTENT_STRATEGY.md](CONTENT_STRATEGY.md) 2.1 节 D1 片数带 [20, 28] 的下沿 (2.4 节反幼稚规则: 入门档降低的是操作难度, 不是作品的成品感); 片数带上限 (28) 与难度值合法性由 3.5 节模型逻辑质检把关。
+- **其余难度**: 磁力片总数 **< 40 片即失败** (`[最低片数]` 参数, 默认 40) —— 太小的模型对用户没有搭建价值, 不允许入库。
 
 ```bash
-tests/test_all_models.sh build/magtile_app . 40
+tests/test_all_models.sh build/magtile_app . 40   # 40 只约束非 D1 模型
 ```
 
 ### 3.4 反平凡模型检查 (`anti_trivial_models`)
@@ -136,7 +137,7 @@ tests/test_all_models.sh build/magtile_app . 40
 
 | 规则 | 判定 | 结果 |
 | --- | --- | --- |
-| 规模 | 总片数 < 40 | FAIL |
+| 规模 (难度感知) | 总片数 < 难度下限 (D1: 20, 其余: 40) | FAIL |
 | 形状多样性 | 使用的磁力片形状 < 3 种 | FAIL |
 | 结构高度 | Z 层数 < 2 (纯平面模型) | FAIL |
 | 立体性 | 所有磁力片都是平铺的 (旋转均接近 0,0,0) | FAIL |
@@ -541,8 +542,8 @@ CI 侧: `.github/workflows/release-gate.yml` 仅 `workflow_dispatch` 手动触�
 一个模型 JSON 只有同时满足以下条件才允许合入 `data/models/`:
 
 1. `validate_<模型名>` 通过 (物理 R1~R8, 含全部中间步骤与逐片放置模拟);
-2. `all_models_quality_gate` 通过 (≥ 40 片);
-3. `anti_trivial_models` 通过 (≥ 3 种形状、≥ 2 个 Z 层、存在立置片);
+2. `all_models_quality_gate` 通过 (难度感知片数下限: D1 ≥ 20, 其余 ≥ 40, 见 3.3 节);
+3. `anti_trivial_models` 通过 (难度感知片数下限、≥ 3 种形状、≥ 2 个 Z 层、存在立置片);
 4. `model_logic_gate` 通过 (步骤粒度、中文说明、教程对账、难度区间、BOM 一致);
 5. `step_assembly_gate` 通过 (逐片零差错 P1~P8: id 唯一、每片恰好放置一次、高亮只引用已放置片、无孤儿/幽灵、逐片空间连续, 见 [MODEL_QUALITY.md](MODEL_QUALITY.md));
 6. `library_uniqueness_gate` 通过 (与全库任何模型的结构签名相似度 ≤ 0.85);
