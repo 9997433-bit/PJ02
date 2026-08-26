@@ -1,14 +1,13 @@
 # V1 上架就绪严格档探测报告 (2026-08-26, --strict 全量档)
 
-- 生成时间: 2026-08-26 03:55 UTC (D5 补库批后首次 --strict 全量档实跑; --quick 档记录见 `READINESS_FULL_2026-08-26.md` —— 已随批 P 刷新至 @ `ad6d35c`, 两报告可互为对照 —— 本报告补齐其 R4/R5/R17 三个长跑项的 --strict 实跑证据)
-- 基线提交: `9aa146d` (`9aa146d49bd66e71b98c36776d6e80d0f85ab49a`, `cursor/magtile-studio-foundation-a95b`) —— 自 `8ee2fc7` 以来完成路径 B 配额置换/扩库: 模型库保持 250, 难度分布变为 D1 20 / D2 23 / D3 156 / D4 45 / D5 6, **D3 冻结已解冻** (D1 >= 20 且 D5 >= 6 双达标, 见 §7)
-- 口径同步 (2026-08-26 05:00 UTC): 批 P 扩展装置换波次 (`53615ea`, 净增 1 个 D4 `expansion_orb_01`; 治理/排产刷新至 `ad6d35c`) 后 D4+ 全集 51 → **52 (46 D4 + 6 D5)**, 本报告 D4+ 相关计数与难度配额快照已同步至 52 口径 (难度分布现值 D1 21 / D2 30 / D3 147 / D4 46 / D5 6, 系列归类现值矩阵内 211 + 矩阵外 39); 新基线复验证据: `RELEASE_GATE_STATUS.md` 2026-08-26 04:53 UTC 刷新 (全量 QA 42 子关卡 0 失败, CTest 557/557, strict 巡检阶段 3 D4+ 抗扰动 **52/52** × 50 轮全绿, 含 `expansion_orb_01`) 与同日 `--quick` 复跑 (14 PASS / 2 FAIL / 9 SKIP, 见 `READINESS_FULL_2026-08-26.md`); C++ 引擎与 Qt 界面源码自本报告实跑以来未变更, R4 E2E --strict 证据继续有效
-- 工作区: `/tmp/wt-risk-report/magtile-studio` (干净 worktree @ `9aa146d`, 与 origin 同步); 构建: CMake Release 增量构建 (`build` CLI / `build-qt` Qt), 构建退出码 0
+- 生成时间: 2026-08-26 05:10 UTC (批 P 扩展装置换波次后 --strict 全量档复跑; 同基线 --quick 档记录见 `READINESS_FULL_2026-08-26.md` 同日刷新版 @ `ad6d35c`, 两报告可互为对照 —— 本报告补齐其 R4/R5/R17 三个长跑项的 --strict 实跑证据)
+- 基线提交: `ad6d35c` (`ad6d35c72f232a69d866e6d263072bb45554368d`, `cursor/magtile-studio-foundation-a95b`) —— 自 `9aa146d` 以来完成批 P 扩展装置换 (内容置换 `53615ea`: +10 扩展装 (1 D1 + 7 D2 + 1 D3 白名单 + 1 D4) / −10 矩阵外 D3, 总量 250 保持) 与排产三件套/治理留痕刷新至 52 口径: 难度分布变为 D1 21 / D2 30 / D3 147 / D4 46 / D5 6, **D3 解冻状态维持** (D1 ≥ 20 且 D5 ≥ 6 双达标, 见 §7)
+- 工作区: `/tmp/wt-risk-report/magtile-studio` (worktree 数据与引擎同 `ad6d35c`, 与 origin 同步); 构建: CMake Release 增量构建 (`build` CLI / `build-qt` Qt), 构建退出码 0
 - 环境: `ANDROID_NDK=/opt/android-sdk/ndk/27.2.12479018` (android.yml 钉住版本), `NO_COLOR=1`
 - 执行命令与退出码:
-  1. `tools/check_v1_readiness.sh --strict` (**全量档, 非 --quick**): 退出码 **1** (仅 R6/R7 两项 L3 实物复核 P0 失败, 属预期硬闸门, 非软件缺陷); 总耗时约 1 分 53 秒
+  1. `tools/check_v1_readiness.sh --strict` (**全量档, 非 --quick**): 退出码 **1** (仅 R6/R7 两项 L3 实物复核 P0 失败, 属预期硬闸门, 非软件缺陷); 总耗时约 1 分 31 秒
   2. `tools/run_e2e_smoke.sh --strict` (独立复跑): 退出码 **0**, 9/9 全绿 0 SKIP; 总耗时约 34 秒
-- 完整日志: 附录 A (readiness --strict, 1543 行 —— 含 52 口径同步插入的 3 行 expansion_orb_01 条目) / 附录 B (E2E --strict 独立跑, 151 行)
+- 完整日志: 附录 A (readiness --strict, 1492 行) / 附录 B (E2E --strict 独立跑, 151 行)
 
 ## 1. 结论速览
 
@@ -16,8 +15,8 @@
 
 - 与 --quick 档相比, 三个长跑项 R4 (E2E --strict) / R5 (发布门禁) / R17 (扰动抽检) 本次全部实跑并 **全绿** —— 自动探测侧无任何 SKIP, 工程可探测项全部通过。
 - `run_e2e_smoke.sh --strict` 独立复跑 9/9 全绿 (含 E2E-14a Android NDK 交叉编译 + 34 个 JNI 符号断言), 退出码 0 —— E2E 自动子集达到上架签核档口径。
-- 唯二失败 R6/R7 为 D4+ 实物复核缺口 (52 个, 较 `8ee2fc7` 基线 46 个净增 6 个 —— 5 个 D5 扩库 + 1 个批 P D4 `expansion_orb_01`), 按设计须用户实搭清零, 不属工程可修复范围。
-- **路径 B 里程碑**: 难度配额 D3 冻结在本基线已解冻 (D1 20/20, D5 6/6), `LAUNCH_BLOCKERS_2026-08-25.md` 三路径中的路径 B 已闭环; 剩余阻塞仅路径 A (实物签核 R6/R7) 与路径 C (Manual P0, M1~M6)。
+- 唯二失败 R6/R7 为 D4+ 实物复核缺口 (52 个, 较 `9aa146d` 基线 51 个净增 1 个 —— 批 P 入库的 D4 `expansion_orb_01` 所致), 按设计须用户实搭清零, 不属工程可修复范围。
+- **路径 B 维持闭环**: 难度配额 D3 冻结在本基线保持解冻 (D1 21 ≥ 20, D5 6 ≥ 6), `LAUNCH_BLOCKERS_2026-08-26.md` 维持单红灯口径; 剩余阻塞仅路径 A (实物签核 R6/R7) 与路径 C (Manual P0, M1~M6)。
 
 ### --strict 档逐项裁决 (交付口径速查)
 
@@ -34,8 +33,8 @@
 | R1 内容体量 | P0 | **PASS** | 0s | 模型 JSON 250 个 >= 门槛 200 (目标区间上限达成) |
 | R2 目录/缩略图对账 | P1 | **PASS** | 0s | 模型 250 / 目录登记 250 / 缩略图就绪 250, 三方一致 |
 | R3 免费层清单对齐 | P0 | **PASS** | 0s | 免费标签 30 x starter 清单 x core-9 三条断言全过 |
-| R4 E2E 冒烟 (--strict) | P0 | **PASS** | 56s | 9/9 全绿 0 SKIP, 含 Android JNI (明细见 §3) |
-| R5 发布门禁快检 | P0 | **PASS** | 44s | 3/3 关卡全过, 含 52 D4+ x 50 扰动全绿 (明细见 §4) |
+| R4 E2E 冒烟 (--strict) | P0 | **PASS** | 35s | 9/9 全绿 0 SKIP, 含 Android JNI (明细见 §3) |
+| R5 发布门禁快检 | P0 | **PASS** | 43s | 3/3 关卡全过, 含 52 D4+ x 50 扰动全绿 (明细见 §4) |
 | R6 实物抽样包缺口 | P0 | **FAIL** | 0s | 预期失败: 抽样包缺口 10/10, 含 6 个 D5 (详见 §6) |
 | R7 D4+ 实物复核清零 | P0 | **FAIL** | 0s | 预期失败: D4+ 52 个待复核 0/52 (详见 §6) |
 | R8 隐私合规文档 | P0 | **PASS** | 0s | SECURITY_AND_PRIVACY + PRIVACY_POLICY_DRAFT 在位 |
@@ -47,9 +46,9 @@
 | R13 Android release 签名 | P0 | **PASS** | 0s | signingConfigs + keystore.properties.example 齐备 |
 | R14 商店上架文档守卫 | P0 | **PASS** | 0s | validate_store_listing 全过 (15+5 章节, 内链全有效) |
 | R15 国内合规清单守卫 | P0 | **PASS** | 0s | 51 条 (P0 30 / P1 21) 全带级别与负责方, 交叉引用就位 |
-| R16 儿童友好文案守卫 | P0 | **PASS** | 0s | 301 文件 / 8571 段用户可见中文文案, 零红线 |
-| R17 D4+ 扰动仿真抽检 | P1 | **PASS** | 13s | 10/10 全绿, D5 全数 6 + 大体量 D4 补 4 (明细见 §5) |
-| R18 内容系列归类机检 | P1 | **PASS** | 0s | 250 归类齐全: 矩阵内 201 + 矩阵外 49, 缺失/非法 0 |
+| R16 儿童友好文案守卫 | P0 | **PASS** | 1s | 301 文件 / 8493 段用户可见中文文案, 零红线 |
+| R17 D4+ 扰动仿真抽检 | P1 | **PASS** | 12s | 10/10 全绿, D5 全数 6 + 大体量 D4 补 4 (明细见 §5) |
+| R18 内容系列归类机检 | P1 | **PASS** | 0s | 250 归类齐全: 矩阵内 211 + 矩阵外 39, 缺失/非法 0 |
 | M1~M6 人工项 | P0 | SKIP x6 | - | 实机打包/真机验收/法务定稿/矩阵签核/实搭签核/备案 |
 
 ## 3. R4 E2E 冒烟明细 (--strict 签核档, readiness 内嵌实跑)
@@ -60,13 +59,13 @@ readiness --strict 把 `--strict` 透传给 `run_e2e_smoke.sh`, 9 项全部实�
 | --- | --- | --- | --- |
 | E2E-01a CLI 启动冒烟 | PASS | 0s | catalog 13 种片型齐全 |
 | E2E-11a 免费层清单对齐 | PASS | 0s | verify_free_tier 三断言全过 |
-| E2E-11b CLI 免费筛选对账 | PASS | 0s | --free-only 30 个与 starter 清单一致, 目录对账通过 |
+| E2E-11b CLI 免费筛选对账 | PASS | 1s | --free-only 30 个与 starter 清单一致, 目录对账通过 |
 | E2E-06a CLI 免费模型教程步进 | PASS | 0s | beach_hut_01 全程步进, 片数对账一致 |
 | E2E-17a 跨端存档键契约 | PASS | 0s | CLI 写 -> sqlite 直读 -> CLI 回读 + 全量跨端互通断言 (19 断言) |
-| E2E-QT Qt 无头冒烟 | PASS | 14s | test_qt_smoke.sh 全路径 (offscreen) |
-| E2E-12a Qt 进度页深链 | PASS | 5s | 完成存档落盘 + 进度页实例化, 无 QML 运行时错误 |
-| E2E-04a/09a/11c/12b Qt 按钮级路径冒烟 | PASS | 15s | 筛选切换/库存深链/家长门/成就列表四路径全过 |
-| E2E-14a Android JNI 符号断言 | PASS | 22s | NDK 27.2.12479018 交叉编译 arm64-v8a, 34 个 JNI 符号与 android.yml 同口径全在位 |
+| E2E-QT Qt 无头冒烟 | PASS | 15s | test_qt_smoke.sh 全路径 (offscreen) |
+| E2E-12a Qt 进度页深链 | PASS | 4s | 完成存档落盘 + 进度页实例化, 无 QML 运行时错误 |
+| E2E-04a/09a/11c/12b Qt 按钮级路径冒烟 | PASS | 14s | 筛选切换/库存深链/家长门/成就列表四路径全过 |
+| E2E-14a Android JNI 符号断言 | PASS | 1s | NDK 27.2.12479018 arm64-v8a 增量复用 build-android 产物 (引擎自上次交叉编译未变更), 34 个 JNI 符号与 android.yml 同口径全在位 |
 
 ## 4. R5 发布门禁明细 (默认档实跑)
 
@@ -76,9 +75,9 @@ readiness --strict 把 `--strict` 透传给 `run_e2e_smoke.sh`, 9 项全部实�
 | --- | --- | --- | --- |
 | 1 免费层清单对齐核验 | PASS | 0s | 与 R3 同载体复验 |
 | 2 弱磁严格档全库巡检 (strict) | PASS | 43s | 三阶段全绿: 250 模型 validate --profile strict 零警告 + 全库逐步装配质检 + **D4+ 抗扰动巡检 52 个 x 50 次采样全绿** |
-| 3 L3 实物复核缺口报告 (报告型) | PASS | 1s | 待复核 52 (报告不阻断; 正式出包终防线用 --fail-on-pending) |
+| 3 L3 实物复核缺口报告 (报告型) | PASS | 0s | 待复核 52 (报告不阻断; 正式出包终防线用 --fail-on-pending) |
 
-注: 门禁关卡 2 的阶段 3/3 已对 **全部 52 个 D4+ 模型** 实跑 strict + jitter 50, 是 R17 十模型抽样的超集 —— 本基线 (含 5 个新晋 D5) 的搭建误差稳健性在全集口径上验证通过。与 `RELEASE_GATE_STATUS.md` 批 P 后刷新版 (--full 档 42 子关卡全绿 + CTest 557/557 + D4+ jitter 52/52) 结论一致。
+注: 门禁关卡 2 的阶段 3/3 已对 **全部 52 个 D4+ 模型** 实跑 strict + jitter 50, 是 R17 十模型抽样的超集 —— 本基线 (含批 P 新晋 D4 `expansion_orb_01`) 的搭建误差稳健性在全集口径上验证通过。与同基线 `RELEASE_GATE_STATUS.md` 同日刷新版 (--full 档 42 子关卡全绿 + CTest 557/557 + D4+ jitter 52/52) 结论一致。
 
 ## 5. R17 D4+ 扰动仿真抽检明细 (全量实跑)
 
@@ -97,18 +96,18 @@ readiness --strict 把 `--strict` 透传给 `run_e2e_smoke.sh`, 9 项全部实�
 | 9 | ferry_terminal_01 | D4 | 100 | 通过 |
 | 10 | apartment_block_01 | D4 | 99 | 通过 |
 
-与前次全量档 (b369bad, D5 仅 1 个) 相比, 本次 D5 全数 6 个悉数进入抽样 —— 新扩 D5 批的软件侧稳健性前哨全绿 (不豁免 S1/S2 实搭)。
+与前次全量档 (b369bad, D5 仅 1 个) 相比, 本次 D5 全数 6 个悉数进入抽样 —— 扩库 D5 批的软件侧稳健性前哨全绿 (不豁免 S1/S2 实搭); 批 P 新晋 D4 `expansion_orb_01` (78 片) 未达大体量补足线, 由 R5 门禁的 52 全集 jitter 巡检覆盖。
 
 ## 6. R6/R7 失败详情 (预期硬闸门, 非工程可修复)
 
-- **R6**: 实物抽样包缺口 10/10 —— D4+ 52 个全部待复核, 抽样命中 S1=0 / S2=6 / S3=4 (royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / skyscraper_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01 / stadium_gate_01 / ferry_terminal_01 / treehouse_02 / elephant_01), 预计实搭总耗时约 1000 分钟 (约 16.7 小时 —— 较 `8ee2fc7` 基线的 750 分钟增加, 因 6 个 D5 全部落入 S2 档每个 120 分钟)。已标注 `physical_verified` 的 3 个 D3 模型 (castle_foundation_01 / great_wall_01 / tokyo_tower_01) 一致性核对通过。
-- **R7**: 扫描 250 模型, D4+ 共 52 个: 已复核 0, 待复核 52 (`--fail-on-pending` 生效)。待复核集合 = 46 D4 + 6 D5, 较 `8ee2fc7` 基线 46 个净增 6 个 (5 个 D5 扩库新晋: royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01; 1 个批 P 新晋 D4: expansion_orb_01)。
+- **R6**: 实物抽样包缺口 10/10 —— D4+ 52 个全部待复核, 抽样命中 S1=0 / S2=6 / S3=4 (royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / skyscraper_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01 / stadium_gate_01 / ferry_terminal_01 / treehouse_02 / elephant_01), 预计实搭总耗时约 1000 分钟 (约 16.7 小时, 与上基线 `9aa146d` 相同 —— 批 P 新晋 D4 78 片未改变按片数排序的抽样命中集合)。已标注 `physical_verified` 的 3 个 D3 模型 (castle_foundation_01 / great_wall_01 / tokyo_tower_01) 一致性核对通过。
+- **R7**: 扫描 250 模型, D4+ 共 52 个: 已复核 0, 待复核 52 (`--fail-on-pending` 生效)。待复核集合 = 46 D4 + 6 D5, 较 `9aa146d` 基线 51 个净增 1 个 (批 P 新晋 D4: `expansion_orb_01`, 入库前已过内容批评审五道闸与 strict --jitter 50)。
 
-两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (排产单 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`: 必搭 41 ≈ 52.8h + 可缓建 11 ≈ 12.8h; 落盘用签核 CLI `tools/mark_physical_verified.py`; 缩减流程见 `docs/USER_HANDOFF.md` §4.3)。本次运行无任何非预期 / 工程可修复的失败项。
+两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (签核 CLI `tools/mark_physical_verified.py`; 排产单 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`: 必搭 41 ≈ 52.8h + 可缓建 11 ≈ 12.8h; 缩减流程见 `docs/USER_HANDOFF.md` §4.3)。本次运行无任何非预期 / 工程可修复的失败项。
 
-## 7. 难度配额快照: D3 冻结已解冻 (路径 B 闭环)
+## 7. 难度配额快照: D3 解冻状态维持 (路径 B 保持闭环)
 
-readiness 失败尾注自动带出的配额快照显示 (对照 `CONTENT_GAP_AUDIT.md` 7.3 节; 数值为批 P 置换后 52 口径同步现值):
+readiness 失败尾注自动带出的配额快照显示 (对照 `CONTENT_GAP_AUDIT.md` 7.3 节):
 
 | 难度 | 数量 | 占比 | 解冻线 | 状态 |
 | --- | --- | --- | --- | --- |
@@ -118,11 +117,11 @@ readiness 失败尾注自动带出的配额快照显示 (对照 `CONTENT_GAP_AUD
 | D4 (挑战) | 46 | 18.4% | - | - |
 | D5 (大师) | 6 | 2.4% | >= 6 | **已达标** |
 
-**D3 冻结状态: 已解冻** (D1 21 >= 20 且 D5 6 >= 6)。`LAUNCH_BLOCKERS_2026-08-25.md` 的路径 B (G2 红灯②) 在本基线已消除; readiness 脚本尾部的三路径指引为 P0 失败时的固定输出, 其中路径 B 一行已过时, 现实阻塞仅剩路径 A (R6/R7 实物) 与路径 C (Manual P0)。
+**D3 冻结状态: 已解冻** (D1 21 >= 20 且 D5 6 >= 6)。批 P 置换 +10/−10 后解冻线继续达标, `LAUNCH_BLOCKERS_2026-08-26.md` 维持单红灯口径 (路径 B 已闭环); readiness 脚本尾部的三路径指引已随 `d9ebeff` 刷新 —— 路径 B 行标注「已完成 2026-08-26」, 现实阻塞仅剩路径 A (R6/R7 实物) 与路径 C (Manual P0)。
 
 ## 8. 独立复跑: tools/run_e2e_smoke.sh --strict (退出码 0)
 
-按签核流程在同一基线独立复跑 E2E 冒烟 --strict 档: **9/9 PASS / 0 FAIL / 0 SKIP, 退出码 0**, 结论「自动子集全绿」。各关卡结果与 §3 (readiness 内嵌跑) 完全一致; E2E-14a 复用已就绪的 `build-android` 增量产物, 0s 完成 34 个 JNI 符号断言。完整输出见附录 B。
+按签核流程在同一基线独立复跑 E2E 冒烟 --strict 档: **9/9 PASS / 0 FAIL / 0 SKIP, 退出码 0**, 结论「自动子集全绿」。各关卡结果与 §3 (readiness 内嵌跑) 完全一致; E2E-14a 复用已就绪的 `build-android` 增量产物, 1s 完成 34 个 JNI 符号断言。完整输出见附录 B。
 
 负向验证 (--strict 闸门有效性): 未配置 `ANDROID_NDK` 时同命令 E2E-14a 记 SKIP, 脚本按约定判「--strict 档存在 1 项 SKIP, 上架签核不放行」退出码 1 —— strict 档不允许静默跳过的设计按预期工作。签核环境须保证 NDK 可用 (本次: `ANDROID_NDK=/opt/android-sdk/ndk/27.2.12479018`)。
 
@@ -130,12 +129,12 @@ readiness 失败尾注自动带出的配额快照显示 (对照 `CONTENT_GAP_AUD
 
 1. 路径 A (唯一自动侧红灯): 按 `docs/reports/PHYSICAL_REVIEW_QUEUE.md` 实搭 52 个 D4+ (含 6 个 D5) 并回填 `physical_verified` (签核 CLI `tools/mark_physical_verified.py`), 清零 R6/R7
 2. 路径 C: M1~M6 人工项按 `docs/USER_HANDOFF.md` §4 逐条完成 (实机打包/真机验收/法务定稿/矩阵签核/实搭签核/备案)
-3. 路径 B 已闭环, 无需进一步动作; 后续批次评审可恢复接收 D3 模型 (D3 冻结已解冻)
+3. 路径 B 已闭环, 无需进一步动作; 后续批次评审可恢复接收 D3 模型 (D3 冻结已解冻, 解冻线由 CTest 常开闸门与批次评审机检持续守卫)
 
-## 附录 A: readiness --strict 全量档完整输出 (/tmp/readiness_strict_20260826.log)
+## 附录 A: readiness --strict 全量档完整输出 (/tmp/readiness_strict_20260826_batchp.log)
 
 <details>
-<summary>点开查看完整日志 (1543 行, NO_COLOR=1)</summary>
+<summary>点开查看完整日志 (1492 行, NO_COLOR=1)</summary>
 
 ```text
 ==============================================================
@@ -307,60 +306,10 @@ Qt 界面按钮级路径冒烟通过
  E2E 冒烟 9: E2E-14a Android JNI 符号断言 (NDK 交叉编译)
 ==============================================================
   NDK: /opt/android-sdk/ndk/27.2.12479018
--- The C compiler identification is Clang 18.0.3
--- The CXX compiler identification is Clang 18.0.3
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /opt/android-sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /opt/android-sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
--- Looking for pthread_create in pthreads
--- Looking for pthread_create in pthreads - not found
--- Looking for pthread_create in pthread
--- Looking for pthread_create in pthread - not found
--- Check if compiler accepts -pthread
--- Check if compiler accepts -pthread - yes
--- Found Threads: TRUE  
--- Configuring done (0.3s)
+-- Configuring done (0.0s)
 -- Generating done (0.0s)
 -- Build files have been written to: /tmp/wt-risk-report/magtile-studio/build-android
-[1/30] Building CXX object CMakeFiles/magtile_core.dir/src/core/types.cpp.o
-[2/30] Building CXX object CMakeFiles/magtile_core.dir/src/core/age_mode.cpp.o
-[3/30] Building CXX object CMakeFiles/magtile_core.dir/src/core/tile_catalog.cpp.o
-[4/30] Building CXX object CMakeFiles/magtile_core.dir/src/core/model_definition.cpp.o
-[5/30] Building CXX object CMakeFiles/magtile_core.dir/src/core/parent_gate.cpp.o
-[6/30] Building CXX object CMakeFiles/magtile_core.dir/src/physics/geometry.cpp.o
-[7/30] Building CXX object CMakeFiles/magtile_core.dir/src/progress/achievements.cpp.o
-[8/30] Building CXX object CMakeFiles/magtile_core.dir/src/core/json_io.cpp.o
-[9/30] Building CXX object CMakeFiles/magtile_core.dir/src/core/model_catalog.cpp.o
-[10/30] Building CXX object CMakeFiles/magtile_core.dir/src/progress/age_settings.cpp.o
-[11/30] Building CXX object CMakeFiles/magtile_core.dir/src/physics/physics_validator.cpp.o
-[12/30] Building CXX object CMakeFiles/magtile_core.dir/src/progress/data_privacy.cpp.o
-[13/30] Building CXX object CMakeFiles/magtile_core.dir/src/progress/subscription_settings.cpp.o
-[14/30] Building CXX object CMakeFiles/magtile_core.dir/src/progress/ui_settings.cpp.o
-[15/30] Building CXX object CMakeFiles/magtile_core.dir/src/progress/progress_store.cpp.o
-[16/30] Building CXX object CMakeFiles/magtile_core.dir/src/billing/fake_billing_client.cpp.o
-[17/30] Building CXX object CMakeFiles/magtile_core.dir/src/billing/store_billing_client.cpp.o
-[18/30] Building CXX object CMakeFiles/magtile_render_scene.dir/src/render/gl/gl_api.cpp.o
-[19/30] Building CXX object CMakeFiles/magtile_core.dir/src/tutorial/tutorial_engine.cpp.o
-[20/30] Building CXX object CMakeFiles/magtile_core.dir/src/render/null_renderer.cpp.o
-[21/30] Building CXX object CMakeFiles/magtile_core.dir/src/render/orbit_camera.cpp.o
-[22/30] Building CXX object CMakeFiles/magtile_core.dir/src/tts/tts_engine.cpp.o
-[23/30] Building CXX object CMakeFiles/magtile_render_scene.dir/src/render/gl/gl_scene_renderer.cpp.o
-[24/30] Building CXX object platforms/android/CMakeFiles/magtile_android.dir/jni/magtile_scene_jni.cpp.o
-[25/30] Building CXX object platforms/android/CMakeFiles/magtile_android.dir/jni/magtile_jni.cpp.o
-[26/30] Building C object CMakeFiles/magtile_sqlite3.dir/third_party/sqlite3/sqlite3.c.o
-[27/30] Linking C static library libmagtile_sqlite3.a
-[28/30] Linking CXX static library libmagtile_core.a
-[29/30] Linking CXX static library libmagtile_render_scene.a
-[30/30] Linking CXX shared library platforms/android/libmagtile_core.so
+ninja: no work to do.
   (符号清单解析自 /tmp/wt-risk-report/.github/workflows/android.yml)
 [断言通过] JNI 符号断言通过 (34 个, 与 android.yml 同口径)
 [通过] E2E-14a Android JNI 符号断言 (NDK 交叉编译)
@@ -370,13 +319,13 @@ Qt 界面按钮级路径冒烟通过
 ==============================================================
   PASS   E2E-01a CLI 启动冒烟 (catalog 13 片型)         0s
   PASS   E2E-11a 免费层清单对齐 (verify_free_tier)     0s
-  PASS   E2E-11b CLI 免费筛选对账 (--free-only)         0s
+  PASS   E2E-11b CLI 免费筛选对账 (--free-only)         1s
   PASS   E2E-06a CLI 免费模型教程步进 (beach_hut_01)  0s
   PASS   E2E-17a 跨端存档键契约 (CLI 写 -> sqlite 直读) 0s
-  PASS   E2E-QT Qt 无头冒烟 (test_qt_smoke.sh)            14s
-  PASS   E2E-12a Qt 进度页深链 (--smoke-open-progress)   5s
-  PASS   E2E-04a/09a/11c/12b Qt 按钮级路径冒烟         15s
-  PASS   E2E-14a Android JNI 符号断言 (NDK 交叉编译)  22s
+  PASS   E2E-QT Qt 无头冒烟 (test_qt_smoke.sh)            15s
+  PASS   E2E-12a Qt 进度页深链 (--smoke-open-progress)   4s
+  PASS   E2E-04a/09a/11c/12b Qt 按钮级路径冒烟         14s
+  PASS   E2E-14a Android JNI 符号断言 (NDK 交叉编译)  1s
 --------------------------------------------------------------
  结论: 9 项通过 (0 项跳过), 自动子集全绿
  人工侧: 按 docs/E2E_TEST_MATRIX.md 第 1 节 P0 的 Manual 要点逐条打钩
@@ -430,11 +379,9 @@ starter 清单条目:    30
 [通过] astronaut_training_01
 [通过] bakery_shop_01
 [通过] ball_run_tower_01
-[通过] bamboo_house_01
 [通过] basketball_arena_01
 [通过] basketball_court_01
 [通过] beach_hut_01
-[通过] bike_rack_park_01
 [通过] birthday_party_01
 [通过] bowling_alley_01
 [通过] boxing_ring_01
@@ -464,9 +411,9 @@ starter 清单条目:    30
 [通过] chinese_garden_01
 [通过] christmas_market_01
 [通过] city_bus_stop_01
-[通过] climbing_wall_01
 [通过] clock_tower_01
 [通过] combine_harvester_01
+[通过] conservatory_01
 [通过] control_tower_01
 [通过] coral_reef_01
 [通过] coral_reef_02
@@ -476,11 +423,9 @@ starter 清单条目:    30
 [通过] crocodile_01
 [通过] cruise_ship_01
 [通过] cup_coaster_01
-[通过] dental_clinic_01
 [通过] desk_organizer_01
 [通过] dinosaur_hall_01
 [通过] dinosaur_stego_01
-[通过] diving_tower_01
 [通过] dragon_boat_01
 [通过] dragon_cave_01
 [通过] drawbridge_01
@@ -491,8 +436,8 @@ starter 清单条目:    30
 [通过] eiffel_tower_01
 [通过] elephant_01
 [通过] elephant_pavilion_01
-[通过] er_entrance_01
 [通过] excavator_01
+[通过] expansion_orb_01
 [通过] fairy_castle_01
 [通过] farm_barn_01
 [通过] farm_wagon_01
@@ -504,7 +449,6 @@ starter 清单条目:    30
 [通过] fire_truck_01
 [通过] fireworks_show_01
 [通过] fishing_boat_01
-[通过] flag_plaza_01
 [通过] food_truck_01
 [通过] forklift_01
 [通过] freight_yard_01
@@ -524,10 +468,10 @@ starter 清单条目:    30
 [通过] hedgehog_01
 [通过] helicopter_01
 [通过] helicopter_pad_01
+[通过] hex_honeycomb_01
 [通过] horse_stable_01
 [通过] hospital_01
 [通过] hot_air_balloon_01
-[通过] hydro_dam_01
 [通过] ice_cream_truck_01
 [通过] ice_rink_01
 [通过] igloo_01
@@ -536,7 +480,6 @@ starter 清单条目:    30
 [通过] knight_armor_01
 [通过] ladybug_01
 [通过] lantern_festival_01
-[通过] lego_style_house_01
 [通过] library_building_01
 [通过] lifeguard_tower_01
 [通过] lighthouse_01
@@ -548,6 +491,7 @@ starter 清单条目:    30
 [通过] marble_dash_lane_01
 [通过] marble_grand_cascade_01
 [通过] marble_run_spiral_01
+[通过] marble_splitter_01
 [通过] marble_starter_slope_01
 [通过] mars_habitat_01
 [通过] mars_rover_01
@@ -581,6 +525,7 @@ starter 清单条目:    30
 [通过] planetarium_01
 [通过] planetarium_02
 [通过] plank_bridge_01
+[通过] plaza_canopy_01
 [通过] police_car_01
 [通过] post_office_01
 [通过] pumpkin_lantern_01
@@ -593,6 +538,7 @@ starter 清单条目:    30
 [通过] rainforest_canopy_01
 [通过] rehab_park_01
 [通过] rescue_hq_01
+[通过] rhombus_patchwork_01
 [通过] road_construction_01
 [通过] robot_01
 [通过] robot_arm_01
@@ -611,9 +557,9 @@ starter 清单条目:    30
 [通过] satellite_dish_01
 [通过] school_bus_01
 [通过] sculpture_plaza_01
+[通过] sector_rotunda_01
 [通过] seedling_greenhouse_01
 [通过] sheep_farm_01
-[通过] skate_park_01
 [通过] ski_jump_01
 [通过] ski_lodge_01
 [通过] skyscraper_01
@@ -633,6 +579,7 @@ starter 清单条目:    30
 [通过] stellar_launch_gantry_01
 [通过] stonehenge_01
 [通过] strait_rainbow_bridge_01
+[通过] streetcar_01
 [通过] submarine_01
 [通过] submarine_dock_01
 [通过] subway_station_01
@@ -644,6 +591,7 @@ starter 清单条目:    30
         [警告] 第 11 步完成后: 模型由多个互不相连的部分组成, 建议在教程中明确分组说明 (disconnected_assembly)
 [通过] suspension_rail_01
 [通过] swing_set_01
+[通过] switchback_ramp_01
 [通过] sydney_opera_01
 [通过] taxi_01
 [通过] temple_greek_01
@@ -656,6 +604,7 @@ starter 清单条目:    30
 [通过] traffic_light_junction_01
 [通过] trailer_home_01
 [通过] train_station_01
+[通过] trapezoid_awning_01
 [通过] trebuchet_01
 [通过] treehouse_01
 [通过] treehouse_02
@@ -709,15 +658,11 @@ starter 清单条目:    30
 
 [PASS] ball_run_tower_01.json: 94 片 / 19 步 / 高亮引用 38 处 / 逐片连通检查 94 片
 
-[PASS] bamboo_house_01.json: 62 片 / 17 步 / 高亮引用 29 处 / 逐片连通检查 62 片
-
 [PASS] basketball_arena_01.json: 83 片 / 18 步 / 高亮引用 42 处 / 逐片连通检查 83 片
 
 [PASS] basketball_court_01.json: 52 片 / 15 步 / 高亮引用 22 处 / 逐片连通检查 52 片
 
 [PASS] beach_hut_01.json: 44 片 / 12 步 / 高亮引用 18 处 / 逐片连通检查 44 片
-
-[PASS] bike_rack_park_01.json: 62 片 / 16 步 / 高亮引用 24 处 / 逐片连通检查 62 片
 
 [PASS] birthday_party_01.json: 69 片 / 14 步 / 高亮引用 20 处 / 逐片连通检查 69 片
 
@@ -777,11 +722,11 @@ starter 清单条目:    30
 
 [PASS] city_bus_stop_01.json: 46 片 / 10 步 / 高亮引用 16 处 / 逐片连通检查 46 片
 
-[PASS] climbing_wall_01.json: 62 片 / 14 步 / 高亮引用 18 处 / 逐片连通检查 62 片
-
 [PASS] clock_tower_01.json: 67 片 / 16 步 / 高亮引用 28 处 / 逐片连通检查 67 片
 
 [PASS] combine_harvester_01.json: 74 片 / 14 步 / 高亮引用 26 处 / 逐片连通检查 74 片
+
+[PASS] conservatory_01.json: 41 片 / 9 步 / 高亮引用 16 处 / 逐片连通检查 41 片
 
 [PASS] control_tower_01.json: 62 片 / 14 步 / 高亮引用 23 处 / 逐片连通检查 62 片
 
@@ -801,15 +746,11 @@ starter 清单条目:    30
 
 [PASS] cup_coaster_01.json: 24 片 / 5 步 / 高亮引用 7 处 / 逐片连通检查 24 片
 
-[PASS] dental_clinic_01.json: 61 片 / 12 步 / 高亮引用 18 处 / 逐片连通检查 61 片
-
 [PASS] desk_organizer_01.json: 42 片 / 10 步 / 高亮引用 13 处 / 逐片连通检查 42 片
 
 [PASS] dinosaur_hall_01.json: 84 片 / 18 步 / 高亮引用 19 处 / 逐片连通检查 84 片
 
 [PASS] dinosaur_stego_01.json: 69 片 / 17 步 / 高亮引用 27 处 / 逐片连通检查 69 片
-
-[PASS] diving_tower_01.json: 62 片 / 13 步 / 高亮引用 13 处 / 逐片连通检查 62 片
 
 [PASS] dragon_boat_01.json: 72 片 / 17 步 / 高亮引用 20 处 / 逐片连通检查 72 片
 
@@ -831,9 +772,9 @@ starter 清单条目:    30
 
 [PASS] elephant_pavilion_01.json: 75 片 / 15 步 / 高亮引用 24 处 / 逐片连通检查 75 片
 
-[PASS] er_entrance_01.json: 63 片 / 13 步 / 高亮引用 22 处 / 逐片连通检查 63 片
-
 [PASS] excavator_01.json: 55 片 / 18 步 / 高亮引用 28 处 / 逐片连通检查 55 片
+
+[PASS] expansion_orb_01.json: 78 片 / 18 步 / 高亮引用 20 处 / 逐片连通检查 78 片
 
 [PASS] fairy_castle_01.json: 66 片 / 13 步 / 高亮引用 18 处 / 逐片连通检查 66 片
 
@@ -856,8 +797,6 @@ starter 清单条目:    30
 [PASS] fireworks_show_01.json: 73 片 / 13 步 / 高亮引用 18 处 / 逐片连通检查 73 片
 
 [PASS] fishing_boat_01.json: 63 片 / 16 步 / 高亮引用 28 处 / 逐片连通检查 63 片
-
-[PASS] flag_plaza_01.json: 60 片 / 13 步 / 高亮引用 15 处 / 逐片连通检查 60 片
 
 [PASS] food_truck_01.json: 51 片 / 16 步 / 高亮引用 29 处 / 逐片连通检查 51 片
 
@@ -897,13 +836,13 @@ starter 清单条目:    30
 
 [PASS] helicopter_pad_01.json: 71 片 / 17 步 / 高亮引用 30 处 / 逐片连通检查 71 片
 
+[PASS] hex_honeycomb_01.json: 44 片 / 8 步 / 高亮引用 17 处 / 逐片连通检查 44 片
+
 [PASS] horse_stable_01.json: 56 片 / 13 步 / 高亮引用 12 处 / 逐片连通检查 56 片
 
 [PASS] hospital_01.json: 98 片 / 18 步 / 高亮引用 33 处 / 逐片连通检查 98 片
 
 [PASS] hot_air_balloon_01.json: 69 片 / 13 步 / 高亮引用 13 处 / 逐片连通检查 69 片
-
-[PASS] hydro_dam_01.json: 62 片 / 16 步 / 高亮引用 27 处 / 逐片连通检查 62 片
 
 [PASS] ice_cream_truck_01.json: 73 片 / 16 步 / 高亮引用 30 处 / 逐片连通检查 73 片
 
@@ -920,8 +859,6 @@ starter 清单条目:    30
 [PASS] ladybug_01.json: 21 片 / 5 步 / 高亮引用 7 处 / 逐片连通检查 21 片
 
 [PASS] lantern_festival_01.json: 57 片 / 12 步 / 高亮引用 18 处 / 逐片连通检查 57 片
-
-[PASS] lego_style_house_01.json: 61 片 / 17 步 / 高亮引用 25 处 / 逐片连通检查 61 片
 
 [PASS] library_building_01.json: 90 片 / 18 步 / 高亮引用 32 处 / 逐片连通检查 90 片
 
@@ -944,6 +881,8 @@ starter 清单条目:    30
 [PASS] marble_grand_cascade_01.json: 123 片 / 32 步 / 高亮引用 42 处 / 逐片连通检查 123 片
 
 [PASS] marble_run_spiral_01.json: 80 片 / 18 步 / 高亮引用 36 处 / 逐片连通检查 80 片
+
+[PASS] marble_splitter_01.json: 40 片 / 10 步 / 高亮引用 15 处 / 逐片连通检查 40 片
 
 [PASS] marble_starter_slope_01.json: 21 片 / 6 步 / 高亮引用 6 处 / 逐片连通检查 21 片
 
@@ -1011,6 +950,8 @@ starter 清单条目:    30
 
 [PASS] plank_bridge_01.json: 27 片 / 5 步 / 高亮引用 8 处 / 逐片连通检查 27 片
 
+[PASS] plaza_canopy_01.json: 25 片 / 7 步 / 高亮引用 12 处 / 逐片连通检查 25 片
+
 [PASS] police_car_01.json: 53 片 / 16 步 / 高亮引用 29 处 / 逐片连通检查 53 片
 
 [PASS] post_office_01.json: 97 片 / 19 步 / 高亮引用 30 处 / 逐片连通检查 97 片
@@ -1034,6 +975,8 @@ starter 清单条目:    30
 [PASS] rehab_park_01.json: 41 片 / 9 步 / 高亮引用 13 处 / 逐片连通检查 41 片
 
 [PASS] rescue_hq_01.json: 101 片 / 18 步 / 高亮引用 69 处 / 逐片连通检查 101 片
+
+[PASS] rhombus_patchwork_01.json: 41 片 / 10 步 / 高亮引用 21 处 / 逐片连通检查 41 片
 
 [PASS] road_construction_01.json: 72 片 / 15 步 / 高亮引用 22 处 / 逐片连通检查 72 片
 
@@ -1071,11 +1014,11 @@ starter 清单条目:    30
 
 [PASS] sculpture_plaza_01.json: 56 片 / 12 步 / 高亮引用 13 处 / 逐片连通检查 56 片
 
+[PASS] sector_rotunda_01.json: 52 片 / 13 步 / 高亮引用 15 处 / 逐片连通检查 52 片
+
 [PASS] seedling_greenhouse_01.json: 22 片 / 6 步 / 高亮引用 9 处 / 逐片连通检查 22 片
 
 [PASS] sheep_farm_01.json: 74 片 / 15 步 / 高亮引用 19 处 / 逐片连通检查 74 片
-
-[PASS] skate_park_01.json: 60 片 / 15 步 / 高亮引用 21 处 / 逐片连通检查 60 片
 
 [PASS] ski_jump_01.json: 54 片 / 16 步 / 高亮引用 21 处 / 逐片连通检查 54 片
 
@@ -1115,6 +1058,8 @@ starter 清单条目:    30
 
 [PASS] strait_rainbow_bridge_01.json: 110 片 / 25 步 / 高亮引用 34 处 / 逐片连通检查 110 片
 
+[PASS] streetcar_01.json: 48 片 / 9 步 / 高亮引用 16 处 / 逐片连通检查 48 片
+
 [PASS] submarine_01.json: 75 片 / 16 步 / 高亮引用 24 处 / 逐片连通检查 75 片
 
 [PASS] submarine_dock_01.json: 89 片 / 18 步 / 高亮引用 29 处 / 逐片连通检查 89 片
@@ -1126,6 +1071,8 @@ starter 清单条目:    30
 [PASS] suspension_rail_01.json: 75 片 / 16 步 / 高亮引用 29 处 / 逐片连通检查 75 片
 
 [PASS] swing_set_01.json: 47 片 / 10 步 / 高亮引用 13 处 / 逐片连通检查 47 片
+
+[PASS] switchback_ramp_01.json: 45 片 / 11 步 / 高亮引用 15 处 / 逐片连通检查 45 片
 
 [PASS] sydney_opera_01.json: 57 片 / 16 步 / 高亮引用 27 处 / 逐片连通检查 57 片
 
@@ -1150,6 +1097,8 @@ starter 清单条目:    30
 [PASS] trailer_home_01.json: 67 片 / 16 步 / 高亮引用 24 处 / 逐片连通检查 67 片
 
 [PASS] train_station_01.json: 75 片 / 18 步 / 高亮引用 26 处 / 逐片连通检查 75 片
+
+[PASS] trapezoid_awning_01.json: 40 片 / 9 步 / 高亮引用 16 处 / 逐片连通检查 40 片
 
 [PASS] trebuchet_01.json: 57 片 / 12 步 / 高亮引用 15 处 / 逐片连通检查 57 片
 
@@ -1318,7 +1267,7 @@ warehouse_01                 D4     97   18
 ==============================================================
   PASS   免费层清单对齐核验                  0s
   PASS   弱磁严格档全库巡检 (strict)         43s
-  PASS   L3 实物复核缺口报告 (报告型)      1s
+  PASS   L3 实物复核缺口报告 (报告型)      0s
 --------------------------------------------------------------
  提醒: L3 实物复核为报告型不阻断; 正式出包前追加 --fail-on-pending 作为终防线
  结论: 全部 3 个门禁关卡通过, 可进入打包流程
@@ -1351,7 +1300,7 @@ D4+ 共 52 个 (待复核 52); 免费层 D4+ 0 个; 抽样目标 10 个, 命中 
   [OK ] tokyo_tower_01           D3 2026-08-25 via content_meta (2026-08-25)
 
 抽样包缺口: 10 / 10 (存在缺口, --fail-on-missing-sample 生效)
-[失败] R6 实物抽样包 V1 复核缺口 (physical_sample_pack) (退出码 1, 日志: /tmp/magtile_v1_readiness_xDLcrv/06_R6.log)
+[失败] R6 实物抽样包 V1 复核缺口 (physical_sample_pack) (退出码 1, 日志: /tmp/magtile_v1_readiness_B58RU4/06_R6.log)
 
 ==============================================================
  R7 [P0] D4+ 实物复核全集清零 (list_physical_pending)
@@ -1415,7 +1364,7 @@ volcano_base_01              D4     83   18
 warehouse_01                 D4     97   18
 
 待复核数量: 52 (存在待复核, --fail-on-pending 生效)
-[失败] R7 D4+ 实物复核全集清零 (list_physical_pending) (退出码 1, 日志: /tmp/magtile_v1_readiness_xDLcrv/07_R7.log)
+[失败] R7 D4+ 实物复核全集清零 (list_physical_pending) (退出码 1, 日志: /tmp/magtile_v1_readiness_B58RU4/07_R7.log)
 
 ==============================================================
  R8 [P0] 隐私合规文档存在性
@@ -1548,7 +1497,7 @@ warehouse_01                 D4     97   18
 ==============================================================
  R16 [P0] 儿童友好文案守卫 (check_child_friendly_copy)
 ==============================================================
-儿童友好文案守卫: 通过 —— 301 个文件 / 8571 段用户可见中文文案, 无恐吓词与催促话术
+儿童友好文案守卫: 通过 —— 301 个文件 / 8493 段用户可见中文文案, 无恐吓词与催促话术
 [通过] R16 儿童友好文案守卫 (check_child_friendly_copy)
 
 ==============================================================
@@ -1577,41 +1526,41 @@ warehouse_01                 D4     97   18
 词表:              /tmp/wt-risk-report/magtile-studio/data/content_series_map.json
                    (13 个矩阵主题 + 11 个矩阵外桶)
 模型总数:          250
-矩阵内 (series):   201
-矩阵外 (bucket):   49
+矩阵内 (series):   211
+矩阵外 (bucket):   39
 缺失归类:          0
 词值非法:          0
 
 主题 × 难度矩阵计数 (现状; 520 目标对照见 CONTENT_GAP_AUDIT.md 第 3 节):
   主题                             D1   D2   D3   D4   D5  合计
   城堡与要塞 castle_fortress        1    0    6    1    1     9
-  陆地交通 land_transport           1    5   26    7    0    39
+  陆地交通 land_transport           1    6   26    7    0    40
   海空交通 sea_air_transport        1    0   15    8    0    24
   航天器 spacecraft                 1    2   15    1    1    20
   动物世界 animal_world             2    2   24    2    0    30
-  建筑地标 landmark_architecture    1    0    9    7    1    18
+  建筑地标 landmark_architecture    1    0   10    7    1    19
   桥梁工程 bridge_engineering       1    0    4    1    1     7
-  几何艺术 geometric_art            2    1    1    0    0     4
-  滚珠乐园 marble_run               1    0    1    2    1     5
-  植物花园 plant_garden             2    1    4    3    0    10
+  几何艺术 geometric_art            2    3    1    1    0     7
+  滚珠乐园 marble_run               1    2    1    2    1     7
+  植物花园 plant_garden             2    3    4    3    0    12
   节日限定 holiday_seasonal         1    1    9    0    0    11
-  实用功能 practical_utility        5    1    0    0    0     6
+  实用功能 practical_utility        6    1    0    0    0     7
   幻想与机械 fantasy_machinery      1    2   14    0    1    18
-  矩阵内小计                       20   15  128   32    6   201
+  矩阵内小计                       21   22  129   33    6   211
 
 矩阵外桶计数:
-  城市生活 city_life               18
-  运动 sports                      10
-  田园 farm                         5
-  工程结构 engineering_misc         3
+  城市生活 city_life               15
+  运动 sports                       7
+  田园 farm                         3
+  工程结构 engineering_misc         2
   音乐 music                        1
   自然世界 nature_misc              4
-  校园 campus                       1
+  校园 campus                       0
   游乐园 amusement                  2
   海洋航行 maritime_misc            2
   博物馆 museum                     1
   其他 other                        2
-  矩阵外小计                       49
+  矩阵外小计                       39
 
 归类齐全且词值全部合法, 无警告
 ==============================================================
@@ -1635,8 +1584,8 @@ warehouse_01                 D4     97   18
   PASS   R1   [P0] 内容体量 (模型 JSON >= 200)              0s
   PASS   R2   [P1] 目录登记 / 缩略图对账                 0s
   PASS   R3   [P0] 免费层清单对齐 (verify_free_tier)       0s
-  PASS   R4   [P0] E2E 冒烟 (run_e2e_smoke.sh --strict)         56s
-  PASS   R5   [P0] 发布门禁快检 (run_release_gate.sh)       44s
+  PASS   R4   [P0] E2E 冒烟 (run_e2e_smoke.sh --strict)         35s
+  PASS   R5   [P0] 发布门禁快检 (run_release_gate.sh)       43s
   FAIL   R6   [P0] 实物抽样包 V1 复核缺口 (physical_sample_pack) 0s
   FAIL   R7   [P0] D4+ 实物复核全集清零 (list_physical_pending) 0s
   PASS   R8   [P0] 隐私合规文档存在性                    0s
@@ -1648,8 +1597,8 @@ warehouse_01                 D4     97   18
   PASS   R13  [P0] Android release 签名配置                   0s
   PASS   R14  [P0] 商店上架文档守卫 (validate_store_listing) 0s
   PASS   R15  [P0] 国内合规清单守卫 (check_china_compliance_docs) 0s
-  PASS   R16  [P0] 儿童友好文案守卫 (check_child_friendly_copy) 0s
-  PASS   R17  [P1] D4+ 扰动仿真抽检 (validate --jitter 50)  13s
+  PASS   R16  [P0] 儿童友好文案守卫 (check_child_friendly_copy) 1s
+  PASS   R17  [P1] D4+ 扰动仿真抽检 (validate --jitter 50)  12s
   PASS   R18  [P1] 内容系列归类机检 (check_content_series --strict) 0s
   SKIP   M1   [P0] Windows/macOS 实机打包验收 + 代码签名/公证 -
   SKIP   M2   [P0] Android 真机验收 + 商店上架资料      -
@@ -1660,12 +1609,11 @@ warehouse_01                 D4     97   18
 --------------------------------------------------------------
  合计 25 项: 17 PASS / 2 FAIL / 6 SKIP (其中 P0 失败 2 项)
  结论: 存在 2 项 P0 失败 —— 未达上架就绪, 逐项对照清单补齐
- 分项日志: /tmp/magtile_v1_readiness_xDLcrv
+ 分项日志: /tmp/magtile_v1_readiness_B58RU4
 
- 阻塞项指引 (工程侧已触顶, 见 docs/reports/LAUNCH_BLOCKERS_2026-08-25.md):
+ 阻塞项指引 (工程侧已触顶, 见 docs/reports/LAUNCH_BLOCKERS_2026-08-26.md):
    路径 A 实物签核 —— R6/R7: 按 docs/reports/PHYSICAL_REVIEW_QUEUE.md 实搭落盘
-   路径 B 配额解冻 —— G2 红灯②: D1>=20 且 D5>=6 (置换/扩库/豁免, 需你决策)
-                        规划: docs/reports/QUOTA_SUBSTITUTION_PLAN_2026-08-25.md
+   路径 B 配额解冻 —— 已完成 2026-08-26 (D1 20/20, D5 6/6, strict 守卫绿; 维持解冻线即可)
    路径 C Manual P0 —— 行政/实机/沙盒/法务: docs/USER_HANDOFF.md §4
 
  难度配额快照 (--full 档 strict 守卫口径):
@@ -1685,7 +1633,7 @@ warehouse_01                 D4     97   18
 
 </details>
 
-## 附录 B: run_e2e_smoke.sh --strict 独立跑完整输出 (/tmp/e2e_strict_20260826.log)
+## 附录 B: run_e2e_smoke.sh --strict 独立跑完整输出 (/tmp/e2e_strict_20260826_batchp.log)
 
 <details>
 <summary>点开查看完整日志 (151 行, NO_COLOR=1)</summary>
@@ -1833,12 +1781,12 @@ ninja: no work to do.
   PASS   E2E-01a CLI 启动冒烟 (catalog 13 片型)         0s
   PASS   E2E-11a 免费层清单对齐 (verify_free_tier)     0s
   PASS   E2E-11b CLI 免费筛选对账 (--free-only)         0s
-  PASS   E2E-06a CLI 免费模型教程步进 (beach_hut_01)  0s
+  PASS   E2E-06a CLI 免费模型教程步进 (beach_hut_01)  1s
   PASS   E2E-17a 跨端存档键契约 (CLI 写 -> sqlite 直读) 0s
-  PASS   E2E-QT Qt 无头冒烟 (test_qt_smoke.sh)            15s
-  PASS   E2E-12a Qt 进度页深链 (--smoke-open-progress)   4s
+  PASS   E2E-QT Qt 无头冒烟 (test_qt_smoke.sh)            14s
+  PASS   E2E-12a Qt 进度页深链 (--smoke-open-progress)   5s
   PASS   E2E-04a/09a/11c/12b Qt 按钮级路径冒烟         14s
-  PASS   E2E-14a Android JNI 符号断言 (NDK 交叉编译)  0s
+  PASS   E2E-14a Android JNI 符号断言 (NDK 交叉编译)  1s
 --------------------------------------------------------------
  结论: 9 项通过 (0 项跳过), 自动子集全绿
  人工侧: 按 docs/E2E_TEST_MATRIX.md 第 1 节 P0 的 Manual 要点逐条打钩

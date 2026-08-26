@@ -1,19 +1,19 @@
 # V1 上架就绪探测报告 (2026-08-26 刷新, --quick 档)
 
-- 生成时间: 2026-08-26 04:51 UTC (批 P 扩展装置换波次后刷新; 上一份 --quick 记录 @ `9aa146d` 见本文件历史版本, 同日 --strict 全量档记录见 `READINESS_STRICT_2026-08-26.md` @ `9aa146d` —— 其计数已同步 52 口径, 上一份全量档记录见 `READINESS_FULL_2026-08-25.md` @ `b369bad`)
-- 基线提交: `ad6d35c` (`cursor/magtile-studio-foundation-a95b` —— 自 `9aa146d` 以来为批 P 扩展装置换波次: 按 `BATCH_P_MERGE_PLAN_2026-08-26.md` 摘取 10 个扩展装模型 (1 D1 + 7 D2 + 1 D3 白名单 + 1 D4) 入库并按计划附录 B 退役 10 个矩阵外 D3, 总量保持 250 (`53615ea`); 另含实物签核 CLI `mark_physical_verified.py` (`573e0cc`)、排产三件套 52 口径刷新 (`8974b4b`) 与治理文档换版 (`d9ebeff` / `ad6d35c`); C++ 引擎源码未变更)
-- 构建配置: CMake Release, `/tmp/wt-risk-report/magtile-studio` worktree (@ `ad6d35c`, 工作区干净) 增量构建, 退出码 0
+- 生成时间: 2026-08-26 05:12 UTC (批 P 扩展装置换波次后刷新; 上一份 --quick 记录 @ `9aa146d` 见本文件历史版本, 同基线 --strict 全量档记录见 `READINESS_STRICT_2026-08-26.md` 同日刷新版, 两报告可互为对照)
+- 基线提交: `ad6d35c` (`cursor/magtile-studio-foundation-a95b` —— 自 `9aa146d` 以来为批 P 扩展装置换波次: 内容置换 `53615ea` (+10 扩展装 (1 D1 + 7 D2 + 1 D3 白名单 + 1 D4) / −10 矩阵外 D3, 总量 250 保持) + 签核 CLI `573e0cc` + 排产三件套刷新至 52 口径 `8974b4b` + 治理留痕刷新 `ad6d35c`; C++ 引擎源码未变更)
+- 构建配置: CMake Release, `/tmp/wt-risk-report/magtile-studio` worktree (数据与引擎同 `ad6d35c`, 其后仅治理文档留痕) 增量构建, 退出码 0
 - 执行命令: `tools/check_v1_readiness.sh --quick` (**--quick 档**: R4 E2E / R5 发布门禁 / R17 扰动抽检三个长跑项按约定记 SKIP; 总耗时约 1s)
 - 退出码: **1** (仅 R6/R7 两项 L3 实物复核 P0 失败, 属预期硬闸门, 非软件缺陷)
-- 长跑项补充覆盖 (同场批 P 基线): `tools/run_release_gate.sh --full --fail-on-pending` 已在同一 worktree 批 P 置换后单独实跑 (见 `RELEASE_GATE_STATUS.md` 2026-08-26 04:53 UTC 刷新) —— **全量 QA 42 子关卡 0 失败保持全绿** (CTest 557/557, strict 巡检三阶段全绿含 D4+ 抗扰动 52/52 × 50 轮, 含新入库 `expansion_orb_01`), 是 R5 默认档的超集且覆盖面超出 R17 的 10 模型抽样; 唯一红灯为 L3 实物复核 52 待复核硬闸门。R4 E2E 冒烟本次未跑 (--quick 约定), --strict 全量档证据保持 `READINESS_STRICT_2026-08-26.md` §3 (`9aa146d` 实跑, 其后无引擎/Qt 界面变更; 批 P 模型 JSON 置换已由本场全量 QA 的 250/250 validate + 逐步装配 + CTest 557/557 全绿覆盖)
+- 长跑项补充覆盖 (同场同基线): `tools/run_release_gate.sh --full --fail-on-pending` 已在同一 worktree 同一数据基线单独实跑 (见 `RELEASE_GATE_STATUS.md` 2026-08-26 04:53 UTC 刷新) —— **全量 QA 42 子关卡 0 失败保持全绿** (CTest 557/557, strict 巡检三阶段全绿含 D4+ 抗扰动 52/52 × 50 轮), 是 R5 默认档的超集且覆盖面超出 R17 的 10 模型抽样; 唯一红灯为 L3 实物复核 52 待复核硬闸门。R4 E2E 冒烟本次未跑 (--quick 约定), 全量档证据见 `READINESS_STRICT_2026-08-26.md` 同日刷新版 §3 (同基线 --strict 实跑 9/9 全绿 0 SKIP; 批 P 模型 JSON 变更已由本场全量 QA 的 250/250 validate + 逐步装配全绿覆盖)
 
 ## 1. 结论速览
 
 **合计 25 项: 14 PASS / 2 FAIL / 9 SKIP (P0 失败 2 项, 全部为实物复核硬闸门)。**
 
-工程侧判定: **批 P 置换入库后软件门禁保持无任何工程侧红项** —— 10 个扩展装模型经内容批评审五道闸 (`BATCH_P_MERGE_PLAN_2026-08-26.md`) 摘取入库, 置换未引入任何软件侧红项 (同场全量 QA 42 子关卡 0 失败, 见 `RELEASE_GATE_STATUS.md`), 难度配额守卫 strict 档保持绿灯 (D1 21 ≥ 20 且 D5 6 ≥ 6, D3 解冻维持)。唯二失败 R6/R7 为 D4+ 实物复核缺口 (**52 个: 46 D4 + 6 D5**, 较 `9aa146d` 基线净增 1 个批 P 新 D4 `expansion_orb_01`), 按设计须用户实搭清零 (`docs/PHYSICAL_REBUILD_CHECKLIST.md`, 排产单 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`, 签核 CLI `tools/mark_physical_verified.py`), 不属工程可修复范围。本次运行无任何工程可修复的失败项。
+工程侧判定: **批 P 置换后软件门禁在 250 基线上保持无任何工程侧红项** —— 批 P 的 10 个扩展装模型经内容批评审五道闸 (`BATCH_P_MERGE_PLAN_2026-08-26.md`) 在本线基线过检后摘取入库, 同场全量实跑确认置换未引入任何软件侧红项 (明细见 `RELEASE_GATE_STATUS.md` §1), 难度配额守卫 strict 档保持绿灯 (D1 21 ≥ 20 且 D5 6 ≥ 6, D3 解冻维持)。唯二失败 R6/R7 为 D4+ 实物复核缺口 (52 个: 46 D4 + 6 D5, 较 `9aa146d` 基线净增 1 个 D4 `expansion_orb_01`), 按设计须用户实搭清零 (`docs/PHYSICAL_REBUILD_CHECKLIST.md`, 排产单 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`), 不属工程可修复范围。本次运行无任何工程可修复的失败项。
 
-与前次 --quick 运行 (`9aa146d`) 的口径差异: 探测项集合不变 (R1~R18 + M1~M6 共 25 项), SKIP 集合不变 (R4/R5/R17 + M1~M6), PASS/FAIL 分布不变 (14/2/9)。数据面变化: ① R7 待复核从 51 增至 **52** (+1 批 P 新 D4 `expansion_orb_01`, 78 片 / 18 步, 风险分 54.1, 排产队列第 8 位); ② R6 抽样包命中保持 S1=0 S2=6 S3=4 (同一组 10 个模型, `expansion_orb_01` 78 片未及 S3 高片数补位线不入抽样包), 预计仍 1000 分钟 ≈ 16.7 小时; ③ R18 矩阵内/外从 201/49 变为 **211/39** (批 P 10 个全部落矩阵格, 退役 10 个均为矩阵外桶); ④ R16 文案段数 8571 → 8493 (退役模型文案随置换出库, 301 文件全绿); ⑤ 尾部难度配额快照变为 **D1 21 / D2 30 / D3 147 / D4 46 / D5 6** (解冻维持: D1 21 ≥ 20 且 D5 6 ≥ 6); ⑥ 脚本尾部阻塞项指引已随 `d9ebeff` 换版 —— 指向 `LAUNCH_BLOCKERS_2026-08-26.md`, 路径 B 行改为「已完成 2026-08-26」, 实际剩余路径仅 A (实物) 与 C (Manual P0)。
+与前次 --quick 运行 (`9aa146d`) 的口径差异: 探测项集合不变 (R1~R18 + M1~M6 共 25 项), SKIP 集合不变 (R4/R5/R17 + M1~M6)。数据面变化: ① R7 待复核从 51 增至 **52** (+1 新 D4 `expansion_orb_01`, 批 P `53615ea` 入库); ② R6 抽样包命中保持 S1=0 S2=6 S3=4 (新 D4 仅 78 片, 未进入按片数排序的 S3 档), 预计 1000 分钟 ≈ 16.7 小时不变; ③ R18 矩阵内/外从 201/49 变为 **211/39** (批 P 10 个全部落矩阵内, 退役 10 个均为矩阵外 D3); ④ R16 文案段数 8571 → 8493 (置换模型文案随之出入库); ⑤ 尾部难度配额快照变为 **D1 21 / D2 30 / D3 147 / D4 46 / D5 6** —— 解冻线 D1 ≥ 20 且 D5 ≥ 6 保持达标, D3 解冻维持, 实际剩余路径仍仅 A (实物) 与 C (Manual P0)。
 
 ## 2. 逐项结果
 
@@ -22,7 +22,7 @@
 | R1 内容体量 | P0 | **PASS** | 0s | 模型 JSON 250 个 >= 门槛 200 (目标区间 200~250 上限达成) |
 | R2 目录/缩略图对账 | P1 | **PASS** | 0s | 模型 250 / 目录登记 250 / 缩略图就绪 250, 三方一致 |
 | R3 免费层清单对齐 | P0 | **PASS** | 0s | 免费标签 30 x starter 清单 x core-9 三条断言全过 |
-| R4 E2E 冒烟 | P0 | SKIP | - | --quick 约定; --strict 全量档证据见 READINESS_STRICT_2026-08-26.md §3 (其后无引擎/界面变更) |
+| R4 E2E 冒烟 | P0 | SKIP | - | --quick 约定; 全量档证据见 READINESS_STRICT_2026-08-26.md 同日刷新版 §3 (同基线 --strict 实跑 9/9) |
 | R5 发布门禁快检 | P0 | SKIP | - | --quick 约定; 同场已单独实跑超集档 `--full --fail-on-pending`, QA 全绿 (见 RELEASE_GATE_STATUS.md) |
 | R6 实物抽样包缺口 | P0 | **FAIL** | 0s | 预期失败: 抽样包缺口 10/10, 命中 S1=0 S2=6 S3=4 (详见 §3) |
 | R7 D4+ 实物复核清零 | P0 | **FAIL** | 0s | 预期失败: D4+ 52 个待复核 0/52 (详见 §3) |
@@ -45,14 +45,14 @@
 - **R6**: 实物抽样包缺口 10/10 —— D4+ 52 个全部待复核, 抽样命中 S1=0 / S2=6 / S3=4: **6 个 D5 全部纳入优先抽样** (royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / skyscraper_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01, 各 120min) + 4 个高片数 D4 (stadium_gate_01 / ferry_terminal_01 / treehouse_02 / elephant_01, 各 70min), 预计实搭总耗时约 1000 分钟 (约 16.7 小时)。已标注 `physical_verified` 的 3 个 D3 模型 (castle_foundation_01 / great_wall_01 / tokyo_tower_01) 一致性核对通过。
 - **R7**: 扫描 250 模型, D4+ 共 52 个: 已复核 0, 待复核 52 (`--fail-on-pending` 生效)。
 
-两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (族去重排产单见 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`: 必搭 41 ≈ 52.8h + 可缓建 11 ≈ 12.8h, 合计 3940 分钟 ≈ 65.7h; 落盘用签核 CLI `tools/mark_physical_verified.py`; 缩减流程见 `docs/USER_HANDOFF.md` §4.3)。待复核集合较 `9aa146d` 基线净增 1 个批 P 新 D4 (`expansion_orb_01`, 扩展装轨道球体), 其入库评审已通过 strict 零警告 + 抗扰动 50 轮全绿 (见 RELEASE_GATE_STATUS.md §2), **全部 52 个均可直接排实搭**。本次运行无任何非预期 / 工程可修复的失败项。
+两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (签核 CLI `tools/mark_physical_verified.py`; 族去重排产单见 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`: 必搭 41 ≈ 52.8h + 可缓建 11 ≈ 12.8h)。待复核集合较 `9aa146d` 基线净增 1 个新 D4 (`expansion_orb_01`, 批 P `53615ea` 入库, 入库前已过内容批评审五道闸并通过 strict --jitter 50, 见 `RELEASE_GATE_STATUS.md` §2), **全部 52 个均可直接排实搭**。本次运行无任何非预期 / 工程可修复的失败项。
 
 ## 4. 下一步
 
-1. 用户侧: 按 `docs/USER_HANDOFF.md` §4 完成实物 (R6/R7 清零, 建议从 §3 抽样包 10 个起步, 落盘用 `tools/mark_physical_verified.py`)、行政、实机、沙盒验收; 路径 B 配额解冻已完结 (D1 21/20 + D5 6/6, 快照见附录尾段), 无需再决策
-2. 签核档: 上架签核前以全量档复跑 (`tools/check_v1_readiness.sh` 不带 `--quick`, 配 Android NDK 后加 `--strict`), 消除 R4/R5/R17 SKIP 与 E2E-14a SKIP
+1. 用户侧: 按 `docs/USER_HANDOFF.md` §4 完成实物 (R6/R7 清零, 建议从 §3 抽样包 10 个起步)、行政、实机、沙盒验收; 路径 B 配额解冻已完结 (D1 21 ≥ 20 且 D5 6 ≥ 6, 快照见附录尾段), 无需再决策
+2. 签核档: 上架签核前以全量档复跑 (`tools/check_v1_readiness.sh` 不带 `--quick`, 配 Android NDK 后加 `--strict`), 消除 R4/R5/R17 SKIP 与 E2E-14a SKIP —— 同基线 --strict 实跑记录见 `READINESS_STRICT_2026-08-26.md` 同日刷新版
 
-## 附录: 本次 --quick 档完整输出 (/tmp/readiness_quick.log)
+## 附录: 本次 --quick 档完整输出 (/tmp/readiness_quick_20260826_batchp.log)
 
 <details>
 <summary>点开查看完整日志 (382 行, NO_COLOR=1)</summary>
@@ -126,7 +126,7 @@ D4+ 共 52 个 (待复核 52); 免费层 D4+ 0 个; 抽样目标 10 个, 命中 
   [OK ] tokyo_tower_01           D3 2026-08-25 via content_meta (2026-08-25)
 
 抽样包缺口: 10 / 10 (存在缺口, --fail-on-missing-sample 生效)
-[失败] R6 实物抽样包 V1 复核缺口 (physical_sample_pack) (退出码 1, 日志: /tmp/magtile_v1_readiness_Na6Q8N/06_R6.log)
+[失败] R6 实物抽样包 V1 复核缺口 (physical_sample_pack) (退出码 1, 日志: /tmp/magtile_v1_readiness_xPhCHF/06_R6.log)
 
 ==============================================================
  R7 [P0] D4+ 实物复核全集清零 (list_physical_pending)
@@ -190,7 +190,7 @@ volcano_base_01              D4     83   18
 warehouse_01                 D4     97   18
 
 待复核数量: 52 (存在待复核, --fail-on-pending 生效)
-[失败] R7 D4+ 实物复核全集清零 (list_physical_pending) (退出码 1, 日志: /tmp/magtile_v1_readiness_Na6Q8N/07_R7.log)
+[失败] R7 D4+ 实物复核全集清零 (list_physical_pending) (退出码 1, 日志: /tmp/magtile_v1_readiness_xPhCHF/07_R7.log)
 
 ==============================================================
  R8 [P0] 隐私合规文档存在性
@@ -397,7 +397,7 @@ warehouse_01                 D4     97   18
   PASS   R3   [P0] 免费层清单对齐 (verify_free_tier)       0s
   SKIP   R4   [P0] E2E 冒烟 (run_e2e_smoke.sh)                  -
   SKIP   R5   [P0] 发布门禁快检 (run_release_gate.sh)       -
-  FAIL   R6   [P0] 实物抽样包 V1 复核缺口 (physical_sample_pack) 0s
+  FAIL   R6   [P0] 实物抽样包 V1 复核缺口 (physical_sample_pack) 1s
   FAIL   R7   [P0] D4+ 实物复核全集清零 (list_physical_pending) 0s
   PASS   R8   [P0] 隐私合规文档存在性                    0s
   PASS   R9   [P0] 桌面打包资产完备                       0s
@@ -420,7 +420,7 @@ warehouse_01                 D4     97   18
 --------------------------------------------------------------
  合计 25 项: 14 PASS / 2 FAIL / 9 SKIP (其中 P0 失败 2 项)
  结论: 存在 2 项 P0 失败 —— 未达上架就绪, 逐项对照清单补齐
- 分项日志: /tmp/magtile_v1_readiness_Na6Q8N
+ 分项日志: /tmp/magtile_v1_readiness_xPhCHF
 
  阻塞项指引 (工程侧已触顶, 见 docs/reports/LAUNCH_BLOCKERS_2026-08-26.md):
    路径 A 实物签核 —— R6/R7: 按 docs/reports/PHYSICAL_REVIEW_QUEUE.md 实搭落盘
