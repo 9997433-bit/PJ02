@@ -49,184 +49,159 @@
       }
     },
     {
-      "id": "magna_tiles_32_classic",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES Classic 32片",
-      "name_en": "MAGNA-TILES Classic 32-Piece Set",
-      "piece_count_label": 32,
+      "id": "playmags_100",
+      "brand": "playmags",
+      "name_zh": "Playmags 100片超值装",
+      "name_en": "Playmags 100-Piece Value Set",
+      "piece_count_label": 84,
       "tier_scope": "core",
-      "description_zh": "经典入门盒: 14 小方 + 2 大方 + 8 等边三角 + 4 直角三角 + 4 等腰三角, 半透明原色。",
+      "description_zh": "Playmags 经典 100 片盒装 (TP100): 26 正方 + 18 窗格 (14 窗 + 4 四格窗) + 10 直角三角 + 8 锐角瘦高三角 + 12 等边三角 + 8 长方 + 2 大正方。盒面标称 100 件含 16 枚 Click-in 字母/窗插片 (非磁力片, 不计入 pieces)。",
+      "compatibility": "Flat open-frame tiles; compatible with standard MagTile edge geometry. Click-in inserts omitted.",
       "pieces": {
-        "square": 14,
-        "large_square": 2,
-        "equilateral_triangle": 8,
+        "square": 26,
+        "window_square": 18,
+        "right_triangle": 10,
+        "isosceles_triangle": 8,
+        "equilateral_triangle": 12,
+        "rectangle": 8,
+        "large_square": 2
+      }
+    },
+    {
+      "id": "playmags_60",
+      "brand": "playmags",
+      "name_zh": "Playmags 60片入门装",
+      "name_en": "Playmags 60-Piece Starter Set",
+      "piece_count_label": 54,
+      "tier_scope": "core",
+      "description_zh": "Playmags 60 片入门盒: 22 正方 + 14 窗格 (12 窗 + 2 四格窗) + 4 直角三角 + 7 锐角瘦高三角 + 7 等边三角。盒面标称 60 件含 6 枚 Click-in 插片 (非磁力片, 不计入 pieces)。",
+      "compatibility": "Flat open-frame tiles; compatible with standard MagTile edge geometry. Click-in inserts omitted.",
+      "pieces": {
+        "square": 22,
+        "window_square": 14,
         "right_triangle": 4,
-        "isosceles_triangle": 4
-      },
-      "source_url": "https://magnatiles.com/products/magna-tiles-classic-32-piece-set",
-      "notes": "approximate BOM; official retail breakdown (SKU 2132)"
+        "isosceles_triangle": 7,
+        "equilateral_triangle": 7
+      }
     },
     {
-      "id": "magna_tiles_37_classic",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES Classic 37片",
-      "name_en": "MAGNA-TILES Classic 37-Piece Set",
-      "piece_count_label": 37,
+      "id": "playmags_150",
+      "brand": "playmags",
+      "name_zh": "Playmags 150片豪华装",
+      "name_en": "Playmags 150-Piece Mega Set",
+      "piece_count_label": 132,
       "tier_scope": "core",
-      "description_zh": "略大于 32 片的经典入门盒: 18 小方 + 2 大方 + 17 片三角形 (7 等边 / 6 直角 / 4 等腰)。",
+      "description_zh": "Playmags 150 片大盒: 32 正方 + 34 窗格 (26 窗 + 8 四格窗) + 14 门框 (Gate) + 10 直角三角 + 8 锐角瘦高三角 + 18 等边三角 + 12 长方 + 3 大正方 + 1 车轮底座。盒面标称 150 件含 18 枚 Click-in 插片 (非磁力片, 不计入 pieces)。",
+      "compatibility": "Flat open-frame tiles; Gate pieces mapped to door_frame. Click-in inserts omitted.",
       "pieces": {
-        "square": 18,
-        "large_square": 2,
-        "equilateral_triangle": 7,
-        "right_triangle": 6,
-        "isosceles_triangle": 4
-      },
-      "source_url": "https://magnatiles.com/products/magna-tiles-classic-37-piece-set",
-      "notes": "approximate BOM; official retail breakdown (SKU 14837)"
+        "square": 32,
+        "window_square": 34,
+        "door_frame": 14,
+        "right_triangle": 10,
+        "isosceles_triangle": 8,
+        "equilateral_triangle": 18,
+        "rectangle": 12,
+        "large_square": 3,
+        "wheel_base": 1
+      }
     },
     {
-      "id": "magna_tiles_100_clear",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES Clear Colors 100片",
-      "name_en": "MAGNA-TILES Clear Colors 100-Piece Set",
+      "id": "picassotiles_100",
+      "brand": "picassotiles",
+      "name_zh": "PicassoTiles PT100 经典100片",
+      "name_en": "PicassoTiles PT100 Classic 100-Piece Set",
       "piece_count_label": 100,
       "tier_scope": "core",
-      "description_zh": "畅销大盒: 50 小方 + 4 大方 + 20 等边三角 + 11 直角三角 + 15 等腰三角, 半透明彩色。",
+      "description_zh": "PicassoTiles PT100 经典入门盒: 8 大正方 + 46 小正方 + 20 小等边三角 + 12 中直角三角 + 14 瘦高三角。五类几何片, 无窗格/门框/扩展片型。",
+      "compatibility": "Fully compatible with MagTile core edge geometry; no window/door/wheel variants in this set.",
       "pieces": {
-        "square": 50,
-        "large_square": 4,
+        "large_square": 8,
+        "square": 46,
         "equilateral_triangle": 20,
-        "right_triangle": 11,
-        "isosceles_triangle": 15
-      },
-      "source_url": "https://www.amazon.com/dp/B013CO8NEU",
-      "notes": "approximate BOM; Classic/Clear Colors 100 share same shape mix (SKU 4300)"
+        "right_triangle": 12,
+        "isosceles_triangle": 14
+      }
     },
     {
-      "id": "magna_tiles_48_dx",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES Clear Colors DX 48片",
-      "name_en": "MAGNA-TILES Clear Colors DX 48-Piece Set",
+      "id": "picassotiles_60",
+      "brand": "picassotiles",
+      "name_zh": "PicassoTiles PT60 经典60片",
+      "name_en": "PicassoTiles PT60 Classic 60-Piece Set",
+      "piece_count_label": 60,
+      "tier_scope": "core",
+      "description_zh": "PicassoTiles PT60 经典盒: 4 大正方 + 24 小正方 + 18 小等边三角 + 8 中直角三角 + 6 瘦高三角。",
+      "compatibility": "Fully compatible with MagTile core edge geometry.",
+      "pieces": {
+        "large_square": 4,
+        "square": 24,
+        "equilateral_triangle": 18,
+        "right_triangle": 8,
+        "isosceles_triangle": 6
+      }
+    },
+    {
+      "id": "picassotiles_101",
+      "brand": "picassotiles",
+      "name_zh": "PicassoTiles 101片城堡车底座装",
+      "name_en": "PicassoTiles 101-Piece Castle & Car Base Set",
+      "piece_count_label": 101,
+      "tier_scope": "core",
+      "description_zh": "PicassoTiles 100 片城堡 STEM 盒 (含滚动车底座): 在 PT100 五类片型基础上增加车轮底座与可开合门/窗建筑件 (按窗格方/门框方映射)。常见批次片数分配会有小幅波动。",
+      "compatibility": "Castle variant adds wheeled chassis and architectural window/door pieces; door/window counts are approximate across retail batches.",
+      "pieces": {
+        "large_square": 8,
+        "square": 40,
+        "equilateral_triangle": 18,
+        "right_triangle": 12,
+        "isosceles_triangle": 12,
+        "window_square": 4,
+        "door_frame": 4,
+        "wheel_base": 3
+      }
+    },
+    {
+      "id": "magformers_30",
+      "brand": "magformers",
+      "name_zh": "Magformers 30片彩虹/灵感装",
+      "name_en": "Magformers Rainbow / Inspire 30-Piece Set",
+      "piece_count_label": 30,
+      "tier_scope": "core",
+      "description_zh": "Magformers 经典 30 片 (Rainbow / Inspire 等): 18 正方 + 12 等边三角。仅含两类片型, 无直角/瘦高三角/长方/变体。",
+      "compatibility": "Magformers hollow-frame equilateral triangles: edge length matches MagTile equilateral_triangle but open-center geometry affects hinge/cantilever strength vs flat tiles. No right/isosceles/rectangle pieces in set.",
+      "pieces": {
+        "square": 18,
+        "equilateral_triangle": 12
+      }
+    },
+    {
+      "id": "magformers_62_designer",
+      "brand": "magformers",
+      "name_zh": "Magformers Designer 62片",
+      "name_en": "Magformers Designer 62-Piece Set",
       "piece_count_label": 48,
       "tier_scope": "core+expansion",
-      "description_zh": "豪华中盒: 含拱形/门框/铰链门/车轮等特殊片; 无 catalog 片型的 imagination/arch 片分别近似为小方与扇形。",
+      "description_zh": "Magformers Designer 62 片: 22 正方 + 20 等边三角 + 4 菱形 + 2 梯形。14 片 Magformers 等腰三角 (30-60-90 开框几何) 与 MagTile 瘦高等腰三角不兼容, 已从 histogram 省略。",
+      "compatibility": "14 Magformers isosceles triangles omitted — 30-60-90 open-frame geometry incompatible with MagTile isosceles_triangle (tall narrow, base 1 height 2). 48 of 62 retail pieces mapped. Diamonds → rhombus, trapezoids → trapezoid.",
       "pieces": {
-        "square": 14,
-        "large_square": 3,
-        "equilateral_triangle": 11,
-        "right_triangle": 10,
-        "isosceles_triangle": 6,
-        "wheel_base": 1,
-        "door_frame": 2,
-        "sector": 1
-      },
-      "source_url": "https://www.amazon.com/Magna-Tiles-48-Piece-Clear-Colors-DELUXE/dp/B0093LSWIE",
-      "notes": "approximate BOM; 2 imagination pieces→square, arch→sector, hinged door→door_frame (SKU 12148)"
+        "square": 22,
+        "equilateral_triangle": 20,
+        "rhombus": 4,
+        "trapezoid": 2
+      }
     },
     {
-      "id": "magna_tiles_15_stardust",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES Stardust 15片",
-      "name_en": "MAGNA-TILES Stardust 15-Piece Set",
-      "piece_count_label": 15,
+      "id": "magformers_62_rainbow",
+      "brand": "magformers",
+      "name_zh": "Magformers Rainbow 62片",
+      "name_en": "Magformers Rainbow 62-Piece Set",
+      "piece_count_label": 50,
       "tier_scope": "core",
-      "description_zh": "闪粉/镜面特效补充包: 7 闪粉方 + 4 镜面方 + 4 等边三角 (外观变体, 物理按 square 计)。",
+      "description_zh": "Magformers Rainbow 62 片: 30 正方 + 20 等边三角。12 片五边形无对应 MagTile 片型, 已从 histogram 省略。",
+      "compatibility": "12 pentagons omitted (no MagTile equivalent). Magformers hollow-frame equilateral triangles: edge-compatible but weaker hinge behavior vs flat tiles. 50 of 62 retail pieces mapped.",
       "pieces": {
-        "square": 11,
-        "equilateral_triangle": 4
-      },
-      "source_url": "https://www.mindware.orientaltrading.com/magna-tiles-sup-----sup-stardust-15-piece-magnetic-construction-set-the-original-magnetic-building-brand-a2-13968680.fltr",
-      "notes": "approximate BOM; glitter/mirror squares mapped to square (SKU 18715)"
-    },
-    {
-      "id": "magna_tiles_16_ice",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES ICE 16片",
-      "name_en": "MAGNA-TILES ICE 16-Piece Set",
-      "piece_count_label": 16,
-      "tier_scope": "core",
-      "description_zh": "全透明无色补充包: 4 小方 + 4 等边三角 + 4 直角三角 + 4 等腰三角, 各片型数量均等。",
-      "pieces": {
-        "square": 4,
-        "equilateral_triangle": 4,
-        "right_triangle": 4,
-        "isosceles_triangle": 4
-      },
-      "source_url": "https://magnatiles.com/products/magna-tiles-ice-16-piece-set",
-      "notes": "approximate BOM; official retail breakdown (SKU 18716)"
-    },
-    {
-      "id": "magna_tiles_16_glow",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES Glow 16片",
-      "name_en": "MAGNA-TILES Glow 16-Piece Set",
-      "piece_count_label": 16,
-      "tier_scope": "core",
-      "description_zh": "夜光补充包: 4 小方 + 4 等边三角 + 4 直角三角 + 4 等腰三角 (不含 LED 钥匙扣配件)。",
-      "pieces": {
-        "square": 4,
-        "equilateral_triangle": 4,
-        "right_triangle": 4,
-        "isosceles_triangle": 4
-      },
-      "source_url": "https://www.walmart.com/ip/MAGNA-TILES-Glow-16-Piece-Magnetic-Construction-Set-The-ORIGINAL-Magnetic-Building-Brand/678551301",
-      "notes": "approximate BOM; LED keychain excluded from tile count (SKU 18816)"
-    },
-    {
-      "id": "magna_tiles_110_metropolis",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES Metropolis 110片",
-      "name_en": "MAGNA-TILES Metropolis 110-Piece Set",
-      "piece_count_label": 110,
-      "tier_scope": "core+expansion",
-      "description_zh": "旗舰城市主题大盒: 含窗格/扇形/车轮/门框等特殊片; spinner/stair/arch 等无 catalog 片型近似映射。",
-      "pieces": {
-        "square": 57,
-        "large_square": 2,
-        "equilateral_triangle": 12,
-        "right_triangle": 12,
-        "isosceles_triangle": 10,
-        "rectangle": 1,
-        "window_square": 6,
-        "door_frame": 1,
-        "wheel_base": 2,
-        "trapezoid": 2,
-        "sector": 5
-      },
-      "source_url": "https://www.amazon.com/Magna-Tiles-Metropolis-Award-Winning-Educational/dp/B07WDDB59W",
-      "notes": "approximate BOM; spinner→square, 2 stairs→trapezoid, arch→sector (SKU 20110)"
-    },
-    {
-      "id": "magna_tiles_32_builder",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES Builder 32片",
-      "name_en": "MAGNA-TILES Builder 32-Piece Set",
-      "piece_count_label": 32,
-      "tier_scope": "core+expansion",
-      "description_zh": "建筑/道路主题盒: 含道路方/扇形/砖块长方形/起重机/车轮; 无 catalog 片型的 crane/spinner 近似映射。",
-      "pieces": {
-        "square": 17,
-        "rectangle": 10,
-        "wheel_base": 1,
-        "sector": 4
-      },
-      "source_url": "https://magnatiles.com/products/magna-tiles-builder-32-piece-set",
-      "notes": "approximate BOM; 6 road squares+10 squares+spinner→square, 2 cranes→rectangle, 4 road quarters→sector (SKU 21632)"
-    },
-    {
-      "id": "magna_tiles_8_rectangles",
-      "brand": "magna_tiles",
-      "name_zh": "MAGNA-TILES Rectangles 8片扩展",
-      "name_en": "MAGNA-TILES Rectangles 8-Piece Expansion Set",
-      "piece_count_label": 8,
-      "tier_scope": "core",
-      "description_zh": "长方形扩展包: 4 大方 (6×6 inch) + 4 长方形 (6×3 inch), 可与任意 MAGNA-TILES 套装兼容。",
-      "pieces": {
-        "large_square": 4,
-        "rectangle": 4
-      },
-      "source_url": "https://www.mightyrabbit.com/products/magna-tiles-tiles-rectangles-8-piece-expansion-set-play-toy-magt-15816",
-      "notes": "approximate BOM; official retail breakdown (SKU 15816)"
+        "square": 30,
+        "equilateral_triangle": 20
+      }
     }
   ]
 }
