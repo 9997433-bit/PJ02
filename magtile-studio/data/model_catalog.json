@@ -3,6 +3,150 @@
   "comment": "模型库目录: 商业版模型库界面 (magtile_app library) 的数据源。每个条目描述一个模型的展示元数据, file 与 thumbnail 相对本文件所在目录解析; 元数据必须与模型 JSON 一致 (由 library CLI 与 CTest 用例 library_catalog_check 把关)。theme 为卡片主题 (由标签推导), thumbnail 由 tools/generate_thumbnails.py 生成。本文件由 tools/update_model_catalog.py 自动生成, 请勿手工编辑。",
   "models": [
     {
+      "id": "castle_guard_post_01",
+      "file": "models/castle_guard_post_01.json",
+      "name": "城门小岗楼",
+      "name_en": "Castle Guard Post 01",
+      "description": "D1 入门城防件: 最小可驻守单元 —— 2x2 石砌岗房收一层蓝色平顶甲板, 四枚红色雉堞沿甲板边对角错位转圈站岗; 南面紫色门框方开出士兵进出的门洞, 旁边黄色窗格方是射箭孔, 两翼短墙从楼角探出、墙顶各站一枚城齿。搭完从门洞塞一颗玻璃珠进去 —— 那是今晚的哨兵。",
+      "difficulty": 1,
+      "total_pieces": 20,
+      "step_count": 7,
+      "theme": "城堡王国",
+      "tags": [
+        "城堡",
+        "岗楼",
+        "雉堞",
+        "亲子入门"
+      ]
+    },
+    {
+      "id": "farm_wagon_01",
+      "file": "models/farm_wagon_01.json",
+      "name": "农场运货马车",
+      "name_en": "Farm Wagon 01",
+      "description": "D1 入门交通件: 能推着跑的八轮农场运货马车 —— 四片车轮底座拼成整车平板车架, 红色横楣围出货斗, 车尾黄色门框方是卸货门洞; 蓝色驾驶台与橙色货舱盖板分出前中后三个区, 中间敞口正好往里丢苹果, 车头两片直角三角合成拖挂箭头, 台角两盏黄色车灯一点就发车。",
+      "difficulty": 1,
+      "total_pieces": 20,
+      "step_count": 7,
+      "theme": "陆地交通",
+      "tags": [
+        "陆地交通",
+        "马车",
+        "农场",
+        "亲子入门"
+      ]
+    },
+    {
+      "id": "phone_cradle_01",
+      "file": "models/phone_cradle_01.json",
+      "name": "追剧手机摇篮",
+      "name_en": "Phone Cradle 01",
+      "description": "入门档实用功能: 只做一件事并把它做透的手机躺靠架 —— 四片紫色靠背墙踩住底板拼缝一字排开, 两端直角三角斜撑咬棱压缝, 橙色长板顶边整边吸住靠背顶沿搭出 30 度躺靠坡道, 坡尾恰好落回底板零悬挑; 右前角四面绿墙围出开顶耳机小盒, 靠背顶沿三面红旗迎风。20 片, 搭完的第一件事: 把手机躺上去, 按下播放键。",
+      "difficulty": 1,
+      "total_pieces": 20,
+      "step_count": 6,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "手机架",
+        "书桌",
+        "亲子",
+        "入门"
+      ],
+      "thumbnail": "thumbnails/phone_cradle_01.png"
+    },
+    {
+      "id": "snack_tray_01",
+      "file": "models/snack_tray_01.json",
+      "name": "双格点心托盘",
+      "name_en": "Snack Tray 01",
+      "description": "D1 入门实用件: 端得上桌的双格点心托盘 —— 4x3 橙黄长方板托底, 青色横楣围出长边, 蓝色中隔墙分出咸甜两格; 两端透明窗格方一物两用, 镂空既是提手孔又是透气窗, 窗顶还立着两面红色招牌小旗。六步搭完, 第一件事就是端着它去装真点心。",
+      "difficulty": 1,
+      "total_pieces": 21,
+      "step_count": 6,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "托盘",
+        "收纳",
+        "亲子入门"
+      ]
+    },
+    {
+      "id": "napkin_holder_01",
+      "file": "models/napkin_holder_01.json",
+      "name": "拱门餐巾架",
+      "name_en": "Napkin Holder 01",
+      "description": "入门档实用功能: 餐桌上的拱门餐巾架, 结构签名是'双墙门式框架' —— 两片门框方与两片窗格方面对面立在相邻拼缝上, 灰色顶板南北边整边锁住两道墙顶围成闭合传力环, 一格宽的槽腔正好插一沓餐巾, 门洞窗格里都看得见; 左前牙签盒与右后调料盒各借一道框架墙当第四面, 对角呼应; 顶板短边两面绿旗, 南墙顶沿两片粉色'餐巾角'高高翘起。22 片受压闭环零悬挑, 搭完就能开饭。",
+      "difficulty": 1,
+      "total_pieces": 22,
+      "step_count": 7,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "餐巾架",
+        "餐桌",
+        "厨房",
+        "入门"
+      ],
+      "thumbnail": "thumbnails/napkin_holder_01.png"
+    },
+    {
+      "id": "seedling_greenhouse_01",
+      "file": "models/seedling_greenhouse_01.json",
+      "name": "育苗小暖棚",
+      "name_en": "Seedling Greenhouse 01",
+      "description": "D1 入门园艺件: 朝南的单坡育苗暖棚 —— 4x2 橙黄棋盘苗床上立一排透明窗格后墙, 四道 30 度透明长板从墙顶一直斜铺到床前当玻璃顶, 两端灰色直角三角山墙一咬锁死整个棚架; 苗床前缘探出四株新芽, 其中一株已经开出粉色的花。搭完记得把它摆到窗台最晒的位置。",
+      "difficulty": 1,
+      "total_pieces": 22,
+      "step_count": 6,
+      "theme": "植物花园",
+      "tags": [
+        "植物花园",
+        "暖棚",
+        "育苗",
+        "亲子入门"
+      ]
+    },
+    {
+      "id": "cup_coaster_01",
+      "file": "models/cup_coaster_01.json",
+      "name": "双杯位杯垫台",
+      "name_en": "Cup Coaster Station 01",
+      "description": "入门档实用功能: 茶几上的双杯位杯垫台, 结构签名是'大方地台封顶盒' —— 两片大正方形地台四边各同吸两片共线围墙墙脚 (R2 长短边完整贴合), 中央双隔墙骑住公共拼缝把盒腔分成两格, 顶上四片长板短边吸墙沿、长边压共线墙顶拼成整层台面, 台面放杯子、盒腔收杯垫一物两用; 四角粉色热气小旗提醒: 热饮请放杯垫上。24 片全程受压零悬挑, 4 岁小手也能一次合围成功。",
+      "difficulty": 1,
+      "total_pieces": 24,
+      "step_count": 5,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "杯垫",
+        "茶几",
+        "收纳",
+        "入门"
+      ],
+      "thumbnail": "thumbnails/cup_coaster_01.png"
+    },
+    {
+      "id": "pencil_cup_01",
+      "file": "models/pencil_cup_01.json",
+      "name": "高低双筒笔筒",
+      "name_en": "Pencil Cup 01",
+      "description": "入门档实用功能: 书桌上的高低双筒笔筒, 结构签名是'高低开顶双筒' —— 两层高的铅笔主筒四片墙竖棱角缝互吸成环, 第二层换窗格方透出笔身, 旁边一层高的便签矮筒露出便签头, 中间两条拼缝各骑一片红色便签夹立三角, 北沿三片草绿灌木一排, 透明'铅笔'立在矮筒沿上等真铅笔来换岗; 与封顶的杯垫台相反, 本作全部筒腔开顶 —— 24 片搭完就能把整盒彩笔请进去。",
+      "difficulty": 1,
+      "total_pieces": 24,
+      "step_count": 7,
+      "theme": "实用功能",
+      "tags": [
+        "实用功能",
+        "笔筒",
+        "书桌",
+        "文具",
+        "入门"
+      ],
+      "thumbnail": "thumbnails/pencil_cup_01.png"
+    },
+    {
       "id": "rehab_park_01",
       "file": "models/rehab_park_01.json",
       "name": "康复操场",
