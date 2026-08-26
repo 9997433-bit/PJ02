@@ -657,7 +657,7 @@ if [ "$p0_fail" -gt 0 ]; then
     echo ""
     echo "${BOLD} 阻塞项指引 (工程侧已触顶, 见 docs/reports/LAUNCH_BLOCKERS_2026-08-26.md):${RESET}"
     echo "   路径 A 实物签核 —— R6/R7: 按 docs/reports/PHYSICAL_REVIEW_QUEUE.md 实搭落盘"
-    echo "   路径 B 配额解冻 —— 已完成 2026-08-26 (D1 20/20, D5 6/6, strict 守卫绿; 维持解冻线即可)"
+    echo "   路径 B 配额解冻 —— 已完成 2026-08-26 (D1 21/20, D5 6/6, strict 守卫绿; 维持解冻线即可)"
     echo "   路径 C Manual P0 —— 行政/实机/沙盒/法务: docs/USER_HANDOFF.md §4"
     if [ -x "$ROOT/tools/check_difficulty_quota.py" ]; then
         echo ""
