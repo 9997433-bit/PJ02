@@ -1,19 +1,19 @@
 # V1 上架就绪探测报告 (2026-08-26 刷新, --quick 档)
 
-- 生成时间: 2026-08-26 03:56 UTC (软件侧红项清零波次后刷新; 上一份 --quick 记录 @ `8ee2fc7` 见本文件历史版本, 上一份全量档记录见 `READINESS_FULL_2026-08-25.md` @ `b369bad`, 其 R4 E2E 全量档证据仍有效)
-- 基线提交: `9aa146d` (`cursor/magtile-studio-foundation-a95b` —— 自 `8ee2fc7` 以来为路径 B 配额解冻内容批 (D1 ×20 / D5 ×5 入库, B1 置换退役 25 个 D3) 与软件侧红项清零波次 (QA 难度感知片数下限治理 `b925eba`、2 个 D5 扩规模、R9 放置重排、实物三件套刷新至 51 口径); 模型库保持 250, C++ 引擎源码未变更)
-- 构建配置: CMake Release, `/tmp/wt-risk-report/magtile-studio` worktree (@ `9aa146d`, 工作区干净) 增量构建, 退出码 0
+- 生成时间: 2026-08-26 04:51 UTC (批 P 扩展装置换波次后刷新; 上一份 --quick 记录 @ `9aa146d` 见本文件历史版本, 同日 --strict 全量档记录见 `READINESS_STRICT_2026-08-26.md` @ `9aa146d` —— 其计数已同步 52 口径, 上一份全量档记录见 `READINESS_FULL_2026-08-25.md` @ `b369bad`)
+- 基线提交: `ad6d35c` (`cursor/magtile-studio-foundation-a95b` —— 自 `9aa146d` 以来为批 P 扩展装置换波次: 按 `BATCH_P_MERGE_PLAN_2026-08-26.md` 摘取 10 个扩展装模型 (1 D1 + 7 D2 + 1 D3 白名单 + 1 D4) 入库并按计划附录 B 退役 10 个矩阵外 D3, 总量保持 250 (`53615ea`); 另含实物签核 CLI `mark_physical_verified.py` (`573e0cc`)、排产三件套 52 口径刷新 (`8974b4b`) 与治理文档换版 (`d9ebeff` / `ad6d35c`); C++ 引擎源码未变更)
+- 构建配置: CMake Release, `/tmp/wt-risk-report/magtile-studio` worktree (@ `ad6d35c`, 工作区干净) 增量构建, 退出码 0
 - 执行命令: `tools/check_v1_readiness.sh --quick` (**--quick 档**: R4 E2E / R5 发布门禁 / R17 扰动抽检三个长跑项按约定记 SKIP; 总耗时约 1s)
 - 退出码: **1** (仅 R6/R7 两项 L3 实物复核 P0 失败, 属预期硬闸门, 非软件缺陷)
-- 长跑项补充覆盖 (同场同基线): `tools/run_release_gate.sh --full --fail-on-pending` 已在同一 worktree 同一提交单独实跑 (见 `RELEASE_GATE_STATUS.md` 2026-08-26 03:56 UTC 刷新) —— **全量 QA 42 子关卡 0 失败首次全绿** (CTest 556/556, strict 巡检三阶段全绿含 D4+ 抗扰动 51/51 × 50 轮), 是 R5 默认档的超集且覆盖面超出 R17 的 10 模型抽样; 唯一红灯为 L3 实物复核 51 待复核硬闸门。R4 E2E 冒烟本次未跑 (--quick 约定), 全量档证据保持 `READINESS_FULL_2026-08-25.md` §3 (b369bad, 其后无引擎/Qt 界面变更; 模型 JSON 变更已由本场全量 QA 的 250/250 validate + 逐步装配全绿覆盖)
+- 长跑项补充覆盖 (同场批 P 基线): `tools/run_release_gate.sh --full --fail-on-pending` 已在同一 worktree 批 P 置换后单独实跑 (见 `RELEASE_GATE_STATUS.md` 2026-08-26 04:53 UTC 刷新) —— **全量 QA 42 子关卡 0 失败保持全绿** (CTest 557/557, strict 巡检三阶段全绿含 D4+ 抗扰动 52/52 × 50 轮, 含新入库 `expansion_orb_01`), 是 R5 默认档的超集且覆盖面超出 R17 的 10 模型抽样; 唯一红灯为 L3 实物复核 52 待复核硬闸门。R4 E2E 冒烟本次未跑 (--quick 约定), --strict 全量档证据保持 `READINESS_STRICT_2026-08-26.md` §3 (`9aa146d` 实跑, 其后无引擎/Qt 界面变更; 批 P 模型 JSON 置换已由本场全量 QA 的 250/250 validate + 逐步装配 + CTest 557/557 全绿覆盖)
 
 ## 1. 结论速览
 
 **合计 25 项: 14 PASS / 2 FAIL / 9 SKIP (P0 失败 2 项, 全部为实物复核硬闸门)。**
 
-工程侧判定: **软件门禁首次在 250 基线上无任何工程侧红项** —— 上一轮 (`b31e933`) 发布门禁暴露的 5 个内容侧真红 (20 个 D1 片数下限冲突 / 2 个 D5 片数区间 / 2 个 D5 抖动失败) 已全部按治理决策 + 内容返工清零 (明细见 `RELEASE_GATE_STATUS.md` §2), 难度配额守卫 strict 档保持绿灯 (D1 20 ≥ 20 且 D5 6 ≥ 6, D3 解冻维持)。唯二失败 R6/R7 为 D4+ 实物复核缺口 (51 个: 45 D4 + 6 D5, 较 8ee2fc7 基线 +5 个新 D5), 按设计须用户实搭清零 (`docs/PHYSICAL_REBUILD_CHECKLIST.md`, 排产单 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`), 不属工程可修复范围。本次运行无任何工程可修复的失败项。
+工程侧判定: **批 P 置换入库后软件门禁保持无任何工程侧红项** —— 10 个扩展装模型经内容批评审五道闸 (`BATCH_P_MERGE_PLAN_2026-08-26.md`) 摘取入库, 置换未引入任何软件侧红项 (同场全量 QA 42 子关卡 0 失败, 见 `RELEASE_GATE_STATUS.md`), 难度配额守卫 strict 档保持绿灯 (D1 21 ≥ 20 且 D5 6 ≥ 6, D3 解冻维持)。唯二失败 R6/R7 为 D4+ 实物复核缺口 (**52 个: 46 D4 + 6 D5**, 较 `9aa146d` 基线净增 1 个批 P 新 D4 `expansion_orb_01`), 按设计须用户实搭清零 (`docs/PHYSICAL_REBUILD_CHECKLIST.md`, 排产单 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`, 签核 CLI `tools/mark_physical_verified.py`), 不属工程可修复范围。本次运行无任何工程可修复的失败项。
 
-与前次 --quick 运行 (`8ee2fc7`) 的口径差异: 探测项集合不变 (R1~R18 + M1~M6 共 25 项), SKIP 集合不变 (R4/R5/R17 + M1~M6)。数据面变化: ① R6 抽样包命中从 S1=0 S2=1 S3=9 变为 **S1=0 S2=6 S3=4** (6 个 D5 全部进入优先抽样, 预计 1000 分钟 ≈ 16.7 小时, 前次 750 分钟); ② R7 待复核从 46 增至 **51** (+5 新 D5); ③ R18 矩阵内/外从 176/74 变为 **201/49** (D1/D5 新批全部落矩阵内, 系列归类回填); ④ R16 文案段数 8874 → 8571 (B1 退役 25 个 D3 模型文案随之出库); ⑤ 尾部难度配额快照从「冻结生效中 (D1 0/20, D5 1/6)」翻转为「**已解冻 (D1 20 ≥ 20 且 D5 6 ≥ 6)**」—— 阻塞项指引中的路径 B 已完结, 实际剩余路径仅 A (实物) 与 C (Manual P0)。
+与前次 --quick 运行 (`9aa146d`) 的口径差异: 探测项集合不变 (R1~R18 + M1~M6 共 25 项), SKIP 集合不变 (R4/R5/R17 + M1~M6), PASS/FAIL 分布不变 (14/2/9)。数据面变化: ① R7 待复核从 51 增至 **52** (+1 批 P 新 D4 `expansion_orb_01`, 78 片 / 18 步, 风险分 54.1, 排产队列第 8 位); ② R6 抽样包命中保持 S1=0 S2=6 S3=4 (同一组 10 个模型, `expansion_orb_01` 78 片未及 S3 高片数补位线不入抽样包), 预计仍 1000 分钟 ≈ 16.7 小时; ③ R18 矩阵内/外从 201/49 变为 **211/39** (批 P 10 个全部落矩阵格, 退役 10 个均为矩阵外桶); ④ R16 文案段数 8571 → 8493 (退役模型文案随置换出库, 301 文件全绿); ⑤ 尾部难度配额快照变为 **D1 21 / D2 30 / D3 147 / D4 46 / D5 6** (解冻维持: D1 21 ≥ 20 且 D5 6 ≥ 6); ⑥ 脚本尾部阻塞项指引已随 `d9ebeff` 换版 —— 指向 `LAUNCH_BLOCKERS_2026-08-26.md`, 路径 B 行改为「已完成 2026-08-26」, 实际剩余路径仅 A (实物) 与 C (Manual P0)。
 
 ## 2. 逐项结果
 
@@ -22,10 +22,10 @@
 | R1 内容体量 | P0 | **PASS** | 0s | 模型 JSON 250 个 >= 门槛 200 (目标区间 200~250 上限达成) |
 | R2 目录/缩略图对账 | P1 | **PASS** | 0s | 模型 250 / 目录登记 250 / 缩略图就绪 250, 三方一致 |
 | R3 免费层清单对齐 | P0 | **PASS** | 0s | 免费标签 30 x starter 清单 x core-9 三条断言全过 |
-| R4 E2E 冒烟 | P0 | SKIP | - | --quick 约定; 全量档证据见 READINESS_FULL_2026-08-25.md §3 (其后无引擎/界面变更) |
+| R4 E2E 冒烟 | P0 | SKIP | - | --quick 约定; --strict 全量档证据见 READINESS_STRICT_2026-08-26.md §3 (其后无引擎/界面变更) |
 | R5 发布门禁快检 | P0 | SKIP | - | --quick 约定; 同场已单独实跑超集档 `--full --fail-on-pending`, QA 全绿 (见 RELEASE_GATE_STATUS.md) |
 | R6 实物抽样包缺口 | P0 | **FAIL** | 0s | 预期失败: 抽样包缺口 10/10, 命中 S1=0 S2=6 S3=4 (详见 §3) |
-| R7 D4+ 实物复核清零 | P0 | **FAIL** | 0s | 预期失败: D4+ 51 个待复核 0/51 (详见 §3) |
+| R7 D4+ 实物复核清零 | P0 | **FAIL** | 0s | 预期失败: D4+ 52 个待复核 0/52 (详见 §3) |
 | R8 隐私合规文档 | P0 | **PASS** | 0s | SECURITY_AND_PRIVACY + PRIVACY_POLICY_DRAFT 在位 |
 | R9 桌面打包资产 | P0 | **PASS** | 0s | 打包手册/CPack/WiX/starter 清单/第三方声明/CI 齐备 |
 | R10 计费适配层单测 | P1 | **PASS** | 0s | `magtile_billing_test` 实跑通过 (41 断言全绿) |
@@ -35,27 +35,27 @@
 | R13 Android release 签名 | P0 | **PASS** | 0s | signingConfigs + keystore.properties.example 齐备 |
 | R14 商店上架文档守卫 | P0 | **PASS** | 0s | validate_store_listing 全过 (15+5 章节, 内链全有效) |
 | R15 国内合规清单守卫 | P0 | **PASS** | 0s | 51 条 (P0 30 / P1 21) 全带级别与负责方, 交叉引用 5 项就位 |
-| R16 儿童友好文案守卫 | P0 | **PASS** | 0s | 301 文件 / 8571 段用户可见中文文案, 零红线 |
-| R17 D4+ 扰动仿真抽检 | P1 | SKIP | - | --quick 约定; 同场发布门禁 strict 巡检阶段 3 已对全部 51 个 D4+ 实跑 strict --jitter 50 全绿 (超集, 见 RELEASE_GATE_STATUS.md §2.3) |
-| R18 内容系列归类机检 | P1 | **PASS** | 0s | 250 归类齐全: 矩阵内 201 + 矩阵外 49, 缺失/非法 0 |
+| R16 儿童友好文案守卫 | P0 | **PASS** | 0s | 301 文件 / 8493 段用户可见中文文案, 零红线 |
+| R17 D4+ 扰动仿真抽检 | P1 | SKIP | - | --quick 约定; 同场发布门禁 strict 巡检阶段 3 已对全部 52 个 D4+ 实跑 strict --jitter 50 全绿 (超集, 见 RELEASE_GATE_STATUS.md §1) |
+| R18 内容系列归类机检 | P1 | **PASS** | 0s | 250 归类齐全: 矩阵内 211 + 矩阵外 39, 缺失/非法 0 |
 | M1~M6 人工项 | P0 | SKIP x6 | - | 实机打包/真机验收/法务定稿/矩阵签核/实搭签核/备案 |
 
 ## 3. R6/R7 失败详情 (预期硬闸门, 非工程可修复)
 
-- **R6**: 实物抽样包缺口 10/10 —— D4+ 51 个全部待复核, 抽样命中 S1=0 / S2=6 / S3=4: **6 个 D5 全部纳入优先抽样** (royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / skyscraper_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01, 各 120min) + 4 个高片数 D4 (stadium_gate_01 / ferry_terminal_01 / treehouse_02 / elephant_01, 各 70min), 预计实搭总耗时约 1000 分钟 (约 16.7 小时)。已标注 `physical_verified` 的 3 个 D3 模型 (castle_foundation_01 / great_wall_01 / tokyo_tower_01) 一致性核对通过。
-- **R7**: 扫描 250 模型, D4+ 共 51 个: 已复核 0, 待复核 51 (`--fail-on-pending` 生效)。
+- **R6**: 实物抽样包缺口 10/10 —— D4+ 52 个全部待复核, 抽样命中 S1=0 / S2=6 / S3=4: **6 个 D5 全部纳入优先抽样** (royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / skyscraper_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01, 各 120min) + 4 个高片数 D4 (stadium_gate_01 / ferry_terminal_01 / treehouse_02 / elephant_01, 各 70min), 预计实搭总耗时约 1000 分钟 (约 16.7 小时)。已标注 `physical_verified` 的 3 个 D3 模型 (castle_foundation_01 / great_wall_01 / tokyo_tower_01) 一致性核对通过。
+- **R7**: 扫描 250 模型, D4+ 共 52 个: 已复核 0, 待复核 52 (`--fail-on-pending` 生效)。
 
-两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (族去重排产单见 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`: 必搭 40 ≈ 51.7h + 可缓建 11 ≈ 12.8h; 缩减流程见 `docs/USER_HANDOFF.md` §4.3)。待复核集合较 8ee2fc7 基线 +5 个新 D5 (giant_ferris_wheel_01 / marble_grand_cascade_01 / royal_citadel_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01), 其中 3 个曾带软件侧红项的模型已于本波次返工完毕并通过 strict --jitter 50 (见 RELEASE_GATE_STATUS.md §2), **全部 51 个均可直接排实搭**。本次运行无任何非预期 / 工程可修复的失败项。
+两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (族去重排产单见 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`: 必搭 41 ≈ 52.8h + 可缓建 11 ≈ 12.8h, 合计 3940 分钟 ≈ 65.7h; 落盘用签核 CLI `tools/mark_physical_verified.py`; 缩减流程见 `docs/USER_HANDOFF.md` §4.3)。待复核集合较 `9aa146d` 基线净增 1 个批 P 新 D4 (`expansion_orb_01`, 扩展装轨道球体), 其入库评审已通过 strict 零警告 + 抗扰动 50 轮全绿 (见 RELEASE_GATE_STATUS.md §2), **全部 52 个均可直接排实搭**。本次运行无任何非预期 / 工程可修复的失败项。
 
 ## 4. 下一步
 
-1. 用户侧: 按 `docs/USER_HANDOFF.md` §4 完成实物 (R6/R7 清零, 建议从 §3 抽样包 10 个起步)、行政、实机、沙盒验收; 路径 B 配额解冻已完结 (D1 20/20 + D5 6/6, 快照见附录尾段), 无需再决策
+1. 用户侧: 按 `docs/USER_HANDOFF.md` §4 完成实物 (R6/R7 清零, 建议从 §3 抽样包 10 个起步, 落盘用 `tools/mark_physical_verified.py`)、行政、实机、沙盒验收; 路径 B 配额解冻已完结 (D1 21/20 + D5 6/6, 快照见附录尾段), 无需再决策
 2. 签核档: 上架签核前以全量档复跑 (`tools/check_v1_readiness.sh` 不带 `--quick`, 配 Android NDK 后加 `--strict`), 消除 R4/R5/R17 SKIP 与 E2E-14a SKIP
 
-## 附录: 本次 --quick 档完整输出 (/tmp/readiness_quick_20260826_qagreen.log)
+## 附录: 本次 --quick 档完整输出 (/tmp/readiness_quick.log)
 
 <details>
-<summary>点开查看完整日志 (383 行, NO_COLOR=1)</summary>
+<summary>点开查看完整日志 (382 行, NO_COLOR=1)</summary>
 
 ```text
 ==============================================================
@@ -104,7 +104,7 @@ starter 清单条目:    30
  R6 [P0] 实物抽样包 V1 复核缺口 (physical_sample_pack)
 ==============================================================
 == V1 上架 D4+ 实物复核优先抽样包 (规程: docs/PHYSICAL_REBUILD_CHECKLIST.md) ==
-D4+ 共 51 个 (待复核 51); 免费层 D4+ 0 个; 抽样目标 10 个, 命中 S1=0 S2=6 S3=4
+D4+ 共 52 个 (待复核 52); 免费层 D4+ 0 个; 抽样目标 10 个, 命中 S1=0 S2=6 S3=4
 
 #   模型                       难度    片数   步骤 主题     层      预计 状态
 1   royal_citadel_01         D5   124   28 城堡王国   S2  120min 待复核
@@ -126,15 +126,15 @@ D4+ 共 51 个 (待复核 51); 免费层 D4+ 0 个; 抽样目标 10 个, 命中 
   [OK ] tokyo_tower_01           D3 2026-08-25 via content_meta (2026-08-25)
 
 抽样包缺口: 10 / 10 (存在缺口, --fail-on-missing-sample 生效)
-[失败] R6 实物抽样包 V1 复核缺口 (physical_sample_pack) (退出码 1, 日志: /tmp/magtile_v1_readiness_5QnOQo/06_R6.log)
+[失败] R6 实物抽样包 V1 复核缺口 (physical_sample_pack) (退出码 1, 日志: /tmp/magtile_v1_readiness_Na6Q8N/06_R6.log)
 
 ==============================================================
  R7 [P0] D4+ 实物复核全集清零 (list_physical_pending)
 ==============================================================
 == 实物搭建复核跟踪 (D4+, 规程: docs/PHYSICAL_REBUILD_CHECKLIST.md) ==
-扫描 250 个模型, D4+ 共 51 个: 已复核 0, 待复核 51
+扫描 250 个模型, D4+ 共 52 个: 已复核 0, 待复核 52
 
--- 待复核 (51) --
+-- 待复核 (52) --
 模型                           难度     片数   步骤
 giant_ferris_wheel_01        D5    122   30
 marble_grand_cascade_01      D5    123   32
@@ -153,6 +153,7 @@ covered_bridge_01            D4     94   18
 dinosaur_hall_01             D4     84   18
 eiffel_tower_01              D4     95   21
 elephant_01                  D4     95   18
+expansion_orb_01             D4     78   18
 ferry_terminal_01            D4    100   19
 fire_station_01              D4     81   19
 freight_yard_01              D4     85   20
@@ -188,8 +189,8 @@ triumphal_arch_01            D4     88   18
 volcano_base_01              D4     83   18
 warehouse_01                 D4     97   18
 
-待复核数量: 51 (存在待复核, --fail-on-pending 生效)
-[失败] R7 D4+ 实物复核全集清零 (list_physical_pending) (退出码 1, 日志: /tmp/magtile_v1_readiness_5QnOQo/07_R7.log)
+待复核数量: 52 (存在待复核, --fail-on-pending 生效)
+[失败] R7 D4+ 实物复核全集清零 (list_physical_pending) (退出码 1, 日志: /tmp/magtile_v1_readiness_Na6Q8N/07_R7.log)
 
 ==============================================================
  R8 [P0] 隐私合规文档存在性
@@ -322,7 +323,7 @@ warehouse_01                 D4     97   18
 ==============================================================
  R16 [P0] 儿童友好文案守卫 (check_child_friendly_copy)
 ==============================================================
-儿童友好文案守卫: 通过 —— 301 个文件 / 8571 段用户可见中文文案, 无恐吓词与催促话术
+儿童友好文案守卫: 通过 —— 301 个文件 / 8493 段用户可见中文文案, 无恐吓词与催促话术
 [通过] R16 儿童友好文案守卫 (check_child_friendly_copy)
 
 [跳过] R17 [P1] D4+ 扰动仿真抽检 (validate --jitter 50) —— --quick (慢项; 签核前必须全量跑, 全量档不允许静默跳过)
@@ -336,41 +337,41 @@ warehouse_01                 D4     97   18
 词表:              /tmp/wt-risk-report/magtile-studio/data/content_series_map.json
                    (13 个矩阵主题 + 11 个矩阵外桶)
 模型总数:          250
-矩阵内 (series):   201
-矩阵外 (bucket):   49
+矩阵内 (series):   211
+矩阵外 (bucket):   39
 缺失归类:          0
 词值非法:          0
 
 主题 × 难度矩阵计数 (现状; 520 目标对照见 CONTENT_GAP_AUDIT.md 第 3 节):
   主题                             D1   D2   D3   D4   D5  合计
   城堡与要塞 castle_fortress        1    0    6    1    1     9
-  陆地交通 land_transport           1    5   26    7    0    39
+  陆地交通 land_transport           1    6   26    7    0    40
   海空交通 sea_air_transport        1    0   15    8    0    24
   航天器 spacecraft                 1    2   15    1    1    20
   动物世界 animal_world             2    2   24    2    0    30
-  建筑地标 landmark_architecture    1    0    9    7    1    18
+  建筑地标 landmark_architecture    1    0   10    7    1    19
   桥梁工程 bridge_engineering       1    0    4    1    1     7
-  几何艺术 geometric_art            2    1    1    0    0     4
-  滚珠乐园 marble_run               1    0    1    2    1     5
-  植物花园 plant_garden             2    1    4    3    0    10
+  几何艺术 geometric_art            2    3    1    1    0     7
+  滚珠乐园 marble_run               1    2    1    2    1     7
+  植物花园 plant_garden             2    3    4    3    0    12
   节日限定 holiday_seasonal         1    1    9    0    0    11
-  实用功能 practical_utility        5    1    0    0    0     6
+  实用功能 practical_utility        6    1    0    0    0     7
   幻想与机械 fantasy_machinery      1    2   14    0    1    18
-  矩阵内小计                       20   15  128   32    6   201
+  矩阵内小计                       21   22  129   33    6   211
 
 矩阵外桶计数:
-  城市生活 city_life               18
-  运动 sports                      10
-  田园 farm                         5
-  工程结构 engineering_misc         3
+  城市生活 city_life               15
+  运动 sports                       7
+  田园 farm                         3
+  工程结构 engineering_misc         2
   音乐 music                        1
   自然世界 nature_misc              4
-  校园 campus                       1
+  校园 campus                       0
   游乐园 amusement                  2
   海洋航行 maritime_misc            2
   博物馆 museum                     1
   其他 other                        2
-  矩阵外小计                       49
+  矩阵外小计                       39
 
 归类齐全且词值全部合法, 无警告
 ==============================================================
@@ -419,12 +420,11 @@ warehouse_01                 D4     97   18
 --------------------------------------------------------------
  合计 25 项: 14 PASS / 2 FAIL / 9 SKIP (其中 P0 失败 2 项)
  结论: 存在 2 项 P0 失败 —— 未达上架就绪, 逐项对照清单补齐
- 分项日志: /tmp/magtile_v1_readiness_5QnOQo
+ 分项日志: /tmp/magtile_v1_readiness_Na6Q8N
 
- 阻塞项指引 (工程侧已触顶, 见 docs/reports/LAUNCH_BLOCKERS_2026-08-25.md):
+ 阻塞项指引 (工程侧已触顶, 见 docs/reports/LAUNCH_BLOCKERS_2026-08-26.md):
    路径 A 实物签核 —— R6/R7: 按 docs/reports/PHYSICAL_REVIEW_QUEUE.md 实搭落盘
-   路径 B 配额解冻 —— G2 红灯②: D1>=20 且 D5>=6 (置换/扩库/豁免, 需你决策)
-                        规划: docs/reports/QUOTA_SUBSTITUTION_PLAN_2026-08-25.md
+   路径 B 配额解冻 —— 已完成 2026-08-26 (D1 20/20, D5 6/6, strict 守卫绿; 维持解冻线即可)
    路径 C Manual P0 —— 行政/实机/沙盒/法务: docs/USER_HANDOFF.md §4
 
  难度配额快照 (--full 档 strict 守卫口径):
@@ -432,13 +432,13 @@ warehouse_01                 D4     97   18
     难度配额检查 (D3 冻结硬闸门 —— CONTENT_GAP_AUDIT.md 7.3 节)
    ==============================================================
    主库模型总数:      250  (/tmp/wt-risk-report/magtile-studio/data/models)
-     D1 (入门):          20  (8.0%)   解冻线 >= 20, 已达标
-     D2 (进阶):          23  (9.2%)
-     D3 (熟练):         156  (62.4%)
-     D4 (挑战):          45  (18.0%)
+     D1 (入门):          21  (8.4%)   解冻线 >= 20, 已达标
+     D2 (进阶):          30  (12.0%)
+     D3 (熟练):         147  (58.8%)
+     D4 (挑战):          46  (18.4%)
      D5 (大师):           6  (2.4%)   解冻线 >= 6, 已达标
    
-   D3 冻结状态: 已解冻 (D1 20 >= 20 且 D5 6 >= 6)
+   D3 冻结状态: 已解冻 (D1 21 >= 20 且 D5 6 >= 6)
    ==============================================================
 ```
 

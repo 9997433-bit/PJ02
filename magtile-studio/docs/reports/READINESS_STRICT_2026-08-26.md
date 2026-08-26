@@ -1,13 +1,14 @@
 # V1 上架就绪严格档探测报告 (2026-08-26, --strict 全量档)
 
-- 生成时间: 2026-08-26 03:55 UTC (D5 补库批后首次 --strict 全量档实跑; 同基线 --quick 档记录见 `READINESS_FULL_2026-08-26.md` 同日刷新版 @ `9aa146d`, 两报告可互为对照 —— 本报告补齐其 R4/R5/R17 三个长跑项的 --strict 实跑证据)
+- 生成时间: 2026-08-26 03:55 UTC (D5 补库批后首次 --strict 全量档实跑; --quick 档记录见 `READINESS_FULL_2026-08-26.md` —— 已随批 P 刷新至 @ `ad6d35c`, 两报告可互为对照 —— 本报告补齐其 R4/R5/R17 三个长跑项的 --strict 实跑证据)
 - 基线提交: `9aa146d` (`9aa146d49bd66e71b98c36776d6e80d0f85ab49a`, `cursor/magtile-studio-foundation-a95b`) —— 自 `8ee2fc7` 以来完成路径 B 配额置换/扩库: 模型库保持 250, 难度分布变为 D1 20 / D2 23 / D3 156 / D4 45 / D5 6, **D3 冻结已解冻** (D1 >= 20 且 D5 >= 6 双达标, 见 §7)
+- 口径同步 (2026-08-26 05:00 UTC): 批 P 扩展装置换波次 (`53615ea`, 净增 1 个 D4 `expansion_orb_01`; 治理/排产刷新至 `ad6d35c`) 后 D4+ 全集 51 → **52 (46 D4 + 6 D5)**, 本报告 D4+ 相关计数与难度配额快照已同步至 52 口径 (难度分布现值 D1 21 / D2 30 / D3 147 / D4 46 / D5 6, 系列归类现值矩阵内 211 + 矩阵外 39); 新基线复验证据: `RELEASE_GATE_STATUS.md` 2026-08-26 04:53 UTC 刷新 (全量 QA 42 子关卡 0 失败, CTest 557/557, strict 巡检阶段 3 D4+ 抗扰动 **52/52** × 50 轮全绿, 含 `expansion_orb_01`) 与同日 `--quick` 复跑 (14 PASS / 2 FAIL / 9 SKIP, 见 `READINESS_FULL_2026-08-26.md`); C++ 引擎与 Qt 界面源码自本报告实跑以来未变更, R4 E2E --strict 证据继续有效
 - 工作区: `/tmp/wt-risk-report/magtile-studio` (干净 worktree @ `9aa146d`, 与 origin 同步); 构建: CMake Release 增量构建 (`build` CLI / `build-qt` Qt), 构建退出码 0
 - 环境: `ANDROID_NDK=/opt/android-sdk/ndk/27.2.12479018` (android.yml 钉住版本), `NO_COLOR=1`
 - 执行命令与退出码:
   1. `tools/check_v1_readiness.sh --strict` (**全量档, 非 --quick**): 退出码 **1** (仅 R6/R7 两项 L3 实物复核 P0 失败, 属预期硬闸门, 非软件缺陷); 总耗时约 1 分 53 秒
   2. `tools/run_e2e_smoke.sh --strict` (独立复跑): 退出码 **0**, 9/9 全绿 0 SKIP; 总耗时约 34 秒
-- 完整日志: 附录 A (readiness --strict, 1540 行) / 附录 B (E2E --strict 独立跑, 151 行)
+- 完整日志: 附录 A (readiness --strict, 1543 行 —— 含 52 口径同步插入的 3 行 expansion_orb_01 条目) / 附录 B (E2E --strict 独立跑, 151 行)
 
 ## 1. 结论速览
 
@@ -15,7 +16,7 @@
 
 - 与 --quick 档相比, 三个长跑项 R4 (E2E --strict) / R5 (发布门禁) / R17 (扰动抽检) 本次全部实跑并 **全绿** —— 自动探测侧无任何 SKIP, 工程可探测项全部通过。
 - `run_e2e_smoke.sh --strict` 独立复跑 9/9 全绿 (含 E2E-14a Android NDK 交叉编译 + 34 个 JNI 符号断言), 退出码 0 —— E2E 自动子集达到上架签核档口径。
-- 唯二失败 R6/R7 为 D4+ 实物复核缺口 (51 个, 较 `8ee2fc7` 基线 46 个净增 5 个 —— D5 扩库所致), 按设计须用户实搭清零, 不属工程可修复范围。
+- 唯二失败 R6/R7 为 D4+ 实物复核缺口 (52 个, 较 `8ee2fc7` 基线 46 个净增 6 个 —— 5 个 D5 扩库 + 1 个批 P D4 `expansion_orb_01`), 按设计须用户实搭清零, 不属工程可修复范围。
 - **路径 B 里程碑**: 难度配额 D3 冻结在本基线已解冻 (D1 20/20, D5 6/6), `LAUNCH_BLOCKERS_2026-08-25.md` 三路径中的路径 B 已闭环; 剩余阻塞仅路径 A (实物签核 R6/R7) 与路径 C (Manual P0, M1~M6)。
 
 ### --strict 档逐项裁决 (交付口径速查)
@@ -34,9 +35,9 @@
 | R2 目录/缩略图对账 | P1 | **PASS** | 0s | 模型 250 / 目录登记 250 / 缩略图就绪 250, 三方一致 |
 | R3 免费层清单对齐 | P0 | **PASS** | 0s | 免费标签 30 x starter 清单 x core-9 三条断言全过 |
 | R4 E2E 冒烟 (--strict) | P0 | **PASS** | 56s | 9/9 全绿 0 SKIP, 含 Android JNI (明细见 §3) |
-| R5 发布门禁快检 | P0 | **PASS** | 44s | 3/3 关卡全过, 含 51 D4+ x 50 扰动全绿 (明细见 §4) |
+| R5 发布门禁快检 | P0 | **PASS** | 44s | 3/3 关卡全过, 含 52 D4+ x 50 扰动全绿 (明细见 §4) |
 | R6 实物抽样包缺口 | P0 | **FAIL** | 0s | 预期失败: 抽样包缺口 10/10, 含 6 个 D5 (详见 §6) |
-| R7 D4+ 实物复核清零 | P0 | **FAIL** | 0s | 预期失败: D4+ 51 个待复核 0/51 (详见 §6) |
+| R7 D4+ 实物复核清零 | P0 | **FAIL** | 0s | 预期失败: D4+ 52 个待复核 0/52 (详见 §6) |
 | R8 隐私合规文档 | P0 | **PASS** | 0s | SECURITY_AND_PRIVACY + PRIVACY_POLICY_DRAFT 在位 |
 | R9 桌面打包资产 | P0 | **PASS** | 0s | 打包手册/CPack/WiX/starter 清单/第三方声明/CI 齐备 |
 | R10 计费适配层单测 | P1 | **PASS** | 0s | `magtile_billing_test` 实跑通过 (41 断言全绿) |
@@ -74,10 +75,10 @@ readiness --strict 把 `--strict` 透传给 `run_e2e_smoke.sh`, 9 项全部实�
 | 关卡 | 结果 | 耗时 | 说明 |
 | --- | --- | --- | --- |
 | 1 免费层清单对齐核验 | PASS | 0s | 与 R3 同载体复验 |
-| 2 弱磁严格档全库巡检 (strict) | PASS | 43s | 三阶段全绿: 250 模型 validate --profile strict 零警告 + 全库逐步装配质检 + **D4+ 抗扰动巡检 51 个 x 50 次采样全绿** |
-| 3 L3 实物复核缺口报告 (报告型) | PASS | 1s | 待复核 51 (报告不阻断; 正式出包终防线用 --fail-on-pending) |
+| 2 弱磁严格档全库巡检 (strict) | PASS | 43s | 三阶段全绿: 250 模型 validate --profile strict 零警告 + 全库逐步装配质检 + **D4+ 抗扰动巡检 52 个 x 50 次采样全绿** |
+| 3 L3 实物复核缺口报告 (报告型) | PASS | 1s | 待复核 52 (报告不阻断; 正式出包终防线用 --fail-on-pending) |
 
-注: 门禁关卡 2 的阶段 3/3 已对 **全部 51 个 D4+ 模型** 实跑 strict + jitter 50, 是 R17 十模型抽样的超集 —— 本基线 (含 5 个新晋 D5) 的搭建误差稳健性在全集口径上验证通过。与同基线 `RELEASE_GATE_STATUS.md` 同日刷新版 (--full 档 42 子关卡全绿 + CTest 556/556 + D4+ jitter 51/51) 结论一致。
+注: 门禁关卡 2 的阶段 3/3 已对 **全部 52 个 D4+ 模型** 实跑 strict + jitter 50, 是 R17 十模型抽样的超集 —— 本基线 (含 5 个新晋 D5) 的搭建误差稳健性在全集口径上验证通过。与 `RELEASE_GATE_STATUS.md` 批 P 后刷新版 (--full 档 42 子关卡全绿 + CTest 557/557 + D4+ jitter 52/52) 结论一致。
 
 ## 5. R17 D4+ 扰动仿真抽检明细 (全量实跑)
 
@@ -100,24 +101,24 @@ readiness --strict 把 `--strict` 透传给 `run_e2e_smoke.sh`, 9 项全部实�
 
 ## 6. R6/R7 失败详情 (预期硬闸门, 非工程可修复)
 
-- **R6**: 实物抽样包缺口 10/10 —— D4+ 51 个全部待复核, 抽样命中 S1=0 / S2=6 / S3=4 (royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / skyscraper_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01 / stadium_gate_01 / ferry_terminal_01 / treehouse_02 / elephant_01), 预计实搭总耗时约 1000 分钟 (约 16.7 小时 —— 较 `8ee2fc7` 基线的 750 分钟增加, 因 6 个 D5 全部落入 S2 档每个 120 分钟)。已标注 `physical_verified` 的 3 个 D3 模型 (castle_foundation_01 / great_wall_01 / tokyo_tower_01) 一致性核对通过。
-- **R7**: 扫描 250 模型, D4+ 共 51 个: 已复核 0, 待复核 51 (`--fail-on-pending` 生效)。待复核集合 = 45 D4 + 6 D5, 较 `8ee2fc7` 基线 46 个净增 5 个 (D5 扩库新晋: royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01)。
+- **R6**: 实物抽样包缺口 10/10 —— D4+ 52 个全部待复核, 抽样命中 S1=0 / S2=6 / S3=4 (royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / skyscraper_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01 / stadium_gate_01 / ferry_terminal_01 / treehouse_02 / elephant_01), 预计实搭总耗时约 1000 分钟 (约 16.7 小时 —— 较 `8ee2fc7` 基线的 750 分钟增加, 因 6 个 D5 全部落入 S2 档每个 120 分钟)。已标注 `physical_verified` 的 3 个 D3 模型 (castle_foundation_01 / great_wall_01 / tokyo_tower_01) 一致性核对通过。
+- **R7**: 扫描 250 模型, D4+ 共 52 个: 已复核 0, 待复核 52 (`--fail-on-pending` 生效)。待复核集合 = 46 D4 + 6 D5, 较 `8ee2fc7` 基线 46 个净增 6 个 (5 个 D5 扩库新晋: royal_citadel_01 / marble_grand_cascade_01 / giant_ferris_wheel_01 / stellar_launch_gantry_01 / strait_rainbow_bridge_01; 1 个批 P 新晋 D4: expansion_orb_01)。
 
-两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (排产单 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`; 缩减流程见 `docs/USER_HANDOFF.md` §4.3)。本次运行无任何非预期 / 工程可修复的失败项。
+两项均为 L3 实物复核硬闸门: 需用户按 `docs/PHYSICAL_REBUILD_CHECKLIST.md` 实搭后回填 `physical_verified` 标记 (排产单 `docs/reports/PHYSICAL_REVIEW_QUEUE.md`: 必搭 41 ≈ 52.8h + 可缓建 11 ≈ 12.8h; 落盘用签核 CLI `tools/mark_physical_verified.py`; 缩减流程见 `docs/USER_HANDOFF.md` §4.3)。本次运行无任何非预期 / 工程可修复的失败项。
 
 ## 7. 难度配额快照: D3 冻结已解冻 (路径 B 闭环)
 
-readiness 失败尾注自动带出的配额快照显示 (对照 `CONTENT_GAP_AUDIT.md` 7.3 节):
+readiness 失败尾注自动带出的配额快照显示 (对照 `CONTENT_GAP_AUDIT.md` 7.3 节; 数值为批 P 置换后 52 口径同步现值):
 
 | 难度 | 数量 | 占比 | 解冻线 | 状态 |
 | --- | --- | --- | --- | --- |
-| D1 (入门) | 20 | 8.0% | >= 20 | **已达标** |
-| D2 (进阶) | 23 | 9.2% | - | - |
-| D3 (熟练) | 156 | 62.4% | - | - |
-| D4 (挑战) | 45 | 18.0% | - | - |
+| D1 (入门) | 21 | 8.4% | >= 20 | **已达标** |
+| D2 (进阶) | 30 | 12.0% | - | - |
+| D3 (熟练) | 147 | 58.8% | - | - |
+| D4 (挑战) | 46 | 18.4% | - | - |
 | D5 (大师) | 6 | 2.4% | >= 6 | **已达标** |
 
-**D3 冻结状态: 已解冻** (D1 20 >= 20 且 D5 6 >= 6)。`LAUNCH_BLOCKERS_2026-08-25.md` 的路径 B (G2 红灯②) 在本基线已消除; readiness 脚本尾部的三路径指引为 P0 失败时的固定输出, 其中路径 B 一行已过时, 现实阻塞仅剩路径 A (R6/R7 实物) 与路径 C (Manual P0)。
+**D3 冻结状态: 已解冻** (D1 21 >= 20 且 D5 6 >= 6)。`LAUNCH_BLOCKERS_2026-08-25.md` 的路径 B (G2 红灯②) 在本基线已消除; readiness 脚本尾部的三路径指引为 P0 失败时的固定输出, 其中路径 B 一行已过时, 现实阻塞仅剩路径 A (R6/R7 实物) 与路径 C (Manual P0)。
 
 ## 8. 独立复跑: tools/run_e2e_smoke.sh --strict (退出码 0)
 
@@ -127,14 +128,14 @@ readiness 失败尾注自动带出的配额快照显示 (对照 `CONTENT_GAP_AUD
 
 ## 9. 下一步
 
-1. 路径 A (唯一自动侧红灯): 按 `docs/reports/PHYSICAL_REVIEW_QUEUE.md` 实搭 51 个 D4+ (含 6 个 D5) 并回填 `physical_verified`, 清零 R6/R7
+1. 路径 A (唯一自动侧红灯): 按 `docs/reports/PHYSICAL_REVIEW_QUEUE.md` 实搭 52 个 D4+ (含 6 个 D5) 并回填 `physical_verified` (签核 CLI `tools/mark_physical_verified.py`), 清零 R6/R7
 2. 路径 C: M1~M6 人工项按 `docs/USER_HANDOFF.md` §4 逐条完成 (实机打包/真机验收/法务定稿/矩阵签核/实搭签核/备案)
 3. 路径 B 已闭环, 无需进一步动作; 后续批次评审可恢复接收 D3 模型 (D3 冻结已解冻)
 
 ## 附录 A: readiness --strict 全量档完整输出 (/tmp/readiness_strict_20260826.log)
 
 <details>
-<summary>点开查看完整日志 (1540 行, NO_COLOR=1)</summary>
+<summary>点开查看完整日志 (1543 行, NO_COLOR=1)</summary>
 
 ```text
 ==============================================================
@@ -1199,6 +1200,7 @@ starter 清单条目:    30
    [通过] dinosaur_hall_01
    [通过] eiffel_tower_01
    [通过] elephant_01
+   [通过] expansion_orb_01
    [通过] ferry_terminal_01
    [通过] fire_station_01
    [通过] freight_yard_01
@@ -1239,11 +1241,11 @@ starter 清单条目:    30
    [通过] triumphal_arch_01
    [通过] volcano_base_01
    [通过] warehouse_01
-   小计: D4+ 共 51 个模型, 通过 51, 失败 0
+   小计: D4+ 共 52 个模型, 通过 52, 失败 0
 
 ==============================================================
  strict 巡检结论: 全绿 (strict 零警告审计 + 逐步装配质检均通过;
-                  D4+ 抗扰动巡检: 全绿 (51 个 D4+ 模型 x 50 次采样))
+                  D4+ 抗扰动巡检: 全绿 (52 个 D4+ 模型 x 50 次采样))
 [通过] 弱磁严格档全库巡检 (strict)
 
 ==============================================================
@@ -1251,9 +1253,9 @@ starter 清单条目:    30
  $ /usr/bin/python3 /tmp/wt-risk-report/magtile-studio/tools/list_physical_pending.py /tmp/wt-risk-report/magtile-studio/data/models
 ==============================================================
 == 实物搭建复核跟踪 (D4+, 规程: docs/PHYSICAL_REBUILD_CHECKLIST.md) ==
-扫描 250 个模型, D4+ 共 51 个: 已复核 0, 待复核 51
+扫描 250 个模型, D4+ 共 52 个: 已复核 0, 待复核 52
 
--- 待复核 (51) --
+-- 待复核 (52) --
 模型                           难度     片数   步骤
 giant_ferris_wheel_01        D5    122   30
 marble_grand_cascade_01      D5    123   32
@@ -1272,6 +1274,7 @@ covered_bridge_01            D4     94   18
 dinosaur_hall_01             D4     84   18
 eiffel_tower_01              D4     95   21
 elephant_01                  D4     95   18
+expansion_orb_01             D4     78   18
 ferry_terminal_01            D4    100   19
 fire_station_01              D4     81   19
 freight_yard_01              D4     85   20
@@ -1307,7 +1310,7 @@ triumphal_arch_01            D4     88   18
 volcano_base_01              D4     83   18
 warehouse_01                 D4     97   18
 
-待复核数量: 51
+待复核数量: 52
 [通过] L3 实物复核缺口报告 (报告型)
 
 ==============================================================
@@ -1326,7 +1329,7 @@ warehouse_01                 D4     97   18
  R6 [P0] 实物抽样包 V1 复核缺口 (physical_sample_pack)
 ==============================================================
 == V1 上架 D4+ 实物复核优先抽样包 (规程: docs/PHYSICAL_REBUILD_CHECKLIST.md) ==
-D4+ 共 51 个 (待复核 51); 免费层 D4+ 0 个; 抽样目标 10 个, 命中 S1=0 S2=6 S3=4
+D4+ 共 52 个 (待复核 52); 免费层 D4+ 0 个; 抽样目标 10 个, 命中 S1=0 S2=6 S3=4
 
 #   模型                       难度    片数   步骤 主题     层      预计 状态
 1   royal_citadel_01         D5   124   28 城堡王国   S2  120min 待复核
@@ -1354,9 +1357,9 @@ D4+ 共 51 个 (待复核 51); 免费层 D4+ 0 个; 抽样目标 10 个, 命中 
  R7 [P0] D4+ 实物复核全集清零 (list_physical_pending)
 ==============================================================
 == 实物搭建复核跟踪 (D4+, 规程: docs/PHYSICAL_REBUILD_CHECKLIST.md) ==
-扫描 250 个模型, D4+ 共 51 个: 已复核 0, 待复核 51
+扫描 250 个模型, D4+ 共 52 个: 已复核 0, 待复核 52
 
--- 待复核 (51) --
+-- 待复核 (52) --
 模型                           难度     片数   步骤
 giant_ferris_wheel_01        D5    122   30
 marble_grand_cascade_01      D5    123   32
@@ -1375,6 +1378,7 @@ covered_bridge_01            D4     94   18
 dinosaur_hall_01             D4     84   18
 eiffel_tower_01              D4     95   21
 elephant_01                  D4     95   18
+expansion_orb_01             D4     78   18
 ferry_terminal_01            D4    100   19
 fire_station_01              D4     81   19
 freight_yard_01              D4     85   20
@@ -1410,7 +1414,7 @@ triumphal_arch_01            D4     88   18
 volcano_base_01              D4     83   18
 warehouse_01                 D4     97   18
 
-待复核数量: 51 (存在待复核, --fail-on-pending 生效)
+待复核数量: 52 (存在待复核, --fail-on-pending 生效)
 [失败] R7 D4+ 实物复核全集清零 (list_physical_pending) (退出码 1, 日志: /tmp/magtile_v1_readiness_xDLcrv/07_R7.log)
 
 ==============================================================
@@ -1669,13 +1673,13 @@ warehouse_01                 D4     97   18
     难度配额检查 (D3 冻结硬闸门 —— CONTENT_GAP_AUDIT.md 7.3 节)
    ==============================================================
    主库模型总数:      250  (/tmp/wt-risk-report/magtile-studio/data/models)
-     D1 (入门):          20  (8.0%)   解冻线 >= 20, 已达标
-     D2 (进阶):          23  (9.2%)
-     D3 (熟练):         156  (62.4%)
-     D4 (挑战):          45  (18.0%)
+     D1 (入门):          21  (8.4%)   解冻线 >= 20, 已达标
+     D2 (进阶):          30  (12.0%)
+     D3 (熟练):         147  (58.8%)
+     D4 (挑战):          46  (18.4%)
      D5 (大师):           6  (2.4%)   解冻线 >= 6, 已达标
    
-   D3 冻结状态: 已解冻 (D1 20 >= 20 且 D5 6 >= 6)
+   D3 冻结状态: 已解冻 (D1 21 >= 20 且 D5 6 >= 6)
    ==============================================================
 ```
 
