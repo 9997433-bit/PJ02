@@ -48,6 +48,11 @@ jobs:
   package:
     runs-on: windows-2022
     timeout-minutes: 60
+    env:
+      # windows-2022 默认控制台为 cp1252; 多个 Python 门禁脚本 print 中文
+      # 会 UnicodeEncodeError。PEP 540 强制 UTF-8 模式, 不改脚本语义。
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
     defaults:
       run:
         shell: pwsh
@@ -96,7 +101,9 @@ jobs:
         run: cmake --build build --config Release --parallel
 
       - name: 测试 (跳过需显示环境的 GUI 冒烟)
-        run: ctest --test-dir build -C Release --output-on-failure -E "(library|inventory)_gui_smoke"
+        run: |
+          chcp 65001 | Out-Null
+          ctest --test-dir build -C Release --output-on-failure -E "(library|inventory)_gui_smoke"
 
       # windows-latest (Windows Server 2025 镜像) 已不再预装 NSIS
       # (actions/runner-images#12677); 缺席时经 Chocolatey 安装,
